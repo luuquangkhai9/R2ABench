@@ -1,0 +1,289 @@
+@startuml
+!define RECTANGLE rectangle linewidth 1
+
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam defaultTextAlignment center
+skinparam wrapWidth 200
+skinparam maxMessageSize 100
+
+' Main system boundary
+package "LabHire System" {
+  RECTANGLE "Web Client" as web_client [
+    Web Browser
+    ----
+    HTML/CSS/JavaScript
+    Responsive UI
+  ]
+  
+  RECTANGLE "Mobile Client" as mobile_client [
+    Mobile App
+    ----
+    Android/iOS
+    Hybrid or Native
+  ]
+  
+  RECTANGLE "API Gateway" as api_gateway [
+    API Gateway
+    ----
+    Request Routing
+    Authentication
+    Rate Limiting
+  ]
+  
+  package "Application Layer" {
+    RECTANGLE "User Service" as user_service [
+      User Service
+      ----
+      Registration/Login
+      Profile Management
+      Authentication
+    ]
+    
+    RECTANGLE "Project Service" as project_service [
+      Project Service
+      ----
+      Project CRUD
+      Search & Recommendation
+      Favorites Management
+    ]
+    
+    RECTANGLE "Community Service" as community_service [
+      Community Service
+      ----
+      Post Management
+      Comments
+      Popularity Ranking
+    ]
+    
+    RECTANGLE "Application Service" as application_service [
+      Application Service
+      ----
+      Internship Applications
+      Student-Mentor Matching
+    ]
+    
+    RECTANGLE "Admin Service" as admin_service [
+      Admin Service
+      ----
+      User Certification
+      Content Moderation
+      Review Management
+    ]
+    
+    RECTANGLE "Notification Service" as notification_service [
+      Notification Service
+      ----
+      Email Push
+      In-site Messages
+      Real-time Alerts
+    ]
+    
+    RECTANGLE "Chat Service" as chat_service [
+      Chat Service
+      ----
+      Secure Messaging
+      Mentor-Student Communication
+    ]
+    
+    RECTANGLE "Recommendation Engine" as recommendation_engine [
+      Recommendation Engine
+      ----
+      Collaborative Filtering
+      Tag Matching
+      Cold-start Handling
+    ]
+  }
+  
+  package "Supporting Services" {
+    RECTANGLE "Email Service" as email_service [
+      Email Service
+      ----
+      Verification Codes
+      Notification Emails
+    ]
+    
+    RECTANGLE "Storage Service" as storage_service [
+      Storage Service
+      ----
+      File Storage
+      Resume Management
+    ]
+    
+    RECTANGLE "Risk Control Service" as risk_control_service [
+      Risk Control Service
+      ----
+      Abuse Prevention
+      Behavior Monitoring
+      Fraud Detection
+    ]
+  }
+  
+  package "Data Layer" {
+    RECTANGLE "User Database" as user_db [
+      User Database
+      ----
+      User Accounts
+      Profiles
+      Certifications
+    ]
+    
+    RECTANGLE "Project Database" as project_db [
+      Project Database
+      ----
+      Internship Projects
+      Applications
+      Favorites
+    ]
+    
+    RECTANGLE "Community Database" as community_db [
+      Community Database
+      ----
+      Posts
+      Comments
+      Likes
+    ]
+    
+    RECTANGLE "Audit Database" as audit_db [
+      Audit Database
+      ----
+      Logs
+      Audit Trails
+      Risk Events
+    ]
+  }
+}
+
+' External systems
+RECTANGLE "University Email Servers" as uni_email [
+  University Email Servers
+  ----
+  Email Verification
+  Domain Validation
+]
+  
+RECTANGLE "Enterprise Email Servers" as ent_email [
+  Enterprise Email Servers
+  ----
+  Corporate Verification
+]
+
+RECTANGLE "SMS Gateway" as sms_gateway [
+  SMS Gateway
+  ----
+  SMS Verification
+  Text Notifications
+]
+
+' Connections
+web_client --> api_gateway : HTTPS
+mobile_client --> api_gateway : HTTPS/API
+api_gateway --> user_service : Internal API
+api_gateway --> project_service : Internal API
+api_gateway --> community_service : Internal API
+api_gateway --> application_service : Internal API
+api_gateway --> admin_service : Internal API
+api_gateway --> notification_service : Internal API
+api_gateway --> chat_service : Internal API
+
+user_service --> user_db : DB Operations
+user_service --> email_service : Verification
+user_service --> uni_email : Email Verification
+user_service --> ent_email : Enterprise Verification
+user_service --> risk_control_service : Risk Monitoring
+
+project_service --> project_db : DB Operations
+project_service --> recommendation_engine : Get Recommendations
+project_service --> notification_service : Trigger Notifications
+
+community_service --> community_db : DB Operations
+community_service --> notification_service : Comment Replies
+community_service --> risk_control_service : Content Moderation
+
+application_service --> project_db : Read Applications
+application_service --> user_db : Read User Info
+application_service --> notification_service : Application Alerts
+application_service --> chat_service : Enable Chat
+
+admin_service --> user_db : Manage Users
+admin_service --> project_db : Moderate Projects
+admin_service --> community_db : Moderate Content
+admin_service --> audit_db : Audit Logs
+
+notification_service --> email_service : Send Emails
+notification_service --> user_db : User Preferences
+notification_service --> sms_gateway : SMS Notifications
+
+chat_service --> user_db : User Validation
+chat_service --> storage_service : Message Storage
+chat_service --> risk_control_service : Message Monitoring
+
+recommendation_engine --> user_db : User Data
+recommendation_engine --> project_db : Project Data
+recommendation_engine --> community_db : Interaction Data
+
+risk_control_service --> audit_db : Log Events
+risk_control_service --> user_service : Fraud Alerts
+risk_control_service --> community_service : Content Flags
+
+storage_service --> user_db : File References
+
+email_service --> uni_email : University Emails
+email_service --> ent_email : Enterprise Emails
+
+note right of user_service
+  Handles:
+  - User registration/login
+  - Profile management
+  - Identity verification
+  - Role-based access control
+end note
+
+note right of project_service
+  Handles:
+  - Project creation/modification
+  - Project search
+  - Project recommendations
+  - Favorites management
+end note
+
+note right of community_service
+  Handles:
+  - Post creation/deletion
+  - Comments management
+  - Popularity ranking
+  - Content moderation support
+end note
+
+note right of application_service
+  Handles:
+  - Internship applications
+  - Student-mentor matching
+  - Application status tracking
+end note
+
+note right of admin_service
+  Handles:
+  - User certifications
+  - Content moderation
+  - Review workflows
+  - System administration
+end note
+
+note right of recommendation_engine
+  Implements:
+  - Collaborative filtering
+  - Tag-based matching
+  - Cold-start strategies
+  - Personalization algorithms
+end note
+
+note right of risk_control_service
+  Implements:
+  - Abuse prevention
+  - Behavior monitoring
+  - Fraud detection
+  - Rate limiting
+end note
+
+@enduml

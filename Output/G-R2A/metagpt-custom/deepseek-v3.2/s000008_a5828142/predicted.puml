@@ -1,0 +1,82 @@
+@startuml
+
+package "Presentation Layer" {
+  component "Vue Frontend" as vue
+}
+
+package "Application Layer" {
+  node "Node.js/Express Backend" as backend {
+    component "Authentication Service" as auth
+    component "Socket.IO Server" as socketio
+    component "Project & Version Manager" as project_mgr
+    component "Workspace Coordinator" as workspace
+    component "Battle Engine" as battle
+    component "Code Execution Service" as execution
+    component "Playback Service" as playback
+    component "File Service" as file_service
+  }
+}
+
+package "Data Layer" {
+  database "MySQL Database" as mysql
+  database "InfluxDB" as influxdb
+  database "Redis" as redis
+}
+
+package "Infrastructure Layer" {
+  cloud "Docker Sandbox" as docker
+  cloud "S3-compatible Object Storage" as s3
+  component "Nginx Reverse Proxy" as nginx
+}
+
+' External connections
+vue --> nginx : HTTP/WebSocket
+nginx --> backend : reverse proxy
+backend --> docker : isolated execution
+
+' Authentication flows
+auth --> mysql : validate credentials
+auth --> redis : store/validate JWT tokens
+note on link: JWT validation required
+
+' Project & version management
+project_mgr --> mysql : CRUD projects/versions
+project_mgr --> file_service : create initial files
+note on link: version creation with initial files
+
+' Workspace coordination
+workspace --> redis : real-time state & authorization
+workspace --> socketio : emit authorization status
+workspace --> playback : record workspace events
+
+' Battle system
+battle --> mysql : persist battle records
+battle --> redis : invitation cache & live state
+note on link: isolated execution with watched cache
+battle --> execution : judge code submissions
+battle --> file_service : store battle result files
+
+' Code execution
+execution --> docker : sandboxed execution
+execution --> redis : coordination & state access
+
+' Playback service
+playback --> influxdb : store time-series events
+playback --> redis : retrieve workspace context
+
+' File service
+file_service --> s3 : store file objects
+file_service --> mysql : store file metadata
+file on link: CloudFront-style distribution configured
+
+' Socket.IO real-time communication
+socketio --> vue : real-time updates
+socketio --> workspace : workspace events
+socketio --> battle : battle events
+note on link: real-time workspace & battle communication
+
+' Infrastructure notes
+note top of docker : Docker isolation required
+note top of redis : Redis readiness check required
+
+@enduml

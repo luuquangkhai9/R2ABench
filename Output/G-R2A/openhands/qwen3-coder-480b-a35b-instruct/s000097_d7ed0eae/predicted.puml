@@ -1,0 +1,86 @@
+@startuml
+!theme plain
+skinparam rectangleLineWidth 1
+skinparam noteFontSize 10
+
+' Title and boundary
+title BeeGreen Backend API Architecture
+
+package "BeeGreen System" {
+  [Client Applications] as clients {
+    [Website Client]
+    [Browser Extension]
+  }
+  
+  package "Backend API Layer" {
+    [REST Controller] as controller
+    [User Repository] as repository
+    [Data Storage] as storage
+    
+    controller -down-> repository : uses
+    repository -down-> storage : persists to
+  }
+  
+  package "API Endpoints" {
+    [POST /users] as create_user
+    [GET /users] as list_users
+    [PATCH /users] as update_users
+    [GET /users/{id}] as get_user
+    [GET /ping] as ping
+  }
+  
+  package "Data Models" {
+    [User Model] as user_model
+    [Ping Response] as ping_model
+  }
+}
+
+clients -down-> create_user : HTTP POST
+clients -down-> list_users : HTTP GET
+clients -down-> update_users : HTTP PATCH
+clients -down-> get_user : HTTP GET
+clients -down-> ping : HTTP GET
+
+create_user -down-> controller : routes to
+list_users -down-> controller : routes to
+update_users -down-> controller : routes to
+get_user -down-> controller : routes to
+ping -down-> controller : routes to
+
+controller -down-> user_model : creates/returns
+controller -down-> ping_model : returns
+
+note right of controller
+  LoopBack-based REST controller
+  handling all documented endpoints
+end note
+
+note right of repository
+  UserRepository providing
+  persistence operations for User model
+end note
+
+note right of storage
+  Persistent data storage
+  (database or file system)
+end note
+
+note top of user_model
+  User entity with:
+  - id (string)
+  - ip (string)
+  - creationDate (date)
+  - purchaseIds (string[])
+  - username (string)
+  - region (string)
+end note
+
+note bottom of ping_model
+  Ping response with:
+  - greeting (string)
+  - date (string)
+  - url (string)
+  - headers (object)
+end note
+
+@enduml

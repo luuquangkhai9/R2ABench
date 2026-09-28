@@ -1,0 +1,118 @@
+@startuml
+!define AWSPUML https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v17.0/dist
+!includeurl AWSPUML/AWSCommon.puml
+!includeurl AWSPUML/ApplicationIntegration/SimpleQueueServiceSQS.puml
+!includeurl AWSPUML/SecurityIdentityCompliance/Cognito.puml
+!includeurl AWSPUML/NetworkingContentDelivery/APIGateway.puml
+!includeurl AWSPUML/Compute/EC2.puml
+!includeurl AWSPUML/ManagementGovernance/CloudFormation.puml
+!includeurl AWSPUML/SecurityIdentityCompliance/IdentityAccessManagementIAM.puml
+!includeurl AWSPUML/General/Users.puml
+
+skinparam componentStyle rectangle
+skinparam linetype ortho
+left to right direction
+
+title "PN Infra: Cognito, API Gateway, and VPC Endpoint Architecture"
+
+package "Cognito Account" {
+  [Cognito User Pool] as USER_POOL <<Cognito>>
+  [Cognito User Pool Client] as USER_CLIENT <<Cognito>>
+  [Cognito Identity Pool] as IDENTITY_POOL <<Cognito>>
+
+  USER_POOL - USER_CLIENT
+  USER_POOL - IDENTITY_POOL : "Provider"
+  USER_CLIENT - IDENTITY_POOL : "ClientId"
+
+  package "IAM Roles" {
+    [Authenticated IAM Role] as AUTH_ROLE <<IAM>>
+    [Unauthenticated IAM Role] as UNAUTH_ROLE <<IAM>>
+  }
+
+  IDENTITY_POOL --> AUTH_ROLE : "Maps\nAuthenticated"
+  IDENTITY_POOL --> UNAUTH_ROLE : "Maps\nUnauthenticated"
+}
+
+package "API Gateway Account" {
+  [API Gateway] as APIGW <<APIGateway>>
+  [Cognito Authorizer] as AUTHORIZER <<Cognito>>
+  [API Stage Deployment] as STAGE <<APIGateway>>
+
+  APIGW --> AUTHORIZER : "Uses"
+  AUTHORIZER --> USER_POOL : "Validates with\nARN Input"
+  APIGW --> STAGE : "Deploys"
+
+  package "API Methods" {
+    [WhoAmI Method] as WHOAMI <<APIGateway>>
+    [ECS Proxy Method] as ECS_PROXY <<APIGateway>>
+
+    WHOAMI --> AUTHORIZER : "Protected by"
+    ECS_PROXY --> AUTHORIZER : "Protected by"
+    WHOAMI - APIGW
+    ECS_PROXY - APIGW
+  }
+
+  [VPC Link] as VPCLINK <<EC2>>
+  ECS_PROXY --> VPCLINK : "Integration via"
+  VPCLINK --> [Network Load Balancer] as NLB <<EC2>> : "Points to\n(External Input)"
+
+  [Callback URL Output] as CALLBACK_OUT <<CloudFormation>>
+  STAGE --> CALLBACK_OUT : "Publishes"
+}
+
+package "VPC & Networking" {
+  [Virtual Private Cloud] as VPC <<EC2>>
+  [Subnets] as SUBNETS <<EC2>>
+  [Security Group] as SG <<EC2>>
+
+  VPC - SUBNETS
+  VPC - SG
+
+  [SQS VPC Endpoint] as SQS_ENDPOINT <<SQS>>
+  SQS_ENDPOINT --> VPC : "Placed in"
+  SQS_ENDPOINT --> SUBNETS : "Uses"
+  SQS_ENDPOINT --> SG : "Secured by"
+  SG --> VPC : "Ingress from\nVPC CIDR"
+
+  SQS_ENDPOINT --> [Amazon SQS Service] as SQS <<SQS>> : "Private DNS\nConnectivity"
+}
+
+[Infrastructure Operator] as OPERATOR <<Users>> -down-> [CloudFormation Templates] as CF_TEMPLATES <<CloudFormation>>
+CF_TEMPLATES --> USER_POOL : "Deploys"
+CF_TEMPLATES --> APIGW : "Deploys"
+CF_TEMPLATES --> SQS_ENDPOINT : "Deploys"
+
+[API Client] as CLIENT <<Users>> -up-> APIGW : "Calls Endpoint"
+CLIENT --> WHOAMI : "Gets Role Header"
+CLIENT --> ECS_PROXY : "Forwards Role"
+
+note right of USER_POOL
+  Attributes:
+  custom:Role
+  email
+end note
+
+note right of AUTHORIZER
+  Maps claim
+  custom:Role to
+  x-pagopa-pn-cx-role
+end note
+
+note right of WHOAMI
+  Method Response:
+  Optional header
+  x-pagopa-pn-cx-role
+end note
+
+note right of ECS_PROXY
+  Integration Request:
+  Forwards role claim
+  as x-pagopa-pn-cx-role
+end note
+
+note bottom of SQS_ENDPOINT
+  Type: Interface
+  Service: com.amazonaws.<region>.sqs
+  Private DNS: Enabled
+end note
+@enduml

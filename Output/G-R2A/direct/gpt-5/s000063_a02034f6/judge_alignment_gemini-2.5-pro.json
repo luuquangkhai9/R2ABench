@@ -1,0 +1,80 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Access Layer::Gateway",
+        "Global::BFF"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go::Client Access Layer::MTProto Gateway",
+        "Teamgram Server (Go::Client Access Layer::BFF / Edge Orchestrator"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the Gateway and BFF components. It accurately grouped them into a 'Client Access Layer' boundary, which is more architecturally precise than the GT's mix of 'Access Layer' and 'Global'."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Auth Session",
+        "Access Layer::Session",
+        "Services::Msg",
+        "Services::Services",
+        "Global::Push",
+        "Global::Sync"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go::Service Layer::Auth Service",
+        "Teamgram Server (Go::Service Layer::Session Service",
+        "Teamgram Server (Go::Service Layer::Future Salts Handler",
+        "Teamgram Server (Go::Service Layer::Salt Manager",
+        "Teamgram Server (Go::Service Layer::Registration Service",
+        "Teamgram Server (Go::Service Layer::Messaging Service",
+        "Teamgram Server (Go::Service Layer::Service Message Handler",
+        "Teamgram Server (Go::Service Layer::Push Service",
+        "Teamgram Server (Go::Service Layer::Sync Service"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The AI successfully deconstructed the GT's generic or broadly-scoped services into a set of specific, fine-grained microservices that directly correspond to functionalities described in the PRD (e.g., Salt/Future Salts handling). Placing all these components into a unified 'Service Layer' is a canonical and correct architectural decision."
+    },
+    {
+      "gt_nodes": [
+        "Global::Kafka",
+        "Services::DFS",
+        "Storages::MinIO",
+        "Storages::MySQL",
+        "Storages::Redis"
+      ],
+      "predicted_nodes": [
+        "External Infrastructure & Integrations::Kafka",
+        "Teamgram Server (Go::Adapters::Kafka Client",
+        "External Infrastructure & Integrations::MinIO",
+        "Teamgram Server (Go::Adapters::MinIO Client",
+        "External Infrastructure & Integrations::MySQL",
+        "Teamgram Server (Go::Adapters::MySQL DAO",
+        "External Infrastructure & Integrations::Redis",
+        "Teamgram Server (Go::Adapters::Redis Client"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the external dependencies and the corresponding application-level services/clients that use them (e.g., MinIO and DFS). It improved upon the GT by creating a distinct 'Adapters' layer for the clients and an 'External Infrastructure' boundary for the dependencies, which is a superior architectural representation."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer::Status",
+    "Clients::Android",
+    "Clients::PC",
+    "Clients::Web",
+    "Clients::iOS"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Infrastructure & Integrations::External Verification Service",
+    "External Infrastructure & Integrations::FFmpeg / FFProbe",
+    "External Infrastructure & Integrations::etcd",
+    "Global::Teamgram Server (Go",
+    "Teamgram Server (Go::Adapters::Default None-Verifier\\n(accepts code 12345",
+    "Teamgram Server (Go::Adapters::Media Wrapper",
+    "Teamgram Server (Go::Adapters::Verification Adapter",
+    "Teamgram Server (Go::Adapters::etcd Client"
+  ]
+}

@@ -1,0 +1,253 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Backend::BFF / API Gateway::Admin Console Gateway"
+      ],
+      "predicted_nodes": [
+        "Gateway / BFF Layer::API Gateway / BFF"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the administrative gateway/BFF layer. The package naming differs, but the architectural boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Backend::BFF / API Gateway::Native App Gateway"
+      ],
+      "predicted_nodes": [
+        "Gateway / BFF Layer::API Gateway / BFF"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the client-facing gateway/BFF layer for native apps. The AI collapsed multiple gateway nodes into a single generic gateway node, which is acceptable as a merged match."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Database::NoSQL\\n(Firestore"
+      ],
+      "predicted_nodes": [
+        "Data Stores::NoSQL Storage",
+        "Data Stores::NoSQL Storage::Message Data"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT NoSQL datastore corresponds to the predicted NoSQL storage, and the split into a storage node plus message data is consistent with the PRD's message management data domain backed by NoSQL."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Database::RDB\\n(MySQL"
+      ],
+      "predicted_nodes": [
+        "Data Stores::MySQL",
+        "Data Stores::MySQL::Book Data",
+        "Data Stores::MySQL::EC Site Data",
+        "Data Stores::MySQL::User Data"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT MySQL datastore is correctly represented, and the AI's split into domain-specific MySQL data nodes aligns with the PRD's separate MySQL-backed user, book, and EC site data."
+    },
+    {
+      "gt_nodes": [
+        "Backend::External APIs::Email Sending\\n(SendGrid"
+      ],
+      "predicted_nodes": [
+        "External Integrations::Email Notification Provider"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "SendGrid email sending is semantically equivalent to an email notification provider integration. The boundary change is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Backend::External APIs::Firebase\\nAuthentication"
+      ],
+      "predicted_nodes": [
+        "Data Stores::Firebase Authentication"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The component is functionally equivalent as Firebase Authentication, but the AI placed it under data stores rather than an external API/authentication integration boundary, which is a boundary attribution error."
+    },
+    {
+      "gt_nodes": [
+        "Backend::External APIs::Google Books API"
+      ],
+      "predicted_nodes": [
+        "External Integrations::Book-Search API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The exact provider is unresolved in the PRD, but both nodes represent the required external book-search integration. The boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Backend::External APIs::Push Notification\\n(FCM"
+      ],
+      "predicted_nodes": [
+        "External Integrations::Push Notification Provider"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "FCM corresponds to a push notification provider integration. The boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Backend::External APIs::Stripe"
+      ],
+      "predicted_nodes": [
+        "External Integrations::Stripe Payment"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote Stripe as the payment integration. Boundary placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Backend::File Storage::NAS\\n(Cloud Storage"
+      ],
+      "predicted_nodes": [
+        "GCP Infrastructure::Cloud Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Cloud Storage is semantically equivalent to the GT file/object storage node. The infrastructure boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Backend::L7 Load Balancer"
+      ],
+      "predicted_nodes": [
+        "GCP Infrastructure::Load Balancer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the load balancer layer in GCP. Boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Admin Service"
+      ],
+      "predicted_nodes": [
+        "Backend Services (Containerized::EC Site API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Admin Service is not semantically equivalent to EC Site API; this is a context mismatch between administrative functionality and EC site functionality."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Auth API"
+      ],
+      "predicted_nodes": [
+        "Backend Services (Containerized::Authentication API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both are the authentication backend API. The containerized backend services boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Book Service"
+      ],
+      "predicted_nodes": [
+        "Backend Services (Containerized::Book Management API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The book service corresponds to the book management API. Boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Notification Service"
+      ],
+      "predicted_nodes": [
+        "Backend Services (Containerized::Notification Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The node is semantically equivalent. The containerized service boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Store Service"
+      ],
+      "predicted_nodes": [
+        "Backend Services (Containerized::EC Site API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Store Service corresponds to the EC site service/API in the PRD. The containerized backend service boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Support Service"
+      ],
+      "predicted_nodes": [
+        "Backend Services (Containerized::Support API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Support Service matches the support API. Boundary placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::User Service"
+      ],
+      "predicted_nodes": [
+        "Backend Services (Containerized::User Management API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "User Service is equivalent to the user management API. The boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::Native App"
+      ],
+      "predicted_nodes": [
+        "Client Applications::Native Mobile Apps"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent native app clients. The client applications boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Web Admin App"
+      ],
+      "predicted_nodes": [
+        "Client Applications::Administrative Web App"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the administrative web application client. The boundary is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Backend Services (Containerized::Authentication API",
+    "Backend Services (Containerized::Book Management API",
+    "Backend Services (Containerized::EC Site API",
+    "Backend Services (Containerized::Notification Service",
+    "Backend Services (Containerized::Support API",
+    "Backend Services (Containerized::User Management API",
+    "Data Stores::Firebase Authentication",
+    "Data Stores::MySQL",
+    "Data Stores::MySQL::Book Data",
+    "Data Stores::MySQL::EC Site Data",
+    "Data Stores::MySQL::User Data",
+    "Data Stores::NoSQL Storage",
+    "Data Stores::NoSQL Storage::Message Data",
+    "External Integrations::Book-Search API",
+    "External Integrations::Email Notification Provider",
+    "External Integrations::Push Notification Provider",
+    "External Integrations::Stripe Payment",
+    "GCP Infrastructure::Cloud Storage",
+    "GCP Infrastructure::GCE Virtual Machine",
+    "GCP Infrastructure::GKE Cluster",
+    "GCP Infrastructure::Load Balancer",
+    "Gateway / BFF Layer::API Gateway / BFF"
+  ]
+}

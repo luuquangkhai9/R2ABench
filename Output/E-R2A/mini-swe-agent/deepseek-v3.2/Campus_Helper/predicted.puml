@@ -1,0 +1,72 @@
+@startuml  
+title Campus Helper Platform Architecture  
+  
+actor Guest  
+actor "Registered User" as RegisteredUser  
+actor Administrator as Admin  
+  
+component "WeChat Mini Program" as WeChatMiniProgram  
+component "WeChat Client" as WeChatClient  
+  
+package "Presentation Layer" {  
+  component "Mini Program UI" as MiniProgramUI  
+  component "Admin Dashboard" as AdminDashboard  
+}  
+  
+package "Business Layer" {  
+  component "Auth Service" as AuthService  
+  component "Product Service" as ProductService  
+  component "Order Service" as OrderService  
+  component "User Service" as UserService  
+}  
+  
+package "Data Layer" {  
+  component "Data Access" as DAL  
+}  
+  
+package "Database Layer" {  
+  database "User DB" as UserDB  
+  database "Product DB" as ProductDB  
+  database "Order DB" as OrderDB  
+  database "System DB" as SystemDB  
+}  
+  
+Guest -- 
+RegisteredUser -- 
+Admin -- 
+  
+WeChatClient -- 
+WeChatMiniProgram -- 
+  
+MiniProgramUI -- 
+AdminDashboard -- 
+MiniProgramUI -- 
+MiniProgramUI -- 
+AdminDashboard -- 
+  
+AuthService -- 
+ProductService -- 
+  
+AuthService -- 
+ProductService -- 
+OrderService -- 
+UserService -- 
+  
+DAL -- 
+DAL -- 
+DAL -- 
+DAL -- 
+  
+note right of Guest  
+  View products only  
+end note  
+  
+note right of RegisteredUser  
+  Browse, publish, order  
+end note  
+  
+note right of Admin  
+  Manage platform  
+end note  
+  
+@enduml 

@@ -1,0 +1,56 @@
+@startuml
+
+package "Client Layer" {
+  component "Website Client\n(React/TypeScript)" as WebsiteClient
+  component "Chrome Extension Client\n(Chrome Browser Extension)" as ChromeExtension
+}
+
+package "Backend API Layer" {
+  node "Node.js LoopBack REST Server" as LoopBackServer
+  interface "User REST Endpoints\nPOST /users, GET /users, PATCH /users,\nGET /users/{id}" as UserEndpoints
+  interface "Ping Endpoint\nGET /ping" as PingEndpoint
+  component "HTTP Request Context" as HttpRequestContext
+}
+
+package "Domain Model Layer" {
+  component "User Model\nid, ip, creationDate, purchaseIds, username, region" as UserModel
+  component "InventoryItem Model\nid, stats, totalScore, category, details, comments, name, associatedStores" as InventoryItemModel
+  component "PingResponse Schema\ngreeting, date, url, headers" as PingResponseSchema
+}
+
+package "Persistence Layer" {
+  component "UserRepository" as UserRepository
+  database "Persistent Storage" as PersistentStorage
+}
+
+package "Data-Processing Layer" {
+  cloud "Supporting Cloud/Data-Processing" as DataProcessingCloud {
+    component "Data-Processing Assets\nSustainability scoring & recommendation workflows" as DataProcessingAssets
+  }
+}
+
+// Clients consume REST endpoints
+WebsiteClient --> UserEndpoints
+WebsiteClient --> PingEndpoint
+ChromeExtension --> UserEndpoints
+ChromeExtension --> PingEndpoint
+
+// Backend exposes endpoints
+LoopBackServer --> UserEndpoints
+LoopBackServer --> PingEndpoint
+
+// Endpoint and repository dependencies
+UserEndpoints --> UserRepository
+UserRepository --> PersistentStorage
+
+// User endpoints operate on the User model
+UserEndpoints --> UserModel
+
+// Ping endpoint requires request context and returns PingResponse schema
+PingEndpoint --> HttpRequestContext
+PingEndpoint --> PingResponseSchema
+
+// Data-Processing depends on InventoryItem model
+DataProcessingAssets --> InventoryItemModel
+
+@enduml

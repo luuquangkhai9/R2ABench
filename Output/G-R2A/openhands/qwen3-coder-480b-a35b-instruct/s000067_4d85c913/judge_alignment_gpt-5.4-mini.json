@@ -1,0 +1,338 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Event Handler eBPF Programs::Default Handler Probes",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "TraceLeft System::Handler Programs"
+      ],
+      "reasoning": "The predicted handler programs cover the default handler probe responsibility, though they are modeled at a higher aggregation level."
+    },
+    {
+      "gt_node": "Event Handler eBPF Programs::Handler Probe\\nhandle_syscall_write",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "TraceLeft System::Handler Programs",
+        "TraceLeft System::Handler Maps"
+      ],
+      "reasoning": "The specific handler probe concept is covered by the predicted handler program/mapping nodes, even though the exact probe-level granularity is not preserved."
+    },
+    {
+      "gt_node": "Event Handler eBPF Programs::Process Specific\\nHandler Probes",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "TraceLeft System::Handler Programs"
+      ],
+      "reasoning": "Process-specific handler probes are represented by the predicted handler programs node."
+    },
+    {
+      "gt_node": "Global::Perf Event Map\\nshared event map",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "TraceLeft System::Perf-based Event Channel"
+      ],
+      "reasoning": "The perf event map is semantically covered by the predicted perf-based event channel, which represents the same event delivery mechanism."
+    },
+    {
+      "gt_node": "Global::Prog ID Map\\npid to id",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Configuration & Data::Event Registration\\nStructure"
+      ],
+      "reasoning": "The PID-to-program-ID mapping responsibility is partially reflected in the event registration structure, though the exact map is not explicitly modeled."
+    },
+    {
+      "gt_node": "Global::TraceLeft\\nCLI and library tracer",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "TraceLeft System::CLI Entry Point",
+        "TraceLeft System::TraceLeft Library",
+        "TraceLeft System::Userspace Tracer"
+      ],
+      "reasoning": "The overall TraceLeft CLI and library tracer is decomposed into CLI, library, and userspace tracer nodes in the prediction."
+    },
+    {
+      "gt_node": "Linux Kernel Functions::inet_csk_accept",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "TraceLeft System::eBPF Probes\\n(kprobe/kretprobe"
+      ],
+      "reasoning": "The specific kernel function is an example of the traced function targets covered by the generic eBPF probes node."
+    },
+    {
+      "gt_node": "Linux Kernel Functions::sys_open",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "TraceLeft System::eBPF Probes\\n(kprobe/kretprobe"
+      ],
+      "reasoning": "The predicted generic probe node covers tracing of kernel functions such as sys_open."
+    },
+    {
+      "gt_node": "Linux Kernel Functions::sys_write",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "TraceLeft System::eBPF Probes\\n(kprobe/kretprobe"
+      ],
+      "reasoning": "The predicted generic probe node covers tracing of kernel functions such as sys_write."
+    },
+    {
+      "gt_node": "Main eBPF Program::Kprobe / Kretprobe\\nother traced calls",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "TraceLeft System::eBPF Probes\\n(kprobe/kretprobe"
+      ],
+      "reasoning": "The main eBPF program's kprobe/kretprobe behavior is represented by the predicted eBPF probes node."
+    },
+    {
+      "gt_node": "Main eBPF Program::Kprobe\\nentry probe",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "TraceLeft System::eBPF Probes\\n(kprobe/kretprobe"
+      ],
+      "reasoning": "The predicted generic eBPF probes node covers entry probes."
+    },
+    {
+      "gt_node": "Main eBPF Program::Kretprobe\\nreturn probe",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "TraceLeft System::eBPF Probes\\n(kprobe/kretprobe"
+      ],
+      "reasoning": "The predicted generic eBPF probes node covers return probes."
+    },
+    {
+      "gt_node": "Main eBPF Program::Prog Map\\npid to fd",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "TraceLeft System::Handler Maps"
+      ],
+      "reasoning": "The process-to-program map responsibility is broadly represented by the predicted handler maps node, although the exact semantics are not explicit."
+    },
+    {
+      "gt_node": "Main eBPF Program::Prog Maps\\nhandler mappings",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "TraceLeft System::Handler Maps"
+      ],
+      "reasoning": "The predicted handler maps node directly covers handler mapping responsibilities."
+    },
+    {
+      "gt_node": "Main eBPF Program::Ret Prog Map\\npid to fd",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "TraceLeft System::Handler Maps"
+      ],
+      "reasoning": "The return-program map is semantically covered by the handler maps abstraction in the prediction."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Configuration & Data::Common Event Header",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Perf Event Map\\nshared event map",
+        "Global::TraceLeft\\nCLI and library tracer"
+      ],
+      "reasoning": "The common event header is grounded in the GT event dispatch design and tracer-side dispatch responsibility."
+    },
+    {
+      "predicted_node": "Configuration & Data::Event Configuration\\nMetadata",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::TraceLeft\\nCLI and library tracer"
+      ],
+      "reasoning": "Event configuration metadata is directly supported by the PRD's configuration-driven handler generation requirements."
+    },
+    {
+      "predicted_node": "Configuration & Data::Event Registration\\nStructure",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Prog ID Map\\npid to id",
+        "Main eBPF Program::Prog Map\\npid to fd",
+        "Main eBPF Program::Ret Prog Map\\npid to fd"
+      ],
+      "reasoning": "The event registration structure is grounded in the GT's program-ID and process-selection mapping concepts."
+    },
+    {
+      "predicted_node": "External Dependencies::Linux Kernel\\n(eBPF support",
+      "grounded": true,
+      "reference_nodes": [
+        "Linux Kernel Functions::inet_csk_accept",
+        "Linux Kernel Functions::sys_open",
+        "Linux Kernel Functions::sys_write",
+        "Main eBPF Program::Kprobe / Kretprobe\\nother traced calls"
+      ],
+      "reasoning": "The Linux kernel/eBPF dependency is clearly grounded in the traced kernel-function and probe-oriented GT nodes."
+    },
+    {
+      "predicted_node": "External Dependencies::gobpf Library",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::TraceLeft\\nCLI and library tracer"
+      ],
+      "reasoning": "The gobpf dependency is explicitly stated in the PRD and is part of the traced system implementation context."
+    },
+    {
+      "predicted_node": "TraceLeft System::CLI Entry Point",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::TraceLeft\\nCLI and library tracer"
+      ],
+      "reasoning": "This directly corresponds to the CLI portion of TraceLeft."
+    },
+    {
+      "predicted_node": "TraceLeft System::Handler Generator",
+      "grounded": true,
+      "reference_nodes": [
+        "Event Handler eBPF Programs::Default Handler Probes",
+        "Event Handler eBPF Programs::Process Specific\\nHandler Probes"
+      ],
+      "reasoning": "The handler generator is grounded in the configuration-driven generation of handler code and handler-related GT nodes."
+    },
+    {
+      "predicted_node": "TraceLeft System::Handler Maps",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Prog ID Map\\npid to id",
+        "Main eBPF Program::Prog Map\\npid to fd",
+        "Main eBPF Program::Ret Prog Map\\npid to fd",
+        "Main eBPF Program::Prog Maps\\nhandler mappings"
+      ],
+      "reasoning": "Handler maps correspond to the GT's program and handler mapping nodes."
+    },
+    {
+      "predicted_node": "TraceLeft System::Handler Programs",
+      "grounded": true,
+      "reference_nodes": [
+        "Event Handler eBPF Programs::Default Handler Probes",
+        "Event Handler eBPF Programs::Handler Probe\\nhandle_syscall_write",
+        "Event Handler eBPF Programs::Process Specific\\nHandler Probes"
+      ],
+      "reasoning": "The generic handler programs node is grounded in all GT handler probe concepts."
+    },
+    {
+      "predicted_node": "TraceLeft System::Perf-based Event Channel",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Perf Event Map\\nshared event map"
+      ],
+      "reasoning": "This matches the GT perf event map / shared event delivery mechanism."
+    },
+    {
+      "predicted_node": "TraceLeft System::TraceLeft Library",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::TraceLeft\\nCLI and library tracer"
+      ],
+      "reasoning": "This is directly grounded in the TraceLeft library portion of the GT."
+    },
+    {
+      "predicted_node": "TraceLeft System::Userspace Tracer",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::TraceLeft\\nCLI and library tracer"
+      ],
+      "reasoning": "The userspace tracer is part of the GT TraceLeft CLI/library tracer system."
+    },
+    {
+      "predicted_node": "TraceLeft System::eBPF Probes\\n(kprobe/kretprobe",
+      "grounded": true,
+      "reference_nodes": [
+        "Main eBPF Program::Kprobe / Kretprobe\\nother traced calls",
+        "Main eBPF Program::Kprobe\\nentry probe",
+        "Main eBPF Program::Kretprobe\\nreturn probe",
+        "Linux Kernel Functions::inet_csk_accept",
+        "Linux Kernel Functions::sys_open",
+        "Linux Kernel Functions::sys_write"
+      ],
+      "reasoning": "This generic probe node is grounded in the GT's kprobe/kretprobe main program and traced kernel functions."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Event Handler eBPF Programs::Default Handler Probes"
+      ],
+      "predicted_nodes": [
+        "TraceLeft System::Handler Programs"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The handler programs abstraction matches the default handler probe responsibility, with acceptable boundary generalization."
+    },
+    {
+      "gt_nodes": [
+        "Event Handler eBPF Programs::Handler Probe\\nhandle_syscall_write"
+      ],
+      "predicted_nodes": [
+        "TraceLeft System::Handler Programs"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The specific handler probe is represented by the broader handler programs node, and the boundary remains semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Event Handler eBPF Programs::Process Specific\\nHandler Probes"
+      ],
+      "predicted_nodes": [
+        "TraceLeft System::Handler Programs"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Process-specific handler probes are captured by the predicted handler programs node."
+    },
+    {
+      "gt_nodes": [
+        "Global::Perf Event Map\\nshared event map"
+      ],
+      "predicted_nodes": [
+        "TraceLeft System::Perf-based Event Channel"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The perf event map and perf-based event channel are semantically equivalent event-delivery concepts."
+    },
+    {
+      "gt_nodes": [
+        "Global::TraceLeft\\nCLI and library tracer"
+      ],
+      "predicted_nodes": [
+        "TraceLeft System::CLI Entry Point",
+        "TraceLeft System::TraceLeft Library",
+        "TraceLeft System::Userspace Tracer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT system node is split into CLI, library, and userspace tracer nodes with consistent boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Kprobe / Kretprobe\\nother traced calls",
+        "Main eBPF Program::Kprobe\\nentry probe",
+        "Main eBPF Program::Kretprobe\\nreturn probe"
+      ],
+      "predicted_nodes": [
+        "TraceLeft System::eBPF Probes\\n(kprobe/kretprobe"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Multiple GT probe nodes are aggregated into a generic eBPF probes node, which is boundary-consistent."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Prog Map\\npid to fd",
+        "Main eBPF Program::Prog Maps\\nhandler mappings",
+        "Main eBPF Program::Ret Prog Map\\npid to fd",
+        "Global::Prog ID Map\\npid to id"
+      ],
+      "predicted_nodes": [
+        "TraceLeft System::Handler Maps"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The prediction aggregates multiple GT mapping structures into a single handler maps abstraction without crossing architectural boundaries."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

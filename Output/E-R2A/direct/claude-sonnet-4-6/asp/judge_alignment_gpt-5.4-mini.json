@@ -1,0 +1,89 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Client Layer"
+      ],
+      "predicted_nodes": [
+        "Global::Markdown-Capable Environment\\n(Editor / Viewer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the user-facing client/editor/viewer environment for the checklist artifact. The predicted node renames the client layer into a more specific markdown-capable UI context, which is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Service / Backend Layer"
+      ],
+      "predicted_nodes": [
+        "Markdown-Capable Environment\\n(Editor / Viewer::Review Artifact\\n(Markdown Checklist Document::FR-001 / FR-002 | DR-001\\nReview Purpose & Basis\\n─────────────────────────\\n• Review Goal (user needs + doc norms)\\n• Review / Verification Method\\n• Industry Standards Reference\\n• Product Specifications Reference\\n• Business Specifications Reference\\n• Documentation Specifications Reference",
+        "Markdown-Capable Environment\\n(Editor / Viewer::Review Artifact\\n(Markdown Checklist Document::FR-003 / FR-004 | DR-002 | NFR-001\\nCompleteness Review Checklist\\n─────────────────────────\\n• Core / Basic Functions vs. Goals\\n• Alignment with User Needs\\n• Special Cases & Exception Handling\\n• Auxiliary / Supporting Functions",
+        "Markdown-Capable Environment\\n(Editor / Viewer::Review Artifact\\n(Markdown Checklist Document::FR-005 | DR-002 | NFR-002\\nUnderstandability Review Checklist\\n─────────────────────────\\n• Clarity of Requirement Statements\\n• Ease of Understanding\\n• Specificity of Descriptions\\n• Level of Detail\\n• Degree of Refinement",
+        "Markdown-Capable Environment\\n(Editor / Viewer::Review Artifact\\n(Markdown Checklist Document::FR-006 | DR-002 | NFR-003\\nRequirement Model Accuracy Checklist\\n─────────────────────────\\n• Conformance to Norms\\n• Reasonableness of Models\\n• Rigor & Precision\\n• Accuracy of Models",
+        "Markdown-Capable Environment\\n(Editor / Viewer::Review Artifact\\n(Markdown Checklist Document::FR-007 | DR-002\\nExtension & Improvement Checklist\\n─────────────────────────\\n• Clarity of Extension Goals\\n• Reasonableness & Feasibility\\n• Concreteness of Improvement Goals\\n• Sufficiency & Demonstrability",
+        "Markdown-Capable Environment\\n(Editor / Viewer::Review Artifact\\n(Markdown Checklist Document::FR-008 | DR-003\\nSoftware Requirements Problem Report\\n─────────────────────────\\n• Discovered Requirement Issues (list)\\n• Overall Evaluation\\n• Improvement Suggestions",
+        "Markdown-Capable Environment\\n(Editor / Viewer::Review Artifact\\n(Markdown Checklist Document::FR-009 | DR-004 | NFR-004 | C-003\\nReview Score Record\\n─────────────────────────\\n• Content Completeness Score  /10\\n• Understandability Score     /10\\n• Model Accuracy Score        /10\\n• Extension/Improvement Score /10\\n• Total Score                 /40",
+        "Markdown-Capable Environment\\n(Editor / Viewer::Review Artifact\\n(Markdown Checklist Document::FR-010 | DR-005\\nReview Metadata\\n─────────────────────────\\n• Reviewer Identity\\n• Review Date"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT backend layer is represented by multiple checklist document sections in the predicted model. This is a reasonable split/aggregation of backend responsibilities for the review artifact, and the boundary remains consistent with a backend/content-generation role."
+    },
+    {
+      "gt_nodes": [
+        "Global::Storage / Database Layer"
+      ],
+      "predicted_nodes": [
+        "Markdown-Capable Environment\\n(Editor / Viewer::Checklist Data Store\\n(Markdown File)\\n─────────────\\nDR-001 Review Purpose\\nDR-002 Checklist Items\\nDR-003 Problem Report\\nDR-004 Score Record\\nDR-005 Review Metadata",
+        "Markdown-Capable Environment\\n(Editor / Viewer::External Reference Inputs (C-002 / C-004::Industry Standards\\nProduct Specs\\nBusiness Rules\\nDoc Norms",
+        "Markdown-Capable Environment\\n(Editor / Viewer::External Reference Inputs (C-002 / C-004::Requirements Document\\nUnder Review\\n(source artifact"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These predicted nodes represent data persistence and input/reference data storage, which aligns with the GT storage/database layer. The naming is different but the architectural responsibility is equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Client Layer::Client Terminal"
+      ],
+      "predicted_nodes": [
+        "Global::Markdown-Capable Environment\\n(Editor / Viewer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A client terminal maps semantically to the markdown-capable editor/viewer UI used to inspect and edit the checklist. The boundary is acceptable as a frontend/client presentation layer."
+    },
+    {
+      "gt_nodes": [
+        "Client Layer::Cloud DNS"
+      ],
+      "predicted_nodes": [
+        "Global::Markdown-Capable Environment\\n(Editor / Viewer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Cloud DNS is network infrastructure, not a markdown editor/viewer client component. The predicted node does not reproduce this GT infrastructure node and mixes unrelated concerns."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Client Layer::Cloud DNS",
+    "Network / Gateway Layer::Machine 01",
+    "Network / Gateway Layer::Machine 01::LVS - Linux Virtual Server",
+    "Network / Gateway Layer::Machine 01::Nginx",
+    "Network / Gateway Layer::Machine 02",
+    "Network / Gateway Layer::Machine 02::LVS - Linux Virtual Server",
+    "Network / Gateway Layer::Machine 02::Nginx",
+    "Network / Gateway Layer::Machine 03",
+    "Network / Gateway Layer::Machine 03::LVS - Linux Virtual Server",
+    "Network / Gateway Layer::Machine 03::Nginx",
+    "Service / Backend Layer::Back-office Management",
+    "Service / Backend Layer::Django Service Clusters",
+    "Service / Backend Layer::Literature Service",
+    "Service / Backend Layer::Socializing Service",
+    "Service / Backend Layer::User Information Service",
+    "Storage / Database Layer::Elasticsearch",
+    "Storage / Database Layer::MySQL Database",
+    "Storage / Database Layer::Redis Cache"
+  ],
+  "unmatched_predicted_nodes": []
+}

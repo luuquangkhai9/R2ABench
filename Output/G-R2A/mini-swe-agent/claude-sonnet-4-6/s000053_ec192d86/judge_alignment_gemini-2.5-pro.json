@@ -1,0 +1,89 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Alert Source::app-sre\\nalertmanager",
+        "Alert Source::cluster\\nalertmanager",
+        "Alert Source::deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Alert Sources::Alert Webhook Producer"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated multiple specific alert sources from the GT into a single, generalized 'Alert Webhook Producer' component. The 'External Alert Sources' boundary is semantically equivalent to the GT's 'Alert Source' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton\\nEvent\\nListener"
+      ],
+      "predicted_nodes": [
+        "Tekton Execution Environment\\n(configuration-anomaly-detection namespace::Event-Driven Path::EventListener"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the Tekton EventListener. The AI provided a more specific and accurate boundary ('Tekton Execution Environment...') than the GT's 'Global', which aligns better with the PRD's description of a namespaced Tekton environment."
+    },
+    {
+      "gt_nodes": [
+        "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster",
+        "PagerDuty Team::app-sre-alertmanager",
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly abstracted the specific PagerDuty team/service configurations from the GT into a single 'PagerDuty' node representing the external system. The 'External Systems' boundary is a correct classification for this integration."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::CHGM investigation",
+        "cadctl::CPD investigation",
+        "cadctl::switch(alerttype",
+        "Alerts::CHGM",
+        "Alerts::CPD",
+        "Alerts::all cluster\\nalerts"
+      ],
+      "predicted_nodes": [
+        "CAD Container Image\\n(UBI Minimal Runtime::cadctl CLI::Anomaly Detection & Communication",
+        "CAD Container Image\\n(UBI Minimal Runtime::cadctl CLI::CHGM Workflow Handler",
+        "CAD Container Image\\n(UBI Minimal Runtime::cadctl CLI::cadctl Entry Point\\n(/bin/cadctl"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly mapped GT's specific investigation workflows and alert types to functional components within the cadctl CLI. The AI's boundary 'CAD Container Image...::cadctl CLI' is more architecturally descriptive and accurate than the GT's separate 'cadctl' and 'Alerts' boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Global::Escalate alert to\\non-call SRE",
+        "Global::Update Incident\\nNotes"
+      ],
+      "predicted_nodes": [
+        "CAD Container Image\\n(UBI Minimal Runtime::cadctl CLI::Mitigation & Disposition Handler"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated specific mitigation/disposition actions from the GT into a single functional handler, as described in PRD FR-004. Placing this handler within the 'cadctl CLI' is more accurate than the GT's generic 'Global' boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?",
+    "cadctl::Future investigations"
+  ],
+  "unmatched_predicted_nodes": [
+    "Build Layer::Go 1.17 Builder Image",
+    "CAD Container Image\\n(UBI Minimal Runtime::Integration Library (pkg::AWS Integration",
+    "CAD Container Image\\n(UBI Minimal Runtime::Integration Library (pkg::OCM Integration",
+    "CAD Container Image\\n(UBI Minimal Runtime::Integration Library (pkg::PagerDuty Integration",
+    "Deployment Assets & Template Utility::Deployment Template Artifact",
+    "Deployment Assets & Template Utility::Deployment YAML Manifests",
+    "Deployment Assets & Template Utility::Template Update Utility",
+    "External Systems::AWS",
+    "External Systems::OCM (OpenShift Cluster Manager",
+    "Tekton Execution Environment\\n(configuration-anomaly-detection namespace::Event-Driven Path::Trigger",
+    "Tekton Execution Environment\\n(configuration-anomaly-detection namespace::Pipeline Execution::PipelineRun (v1beta1",
+    "Tekton Execution Environment\\n(configuration-anomaly-detection namespace::Pipeline Execution::cad-checks-pipeline"
+  ]
+}

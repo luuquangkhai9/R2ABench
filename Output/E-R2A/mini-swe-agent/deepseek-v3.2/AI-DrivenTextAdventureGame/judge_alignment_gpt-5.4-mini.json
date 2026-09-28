@@ -1,0 +1,293 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot"
+      ],
+      "predicted_nodes": [
+        "Application Layer::API Gateway",
+        "Application Layer::Community Services::Comment Service",
+        "Application Layer::Community Services::Notification Service",
+        "Application Layer::Community Services::Post Service",
+        "Application Layer::Game Services::Game Engine Service",
+        "Application Layer::Game Services::Save Management Service",
+        "Application Layer::User Services::Admin Service",
+        "Application Layer::User Services::Favorites Service",
+        "Application Layer::User Services::User Management Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT's single backend application node is reasonably decomposed into multiple application-layer services in the predicted model. The architectural boundary remains semantically consistent as backend business/application services."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot::Community Management"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Community Services::Comment Service",
+        "Application Layer::Community Services::Notification Service",
+        "Application Layer::Community Services::Post Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Community management in GT is split into more detailed community services in the prediction. The layer attribution stays within the backend application boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot::Favorites Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::User Services::Favorites Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent favorites management functionality. The boundary difference is only a naming/structuring variation within the backend application layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot::Game System"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Game Services::Game Engine Service",
+        "Application Layer::Game Services::Save Management Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT game system is decomposed into engine and save management services. This is a valid refinement and remains in the correct backend application boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot::Notification Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Community Services::Notification Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Notification functionality matches semantically. Predicted placement as an application service is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot::User Management"
+      ],
+      "predicted_nodes": [
+        "Application Layer::User Services::User Management Service",
+        "Application Layer::User Services::Admin Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT user management is split into user-facing and admin-facing management services. The decomposition is semantically correct and remains in backend application services."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Caching"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Layer::Cache Layer",
+        "Infrastructure Layer::Cache Layer::Content Cache",
+        "Infrastructure Layer::Cache Layer::Game State Cache",
+        "Infrastructure Layer::Cache Layer::Session Cache"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Caching is preserved semantically and refined into cache subcomponents. Infrastructure cache boundary is compatible with the GT data caching layer."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Read/Write Database"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Layer::Database Layer",
+        "Infrastructure Layer::Database Layer::MySQL Database",
+        "Infrastructure Layer::Database Layer::MySQL Database::Game Saves",
+        "Infrastructure Layer::Database Layer::MySQL Database::Posts & Comments",
+        "Infrastructure Layer::Database Layer::MySQL Database::System Metadata",
+        "Infrastructure Layer::Database Layer::MySQL Database::User Data"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT read/write database is decomposed into database layer and concrete MySQL partitions/tables. This is a valid refinement with consistent storage boundary attribution."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Storage"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Layer::File Storage",
+        "Infrastructure Layer::File Storage::Game Assets",
+        "Infrastructure Layer::File Storage::Generated Content",
+        "Infrastructure Layer::File Storage::User Uploads"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT generic storage is represented by file storage and its subareas. The predicted storage boundary is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer::MySQL"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Layer::Database Layer::MySQL Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the MySQL persistence layer. The boundary name differs but is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Frontend UI Layer::TypeScript",
+        "Frontend UI Layer::Vite2",
+        "Frontend UI Layer::Vue3",
+        "Frontend UI Layer::element-plus"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web Client (Vue.js/Nuxt.js)",
+        "Presentation Layer::Web Client (Vue.js/Nuxt.js::Admin Interface)",
+        "Presentation Layer::Web Client (Vue.js/Nuxt.js::Community Interface)",
+        "Presentation Layer::Web Client (Vue.js/Nuxt.js::Game Interface)",
+        "Presentation Layer::Web Client (Vue.js/Nuxt.js::User Profile Interface)",
+        "Presentation Layer::Mobile Client"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The GT frontend technology stack is aggregated into higher-level web client and interface nodes in the prediction. This is acceptable because the predicted nodes represent the frontend/presentation boundary, though with different abstraction granularity."
+    },
+    {
+      "gt_nodes": [
+        "Global::Log Recording"
+      ],
+      "predicted_nodes": [
+        "Application Layer::User Services::Admin Service::System Monitoring"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node partly covers monitoring, but GT is an explicit global logging concern. Mapping it into admin system monitoring is not a clean equivalent and crosses functional boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Global::Permission Control"
+      ],
+      "predicted_nodes": [
+        "Application Layer::API Gateway::Authentication",
+        "Application Layer::User Services::User Management Service::Authorization"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "Permission control in GT is distributed across authentication and authorization concerns in the gateway and user management services. This is semantically equivalent and boundary-appropriate for access control."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Ajax Interaction"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web Client (Vue.js/Nuxt.js)",
+        "Presentation Layer::Web Client (Vue.js/Nuxt.js::Admin Interface)",
+        "Presentation Layer::Web Client (Vue.js/Nuxt.js::Community Interface)",
+        "Presentation Layer::Web Client (Vue.js/Nuxt.js::Game Interface)",
+        "Presentation Layer::Web Client (Vue.js/Nuxt.js::User Profile Interface)"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Ajax interaction is a frontend presentation concern and is reasonably absorbed into the web client interfaces. The boundary remains correct."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Ajax Interaction::GET Request"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web Client (Vue.js/Nuxt.js)"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "GET request handling is a finer-grained frontend interaction detail and is consistent with the predicted web client presentation layer."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Ajax Interaction::POST Request"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web Client (Vue.js/Nuxt.js)"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "POST request handling is a finer-grained frontend interaction detail and is consistent with the predicted web client presentation layer."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Template Rendering"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web Client (Vue.js/Nuxt.js)"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Template rendering is semantically aligned with the web client presentation layer, especially given Vue/Nuxt SSR context."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Application Layer::API Gateway",
+    "Application Layer::API Gateway::Authentication",
+    "Application Layer::API Gateway::Rate Limiting",
+    "Application Layer::API Gateway::Request Routing",
+    "Application Layer::Community Services::Comment Service",
+    "Application Layer::Community Services::Comment Service::Comment Management",
+    "Application Layer::Community Services::Comment Service::Reply Management",
+    "Application Layer::Community Services::Notification Service",
+    "Application Layer::Community Services::Notification Service::Notification Delivery",
+    "Application Layer::Community Services::Notification Service::Notification Generation",
+    "Application Layer::Community Services::Post Service",
+    "Application Layer::Community Services::Post Service::Post Creation",
+    "Application Layer::Community Services::Post Service::Post Review",
+    "Application Layer::Community Services::Post Service::Search & Recommendations",
+    "Application Layer::Game Services::Game Engine Service",
+    "Application Layer::Game Services::Game Engine Service::Choice Processing",
+    "Application Layer::Game Services::Game Engine Service::Game State Management",
+    "Application Layer::Game Services::Game Engine Service::Plot Generation",
+    "Application Layer::Game Services::Save Management Service",
+    "Application Layer::Game Services::Save Management Service::Save Creation",
+    "Application Layer::Game Services::Save Management Service::Save Retrieval",
+    "Application Layer::Game Services::Save Management Service::Save Sharing",
+    "Application Layer::User Services::Admin Service",
+    "Application Layer::User Services::Admin Service::Content Moderation",
+    "Application Layer::User Services::Admin Service::System Monitoring",
+    "Application Layer::User Services::Admin Service::User Governance",
+    "Application Layer::User Services::Favorites Service",
+    "Application Layer::User Services::Favorites Service::Collection Organization",
+    "Application Layer::User Services::Favorites Service::Favorite Management",
+    "Application Layer::User Services::User Management Service",
+    "Application Layer::User Services::User Management Service::Authorization",
+    "Application Layer::User Services::User Management Service::Profile Management",
+    "Application Layer::User Services::User Management Service::Registration/Authentication",
+    "External Systems::Cloud Platform",
+    "External Systems::Email Service",
+    "External Systems::LLM Provider API",
+    "Infrastructure Layer::AI/LLM Integration",
+    "Infrastructure Layer::AI/LLM Integration::LLM API Client",
+    "Infrastructure Layer::AI/LLM Integration::Prompt Engineering",
+    "Infrastructure Layer::AI/LLM Integration::Response Processing",
+    "Infrastructure Layer::Cache Layer",
+    "Infrastructure Layer::Cache Layer::Content Cache",
+    "Infrastructure Layer::Cache Layer::Game State Cache",
+    "Infrastructure Layer::Cache Layer::Session Cache",
+    "Infrastructure Layer::Database Layer",
+    "Infrastructure Layer::Database Layer::MySQL Database",
+    "Infrastructure Layer::Database Layer::MySQL Database::Game Saves",
+    "Infrastructure Layer::Database Layer::MySQL Database::Posts & Comments",
+    "Infrastructure Layer::Database Layer::MySQL Database::System Metadata",
+    "Infrastructure Layer::Database Layer::MySQL Database::User Data",
+    "Infrastructure Layer::File Storage",
+    "Infrastructure Layer::File Storage::Game Assets",
+    "Infrastructure Layer::File Storage::Generated Content",
+    "Infrastructure Layer::File Storage::User Uploads",
+    "Infrastructure Layer::Message Queue",
+    "Infrastructure Layer::Message Queue::Async Processing",
+    "Infrastructure Layer::Message Queue::Event Distribution",
+    "Presentation Layer::Mobile Client",
+    "Presentation Layer::Web Client (Vue.js/Nuxt.js",
+    "Presentation Layer::Web Client (Vue.js/Nuxt.js::Admin Interface",
+    "Presentation Layer::Web Client (Vue.js/Nuxt.js::Community Interface",
+    "Presentation Layer::Web Client (Vue.js/Nuxt.js::Game Interface",
+    "Presentation Layer::Web Client (Vue.js/Nuxt.js::User Profile Interface"
+  ]
+}

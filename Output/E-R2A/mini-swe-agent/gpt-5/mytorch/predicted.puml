@@ -1,0 +1,64 @@
+@startuml
+skinparam componentStyle rectangle
+
+package `"Presentation Layer`" {
+  [Front-End UI]
+}
+
+package `"Application/Service Layer`" {
+  [Back-End API]
+  [Model Management API]
+  [Training API]
+  [Inference API]
+}
+
+package `"Domain/Engine Layer`" {
+  [MyTorch/NNE Core]
+  [Data Pipeline]
+  [Training Engine]
+  [Inference Engine]
+  [Model Zoo & Weight Init]
+  [GPU Acceleration Adapter]
+}
+
+package `"Infrastructure Layer`" {
+  database `"SQLite Local DB`" as SQLite
+  [Local File Storage]
+  node `"GPU Device`" as GPU
+}
+
+package `"External Dependencies`" {
+  [Preset Datasets]
+  [Python Runtime & Libraries]
+  [CUDA/cuDNN Drivers]
+}
+
+[Front-End UI] --> [Back-End API]
+[Back-End API] --> [Model Management API]
+[Back-End API] --> [Training API]
+[Back-End API] --> [Inference API]
+
+[Training API] --> [Training Engine]
+[Inference API] --> [Inference Engine]
+[Model Management API] --> [MyTorch/NNE Core]
+[Model Management API] --> SQLite
+[Model Management API] --> [Local File Storage]
+
+[Data Pipeline] --> [Preset Datasets]
+[Data Pipeline] --> [MyTorch/NNE Core]
+
+[Training Engine] --> [MyTorch/NNE Core]
+[Inference Engine] --> [MyTorch/NNE Core]
+[MyTorch/NNE Core] --> [Model Zoo & Weight Init]
+[MyTorch/NNE Core] --> [GPU Acceleration Adapter]
+
+[Training API] --> SQLite
+[Inference API] --> SQLite
+[Training API] --> [Local File Storage]
+[Inference API] --> [Local File Storage]
+
+[GPU Acceleration Adapter] --> GPU
+[CUDA/cuDNN Drivers] --> [GPU Acceleration Adapter]
+[Back-End API] ..> [Python Runtime & Libraries]
+[MyTorch/NNE Core] ..> [Python Runtime & Libraries]
+@enduml

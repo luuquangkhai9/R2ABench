@@ -1,0 +1,71 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Browser"
+      ],
+      "predicted_nodes": [
+        "Global::Web Clients"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the web clients/browsers accessing the system. The global boundary attribution is identical."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine"
+      ],
+      "predicted_nodes": [
+        "Platform Environment::GCP Project",
+        "Platform Environment::GCP Project::GKE Cluster",
+        "Platform Environment::GCP Project::GKE Cluster::Runtime::Adapter Pod/Container"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node specifies Compute Engine as the compute environment. The AI accurately details this into the GCP Project, GKE Cluster, and the specific adapter pod, as GKE workloads run on Compute Engine instances."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine::pulltop"
+      ],
+      "predicted_nodes": [
+        "Platform Environment::GCP Project::GKE Cluster::Runtime::Adapter Pod/Container::pulltop (Node.js"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the pulltop Node.js process. The boundary difference between Compute Engine and GKE Container is semantically consistent as the container runs on the compute instances."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine::websocketd"
+      ],
+      "predicted_nodes": [
+        "Platform Environment::GCP Project::GKE Cluster::Runtime::Adapter Pod/Container::websocketd (:8080"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the websocketd streaming process. The boundary mapping matches the compute environment."
+    },
+    {
+      "gt_nodes": [
+        "pubsub-public-data project::Cloud Pub/Sub\\ntopic"
+      ],
+      "predicted_nodes": [
+        "Platform Environment::GCP Project::Google Cloud Pub/Sub"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Google Cloud Pub/Sub topic component. Although the GT places it in a specifically named project and the AI places it in the general GCP Project boundary, the environment and semantic attribution remain valid."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Platform Environment::GCP Project::GKE Cluster::Configuration::Kubernetes ConfigMap (topic",
+    "Platform Environment::GCP Project::GKE Cluster::Configuration::Runtime Topic Parameter (SYMBOL",
+    "Platform Environment::GCP Project::GKE Cluster::Deployment & Scaling::Adapter Deployment",
+    "Platform Environment::GCP Project::GKE Cluster::Deployment & Scaling::Horizontal Pod Autoscaler (HPA",
+    "Platform Environment::GCP Project::GKE Cluster::Networking / Exposure::Kubernetes Service (LoadBalancer) (:80",
+    "Platform Environment::GCP Project::GKE Cluster::Runtime::Adapter Pod/Container::RecentMessageCache (last 10",
+    "Platform Environment::GCP Project::GKE Cluster::Runtime::Adapter Pod/Container::exec.sh"
+  ]
+}

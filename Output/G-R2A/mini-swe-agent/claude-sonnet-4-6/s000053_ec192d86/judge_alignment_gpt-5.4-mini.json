@@ -1,0 +1,176 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Alerts::CHGM"
+      ],
+      "predicted_nodes": [
+        "CAD Container Image\n(UBI Minimal Runtime::cadctl CLI::CHGM Workflow Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the CHGM alert workflow handling function. The AI placed it inside the cadctl CLI/runtime boundary, which is semantically consistent with the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Alerts::CPD"
+      ],
+      "predicted_nodes": [
+        "CAD Container Image\n(UBI Minimal Runtime::cadctl CLI::Anomaly Detection & Communication"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The CPD alert handling corresponds to anomaly detection/communication workflow behavior. The boundary is consistent with CLI-based execution."
+    },
+    {
+      "gt_nodes": [
+        "Global::Escalate alert to\non-call SRE"
+      ],
+      "predicted_nodes": [
+        "CAD Container Image\n(UBI Minimal Runtime::cadctl CLI::Mitigation & Disposition Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Escalation is a mitigation/disposition behavior, and placing it under the cadctl CLI workflow handler is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::Update Incident\nNotes"
+      ],
+      "predicted_nodes": [
+        "CAD Container Image\n(UBI Minimal Runtime::cadctl CLI::Mitigation & Disposition Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Updating incident notes is part of the follow-up disposition workflow. The boundary placement is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton Interceptor:\nAlert investigation\nimplemented in CAD?",
+        "Global::Tekton\nEvent\nListener"
+      ],
+      "predicted_nodes": [
+        "Tekton Execution Environment\n(configuration-anomaly-detection namespace::Event-Driven Path::EventListener",
+        "Tekton Execution Environment\n(configuration-anomaly-detection namespace::Event-Driven Path::Trigger"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT combines the Tekton event-listener/interceptor path into coarse nodes, while the AI split it into EventListener and Trigger. This is semantically equivalent and the Tekton execution boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "PagerDuty Team::<cluster>.openshiftapps.com-\nhive-cluster",
+        "PagerDuty Team::app-sre-alertmanager",
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT lists specific PagerDuty team targets, while the AI aggregated them under the broader PagerDuty external system boundary. This is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Alert Source::app-sre\nalertmanager",
+        "Alert Source::cluster\nalertmanager",
+        "Alert Source::deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Alert Sources::Alert Webhook Producer"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT enumerates specific alert sources; the AI grouped them into a generic alert webhook producer/source. This is a valid abstraction and boundary placement."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::CHGM investigation",
+        "cadctl::CPD investigation",
+        "cadctl::Future investigations",
+        "cadctl::switch(alerttype"
+      ],
+      "predicted_nodes": [
+        "CAD Container Image\n(UBI Minimal Runtime::cadctl CLI::CHGM Workflow Handler",
+        "CAD Container Image\n(UBI Minimal Runtime::cadctl CLI::Anomaly Detection & Communication",
+        "CAD Container Image\n(UBI Minimal Runtime::cadctl CLI::Mitigation & Disposition Handler",
+        "CAD Container Image\n(UBI Minimal Runtime::cadctl CLI::cadctl Entry Point\n(/bin/cadctl"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has multiple cadctl subcommands/actions, and the AI split them into more specific CLI responsibilities plus the entry point. This is a reasonable functional decomposition within the CAD container/CLI boundary."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Build Layer::Go 1.17 Builder Image"
+      ],
+      "match_type": "1:0",
+      "is_boundary_correct": true,
+      "reasoning": "This is a build-environment component not explicitly present in GT node names, but it is consistent with the PRD."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "CAD Container Image\n(UBI Minimal Runtime::Integration Library (pkg::AWS Integration",
+        "CAD Container Image\n(UBI Minimal Runtime::Integration Library (pkg::OCM Integration",
+        "CAD Container Image\n(UBI Minimal Runtime::Integration Library (pkg::PagerDuty Integration"
+      ],
+      "match_type": "1:0",
+      "is_boundary_correct": true,
+      "reasoning": "These are finer-grained integration-library components implied by the PRD, but they do not directly correspond to a specific GT node list item."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Deployment Assets & Template Utility::Deployment Template Artifact",
+        "Deployment Assets & Template Utility::Deployment YAML Manifests",
+        "Deployment Assets & Template Utility::Template Update Utility"
+      ],
+      "match_type": "1:0",
+      "is_boundary_correct": true,
+      "reasoning": "These nodes align with PRD requirements for deployment assets and template update workflow, but there is no direct GT node equivalent."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Global::Alert Webhook Producer",
+        "Global::CAD Container Image\n(UBI Minimal Runtime",
+        "Global::External Alert Sources",
+        "Global::External Systems",
+        "Global::Tekton Execution Environment\n(configuration-anomaly-detection namespace",
+        "Tekton Execution Environment\n(configuration-anomaly-detection namespace::Pipeline Execution::PipelineRun (v1beta1",
+        "Tekton Execution Environment\n(configuration-anomaly-detection namespace::Pipeline Execution::cad-checks-pipeline"
+      ],
+      "match_type": "1:0",
+      "is_boundary_correct": true,
+      "reasoning": "These are structural/containerization and Tekton execution environment nodes not directly represented in the GT list."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Build Layer::Go 1.17 Builder Image",
+    "CAD Container Image\n(UBI Minimal Runtime::Integration Library (pkg::AWS Integration",
+    "CAD Container Image\n(UBI Minimal Runtime::Integration Library (pkg::OCM Integration",
+    "CAD Container Image\n(UBI Minimal Runtime::Integration Library (pkg::PagerDuty Integration",
+    "CAD Container Image\n(UBI Minimal Runtime::cadctl CLI::Anomaly Detection & Communication",
+    "CAD Container Image\n(UBI Minimal Runtime::cadctl CLI::Mitigation & Disposition Handler",
+    "CAD Container Image\n(UBI Minimal Runtime::cadctl CLI::cadctl Entry Point\n(/bin/cadctl",
+    "Deployment Assets & Template Utility::Deployment Template Artifact",
+    "Deployment Assets & Template Utility::Deployment YAML Manifests",
+    "Deployment Assets & Template Utility::Template Update Utility",
+    "External Alert Sources::Alert Webhook Producer",
+    "External Systems::AWS",
+    "External Systems::OCM (OpenShift Cluster Manager",
+    "External Systems::PagerDuty",
+    "Global::Alert Webhook Producer",
+    "Global::CAD Container Image\n(UBI Minimal Runtime",
+    "Global::External Alert Sources",
+    "Global::External Systems",
+    "Global::Tekton Execution Environment\n(configuration-anomaly-detection namespace",
+    "Tekton Execution Environment\n(configuration-anomaly-detection namespace::Event-Driven Path::EventListener",
+    "Tekton Execution Environment\n(configuration-anomaly-detection namespace::Event-Driven Path::Trigger",
+    "Tekton Execution Environment\n(configuration-anomaly-detection namespace::Pipeline Execution::PipelineRun (v1beta1",
+    "Tekton Execution Environment\n(configuration-anomaly-detection namespace::Pipeline Execution::cad-checks-pipeline"
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Proxy Core"
+      ],
+      "predicted_nodes": [
+        "Proxy Layer::HTTP Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the core proxying functionality. The 'Proxy Layer' boundary is identical and correct."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Logging"
+      ],
+      "predicted_nodes": [
+        "Proxy Layer::Debug Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the logging capability within the proxy component. The 'Proxy Layer' boundary is identical and correct."
+    },
+    {
+      "gt_nodes": [
+        "CGI Portal::Http Test\\nClient"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Test Client",
+        "Client Layer::Async HTTP Client",
+        "Client Layer::Executor Service\\n(Fixed Thread Pool"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The nodes are functionally related to HTTP testing. However, the GT places the test client within a 'CGI Portal' (a management webapp), while the AI places it in a generic 'Client Layer'. These boundaries are not semantically equivalent, representing a context confusion."
+    },
+    {
+      "gt_nodes": [
+        "Business Servers::Business Server A",
+        "Business Servers::Business Server B",
+        "Business Servers::Business Server C"
+      ],
+      "predicted_nodes": [
+        "External Systems::Upstream Server"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI's single 'Upstream Server' node correctly aggregates the multiple specific 'Business Server' nodes from the GT. The boundaries 'Business Servers' and 'External Systems' are semantically equivalent in this context."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Download"
+      ],
+      "predicted_nodes": [
+        "Server Layer (Grizzly/Jersey::GET /download\\n(File Download Endpoint"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "While both nodes refer to file download, the GT places this function in the 'Proxy Layer' as a plugin. The AI, correctly following the PRD, places it in the 'Server Layer' as a test server endpoint. This is a severe boundary-crossing error."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Upload"
+      ],
+      "predicted_nodes": [
+        "Server Layer (Grizzly/Jersey::File Upload Handler\\n(returns {filepath: name"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Similar to the download function, the GT places upload functionality in the 'Proxy Layer'. The AI, following the PRD, correctly places it in the 'Server Layer' as part of the Test Server. This is a severe boundary-crossing error."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer\\nKeepalived(VIP::Openresty",
+    "Business Servers::......",
+    "Business Servers::Business Server A",
+    "CGI Portal::Appkey\\nManager",
+    "CGI Portal::CGI Manager",
+    "CGI Portal::Case Manager",
+    "CGI Portal::Document\\nGenerate",
+    "CGI Portal::Log & Tree\\ninquire",
+    "CGI Portal::Metrics &\\nReport",
+    "CGI Portal::Service\\nManager",
+    "Clients::APP Client",
+    "Clients::Business Server",
+    "Clients::Developer",
+    "Clients::Web Client",
+    "Global::Log consumer",
+    "Proxy Layer::cgi_proxy 1::Appkey\\nValidate",
+    "Proxy Layer::cgi_proxy 1::Formatter",
+    "Proxy Layer::cgi_proxy 1::Global Limit",
+    "Proxy Layer::cgi_proxy 1::Login &\\nPermission",
+    "Proxy Layer::cgi_proxy 1::Plugin::Agent",
+    "Proxy Layer::cgi_proxy 1::Plugin::Attach Check",
+    "Proxy Layer::cgi_proxy 1::Plugin::Check\\nParameter",
+    "Proxy Layer::cgi_proxy 1::Plugin::Mock",
+    "Proxy Layer::cgi_proxy 2",
+    "Support Platform::Data Bank\\nHDFS/Hbase/Druid",
+    "Support Platform::Msg Center\\nKafka",
+    "Support Platform::Mysql",
+    "Support Platform::Permission\\nCenter",
+    "Support Platform::Redis Cache",
+    "Support Platform::User Center",
+    "Task Scheduler::CGI Case\\nExecutor",
+    "Task Scheduler::CGI Health\\nCheck",
+    "Task Scheduler::Daily Report",
+    "Task Scheduler::Log Analysis",
+    "Task Scheduler::Monitor/Alarm"
+  ],
+  "unmatched_predicted_nodes": [
+    "Data Stores::Local Filesystem",
+    "Proxy Layer::Upstream Channel Handler\\n(Netty-style",
+    "Server Layer (Grizzly/Jersey::Response Model\\n{code:Int, msg:String, data:Object",
+    "Server Layer (Grizzly/Jersey::Test Server"
+  ]
+}

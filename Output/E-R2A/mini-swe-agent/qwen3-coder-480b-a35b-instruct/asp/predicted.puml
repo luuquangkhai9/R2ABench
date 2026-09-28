@@ -1,0 +1,58 @@
+﻿@startuml
+title Requirements Review Checklist Architecture
+
+actor "Reviewer" as reviewer
+actor "Requirements Owner" as owner
+actor "Project Stakeholder" as stakeholder
+
+package "Review Artifact" {
+  [Review Objectives] as objectives
+  [Checklist Inspection] as checklist
+  [Problem Reporting] as problems
+  [Scoring System] as scoring
+  [Metadata Management] as metadata
+}
+
+package "Data Storage" {
+  [Review Purpose Data] as purposeData
+  [Checklist Items] as checklistData
+  [Problem Reports] as problemData
+  [Score Records] as scoreData
+  [Reviewer Metadata] as metaData
+}
+
+reviewer --> objectives : defines
+reviewer --> checklist : performs
+reviewer --> problems : records
+reviewer --> scoring : assigns
+reviewer --> metadata : provides
+
+objectives --> purposeData : stores/retrieves
+checklist --> checklistData : uses/updates
+problems --> problemData : saves
+scoring --> scoreData : records
+metadata --> metaData : maintains
+
+owner <-- problems : receives findings
+stakeholder <-- scoring : views results
+stakeholder <-- metadata : views review info
+
+note right of checklist
+  Inspects:
+  - Completeness
+  - Understandability
+  - Model Accuracy
+  - Extensions/Improvements
+end note
+
+note right of scoring
+  Four 10-point dimensions:
+  - Content completeness
+  - Understandability
+  - Model accuracy
+  - Extension/improvement
+  Total score: 40 points
+end note
+
+@enduml
+

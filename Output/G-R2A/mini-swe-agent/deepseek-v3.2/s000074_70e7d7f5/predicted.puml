@@ -1,0 +1,143 @@
+@startuml
+!define LAYER_COLOR #E6F3FF
+!define COMPONENT_COLOR #CCE6FF
+!define EXTERNAL_COLOR #FFE6E6
+!define DATA_COLOR #E6FFE6
+
+skinparam component {
+  BackgroundColor<<Layer>> LAYER_COLOR
+  BackgroundColor<<Component>> COMPONENT_COLOR
+  BackgroundColor<<External>> EXTERNAL_COLOR
+  BackgroundColor<<Data>> DATA_COLOR
+  BorderColor #666666
+  ArrowColor #333333
+}
+
+title Tengine Lite - Layered Architecture
+
+package "User Interface Layer" <<Layer>> {
+  component "Example Applications" <<Component>> {
+    [Classification]
+    [Object Detection]
+    [Segmentation]
+    [Pose Estimation]
+    [Landmark Detection]
+    [Character Recognition]
+  }
+  
+  component "Browser-based Converter" <<Component>> {
+    [WebAssembly Runtime]
+    [Local Model Conversion]
+  }
+}
+
+package "API Layer" <<Layer>> {
+  component "C API" <<Component>> {
+    [Tengine-compatible Interface]
+  }
+  
+  component "C++ API" <<Component>> {
+    [C++ Interface]
+  }
+  
+  component "Python API" <<Component>> {
+    [Python Interface]
+  }
+}
+
+package "Core Engine Layer" <<Layer>> {
+  component "Scheduler Module" <<Component>> {
+    [NNIR Execution]
+    [Computation Graph]
+    [Hardware Resource Mgmt]
+    [Model Serializer]
+  }
+  
+  component "Device Module" <<Component>> {
+    [NN Operators Backend]
+  }
+  
+  component "Operator Module" <<Component>> {
+    [Operator Registration]
+    [Operator Initialization]
+  }
+  
+  component "Serializer Module" <<Component>> {
+    [tmfile Decoder]
+    [Binary Model Parser]
+  }
+}
+
+package "Tools Layer" <<Layer>> {
+  component "Linux Conversion Tool" <<Component>> {
+    [Pre-compiled Converter]
+  }
+  
+  component "CMake Build System" <<Component>> {
+    [Cross-platform Compilation]
+  }
+}
+
+package "External Systems" <<External>> {
+  component "Web Browser" <<External>> {
+    [WebAssembly Support]
+  }
+  
+  component "Linux OS" <<External>> {
+    [Native Execution]
+  }
+}
+
+package "Data Stores" <<Data>> {
+  component "Model Files" <<Data>> {
+    [tmfile Format]
+    [Converted Models]
+  }
+  
+  component "Image Files" <<Data>> {
+    [Input Images]
+  }
+}
+
+'Example Applications' --> 'C API' : "Uses"
+'Example Applications' --> 'C++ API' : "Uses"
+'Example Applications' --> 'Python API' : "Uses"
+
+'C API' --> 'Scheduler Module' : "Invokes"
+'C++ API' --> 'Scheduler Module' : "Invokes"
+'Python API' --> 'Scheduler Module' : "Invokes"
+
+'Scheduler Module' --> 'Device Module' : "Executes Operators"
+'Scheduler Module' --> 'Operator Module' : "Manages Operators"
+'Scheduler Module' --> 'Serializer Module' : "Loads Models"
+
+'Browser-based Converter' --> 'Serializer Module' : "Uses Decoder"
+'Linux Conversion Tool' --> 'Serializer Module' : "Uses Decoder"
+
+'CMake Build System' --> 'Core Engine Layer' : "Builds"
+
+'Web Browser' --> 'Browser-based Converter' : "Hosts"
+'Linux OS' --> 'Linux Conversion Tool' : "Runs On"
+'Linux OS' --> 'Example Applications' : "Runs On"
+
+'Model Files' --> 'Serializer Module' : "Input"
+'Serializer Module' --> 'Model Files' : "Output"
+'Image Files' --> 'Example Applications' : "Input"
+
+note right of 'Browser-based Converter'
+  Converts models locally
+  using WebAssembly
+  No data uploaded
+end note
+
+note right of 'Linux Conversion Tool'
+  Pre-compiled tool
+  for Linux systems
+end note
+
+note right of 'CMake Build System'
+  Cross-platform
+  compilation support
+end note
+
+@enduml

@@ -1,0 +1,97 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Router Endpoints"
+      ],
+      "predicted_nodes": [
+        "Global::HTTP Endpoints\n(Client Inbound"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the HTTP-facing inbound endpoints for router-related operations. The predicted node uses a more generic boundary, but it is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Turing System::Turing API Server\nHTTP REST API to configure Routers"
+      ],
+      "predicted_nodes": [
+        "API Layer::HTTP API Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the main HTTP API server exposing router/ensembler management endpoints. The layer name differs, but the component placement is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Router Clients"
+      ],
+      "predicted_nodes": [
+        "API Layer::Router Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node represents external consumers/clients, while the predicted node is an internal request handler. These are not the same architectural element, so the match is not valid."
+    },
+    {
+      "gt_nodes": [
+        "Kubernetes Cluster::Knative Controller"
+      ],
+      "predicted_nodes": [
+        "Cluster Management Layer::Kubernetes Cluster Manager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT component is a specific Kubernetes/Knative control-plane component, while the predicted node is a generic cluster manager service. This is only loosely related and not an accurate architectural reproduction."
+    },
+    {
+      "gt_nodes": [
+        "Kubernetes Cluster::Istio"
+      ],
+      "predicted_nodes": [
+        "Global::Kubernetes Cluster"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a specific service mesh component inside the Kubernetes cluster boundary, whereas the prediction collapses it into the entire cluster. This is a boundary and granularity error."
+    },
+    {
+      "gt_nodes": [
+        "Global::Machine Learning Platform\nMLP API Server"
+      ],
+      "predicted_nodes": [
+        "Global::MLflow Model Registry"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both are ML-related external systems, but the GT node is an MLP API server while the prediction is specifically an MLflow registry. The predicted node is too specific and does not faithfully match the GT component."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Authorization Service",
+    "Global::Experimentation Service",
+    "Global::Monitoring and Alerting Service",
+    "Global::Secret Store",
+    "Global::Turing User",
+    "Turing System::Database\nPersistent storage for Router objects",
+    "Turing System::Turing UI\nWeb interface to configure Routers"
+  ],
+  "unmatched_predicted_nodes": [
+    "API Layer::Ensembler Handler",
+    "API Layer::Router Handler",
+    "Global::Artifact Download Interface",
+    "Global::Cluster API Interface",
+    "Global::Jaeger\n(Distributed Tracing Backend",
+    "Global::PyFuncEnsembler HTTP Interface",
+    "Global::Trace Export Interface",
+    "Kubernetes Cluster::Kubernetes API",
+    "Middleware Layer::Authorization Middleware\n(conditional",
+    "Middleware Layer::OpenAPI Validation Middleware\n(conditional",
+    "Observability Layer::Jaeger Tracing Client",
+    "OpenAPI Specification (v3.0.3::Endpoint Schemas",
+    "PyFuncEnsembler Runtime Layer::PyFuncEnsembler Image Builder",
+    "PyFuncEnsembler Runtime Layer::PyFuncEnsemblerRunner\n(webservice",
+    "Service / Business Logic Layer::Ensembler Service",
+    "Service / Business Logic Layer::Router Service"
+  ]
+}

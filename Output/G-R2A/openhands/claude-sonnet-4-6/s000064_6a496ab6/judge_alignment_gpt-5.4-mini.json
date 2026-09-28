@@ -1,0 +1,594 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Backend::BFF / API Gateway::Admin Console Gateway",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "GCP::GKE Cluster::Gateway / BFF Layer::Admin Gateway / BFF"
+      ],
+      "reasoning": "The predicted admin gateway/BFF node covers the same client-facing administrative access responsibility."
+    },
+    {
+      "gt_node": "Backend::BFF / API Gateway::Native App Gateway",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "GCP::GKE Cluster::Gateway / BFF Layer::Native App Gateway / BFF"
+      ],
+      "reasoning": "The predicted native app gateway/BFF node covers the same client-facing mobile access responsibility."
+    },
+    {
+      "gt_node": "Backend::Database::NoSQL\n(Firestore",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "GCP::GCP Data Stores::NoSQL Storage\n(Message Data"
+      ],
+      "reasoning": "The predicted NoSQL message-data store covers the GT NoSQL backend storage responsibility, even though the named technology is abstracted."
+    },
+    {
+      "gt_node": "Backend::Database::RDB\n(MySQL",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "GCP::GCP Data Stores::MySQL\n(Book Data",
+        "GCP::GCP Data Stores::MySQL\n(EC Site Data",
+        "GCP::GCP Data Stores::MySQL\n(User Data"
+      ],
+      "reasoning": "The GT MySQL relational database responsibility is covered by multiple predicted MySQL data-store nodes partitioned by domain."
+    },
+    {
+      "gt_node": "Backend::External APIs::Email Sending\n(SendGrid",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Services::Email Notification Provider"
+      ],
+      "reasoning": "The predicted email notification provider corresponds to the same external email delivery integration."
+    },
+    {
+      "gt_node": "Backend::External APIs::Firebase\nAuthentication",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Services::Firebase Authentication"
+      ],
+      "reasoning": "The predicted Firebase Authentication node matches the GT authentication external API."
+    },
+    {
+      "gt_node": "Backend::External APIs::Google Books API",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Services::Book-Search API"
+      ],
+      "reasoning": "The predicted book-search API corresponds to the GT external book search integration, despite provider-name generalization."
+    },
+    {
+      "gt_node": "Backend::External APIs::Push Notification\n(FCM",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Services::Push Notification Provider"
+      ],
+      "reasoning": "The predicted push notification provider covers the same external push notification integration responsibility."
+    },
+    {
+      "gt_node": "Backend::External APIs::Stripe",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Services::Stripe\n(Payment"
+      ],
+      "reasoning": "The predicted Stripe payment node matches the GT payment integration."
+    },
+    {
+      "gt_node": "Backend::File Storage::NAS\n(Cloud Storage",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node clearly covers the file/object storage responsibility."
+    },
+    {
+      "gt_node": "Backend::L7 Load Balancer",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "GCP::Load Balancer"
+      ],
+      "reasoning": "The predicted load balancer covers the same infrastructure responsibility."
+    },
+    {
+      "gt_node": "Backend::Microservices::Admin Service",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted backend service explicitly represents the admin service; only the admin gateway/BFF is present."
+    },
+    {
+      "gt_node": "Backend::Microservices::Auth API",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "GCP::GKE Cluster::Backend Services::Authentication API"
+      ],
+      "reasoning": "The predicted authentication API covers the GT auth microservice responsibility."
+    },
+    {
+      "gt_node": "Backend::Microservices::Book Service",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "GCP::GKE Cluster::Backend Services::Book Management API\n(Golang"
+      ],
+      "reasoning": "The predicted book management API covers the GT book service responsibility."
+    },
+    {
+      "gt_node": "Backend::Microservices::Notification Service",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "GCP::GKE Cluster::Backend Services::Notification Service"
+      ],
+      "reasoning": "The predicted notification service directly matches the GT notification service."
+    },
+    {
+      "gt_node": "Backend::Microservices::Store Service",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "GCP::GKE Cluster::Backend Services::EC Site API\n(Golang"
+      ],
+      "reasoning": "The predicted EC site API covers the GT store/EC-site service responsibility."
+    },
+    {
+      "gt_node": "Backend::Microservices::Support Service",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "GCP::GKE Cluster::Backend Services::Support API\n(Golang"
+      ],
+      "reasoning": "The predicted support API covers the GT support service responsibility."
+    },
+    {
+      "gt_node": "Backend::Microservices::User Service",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "GCP::GKE Cluster::Backend Services::User Management API\n(Golang"
+      ],
+      "reasoning": "The predicted user management API covers the GT user service responsibility."
+    },
+    {
+      "gt_node": "Global::Native App",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Native Mobile Apps"
+      ],
+      "reasoning": "The predicted native mobile apps node covers the GT native app client concept."
+    },
+    {
+      "gt_node": "Global::Web Admin App",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Admin Web Application"
+      ],
+      "reasoning": "The predicted admin web application node covers the GT web admin app concept."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "External Services::Book-Search API",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::External APIs::Google Books API"
+      ],
+      "reasoning": "This is grounded in the GT external book-search integration."
+    },
+    {
+      "predicted_node": "External Services::Email Notification Provider",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::External APIs::Email Sending\n(SendGrid"
+      ],
+      "reasoning": "This corresponds to the GT email sending external service."
+    },
+    {
+      "predicted_node": "External Services::Firebase Authentication",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::External APIs::Firebase\nAuthentication"
+      ],
+      "reasoning": "This directly matches the GT Firebase authentication dependency."
+    },
+    {
+      "predicted_node": "External Services::Push Notification Provider",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::External APIs::Push Notification\n(FCM"
+      ],
+      "reasoning": "This corresponds to the GT push notification external integration."
+    },
+    {
+      "predicted_node": "External Services::Stripe\n(Payment",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::External APIs::Stripe"
+      ],
+      "reasoning": "This directly matches the GT Stripe payment integration."
+    },
+    {
+      "predicted_node": "GCP::GCE VM (Ops",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "This is grounded by the PRD infrastructure context, which includes GCE VM operational procedures."
+    },
+    {
+      "predicted_node": "GCP::GCE VM (Ops::Cloud SDK",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "This is grounded as a subcomponent of the GCE VM operations environment mentioned in the PRD."
+    },
+    {
+      "predicted_node": "GCP::GCP Data Stores::MySQL\n(Book Data",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::Database::RDB\n(MySQL"
+      ],
+      "reasoning": "This is a grounded MySQL domain store for book data."
+    },
+    {
+      "predicted_node": "GCP::GCP Data Stores::MySQL\n(EC Site Data",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::Database::RDB\n(MySQL"
+      ],
+      "reasoning": "This is a grounded MySQL domain store for EC site data."
+    },
+    {
+      "predicted_node": "GCP::GCP Data Stores::MySQL\n(User Data",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::Database::RDB\n(MySQL"
+      ],
+      "reasoning": "This is a grounded MySQL domain store for user data."
+    },
+    {
+      "predicted_node": "GCP::GCP Data Stores::NoSQL Storage\n(Message Data",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::Database::NoSQL\n(Firestore"
+      ],
+      "reasoning": "This corresponds to the GT NoSQL message data store."
+    },
+    {
+      "predicted_node": "GCP::GKE Cluster",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::Microservices::Auth API",
+        "Backend::Microservices::Book Service",
+        "Backend::Microservices::Notification Service",
+        "Backend::Microservices::Store Service",
+        "Backend::Microservices::Support Service",
+        "Backend::Microservices::User Service"
+      ],
+      "reasoning": "The cluster node is grounded as the deployment environment for the backend services."
+    },
+    {
+      "predicted_node": "GCP::GKE Cluster::Backend Services::Authentication API",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::Microservices::Auth API"
+      ],
+      "reasoning": "This matches the GT authentication backend service."
+    },
+    {
+      "predicted_node": "GCP::GKE Cluster::Backend Services::Book Management API\n(Golang",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::Microservices::Book Service"
+      ],
+      "reasoning": "This matches the GT book service responsibility."
+    },
+    {
+      "predicted_node": "GCP::GKE Cluster::Backend Services::EC Site API\n(Golang",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::Microservices::Store Service"
+      ],
+      "reasoning": "This matches the GT EC site/store service responsibility."
+    },
+    {
+      "predicted_node": "GCP::GKE Cluster::Backend Services::Message Management Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::Database::NoSQL\n(Firestore"
+      ],
+      "reasoning": "This is grounded as the service layer handling message management data and aligns with the PRD's message-management domain."
+    },
+    {
+      "predicted_node": "GCP::GKE Cluster::Backend Services::Notification Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::Microservices::Notification Service"
+      ],
+      "reasoning": "This directly corresponds to the GT notification service."
+    },
+    {
+      "predicted_node": "GCP::GKE Cluster::Backend Services::Support API\n(Golang",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::Microservices::Support Service"
+      ],
+      "reasoning": "This matches the GT support service responsibility."
+    },
+    {
+      "predicted_node": "GCP::GKE Cluster::Backend Services::User Management API\n(Golang",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::Microservices::User Service"
+      ],
+      "reasoning": "This matches the GT user service responsibility."
+    },
+    {
+      "predicted_node": "GCP::GKE Cluster::Gateway / BFF Layer::Admin Gateway / BFF",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::BFF / API Gateway::Admin Console Gateway"
+      ],
+      "reasoning": "This corresponds to the GT admin gateway/BFF."
+    },
+    {
+      "predicted_node": "GCP::GKE Cluster::Gateway / BFF Layer::Native App Gateway / BFF",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::BFF / API Gateway::Native App Gateway"
+      ],
+      "reasoning": "This corresponds to the GT native app gateway/BFF."
+    },
+    {
+      "predicted_node": "GCP::Load Balancer",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::L7 Load Balancer"
+      ],
+      "reasoning": "This matches the GT load balancer infrastructure node."
+    },
+    {
+      "predicted_node": "Global::Admin Web Application",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Web Admin App"
+      ],
+      "reasoning": "This is the same admin web client concept as the GT node."
+    },
+    {
+      "predicted_node": "Global::External Services",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::External APIs::Email Sending\n(SendGrid",
+        "Backend::External APIs::Firebase\nAuthentication",
+        "Backend::External APIs::Google Books API",
+        "Backend::External APIs::Push Notification\n(FCM",
+        "Backend::External APIs::Stripe"
+      ],
+      "reasoning": "This is an umbrella grouping for GT external API dependencies."
+    },
+    {
+      "predicted_node": "Global::GCP",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::L7 Load Balancer",
+        "Backend::File Storage::NAS\n(Cloud Storage",
+        "Backend::Database::NoSQL\n(Firestore",
+        "Backend::Database::RDB\n(MySQL"
+      ],
+      "reasoning": "This is a high-level umbrella grouping for the GT cloud/infrastructure components."
+    },
+    {
+      "predicted_node": "Global::Native Mobile Apps",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Native App"
+      ],
+      "reasoning": "This is the same native client concept as the GT node."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Backend::BFF / API Gateway::Admin Console Gateway"
+      ],
+      "predicted_nodes": [
+        "GCP::GKE Cluster::Gateway / BFF Layer::Admin Gateway / BFF"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same administrative gateway/BFF concept with semantically equivalent boundary attribution."
+    },
+    {
+      "gt_nodes": [
+        "Backend::BFF / API Gateway::Native App Gateway"
+      ],
+      "predicted_nodes": [
+        "GCP::GKE Cluster::Gateway / BFF Layer::Native App Gateway / BFF"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same native client gateway/BFF concept with semantically equivalent boundary attribution."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Database::NoSQL\n(Firestore"
+      ],
+      "predicted_nodes": [
+        "GCP::GCP Data Stores::NoSQL Storage\n(Message Data"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same NoSQL message-store concept; boundary naming differs but is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Database::RDB\n(MySQL"
+      ],
+      "predicted_nodes": [
+        "GCP::GCP Data Stores::MySQL\n(Book Data",
+        "GCP::GCP Data Stores::MySQL\n(EC Site Data",
+        "GCP::GCP Data Stores::MySQL\n(User Data"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT relational database responsibility is split into domain-specific MySQL stores, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Backend::External APIs::Email Sending\n(SendGrid"
+      ],
+      "predicted_nodes": [
+        "External Services::Email Notification Provider"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same external email delivery integration; boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Backend::External APIs::Firebase\nAuthentication"
+      ],
+      "predicted_nodes": [
+        "External Services::Firebase Authentication"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match for the Firebase auth integration."
+    },
+    {
+      "gt_nodes": [
+        "Backend::External APIs::Google Books API"
+      ],
+      "predicted_nodes": [
+        "External Services::Book-Search API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The provider name is generalized, but the external book-search integration is the same responsibility."
+    },
+    {
+      "gt_nodes": [
+        "Backend::External APIs::Push Notification\n(FCM"
+      ],
+      "predicted_nodes": [
+        "External Services::Push Notification Provider"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same push notification integration, with semantically equivalent boundary naming."
+    },
+    {
+      "gt_nodes": [
+        "Backend::External APIs::Stripe"
+      ],
+      "predicted_nodes": [
+        "External Services::Stripe\n(Payment"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match for the Stripe payment integration."
+    },
+    {
+      "gt_nodes": [
+        "Backend::L7 Load Balancer"
+      ],
+      "predicted_nodes": [
+        "GCP::Load Balancer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same load balancer infrastructure concept."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Auth API"
+      ],
+      "predicted_nodes": [
+        "GCP::GKE Cluster::Backend Services::Authentication API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Authentication service is preserved and placed within the semantically correct cluster boundary."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Book Service"
+      ],
+      "predicted_nodes": [
+        "GCP::GKE Cluster::Backend Services::Book Management API\n(Golang"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same book-management service responsibility with consistent backend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Notification Service"
+      ],
+      "predicted_nodes": [
+        "GCP::GKE Cluster::Backend Services::Notification Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct service match."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Store Service"
+      ],
+      "predicted_nodes": [
+        "GCP::GKE Cluster::Backend Services::EC Site API\n(Golang"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The EC site API corresponds to the GT store/EC-site service."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Support Service"
+      ],
+      "predicted_nodes": [
+        "GCP::GKE Cluster::Backend Services::Support API\n(Golang"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct support service match."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::User Service"
+      ],
+      "predicted_nodes": [
+        "GCP::GKE Cluster::Backend Services::User Management API\n(Golang"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct user management service match."
+    },
+    {
+      "gt_nodes": [
+        "Global::Native App"
+      ],
+      "predicted_nodes": [
+        "Global::Native Mobile Apps"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same native client concept."
+    },
+    {
+      "gt_nodes": [
+        "Global::Web Admin App"
+      ],
+      "predicted_nodes": [
+        "Global::Admin Web Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same admin web client concept."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Backend::File Storage::NAS\n(Cloud Storage",
+    "Backend::Microservices::Admin Service"
+  ],
+  "unmatched_predicted_nodes": [
+    "GCP::GCE VM (Ops",
+    "GCP::GCE VM (Ops::Cloud SDK",
+    "GCP::GKE Cluster",
+    "GCP::GKE Cluster::Backend Services::Message Management Service",
+    "Global::External Services",
+    "Global::GCP"
+  ]
+}

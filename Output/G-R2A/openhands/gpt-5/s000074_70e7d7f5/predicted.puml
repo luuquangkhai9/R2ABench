@@ -1,0 +1,85 @@
+@startuml
+title Tengine Lite - System Architecture Overview
+
+skinparam componentStyle rectangle
+
+package "Examples" {
+  [Vision/OCR Examples] as Examples
+}
+
+package "API Surfaces" {
+  [C API] as CAPI
+  [C++ API Docs] as CPPDocs
+  [Python API Docs] as PYDocs
+}
+
+package "Tengine Lite Library" {
+  [Scheduler] as Scheduler
+  [Operator Module] as Operator
+  [Device Backend] as Device
+  [Serializer (tmfile)] as Serializer
+}
+
+package "Conversion Tooling" {
+  [Linux Model Converter (CLI)] as LinuxConv
+  [Online Model Converter (WebAssembly)] as WebConv
+}
+
+package "External Assets" {
+  artifact "Image Files" as Img
+  artifact "Model Files" as ModelFiles
+  artifact "Binary tmfile" as TMFile
+  artifact "Serialized Model Params" as SerParams
+}
+
+node "Linux" as LinuxNode
+node "Web Browser (WASM)" as BrowserNode
+node "Local Execution Environment" as LocalNode
+
+component "CMake-based Build" as CMake
+
+Examples --> CAPI : run examples
+CAPI --> Scheduler
+CPPDocs ..> CAPI : documentation entry point
+PYDocs ..> CAPI : documentation entry point
+
+Scheduler --> Operator : register/initialize operators
+Scheduler --> Device : execute graphs on hardware
+Scheduler --> Serializer : load/deserialize models
+Serializer --> SerParams
+
+Examples --> Img : consume local images
+
+ModelFiles --> LinuxConv
+ModelFiles --> WebConv
+LinuxConv --> TMFile : produce
+WebConv --> TMFile : produce
+TMFile --> Serializer : decode
+
+LinuxNode -- LinuxConv
+BrowserNode -- WebConv
+LocalNode -- Examples
+LocalNode -- Scheduler
+
+CMake ..> Scheduler : build
+CMake ..> Examples : build
+
+note left of Examples
+Includes: classification, detection, segmentation,
+pose estimation, landmarks, OCR
+end note
+
+note bottom of CAPI
+Compatible with original Tengine C API
+end note
+
+note right of WebConv
+Executes locally via WebAssembly
+No external network required
+end note
+
+note bottom of CMake
+Cross-platform build based on CMake
+end note
+
+@enduml

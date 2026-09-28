@@ -1,0 +1,185 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Browser / Client Layer::Frontend Interface\\n(Bootstrap-Vue"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::VueFrontend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the browser-side frontend UI layer. The predicted node uses a different but semantically equivalent presentation boundary."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Blog Data"
+      ],
+      "predicted_nodes": [
+        "Data Access Layer::BlogRepository"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The functionality aligns with blog persistence, but the GT node is a database storage node while the prediction is a repository/data-access component, which is a layer mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Dataset Data"
+      ],
+      "predicted_nodes": [
+        "Data Access Layer::DatasetRepository"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Semantically both relate to dataset persistence, but the GT is a database layer node whereas the prediction is a repository layer node, so the boundary attribution is not correct."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Following Data"
+      ],
+      "predicted_nodes": [
+        "Data Access Layer::FollowRepository"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "They both represent follow relationship storage, but the GT places it in the database layer and the prediction places it in a repository layer, which is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Model Data"
+      ],
+      "predicted_nodes": [
+        "Data Access Layer::ModelRepository"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The model persistence concern matches, but the GT node is a MySQL database node while the predicted node is a repository/data-access node."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Q&A Community Data"
+      ],
+      "predicted_nodes": [
+        "Data Access Layer::QARepository"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both refer to Q&A data persistence, but the architectural boundary differs between database storage and repository access."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::User Data"
+      ],
+      "predicted_nodes": [
+        "Data Access Layer::UserRepository",
+        "Application / API Layer::AuthGuard\\n(Session Validation | Role Check\\nAD-001, AD-002",
+        "Domain Service Layer::AccountService\\n(Register | Login | Logout\\nPassword Recovery | Profile | Roles"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT user data node is split across repository, account logic, and auth guard concerns in the prediction. However, only the repository corresponds to storage; the additional service/filter nodes are not equivalent to the GT database boundary, so overall boundary attribution is not correct."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Account Management Module"
+      ],
+      "predicted_nodes": [
+        "Domain Service Layer::AccountService\\n(Register | Login | Logout\\nPassword Recovery | Profile | Roles",
+        "Application / API Layer::AuthGuard\\n(Session Validation | Role Check\\nAD-001, AD-002"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT account management module is decomposed into account service plus authentication guard responsibilities. This is a reasonable semantic split within the backend/server boundary."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Admin Module"
+      ],
+      "predicted_nodes": [
+        "Domain Service Layer::AdminGovernanceService\\n(Cancel Accounts | Delete Illegal Content\\nFR-031, FR-032, DR-010",
+        "Application / API Layer::AuthGuard\\n(Session Validation | Role Check\\nAD-001, AD-002"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The admin module is split into governance logic and role-based access control. This matches the GT server-side admin boundary semantically."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Blog Sharing Module"
+      ],
+      "predicted_nodes": [
+        "Domain Service Layer::BlogService\\n(Articles | Comments\\nValidation FR-015",
+        "Data Access Layer::BlogRepository\\n(Blog and Comment entity SQL"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT blog module is split into business service and persistence repository, which is a reasonable backend decomposition."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Dataset Management Module"
+      ],
+      "predicted_nodes": [
+        "Domain Service Layer::DatasetService\\n(Upload | Download | Delete\\nNaming Validation AD-004",
+        "Data Access Layer::DatasetRepository\\n(Dataset entity SQL",
+        "Persistence Layer::File Storage Service\\n(Model Binaries | Dataset Files\\nFR-018, FR-019, FR-025, FR-026\\nNFR-009, C-004"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT dataset module is decomposed into service, repository, and file storage handling. This is semantically consistent with the GT server-side dataset module."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Following Management Module"
+      ],
+      "predicted_nodes": [
+        "Domain Service Layer::FollowService\\n(Follow | Unfollow\\nFollow Lists DR-008",
+        "Data Access Layer::FollowRepository\\n(Follow relationship SQL"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted follow service and repository together correspond to the GT following management module, with correct backend layering."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Model Management Module"
+      ],
+      "predicted_nodes": [
+        "Domain Service Layer::ModelService\\n(Upload | Metadata | Download\\nDelete | Modify | Online Invocation FR-022",
+        "Domain Service Layer::ModelReviewService\\n(Review Workflow | State Transition\\nFR-018, DR-006",
+        "Domain Service Layer::PaymentService\\n(Purchase | Balance Check\\nTransaction Records AD-005",
+        "Data Access Layer::ModelRepository\\n(Model entity SQL",
+        "Persistence Layer::File Storage Service\\n(Model Binaries | Dataset Files\\nFR-018, FR-019, FR-025, FR-026\\nNFR-009, C-004",
+        "Domain Service Layer::RecommendationService\\n(Personalized Model Pools\\nNFR-015, AD-003, DR-009"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT model management module is expanded into multiple functionally related backend services. This decomposition matches the GT module and remains within the backend/server architectural boundary."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Q&A Community Module"
+      ],
+      "predicted_nodes": [
+        "Domain Service Layer::QAService\\n(Questions | Answers\\nCreate | Edit | Delete",
+        "Data Access Layer::QARepository\\n(Question and Answer entity SQL"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The Q&A module is correctly split into service and repository responsibilities within the backend/server layer."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Application / API Layer::EmailNotificationService\\n(Password Recovery Emails - FR-003",
+    "Application / API Layer::SecurityFilter\\n(Injection Prevention\\nMulti-Mechanism Security",
+    "Application / API Layer::SpringBootBackend\\n(NFR-001, NFR-002, NFR-003",
+    "Data Access Layer::BrowsingHistoryRepository\\n(User browsing events - DR-009",
+    "External Systems::Email Service Provider",
+    "Global::External Systems",
+    "Persistence Layer::File Storage Service\\n(Model Binaries | Dataset Files\\nFR-018, FR-019, FR-025, FR-026\\nNFR-009, C-004",
+    "Persistence Layer::MySQL Database\\n(>10,000 users | 1,000 req/s\\nNFR-009, NFR-010\\nC-001, DR-001 to DR-010",
+    "Presentation Layer::I18nModule\\n(ZH/EN Switch - NFR-012",
+    "Presentation Layer::VueFrontend"
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::Go build tags",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Host Scanner::Provider Test Selector"
+      ],
+      "reasoning": "The predicted provider test selector covers the build-tag-based provider-specific test selection responsibility."
+    },
+    {
+      "gt_node": "Host Scanner Endpoint Tests::endpoint_platform1_test.go\\nplatform-specific expected data",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node specifically covers the platform1 test file and its platform-specific expected data responsibility."
+    },
+    {
+      "gt_node": "Host Scanner Endpoint Tests::endpoint_platform2_test.go\\nplatform-specific expected data",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node specifically covers the platform2 test file and its platform-specific expected data responsibility."
+    },
+    {
+      "gt_node": "Host Scanner Endpoint Tests::endpoint_test.go\\ncommon endpoint tests",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Host Scanner::HTTP API Service"
+      ],
+      "reasoning": "The predicted HTTP API service covers the endpoint-testing target at a functional level, including common endpoint behavior."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Global::Config Files",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT nodes do not include a standalone configuration-files component relevant to the provided manual design."
+    },
+    {
+      "predicted_node": "Global::Control Plane JSON",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is a data input concept in the PRD, but it is not represented by any GT node in the manual diagram."
+    },
+    {
+      "predicted_node": "Global::Host Scanner",
+      "grounded": true,
+      "reference_nodes": [
+        "Host Scanner Endpoint Tests::endpoint_test.go\\ncommon endpoint tests",
+        "Global::Go build tags"
+      ],
+      "reasoning": "This is a broad umbrella node that partially grounds the host-scanner test and build-tag concepts, though it is more abstract than the GT nodes."
+    },
+    {
+      "predicted_node": "Global::Process Args",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node explicitly represents process arguments as a standalone architectural node."
+    },
+    {
+      "predicted_node": "Global::Runtime Config",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node explicitly represents runtime configuration as a standalone architectural node."
+    },
+    {
+      "predicted_node": "Host Scanner::CNI Directory Resolver",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The PRD mentions CNI directory resolution, but the GT node set provided here does not contain a corresponding manual node."
+    },
+    {
+      "predicted_node": "Host Scanner::HTTP API Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Host Scanner Endpoint Tests::endpoint_test.go\\ncommon endpoint tests"
+      ],
+      "reasoning": "The HTTP API service is consistent with the common endpoint test responsibility present in the GT nodes."
+    },
+    {
+      "predicted_node": "Host Scanner::JSON Sanitizer",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "Although supported by the PRD, there is no matching GT node in the provided manual diagram."
+    },
+    {
+      "predicted_node": "Host Scanner::Provider Test Selector",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Go build tags",
+        "Host Scanner Endpoint Tests::endpoint_platform1_test.go\\nplatform-specific expected data",
+        "Host Scanner Endpoint Tests::endpoint_platform2_test.go\\nplatform-specific expected data"
+      ],
+      "reasoning": "This predicted node directly corresponds to the Go build-tag-based provider-specific test selection and platform-specific test data concepts in the GT."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Go build tags"
+      ],
+      "predicted_nodes": [
+        "Host Scanner::Provider Test Selector"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The core responsibility matches, and placing build-tag selection under the host-scanner test area is semantically acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Host Scanner Endpoint Tests::endpoint_test.go\\ncommon endpoint tests"
+      ],
+      "predicted_nodes": [
+        "Host Scanner::HTTP API Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The common endpoint tests map to the HTTP API behavior being exercised, and the boundary is semantically compatible."
+    },
+    {
+      "gt_nodes": [
+        "Host Scanner Endpoint Tests::endpoint_platform1_test.go\\nplatform-specific expected data",
+        "Host Scanner Endpoint Tests::endpoint_platform2_test.go\\nplatform-specific expected data"
+      ],
+      "predicted_nodes": [
+        "Host Scanner::Provider Test Selector"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The two platform-specific test files are aggregated into a single provider test selection concept; this is semantically consistent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Host Scanner Endpoint Tests::endpoint_platform1_test.go\\nplatform-specific expected data",
+    "Host Scanner Endpoint Tests::endpoint_platform2_test.go\\nplatform-specific expected data"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Config Files",
+    "Global::Control Plane JSON",
+    "Global::Process Args",
+    "Global::Runtime Config",
+    "Host Scanner::CNI Directory Resolver",
+    "Host Scanner::JSON Sanitizer"
+  ]
+}

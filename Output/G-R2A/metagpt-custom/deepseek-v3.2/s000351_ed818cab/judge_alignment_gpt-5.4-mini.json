@@ -1,0 +1,85 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Client A1",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Client A2",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Client A3",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Client B1",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Client B2",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Client B3"
+      ],
+      "predicted_nodes": [
+        "Orchestration Layer::DistributedClient"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT contains multiple concrete client instances across two distributed groups, while the prediction aggregates them into a single distributed client component. This is functionally equivalent and the orchestration/client boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Kangaroo file A1",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Kangaroo file A2",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Kangaroo file A3",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Kangaroo file B1",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Kangaroo file B2",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Kangaroo file B3",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Work files\\nHashTable A",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Work files\\nHashTable B",
+        "Kangrand Distributed Pollard Kangaroo::Master WorkFile\\nHashTable"
+      ],
+      "predicted_nodes": [
+        "Input/Output Layer::WorkFileManager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates multiple work-file/hash-table artifacts across distributed groups and master merge state; the prediction aggregates this into a work-file management component. This is a valid abstraction and the I/O boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Result.txt A",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Result.txt B"
+      ],
+      "predicted_nodes": [
+        "Input/Output Layer::ResultFileGenerator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT result artifacts from distributed groups correspond to the predicted result-file generation/output component. The file/output boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Server\\n-wsplit",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Server\\n-wsplit"
+      ],
+      "predicted_nodes": [
+        "Orchestration Layer::DistributedServer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has two concrete distributed server instances with wsplit behavior; the prediction generalizes them into a distributed server component. The orchestration boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Merger"
+      ],
+      "predicted_nodes": [
+        "Orchestration Layer::OfflineMerger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the offline merge component that consolidates work files/hash tables and may discover results during merge."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Core Solver Layer::SolverEngine",
+    "Core Solver Layer::SolverEngine::DistinguishedPointManager",
+    "Core Solver Layer::SolverEngine::KangarooStateManager",
+    "Core Solver Layer::SolverEngine::WsplitBackupManager",
+    "Global::GPU Hardware",
+    "Input/Output Layer::ConfigurationHandler",
+    "Input/Output Layer::InputFileParser",
+    "Orchestration Layer::CommandLineInterface"
+  ]
+}

@@ -1,0 +1,177 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Admin Audit"
+      ],
+      "predicted_nodes": [
+        "Backend::Spring Boot Core Services::Business Layer::Admin Review &\nRecipe Management"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the administrator review/audit function. The predicted node combines review with recipe management, but the core admin audit responsibility is semantically equivalent and remains in the backend business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Community Sharing"
+      ],
+      "predicted_nodes": [
+        "Backend::Spring Boot Core Services::Business Layer::Community Sharing\n& Interaction"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to community sharing functionality, including user interaction. The boundary attribution is consistent with the GT business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Health Management"
+      ],
+      "predicted_nodes": [
+        "Backend::Spring Boot Core Services::Business Layer::Health Analysis",
+        "Backend::Spring Boot Core Services::Business Layer::Personalized Nutrition\nAdvice",
+        "Backend::Spring Boot Core Services::Business Layer::Diet Plan"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT health management module is split into more specific predicted functions: health analysis, personalized advice, and diet planning. This is a valid decomposition within the same backend business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Recipe Search"
+      ],
+      "predicted_nodes": [
+        "Backend::Spring Boot Core Services::Business Layer::Text Search"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Text search is the same capability as recipe search. It is correctly placed in the backend business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Smart Recommendation"
+      ],
+      "predicted_nodes": [
+        "Backend::Spring Boot Core Services::Business Layer::Recommendation\nEngine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The recommendation engine corresponds directly to smart recommendation, with correct backend business-layer placement."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::User Information"
+      ],
+      "predicted_nodes": [
+        "Backend::Spring Boot Core Services::Business Layer::Auth & Account\nManagement",
+        "Global::Users"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "User information handling is split into auth/account management plus a generic user entity. The main functionality is preserved and remains within the backend/user domain boundary."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Cleaning"
+      ],
+      "predicted_nodes": [
+        "Backend::Spring Boot Core Services::Business Layer::Recipe Recognition\nOrchestrator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a data-layer preprocessing concern, while the predicted node is an application orchestration/business component. This is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Dataset"
+      ],
+      "predicted_nodes": [
+        "Backend::Spring Boot Core Services::Business Layer::Recipe Recognition\nOrchestrator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "A dataset is a data-layer asset, not a business-layer orchestrator. The predicted attribution crosses the architectural boundary."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Read/Write Database"
+      ],
+      "predicted_nodes": [
+        "Global::MySQL",
+        "Global::Redis Cache"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The generic read/write database layer is split into concrete storage technologies. MySQL and Redis are semantically aligned with the GT data access/storage concerns."
+    },
+    {
+      "gt_nodes": [
+        "Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Global::MySQL"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the MySQL database, and the boundary naming difference is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Database::Redis"
+      ],
+      "predicted_nodes": [
+        "Global::Redis Cache"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote Redis caching. The boundary/package naming differs but is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Frontend UI::Recipe App"
+      ],
+      "predicted_nodes": [
+        "Users::Mobile App\n(Android & iOS UI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the mobile application frontend. The predicted boundary explicitly mentions mobile UI and is consistent with the GT frontend UI."
+    },
+    {
+      "gt_nodes": [
+        "Runtime Environment::Flask Service"
+      ],
+      "predicted_nodes": [
+        "Backend::Flask Model Inference Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Flask-based model inference service. The boundary is still backend/runtime-equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Runtime Environment::Springboot Service"
+      ],
+      "predicted_nodes": [
+        "Backend::Spring Boot Core Services::Business Layer::Admin Review &\nRecipe Management",
+        "Backend::Spring Boot Core Services::Business Layer::Auth & Account\nManagement",
+        "Backend::Spring Boot Core Services::Business Layer::Community Sharing\n& Interaction",
+        "Backend::Spring Boot Core Services::Business Layer::Diet Plan",
+        "Backend::Spring Boot Core Services::Business Layer::Health Analysis",
+        "Backend::Spring Boot Core Services::Business Layer::Merchant Map\nDisplay",
+        "Backend::Spring Boot Core Services::Business Layer::Personalized Nutrition\nAdvice",
+        "Backend::Spring Boot Core Services::Business Layer::Recipe Recognition\nOrchestrator",
+        "Backend::Spring Boot Core Services::Business Layer::Recommendation\nEngine",
+        "Backend::Spring Boot Core Services::Business Layer::Text Search"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single Spring Boot runtime/service node is decomposed into multiple Spring Boot business modules. This is an acceptable split within the same backend runtime context."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Backend::Spring Boot Core Services::Business Layer::Merchant Map\nDisplay",
+    "Global::Backend",
+    "Global::Users"
+  ]
+}

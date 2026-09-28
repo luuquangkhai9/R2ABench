@@ -1,0 +1,153 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "CGI Portal::Http Test\nClient"
+      ],
+      "predicted_nodes": [
+        "Workload Generation Layer::TestClientWorkflow"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the bundled test client workflow used to generate HTTP requests and validate responses."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Proxy Core"
+      ],
+      "predicted_nodes": [
+        "Proxy Forwarding Layer::HTTPProxyForwarder"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the core proxy forwarding component responsible for forwarding inbound requests upstream."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Download"
+      ],
+      "predicted_nodes": [
+        "HTTP Server Layer::DownloadEndpoint"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both correspond to the download functionality exposing a GET endpoint that returns a file attachment when the target file exists."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Upload"
+      ],
+      "predicted_nodes": [
+        "HTTP Server Layer::UploadHandler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the file upload handling workflow that returns a map payload containing the filepath."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Mock"
+      ],
+      "predicted_nodes": [
+        "HTTP Server Layer::TestServerBootstrap"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both are part of the local test server/bootstrap behavior used for test execution."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Mock"
+      ],
+      "predicted_nodes": [
+        "Build/Runtime Layer::GrizzlyJerseyServerStack"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT mock/test server plugin is realized in the predicted Grizzly/Jersey server stack; this is an implementation-level refinement within the correct runtime boundary."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Formatter"
+      ],
+      "predicted_nodes": [
+        "Shared Data Model Layer::StructuredResponseObject"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT formatter is a generic formatting/response-shaping concern, while the predicted node is a specific data model object. The semantics are only partially aligned and the architectural boundary is not equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Logging"
+      ],
+      "predicted_nodes": [
+        "Global::Upstream Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No functional equivalence; logging is a cross-cutting concern, not an upstream server component."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer\\nKeepalived(VIP::Openresty",
+    "Business Servers::......",
+    "Business Servers::Business Server A",
+    "Business Servers::Business Server B",
+    "Business Servers::Business Server C",
+    "CGI Portal::Appkey\\nManager",
+    "CGI Portal::CGI Manager",
+    "CGI Portal::Case Manager",
+    "CGI Portal::Document\\nGenerate",
+    "CGI Portal::Log & Tree\\ninquire",
+    "CGI Portal::Metrics &\\nReport",
+    "CGI Portal::Service\\nManager",
+    "Clients::APP Client",
+    "Clients::Business Server",
+    "Clients::Developer",
+    "Clients::Web Client",
+    "Global::Log consumer",
+    "Proxy Layer::cgi_proxy 1::Appkey\\nValidate",
+    "Proxy Layer::cgi_proxy 1::Global Limit",
+    "Proxy Layer::cgi_proxy 1::Login &\\nPermission",
+    "Proxy Layer::cgi_proxy 1::Plugin::Agent",
+    "Proxy Layer::cgi_proxy 1::Plugin::Attach Check",
+    "Proxy Layer::cgi_proxy 1::Plugin::Check\\nParameter",
+    "Proxy Layer::cgi_proxy 1::Plugin::Download",
+    "Proxy Layer::cgi_proxy 1::Plugin::Mock",
+    "Proxy Layer::cgi_proxy 1::Plugin::Upload",
+    "Proxy Layer::cgi_proxy 1::Proxy Core",
+    "Proxy Layer::cgi_proxy 2",
+    "Support Platform::Data Bank\\nHDFS/Hbase/Druid",
+    "Support Platform::Msg Center\\nKafka",
+    "Support Platform::Mysql",
+    "Support Platform::Permission\\nCenter",
+    "Support Platform::Redis Cache",
+    "Support Platform::User Center",
+    "Task Scheduler::CGI Case\\nExecutor",
+    "Task Scheduler::CGI Health\\nCheck",
+    "Task Scheduler::Daily Report",
+    "Task Scheduler::Log Analysis",
+    "Task Scheduler::Monitor/Alarm"
+  ],
+  "unmatched_predicted_nodes": [
+    "Build/Runtime Layer::BuildConfigModules",
+    "Build/Runtime Layer::GrizzlyJerseyServerStack",
+    "File System Access Layer::FilesystemAdapter",
+    "Global::Asynchronous HTTP Client Environment",
+    "Global::Java Runtime Environment",
+    "Global::Local Filesystem",
+    "Global::Maven Multi-module Build Environment",
+    "HTTP Server Layer::DownloadEndpoint",
+    "HTTP Server Layer::TestServerBootstrap",
+    "HTTP Server Layer::UploadHandler",
+    "Proxy Forwarding Layer::HTTPProxyForwarder",
+    "Shared Data Model Layer::FileHandlingMapPayload",
+    "Shared Data Model Layer::StructuredResponseObject",
+    "Transport/Channel Layer::HTTP",
+    "Transport/Channel Layer::UpstreamChannelContext",
+    "Workload Generation Layer::AsyncHttpClientAdapter",
+    "Workload Generation Layer::FixedThreadPoolExecutor",
+    "Workload Generation Layer::TestClientWorkflow"
+  ]
+}

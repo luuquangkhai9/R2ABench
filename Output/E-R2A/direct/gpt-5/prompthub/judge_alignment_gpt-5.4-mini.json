@@ -1,0 +1,287 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Frontend / Client Layer::Admin System"
+      ],
+      "predicted_nodes": [
+        "Client::Front-end UI\\n(Vue/jQuery, HTML/CSS/JS"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the overall admin-facing frontend/client-side UI area. The predicted node is broader and does not isolate the admin subsystem, but it still stays within the correct frontend/client boundary."
+    },
+    {
+      "gt_nodes": [
+        "Frontend / Client Layer::Admin System::Admin Login"
+      ],
+      "predicted_nodes": [
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::API Gateway & Auth\\n(HTTPS, AuthN/AuthZ, Input Validation"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Functionally both cover login/authentication, but the GT places admin login in the frontend/client admin system while the predicted node moves it into backend gateway/auth services. This is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Frontend / Client Layer::Admin System::Audit / Review Works",
+        "Frontend / Client Layer::Admin System::View User List",
+        "Frontend / Client Layer::Admin System::View Works List"
+      ],
+      "predicted_nodes": [
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Admin Management API\\n(users, artworks, comments, replies",
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Artwork & Review Service\\n(upload/edit/delete, review workflow"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT groups admin review and admin list views under the frontend admin system, while the AI split them into backend admin-management/review services. The functional coverage is related, but the architectural layer attribution is incorrect relative to GT."
+    },
+    {
+      "gt_nodes": [
+        "Frontend / Client Layer::Collection System",
+        "Frontend / Client Layer::Collection System::Add Collection",
+        "Frontend / Client Layer::Collection System::Collection Category",
+        "Frontend / Client Layer::Collection System::Edit Collection",
+        "Frontend / Client Layer::Collection System::Query Collection"
+      ],
+      "predicted_nodes": [
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Favorite Service\\n(favorites, categories, visibility"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted favorite service semantically covers collection/favorite management, including category and visibility operations. However, GT places this subsystem in the frontend/client layer, while the prediction attributes it to backend service logic, which is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Frontend / Client Layer::Comment System",
+        "Frontend / Client Layer::Comment System::Comment on Works",
+        "Frontend / Client Layer::Comment System::Delete Comment",
+        "Frontend / Client Layer::Comment System::Delete Reply",
+        "Frontend / Client Layer::Comment System::Reply to Comment"
+      ],
+      "predicted_nodes": [
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Comment Service",
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Reply Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted nodes correctly separate comment and reply functionality, but GT models the entire comment system in the frontend/client layer. The AI placed them in backend services, so the boundary is incorrect."
+    },
+    {
+      "gt_nodes": [
+        "Frontend / Client Layer::Display System",
+        "Frontend / Client Layer::Display System::Query Upload Progress",
+        "Frontend / Client Layer::Display System::Query Works",
+        "Frontend / Client Layer::Display System::Upload Works",
+        "Frontend / Client Layer::Display System::View Works"
+      ],
+      "predicted_nodes": [
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Artwork & Review Service\\n(upload/edit/delete, review workflow",
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Search & Filter Service\\n(keywords, tags, sorting, filtering"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted services cover artwork display/search/upload/review-progress-related capabilities, but GT assigns these nodes to the frontend/client display system. The AI moved the functionality to backend services, so the boundary attribution is wrong."
+    },
+    {
+      "gt_nodes": [
+        "Frontend / Client Layer::Notification System",
+        "Frontend / Client Layer::Notification System::Audit Notification",
+        "Frontend / Client Layer::Notification System::Comment Notification",
+        "Frontend / Client Layer::Notification System::Private Message - TBD",
+        "Frontend / Client Layer::Notification System::Reply Notification"
+      ],
+      "predicted_nodes": [
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Notification Service\\n(unread/read, count"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The notification functionality matches, but GT places it in the frontend/client layer, whereas the AI places it in backend service architecture. This is a layer/boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Frontend / Client Layer::Recommendation System",
+        "Frontend / Client Layer::Recommendation System::Close Recommendations",
+        "Frontend / Client Layer::Recommendation System::Hot Recommendations",
+        "Frontend / Client Layer::Recommendation System::Personalized Recommendations"
+      ],
+      "predicted_nodes": [
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Algorithm Engine::Recommendation Engine\\n(PyTorch/TensorFlow)\\n(personalized ranking",
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Recommendation Gateway\\n(popular, personalized, preference toggle"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted architecture decomposes recommendation into gateway and algorithm engine, which is functionally aligned. However, GT places recommendation under the frontend/client layer, while the AI correctly models it as backend/algorithm support; relative to GT this is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Frontend / Client Layer::User System",
+        "Frontend / Client Layer::User System::Browse History",
+        "Frontend / Client Layer::User System::Follow Others",
+        "Frontend / Client Layer::User System::User Login",
+        "Frontend / Client Layer::User System::View Home Page"
+      ],
+      "predicted_nodes": [
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::User & Account Service\\n(registration, login, logout, password, profile",
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::History Service\\n(browsing history",
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Social Graph Service\\n(follow/unfollow, fans, follows"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The functional mapping is strong for user login, browsing history, and follow relationships, but GT locates the user system in the frontend/client layer. The AI mapped these to backend services, so the boundary attribution is incorrect."
+    },
+    {
+      "gt_nodes": [
+        "Global::Frontend / Client Layer"
+      ],
+      "predicted_nodes": [
+        "Global::Client",
+        "Client::Web Browser",
+        "Client::Front-end UI\\n(Vue/jQuery, HTML/CSS/JS"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These predicted nodes collectively represent the overall client/frontend side described by the GT global frontend/client layer. The finer decomposition is acceptable and semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Infrastructure",
+        "Infrastructure::Docker Deployment"
+      ],
+      "predicted_nodes": [
+        "Global::Server (Ubuntu 22.04)\\nDocker 20.10.17",
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Healthcheck & Auto-Restart\\n(Docker restart policy",
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Disk Usage Monitor\\n(< 80% capacity",
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Firewall & CORS\\n(WAF rules, CORS policy"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These nodes all fall under infrastructure/deployment concerns and are consistent with the GT infrastructure and Docker deployment boundaries. The AI adds useful deployment/security subnodes without crossing into an unrelated layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::Service / Backend Layer",
+        "Service / Backend Layer::Backend Framework: Django",
+        "Service / Backend Layer::Business Services",
+        "Service / Backend Layer::Business Services::Account Service",
+        "Service / Backend Layer::Business Services::Audit Service",
+        "Service / Backend Layer::Business Services::Authentication Service",
+        "Service / Backend Layer::Business Services::Notification Service",
+        "Service / Backend Layer::Business Services::Resource Service",
+        "Service / Backend Layer::Business Services::Works Service"
+      ],
+      "predicted_nodes": [
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend",
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::User & Account Service\\n(registration, login, logout, password, profile",
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::API Gateway & Auth\\n(HTTPS, AuthN/AuthZ, Input Validation",
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Notification Service\\n(unread/read, count",
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Artwork & Review Service\\n(upload/edit/delete, review workflow",
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Comment Service",
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Reply Service",
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Favorite Service\\n(favorites, categories, visibility",
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Search & Filter Service\\n(keywords, tags, sorting, filtering",
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Social Graph Service\\n(follow/unfollow, fans, follows",
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Logging & Audit\\n(log files, error localization",
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Rate Limiter & Concurrency Control"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted backend container and its service decomposition align well with the GT backend layer and business services. Although the AI is more detailed, the boundary is semantically consistent with the GT backend/service area."
+    },
+    {
+      "gt_nodes": [
+        "Service / Backend Layer::Recommendation Algorithms",
+        "Service / Backend Layer::Recommendation Algorithms::Content Heat / Popularity Based",
+        "Service / Backend Layer::Recommendation Algorithms::Social Relation Based",
+        "Service / Backend Layer::Recommendation Algorithms::User Collection / History Based"
+      ],
+      "predicted_nodes": [
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Algorithm Engine",
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Algorithm Engine::Recommendation Engine\\n(PyTorch/TensorFlow)\\n(personalized ranking"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The algorithm engine and recommendation engine correspond to the GT recommendation algorithms layer. The AI condensed several algorithm variants into a single recommendation engine, which is acceptable and boundary-correct."
+    },
+    {
+      "gt_nodes": [
+        "Service / Backend Layer::SQLite Database"
+      ],
+      "predicted_nodes": [
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: SQLite",
+        "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: SQLite::SQLite DB\\n(users, artworks, reviews,\\nfavorites, comments, replies,\\nfollows, history, notifications,\\npreferences, logs"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the system database layer, and the predicted SQLite container plus schema/data node is semantically equivalent to the GT SQLite database node."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Frontend / Client Layer::Collection System::Add Collection",
+    "Frontend / Client Layer::Collection System::Collection Category",
+    "Frontend / Client Layer::Collection System::Edit Collection",
+    "Frontend / Client Layer::Collection System::Query Collection",
+    "Frontend / Client Layer::Comment System::Comment on Works",
+    "Frontend / Client Layer::Comment System::Delete Comment",
+    "Frontend / Client Layer::Comment System::Delete Reply",
+    "Frontend / Client Layer::Comment System::Reply to Comment",
+    "Frontend / Client Layer::Display System::Query Upload Progress",
+    "Frontend / Client Layer::Display System::Query Works",
+    "Frontend / Client Layer::Display System::Upload Works",
+    "Frontend / Client Layer::Display System::View Works",
+    "Frontend / Client Layer::Notification System::Audit Notification",
+    "Frontend / Client Layer::Notification System::Comment Notification",
+    "Frontend / Client Layer::Notification System::Private Message - TBD",
+    "Frontend / Client Layer::Notification System::Reply Notification",
+    "Frontend / Client Layer::Recommendation System::Close Recommendations",
+    "Frontend / Client Layer::Recommendation System::Hot Recommendations",
+    "Frontend / Client Layer::Recommendation System::Personalized Recommendations",
+    "Frontend / Client Layer::User System::Browse History",
+    "Frontend / Client Layer::User System::Follow Others",
+    "Frontend / Client Layer::User System::User Login",
+    "Frontend / Client Layer::User System::View Home Page",
+    "Global::Frontend / Client Layer",
+    "Global::Infrastructure",
+    "Global::Service / Backend Layer",
+    "Infrastructure::Docker Deployment",
+    "Service / Backend Layer::Backend Framework: Django",
+    "Service / Backend Layer::Business Services",
+    "Service / Backend Layer::Business Services::Account Service",
+    "Service / Backend Layer::Business Services::Audit Service",
+    "Service / Backend Layer::Business Services::Authentication Service",
+    "Service / Backend Layer::Business Services::Notification Service",
+    "Service / Backend Layer::Business Services::Resource Service",
+    "Service / Backend Layer::Business Services::Works Service",
+    "Service / Backend Layer::Recommendation Algorithms::Content Heat / Popularity Based",
+    "Service / Backend Layer::Recommendation Algorithms::Social Relation Based",
+    "Service / Backend Layer::Recommendation Algorithms::User Collection / History Based"
+  ],
+  "unmatched_predicted_nodes": [
+    "Client::Web Browser",
+    "Global::Client",
+    "Global::Offsite Backup Storage",
+    "Global::SMTP / Email Service",
+    "Global::Server (Ubuntu 22.04)\\nDocker 20.10.17",
+    "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Algorithm Engine",
+    "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::API Gateway & Auth\\n(HTTPS, AuthN/AuthZ, Input Validation",
+    "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Admin Management API\\n(users, artworks, comments, replies",
+    "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Artwork & Review Service\\n(upload/edit/delete, review workflow",
+    "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Comment Service",
+    "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Django ORM / Data Access",
+    "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Favorite Service\\n(favorites, categories, visibility",
+    "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::History Service\\n(browsing history",
+    "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Logging & Audit\\n(log files, error localization",
+    "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Notification Service\\n(unread/read, count",
+    "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Rate Limiter & Concurrency Control",
+    "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Recommendation Gateway\\n(popular, personalized, preference toggle",
+    "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Reply Service",
+    "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Search & Filter Service\\n(keywords, tags, sorting, filtering",
+    "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::Social Graph Service\\n(follow/unfollow, fans, follows",
+    "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: Django Backend::User & Account Service\\n(registration, login, logout, password, profile",
+    "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: SQLite",
+    "Server (Ubuntu 22.04)\\nDocker 20.10.17::Container: SQLite::SQLite DB\\n(users, artworks, reviews,\\nfavorites, comments, replies,\\nfollows, history, notifications,\\npreferences, logs",
+    "Server (Ubuntu 22.04)\\nDocker 20.10.17::Disk Usage Monitor\\n(< 80% capacity",
+    "Server (Ubuntu 22.04)\\nDocker 20.10.17::Firewall & CORS\\n(WAF rules, CORS policy",
+    "Server (Ubuntu 22.04)\\nDocker 20.10.17::Healthcheck & Auto-Restart\\n(Docker restart policy"
+  ]
+}

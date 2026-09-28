@@ -1,0 +1,174 @@
+@startuml
+!define RECTANGLE class
+skinparam componentStyle rectangle
+skinparam backgroundColor #F0F0F0
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam rectangle {
+    BackgroundColor #FFFFFF
+    BorderColor #333333
+    ArrowColor #333333
+    FontColor #333333
+}
+
+title Teamgram Server System Architecture
+
+package "External Infrastructure" {
+    component "MySQL" as DB [
+        MySQL Database
+        - Storage for persistent data
+    ]
+    component "Redis" as CACHE [
+        Redis Cache
+        - Session state
+        - Caching
+    ]
+    component "etcd" as CONFIG [
+        etcd
+        - Service discovery
+        - Configuration
+    ]
+    component "Kafka" as MQ [
+        Kafka Message Queue
+        - Asynchronous events
+        - Push notifications
+    ]
+    component "MinIO" as STORAGE [
+        MinIO Object Storage
+        - Media files
+        - Blob storage
+    ]
+    component "FFmpeg/FFProbe" as MEDIA [
+        FFmpeg/FFProbe
+        - Optional media processing
+    ]
+}
+
+package "Teamgram Server System" {
+    rectangle "Client Access Layer" as CLIENT_ACCESS {
+        component "MTProto Server Interface" as MTPROTO [
+            MTProto Server Interface
+            - Telegram-compatible protocol
+            - Authorization key handling
+            - Encrypted session setup
+        ]
+    }
+
+    rectangle "Service Layer" as SERVICE_LAYER {
+        component "Access/BFF Services" as BFF [
+            Access/BFF Services
+            - Request routing
+            - Protocol translation
+        ]
+        component "Messaging Services" as MSG [
+            Messaging Services
+            - Core business logic
+        ]
+        component "Session Manager" as SESSION [
+            Session Manager
+            - session_id management
+            - destroy_session handling
+            - Session replacement
+        ]
+        component "Salt Manager" as SALT [
+            Salt Manager
+            - Server salt handling
+            - Future salts requests
+        ]
+        component "Verification Service" as VERIFY [
+            Verification Service
+            - Registration processing
+            - Phone number verification
+            - Code 12345 (default)
+        ]
+        component "Service Message Handler" as SERVICE_MSG [
+            Service Message Handler
+            - rpc_drop_answer
+            - Protocol service messages
+        ]
+        component "Media Wrapper" as MEDIA_WRAP [
+            Media Wrapper
+            - Optional FFmpeg integration
+        ]
+    }
+
+    rectangle "Storage Layer" as STORAGE_LAYER {
+        component "Data Access Components" as DATA_ACCESS [
+            Data Access Components
+            - Storage abstractions
+            - Cache integration
+        ]
+    }
+
+    rectangle "Supporting Components" as SUPPORT {
+        component "Async Event Processor" as ASYNC [
+            Async Event Processor
+            - Kafka integration
+            - Push notifications
+        ]
+        component "Sync Manager" as SYNC [
+            Sync Manager
+            - State synchronization
+        ]
+    }
+}
+
+package "Deployment & Runtime" {
+    component "Docker Runtime" as DOCKER [
+        Docker Runtime
+        - Container deployment
+    ]
+    component "Go Runtime" as GO [
+        Go Runtime
+        - Manual build/install
+    ]
+}
+
+' External connections
+MTPROTO --> BFF : MTProto messages
+BFF --> MSG : Business requests
+BFF --> SESSION : Session operations
+BFF --> SALT : Salt requests
+BFF --> VERIFY : Verification requests
+BFF --> SERVICE_MSG : Service messages
+MSG --> MEDIA_WRAP : Media processing (optional)
+MEDIA_WRAP --> MEDIA : FFmpeg calls
+
+' Infrastructure connections
+DATA_ACCESS --> DB : Persistent data
+DATA_ACCESS --> CACHE : Cached data
+DATA_ACCESS --> STORAGE : Blob storage
+ASYNC --> MQ : Event publishing
+CONFIG --> BFF : Service discovery
+CONFIG --> MSG : Configuration
+
+' Internal layer connections
+CLIENT_ACCESS --> SERVICE_LAYER : Protocol handling
+SERVICE_LAYER --> STORAGE_LAYER : Data access
+SERVICE_LAYER --> SUPPORT : Async processing
+STORAGE_LAYER --> SUPPORT : Data events
+
+' Deployment connections
+DOCKER --> CLIENT_ACCESS : Hosts services
+GO --> CLIENT_ACCESS : Hosts services
+DOCKER --> SERVICE_LAYER : Hosts services
+GO --> SERVICE_LAYER : Hosts services
+
+' Protocol flows note
+note right of MTPROTO
+    Supports:
+    - Authorization keys
+    - Server/future salts
+    - Encrypted sessions
+    - session_id creation
+    - rpc_drop_answer
+    - destroy_session
+end note
+
+note right of VERIFY
+    Default code: 12345
+    External service override
+    when configured
+end note
+
+@enduml

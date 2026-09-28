@@ -1,0 +1,204 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "cadctl::CHGM investigation"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::CHGM Alert Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the CHGM investigation workflow handled by the cadctl CLI; the predicted node is a semantically equivalent implementation-level name and remains within the correct CLI/business-logic scope."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton Event Listener"
+      ],
+      "predicted_nodes": [
+        "Execution Layer::Tekton Pipeline Execution",
+        "Execution Layer::Skip-Webhook Execution Path"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT contains the standard EventListener-based execution entry path, while the prediction splits execution concerns into generic pipeline execution and skip-webhook path. Although related to Tekton execution, the prediction does not preserve the specific EventListener boundary for the GT node and conflates distinct execution modes."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton Interceptor: Alert investigation implemented in CAD?"
+      ],
+      "predicted_nodes": [
+        "External Systems::Tekton Controller",
+        "Execution Layer::Tekton Pipeline Execution"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is an interceptor/triggering concern inside the Tekton event flow, not a generic Tekton controller or pipeline execution component. The prediction places it too broadly and misses the interceptor boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Escalate alert to on-call SRE"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Disposition Engine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted disposition engine covers escalation and follow-up disposition handling, which semantically includes escalating alerts to on-call SRE. The business-logic placement is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::Update Incident Notes"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Disposition Engine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Updating incident notes is part of the disposition/follow-up handling workflow. The predicted business logic boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Alerts::CHGM"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::CHGM Alert Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The CHGM alert handler corresponds directly to the CHGM alert processing node, with a correct business-logic placement."
+    },
+    {
+      "gt_nodes": [
+        "Alerts::CPD"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Anomaly Detector"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "CPD is a specific alert category, but the predicted anomaly detector is too generic and does not accurately capture the CPD-specific alert node. The boundary and functional attribution do not align well."
+    },
+    {
+      "gt_nodes": [
+        "Alerts::all cluster alerts"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Anomaly Detector"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A generic anomaly detector aligns with handling all cluster alert inputs. The business-logic boundary is reasonable."
+    },
+    {
+      "gt_nodes": [
+        "PagerDuty Team::<cluster>.openshiftapps.com-hive-cluster"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a specific PagerDuty team destination, and the predicted node correctly identifies the external PagerDuty integration boundary, albeit at a more general level."
+    },
+    {
+      "gt_nodes": [
+        "PagerDuty Team::app-sre-alertmanager"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is another PagerDuty destination; the external systems boundary is correct even though the specific team is generalized."
+    },
+    {
+      "gt_nodes": [
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node correctly places the functionality under PagerDuty integration."
+    },
+    {
+      "gt_nodes": [
+        "Alert Source::app-sre alertmanager"
+      ],
+      "predicted_nodes": [
+        "External Systems::Alert Webhook Source"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT alert source is semantically covered by the generic alert webhook source. The external source boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Alert Source::cluster alertmanager"
+      ],
+      "predicted_nodes": [
+        "External Systems::Alert Webhook Source"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is another alertmanager source; the generic external alert webhook source is an acceptable match."
+    },
+    {
+      "gt_nodes": [
+        "Alert Source::deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Systems::Alert Webhook Source"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Deadmanssnitch is an alert source and fits the predicted external alert webhook source boundary."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::CPD investigation"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::CHGM Alert Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node does not correspond to CPD investigation; it is CHGM-specific. This is a functional mismatch."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::Future investigations"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Anomaly Detector",
+        "Business Logic Layer::Disposition Engine"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT placeholder for future investigations is reasonably represented by generic anomaly detection and disposition handling capabilities. The business-logic attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::switch(alerttype"
+      ],
+      "predicted_nodes": [
+        "User Interface Layer::CLI Tool cadctl"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a CLI command/function under cadctl, and the predicted CLI tool boundary is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Business Logic Layer::Integration Library",
+    "External Systems::AWS",
+    "External Systems::OCM",
+    "External Systems::Tekton Controller",
+    "Global::Cluster Data",
+    "Global::Deployment Templates",
+    "User Interface Layer::Template Update Utility"
+  ]
+}

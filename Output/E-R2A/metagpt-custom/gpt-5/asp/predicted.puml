@@ -1,0 +1,108 @@
+@startuml
+
+package "Representation (Markdown)" as Representation {
+  component "Markdown Document Shell" as Shell
+  component "Completeness Checklist" as CC
+  component "Exception & Auxiliary Coverage Checklist" as EAC
+  component "Understandability Checklist" as UND
+  component "Requirement Model Accuracy Checklist" as RMA
+  component "Extension & Improvement Checklist" as EXT
+}
+
+package "Review Guidance" as Guidance {
+  component "Review Purpose & Method Section" as RPM
+  component "Stepwise Review Flow Cues" as Flow
+}
+
+package "Data Model" as DataModel {
+  component "Problem Report Section" as PRS
+  component "Reviewer Metadata Section" as Reviewer
+  interface "Overall Evaluation Field" as OverallEval
+}
+
+package "Compliance & Scoring Rules" as Rules {
+  component "Standards/Basis Reference Section" as SBR
+  component "Scoring Section" as Score
+  interface "Completeness Score (10 pts)" as DS_CC
+  interface "Understandability Score (10 pts)" as DS_UND
+  interface "Model Accuracy Score (10 pts)" as DS_RMA
+  interface "Extension/Improvement Score (10 pts)" as DS_EXT
+  interface "Total Score (max 40)" as TotalScore
+  interface "4x10 Scoring Constraint" as FourByTen
+}
+
+cloud "Requirements document under review" as ReqDoc
+cloud "Industry standards" as IndStd
+cloud "Product specifications" as ProdSpec
+cloud "Business specifications" as BizSpec
+cloud "Documentation specifications" as DocSpec
+cloud "Markdown-capable editor/viewer" as MdEditor
+
+' Guidance to checklists and references
+CC --> RPM
+EAC --> SBR
+UND --> SBR
+RMA --> SBR
+
+' PRS references checklists and contains overall evaluation
+PRS --> CC
+PRS --> EAC
+PRS --> UND
+PRS --> RMA
+PRS --> EXT
+PRS --> OverallEval
+
+' Scoring depends only on four dimensions and produces fields
+Score --> CC
+Score --> UND
+Score --> RMA
+Score --> EXT
+Score --> DS_CC
+Score --> DS_UND
+Score --> DS_RMA
+Score --> DS_EXT
+Score --> TotalScore
+Score --> FourByTen
+
+' Total depends on dimension scores
+TotalScore --> DS_CC
+TotalScore --> DS_UND
+TotalScore --> DS_RMA
+TotalScore --> DS_EXT
+
+' Reviewer attribution for scoring
+Score --> Reviewer
+
+' Representation composition
+RPM --> Shell
+SBR --> Shell
+CC --> Shell
+EAC --> Shell
+UND --> Shell
+RMA --> Shell
+EXT --> Shell
+PRS --> Shell
+Score --> Shell
+Reviewer --> Shell
+Flow --> Shell
+
+' References to external bases
+SBR --> IndStd
+SBR --> ProdSpec
+SBR --> BizSpec
+SBR --> DocSpec
+
+' Checklists read the requirement document
+CC --> ReqDoc
+EAC --> ReqDoc
+UND --> ReqDoc
+RMA --> ReqDoc
+EXT --> ReqDoc
+
+' EAC aggregated under Completeness
+EAC --> CC
+
+' Authoring environment
+MdEditor --> Shell
+
+@enduml

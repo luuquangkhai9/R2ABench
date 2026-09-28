@@ -1,0 +1,116 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Proxy Core"
+      ],
+      "predicted_nodes": [
+        "HTTP Proxy Layer::HTTP Proxy\\n(Netty-based",
+        "HTTP Proxy Layer::Request Forwarding Handler\\n(FullHttpRequest Forwarding"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted Netty-based HTTP proxy and forwarding handler map directly to the core proxy logic in GT. The boundaries ('Proxy Layer' vs 'HTTP Proxy Layer') are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Business Servers::Business Server A",
+        "Business Servers::Business Server B",
+        "Business Servers::Business Server C",
+        "Business Servers::......"
+      ],
+      "predicted_nodes": [
+        "Upstream / External Systems::Upstream Server\\n(Server-side Channel"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT lists specific business servers as multiple targets, which the AI correctly aggregates into a single Upstream Server entity. The boundary attribution is conceptually consistent."
+    },
+    {
+      "gt_nodes": [
+        "CGI Portal::Http Test\\nClient"
+      ],
+      "predicted_nodes": [
+        "Test Utilities Layer::Test Client\\n(Async HTTP Client",
+        "Test Utilities Layer::Async Workload Generator\\n(50 threads, 1000 req/thread"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The test client and async workload generator correspond to the HTTP Test Client in the GT. However, the AI places them in a dedicated 'Test Utilities Layer' rather than the 'CGI Portal' administrative interface boundary as in GT."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Download"
+      ],
+      "predicted_nodes": [
+        "Test Utilities Layer::File Download Endpoint\\nGET /download"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both represent the download functionality. The GT models this as a plugin directly within the Proxy Layer, whereas the AI attributes it to the 'Test Utilities Layer' alongside the test server."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Upload"
+      ],
+      "predicted_nodes": [
+        "Test Utilities Layer::File Upload Handler\\n(/upload, map payload"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both represent file upload capabilities. Similar to the download endpoint, the GT positions it as a proxy plugin while the AI places it under 'Test Utilities Layer'."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Logging"
+      ],
+      "predicted_nodes": [
+        "Build & Runtime Environment::Debug Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both map to the logging component of the proxy. The GT correctly places it within the Proxy Layer, but the AI misattributes it to the 'Build & Runtime Environment'."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer\\nKeepalived(VIP::Openresty",
+    "CGI Portal::Appkey\\nManager",
+    "CGI Portal::CGI Manager",
+    "CGI Portal::Case Manager",
+    "CGI Portal::Document\\nGenerate",
+    "CGI Portal::Log & Tree\\ninquire",
+    "CGI Portal::Metrics &\\nReport",
+    "CGI Portal::Service\\nManager",
+    "Clients::APP Client",
+    "Clients::Business Server",
+    "Clients::Developer",
+    "Clients::Web Client",
+    "Global::Log consumer",
+    "Proxy Layer::cgi_proxy 1::Appkey\\nValidate",
+    "Proxy Layer::cgi_proxy 1::Formatter",
+    "Proxy Layer::cgi_proxy 1::Global Limit",
+    "Proxy Layer::cgi_proxy 1::Login &\\nPermission",
+    "Proxy Layer::cgi_proxy 1::Plugin::Agent",
+    "Proxy Layer::cgi_proxy 1::Plugin::Attach Check",
+    "Proxy Layer::cgi_proxy 1::Plugin::Check\\nParameter",
+    "Proxy Layer::cgi_proxy 1::Plugin::Mock",
+    "Proxy Layer::cgi_proxy 2",
+    "Support Platform::Data Bank\\nHDFS/Hbase/Druid",
+    "Support Platform::Msg Center\\nKafka",
+    "Support Platform::Mysql",
+    "Support Platform::Permission\\nCenter",
+    "Support Platform::Redis Cache",
+    "Support Platform::User Center",
+    "Task Scheduler::CGI Case\\nExecutor",
+    "Task Scheduler::CGI Health\\nCheck",
+    "Task Scheduler::Daily Report",
+    "Task Scheduler::Log Analysis",
+    "Task Scheduler::Monitor/Alarm"
+  ],
+  "unmatched_predicted_nodes": [
+    "Build & Runtime Environment::Maven Multi-Module Build\\n(Java 1.8 / Java 1.7 targets",
+    "Global::Local Filesystem",
+    "Test Utilities Layer::Response Object\\n(code, msg, data",
+    "Test Utilities Layer::Test Server\\n(Grizzly/Jersey"
+  ]
+}

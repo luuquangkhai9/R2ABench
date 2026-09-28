@@ -1,0 +1,92 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "Global::MPI Runtime\\n(mpi4py, mpirun"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match for the MPI system. Both are correctly placed in the 'Global' boundary, representing an underlying runtime environment."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Worker\\nThread"
+      ],
+      "predicted_nodes": [
+        "Execution Layer::WorkerThreadPool\\n(TORC_WORKERS threads\\nper MPI process\\nidle-yield via TORC_WORKER_YIELDTIME"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'Worker Thread' is correctly identified and generalized by the AI as a 'WorkerThreadPool'. The AI's 'Execution Layer' is a logical layer that correctly represents functionality running within the GT's 'MPI Process' container, so the boundary attribution is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Server\\nThread"
+      ],
+      "predicted_nodes": [
+        "MPI Communication Layer::MPICommSubsystem\\n(task dispatch, result return\\nsteal req/resp, SPMD coord",
+        "MPI Communication Layer::MPIPollingLoop\\n(MPI message polling\\nTORC_SERVER_YIELDTIME idle yield"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'Server Thread', which implicitly handles communication, is correctly split by the AI into a logical 'MPICommSubsystem' and its specific 'MPIPollingLoop'. The 'MPI Communication Layer' is a valid logical boundary for components running inside an 'MPI Process'."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Task Queue"
+      ],
+      "predicted_nodes": [
+        "Scheduling & Queue Layer::WorkerQueue\\n(per-worker FIFO)",
+        "Scheduling & Queue Layer::CyclicScheduler\\n(qid = -1, round-robin",
+        "Scheduling & Queue Layer::DirectedScheduler\\n(qid >= 0, targeted",
+        "Scheduling & Queue Layer::StealingCoordinator\\n(idle detection, steal request"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly expands the simple 'Task Queue' concept from the GT. It identifies the queue data structure ('WorkerQueue') and the associated scheduling and management logics ('CyclicScheduler', 'DirectedScheduler', 'StealingCoordinator') which are explicitly described in the PRD. The 'Scheduling & Queue Layer' is a correct logical boundary within the overall process."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Compute node::MPI Process",
+    "Task Queue (in detail::...",
+    "Task Queue (in detail::A1",
+    "Task Queue (in detail::A2",
+    "Task Queue (in detail::A3",
+    "Task Queue (in detail::B1",
+    "Task Queue (in detail::B2",
+    "Task Queue (in detail::Level 0",
+    "Task Queue (in detail::Level 1",
+    "Task Queue (in detail::Level 2",
+    "Task Queue (in detail::Level 3",
+    "Task Queue (in detail::Level 4",
+    "Task Queue (in detail::Level 5"
+  ],
+  "unmatched_predicted_nodes": [
+    "Example / Application Layer::ImagePreprocessingExample",
+    "Example / Application Layer::MasterWorkerExample",
+    "Example / Application Layer::NumericalOptimizationExample",
+    "Example / Application Layer::SPMDExample",
+    "Example / Application Layer::TaskStealingExample",
+    "Execution Layer::IdleYieldMonitor\\n(worker idle-poll loop\\nTORC_WORKER_YIELDTIME",
+    "Execution Layer::SPMDController\\n(broadcast, MPI app-level\\nall-rank execution",
+    "Global::HDF5 File System\\n(preprocessed image output",
+    "Global::Labeled Image File System\\n(raw image input",
+    "Global::Optional Dependencies",
+    "Global::Python Threading Runtime\\n(threading module",
+    "Global::termcolor\\n(console output formatting",
+    "Optional Dependencies::cma\\n(CMA-ES",
+    "Optional Dependencies::h5py",
+    "Optional Dependencies::numpy",
+    "Optional Dependencies::pillow",
+    "Public API Layer::TorcAPI\\n(torc.submit, torc.wait, torc.map\\ntorc.spmd, torc.start, torc.init\\ntorc.launch, torc.shutdown\\ntorc.worker_id, torc.num_workers\\ntorc.node_id, torc.num_nodes\\ntorc.enable_stealing\\ntorc.disable_stealing, torc.gettime",
+    "Runtime Configuration Layer::ConfigurationManager\\n(TORC_WORKERS\\nTORC_STEALING\\nTORC_SERVER_YIELDTIME\\nTORC_WORKER_YIELDTIME",
+    "Task Management Layer::CallbackDispatcher\\n(fires on spawning rank\\nafter result return",
+    "Task Management Layer::CompletionIterator\\n(as_completed: yields tasks\\nin completion order",
+    "Task Management Layer::ParallelMapExecutor",
+    "Task Management Layer::TaskDescriptor\\n(Future-like: input, result",
+    "Task Management Layer::TaskSubmissionManager"
+  ]
+}

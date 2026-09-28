@@ -1,0 +1,129 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Client"
+      ],
+      "predicted_nodes": [
+        "External Clients::Authenticated User",
+        "External Clients::Human Participant\n(FR-006, API-008",
+        "External Clients::Task API User\n(ROLE_ACTIVITI_USER)\n(FR-005, C-002, API-007",
+        "Global::External Clients"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT client actor is split into multiple more specific external user roles. The placement in an external clients boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::SSO/IDM\n(Keycloak"
+      ],
+      "predicted_nodes": [
+        "Global::Keycloak (SSO / Identity Provider",
+        "Global::OIDC / Realm Config",
+        "Global::Token / Role Data",
+        "Global::Token Request",
+        "Keycloak (SSO / Identity Provider::Keycloak\nToken Issuer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT identity provider is decomposed into Keycloak plus related token/realm/authentication details. The identity provider boundary remains semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Gateway"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE\n(Container Orchestration and Cloud Hosting::Architecture Background Layer\n(Contextual - No Functional Requirements Assigned::API Gateway\n(Routed Access - Background)\\n(Section 2.5, C-006"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT gateway corresponds to the predicted API gateway background component. The boundary is semantically equivalent, though more explicit in the prediction."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Audit\\nService"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE\n(Container Orchestration and Cloud Hosting::Observation Layer::Audit Service\\n(Audit Event Records"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The audit service matches directly and is placed in an observation/monitoring layer, which is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Query\\nService"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE\n(Container Orchestration and Cloud Hosting::Observation Layer::Query Service\\n(Process Execution State - Read"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The query service matches directly and is correctly placed in an observation/read-model layer."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Notification\\nService"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE\n(Container Orchestration and Cloud Hosting::Architecture Background Layer\\n(Contextual - No Functional Requirements Assigned::Notification Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The notification service is matched as an architecture background component, which aligns with the GT context."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Customer\\nLogic",
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Out of the\\nBox Services"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE\n(Container Orchestration and Cloud Hosting::Architecture Background Layer\\n(Contextual - No Functional Requirements Assigned::Cloud Connectors"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The two GT cloud connector subnodes are aggregated into one cloud connectors background node. This is semantically consistent and not a boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::BPMN, Form\\nand Rule Defs",
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::Process\\nRuntime"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE\n(Container Orchestration and Cloud Hosting::Process and Task Runtime Layer::Example Runtime Bundle\\n(Process Definitions and Instance Lifecycle\\nincl. SimpleProcess",
+        "Kubernetes / GKE\n(Container Orchestration and Cloud Hosting::Process and Task Runtime Layer::ProcessRuntime API\\n(Definition Listing and Instance Start"
+      ],
+      "match_type": "N:2",
+      "is_boundary_correct": true,
+      "reasoning": "The runtime bundle content and process runtime capability are represented as a combined example runtime bundle plus the ProcessRuntime API. This is a reasonable split/merge alignment within the process/runtime boundary."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Config Maps\\n(Kubernetes",
+        "Activiti Cloud Infrastructure::Registry\\n(Kubernetes"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE\n(Container Orchestration and Cloud Hosting::Architecture Background Layer\\n(Contextual - No Functional Requirements Assigned::Registry / Config Maps\\n(Section 2.5, C-006"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT registry and config maps are merged into a single background infrastructure/configuration node. The boundary is semantically correct."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::External Clients",
+    "Global::Ingress Routes",
+    "Global::Kubernetes / GKE\n(Container Orchestration and Cloud Hosting",
+    "Global::Keycloak (SSO / Identity Provider",
+    "Global::RBAC Enforcement",
+    "Global::Token / Role Data",
+    "Global::Token Request",
+    "Kubernetes / GKE\n(Container Orchestration and Cloud Hosting::API Gateway / Ingress Layer::NGINX Ingress Controller\\n(Public IP to Internal Services",
+    "Kubernetes / GKE\n(Container Orchestration and Cloud Hosting::Application Framework Layer::Spring Boot Application\\n(App Context and Security Config",
+    "Kubernetes / GKE\n(Container Orchestration and Cloud Hosting::Application Framework Layer::Spring Security\\n(User / Group / Role Management\\nand Token Validation",
+    "Kubernetes / GKE\n(Container Orchestration and Cloud Hosting::Cloud Deployment and Configuration Layer::Deployment Descriptors\\n(Replica Counts, Input Rate Params",
+    "Kubernetes / GKE\n(Container Orchestration and Cloud Hosting::Process and Task Runtime Layer::TaskRuntime API\\n(Task Interaction - ROLE_ACTIVITI_USER"
+  ]
+}

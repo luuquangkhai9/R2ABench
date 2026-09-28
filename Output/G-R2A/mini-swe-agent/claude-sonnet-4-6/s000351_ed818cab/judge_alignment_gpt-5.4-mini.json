@@ -1,0 +1,127 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Client A1",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Client A2",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Client A3",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Client B1",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Client B2",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Client B3"
+      ],
+      "predicted_nodes": [
+        "Kangrand CLI Application::Distributed Execution Layer::Distributed Client\\n(CPU/GPU compute"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT models multiple concrete distributed clients, while the prediction aggregates them into a single distributed client component. The distributed execution layer is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Kangaroo file A1",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Kangaroo file A2",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Kangaroo file A3",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Kangaroo file B1",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Kangaroo file B2",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Kangaroo file B3"
+      ],
+      "predicted_nodes": [
+        "Global::Work File\\n(search state"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT contains multiple kangaroo/work files representing search state, and the prediction generalizes them into a single work file node. Boundary placement as a global file artifact is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Result.txt A",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Result.txt B"
+      ],
+      "predicted_nodes": [
+        "Global::Result File\\n(solved key"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has per-group result files, while the prediction abstracts them into a single result file artifact. This is semantically equivalent and correctly placed as a global file output."
+    },
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Server\\n-wsplit",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Server\\n-wsplit"
+      ],
+      "predicted_nodes": [
+        "Kangrand CLI Application::Distributed Execution Layer::Distributed Server\\n(wsplit-enabled, config file"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has two server instances with wsplit behavior; the prediction consolidates them into a single distributed server component. The distributed execution boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Work files\\nHashTable A",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Work files\\nHashTable B",
+        "Kangrand Distributed Pollard Kangaroo::Master WorkFile\\nHashTable"
+      ],
+      "predicted_nodes": [
+        "Global::Master Work File / Hash Table\\n(merged",
+        "Global::Split/Prefixed Backup Files\\n(wsplit"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT distinguishes per-group work/hash-table artifacts and the merged master work/hash-table artifact. The prediction captures these as merged master storage and split/prefixed backup files, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Merger"
+      ],
+      "predicted_nodes": [
+        "Kangrand CLI Application::Work File Management Layer::Offline Merger\\n(merge workflow"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the offline merge component. The work-file management boundary is an appropriate architectural placement."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Global::Input ASCII File\\n(hex values, public keys",
+        "Global::Server Config File",
+        "Global::Work File w/ Kangaroo State\\n(-ws",
+        "Kangrand CLI Application::CLI Layer::Command-Line Interface\\n(-w, -wi, -i, -ws, -d, -gpu...",
+        "Kangrand CLI Application::Core Solver Layer::Collision Detector\\n(Key Recovery",
+        "Kangrand CLI Application::Core Solver Layer::Distinguished Point Filter",
+        "Kangrand CLI Application::Core Solver Layer::In-Memory Hash Table\\n(Collision Detection",
+        "Kangrand CLI Application::Core Solver Layer::Input File Parser\\n(ASCII / Hex / Public Key",
+        "Kangrand CLI Application::Core Solver Layer::Kangaroo Engine\\n(Tame & Wild Herds, SECP256K1",
+        "Kangrand CLI Application::Work File Management Layer::Work File Reader\\n(-i, --info",
+        "Kangrand CLI Application::Work File Management Layer::Work File Writer\\n(-w, -wi, -ws, wsplit",
+        "Global::SECP256K1\\nElliptic Curve\\nArithmetic"
+      ],
+      "match_type": "unmatched_predicted",
+      "is_boundary_correct": false,
+      "reasoning": "These predicted nodes do not have direct explicit GT counterparts as standalone nodes in the provided manual diagram list, even if several are plausible decompositions or internal subcomponents."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Input ASCII File\\n(hex values, public keys",
+    "Global::Master Work File / Hash Table\\n(merged",
+    "Global::Result File\\n(solved key",
+    "Global::SECP256K1\\nElliptic Curve\\nArithmetic",
+    "Global::Server Config File",
+    "Global::Split/Prefixed Backup Files\\n(wsplit",
+    "Global::Work File w/ Kangaroo State\\n(-ws",
+    "Global::Work File\\n(search state",
+    "Kangrand CLI Application::CLI Layer::Command-Line Interface\\n(-w, -wi, -i, -ws, -d, -gpu...",
+    "Kangrand CLI Application::Core Solver Layer::Collision Detector\\n(Key Recovery",
+    "Kangrand CLI Application::Core Solver Layer::Distinguished Point Filter",
+    "Kangrand CLI Application::Core Solver Layer::In-Memory Hash Table\\n(Collision Detection",
+    "Kangrand CLI Application::Core Solver Layer::Input File Parser\\n(ASCII / Hex / Public Key",
+    "Kangrand CLI Application::Core Solver Layer::Kangaroo Engine\\n(Tame & Wild Herds, SECP256K1",
+    "Kangrand CLI Application::Distributed Execution Layer::Distributed Client\\n(CPU/GPU compute",
+    "Kangrand CLI Application::Distributed Execution Layer::Distributed Server\\n(wsplit-enabled, config file",
+    "Kangrand CLI Application::Work File Management Layer::Offline Merger\\n(merge workflow",
+    "Kangrand CLI Application::Work File Management Layer::Work File Reader\\n(-i, --info",
+    "Kangrand CLI Application::Work File Management Layer::Work File Writer\\n(-w, -wi, -ws, wsplit"
+  ]
+}

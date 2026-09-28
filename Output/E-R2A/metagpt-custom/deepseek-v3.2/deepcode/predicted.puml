@@ -1,0 +1,219 @@
+@startuml
+
+!define LAYER_COLOR #E6F3FF
+!define COMPONENT_COLOR #F5F5F5
+!define EXTERNAL_COLOR #FFF0E6
+!define SECURITY_COLOR #FFE6E6
+
+skinparam component {
+  BackgroundColor COMPONENT_COLOR
+  BorderColor #333333
+  ArrowColor #333333
+}
+
+' ========== SECURITY & INFRASTRUCTURE ==========
+cloud "External Clients" as Clients
+
+node "Firewall" as Firewall <<$firewall>> {
+  BackgroundColor SECURITY_COLOR
+}
+
+node "Nginx Reverse Proxy" as Nginx <<$proxy>> {
+  BackgroundColor SECURITY_COLOR
+}
+
+' ========== LAYERS ==========
+package "Frontend Layer" as frontend {
+  component "User Interface" as UI
+  component "Frontend Validation" as FrontendValidation
+}
+
+package "Presentation Layer" as presentation {
+  component "RESTful API" as API
+  component "Swagger Documentation" as Swagger
+  component "Input Validation" as BackendValidation
+}
+
+package "Proxy Layer" as proxy {
+  component "Authentication Filter" as AuthFilter
+}
+
+package "Business Layer" as business {
+  component "User Module" as UserModule
+  component "Problem Module" as ProblemModule
+  component "Solution Module" as SolutionModule
+  component "Forum Module" as ForumModule
+  component "Judging Service Client" as JudgeClient
+  component "Transaction Manager" as TransactionManager
+}
+
+package "Access Layer" as access {
+  component "Data Access Objects" as DAO
+}
+
+' ========== EXTERNAL SYSTEMS ==========
+cloud "LLM Service" as LLM {
+}
+
+node "JudgeHost" as JudgeHost {
+}
+
+node "JudgeCore" as JudgeCore {
+  component "Docker Container" as DockerContainer
+  component "seccomp" as Seccomp
+}
+
+database "MySQL Database" as MySQL
+database "Redis Cache" as Redis
+database "MinIO Object Storage" as MinIO
+
+cloud "SMTP Mail Service" as SMTP
+cloud "CDN" as CDN
+
+' ========== MONITORING & OPS ==========
+node "Prometheus" as Prometheus
+node "Grafana" as Grafana
+cloud "PagerDuty / DingTalk" as Alerting
+node "GitLab CI/CD" as GitLabCI
+database "Private Docker Registry" as DockerRegistry
+cloud "Kubernetes" as K8s
+
+' ========== DEPENDENCIES ==========
+' External -> Infrastructure
+Clients --> Firewall : HTTP/HTTPS
+Firewall --> Nginx : filtered traffic
+
+' Infrastructure -> Frontend
+Nginx --> UI : serves static assets
+Nginx --> API : proxies API requests
+
+' Frontend internal
+UI --> FrontendValidation : validates input
+
+' Frontend -> Presentation
+UI --> API : REST calls
+FrontendValidation --> API : submits validated data
+
+' Presentation internal
+API --> Swagger : documents
+API --> BackendValidation : validates requests
+
+' Presentation -> Proxy
+BackendValidation --> AuthFilter : passes validated requests
+
+' Proxy -> Business
+AuthFilter --> UserModule : authenticated requests
+AuthFilter --> ProblemModule : authenticated requests
+AuthFilter --> SolutionModule : authenticated requests
+AuthFilter --> ForumModule : authenticated requests
+AuthFilter --> JudgeClient : authenticated requests
+
+' Business internal
+UserModule --> TransactionManager : manages transactions
+ProblemModule --> TransactionManager : manages transactions
+SolutionModule --> TransactionManager : manages transactions
+ForumModule --> TransactionManager : manages transactions
+JudgeClient --> TransactionManager : manages transactions
+
+' Business -> Access
+UserModule --> DAO : data operations
+ProblemModule --> DAO : data operations
+SolutionModule --> DAO : data operations
+ForumModule --> DAO : data operations
+
+' Business -> External Services
+JudgeClient --> JudgeHost : submits code
+ProblemModule --> MinIO : retrieves test cases
+UserModule --> SMTP : sends email
+
+' Access -> External Storage
+DAO --> MySQL : CRUD operations
+DAO --> Redis : cache operations
+DAO --> MinIO : object storage operations
+
+' Judging Service Flow
+JudgeHost --> MinIO : fetches test cases
+JudgeHost --> JudgeCore : executes code
+JudgeCore --> DockerContainer : runs in isolation
+DockerContainer --> Seccomp : restricts syscalls
+
+' AI Integration
+UserModule --> LLM : AI assistance requests
+ProblemModule --> LLM : problem analysis
+SolutionModule --> LLM : solution suggestions
+
+' CDN Integration
+CDN --> UI : serves cached assets
+
+' Monitoring & Operations
+Prometheus --> API : collects metrics
+Prometheus --> business : collects metrics
+Prometheus --> JudgeHost : collects metrics
+Prometheus --> JudgeCore : collects metrics
+Prometheus --> MySQL : collects metrics
+Prometheus --> Redis : collects metrics
+Prometheus --> MinIO : collects metrics
+Grafana --> Prometheus : visualizes metrics
+Alerting --> Prometheus : receives alerts
+GitLabCI --> K8s : triggers deployments
+K8s --> DockerRegistry : pulls container images
+K8s --> Nginx : hosts
+K8s --> frontend : hosts
+K8s --> presentation : hosts
+K8s --> proxy : hosts
+K8s --> business : hosts
+K8s --> access : hosts
+
+' ========== STYLING ==========
+' Layer styling
+frontend <<rectangle>> {
+  BackgroundColor LAYER_COLOR
+}
+presentation <<rectangle>> {
+  BackgroundColor LAYER_COLOR
+}
+proxy <<rectangle>> {
+  BackgroundColor LAYER_COLOR
+}
+business <<rectangle>> {
+  BackgroundColor LAYER_COLOR
+}
+access <<rectangle>> {
+  BackgroundColor LAYER_COLOR
+}
+
+' External systems styling
+LLM <<rectangle>> {
+  BackgroundColor EXTERNAL_COLOR
+}
+JudgeHost <<rectangle>> {
+  BackgroundColor EXTERNAL_COLOR
+}
+JudgeCore <<rectangle>> {
+  BackgroundColor EXTERNAL_COLOR
+}
+MySQL <<rectangle>> {
+  BackgroundColor EXTERNAL_COLOR
+}
+Redis <<rectangle>> {
+  BackgroundColor EXTERNAL_COLOR
+}
+MinIO <<rectangle>> {
+  BackgroundColor EXTERNAL_COLOR
+}
+SMTP <<rectangle>> {
+  BackgroundColor EXTERNAL_COLOR
+}
+CDN <<rectangle>> {
+  BackgroundColor EXTERNAL_COLOR
+}
+
+' Security components
+Firewall <<rectangle>> {
+  BackgroundColor SECURITY_COLOR
+}
+Nginx <<rectangle>> {
+  BackgroundColor SECURITY_COLOR
+}
+
+@enduml

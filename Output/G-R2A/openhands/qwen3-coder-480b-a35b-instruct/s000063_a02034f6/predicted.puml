@@ -1,0 +1,78 @@
+@startuml
+' Teamgram Server Architecture Diagram
+
+package "Teamgram Server (Go)" {
+  [Client Access Layer] as client_access
+  [BFF / Access-Facing Services] as bff
+  [Messaging Services] as messaging
+  [Other Business Services] as business
+  [Storage Components] as storage
+  [Async Processing (Kafka)] as async
+  [Push Notification Services] as push
+  [Sync Services] as sync
+  [Media Processing Wrapper] as media_wrapper
+}
+
+database "MySQL" as mysql
+database "Redis" as redis
+database "etcd" as etcd
+queue "Kafka" as kafka
+storage "MinIO" as minio
+
+node "External Infrastructure" {
+  mysql
+  redis
+  etcd
+  kafka
+  minio
+}
+
+client_access --> bff : forwards requests
+bff --> messaging : service calls
+bff --> business : service calls
+messaging --> storage : data persistence
+business --> storage : data persistence
+storage --> mysql : user data
+storage --> redis : cache/session data
+storage --> etcd : configuration data
+
+messaging --> async : sends events
+business --> async : sends events
+async --> kafka : message queue
+
+kafka --> push : notification events
+push --> client_access : pushes notifications
+
+kafka --> sync : sync events
+sync --> client_access : sync responses
+
+messaging --> media_wrapper : media processing
+media_wrapper --> messaging : processed media
+media_wrapper -down-> ffmpeg : optional dependency
+
+note right of media_wrapper
+  Optional component
+  Requires FFmpeg/FFProbe
+end note
+
+note top of client_access
+  MTProto server interface
+  Handles client connections
+end note
+
+note right of bff
+  Service gateway layer
+  Protocol translation
+end note
+
+note bottom of storage
+  Data access layer
+  Database abstraction
+end note
+
+note right of async
+  Event publishing
+  Asynchronous processing
+end note
+
+@enduml

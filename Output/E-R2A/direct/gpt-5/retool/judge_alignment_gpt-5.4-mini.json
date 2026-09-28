@@ -1,0 +1,97 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Internal HTTP",
+        "Backend (Flask Microservices::Microservices",
+        "Backend (Flask Microservices::Microservices::Algorithm Service",
+        "Backend (Flask Microservices::Microservices::Project Management Service",
+        "Backend (Flask Microservices::Microservices::Requirement Management Service",
+        "Backend (Flask Microservices::Microservices::User Management Service"
+      ],
+      "predicted_nodes": [
+        "Global::Local Computer\\nMicroservices Host (Flask",
+        "Local Computer\\nMicroservices Host (Flask::API Gateway\\n(Request Routing, Auth Enforcement",
+        "Local Computer\\nMicroservices Host (Flask::Project Management Service\\n- Projects CRUD\\n- Members & Roles\\n- Baselines",
+        "Local Computer\\nMicroservices Host (Flask::Requirements Management Service\\n- Items CRUD & Tree\\n- Move Positions\\n- Import (Word)\\n- Forward Tracing",
+        "Local Computer\\nMicroservices Host (Flask::User Management Service\\n- Registration/Login/Logout\\n- Passwords, Profiles\\n- System Roles & RBAC",
+        "Global::Algorithm Server\\nAmazon Linux 2 (EC2 t2.xlarge",
+        "Algorithm Server\\nAmazon Linux 2 (EC2 t2.xlarge::Algorithm Service\\n(NLP, PyTorch, Word2vec)\\n- Itemization\\n- Structuring\\n- Common Identification\\n- Conflict Detection\\n- Association Analysis"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT backend microservices are represented by a more detailed host/service decomposition in the prediction. The algorithm service is correctly separated onto an algorithm server, while the core microservices remain under the local microservices host; this is semantically consistent with the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (Vue.js 2.0::Browser / Client",
+        "Global::Frontend (Vue.js 2.0"
+      ],
+      "predicted_nodes": [
+        "Global::Client (Windows 10 64-bit)\\nChrome >=81\\nVue.js SPA",
+        "Client (Windows 10 64-bit)\\nChrome >=81\\nVue.js SPA::ReTool Web UI\\n(Vue.js"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT frontend/browser client is matched by a client host plus Vue.js SPA UI node. The prediction preserves the frontend boundary and adds platform details consistent with the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Global::Network & Gateway Layer",
+        "Network & Gateway Layer::API Gateway",
+        "Network & Gateway Layer::API Gateway::Identity Verification",
+        "Network & Gateway Layer::API Gateway::Request Forwarding",
+        "Network & Gateway Layer::API Gateway::Return Response",
+        "Network & Gateway Layer::HTTP Protocol"
+      ],
+      "predicted_nodes": [
+        "Local Computer\\nMicroservices Host (Flask::API Gateway\\n(Request Routing, Auth Enforcement"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The gateway-related GT nodes are consolidated into one API gateway node with routing and auth enforcement. This is a reasonable merge, and the boundary remains within the gateway/microservice access layer even though the predicted package name is more host-centric."
+    },
+    {
+      "gt_nodes": [
+        "Global::Storage Layer (MongoDB",
+        "Storage Layer (MongoDB::Project Collection",
+        "Storage Layer (MongoDB::Requirement Collection",
+        "Storage Layer (MongoDB::User Collection"
+      ],
+      "predicted_nodes": [
+        "Global::MongoDB\\nCRUD Operations"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT storage layer and its collections are merged into a single MongoDB CRUD node. This is semantically equivalent at the architectural level, and the storage boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Storage Layer (MongoDB"
+      ],
+      "predicted_nodes": [
+        "Global::Offsite Disaster Recovery",
+        "Offsite Disaster Recovery::Backup Copies (3x)\\nPeriodic Backup"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT storage layer includes database persistence; the prediction additionally decomposes the backup/disaster recovery concern. While not explicitly named in GT, it is consistent with the PRD non-functional requirement for periodic backup and offsite disaster recovery."
+    },
+    {
+      "gt_nodes": [
+        "Global::Backend (Flask Microservices"
+      ],
+      "predicted_nodes": [
+        "Global::Local Computer\\nMicroservices Host (Flask"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the backend/microservices system boundary, with the prediction using a more deployment-oriented label. This is semantically equivalent."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Algorithm Server\\nAmazon Linux 2 (EC2 t2.xlarge::File Storage\\n(Uploads: Word Documents",
+    "Local Computer\\nMicroservices Host (Flask::Log Collector\\n(Persistent Logs"
+  ]
+}

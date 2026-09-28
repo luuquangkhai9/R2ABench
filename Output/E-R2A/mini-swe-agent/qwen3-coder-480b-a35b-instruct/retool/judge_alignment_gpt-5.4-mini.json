@@ -1,0 +1,124 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Frontend (Vue.js 2.0::Browser / Client",
+        "Global::Frontend (Vue.js 2.0"
+      ],
+      "predicted_nodes": [
+        "Client (Browser::Vue.js Frontend",
+        "Global::Client (Browser"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These refer to the same front-end/browser client component. The boundary naming differs but is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices",
+        "Global::Backend (Flask Microservices"
+      ],
+      "predicted_nodes": [
+        "Global::Server",
+        "Global::Local Computer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These capture the overall backend deployment/runtime context. The AI used deployment-oriented boundaries instead of the GT's backend umbrella boundary, which is acceptable at this abstraction level."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices::Algorithm Service"
+      ],
+      "predicted_nodes": [
+        "Server::Algorithm Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same algorithm service; GT indicates it runs on a server, and the predicted boundary correctly places it on Server."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices::Project Management Service"
+      ],
+      "predicted_nodes": [
+        "Local Computer::Project Management Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same project management microservice. GT indicates it runs locally, so the Local Computer boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices::Requirement Management Service"
+      ],
+      "predicted_nodes": [
+        "Local Computer::Requirements Management Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same requirement management microservice. The pluralization difference is insignificant, and the local deployment boundary matches the GT context."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices::User Management Service"
+      ],
+      "predicted_nodes": [
+        "Local Computer::User Management Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same user management microservice. The boundary is consistent with the GT deployment context."
+    },
+    {
+      "gt_nodes": [
+        "Global::Network & Gateway Layer",
+        "Network & Gateway Layer::API Gateway",
+        "Network & Gateway Layer::API Gateway::Identity Verification",
+        "Network & Gateway Layer::API Gateway::Request Forwarding",
+        "Network & Gateway Layer::API Gateway::Return Response",
+        "Network & Gateway Layer::HTTP Protocol",
+        "Backend (Flask Microservices::Internal HTTP"
+      ],
+      "predicted_nodes": [
+        "Local Computer::API Gateway"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI compressed the gateway/network stack into a single API Gateway node. This is a valid aggregation of the GT gateway-related nodes, and placing it under Local Computer is consistent with the GT deployment notes for gateway and related backend services."
+    },
+    {
+      "gt_nodes": [
+        "Global::Storage Layer (MongoDB",
+        "Storage Layer (MongoDB::Project Collection",
+        "Storage Layer (MongoDB::Requirement Collection",
+        "Storage Layer (MongoDB::User Collection"
+      ],
+      "predicted_nodes": [
+        "Database::MongoDB"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated the MongoDB storage layer and its collections into one database node. This is semantically correct at a higher abstraction level, and the database boundary is appropriate."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Backend (Flask Microservices",
+    "Global::Frontend (Vue.js 2.0",
+    "Global::Network & Gateway Layer",
+    "Global::Storage Layer (MongoDB",
+    "Network & Gateway Layer::API Gateway",
+    "Network & Gateway Layer::API Gateway::Identity Verification",
+    "Network & Gateway Layer::API Gateway::Request Forwarding",
+    "Network & Gateway Layer::API Gateway::Return Response",
+    "Network & Gateway Layer::HTTP Protocol",
+    "Storage Layer (MongoDB::Project Collection",
+    "Storage Layer (MongoDB::Requirement Collection",
+    "Storage Layer (MongoDB::User Collection"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Database",
+    "Global::Local Computer",
+    "Global::Server"
+  ]
+}

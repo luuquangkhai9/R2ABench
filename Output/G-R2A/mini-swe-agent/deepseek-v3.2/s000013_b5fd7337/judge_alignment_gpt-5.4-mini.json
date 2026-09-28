@@ -1,0 +1,96 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "High level architecture::Backend::FastAPI",
+        "High level architecture::Backend::Docker\\nbackend container"
+      ],
+      "predicted_nodes": [
+        "Application Layer::FastAPI Backend"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the backend application service implemented with FastAPI and deployed as the backend container. The predicted node aggregates the implementation and deployment aspects into one backend service node, which is semantically consistent with the GT."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Analytics and storage::Elasticsearch",
+        "High level architecture::Analytics and storage::Docker\\nelasticsearch container"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Elasticsearch"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node correctly captures the Elasticsearch storage component. Although the GT separates the technology node and its containerization, the boundary attribution to a data/storage layer is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Analytics and storage::Kibana",
+        "High level architecture::Analytics and storage::Docker\\nkibana container"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Kibana"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Kibana is correctly identified as the auxiliary data inspection UI. The GT separates the container and the tool; the predicted node aggregates them appropriately under a data layer boundary."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Frontend::React",
+        "High level architecture::Frontend::Docker\\nfrontend container"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::React Frontend"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The React browser frontend is correctly matched to the presentation layer. The GT's separate container and technology nodes are reasonably merged into one frontend node."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Backend::Genius API\\nintegration"
+      ],
+      "predicted_nodes": [
+        "Genius API::External Song Search",
+        "Genius API::Music Metadata",
+        "Global::Genius API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT backend integration with the external Genius API is split into more specific predicted nodes. This is semantically correct because Genius is an external dependency, not an internal service. The predicted boundary is acceptable even though it decomposes the interaction into multiple nodes."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::user",
+        "High level architecture::Developer/Admin"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::React Frontend::User Interface",
+        "Presentation Layer::React Frontend::Web UI"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted frontend UI nodes correspond to the user-facing access path shown in the GT. However, the GT also includes separate user and developer/admin actor nodes that are not explicitly preserved as actors in the predicted list; thus this is only a partial semantic consolidation."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "High level architecture::Developer/Admin",
+    "High level architecture::user"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application Layer::FastAPI Backend::API Gateway",
+    "Application Layer::FastAPI Backend::Song Lookup Service",
+    "Application Layer::FastAPI Backend::Storage Workflow",
+    "Data Layer::Elasticsearch::Index Storage",
+    "Data Layer::Elasticsearch::Mood Associations",
+    "Data Layer::Elasticsearch::Song Records",
+    "Data Layer::Kibana::Dashboard",
+    "Data Layer::Kibana::Data Inspection UI",
+    "Genius API::External Song Search",
+    "Genius API::Music Metadata",
+    "Presentation Layer::React Frontend::User Interface",
+    "Presentation Layer::React Frontend::Web UI"
+  ]
+}

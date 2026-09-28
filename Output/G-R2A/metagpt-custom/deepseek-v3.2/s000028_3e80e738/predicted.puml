@@ -1,0 +1,91 @@
+@startuml
+
+' Define colors for account boundaries
+!define COGNITO_ACCOUNT #FFF2CC
+!define API_ACCOUNT #D5E8D4
+!define SHARED_ACCOUNT #DAE8FC
+
+' Cognito Account
+package "Cognito Account" as cognito_account <<Rectangle>> {
+  component "Cognito Stack" as cognito_stack
+  component "Cognito User Pool" as cognito_user_pool
+  component "Cognito Identity Pool" as cognito_identity_pool
+  component "IAM Roles" as iam_roles
+  
+  cognito_stack : Provisions Cognito resources\nOutputs: UserPoolArn, IdentityPoolId
+  cognito_user_pool : Manages user identities\nAttributes: custom:Role (R/W), email (R/W)
+  cognito_identity_pool : Federates identities\nToken validity units configurable
+  iam_roles : Defines permissions\nUnauthenticated role with sts:AssumeRoleWithWebIdentity trust policy
+}
+
+' API Gateway Account
+package "API Gateway Account" as api_account <<Rectangle>> {
+  component "API Gateway Stack" as api_gateway_stack
+  component "API Gateway" as api_gateway_service
+  component "Cognito Authorizer" as cognito_authorizer
+  component "WhoAmI Method" as whoami_method
+  component "ECS Proxy Method" as ecs_proxy_method
+  
+  api_gateway_stack : Deploys API Gateway with authorizer\nOutputs: CallbackURL
+  api_gateway_service : Hosts REST API\nUses VPC Link integration
+  cognito_authorizer : Validates tokens using UserPoolArn from Cognito account
+  whoami_method : Returns role info\nIntegration response maps Cognito claims to x-pagopa-pn-cx-role header
+  ecs_proxy_method : Proxies to ECS via VPC Link\nIntegration response maps Cognito claims to x-pagopa-pn-cx-role header
+}
+
+' Shared Infrastructure Account
+package "Shared Infrastructure Account" as shared_account <<Rectangle>> {
+  component "VPC Endpoint Template" as vpc_endpoint_template
+  component "SQS VPC Endpoint" as sqs_vpc_endpoint
+  component "Security Group" as vpc_endpoint_sg
+  
+  vpc_endpoint_template : Creates SQS VPC endpoint\nDepends on existing VPC, subnets, CIDR
+  sqs_vpc_endpoint : Private SQS connectivity\nPrivate DNS enabled (NFR-001)
+  vpc_endpoint_sg : Restricts ingress to VPC CIDR (FR-014)
+}
+
+' External AWS Services
+cloud "AWS CloudFormation" as cloudformation
+
+' Installation Inputs
+component "Installation Inputs" as inputs
+inputs : AWS profiles\nDNS values\nAPI keys\nEnvironment names
+
+' Key Dependencies and Data Flows
+cognito_stack --> cognito_user_pool : provisions
+cognito_stack --> cognito_identity_pool : provisions
+cognito_stack --> iam_roles : provisions
+iam_roles --> cognito_identity_pool : attached to (FR-007)
+
+api_gateway_stack --> api_gateway_service : deploys
+api_gateway_stack --> cognito_authorizer : deploys
+api_gateway_stack --> whoami_method : deploys
+api_gateway_stack --> ecs_proxy_method : deploys
+whoami_method --> api_gateway_stack : depends on (CON-004)
+ecs_proxy_method --> api_gateway_stack : depends on (CON-004)
+
+vpc_endpoint_template --> sqs_vpc_endpoint : creates
+vpc_endpoint_template --> vpc_endpoint_sg : creates
+sqs_vpc_endpoint --> vpc_endpoint_sg : uses
+
+' Cross-account dependencies
+cognito_stack ..> api_gateway_stack : exports UserPoolArn
+api_gateway_stack ..> cognito_stack : requires UserPoolArn
+cognito_authorizer ..> cognito_user_pool : validates using UserPoolArn
+
+' Infrastructure provisioning
+cognito_stack --> cloudformation : deployed via
+api_gateway_stack --> cloudformation : deployed via
+vpc_endpoint_template --> cloudformation : deployed via
+
+' Installation inputs flow
+inputs --> cognito_stack : provides parameters
+inputs --> api_gateway_stack : provides parameters
+inputs --> vpc_endpoint_template : provides parameters
+
+' Account boundary styling
+cognito_account <<Rectangle>> COGNITO_ACCOUNT
+api_account <<Rectangle>> API_ACCOUNT
+shared_account <<Rectangle>> SHARED_ACCOUNT
+
+@enduml

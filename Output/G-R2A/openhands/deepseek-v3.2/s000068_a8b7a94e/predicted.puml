@@ -1,0 +1,137 @@
+@startuml
+!define AWSPUML https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v17.0/dist
+!include AWSPUML/AWSCommon.puml
+!include AWSPUML/Compute/all.puml
+!include AWSPUML/Storage/all.puml
+!include AWSPUML/NetworkingContentDelivery/all.puml
+!include AWSPUML/ManagementGovernance/all.puml
+!include AWSPUML/DeveloperTools/all.puml
+
+skinparam componentStyle rectangle
+skinparam linetype ortho
+
+title Core Flight System (cFS) Architecture from SRS s000068_a8b7a94e
+
+package "GitHub Actions Environment" {
+  component "GitHub Actions Runner\n(ubuntu-18.04)" as runner_ubuntu18 {
+    component "Build Workflow" as build_wf
+    component "Functional Test Workflow" as func_test_wf
+    component "Format Check Workflow" as format_wf
+  }
+  
+  component "GitHub Actions Runner\n(ubuntu-latest)" as runner_latest {
+    component "Changelog Workflow" as changelog_wf
+    component "Duplicate Check Workflow" as duplicate_wf
+  }
+  
+  rectangle "Reusable Workflows" {
+    component "Static Analysis Workflow" as static_wf
+    component "CodeQL Workflow" as codeql_wf
+    component "Format Check\nReusable" as format_reuse
+  }
+}
+
+package "Build System" {
+  component "Makefile.sample" as makefile_sample
+  component "sample_defs" as sample_defs
+  component "Git Submodules" as submodules
+  component "Build Artifacts" as artifacts
+  
+  makefile_sample -[hidden]-> sample_defs
+  makefile_sample -[hidden]-> submodules
+}
+
+package "Core Flight System Framework" {
+  component "cFE\n(Core Flight Executive)" as cfe
+  component "OSAL\n(Operating System\nAbstraction Layer)" as osal
+  component "PSP\n(Platform Support Package)" as psp
+  component "Framework Applications" as framework_apps
+  
+  cfe -[hidden]-> osal
+  osal -[hidden]-> psp
+  psp -[hidden]-> framework_apps
+}
+
+component "core-cpu1 Executable\n(Runnable Target)" as core_cpu1
+
+package "Host Utilities" {
+  component "cmdUtil\n(Command Utility)" as cmd_util
+  component "Telemetry Interface" as telemetry_iface
+}
+
+package "Related Tools & Interfaces" {
+  component "SIL\n(Software-in-the-Loop)" as sil
+  component "ECI\n(External Command\nInterface)" as eci
+  component "cFS_IO_LIB" as io_lib
+  component "cFS_LIB" as cfs_lib
+  component "CCDD\n(Command and Data\nDictionary)" as ccdd
+  component "Perfutils-java" as perfutils
+  component "gen_sch_tbl" as gen_sch
+}
+
+cloud "Network" as network {
+  component "Telemetry IP\n(Operator Configured)" as telemetry_ip
+}
+
+' Users/Actors
+actor "Developer/Build User" as dev_user
+actor "CI Maintainer/\nWorkflow Operator" as ci_user
+actor "Functional Tester" as tester
+actor "Telemetry/\nGround-Test Operator" as telemetry_op
+
+' Relationships
+
+' Build flow
+dev_user --> makefile_sample : "Invokes build steps"
+makefile_sample --> artifacts : "make prep, make install"
+submodules --> artifacts : "Source checkout"
+artifacts --> core_cpu1 : "Produces"
+
+' CI/CD flows
+ci_user --> runner_ubuntu18 : "Triggers workflows"
+ci_user --> runner_latest : "Triggers workflows"
+build_wf --> makefile_sample : "Executes build"
+func_test_wf --> core_cpu1 : "Functional testing"
+format_wf --> artifacts : "Format checking"
+
+' Reusable workflow relationships
+build_wf --> format_reuse : "workflow_call"
+build_wf --> static_wf : "workflow_call"
+build_wf --> codeql_wf : "workflow_call"
+
+' Test execution flow
+tester --> cmd_util : "Sends commands"
+cmd_util --> core_cpu1 : "Command transmission\n(--pktid, --cmdcode, etc.)"
+core_cpu1 --> telemetry_iface : "Generates telemetry"
+telemetry_op --> telemetry_ip : "Enters IP address\n(127.0.0.1 for local)"
+telemetry_ip --> telemetry_iface : "Connection"
+telemetry_iface --> telemetry_op : "Visible telemetry data"
+
+' Framework relationships
+core_cpu1 --> cfe : "Includes"
+cfe --> osal : "Depends on"
+cfe --> psp : "Depends on"
+cfe --> framework_apps : "Includes"
+
+' Tool relationships
+cmd_util --> eci : "Uses interface"
+telemetry_iface --> ccdd : "Uses dictionary"
+framework_apps --> io_lib : "Uses"
+framework_apps --> cfs_lib : "Uses"
+ci_user --> changelog_wf : "Manual trigger"
+changelog_wf --> "Changelog Artifact\n(Uploaded)" as changelog_artifact : "Generates"
+changelog_artifact --> "Categories:\n- Closed issues\n- Breaking changes\n- Implemented enhancements\n- Fixed bugs\n- Deprecated\n- Removed\n- Security fixes" as categories
+
+' Build variants
+note right of artifacts
+  Build Variants:
+  - debug
+  - release
+end note
+
+' Timeout constraint
+note right of func_test_wf
+  CI timeout: 15 minutes
+end note
+
+@enduml

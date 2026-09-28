@@ -1,0 +1,131 @@
+@startuml
+!define RECTANGLE class
+
+' Title and Theme
+title hAFL2 System Architecture
+skinparam componentStyle rectangle
+
+' Core System
+package "hAFL2 System" {
+  RECTANGLE hAFL2 [
+    hAFL2
+    Hypervisor Fuzzing Platform
+    ==
+    Orchestrates fuzzing workflows
+    Manages test execution
+  ]
+  
+  RECTANGLE KAFL_Fuzzer [
+    kAFL-Fuzzer
+    ==
+    Core fuzzing engine
+    Executes test suites
+  ]
+}
+
+' Linux Userspace Workflow
+package "Linux Userspace Fuzzing" {
+  RECTANGLE InitrdBuilder [
+    initrd Builder
+    ==
+    Packages target binaries
+    Copies shared libraries
+  ]
+  
+  RECTANGLE Forkserver [
+    Embedded Forkserver
+    ==
+    Maps kAFL hypercalls
+    to AFL-style I/O
+  ]
+  
+  RECTANGLE LinuxTarget [
+    Linux Target Binary
+    ==
+    Userspace application
+    Packaged in initrd
+  ]
+  
+  RECTANGLE Initrd [
+    initrd
+    ==
+    Launchable package
+    Contains target + libs
+  ]
+}
+
+' Windows Workflow
+package "Windows Hyper-V Fuzzing" {
+  RECTANGLE Loader [
+    loader.exe
+    ==
+    Creates fuzzing snapshot
+    Loads packet_sender.exe
+  ]
+  
+  RECTANGLE PacketSender [
+    packet_sender.exe
+    ==
+    Triggers packet-sending IOCTL
+  ]
+  
+  package "Child Partition VM" {
+    RECTANGLE ChildHarness [
+      Child Partition Harness
+      ==
+      Sends fuzzing payloads
+      to root partition
+    ]
+  }
+  
+  package "Root Partition VM" {
+    RECTANGLE RootMonitor [
+      Root Partition Monitor
+      ==
+      Crash monitoring
+      VMSwitch targeting
+    ]
+  }
+}
+
+' Communication Channels
+package "Communication Layer" {
+  RECTANGLE VMBus [
+    VMBus/Netvsc Channels
+    ==
+    Communication pathway
+    Child ↔ Root partition
+  ]
+}
+
+' Relationships
+hAFL2 --> KAFL_Fuzzer : executes
+hAFL2 --> InitrdBuilder : uses
+InitrdBuilder --> LinuxTarget : packages
+InitrdBuilder --> Initrd : creates
+Initrd --> Forkserver : contains
+Forkserver --> LinuxTarget : manages
+hAFL2 --> Loader : uses
+Loader --> PacketSender : loads/executes
+PacketSender --> ChildHarness : triggers
+ChildHarness --> VMBus : sends payloads
+VMBus --> RootMonitor : delivers payloads
+RootMonitor --> hAFL2 : reports crashes
+
+' Notes
+note right of hAFL2
+  Primary entry point for 
+  fuzzing workflows
+end note
+
+note right of LinuxTarget
+  Target applications 
+  packaged for fuzzing
+end note
+
+note right of RootMonitor
+  Monitors for crashes
+  in root partition
+end note
+
+@enduml

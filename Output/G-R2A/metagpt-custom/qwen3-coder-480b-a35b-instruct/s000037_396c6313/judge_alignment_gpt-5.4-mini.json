@@ -1,0 +1,155 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::plugin"
+      ],
+      "predicted_nodes": [
+        "Global::veinmind-sdk/libveinmind",
+        "Global::veinmind-runner",
+        "Plugin Layer::PluginManager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These nodes collectively represent the plugin-related/tooling/runtime side of the system. The GT node is a broad plugin boundary, while the predicted nodes split it into SDK/library, runner, and plugin management concerns. The boundary attribution is acceptable at this abstraction level."
+    },
+    {
+      "gt_nodes": [
+        "Global::runner"
+      ],
+      "predicted_nodes": [
+        "Execution Layer::RunnerExecutor",
+        "Execution Layer::QuickStartWorkflow",
+        "Execution Layer::StartupScript",
+        "Global::veinmind-runner"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT runner node is decomposed by the AI into execution workflow, executor, startup script, and runner image. This is semantically consistent with the runner-based execution capability described in the PRD, and the boundary placement is reasonable."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::containerd"
+      ],
+      "predicted_nodes": [
+        "Global::Containerd"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Containerd infrastructure backend. The predicted node omits the GT package name granularity but remains semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::docker"
+      ],
+      "predicted_nodes": [
+        "Global::Docker"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Docker infrastructure/backend dependency used by the tool suite. The boundary differs in naming but is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::dockerfile"
+      ],
+      "predicted_nodes": [
+        "Global::Docker Registry",
+        "Global::DockerHub",
+        "Global::Harbor"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents a broad infrastructure/input backend category related to container image sources and artifacts. The predicted nodes split this into specific registry/provider targets, which is a reasonable refinement and not a boundary error."
+    },
+    {
+      "gt_nodes": [
+        "SDK::interact system"
+      ],
+      "predicted_nodes": [
+        "Global::veinmind-sdk/libveinmind"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT SDK interaction system matches the predicted SDK/library node. The naming is different but the component role is the same."
+    },
+    {
+      "gt_nodes": [
+        "SDK::plugin system"
+      ],
+      "predicted_nodes": [
+        "Global::veinmind-sdk/libveinmind",
+        "Plugin Layer::PluginManager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT plugin system is represented by the SDK/library plus plugin management functionality. This is semantically aligned and the placement is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::container"
+      ],
+      "predicted_nodes": [
+        "CLI Layer::ScanImageCommand",
+        "Execution Layer::QuickStartWorkflow"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The container scan target is not directly represented by the predicted nodes. ScanImageCommand and QuickStartWorkflow relate to image scanning and execution flow, not the container scan target, so this is a functional mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::iac"
+      ],
+      "predicted_nodes": [
+        "CLI Layer::ScanIacCommand",
+        "Plugin Layer::IaCPolicyLoader",
+        "Plugin Layer::IaCDuplicateMerger",
+        "Plugin Layer::AlertBuilder",
+        "Reporting Layer::ReportGenerator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT IaC scan target is correctly decomposed into command, policy loading, duplicate merging, alert building, and reporting. This is a good semantic match with acceptable boundary attribution."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::image"
+      ],
+      "predicted_nodes": [
+        "CLI Layer::ScanImageCommand",
+        "Execution Layer::QuickStartWorkflow",
+        "Execution Layer::StartupScript"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The image scan target is represented by the image scan CLI and quick-start execution path. The decomposition is consistent with the PRD and the boundaries are reasonable."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Infrastructure and Input Backends::kubernetes",
+    "Infrastructure and Input Backends::tarball",
+    "Scan Targets::cluster"
+  ],
+  "unmatched_predicted_nodes": [
+    "Authorization Layer::DockerAuthRouter",
+    "CLI Layer::ScanIacCommand",
+    "CLI Layer::ScanImageCommand",
+    "Example Packages::PythonEntrypoint",
+    "Execution Layer::QuickStartWorkflow",
+    "Execution Layer::RunnerExecutor",
+    "Execution Layer::StartupScript",
+    "Global::Containerd",
+    "Global::Docker",
+    "Global::Docker Registry",
+    "Global::DockerHub",
+    "Global::Harbor",
+    "Global::veinmind-runner",
+    "Global::veinmind-sdk/libveinmind",
+    "Plugin Layer::AlertBuilder",
+    "Plugin Layer::IaCDuplicateMerger",
+    "Plugin Layer::IaCPolicyLoader",
+    "Plugin Layer::PluginManager",
+    "Reporting Layer::ReportGenerator"
+  ]
+}

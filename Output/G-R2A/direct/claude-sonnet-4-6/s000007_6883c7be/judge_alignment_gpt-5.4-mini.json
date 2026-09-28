@@ -1,0 +1,265 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "CGI Portal::Http Test\nClient"
+      ],
+      "predicted_nodes": [
+        "Client Environment::Test Client\n(Async HTTP Workload",
+        "Client Environment::Test Client\n(Async HTTP Workload::Async HTTP Client\n(GET Requests",
+        "Client Environment::Test Client\n(Async HTTP Workload::Fixed Thread Pool\n(50 threads",
+        "Client Environment::Test Client\n(Async HTTP Workload::Success Counter\n(HTTP 200 detector"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT test client is decomposed into the async HTTP workload, request generator, fixed thread pool, and success counter. This is a semantically faithful split, and the client-side boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Proxy Core"
+      ],
+      "predicted_nodes": [
+        "Proxy Layer\n(Java 1.7 / Netty-style Channel::HTTP Proxy Component",
+        "Proxy Layer\n(Java 1.7 / Netty-style Channel::HTTP Proxy Component::Inbound Request Handler\n(FullHttpRequest",
+        "Proxy Layer\n(Java 1.7 / Netty-style Channel::HTTP Proxy Component::Request Forwarder\n(write + flush on channel active"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The proxy core is represented by the proxy component plus its inbound handler and forwarding subcomponent. The Netty-style proxy-layer attribution is consistent with the GT proxy boundary."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Download"
+      ],
+      "predicted_nodes": [
+        "Test Server Environment\n(Java 1.8 / Grizzly + Jersey::HTTP Test Server::GET /download Endpoint",
+        "Test Server Environment\n(Java 1.8 / Grizzly + Jersey::Response Builder::File Download Response\n(application/octet-stream\nContent-Disposition attachment",
+        "Global::File Transfer Response\n(application/octet-stream\nContent-Disposition",
+        "Global::Local Filesystem",
+        "Local Filesystem::Target Download File"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT download plugin is functionally matched by the GET /download endpoint and file download response, but the AI placed the behavior in the test server environment rather than the proxy plugin boundary. This is a boundary error because the GT explicitly models it under the proxy plugin layer."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Upload"
+      ],
+      "predicted_nodes": [
+        "Test Server Environment\n(Java 1.8 / Grizzly + Jersey::HTTP Test Server::File Upload Handler",
+        "Test Server Environment\n(Java 1.8 / Grizzly + Jersey::Response Builder::File Upload Map Payload\n(filepath -> filename"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The upload-handling map payload corresponds functionally, but it is placed under the test server environment instead of the GT proxy plugin boundary. That is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Logging"
+      ],
+      "predicted_nodes": [
+        "Proxy Layer\n(Java 1.7 / Netty-style Channel::HTTP Proxy Component::Debug Logger\n(URI, headers, body"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The debug logging node matches the GT logging function and remains within the proxy layer, which is correct."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Appkey\nValidate"
+      ],
+      "predicted_nodes": [
+        "Proxy Layer\n(Java 1.7 / Netty-style Channel::HTTP Proxy Component"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted proxy component is too broad and does not specifically capture the appkey validation function. While it is within the proxy layer, the functional equivalence is not sufficiently precise to count as a successful match."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Formatter"
+      ],
+      "predicted_nodes": [
+        "Global::HTTP Request/Response\n(URI, headers, body, status"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The formatter is not explicitly represented; the generic HTTP request/response data node is only a partial conceptual overlap and not a clear functional equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Global Limit"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding rate-limit or global-limit node is present in the predicted list."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Login &\nPermission"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No matching authentication/permission node is present in the predicted list."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Agent"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding agent plugin node is present."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Attach Check"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No attachment-check node is predicted."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Check\nParameter"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No parameter-check node is predicted."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Mock"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No mock plugin node is predicted."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 2"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No second proxy cluster or equivalent node is predicted."
+    },
+    {
+      "gt_nodes": [
+        "CGI Portal::Appkey\nManager",
+        "CGI Portal::CGI Manager",
+        "CGI Portal::Case Manager",
+        "CGI Portal::Document\nGenerate",
+        "CGI Portal::Log & Tree\ninquire",
+        "CGI Portal::Metrics &\nReport",
+        "CGI Portal::Service\nManager"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "These CGI portal management functions are absent from the predicted architecture."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer\nKeepalived(VIP::Openresty",
+        "Business Servers::......",
+        "Business Servers::Business Server A",
+        "Business Servers::Business Server B",
+        "Business Servers::Business Server C",
+        "Clients::APP Client",
+        "Clients::Business Server",
+        "Clients::Developer",
+        "Clients::Web Client",
+        "Global::Log consumer",
+        "Support Platform::Data Bank\nHDFS/Hbase/Druid",
+        "Support Platform::Msg Center\nKafka",
+        "Support Platform::Mysql",
+        "Support Platform::Permission\nCenter",
+        "Support Platform::Redis Cache",
+        "Support Platform::User Center",
+        "Task Scheduler::CGI Case\nExecutor",
+        "Task Scheduler::CGI Health\nCheck",
+        "Task Scheduler::Daily Report",
+        "Task Scheduler::Log Analysis",
+        "Task Scheduler::Monitor/Alarm"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "These infrastructure, business, support-platform, client, and scheduler nodes are not represented in the predicted list."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer\nKeepalived(VIP::Openresty",
+    "Business Servers::......",
+    "Business Servers::Business Server A",
+    "Business Servers::Business Server B",
+    "Business Servers::Business Server C",
+    "CGI Portal::Appkey\nManager",
+    "CGI Portal::CGI Manager",
+    "CGI Portal::Case Manager",
+    "CGI Portal::Document\nGenerate",
+    "CGI Portal::Log & Tree\ninquire",
+    "CGI Portal::Metrics &\nReport",
+    "CGI Portal::Service\nManager",
+    "Clients::APP Client",
+    "Clients::Business Server",
+    "Clients::Developer",
+    "Clients::Web Client",
+    "Global::Log consumer",
+    "Proxy Layer::cgi_proxy 1::Appkey\nValidate",
+    "Proxy Layer::cgi_proxy 1::Formatter",
+    "Proxy Layer::cgi_proxy 1::Global Limit",
+    "Proxy Layer::cgi_proxy 1::Login &\nPermission",
+    "Proxy Layer::cgi_proxy 1::Plugin::Agent",
+    "Proxy Layer::cgi_proxy 1::Plugin::Attach Check",
+    "Proxy Layer::cgi_proxy 1::Plugin::Check\nParameter",
+    "Proxy Layer::cgi_proxy 1::Plugin::Mock",
+    "Proxy Layer::cgi_proxy 2",
+    "Support Platform::Data Bank\nHDFS/Hbase/Druid",
+    "Support Platform::Msg Center\nKafka",
+    "Support Platform::Mysql",
+    "Support Platform::Permission\nCenter",
+    "Support Platform::Redis Cache",
+    "Support Platform::User Center",
+    "Task Scheduler::CGI Case\nExecutor",
+    "Task Scheduler::CGI Health\nCheck",
+    "Task Scheduler::Daily Report",
+    "Task Scheduler::Log Analysis",
+    "Task Scheduler::Monitor/Alarm"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Base URI",
+    "Global::Client Environment",
+    "Global::File Transfer Response\n(application/octet-stream\nContent-Disposition",
+    "Global::HTTP Request/Response\n(URI, headers, body, status",
+    "Global::Local Filesystem",
+    "Global::Maven Multi-Module Build\n(Java 1.7 / 1.8 baselines",
+    "Global::Proxy Layer\n(Java 1.7 / Netty-style Channel",
+    "Global::Test Server Environment\n(Java 1.8 / Grizzly + Jersey",
+    "Global::Upstream Server",
+    "Local Filesystem::Target Download File",
+    "Maven Multi-Module Build\n(Java 1.7 / 1.8 baselines::Proxy SDK Module\n(Java 1.7",
+    "Maven Multi-Module Build\n(Java 1.7 / 1.8 baselines::Test Server Module\n(Java 1.8",
+    "Proxy Layer\n(Java 1.7 / Netty-style Channel::HTTP Proxy Component",
+    "Proxy Layer\n(Java 1.7 / Netty-style Channel::HTTP Proxy Component::Debug Logger\n(URI, headers, body",
+    "Proxy Layer\n(Java 1.7 / Netty-style Channel::HTTP Proxy Component::Inbound Request Handler\n(FullHttpRequest",
+    "Proxy Layer\n(Java 1.7 / Netty-style Channel::HTTP Proxy Component::Request Forwarder\n(write + flush on channel active",
+    "Test Server Environment\n(Java 1.8 / Grizzly + Jersey::HTTP Test Server",
+    "Test Server Environment\n(Java 1.8 / Grizzly + Jersey::HTTP Test Server::File Upload Handler",
+    "Test Server Environment\n(Java 1.8 / Grizzly + Jersey::HTTP Test Server::GET /download Endpoint",
+    "Test Server Environment\n(Java 1.8 / Grizzly + Jersey::HTTP Test Server::Server Startup\n(Programmatic / Base URI",
+    "Test Server Environment\n(Java 1.8 / Grizzly + Jersey::Response Builder",
+    "Test Server Environment\n(Java 1.8 / Grizzly + Jersey::Response Builder::File Download Response\n(application/octet-stream\nContent-Disposition attachment",
+    "Test Server Environment\n(Java 1.8 / Grizzly + Jersey::Response Builder::File Upload Map Payload\n(filepath -> filename",
+    "Test Server Environment\n(Java 1.8 / Grizzly + Jersey::Response Builder::Structured Response Object\n(code: Integer, msg: String, data: Object",
+    "Upstream Server::Upstream Channel\n(Netty-style ChannelContext",
+    "Upstream Server::Upstream HTTP Handler"
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Statlord::Browser Editor\\nLayout authoring"
+      ],
+      "predicted_nodes": [
+        "Client Layer\\n(Browser::TypeScript/React\\nSingle-Page Application\\n(Browser Editor",
+        "Client Layer\\n(Browser::TypeScript/React\\nSingle-Page Application\\n(Browser Editor::Layout Editor\\n(Canvas, Multi-Display",
+        "Client Layer\\n(Browser::TypeScript/React\\nSingle-Page Application\\n(Browser Editor::Redux Store\\n(controls, elements,\\nlayouts, gauges, displays"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's general 'Browser Editor' is correctly split by the AI into the main SPA, the specific layout editing component, and the Redux state management, all of which are mentioned in the PRD. The 'Client Layer' boundary is appropriate and semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Displays\\nOLED, e-paper, LCD, browser"
+      ],
+      "predicted_nodes": [
+        "Global::Physical / Virtual Displays\\n(OLEDs, e-paper, LCDs"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the external physical displays the system outputs to. The AI's 'Global' boundary is appropriate for external hardware and semantically equivalent to the top-level system boundary used by the GT."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Display Resource\\nresolution and state"
+      ],
+      "predicted_nodes": [
+        "Container / Server Layer\\n(Python 3.7, Django::Django Server\\n(manage.py runserver::API Layer::Display API\\n(key, available,\\nresolution_x, resolution_y,\\ncurrent_layout, display_data,\\nrotation"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'Display Resource' node is correctly matched to the more specific 'Display API' node from the AI. The boundary 'Container / Server Layer' is semantically equivalent to the GT's 'Server' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Gauge Resource\\nkey, value"
+      ],
+      "predicted_nodes": [
+        "Container / Server Layer\\n(Python 3.7, Django::Django Server\\n(manage.py runserver::API Layer::Gauge API\\n(key, value"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'Gauge Resource' node is correctly matched to the more specific 'Gauge API' node from the AI. The boundary 'Container / Server Layer' is semantically equivalent to the GT's 'Server' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Layout Resource\\ndata and display positions"
+      ],
+      "predicted_nodes": [
+        "Container / Server Layer\\n(Python 3.7, Django::Django Server\\n(manage.py runserver::API Layer::Layout API\\n(key, data,\\ndisplay_positions"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'Layout Resource' node is correctly matched to the more specific 'Layout API' node from the AI. The boundary 'Container / Server Layer' is semantically equivalent to the GT's 'Server' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::PostgreSQL\\npersistent models"
+      ],
+      "predicted_nodes": [
+        "Global::PostgreSQL\\n(Persistent Storage",
+        "PostgreSQL\\n(Persistent Storage::Display Entity\\n(key, available,\\nresolution_x, resolution_y,\\ncurrent_layout → Layout,\\ndisplay_data, rotation",
+        "PostgreSQL\\n(Persistent Storage::Gauge Entity\\n(key, value",
+        "PostgreSQL\\n(Persistent Storage::Layout Entity\\n(key, data [binary],\\ndisplay_positions [text"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's single PostgreSQL node is correctly expanded by the AI into the database system itself and its specific data entities as described in the PRD. Placing the database in a 'Global' or dedicated 'PostgreSQL' boundary is an architecturally sound choice and semantically equivalent to the GT's 'Server' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Python / Django API"
+      ],
+      "predicted_nodes": [
+        "Container / Server Layer\\n(Python 3.7, Django::Django Server\\n(manage.py runserver",
+        "Container / Server Layer\\n(Python 3.7, Django::Django Server\\n(manage.py runserver::API Layer",
+        "Container / Server Layer\\n(Python 3.7, Django::Django Server\\n(manage.py runserver::Static Asset Server\\n(Built Client Assets"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's generic 'Python / Django API' server is correctly split by the AI into the server process, the API layer, and the static asset serving role, all mentioned in the PRD. The 'Container / Server Layer' boundary is a correct, modern equivalent to the GT's 'Server' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Viewer Instances\\nheadless browsers"
+      ],
+      "predicted_nodes": [
+        "Client Layer\\n(Browser::TypeScript/React\\nSingle-Page Application\\n(Browser Editor::Viewer Interface\\n(B&W Pixel Renderer",
+        "Container / Server Layer\\n(Python 3.7, Django::Django Server\\n(manage.py runserver::API Layer::Viewer Route\\n(render path"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'Viewer Instances' is correctly interpreted and split by the AI into its client-side rendering component ('Viewer Interface') and the backend endpoint that serves it ('Viewer Route'). The boundary placement in both 'Client Layer' and 'Server Layer' is accurate, reflecting the dual nature of the feature."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Build Environment\\n(Node.js, npm::Built Static Assets\\n(JS/CSS/HTML",
+    "Build Environment\\n(Node.js, npm::Client Build Pipeline\\n(npm install, npm run build",
+    "Global::Build Environment\\n(Node.js, npm",
+    "Global::Client Layer\\n(Browser",
+    "Global::Container / Server Layer\\n(Python 3.7, Django"
+  ]
+}

@@ -1,0 +1,146 @@
+@startuml
+!define RECTANGLE class
+skinparam componentStyle rectangle
+skinparam backgroundColor #F0F0F0
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam classFontSize 12
+skinparam componentFontSize 12
+skinparam packageFontSize 14
+skinparam packageFontStyle bold
+skinparam arrowColor #333333
+skinparam classBorderColor #333333
+skinparam componentBorderColor #333333
+skinparam packageBorderColor #333333
+skinparam shadowing false
+
+package "External Actors" {
+  [Java Developer] as DEV
+  [CLI User] as USER
+}
+
+package "JSeats System" {
+  package "API Layer" {
+    RECTANGLE "Caller-Facing API\n(Entry Point)" as API
+    RECTANGLE "Allocation Method Contract" as CONTRACT
+    RECTANGLE "Tally Filtering API" as FILTER_API
+    RECTANGLE "Result Decoration API" as DECORATOR_API
+  }
+
+  package "Core Processing" {
+    RECTANGLE "Processor Workflow" as WORKFLOW
+    RECTANGLE "Allocation Engine" as ENGINE
+    RECTANGLE "Tally Manager" as TALLY_MGR
+    RECTANGLE "Configuration Manager" as CONFIG_MGR
+  }
+
+  package "Method Implementations" {
+    RECTANGLE "Majority Methods\n(Simple, Qualified, Absolute)" as MAJORITY
+    RECTANGLE "Ranked Method\n(By Votes)" as RANKED
+    RECTANGLE "Equal Proportions\n(Huntington-Hill)" as EQUAL_PROP
+    RECTANGLE "Largest Remainder\n(Hare, Droop, Imperiali)" as LR
+    RECTANGLE "Highest Averages\n(D'Hondt, Sainte-Lague, etc.)" as HA
+  }
+
+  package "Data Layer" {
+    RECTANGLE "Tally Data Model" as TALLY_MODEL
+    RECTANGLE "Candidate Data Model" as CANDIDATE_MODEL
+    RECTANGLE "Result Data Model" as RESULT_MODEL
+    RECTANGLE "Properties Data Model" as PROPERTIES_MODEL
+    RECTANGLE "XML Parser/Serializer" as XML
+  }
+
+  package "CLI Layer" {
+    RECTANGLE "Command Line Launcher" as CLI
+    RECTANGLE "CLI Argument Parser" as ARG_PARSER
+    RECTANGLE "CLI Output Handler" as OUTPUT_HANDLER
+  }
+}
+
+package "External Data Sources" {
+  [XML Files] as XML_FILES
+  [Command Line Arguments] as CLI_ARGS
+}
+
+' External Actor Connections
+DEV --> API : "Uses Java API"
+USER --> CLI : "Invokes with options"
+
+' API Layer Connections
+API --> WORKFLOW : "Initiates"
+CONTRACT --> ENGINE : "Defines Interface"
+FILTER_API --> WORKFLOW : "Provides Filters"
+DECORATOR_API --> WORKFLOW : "Provides Decorators"
+
+' Core Processing Connections
+WORKFLOW --> TALLY_MGR : "Gets/Processes Tally"
+WORKFLOW --> CONFIG_MGR : "Reads Configuration"
+WORKFLOW --> ENGINE : "Executes Allocation"
+ENGINE --> MAJORITY : "Uses"
+ENGINE --> RANKED : "Uses"
+ENGINE --> EQUAL_PROP : "Uses"
+ENGINE --> LR : "Uses"
+ENGINE --> HA : "Uses"
+TALLY_MGR --> TALLY_MODEL : "Manages"
+CONFIG_MGR --> PROPERTIES_MODEL : "Manages"
+
+' Data Layer Connections
+TALLY_MODEL --> CANDIDATE_MODEL : "Contains"
+ENGINE --> RESULT_MODEL : "Produces"
+TALLY_MODEL --> XML : "Loads from/Saves to"
+RESULT_MODEL --> XML : "Serializes to"
+PROPERTIES_MODEL --> XML : "Serializes to"
+
+' CLI Layer Connections
+CLI --> ARG_PARSER : "Parses Input"
+CLI --> OUTPUT_HANDLER : "Generates Output"
+ARG_PARSER --> CLI_ARGS : "Reads"
+ARG_PARSER --> WORKFLOW : "Configures & Triggers"
+ARG_PARSER --> TALLY_MGR : "Provides Candidate Data"
+OUTPUT_HANDLER --> RESULT_MODEL : "Formats"
+OUTPUT_HANDLER --> TALLY_MODEL : "Formats"
+OUTPUT_HANDLER --> PROPERTIES_MODEL : "Formats"
+
+' External Data Connections
+XML --> XML_FILES : "Reads/Writes"
+TALLY_MGR --> XML_FILES : "via XML Parser"
+
+' Exception Flow
+ENGINE --> API : "Throws SeatAllocationException"
+ENGINE --> CLI : "Throws SeatAllocationException"
+
+note top of ENGINE
+  Supports configurable workflow:
+  Filter → Allocate → Decorate
+  Implements FR-001B, FR-011
+end note
+
+note right of MAJORITY
+  Absolute method derives
+  threshold from tally votes
+  (potentialVotes/2)+1
+  Implements FR-005
+end note
+
+note right of HA
+  Uses variant-specific
+  divisor sequences
+  Implements FR-006
+end note
+
+note left of XML
+  Tally.fromXML()
+  Implements FR-008
+end note
+
+note bottom of CLI
+  Supports:
+  - Listing methods/filters/decorators
+  - Candidate input (Name:Votes)
+  - File input/output
+  - Method selection
+  - Parameter setting
+  Implements FR-010
+end note
+
+@enduml

@@ -1,0 +1,40 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "External Systems::Kafka",
+        "Global::External Systems"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Kafka external messaging dependency. The AI split the GT node into a generic external-systems boundary and a specific Kafka node, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\\nserver",
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "predicted_nodes": [
+        "Global::JVM Application",
+        "JVM Application::AuditorAPI",
+        "JVM Application::AuditEventGenerator",
+        "JVM Application::EventPublisher",
+        "JVM Application::KafkaEventPublisher",
+        "JVM Application::AuditEventElementFilter",
+        "JVM Application::MetadataHandler"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT shows a client-library application deployed in multiple application contexts, while the AI decomposed the same JVM library into functional components within a JVM Application boundary. This is a reasonable aggregation/splitting of the same overall product scope."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Databases / Filestores\\nElastic, Hadoop, etc."
+  ],
+  "unmatched_predicted_nodes": []
+}

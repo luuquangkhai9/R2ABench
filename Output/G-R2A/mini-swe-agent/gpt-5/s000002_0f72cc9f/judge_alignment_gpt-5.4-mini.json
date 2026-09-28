@@ -1,0 +1,77 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "predicted_nodes": [
+        "Browser::Client Layer (React::Authentication UI\\n(Sign-up/Sign-in",
+        "Browser::Client Layer (React::Content Viewer",
+        "Browser::Client Layer (React::Error Display",
+        "Browser::Client Layer (React::Navigation\\n(React-Router",
+        "Browser::Client Layer (React::Scene Renderer\\n(A-Frame / aframe-react",
+        "Browser::Client Layer (React::Shared Credential\\nHandlers & State"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT web client is decomposed into multiple client-side React/A-Frame/UI concerns in the prediction. Although more granular, all predicted nodes remain within the semantically correct web client/browser boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>WEB SERVER</u></b>\\n\\n* Node\\n* Express\\n* DigitalOcean (Deployment"
+      ],
+      "predicted_nodes": [
+        "Global::Server Host",
+        "Server Host::Application Server (Node.js / Express::Auth Service",
+        "Server Host::Application Server (Node.js / Express::Cache Client",
+        "Server Host::Application Server (Node.js / Express::Content Service",
+        "Server Host::Application Server (Node.js / Express::DB Access Layer",
+        "Server Host::Application Server (Node.js / Express::HTTP API\\n(Express Router",
+        "Server Host::Application Server (Node.js / Express::Password Verifier\\n(bcrypt-nodejs",
+        "Server Host::Application Server (Node.js / Express::Storage Client",
+        "Server Host::Application Server (Node.js / Express::User Repository\\n(User Model"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT web server is split into several backend responsibilities such as routing, auth, persistence access, password verification, and storage integration. These are all consistent with the server-side boundary, and the additional host wrapper is not a semantic boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>DATABASE</u></b>\\n\\n* MariaDB\\n  * Users\\n  * Likes\\n  * Photos\\n  * Comments"
+      ],
+      "predicted_nodes": [
+        "Global::Relational Database\\n(MariaDB-style"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted relational database node is semantically equivalent to the GT database node containing MariaDB-backed persistent application data."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b>AWS S3</b>"
+      ],
+      "predicted_nodes": [
+        "Global::Image Storage\\n(S3-style"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted S3-style image storage service corresponds directly to the GT AWS S3 node."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b>REDIS CACHE</b>"
+      ],
+      "predicted_nodes": [
+        "Global::Cache\\n(Redis-style"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted cache node is semantically equivalent to the GT Redis cache node."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Browser",
+    "Global::Server Host"
+  ]
+}

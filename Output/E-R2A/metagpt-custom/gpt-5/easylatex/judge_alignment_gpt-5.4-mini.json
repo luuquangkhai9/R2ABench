@@ -1,0 +1,263 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::AI Module::Image Pre-processing Module"
+      ],
+      "predicted_nodes": [
+        "Processing Cluster (Python 3.8+::Processing & Conversion::Handwriting/Image Recognition Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the image preprocessing / recognition stage used before LaTeX generation. The predicted node is placed in the processing cluster rather than under the AI module, but this is semantically equivalent and an acceptable boundary refinement."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::AI Module::LaTeX Generation Module"
+      ],
+      "predicted_nodes": [
+        "Processing Cluster (Python 3.8+::Processing & Conversion::LaTeX Generation Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes describe the LaTeX generation function. The predicted placement in a dedicated processing cluster is consistent with the GT backend AI module."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::AI Module::Result Processing Module"
+      ],
+      "predicted_nodes": [
+        "App Server (Node.js 14.x+::Application Services::Project Service",
+        "App Server (Node.js 14.x+::Application Services::Comment Service",
+        "App Server (Node.js 14.x+::Application Services::Version Control Service",
+        "Rendering Host::Rendering & Export::Preview Rendering Service",
+        "Rendering Host::Rendering & Export::Export Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT result processing module is a post-recognition backend function, but the prediction splits it into several unrelated services including project, comment, versioning, rendering, and export. This is an over-broad and semantically incorrect merge/split with severe boundary confusion."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::File Processing Service"
+      ],
+      "predicted_nodes": [
+        "App Server (Node.js 14.x+::Application Services::File Upload/Ingestion",
+        "Processing Cluster (Python 3.8+::Processing & Conversion::CSV/Excel Parser",
+        "Processing Cluster (Python 3.8+::Processing & Conversion::PDF Extraction Service",
+        "Processing Cluster (Python 3.8+::Processing & Conversion::Processing Orchestrator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT file processing service is decomposed into upload/ingestion, parsing/extraction, and orchestration responsibilities. This split is semantically consistent with the original file processing boundary."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::Project Management Service"
+      ],
+      "predicted_nodes": [
+        "App Server (Node.js 14.x+::Application Services::Project Service",
+        "App Server (Node.js 14.x+::Application Services::Group/Collaboration Service",
+        "App Server (Node.js 14.x+::Application Services::Version Control Service",
+        "App Server (Node.js 14.x+::Application Services::Comment Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT project management service aggregates project, collaboration, version, and comment-related management. The prediction splits these into finer application services, which is a reasonable decomposition within the same backend domain."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::Project Management Service::Collaboration & Permissions Service"
+      ],
+      "predicted_nodes": [
+        "App Server (Node.js 14.x+::Application Services::Group/Collaboration Service",
+        "App Server (Node.js 14.x+::Application Services::Permission Control"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These predicted services together cover collaboration and permission control, matching the GT collaboration & permissions component. The decomposition is boundary-consistent."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::Project Management Service::Project Basic Services"
+      ],
+      "predicted_nodes": [
+        "App Server (Node.js 14.x+::Application Services::Project Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted project service corresponds directly to the GT project basic services component."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::User Management Service"
+      ],
+      "predicted_nodes": [
+        "App Server (Node.js 14.x+::Application Services::Auth Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The auth service is the closest functional equivalent to the GT user management service, covering registration/login/authentication concerns. The boundary is acceptable within backend application services."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer / Storage::Project & Article Info"
+      ],
+      "predicted_nodes": [
+        "Global::Relational DB (MySQL 8+ / PostgreSQL 12+"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a data storage entity, and the predicted relational database represents the correct storage boundary. Although the predicted node is generic, the layer attribution is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer / Storage::Team Learning Data"
+      ],
+      "predicted_nodes": [
+        "Global::Relational DB (MySQL 8+ / PostgreSQL 12+"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This GT storage entity is also represented by the relational database boundary in the prediction. The storage layer mapping is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer / Storage::User Information"
+      ],
+      "predicted_nodes": [
+        "Global::Relational DB (MySQL 8+ / PostgreSQL 12+"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "User information persistence belongs to relational storage, and the predicted DB node is semantically consistent with the GT data layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::Application Layer / Backend Services"
+      ],
+      "predicted_nodes": [
+        "Global::App Server (Node.js 14.x+"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the backend application tier at a global level. The naming differs, but the architectural boundary is equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Data Layer / Storage"
+      ],
+      "predicted_nodes": [
+        "Global::Relational DB (MySQL 8+ / PostgreSQL 12+",
+        "Global::Object/File Storage"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT global data/storage boundary is refined into relational database and object/file storage. This is a reasonable decomposition of the storage layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::Presentation Layer / Frontend"
+      ],
+      "predicted_nodes": [
+        "Global::Client - Modern Web Browser (Chrome/Firefox/Safari/Edge"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The frontend presentation layer maps to the browser client side in the prediction. The architectural boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::User Layer / Client Layer"
+      ],
+      "predicted_nodes": [
+        "Global::Client - Modern Web Browser (Chrome/Firefox/Safari/Edge"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The client layer in the GT is correctly represented by the modern browser client in the prediction."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer / Frontend::File Upload Interface"
+      ],
+      "predicted_nodes": [
+        "Client - Modern Web Browser (Chrome/Firefox/Safari/Edge::Client/Web UI::Web Client UI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The web client UI includes the file upload interface as a frontend feature. The boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer / Frontend::LaTeX Rendering Interface"
+      ],
+      "predicted_nodes": [
+        "Client - Modern Web Browser (Chrome/Firefox/Safari/Edge::Client/Web UI::Web Client UI",
+        "Rendering Host::Rendering & Export::Preview Rendering Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The frontend rendering interface should reside in the presentation layer, but the prediction places core rendering responsibility on a separate rendering host. While related, the architectural placement does not match the GT frontend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer / Frontend::Registration & Login Interface"
+      ],
+      "predicted_nodes": [
+        "Client - Modern Web Browser (Chrome/Firefox/Safari/Edge::Client/Web UI::Web Client UI",
+        "App Server (Node.js 14.x+::Application Services::Auth Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The interface exists in the frontend UI and is backed by the auth service. The predicted split is acceptable and the boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer / Frontend::Workspace Interface"
+      ],
+      "predicted_nodes": [
+        "Client - Modern Web Browser (Chrome/Firefox/Safari/Edge::Client/Web UI::Web Client UI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The workspace interface is a frontend UI concern and is correctly placed in the web client UI boundary."
+    },
+    {
+      "gt_nodes": [
+        "User Layer / Client Layer::Mobile Browser",
+        "User Layer / Client Layer::PC Browser"
+      ],
+      "predicted_nodes": [
+        "Global::Client - Modern Web Browser (Chrome/Firefox/Safari/Edge"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT distinguishes mobile and PC browsers, while the prediction aggregates them into a single modern browser client. This is a valid merge with correct layer attribution."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Application Layer / Backend Services::AI Module",
+    "Application Layer / Backend Services::AI Module::Result Processing Module",
+    "Global::Presentation Layer / Frontend",
+    "Global::User Layer / Client Layer"
+  ],
+  "unmatched_predicted_nodes": [
+    "App Server (Node.js 14.x+::REST API::REST API Gateway",
+    "App Server (Node.js 14.x+::Realtime Communication::Realtime Gateway (WebSocket",
+    "App Server (Node.js 14.x+::Security & Compliance::Security Module",
+    "Global::Object/File Storage",
+    "Global::Processing Cluster (Python 3.8+",
+    "Global::Rendering Host",
+    "Global::Web Server (Nginx/Apache HTTPD",
+    "Processing Cluster (Python 3.8+::Processing & Conversion::CSV/Excel Parser",
+    "Processing Cluster (Python 3.8+::Processing & Conversion::Handwriting/Image Recognition Service",
+    "Processing Cluster (Python 3.8+::Processing & Conversion::LaTeX Generation Service",
+    "Processing Cluster (Python 3.8+::Processing & Conversion::PDF Extraction Service",
+    "Processing Cluster (Python 3.8+::Processing & Conversion::Processing Orchestrator",
+    "Rendering Host::LaTeX Engine (TeX Live / MiKTeX",
+    "Rendering Host::Rendering & Export::Export Service",
+    "Rendering Host::Rendering & Export::Preview Rendering Service",
+    "Web Server (Nginx/Apache HTTPD::HTTP/WS Reverse Proxy"
+  ]
+}

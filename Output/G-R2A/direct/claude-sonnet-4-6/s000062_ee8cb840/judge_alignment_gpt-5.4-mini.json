@@ -1,0 +1,94 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\nROS Architecture::Car / Simulator"
+      ],
+      "predicted_nodes": [
+        "External Systems & Data Sources::Udacity Capstone\nProject Simulator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Udacity simulator environment used by the system. The GT places it under the overall ROS architecture, while the prediction classifies it as an external system/data source; this is semantically consistent and not a severe boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\nROS Architecture::Control::DBW Node\nDrive-by-wire"
+      ],
+      "predicted_nodes": [
+        "Execution Environment::Docker Container::ROS Runtime::Control Subsystem::Drive-By-Wire\n(DBW) Node\n(throttle / steering / brake"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The drive-by-wire control node is the same component. The predicted node is nested more deeply under Docker/ROS runtime, but still within the correct control subsystem, so the boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\nROS Architecture::Control::Waypoint Follower\nController"
+      ],
+      "predicted_nodes": [
+        "Execution Environment::Docker Container::ROS Runtime::Control Subsystem::Waypoint Follower\nNode"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These are functionally equivalent waypoint-following control components. The predicted boundary is consistent with the GT control layer."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\nROS Architecture::Perception::Traffic Light\nDetection Node"
+      ],
+      "predicted_nodes": [
+        "Execution Environment::Docker Container::ROS Runtime::Perception Subsystem::Traffic Light\nDetection Node",
+        "Execution Environment::Docker Container::ROS Runtime::Perception Subsystem::Traffic Light\nClassifier\n(Real Images"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT traffic-light perception node is represented in the prediction as a detection node plus a separate classifier, which is a reasonable split of the same perception responsibility. The placement in the perception subsystem is correct."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\nROS Architecture::Planning::Waypoint Loader\nROS Node"
+      ],
+      "predicted_nodes": [
+        "Execution Environment::Docker Container::ROS Runtime::Planning Subsystem::Waypoint Loader\nNode"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent waypoint loading in the planning layer. Boundary attribution to the planning subsystem is correct."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\nROS Architecture::Planning::Waypoint Updater Node\nROS Node"
+      ],
+      "predicted_nodes": [
+        "Execution Environment::Docker Container::ROS Runtime::Planning Subsystem::Waypoint Updater\nNode\n(uses twist.twist.linear.x"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These are the same waypoint updater component. The added note about twist.twist.linear.x is consistent with the PRD and the planning boundary is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Udacity Self-Driving Car Capstone\nROS Architecture::Perception::Obstacle Detection\nROS Node"
+  ],
+  "unmatched_predicted_nodes": [
+    "Execution Environment::Docker Container",
+    "Execution Environment::Docker Container::ROS Runtime",
+    "Execution Environment::Docker Container::ROS Runtime::Control Subsystem",
+    "Execution Environment::Docker Container::ROS Runtime::Launch Entry Points",
+    "Execution Environment::Docker Container::ROS Runtime::Launch Entry Points::launch/site.launch\n(Site Mode",
+    "Execution Environment::Docker Container::ROS Runtime::Launch Entry Points::launch/styx.launch\n(Simulator Mode",
+    "Execution Environment::Docker Container::ROS Runtime::Perception Subsystem",
+    "Execution Environment::Docker Container::ROS Runtime::Planning Subsystem",
+    "Execution Environment::Docker Container::ROS Runtime::ROS Topics",
+    "Execution Environment::Docker Container::ROS Runtime::ROS Topics::/base_waypoints",
+    "Execution Environment::Docker Container::ROS Runtime::ROS Topics::/current_pose",
+    "Execution Environment::Docker Container::ROS Runtime::ROS Topics::/final_waypoints",
+    "Execution Environment::Docker Container::ROS Runtime::ROS Topics::/traffic_waypoint\n(stop waypoint for red/yellow",
+    "Execution Environment::Docker Container::ROS Runtime::ROS Topics::/twist_cmd",
+    "Execution Environment::Docker Container::ROS Runtime::ROS Topics::/vehicle/dbw_cmd\n(vehicle commands",
+    "External Systems & Data Sources::Recorded Training Bag\n(downloaded & unzipped",
+    "Global::Execution Environment",
+    "Global::External Systems & Data Sources"
+  ]
+}

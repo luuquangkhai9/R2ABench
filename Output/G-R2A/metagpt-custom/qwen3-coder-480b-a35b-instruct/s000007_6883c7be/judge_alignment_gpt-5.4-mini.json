@@ -1,0 +1,182 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "CGI Portal::Http Test\\nClient"
+      ],
+      "predicted_nodes": [
+        "JVM Environment::Test Client Layer::Test Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the bundled HTTP test client used for asynchronous request execution and success counting. The predicted node is placed in a more explicit test-client layer, which is semantically consistent with the GT CGI portal test client node."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Proxy Core"
+      ],
+      "predicted_nodes": [
+        "JVM Environment::Proxy Layer::HTTP Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the core HTTP proxy forwarding component. The predicted placement under a proxy layer is consistent with the GT proxy core boundary."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Download"
+      ],
+      "predicted_nodes": [
+        "JVM Environment::Test Server Layer::Download Endpoint"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the file download endpoint/handler behavior for GET /download. The predicted test-server layer is appropriate for this server-side endpoint."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Upload"
+      ],
+      "predicted_nodes": [
+        "JVM Environment::Test Server Layer::Upload Endpoint"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both correspond to file upload handling that returns a filepath map payload. The predicted test-server layer is a reasonable semantic equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Check\\nParameter"
+      ],
+      "predicted_nodes": [
+        "JVM Environment::Test Server Layer::File Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node indicates request/content parameter checking within the file-handling flow, which aligns with the predicted file handler responsible for upload/download-related processing."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Agent"
+      ],
+      "predicted_nodes": [
+        "External Systems::Upstream Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT agent/plugin role is consistent with the upstream-side communication target used by the proxy forwarding flow. This is a looser semantic match, but still within the external upstream boundary."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Mock"
+      ],
+      "predicted_nodes": [
+        "JVM Environment::Test Server Layer::Test Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The mock plugin aligns with the bundled test server role used for test execution. The boundary attribution is consistent with a test-server context."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Proxy Core"
+      ],
+      "predicted_nodes": [
+        "JVM Environment::Proxy Layer::Channel Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT proxy core is decomposed into the main proxy component and its channel-management responsibility. This split is semantically consistent and remains within the proxy layer."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Download"
+      ],
+      "predicted_nodes": [
+        "JVM Environment::Test Server Layer::Download Endpoint",
+        "JVM Environment::Test Server Layer::File Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT download plugin is represented as a dedicated endpoint plus file-handling implementation. This is a valid refinement within the test-server boundary."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Upload"
+      ],
+      "predicted_nodes": [
+        "JVM Environment::Test Server Layer::Upload Endpoint",
+        "JVM Environment::Test Server Layer::File Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT upload plugin is split into the upload endpoint and the file-handling component, which is a reasonable functional decomposition."
+    },
+    {
+      "gt_nodes": [
+        "CGI Portal::Case Manager",
+        "CGI Portal::Service\\nManager"
+      ],
+      "predicted_nodes": [
+        "JVM Environment::Test Server Layer::Request Queue"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted request queue is not semantically equivalent to case/service management. This is a boundary and responsibility mismatch rather than a valid aggregation."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer\\nKeepalived(VIP::Openresty",
+    "Business Servers::......",
+    "Business Servers::Business Server A",
+    "Business Servers::Business Server B",
+    "Business Servers::Business Server C",
+    "CGI Portal::Appkey\\nManager",
+    "CGI Portal::CGI Manager",
+    "CGI Portal::Case Manager",
+    "CGI Portal::Document\\nGenerate",
+    "CGI Portal::Log & Tree\\ninquire",
+    "CGI Portal::Metrics &\\nReport",
+    "CGI Portal::Service\\nManager",
+    "Clients::APP Client",
+    "Clients::Business Server",
+    "Clients::Developer",
+    "Clients::Web Client",
+    "Global::Log consumer",
+    "Proxy Layer::cgi_proxy 1::Appkey\\nValidate",
+    "Proxy Layer::cgi_proxy 1::Formatter",
+    "Proxy Layer::cgi_proxy 1::Global Limit",
+    "Proxy Layer::cgi_proxy 1::Logging",
+    "Proxy Layer::cgi_proxy 1::Login &\\nPermission",
+    "Proxy Layer::cgi_proxy 1::Plugin::Attach Check",
+    "Proxy Layer::cgi_proxy 1::Proxy Core",
+    "Proxy Layer::cgi_proxy 2",
+    "Support Platform::Data Bank\\nHDFS/Hbase/Druid",
+    "Support Platform::Msg Center\\nKafka",
+    "Support Platform::Mysql",
+    "Support Platform::Permission\\nCenter",
+    "Support Platform::Redis Cache",
+    "Support Platform::User Center",
+    "Task Scheduler::CGI Case\\nExecutor",
+    "Task Scheduler::CGI Health\\nCheck",
+    "Task Scheduler::Daily Report",
+    "Task Scheduler::Log Analysis",
+    "Task Scheduler::Monitor/Alarm"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::Asynchronous HTTP Client Environment",
+    "External Systems::Asynchronous HTTP Client Environment::Async HTTP Client",
+    "External Systems::Grizzly/Jersey HTTP Server Environment",
+    "External Systems::Grizzly/Jersey HTTP Server Environment::Grizzly/Jersey HTTP Server",
+    "External Systems::Local Filesystem",
+    "External Systems::Upstream Server",
+    "Global::External Systems",
+    "Global::JVM Environment",
+    "JVM Environment::Data Layer",
+    "JVM Environment::Data Layer::Structured Response Builder",
+    "JVM Environment::Proxy Layer",
+    "JVM Environment::Test Client Layer",
+    "JVM Environment::Test Server Layer",
+    "JVM Environment::Test Server Layer::Test Server"
+  ]
+}

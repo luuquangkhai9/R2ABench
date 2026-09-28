@@ -1,0 +1,251 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::GoDaddy API\\nDomain availability",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::GoDaddy API\\n(Optional External Service"
+      ],
+      "reasoning": "The predicted GoDaddy node covers the optional external GoDaddy availability-check integration described by the GT node."
+    },
+    {
+      "gt_node": "Global::HTTP API\\nSession and attack requests",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Squatm3gator API Process::HTTP Layer::HTTP API\\nRequest Handler",
+        "Squatm3gator API Process::HTTP Layer::Session Manager",
+        "Squatm3gator API Process::HTTP Layer::Attack Option Parser\\n(Hf, Hc, -add, F, R\\ngodaddy, output flags"
+      ],
+      "reasoning": "The GT HTTP API responsibility is covered by the predicted request handler, session manager, and attack option parsing nodes."
+    },
+    {
+      "gt_node": "Global::Redis\\nCommand and reporting queues",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Redis",
+        "Squatm3gator API Process::Job Dispatch Layer::Redis Job Producer\\n(Publishes job to Job Channel)\\nJob ID = Session Key",
+        "Squatm3gator API Process::Background Consumer Thread::Redis Job Consumer\\n(Subscribes to Job Channel"
+      ],
+      "reasoning": "The predicted Redis node plus producer/consumer roles cover Redis-backed command and reporting queue responsibilities."
+    },
+    {
+      "gt_node": "Global::Socket.io\\nWebSocket result channel",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Squatm3gator API Process::HTTP Layer::WebSocket /\\nSocket.IO Server",
+        "Squatm3gator API Process::Background Consumer Thread::Result Correlator\\n(Matches WORKER_ID#JOB_UUID#MESSAGE\\nwith Session Key"
+      ],
+      "reasoning": "The predicted WebSocket/Socket.IO server and result correlation logic cover the asynchronous result channel responsibility."
+    },
+    {
+      "gt_node": "Global::Squatm3m3\\nDomain generation engine",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "The GT node refers to the squatm3 domain-generation engine, but the predicted list includes 'squatm3 CLI Engine' with a spelling/name mismatch that appears to be a distinct component from the GT label rather than a clearly grounded match under the provided text."
+    },
+    {
+      "gt_node": "Global::Web UI\\nindex.html",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Squatm3gator API Process::HTTP Layer::HTTP API\\nRequest Handler",
+        "Squatm3gator API Process::HTTP Layer::Session Manager"
+      ],
+      "reasoning": "The predicted HTTP layer components cover the root page/session-serving web UI responsibility, including the index.html entry point."
+    },
+    {
+      "gt_node": "Global::Workers\\nCommand consumers",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Squatm3gator API Process::Background Consumer Thread::Redis Job Consumer\\n(Subscribes to Job Channel",
+        "Squatm3gator API Process::Background Consumer Thread::Result Correlator\\n(Matches WORKER_ID#JOB_UUID#MESSAGE\\nwith Session Key"
+      ],
+      "reasoning": "The GT worker/consumer responsibility is covered by the predicted background consumer thread and result correlation nodes."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Global::GoDaddy API\\n(Optional External Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::GoDaddy API\\nDomain availability"
+      ],
+      "reasoning": "This clearly corresponds to the optional GoDaddy integration in the GT."
+    },
+    {
+      "predicted_node": "Global::Redis",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Redis\\nCommand and reporting queues"
+      ],
+      "reasoning": "This directly matches the Redis infrastructure concept in the GT."
+    },
+    {
+      "predicted_node": "Global::squatm3 CLI Engine\\n(Subprocess",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Squatm3\\nDomain generation engine"
+      ],
+      "reasoning": "This is the same domain-generation engine concept, expressed with implementation detail as a subprocess/CLI engine."
+    },
+    {
+      "predicted_node": "Squatm3gator API Process::Background Consumer Thread::Redis Job Consumer\\n(Subscribes to Job Channel",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Workers\\nCommand consumers",
+        "Global::Redis\\nCommand and reporting queues"
+      ],
+      "reasoning": "This is a grounded specialization of the worker/consumer concept listening on Redis."
+    },
+    {
+      "predicted_node": "Squatm3gator API Process::Background Consumer Thread::Result Correlator\\n(Matches WORKER_ID#JOB_UUID#MESSAGE\\nwith Session Key",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Workers\\nCommand consumers",
+        "Global::Socket.io\\nWebSocket result channel",
+        "Global::Redis\\nCommand and reporting queues"
+      ],
+      "reasoning": "This matches the GT responsibilities for worker reporting and session-bound result routing."
+    },
+    {
+      "predicted_node": "Squatm3gator API Process::HTTP Layer::Attack Option Parser\\n(Hf, Hc, -add, F, R\\ngodaddy, output flags",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HTTP API\\nSession and attack requests"
+      ],
+      "reasoning": "This is a grounded decomposition of the GT HTTP API request-handling responsibility."
+    },
+    {
+      "predicted_node": "Squatm3gator API Process::HTTP Layer::Error Handler\\n(HTTP 400 / 404 / 500\\nQuery Parse Failure",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HTTP API\\nSession and attack requests"
+      ],
+      "reasoning": "The error handling behavior is part of the HTTP API responsibility and is clearly supported by the GT requirements."
+    },
+    {
+      "predicted_node": "Squatm3gator API Process::HTTP Layer::HTTP API\\nRequest Handler",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HTTP API\\nSession and attack requests",
+        "Global::Web UI\\nindex.html"
+      ],
+      "reasoning": "This is a direct implementation-level representation of the GT HTTP API and web entry handling."
+    },
+    {
+      "predicted_node": "Squatm3gator API Process::HTTP Layer::Session Manager",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HTTP API\\nSession and attack requests",
+        "Global::Workers\\nCommand consumers"
+      ],
+      "reasoning": "Session creation/validation is explicitly part of the GT HTTP and worker-correlation flow."
+    },
+    {
+      "predicted_node": "Squatm3gator API Process::HTTP Layer::WebSocket /\\nSocket.IO Server",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Socket.io\\nWebSocket result channel"
+      ],
+      "reasoning": "This is a direct grounding of the GT Socket.IO/WebSocket channel."
+    },
+    {
+      "predicted_node": "Squatm3gator API Process::Job Dispatch Layer::Redis Job Producer\\n(Publishes job to Job Channel)\\nJob ID = Session Key",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Redis\\nCommand and reporting queues",
+        "Global::Workers\\nCommand consumers",
+        "Global::HTTP API\\nSession and attack requests"
+      ],
+      "reasoning": "The job producer is strongly grounded in the GT's Redis command queue and session-bound job creation responsibilities."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::GoDaddy API\\nDomain availability"
+      ],
+      "predicted_nodes": [
+        "Global::GoDaddy API\\n(Optional External Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same GoDaddy external integration concept; boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::HTTP API\\nSession and attack requests"
+      ],
+      "predicted_nodes": [
+        "Squatm3gator API Process::HTTP Layer::HTTP API\\nRequest Handler",
+        "Squatm3gator API Process::HTTP Layer::Session Manager",
+        "Squatm3gator API Process::HTTP Layer::Attack Option Parser\\n(Hf, Hc, -add, F, R\\ngodaddy, output flags",
+        "Squatm3gator API Process::HTTP Layer::Error Handler\\n(HTTP 400 / 404 / 500\\nQuery Parse Failure"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT HTTP API responsibility is decomposed into request handling, session management, parsing, and error handling within the API process."
+    },
+    {
+      "gt_nodes": [
+        "Global::Redis\\nCommand and reporting queues"
+      ],
+      "predicted_nodes": [
+        "Global::Redis",
+        "Squatm3gator API Process::Job Dispatch Layer::Redis Job Producer\\n(Publishes job to Job Channel)\\nJob ID = Session Key",
+        "Squatm3gator API Process::Background Consumer Thread::Redis Job Consumer\\n(Subscribes to Job Channel"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The Redis queue responsibility is represented both as infrastructure and as producer/consumer roles; boundary attribution is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Socket.io\\nWebSocket result channel"
+      ],
+      "predicted_nodes": [
+        "Squatm3gator API Process::HTTP Layer::WebSocket /\\nSocket.IO Server",
+        "Squatm3gator API Process::Background Consumer Thread::Result Correlator\\n(Matches WORKER_ID#JOB_UUID#MESSAGE\\nwith Session Key"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT asynchronous result channel is split into server transport and session/job correlation logic, which is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Squatm3m3\\nDomain generation engine"
+      ],
+      "predicted_nodes": [
+        "Global::squatm3 CLI Engine\\n(Subprocess"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is the same engine concept with a subprocess/CLI implementation detail; boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Global::Web UI\\nindex.html"
+      ],
+      "predicted_nodes": [
+        "Squatm3gator API Process::HTTP Layer::HTTP API\\nRequest Handler",
+        "Squatm3gator API Process::HTTP Layer::Session Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The root page/index.html delivery is represented by the HTTP request and session handling path."
+    },
+    {
+      "gt_nodes": [
+        "Global::Workers\\nCommand consumers"
+      ],
+      "predicted_nodes": [
+        "Squatm3gator API Process::Background Consumer Thread::Redis Job Consumer\\n(Subscribes to Job Channel",
+        "Squatm3gator API Process::Background Consumer Thread::Result Correlator\\n(Matches WORKER_ID#JOB_UUID#MESSAGE\\nwith Session Key"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The worker/consumer responsibility is split into Redis job consumption and result correlation, both within the expected backend process boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

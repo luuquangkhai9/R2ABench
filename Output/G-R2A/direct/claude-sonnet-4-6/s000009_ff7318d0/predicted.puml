@@ -1,0 +1,185 @@
+@startuml
+!define AWSPuml https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v18.0/dist
+!include AWSPuml/AWSCommon.puml
+!include AWSPuml/General/all.puml
+
+skinparam backgroundColor #FAFAFA
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam rectangle {
+    BorderColor #444444
+    BackgroundColor #FFFFFF
+    FontColor #222222
+}
+skinparam node {
+    BorderColor #444444
+    BackgroundColor #EEF2FF
+}
+skinparam cloud {
+    BorderColor #888888
+    BackgroundColor #F0F4FF
+}
+skinparam database {
+    BorderColor #444444
+    BackgroundColor #FFF8E1
+}
+skinparam queue {
+    BorderColor #444444
+    BackgroundColor #E8F5E9
+}
+skinparam component {
+    BorderColor #555555
+    BackgroundColor #FFFFFF
+}
+skinparam arrow {
+    Color #333333
+    FontSize 10
+}
+
+title Foot365 — AWS System Architecture
+
+'=============================================
+' USER ACTOR
+'=============================================
+actor "User\n(Football Enthusiast /\nChatbot User /\nReminder Requester)" as User
+
+'=============================================
+' FRONTEND LAYER
+'=============================================
+node "Amazon S3\n(Static Hosting)" as S3 {
+    rectangle "Web Frontend\n[HTML, CSS, Bootstrap, jQuery]\n\n- Fixtures / Standings / Schedules\n- Results / Live Scores / Predictions\n- Chatbot UI\n- Reminder Request UI\n- Screening Recommendations" as Frontend
+}
+
+'=============================================
+' AUTHENTICATION & SECURITY
+'=============================================
+node "Security & Identity" as SecurityZone {
+    rectangle "Amazon Cognito\n(User Authentication)" as Cognito
+    rectangle "AWS IAM\n(Access Management)" as IAM
+}
+
+'=============================================
+' API LAYER
+'=============================================
+node "API Layer" as APIZone {
+    rectangle "Amazon API Gateway\n(execute-api / AWS Sig v4 / JSON defaults)" as APIGateway
+}
+
+'=============================================
+' BACKEND COMPUTE — LAMBDA
+'=============================================
+node "Backend Compute — AWS Lambda\n[Python / Node]" as LambdaZone {
+    rectangle "Match Info Handler\n(Fixtures, Standings,\nSchedules, Results,\nLive Scores)" as LambdaMatch
+    rectangle "Prediction Handler\n(Match Outcome\nProbabilities)" as LambdaPrediction
+    rectangle "Chatbot / Conversation Handler\n(Intent Processing:\nFixtures, Results,\nScreening Recommendations)" as LambdaChatbot
+    rectangle "Reminder Handler\n(Queuing & SMS\nOrchestration)" as LambdaReminder
+    rectangle "Screening Recommendation Handler\n(Nearby Venue Search)" as LambdaScreening
+}
+
+'=============================================
+' DATA STORAGE & SEARCH
+'=============================================
+node "Data Storage & Search" as DataZone {
+    database "Amazon DynamoDB\n(Match Results, Statistics,\nFixtures, Standings,\nSchedules)" as DynamoDB
+    rectangle "Amazon Elasticsearch\n(Match Data Search\n& Retrieval)" as Elasticsearch
+}
+
+'=============================================
+' PREDICTION SERVICE
+'=============================================
+node "ML Prediction" as PredictionZone {
+    rectangle "Amazon SageMaker\n(Match Outcome Predictions:\nHome Win / Draw / Away Win)" as SageMaker
+}
+
+'=============================================
+' NOTIFICATION WORKFLOW
+'=============================================
+node "Notification Workflow" as NotificationZone {
+    queue "Amazon SQS\n(Reminder Request Queue)" as SQS
+    rectangle "Amazon SNS\n(SMS Reminder Delivery)" as SNS
+}
+
+'=============================================
+' LIVE SCORE STREAMING PIPELINE (EC2)
+'=============================================
+node "EC2 — Live Score Streaming Pipeline" as EC2Zone {
+    rectangle "Apache Kafka\n(Live Score Event Broker)" as Kafka
+    rectangle "Apache Avro\n(Payload Encoding /\nSchema)" as Avro
+    rectangle "Live Score Consumer\n(Score Update Processor)" as LiveScoreConsumer
+}
+
+'=============================================
+' EXTERNAL / UPSTREAM
+'=============================================
+cloud "Live Score\nData Source\n(External)" as ExternalScoreSource
+
+'=============================================
+' RELATIONSHIPS
+'=============================================
+
+' User <-> Frontend
+User --> Frontend : Browse web app\n(HTTPS)
+
+' Frontend <-> Auth
+Frontend --> Cognito : Authenticate user
+Frontend --> IAM : Protected access
+
+' Frontend <-> API Gateway
+Frontend --> APIGateway : API requests\n(HTTP / AWS Sig v4 / JSON)
+
+' API Gateway <-> Lambda
+APIGateway --> LambdaMatch : Route match\ninformation requests
+APIGateway --> LambdaPrediction : Route prediction\nrequests
+APIGateway --> LambdaChatbot : Route chatbot\nmessages
+APIGateway --> LambdaReminder : Route reminder\nrequests
+APIGateway --> LambdaScreening : Route screening\nrecommendation requests
+
+' Lambda <-> DynamoDB / Elasticsearch
+LambdaMatch --> DynamoDB : Read/write fixtures,\nresults, standings, schedules
+LambdaMatch --> Elasticsearch : Search & retrieve\nmatch data
+LambdaScreening --> DynamoDB : Read venue/location data
+LambdaScreening --> Elasticsearch : Search venue\nrecommendations
+LambdaChatbot --> DynamoDB : Query fixtures,\nresults data
+LambdaChatbot --> Elasticsearch : Search football\ninformation
+
+' DynamoDB <-> Elasticsearch sync
+DynamoDB <--> Elasticsearch : Data sync /\nindexing
+
+' Lambda <-> SageMaker
+LambdaPrediction --> SageMaker : Invoke prediction\nmodel (match outcomes)
+
+' Lambda <-> Notification
+LambdaReminder --> SQS : Queue reminder\nrequest
+SQS --> SNS : Dequeue & trigger\nSMS notification
+SNS --> User : SMS reminder\ndelivery
+
+' Live score streaming
+ExternalScoreSource --> Kafka : Produce live\nscore events
+Kafka --> Avro : Encode events\n(Apache Avro schema)
+Avro --> LiveScoreConsumer : Consume & decode\nscore updates
+LiveScoreConsumer --> DynamoDB : Persist live\nscore updates
+LiveScoreConsumer --> APIGateway : Push updated\nlive score data
+
+' Chatbot response flows back to user via API Gateway & Frontend
+LambdaChatbot --> APIGateway : Conversational\nresponse
+LambdaMatch --> APIGateway : Match data\nresponse
+LambdaPrediction --> APIGateway : Prediction\nprobabilities response
+LambdaReminder --> APIGateway : Reminder\nconfirmation
+LambdaScreening --> APIGateway : Screening venue\nrecommendations
+
+APIGateway --> Frontend : JSON responses
+
+'=============================================
+' LEGEND
+'=============================================
+legend right
+  |= Symbol |= Meaning |
+  | node | AWS Hosted Service / EC2 |
+  | rectangle | Component / Service |
+  | database | Persistent Data Store |
+  | queue | Message Queue |
+  | cloud | External System |
+  | --> | Data / Control Flow |
+endlegend
+
+@enduml

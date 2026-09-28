@@ -1,0 +1,93 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Client-side::Logic::Angular Services"
+      ],
+      "predicted_nodes": [
+        "ApiLayer::BackendApi"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both refer to API/service communication from the client side to the backend, but the GT node is a client-side Angular service layer while the predicted node places it in a backend API boundary, which is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Data::ngRX state store"
+      ],
+      "predicted_nodes": [
+        "FrontendLayer::ControlledListLoader"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The controlled-list loader behavior is related to NgRx/store initialization, but the predicted node represents a loader component rather than the GT NgRx state store itself. This is only a partial functional overlap and does not accurately reproduce the GT node boundary or component."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::Domain Services"
+      ],
+      "predicted_nodes": [
+        "BackendLayer::DomainServices",
+        "BackendLayer::DevelopmentBackDoor"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The main domain-services node matches semantically, but the additional development back door is a separate backend-only mechanism rather than part of the generic domain services node. The aggregation is not faithful as a single equivalent match, and the boundary attribution is therefore not fully correct."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::WebAPI Controllers"
+      ],
+      "predicted_nodes": [
+        "BackendLayer::NetCoreWebApi"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted .NET Core WebAPI node is semantically equivalent to the GT WebAPI/controllers boundary at a higher abstraction level, and the backend/server-side placement is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::DbContext",
+        "Server-side::Technology::Entity Framework (ORM)"
+      ],
+      "predicted_nodes": [
+        "DataAccessLayer::EntityFrameworkDbContext"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates DbContext and Entity Framework as distinct but closely related data-access elements; the predicted node combines them into one data-access abstraction. This is a reasonable semantic merge with correct backend/data-access placement."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Data::DB Entities (Registration, Community, etc."
+      ],
+      "predicted_nodes": [
+        "ExternalSystems::MsSqlDatabase"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents persistent database entities, and the predicted MSSQL database is the corresponding storage boundary. The abstraction is broader on the predicted side, but the placement in the database/external persistence boundary is consistent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Client-side::Data::View-Models (JSON",
+    "Client-side::Logic::UI Components",
+    "Client-side::Logic::UI Components::Component Class",
+    "Client-side::Logic::UI Components::HTML Templates",
+    "Client-side::Technology::Angular 7",
+    "Server-side::Data::View-Models (C#",
+    "Server-side::Logic::Domain Services::CAPTCHA",
+    "Server-side::Logic::Domain Services::Email",
+    "Server-side::Logic::Domain Services::PDF",
+    "Server-side::Technology::.NET Core WebAPI",
+    "Server-side::Technology::Standard C# Classes"
+  ],
+  "unmatched_predicted_nodes": [
+    "ExternalSystems::SiteMinder",
+    "FrontendLayer::CookieService",
+    "FrontendLayer::NotificationQueue",
+    "Global::ExternalSystems",
+    "Global::WebBrowser",
+    "WebBrowser::ClientApp"
+  ]
+}

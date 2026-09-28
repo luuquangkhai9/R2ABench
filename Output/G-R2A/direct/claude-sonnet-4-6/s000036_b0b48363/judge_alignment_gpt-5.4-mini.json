@@ -1,0 +1,95 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::HypnoLog\\nServer"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Node.js Runtime::HypnoLog Server Process",
+        "Host Machine::Node.js Runtime::HypnoLog Server Process::HTTP Server\\n(Node http.Server",
+        "Host Machine::Node.js Runtime::HypnoLog Server Process::bin/www\\nStartup Script"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT's HypnoLog Server is decomposed by the AI into runtime/process/startup-script nodes. This is a semantically correct split, and the placement under Node.js runtime and server process boundaries is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::HTTP"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Node.js Runtime::HypnoLog Server Process::HTTP Server\\n(Node http.Server",
+        "Host Machine::Node.js Runtime::HypnoLog Server Process::HTTP Server\\n(Node http.Server::Express Application",
+        "Host Machine::Node.js Runtime::HypnoLog Server Process::HTTP Server\\n(Node http.Server::Express Application::JSON Body Parser\\n(limit: 50mb",
+        "Host Machine::Node.js Runtime::HypnoLog Server Process::HTTP Server\\n(Node http.Server::Express Application::Logging Router\\n(mounted at /logger",
+        "Host Machine::Node.js Runtime::HypnoLog Server Process::HTTP Server::Express Application::Logging Router\\n(mounted at /logger::GET /logger/status\\nStatus Endpoint",
+        "Host Machine::Node.js Runtime::HypnoLog Server Process::HTTP Server\\n(Node http.Server::Express Application::Logging Router\\n(mounted at /logger::POST /logger/in\\nLog Ingestion Handler",
+        "Host Machine::Node.js Runtime::HypnoLog Server Process::HTTP Server\\n(Node http.Server::Express Application::Static File Server\\n(public web directory",
+        "Host Machine::Node.js Runtime::HypnoLog Server Process::HTTP Server\\n(Node http.Server::Socket.IO Server\\n(attached to HTTP Server",
+        "Host Machine::Node.js Runtime::HypnoLog Server Process::HTTP Server\\n(Node http.Server::Socket.IO Server\\n(attached to HTTP Server::Connected Client Registry\\n(add on connect / remove on disconnect",
+        "Host Machine::Node.js Runtime::HypnoLog Server Process::HTTP Server\\n(Node http.Server::Socket.IO Server\\n(attached to HTTP Server::Notification Emitter\\n(event: notification",
+        "Host Machine::Node.js Runtime::HypnoLog Server Process::bin/www\\nStartup Script::Browser URL Announcer\\n(print + open /client.html",
+        "Host Machine::Node.js Runtime::HypnoLog Server Process::bin/www\\nStartup Script::Port Resolver\\n(default: 7000 / CLI arg"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT HTTP concept is expanded into concrete server-side HTTP infrastructure, routing, static delivery, body parsing, and Socket.IO attachment. This is a valid decomposition, and the architectural boundaries are consistent with the GT meaning."
+    },
+    {
+      "gt_nodes": [
+        "Global::In Browser Log"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Browser Environment",
+        "Host Machine::Browser Environment::Browser Web UI\\n(loaded from /client.html",
+        "Host Machine::Browser Environment::Browser Web UI\\n(loaded from /client.html::Message Handler",
+        "Host Machine::Browser Environment::Browser Web UI\\n(loaded from /client.html::Message Handler::Invalid Message Wrapper\\n(HypnoLog-error object",
+        "Host Machine::Browser Environment::Browser Web UI\\n(loaded from /client.html::Message Handler::Valid Object Passthrough",
+        "Host Machine::Browser Environment::Browser Web UI\\n(loaded from /client.html::Received-Data List\\n(client-side store",
+        "Host Machine::Browser Environment::Browser Web UI\\n(loaded from /client.html::Schema Validator\\n(Ajv / HypnoLog Data Object schema",
+        "Host Machine::Browser Environment::Browser Web UI\\n(loaded from /client.html::Socket.IO Client\\n(same-origin connection",
+        "Host Machine::Browser Environment::Browser Web UI\\n(loaded from /client.html::Tag Display Handler\\n(CSS classes / filter text",
+        "Host Machine::Browser Environment::Browser Web UI\\n(loaded from /client.html::UI State Manager\\n(last-update time / tag filter",
+        "Host Machine::Browser Environment::Browser Web UI\\n(loaded from /client.html::Variable Name Display\\n(name prefix element",
+        "Host Machine::Browser Environment::Browser Web UI\\n(loaded from /client.html::Window Dispatcher\\n(broadcast to all registered windows",
+        "Host Machine::Browser Environment::Browser Web UI\\n(loaded from /client.html::Default Window",
+        "Host Machine::Browser Environment::Browser Web UI\\n(loaded from /client.html::Default Window::DOM Element Renderer\\n(append to window",
+        "Host Machine::Browser Environment::Browser Web UI\\n(loaded from /client.html::Default Window::Visualizer Dispatcher\\n(ordered canDisplay evaluation",
+        "Host Machine::Browser Environment::Browser Web UI\\n(loaded from /client.html::Default Window::Visualizer Registry\\n(loaded from config",
+        "Host Machine::Browser Environment::Browser Web UI\\n(loaded from /client.html::Default Window::Visualizer Registry\\n(loaded from config::Visualizer 1\\ncanDisplay(obj) / display(obj, cb",
+        "Host Machine::Browser Environment::Browser Web UI\\n(loaded from /client.html::Default Window::Visualizer Registry\\n(loaded from config::Visualizer 2\\ncanDisplay(obj) / display(obj, cb",
+        "Host Machine::Browser Environment::Browser Web UI\\n(loaded from /client.html::Default Window::Visualizer Registry\\n(loaded from config::Visualizer N\\ncanDisplay(obj) / display(obj, cb"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT's in-browser log handling is thoroughly decomposed into browser environment, UI, socket client, validation, wrapping, storage, dispatch, windowing, and visualization components. These are semantically aligned and correctly placed within the browser/UI boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::C#"
+      ],
+      "predicted_nodes": [
+        "Global::Visualizer Configuration\\n(user config / default config"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "There is no semantic equivalence between GT C# and the predicted visualizer configuration node. This is not a valid match; it is a hallucinated unrelated component."
+    },
+    {
+      "gt_nodes": [
+        "Global::Python"
+      ],
+      "predicted_nodes": [
+        "Global::Visualizer Configuration\\n(user config / default config"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "There is no semantic equivalence between GT Python and the predicted visualizer configuration node. This is not a valid match; it is a hallucinated unrelated component."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::C#",
+    "Global::Python"
+  ],
+  "unmatched_predicted_nodes": []
+}

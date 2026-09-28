@@ -1,0 +1,54 @@
+@startuml
+' Deployment & Component Diagram - Layered Architecture (Revised)
+
+' === LAYERS ===
+node "Frontend Layer" {
+    component "Next.js Frontend"
+    component "Session Handler"
+}
+
+node "Middleware Layer" {
+    component "Task Request Processor"
+    component "Address-to-Neighborhood Resolver"
+}
+
+node "Backend Layer" {
+    component "Login API"
+    component "Logout API"
+    component "OnFleet Task Handler"
+}
+
+node "Authentication Layer" {
+    component "Firebase Configuration Loader"
+    component "Firebase Admin SDK"
+    database "Firebase Authentication"
+}
+
+cloud "External Systems" {
+    component "OnFleet Task Management System"
+    component "External User Channels"
+}
+
+' === DEPENDENCIES ===
+Session Handler --> Firebase Admin SDK : getIdToken()
+Session Handler --> Login API : POST /api/login\n(Firebase ID token)
+Session Handler --> Logout API : POST /api/logout
+
+Login API --> Firebase Admin SDK : Verify ID Token
+Firebase Admin SDK --> Firebase Authentication : Validate Token
+Firebase Configuration Loader --> [ ENV_VARS ] : Load Config
+
+Task Request Processor --> Address-to-Neighborhood Resolver : Resolve Location
+Task Request Processor --> OnFleet Task Handler : Eligible Task Requests
+
+Next.js Frontend --> Task Request Processor : Submit Help Tasks (UI-001)
+External User Channels --> Task Request Processor : Submit Help Tasks (UI-002)
+
+OnFleet Task Handler --> OnFleet Task Management System : invoke Create Task
+
+' Wrapping relationship示意 via note and dashed line
+note right of Login API
+  Wrapped by\nSession Middleware\n(SI-004, FR-006)
+end note
+
+@enduml

@@ -1,0 +1,70 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "High level architecture::Analytics and storage::Docker\\nelasticsearch container",
+        "High level architecture::Analytics and storage::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Docker Network\\n(Internal service communication - COM-002::Elasticsearch\\n(Container: elasticsearch"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates the Elasticsearch container and the Elasticsearch service/data store concept, while the prediction combines them under the Docker network/internal communication context. The functional component is equivalent and the boundary placement is semantically acceptable."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Analytics and storage::Docker\\nkibana container",
+        "High level architecture::Analytics and storage::Kibana"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Docker Network\\n(Internal service communication - COM-002::Kibana\\n(Container: kibana"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates the Kibana container and Kibana UI/service concept, while the prediction combines them within the Docker network context. This is functionally equivalent and not a severe boundary error."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Backend::Docker\\nbackend container",
+        "High level architecture::Backend::FastAPI",
+        "High level architecture::Backend::Genius API\\nintegration"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Docker Network\\n(Internal service communication - COM-002::backend\\nFastAPI API\\n(Container: backend"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The prediction aggregates the backend container, FastAPI backend, and backend networking context into one node. It does not include explicit Genius API integration, but the backend node itself is correctly placed in the backend layer and the component is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Frontend::Docker\\nfrontend container",
+        "High level architecture::Frontend::React"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Docker Network\\n(Internal service communication - COM-002::frontend\\nReact SPA\\n(Container: frontend"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The React frontend and its container are combined in the predicted node. The functional equivalence is correct and the boundary remains within the frontend/Docker host context."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::user"
+      ],
+      "predicted_nodes": [
+        "Global::Docker Host"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted Docker Host is not semantically equivalent to the user actor. This is a clear boundary and role confusion."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "High level architecture::Developer/Admin"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Genius API\\n(External Dependency"
+  ]
+}

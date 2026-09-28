@@ -1,0 +1,100 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::Consumer Contract Wallet v3.3.1\\nLibrary Contract\\nwallet.sol"
+      ],
+      "predicted_nodes": [
+        "Consumer Contract Wallet Layer::Consumer Contract Wallet"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the main consumer wallet contract. The predicted boundary is semantically aligned with the wallet contract layer."
+    },
+    {
+      "gt_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::controller.sol"
+      ],
+      "predicted_nodes": [
+        "Supporting Contracts Layer::Controller Contracts"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT controller contract is represented by a controller contract grouping in the predicted architecture. Boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::oracle.sol"
+      ],
+      "predicted_nodes": [
+        "Supporting Contracts Layer::Oracle/Rate Provider"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The oracle contract corresponds to the rate-provider support component. The layer attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::tokenWhitelist.sol"
+      ],
+      "predicted_nodes": [
+        "Supporting Contracts Layer::Token Whitelist",
+        "Whitelist Data::Token Attributes"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT whitelist contract is split into a service/layer node and its data attributes. This is a reasonable decomposition and the boundaries are semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::walletCache.sol"
+      ],
+      "predicted_nodes": [
+        "Global::Wallet Storage",
+        "Wallet Storage::ETH & ERC20 Assets"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The wallet cache/storage responsibilities are split into a storage boundary and the stored asset data. This is a valid refinement."
+    },
+    {
+      "gt_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::walletDeployer.sol"
+      ],
+      "predicted_nodes": [
+        "Consumer Contract Wallet Layer::Consumer Contract Wallet"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The deployer contract is not the wallet itself. Collapsing wallet deployment into the wallet runtime component loses the distinct deployment boundary."
+    },
+    {
+      "gt_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::TKN Holder Contract\\nholder.sol"
+      ],
+      "predicted_nodes": [
+        "Global::Whitelist Data",
+        "Whitelist Data::Token Attributes"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT TKN Holder contract is related to token handling/burning policy, but the predicted nodes only represent whitelist data and attributes, not the holder contract itself. This is an incorrect semantic mapping."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "TokenCard Contracts\\nHigh Level Architecture::Gnosis MultiSig\\ncryptofloat.tokencard.eth",
+    "TokenCard Contracts\\nHigh Level Architecture::Proxy.sol",
+    "TokenCard Contracts\\nHigh Level Architecture::license.sol"
+  ],
+  "unmatched_predicted_nodes": [
+    "Consumer Contract Wallet Layer::Gas Tank",
+    "ENS Layer::Ethereum Name Service",
+    "Ethereum Network::Ethereum Node",
+    "Exchange Rates::Rate Data",
+    "Global::Exchange Rates",
+    "Global::Wallet Storage",
+    "Global::Whitelist Data",
+    "Integration Layer::Go Bindings Generator",
+    "Integration Layer::Integrator Applications"
+  ]
+}

@@ -1,0 +1,131 @@
+@startuml
+!define RECTANGLE class
+skinparam componentStyle rectangle
+skinparam backgroundColor #FEFEFE
+skinparam classFontColor #000000
+skinparam classArrowColor #000000
+skinparam classBorderColor #000000
+skinparam arrowColor #000000
+skinparam shadowing false
+
+title PromptHub System Architecture
+
+package "Client Environment" {
+  [Web Browser] as Browser
+  Browser : HTML/CSS/JavaScript
+  Browser : Vue.js / jQuery
+  Browser : Chrome 110+, Safari 15.3+, Firefox 119+
+  note right of Browser
+    OS: Windows 7+, macOS 8.0+
+    Hardware: Min i7/MX250/4GB
+    Rec i5-10600K/GTX 1060/16GB
+  end note
+}
+
+package "Server Environment (Docker)" {
+  package "Frontend Module" {
+    [Frontend Server] as Frontend
+    Frontend : Serves static assets
+    Frontend : Handles UI routing
+  }
+
+  package "Backend Module (Django)" {
+    [Backend Server] as Backend
+    Backend : Python/Django
+    Backend : Business Logic
+    Backend : API Endpoints
+    Backend : Authentication & Authorization
+  }
+
+  package "Algorithm Support Module" {
+    [Recommendation Engine] as Algorithm
+    Algorithm : Python
+    Algorithm : PyTorch / TensorFlow
+    Algorithm : Popular & Personalized Recs
+  }
+
+  package "Data Layer" {
+    database "SQLite Database" as DB {
+      folder "User Data" {
+        (User Accounts)
+        (Admin Accounts)
+        (Follow Relationships)
+        (Browsing History)
+      }
+      folder "Artwork Data" {
+        (AI Artworks)
+        (Review Records)
+        (Comments)
+        (Replies)
+      }
+      folder "Interaction Data" {
+        (Favorites)
+        (Favorite Categories)
+        (Recommendation Signals)
+        (Notifications)
+      }
+      folder "System Data" {
+        (Logs)
+        (Sensitive Data - Encrypted)
+      }
+    }
+    note right of DB
+      Later migration to MySQL
+      for high concurrency
+    end note
+  }
+}
+
+package "External Services" {
+  [Email Service] as Email
+  [Security & Monitoring] as SecMon
+  SecMon : Firewall
+  SecMon : Vulnerability Scanning
+  SecMon : Docker Auto-restart
+}
+
+' Core Data Flows
+Browser --> Frontend : HTTP/HTTPS Requests (UI)
+Frontend --> Backend : API Calls (JSON/Form Data)
+Backend --> DB : CRUD Operations
+Backend --> Algorithm : Recommendation Requests
+Algorithm --> DB : Reads user/artwork data
+Backend --> Email : Sends verification/alert emails
+SecMon --> Backend : Security Enforcement & Monitoring
+
+' User Role Interactions
+actor "Visitor" as Visitor
+actor "Registered User" as User
+actor "Administrator" as Admin
+actor "AI Artwork Creator" as Creator
+
+Visitor --> Browser : Browse artworks, Search, Register
+User --> Browser : Manage profile, Upload, Favorite, Comment, Follow
+Creator --> Browser : Upload/Edit artworks, Check review
+Admin --> Browser : Review artworks, Manage users/comments
+
+' Key Functional Component Links
+Backend --> (User Accounts) : FR-001..005, FR-016..017
+Backend --> (Admin Accounts) : FR-018..019
+Backend --> (AI Artworks) : FR-027..032
+Backend --> (Review Records) : FR-022, FR-032
+Backend --> (Comments) : FR-043..044
+Backend --> (Replies) : FR-045..046
+Backend --> (Favorites) : FR-033..042
+Backend --> (Favorite Categories) : FR-034..035, FR-039..042
+Backend --> (Follow Relationships) : FR-012..015
+Backend --> (Browsing History) : FR-011
+Backend --> (Recommendation Signals) : FR-047..049
+Backend --> (Notifications) : FR-050..052
+Backend --> (Logs) : NFR-016
+Backend --> (Sensitive Data - Encrypted) : NFR-012, DR-015
+
+' Non-Functional Links
+note on link
+  NFR-001..003: Performance
+  NFR-004..008: Reliability
+  NFR-009..014: Security
+  NFR-015..017: Maintainability
+end note
+
+@enduml

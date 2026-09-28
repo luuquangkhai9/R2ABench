@@ -1,0 +1,111 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::KVM (L0)"
+      ],
+      "predicted_nodes": [
+        "Guest Execution Layer::Child Partition VM",
+        "Guest Execution Layer::Linux Guest VM",
+        "Guest Execution Layer::Root Partition VM"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT root virtualization layer is represented in the predicted diagram by multiple VM-related execution nodes. The split is acceptable and stays within the same overall virtualization/system boundary."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host"
+      ],
+      "predicted_nodes": [
+        "Communication Layer::Hyper-V Virtual Switch",
+        "Communication Layer::Hypercall/IOCTL Translation",
+        "Communication Layer::VMBus/netvsc Channel"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "This GT host-layer Hyper-V boundary is decomposed into several Hyper-V communication/interop components. The predicted placement is semantically aligned with the host/virtualization communication layer."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2)"
+      ],
+      "predicted_nodes": [
+        "Guest Execution Layer::Child Partition VM",
+        "Guest Execution Layer::Child Partition VM::Child Partition Harness",
+        "Guest Execution Layer::Child Partition VM::harness-driver",
+        "Guest Execution Layer::Child Partition VM::loader.exe",
+        "Guest Execution Layer::Child Partition VM::packet_sender.exe",
+        "Guest Execution Layer::Child Partition VM::Windows Offset Config"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT child-partition guest VM is represented by the predicted child partition VM plus its contained workflow/helper components. The boundary is consistent with the child-partition guest context."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2::harness.sys"
+      ],
+      "predicted_nodes": [
+        "Guest Execution Layer::Child Partition VM::harness-driver"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The harness driver/kernel component corresponds directly to the GT harness.sys node, and it is placed under the child-partition VM boundary, which is correct."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2"
+      ],
+      "predicted_nodes": [
+        "Guest Execution Layer::Root Partition VM",
+        "Guest Execution Layer::Root Partition VM::Crash-Monitoring Workflow"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT root partition host OS boundary is modeled by the predicted root partition VM and its monitoring workflow. The semantic placement is correct for the root-partition side of the Hyper-V workflow."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::CrashMonitoring.sys"
+      ],
+      "predicted_nodes": [
+        "Guest Execution Layer::Root Partition VM::Crash-Monitoring Workflow"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "CrashMonitoring.sys is represented by the crash-monitoring workflow under the root partition VM. This is a faithful functional match with correct side-of-system placement."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::vmswitch.sys"
+      ],
+      "predicted_nodes": [
+        "Communication Layer::Hyper-V Virtual Switch"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "vmswitch.sys maps directly to the Hyper-V virtual switch. The predicted communication-layer placement is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "predicted_nodes": [
+        "Host Control Layer::hAFL2 Controller",
+        "Host Control Layer::Launch Scripts",
+        "Host Control Layer::Linux Host System",
+        "Host Control Layer::initrd Builder",
+        "Host Control Layer::pytest Integration"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT hAFL2 node is expanded into its controller, scripts, host-side packaging, and test integration responsibilities. These remain within the host-control boundary and are semantically consistent."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Guest Execution Layer::Linux Guest VM::Embedded Forkserver",
+    "Guest Execution Layer::Linux Guest VM::initrd"
+  ]
+}

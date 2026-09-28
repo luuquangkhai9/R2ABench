@@ -1,0 +1,151 @@
+@startuml
+!define RECTANGLE rectangle transparent line:transparent
+
+package "Client Tier" {
+  rectangle "Web Browser" as browser #lightblue [
+    HTML/CSS/JavaScript
+    Vue.js Framework
+    jQuery
+  ]
+}
+
+package "Application Tier" {
+  package "Frontend Service" {
+    rectangle "UI Components" as ui #lightgreen [
+      Home Page
+      User Interface
+      Artwork Display
+      Search Interface
+    ]
+    
+    rectangle "Client Logic" as clientLogic #lightgreen [
+      State Management
+      User Interaction
+      Form Validation
+    ]
+  }
+  
+  package "Backend Service" {
+    rectangle "API Gateway" as apiGateway #lightyellow [
+      Request Routing
+      Authentication
+      Rate Limiting
+    ]
+    
+    rectangle "User Management" as userModule #lightyellow [
+      Registration
+      Authentication
+      Profile Management
+    ]
+    
+    rectangle "Artwork Management" as artworkModule #lightyellow [
+      Upload Processing
+      Review Workflow
+      Content Management
+    ]
+    
+    rectangle "Social Features" as socialModule #lightyellow [
+      Favorites
+      Comments & Replies
+      Follow System
+    ]
+    
+    rectangle "Notification Service" as notificationModule #lightyellow [
+      Message Delivery
+      Read Status Tracking
+    ]
+    
+    rectangle "Recommendation Engine" as recommendationModule #lightyellow [
+      Popular Recommendations
+      Personalized Recommendations
+    ]
+    
+    rectangle "Administration" as adminModule #lightyellow [
+      User Moderation
+      Content Review
+      System Management
+    ]
+  }
+}
+
+package "Data Tier" {
+  rectangle "Database" as database #lightpink [
+    SQLite
+    (Future: MySQL)
+  ]
+  
+  rectangle "Storage" as storage #lightpink [
+    Image Storage
+    Asset Management
+  ]
+}
+
+package "Infrastructure" {
+  rectangle "Docker Container" as docker #lightgray [
+    Container Orchestration
+    Deployment Management
+  ]
+}
+
+package "External Services" {
+  rectangle "Email Service" as email #white [
+    Verification Codes
+    Notifications
+  ]
+  
+  rectangle "AI/ML Frameworks" as mlFrameworks #white [
+    PyTorch
+    TensorFlow
+  ]
+}
+
+' Connections
+browser --> ui : "User Interaction"
+ui --> clientLogic : "State Updates"
+clientLogic --> apiGateway : "API Requests"
+
+apiGateway --> userModule : "Auth Requests"
+apiGateway --> artworkModule : "Content Requests"
+apiGateway --> socialModule : "Social Requests"
+apiGateway --> notificationModule : "Notification Requests"
+apiGateway --> recommendationModule : "Recommendation Requests"
+apiGateway --> adminModule : "Admin Requests"
+
+userModule --> database : "User Data"
+artworkModule --> database : "Artwork Data"
+artworkModule --> storage : "Image Storage"
+socialModule --> database : "Social Data"
+notificationModule --> database : "Notification Data"
+recommendationModule --> database : "Recommendation Data"
+adminModule --> database : "Admin Data"
+
+recommendationModule --> mlFrameworks : "Algorithm Processing"
+
+database --> storage : "Asset References"
+docker --> database : "Containerization"
+docker --> storage : "Volume Management"
+
+email <-- userModule : "Verification Emails"
+email <-- notificationModule : "Alerts"
+
+note right of browser
+  Supported Browsers:
+  Chrome 110+, Safari 15+, Firefox 119+
+end note
+
+note right of database
+  SQLite for development
+  MySQL for production
+end note
+
+note bottom of docker
+  Docker 20.10.17
+  Ubuntu 22.0.4
+end note
+
+note top of recommendationModule
+  Machine Learning
+  Algorithms
+end note
+
+@enduml

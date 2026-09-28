@@ -1,0 +1,150 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Client-side::Technology::Angular 7"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Presentation Layer::AngularClientApp"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node for the Angular technology is matched with the AI's node for the Angular client application instance. The boundaries 'Client-side' and 'Web Browser::Presentation Layer' are semantically equivalent for the main application component."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Data::ngRX state store"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Client State Layer::NgRxStore\\n(Actions / Reducers"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The client-side state management solution is correctly identified. The GT boundary 'Client-side::Data' and the AI's boundary 'Web Browser::Client State Layer' are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Logic::Angular\\nServices"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Presentation Layer::API Service Wrappers::EvacueeServiceWrapper",
+        "Web Browser::Presentation Layer::API Service Wrappers::IncidentTaskServiceWrapper",
+        "Web Browser::Presentation Layer::API Service Wrappers::OrganizationServiceWrapper",
+        "Web Browser::Presentation Layer::API Service Wrappers::ReferralServiceWrapper",
+        "Web Browser::Presentation Layer::API Service Wrappers::RegistrationServiceWrapper\\n<<PDF collection>>"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The generic GT node 'Angular Services' is correctly split by the AI into specific service wrappers mentioned in the PRD. The client-side boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Logic::UI Components"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Presentation Layer::NotifierComponent",
+        "Web Browser::Presentation Layer::SessionExpiredPage"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The generic GT node for 'UI Components' is reasonably matched to specific UI-related functional components that the AI identified from the PRD. The client-side boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::WebAPI\\nControllers"
+      ],
+      "predicted_nodes": [
+        "Application Server (.NET Core::API / Server Layer::WebAPIControllers"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match for the backend API controllers. The AI's boundary 'Application Server (.NET Core::API / Server Layer' is a more specific and accurate representation than the GT's 'Server-side::Logic' but is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::DbContext"
+      ],
+      "predicted_nodes": [
+        "Application Server (.NET Core::Data Access Layer::DbContext\\n(Entity Framework / ADO.NET"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Correct match for the Entity Framework DbContext. The AI correctly placed it in a 'Data Access Layer', which is more accurate than the GT's generic 'Logic' layer. The boundaries are semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::Domain Services"
+      ],
+      "predicted_nodes": [
+        "Application Server (.NET Core::Domain Service Layer::DomainServices"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match for the backend domain services. The AI's use of a 'Domain Service Layer' is more specific and architecturally sound than the GT's generic 'Logic' layer, but it is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Data::DB Entities\\n(Registration, Community, etc."
+      ],
+      "predicted_nodes": [
+        "Application Server (.NET Core::Data Access Layer::Persistent Database Entities",
+        "Application Server (.NET Core::Domain Service Layer::C# Domain Classes\\n(Domain Model / Entities"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'DB Entities' node is matched to the AI's more nuanced split between 'Persistent Database Entities' and 'C# Domain Classes'. This reflects a good architectural pattern, and the server-side boundary attributions are correct."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Technology::.NET Core\\nWebAPI"
+      ],
+      "predicted_nodes": [
+        "Global::Application Server (.NET Core"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's technology node is matched with the AI's logical server node. Representing the application server as a top-level component in the 'Global' boundary is a valid architectural choice and is semantically equivalent to the GT's 'Server-side' context."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::Domain Services::PDF"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Presentation Layer::API Service Wrappers::RegistrationServiceWrapper\\n<<PDF collection>>"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The AI correctly identified the 'PDF collection' capability but associated it with the client-side 'RegistrationServiceWrapper'. The GT correctly places the PDF service logic on the 'Server-side'. This is a boundary-crossing error, misattributing a backend service capability to the frontend."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Client-side::Data::View-Models\\n(JSON",
+    "Client-side::Logic::UI Components::Component\\nClass",
+    "Client-side::Logic::UI Components::HTML\\nTemplates",
+    "Server-side::Data::View-Models\\n(C#",
+    "Server-side::Logic::Domain Services::CAPTCHA",
+    "Server-side::Logic::Domain Services::Email",
+    "Server-side::Technology::Entity\\nFramework\\n(ORM",
+    "Server-side::Technology::Standard\\nC# Classes"
+  ],
+  "unmatched_predicted_nodes": [
+    "Database Server::MS SQL Database",
+    "Database Server::SQLMaintenanceScripts",
+    "Database Server::backup",
+    "Global::Database Server",
+    "Global::External URLs",
+    "Global::Local Development Proxy",
+    "Global::SiteMinder\\n(Authentication / Access Control",
+    "Global::Web Browser",
+    "Local Development Proxy::SM_TOKEN Injector\\n(volunteer / local authority / provincial admin",
+    "Web Browser::Client State Layer::ControlledListLoader",
+    "Web Browser::HTTP Communication Layer::HttpInterceptor",
+    "Web Browser::HTTP Communication Layer::WatchdogTimer",
+    "Web Browser::Presentation Layer::AuthGuard",
+    "Web Browser::Presentation Layer::CookieService",
+    "Web Browser::Presentation Layer::ModuleImportDiagnostic",
+    "Web Browser::Presentation Layer::NotificationQueueService",
+    "Web Browser::Presentation Layer::RedirectGuard",
+    "Web Browser::Presentation Layer::RoleBasedRouter"
+  ]
+}

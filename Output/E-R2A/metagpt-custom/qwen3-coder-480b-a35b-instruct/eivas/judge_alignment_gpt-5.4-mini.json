@@ -1,0 +1,213 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Frontend Layer (React, Antd, AMap::Epidemic Reporting::Information Trigger"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Reporting Form Interface [FR-001"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the reporting form entry interface for epidemiological investigation submission. The predicted node is placed in the presentation layer, which is semantically consistent with the GT frontend layer."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer (React, Antd, AMap::Epidemic Reporting::Travel Visualization",
+        "Frontend Layer (React, Antd, AMap::Individual Case Analysis::Associated Location Inquiry",
+        "Frontend Layer (React, Antd, AMap::Individual Case Analysis::Person Relationship Map",
+        "Frontend Layer (React, Antd, AMap::Overall Analysis::Aggregate Transmission Viz",
+        "Frontend Layer (React, Antd, AMap::Overall Analysis::Regional Flow Viz"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Map Visualization Component [AD-003"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT contains several map/graph visualization frontend nodes, and the AI aggregated them into one generic map visualization component. This is a reasonable merge, and the presentation/frontend boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer (React, Antd, AMap::Case Management::Case Inquiry",
+        "Frontend Layer (React, Antd, AMap::Case Management::Filtering & Sorting"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Case Management Module [FR-004 to FR-008"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node functionally covers case management query, filtering, sorting, and edit/completion functions, but it is placed in the application layer rather than the GT frontend layer. Since the GT nodes are UI-facing frontend components, this is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer (React, Antd, AMap::Epidemic Overview::Natural Characteristics",
+        "Frontend Layer (React, Antd, AMap::Epidemic Overview::Population Characteristics"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Outbreak Analysis Module [FR-012 to FR-018"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT nodes are frontend dashboard/chart display components for outbreak overview. The predicted node aggregates these analytical displays into an application-layer module, which crosses the frontend/service boundary and is therefore incorrect."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer (Django::Data Collection & Entry::Auto-Brief Generation",
+        "Service Layer (Django::Data Collection & Entry::Fast Query Matching",
+        "Service Layer (Django::Data Collection & Entry::Map Data Interaction",
+        "Service Layer (Django::Data Collection & Entry::Metadata Standardization"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Case Management Module [FR-004 to FR-008",
+        "Application Layer::Itinerary Analysis Module [FR-009, FR-010",
+        "Presentation Layer::Reporting Form Interface [FR-001"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "These GT service-layer components implement data entry/query preprocessing and map interaction support. The predicted nodes partially cover related behavior, but the mapping is split across presentation/application layers rather than the service layer, and the AI did not preserve the GT architectural boundary."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer (Django::Epidemic Tracing & Analysis::Aggregate Block Generation",
+        "Service Layer (Django::Epidemic Tracing & Analysis::Graph Matching & Generation",
+        "Service Layer (Django::Epidemic Tracing & Analysis::Location Co-presence Query",
+        "Service Layer (Django::Epidemic Tracing & Analysis::Similarity Calculation",
+        "Service Layer (Django::Epidemic Tracing & Analysis::Transmission Relation Calculation",
+        "Service Layer (Django::Epidemic Tracing & Analysis::Travel Risk Calculation"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Outbreak Analysis Module [FR-012 to FR-018",
+        "Application Layer::Itinerary Analysis Module [FR-009, FR-010"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT has a set of backend service-layer analysis/calculation nodes for tracing, graph generation, and risk computation. The AI merged these into higher-level application-layer modules, which is a significant boundary error because the computational logic belongs in the service layer."
+    },
+    {
+      "gt_nodes": [
+        "Storage Layer (Neo4j, MongoDB::Epidemiological Database::Basic Info",
+        "Storage Layer (Neo4j, MongoDB::Epidemiological Database::Diagnosis Info",
+        "Storage Layer (Neo4j, MongoDB::Epidemiological Database::Travel Info",
+        "Storage Layer (Neo4j, MongoDB::External Data",
+        "Storage Layer (Neo4j, MongoDB::Graph Database::Close Contact Relations",
+        "Storage Layer (Neo4j, MongoDB::Graph Database::Location Relations"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Database Storage System"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated multiple storage nodes into a generic database storage system. Although details are collapsed, the semantics remain storage/database related and the boundary is consistent with the GT storage layer."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Algorithm Layer::Internal Algorithm Processing Module [AD-002"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No explicit GT node corresponds to a standalone algorithm layer module. GT places analysis/calculation logic in service-layer epidemic tracing nodes, not in a separate algorithm layer."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Application Layer::Authentication/Authorization Module [AD-004"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "Authentication/authorization is not specified in the GT or PRD as a system node. This appears to be hallucinated."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Application Layer::Data Validation & Sanitization Layer [NFR-001, DR-008"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "While validation is a plausible concern, the GT does not contain a corresponding standalone node. It is not explicitly represented as an architecture node in the reference design."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Application Layer::Logging & Monitoring Component [NFR-003"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No matching GT node exists for logging/monitoring as a distinct architectural component."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Application Layer::Rate Limiting/Cooldown Mechanism [NFR-005"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "The GT does not define a separate rate limiting component node, even though the PRD mentions IP cooldown as a non-functional requirement."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Application Layer::Security Encryption Module [NFR-004, C-004"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "Encryption is a requirement, but the GT architecture does not expose a corresponding explicit node."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Data Layer::Cache Layer [NFR-002"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No cache layer node exists in the GT."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Global::Map Service Provider [AD-003"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "The GT uses AMap in frontend visualization nodes, but does not define a separate global map service provider node."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Frontend Layer (React, Antd, AMap::Case Management::Case Inquiry",
+    "Frontend Layer (React, Antd, AMap::Case Management::Filtering & Sorting",
+    "Frontend Layer (React, Antd, AMap::Epidemic Overview::Natural Characteristics",
+    "Frontend Layer (React, Antd, AMap::Epidemic Overview::Population Characteristics",
+    "Frontend Layer (React, Antd, AMap::Epidemic Reporting::Information Trigger",
+    "Frontend Layer (React, Antd, AMap::Epidemic Reporting::Travel Visualization",
+    "Frontend Layer (React, Antd, AMap::Individual Case Analysis::Associated Location Inquiry",
+    "Frontend Layer (React, Antd, AMap::Individual Case Analysis::Person Relationship Map",
+    "Frontend Layer (React, Antd, AMap::Overall Analysis::Aggregate Transmission Viz",
+    "Frontend Layer (React, Antd, AMap::Overall Analysis::Regional Flow Viz",
+    "Service Layer (Django::Data Collection & Entry::Auto-Brief Generation",
+    "Service Layer (Django::Data Collection & Entry::Fast Query Matching",
+    "Service Layer (Django::Data Collection & Entry::Map Data Interaction",
+    "Service Layer (Django::Data Collection & Entry::Metadata Standardization",
+    "Service Layer (Django::Epidemic Tracing & Analysis::Aggregate Block Generation",
+    "Service Layer (Django::Epidemic Tracing & Analysis::Graph Matching & Generation",
+    "Service Layer (Django::Epidemic Tracing & Analysis::Location Co-presence Query",
+    "Service Layer (Django::Epidemic Tracing & Analysis::Similarity Calculation",
+    "Service Layer (Django::Epidemic Tracing & Analysis::Transmission Relation Calculation",
+    "Service Layer (Django::Epidemic Tracing & Analysis::Travel Risk Calculation",
+    "Storage Layer (Neo4j, MongoDB::Epidemiological Database::Basic Info",
+    "Storage Layer (Neo4j, MongoDB::Epidemiological Database::Diagnosis Info",
+    "Storage Layer (Neo4j, MongoDB::Epidemiological Database::Travel Info",
+    "Storage Layer (Neo4j, MongoDB::External Data",
+    "Storage Layer (Neo4j, MongoDB::Graph Database::Close Contact Relations",
+    "Storage Layer (Neo4j, MongoDB::Graph Database::Location Relations"
+  ],
+  "unmatched_predicted_nodes": [
+    "Algorithm Layer::Internal Algorithm Processing Module [AD-002",
+    "Application Layer::Authentication/Authorization Module [AD-004",
+    "Application Layer::Data Validation & Sanitization Layer [NFR-001, DR-008",
+    "Application Layer::Logging & Monitoring Component [NFR-003",
+    "Application Layer::Rate Limiting/Cooldown Mechanism [NFR-005",
+    "Application Layer::Security Encryption Module [NFR-004, C-004",
+    "Data Layer::Cache Layer [NFR-002",
+    "Global::Map Service Provider [AD-003"
+  ]
+}

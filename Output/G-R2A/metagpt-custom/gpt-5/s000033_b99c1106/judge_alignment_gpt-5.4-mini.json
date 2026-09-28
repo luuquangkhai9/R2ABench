@@ -1,0 +1,122 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Airflow\n(Spark Driver"
+      ],
+      "predicted_nodes": [
+        "Workflow & Scheduling (Airflow::Airflow Webserver/Scheduler\n(LocalExecutor",
+        "Workflow & Scheduling (Airflow::Airflow Spark connection\n\\",
+        "Workflow & Scheduling (Airflow::Airflow Python Env\nwith PySpark",
+        "Workflow & Scheduling (Airflow::SparkSubmitOperator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Airflow driver node is decomposed into its Airflow webserver/scheduler, Spark connection, Python environment with PySpark, and Spark submission operator responsibilities. This is a semantically correct split within the Airflow/workflow boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Cluster Manager\n(Spark Standalone"
+      ],
+      "predicted_nodes": [
+        "Data Processing (Spark Standalone::Spark Master\nservice \\"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Spark standalone cluster manager/master component. The predicted boundary is semantically aligned with the GT cluster manager node."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\n(Spark"
+      ],
+      "predicted_nodes": [
+        "Interactive Analytics (Jupyter/PySpark::Jupyter/PySpark service\n\\"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the Jupyter/PySpark interactive notebook service. The boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Postgres"
+      ],
+      "predicted_nodes": [
+        "Persistence (Postgres::Postgres 9.6\n(Airflow metadata"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Postgres metadata persistence service. The predicted persistence boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 1"
+      ],
+      "predicted_nodes": [
+        "Data Processing (Spark Standalone::spark-worker-1"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The worker component matches the GT worker 1 node, and the Spark standalone boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 2"
+      ],
+      "predicted_nodes": [
+        "Data Processing (Spark Standalone::spark-worker-2"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The worker component matches the GT worker 2 node, and the Spark standalone boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 3"
+      ],
+      "predicted_nodes": [
+        "Data Processing (Spark Standalone::spark-worker-3"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The worker component matches the GT worker 3 node, and the Spark standalone boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker N"
+      ],
+      "predicted_nodes": [
+        "Data Processing (Spark Standalone::spark-worker-1",
+        "Data Processing (Spark Standalone::spark-worker-2",
+        "Data Processing (Spark Standalone::spark-worker-3"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT extensible worker pattern is represented by explicit worker instances in the prediction. This is a valid split/expansion within the same Spark standalone boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Data Engineer"
+      ],
+      "predicted_nodes": [
+        "External Systems::Host Machine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The Data Engineer actor is not equivalent to the host machine. This is a context confusion between a human actor and an infrastructure element."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Access & Observability (Service UIs/Ports::Host Port Mappings\n5432, 8282, 8181, 7077,\n8888, 4040-4080",
+    "Data Processing (Spark Standalone::Bundled Spark runtime\n(Spark 2.4.5 for Hadoop 2.6",
+    "Data Processing (Spark Standalone::CLI: pyspark\n(./bin/pyspark",
+    "Data Processing (Spark Standalone::CLI: run-example\n(./bin/run-example",
+    "Data Processing (Spark Standalone::MASTER env var",
+    "Data Processing (Spark Standalone::MLlib Examples\n(load libsvm dataset",
+    "Data Processing (Spark Standalone::libsvm sample dataset",
+    "External Systems::Docker Engine",
+    "External Systems::Host Machine",
+    "Orchestration (Docker Compose::Compose Network",
+    "Orchestration (Docker Compose::Docker Compose\n(Orchestrator"
+  ]
+}

@@ -1,0 +1,86 @@
+@startuml
+' Deployment nodes representing infrastructure layers
+node "Client Layer" {
+    component "Web Client" as WebClient [
+        React Application
+        React-Router
+        A-Frame Scene Rendering
+        jQuery Integration
+    ]
+
+    component "Authentication Views" as AuthViews [
+        Sign-up / Sign-in UI
+        Shared Credential Input Handlers
+    ]
+
+    component "Content Retrieval Module" as ContentModule [
+        Async Content Fetching
+        Error Handling
+    ]
+
+    component "Scene Renderer" as SceneRenderer [
+        A-Frame Scenes:
+        Lobby, SF, Louvre, Berlin,
+        Milan, Rome, Hack, Camera,
+        Sky, Plane, TextPlane
+    ]
+}
+
+node "Server Layer" {
+    component "Web Server" as WebServer [
+        Node.js/Express Server
+        HTTP Request Handling
+    ]
+
+    component "User Controller" as UserController [
+        User Account Logic
+        Authentication Flow
+        bcrypt-nodejs Password Verification
+    ]
+
+    component "User Model" as UserModel [
+        User Persistence Interface
+        Create, Save, Query
+    ]
+}
+
+node "Data Layer" {
+    database "Database" as Database [
+        MariaDB-style RDBMS
+        Users, Likes, Photos, Comments
+    ]
+}
+
+node "Cache Layer" {
+    component "Redis" as Redis [
+        Redis-style Caching
+        Performance Optimization
+    ]
+}
+
+node "Storage Layer" {
+    cloud "Image Storage Service" as ImageStorage [
+        AWS S3-style Storage
+        Photo/Image Assets
+    ]
+}
+
+' Component Dependencies
+AuthViews --> WebClient : part of
+SceneRenderer --> WebClient : renders in
+ContentModule --> WebClient : used by
+
+WebClient --> WebServer : HTTP requests
+AuthViews --> WebServer : credential submission
+ContentModule --> WebServer : content requests
+
+WebServer --> UserController : routes auth
+UserController --> UserModel : persists user
+UserController --> UserModel : verifies password (bcrypt-nodejs)
+UserModel --> Database : data access
+
+WebServer --> Redis : caching layer
+WebServer --> Database : persistent storage
+WebServer --> ImageStorage : image assets
+
+@enduml

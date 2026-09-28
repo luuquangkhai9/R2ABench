@@ -1,0 +1,85 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "predicted_nodes": [
+        "Global::CI/CD Workflows",
+        "Global::Build & Install Process",
+        "Global::Execution Target",
+        "Global::Host Command Utility",
+        "Global::Telemetry System",
+        "Global::Environment",
+        "Global::External Interfaces"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These predicted nodes collectively describe the same overall cFS bundle and its major reviewed facets. The GT is a high-level umbrella node, and the AI has decomposed it into related sub-aspects rather than placing them in a conflicting architectural boundary."
+    },
+    {
+      "gt_nodes": [
+        "Reuse Workflows::Submodule Reuse",
+        "Reuse Workflows::cFS Reuse"
+      ],
+      "predicted_nodes": [
+        "Global::CI/CD Workflows"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The AI captured the general idea of reusable CI workflows, but merged the two specific reuse nodes into a generic global CI/CD node and lost the distinct reuse-workflow boundary/package attribution. This is an architectural abstraction mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Static and Quality Checks::CodeQL Analysis",
+        "Static and Quality Checks::Format Check",
+        "Static and Quality Checks::Static Analysis"
+      ],
+      "predicted_nodes": [
+        "Global::CI/CD Workflows"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT contains specific quality-check workflow nodes under the Static and Quality Checks boundary, while the prediction collapses them into a generic CI/CD workflow node. The functionality is related, but the architectural layer/boundary is too coarse and does not preserve the GT package attribution."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::",
+    "Global::+",
+    "Global::+ Makefile",
+    "Global::+ Perfutils",
+    "Global::+ core",
+    "Global::+ ubuntu",
+    "Global::0.0.1) supported",
+    "Global::18.04",
+    "Global::Build & Install Process",
+    "Global::CI maintainer or workflow operator",
+    "Global::Constrained to Makefile",
+    "Global::Core Flight System (cFS",
+    "Global::Developer or build user",
+    "Global::Environment",
+    "Global::Execution Target",
+    "Global::External Interfaces",
+    "Global::Functional tester",
+    "Global::Host",
+    "Global::Host Command Utility",
+    "Global::Local (127",
+    "Global::Operator",
+    "Global::Telemetry System",
+    "Global::Telemetry or ground-test operator",
+    "Global::User",
+    "Global::Uses command",
+    "Global::cmdcode",
+    "Global::configured IP address",
+    "Global::cpu1 executable",
+    "Global::endian",
+    "Global::java",
+    "Global::latest",
+    "Global::line flags",
+    "Global::pktid",
+    "Global::sample",
+    "Global::side command transmission",
+    "Global::uint32"
+  ]
+}

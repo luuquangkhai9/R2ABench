@@ -1,0 +1,71 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "pubsub-public-data project::Cloud Pub/Sub\ntopic"
+      ],
+      "predicted_nodes": [
+        "GCP Project::Google Cloud Pub/Sub",
+        "GCP Project::Google Cloud Pub/Sub::Topic\n(configured"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT specifies a Pub/Sub topic in a public project, while the AI abstracts the Pub/Sub service and configured topic within the broader GCP Project boundary. This is semantically equivalent according to the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine"
+      ],
+      "predicted_nodes": [
+        "GCP Project::GKE Cluster",
+        "GCP Project::GKE Cluster::Deployment\nAdapter Pods",
+        "GCP Project::GKE Cluster::Pod-1 (Adapter",
+        "GCP Project::GKE Cluster::Pod-1 (Adapter::Adapter Container",
+        "GCP Project::GKE Cluster::Pod-2 (Adapter)\n(scaled replica",
+        "GCP Project::GKE Cluster::Pod-2 (Adapter)\n(scaled replica::Adapter Container"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT diagram generally models the compute layer as 'Compute Engine'. The AI more precisely aligns with the PRD by detailing GKE Cluster, Deployment, and Pods, matching the containerized compute infrastructure."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine::pulltop"
+      ],
+      "predicted_nodes": [
+        "GCP Project::GKE Cluster::Pod-1 (Adapter::pulltop (Node.js",
+        "GCP Project::GKE Cluster::Pod-2 (Adapter)\n(scaled replica::pulltop (Node.js"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The 'pulltop' component is correctly identified. AI places it appropriately inside multiple replicated GKE Pods, semantically matching the GT's Compute Engine boundary."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine::websocketd"
+      ],
+      "predicted_nodes": [
+        "GCP Project::GKE Cluster::Pod-1 (Adapter::websocketd\nlistens :8080",
+        "GCP Project::GKE Cluster::Pod-2 (Adapter)\n(scaled replica::websocketd\nlistens :8080"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The 'websocketd' process matches functionally. The AI accurately details its presence inside the scaled GKE pods, mapping well to the GT's broader compute boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Browser"
+  ],
+  "unmatched_predicted_nodes": [
+    "GCP Project::GKE Cluster::ConfigMap\nkey: topic",
+    "GCP Project::GKE Cluster::HPA\nmin: 1, max: 2\nCPU target: 80%",
+    "GCP Project::GKE Cluster::Pod-1 (Adapter::Recent Message Cache\n(10 messages",
+    "GCP Project::GKE Cluster::Pod-1 (Adapter::exec.sh",
+    "GCP Project::GKE Cluster::Pod-2 (Adapter)\n(scaled replica::Recent Message Cache\n(10 messages",
+    "GCP Project::GKE Cluster::Pod-2 (Adapter)\n(scaled replica::exec.sh",
+    "GCP Project::GKE Cluster::Service\nType: LoadBalancer\nPort 80 -> 8080",
+    "GCP Project::Google Cloud Pub/Sub::Subscription (per Pod)\nSub-1",
+    "GCP Project::Google Cloud Pub/Sub::Subscription (per Pod)\nSub-2",
+    "Global::GCP Project"
+  ]
+}

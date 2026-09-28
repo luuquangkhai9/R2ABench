@@ -1,0 +1,255 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Frontend (Vue.js 2.0"
+      ],
+      "predicted_nodes": [
+        "Global::Client Machine\\n(Windows 10 x64, Chrome 81+, i7-6700HQ, ≥8 GB"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the client/frontend-side system boundary, and the predicted node correctly places the Vue.js frontend within the client machine boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Backend (Flask Microservices"
+      ],
+      "predicted_nodes": [
+        "Global::Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the backend/server-side boundary, and the predicted node correctly maps backend services to the local server deployment boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Network & Gateway Layer"
+      ],
+      "predicted_nodes": [
+        "Global::External Network / Internet"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node captures the external network boundary that corresponds to the GT network/gateway layer context."
+    },
+    {
+      "gt_nodes": [
+        "Global::Storage Layer (MongoDB"
+      ],
+      "predicted_nodes": [
+        "Global::MongoDB\\n(Local Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the MongoDB storage boundary; the predicted node uses a deployment-oriented label but remains semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Network & Gateway Layer::API Gateway"
+      ],
+      "predicted_nodes": [
+        "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::API Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The API gateway component is matched correctly and kept within the server-side/local server boundary."
+    },
+    {
+      "gt_nodes": [
+        "Network & Gateway Layer::API Gateway::Identity Verification"
+      ],
+      "predicted_nodes": [
+        "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::API Gateway::Access Control\\n& Rate Limiting"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The gateway sub-function is related, but identity verification is not equivalent to access control and rate limiting; this is a functional mismatch within the gateway layer."
+    },
+    {
+      "gt_nodes": [
+        "Network & Gateway Layer::API Gateway::Request Forwarding"
+      ],
+      "predicted_nodes": [
+        "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::API Gateway::Request Routing"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Request forwarding and request routing are functionally equivalent gateway responsibilities, and the boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Network & Gateway Layer::API Gateway::Return Response"
+      ],
+      "predicted_nodes": [
+        "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::API Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted gateway node subsumes response returning as part of the API gateway responsibilities."
+    },
+    {
+      "gt_nodes": [
+        "Network & Gateway Layer::HTTP Protocol"
+      ],
+      "predicted_nodes": [
+        "Global::External Network / Internet"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "HTTP protocol is part of the network communication boundary and is semantically consistent with the external network representation."
+    },
+    {
+      "gt_nodes": [
+        "Storage Layer (MongoDB::Project Collection"
+      ],
+      "predicted_nodes": [
+        "MongoDB\\n(Local Server::Projects Collection\\n(Project Info/State\\nMembers/Roles"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The project collection is correctly preserved under MongoDB, with slightly richer content detail."
+    },
+    {
+      "gt_nodes": [
+        "Storage Layer (MongoDB::Requirement Collection"
+      ],
+      "predicted_nodes": [
+        "MongoDB\\n(Local Server::Requirements Collection\\n(Req Items/Tree/Hierarchy\\nStructuring/Tracing"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The requirement collection is correctly matched and the stored content details are consistent with the GT."
+    },
+    {
+      "gt_nodes": [
+        "Storage Layer (MongoDB::User Collection"
+      ],
+      "predicted_nodes": [
+        "MongoDB\\n(Local Server::Users Collection\\n(Account/Role/Permission\\nProfile/Privacy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The user collection is semantically equivalent and placed in the correct MongoDB storage boundary."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices"
+      ],
+      "predicted_nodes": [
+        "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::User Management Service\\n(Flask Microservice",
+        "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::Project Management Service\\n(Flask Microservice",
+        "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::Requirements Management Service\\n(Flask Microservice",
+        "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::API Gateway",
+        "Global::Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT microservices container is decomposed into explicit server-side deployment/service nodes. This is a reasonable refinement and remains within the correct backend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices::Algorithm Service"
+      ],
+      "predicted_nodes": [
+        "Global::Algorithm Server\\n(High-Performance Server, Amazon Linux 2",
+        "Algorithm Server\\n(High-Performance Server, Amazon Linux 2::Algorithm Service\\n(Flask Microservice"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The algorithm service is split into deployment boundary plus service node, which matches the GT component and its special server deployment constraint."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices::Project Management Service"
+      ],
+      "predicted_nodes": [
+        "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::Project Management Service\\n(Flask Microservice"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The project management service is correctly matched to the local server backend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices::Requirement Management Service"
+      ],
+      "predicted_nodes": [
+        "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::Requirements Management Service\\n(Flask Microservice"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The requirement management service is correctly matched to the backend service boundary."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices::User Management Service"
+      ],
+      "predicted_nodes": [
+        "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::User Management Service\\n(Flask Microservice"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The user management service is correctly matched to the backend service boundary."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (Vue.js 2.0::Browser / Client"
+      ],
+      "predicted_nodes": [
+        "Client Machine\\n(Windows 10 x64, Chrome 81+, i7-6700HQ, ≥8 GB::Vue.js\\nWeb Frontend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The browser/client frontend node is correctly reproduced as a Vue.js web frontend on the client machine."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Backend (Flask Microservices::Internal HTTP",
+    "Network & Gateway Layer::API Gateway::Identity Verification",
+    "Network & Gateway Layer::API Gateway::Return Response"
+  ],
+  "unmatched_predicted_nodes": [
+    "Algorithm Server\\n(High-Performance Server, Amazon Linux 2::Association Analysis\\n(NLP + Heuristic Rules",
+    "Algorithm Server\\n(High-Performance Server, Amazon Linux 2::Common Req Identification\\n(Word2vec Model",
+    "Algorithm Server\\n(High-Performance Server, Amazon Linux 2::Conflict Detection\\n(NLP + Heuristic Rules",
+    "Algorithm Server\\n(High-Performance Server, Amazon Linux 2::Requirement Itemization\\n(NLP + Heuristic Rules",
+    "Algorithm Server\\n(High-Performance Server, Amazon Linux 2::Requirement Structuring\\n(NLP + Heuristic Rules",
+    "Algorithm Server\\n(High-Performance Server, Amazon Linux 2::ML Models\\n(PyTorch / Word2vec",
+    "Client Machine\\n(Windows 10 x64, Chrome 81+, i7-6700HQ, ≥8 GB::Vue.js\\nWeb Frontend::Baseline Mgmt UI\\n(Create/View Baselines",
+    "Client Machine\\n(Windows 10 x64, Chrome 81+, i7-6700HQ, ≥8 GB::Vue.js\\nWeb Frontend::Member Mgmt UI\\n(Add/Delete/Modify\\nProject Roles",
+    "Client Machine\\n(Windows 10 x64, Chrome 81+, i7-6700HQ, ≥8 GB::Vue.js\\nWeb Frontend::Project List UI\\n(Create/Delete/View\\nProject Info",
+    "Client Machine\\n(Windows 10 x64, Chrome 81+, i7-6700HQ, ≥8 GB::Vue.js\\nWeb Frontend::Requirement Analysis UI\\n(Structuring / Common Req\\nConflict / Association",
+    "Client Machine\\n(Windows 10 x64, Chrome 81+, i7-6700HQ, ≥8 GB::Vue.js\\nWeb Frontend::Requirements Mgmt UI\\n(Req Tree / Create / Import\\nModify / Delete / Move\\nTrace View",
+    "Client Machine\\n(Windows 10 x64, Chrome 81+, i7-6700HQ, ≥8 GB::Vue.js\\nWeb Frontend::User Auth UI\\n(Register/Login/Logout\\nPassword/Profile",
+    "Client Machine\\n(Windows 10 x64, Chrome 81+, i7-6700HQ, ≥8 GB::Vue.js\\nWeb Frontend::User Mgmt UI\\n(User List / Add / Delete\\nReset PW / Role",
+    "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::API Gateway::Access Control\\n& Rate Limiting",
+    "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::API Gateway::Request Routing",
+    "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::API Gateway::Security Filter\\n(Input Validation\\nInjection Prevention",
+    "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::Log & Monitoring\\nService",
+    "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::Log & Monitoring\\nService::Persistent Log\\nStorage",
+    "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::Log & Monitoring\\nService::Security Event\\nRecorder",
+    "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::Project Management Service\\n(Flask Microservice::Baseline Node\\nService\\n(Create/View/Archive",
+    "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::Project Management Service\\n(Flask Microservice::Member Management\\n(Add/Delete/Modify\\nView Members",
+    "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::Project Management Service\\n(Flask Microservice::Project CRUD\\n(Create/Delete\\nModify/View/List",
+    "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::Project Management Service\\n(Flask Microservice::Project Role\\nManagement",
+    "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::Requirements Management Service\\n(Flask Microservice",
+    "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::Requirements Management Service\\n(Flask Microservice::Forward Tracing\\nService\\n(Code/TestCase/Person",
+    "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::Requirements Management Service\\n(Flask Microservice::Req Analysis\\nOrchestrator",
+    "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::Requirements Management Service\\n(Flask Microservice::Req Item CRUD\\n(Create/Modify\\nDelete/View/Move",
+    "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::Requirements Management Service\\n(Flask Microservice::Req Item Tree\\nManagement",
+    "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::Requirements Management Service\\n(Flask Microservice::Word Document\\nImport Handler",
+    "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::User Management Service\\n(Flask Microservice",
+    "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::User Management Service\\n(Flask Microservice::Password Mgmt\\n(Modify / Reset",
+    "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::User Management Service\\n(Flask Microservice::Personal Info\\nService",
+    "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::User Management Service\\n(Flask Microservice::Registration & Login\\nLogout",
+    "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::User Management Service\\n(Flask Microservice::Role & Permission\\nManagement",
+    "Local Server\\n(EC2 t2.xlarge recommended, Amazon Linux 2::User Management Service\\n(Flask Microservice::User CRUD\\n(Add / Delete / List",
+    "MongoDB\\n(Local Server::Analysis Results Collection\\n(Common/Conflict\\nAssociation",
+    "MongoDB\\n(Local Server::Baseline Collection\\n(Nodes/Archived Reqs",
+    "MongoDB\\n(Local Server::Log Collection\\n(Persistent Logs",
+    "MongoDB\\n(Local Server::Projects Collection\\n(Project Info/State\\nMembers/Roles",
+    "MongoDB\\n(Local Server::Requirements Collection\\n(Req Items/Tree/Hierarchy\\nStructuring/Tracing",
+    "MongoDB\\n(Local Server::Users Collection\\n(Account/Role/Permission\\nProfile/Privacy"
+  ]
+}

@@ -1,0 +1,111 @@
+@startuml
+!define RECTANGLE class
+
+title System Architecture - tokencard/contracts
+
+package "Ethereum Network" {
+    RECTANGLE "Consumer Contract Wallet" as Wallet {
+        + Holds ETH and ERC20 assets
+        + Resolves contract addresses via ENS
+        + Uses token whitelist for decisions
+        + Uses exchange-rate data
+        + Segregates gas-payment ETH
+    }
+
+    RECTANGLE "ENS (Ethereum Name Service)" as ENS {
+        + Resolves contract addresses
+    }
+
+    RECTANGLE "Token Whitelist Contract" as TokenWhitelist {
+        + Stores token exchange rates
+        + Indicates loadability status
+        + Indicates burnability status
+    }
+
+    RECTANGLE "Oracle/Licence Contract" as Oracle {
+        + Provides exchange-rate data
+    }
+
+    RECTANGLE "Controller Contract" as Controller {
+        + Manages admin/controller counts
+        + Supports control operations
+    }
+
+    RECTANGLE "TKN Holder Contract" as TKNHolder {
+        + Handles token burning
+    }
+
+    RECTANGLE "Gas Tank (Owner Address)" as GasTank {
+        + Holds gas-payment ETH
+        + Separate from wallet assets
+    }
+}
+
+package "Go Bindings Layer" {
+    RECTANGLE "Wallet Binding" as WalletBinding {
+        + Call (read-only)
+        + Transact (paid)
+        + Transfer
+    }
+
+    RECTANGLE "Controller Binding" as ControllerBinding {
+        + Call (read-only)
+        + Transact (paid)
+        + Transfer
+        + Get adminCount
+        + Get controllerCount
+    }
+
+    RECTANGLE "Token Whitelist Binding" as TokenWhitelistBinding {
+        + Call (read-only)
+    }
+
+    RECTANGLE "Oracle Binding" as OracleBinding {
+        + Call (read-only)
+    }
+}
+
+actor "Owner" as Owner
+actor "Controller" as ControllerUser
+actor "Integrator/Developer" as Integrator
+
+Owner --> Wallet : owns
+Owner --> GasTank : manages ETH for gas
+
+Wallet --> ENS : resolves addresses
+Wallet --> TokenWhitelist : checks token status
+Wallet --> Oracle : gets exchange rates
+Wallet --> Controller : interacts for control
+Wallet --> TKNHolder : burns tokens
+
+ControllerUser --> Controller : operates
+Controller --> Wallet : confirms/control
+
+Integrator --> WalletBinding : uses
+Integrator --> ControllerBinding : uses
+Integrator --> TokenWhitelistBinding : uses
+Integrator --> OracleBinding : uses
+
+WalletBinding --> Wallet : interacts
+ControllerBinding --> Controller : interacts
+TokenWhitelistBinding --> TokenWhitelist : reads
+OracleBinding --> Oracle : reads
+
+note right of Wallet
+    Core smart contract
+    - Manages user assets
+    - Enforces security boundaries
+    - Uses external contracts via ENS
+end note
+
+note right of GasTank
+    Gas-payment ETH kept separate
+    from protected wallet assets
+end note
+
+note bottom of ENS
+    Central contract address
+    resolution mechanism
+end note
+
+@enduml

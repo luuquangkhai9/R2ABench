@@ -1,0 +1,356 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Alert Source::app-sre\\nalertmanager",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::External Alert\\nSystem"
+      ],
+      "reasoning": "The predicted external alert system covers this alert source responsibility, even though it is generalized."
+    },
+    {
+      "gt_node": "Alert Source::cluster\\nalertmanager",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::External Alert\\nSystem"
+      ],
+      "reasoning": "This is another external alert source, and the predicted external alert system covers it."
+    },
+    {
+      "gt_node": "Alert Source::deadmanssnitch",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::External Alert\\nSystem"
+      ],
+      "reasoning": "The predicted external alert system captures this alert-source responsibility."
+    },
+    {
+      "gt_node": "Alerts::CHGM",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Configuration Anomaly Detection (CAD::CLI Tool\\ncadctl",
+        "Configuration Anomaly Detection (CAD::Tekton Pipeline\\nExecution"
+      ],
+      "reasoning": "The CHGM investigation workflow is represented both in the CLI tool and the Tekton execution path."
+    },
+    {
+      "gt_node": "Alerts::CPD",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Configuration Anomaly Detection (CAD::CLI Tool\\ncadctl",
+        "Configuration Anomaly Detection (CAD::Tekton Pipeline\\nExecution"
+      ],
+      "reasoning": "The future/other alert investigation capability is covered by the generalized CLI and pipeline execution concepts."
+    },
+    {
+      "gt_node": "Alerts::all cluster\\nalerts",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::External Alert\\nSystem",
+        "Global::Cluster Owner/\\nOperations Systems"
+      ],
+      "reasoning": "The predicted nodes cover the broader alert intake and communications context for all cluster alerts."
+    },
+    {
+      "gt_node": "Global::Escalate alert to\\non-call SRE",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Cluster Owner/\\nOperations Systems"
+      ],
+      "reasoning": "Escalation to on-call SRE is a communication/action toward operations systems, which this predicted node covers."
+    },
+    {
+      "gt_node": "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Configuration Anomaly Detection (CAD::Tekton Pipeline\\nExecution::EventListener",
+        "Configuration Anomaly Detection (CAD::Tekton Pipeline\\nExecution::Trigger"
+      ],
+      "reasoning": "The interceptor concept is represented by the Tekton EventListener/Trigger execution architecture, though the exact interceptor node is not explicit."
+    },
+    {
+      "gt_node": "Global::Tekton\\nEvent\\nListener",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Configuration Anomaly Detection (CAD::Tekton Pipeline\\nExecution::EventListener"
+      ],
+      "reasoning": "This directly corresponds to the predicted EventListener node."
+    },
+    {
+      "gt_node": "Global::Update Incident\\nNotes",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Cluster Owner/\\nOperations Systems"
+      ],
+      "reasoning": "Updating incident notes is an operations-system communication/follow-up action covered at a higher level by the predicted operations-system node."
+    },
+    {
+      "gt_node": "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Configuration Anomaly Detection (CAD::Integration Library::PagerDuty\\nIntegration",
+        "Global::Cluster Owner/\\nOperations Systems"
+      ],
+      "reasoning": "The PagerDuty team target is covered by the PagerDuty integration and related operations-system communications."
+    },
+    {
+      "gt_node": "PagerDuty Team::app-sre-alertmanager",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Configuration Anomaly Detection (CAD::Integration Library::PagerDuty\\nIntegration",
+        "Global::Cluster Owner/\\nOperations Systems"
+      ],
+      "reasoning": "This PagerDuty destination is also covered by the PagerDuty integration concept."
+    },
+    {
+      "gt_node": "PagerDuty Team::prod-deadmanssnitch",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Configuration Anomaly Detection (CAD::Integration Library::PagerDuty\\nIntegration",
+        "Global::Cluster Owner/\\nOperations Systems"
+      ],
+      "reasoning": "The PagerDuty integration node covers this communication target."
+    },
+    {
+      "gt_node": "cadctl::CHGM investigation",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Configuration Anomaly Detection (CAD::CLI Tool\\ncadctl"
+      ],
+      "reasoning": "This is a specific workflow within the cadctl CLI tool."
+    },
+    {
+      "gt_node": "cadctl::CPD investigation",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Configuration Anomaly Detection (CAD::CLI Tool\\ncadctl"
+      ],
+      "reasoning": "This is another CLI investigation workflow captured by the cadctl tool."
+    },
+    {
+      "gt_node": "cadctl::Future investigations",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Configuration Anomaly Detection (CAD::CLI Tool\\ncadctl"
+      ],
+      "reasoning": "The generalized CLI tool covers future investigation commands or workflows."
+    },
+    {
+      "gt_node": "cadctl::switch(alerttype",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Configuration Anomaly Detection (CAD::CLI Tool\\ncadctl"
+      ],
+      "reasoning": "This appears to be a CLI switch or command option and is covered by the predicted cadctl CLI tool node."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Configuration Anomaly Detection (CAD::CLI Tool\\ncadctl",
+      "grounded": true,
+      "reference_nodes": [
+        "cadctl::CHGM investigation",
+        "cadctl::CPD investigation",
+        "cadctl::Future investigations",
+        "cadctl::switch(alerttype"
+      ],
+      "reasoning": "The CLI tool node is grounded in the cadctl investigation workflows and command behavior."
+    },
+    {
+      "predicted_node": "Configuration Anomaly Detection (CAD::Direct PipelineRun\\n(skip-webhook path",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The direct skip-webhook execution path exists in the PRD, but no GT node directly represents this pipeline-run node; the GT set is focused on alerts, teams, and cadctl workflows."
+    },
+    {
+      "predicted_node": "Configuration Anomaly Detection (CAD::Integration Library",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is a broad aggregation node not explicitly present in the GT list, which only contains specific alert, team, and cadctl nodes."
+    },
+    {
+      "predicted_node": "Configuration Anomaly Detection (CAD::Integration Library::AWS\\nIntegration",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "AWS integration is supported by the PRD, but there is no corresponding GT node for AWS or a generic integration library concept in the provided GT nodes."
+    },
+    {
+      "predicted_node": "Configuration Anomaly Detection (CAD::Integration Library::OCM\\nIntegration",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Update Incident\\nNotes"
+      ],
+      "reasoning": "OCM integration is plausibly grounded by the incident/update workflow and follow-up handling concepts, though the GT does not name OCM explicitly."
+    },
+    {
+      "predicted_node": "Configuration Anomaly Detection (CAD::Integration Library::PagerDuty\\nIntegration",
+      "grounded": true,
+      "reference_nodes": [
+        "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster",
+        "PagerDuty Team::app-sre-alertmanager",
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "reasoning": "This is directly grounded by the PagerDuty team nodes in the GT."
+    },
+    {
+      "predicted_node": "Configuration Anomaly Detection (CAD::Tekton Pipeline\\nExecution",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Tekton\\nEvent\\nListener",
+        "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?"
+      ],
+      "reasoning": "The overall Tekton execution concept is grounded by the GT Tekton listener/interceptor nodes."
+    },
+    {
+      "predicted_node": "Configuration Anomaly Detection (CAD::Tekton Pipeline\\nExecution::EventListener",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Tekton\\nEvent\\nListener"
+      ],
+      "reasoning": "Direct match to the GT EventListener concept."
+    },
+    {
+      "predicted_node": "Configuration Anomaly Detection (CAD::Tekton Pipeline\\nExecution::PipelineRun\\n(cad-checks-pipeline",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT list does not include a PipelineRun node or the cad-checks-pipeline target; this is PRD-grounded but not GT-grounded."
+    },
+    {
+      "predicted_node": "Configuration Anomaly Detection (CAD::Tekton Pipeline\\nExecution::Trigger",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?"
+      ],
+      "reasoning": "The trigger is part of the same Tekton alert-investigation execution flow represented in the GT."
+    },
+    {
+      "predicted_node": "Configuration Anomaly Detection (CAD::Template Update\\nUtility",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "Template update utility is in the PRD, but there is no corresponding GT node for template artifacts or update workflow."
+    },
+    {
+      "predicted_node": "Global::Cluster Owner/\\nOperations Systems",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Escalate alert to\\non-call SRE",
+        "Global::Update Incident\\nNotes"
+      ],
+      "reasoning": "This is grounded by the GT's escalation and incident-update operations concepts."
+    },
+    {
+      "predicted_node": "Global::Configuration Anomaly Detection (CAD",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This appears to be an overly broad container/label node with no direct GT counterpart."
+    },
+    {
+      "predicted_node": "Global::External Alert\\nSystem",
+      "grounded": true,
+      "reference_nodes": [
+        "Alert Source::app-sre\\nalertmanager",
+        "Alert Source::cluster\\nalertmanager",
+        "Alert Source::deadmanssnitch",
+        "Alerts::all cluster\\nalerts"
+      ],
+      "reasoning": "This generalizes the GT alert sources and alert intake concepts."
+    },
+    {
+      "predicted_node": "Global::Tekton\\nEnvironment",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Tekton\\nEvent\\nListener",
+        "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?"
+      ],
+      "reasoning": "The environment node is grounded by the Tekton-related GT nodes, though it is broader than any one GT node."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Tekton\\nEvent\\nListener"
+      ],
+      "predicted_nodes": [
+        "Configuration Anomaly Detection (CAD::Tekton Pipeline\\nExecution::EventListener"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same Tekton EventListener concept with semantically equivalent boundary attribution."
+    },
+    {
+      "gt_nodes": [
+        "Global::Escalate alert to\\non-call SRE",
+        "Global::Update Incident\\nNotes"
+      ],
+      "predicted_nodes": [
+        "Global::Cluster Owner/\\nOperations Systems"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node aggregates operations-system communication and follow-up actions represented by the two GT nodes."
+    },
+    {
+      "gt_nodes": [
+        "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster",
+        "PagerDuty Team::app-sre-alertmanager",
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "Configuration Anomaly Detection (CAD::Integration Library::PagerDuty\\nIntegration"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "All three GT PagerDuty team targets are covered by the single PagerDuty integration node, with semantically consistent boundary attribution."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::CHGM investigation",
+        "cadctl::CPD investigation",
+        "cadctl::Future investigations",
+        "cadctl::switch(alerttype"
+      ],
+      "predicted_nodes": [
+        "Configuration Anomaly Detection (CAD::CLI Tool\\ncadctl"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted CLI tool node aggregates the specific cadctl workflows and command behavior from the GT."
+    },
+    {
+      "gt_nodes": [
+        "Alert Source::app-sre\\nalertmanager",
+        "Alert Source::cluster\\nalertmanager",
+        "Alert Source::deadmanssnitch",
+        "Alerts::all cluster\\nalerts"
+      ],
+      "predicted_nodes": [
+        "Global::External Alert\\nSystem"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted external alert system generalizes the GT alert sources and alert intake grouping."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?"
+      ],
+      "predicted_nodes": [
+        "Configuration Anomaly Detection (CAD::Tekton Pipeline\\nExecution::EventListener",
+        "Configuration Anomaly Detection (CAD::Tekton Pipeline\\nExecution::Trigger"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT interceptor concept is represented by multiple Tekton execution components in the predicted architecture."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Configuration Anomaly Detection (CAD::Direct PipelineRun\\n(skip-webhook path",
+    "Configuration Anomaly Detection (CAD::Integration Library",
+    "Configuration Anomaly Detection (CAD::Integration Library::AWS\\nIntegration",
+    "Configuration Anomaly Detection (CAD::Integration Library::OCM\\nIntegration",
+    "Configuration Anomaly Detection (CAD::Tekton Pipeline\\nExecution::PipelineRun\\n(cad-checks-pipeline",
+    "Configuration Anomaly Detection (CAD::Template Update\\nUtility",
+    "Global::Configuration Anomaly Detection (CAD"
+  ]
+}

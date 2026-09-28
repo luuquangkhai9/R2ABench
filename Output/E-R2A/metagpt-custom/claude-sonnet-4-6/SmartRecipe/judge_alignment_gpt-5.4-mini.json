@@ -1,0 +1,202 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Admin Audit"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer\\n(Spring Boot Services::AdminService",
+        "Control / API Gateway Layer\\n(Spring Boot Controllers::AdminController"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent administrator management/review business functionality. The AI split the GT module into service and controller layers, which is architecturally appropriate and within the same backend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Community Sharing"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer\\n(Spring Boot Services::CommunityService",
+        "Control / API Gateway Layer\\n(Spring Boot Controllers::CommunityController"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both correspond to community sharing functionality. The split into controller and service is acceptable and boundary-consistent."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Health Management"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer\\n(Spring Boot Services::CalorieJudgmentService",
+        "Business Logic Layer\\n(Spring Boot Services::CheckInService",
+        "Business Logic Layer\\n(Spring Boot Services::NutritionAnalysisService",
+        "Business Logic Layer\\n(Spring Boot Services::FoodTabooService",
+        "Control / API Gateway Layer\\n(Spring Boot Controllers::HealthController"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT health management is decomposed into multiple domain services such as calorie judgment, check-in, nutrition analysis, and taboo checking. This is semantically aligned and remains in the correct backend boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Recipe Search"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer\\n(Spring Boot Services::RecipeService",
+        "Control / API Gateway Layer\\n(Spring Boot Controllers::RecipeController"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Recipe search functionality is represented by recipe-related service/controller components. The boundary placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Smart Recommendation"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer\\n(Spring Boot Services::RecommendationService",
+        "Control / API Gateway Layer\\n(Spring Boot Controllers::RecommendationController",
+        "Mobile Frontend Layer::RecommendationScreen"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT recommendation module maps well to recommendation service/controller plus the UI screen. The functionality is consistent and the boundaries are appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::User Information"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer\\n(Spring Boot Services::AuthManager",
+        "Control / API Gateway Layer\\n(Spring Boot Controllers::UserController",
+        "Mobile Frontend Layer::LoginScreen"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "User information/login/account management is represented through auth and user controller components with a matching login screen. The backend/frontend separation is reasonable."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Cleaning"
+      ],
+      "predicted_nodes": [
+        "Mobile Frontend Layer::ImagePreprocessor"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The functional idea of preprocessing/cleaning exists, but the GT places it in the data layer, while the AI placed it in the mobile frontend. This is a boundary error because data preprocessing is not a frontend UI responsibility."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Dataset"
+      ],
+      "predicted_nodes": [
+        "Model Inference Layer\\n(Flask Service::FlaskInferenceService",
+        "Model Inference Layer\\n(Flask Service::ModelRuntime",
+        "Persistence Layer::MySQL Database\\n(users, recipes, ingredients,\\nnutrition, health, merchants,\\ncomments, history, feedback\\n— 14+ entities"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT dataset node corresponds to the data/model assets used by inference and persisted entities. The AI expanded it into inference runtime and database storage, which is semantically aligned though more detailed."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Read/Write Database"
+      ],
+      "predicted_nodes": [
+        "Data Access Layer\\n(Spring Boot DAL::DataAccessRepository",
+        "Persistence Layer::MySQL Database\\n(users, recipes, ingredients,\\nnutrition, health, merchants,\\ncomments, history, feedback\\n— 14+ entities",
+        "Persistence Layer::Redis Cache\\n(in-memory query cache"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT read/write database layer is represented by repository access plus MySQL persistence and Redis caching. The decomposition is consistent with the backend data boundary."
+    },
+    {
+      "gt_nodes": [
+        "Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Persistence Layer::MySQL Database\\n(users, recipes, ingredients,\\nnutrition, health, merchants,\\ncomments, history, feedback\\n— 14+ entities"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct semantic match. The database boundary differs in naming but is equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Database::Redis"
+      ],
+      "predicted_nodes": [
+        "Persistence Layer::Redis Cache\\n(in-memory query cache"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct semantic match for the caching database layer, with equivalent boundary meaning."
+    },
+    {
+      "gt_nodes": [
+        "Frontend UI::Recipe App"
+      ],
+      "predicted_nodes": [
+        "Mobile Frontend Layer::LoginScreen",
+        "Mobile Frontend Layer::CommunityScreen",
+        "Mobile Frontend Layer::HealthCenterScreen",
+        "Mobile Frontend Layer::PhotoCaptureScreen",
+        "Mobile Frontend Layer::RecipeDisplayScreen",
+        "Mobile Frontend Layer::RecommendationScreen",
+        "Mobile Frontend Layer::AdminInterfaceScreen",
+        "Mobile Frontend Layer::FeedbackScreen"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT recipe app UI is decomposed into multiple mobile screens. This is a valid frontend refinement and the boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Runtime Environment::Flask Service"
+      ],
+      "predicted_nodes": [
+        "Model Inference Layer\\n(Flask Service::FlaskInferenceService",
+        "Model Inference Layer\\n(Flask Service::ModelRuntime"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Flask runtime service matches the AI's Flask inference/runtime components. The boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Runtime Environment::Springboot Service"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer\\n(Spring Boot Services::AdminService",
+        "Business Logic Layer\\n(Spring Boot Services::AuthManager",
+        "Business Logic Layer\\n(Spring Boot Services::CalorieJudgmentService",
+        "Business Logic Layer\\n(Spring Boot Services::CheckInService",
+        "Business Logic Layer\\n(Spring Boot Services::CommunityService",
+        "Business Logic Layer\\n(Spring Boot Services::FeedbackService",
+        "Business Logic Layer\\n(Spring Boot Services::FoodTabooService",
+        "Business Logic Layer\\n(Spring Boot Services::MerchantLocationService",
+        "Business Logic Layer\\n(Spring Boot Services::NutritionAnalysisService",
+        "Business Logic Layer\\n(Spring Boot Services::RecipeService",
+        "Business Logic Layer\\n(Spring Boot Services::RecommendationService",
+        "Control / API Gateway Layer\\n(Spring Boot Controllers::AdminController",
+        "Control / API Gateway Layer\\n(Spring Boot Controllers::CommunityController",
+        "Control / API Gateway Layer\\n(Spring Boot Controllers::FeedbackController",
+        "Control / API Gateway Layer\\n(Spring Boot Controllers::HealthController",
+        "Control / API Gateway Layer\\n(Spring Boot Controllers::PhotoRecognitionController",
+        "Control / API Gateway Layer\\n(Spring Boot Controllers::RecipeController",
+        "Control / API Gateway Layer\\n(Spring Boot Controllers::RecommendationController",
+        "Control / API Gateway Layer\\n(Spring Boot Controllers::UserController",
+        "Data Access Layer\\n(Spring Boot DAL::DataAccessRepository"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Spring Boot runtime is expanded into concrete controller/service/data-access components. This is an appropriate architectural refinement within the backend boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

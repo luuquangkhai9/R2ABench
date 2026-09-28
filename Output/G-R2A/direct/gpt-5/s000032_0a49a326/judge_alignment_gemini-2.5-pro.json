@@ -1,0 +1,105 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::SSO/IDM\n(Keycloak"
+      ],
+      "predicted_nodes": [
+        "Global::Keycloak\nIdentity Provider / SSO"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Keycloak SSO/Identity Management component and are located in the global boundary."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Audit\nService"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Audit Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Audit Service. The GT boundary 'Activiti Cloud Infrastructure' is semantically equivalent to 'Kubernetes / GKE Cluster'."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Customer\nLogic",
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Out of the\nBox Services"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Cloud Connectors"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT explicitly splits Cloud Connectors into customer logic and out-of-the-box services, which are merged into a single Cloud Connectors node by the AI. Boundaries are functionally equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Notification\nService"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Notification Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Notification Service, with equivalent cloud infrastructure boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Query\nService"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Query Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Query Service, with equivalent cloud infrastructure boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Config Maps\n(Kubernetes",
+        "Activiti Cloud Infrastructure::Registry\n(Kubernetes"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::ConfigMaps / Registry"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Config Maps and Registry nodes in GT are merged into a single ConfigMaps / Registry node in the prediction. The boundary matches the Kubernetes cluster context."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Gateway"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::NGINX Ingress Controller"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Gateway maps directly to the predicted NGINX Ingress Controller, which serves as the API gateway for the cluster. Boundaries match semantically."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::BPMN, Form\nand Rule Defs",
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::Process\nRuntime"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Example Runtime Bundle\n(Spring Boot::ProcessRuntime API",
+        "Kubernetes / GKE Cluster::Example Runtime Bundle\n(Spring Boot::Spring Security\n(User/Groups/Roles",
+        "Kubernetes / GKE Cluster::Example Runtime Bundle\n(Spring Boot::TaskRuntime API",
+        "Kubernetes / GKE Cluster::Example Runtime Bundle\n(Spring Boot::User Endpoints\n- Process Definitions\n- Start SimpleProcess"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Runtime Bundle nodes representing Process Runtime and Definitions are split and expanded by the AI into specific API, security, and endpoint nodes. All conceptually map to the Runtime Bundle within the cloud infrastructure boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Client"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Kubernetes / GKE Cluster",
+    "Global::Public Internet\n(Public IP"
+  ]
+}

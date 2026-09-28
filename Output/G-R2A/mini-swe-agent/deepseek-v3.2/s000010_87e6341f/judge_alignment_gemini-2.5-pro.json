@@ -1,0 +1,93 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Flutter-based app::Android",
+        "Flutter-based app::Dart",
+        "Flutter-based app::MacOS",
+        "Flutter-based app::Web",
+        "Flutter-based app::iOS"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Flutter/Dart Client",
+        "Client Layer::Flutter/Dart Client::Generated Dart Client Code",
+        "Client Layer::Flutter/Dart Client::Multi-platform App"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The GT explicitly details individual supported platforms and the Dart runtime, which the AI successfully aggregates into generalized multi-platform client nodes. The client boundaries are functionally consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Hosted in Azure Kubernetes Service"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Layer::Azure Kubernetes Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Azure Kubernetes Service. The AI placed it within an appropriate 'Infrastructure Layer' boundary, which logically maps to the GT's cloud deployment environment."
+    },
+    {
+      "gt_nodes": [
+        "Global::Postman",
+        "Global::Test Client 1\nNodeJS",
+        "Global::Test Client 2\nGolang"
+      ],
+      "predicted_nodes": [
+        "Global::API Consumers/Testers"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT lists specific testing tools and client applications, which the AI consolidates into a single actor node representing API consumers and testers as defined in the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Global::gRPC Gateway\n(HTTP-gRPC Proxy)\nGolang"
+      ],
+      "predicted_nodes": [
+        "API Gateway Layer::gRPC-Gateway Middleware",
+        "API Gateway Layer::gRPC-Gateway Middleware::HTTP Endpoints",
+        "API Gateway Layer::gRPC-Gateway Middleware::gRPC Translation"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single gRPC Gateway proxy node in the GT is accurately split into its core components and capabilities by the AI. The API Gateway boundary correctly captures the middleware layer."
+    },
+    {
+      "gt_nodes": [
+        "Hosted in Azure Kubernetes Service::Docker container"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Layer::Docker Runtime"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the containerization engine. The AI's 'Infrastructure Layer' logically encompasses the GT's specific AKS boundary."
+    },
+    {
+      "gt_nodes": [
+        "Hosted in Azure Kubernetes Service::Docker container::Recipes Server\n(gRPC Server)\nGolang"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Go gRPC Server",
+        "Service Layer::Go gRPC Server::Ingredient Service",
+        "Service Layer::Go gRPC Server::Recipe Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The overarching GT server node is expanded by the AI into the main server and its internal domain services (Ingredient, Recipe). The logical 'Service Layer' correctly aligns with the physical server deployment boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Data Layer::Ingredient Data",
+    "Data Layer::Recipe Data",
+    "Global::Developers",
+    "Global::End Users",
+    "Global::Operators",
+    "Infrastructure Layer::Kubernetes Cluster",
+    "Shared Contracts::Protocol Buffers Contract",
+    "Shared Contracts::Protocol Buffers Contract::.proto Definitions"
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Static and Quality Checks::CodeQL Analysis",
+        "Static and Quality Checks::Static Analysis"
+      ],
+      "predicted_nodes": [
+        "CI / Automation Layer::Static Analysis /\nCodeQL Workflow"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT nodes for CodeQL and Static Analysis are combined into a single workflow node by the AI. The boundaries (Static and Quality Checks vs CI / Automation Layer) are semantically equivalent as they both represent the CI pipeline execution context."
+    },
+    {
+      "gt_nodes": [
+        "Static and Quality Checks::Format Check"
+      ],
+      "predicted_nodes": [
+        "CI / Automation Layer::Format Check Workflow\n(ubuntu-18.04"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the format checking workflow. The boundaries are semantically consistent (quality check within CI)."
+    },
+    {
+      "gt_nodes": [
+        "Reuse Workflows::Submodule Reuse",
+        "Reuse Workflows::cFS Reuse"
+      ],
+      "predicted_nodes": [
+        "CI / Automation Layer::Reusable Workflows\n(workflow_call"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "GT identifies specific reuse workflows, which the AI groups into a single reusable workflow node. The boundaries appropriately represent CI workflows."
+    },
+    {
+      "gt_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "predicted_nodes": [
+        "Build Layer::Git Submodules\n(cFE, OSAL, PSP,\nFramework Apps",
+        "cFS Runtime Target Layer::cFE\n(Core Flight Executive",
+        "cFS Runtime Target Layer::OSAL\n(OS Abstraction Layer",
+        "cFS Runtime Target Layer::PSP\n(Platform Support Package",
+        "cFS Runtime Target Layer::Framework Applications"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The global cFS Bundle in GT is correctly split by the AI into its constituent submodules and framework applications as described in the PRD, placed within logical runtime and build boundaries."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Build Layer::Build Variants\n(debug / release",
+    "Build Layer::Makefile.sample /\nsample_defs Assets",
+    "Build Layer::make prep /\nmake install",
+    "CI / Automation Layer::Build & Test Workflow\n(ubuntu-18.04",
+    "CI / Automation Layer::Changelog Workflow\n(ubuntu-latest",
+    "External Systems::GitHub Actions\nCI Platform",
+    "External Systems::GitHub Repository\n(nasa/cFS",
+    "Global::Build Artifacts",
+    "Global::Build Layer",
+    "Global::CI / Automation Layer",
+    "Global::Changelog Artifact",
+    "Global::External Systems",
+    "Global::Host-Side Tools Layer",
+    "Global::Related Libraries & Tools",
+    "Global::Telemetry Data Stream",
+    "Global::cFS Runtime Target Layer",
+    "Host-Side Tools Layer::Telemetry Observer\n(Operator UI / Terminal",
+    "Host-Side Tools Layer::cmdUtil\n(Command Utility",
+    "Related Libraries & Tools::CCDD /\nPerfutils-java /\ngen_sch_tbl",
+    "Related Libraries & Tools::SIL / ECI",
+    "Related Libraries & Tools::cFS_LIB /\ncFS_IO_LIB",
+    "cFS Runtime Target Layer::core-cpu1\n(cFS Executable"
+  ]
+}

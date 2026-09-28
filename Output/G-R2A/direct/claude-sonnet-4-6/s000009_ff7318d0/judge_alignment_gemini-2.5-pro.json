@@ -1,0 +1,167 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::API Gateway"
+      ],
+      "predicted_nodes": [
+        "API Layer::Amazon API Gateway\\n(execute-api / AWS Sig v4 / JSON defaults"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the API Gateway. The GT places it in 'Global', while the AI creates a more specific 'API Layer'. This is a semantically equivalent and valid architectural grouping."
+    },
+    {
+      "gt_nodes": [
+        "Global::Cognito"
+      ],
+      "predicted_nodes": [
+        "Security & Identity::Amazon Cognito\\n(User Authentication"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified Cognito for authentication. The AI's 'Security & Identity' boundary is a more descriptive and appropriate grouping than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::S3"
+      ],
+      "predicted_nodes": [
+        "Amazon S3\\n(Static Hosting::Web Frontend\\n[HTML, CSS, Bootstrap, jQuery]\\n\\n- Fixtures / Standings / Schedules\\n- Results / Live Scores / Predictions\\n- Chatbot UI\\n- Reminder Request UI\\n- Screening Recommendations"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both identify S3 for hosting the frontend. The AI's node has a complex name but correctly identifies its role and boundary. The implied top-level boundary is global, which is consistent with the GT."
+    },
+    {
+      "gt_nodes": [
+        "Fixtures Service::fixtures\\nLambda",
+        "Standing Service::standing\\nLambda",
+        "Live Score Pipeline::live_score\\nLambda"
+      ],
+      "predicted_nodes": [
+        "Backend Compute — AWS Lambda\\n[Python / Node::Match Info Handler\\n(Fixtures, Standings,\\nSchedules, Results,\\nLive Scores"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated multiple specific data-serving Lambdas from the GT into a single 'Match Info Handler'. This is a valid aggregation. The AI's 'Backend Compute' boundary is a reasonable technology-based layer, contrasting with the GT's service-based boundaries, but it is not an error."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::prediction\\nLambda"
+      ],
+      "predicted_nodes": [
+        "Backend Compute — AWS Lambda\\n[Python / Node::Prediction Handler\\n(Match Outcome\\nProbabilities"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the prediction-related Lambda function. The AI's 'Backend Compute' boundary is a valid architectural choice."
+    },
+    {
+      "gt_nodes": [
+        "Recommendation Service::recommendation\\nLambda"
+      ],
+      "predicted_nodes": [
+        "Backend Compute — AWS Lambda\\n[Python / Node::Chatbot / Conversation Handler\\n(Intent Processing:\\nFixtures, Results,\\nScreening Recommendations",
+        "Backend Compute — AWS Lambda\\n[Python / Node::Screening Recommendation Handler\\n(Nearby Venue Search"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly interpreted the PRD and split the generic 'recommendation' Lambda from the GT into two more specific functions: one for chatbot conversation and one for screening recommendations. The boundary is consistent with other Lambda functions."
+    },
+    {
+      "gt_nodes": [
+        "Fixtures Service::SQS",
+        "Notification Service::SQS"
+      ],
+      "predicted_nodes": [
+        "Notification Workflow::Amazon SQS\\n(Reminder Request Queue"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified a single SQS queue for reminders, aggregating the two SQS instances from the GT which both serve the reminder function. The 'Notification Workflow' boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Notification Service::SNS"
+      ],
+      "predicted_nodes": [
+        "Notification Workflow::Amazon SNS\\n(SMS Reminder Delivery"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the SNS topic used for SMS delivery. The 'Notification Workflow' boundary is semantically equivalent to the GT's 'Notification Service'."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::DynamoDB\\nLive Scores",
+        "Prediction Service::DynamoDB\\nPredictions",
+        "Standing Service::DynamoDB\\nStandings"
+      ],
+      "predicted_nodes": [
+        "Data Storage & Search::Amazon DynamoDB\\n(Match Results, Statistics,\\nFixtures, Standings,\\nSchedules"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated multiple service-specific DynamoDB instances from the GT into a single component, which is a common architectural representation. The 'Data Storage & Search' boundary is a correct data-layer grouping."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::Elasticsearch",
+        "Prediction Service::Elasticsearch",
+        "Standing Service::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "Data Storage & Search::Amazon Elasticsearch\\n(Match Data Search\\n& Retrieval"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Similar to DynamoDB, the AI aggregated multiple Elasticsearch instances into a single component within a 'Data Storage & Search' boundary, which is a valid and correct architectural pattern."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::SageMaker"
+      ],
+      "predicted_nodes": [
+        "ML Prediction::Amazon SageMaker\\n(Match Outcome Predictions:\\nHome Win / Draw / Away Win"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the SageMaker service. The AI's 'ML Prediction' boundary is semantically equivalent to the GT's 'Prediction Service'."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2::Kafka"
+      ],
+      "predicted_nodes": [
+        "EC2 — Live Score Streaming Pipeline::Apache Kafka\\n(Live Score Event Broker"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the Kafka component. The AI's 'EC2 — Live Score Streaming Pipeline' boundary is semantically equivalent to the GT's 'Live Score Pipeline::EC2' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2::foot app"
+      ],
+      "predicted_nodes": [
+        "EC2 — Live Score Streaming Pipeline::Live Score Consumer\\n(Score Update Processor"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the vague 'foot app' in the GT as a 'Live Score Consumer', which is a more descriptive and accurate name for a Kafka consumer in a streaming pipeline. The boundary is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::User",
+    "Live Score Pipeline::EC2",
+    "Live Score Pipeline::EC2::M4",
+    "Recommendation Service::Lex"
+  ],
+  "unmatched_predicted_nodes": [
+    "Backend Compute — AWS Lambda\\n[Python / Node::Reminder Handler\\n(Queuing & SMS\\nOrchestration",
+    "EC2 — Live Score Streaming Pipeline::Apache Avro\\n(Payload Encoding /\\nSchema",
+    "Global::Live Score\\nData Source\\n(External",
+    "Security & Identity::AWS IAM\\n(Access Management"
+  ]
+}

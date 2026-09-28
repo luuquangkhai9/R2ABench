@@ -1,0 +1,523 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Browser / Client Layer::Frontend Interface\\n(Bootstrap-Vue",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Frontend Layer::Vue.js Client",
+        "Frontend Layer::Web Browser"
+      ],
+      "reasoning": "The GT frontend interface is covered by the predicted browser/client frontend nodes, which together represent the UI layer and client execution environment."
+    },
+    {
+      "gt_node": "Database Layer\\n(MySQL::Blog Data",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Data Layer::MySQL Database::Blog Table",
+        "Data Layer::MySQL Database::Comment Table"
+      ],
+      "reasoning": "The GT blog data responsibility is covered by the predicted blog/comment persistence tables within the MySQL data layer."
+    },
+    {
+      "gt_node": "Database Layer\\n(MySQL::Dataset Data",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Data Layer::MySQL Database::Dataset Table",
+        "Data Layer::Storage::Dataset Files"
+      ],
+      "reasoning": "The GT dataset data responsibility is covered by the predicted dataset table plus dataset file storage."
+    },
+    {
+      "gt_node": "Database Layer\\n(MySQL::Following Data",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Data Layer::MySQL Database::Follow Table"
+      ],
+      "reasoning": "The predicted follow table covers the GT following relationship data responsibility."
+    },
+    {
+      "gt_node": "Database Layer\\n(MySQL::Model Data",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Data Layer::MySQL Database::Model Table",
+        "Data Layer::Storage::Model Files",
+        "Data Layer::MySQL Database::Transaction Table"
+      ],
+      "reasoning": "The GT model data responsibility is covered by model metadata, model files, and transaction-related persistence."
+    },
+    {
+      "gt_node": "Database Layer\\n(MySQL::Q&A Community Data",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Data Layer::MySQL Database::Question Table",
+        "Data Layer::MySQL Database::Answer Table",
+        "Data Layer::MySQL Database::Comment Table"
+      ],
+      "reasoning": "The predicted question, answer, and comment tables collectively cover the GT Q&A community data responsibility."
+    },
+    {
+      "gt_node": "Database Layer\\n(MySQL::User Data",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Data Layer::MySQL Database::User Table",
+        "External Services::Email Service"
+      ],
+      "reasoning": "The user table covers user account data, and the email service corresponds to password recovery support tied to user data operations."
+    },
+    {
+      "gt_node": "Server Layer\\n(Spring Boot::Core Modules::Account Management Module",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Application Layer::Authentication Service",
+        "Application Layer::User Service"
+      ],
+      "reasoning": "The predicted authentication and user services cover registration, login, password recovery, profile updates, and logout responsibilities."
+    },
+    {
+      "gt_node": "Server Layer\\n(Spring Boot::Core Modules::Admin Module",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Application Layer::Admin Service"
+      ],
+      "reasoning": "The predicted admin service directly covers account cancellation and illegal content deletion."
+    },
+    {
+      "gt_node": "Server Layer\\n(Spring Boot::Core Modules::Blog Sharing Module",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Application Layer::Blog Service"
+      ],
+      "reasoning": "The predicted blog service covers blog article and comment publishing, modification, and deletion."
+    },
+    {
+      "gt_node": "Server Layer\\n(Spring Boot::Core Modules::Dataset Management Module",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Application Layer::Dataset Service"
+      ],
+      "reasoning": "The predicted dataset service covers dataset upload, download, deletion, and modification."
+    },
+    {
+      "gt_node": "Server Layer\\n(Spring Boot::Core Modules::Following Management Module",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Application Layer::Follow Service"
+      ],
+      "reasoning": "The predicted follow service covers follow and unfollow management."
+    },
+    {
+      "gt_node": "Server Layer\\n(Spring Boot::Core Modules::Model Management Module",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Application Layer::Model Service",
+        "Application Layer::Recommendation Service",
+        "Application Layer::Payment Service",
+        "External Services::Payment Gateway"
+      ],
+      "reasoning": "The predicted model, recommendation, and payment services together cover model upload, review, download, online invocation, recommendation, and purchase."
+    },
+    {
+      "gt_node": "Server Layer\\n(Spring Boot::Core Modules::Q&A Community Module",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Application Layer::Q&A Service"
+      ],
+      "reasoning": "The predicted Q&A service covers question and answer publishing, modification, and deletion."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "API Gateway Layer::API Gateway",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT does not define an API gateway or equivalent boundary."
+    },
+    {
+      "predicted_node": "Application Layer::Admin Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Admin Module"
+      ],
+      "reasoning": "Directly grounded in administrator governance requirements."
+    },
+    {
+      "predicted_node": "Application Layer::Authentication Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Account Management Module"
+      ],
+      "reasoning": "Grounded in registration, login, password recovery, and logout/account state responsibilities."
+    },
+    {
+      "predicted_node": "Application Layer::Blog Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Blog Sharing Module"
+      ],
+      "reasoning": "Grounded in blog article and comment management concepts."
+    },
+    {
+      "predicted_node": "Application Layer::Dataset Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Dataset Management Module"
+      ],
+      "reasoning": "Grounded in dataset upload, download, delete, and modify requirements."
+    },
+    {
+      "predicted_node": "Application Layer::Follow Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Following Management Module"
+      ],
+      "reasoning": "Grounded in follow/unfollow functionality."
+    },
+    {
+      "predicted_node": "Application Layer::Model Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Model Management Module"
+      ],
+      "reasoning": "Grounded in model upload, download, invocation, and purchase-related model management."
+    },
+    {
+      "predicted_node": "Application Layer::Payment Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Model Management Module"
+      ],
+      "reasoning": "Grounded by the model purchase/payment flow, even though the GT does not isolate payment as a standalone module."
+    },
+    {
+      "predicted_node": "Application Layer::Q&A Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Q&A Community Module"
+      ],
+      "reasoning": "Grounded in question and answer community operations."
+    },
+    {
+      "predicted_node": "Application Layer::Recommendation Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Model Management Module"
+      ],
+      "reasoning": "Grounded in the model recommendation requirement, though it is more specific than the GT module boundary."
+    },
+    {
+      "predicted_node": "Application Layer::User Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Account Management Module",
+        "Server Layer\\n(Spring Boot::Core Modules::Following Management Module"
+      ],
+      "reasoning": "Grounded in personal information management and user-centric operations, though somewhat aggregated."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database",
+      "grounded": true,
+      "reference_nodes": [
+        "Database Layer\\n(MySQL::Blog Data",
+        "Database Layer\\n(MySQL::Dataset Data",
+        "Database Layer\\n(MySQL::Following Data",
+        "Database Layer\\n(MySQL::Model Data",
+        "Database Layer\\n(MySQL::Q&A Community Data",
+        "Database Layer\\n(MySQL::User Data"
+      ],
+      "reasoning": "Grounded as the overall database boundary corresponding to all GT MySQL data nodes."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database::Answer Table",
+      "grounded": true,
+      "reference_nodes": [
+        "Database Layer\\n(MySQL::Q&A Community Data"
+      ],
+      "reasoning": "Grounded in Q&A answer data."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database::Blog Table",
+      "grounded": true,
+      "reference_nodes": [
+        "Database Layer\\n(MySQL::Blog Data"
+      ],
+      "reasoning": "Grounded in blog article data."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database::Comment Table",
+      "grounded": true,
+      "reference_nodes": [
+        "Database Layer\\n(MySQL::Blog Data",
+        "Database Layer\\n(MySQL::Q&A Community Data"
+      ],
+      "reasoning": "Grounded in blog comment data and, more generally, community comment-like persistence."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database::Dataset Table",
+      "grounded": true,
+      "reference_nodes": [
+        "Database Layer\\n(MySQL::Dataset Data"
+      ],
+      "reasoning": "Grounded in dataset metadata persistence."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database::Follow Table",
+      "grounded": true,
+      "reference_nodes": [
+        "Database Layer\\n(MySQL::Following Data"
+      ],
+      "reasoning": "Grounded in follow relationship data."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database::Model Table",
+      "grounded": true,
+      "reference_nodes": [
+        "Database Layer\\n(MySQL::Model Data"
+      ],
+      "reasoning": "Grounded in model metadata persistence."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database::Question Table",
+      "grounded": true,
+      "reference_nodes": [
+        "Database Layer\\n(MySQL::Q&A Community Data"
+      ],
+      "reasoning": "Grounded in Q&A question data."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database::Transaction Table",
+      "grounded": true,
+      "reference_nodes": [
+        "Database Layer\\n(MySQL::Model Data"
+      ],
+      "reasoning": "Grounded in model purchase/transaction data, although this is a more detailed decomposition than the GT."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database::User Table",
+      "grounded": true,
+      "reference_nodes": [
+        "Database Layer\\n(MySQL::User Data"
+      ],
+      "reasoning": "Grounded in user account data."
+    },
+    {
+      "predicted_node": "Data Layer::Storage::Dataset Files",
+      "grounded": true,
+      "reference_nodes": [
+        "Database Layer\\n(MySQL::Dataset Data"
+      ],
+      "reasoning": "Grounded in dataset file content/storage requirements."
+    },
+    {
+      "predicted_node": "Data Layer::Storage::Model Files",
+      "grounded": true,
+      "reference_nodes": [
+        "Database Layer\\n(MySQL::Model Data"
+      ],
+      "reasoning": "Grounded in model file storage requirements."
+    },
+    {
+      "predicted_node": "External Services::Email Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Database Layer\\n(MySQL::User Data"
+      ],
+      "reasoning": "Grounded in password recovery via email."
+    },
+    {
+      "predicted_node": "External Services::Payment Gateway",
+      "grounded": true,
+      "reference_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Model Management Module"
+      ],
+      "reasoning": "Grounded in the model purchase/payment requirement, though the GT explicitly notes the payment channel is not defined."
+    },
+    {
+      "predicted_node": "Frontend Layer::Vue.js Client",
+      "grounded": true,
+      "reference_nodes": [
+        "Browser / Client Layer::Frontend Interface\\n(Bootstrap-Vue"
+      ],
+      "reasoning": "Grounded in the client-side UI layer."
+    },
+    {
+      "predicted_node": "Frontend Layer::Web Browser",
+      "grounded": true,
+      "reference_nodes": [
+        "Browser / Client Layer::Frontend Interface\\n(Bootstrap-Vue"
+      ],
+      "reasoning": "Grounded in the browser/client execution boundary."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Browser / Client Layer::Frontend Interface\\n(Bootstrap-Vue"
+      ],
+      "predicted_nodes": [
+        "Frontend Layer::Vue.js Client",
+        "Frontend Layer::Web Browser"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT frontend interface is split into client framework and browser runtime, which is semantically consistent with the client boundary."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Blog Data"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL Database::Blog Table",
+        "Data Layer::MySQL Database::Comment Table"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Blog data is decomposed into blog and comment persistence, staying within the correct data boundary."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Dataset Data"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL Database::Dataset Table",
+        "Data Layer::Storage::Dataset Files"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Dataset metadata and file storage are a reasonable split of the GT dataset data responsibility."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Following Data"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL Database::Follow Table"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The follow table directly corresponds to following relationship data."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Model Data"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL Database::Model Table",
+        "Data Layer::Storage::Model Files",
+        "Data Layer::MySQL Database::Transaction Table"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Model metadata, model binaries, and purchase transaction records are a reasonable split of model data within the storage boundary."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Q&A Community Data"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL Database::Question Table",
+        "Data Layer::MySQL Database::Answer Table",
+        "Data Layer::MySQL Database::Comment Table"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Questions and answers are directly covered; comments are an acceptable adjacent community data decomposition."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::User Data"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL Database::User Table",
+        "External Services::Email Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The user table matches the GT data boundary, but the email service is an external integration rather than a database component, so the combined boundary attribution is not fully correct."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Account Management Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Authentication Service",
+        "Application Layer::User Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Account management is reasonably split into authentication and user profile services within the server/application boundary."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Admin Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Admin Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct functional and boundary correspondence."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Blog Sharing Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Blog Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct correspondence for blog article and comment management."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Dataset Management Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Dataset Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct correspondence for dataset management."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Following Management Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Follow Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct correspondence for follow management."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Model Management Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Model Service",
+        "Application Layer::Recommendation Service",
+        "Application Layer::Payment Service",
+        "External Services::Payment Gateway"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "Core model management is covered, but recommendation and payment are split into extra services; the payment gateway is external and the GT explicitly does not define payment details, so the boundary is only partially aligned."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Q&A Community Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Q&A Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct correspondence for Q&A community operations."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "API Gateway Layer::API Gateway"
+  ]
+}

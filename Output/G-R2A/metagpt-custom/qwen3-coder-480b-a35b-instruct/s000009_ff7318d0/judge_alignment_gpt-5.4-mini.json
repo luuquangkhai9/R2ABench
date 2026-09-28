@@ -1,0 +1,272 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::API Gateway"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::API Management::API Gateway",
+        "API Layer::REST API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both predicted nodes represent the same API exposure/routing function as the GT API Gateway. The AWS Cloud::API Management boundary is semantically consistent, and REST API is an acceptable functional abstraction of the same component."
+    },
+    {
+      "gt_nodes": [
+        "Global::Cognito"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Authentication::Cognito",
+        "Authentication Layer::Auth Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted Cognito node matches the GT authentication service, and the authentication-layer abstraction is semantically aligned with the GT global Cognito placement."
+    },
+    {
+      "gt_nodes": [
+        "Global::S3"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Web Hosting::S3 Bucket"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the S3 hosting/storage component used for frontend hosting. The AWS Cloud::Web Hosting boundary is consistent with the GT global infrastructure placement."
+    },
+    {
+      "gt_nodes": [
+        "Notification Service::SQS"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Messaging::SQS",
+        "Notification Layer::Message Queue"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT SQS notification queue is represented by the AWS messaging SQS node and the notification queue abstraction. The messaging/notification boundaries are semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Notification Service::SNS"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Messaging::SNS",
+        "Notification Layer::Notifier"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT SNS SMS notification component is captured by the AWS messaging SNS node and the notifier abstraction. The boundary attribution remains consistent with notification delivery."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::SageMaker"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::AI-ML::SageMaker",
+        "AI-ML Layer::Prediction Engine"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both predicted nodes correspond to the match prediction capability and its SageMaker implementation. The AI/ML boundaries are consistent with the GT prediction service."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::DynamoDB\\nPredictions"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Data Storage::DynamoDB",
+        "Data Layer::User-Data Store"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT prediction data store is represented by the generic DynamoDB storage node and the data-layer store abstraction. This is a valid semantic match despite the more generic predicted naming."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Data Storage::Elasticsearch",
+        "Data Layer::Search Index"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted Elasticsearch nodes correspond directly to the GT Elasticsearch retrieval/search component. The data-storage/search-index boundaries are semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Standing Service::DynamoDB\\nStandings"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Data Storage::DynamoDB",
+        "Data Layer::User-Data Store"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT standing data store is represented by the generic DynamoDB node and data-layer store abstraction. The storage boundary is consistent even though the predicted name is generic."
+    },
+    {
+      "gt_nodes": [
+        "Standing Service::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Data Storage::Elasticsearch",
+        "Data Layer::Search Index"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted Elasticsearch/search-index nodes match the GT standing retrieval index component. Boundary attribution is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::DynamoDB\\nLive Scores"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Data Storage::DynamoDB",
+        "Data Layer::User-Data Store"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT live-score DynamoDB store is captured by the generic DynamoDB storage node and the data-layer store abstraction. The boundary is acceptable though the name is generic."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Data Storage::Elasticsearch",
+        "Data Layer::Search Index"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Elasticsearch node is semantically the same as the predicted Elasticsearch/search index nodes. The boundary placement is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Streaming::EC2 Instance",
+        "AWS Cloud::Streaming::EC2 Instance::Kafka-Avro Processor"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT EC2 host for the streaming pipeline matches the predicted EC2 instance boundary and its Kafka-Avro processor child. The streaming placement is consistent with the GT pipeline."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2::Kafka"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Streaming::EC2 Instance::Kafka-Avro Processor",
+        "Streaming Layer::Event Streamer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Kafka in the GT live-score pipeline is represented by the Kafka-Avro processor and event-streamer abstractions. The streaming boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Fixtures Service::fixtures\\nLambda"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Compute::Lambda Functions",
+        "Application Layer::Backend Logic"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT fixtures Lambda is captured by the generic Lambda Functions node and backend logic abstraction. The compute/application boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Standing Service::standing\\nLambda"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Compute::Lambda Functions",
+        "Application Layer::Backend Logic"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT standing Lambda matches the predicted Lambda Functions and backend logic abstraction. The placement is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::prediction\\nLambda"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Compute::Lambda Functions",
+        "Application Layer::Backend Logic"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT prediction Lambda is represented by the generic Lambda Functions node and backend logic abstraction. The boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Recommendation Service::recommendation\\nLambda"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Compute::Lambda Functions",
+        "Application Layer::Backend Logic"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT recommendation Lambda is represented by the generic Lambda Functions node and backend logic abstraction. The semantic match is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Recommendation Service::Lex"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Backend Logic"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT uses Lex for the chatbot/recommendation capability, but the predicted diagram omits Lex as a distinct service and collapses it into generic backend logic. This loses the specific architectural component and its boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::User",
+    "Live Score Pipeline::EC2::M4",
+    "Live Score Pipeline::EC2::foot app",
+    "Notification Service::SQS",
+    "Notification Service::SNS",
+    "Recommendation Service::Lex"
+  ],
+  "unmatched_predicted_nodes": [
+    "AWS Cloud::AI-ML",
+    "AWS Cloud::AI-ML::SageMaker",
+    "AWS Cloud::API Management",
+    "AWS Cloud::API Management::API Gateway",
+    "AWS Cloud::Authentication",
+    "AWS Cloud::Authentication::Cognito",
+    "AWS Cloud::Authentication::IAM",
+    "AWS Cloud::Compute",
+    "AWS Cloud::Compute::Lambda Functions",
+    "AWS Cloud::Data Storage",
+    "AWS Cloud::Data Storage::DynamoDB",
+    "AWS Cloud::Data Storage::Elasticsearch",
+    "AWS Cloud::Messaging",
+    "AWS Cloud::Messaging::SNS",
+    "AWS Cloud::Messaging::SQS",
+    "AWS Cloud::Streaming",
+    "AWS Cloud::Streaming::EC2 Instance",
+    "AWS Cloud::Streaming::EC2 Instance::Kafka-Avro Processor",
+    "AWS Cloud::Web Hosting",
+    "AWS Cloud::Web Hosting::S3 Bucket",
+    "Application Layer::Backend Logic",
+    "Application Layer::Reminder Handler",
+    "Authentication Layer::Auth Service",
+    "Data Layer::Search Index",
+    "Data Layer::User-Data Store",
+    "Global::AWS Cloud",
+    "Notification Layer::Message Queue",
+    "Notification Layer::Notifier",
+    "Presentation Layer::Chatbot Interface",
+    "Presentation Layer::Live Scores Display",
+    "Presentation Layer::Web UI",
+    "Streaming Layer::Event Streamer"
+  ]
+}

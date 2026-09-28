@@ -1,0 +1,289 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "其它数据源::BMS",
+        "其它数据源::ERP",
+        "其它数据源::MES"
+      ],
+      "predicted_nodes": [
+        "Global::MyEMS Components",
+        "Global::Third-party Applications"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "These GT nodes collectively represent external system consumers/integration sources of the API. The predicted nodes are broader client categories rather than the specific source systems, so this is only a loose semantic aggregation. Boundary attribution is also too generic and does not preserve the specific external-source context."
+    },
+    {
+      "gt_nodes": [
+        "其它数据源::天气",
+        "其它数据源::手工录入"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "No clear equivalent predicted node is present."
+    },
+    {
+      "gt_nodes": [
+        "安全::API Access"
+      ],
+      "predicted_nodes": [
+        "API Service Layer::Python Runtime::REST API (/api/*",
+        "API Service Layer::Python Runtime::REST API Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT security-related API access capability is represented by the predicted REST API service and its /api/* endpoint. The boundary is acceptable because the API access capability belongs within the API service layer."
+    },
+    {
+      "gt_nodes": [
+        "安全::HTTPS"
+      ],
+      "predicted_nodes": [
+        "Deployment & Delivery Layer::Reverse Proxy (e.g., Nginx",
+        "Deployment & Delivery Layer::Reverse Proxy (e.g., Nginx::Reverse Proxy Routing (/api/ -> REST API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "HTTPS is not explicitly named, but the reverse-proxy routing support is the closest architectural equivalent in this PRD context for same-origin API access over HTTP/HTTPS. Placement in deployment/delivery is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "安全::用户权限"
+      ],
+      "predicted_nodes": [
+        "Admin UI Layer::Browser Environment::Admin Application (MyEMS Admin"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node only captures the admin UI application, not user authorization/access-control semantics. There is no equivalent security/permission component in the predicted list."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::Docker Engine"
+      ],
+      "predicted_nodes": [
+        "Global::Docker Engine",
+        "Deployment & Delivery Layer::Docker-based Setup"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The Docker Engine is correctly represented as a deployment/runtime infrastructure component and also as part of the Docker-based setup capability. Boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::Web Server"
+      ],
+      "predicted_nodes": [
+        "Deployment & Delivery Layer::Reverse Proxy (e.g., Nginx)",
+        "Deployment & Delivery Layer::Reverse Proxy (e.g., Nginx::Reverse Proxy Routing (/api/ -> REST API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "A web server/reverse proxy is a valid architectural equivalent for routing /api traffic. The deployment layer placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::数据库集群"
+      ],
+      "predicted_nodes": [
+        "Global::MySQL-compatible Database",
+        "Data/Persistence Layer::Database Connectivity (MySQL-compatible"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT database cluster is represented by the MySQL-compatible database and the associated connectivity. The data/persistence boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::云端Kubernetes集群",
+        "容器化服务器集群::本地Kubernetes集群",
+        "容器化服务器集群::虚拟机",
+        "容器化服务器集群::裸金属服务器"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "No corresponding predicted infrastructure-runtime deployment nodes are present."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::Kafka Broker",
+        "容器化服务器集群::MQTT Broker"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "No corresponding predicted messaging-broker nodes are present."
+    },
+    {
+      "gt_nodes": [
+        "数据分析服务::API"
+      ],
+      "predicted_nodes": [
+        "API Service Layer::Python Runtime::REST API Service",
+        "API Service Layer::Python Runtime::REST API (/api/*"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT data analysis API service is semantically aligned with the predicted REST API service. Boundary placement in the API service layer is correct."
+    },
+    {
+      "gt_nodes": [
+        "数据分析服务::Excel导出",
+        "数据分析服务::高级报表引擎",
+        "数据分析服务::FDD规则引擎",
+        "数据分析服务::邮件/短信/微信"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "No corresponding predicted analytics/reporting/notification nodes are present."
+    },
+    {
+      "gt_nodes": [
+        "数据可视化::BI",
+        "数据可视化::Web UI",
+        "数据可视化::大屏",
+        "数据可视化::小程序",
+        "数据可视化::手机应用"
+      ],
+      "predicted_nodes": [
+        "Admin UI Layer::Browser Environment::Admin Application (MyEMS Admin"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted admin browser application is not equivalent to the GT visualization products and channels. This is a severe semantic mismatch, despite both being UI-related."
+    },
+    {
+      "gt_nodes": [
+        "数据计算服务::成本数据",
+        "数据计算服务::数据清洗",
+        "数据计算服务::数据规范化",
+        "数据计算服务::碳排放数据",
+        "数据计算服务::租户数据",
+        "数据计算服务::空间数据",
+        "数据计算服务::组合设备数据",
+        "数据计算服务::计量表数据",
+        "数据计算服务::设备数据",
+        "数据计算服务::车间数据",
+        "数据计算服务::门店数据"
+      ],
+      "predicted_nodes": [
+        "Data/Persistence Layer::API Runtime Configuration Data"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "These GT nodes are domain data computation services, while the predicted node is runtime configuration data. This is a semantic mismatch and a boundary confusion between business computation and configuration/persistence."
+    },
+    {
+      "gt_nodes": [
+        "数据采集服务::BACnet",
+        "数据采集服务::EtherNet/IP",
+        "数据采集服务::Kafka",
+        "数据采集服务::MQTT",
+        "数据采集服务::Modbus",
+        "数据采集服务::OPC UA",
+        "数据采集服务::S7"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "No corresponding predicted data acquisition/protocol nodes are present."
+    },
+    {
+      "gt_nodes": [
+        "硬件网关::数据采集",
+        "硬件网关::设备控制"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "No corresponding predicted hardware gateway nodes are present."
+    },
+    {
+      "gt_nodes": [
+        "第三方应用::AR",
+        "第三方应用::BMS",
+        "第三方应用::ERP"
+      ],
+      "predicted_nodes": [
+        "Global::Third-party Applications"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node correctly captures the role of external third-party application consumers, though it aggregates multiple specific application types. Boundary attribution is acceptable."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "其它数据源::天气",
+    "其它数据源::手工录入",
+    "安全::用户权限",
+    "容器化服务器集群::...",
+    "容器化服务器集群::Kafka Broker",
+    "容器化服务器集群::MQTT Broker",
+    "容器化服务器集群::云端Kubernetes集群",
+    "容器化服务器集群::本地Kubernetes集群",
+    "容器化服务器集群::虚拟机",
+    "容器化服务器集群::裸金属服务器",
+    "数据分析服务::...",
+    "数据分析服务::Excel导出",
+    "数据分析服务::FDD规则引擎",
+    "数据分析服务::邮件/短信/微信",
+    "数据分析服务::高级报表引擎",
+    "数据可视化::...",
+    "数据可视化::BI",
+    "数据可视化::Web UI",
+    "数据可视化::大屏",
+    "数据可视化::小程序",
+    "数据可视化::手机应用",
+    "数据计算服务::...",
+    "数据计算服务::成本数据",
+    "数据计算服务::数据清洗",
+    "数据计算服务::数据规范化",
+    "数据计算服务::碳排放数据",
+    "数据计算服务::租户数据",
+    "数据计算服务::空间数据",
+    "数据计算服务::组合设备数据",
+    "数据计算服务::计量表数据",
+    "数据计算服务::设备数据",
+    "数据计算服务::车间数据",
+    "数据计算服务::门店数据",
+    "数据采集服务::...",
+    "数据采集服务::BACnet",
+    "数据采集服务::EtherNet/IP",
+    "数据采集服务::Kafka",
+    "数据采集服务::MQTT",
+    "数据采集服务::Modbus",
+    "数据采集服务::OPC UA",
+    "数据采集服务::S7",
+    "硬件网关::数据采集",
+    "硬件网关::设备控制"
+  ],
+  "unmatched_predicted_nodes": [
+    "API Service Layer::Python Runtime",
+    "API Service Layer::Python Runtime::REST API (/api/*",
+    "API Service Layer::Python Runtime::REST API Service",
+    "Admin UI Layer::Browser Environment",
+    "Admin UI Layer::Browser Environment::API Base Path Resolver",
+    "Admin UI Layer::Browser Environment::Admin Application (MyEMS Admin",
+    "Admin UI Layer::Browser Environment::Admin Routing Configuration",
+    "Admin UI Layer::Browser Environment::Category Settings Modules",
+    "Admin UI Layer::Browser Environment::Contact Settings Route Module (/contact",
+    "Admin UI Layer::Browser Environment::Route Lazy-Loading Mechanism",
+    "Admin UI Layer::Browser Environment::Tariff Settings Modules",
+    "Admin UI Layer::Browser Environment::User Settings Route Module (/user",
+    "Data/Persistence Layer::API Runtime Configuration Data",
+    "Data/Persistence Layer::Database Connectivity (MySQL-compatible",
+    "Deployment & Delivery Layer::Development Quick-Run Paths",
+    "Deployment & Delivery Layer::Docker-based Setup",
+    "Deployment & Delivery Layer::Python Dependency Set",
+    "Deployment & Delivery Layer::Reverse Proxy (e.g., Nginx",
+    "Deployment & Delivery Layer::Reverse Proxy (e.g., Nginx::Reverse Proxy Routing (/api/ -> REST API",
+    "Global::Docker Engine",
+    "Global::MyEMS Components",
+    "Global::MySQL-compatible Database",
+    "Global::Third-party Applications"
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "BACKEND::Router"
+      ],
+      "predicted_nodes": [
+        "Heroku (Deployment Env)\\nNFR-004::Node.js Server (CommonJS)\\nC-001, NFR-003\\nStarted via Node.js start script::HTTP Router\\nFR-004, C-004"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the Router component. The predicted boundary 'Node.js Server' is a more specific but semantically correct representation of the GT's 'BACKEND'."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::algorithm"
+      ],
+      "predicted_nodes": [
+        "Heroku (Deployment Env)\\nNFR-004::Node.js Server (CommonJS)\\nC-001, NFR-003\\nStarted via Node.js start script::Autocomplete/Search Module\\nFR-002, FR-009"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the autocomplete algorithm as a distinct module in the backend. The 'Node.js Server' boundary is semantically equivalent to 'BACKEND'."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::handlers"
+      ],
+      "predicted_nodes": [
+        "Heroku (Deployment Env)\\nNFR-004::Node.js Server (CommonJS)\\nC-001, NFR-003\\nStarted via Node.js start script::Home Page Handler\\nFR-003",
+        "Heroku (Deployment Env)\\nNFR-004::Node.js Server (CommonJS)\\nC-001, NFR-003\\nStarted via Node.js start script::Not-Found Handler (404)\\nFR-007",
+        "Heroku (Deployment Env)\\nNFR-004::Node.js Server (CommonJS)\\nC-001, NFR-003\\nStarted via Node.js start script::Static Asset Server\\nFR-005"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly split the generic 'handlers' node from the GT into three specific handler components as described in the PRD (Home Page, Not-Found, Static Asset). The boundary attribution to the 'Node.js Server' is correct."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::index.html",
+        "FRONTEND::main.css",
+        "FRONTEND::userInput"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Search UI\\n- Input field (FR-001)\\n- Suggestions list"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated several specific GT frontend nodes into a single logical 'Search UI' component. The 'Web Browser' boundary is semantically equivalent to 'FRONTEND'."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "BACKEND::data.json",
+    "BACKEND::public assets\\nhtml\\ncss\\njs",
+    "FRONTEND::XMLHttpRequest"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Heroku (Deployment Env)\\nNFR-004",
+    "Global::Web Browser",
+    "Heroku (Deployment Env)\\nNFR-004::Node.js Server (CommonJS)\\nC-001, NFR-003\\nStarted via Node.js start script",
+    "Heroku (Deployment Env)\\nNFR-004::Node.js Server (CommonJS)\\nC-001, NFR-003\\nStarted via Node.js start script::Content-Type Mapper\\nFR-006, NFR-002\\nhtml, css, js, jpg, ico",
+    "Heroku (Deployment Env)\\nNFR-004::Node.js Server (CommonJS)\\nC-001, NFR-003\\nStarted via Node.js start script::Value Extraction\\nFR-008"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "External Systems::Kafka Topic\\n(Event Stream"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Kafka-backed default event-stream transport used for publishing audit events. The predicted node is more specific but semantically equivalent to the GT Kafka node."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\\nserver",
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "predicted_nodes": [
+        "Application Layer (JVM 11::Integrating JVM Application\\n(Service using auditor",
+        "Auditor Client Library (Kotlin/JVM::Auditor Client API\\n(Generates AuditEvent from old/new"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT shows the auditor library embedded/used by multiple applications, while the predicted nodes split this into an integrating JVM application and the auditor client library. This is a reasonable semantic decomposition and the boundary attribution remains consistent with an application-layer client library context."
+    },
+    {
+      "gt_nodes": [
+        "Global::Databases / Filestores\\nElastic, Hadoop, etc."
+      ],
+      "predicted_nodes": [
+        "External Systems::Downstream Consumers\\n(Out of scope"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node refers to generic storage systems, while the predicted node refers to downstream consumers. The PRD says downstream services may consume and persist events, but consuming systems are outside scope; this is not the same functional node as the GT storage boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Default Implementation (Optional::KafkaPublisher\\n(Default EventPublisher",
+    "Infrastructure Abstractions::AuditEventElementFilter",
+    "Infrastructure Abstractions::EventPublisher",
+    "Infrastructure Abstractions::LogProvider"
+  ]
+}

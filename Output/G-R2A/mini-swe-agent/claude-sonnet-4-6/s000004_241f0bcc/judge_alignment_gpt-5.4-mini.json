@@ -1,0 +1,242 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Client-side::Data::ngRX state store"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Angular ClientApp::NgRx Store\\n(Client-side State / Cache"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the client-side NgRx store used for shared state/cache."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Logic::Angular\\nServices"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Angular ClientApp::Evacuee Service Wrapper",
+        "Web Browser::Angular ClientApp::Incident-Task Service Wrapper",
+        "Web Browser::Angular ClientApp::Organization Service Wrapper",
+        "Web Browser::Angular ClientApp::Referral Service Wrapper",
+        "Web Browser::Angular ClientApp::Registration Service Wrapper\\n(incl. PDF Collection"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has a generic Angular services node, and the prediction splits it into specific front-end service wrappers that are semantically consistent with the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Logic::UI Components"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Angular ClientApp::Auth / Session Handler\\n(Login, Logout, Session-Expired",
+        "Web Browser::Angular ClientApp::Controlled-List Loader\\n(App Initialization",
+        "Web Browser::Angular ClientApp::HTTP Interceptor\\n(Watchdog Timer, 401 Handler",
+        "Web Browser::Angular ClientApp::Module Diagnostic\\n(Double-load Alert",
+        "Web Browser::Angular ClientApp::Notification Service\\n(Queue & Notifier",
+        "Web Browser::Angular ClientApp::Redirect Guard",
+        "Web Browser::Angular ClientApp::Role-based Router\\n(Landing & Route Guards"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT UI components node is broadly represented by multiple front-end application concerns in the prediction. These are all within the Angular client boundary and align with the PRD's front-end responsibilities."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Logic::UI Components::Component\\nClass"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Angular ClientApp::Notification Service\\n(Queue & Notifier"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The notifier/notification display behavior corresponds to a UI component class in the GT, and it remains correctly placed in the client application boundary."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Logic::UI Components::HTML\\nTemplates"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Angular ClientApp::Notification Service\\n(Queue & Notifier"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT template layer is not explicitly named in the prediction, but the front-end notification/notifier presentation functionality is the closest semantic equivalent and is correctly on the client side."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Technology::Angular 7"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Angular ClientApp"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the Angular front-end technology/client application."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Data::DB Entities\\n(Registration, Community, etc."
+      ],
+      "predicted_nodes": [
+        "MS SQL Database::Persistent Database Entities"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to persistent database entities on the server/database side."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Data::View-Models\\n(C#"
+      ],
+      "predicted_nodes": [
+        "Global::.NET Core WebAPI Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The prediction does not explicitly model C# view-models; it only places a generic server node. This is too coarse and does not accurately reproduce the GT layer/component."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::DbContext"
+      ],
+      "predicted_nodes": [
+        ".NET Core WebAPI Server::Data Access Layer::Entity Framework / DbContext"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The DbContext is correctly identified and placed under the server-side data access layer."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::Domain Services"
+      ],
+      "predicted_nodes": [
+        ".NET Core WebAPI Server::Domain Services"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The domain services are semantically equivalent and correctly placed in the backend/server boundary."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::Domain Services::CAPTCHA"
+      ],
+      "predicted_nodes": [
+        ".NET Core WebAPI Server::Domain Services"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The specific CAPTCHA service is merged into the broader domain services node; this is acceptable and remains within the correct server-side boundary."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::Domain Services::Email"
+      ],
+      "predicted_nodes": [
+        ".NET Core WebAPI Server::Domain Services"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The specific Email service is merged into the broader domain services node; boundary placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::Domain Services::PDF"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Angular ClientApp::Registration Service Wrapper\\n(incl. PDF Collection"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT PDF domain service is server-side, while the prediction places PDF collection inside the Angular client registration wrapper. That is a boundary-crossing error."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::WebAPI\\nControllers"
+      ],
+      "predicted_nodes": [
+        ".NET Core WebAPI Server::API Controllers"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These are equivalent controller layers on the backend."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Technology::.NET Core\\nWebAPI"
+      ],
+      "predicted_nodes": [
+        ".NET Core WebAPI Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The prediction correctly represents the backend .NET Core WebAPI server."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Technology::Entity\\nFramework\\n(ORM"
+      ],
+      "predicted_nodes": [
+        ".NET Core WebAPI Server::Data Access Layer::Entity Framework / DbContext"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Entity Framework is correctly identified as part of the backend data-access layer."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Technology::Standard\\nC# Classes"
+      ],
+      "predicted_nodes": [
+        "Global::.NET Core WebAPI Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT has a specific C# classes technology node, but the prediction collapses it into a generic server node, losing the correct component-level attribution."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Logic::UI Components"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Angular ClientApp::Auth / Session Handler\\n(Login, Logout, Session-Expired"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Authentication/session UI behavior belongs in the Angular client boundary."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Logic::UI Components"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Angular ClientApp::Role-based Router\\n(Landing & Route Guards"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Role-based routing and route guards are front-end UI/navigation concerns and are correctly placed."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Client-side::Data::View-Models\\n(JSON",
+    "Server-side::Data::View-Models\\n(C#"
+  ],
+  "unmatched_predicted_nodes": [
+    ".NET Core WebAPI Server::Development API Bypass\\n(Dev Env Only",
+    "Global::MS SQL Database",
+    "Global::SiteMinder\\n(Auth / Access Control",
+    "Global::Web Browser",
+    "MS SQL Database::Persistent Database Entities",
+    "MS SQL Database::Repository SQL Scripts\\n(Data Maintenance",
+    "Web Browser::Angular ClientApp::Auth / Session Handler\\n(Login, Logout, Session-Expired",
+    "Web Browser::Angular ClientApp::Controlled-List Loader\\n(App Initialization",
+    "Web Browser::Angular ClientApp::HTTP Interceptor\\n(Watchdog Timer, 401 Handler",
+    "Web Browser::Angular ClientApp::Module Diagnostic\\n(Double-load Alert",
+    "Web Browser::Angular ClientApp::Notification Service\\n(Queue & Notifier",
+    "Web Browser::Angular ClientApp::Redirect Guard",
+    "Web Browser::Angular ClientApp::Role-based Router\\n(Landing & Route Guards"
+  ]
+}

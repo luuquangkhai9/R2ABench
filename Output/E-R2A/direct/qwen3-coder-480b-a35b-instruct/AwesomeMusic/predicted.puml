@@ -1,0 +1,101 @@
+@startuml
+!define RECTANGLE rectangle
+!define DATABASE database
+!define QUEUE queue
+!define COMPONENT component
+
+title AwesomeMusic System Architecture
+
+skinparam componentStyle rectangle
+
+' Define major components
+RECTANGLE "Web Frontend" as frontend [
+    HTML/CSS/JS
+    Bootstrap Framework
+]
+
+RECTANGLE "Web Backend" as backend [
+    Golang + Gin Framework
+    RESTful API Services
+]
+
+RECTANGLE "Algorithm Service" as algorithm [
+    AI Music Generation
+    GPT-2 Model Training
+    Score Classification & Recommendation
+]
+
+RECTANGLE "Scheduling Module" as scheduler [
+    Task Orchestration
+    Daily Training Trigger
+    Task Queue Management
+]
+
+' Define databases and storage
+DATABASE "User Database" as userDB
+DATABASE "Score Database" as scoreDB
+DATABASE "Model Parameters Storage" as modelDB
+DATABASE "Task Metadata Storage" as taskDB
+
+' Define messaging systems
+QUEUE "RabbitMQ" as mq
+QUEUE "etcd" as etcd
+
+' Define external systems
+RECTANGLE "Hadoop Cluster" as hadoop
+RECTANGLE "Nginx Load Balancer" as nginx
+
+' Connections between components
+frontend --> backend : HTTPS/TCP/IP
+backend --> algorithm : HTTPS/TCP/IP
+scheduler --> algorithm : Task Trigger
+scheduler --> mq : Push/Poll Tasks
+mq --> algorithm : Process Tasks
+algorithm --> hadoop : Store/Retrieve Data
+nginx --> frontend : Load Balance
+etcd --> backend : Service Discovery
+
+' Database connections
+backend --> userDB : User Data
+backend --> scoreDB : Score Data
+algorithm --> modelDB : Model Params
+scheduler --> taskDB : Task Metadata
+
+' External interfaces
+frontend -down-> nginx : Web Access
+nginx -down-> frontend : Response
+hadoop -down-> algorithm : Big Data Processing
+
+note right of frontend
+  User Interfaces:
+  - Registration/Login
+  - Score Generation
+  - Upload/Download
+  - Search/Favorites
+end note
+
+note right of backend
+  Core Services:
+  - User Management
+  - Score Operations
+  - Data Storage
+  - API Gateway
+end note
+
+note right of algorithm
+  AI Capabilities:
+  - Music Generation
+  - Model Training
+  - Classification
+  - Recommendations
+end note
+
+note right of scheduler
+  Task Management:
+  - Daily Training
+  - Classification Jobs
+  - Recommendation Updates
+  - User Requests
+end note
+
+@enduml

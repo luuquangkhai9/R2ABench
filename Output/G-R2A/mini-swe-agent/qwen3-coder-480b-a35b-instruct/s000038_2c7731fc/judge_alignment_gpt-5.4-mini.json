@@ -1,0 +1,114 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Web2 application stack::Applications"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Redis Application",
+        "Application Layer::Pub/Sub Application",
+        "Application Layer::SQL Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT generic Applications node is split into multiple application types in the prediction. The application-layer attribution is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::IceFireDB"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Redis Proxy",
+        "Service Layer::Pub/Sub Service",
+        "Service Layer::SQL Result Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT IceFireDB platform node corresponds to the core backend services. The prediction decomposes it into the major runtime-facing components described in the PRD, and the service-layer attribution is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::Platform"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Redis Cluster",
+        "Data Layer::Redis Standalone",
+        "Data Layer::Peer Network (DHT"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Platform node maps to the infrastructure/storage/network substrate. The predicted data-layer nodes capture Redis storage modes and the peer network substrate, which is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::Processing\nBusiness Logic"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Redis Proxy",
+        "Service Layer::Pub/Sub Service",
+        "Service Layer::SQL Result Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT business-logic processing node is decomposed into concrete services implementing the system behavior. Service-layer placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Web3 application stack::Applications"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Redis Application",
+        "Application Layer::Pub/Sub Application",
+        "Application Layer::SQL Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT applications node is matched by the application-facing client types. The boundary is consistent with an application layer."
+    },
+    {
+      "gt_nodes": [
+        "Web3 application stack::IceFireDB"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Redis Proxy",
+        "Service Layer::Pub/Sub Service",
+        "Service Layer::SQL Result Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "This is the Web3 equivalent of the core IceFireDB system node, and the prediction captures the same backend responsibilities in a service layer."
+    },
+    {
+      "gt_nodes": [
+        "Web3 application stack::Decentralized Processing\nBusiness Logic"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Redis Proxy",
+        "Service Layer::Pub/Sub Service",
+        "Service Layer::SQL Result Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted service nodes correspond to the decentralized processing/business-logic part of the GT diagram, and the service boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Web3 application stack::Decentralized File System\nLarge Files and Media"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Peer Network (DHT"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "There is no true semantic match in the PRD scope. The prediction appears to confuse decentralized file system semantics with peer discovery/network infrastructure, which is a boundary/context error."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Web2 application stack::BlockChain Database\\nTransactions, Contracts,\\nCertificates and Receipts",
+    "Web3 application stack::BlockChain Database\\nTransactions, Contracts,\\nCertificates and Receipts",
+    "Web2 application stack::File System\\nLarge Files and Media"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::NAT/Private Networks"
+  ]
+}

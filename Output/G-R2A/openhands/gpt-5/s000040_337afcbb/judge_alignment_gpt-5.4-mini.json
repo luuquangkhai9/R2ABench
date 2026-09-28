@@ -1,0 +1,121 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Proxy"
+      ],
+      "predicted_nodes": [
+        "Network Boundary (controlled by PI_ALLOWED_NETWORKS::PlugIt Proxy",
+        "Network Boundary (controlled by PI_ALLOWED_NETWORKS::PlugIt Proxy::Proxy Core",
+        "Network Boundary (controlled by PI_ALLOWED_NETWORKS::PlugIt Proxy::Proxy Data Store"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT proxy node is decomposed into the proxy core and its proxy-side data store, which is consistent with the PRD architecture. The network-boundary attribution is semantically aligned with the internal network placement of the proxy."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Service 1"
+      ],
+      "predicted_nodes": [
+        "PlugIt Services (N::Service A::PlugIt Service A",
+        "PlugIt Services (N::Service A::Service A DB"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT service node is represented as a service plus its own database, which matches the PRD expectation that each PlugIt Service may have a service-specific data store. The boundary attribution remains within the service context."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Service 2"
+      ],
+      "predicted_nodes": [
+        "PlugIt Services (N::Service B::PlugIt Service B",
+        "PlugIt Services (N::Service B::Service B DB"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT service node is represented as a service plus its own database, consistent with the PRD. Boundary attribution is appropriate for a service-local deployment."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB_Proxy"
+      ],
+      "predicted_nodes": [
+        "Network Boundary (controlled by PI_ALLOWED_NETWORKS::PlugIt Proxy::Proxy Data Store"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The proxy-side datastore in the predicted diagram corresponds semantically to the GT DB_Proxy node. The naming differs, but the architectural role is equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB 1"
+      ],
+      "predicted_nodes": [
+        "PlugIt Services (N::Service A::Service A DB"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The first service database in the GT aligns with Service A DB in the predicted diagram. The boundary attribution is correct as a service-specific database."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB 2"
+      ],
+      "predicted_nodes": [
+        "PlugIt Services (N::Service B::Service B DB"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The second service database in the GT aligns with Service B DB in the predicted diagram. The boundary attribution is correct as a service-specific database."
+    },
+    {
+      "gt_nodes": [
+        "Global::Internet"
+      ],
+      "predicted_nodes": [
+        "Global::Inbound Email"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Internet node is only a broad external source/sink boundary, and the predicted inbound email node is a specific external input within that global boundary. This is an acceptable semantic refinement."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Service 3"
+      ],
+      "predicted_nodes": [
+        "PlugIt Services (N::Service A::PlugIt Service A",
+        "PlugIt Services (N::Service B::PlugIt Service B"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "No distinct third service is represented. Mapping the third GT service to the two predicted services is not semantically correct and indicates an omission/hallucination issue rather than a valid split."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB 3"
+      ],
+      "predicted_nodes": [
+        "PlugIt Services (N::Service A::Service A DB",
+        "PlugIt Services (N::Service B::Service B DB"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT contains a third database node, but the prediction only provides two service databases. This is not a valid split of the same component and represents a missing node."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Internal Network::PlugIt Service 3",
+    "Internal Network::DB 3"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Alembic Migration\\nTool",
+    "Network Boundary (controlled by PI_ALLOWED_NETWORKS::PlugIt API Client\\n(init with API_URL",
+    "Network Boundary (controlled by PI_ALLOWED_NETWORKS::PlugIt Proxy::Mail Intake <<example/standalone>>::Auto-response\\nFilter",
+    "Network Boundary (controlled by PI_ALLOWED_NETWORKS::PlugIt Proxy::Mail Intake <<example/standalone>>::Mail Handler",
+    "Network Boundary (controlled by PI_ALLOWED_NETWORKS::PlugIt Proxy::Mail Intake <<example/standalone>>::Routing Token\\nValidator\\n(SHA-512 slice [30:42",
+    "Network Boundary (controlled by PI_ALLOWED_NETWORKS::PlugIt Proxy::Mail Intake <<example/standalone>>::Text Payload\\nExtractor"
+  ]
+}

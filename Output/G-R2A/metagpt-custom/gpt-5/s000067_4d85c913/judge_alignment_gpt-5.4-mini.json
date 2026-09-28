@@ -1,0 +1,154 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::TraceLeft\nCLI and library tracer"
+      ],
+      "predicted_nodes": [
+        "Userspace Library/Tracer Layer::TraceLeft Library"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the core TraceLeft library/tracer component. The predicted node places it in a userspace library/tracer boundary, which is semantically consistent with the GT global library/tracer node."
+    },
+    {
+      "gt_nodes": [
+        "Event Handler eBPF Programs::Default Handler Probes",
+        "Event Handler eBPF Programs::Process Specific\nHandler Probes"
+      ],
+      "predicted_nodes": [
+        "Linux OS Environment::Kernel eBPF Runtime Layer::Handler eBPF Programs"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates handler probes into default and process-specific variants, while the AI aggregates them into a single handler eBPF programs node. This is a valid merge and remains in the correct kernel/runtime boundary."
+    },
+    {
+      "gt_nodes": [
+        "Event Handler eBPF Programs::Handler Probe\nhandle_syscall_write"
+      ],
+      "predicted_nodes": [
+        "Linux OS Environment::Kernel eBPF Runtime Layer::Handler eBPF Programs"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT shows one concrete handler probe instance, while the AI generalizes it into the broader handler eBPF programs node. This is an acceptable abstraction within the same kernel/runtime boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Perf Event Map\nshared event map"
+      ],
+      "predicted_nodes": [
+        "Linux OS Environment::Kernel eBPF Runtime Layer::Linux perf event channel"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT perf event map/shared event map corresponds to the perf-based event delivery channel described in the PRD. The boundary is correctly placed in the kernel/runtime path."
+    },
+    {
+      "gt_nodes": [
+        "Global::Prog ID Map\npid to id"
+      ],
+      "predicted_nodes": [
+        "Linux OS Environment::Kernel eBPF Runtime Layer::Handler Maps and Return-Program Maps"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT program ID map is part of the handler selection/mapping mechanism. The predicted node groups the relevant maps and is correctly attributed to the kernel/runtime layer."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Kprobe / Kretprobe\nother traced calls",
+        "Main eBPF Program::Kprobe\nentry probe",
+        "Main eBPF Program::Kretprobe\nreturn probe"
+      ],
+      "predicted_nodes": [
+        "Linux OS Environment::Kernel eBPF Runtime Layer::Main eBPF Program",
+        "Linux OS Environment::Kernel eBPF Runtime Layer::kprobe/kretprobe"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT breaks the main program into entry/return/other traced-call probes, while the AI aggregates them under the main eBPF program and kprobe/kretprobe runtime classification. This is a valid merge with correct kernel boundary placement."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Prog Map\npid to fd",
+        "Main eBPF Program::Ret Prog Map\npid to fd",
+        "Main eBPF Program::Prog Maps\nhandler mappings"
+      ],
+      "predicted_nodes": [
+        "Linux OS Environment::Kernel eBPF Runtime Layer::Handler Maps and Return-Program Maps"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT contains multiple map nodes for program/return-program/handler mappings; the predicted node consolidates them appropriately. The kernel/runtime boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Linux Kernel Functions::inet_csk_accept",
+        "Linux Kernel Functions::sys_open",
+        "Linux Kernel Functions::sys_write"
+      ],
+      "predicted_nodes": [
+        "Linux OS Environment::Kernel eBPF Runtime Layer::kprobe/kretprobe"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT lists example traced kernel functions, while the AI abstracts them into the kprobe/kretprobe mechanism. This is semantically consistent and correctly placed in the kernel runtime layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::Linux OS Environment"
+      ],
+      "predicted_nodes": [
+        "Linux OS Environment::Linux kernel eBPF subsystem"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node refines the global Linux environment into the kernel eBPF subsystem, which aligns with the PRD and is not a boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Global::gobpf"
+      ],
+      "predicted_nodes": [
+        "Global::gobpf"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact semantic match and identical boundary attribution."
+    },
+    {
+      "gt_nodes": [
+        "Global::TraceLeft\nCLI and library tracer"
+      ],
+      "predicted_nodes": [
+        "Userspace Library/Tracer Layer::Userspace Tracer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The userspace tracer is a functional subset/role of the broader TraceLeft CLI/library tracer component. The boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Global::TraceLeft\nCLI and library tracer"
+      ],
+      "predicted_nodes": [
+        "CLI Layer::CLI Entry Point",
+        "CLI Layer::Trace Command",
+        "CLI Layer::Event Registration Parser"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's combined CLI/library tracer is split into distinct CLI responsibilities in the prediction. This split is semantically reasonable and the CLI boundary is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Code Generation Layer::Code Generator",
+    "Global::Proto/JSON Event Configuration Source",
+    "Userspace Library/Tracer Layer::Common Event Header",
+    "Userspace Library/Tracer Layer::Handler Naming Scheme",
+    "Userspace Library/Tracer Layer::Probe Loader/Installer"
+  ]
+}

@@ -1,0 +1,97 @@
+@startuml
+!define LAYER_COLOR #E6F3FF
+!define COMPONENT_COLOR #CCE6FF
+!define EXTERNAL_COLOR #FFE6E6
+!define DATASTORE_COLOR #E6FFE6
+
+skinparam component {
+  BackgroundColor<<Layer>> LAYER_COLOR
+  BackgroundColor<<Component>> COMPONENT_COLOR
+  BackgroundColor<<External>> EXTERNAL_COLOR
+  BackgroundColor<<Datastore>> DATASTORE_COLOR
+  BorderColor #666666
+  ArrowColor #333333
+}
+
+title Help With COVID Session and Task Workflow Architecture
+
+package "Frontend Layer" <<Layer>> {
+  component "Next.js Frontend Application" <<Component>> {
+    component "Firebase Session Handler" <<Component>> as SessionHandler
+    component "Task Request Form" <<Component>> as TaskForm
+  }
+}
+
+package "Middleware Layer" <<Layer>> {
+  component "Session Middleware" <<Component>> as SessionMiddleware
+  component "Task Request Middleware" <<Component>> as TaskMiddleware {
+    component "Address Processor" <<Component>> as AddressProcessor
+    component "Service-Area Decision Engine" <<Component>> as ServiceAreaEngine
+  }
+}
+
+package "Backend Layer" <<Layer>> {
+  component "Firebase Functions" <<Component>> as FirebaseFunctions {
+    component "Login API (/api/login)" <<Component>> as LoginAPI
+    component "Logout API (/api/logout)" <<Component>> as LogoutAPI
+  }
+  
+  component "Task Handling Backend" <<Component>> as TaskBackend {
+    component "OnFleet Task Creator" <<Component>> as OnFleetCreator
+  }
+}
+
+package "External Systems" <<Layer>> {
+  component "Firebase Authentication" <<External>> as FirebaseAuth
+  component "OnFleet Task System" <<External>> as OnFleetSystem
+  component "Environment Variables" <<External>> as EnvVars
+}
+
+package "Data Stores" <<Layer>> {
+  component "Server-Side Session Store" <<Datastore>> as SessionStore
+}
+
+' Frontend interactions
+SessionHandler --> LoginAPI : POST /api/login\n(token in JSON body)
+SessionHandler --> LogoutAPI : POST /api/logout
+TaskForm --> TaskMiddleware : Task Request Data\n(Address, User Info)
+
+' Middleware processing
+SessionMiddleware --> LoginAPI : Wraps API with session support
+TaskMiddleware --> AddressProcessor : Processes address
+AddressProcessor --> ServiceAreaEngine : Neighborhood data
+ServiceAreaEngine --> TaskBackend : Eligible requests only
+
+' Backend operations
+LoginAPI --> FirebaseAuth : Verify Firebase ID Token
+LoginAPI --> SessionStore : Store decoded token data
+TaskBackend --> OnFleetCreator : Create task
+OnFleetCreator --> OnFleetSystem : API call to create task
+
+' Configuration and dependencies
+FirebaseFunctions --> EnvVars : Firebase config\n(FIREBASE_AUTH_DOMAIN, etc.)
+Next.js Frontend Application --> EnvVars : Runtime configuration
+
+' External user entry points
+() "End User Channels" as UserChannels
+UserChannels --> TaskMiddleware : Task requests
+
+note top of Next.js Frontend Application
+  Supports three run modes:
+  - Both frontend & backend
+  - Frontend only
+  - Backend only
+end note
+
+note right of SessionMiddleware
+  Provides server-side session
+  object for authentication data
+end note
+
+note right of TaskMiddleware
+  Processes address to determine:
+  - Neighborhood/routing data
+  - Service-area eligibility
+end note
+
+@enduml

@@ -1,0 +1,121 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::runner"
+      ],
+      "predicted_nodes": [
+        "Global::veinmind-runner",
+        "Execution Layer::Runner Execution",
+        "veinmind-runner::Execution Environment",
+        "veinmind-runner::Runner Image",
+        "Execution Layer::Runner Execution::Parallel Container Manager",
+        "Execution Layer::Runner Execution::Container Lifecycle"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's generic 'runner' node is correctly decomposed by the AI into the runner component itself, its execution layer functionality, and its constituent parts like the image and environment. The AI's 'Execution Layer' and 'veinmind-runner' boundaries are more specific and architecturally appropriate than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::plugin"
+      ],
+      "predicted_nodes": [
+        "Core Services Layer::Plugin Framework",
+        "Execution Layer::Plugin Examples",
+        "Core Services Layer::Plugin Framework::Plugin Manager",
+        "Core Services Layer::Plugin Framework::Command Mapper",
+        "Execution Layer::Plugin Examples::Python Example Container",
+        "Execution Layer::Plugin Examples::SDK Integration"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's abstract 'plugin' concept is correctly split by the AI into the underlying 'Plugin Framework' (in the Core Services Layer) and the concrete 'Plugin Examples' (in the Execution Layer). This is a logical separation of concerns, and the boundaries are semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "SDK::interact system",
+        "SDK::plugin system"
+      ],
+      "predicted_nodes": [
+        "Global::veinmind-sdk/libveinmind",
+        "veinmind-sdk/libveinmind::SDK Core",
+        "veinmind-sdk/libveinmind::Library APIs"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT nodes describe functions within the SDK, which the AI correctly maps to the 'veinmind-sdk/libveinmind' component and its core parts. The AI's 'veinmind-sdk/libveinmind' boundary is semantically equivalent to the GT's 'SDK' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::containerd"
+      ],
+      "predicted_nodes": [
+        "Cloud Infrastructure::Containerd"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct 1:1 match for the containerd runtime. The AI's 'Cloud Infrastructure' boundary is semantically equivalent to the GT's 'Infrastructure and Input Backends'."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::docker"
+      ],
+      "predicted_nodes": [
+        "Docker Runtime::Docker Daemon",
+        "Cloud Infrastructure::Docker Registry",
+        "Cloud Infrastructure::DockerHub",
+        "Cloud Infrastructure::Harbor",
+        "Docker Runtime::Container Registry"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's generic 'docker' node is correctly expanded by the AI into the runtime daemon and the various container registry types mentioned in the PRD (NFR-002). The AI's 'Docker Runtime' and 'Cloud Infrastructure' boundaries are a correct and more detailed breakdown than the GT's."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::image",
+        "Scan Targets::container",
+        "Scan Targets::iac",
+        "Infrastructure and Input Backends::dockerfile",
+        "Infrastructure and Input Backends::kubernetes"
+      ],
+      "predicted_nodes": [
+        "Core Services Layer::Scanning Engine",
+        "Core Services Layer::Scanning Engine::Image Scanner",
+        "Core Services Layer::Scanning Engine::Container Scanner",
+        "Core Services Layer::Scanning Engine::IaC Scanner",
+        "User Interface Layer::CLI Interface",
+        "User Interface Layer::CLI Interface::scan-image command",
+        "User Interface Layer::CLI Interface::scan-container command",
+        "User Interface Layer::CLI Interface::scan-iac command"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT lists what is being scanned (targets), while the AI models the components that perform the scanning (Scanners) and the interfaces that trigger them (CLI Commands). This is a correct functional mapping. The AI's placement of logic in the 'Core Services Layer' and triggers in the 'User Interface Layer' is architecturally superior to the GT's mix of 'Scan Targets' and 'Infrastructure' boundaries."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Infrastructure and Input Backends::tarball",
+    "Scan Targets::cluster"
+  ],
+  "unmatched_predicted_nodes": [
+    "Core Services Layer::Authorization Router",
+    "Core Services Layer::Authorization Router::Action Classifier",
+    "Core Services Layer::Authorization Router::Route Matcher",
+    "Data Layer::Report Generator",
+    "Data Layer::Report Generator::IaC Alert Builder",
+    "Data Layer::Report Generator::Malicious File Reporter",
+    "Data Layer::Scan Results Store",
+    "Data Layer::Scan Results Store::IaC Alert Details",
+    "Data Layer::Scan Results Store::MaliciousFileInfo",
+    "Data Layer::Scan Results Store::ReportData",
+    "Data Layer::Scan Results Store::ReportImage",
+    "Data Layer::Scan Results Store::ReportLayer",
+    "Global::Policy Libraries",
+    "Policy Libraries::IaC Policy Rules",
+    "Policy Libraries::Security Policies",
+    "User Interface Layer::Quick-Start Scripts",
+    "User Interface Layer::Quick-Start Scripts::run.sh startup script"
+  ]
+}

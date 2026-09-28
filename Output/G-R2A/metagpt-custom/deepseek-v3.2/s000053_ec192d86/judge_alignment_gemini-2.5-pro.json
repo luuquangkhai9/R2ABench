@@ -1,0 +1,94 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Alert Source::app-sre\\nalertmanager",
+        "Alert Source::cluster\\nalertmanager",
+        "Alert Source::deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "Global::Alert Source"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated multiple specific alert source instances from the GT into a single, high-level conceptual node. The boundary attribution is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::switch(alerttype"
+      ],
+      "predicted_nodes": [
+        "CLI Layer::cadctl"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the main 'cadctl' tool, abstracting the GT's internal logic node ('switch') to the component level. The 'CLI Layer' boundary is a correct and semantically equivalent classification."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::CHGM investigation"
+      ],
+      "predicted_nodes": [
+        "CLI Layer::CHGM Workflow"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the 'Cluster Has Gone Missing' workflow. The AI placed it in the 'CLI Layer', which is semantically equivalent to the GT's 'cadctl' boundary."
+    },
+    {
+      "gt_nodes": [
+        "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster",
+        "PagerDuty Team::app-sre-alertmanager",
+        "PagerDuty Team::prod-deadmanssnitch",
+        "Global::Escalate alert to\\non-call SRE",
+        "Global::Update Incident\\nNotes"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated multiple detailed GT nodes representing PagerDuty teams and related actions into a single component representing the external PagerDuty system. The 'External Systems' boundary is a valid architectural abstraction."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton\\nEvent\\nListener"
+      ],
+      "predicted_nodes": [
+        "Orchestration Layer::EventListener"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the Tekton EventListener. The AI correctly classified this component into an 'Orchestration Layer', which is more specific and accurate than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?"
+      ],
+      "predicted_nodes": [
+        "Orchestration Layer::Trigger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly interpreted the GT's logical decision point node ('Tekton Interceptor') as the Tekton 'Trigger' component, which aligns with the PRD's description. The 'Orchestration Layer' boundary is a correct classification."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Alerts::CHGM",
+    "Alerts::CPD",
+    "Alerts::all cluster\\nalerts",
+    "cadctl::CPD investigation",
+    "cadctl::Future investigations"
+  ],
+  "unmatched_predicted_nodes": [
+    "Alert Source::Alert Webhook",
+    "Deployment/Asset Layer::Container Runtime",
+    "Deployment/Asset Layer::Template Update Utility",
+    "External Systems::AWS",
+    "External Systems::OCM",
+    "Global::External Systems",
+    "Integration Layer::Integration Library",
+    "Orchestration Layer::PipelineRun",
+    "Tekton Execution Environment::Tekton"
+  ]
+}

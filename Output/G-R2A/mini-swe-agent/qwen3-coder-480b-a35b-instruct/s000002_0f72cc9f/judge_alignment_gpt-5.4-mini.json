@@ -1,0 +1,67 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::<b><u>DATABASE</u></b>\\n\\n* MariaDB\\n  * Users\\n  * Likes\\n  * Photos\\n  * Comments"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Database",
+        "External Services::MariaDB"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT database node is represented by a generic database node and a specific MariaDB node. This is a valid split/overlap of the same storage concern, and the data-layer/external-services attribution is semantically acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "predicted_nodes": [
+        "Web Client::A-Frame Renderer",
+        "Web Client::React App"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT web client node is decomposed into client-side rendering and React application parts. Both remain correctly placed within the Web Client boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>WEB SERVER</u></b>\\n\\n* Node\\n* Express\\n* DigitalOcean (Deployment"
+      ],
+      "predicted_nodes": [
+        "Web Server::Node.js Server",
+        "Web Server::Auth Routes",
+        "Web Server::User Controller"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT web server node is split into server runtime, routes, and controller responsibilities. This is a reasonable functional decomposition and the boundary remains correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::AWS S3"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Image Storage",
+        "External Services::AWS S3"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT AWS S3 storage node is matched by a specific AWS S3 node and a more generic image storage node. The external storage boundary is consistent, and the extra generic node is compatible with the same concern."
+    },
+    {
+      "gt_nodes": [
+        "Global::REDIS CACHE"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Cache",
+        "External Services::Redis"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Redis cache node is represented by a generic cache node and a specific Redis node. This is a valid match and the boundary attribution is acceptable."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

@@ -1,0 +1,69 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::<b>AWS S3</b>"
+      ],
+      "predicted_nodes": [
+        "External Services::AWS S3\n(Image Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the AWS S3 image storage service. The AI's boundary 'External Services' is semantically consistent with the GT's global scope."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b>REDIS CACHE</b>"
+      ],
+      "predicted_nodes": [
+        "External Services::Redis\n(Cache"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Redis cache component. The boundary attribution is consistent and correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>DATABASE</u></b>\n\n* MariaDB\n  * Users\n  * Likes\n  * Photos\n  * Comments"
+      ],
+      "predicted_nodes": [
+        "External Services::MariaDB\n(Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the MariaDB relational database. The AI correctly extracted the database component and its boundary attribution is semantically valid."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>WEB SERVER</u></b>\n\n* Node\n* Express\n* DigitalOcean (Deployment"
+      ],
+      "predicted_nodes": [
+        "Web Server (Node.js::Express Server",
+        "Global::User Controller",
+        "Global::User Model",
+        "Global::Database Access Layer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The monolithic web server in the GT is split by the AI into the Express server and its internal backend components (Controller, Model, DB Access) mentioned in the PRD. The boundaries are logically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\n\n* A-Frame\n* React\n* React-Router"
+      ],
+      "predicted_nodes": [
+        "Web Client (Browser::React App",
+        "Global::Authentication Views\n(Sign-up/Sign-in",
+        "Global::Shared Credential Handlers",
+        "Global::Credential Submission\n(JSON POST"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Web Client is expanded by the AI to include the base React App as well as specific client-side views and handlers detailed in the PRD. The boundary attributions align with the client-side architecture."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Content Service"
+  ]
+}

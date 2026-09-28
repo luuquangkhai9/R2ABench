@@ -1,0 +1,83 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Browser Clients::Client Browser\nPlayer 1",
+        "Browser Clients::Client Browser\nPlayer 2",
+        "Browser Clients::Client Browser\nPlayer 3"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Browser Client"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The three GT browser client nodes are instances of the same browser client component. The AI aggregated them into one browser client node, which is semantically equivalent and placed in an appropriate client-side boundary."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\nErlang"
+      ],
+      "predicted_nodes": [
+        "Game Server Layer::Game Server (Master"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the master game server role in the Erlang/OTP server cluster. The boundary is consistent with the server layer."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Slave\nErlang"
+      ],
+      "predicted_nodes": [
+        "Game Server Layer::Replica Node (Slave"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the replica/slave server role. The AI placed it in the server layer, which is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::DNS"
+      ],
+      "predicted_nodes": [
+        "External Systems::DNS/Load Balancer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT DNS node is semantically covered by the AI's DNS/Load Balancer external system node. The external systems boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Static Web Tier::Web Server\nGame assets, HTML, CSS, JS"
+      ],
+      "predicted_nodes": [
+        "Web Server Layer::Web Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the static web server responsible for serving game assets and web content. The web server boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Erlang / OTP Game Server Cluster"
+      ],
+      "predicted_nodes": [
+        "Global::Game Server Layer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node denotes the overall game server cluster, and the predicted global game server layer captures the same high-level architectural grouping."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "External Systems::Network Infrastructure",
+    "Global::Client Layer",
+    "Global::External Systems",
+    "Global::JSON Message Parser",
+    "Global::Ping/Pong Handler",
+    "Global::Reconnection Manager",
+    "Global::Server List Manager",
+    "Global::Web Server Layer"
+  ]
+}

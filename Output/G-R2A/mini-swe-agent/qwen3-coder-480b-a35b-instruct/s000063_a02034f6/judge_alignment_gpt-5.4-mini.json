@@ -1,0 +1,160 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::BFF"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Access-Facing Services"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the access-facing/BFF layer that mediates client requests before reaching business services."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Auth Session"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Authorization Services"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent authorization-related session handling within the server's access/service path."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Session"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Session Management"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe session lifecycle and session-related protocol handling."
+    },
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "Infrastructure & Storage::Kafka"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same infrastructure dependency; only the boundary naming differs."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MinIO"
+      ],
+      "predicted_nodes": [
+        "Infrastructure & Storage::MinIO"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same storage component; boundary attribution is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MySQL"
+      ],
+      "predicted_nodes": [
+        "Infrastructure & Storage::MySQL"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same database dependency; boundary attribution is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Storages::Redis"
+      ],
+      "predicted_nodes": [
+        "Infrastructure & Storage::Redis"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same cache/storage dependency; boundary attribution is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Push"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Messaging Services"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Push-related asynchronous handling fits within messaging/supporting service responsibilities."
+    },
+    {
+      "gt_nodes": [
+        "Global::Sync"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Session Management"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT sync component is a distinct supporting/asynchronous concern, while the predicted node places it under session management, which is a different functional boundary."
+    },
+    {
+      "gt_nodes": [
+        "Services::Msg"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Messaging Services"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote messaging-related business/service functionality."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Gateway"
+      ],
+      "predicted_nodes": [
+        "Client Access Layer::MTProto Server Interface"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the client-facing gateway/interface handling MTProto communication."
+    },
+    {
+      "gt_nodes": [
+        "Clients::Android",
+        "Clients::PC",
+        "Clients::Web",
+        "Clients::iOS"
+      ],
+      "predicted_nodes": [
+        "Client Access Layer::MTProto Server Interface"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT lists multiple client types, while the prediction aggregates them into the generic client-server interface boundary. This is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Services::DFS"
+      ],
+      "predicted_nodes": [
+        "Supporting Components::Media Processing (Optional"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "DFS is the closest GT service-level component corresponding to supporting/media-related infrastructure functionality, and the optional media-processing wrapper aligns with a supporting component."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer::Status",
+    "Services::Services"
+  ],
+  "unmatched_predicted_nodes": [
+    "Infrastructure & Storage::etcd",
+    "Service Layer::Authorization Services",
+    "Service Layer::Messaging Services",
+    "Service Layer::Session Management"
+  ]
+}

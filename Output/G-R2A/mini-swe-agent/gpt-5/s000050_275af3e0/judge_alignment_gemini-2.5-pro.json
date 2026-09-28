@@ -1,0 +1,86 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2"
+      ],
+      "predicted_nodes": [
+        "Windows Hyper-V Fuzzing Workflow::Child Partition VM (Windows)"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Child Partition VM in the Hyper-V fuzzing setup. The GT uses a physical layer boundary 'Hyper-V (L1) - Host', while the AI uses a logical workflow boundary 'Windows Hyper-V Fuzzing Workflow', which is semantically equivalent in this context."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2::harness.sys"
+      ],
+      "predicted_nodes": [
+        "Windows Hyper-V Fuzzing Workflow::Child Partition VM (Windows)::Harness Driver"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the harness driver ('harness.sys') operating within the child partition. The parent boundaries ('Child Partition\\nGuest VM (L2' and 'Child Partition VM (Windows)') are a correct match."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2"
+      ],
+      "predicted_nodes": [
+        "Windows Hyper-V Fuzzing Workflow::Root Partition (Windows)"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Root Partition (Host OS) in the Hyper-V fuzzing setup. The GT and AI use semantically equivalent names for this component and place it within a correctly matched parent context."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::CrashMonitoring.sys"
+      ],
+      "predicted_nodes": [
+        "Windows Hyper-V Fuzzing Workflow::Root Partition (Windows)::Crash Monitoring Driver"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the crash monitoring driver ('CrashMonitoring.sys') running in the root partition. The parent boundaries ('Root Partition\\nHost OS (L2' and 'Root Partition (Windows)') are a correct match."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::vmswitch.sys"
+      ],
+      "predicted_nodes": [
+        "Windows Hyper-V Fuzzing Workflow::Root Partition (Windows)::Hyper-V VMSwitch (vmswitch.sys)"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes identify the target of the fuzzing, 'vmswitch.sys', located in the root partition. The AI's naming is slightly more descriptive but functionally identical. The parent boundaries are correctly matched."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "predicted_nodes": [
+        "Orchestration::kAFL-Fuzzer",
+        "Orchestration::Standalone Test Runner (Python CLI)"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's single 'hAFL2' node, described in the PRD as a kAFL-based system with a standalone entry point, is reasonably split by the AI into its core component 'kAFL-Fuzzer' and its entry point 'Standalone Test Runner'. The AI's 'Orchestration' boundary is a good logical equivalent to the GT's placement of hAFL2 at the top level of the fuzzing setup ('KVM (L0')."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::KVM (L0",
+    "KVM (L0::Hyper-V (L1) - Host"
+  ],
+  "unmatched_predicted_nodes": [
+    "Linux Userspace Fuzzing Workflow::Guest VM (Linux)",
+    "Linux Userspace Fuzzing Workflow::Guest VM (Linux::Embedded Forkserver",
+    "Linux Userspace Fuzzing Workflow::Guest VM (Linux::Target Binary",
+    "Linux Userspace Fuzzing Workflow::Host (Linux)",
+    "Linux Userspace Fuzzing Workflow::Host (Linux::Initrd Builder (bash scripts)",
+    "Linux Userspace Fuzzing Workflow::Host (Linux::initrd",
+    "Windows Hyper-V Fuzzing Workflow::Child Partition VM (Windows)::loader.exe",
+    "Windows Hyper-V Fuzzing Workflow::Child Partition VM (Windows)::packet_sender.exe",
+    "Windows Hyper-V Fuzzing Workflow::VMBus/netvsc Channel"
+  ]
+}

@@ -1,0 +1,171 @@
+@startuml
+' System Architecture Diagram for tokencard/contracts
+' Generated from Software Requirements Specification
+
+' === External Systems ===
+component "Ethereum Network" as ETH_NETWORK {
+  database "Blockchain" as BLOCKCHAIN
+  interface "Smart Contracts"
+}
+
+component "ENS (Ethereum Name Service)" as ENS {
+  database "Name Registry" as ENS_REGISTRY
+  interface "Address Resolution"
+}
+
+' === Core User Entities ===
+component "Owner Address" as OWNER {
+  note right of OWNER
+    Externally Owned Address (EOA)
+    Owns user's smart contracts
+    Hosts Gas Tank
+  end note
+  
+  component "Gas Tank" as GAS_TANK {
+    note right of GAS_TANK
+      Gas-payment ETH
+      Outside Consumer Contract Wallet
+      Separate from protected assets
+    end note
+  }
+}
+
+component "Controller Addresses" as CONTROLLERS {
+  note right of CONTROLLERS
+    Set of addresses
+    Service and control operations
+    Generated bindings
+  end note
+  
+  database "Controller State" as CONTROLLER_STATE {
+    field "adminCount: uint256"
+    field "controllerCount: uint256"
+  }
+}
+
+' === Main Smart Contracts ===
+component "Consumer Contract Wallet" as WALLET {
+  note right of WALLET
+    Holds user ETH and ERC20 assets
+    Security protections apply
+    Core wallet functionality
+  end note
+  
+  database "Wallet Assets" as WALLET_ASSETS {
+    field "ETH balance"
+    field "ERC20 tokens[]"
+  }
+}
+
+' === Supporting Contracts (ENS-resolved) ===
+component "Token Whitelist Contract" as TOKEN_WHITELIST {
+  note right of TOKEN_WHITELIST
+    Token support status
+    Exchange rates
+    Loadability flags
+    Burnability flags
+  end note
+  
+  database "Token List" as TOKEN_LIST {
+    field "tokenAddress"
+    field "exchangeRate"
+    field "loadable: bool"
+    field "burnable: bool"
+  }
+}
+
+component "Oracle/Rate Provider" as ORACLE {
+  note right of ORACLE
+    Exchange-rate data provider
+    Supports token operations
+    External price feeds
+  end note
+  
+  database "Exchange Rates" as EXCHANGE_RATES {
+    field "token pairs"
+    field "current rates"
+  }
+}
+
+' === Integration Layer ===
+component "Generated Go Bindings" as GO_BINDINGS {
+  note right of GO_BINDINGS
+    Contract interaction patterns
+    Read-only calls (Call)
+    Paid transactions (Transact)
+    Transfers (Transfer)
+  end note
+  
+  interface "API Layer" as API
+}
+
+' === Relationships ===
+
+' Owner controls the Wallet
+OWNER --> WALLET : owns\ncontrols
+
+' Gas Tank is part of Owner but separate from Wallet
+OWNER --> GAS_TANK : contains
+GAS_TANK ..> WALLET : separate from\n(security boundary)
+
+' Wallet uses supporting contracts
+WALLET --> TOKEN_WHITELIST : queries\nfor token eligibility
+WALLET --> ORACLE : obtains\nexchange-rate data
+
+' Supporting contracts are resolved via ENS
+WALLET --> ENS : resolves\ncontract addresses
+TOKEN_WHITELIST --> ENS : address\nresolution
+ORACLE --> ENS : address\nresolution
+
+' Controllers interact with system
+CONTROLLERS --> WALLET : control/\nconfirmation ops
+CONTROLLERS --> TOKEN_WHITELIST : management
+CONTROLLERS --> ORACLE : management
+
+' Go Bindings provide integration
+GO_BINDINGS --> WALLET : read/write\ninteractions
+GO_BINDINGS --> CONTROLLERS : admin/\ncontroller ops
+GO_BINDINGS --> TOKEN_WHITELIST : token\nqueries
+GO_BINDINGS --> ORACLE : rate\nqueries
+
+' External dependencies
+WALLET --> ETH_NETWORK : deployed on\ninteracts with
+TOKEN_WHITELIST --> ETH_NETWORK : deployed on
+ORACLE --> ETH_NETWORK : deployed on
+CONTROLLERS --> ETH_NETWORK : deployed on
+
+' Data flows
+TOKEN_WHITELIST --> WALLET : token eligibility\nrate data
+ORACLE --> WALLET : exchange-rate data
+TOKEN_WHITELIST --> CONTROLLERS : token list updates
+ORACLE --> CONTROLLERS : rate updates
+
+' === Legend/Notes ===
+note top of ETH_NETWORK
+  <b>External Dependency</b>
+  Required runtime environment
+end note
+
+note top of ENS
+  <b>External Dependency</b>
+  Contract address resolution
+end note
+
+note as NFR1
+  <b>Security Boundary</b>
+  Gas-payment ETH is kept outside
+  Consumer Contract Wallet
+end note
+
+GAS_TANK .. NFR1
+WALLET .. NFR1
+
+note as NFR2
+  <b>Interface Consistency</b>
+  Bindings provide distinct
+  read-only vs paid paths
+end note
+
+GO_BINDINGS .. NFR2
+
+@enduml

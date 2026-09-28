@@ -1,0 +1,86 @@
+@startuml
+!define RECTANGLE class
+!define COMPONENT component
+!define DATABASE database
+
+title BeeGreen System Architecture
+
+skinparam componentStyle rectangle
+
+package "Client Tier" {
+  RECTANGLE WebsiteClient [
+    Website Client
+    (React/TypeScript)
+  ]
+
+  RECTANGLE BrowserExtension [
+    Browser Extension
+    (Chrome)
+  ]
+}
+
+package "API Tier" {
+  COMPONENT BackendServer [
+    Backend Server
+    (Node.js/LoopBack)
+  ]
+
+  RECTANGLE UserRepository [
+    UserRepository
+    (Data Access Layer)
+  ]
+
+  RECTANGLE UserController [
+    UserController
+    (REST Controller)
+  ]
+
+  UserController --> UserRepository : uses
+  BackendServer --> UserController : hosts
+}
+
+package "Data Tier" {
+  DATABASE PersistentStorage [
+    Persistent Storage
+    (Database)
+  ]
+
+  UserRepository --> PersistentStorage : persists data
+}
+
+package "External Systems" {
+  RECTANGLE DataProcessing [
+    Data Processing
+    (Cloud Services)
+  ]
+}
+
+WebsiteClient --> BackendServer : HTTP/JSON
+BrowserExtension --> BackendServer : HTTP/JSON
+BackendServer --> DataProcessing : uses (scoring/recommendations)
+
+note right of BackendServer
+  Exposes REST endpoints:
+  - POST /users
+  - GET /users
+  - PATCH /users
+  - GET /users/{id}
+  - GET /ping
+end note
+
+note right of UserController
+  Handles:
+  - User creation
+  - User listing
+  - Bulk updates
+  - User retrieval
+  - Ping diagnostics
+end note
+
+note right of PersistentStorage
+  Stores:
+  - User records
+  - InventoryItem data
+end note
+
+@enduml

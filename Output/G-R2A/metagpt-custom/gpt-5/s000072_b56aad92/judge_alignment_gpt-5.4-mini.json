@@ -1,0 +1,168 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Hardware"
+      ],
+      "predicted_nodes": [
+        "Global::hwloc distribution tarball"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the external distribution/package artifact in the build/verification context, and the Global boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCS Services\\nCommon Utilities::Memory Management"
+      ],
+      "predicted_nodes": [
+        "Build/Deploy Configuration Layer::CFLAGS",
+        "Build/Deploy Configuration Layer::LDFLAGS",
+        "Build/Deploy Configuration Layer::LD_LIBRARY_PATH"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node represents a memory-management utility capability within UCX, while the predicted nodes are build/runtime path configuration variables. They are not semantically equivalent components, so this is not a valid match."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCM Memory Services::Memory Hooks"
+      ],
+      "predicted_nodes": [
+        "Build/Deploy Configuration Layer::libibverbs headers",
+        "Build/Deploy Configuration Layer::librdmacm headers"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is about UCX memory-hook services, whereas the predicted nodes are build prerequisites for verbs support. Different subsystem responsibilities, so boundary/semantic match fails."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Message Passing API\\nTag Matching, Rendezvous"
+      ],
+      "predicted_nodes": [
+        "Data Path / Send Path Layer::Send state machine",
+        "Data Path / Send Path Layer::Rendezvous packet preparation logic",
+        "Data Path / Send Path Layer::Packet control fields\\n(envelope, LIBA(OD), one LIBA, two LIBAs"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "These predicted nodes capture the rendezvous/send-path mechanics described in the PRD, which are conceptually related to the GT message-passing rendezvous area, but the GT is specifically UCX UCP message-passing API level. The AI placed them in a generic send-path layer rather than the UCX UCP protocol boundary, so boundary attribution is not correct."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Fragmentation"
+      ],
+      "predicted_nodes": [
+        "Data Path / Send Path Layer::Data Descriptor (non-direct-access payload"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node is about payload sourcing/packing from a data descriptor in a send path, not the fragmentation protocol capability in UCX. This is not semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Transport Selection"
+      ],
+      "predicted_nodes": [
+        "Transport Integration Layer::CH4 network-module integration context",
+        "Global::OFI/libfabric",
+        "Global::UCX"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is specifically about transport selection inside UCX UCP, while the predicted nodes describe broader integration context and transport technologies. The AI did not preserve the specific architectural boundary."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCS Services\\nCommon Utilities::Data Structures"
+      ],
+      "predicted_nodes": [
+        "Data Path / Send Path Layer::Packet buffer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "A packet buffer is a concrete send-path data structure, but the GT node is a generic common-utilities data-structures category. This is too broad and not a precise semantic match."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCS Services\\nCommon Utilities::Utilities"
+      ],
+      "predicted_nodes": [
+        "Build & Verification Layer::run-embedded-tests.sh",
+        "Build & Verification Layer::Autogen (./autogen.sh",
+        "Build & Verification Layer::Autotools build steps\\n(./configure, make",
+        "Build & Verification Layer::Autotools test/cleanup steps\\n(make check/clean/distclean",
+        "Build & Verification Layer::Expand distribution tarball",
+        "Build & Verification Layer::Manual embedded hwloc workflow",
+        "Build & Verification Layer::hwloc-tree/ directory rename"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "These are build/verification workflow steps, not a generic UCX utilities layer. They are not semantically equivalent to the GT utility package."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Drivers and Kernels::Cray Driver",
+    "Drivers and Kernels::OS Kernel\\nEthernet",
+    "Drivers and Kernels::OS Kernel\\nHost Memory",
+    "Drivers and Kernels::OS Kernel\\nMemory Hooks",
+    "Drivers and Kernels::RDMA Verbs Driver",
+    "Drivers and Kernels::ROCm / CUDA",
+    "Global::Applications\\nHPC, AI, ML, Big Data",
+    "Programming Models and Frameworks::AI / ML Frameworks\\nTensorFlow, Burst Buffer",
+    "Programming Models and Frameworks::MPI\\nMPICH, Open-MPI",
+    "Programming Models and Frameworks::PGAS / SHMEM\\nOpenSHMEM, UPC, CAF, X10, Chapel",
+    "Programming Models and Frameworks::Task Runtimes\\nParsec, OCR, Legion",
+    "UCX::UCP Protocols\\nHigh Level API::Cross-Transport Multi-Rail",
+    "UCX::UCP Protocols\\nHigh Level API::I/O API\\nStream",
+    "UCX::UCP Protocols\\nHigh Level API::PGAS API\\nRMAs, Atomics",
+    "UCX::UCP Protocols\\nHigh Level API::Software Protocols",
+    "UCX::UCP Protocols\\nHigh Level API::Task Based API\\nActive Messages",
+    "UCX::UCS Services\\nCommon Utilities::Memory Management",
+    "UCX::UCT Hardware Transports\\nLow Level API::DCT",
+    "UCX::UCT Hardware Transports\\nLow Level API::Ethernet Transport\\nTCP/IP Sockets",
+    "UCX::UCT Hardware Transports\\nLow Level API::GPU Transport\\nNVIDIA CUDA, AMD ROCm",
+    "UCX::UCT Hardware Transports\\nLow Level API::Gemini / Aries Transport\\nGNI",
+    "UCX::UCT Hardware Transports\\nLow Level API::Intra-node Host Memory\\nSYSV, POSIX, KNEM, CMA, XPMEM",
+    "UCX::UCT Hardware Transports\\nLow Level API::RC",
+    "UCX::UCT Hardware Transports\\nLow Level API::RDMA Verbs Transport\\nInfiniBand, ROCE, OPA",
+    "UCX::UCT Hardware Transports\\nLow Level API::UD"
+  ],
+  "unmatched_predicted_nodes": [
+    "Build & Verification Layer::Autogen (./autogen.sh",
+    "Build & Verification Layer::Autotools build steps\\n(./configure, make",
+    "Build & Verification Layer::Autotools test/cleanup steps\\n(make check/clean/distclean",
+    "Build & Verification Layer::Expand distribution tarball",
+    "Build & Verification Layer::Manual embedded hwloc workflow",
+    "Build & Verification Layer::hwloc-tree/ directory rename",
+    "Build & Verification Layer::run-embedded-tests.sh",
+    "Build/Deploy Configuration Layer::Build/deploy configuration interface",
+    "Build/Deploy Configuration Layer::CFLAGS",
+    "Build/Deploy Configuration Layer::LDFLAGS",
+    "Build/Deploy Configuration Layer::LD_LIBRARY_PATH",
+    "Build/Deploy Configuration Layer::libibverbs headers",
+    "Build/Deploy Configuration Layer::librdmacm headers",
+    "Communication Design Layer::Communication lifecycle responsibilities documentation",
+    "Communication Design Layer::One-to-many scatter transfer responsibility documentation",
+    "Data Path / Send Path Layer::Data Descriptor (non-direct-access payload",
+    "Data Path / Send Path Layer::Flow-control state",
+    "Data Path / Send Path Layer::Network send descriptor preparation",
+    "Data Path / Send Path Layer::Packet buffer",
+    "Data Path / Send Path Layer::Packet control fields\\n(envelope, LIBA(OD), one LIBA, two LIBAs",
+    "Data Path / Send Path Layer::Pinned User Data",
+    "Data Path / Send Path Layer::Rendezvous packet preparation logic",
+    "Data Path / Send Path Layer::Send state machine",
+    "Global::Linux Verbs API",
+    "Global::Network Device",
+    "Global::OFI/libfabric",
+    "Global::UCX",
+    "Global::hwloc distribution tarball",
+    "Global::libibverbs",
+    "Global::librdmacm",
+    "Transport Integration Layer::CH4 network-module integration context",
+    "Transport Integration Layer::Embedded Libfabric verbs provider",
+    "Transport Integration Layer::Verbs communication management via librdmacm",
+    "Transport Integration Layer::Verbs control/data transfer via libibverbs"
+  ]
+}

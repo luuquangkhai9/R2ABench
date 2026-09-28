@@ -1,0 +1,80 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Service / Backend Layer"
+      ],
+      "predicted_nodes": [
+        "Review_Process_Layer::Review_Checklist_Orchestrator",
+        "Review_Process_Layer::Checklist_Inspection",
+        "Review_Process_Layer::Problem_Reporting",
+        "Review_Process_Layer::Scoring_and_Signoff"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT indicates a generic backend service layer, while the predicted nodes correctly capture backend-like processing functions but place them under a review-process-specific boundary rather than the GT's service/backend boundary. This is a semantic split, but the architectural boundary attribution does not reproduce the GT structure."
+    },
+    {
+      "gt_nodes": [
+        "Global::Storage / Database Layer"
+      ],
+      "predicted_nodes": [
+        "Data_Layer::Review_Artifact_Markdown_Checklist",
+        "Data_Layer::Review_Data_Purpose_Items_Problems_Scores_Metadata"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has a generic storage/database layer, and the predicted nodes represent stored review artifact data and metadata. Although the predicted boundary name differs, it is semantically equivalent to a data/storage layer."
+    },
+    {
+      "gt_nodes": [
+        "Storage / Database Layer::MySQL Database"
+      ],
+      "predicted_nodes": [
+        "Data_Layer::Review_Data_Purpose_Items_Problems_Scores_Metadata"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node represents persistent structured review data, which is functionally consistent with the GT database node. The boundary is semantically aligned with storage/data."
+    },
+    {
+      "gt_nodes": [
+        "Storage / Database Layer::Redis Cache"
+      ],
+      "predicted_nodes": [
+        "Data_Layer::Review_Artifact_Markdown_Checklist"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is an explicit cache component, but the predicted node is a persisted markdown artifact rather than a cache. This is not a functional equivalent and also reflects a storage-type mismatch."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Client Layer::Client Terminal",
+    "Client Layer::Cloud DNS",
+    "Global::Client Layer",
+    "Global::Network / Gateway Layer",
+    "Network / Gateway Layer::Machine 01",
+    "Network / Gateway Layer::Machine 01::LVS - Linux Virtual Server",
+    "Network / Gateway Layer::Machine 01::Nginx",
+    "Network / Gateway Layer::Machine 02",
+    "Network / Gateway Layer::Machine 02::LVS - Linux Virtual Server",
+    "Network / Gateway Layer::Machine 02::Nginx",
+    "Network / Gateway Layer::Machine 03",
+    "Network / Gateway Layer::Machine 03::LVS - Linux Virtual Server",
+    "Network / Gateway Layer::Machine 03::Nginx",
+    "Service / Backend Layer::Back-office Management",
+    "Service / Backend Layer::Django Service Clusters",
+    "Service / Backend Layer::Literature Service",
+    "Service / Backend Layer::Socializing Service",
+    "Service / Backend Layer::User Information Service",
+    "Storage / Database Layer::Elasticsearch"
+  ],
+  "unmatched_predicted_nodes": [
+    "External_References::Business_Rules",
+    "External_References::Documentation_Specifications",
+    "External_References::Industry_Standards",
+    "External_References::Product_Specifications",
+    "Presentation_Layer::Markdown_UI"
+  ]
+}

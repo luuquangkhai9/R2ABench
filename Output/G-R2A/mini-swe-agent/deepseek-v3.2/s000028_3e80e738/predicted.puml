@@ -1,0 +1,166 @@
+@startuml
+!define AWSPUML https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v17.0/dist
+!includeurl AWSPUML/AWSCommon.puml
+!includeurl AWSPUML/General/Users.puml
+!includeurl AWSPUML/SecurityIdentityCompliance/Cognito.puml
+!includeurl AWSPUML/ApplicationIntegration/APIGateway.puml
+!includeurl AWSPUML/ApplicationIntegration/SimpleQueueServiceSQS.puml
+!includeurl AWSPUML/Compute/ElasticContainerService.puml
+!includeurl AWSPUML/SecurityIdentityCompliance/IdentityAccessManagementIAM.puml
+!includeurl AWSPUML/NetworkingContentDelivery/VPC.puml
+!includeurl AWSPUML/ManagementGovernance/CloudFormation.puml
+
+title AWS Infrastructure Architecture: Cognito, API Gateway, and VPC Endpoint
+
+skinparam componentStyle uml2
+skinparam backgroundColor #F5F5F5
+skinparam defaultFontSize 12
+
+' ========== LAYERS ==========
+package "Infrastructure Layer" {
+  component "CloudFormation Templates" as CF_TEMPLATES <<CloudFormation>> {
+    component "Cognito Stack" as COGNITO_STACK
+    component "API Gateway Stack" as API_STACK
+    component "VPC Endpoint Stack" as VPC_STACK
+  }
+}
+
+package "AWS Account: Cognito Account" as COGNITO_ACCOUNT {
+  package "Authentication Layer" {
+    component "Cognito User Pool" as COGNITO_USER_POOL <<Cognito>> {
+      component "User Pool Client" as USER_POOL_CLIENT
+    }
+    
+    component "Cognito Identity Pool" as COGNITO_IDENTITY_POOL <<Cognito>>
+    
+    component "IAM Roles" as IAM_ROLES <<IAM>> {
+      component "Authenticated Role" as AUTH_ROLE
+      component "Unauthenticated Role" as UNAUTH_ROLE
+    }
+  }
+}
+
+package "AWS Account: API Gateway Account" as API_ACCOUNT {
+  package "API Layer" {
+    component "API Gateway" as API_GATEWAY <<APIGateway>> {
+      component "Cognito Authorizer" as COGNITO_AUTHORIZER
+      component "WhoAmI Method" as WHOAMI_METHOD
+      component "ECS Proxy Method" as ECS_METHOD
+      component "Deployment Stage" as DEPLOYMENT_STAGE
+    }
+    
+    component "Callback URL Output" as CALLBACK_URL
+  }
+  
+  package "Compute Layer" {
+    component "ECS Service" as ECS_SERVICE <<ECS>>
+  }
+  
+  package "Network Layer" {
+    component "VPC" as VPC <<VPC>> {
+      component "Subnets" as SUBNETS
+      component "Security Group" as SG
+    }
+    
+    component "VPC Interface Endpoint" as VPC_ENDPOINT <<VPC>>
+  }
+}
+
+package "External Systems" {
+  component "API Clients" as API_CLIENTS <<Users>>
+  component "Amazon SQS" as SQS <<SQS>>
+}
+
+' ========== DEPENDENCIES & FLOWS ==========
+' CloudFormation deployment
+CF_TEMPLATES ..> COGNITO_STACK : deploys
+CF_TEMPLATES ..> API_STACK : deploys
+CF_TEMPLATES ..> VPC_STACK : deploys
+
+' Cognito account setup
+COGNITO_STACK ..> COGNITO_USER_POOL : creates
+COGNITO_STACK ..> COGNITO_IDENTITY_POOL : creates
+COGNITO_STACK ..> IAM_ROLES : creates
+
+' Cognito internal relationships
+COGNITO_USER_POOL --> USER_POOL_CLIENT : contains
+COGNITO_IDENTITY_POOL --> COGNITO_USER_POOL : linked to
+COGNITO_IDENTITY_POOL --> IAM_ROLES : role attachment
+IAM_ROLES --> AUTH_ROLE : includes
+IAM_ROLES --> UNAUTH_ROLE : includes
+
+' Cross-account authentication
+COGNITO_USER_POOL --> COGNITO_AUTHORIZER : provides ARN
+note on link: Cross-account authentication
+
+' API Gateway setup
+API_STACK ..> API_GATEWAY : creates
+API_GATEWAY --> COGNITO_AUTHORIZER : uses
+API_GATEWAY --> WHOAMI_METHOD : includes
+API_GATEWAY --> ECS_METHOD : includes
+API_GATEWAY --> DEPLOYMENT_STAGE : deploys to
+API_GATEWAY --> CALLBACK_URL : outputs
+
+' API Gateway methods
+WHOAMI_METHOD --> COGNITO_AUTHORIZER : protected by
+ECS_METHOD --> COGNITO_AUTHORIZER : protected by
+ECS_METHOD --> ECS_SERVICE : proxies to
+note on link: VPC Link integration
+
+' Role header flow
+COGNITO_AUTHORIZER --> WHOAMI_METHOD : provides role claim
+COGNITO_AUTHORIZER --> ECS_METHOD : provides role claim
+WHOAMI_METHOD --> API_CLIENTS : returns x-pagopa-pn-cx-role header
+ECS_METHOD --> ECS_SERVICE : forwards x-pagopa-pn-cx-role header
+
+' VPC endpoint setup
+VPC_STACK ..> VPC_ENDPOINT : creates
+VPC --> SUBNETS : contains
+VPC --> SG : contains
+VPC_ENDPOINT --> VPC : within
+VPC_ENDPOINT --> SUBNETS : uses
+VPC_ENDPOINT --> SG : secured by
+VPC_ENDPOINT --> SQS : connects to
+note on link: Private DNS enabled
+
+' Client access
+API_CLIENTS --> API_GATEWAY : HTTP requests
+API_CLIENTS --> CALLBACK_URL : consumes
+
+' ECS to SQS communication
+ECS_SERVICE --> VPC_ENDPOINT : uses for private access
+VPC_ENDPOINT --> SQS : private connectivity
+
+' ========== NOTES & CONSTRAINTS ==========
+note top of CF_TEMPLATES
+  CloudFormation templates
+  using format version 2010-09-09
+end note
+
+note right of COGNITO_USER_POOL
+  User attributes:
+  - custom:Role
+  - email
+  Token validity units:
+  - days, hours, minutes, seconds
+end note
+
+note right of COGNITO_AUTHORIZER
+  Uses Cognito user-pool ARN
+  from Cognito account
+end note
+
+note right of VPC_ENDPOINT
+  Security constraints:
+  - Ingress restricted to VPC CIDR
+  - Private DNS enabled
+end note
+
+note right of UNAUTH_ROLE
+  Security boundary:
+  - Trusts only unauthenticated
+    identities from identity pool
+  - Limited action scope
+end note
+
+@enduml

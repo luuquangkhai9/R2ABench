@@ -1,0 +1,160 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::InfluxDB"
+      ],
+      "predicted_nodes": [
+        "Global::InfluxDB",
+        "InfluxDB::Time-Series Records"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the InfluxDB time-series database. The GT places it under the application runtime/database boundary, while the prediction splits it into a global node plus a data-content node; this is semantically consistent and not a severe boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Global::MySQL",
+        "MySQL::Relational Data Store"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the MySQL relational database. The predicted nodes are a reasonable decomposition and remain within the correct storage/database context."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::Redis"
+      ],
+      "predicted_nodes": [
+        "Global::Redis",
+        "Redis::Cache & Coordination"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote Redis used for cache and coordination. The predicted boundary attribution is semantically aligned with the GT database/runtime placement."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Reverse Proxy::Nginx"
+      ],
+      "predicted_nodes": [
+        "Global::Nginx Reverse Proxy",
+        "Nginx Reverse Proxy::Reverse Proxy"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Nginx reverse proxy component. The boundary naming differs but stays within the correct reverse-proxy infrastructure context."
+    },
+    {
+      "gt_nodes": [
+        "Backend Repo::Node.js"
+      ],
+      "predicted_nodes": [
+        "Global::Node.js Backend",
+        "Node.js Backend::Express Server"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Node.js backend runtime is represented by a global backend node and an Express server node. This is a valid semantic match and the layer attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Coding Sandbox::Coding Sandbox 1::Docker",
+        "Coding Sandbox::Coding Sandbox 2::Docker"
+      ],
+      "predicted_nodes": [
+        "Global::Docker Sandbox",
+        "Docker Sandbox::Code Executor"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has two sandbox instances using Docker, while the prediction aggregates them into a single Docker sandbox/code executor concept. This is a correct functional consolidation within the sandbox boundary."
+    },
+    {
+      "gt_nodes": [
+        "Coding Sandbox::Coding Sandbox 1::Node.js",
+        "Coding Sandbox::Coding Sandbox 2::Node.js"
+      ],
+      "predicted_nodes": [
+        "Global::Docker Sandbox",
+        "Docker Sandbox::Code Executor"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The Node.js runtime inside the sandbox is represented as part of the Docker sandbox executor. Although aggregated, it remains in the correct sandbox/execution layer."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Repo::Vue 3"
+      ],
+      "predicted_nodes": [
+        "Global::Vue Frontend",
+        "Vue Frontend::Browser App"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the Vue-based browser frontend. The predicted naming is generic but semantically correct and within the frontend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Static Asset Delivery::CDN\\nCloudFront"
+      ],
+      "predicted_nodes": [
+        "Global::CDN (CloudFront Style",
+        "CDN (CloudFront Style::Content Delivery"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both identify CloudFront-style CDN delivery. The prediction preserves the correct static asset delivery/distribution role."
+    },
+    {
+      "gt_nodes": [
+        "Static Asset Delivery::Storage\\nS3 bucket"
+      ],
+      "predicted_nodes": [
+        "Global::Object Storage (S3 Compatible",
+        "Object Storage (S3 Compatible::File Storage"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to S3-compatible object storage for file storage. The boundary naming differs but remains semantically aligned with storage delivery."
+    },
+    {
+      "gt_nodes": [
+        "Global::Developer"
+      ],
+      "predicted_nodes": [
+        "Global::Node.js Backend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "There is no functional equivalence between a developer actor and a Node.js backend component, so this is not a valid match."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Application Runtime::Reverse Proxy::Express",
+    "Backend Repo::CI/CD Workflow",
+    "Backend Repo::Deploy Key",
+    "Backend Repo::GitHub",
+    "Coding Sandbox::Coding Sandbox 1::Exporter",
+    "Coding Sandbox::Coding Sandbox 2::Exporter",
+    "Frontend Repo::CI/CD Workflow",
+    "Frontend Repo::Deploy Key",
+    "Frontend Repo::GitHub",
+    "Global::Developer",
+    "Global::End User"
+  ],
+  "unmatched_predicted_nodes": [
+    "Node.js Backend::Authentication Service",
+    "Node.js Backend::Battle Service",
+    "Node.js Backend::Code Execution Service",
+    "Node.js Backend::File Distribution",
+    "Node.js Backend::Project Management",
+    "Node.js Backend::Replay Service",
+    "Node.js Backend::Socket.IO Service",
+    "Node.js Backend::Workspace Coordination"
+  ]
+}

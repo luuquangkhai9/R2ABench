@@ -1,0 +1,95 @@
+@startuml
+!define RECTANGLE rectangle
+!define DATABASE database
+!define COMPONENT component
+!define INTERFACE interface
+!define PACKAGE package
+
+title System Architecture - Help With COVID Session and Task Workflow
+
+' High-Level Context
+RECTANGLE "End User" as endUser
+RECTANGLE "Frontend Channels\n(Text/Call)" as externalChannels
+RECTANGLE "Next.js Frontend" as frontend
+RECTANGLE "Firebase Authentication" as firebaseAuth
+RECTANGLE "Session Handler" as sessionHandler
+RECTANGLE "Login API\n(/api/login)" as loginAPI
+RECTANGLE "Logout API\n(/api/logout)" as logoutAPI
+RECTANGLE "Session Middleware" as sessionMiddleware
+RECTANGLE "Firebase Admin SDK" as firebaseAdmin
+RECTANGLE "OnFleet Task System" as onfleet
+RECTANGLE "Task Middleware\n(Address & Area Check)" as taskMiddleware
+RECTANGLE "Backend Task Handler" as taskHandler
+RECTANGLE "Environment Variables" as envVars
+
+' Grouping Components
+PACKAGE "Frontend Layer" {
+    frontend
+    sessionHandler
+}
+
+PACKAGE "Authentication Layer" {
+    firebaseAuth
+    firebaseAdmin
+}
+
+PACKAGE "API Layer" {
+    loginAPI
+    logoutAPI
+    sessionMiddleware
+}
+
+PACKAGE "Task Processing Layer" {
+    taskMiddleware
+    taskHandler
+}
+
+' Connections
+endUser --> frontend : UI-001 Form Entry
+externalChannels --> taskMiddleware : UI-002 Channel Entry
+frontend --> sessionHandler : FR-001/FR-002
+sessionHandler --> loginAPI : SI-001, CI-001
+sessionHandler --> logoutAPI : SI-002, CI-002
+loginAPI --> sessionMiddleware : SI-004
+sessionMiddleware --> firebaseAdmin : SI-003
+firebaseAuth <-- frontend : Auth Flow
+firebaseAdmin --> loginAPI : Token Verification
+loginAPI --> sessionMiddleware : Store Session Data
+taskMiddleware --> taskHandler : CI-004
+taskHandler --> onfleet : SI-005
+frontend --> taskMiddleware : UI-001, CI-003
+envVars --> frontend : DI-003
+envVars --> firebaseAdmin : DI-003
+envVars --> taskHandler : DI-003
+
+note right of frontend
+  Next.js Application
+  Handles UI and session triggers
+end note
+
+note right of firebaseAuth
+  Firebase Client SDK
+  Provides getIdToken()
+end note
+
+note left of firebaseAdmin
+  Firebase Admin SDK
+  Verifies ID Tokens
+end note
+
+note right of sessionMiddleware
+  Wraps API handlers
+  Manages server-side sessions
+end note
+
+note left of taskMiddleware
+  Processes addresses
+  Determines service areas
+end note
+
+note right of onfleet
+  External Task System
+  Receives task creation calls
+end note
+
+@enduml

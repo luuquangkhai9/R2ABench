@@ -1,0 +1,89 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::containerd"
+      ],
+      "predicted_nodes": [
+        "External Systems::Containerd"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Containerd external runtime dependency. 'Infrastructure and Input Backends' and 'External Systems' are semantically equivalent boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::docker"
+      ],
+      "predicted_nodes": [
+        "External Systems::Docker Runtime"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Docker runtime dependency. The boundaries are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "SDK::interact system",
+        "SDK::plugin system"
+      ],
+      "predicted_nodes": [
+        "SDK / Library Layer::veinmind-sdk / libveinmind"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT specifies detailed internal SDK systems which the AI aggregates into a single unified SDK/Library layer node. Both refer to the veinmind-sdk component."
+    },
+    {
+      "gt_nodes": [
+        "Global::runner"
+      ],
+      "predicted_nodes": [
+        "Runner Execution Layer::veinmind-runner"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the veinmind-runner component. The 'Global' boundary in GT implies a lack of specific boundaries, which maps acceptably to the AI's 'Runner Execution Layer'."
+    },
+    {
+      "gt_nodes": [
+        "Global::plugin"
+      ],
+      "predicted_nodes": [
+        "Runner Execution Layer::Python Plugin Example\n(veinmind/python3.6:1.3.1-stretch"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the plugin implementation/example mentioned in the system. The 'Global' boundary matches acceptably with the AI's execution layer."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Infrastructure and Input Backends::dockerfile",
+    "Infrastructure and Input Backends::kubernetes",
+    "Infrastructure and Input Backends::tarball",
+    "Scan Targets::cluster",
+    "Scan Targets::container",
+    "Scan Targets::iac",
+    "Scan Targets::image"
+  ],
+  "unmatched_predicted_nodes": [
+    "CLI Layer::run.sh (Startup Script",
+    "CLI Layer::scan-container CLI",
+    "CLI Layer::scan-iac CLI",
+    "CLI Layer::scan-image CLI",
+    "Core Scanning Services::Container Scanner",
+    "Core Scanning Services::Docker Authorization Router",
+    "Core Scanning Services::IaC Scanner",
+    "Core Scanning Services::Image Scanner",
+    "External Systems::Docker Registry",
+    "External Systems::DockerHub",
+    "External Systems::Harbor",
+    "IaC Scanning Components::Alert Detail Builder",
+    "IaC Scanning Components::IaC Rule Engine",
+    "IaC Scanning Components::Policy Library Loader",
+    "IaC Scanning Components::Report Event Publisher",
+    "Report Data Store::IaC Alert Report\n(IaC rule metadata,\nfile-location detail,\nalert detail",
+    "Report Data Store::Malicious-File Report\n(MaliciousFileInfo, ReportData,\nReportImage, ReportLayer",
+    "Runner Execution Layer::Parallel-Container Startup Scripts"
+  ]
+}

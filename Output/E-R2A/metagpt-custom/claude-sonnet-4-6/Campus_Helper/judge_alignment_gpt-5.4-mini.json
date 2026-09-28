@@ -1,0 +1,326 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Admin Mgmt Service"
+      ],
+      "predicted_nodes": [
+        "Business Layer::All Users View\\nUser Detail\\nUser Modification"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent administrator management functionality over user data. The predicted node is broader and includes the GT admin management service scope, with no severe layer mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Help Goods Service"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Popularity-Sorted Listing\\nCategory-Filtered Browse\\nProduct Detail Display",
+        "Business Layer::Product Overview / Detail\\nSearch / Modify\\nSingle & Batch Delete\\n(Second-Confirmation Flow"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT help goods/product service is functionally split in the prediction into product browsing and product management-related product service nodes. Although broader than the GT node, they remain within the same business layer and do not cross architectural boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Order Mgmt Service"
+      ],
+      "predicted_nodes": [
+        "Business Layer::All Orders View\\nOrder Detail\\nOrder Modification",
+        "Business Layer::Order Lifecycle Management\\n(Create / Modify Remark\\n/ Confirm / Cancel"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT order management service is represented by separate predicted nodes for administrative order management and user order lifecycle operations. This is a valid functional split within the business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Personal Center Service"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Personal Center\\nFavorites Viewing\\nOrder Record Viewing"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node matches the GT personal center service semantics directly and remains in the correct business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Create Order Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Order Lifecycle Management\\n(Create / Modify Remark\\n/ Confirm / Cancel"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Create order is included in the predicted order lifecycle module. This is semantically equivalent and correctly placed in the business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Favorites Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Favorite Relationship\\nStore & Retrieve",
+        "Business Layer::Personal Center\\nFavorites Viewing\\nOrder Record Viewing"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The favorites capability is split into persistence and user-facing viewing. Both are still within the business layer and align with the GT favorites module."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Goods Category Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Popularity-Sorted Listing\\nCategory-Filtered Browse\\nProduct Detail Display"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node includes category-filtered browsing, which corresponds to the GT goods category module. The grouping is broader but still correct."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Hot Items Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Popularity-Sorted Listing\\nCategory-Filtered Browse\\nProduct Detail Display"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Popularity-sorted listing corresponds directly to the GT hot items module. The node is broader but not boundary-incorrect."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Modify User Info Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::All Users View\\nUser Detail\\nUser Modification"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "User modification is covered by the predicted admin user management node. The business-layer placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Order Record Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Personal Center\\nFavorites Viewing\\nOrder Record Viewing"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Order record viewing is explicitly included in the predicted personal center node and is correctly placed in the business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Platform Mgmt Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Product Overview / Detail\\nSearch / Modify\\nSingle & Batch Delete\\n(Second-Confirmation Flow",
+        "Business Layer::All Orders View\\nOrder Detail\\nOrder Modification",
+        "Business Layer::All Users View\\nUser Detail\\nUser Modification"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The platform management module in GT is decomposed into product, order, and user administration functions in the prediction. This is a valid functional split within the business layer."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Custom Functions"
+      ],
+      "predicted_nodes": [
+        "Data Layer::CRUD Abstraction\\nPrivacy Protection\\n(Sole Gateway to DB"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Custom data-layer functions are reasonably represented by a CRUD abstraction and DB access gateway. The boundary is consistent with the GT data layer."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Cache"
+      ],
+      "predicted_nodes": [
+        "Data Layer::CRUD Abstraction\\nPrivacy Protection\\n(Sole Gateway to DB"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The prediction does not explicitly name cache, but the data-layer infrastructure abstraction is the closest semantic equivalent among the predicted nodes. No severe boundary violation is present."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Recovery"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Data Review & Privacy Gate\\n(Pre-write review enforcement\\nper NFR-004 / DR-008"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node is about privacy review rather than recovery. This is a semantic mismatch, so it cannot be considered a correct match."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Read/Write Database"
+      ],
+      "predicted_nodes": [
+        "Data Layer::CRUD Abstraction\\nPrivacy Protection\\n(Sole Gateway to DB"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted CRUD abstraction corresponds to the GT read/write database access layer and stays within the correct data layer boundary."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Stored Procedures"
+      ],
+      "predicted_nodes": [
+        "Data Layer::CRUD Abstraction\\nPrivacy Protection\\n(Sole Gateway to DB"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Stored-procedure-like database encapsulation is broadly represented by the predicted CRUD abstraction. The boundary remains in the data layer."
+    },
+    {
+      "gt_nodes": [
+        "Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Data Entity Layer::Database\\n[User | Product | Tag/Category\\n| Order | Favorite\\n| AdminLog | FaultMonitoringData]\\n(<=100K rows/table, <=100 GB total"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT MySQL database is semantically matched by the predicted database entity layer node. The layer/package naming differs, but it is an equivalent database boundary."
+    },
+    {
+      "gt_nodes": [
+        "Display Layer::GET Request"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::WeChat Mini Program UI\\n(User & Admin Interfaces"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "GET request handling is part of the presentation/display interaction path. The prediction is coarse-grained but remains within the correct presentation layer."
+    },
+    {
+      "gt_nodes": [
+        "Display Layer::POST Request"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::WeChat Mini Program UI\\n(User & Admin Interfaces"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "POST request handling is also part of the presentation/display interaction path. The predicted UI node is coarse but not boundary-wrong."
+    },
+    {
+      "gt_nodes": [
+        "Display Layer::Template Engine Rendering\\n(pages"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::WeChat Mini Program UI\\n(User & Admin Interfaces"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Template/page rendering is consistent with the presentation layer UI node, despite different technology naming."
+    },
+    {
+      "gt_nodes": [
+        "Display Layer::wx.request Interaction"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::WeChat Mini Program UI\\n(User & Admin Interfaces"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "wx.request interaction is a frontend/presentation concern and is correctly placed in the presentation layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::Log Recording"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Admin Operation Recording\\nMulti-Condition Log Retrieval"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Log recording is semantically matched by the predicted admin operation recording and log retrieval node. Although the naming is narrower, it remains functionally equivalent and appropriately located."
+    },
+    {
+      "gt_nodes": [
+        "Global::Permission Control"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Permission Control\\nRole Enforcement\\n(Guest / User / Customer\\n/ Seller / Admin"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Permission control is correctly matched semantically. The prediction places it in the business layer instead of Global, but that is an acceptable semantic-equivalent boundary choice."
+    },
+    {
+      "gt_nodes": [
+        "Mini-program UI::JavaScript"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::WeChat Mini Program UI\\n(User & Admin Interfaces"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "JavaScript is part of the mini-program UI implementation and belongs to the presentation layer. The prediction is coarse but acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Mini-program UI::Wxml"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::WeChat Mini Program UI\\n(User & Admin Interfaces"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "WXML is a presentation-layer UI technology and is covered by the predicted mini-program UI node."
+    },
+    {
+      "gt_nodes": [
+        "Mini-program UI::Wxss"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::WeChat Mini Program UI\\n(User & Admin Interfaces"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "WXSS is also a presentation-layer UI technology and is covered by the predicted mini-program UI node."
+    },
+    {
+      "gt_nodes": [
+        "Runtime Environment::Tencent Cloud\\nLightweight App Server"
+      ],
+      "predicted_nodes": [
+        "Global::Android OS (5.0+"
+      ],
+      "match_type": "none",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node matches the server/runtime deployment environment. The Android OS node is unrelated to the GT server runtime."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Business Layer::Functional Modules::......",
+    "Data Layer::Data Backup",
+    "Data Layer::Data Recovery",
+    "Display Layer::GET Request",
+    "Display Layer::POST Request",
+    "Display Layer::Template Engine Rendering\\n(pages",
+    "Display Layer::wx.request Interaction",
+    "Runtime Environment::MySQL 106.55.224.139\\n2 Cores 4GB",
+    "Runtime Environment::Tencent Cloud\\nLightweight App Server"
+  ],
+  "unmatched_predicted_nodes": [
+    "Business Layer::Account Management\\nAuthentication\\nRole Assignment",
+    "Business Layer::Input Validation\\nSQL Injection Prevention\\nBot / Malicious Behavior Detection\\n(>=98% recognition rate",
+    "Business Layer::Permission Control\\nRole Enforcement\\n(Guest / User / Customer\\n/ Seller / Admin",
+    "Data Layer::CPU / Memory / I/O / Connections\\nQPS / Response Time / Error Codes\\nDB Load / Slow Queries\\nCache / Queue / Storage Metrics",
+    "Data Layer::Keyword / Publisher / Status\\nName / Number Search\\n(Response-Time SLA",
+    "Global::Android OS (5.0+",
+    "Global::WeChat Platform / Runtime\\n(WeChat 8.0+"
+  ]
+}

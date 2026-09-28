@@ -1,0 +1,186 @@
+@startuml
+!define RECTANGLE rectangle
+!define COMPONENT component
+!define DATABASE database
+!define CLOUD cloud
+!define NODE node
+
+skinparam {
+  BackgroundColor #F8F9FA
+  ArrowColor #2C3E50
+  BorderColor #2C3E50
+  ActorBackgroundColor #E8F4FD
+  ActorBorderColor #3498DB
+  ComponentBackgroundColor #E8F6F3
+  ComponentBorderColor #1ABC9C
+  DatabaseBackgroundColor #FDEBD0
+  DatabaseBorderColor #E67E22
+  PackageBackgroundColor #F4ECF7
+  PackageBorderColor #8E44AD
+  RectangleBackgroundColor #FEF9E7
+  RectangleBorderColor #F1C40F
+  NoteBackgroundColor #FADBD8
+  NoteBorderColor #E74C3C
+}
+
+title ReTool - System Architecture Diagram
+left to right direction
+
+' ========== CLIENT TIER ==========
+package "Client Tier" as ClientTier {
+  rectangle "Web Browser\n(Google Chrome 81.0+)" as Browser {
+    rectangle "Vue.js Frontend Application" as Frontend
+    note right of Frontend
+      <b>Operating Environment:</b>
+      • Windows 10 64-bit
+      • Intel Core i7-6700HQ CPU
+      • ≥8 GB RAM
+      • ≥100 MB storage
+    end note
+  }
+}
+
+' ========== LOCAL SERVICES TIER ==========
+cloud "Local Computer\n(On-premises Deployment)" as LocalComputer {
+  package "Microservices Gateway" as Gateway {
+    rectangle "API Gateway" as APIGateway
+    note right of APIGateway
+      <b>Responsibilities:</b>
+      • Request routing
+      • Load balancing
+      • Authentication/Authorization
+      • Rate limiting
+    end note
+  }
+
+  package "Core Management Services" as CoreServices {
+    rectangle "User Management Service" as UserService
+    note right of UserService
+      <b>Functions:</b>
+      • User registration/login
+      • Password management
+      • Role/permission management
+      • User CRUD operations
+    end note
+
+    rectangle "Project Management Service" as ProjectService
+    note right of ProjectService
+      <b>Functions:</b>
+      • Project CRUD operations
+      • Member management
+      • Baseline management
+      • Role assignment
+    end note
+
+    rectangle "Requirements Management Service" as RequirementsService
+    note right of RequirementsService
+      <b>Functions:</b>
+      • Requirement item CRUD
+      • Requirement tree management
+      • Forward tracing
+      • Word document upload
+    end note
+  }
+}
+
+' ========== REMOTE SERVER TIER ==========
+cloud "Remote Server\n(EC2 t2.xlarge)" as RemoteServer {
+  package "Algorithm Service" as AlgorithmService {
+    rectangle "NLP Processing Engine" as NLPEngine
+    note right of NLPEngine
+      <b>Technologies:</b>
+      • PyTorch
+      • Word2vec models
+      • NLP toolkits
+    end note
+
+    rectangle "Analysis Modules" as AnalysisModules
+    note right of AnalysisModules
+      <b>Capabilities:</b>
+      • Requirement structuring
+      • Common requirement identification
+      • Conflict detection
+      • Association analysis
+    end note
+  }
+}
+
+' ========== DATA TIER ==========
+package "Data Tier" as DataTier {
+  database "MongoDB Database" as MongoDB {
+    rectangle "User Collection" as UserCollection
+    rectangle "Project Collection" as ProjectCollection
+    rectangle "Requirements Collection" as RequirementsCollection
+    rectangle "Analysis Results Collection" as AnalysisCollection
+    rectangle "Word Documents Storage" as DocumentsStorage
+    rectangle "System Logs" as SystemLogs
+  }
+  
+  note right of MongoDB
+    <b>Data Requirements:</b>
+    • Periodic backup
+    • 3-copy offsite DR
+    • CRUD operations
+    • Persistent storage
+  end note
+}
+
+' ========== CONNECTIONS ==========
+Frontend --> APIGateway : "HTTP/HTTPS REST API\n(User interactions)"
+APIGateway --> UserService : "Internal API calls"
+APIGateway --> ProjectService : "Internal API calls"
+APIGateway --> RequirementsService : "Internal API calls"
+
+RequirementsService --> NLPEngine : "Word documents & requirements\nfor analysis"
+RequirementsService --> AnalysisModules : "Analysis requests"
+
+UserService --> UserCollection : "CRUD operations"
+ProjectService --> ProjectCollection : "CRUD operations"
+RequirementsService --> RequirementsCollection : "CRUD operations"
+RequirementsService --> DocumentsStorage : "Document storage"
+NLPEngine --> AnalysisCollection : "Analysis results storage"
+AnalysisModules --> AnalysisCollection : "Analysis results storage"
+
+' ========== SECURITY LAYER ==========
+rectangle "Security Layer" as SecurityLayer {
+  rectangle "Authentication/Authorization" as Auth
+  rectangle "Input Validation" as InputValidation
+  rectangle "Data Encryption" as DataEncryption
+  rectangle "Access Control" as AccessControl
+}
+
+Auth -[hidden]-> InputValidation
+InputValidation -[hidden]-> DataEncryption
+DataEncryption -[hidden]-> AccessControl
+
+APIGateway ..> Auth : "enforces"
+APIGateway ..> InputValidation : "validates"
+Frontend ..> DataEncryption : "uses for\nsecure transmission"
+UserService ..> AccessControl : "implements"
+
+' ========== NETWORK DEPENDENCIES ==========
+note top of Frontend
+  <b>Network Dependency:</b>
+  All system functions require
+  network connectivity
+end note
+
+note top of RemoteServer
+  <b>Performance Requirements:</b>
+  • 4 vCPU
+  • 16 GB RAM
+  • 5 Gbps bandwidth
+  • Amazon Linux 2
+end note
+
+' ========== KEY DATA FLOWS ==========
+note "Key Data Flows:" as DataFlowsNote
+1. User authentication → UserService → MongoDB
+2. Project operations → ProjectService → MongoDB
+3. Requirement management → RequirementsService → MongoDB
+4. Word upload → RequirementsService → AlgorithmService
+5. Analysis requests → RequirementsService → AlgorithmService → MongoDB
+6. Forward tracing → RequirementsService → MongoDB
+end note
+
+@enduml

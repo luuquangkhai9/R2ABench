@@ -1,0 +1,233 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Backend::Data Access Layer::Class Diagram Parser"
+      ],
+      "predicted_nodes": [
+        "POCD System::Business Logic Layer::ClassDiagramParser"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both represent the class diagram parsing component, but GT places it in the Data Access Layer while the prediction places it in the Business Logic Layer, which is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Data Access Layer::Database Parser"
+      ],
+      "predicted_nodes": [
+        "POCD System::Business Logic Layer::DatabaseParser"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both represent database parsing, but GT places it in the Data Access Layer while the prediction places it in the Business Logic Layer, which is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Data Access Layer::Database Connection"
+      ],
+      "predicted_nodes": [
+        "External Systems::JDBCConnector"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "GT's database connection node corresponds semantically to the JDBC connector dependency. The external systems boundary is an acceptable placement for this integration dependency."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::DB & Class Diagram Matching"
+      ],
+      "predicted_nodes": [
+        "POCD System::Business Logic Layer::EntityMatcher"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the core entity/class and relationship matching logic. The business logic layer attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Base Algorithm Layer::Weighted Graph Construction",
+        "Backend::Base Algorithm Layer::Bipartite Matching",
+        "Backend::Base Algorithm Layer::String Similarity",
+        "Backend::Base Algorithm Layer::Type Similarity",
+        "Backend::Base Algorithm Layer::Strict Matching"
+      ],
+      "predicted_nodes": [
+        "POCD System::Business Logic Layer::EntityMatcher"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The prediction aggregates several GT algorithmic submodules into a higher-level matcher. Functionally related, but the GT explicitly separates base algorithms from business logic; the predicted boundary collapses lower-level algorithm layer concerns into business logic, which is not faithful."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Unified Abstraction Layer::Comparable Entity Construction",
+        "Backend::Unified Abstraction Layer::Data Type Mapping",
+        "Backend::Unified Abstraction Layer::Database Relationship Identification"
+      ],
+      "predicted_nodes": [
+        "POCD System::Business Logic Layer::EntityMatcher",
+        "POCD System::Business Logic Layer::InconsistencyDetector"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "These GT nodes describe abstraction/preprocessing and relationship identification support functions. The prediction splits them across general matcher/detector business nodes, but misses the explicit unified abstraction layer boundary, causing a layer mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::Class Attr vs DB Field Inconsistency Detection"
+      ],
+      "predicted_nodes": [
+        "POCD System::Business Logic Layer::InconsistencyDetector"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The prediction covers the same detection responsibility. Business logic layer placement is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::Class vs DB Table Inconsistency Detection"
+      ],
+      "predicted_nodes": [
+        "POCD System::Business Logic Layer::InconsistencyDetector"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The detector matches the class/table inconsistency function, and the business logic layer placement is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::Relationship Inconsistency Detection"
+      ],
+      "predicted_nodes": [
+        "POCD System::Business Logic Layer::InconsistencyDetector"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The prediction represents relationship inconsistency detection as part of a general detector. Boundary placement is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::Generate Modification Command",
+        "Backend::Business Logic Layer::Class Diagram Modification",
+        "Backend::Business Logic Layer::Build Topology"
+      ],
+      "predicted_nodes": [
+        "POCD System::Business Logic Layer::RepairEngine"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "These GT nodes collectively correspond to repair/modification orchestration and execution. Aggregation into a repair engine is semantically consistent within the business logic layer."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::DB & Class Diagram Format Conversion"
+      ],
+      "predicted_nodes": [
+        "POCD System::Business Logic Layer::ClassDiagramParser",
+        "POCD System::Business Logic Layer::DatabaseParser"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "GT has an explicit conversion step between parsing results and business-readable format. The prediction distributes this into parsers without a dedicated conversion node, so the semantics are not faithfully reproduced."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::User Input Acquisition"
+      ],
+      "predicted_nodes": [
+        "POCD System::User Interface Layer::AccountManagement",
+        "POCD System::User Interface Layer::DetectionConfiguration",
+        "POCD System::User Interface Layer::FileManagement",
+        "POCD System::User Interface Layer::HelpAndExamples",
+        "POCD System::User Interface Layer::HistoryViewer",
+        "POCD System::User Interface Layer::ReportDisplay"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a generic user-input acquisition function that is naturally realized across several UI modules. Mapping to multiple UI-facing nodes is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (User Interface Layer::Detection Settings"
+      ],
+      "predicted_nodes": [
+        "POCD System::User Interface Layer::DetectionConfiguration"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the detection configuration UI. The frontend/user interface layer attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (User Interface Layer::Display Modification Results"
+      ],
+      "predicted_nodes": [
+        "POCD System::User Interface Layer::ReportDisplay"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both concern displaying outcomes/results to the user. UI layer placement is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (User Interface Layer::File Management"
+      ],
+      "predicted_nodes": [
+        "POCD System::User Interface Layer::FileManagement"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The file management UI matches directly, and the user interface layer placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (User Interface Layer::Generate Modification Suggestions"
+      ],
+      "predicted_nodes": [
+        "POCD System::Business Logic Layer::RepairEngine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "GT places suggestion generation in the frontend UI layer, while the prediction places it in the backend repair engine. This is a severe boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (User Interface Layer::New User Tutorial"
+      ],
+      "predicted_nodes": [
+        "POCD System::User Interface Layer::HelpAndExamples"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The help/examples UI covers tutorial onboarding functionality. The UI layer placement is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (User Interface Layer::User Login",
+        "Frontend (User Interface Layer::User Registration"
+      ],
+      "predicted_nodes": [
+        "POCD System::User Interface Layer::AccountManagement"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Login and registration are consolidated into an account management UI module. This is a valid functional aggregation within the UI layer."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "External Systems::MySQLDatabase",
+    "External Systems::StarUML",
+    "External Systems::ThirdPartyApplications",
+    "Global::External Systems",
+    "Global::POCD System",
+    "POCD System::Business Logic Layer::HistoryManager",
+    "POCD System::Business Logic Layer::ReportGenerator",
+    "POCD System::Data Access Layer::ConfigurationDataStore",
+    "POCD System::Data Access Layer::DetectionDataStore",
+    "POCD System::Data Access Layer::FileDataStore",
+    "POCD System::Data Access Layer::UserDataStore",
+    "POCD System::User Interface Layer::HistoryViewer"
+  ]
+}

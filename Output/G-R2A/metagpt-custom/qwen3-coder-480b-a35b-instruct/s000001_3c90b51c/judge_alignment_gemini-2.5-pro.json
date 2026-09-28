@@ -1,0 +1,97 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Result"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Result"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the allocation result data object. The AI's placement in a 'Data Layer' is a standard and semantically correct architectural refinement compared to the GT's 'Global' scope for a data model."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tally"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Tally"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the input tally data object. The AI's placement in a 'Data Layer' is a standard and semantically correct architectural refinement compared to the GT's 'Global' scope for a data model."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::Parameters"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Properties"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The PRD (DR-003) explicitly mentions using Java 'Properties' for parameters. The AI correctly identifies this and places the data-like configuration into the 'Data Layer', which is a valid refinement of the GT's 'Seat Allocation Configuration' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::ResultDecorators"
+      ],
+      "predicted_nodes": [
+        "API Layer::ResultDecorator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the result decoration contract. The PRD specifies a 'Result decoration API' (FR-007, NFR-002). Placing this contract in an 'API Layer' is a valid architectural decision and semantically equivalent to being part of the overall configuration."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::TallyFilters"
+      ],
+      "predicted_nodes": [
+        "API Layer::TallyFilter"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the tally filtering contract. The PRD specifies a 'Tally filtering API'. Placing this contract in an 'API Layer' is a valid architectural decision and semantically equivalent to being part of the overall configuration."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::Seat Allocation Method"
+      ],
+      "predicted_nodes": [
+        "Method Implementation Layer::EqualProportionsMethod",
+        "Method Implementation Layer::HighestAveragesMethod",
+        "Method Implementation Layer::LargestRemainderMethod",
+        "Method Implementation Layer::MajorityMethod",
+        "Method Implementation Layer::RankedMethod"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly split the abstract 'Seat Allocation Method' concept from the GT into its concrete implementation families mentioned in the PRD (FR-003). The 'Method Implementation Layer' is a good refinement for these components compared to the GT's 'Seat Allocation Configuration' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Processor::Decorate",
+        "Seat Allocation Processor::Filter",
+        "Seat Allocation Processor::Process"
+      ],
+      "predicted_nodes": [
+        "Core Processing Layer::Processor"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT nodes represent the individual steps of the allocation workflow. The AI has aggregated these actions into a single 'Processor' component, which is a valid abstraction. The 'Core Processing Layer' boundary is semantically equivalent to the GT's 'Seat Allocation Processor' boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Seat Allocation Configuration::TieBreaker"
+  ],
+  "unmatched_predicted_nodes": [
+    "API Layer::SeatAllocator",
+    "CLI Layer::CommandLineInterface",
+    "Core Processing Layer::Configuration",
+    "Global::Command Line Shell Environment",
+    "Global::Java Runtime Environment"
+  ]
+}

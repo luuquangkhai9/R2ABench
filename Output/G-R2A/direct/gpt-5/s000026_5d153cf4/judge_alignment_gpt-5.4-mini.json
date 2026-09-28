@@ -1,0 +1,79 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Browser"
+      ],
+      "predicted_nodes": [
+        "Global::GCP Project"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a browser/client actor, while the predicted node is the overall project boundary. They are not semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine"
+      ],
+      "predicted_nodes": [
+        "GCP Project::GKE Cluster"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both relate to infrastructure hosting the runtime, but Compute Engine is not equivalent to a GKE Cluster. This is a boundary/context mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine::pulltop"
+      ],
+      "predicted_nodes": [
+        "GCP Project::GKE Cluster::Pod-1 (Adapter)::pulltop (Node.js",
+        "GCP Project::GKE Cluster::Pod-2 (Adapter) (scaled replica::pulltop (Node.js"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The pulltop process is correctly identified and split across replicas. The pod-level placement is consistent with the GT runtime component, despite the differing infrastructure abstraction."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine::websocketd"
+      ],
+      "predicted_nodes": [
+        "GCP Project::GKE Cluster::Pod-1 (Adapter)::websocketd\\nlistens :8080",
+        "GCP Project::GKE Cluster::Pod-2 (Adapter) (scaled replica::websocketd\\nlistens :8080"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The websocketd runtime component is correctly represented and replicated per pod. The boundary is acceptable even though the GT used Compute Engine as the host abstraction."
+    },
+    {
+      "gt_nodes": [
+        "pubsub-public-data project::Cloud Pub/Sub\\ntopic"
+      ],
+      "predicted_nodes": [
+        "GCP Project::Google Cloud Pub/Sub::Topic\\n(configured"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These both represent the configured Pub/Sub topic. The project boundary naming differs, but the semantic component is equivalent."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "GCP Project::GKE Cluster::ConfigMap\\nkey: topic",
+    "GCP Project::GKE Cluster::Deployment\\nAdapter Pods",
+    "GCP Project::GKE Cluster::HPA\\nmin: 1, max: 2\\nCPU target: 80%",
+    "GCP Project::GKE Cluster::Pod-1 (Adapter",
+    "GCP Project::GKE Cluster::Pod-1 (Adapter::Adapter Container",
+    "GCP Project::GKE Cluster::Pod-1 (Adapter::Recent Message Cache\\n(10 messages",
+    "GCP Project::GKE Cluster::Pod-1 (Adapter::exec.sh",
+    "GCP Project::GKE Cluster::Pod-2 (Adapter)\\n(scaled replica",
+    "GCP Project::GKE Cluster::Pod-2 (Adapter)\\n(scaled replica::Adapter Container",
+    "GCP Project::GKE Cluster::Pod-2 (Adapter)\\n(scaled replica::Recent Message Cache\\n(10 messages",
+    "GCP Project::GKE Cluster::Pod-2 (Adapter)\\n(scaled replica::exec.sh",
+    "GCP Project::GKE Cluster::Service\\nType: LoadBalancer\\nPort 80 -> 8080",
+    "GCP Project::Google Cloud Pub/Sub",
+    "GCP Project::Google Cloud Pub/Sub::Subscription (per Pod)\\nSub-1",
+    "GCP Project::Google Cloud Pub/Sub::Subscription (per Pod)\\nSub-2"
+  ]
+}

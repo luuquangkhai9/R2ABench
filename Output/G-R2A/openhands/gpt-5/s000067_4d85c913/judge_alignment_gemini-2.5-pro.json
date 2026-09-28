@@ -1,0 +1,82 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::TraceLeft\\nCLI and library tracer"
+      ],
+      "predicted_nodes": [
+        "Userspace::TraceLeft CLI",
+        "Userspace::TraceLeft Library",
+        "Userspace::Trace Command",
+        "Userspace::Generator Subsystem",
+        "Userspace::Probe Loader",
+        "Userspace::Event Registration Parser",
+        "Userspace::Userspace Tracer/Dispatcher"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly decomposed the monolithic GT node 'TraceLeft' into its specific functional components as described in the PRD (CLI, Library, Generator, Loader, Parser, Dispatcher). The 'Userspace' boundary is more accurate than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Kprobe\\nentry probe",
+        "Main eBPF Program::Kretprobe\\nreturn probe",
+        "Main eBPF Program::Kprobe / Kretprobe\\nother traced calls"
+      ],
+      "predicted_nodes": [
+        "Linux Kernel (eBPF::Main eBPF Program"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated the specific GT nodes representing the eBPF entry points (kprobe/kretprobe) into a single logical 'Main eBPF Program' component. The predicted 'Linux Kernel (eBPF' boundary is semantically equivalent to the GT's 'Main eBPF Program' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Event Handler eBPF Programs::Default Handler Probes",
+        "Event Handler eBPF Programs::Process Specific\\nHandler Probes",
+        "Event Handler eBPF Programs::Handler Probe\\nhandle_syscall_write"
+      ],
+      "predicted_nodes": [
+        "Linux Kernel (eBPF::Handler eBPF Programs\\n(default + process-specific"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the different types of handler probes from the GT into a single logical node. The 'Linux Kernel (eBPF' boundary is a correct and semantically equivalent placement for components in the 'Event Handler eBPF Programs' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Perf Event Map\\nshared event map"
+      ],
+      "predicted_nodes": [
+        "Linux Kernel (eBPF::Perf Event Channel"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the same communication mechanism for sending events from kernel-space to user-space, as described in DR-002. Placing it within the 'Linux Kernel (eBPF' boundary is more precise than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Linux Kernel Functions::inet_csk_accept",
+        "Linux Kernel Functions::sys_open",
+        "Linux Kernel Functions::sys_write"
+      ],
+      "predicted_nodes": [
+        "Global::Linux Kernel (eBPF"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI abstracted the specific traced kernel functions from the GT into a single node representing the host Linux Kernel environment. While the name 'Linux Kernel (eBPF' is slightly awkward for this node, its role as the host system is clear. The 'Global' boundary is a reasonable, high-level placement."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Prog ID Map\\npid to id",
+    "Main eBPF Program::Prog Map\\npid to fd",
+    "Main eBPF Program::Prog Maps\\nhandler mappings",
+    "Main eBPF Program::Ret Prog Map\\npid to fd"
+  ],
+  "unmatched_predicted_nodes": [
+    "Linux Kernel (eBPF::Common Event Header",
+    "Userspace::Event Config Metadata\\n(Proto/JSON",
+    "Userspace::gobpf Integration"
+  ]
+}

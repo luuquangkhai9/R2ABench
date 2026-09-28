@@ -1,0 +1,739 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Application Layer / Backend Services::AI Module",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::AI/OCR Models",
+        "AI/OCR Models::CSV/Excel Parser",
+        "AI/OCR Models::Handwriting\\nRecognition Model",
+        "AI/OCR Models::Image Formula\\nRecognition Model",
+        "AI/OCR Models::PDF Parser",
+        "AI/OCR Models::Table Recognition\\nModel"
+      ],
+      "reasoning": "The GT AI module responsibility is covered by the predicted AI/OCR model group and its specialized parsers/recognizers."
+    },
+    {
+      "gt_node": "Application Layer / Backend Services::AI Module::Image Pre-processing Module",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "AI/OCR Models::Image Formula\\nRecognition Model"
+      ],
+      "reasoning": "The predicted image formula recognition model implicitly covers image handling/recognition steps, though it is not explicitly separated as preprocessing."
+    },
+    {
+      "gt_node": "Application Layer / Backend Services::AI Module::LaTeX Generation Module",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Backend Services::Rendering\\nService",
+        "AI/OCR Models::CSV/Excel Parser",
+        "AI/OCR Models::Handwriting\\nRecognition Model",
+        "AI/OCR Models::Image Formula\\nRecognition Model",
+        "AI/OCR Models::PDF Parser",
+        "AI/OCR Models::Table Recognition\\nModel"
+      ],
+      "reasoning": "The predicted model stack covers recognition and downstream output preparation, but there is no dedicated LaTeX generation node; the responsibility is only partially and indirectly represented."
+    },
+    {
+      "gt_node": "Application Layer / Backend Services::AI Module::Result Processing Module",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Backend Services::Rendering\\nService",
+        "Global::AI/OCR Models"
+      ],
+      "reasoning": "Result processing after recognition is broadly represented by backend rendering/output handling, though not explicitly as a separate result-processing component."
+    },
+    {
+      "gt_node": "Application Layer / Backend Services::File Processing Service",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Backend Services::File Processing\\nService",
+        "AI/OCR Models::CSV/Excel Parser",
+        "AI/OCR Models::PDF Parser"
+      ],
+      "reasoning": "The predicted file processing service directly matches the GT node, and file-specific parsers reinforce the same responsibility."
+    },
+    {
+      "gt_node": "Application Layer / Backend Services::Project Management Service",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Backend Services::Project Management\\nService",
+        "Backend Services::Version Control\\nService",
+        "Backend Services::Collaboration\\nService"
+      ],
+      "reasoning": "Project management is directly represented, with versioning and collaboration as related sub-responsibilities."
+    },
+    {
+      "gt_node": "Application Layer / Backend Services::Project Management Service::Collaboration & Permissions Service",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Backend Services::Collaboration\\nService"
+      ],
+      "reasoning": "Collaboration is covered, but permissions are not explicitly separated; still a reasonable semantic match."
+    },
+    {
+      "gt_node": "Application Layer / Backend Services::Project Management Service::Project Basic Services",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Backend Services::Project Management\\nService"
+      ],
+      "reasoning": "The predicted project management service covers core project basic services."
+    },
+    {
+      "gt_node": "Application Layer / Backend Services::User Management Service",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Backend Services::User Management\\nService",
+        "Backend Services::Authentication\\nService"
+      ],
+      "reasoning": "User management is directly matched, and authentication is an adjacent sub-function in the same domain."
+    },
+    {
+      "gt_node": "Data Layer / Storage::Project & Article Info",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Database::Project Data",
+        "Database::Version Data"
+      ],
+      "reasoning": "Project-related persistent information is covered, though the GT node is more specific and the prediction splits project-related data across multiple database nodes."
+    },
+    {
+      "gt_node": "Data Layer / Storage::Team Learning Data",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Database::Collaboration Data"
+      ],
+      "reasoning": "Team/collaboration storage is semantically close to team learning data, though naming is not identical."
+    },
+    {
+      "gt_node": "Data Layer / Storage::User Information",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Database::User Data"
+      ],
+      "reasoning": "User information is directly represented by user data storage."
+    },
+    {
+      "gt_node": "Global::Application Layer / Backend Services",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Backend Services"
+      ],
+      "reasoning": "The predicted global backend container corresponds to the GT application/backend layer container."
+    },
+    {
+      "gt_node": "Global::Data Layer / Storage",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Database",
+        "Global::File Storage\\n(System"
+      ],
+      "reasoning": "The GT data/storage layer is covered by database and file storage in the prediction."
+    },
+    {
+      "gt_node": "Global::Presentation Layer / Frontend",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Browser-based\\nClient (Frontend",
+        "Browser-based\\nClient (Frontend::User Interface",
+        "Browser-based\\nClient (Frontend::Project Manager",
+        "Browser-based\\nClient (Frontend::Real-time Preview",
+        "Browser-based\\nClient (Frontend::Collaboration UI",
+        "Browser-based\\nClient (Frontend::Version Control UI"
+      ],
+      "reasoning": "The frontend layer is clearly represented by the browser-based client and its UI subnodes."
+    },
+    {
+      "gt_node": "Global::User Layer / Client Layer",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Browser-based\\nClient (Frontend"
+      ],
+      "reasoning": "The client layer is represented by the browser-based frontend container."
+    },
+    {
+      "gt_node": "Presentation Layer / Frontend::File Upload Interface",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No dedicated upload UI node is present; the browser UI is too generic to confirm this specific interface responsibility."
+    },
+    {
+      "gt_node": "Presentation Layer / Frontend::LaTeX Rendering Interface",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Browser-based\\nClient (Frontend::Real-time Preview",
+        "Backend Services::Rendering\\nService"
+      ],
+      "reasoning": "The real-time preview UI corresponds to the LaTeX rendering interface, although rendering is split between frontend preview and backend rendering service."
+    },
+    {
+      "gt_node": "Presentation Layer / Frontend::Registration & Login Interface",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Browser-based\\nClient (Frontend::User Interface",
+        "Backend Services::Authentication\\nService",
+        "Backend Services::User Management\\nService"
+      ],
+      "reasoning": "The generic user interface plus auth/user management services cover registration and login flows."
+    },
+    {
+      "gt_node": "Presentation Layer / Frontend::Workspace Interface",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Browser-based\\nClient (Frontend::Project Manager",
+        "Browser-based\\nClient (Frontend::Version Control UI",
+        "Browser-based\\nClient (Frontend::Collaboration UI",
+        "Browser-based\\nClient (Frontend::Real-time Preview"
+      ],
+      "reasoning": "Workspace functionality is distributed across project management, version control, collaboration, and preview UIs."
+    },
+    {
+      "gt_node": "User Layer / Client Layer::Mobile Browser",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "The prediction only mentions a browser-based client generally and does not explicitly distinguish mobile browser support as a node."
+    },
+    {
+      "gt_node": "User Layer / Client Layer::PC Browser",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Browser-based\\nClient (Frontend"
+      ],
+      "reasoning": "The browser-based client covers PC browser usage, though it does not explicitly separate PC from mobile."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "AI/OCR Models::CSV/Excel Parser",
+      "grounded": true,
+      "reference_nodes": [
+        "Application Layer / Backend Services::AI Module",
+        "Application Layer / Backend Services::File Processing Service"
+      ],
+      "reasoning": "Grounded in file/AI processing responsibilities for CSV and Excel inputs."
+    },
+    {
+      "predicted_node": "AI/OCR Models::Handwriting\\nRecognition Model",
+      "grounded": true,
+      "reference_nodes": [
+        "Application Layer / Backend Services::AI Module",
+        "Application Layer / Backend Services::AI Module::Image Pre-processing Module"
+      ],
+      "reasoning": "Grounded in handwritten input recognition within the AI module."
+    },
+    {
+      "predicted_node": "AI/OCR Models::Image Formula\\nRecognition Model",
+      "grounded": true,
+      "reference_nodes": [
+        "Application Layer / Backend Services::AI Module",
+        "Application Layer / Backend Services::AI Module::Image Pre-processing Module"
+      ],
+      "reasoning": "Grounded in image-based formula/table recognition."
+    },
+    {
+      "predicted_node": "AI/OCR Models::PDF Parser",
+      "grounded": true,
+      "reference_nodes": [
+        "Application Layer / Backend Services::File Processing Service",
+        "Application Layer / Backend Services::AI Module"
+      ],
+      "reasoning": "Grounded in PDF input processing and extraction."
+    },
+    {
+      "predicted_node": "AI/OCR Models::Table Recognition\\nModel",
+      "grounded": true,
+      "reference_nodes": [
+        "Application Layer / Backend Services::AI Module"
+      ],
+      "reasoning": "Grounded in table recognition responsibilities."
+    },
+    {
+      "predicted_node": "Backend Services::Authentication\\nService",
+      "grounded": true,
+      "reference_nodes": [
+        "Application Layer / Backend Services::User Management Service"
+      ],
+      "reasoning": "Authentication is a legitimate sub-function of user management."
+    },
+    {
+      "predicted_node": "Backend Services::Collaboration\\nService",
+      "grounded": true,
+      "reference_nodes": [
+        "Application Layer / Backend Services::Project Management Service::Collaboration & Permissions Service",
+        "Application Layer / Backend Services::Project Management Service"
+      ],
+      "reasoning": "Grounded in collaboration and permission control requirements."
+    },
+    {
+      "predicted_node": "Backend Services::File Processing\\nService",
+      "grounded": true,
+      "reference_nodes": [
+        "Application Layer / Backend Services::File Processing Service"
+      ],
+      "reasoning": "Direct match to GT file processing responsibility."
+    },
+    {
+      "predicted_node": "Backend Services::Project Management\\nService",
+      "grounded": true,
+      "reference_nodes": [
+        "Application Layer / Backend Services::Project Management Service"
+      ],
+      "reasoning": "Direct match to GT project management responsibility."
+    },
+    {
+      "predicted_node": "Backend Services::Rendering\\nService",
+      "grounded": true,
+      "reference_nodes": [
+        "Application Layer / Backend Services::AI Module::Result Processing Module",
+        "Presentation Layer / Frontend::LaTeX Rendering Interface"
+      ],
+      "reasoning": "Grounded in LaTeX rendering/preview output responsibilities."
+    },
+    {
+      "predicted_node": "Backend Services::User Management\\nService",
+      "grounded": true,
+      "reference_nodes": [
+        "Application Layer / Backend Services::User Management Service"
+      ],
+      "reasoning": "Direct match to user management."
+    },
+    {
+      "predicted_node": "Backend Services::Version Control\\nService",
+      "grounded": true,
+      "reference_nodes": [
+        "Application Layer / Backend Services::Project Management Service",
+        "Data Layer / Storage::Project & Article Info"
+      ],
+      "reasoning": "Version control is grounded in the project/version management requirements."
+    },
+    {
+      "predicted_node": "Browser-based\\nClient (Frontend::Collaboration UI",
+      "grounded": true,
+      "reference_nodes": [
+        "Presentation Layer / Frontend::Workspace Interface",
+        "Presentation Layer / Frontend::Registration & Login Interface"
+      ],
+      "reasoning": "Collaboration UI is grounded in the frontend workspace/collaboration requirements."
+    },
+    {
+      "predicted_node": "Browser-based\\nClient (Frontend::Project Manager",
+      "grounded": true,
+      "reference_nodes": [
+        "Presentation Layer / Frontend::Workspace Interface",
+        "Presentation Layer / Frontend::Registration & Login Interface"
+      ],
+      "reasoning": "Grounded in project browsing and management UI needs."
+    },
+    {
+      "predicted_node": "Browser-based\\nClient (Frontend::Real-time Preview",
+      "grounded": true,
+      "reference_nodes": [
+        "Presentation Layer / Frontend::LaTeX Rendering Interface"
+      ],
+      "reasoning": "Directly grounded in real-time rendering preview."
+    },
+    {
+      "predicted_node": "Browser-based\\nClient (Frontend::User Interface",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Presentation Layer / Frontend",
+        "Presentation Layer / Frontend::Registration & Login Interface",
+        "Presentation Layer / Frontend::Workspace Interface"
+      ],
+      "reasoning": "A generic frontend UI container is grounded by the overall presentation layer and its UI functions."
+    },
+    {
+      "predicted_node": "Browser-based\\nClient (Frontend::Version Control UI",
+      "grounded": true,
+      "reference_nodes": [
+        "Presentation Layer / Frontend::Workspace Interface"
+      ],
+      "reasoning": "Grounded in version tree navigation and version operations UI."
+    },
+    {
+      "predicted_node": "Database::Collaboration Data",
+      "grounded": true,
+      "reference_nodes": [
+        "Data Layer / Storage::Team Learning Data"
+      ],
+      "reasoning": "Collaboration data is semantically aligned with team learning/collaborative storage."
+    },
+    {
+      "predicted_node": "Database::File Storage Metadata",
+      "grounded": true,
+      "reference_nodes": [
+        "Data Layer / Storage::Project & Article Info",
+        "Data Layer / Storage::User Information"
+      ],
+      "reasoning": "Metadata for file storage aligns with persistent project/file records."
+    },
+    {
+      "predicted_node": "Database::Project Data",
+      "grounded": true,
+      "reference_nodes": [
+        "Data Layer / Storage::Project & Article Info"
+      ],
+      "reasoning": "Directly grounded in project storage."
+    },
+    {
+      "predicted_node": "Database::User Data",
+      "grounded": true,
+      "reference_nodes": [
+        "Data Layer / Storage::User Information"
+      ],
+      "reasoning": "Directly grounded in user information storage."
+    },
+    {
+      "predicted_node": "Database::Version Data",
+      "grounded": true,
+      "reference_nodes": [
+        "Data Layer / Storage::Project & Article Info"
+      ],
+      "reasoning": "Grounded in version and historical file persistence."
+    },
+    {
+      "predicted_node": "External Interfaces::LaTeX Engine\\n(TeX Live/MiKTeX",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Application Layer / Backend Services",
+        "Presentation Layer / Frontend::LaTeX Rendering Interface"
+      ],
+      "reasoning": "The LaTeX engine is an expected external dependency in the PRD constraints and rendering flow."
+    },
+    {
+      "predicted_node": "External Interfaces::Web Server\\n(Apache/Nginx",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Application Layer / Backend Services"
+      ],
+      "reasoning": "Web server dependency is explicitly grounded in deployment/runtime constraints."
+    },
+    {
+      "predicted_node": "File Storage\\n(System::Generated Outputs\\n(LaTeX,PDF,PNG,JPEG",
+      "grounded": true,
+      "reference_nodes": [
+        "Data Layer / Storage::Project & Article Info",
+        "Data Layer / Storage::Team Learning Data"
+      ],
+      "reasoning": "Generated artifacts are grounded in persistent storage/output management needs."
+    },
+    {
+      "predicted_node": "File Storage\\n(System::Uploaded Files\\n(JPG,PNG,PDF,CSV,XLSX",
+      "grounded": true,
+      "reference_nodes": [
+        "Data Layer / Storage::Project & Article Info",
+        "Data Layer / Storage::User Information"
+      ],
+      "reasoning": "Uploaded file storage is grounded in the file/data persistence requirements."
+    },
+    {
+      "predicted_node": "Global::AI/OCR Models",
+      "grounded": true,
+      "reference_nodes": [
+        "Application Layer / Backend Services::AI Module"
+      ],
+      "reasoning": "The global AI/OCR container is a valid abstraction of the GT AI module."
+    },
+    {
+      "predicted_node": "Global::Backend Services",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Application Layer / Backend Services"
+      ],
+      "reasoning": "Directly grounded as the backend container."
+    },
+    {
+      "predicted_node": "Global::Browser-based\\nClient (Frontend",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Presentation Layer / Frontend",
+        "Global::User Layer / Client Layer"
+      ],
+      "reasoning": "Directly grounded as the browser-based frontend/client container."
+    },
+    {
+      "predicted_node": "Global::Database",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Data Layer / Storage"
+      ],
+      "reasoning": "Directly grounded as the database/container for data storage."
+    },
+    {
+      "predicted_node": "Global::External Interfaces",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Application Layer / Backend Services"
+      ],
+      "reasoning": "External interface abstraction is grounded by HTTP/REST and runtime dependencies."
+    },
+    {
+      "predicted_node": "Global::File Storage\\n(System",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Data Layer / Storage"
+      ],
+      "reasoning": "Directly grounded as a storage container for files and artifacts."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::AI Module"
+      ],
+      "predicted_nodes": [
+        "Global::AI/OCR Models",
+        "AI/OCR Models::CSV/Excel Parser",
+        "AI/OCR Models::Handwriting\\nRecognition Model",
+        "AI/OCR Models::Image Formula\\nRecognition Model",
+        "AI/OCR Models::PDF Parser",
+        "AI/OCR Models::Table Recognition\\nModel"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT AI module is decomposed into a global AI/OCR container and multiple specialized recognition/parser nodes; the boundary is semantically acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::AI Module::Image Pre-processing Module"
+      ],
+      "predicted_nodes": [
+        "AI/OCR Models::Image Formula\\nRecognition Model"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted image recognition model subsumes preprocessing as part of the recognition pipeline, without a severe boundary violation."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::AI Module::LaTeX Generation Module"
+      ],
+      "predicted_nodes": [
+        "Backend Services::Rendering\\nService"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Although not exact, rendering/output generation is the closest semantic match to LaTeX generation in the prediction."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::AI Module::Result Processing Module"
+      ],
+      "predicted_nodes": [
+        "Backend Services::Rendering\\nService"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Result processing is reasonably represented by backend rendering/output handling."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::File Processing Service"
+      ],
+      "predicted_nodes": [
+        "Backend Services::File Processing\\nService",
+        "AI/OCR Models::CSV/Excel Parser",
+        "AI/OCR Models::PDF Parser"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The file processing responsibility is split across a direct backend service and format-specific parsers, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::Project Management Service"
+      ],
+      "predicted_nodes": [
+        "Backend Services::Project Management\\nService",
+        "Backend Services::Version Control\\nService",
+        "Backend Services::Collaboration\\nService"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Project management is decomposed into related sub-services for collaboration and versioning."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::Project Management Service::Collaboration & Permissions Service"
+      ],
+      "predicted_nodes": [
+        "Backend Services::Collaboration\\nService"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Collaboration and permission control are represented, though permissions are implicit rather than explicit."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::Project Management Service::Project Basic Services"
+      ],
+      "predicted_nodes": [
+        "Backend Services::Project Management\\nService"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::User Management Service"
+      ],
+      "predicted_nodes": [
+        "Backend Services::User Management\\nService",
+        "Backend Services::Authentication\\nService"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "User management is split into user management and authentication, which is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer / Storage::Project & Article Info"
+      ],
+      "predicted_nodes": [
+        "Database::Project Data",
+        "Database::Version Data",
+        "Database::File Storage Metadata"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Project/article information is split into related database records and metadata, staying within the data/storage boundary."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer / Storage::Team Learning Data"
+      ],
+      "predicted_nodes": [
+        "Database::Collaboration Data"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Semantically equivalent collaborative storage concept."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer / Storage::User Information"
+      ],
+      "predicted_nodes": [
+        "Database::User Data"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match."
+    },
+    {
+      "gt_nodes": [
+        "Global::Application Layer / Backend Services"
+      ],
+      "predicted_nodes": [
+        "Global::Backend Services"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Equivalent container abstraction."
+    },
+    {
+      "gt_nodes": [
+        "Global::Data Layer / Storage"
+      ],
+      "predicted_nodes": [
+        "Global::Database",
+        "Global::File Storage\\n(System"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The global storage layer is split into database and file storage, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Presentation Layer / Frontend"
+      ],
+      "predicted_nodes": [
+        "Global::Browser-based\\nClient (Frontend",
+        "Browser-based\\nClient (Frontend::User Interface",
+        "Browser-based\\nClient (Frontend::Project Manager",
+        "Browser-based\\nClient (Frontend::Real-time Preview",
+        "Browser-based\\nClient (Frontend::Collaboration UI",
+        "Browser-based\\nClient (Frontend::Version Control UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Frontend layer is decomposed into a global container and specific UI subnodes."
+    },
+    {
+      "gt_nodes": [
+        "Global::User Layer / Client Layer"
+      ],
+      "predicted_nodes": [
+        "Global::Browser-based\\nClient (Frontend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Browser-based client corresponds to the user/client layer abstraction."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer / Frontend::File Upload Interface"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No sufficiently specific upload interface node is present in the prediction."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer / Frontend::LaTeX Rendering Interface"
+      ],
+      "predicted_nodes": [
+        "Browser-based\\nClient (Frontend::Real-time Preview",
+        "Backend Services::Rendering\\nService"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The rendering interface is split into frontend preview and backend rendering."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer / Frontend::Registration & Login Interface"
+      ],
+      "predicted_nodes": [
+        "Browser-based\\nClient (Frontend::User Interface",
+        "Backend Services::Authentication\\nService",
+        "Backend Services::User Management\\nService"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Registration/login is distributed across frontend UI and backend auth/user services."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer / Frontend::Workspace Interface"
+      ],
+      "predicted_nodes": [
+        "Browser-based\\nClient (Frontend::Project Manager",
+        "Browser-based\\nClient (Frontend::Version Control UI",
+        "Browser-based\\nClient (Frontend::Collaboration UI",
+        "Browser-based\\nClient (Frontend::Real-time Preview"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Workspace functionality is represented by multiple frontend sub-UIs."
+    },
+    {
+      "gt_nodes": [
+        "User Layer / Client Layer::PC Browser"
+      ],
+      "predicted_nodes": [
+        "Global::Browser-based\\nClient (Frontend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "PC browser usage is covered by the browser-based client abstraction."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Presentation Layer / Frontend::File Upload Interface",
+    "User Layer / Client Layer::Mobile Browser"
+  ],
+  "unmatched_predicted_nodes": []
+}

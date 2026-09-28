@@ -1,0 +1,153 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "External Dependencies::mpi4py / MPI Runtime\n(mpirun",
+        "Global::Inter-Process Communication Layer",
+        "Inter-Process Communication Layer::MPI Communication\n(internal"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents the MPI substrate. The predicted diagram splits this into dependency, communication layer, and internal MPI communication, which are semantically equivalent and appropriately attributed."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process"
+      ],
+      "predicted_nodes": [
+        "torc_py Library (Python Package)::Execution Layer (per MPI Process",
+        "Global::Application Layer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted nodes capture the idea of per-process execution, but they place the process abstraction inside the Python package/application structure instead of modeling the compute-node/MPI-process boundary. This is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Server\nThread"
+      ],
+      "predicted_nodes": [
+        "torc_py Library (Python Package)::Execution Layer (per MPI Process::Server Thread\n(yield: TORC_SERVER_YIELDTIME"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the server/yielding thread inside each MPI process. The boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Worker\nThread"
+      ],
+      "predicted_nodes": [
+        "torc_py Library (Python Package)::Execution Layer (per MPI Process::Worker Thread Pool\n(TORC_WORKERS threads)\n(yield: TORC_WORKER_YIELDTIME"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT worker thread maps to the predicted worker-thread pool. This is a reasonable abstraction/split and remains within the correct execution boundary."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Task Queue"
+      ],
+      "predicted_nodes": [
+        "torc_py Library (Python Package)::Execution Layer (per MPI Process::Worker Queue\n(per worker",
+        "torc_py Library (Python Package)::Core Runtime Layer::Task Scheduler /\nDistributor\n(cyclic / directed qid",
+        "torc_py Library (Python Package)::Core Runtime Layer::Load Balancer /\nTask Stealing Engine"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT task queue is decomposed into worker queues plus scheduling and stealing responsibilities. This is a valid refinement and the boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::...",
+        "Task Queue (in detail::A1",
+        "Task Queue (in detail::A2",
+        "Task Queue (in detail::A3",
+        "Task Queue (in detail::B1",
+        "Task Queue (in detail::B2",
+        "Task Queue (in detail::Level 0",
+        "Task Queue (in detail::Level 1",
+        "Task Queue (in detail::Level 2",
+        "Task Queue (in detail::Level 3",
+        "Task Queue (in detail::Level 4",
+        "Task Queue (in detail::Level 5"
+      ],
+      "predicted_nodes": [
+        "torc_py Library (Python Package)::Execution Layer (per MPI Process::Worker Queue\n(per worker",
+        "torc_py Library (Python Package)::Core Runtime Layer::Task Scheduler /\nDistributor\n(cyclic / directed qid",
+        "torc_py Library (Python Package)::Core Runtime Layer::Load Balancer /\nTask Stealing Engine"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The detailed GT task-queue hierarchy is aggregated into higher-level queue, scheduler, and stealing components. This is a valid consolidation and the boundary placement is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "External Dependencies::mpi4py / MPI Runtime\n(mpirun",
+        "External Dependencies::Python Multithreading\n(threading"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "MPI is modeled as an external dependency/runtime in the prediction, which matches the GT global MPI substrate. Python multithreading is not part of the GT node itself, but is a related supporting dependency and does not conflict."
+    },
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "Global::Inter-Process Communication Layer",
+        "Inter-Process Communication Layer::MPI Communication\n(internal"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The prediction correctly refines MPI into an internal inter-process communication layer."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Application Layer::Image Preprocessing\nApplication",
+    "Application Layer::Numerical Optimization\nApplication\n(CMA / Pi4U",
+    "Application Layer::Python Application\n(import torc",
+    "External Data Stores::HDF5 Output File\n(preprocessed images",
+    "External Data Stores::Image Input Files\n(label-named subfolders",
+    "External Dependencies::Python Multithreading\n(threading",
+    "External Dependencies::mpi4py / MPI Runtime\n(mpirun",
+    "External Dependencies::termcolor",
+    "Global::Application Layer",
+    "Global::External Data Stores",
+    "Global::External Dependencies",
+    "Global::Inter-Process Communication Layer",
+    "Global::Optional Dependencies\n(for examples",
+    "Global::torc_py Library (Python Package",
+    "Optional Dependencies\n(for examples::cma",
+    "Optional Dependencies\n(for examples::h5py",
+    "Optional Dependencies\n(for examples::numpy",
+    "Optional Dependencies\n(for examples::pillow",
+    "torc_py Library (Python Package::Configuration Layer",
+    "torc_py Library (Python Package::Configuration Layer::Environment Variable\nConfiguration\nTORC_WORKERS\nTORC_STEALING\nTORC_SERVER_YIELDTIME\nTORC_WORKER_YIELDTIME",
+    "torc_py Library (Python Package::Core Runtime Layer",
+    "torc_py Library (Python Package::Core Runtime Layer::Callback Manager",
+    "torc_py Library (Python Package::Core Runtime Layer::Load Balancer /\nTask Stealing Engine",
+    "torc_py Library (Python Package::Core Runtime Layer::Runtime Lifecycle\nManager",
+    "torc_py Library (Python Package::Core Runtime Layer::SPMD Coordinator",
+    "torc_py Library (Python Package::Core Runtime Layer::Task Descriptor\n(Future)\n.input() / .result",
+    "torc_py Library (Python Package::Core Runtime Layer::Task Scheduler /\nDistributor\n(cyclic / directed qid",
+    "torc_py Library (Python Package::Execution Layer (per MPI Process",
+    "torc_py Library (Python Package::Execution Layer (per MPI Process::Server Thread\n(yield: TORC_SERVER_YIELDTIME",
+    "torc_py Library (Python Package::Execution Layer (per MPI Process::Worker Queue\n(per worker",
+    "torc_py Library (Python Package::Execution Layer (per MPI Process::Worker Thread Pool\n(TORC_WORKERS threads)\n(yield: TORC_WORKER_YIELDTIME",
+    "torc_py Library (Python Package::Public API Layer",
+    "torc_py Library (Python Package::Public API Layer::Lifecycle API\ntorc.start()\ntorc.init()\ntorc.launch()\ntorc.shutdown",
+    "torc_py Library (Python Package::Public API Layer::Map API\ntorc.map",
+    "torc_py Library (Python Package::Public API Layer::Query API\ntorc.worker_id()\ntorc.num_workers()\ntorc.node_id()\ntorc.num_nodes()\ntorc.gettime",
+    "torc_py Library (Python Package::Public API Layer::SPMD API\ntorc.spmd",
+    "torc_py Library (Python Package::Public API Layer::Stealing Control API\ntorc.enable_stealing()\ntorc.disable_stealing",
+    "torc_py Library (Python Package::Public API Layer::Task Submission API\ntorc.submit()\ntorc.wait()\ntorc.as_completed"
+  ]
+}

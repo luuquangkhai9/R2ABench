@@ -1,0 +1,234 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2::harness.sys"
+      ],
+      "predicted_nodes": [
+        "hAFL2 Fuzzing Platform::Windows Hyper-V Fuzzing Workflow::Child Partition VM::Child Partition Harness\\n(fuzzing driver"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the child-partition fuzzing harness/driver used in the Windows Hyper-V workflow. The predicted hierarchy is more descriptive but semantically aligned with the GT boundary."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::CrashMonitoring.sys"
+      ],
+      "predicted_nodes": [
+        "hAFL2 Fuzzing Platform::Windows Hyper-V Fuzzing Workflow::Root Partition VM::Crash Monitor Driver\\n(crash-monitoring"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the root-partition crash monitoring driver/component. The predicted boundary is consistent with the same Windows Hyper-V root partition role."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::vmswitch.sys"
+      ],
+      "predicted_nodes": [
+        "hAFL2 Fuzzing Platform::Windows Hyper-V Fuzzing Workflow::Root Partition VM::VMSwitch\\n(vmswitch.sys"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes denote the Hyper-V virtual switch component vmswitch.sys in the root partition path. Naming differs only by formatting and abbreviation."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "predicted_nodes": [
+        "hAFL2 Fuzzing Platform::Crash Monitoring Feedback Handler",
+        "hAFL2 Fuzzing Platform::Linux Userspace Fuzzing Workflow::Embedded Forkserver\\n(kAFL hypercall mapper",
+        "hAFL2 Fuzzing Platform::Linux Userspace Fuzzing Workflow::initrd Builder\\n(target + shared libs",
+        "hAFL2 Fuzzing Platform::Linux Userspace Fuzzing Workflow::initrd Image\\n(target binary + libs",
+        "hAFL2 Fuzzing Platform::Test & Control Layer::Launch Scripts\\n(bash",
+        "hAFL2 Fuzzing Platform::Test & Control Layer::Standalone Test Runner\\n(test.py",
+        "hAFL2 Fuzzing Platform::Test & Control Layer::kAFL-Fuzzer\\n(pytest test suite",
+        "hAFL2 Fuzzing Platform::Windows Hyper-V Fuzzing Workflow::Child Partition VM::loader.exe\\n(snapshot creator",
+        "hAFL2 Fuzzing Platform::Windows Hyper-V Fuzzing Workflow::Child Partition VM::packet_sender.exe\\n(IOCTL trigger"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has a single umbrella hAFL2 node, while the AI decomposed it into several concrete functional subnodes that are all part of hAFL2. This is a valid refinement rather than a boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Global::KVM (L0"
+      ],
+      "predicted_nodes": [
+        "Host Environment::kAFL Hypervisor\\n(kAFL-based"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT top-level KVM/hypervisor context is represented by the predicted kAFL hypervisor host environment. The boundary is semantically consistent at the system/platform level."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host"
+      ],
+      "predicted_nodes": [
+        "Host Environment::kAFL Hypervisor\\n(kAFL-based"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the host hypervisor layer that underpins the fuzzing environment. The naming differs, but the architectural role matches."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2"
+      ],
+      "predicted_nodes": [
+        "hAFL2 Fuzzing Platform::Windows Hyper-V Fuzzing Workflow::Child Partition VM::Child Partition Harness\\n(fuzzing driver"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT child partition guest VM boundary corresponds to the predicted child partition VM boundary. The predicted node is a specific component within that VM and remains within the correct architectural scope."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2"
+      ],
+      "predicted_nodes": [
+        "hAFL2 Fuzzing Platform::Windows Hyper-V Fuzzing Workflow::Root Partition VM::Crash Monitor Driver\\n(crash-monitoring",
+        "hAFL2 Fuzzing Platform::Windows Hyper-V Fuzzing Workflow::Root Partition VM::Hyper-V Networking Path\\n(netvsc / VMBus",
+        "hAFL2 Fuzzing Platform::Windows Hyper-V Fuzzing Workflow::Root Partition VM::VMSwitch\\n(vmswitch.sys"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT root partition host OS boundary is refined by the AI into the root partition VM workflow and its contained components. This is a reasonable decomposition with no boundary confusion."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::CrashMonitoring.sys"
+      ],
+      "predicted_nodes": [
+        "hAFL2 Fuzzing Platform::Windows Hyper-V Fuzzing Workflow::Root Partition VM::Crash Monitor Driver\\n(crash-monitoring"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same crash-monitoring component, with different naming. The predicted placement under the root partition workflow is correct."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::vmswitch.sys"
+      ],
+      "predicted_nodes": [
+        "hAFL2 Fuzzing Platform::Windows Hyper-V Fuzzing Workflow::Root Partition VM::VMSwitch\\n(vmswitch.sys"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same switch component; the predicted boundary correctly keeps it in the root partition networking path."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Build Toolchain::Visual Studio\\n(Windows driver build"
+      ],
+      "match_type": "unmatched_predicted",
+      "is_boundary_correct": false,
+      "reasoning": "The PRD mentions Visual Studio as a build tool, but no corresponding manual architecture node is present in the GT list."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Build Toolchain::compile.sh\\n(bash script"
+      ],
+      "match_type": "unmatched_predicted",
+      "is_boundary_correct": false,
+      "reasoning": "The compile script exists in the PRD, but there is no GT node for this build-tooling artifact."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Host Environment::Host Shared Libraries"
+      ],
+      "match_type": "unmatched_predicted",
+      "is_boundary_correct": false,
+      "reasoning": "This is supported by the PRD, but the GT node list does not include a dedicated shared-library component."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "hAFL2 Fuzzing Platform::Linux Userspace Fuzzing Workflow::Embedded Forkserver\\n(kAFL hypercall mapper"
+      ],
+      "match_type": "unmatched_predicted",
+      "is_boundary_correct": false,
+      "reasoning": "The PRD describes this function, but no corresponding GT node exists in the manual list."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "hAFL2 Fuzzing Platform::Linux Userspace Fuzzing Workflow::initrd Builder\\n(target + shared libs"
+      ],
+      "match_type": "unmatched_predicted",
+      "is_boundary_correct": false,
+      "reasoning": "No GT node explicitly represents the initrd builder component."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "hAFL2 Fuzzing Platform::Linux Userspace Fuzzing Workflow::initrd Image\\n(target binary + libs"
+      ],
+      "match_type": "unmatched_predicted",
+      "is_boundary_correct": false,
+      "reasoning": "The GT list does not contain a separate initrd artifact node."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "hAFL2 Fuzzing Platform::Test & Control Layer::Launch Scripts\\n(bash"
+      ],
+      "match_type": "unmatched_predicted",
+      "is_boundary_correct": false,
+      "reasoning": "Launch scripts are in the PRD but absent as a manual node in the GT list."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "hAFL2 Fuzzing Platform::Test & Control Layer::Standalone Test Runner\\n(test.py"
+      ],
+      "match_type": "unmatched_predicted",
+      "is_boundary_correct": false,
+      "reasoning": "The standalone test runner is described in the PRD but not represented as a separate GT node."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "hAFL2 Fuzzing Platform::Test & Control Layer::kAFL-Fuzzer\\n(pytest test suite"
+      ],
+      "match_type": "unmatched_predicted",
+      "is_boundary_correct": false,
+      "reasoning": "The GT diagram does not include a separate node for the pytest test suite."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "hAFL2 Fuzzing Platform::Windows Hyper-V Fuzzing Workflow::Child Partition VM::loader.exe\\n(snapshot creator"
+      ],
+      "match_type": "unmatched_predicted",
+      "is_boundary_correct": false,
+      "reasoning": "Loader.exe is in the PRD, but the GT node list does not include it."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "hAFL2 Fuzzing Platform::Windows Hyper-V Fuzzing Workflow::Child Partition VM::packet_sender.exe\\n(IOCTL trigger"
+      ],
+      "match_type": "unmatched_predicted",
+      "is_boundary_correct": false,
+      "reasoning": "Packet_sender.exe is described in the PRD, but there is no GT node for this helper binary."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "hAFL2 Fuzzing Platform::Windows Hyper-V Fuzzing Workflow::Root Partition VM::Hyper-V Networking Path\\n(netvsc / VMBus"
+      ],
+      "match_type": "unmatched_predicted",
+      "is_boundary_correct": false,
+      "reasoning": "The communication path is part of the PRD, but it is not a distinct GT node."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

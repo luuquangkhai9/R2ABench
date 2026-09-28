@@ -1,0 +1,213 @@
+@startuml
+
+skinparam componentStyle rectangle
+skinparam defaultTextAlignment center
+skinparam noteFontSize 10
+skinparam componentFontSize 11
+skinparam arrowFontSize 10
+
+title User-in-the-box Simulator Framework Architecture
+
+' === External Systems ===
+package "External Systems" {
+  component "OpenAI Gym\nInterface" as gym [
+Gym API Contract
+--
+Produced simulators implement
+OpenAI Gym interface
+  ]
+  
+  component "MuJoCo\nSimulation Engine" as mujoco [
+MuJoCo Physics
+--
+Provides biomechanical simulation
+and environment rendering
+  ]
+}
+
+' === Core Framework Components ===  
+package "Core Framework" {
+  component "Simulator Builder" as builder [
+Builds simulators from YAML config
+--
+1. Reads YAML configuration
+2. Integrates MuJoCo XML
+3. Initializes components
+4. Produces standalone package
+  ]
+  
+  component "MuJoCo XML\nIntegration Layer" as xml_integration [
+Combines biomechanical & task XML
+--
+1. Integrates biomechanical model XML
+2. Integrates interaction task XML  
+3. Produces unified MuJoCo XML
+  ]
+  
+  component "Module Registry" as registry [
+Manages extension modules
+--
+1. Biomechanical models
+2. Perception modules  
+3. Interaction tasks
+4. Follows modality-based organization
+  ]
+}
+
+' === Extension Modules ===
+package "Extension Modules" {
+  component "Biomechanical\nModels" as biomech_models [
+MuJoCo-based user models
+--
+• Body kinematics
+• Muscle actuation  
+• Action range: [-1, 1]
+• Control range: [0, 1]
+  ]
+  
+  component "Perception\nModules" as perception_modules [
+Modality-based perception
+--
+• Egocentric vision
+• Proprioception
+• Follows base-class contract
+• Organized by modality
+  ]
+  
+  component "Interaction\nTasks" as interaction_tasks [
+HCI task environments
+--
+• Task definition
+• Environment setup
+• Reward specification
+• MuJoCo XML integration
+  ]
+}
+
+' === Workflow Components ===
+package "Workflow Components" {
+  component "Reinforcement Learning\nTraining Workflow" as training [
+Trains user models/policies
+--
+1. Builds simulator from config
+2. Configures RL algorithm
+3. Produces training artifacts
+4. Saves model checkpoints
+  ]
+  
+  component "Evaluation Runner" as evaluation [
+Runs evaluation from run folders
+--
+1. Loads simulator from run folder
+2. References checkpoint directory
+3. Creates evaluate directory
+4. Writes action logs when enabled
+  ]
+}
+
+' === Data Artifacts ===
+package "Data Artifacts" {
+  database "YAML Configuration\nFiles" as yaml_configs [
+Simulator build definitions
+--
+• Model selection
+• Task configuration  
+• Perception setup
+• Training parameters
+  ]
+  
+  database "MuJoCo XML\nFiles" as xml_files [
+Biomechanical & environment XML
+--
+• Biomechanical model definitions
+• Interaction task environments
+• Integrated during build
+  ]
+  
+  folder "Run Folders" as run_folders [
+Training/evaluation artifacts
+--
+• checkpoints/ (model checkpoints)
+• evaluate/ (evaluation outputs)
+• action logs (when enabled)
+• Training run metadata
+  ]
+  
+  database "Standalone Simulator\nPackages" as simulator_packages [
+Gym-compatible simulators
+--
+• Self-contained units
+• Independent loading
+• Implements Gym interface
+• Ready for deployment
+  ]
+}
+
+' === User Roles ===
+actor "Simulator Builder" as user_builder
+actor "Module Developer" as user_developer
+actor "Training User" as user_trainer
+actor "Evaluator" as user_evaluator
+
+' === Relationships ===
+' User interactions
+user_builder --> yaml_configs : "Provides"
+user_developer --> biomech_models : "Extends"
+user_developer --> perception_modules : "Extends"
+user_developer --> interaction_tasks : "Extends"
+user_trainer --> training : "Initiates"
+user_evaluator --> evaluation : "Initiates with\nrun folder"
+
+' Core framework flows
+yaml_configs --> builder : "Configuration input"
+xml_files --> xml_integration : "XML definitions"
+xml_integration --> builder : "Integrated XML"
+registry --> builder : "Module lookup"
+
+' Module registration
+biomech_models --> registry : "Registers with"
+perception_modules --> registry : "Registers with"
+interaction_tasks --> registry : "Registers with"
+
+' Training workflow
+builder --> training : "Built simulator"
+training --> run_folders : "Produces\ncheckpoints & artifacts"
+
+' Evaluation workflow  
+run_folders --> evaluation : "Input run folder"
+evaluation --> run_folders : "Writes to\nevaluate/ directory"
+
+' Simulator output
+builder --> simulator_packages : "Produces"
+simulator_packages --> gym : "Implements interface"
+simulator_packages --> mujoco : "Uses for simulation"
+
+' Module dependencies
+biomech_models --> mujoco : "Based on"
+interaction_tasks --> mujoco : "Based on"
+
+' Notes
+note top of builder
+  <b>Key Process:</b>
+  1. Read YAML config
+  2. Integrate MuJoCo XML
+  3. Initialize components
+  4. Produce Gym package
+end note
+
+note right of run_folders
+  <b>Run Folder Structure:</b>
+  • checkpoints/ - model checkpoints
+  • evaluate/ - evaluation outputs
+  • action_logs.txt (optional)
+  • training_metadata.json
+end note
+
+note left of registry
+  <b>Extension Contract:</b>
+  • Modality-based organization
+  • Base-class inheritance
+  • Modular framework structure
+end note
+
+@enduml

@@ -1,0 +1,189 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::plugin"
+      ],
+      "predicted_nodes": [
+        "veinmind-tools::Authorization Router"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Docker authorization routing/plugin capability. The predicted placement under veinmind-tools is semantically consistent with the GT global plugin node."
+    },
+    {
+      "gt_nodes": [
+        "Global::runner"
+      ],
+      "predicted_nodes": [
+        "Runner-based Execution::veinmind-runner (image)",
+        "Runner-based Execution::run.sh (parallel-container startup)"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT runner concept is split into the runner image and its startup workflow. This decomposition matches the PRD and the Runner-based Execution boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::containerd"
+      ],
+      "predicted_nodes": [
+        "Container Runtime::Containerd"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same infrastructure/runtime component with a semantically equivalent boundary label."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::docker"
+      ],
+      "predicted_nodes": [
+        "Container Runtime::Docker"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same Docker runtime component with a semantically equivalent boundary label."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::dockerfile"
+      ],
+      "predicted_nodes": [
+        "Registries::Docker Registry",
+        "Registries::DockerHub",
+        "Registries::Harbor"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node represents Dockerfile as an input/backend artifact, while the predicted nodes are registry targets. This is a semantic mismatch, not a valid split."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::kubernetes"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node corresponds to Kubernetes as an infrastructure/input backend."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::tarball"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node corresponds to tarball as an infrastructure/input backend."
+    },
+    {
+      "gt_nodes": [
+        "SDK::interact system"
+      ],
+      "predicted_nodes": [
+        "SDK/Libraries::veinmind-sdk / libveinmind"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the SDK/library integration layer used by tools and plugins."
+    },
+    {
+      "gt_nodes": [
+        "SDK::plugin system"
+      ],
+      "predicted_nodes": [
+        "SDK/Libraries::veinmind-sdk / libveinmind"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted SDK/library node corresponds to the GT plugin-system enablement through SDK support."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::cluster"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node represents a cluster scan target."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::container"
+      ],
+      "predicted_nodes": [
+        "veinmind-tools::Container Scanner",
+        "Global::Container Scanner",
+        "veinmind-tools::CLI Commands::scan-container"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT container scan target is realized through the container scanner and its CLI command. Boundary placement under veinmind-tools and CLI Commands is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::iac"
+      ],
+      "predicted_nodes": [
+        "veinmind-tools::IaC Scanner",
+        "Global::IaC Scanner",
+        "veinmind-tools::CLI Commands::scan-iac",
+        "Global::scan-iac",
+        "Global::Policy Libraries",
+        "Global::IaC Alert Details",
+        "Global::Report Event Client",
+        "Global::Scan Report Data"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT IaC target is expanded into the scanner, command, policy loading, reporting, and alert data structures required by the PRD. The boundaries are broadly consistent."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::image"
+      ],
+      "predicted_nodes": [
+        "veinmind-tools::Image Scanner",
+        "Global::Image Scanner",
+        "veinmind-tools::CLI Commands::scan-image",
+        "Global::scan-image"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT image scan target is split into the scanner and CLI command, which matches the PRD behavior and boundary placement."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Infrastructure and Input Backends::dockerfile",
+    "Infrastructure and Input Backends::kubernetes",
+    "Infrastructure and Input Backends::tarball",
+    "Scan Targets::cluster"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Authorization Router",
+    "Global::Base: veinmind/python3.6:1.3.1-stretch",
+    "Global::Container Scanner",
+    "Global::Containerd",
+    "Global::Docker",
+    "Global::Entrypoint: /tool/entrypoint.sh -> python scan.py $*",
+    "Global::IaC Alert Details",
+    "Global::IaC Scanner",
+    "Global::Image Scanner",
+    "Global::Policy Libraries",
+    "Global::Report Event Client",
+    "Global::Scan Report Data",
+    "Global::run.sh (parallel-container startup",
+    "Global::scan-container",
+    "Global::scan-iac",
+    "Global::scan-image",
+    "Global::veinmind-runner (image",
+    "Python Example Package::Base: veinmind/python3.6:1.3.1-stretch",
+    "Python Example Package::Entrypoint: /tool/entrypoint.sh -> python scan.py $*",
+    "Registries::Docker Registry",
+    "Registries::DockerHub",
+    "Registries::Harbor",
+    "Runner-based Execution::run.sh (parallel-container startup",
+    "Runner-based Execution::veinmind-runner (image",
+    "veinmind-tools::Authorization Router"
+  ]
+}

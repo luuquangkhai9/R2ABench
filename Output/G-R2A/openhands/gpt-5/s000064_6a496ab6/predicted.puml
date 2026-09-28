@@ -1,0 +1,96 @@
+@startuml
+skinparam componentStyle rectangle
+
+' gran-book backend platform architecture (SRS-derived)
+
+title gran-book backend platform architecture (SRS-derived)
+
+rectangle "Clients" as clients {
+  component "Native Mobile Apps" as Mobile
+  component "Admin Web App" as AdminApp
+}
+
+package "External Services" as Ext {
+  cloud "Firebase Authentication" as Firebase
+  cloud "Book-Search API" as BookAPI
+  cloud "Stripe (Payments)" as Stripe
+  cloud "Push Provider" as PushProvider
+  cloud "Email Provider" as EmailProvider
+}
+
+cloud "GCP" as GCP {
+  node "GCLB (Load Balancer)" as LB
+  node "GKE Cluster" as GKE {
+    component "API Gateway / BFF" as Gateway
+    component "Auth API" as AuthAPI
+    component "User Service" as UserSvc
+    component "Book Service" as BookSvc
+    component "EC Site Service" as ECSvc
+    component "Support API" as SupportAPI
+    component "Admin Service" as AdminSvc
+    component "Message-Notification Service" as NotifSvc
+  }
+  database "MySQL" as MySQL
+  database "Message DB (NoSQL)" as NoSQL
+  component "Object Storage (GCS)" as GCS
+  node "GCE VM (Ops)" as GCEVM
+}
+
+' Client access through load balancer
+Mobile --> LB
+AdminApp --> LB
+
+' Load balancer routes to gateway/BFF
+LB --> Gateway
+
+' Gateway interactions with internal services
+Gateway --> AuthAPI : authenticate
+Gateway --> UserSvc
+Gateway --> BookSvc
+Gateway --> ECSvc
+Gateway --> SupportAPI
+Gateway --> AdminSvc
+Gateway --> NotifSvc : notifications
+
+' Authentication via external provider
+AuthAPI --> Firebase : token/identity verification
+
+' External integrations
+BookSvc --> BookAPI : book lookup
+ECSvc  --> Stripe  : payment processing
+
+' Data stores
+UserSvc   --> MySQL
+BookSvc   --> MySQL
+ECSvc     --> MySQL
+SupportAPI --> MySQL
+
+NotifSvc --> NoSQL : message data
+BookSvc  --> GCS   : thumbnails/objects
+
+' Notification providers
+NotifSvc --> PushProvider : push delivery
+NotifSvc --> EmailProvider : email delivery
+
+' Operations and infrastructure
+GCEVM --> LB : TLS provisioning\n(Let's Encrypt DNS-01)
+GCEVM ..> GKE : cluster access\n(GKE credential retrieval)
+
+note over GKE
+- Internal APIs follow request/response design
+- Protocol Buffers naming conventions apply
+end note
+
+note bottom of MySQL
+Stores: user, book, EC-site data
+end note
+
+note bottom of NoSQL
+Stores: message management data
+end note
+
+note bottom of GCS
+Stores: thumbnails and object data
+end note
+
+@enduml

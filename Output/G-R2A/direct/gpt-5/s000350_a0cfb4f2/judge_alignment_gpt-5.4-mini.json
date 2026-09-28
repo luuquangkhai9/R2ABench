@@ -1,0 +1,96 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::GoDaddy API\\nDomain availability"
+      ],
+      "predicted_nodes": [
+        "GoDaddy APIs::Availability Endpoints"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the optional GoDaddy integration used for domain availability checks. The predicted boundary is a more specific but semantically equivalent packaging of the same external API capability."
+    },
+    {
+      "gt_nodes": [
+        "Global::HTTP API\\nSession and attack requests"
+      ],
+      "predicted_nodes": [
+        "API Server Process::HTTP API\\n- GET /\\n- GET /homoglyphs/complete?domain=...\\n- Error handling (400/404/500)\\n- Session validation"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This matches the main HTTP API surface handling session creation, attack requests, homoglyph endpoint access, and error handling. The boundary differs in naming but remains within the correct server-side API context."
+    },
+    {
+      "gt_nodes": [
+        "Global::Redis\\nCommand and reporting queues"
+      ],
+      "predicted_nodes": [
+        "Global::Redis Job Channel",
+        "Global::Redis Report Channel"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is split into separate Redis channels for job publication and reporting. This is a faithful refinement of the same Redis communication boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Socket.io\\nWebSocket result channel"
+      ],
+      "predicted_nodes": [
+        "API Server Process::WebSocket Gateway\\n(Socket.IO/WebSocket",
+        "Client Browser::WebSocket Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT communication channel is decomposed into server gateway and browser client endpoints. This is a reasonable split of the asynchronous WebSocket/Socket.IO path and stays within the correct interaction boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Squatm3\\nDomain generation engine"
+      ],
+      "predicted_nodes": [
+        "Worker Execution::Subprocess: squatm3 CLI\\n(domain-generation engine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the wrapped squatm3 domain-generation engine invoked as a subprocess. The worker-execution boundary is appropriate and semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Web UI\\nindex.html"
+      ],
+      "predicted_nodes": [
+        "Client Browser::Web UI\\n(index.html"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the rendered index.html web entry page. The browser-side boundary is acceptable for this UI element."
+    },
+    {
+      "gt_nodes": [
+        "Global::Workers\\nCommand consumers"
+      ],
+      "predicted_nodes": [
+        "API Server Process::Background Consumer Thread\\n- Started by API process",
+        "Worker Execution::Worker Adapter\\n- Receive jobs\\n- Invoke engine\\n- Stream progress/results"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT worker/consumer node is split into the in-process background consumer thread and the worker adapter responsible for receiving jobs, invoking the engine, and streaming results. This matches the PRD architecture."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "API Server Process::Option Builder\\n- Parse attack codes: Hf, Hc, -add, F, R\\n- Flags: godaddy, output\\n- Build CLI opts (e.g., -Hf, --add, --output=json",
+    "API Server Process::Session Manager\\n- Create session on GET /\\n- Session ID == Job ID",
+    "Global::API Server Process",
+    "Global::Client Browser",
+    "Global::Configuration\\n- Redis URI\\n- GoDaddy key/secret/base URL/endpoints",
+    "Global::Redis Job Channel",
+    "Global::Redis Report Channel",
+    "Global::Worker Execution",
+    "Worker Execution::Worker Adapter\\n- Receive jobs\\n- Invoke engine\\n- Stream progress/results"
+  ]
+}

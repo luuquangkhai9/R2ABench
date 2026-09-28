@@ -1,0 +1,82 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\nROS Architecture::Control::DBW Node\nDrive-by-wire"
+      ],
+      "predicted_nodes": [
+        "Control Layer::DBWNode\n(Drive-By-Wire)\n- subscribes: /twist_cmd,\n  vehicle state\n- publishes: /vehicle_cmd\n  (throttle, steering, brake"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Drive-by-wire node responsible for vehicle control. Boundary attribution (Control vs Control Layer) is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\nROS Architecture::Control::Waypoint Follower\nController"
+      ],
+      "predicted_nodes": [
+        "Control Layer::WaypointFollower\n- subscribes: /final_waypoints,\n  /current_pose\n- publishes: /twist_cmd\n  (linear & angular velocity"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the Waypoint Follower control component. Boundaries correspond well functionally."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\nROS Architecture::Perception::Traffic Light\nDetection Node"
+      ],
+      "predicted_nodes": [
+        "Perception Layer::TLDetectorClassifier\n(tl_detector node)\n- subscribes: /image_color,\n  base_waypoints, current_pose\n- detects & classifies\n  traffic light state\n- publishes: /traffic_waypoint\n  (stop waypoint index"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the traffic light detection node in the perception subsystem. Boundary attributions are semantically identical."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\nROS Architecture::Planning::Waypoint Loader\nROS Node"
+      ],
+      "predicted_nodes": [
+        "Planning Layer::WaypointLoader\n- loads waypoints from CSV\n- publishes: /base_waypoints\n  (incl. target speeds"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both are the Waypoint Loader nodes in the planning subsystem. Boundaries are semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\nROS Architecture::Planning::Waypoint Updater Node\nROS Node"
+      ],
+      "predicted_nodes": [
+        "Planning Layer::WaypointUpdater\n- subscribes: /base_waypoints,\n  /current_pose, /traffic_waypoint\n- publishes: /final_waypoints\n  (velocity-adjusted window"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both specify the Waypoint Updater component. The boundary match (Planning vs Planning Layer) is highly consistent."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\nROS Architecture::Car / Simulator"
+      ],
+      "predicted_nodes": [
+        "External Systems::Recorded Training\nBag Player",
+        "External Systems::Udacity Capstone\nProject Simulator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT combines the execution environments (Car / Simulator) into a single node, which the AI correctly splits into the Simulator and the site-mode bag player (representing the real car execution data). The External Systems boundary is an appropriate fit."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Udacity Self-Driving Car Capstone\nROS Architecture::Perception::Obstacle Detection\nROS Node"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::External Systems",
+    "Global::Infrastructure / Environment Layer\n(Docker Container",
+    "Infrastructure / Environment Layer\n(Docker Container::ROSMaster\n(Topic Broker &\nComm Backbone",
+    "Launch / Configuration Layer::SiteLaunchConfig\n(site.launch —\nSite / Bag Mode",
+    "Launch / Configuration Layer::StyxLaunchConfig\n(styx.launch —\nSimulator Mode",
+    "Styx WebSocket Bridge::StyxBridge\n(bridge.py / server.py)\nWebSocket ↔ ROS adapter"
+  ]
+}

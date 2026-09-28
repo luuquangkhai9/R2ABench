@@ -1,0 +1,102 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "predicted_nodes": [
+        "CI/CD Automation Layer\n(GitHub Actions Workflows::CI Build & Test Workflow\n(debug + release variants\nubuntu-18.04 / 15-min timeout",
+        "CI/CD Automation Layer\n(GitHub Actions Workflows::Changelog Generation Workflow\n(manual trigger / ubuntu-latest\nClosed issues, Breaking changes,\nFixed bugs, Enhancements, etc.",
+        "CI/CD Automation Layer\n(GitHub Actions Workflows::Duplicate-Check Job\n(ubuntu-latest",
+        "CI/CD Automation Layer\n(GitHub Actions Workflows::Format Check Workflow\n(push | pull_request | workflow_call\nubuntu-18.04",
+        "CI/CD Automation Layer\n(GitHub Actions Workflows::Reusable Workflows\n(workflow_call triggers\nFormat Check | Static Analysis | CodeQL",
+        "CI/CD Automation Layer\n(GitHub Actions Workflows::cFS Bundle Reusable Workflows\n(cFS & Submodule workflow_call\nFormat Check | Static Analysis | CodeQL",
+        "Build System Layer::Makefile / Makefile.sample\n(make prep | make install",
+        "Build System Layer::sample_defs\n(Mission Configuration Assets",
+        "Git Submodules\n(Source Checkout::Submodule Sources",
+        "Artifact Storage::Changelog Artifact\n(uploaded output",
+        "Global::GitHub Actions\n(CI/CD Execution Platform\nubuntu-latest | ubuntu-18.04",
+        "Flight Target Layer\n(core-cpu1 Runtime::Framework Applications",
+        "Flight Target Layer\n(core-cpu1 Runtime::cFS Framework::OSAL\n(OS Abstraction Layer",
+        "Flight Target Layer\n(core-cpu1 Runtime::cFS Framework::PSP\n(Platform Support Package",
+        "Flight Target Layer\n(core-cpu1 Runtime::cFS Framework::cFE\n(Core Flight Executive",
+        "Flight Target Layer\n(core-cpu1 Runtime::core-cpu1\n(cFS Target Executable",
+        "Host Tooling Layer::Telemetry Interface\n(Operator Network Endpoint\n127.0.0.1 / configured IP",
+        "Host Tooling Layer::cmdUtil\n(--pktid, --cmdcode,\n--endian, --uint32",
+        "External Libraries & Tools Layer::CCDD\n(Command & Data Dictionary",
+        "External Libraries & Tools Layer::ECI\n(External Coding Interface",
+        "External Libraries & Tools Layer::Perfutils-java",
+        "External Libraries & Tools Layer::SIL\n(Simulation Interface Layer",
+        "External Libraries & Tools Layer::cFS_IO_LIB",
+        "External Libraries & Tools Layer::cFS_LIB",
+        "External Libraries & Tools Layer::gen_sch_tbl"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT 'cFS Bundle' is a top-level umbrella node that is reflected by many predicted subnodes covering build, CI/CD, runtime target, host tooling, reusable workflows, and external tools. Although split across many nodes, the overall boundary placement is consistent with the bundle-level scope."
+    },
+    {
+      "gt_nodes": [
+        "Reuse Workflows::Submodule Reuse"
+      ],
+      "predicted_nodes": [
+        "CI/CD Automation Layer\n(GitHub Actions Workflows::cFS Bundle Reusable Workflows\n(cFS & Submodule workflow_call\nFormat Check | Static Analysis | CodeQL",
+        "CI/CD Automation Layer\n(GitHub Actions Workflows::Reusable Workflows\n(workflow_call triggers\nFormat Check | Static Analysis | CodeQL"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT submodule reuse concept is captured by the reusable workflow nodes. The predicted nodes place it in the CI/workflow reuse boundary, which is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Reuse Workflows::cFS Reuse"
+      ],
+      "predicted_nodes": [
+        "CI/CD Automation Layer\n(GitHub Actions Workflows::cFS Bundle Reusable Workflows\n(cFS & Submodule workflow_call\nFormat Check | Static Analysis | CodeQL",
+        "CI/CD Automation Layer\n(GitHub Actions Workflows::Reusable Workflows\n(workflow_call triggers\nFormat Check | Static Analysis | CodeQL"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The cFS reuse relationship is represented by the reusable workflow nodes and correctly attributed to the workflow reuse boundary."
+    },
+    {
+      "gt_nodes": [
+        "Static and Quality Checks::CodeQL Analysis"
+      ],
+      "predicted_nodes": [
+        "CI/CD Automation Layer\n(GitHub Actions Workflows::Reusable Workflows\n(workflow_call triggers\nFormat Check | Static Analysis | CodeQL",
+        "CI/CD Automation Layer\n(GitHub Actions Workflows::cFS Bundle Reusable Workflows\n(cFS & Submodule workflow_call\nFormat Check | Static Analysis | CodeQL"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "CodeQL Analysis is one of the static quality checks included in the reusable workflow set. The boundary is appropriate under CI/static analysis."
+    },
+    {
+      "gt_nodes": [
+        "Static and Quality Checks::Format Check"
+      ],
+      "predicted_nodes": [
+        "CI/CD Automation Layer\n(GitHub Actions Workflows::Format Check Workflow\n(push | pull_request | workflow_call\nubuntu-18.04",
+        "CI/CD Automation Layer\n(GitHub Actions Workflows::Reusable Workflows\n(workflow_call triggers\nFormat Check | Static Analysis | CodeQL",
+        "CI/CD Automation Layer\n(GitHub Actions Workflows::cFS Bundle Reusable Workflows\n(cFS & Submodule workflow_call\nFormat Check | Static Analysis | CodeQL"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT format check is directly represented by the dedicated format check workflow and also by the reusable workflow grouping. Boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Static and Quality Checks::Static Analysis"
+      ],
+      "predicted_nodes": [
+        "CI/CD Automation Layer\n(GitHub Actions Workflows::Reusable Workflows\n(workflow_call triggers\nFormat Check | Static Analysis | CodeQL",
+        "CI/CD Automation Layer\n(GitHub Actions Workflows::cFS Bundle Reusable Workflows\n(cFS & Submodule workflow_call\nFormat Check | Static Analysis | CodeQL"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The static analysis capability is represented within the reusable workflow nodes and is correctly placed in the CI/static-check boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

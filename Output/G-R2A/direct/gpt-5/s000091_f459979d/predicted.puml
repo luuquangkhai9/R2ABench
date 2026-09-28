@@ -1,0 +1,89 @@
+@startuml
+skinparam componentStyle rectangle
+title s000091_f459979d - System Architecture (LwM2M + Blockchain-backed Management)
+
+actor "Authenticated API Client" as Client
+
+node "Java Backend (Spring)" as Backend {
+  component "UserController\n(Protected REST API)" as UserController <<REST>>
+  component "UserService" as UserService
+  component "JwtUtility\nToken Validator" as JwtUtil <<Security>>
+  component "BlockchainIntegrationService\n(Web3j Client)" as BCService <<Web3j>>
+  component "ASCII32 Codec\n(32-byte ASCII encode/decode)" as Ascii32 <<Utility>>
+  component "LwM2M Service\n(JSON -> Typed Nodes)" as Lwm2mService <<Leshan>>
+}
+
+node "Ethereum-compatible Node" as EthNode {
+  component "JSON-RPC Endpoint\n(HTTP)" as JsonRpc <<RPC>>
+  component "Smart Contract:\nClient/Bootstrap Registry" as Contract <<Contract>>
+}
+
+Client --> UserController : HTTP (GET /users, POST /add)\nAuthorization header
+
+UserController --> JwtUtil : Validate token\nC-001: JwtUtility.isValidToken(auth, 1)
+UserController --> UserService : Retrieve/Create users\non valid token
+UserController <-- UserService : 200 OK / 201 Created\nUser data
+UserController ..> Client : 401/403/400 on invalid token\nFR-001/FR-002
+
+BCService --> Ascii32 : Encode/Decode fixed 32-byte fields\nA-004, NFR-004
+BCService -down-> JsonRpc : Web3j HTTP transport\nC-002
+JsonRpc --> Contract : Invoke contract methods\nC-003
+
+Lwm2mService ..> BCService : Retrieve bootstrap by endpoint\nFR-005
+Lwm2mService : Deserialize LwM2M node JSON\nFR-006, NFR-003
+
+note right of UserController
+User HTTP API
+- FR-001: GET users
+- FR-002: POST /add (create user)
+Access control:
+- 0 -> proceed
+- 1 -> 401 Unauthorized
+- 2 -> 403 Forbidden
+- other -> 400 Bad Request
+NFR-001: Enforce token-based access
+end note
+
+note right of Contract
+Fields (DR-002):
+- endpoint
+- bootstrap server: url, identity, key
+- server: url, identity, key
+All strings encoded as fixed 32-byte ASCII
+end note
+
+note bottom of BCService
+Blockchain-backed operations
+- FR-003: Retrieve client/security info
+  On contract access failure, record exception
+  and return empty collection (no propagate)
+- FR-004: Submit client bootstrap (addClient)
+  Convert strings to 32-byte ASCII before call
+- FR-005: Retrieve bootstrap by endpoint
+  Encode endpoint -> 32-byte; decode fields on return
+end note
+
+note bottom of Lwm2mService
+LwM2M JSON handling (Leshan/LwM2M):
+- Deserialize valid JSON -> typed nodes
+- Reject invalid payloads (e.g., instances without id)
+Mapping (DR-005): boolean->BOOLEAN, string->STRING,
+integers lossless->INTEGER, other numbers->FLOAT,
+others default->STRING
+end note
+
+note top of Backend
+Environment:
+- Java backend runtime
+- Spring MVC controllers (HTTP)
+- Leshan/LwM2M model types
+Dependencies:
+- A-001/A-003: Auth header validation, valid JSON structure
+end note
+
+note top of EthNode
+Blockchain communication:
+- Web3j over HTTP JSON-RPC
+- Ethereum-compatible node (NFR-002)
+end note
+@enduml

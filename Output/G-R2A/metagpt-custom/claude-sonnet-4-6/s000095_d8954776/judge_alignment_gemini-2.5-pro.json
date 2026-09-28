@@ -1,0 +1,135 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Event Bus"
+      ],
+      "predicted_nodes": [
+        "Event Bus Layer::EventBus\n(In-Process Pub/Sub"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the internal Event Bus used for application pub/sub communication."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Location Capture::Google Play Services\nLocation Provider"
+      ],
+      "predicted_nodes": [
+        "External Systems::Google Play Services"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Google Play Services dependency for location handling. The boundary variation (Location Capture vs External Systems) is acceptable as it spans both internal utilization and external framework dependencies."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Location Capture::Location Listeners"
+      ],
+      "predicted_nodes": [
+        "Service Layer::LocationListeners\n(Android Location Callbacks"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the location listener callbacks/components. Placed appropriately in their respective application layer boundaries."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::CSV / URL Loggers"
+      ],
+      "predicted_nodes": [
+        "Logging / Output Layer::TextFileLogger\n(Plain Text Writer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes correspond to the text-based logging format (CSV/Text) described in the PRD, correctly placed in the logging/output boundary."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::GPX Logger"
+      ],
+      "predicted_nodes": [
+        "Logging / Output Layer::GPXLogger\n(GPX Format Writer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match for the GPX logging component."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::KML Logger"
+      ],
+      "predicted_nodes": [
+        "Logging / Output Layer::KMLLogger\n(KML Format Writer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match for the KML logging component."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::NMEA / GPRMC Encoder"
+      ],
+      "predicted_nodes": [
+        "Integration / Upload Layer::GPRMCEncoder\n(NMEA GPRMC Formatter"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the encoder responsible for serializing location data into GPRMC format for OpenGTS."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Upload::Upload Jobs",
+        "GPSLogger Android Application::Upload::Uploaders"
+      ],
+      "predicted_nodes": [
+        "Integration / Upload Layer::OpenGTSUploader\n(UDP Datagram Sender"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT lists generalized upload components, which the AI predicts as the specific OpenGTS UDP uploader component. Functionally related and mapped across upload boundaries."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::User Interface::Detailed View",
+        "GPSLogger Android Application::User Interface::Main Activity",
+        "GPSLogger Android Application::User Interface::Other Fragments",
+        "GPSLogger Android Application::User Interface::Simple View"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::MainActivityFragments\n(UI Fragments / Main Activity"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The detailed UI fragmentation in the GT is aggregated by the AI into a single Presentation Layer node handling MainActivity and Fragments."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenGTS Endpoint\nUDP server"
+      ],
+      "predicted_nodes": [
+        "External Systems::OpenGTS Server\n(UDP"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the external UDP server endpoint for OpenGTS integrations."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "GPSLogger Android Application::Logging::Loggers",
+    "Global::Dropbox",
+    "Global::OpenStreetMap"
+  ],
+  "unmatched_predicted_nodes": [
+    "Configuration / Session Layer::AppSettings /\nSessionState",
+    "Configuration / Session Layer::User Configuration\nInput",
+    "Data Entities::SerializableLocation\n(Location Data Structure",
+    "Global::External Systems",
+    "Integration / Upload Layer::DropboxCredentialConfig\n(Build-time Credential Holder",
+    "Integration / Upload Layer::OSMCredentialConfig\n(Build-time Credential Holder",
+    "Platform / Build Layer::GradleBuildConfig\n(Build-time Credential Injector",
+    "Platform / Build Layer::local.properties\n(sdk.dir / SDK Path",
+    "Platform / Build Layer::~/.gradle/\ngradle.properties\n(Credential Store",
+    "Service Layer::GPSLoggingService\n(Background Android Service"
+  ]
+}

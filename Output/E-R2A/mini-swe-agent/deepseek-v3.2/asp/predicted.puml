@@ -1,0 +1,121 @@
+@startuml
+!define LAYERED
+skinparam componentStyle rectangle
+skinparam backgroundColor #F0F0F0
+skinparam component {
+  BackgroundColor #E6F3FF
+  BorderColor #0066CC
+  FontColor #000000
+}
+skinparam rectangle {
+  BackgroundColor #FFFFFF
+  BorderColor #333333
+}
+skinparam arrow {
+  Color #333333
+  Thickness 2
+}
+
+title Software Requirements Review System Architecture
+
+package "User Layer" {
+  [Reviewer] as REVIEWER
+  [Requirements Owner] as OWNER
+  [Project Stakeholder] as STAKEHOLDER
+}
+
+package "Application Layer" {
+  [Review Management] as REVIEW_MGMT
+  [Checklist Engine] as CHECKLIST_ENGINE
+  [Scoring System] as SCORING_SYS
+  [Problem Reporting] as PROBLEM_REPORT
+  [Report Generation] as REPORT_GEN
+}
+
+package "Data Layer" {
+  database "Review Artifacts" as REVIEW_DB {
+    [Review Purpose Data]
+    [Checklist Items]
+    [Problem Reports]
+    [Score Records]
+    [Review Metadata]
+  }
+
+  [Standards Repository] as STANDARDS_REPO
+  [Requirements Documents] as REQ_DOCS
+}
+
+package "External Systems" {
+  [Industry Standards] as INDUSTRY_STD
+  [Product Specifications] as PRODUCT_SPEC
+  [Business Rules] as BUSINESS_RULES
+  [Documentation Norms] as DOC_NORMS
+}
+
+'' User Layer to Application Layer connections
+REVIEWER --> REVIEW_MGMT : initiates review
+REVIEWER --> CHECKLIST_ENGINE : uses checklist
+REVIEWER --> SCORING_SYS : enters scores
+REVIEWER --> PROBLEM_REPORT : reports issues
+OWNER --> REPORT_GEN : receives findings
+STAKEHOLDER --> REPORT_GEN : views results
+
+'' Application Layer internal connections
+REVIEW_MGMT --> CHECKLIST_ENGINE : manages
+CHECKLIST_ENGINE --> SCORING_SYS : provides basis
+CHECKLIST_ENGINE --> PROBLEM_REPORT : triggers
+PROBLEM_REPORT --> REPORT_GEN : feeds data
+SCORING_SYS --> REPORT_GEN : provides scores
+
+'' Application Layer to Data Layer connections
+REVIEW_MGMT --> REVIEW_DB : stores/retrieves
+CHECKLIST_ENGINE --> REVIEW_DB : accesses items
+SCORING_SYS --> REVIEW_DB : stores scores
+PROBLEM_REPORT --> REVIEW_DB : stores reports
+REPORT_GEN --> REVIEW_DB : retrieves data
+
+CHECKLIST_ENGINE --> STANDARDS_REPO : references
+CHECKLIST_ENGINE --> REQ_DOCS : reviews
+
+'' Data Layer to External Systems connections
+STANDARDS_REPO --> INDUSTRY_STD : incorporates
+STANDARDS_REPO --> PRODUCT_SPEC : incorporates
+STANDARDS_REPO --> BUSINESS_RULES : incorporates
+STANDARDS_REPO --> DOC_NORMS : incorporates
+
+'' External dependencies
+REQ_DOCS ..> INDUSTRY_STD : must conform to
+REQ_DOCS ..> PRODUCT_SPEC : must align with
+REQ_DOCS ..> BUSINESS_RULES : must follow
+REQ_DOCS ..> DOC_NORMS : must adhere to
+
+note right of REVIEW_MGMT
+  Manages review lifecycle:
+  - Define objectives
+  - Set review basis
+  - Coordinate review process
+end note
+
+note right of CHECKLIST_ENGINE
+  Core review functionality:
+  - Completeness checks
+  - Understandability checks
+  - Model accuracy checks
+  - Extension/improvement checks
+end note
+
+note right of SCORING_SYS
+  Scoring functionality:
+  - 4 dimensions x 10 points each
+  - Total score out of 40
+  - Quantitative assessment
+end note
+
+note right of PROBLEM_REPORT
+  Problem tracking:
+  - Requirement issues
+  - Improvement suggestions
+  - Overall evaluation
+end note
+
+@enduml

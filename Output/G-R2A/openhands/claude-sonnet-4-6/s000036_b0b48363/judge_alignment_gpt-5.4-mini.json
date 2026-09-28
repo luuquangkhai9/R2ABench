@@ -1,0 +1,314 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::C#",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node corresponds to a C# implementation/runtime concept."
+    },
+    {
+      "gt_node": "Global::HTTP",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Node.js Runtime::Express Application::HTTP Server\\n(port 7000 default"
+      ],
+      "reasoning": "The predicted HTTP server node covers the HTTP-serving responsibility present in the ground truth."
+    },
+    {
+      "gt_node": "Global::HypnoLog\\nServer",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Browser Client",
+        "Global::HypnoLog Data Object\\n{data, type, [tags], [name",
+        "Global::HypnoLog-error Object\\n{type: HypnoLog-error,\\nerror, validatorErrors, original",
+        "Global::Node.js Runtime",
+        "Node.js Runtime::Express Application",
+        "Node.js Runtime::Express Application::Logging Router\\n(/logger",
+        "Node.js Runtime::Socket.IO Server\\n(attached to HTTP server",
+        "Node.js Runtime::Startup Script\\n(bin/www / npm start / CLI aliases"
+      ],
+      "reasoning": "The server is represented across the Node.js runtime, Express app, logging router, Socket.IO server, and startup script nodes."
+    },
+    {
+      "gt_node": "Global::In Browser Log",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Browser Client::Default Window",
+        "Browser Client::Received-Data List\\n(client-side store",
+        "Browser Client::Schema Validator\\n(Ajv / HypnoLog Data Object schema",
+        "Browser Client::Socket.IO Client\\n(same-origin connection",
+        "Browser Client::UI State\\n(last-update, tag filter, tag display,\\nvariable-name display",
+        "Browser Client::Visualizer 1\\n(canDisplay / display",
+        "Browser Client::Visualizer Config\\n(user config / default config",
+        "Browser Client::Visualizer Dispatcher",
+        "Browser Client::Visualizer N\\n(canDisplay / display",
+        "Browser Client::Window Dispatcher"
+      ],
+      "reasoning": "The browser-side logging/display pipeline is covered by the browser client, validation, state, dispatching, and visualizer/window nodes."
+    },
+    {
+      "gt_node": "Global::Python",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node corresponds to Python support or a Python-specific component."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Browser Client::Default Window",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::In Browser Log"
+      ],
+      "reasoning": "This is grounded in the browser-side display/window responsibility of the in-browser log UI."
+    },
+    {
+      "predicted_node": "Browser Client::Received-Data List\\n(client-side store",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::In Browser Log"
+      ],
+      "reasoning": "The client-side received-data store is part of the browser log handling pipeline."
+    },
+    {
+      "predicted_node": "Browser Client::Schema Validator\\n(Ajv / HypnoLog Data Object schema",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::In Browser Log"
+      ],
+      "reasoning": "Ajv-based schema validation is explicitly part of the browser-side behavior."
+    },
+    {
+      "predicted_node": "Browser Client::Socket.IO Client\\n(same-origin connection",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::In Browser Log"
+      ],
+      "reasoning": "The browser client connection over Socket.IO is directly grounded in the GT browser log functionality."
+    },
+    {
+      "predicted_node": "Browser Client::UI State\\n(last-update, tag filter, tag display,\\nvariable-name display",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::In Browser Log"
+      ],
+      "reasoning": "UI state for tags, variable-name display, and last-update handling is grounded in the browser-side log UI."
+    },
+    {
+      "predicted_node": "Browser Client::Visualizer 1\\n(canDisplay / display",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::In Browser Log"
+      ],
+      "reasoning": "A visualizer implementing canDisplay/display is a grounded browser-side concept."
+    },
+    {
+      "predicted_node": "Browser Client::Visualizer Config\\n(user config / default config",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::In Browser Log"
+      ],
+      "reasoning": "Visualizer loading from configuration is part of the browser-side design."
+    },
+    {
+      "predicted_node": "Browser Client::Visualizer Dispatcher",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::In Browser Log"
+      ],
+      "reasoning": "Selecting and invoking visualizers belongs to the browser display pipeline."
+    },
+    {
+      "predicted_node": "Browser Client::Visualizer N\\n(canDisplay / display",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::In Browser Log"
+      ],
+      "reasoning": "Multiple visualizers are grounded by the GT visualizer mechanism."
+    },
+    {
+      "predicted_node": "Browser Client::Window Dispatcher",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::In Browser Log"
+      ],
+      "reasoning": "Dispatching display objects to windows is part of the browser-side rendering flow."
+    },
+    {
+      "predicted_node": "Global::Browser Client",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::In Browser Log"
+      ],
+      "reasoning": "This is a coarse but valid grounding of the browser-side log/UI subsystem."
+    },
+    {
+      "predicted_node": "Global::HypnoLog Data Object\\n{data, type, [tags], [name",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::In Browser Log"
+      ],
+      "reasoning": "The HypnoLog data object is explicitly part of the system design, though the predicted node broadens the field set."
+    },
+    {
+      "predicted_node": "Global::HypnoLog-error Object\\n{type: HypnoLog-error,\\nerror, validatorErrors, original",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::In Browser Log"
+      ],
+      "reasoning": "The browser-generated error object is explicitly required by the GT design."
+    },
+    {
+      "predicted_node": "Global::Node.js Runtime",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HypnoLog\\nServer"
+      ],
+      "reasoning": "The Node.js runtime is a correct grounding for the server execution environment."
+    },
+    {
+      "predicted_node": "Node.js Runtime::Connected Display Client List\\n(add on connect, remove on disconnect",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HypnoLog\\nServer"
+      ],
+      "reasoning": "Maintaining connected display clients is part of the server-side behavior."
+    },
+    {
+      "predicted_node": "Node.js Runtime::Express Application",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HypnoLog\\nServer"
+      ],
+      "reasoning": "The Express application is a grounded part of the server architecture."
+    },
+    {
+      "predicted_node": "Node.js Runtime::Express Application::HTTP Server\\n(port 7000 default",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HTTP",
+        "Global::HypnoLog\\nServer"
+      ],
+      "reasoning": "The HTTP server and default port behavior are grounded in the GT server description."
+    },
+    {
+      "predicted_node": "Node.js Runtime::Express Application::JSON Body Parser\\n(50mb limit",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HTTP",
+        "Global::HypnoLog\\nServer"
+      ],
+      "reasoning": "JSON body parsing with a size limit is explicitly grounded in the requirements."
+    },
+    {
+      "predicted_node": "Node.js Runtime::Express Application::Logging Router\\n(/logger",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HypnoLog\\nServer"
+      ],
+      "reasoning": "The logging router mounted under /logger is directly grounded."
+    },
+    {
+      "predicted_node": "Node.js Runtime::Express Application::Logging Router\\n(/logger::GET /logger/status\\n(health check",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HypnoLog\\nServer"
+      ],
+      "reasoning": "The status endpoint is part of the grounded logging router behavior."
+    },
+    {
+      "predicted_node": "Node.js Runtime::Express Application::Logging Router\\n(/logger::POST /logger/in\\n(JSON ingestion, 50mb limit",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HTTP",
+        "Global::HypnoLog\\nServer"
+      ],
+      "reasoning": "The ingestion endpoint is directly grounded in the GT and PRD."
+    },
+    {
+      "predicted_node": "Node.js Runtime::Express Application::Static File Server\\n(public web directory",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HypnoLog\\nServer"
+      ],
+      "reasoning": "Serving browser assets from the public web directory is grounded."
+    },
+    {
+      "predicted_node": "Node.js Runtime::Socket.IO Server\\n(attached to HTTP server",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HypnoLog\\nServer"
+      ],
+      "reasoning": "Socket.IO attached to the HTTP server is explicitly grounded."
+    },
+    {
+      "predicted_node": "Node.js Runtime::Startup Script\\n(bin/www / npm start / CLI aliases",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HypnoLog\\nServer"
+      ],
+      "reasoning": "The startup script and CLI aliases are grounded in the runtime requirements."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::HTTP"
+      ],
+      "predicted_nodes": [
+        "Node.js Runtime::Express Application::HTTP Server\\n(port 7000 default"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the HTTP serving layer; the predicted package attribution is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::HypnoLog\\nServer"
+      ],
+      "predicted_nodes": [
+        "Global::Node.js Runtime",
+        "Node.js Runtime::Express Application",
+        "Node.js Runtime::Express Application::HTTP Server\\n(port 7000 default",
+        "Node.js Runtime::Express Application::JSON Body Parser\\n(50mb limit",
+        "Node.js Runtime::Express Application::Logging Router\\n(/logger",
+        "Node.js Runtime::Express Application::Logging Router\\n(/logger::GET /logger/status\\n(health check",
+        "Node.js Runtime::Express Application::Logging Router\\n(/logger::POST /logger/in\\n(JSON ingestion, 50mb limit",
+        "Node.js Runtime::Express Application::Static File Server\\n(public web directory",
+        "Node.js Runtime::Socket.IO Server\\n(attached to HTTP server",
+        "Node.js Runtime::Startup Script\\n(bin/www / npm start / CLI aliases"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The monolithic server concept is split into runtime, Express, routing, transport, and startup concerns, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::In Browser Log"
+      ],
+      "predicted_nodes": [
+        "Global::Browser Client",
+        "Global::HypnoLog Data Object\\n{data, type, [tags], [name",
+        "Global::HypnoLog-error Object\\n{type: HypnoLog-error,\\nerror, validatorErrors, original",
+        "Browser Client::Default Window",
+        "Browser Client::Received-Data List\\n(client-side store",
+        "Browser Client::Schema Validator\\n(Ajv / HypnoLog Data Object schema",
+        "Browser Client::Socket.IO Client\\n(same-origin connection",
+        "Browser Client::UI State\\n(last-update, tag filter, tag display,\\nvariable-name display",
+        "Browser Client::Visualizer 1\\n(canDisplay / display",
+        "Browser Client::Visualizer Config\\n(user config / default config",
+        "Browser Client::Visualizer Dispatcher",
+        "Browser Client::Visualizer N\\n(canDisplay / display",
+        "Browser Client::Window Dispatcher"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The browser-side logging/display concept is decomposed into client, state, validation, dispatch, and visualization subcomponents with consistent boundary attribution."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::C#",
+    "Global::Python"
+  ],
+  "unmatched_predicted_nodes": []
+}

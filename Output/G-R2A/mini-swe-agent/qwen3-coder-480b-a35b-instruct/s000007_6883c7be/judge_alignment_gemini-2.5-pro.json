@@ -1,0 +1,119 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Proxy Core"
+      ],
+      "predicted_nodes": [
+        "System Context::HTTP Proxy",
+        "Proxy Component::Forwarding Handler",
+        "Proxy Component::Channel Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the core proxy function and decomposed it into a high-level component and its specific implementation details (Forwarding Handler, Channel Manager) mentioned in the PRD. The GT aggregates this into a single 'Proxy Core' node. The boundaries ('Proxy Layer' vs. 'Proxy Component') are semantically equivalent for this function."
+    },
+    {
+      "gt_nodes": [
+        "Clients::APP Client",
+        "Clients::Web Client",
+        "Clients::Developer"
+      ],
+      "predicted_nodes": [
+        "System Context::Client"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI generated a single generic 'Client' node, which correctly represents the various types of clients detailed in the GT. The AI's 'System Context' boundary is a reasonable high-level grouping equivalent to the GT's 'Clients' layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Servers::Business Server A",
+        "Business Servers::Business Server B",
+        "Business Servers::Business Server C",
+        "Business Servers::......"
+      ],
+      "predicted_nodes": [
+        "System Context::Upstream Server"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI's 'Upstream Server' node is a correct, generic representation of the multiple backend business servers that the proxy forwards requests to, which are itemized in the GT. The boundaries ('System Context' vs. 'Business Servers') are semantically aligned as they both represent the backend service tier."
+    },
+    {
+      "gt_nodes": [
+        "CGI Portal::Http Test\\nClient"
+      ],
+      "predicted_nodes": [
+        "System Context::Test Client",
+        "Test Components::Test Client::Async HTTP Client",
+        "Test Components::Test Client::Response Counter",
+        "Test Components::Test Client::Workload Generator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the 'Test Client' functionality from the PRD and broke it down into its constituent parts. The GT represents this as a single node within a 'CGI Portal'. While the boundaries are different ('CGI Portal' vs 'Test Components'), they are both plausible logical groupings for a test utility, so it's not a severe error."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Download"
+      ],
+      "predicted_nodes": [
+        "Test Components::Test Server::File Download Endpoint"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "While the functionality matches, the boundary attribution is incorrect. The PRD specifies the download endpoint is part of the 'Test Server'. The AI correctly places it in the 'Test Components::Test Server' boundary, whereas the GT incorrectly places it as a plugin within the 'Proxy Layer'. This is a severe context confusion."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Upload"
+      ],
+      "predicted_nodes": [
+        "Test Components::Test Server::File Upload Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Similar to the download endpoint, the file upload functionality is part of the 'Test Server' per the PRD. The AI's placement in 'Test Components::Test Server' is correct, while the GT's placement in the 'Proxy Layer' is a severe boundary-crossing error."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer\\nKeepalived(VIP::Openresty",
+    "Business Servers::Business Server",
+    "CGI Portal::Appkey\\nManager",
+    "CGI Portal::CGI Manager",
+    "CGI Portal::Case Manager",
+    "CGI Portal::Document\\nGenerate",
+    "CGI Portal::Log & Tree\\ninquire",
+    "CGI Portal::Metrics &\\nReport",
+    "CGI Portal::Service\\nManager",
+    "Clients::Business Server",
+    "Global::Log consumer",
+    "Proxy Layer::cgi_proxy 1::Appkey\\nValidate",
+    "Proxy Layer::cgi_proxy 1::Formatter",
+    "Proxy Layer::cgi_proxy 1::Global Limit",
+    "Proxy Layer::cgi_proxy 1::Logging",
+    "Proxy Layer::cgi_proxy 1::Login &\\nPermission",
+    "Proxy Layer::cgi_proxy 1::Plugin::Agent",
+    "Proxy Layer::cgi_proxy 1::Plugin::Attach Check",
+    "Proxy Layer::cgi_proxy 1::Plugin::Check\\nParameter",
+    "Proxy Layer::cgi_proxy 1::Plugin::Mock",
+    "Proxy Layer::cgi_proxy 2",
+    "Support Platform::Data Bank\\nHDFS/Hbase/Druid",
+    "Support Platform::Msg Center\\nKafka",
+    "Support Platform::Mysql",
+    "Support Platform::Permission\\nCenter",
+    "Support Platform::Redis Cache",
+    "Support Platform::User Center",
+    "Task Scheduler::CGI Case\\nExecutor",
+    "Task Scheduler::CGI Health\\nCheck",
+    "Task Scheduler::Daily Report",
+    "Task Scheduler::Log Analysis",
+    "Task Scheduler::Monitor/Alarm"
+  ],
+  "unmatched_predicted_nodes": [
+    "Data Stores::Local Filesystem",
+    "System Context::Test Server",
+    "Test Components::Test Server::Grizzly/Jersey Server"
+  ]
+}

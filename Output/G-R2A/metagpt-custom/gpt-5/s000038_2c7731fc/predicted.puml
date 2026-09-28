@@ -1,0 +1,67 @@
+@startuml
+
+node "Decentralized Database Infrastructure" {
+
+  package "Client / Protocol Interface" {
+    component "Redis Proxy Frontend"
+    component "Command Category Catalog"
+    component "PubSub Client Interface"
+  }
+
+  package "Synchronization / Coordination" {
+    component "Instruction Synchronizer"
+  }
+
+  package "P2P Networking" {
+    component "PubSub Dissemination Engine"
+    component "Peer Discovery and Routing"
+    component "NAT/Private-Network Connectivity Support"
+    component "Redis Agent Network Transport"
+  }
+
+  package "Storage Integration" {
+    component "Storage Forwarder"
+    component "Cluster-aware Router"
+  }
+
+  package "Internal Data Handling" {
+    component "Internal SQL Result Parser"
+  }
+}
+
+interface "Redis Clients"
+interface "Redis Pub/Sub Clients"
+interface "Internal SQLite-related Client Path"
+
+database "Redis Standalone Server"
+database "Redis Cluster"
+
+cloud "Kademlia DHT / libp2p / IPFS Mechanisms"
+
+// Client interactions
+"Redis Clients" --> "Redis Proxy Frontend"
+"Redis Pub/Sub Clients" --> "PubSub Client Interface"
+
+// Key dependencies
+"Redis Proxy Frontend" --> "Command Category Catalog"
+"Redis Proxy Frontend" --> "Instruction Synchronizer"
+"Redis Proxy Frontend" --> "Storage Forwarder"
+
+"Instruction Synchronizer" --> "Redis Agent Network Transport"
+"Instruction Synchronizer" --> "Storage Forwarder"
+"Instruction Synchronizer" --> "Command Category Catalog"
+
+"PubSub Client Interface" --> "PubSub Dissemination Engine"
+"PubSub Dissemination Engine" --> "Peer Discovery and Routing"
+"PubSub Dissemination Engine" --> "NAT/Private-Network Connectivity Support"
+"NAT/Private-Network Connectivity Support" --> "Peer Discovery and Routing"
+
+"Peer Discovery and Routing" --> "Kademlia DHT / libp2p / IPFS Mechanisms"
+
+"Storage Forwarder" --> "Redis Standalone Server"
+"Storage Forwarder" --> "Cluster-aware Router"
+"Cluster-aware Router" --> "Redis Cluster"
+
+"Internal SQLite-related Client Path" --> "Internal SQL Result Parser"
+
+@enduml

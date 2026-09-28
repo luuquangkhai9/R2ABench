@@ -1,0 +1,98 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Web UI\\nindex.html"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::WebEntryController\\n(GET /",
+        "Presentation Layer::index.html Template"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly split the GT's high-level 'Web UI' node into the controller that serves the page (FR-001) and the template itself. Assigning them to a 'Presentation Layer' is a more specific and accurate architectural classification than 'Global'."
+    },
+    {
+      "gt_nodes": [
+        "Global::HTTP API\\nSession and attack requests"
+      ],
+      "predicted_nodes": [
+        "API Layer::AttackOptionParser",
+        "API Layer::ErrorHandler\\n(400 / 404 / 500",
+        "API Layer::HomoglyphEndpoint",
+        "API Layer::JobController",
+        "API Layer::QueryStringFailureHandler\\n(FR-008",
+        "API Layer::SessionManager",
+        "Messaging Layer::RedisProducer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly deconstructed the monolithic 'HTTP API' node into its specific responsibilities described in the PRD (session management, attack parsing, job creation, error handling). The 'API Layer' is a perfect boundary. Including the 'RedisProducer' is also correct as the API uses it to publish jobs (FR-004)."
+    },
+    {
+      "gt_nodes": [
+        "Global::Redis\\nCommand and reporting queues"
+      ],
+      "predicted_nodes": [
+        "Global::Redis\\n(Job Channel + Reporting Channel"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is an exact functional match for the message broker system used for both job dispatch and result reporting. The boundary is identical and correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Socket.io\\nWebSocket result channel"
+      ],
+      "predicted_nodes": [
+        "Async Notification Layer::WebSocket Session Channel",
+        "Async Notification Layer::WebSocketNotifier\\n(Socket.IO",
+        "Messaging Layer::RedisReportingReader"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI accurately identified the components of the asynchronous reporting flow (FR-005): reading from the Redis reporting channel ('RedisReportingReader') and then pushing updates via WebSockets ('WebSocketNotifier'). The 'Async Notification Layer' is a suitable and specific boundary for this functionality."
+    },
+    {
+      "gt_nodes": [
+        "Global::Workers\\nCommand consumers"
+      ],
+      "predicted_nodes": [
+        "Worker / Consumer Layer::BackgroundConsumerThread"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct match for the background process that consumes jobs from Redis (FR-002). The 'Worker / Consumer Layer' is a more descriptive and appropriate boundary than the generic 'Global'."
+    },
+    {
+      "gt_nodes": [
+        "Global::Squatm3\\nDomain generation engine"
+      ],
+      "predicted_nodes": [
+        "Domain Generation Layer::Squatm3Wrapper",
+        "External Systems::squatm3 CLI binary"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly distinguished between the external 'squatm3 CLI binary' (C-004) and the application's internal code that wraps and invokes it ('Squatm3Wrapper'). Placing them in 'External Systems' and a 'Domain Generation Layer' respectively is an excellent architectural decision."
+    },
+    {
+      "gt_nodes": [
+        "Global::GoDaddy API\\nDomain availability"
+      ],
+      "predicted_nodes": [
+        "External Integration Layer::GoDaddyClient",
+        "External Systems::GoDaddy API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Similar to the Squatm3 node, the AI correctly separated the external GoDaddy API from the internal client code that calls it. The 'External Integration Layer' and 'External Systems' boundaries are accurate and specific."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Configuration Layer::AppConfig",
+    "Global::Browser / HTTP Client",
+    "Global::External Systems"
+  ]
+}

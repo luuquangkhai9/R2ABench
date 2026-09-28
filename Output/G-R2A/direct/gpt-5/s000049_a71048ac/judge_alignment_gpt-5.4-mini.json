@@ -1,0 +1,113 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Scala Driver for Lucene\\nAnalyzer, Word-counter, FST dictionary"
+      ],
+      "predicted_nodes": [
+        "attic-nlp4l (Scala Library::IndexProcessor",
+        "attic-nlp4l (Scala Library::InteractiveAPI",
+        "attic-nlp4l (Scala Library::LibSVMExporter",
+        "attic-nlp4l (Scala Library::SchemaLoader",
+        "attic-nlp4l (Scala Library::SearchService",
+        "attic-nlp4l (Scala Library::TermAccess",
+        "attic-nlp4l (Scala Library::Vectorizer",
+        "attic-nlp4l (Scala Library::ChartDisplay"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a coarse-grained global driver covering multiple NLP4L capabilities. The predicted nodes split it into concrete library components that align functionally with the GT scope. Although the package name is different, it is a semantically equivalent architectural boundary for the same product library."
+    },
+    {
+      "gt_nodes": [
+        "Global::Scala High Level API\\nfor convenience in text mining and stats"
+      ],
+      "predicted_nodes": [
+        "attic-nlp4l (Scala Library::InteractiveAPI",
+        "attic-nlp4l (Scala Library::SchemaLoader",
+        "attic-nlp4l (Scala Library::SchemaModel",
+        "attic-nlp4l (Scala Library::SearchService",
+        "attic-nlp4l (Scala Library::TermAccess",
+        "attic-nlp4l (Scala Library::Vectorizer",
+        "attic-nlp4l (Scala Library::LibSVMExporter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node describes a high-level convenience API for text mining and statistics, which is functionally decomposed in the predicted architecture into higher-level service modules. The package attribution remains within the same Scala library context, so the boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Lucene Layer::Apache Lucene API"
+      ],
+      "predicted_nodes": [
+        "Global::Lucene Analyzers\\n(5.2.0",
+        "Global::Lucene Index\\n(5.2.0"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents the Lucene dependency/API layer. The predicted nodes split this into Lucene analyzer and index concerns, which are semantically consistent with the Lucene layer and do not introduce a boundary conflict."
+    },
+    {
+      "gt_nodes": [
+        "Lucene Layer::Index"
+      ],
+      "predicted_nodes": [
+        "Global::Lucene Index\\n(5.2.0"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Lucene index data source. The boundary label differs, but it is semantically equivalent to the Lucene layer/data boundary in the GT."
+    },
+    {
+      "gt_nodes": [
+        "NLP4L User Interfaces and Integrations::Applications"
+      ],
+      "predicted_nodes": [
+        "Global::Lucene Ecosystem User",
+        "Global::Machine Learning Workflow User",
+        "Global::Scala Interactive User",
+        "Global::Schema Configuration User"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is an umbrella for user-facing application/integration entry points. The predicted nodes split this into distinct user roles, which is a reasonable refinement of the same external interface area."
+    },
+    {
+      "gt_nodes": [
+        "NLP4L User Interfaces and Integrations::File based\\nMahout/Spark\\nconnector"
+      ],
+      "predicted_nodes": [
+        "Global::External ML Tools\\n(e.g., Spark, Mahout",
+        "attic-nlp4l (Scala Library::LibSVMExporter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents file-based integration to ML tooling. The predicted nodes capture the external ML tool boundary and the LIBSVM export mechanism, which is functionally equivalent."
+    },
+    {
+      "gt_nodes": [
+        "NLP4L User Interfaces and Integrations::Index Schema\\nBrowser (GUI/CUI"
+      ],
+      "predicted_nodes": [
+        "attic-nlp4l (Scala Library::SchemaLoader",
+        "attic-nlp4l (Scala Library::SchemaModel"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a schema browsing/manipulation UI entry point. The predicted nodes identify the underlying schema loading and model components, which align with the same schema configuration function."
+    },
+    {
+      "gt_nodes": [
+        "NLP4L User Interfaces and Integrations::Interactive Shell\\nfor NLP4L (REPL"
+      ],
+      "predicted_nodes": [
+        "attic-nlp4l (Scala Library::InteractiveAPI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the interactive Scala usage surface. The predicted node is the implementation-side equivalent of the GT REPL/shell entry point."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

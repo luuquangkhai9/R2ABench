@@ -1,0 +1,224 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Client-side::Logic::Angular Services"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Presentation Layer::API Service Wrappers::EvacueeServiceWrapper",
+        "Web Browser::Presentation Layer::API Service Wrappers::IncidentTaskServiceWrapper",
+        "Web Browser::Presentation Layer::API Service Wrappers::OrganizationServiceWrapper",
+        "Web Browser::Presentation Layer::API Service Wrappers::ReferralServiceWrapper",
+        "Web Browser::Presentation Layer::API Service Wrappers::RegistrationServiceWrapper\n<<PDF collection>>"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents the Angular client-side service layer, and the predicted nodes correctly split it into the specific API service wrappers described in the PRD. The boundary attribution remains within the browser/front-end side, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Logic::UI Components"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Presentation Layer::AngularClientApp",
+        "Web Browser::Presentation Layer::AuthGuard",
+        "Web Browser::Presentation Layer::ModuleImportDiagnostic",
+        "Web Browser::Presentation Layer::NotificationQueueService",
+        "Web Browser::Presentation Layer::NotifierComponent",
+        "Web Browser::Presentation Layer::RedirectGuard",
+        "Web Browser::Presentation Layer::RoleBasedRouter",
+        "Web Browser::Presentation Layer::SessionExpiredPage"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT UI components node is broadly represented by the predicted browser presentation-layer components, guards, routing, notifier, and session-expired UI. This is a valid decomposition of client UI responsibilities."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Logic::UI Components::Component\nClass"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Presentation Layer::NotifierComponent",
+        "Web Browser::Presentation Layer::SessionExpiredPage"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These predicted nodes are concrete UI components and fit the GT component-class concept. Boundary placement in the browser presentation layer is correct."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Logic::UI Components::HTML\nTemplates"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Presentation Layer::AngularClientApp"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The Angular client app encompasses the UI template/view layer conceptually. The boundary is correct for front-end presentation assets."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Technology::Angular 7"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Global"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted nodes do not explicitly name Angular 7, but the browser front-end context is the same technology tier. This is a loose semantic match at the platform boundary."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Data::ngRX state store"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Client State Layer::NgRxStore\n(Actions / Reducers",
+        "Web Browser::Client State Layer::ControlledListLoader"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The NgRx store is correctly represented, and the controlled-list loader is a valid related client-state initialization component. The client state boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::WebAPI\nControllers"
+      ],
+      "predicted_nodes": [
+        "Application Server (.NET Core::API / Server Layer::WebAPIControllers"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is the same concept: WebAPI controllers on the server side. The application-server/API boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::DbContext"
+      ],
+      "predicted_nodes": [
+        "Application Server (.NET Core::Data Access Layer::DbContext\n(Entity Framework / ADO.NET"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "DbContext is correctly placed in the data access layer and semantically matches the GT node."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::Domain Services"
+      ],
+      "predicted_nodes": [
+        "Application Server (.NET Core::Domain Service Layer::DomainServices"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted domain service layer directly corresponds to the GT domain services node."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::Domain Services::PDF"
+      ],
+      "predicted_nodes": [
+        "Application Server (.NET Core::Domain Service Layer::DomainServices",
+        "Web Browser::Presentation Layer::API Service Wrappers::RegistrationServiceWrapper\n<<PDF collection>>"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "PDF capability belongs to the server-side domain-service concern in the GT, but the prediction places PDF collection on the registration service wrapper in the browser/front-end layer. This is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Technology::.NET Core\nWebAPI"
+      ],
+      "predicted_nodes": [
+        "Global::Application Server (.NET Core"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The application server/.NET Core context is semantically equivalent to the GT .NET Core WebAPI technology layer."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Technology::Entity\nFramework\n(ORM"
+      ],
+      "predicted_nodes": [
+        "Application Server (.NET Core::Data Access Layer::DbContext\n(Entity Framework / ADO.NET"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Entity Framework ORM is correctly mapped to the data access layer with DbContext."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Technology::Standard\nC# Classes"
+      ],
+      "predicted_nodes": [
+        "Application Server (.NET Core::Domain Service Layer::C# Domain Classes\n(Domain Model / Entities"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "C# standard/domain classes are correctly represented as domain classes in the application server domain layer."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Data::DB Entities\n(Registration, Community, etc."
+      ],
+      "predicted_nodes": [
+        "Application Server (.NET Core::Data Access Layer::Persistent Database Entities"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Persistent database entities are semantically equivalent to the GT DB entities node and are placed in the correct data access/database-related boundary."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Logic::UI Components::HTML\nTemplates"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Presentation Layer::AngularClientApp"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The Angular client app is the appropriate container for HTML templates in the front-end presentation layer."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Client-side::Data::View-Models\\n(JSON",
+    "Server-side::Logic::Domain Services::CAPTCHA",
+    "Server-side::Logic::Domain Services::Email",
+    "Client-side::Technology::Angular 7"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application Server (.NET Core::API / Server Layer::WebAPIControllers",
+    "Application Server (.NET Core::Data Access Layer::DbContext\\n(Entity Framework / ADO.NET",
+    "Application Server (.NET Core::Data Access Layer::Persistent Database Entities",
+    "Application Server (.NET Core::Domain Service Layer::C# Domain Classes\\n(Domain Model / Entities",
+    "Application Server (.NET Core::Domain Service Layer::DomainServices",
+    "Database Server::MS SQL Database",
+    "Database Server::SQLMaintenanceScripts",
+    "Database Server::backup",
+    "Global::Application Server (.NET Core",
+    "Global::Database Server",
+    "Global::External URLs",
+    "Global::Local Development Proxy",
+    "Global::SiteMinder\\n(Authentication / Access Control",
+    "Global::Web Browser",
+    "Local Development Proxy::SM_TOKEN Injector\\n(volunteer / local authority / provincial admin",
+    "Web Browser::Client State Layer::ControlledListLoader",
+    "Web Browser::Client State Layer::NgRxStore\\n(Actions / Reducers",
+    "Web Browser::HTTP Communication Layer::HttpInterceptor",
+    "Web Browser::HTTP Communication Layer::WatchdogTimer",
+    "Web Browser::Presentation Layer::API Service Wrappers::EvacueeServiceWrapper",
+    "Web Browser::Presentation Layer::API Service Wrappers::IncidentTaskServiceWrapper",
+    "Web Browser::Presentation Layer::API Service Wrappers::OrganizationServiceWrapper",
+    "Web Browser::Presentation Layer::API Service Wrappers::ReferralServiceWrapper",
+    "Web Browser::Presentation Layer::API Service Wrappers::RegistrationServiceWrapper\\n<<PDF collection>>",
+    "Web Browser::Presentation Layer::AngularClientApp",
+    "Web Browser::Presentation Layer::AuthGuard",
+    "Web Browser::Presentation Layer::CookieService",
+    "Web Browser::Presentation Layer::ModuleImportDiagnostic",
+    "Web Browser::Presentation Layer::NotificationQueueService",
+    "Web Browser::Presentation Layer::NotifierComponent",
+    "Web Browser::Presentation Layer::RedirectGuard",
+    "Web Browser::Presentation Layer::RoleBasedRouter",
+    "Web Browser::Presentation Layer::SessionExpiredPage"
+  ]
+}

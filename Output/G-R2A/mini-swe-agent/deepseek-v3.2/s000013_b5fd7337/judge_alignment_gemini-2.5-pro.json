@@ -1,0 +1,81 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "High level architecture::Frontend::React"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::React Frontend",
+        "Presentation Layer::React Frontend::User Interface",
+        "Presentation Layer::React Frontend::Web UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the React frontend and split it into several sub-components. The 'Presentation Layer' boundary is a standard architectural term and is semantically equivalent to the GT's 'Frontend' boundary."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Backend::FastAPI"
+      ],
+      "predicted_nodes": [
+        "Application Layer::FastAPI Backend",
+        "Application Layer::FastAPI Backend::Song Lookup Service",
+        "Application Layer::FastAPI Backend::Storage Workflow"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the FastAPI backend and broke it down into its logical functions (Song Lookup, Storage Workflow) as described in the PRD. The 'Application Layer' boundary is semantically equivalent to the GT's 'Backend' boundary."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Analytics and storage::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Elasticsearch",
+        "Data Layer::Elasticsearch::Index Storage",
+        "Data Layer::Elasticsearch::Mood Associations",
+        "Data Layer::Elasticsearch::Song Records"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI identified Elasticsearch and correctly detailed the data entities it stores, as per the PRD (DR-001, DR-003). The 'Data Layer' boundary is semantically equivalent to the GT's 'Analytics and storage' boundary."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Analytics and storage::Kibana"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Kibana",
+        "Data Layer::Kibana::Dashboard",
+        "Data Layer::Kibana::Data Inspection UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified Kibana and its function as a data inspection UI. Placing it in the 'Data Layer' alongside Elasticsearch is a valid architectural choice and is semantically consistent with the GT's 'Analytics and storage' boundary."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Backend::Genius API\nintegration"
+      ],
+      "predicted_nodes": [
+        "Global::Genius API",
+        "Genius API::External Song Search",
+        "Genius API::Music Metadata"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT models the integration component within the backend, while the AI models the external service itself. The PRD (C-007) explicitly states the Genius API should be modeled as an external dependency. The AI's placement in a 'Global' or its own separate boundary is a more accurate representation of this requirement than the GT's placement within the 'Backend' boundary. Therefore, the boundary is considered correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "High level architecture::Analytics and storage::Docker\\nelasticsearch container",
+    "High level architecture::Analytics and storage::Docker\\nkibana container",
+    "High level architecture::Backend::Docker\\nbackend container",
+    "High level architecture::Frontend::Docker\\nfrontend container",
+    "High level architecture::Developer/Admin",
+    "High level architecture::user"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application Layer::FastAPI Backend::API Gateway"
+  ]
+}

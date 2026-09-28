@@ -1,0 +1,361 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::Application",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "QAPM Android SDK::QAPM Config Manager"
+      ],
+      "reasoning": "The application-level host context is represented indirectly by the predicted SDK-side integration and configuration management, though there is no exact application node. This is a loose semantic coverage for the overall integrated app context."
+    },
+    {
+      "gt_node": "QAPM_Plugin::Plugin init compile",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node represents plugin build-time or initialization compilation behavior."
+    },
+    {
+      "gt_node": "QAPM_Plugin::QAPM_Plugin",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "The predicted diagram does not include a plugin component or plugin boundary."
+    },
+    {
+      "gt_node": "QAPM_SDK::QAPM-SDK",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "QAPM Android SDK::QAPM Config Manager",
+        "QAPM Android SDK::Background Scheduling::QAPM Handler Manager",
+        "QAPM Android SDK::Upload Processing::Upload Scheduler",
+        "QAPM Android SDK::Apache HttpClient Instrumentation::ResponseHandler Wrapper"
+      ],
+      "reasoning": "The core SDK responsibilities are covered by the predicted QAPM Android SDK subsystem and its major internal modules, even though the top-level SDK node is decomposed rather than represented as a single node."
+    },
+    {
+      "gt_node": "QAPM_SDK::QAPM_Collect",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "Collection functionality is out of scope in the predicted nodes and not represented."
+    },
+    {
+      "gt_node": "QAPM_SDK::QAPM_Report",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "Reporting pipeline concepts are not present among the predicted nodes, aside from sender/upload dispatch which is not the same as the report module."
+    },
+    {
+      "gt_node": "QAPM_SDK::QAPM_Storage",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Local Upload Storage::Upload Directory",
+        "Local Upload Storage::Upload Files",
+        "QAPM Android SDK::Upload Processing::Forced-Send Storage Pop"
+      ],
+      "reasoning": "The storage responsibility is partially represented by local upload storage and forced-send storage pop behavior, which aligns with the GT storage concept."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Android Platform APIs::Android Context",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Application",
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "Android Context is a real platform dependency for the SDK’s upload processing and is grounded by the application/SDK environment."
+    },
+    {
+      "predicted_node": "Android Platform APIs::Handler",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "This is grounded by the SDK's background and main-thread dispatch requirements."
+    },
+    {
+      "predicted_node": "Android Platform APIs::HandlerThread / Looper",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "This directly corresponds to the GT SDK scheduling infrastructure."
+    },
+    {
+      "predicted_node": "Android Platform APIs::Network Connectivity API",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-Storage",
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "reasoning": "Network gating is explicitly part of upload processing, which is grounded in the storage/upload subset of the SDK."
+    },
+    {
+      "predicted_node": "Apache HttpClient::HttpEntity",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "reasoning": "This is grounded by the HTTP entity instrumentation requirements in the SDK."
+    },
+    {
+      "predicted_node": "Apache HttpClient::HttpResponse",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "reasoning": "This is grounded by response-handler instrumentation around Apache HttpClient responses."
+    },
+    {
+      "predicted_node": "Apache HttpClient::ResponseHandler",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "reasoning": "This directly corresponds to the response-handler wrapper behavior."
+    },
+    {
+      "predicted_node": "Global::Data Sender\n(Remote Endpoint",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM_Report",
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "reasoning": "The sender endpoint is part of the upload sending workflow, though the name is awkwardly formatted."
+    },
+    {
+      "predicted_node": "Local Upload Storage::Upload Directory",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "reasoning": "This is directly grounded in the upload storage and file enumeration requirements."
+    },
+    {
+      "predicted_node": "Local Upload Storage::Upload Files",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "reasoning": "Upload files are explicit GT storage artifacts."
+    },
+    {
+      "predicted_node": "QAPM Android SDK::Apache HttpClient Instrumentation::Counting InputStream Cache",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "reasoning": "This corresponds to the wrapped entity getContent() counting stream behavior."
+    },
+    {
+      "predicted_node": "QAPM Android SDK::Apache HttpClient Instrumentation::HttpEntity Wrapper",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "reasoning": "This is a direct match to the HTTP entity wrapper concept."
+    },
+    {
+      "predicted_node": "QAPM Android SDK::Apache HttpClient Instrumentation::ResponseHandler Wrapper",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "reasoning": "This is a direct match to the transaction-aware response-handler wrapper."
+    },
+    {
+      "predicted_node": "QAPM Android SDK::Apache HttpClient Instrumentation::Transaction State Inspector",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "reasoning": "This maps to the transaction-state inspection/instrumentation behavior in response handling."
+    },
+    {
+      "predicted_node": "QAPM Android SDK::Background Scheduling::Background HandlerThread",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "This is directly grounded by the work-handler initialization requirements."
+    },
+    {
+      "predicted_node": "QAPM Android SDK::Background Scheduling::Main Thread Handler",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "This is directly grounded by the default main-thread handler requirement."
+    },
+    {
+      "predicted_node": "QAPM Android SDK::Background Scheduling::QAPM Handler Manager",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "This corresponds to the handler manager responsible for initializing and maintaining handlers."
+    },
+    {
+      "predicted_node": "QAPM Android SDK::Background Scheduling::Work Handler",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "This directly matches the GT work-handler concept."
+    },
+    {
+      "predicted_node": "QAPM Android SDK::QAPM Config Manager",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "The configured sender dependency is explicitly tied to QAPM configuration management."
+    },
+    {
+      "predicted_node": "QAPM Android SDK::Upload Processing::Context Param Deriver\n(cParam",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "reasoning": "This directly corresponds to deriving cParam from Android context."
+    },
+    {
+      "predicted_node": "QAPM Android SDK::Upload Processing::File Content Reader\n(bParam",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "reasoning": "This directly corresponds to reading upload file content as bParam."
+    },
+    {
+      "predicted_node": "QAPM Android SDK::Upload Processing::Forced-Send Storage Pop",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "reasoning": "This is directly grounded by the forced-send storage pop requirement."
+    },
+    {
+      "predicted_node": "QAPM Android SDK::Upload Processing::Network Connectivity Gate",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "reasoning": "This directly matches the network-gated upload processing behavior."
+    },
+    {
+      "predicted_node": "QAPM Android SDK::Upload Processing::Upload Callback Handler",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "reasoning": "This corresponds to sender success/failure handling for delete/log behavior."
+    },
+    {
+      "predicted_node": "QAPM Android SDK::Upload Processing::Upload File Enumerator",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "reasoning": "This is grounded by upload directory scanning and file enumeration."
+    },
+    {
+      "predicted_node": "QAPM Android SDK::Upload Processing::Upload Scheduler",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "This corresponds to asynchronous scheduling of upload work."
+    },
+    {
+      "predicted_node": "QAPM Android SDK::Upload Processing::Upload Sender Dispatcher",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "reasoning": "This is grounded by submitting bParam/cParam to the configured sender."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "predicted_nodes": [
+        "QAPM Android SDK::Background Scheduling::QAPM Handler Manager",
+        "QAPM Android SDK::Background Scheduling::Work Handler",
+        "QAPM Android SDK::Background Scheduling::Background HandlerThread",
+        "QAPM Android SDK::Background Scheduling::Main Thread Handler",
+        "QAPM Android SDK::Upload Processing::Upload Scheduler",
+        "QAPM Android SDK::QAPM Config Manager",
+        "QAPM Android SDK::Apache HttpClient Instrumentation::ResponseHandler Wrapper",
+        "QAPM Android SDK::Apache HttpClient Instrumentation::HttpEntity Wrapper"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT SDK node is decomposed into multiple internal SDK modules; the boundary remains within the QAPM SDK domain."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "predicted_nodes": [
+        "Local Upload Storage::Upload Directory",
+        "Local Upload Storage::Upload Files",
+        "QAPM Android SDK::Upload Processing::Network Connectivity Gate",
+        "QAPM Android SDK::Upload Processing::Forced-Send Storage Pop",
+        "QAPM Android SDK::Upload Processing::Upload File Enumerator",
+        "QAPM Android SDK::Upload Processing::File Content Reader\n(bParam",
+        "QAPM Android SDK::Upload Processing::Context Param Deriver\n(cParam",
+        "QAPM Android SDK::Upload Processing::Upload Sender Dispatcher",
+        "QAPM Android SDK::Upload Processing::Upload Callback Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT storage node is represented through local upload storage and upload-processing steps tied to stored files; the boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "predicted_nodes": [
+        "Apache HttpClient::ResponseHandler",
+        "Apache HttpClient::HttpResponse",
+        "Apache HttpClient::HttpEntity",
+        "QAPM Android SDK::Apache HttpClient Instrumentation::Transaction State Inspector",
+        "QAPM Android SDK::Apache HttpClient Instrumentation::ResponseHandler Wrapper",
+        "QAPM Android SDK::Apache HttpClient Instrumentation::HttpEntity Wrapper",
+        "QAPM Android SDK::Apache HttpClient Instrumentation::Counting InputStream Cache"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The response instrumentation responsibility is covered, but the GT reporting boundary is not the same as Apache instrumentation wrappers; this is a boundary mismatch despite semantic overlap."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_Plugin::Plugin init compile",
+        "QAPM_Plugin::QAPM_Plugin"
+      ],
+      "predicted_nodes": [],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node captures plugin build-time/init behavior, so there is no valid match."
+    },
+    {
+      "gt_nodes": [
+        "Global::Application"
+      ],
+      "predicted_nodes": [
+        "Android Platform APIs::Android Context"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The application-host context is loosely represented by Android Context, which is semantically aligned even though the exact GT node is broader."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "QAPM_Plugin::Plugin init compile",
+    "QAPM_Plugin::QAPM_Plugin",
+    "QAPM_SDK::QAPM_Collect"
+  ],
+  "unmatched_predicted_nodes": []
+}

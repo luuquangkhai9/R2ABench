@@ -1,0 +1,67 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Go build tags"
+      ],
+      "predicted_nodes": [
+        "Global::Go Toolchain (build tags",
+        "Go Toolchain (build tags::Provider-specific Test Selector",
+        "Go Toolchain (build tags::Provider-specific Test Suites"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents the Go build-tag mechanism used for provider-specific test selection. The predicted nodes split this concern into a global build-tags concept plus selector/suite nodes, which is semantically equivalent and remains within the correct tooling/test boundary."
+    },
+    {
+      "gt_nodes": [
+        "Host Scanner Endpoint Tests::endpoint_platform1_test.go\\nplatform-specific expected data"
+      ],
+      "predicted_nodes": [
+        "Go Toolchain (build tags::Provider-specific Test Suites"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a provider-specific test file with expected data, while the predicted node is a more generic test-suite abstraction. The functional area is related, but the boundary is too coarse and does not preserve the test-file-specific attribution."
+    },
+    {
+      "gt_nodes": [
+        "Host Scanner Endpoint Tests::endpoint_platform2_test.go\\nplatform-specific expected data"
+      ],
+      "predicted_nodes": [
+        "Go Toolchain (build tags::Provider-specific Test Suites"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "Same as above: the AI aggregated specific provider test artifacts into a generic suite node. This is functionally related but not accurately placed at the same architectural granularity or boundary."
+    },
+    {
+      "gt_nodes": [
+        "Host Scanner Endpoint Tests::endpoint_test.go\\ncommon endpoint tests"
+      ],
+      "predicted_nodes": [
+        "Linux Host (Kubernetes Node::DaemonSet Pod (Privileged::API Layer::HTTP API",
+        "Linux Host (Kubernetes Node::DaemonSet Pod (Privileged::API Layer::HTTP Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The common endpoint tests verify HTTP endpoint behavior, but the predicted nodes describe the runtime service/API itself, not the test artifacts. This is a severe context mismatch between test layer and product runtime layer."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::HTTP Clients",
+    "Global::Kubernetes",
+    "Global::Linux Host (Kubernetes Node",
+    "Kubernetes::DaemonSet Controller",
+    "Linux Host (Kubernetes Node::DaemonSet Pod (Privileged",
+    "Linux Host (Kubernetes Node::DaemonSet Pod (Privileged::API Layer::HTTP API",
+    "Linux Host (Kubernetes Node::DaemonSet Pod (Privileged::API Layer::HTTP Service",
+    "Linux Host (Kubernetes Node::DaemonSet Pod (Privileged::API Layer::JSON Processing Interface",
+    "Linux Host (Kubernetes Node::DaemonSet Pod (Privileged::Configuration/Input Layer::Runtime and Process Configuration Input Handler",
+    "Linux Host (Kubernetes Node::DaemonSet Pod (Privileged::Processing/Logic Layer::CNI Directory Resolver",
+    "Linux Host (Kubernetes Node::DaemonSet Pod (Privileged::Processing/Logic Layer::Host Information Collector",
+    "Linux Host (Kubernetes Node::DaemonSet Pod (Privileged::Processing/Logic Layer::JSON Sanitizer",
+    "Linux Host (Kubernetes Node::Linux Filesystem Paths (/etc, /run, /var/lib"
+  ]
+}

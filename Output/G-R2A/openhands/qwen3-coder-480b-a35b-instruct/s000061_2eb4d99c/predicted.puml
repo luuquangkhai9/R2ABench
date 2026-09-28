@@ -1,0 +1,81 @@
+@startuml
+!define RECTANGLE rectangle linewidth 1
+
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam defaultTextAlignment center
+skinparam wrapWidth 200
+skinparam maxMessageSize 150
+
+title IoT Device Simulator System Architecture
+
+' Main system boundary
+rectangle "IoT Device Simulator" as system {
+  RECTANGLE "Web Management\nConsole" as console
+  
+  rectangle "API Layer" as api_layer {
+    RECTANGLE "API Gateway\n(REGIONAL)" as api_gateway
+    RECTANGLE "Request Validation" as req_validation
+    RECTANGLE "CORS Configuration" as cors
+  }
+  
+  rectangle "Service Layer" as service_layer {
+    RECTANGLE "Lambda Functions" as lambda
+    RECTANGLE "Device Simulation\nEngine" as simulation_engine
+    RECTANGLE "Route Loader" as route_loader
+    RECTANGLE "Custom Resource\nHandler" as custom_resource
+  }
+  
+  rectangle "Data Layer" as data_layer {
+    RECTANGLE "Amazon S3\n(Route Storage)" as s3
+    RECTANGLE "DynamoDB\n(Device State)" as dynamodb
+  }
+}
+
+' External AWS services
+RECTANGLE "AWS IoT Core" as iot_core
+RECTANGLE "CloudFormation" as cloudformation
+RECTANGLE "Authentication\n(Cognito/IAM)" as auth
+
+' Relationships
+console --> api_gateway : Manages
+api_gateway --> lambda : Integrates with
+lambda --> req_validation : Uses
+lambda --> cors : Configures
+lambda --> simulation_engine : Invokes
+lambda --> route_loader : Invokes
+lambda --> custom_resource : Processes
+simulation_engine --> iot_core : Publishes messages
+route_loader --> s3 : Loads routes
+custom_resource --> cloudformation : Responds to events
+lambda --> dynamodb : Stores device state
+console --> auth : Authenticates with
+api_gateway --> auth : Validates requests
+
+note right of api_gateway
+  Methods: GET, POST, PUT, DELETE, OPTIONS
+  Stage: prod
+  Tracing: Enabled
+  Logging: INFO level with JSON access logs
+end note
+
+note right of s3
+  Bucket: ROUTE_BUCKET
+  Format: JSON
+  Key: routeName or route-{id}.json
+end note
+
+note right of custom_resource
+  Processes CloudFormation
+  custom resource events
+  Constructs responses with
+  solution context
+end note
+
+note right of simulation_engine
+  Executes device behavior
+  simulations
+  Publishes to IoT topics
+end note
+
+@enduml

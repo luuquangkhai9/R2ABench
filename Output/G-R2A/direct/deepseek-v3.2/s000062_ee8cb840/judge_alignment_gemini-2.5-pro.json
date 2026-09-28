@@ -1,0 +1,84 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Car / Simulator"
+      ],
+      "predicted_nodes": [
+        "External Systems::Udacity Simulator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the Udacity simulator. The AI correctly places it in an 'External Systems' boundary, which is semantically more accurate than the GT's general 'ROS Architecture' for a component the system interacts with."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Control::DBW Node\\nDrive-by-wire"
+      ],
+      "predicted_nodes": [
+        "Control Subsystem::Drive-by-Wire Controller"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match. The 'Control' layer in GT is equivalent to the 'Control Subsystem' boundary in the prediction."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Control::Waypoint Follower\\nController"
+      ],
+      "predicted_nodes": [
+        "Control Subsystem::Waypoint Follower"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match. The 'Control' layer in GT is equivalent to the 'Control Subsystem' boundary in the prediction."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Perception::Traffic Light\\nDetection Node"
+      ],
+      "predicted_nodes": [
+        "Perception Subsystem::Traffic Light Classifier",
+        "Perception Subsystem::Traffic Light Detector",
+        "Perception Subsystem::Traffic Waypoint Generator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly split the single GT node for traffic light perception into its distinct functions (detection, classification, waypoint generation) as described in the PRD. The 'Perception' layer in GT is equivalent to the 'Perception Subsystem' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Planning::Waypoint Loader\\nROS Node"
+      ],
+      "predicted_nodes": [
+        "Planning Subsystem::Waypoint Loader"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match. The 'Planning' layer in GT is equivalent to the 'Planning Subsystem' boundary in the prediction."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Planning::Waypoint Updater Node\\nROS Node"
+      ],
+      "predicted_nodes": [
+        "Planning Subsystem::Waypoint Updater",
+        "Planning Subsystem::Final Waypoint Generator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI split the 'Waypoint Updater' node's functionality, explicitly creating a 'Final Waypoint Generator' which is the primary output of the updater as per the PRD. The 'Planning' layer in GT is equivalent to the 'Planning Subsystem' boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Udacity Self-Driving Car Capstone\\nROS Architecture::Perception::Obstacle Detection\\nROS Node"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::Docker Environment",
+    "External Systems::ROS Master",
+    "External Systems::Recorded Training Bag",
+    "Launch Entry Points::site.launch\\nSite Mode",
+    "Launch Entry Points::styx.launch\\nSimulator Mode",
+    "Vehicle Interface::Vehicle Command\\nPublisher"
+  ]
+}

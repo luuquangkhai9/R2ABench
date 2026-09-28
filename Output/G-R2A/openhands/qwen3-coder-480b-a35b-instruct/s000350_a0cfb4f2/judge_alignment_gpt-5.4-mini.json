@@ -1,0 +1,200 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::GoDaddy API\\nDomain availability",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "squatm3gator System::GoDaddy API"
+      ],
+      "reasoning": "The predicted GoDaddy API node covers the optional GoDaddy-based domain availability integration responsibility."
+    },
+    {
+      "gt_node": "Global::HTTP API\\nSession and attack requests",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "squatm3gator System::HTTP API"
+      ],
+      "reasoning": "The predicted HTTP API node covers session initialization, attack request handling, and related request parsing/publishing responsibilities."
+    },
+    {
+      "gt_node": "Global::Redis\\nCommand and reporting queues",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "squatm3gator System::Redis"
+      ],
+      "reasoning": "The predicted Redis node covers the job publication and reporting queue responsibilities."
+    },
+    {
+      "gt_node": "Global::Socket.io\\nWebSocket result channel",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "squatm3gator System::WebSocket Channel"
+      ],
+      "reasoning": "The predicted WebSocket Channel node covers the asynchronous result delivery channel responsibility."
+    },
+    {
+      "gt_node": "Global::Squatm3\\nDomain generation engine",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "squatm3gator System::squatm3 Engine"
+      ],
+      "reasoning": "The predicted squatm3 Engine node covers the wrapped domain-generation engine responsibility."
+    },
+    {
+      "gt_node": "Global::Web UI\\nindex.html",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "squatm3gator System::Web UI"
+      ],
+      "reasoning": "The predicted Web UI node covers the index.html root page responsibility."
+    },
+    {
+      "gt_node": "Global::Workers\\nCommand consumers",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "squatm3gator System::Background Consumer"
+      ],
+      "reasoning": "The predicted Background Consumer node covers the worker/consumer command execution responsibility."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "squatm3gator System::Background Consumer",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Workers\\nCommand consumers",
+        "Global::Redis\\nCommand and reporting queues"
+      ],
+      "reasoning": "This corresponds to the background consumer thread that listens to Redis and triggers worker execution."
+    },
+    {
+      "predicted_node": "squatm3gator System::GoDaddy API",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::GoDaddy API\\nDomain availability"
+      ],
+      "reasoning": "This matches the optional GoDaddy integration for domain availability checks."
+    },
+    {
+      "predicted_node": "squatm3gator System::HTTP API",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HTTP API\\nSession and attack requests"
+      ],
+      "reasoning": "This matches the HTTP interface for session creation, request parsing, and attack job submission."
+    },
+    {
+      "predicted_node": "squatm3gator System::Redis",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Redis\\nCommand and reporting queues"
+      ],
+      "reasoning": "This corresponds to the Redis-backed command and reporting communication layer."
+    },
+    {
+      "predicted_node": "squatm3gator System::Web UI",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Web UI\\nindex.html"
+      ],
+      "reasoning": "This corresponds to the web entry page rendered from index.html."
+    },
+    {
+      "predicted_node": "squatm3gator System::WebSocket Channel",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Socket.io\\nWebSocket result channel"
+      ],
+      "reasoning": "This corresponds to the asynchronous Socket.IO/WebSocket-style client update channel."
+    },
+    {
+      "predicted_node": "squatm3gator System::squatm3 Engine",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Squatm3\\nDomain generation engine"
+      ],
+      "reasoning": "This corresponds to the wrapped squatm3 domain-generation engine invoked by the consumer."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::GoDaddy API\\nDomain availability"
+      ],
+      "predicted_nodes": [
+        "squatm3gator System::GoDaddy API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same integration responsibility; system/package boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::HTTP API\\nSession and attack requests"
+      ],
+      "predicted_nodes": [
+        "squatm3gator System::HTTP API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The HTTP API responsibilities align and the boundary attribution is equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Redis\\nCommand and reporting queues"
+      ],
+      "predicted_nodes": [
+        "squatm3gator System::Redis"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The Redis communication layer is preserved, with only package naming changed."
+    },
+    {
+      "gt_nodes": [
+        "Global::Socket.io\\nWebSocket result channel"
+      ],
+      "predicted_nodes": [
+        "squatm3gator System::WebSocket Channel"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Socket.IO/WebSocket result delivery is semantically the same boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Squatm3\\nDomain generation engine"
+      ],
+      "predicted_nodes": [
+        "squatm3gator System::squatm3 Engine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The wrapped squatm3 engine is correctly identified and localized."
+    },
+    {
+      "gt_nodes": [
+        "Global::Web UI\\nindex.html"
+      ],
+      "predicted_nodes": [
+        "squatm3gator System::Web UI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The UI node maps directly to the index.html web entry page."
+    },
+    {
+      "gt_nodes": [
+        "Global::Workers\\nCommand consumers"
+      ],
+      "predicted_nodes": [
+        "squatm3gator System::Background Consumer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The background consumer is the same worker/consumer concept in the GT."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

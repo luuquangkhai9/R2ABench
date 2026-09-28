@@ -1,0 +1,442 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Application Layer::Model Initialization"
+      ],
+      "predicted_nodes": [
+        "Backend Layer::Model Initialization Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both refer to the model initialization business capability, but GT places it in the application layer while the prediction places it in a backend service layer. This is a layer shift rather than a semantically equivalent boundary."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer::Model Management"
+      ],
+      "predicted_nodes": [
+        "Backend Layer::Model Management Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The component meaning matches, but the AI moved it into the backend service layer instead of the application layer used by GT."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer::Model Training"
+      ],
+      "predicted_nodes": [
+        "Backend Layer::Model Training Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The training function matches, but GT assigns it to the application layer while the prediction assigns it to a backend service boundary."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer::Task Inference"
+      ],
+      "predicted_nodes": [
+        "Backend Layer::Inference Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both denote inference execution, but the boundary differs: GT uses application layer, while the prediction places it in backend."
+    },
+    {
+      "gt_nodes": [
+        "MyTorch Framework Layer::High-Level Components::Data Related::Data Loader"
+      ],
+      "predicted_nodes": [
+        "MyTorch NNE Framework Layer::Data Loader"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These are semantically the same data loading component. The boundary naming differs but is equivalent and consistent with the framework layer."
+    },
+    {
+      "gt_nodes": [
+        "MyTorch Framework Layer::High-Level Components::Data Related::Datasets"
+      ],
+      "predicted_nodes": [
+        "External Environment::Preset Datasets",
+        "External Environment::Public Datasets External"
+      ],
+      "match_type": "1:2",
+      "is_boundary_correct": false,
+      "reasoning": "GT represents datasets as an internal framework component, while the prediction splits them into external environment nodes, which is a severe boundary mismatch. The dataset resource may be external in reality, but this does not reproduce the GT architectural placement."
+    },
+    {
+      "gt_nodes": [
+        "MyTorch Framework Layer::High-Level Components::Neural Network::Activation Functions"
+      ],
+      "predicted_nodes": [
+        "MyTorch NNE Framework Layer::Weight Initializer He Lecun Xavier"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "This is not semantically equivalent. Activation functions and weight initializers are related but distinct components."
+    },
+    {
+      "gt_nodes": [
+        "MyTorch Framework Layer::High-Level Components::Neural Network::Loss Functions"
+      ],
+      "predicted_nodes": [
+        "MyTorch NNE Framework Layer::Loss Functions"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The loss function component matches directly and is placed within the framework layer, consistent with GT."
+    },
+    {
+      "gt_nodes": [
+        "MyTorch Framework Layer::High-Level Components::Neural Network::Neural Network Tools"
+      ],
+      "predicted_nodes": [
+        "MyTorch NNE Framework Layer::MyTorch Core Engine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The names differ, but both denote core neural-network framework tooling/engine functionality. The boundary remains within the framework layer and is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "MyTorch Framework Layer::High-Level Components::Optimization::LR Scheduler"
+      ],
+      "predicted_nodes": [
+        "MyTorch NNE Framework Layer::Optimizers and LR Scheduler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated the learning rate scheduler with optimizers. This is a reasonable merge of closely related optimization components, and the boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "MyTorch Framework Layer::High-Level Components::Optimization::Optimizers"
+      ],
+      "predicted_nodes": [
+        "MyTorch NNE Framework Layer::Optimizers and LR Scheduler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI merged optimizers with the LR scheduler into one node. This is semantically valid and remains in the correct framework boundary."
+    },
+    {
+      "gt_nodes": [
+        "MyTorch Framework Layer::Low-Level Operations::Gradient Computation"
+      ],
+      "predicted_nodes": [
+        "MyTorch NNE Framework Layer::Forward and Backward Engine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted engine includes backward/gradient computation functionality, which corresponds to the GT low-level gradient computation component. The boundary is still within the framework layer."
+    },
+    {
+      "gt_nodes": [
+        "MyTorch Framework Layer::Low-Level Operations::Mathematical Interfaces"
+      ],
+      "predicted_nodes": [
+        "MyTorch NNE Framework Layer::MyTorch Core Engine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The core engine plausibly subsumes the mathematical interface capability. The framework boundary is consistent, though the match is somewhat broad."
+    },
+    {
+      "gt_nodes": [
+        "MyTorch Framework Layer::Low-Level Operations::Tensor Operations"
+      ],
+      "predicted_nodes": [
+        "MyTorch NNE Framework Layer::MyTorch Core Engine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The core engine appears to aggregate low-level tensor operations. This is an acceptable merged match within the same framework boundary."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Configuration Interface"
+      ],
+      "predicted_nodes": [
+        "Frontend Layer::Configuration Interface"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The functionality and architectural placement are equivalent; only the layer naming differs."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Inference Interface"
+      ],
+      "predicted_nodes": [
+        "Frontend Layer::Inference Interface"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match with equivalent frontend/presentation boundary."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Main Interface"
+      ],
+      "predicted_nodes": [
+        "Frontend Layer::Main Interface"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match with equivalent frontend/presentation boundary."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Training Interface"
+      ],
+      "predicted_nodes": [
+        "Frontend Layer::Training Interface"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match with equivalent frontend/presentation boundary."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer::Core Functional Modules::Inference::Inference Visualization"
+      ],
+      "predicted_nodes": [
+        "Frontend Layer::Inference Interface"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The prediction does not explicitly capture a separate inference visualization service node; it collapses it into a frontend interface. This loses the GT service-layer placement and is not an exact architectural reproduction."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer::Core Functional Modules::Inference::Model Selection"
+      ],
+      "predicted_nodes": [
+        "Backend Layer::Inference Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Model selection is only loosely covered by the broader inference service. The GT has a specific service module, but the prediction over-aggregates it, losing boundary fidelity."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer::Core Functional Modules::Inference::Task Settings"
+      ],
+      "predicted_nodes": [
+        "Backend Layer::Inference Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The prediction does not preserve the distinct task settings module and instead collapses it into a general inference service, which is a mismatch in granularity and boundary."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer::Core Functional Modules::Initialization::Backbone Selection"
+      ],
+      "predicted_nodes": [
+        "Backend Layer::Model Initialization Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The initialization service may encompass backbone selection, but GT keeps it as a separate core functional module. The prediction merges and relocates it into backend service architecture."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer::Core Functional Modules::Initialization::Initialization Visualization"
+      ],
+      "predicted_nodes": [
+        "Frontend Layer::Configuration Interface"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Initialization visualization is not the same as configuration interface, and the prediction does not preserve the dedicated visualization module."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer::Core Functional Modules::Initialization::Parameter Settings"
+      ],
+      "predicted_nodes": [
+        "Backend Layer::Model Initialization Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Parameter settings are only indirectly implied by the broader initialization service; the specific GT service module is not faithfully reproduced."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer::Core Functional Modules::Training::Model Selection"
+      ],
+      "predicted_nodes": [
+        "Backend Layer::Model Training Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The prediction merges multiple training-related modules into one backend service, losing the GT distinction for model selection."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer::Core Functional Modules::Training::Training Hyperparams"
+      ],
+      "predicted_nodes": [
+        "Backend Layer::Model Training Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The specific hyperparameter module is absorbed into a general training service, which does not accurately reproduce the GT node structure."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer::Core Functional Modules::Training::Training Visualization"
+      ],
+      "predicted_nodes": [
+        "Frontend Layer::Training Interface"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Training visualization is not explicitly represented as a separate node. It is only loosely implied by the UI interface, so the architectural boundary is not faithfully matched."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer::Infrastructure & Interfaces::Business System"
+      ],
+      "predicted_nodes": [
+        "Backend Layer::Backend API Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a reasonable semantic match for the backend business/system interface layer, with an equivalent backend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer::Infrastructure & Interfaces::Public Interface"
+      ],
+      "predicted_nodes": [
+        "Backend Layer::Backend API Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The public interface corresponds to the exposed backend API service. The boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer::Infrastructure & Interfaces::Service Interface"
+      ],
+      "predicted_nodes": [
+        "Backend Layer::Backend API Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The service interface is effectively represented by the backend API service, and the boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer::Neural Network Model Management"
+      ],
+      "predicted_nodes": [
+        "Backend Layer::Model Management Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The function matches semantically, and backend service placement is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer::Software Construction & Middleware"
+      ],
+      "predicted_nodes": [
+        "External Environment::NNE Base Framework"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "GT describes an internal software construction/middleware layer, while the prediction moves it outside the system into an external environment dependency. This is a boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer::System Management::Logging System"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Training Log Store",
+        "Data Layer::Inference Log Store"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT logging system is split into training and inference log storage nodes. This is a valid decomposition, and the storage/data boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer::System Management::Permission Management"
+      ],
+      "predicted_nodes": [
+        "Backend Layer::Backend API Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Permission management is not explicitly represented. The backend API service does not faithfully correspond to access control management."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer::System Management::Security Audit"
+      ],
+      "predicted_nodes": [
+        "Backend Layer::Exception and Fault Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Security audit and exception/fault handling are different concerns. This is not a semantic match."
+    },
+    {
+      "gt_nodes": [
+        "Storage / Data Layer::NN Model Data"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Model Store"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Model storage matches NN model data, and the storage/data boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Storage / Data Layer::Train/Inference History"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Training Log Store",
+        "Data Layer::Inference Log Store"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The history node is reasonably split into training and inference log stores. The data-layer placement is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "MyTorch Framework Layer::High-Level Components::Neural Network::Activation Functions",
+    "Service Layer::Core Functional Modules::Inference::Inference Visualization",
+    "Service Layer::Core Functional Modules::Inference::Model Selection",
+    "Service Layer::Core Functional Modules::Inference::Task Settings",
+    "Service Layer::Core Functional Modules::Initialization::Backbone Selection",
+    "Service Layer::Core Functional Modules::Initialization::Initialization Visualization",
+    "Service Layer::Core Functional Modules::Initialization::Parameter Settings",
+    "Service Layer::Core Functional Modules::Training::Model Selection",
+    "Service Layer::Core Functional Modules::Training::Training Hyperparams",
+    "Service Layer::Core Functional Modules::Training::Training Visualization",
+    "Service Layer::System Management::Permission Management",
+    "Service Layer::System Management::Security Audit"
+  ],
+  "unmatched_predicted_nodes": [
+    "Backend Layer::Exception and Fault Handler",
+    "Backend Layer::GPU Monitor",
+    "External Environment::GPU Hardware",
+    "External Environment::NNE Base Framework",
+    "External Environment::Preset Datasets",
+    "External Environment::Public Datasets External",
+    "External Environment::Python 3.8+ Runtime",
+    "MyTorch NNE Framework Layer::Classic Models ResNet VGG Transformer",
+    "MyTorch NNE Framework Layer::GPU Acceleration Module",
+    "MyTorch NNE Framework Layer::Weight Initializer He Lecun Xavier",
+    "Data Layer::DB Backup and Recovery",
+    "Data Layer::SQLite Local DB"
+  ]
+}

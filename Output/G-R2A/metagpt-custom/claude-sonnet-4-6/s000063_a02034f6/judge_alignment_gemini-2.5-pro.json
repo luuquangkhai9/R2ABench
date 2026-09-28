@@ -1,0 +1,159 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Access Layer::Gateway"
+      ],
+      "predicted_nodes": [
+        "Client Access Layer::MTProto Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are functionally equivalent as the main client entry point. The boundaries 'Access Layer' and 'Client Access Layer' are semantically identical."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Session"
+      ],
+      "predicted_nodes": [
+        "Client Access Layer::Session Manager",
+        "Client Access Layer::Service Message Processor"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's general 'Session' node is correctly split by the AI into a 'Session Manager' and a 'Service Message Processor' which handles session-related messages like 'destroy_session' mentioned in the PRD. The boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Auth Session"
+      ],
+      "predicted_nodes": [
+        "Client Access Layer::Authorization Key Handler",
+        "Client Access Layer::Future Salts Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'Auth Session' is decomposed into more granular handlers for authorization keys and future salts, both of which are specified in the PRD. The boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::BFF"
+      ],
+      "predicted_nodes": [
+        "BFF / Access-Facing Service Layer::BFF / Access-Facing Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are a direct match for the BFF component. The AI's boundary 'BFF / Access-Facing Service Layer' is more specific and descriptive than the GT's 'Global', and aligns better with the PRD's description."
+    },
+    {
+      "gt_nodes": [
+        "Services::Services"
+      ],
+      "predicted_nodes": [
+        "Business / Service Layer::Registration & Verification Service",
+        "Business / Service Layer::Verification Code Verifier",
+        "Business / Service Layer::Media Processing Service",
+        "Infrastructure & Deployment Layer::FFmpeg/FFProbe Wrapper"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly decomposes the GT's generic 'Services' bucket into specific microservices and components (Registration, Verification, Media Processing, FFmpeg Wrapper) that are explicitly mentioned in the PRD. The boundary attributions are reasonable interpretations."
+    },
+    {
+      "gt_nodes": [
+        "Services::Msg"
+      ],
+      "predicted_nodes": [
+        "Business / Service Layer::Messaging Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the messaging service. The 'Services' and 'Business / Service Layer' boundaries are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Sync"
+      ],
+      "predicted_nodes": [
+        "Asynchronous / Supporting Layer::Sync Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the sync service. The AI's boundary 'Asynchronous / Supporting Layer' is more descriptive and accurate based on the PRD than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Services::DFS"
+      ],
+      "predicted_nodes": [
+        "Storage-Facing / Data Layer::MinIO Adapter"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's Distributed File System service (DFS) is the functional equivalent of the AI's 'MinIO Adapter'. The AI's boundary 'Storage-Facing / Data Layer' is a more accurate classification for a storage adapter than the GT's generic 'Services' layer."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MinIO"
+      ],
+      "predicted_nodes": [
+        "External Systems::MinIO"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match for the MinIO storage dependency. The GT's 'Storages' boundary and the AI's 'External Systems' boundary are both valid and semantically equivalent for classifying external infrastructure."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MySQL"
+      ],
+      "predicted_nodes": [
+        "External Systems::MySQL"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match for the MySQL dependency. The 'Storages' and 'External Systems' boundaries are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Storages::Redis"
+      ],
+      "predicted_nodes": [
+        "External Systems::Redis"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match for the Redis dependency. The 'Storages' and 'External Systems' boundaries are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "External Systems::Kafka"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match for the Kafka dependency. The AI's 'External Systems' boundary is more consistent and arguably more accurate than the GT's 'Global' for an external infrastructure component."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer::Status",
+    "Clients::Android",
+    "Clients::PC",
+    "Clients::Web",
+    "Clients::iOS",
+    "Global::Push"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::External Verification-Code Service",
+    "External Systems::FFProbe",
+    "External Systems::FFmpeg",
+    "External Systems::etcd",
+    "Storage-Facing / Data Layer::Kafka Adapter",
+    "Storage-Facing / Data Layer::MySQL Adapter",
+    "Storage-Facing / Data Layer::Redis Adapter",
+    "Storage-Facing / Data Layer::etcd Adapter"
+  ]
+}

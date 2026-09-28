@@ -1,0 +1,295 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Frontend (User Interface Layer::User Login",
+        "Frontend (User Interface Layer::User Registration"
+      ],
+      "predicted_nodes": [
+        "User Interface Layer::Registration / Login UI"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separate registration and login pages are aggregated into one UI module. The functional scope matches and the boundary remains within the frontend/user interface layer."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (User Interface Layer::File Management"
+      ],
+      "predicted_nodes": [
+        "User Interface Layer::File Management UI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the file management front-end page/module, with consistent UI-layer attribution."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (User Interface Layer::Detection Settings"
+      ],
+      "predicted_nodes": [
+        "User Interface Layer::Detection Configuration UI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The detection settings/configuration interface is semantically equivalent and correctly placed in the UI layer."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (User Interface Layer::Display Modification Results",
+        "Frontend (User Interface Layer::Generate Modification Suggestions"
+      ],
+      "predicted_nodes": [
+        "User Interface Layer::Repair Interaction UI",
+        "User Interface Layer::Results Display UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT frontend nodes for showing repair suggestions/results are split into separate repair interaction and results display UIs. The split is reasonable and remains in the correct frontend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (User Interface Layer::New User Tutorial"
+      ],
+      "predicted_nodes": [
+        "User Interface Layer::Help & Cases UI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The tutorial/help functionality is semantically covered by the help and cases interface. The boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Base Algorithm Layer::Bipartite Matching",
+        "Backend::Base Algorithm Layer::Strict Matching",
+        "Backend::Base Algorithm Layer::String Similarity",
+        "Backend::Base Algorithm Layer::Type Similarity",
+        "Backend::Base Algorithm Layer::Weighted Graph Construction"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Matching & Detection::EntityMatchingEngine",
+        "Business Logic Layer::Matching & Detection::InconsistencyDetectionEngine"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT algorithmic primitives are aggregated into higher-level matching and detection engines. This is functionally equivalent and still belongs to backend business logic rather than UI or data access."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::Build Topology",
+        "Backend::Business Logic Layer::Generate Modification Command"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Repair Services::RepairOrderScheduler",
+        "Business Logic Layer::Repair Services::AutoRepairExecutor"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Topology building and repair command generation are represented by repair ordering and automated repair execution services. The functional meaning aligns and the backend business layer placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::Class Attr vs DB Field Inconsistency Detection",
+        "Backend::Business Logic Layer::Class vs DB Table Inconsistency Detection",
+        "Backend::Business Logic Layer::Relationship Inconsistency Detection"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Matching & Detection::InconsistencyDetectionEngine",
+        "Business Logic Layer::Matching & Detection::EntityMatchingEngine"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT detection responsibilities are consolidated into general matching/detection engines. This is a valid aggregation within the business logic layer."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::Class Diagram Modification"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Repair Services::AutoRepairExecutor"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Automatic class diagram modification corresponds to auto repair execution. The backend placement is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::DB & Class Diagram Format Conversion"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Parsing Pipeline::JSONConverter",
+        "Business Logic Layer::Parsing Pipeline::MDJParser\n(+ Jackson Java Object Model"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT conversion function is split into parsing and JSON conversion/model handling. The components are semantically aligned and remain in backend processing."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::DB & Class Diagram Matching"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Matching & Detection::EntityMatchingEngine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The core matching business function is correctly captured by the entity matching engine in the backend business logic layer."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::User Input Acquisition"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Access & Gateway::GuestDetectionFacade",
+        "Business Logic Layer::Access & Gateway::AuthManager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "User input acquisition is distributed across authenticated and guest access gateways/facades. This is a plausible decomposition within backend access handling."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Data Access Layer::Class Diagram Parser"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Parsing Pipeline::MDJParser\n(+ Jackson Java Object Model"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The parsing responsibility matches, but GT places it in the data access layer while the prediction places it in business logic. This is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Data Access Layer::Database Parser"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Parsing Pipeline::DatabaseParser"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The database parsing function matches, but the AI placed it in business logic instead of the GT data access layer. This is a boundary-layer error."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Data Access Layer::Database Connection"
+      ],
+      "predicted_nodes": [
+        "Data Access Layer::JDBCConnector"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The JDBC connector is the same database connectivity component, and the boundary attribution is consistent with the GT data access layer."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Unified Abstraction Layer::Comparable Entity Construction"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Matching & Detection::EntityMatchingEngine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Comparable entity construction is related to matching, but the GT assigns it to a dedicated abstraction layer, not the matching engine. The prediction collapses it into a different architectural responsibility."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Unified Abstraction Layer::Data Type Mapping"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Parsing Pipeline::JSONConverter"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Data type mapping is semantically adjacent to conversion, but the GT treats it as a unified abstraction concern, not JSON conversion. The boundary/function attribution is not accurate."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Unified Abstraction Layer::Database Relationship Identification"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Parsing Pipeline::DatabaseRelationshipExtractor"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The functionality matches, but the GT locates it in a unified abstraction layer while the AI places it in parsing pipeline. This is a layer mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (User Interface Layer::User Login",
+        "Frontend (User Interface Layer::User Registration"
+      ],
+      "predicted_nodes": [
+        "User Interface Layer::Registration / Login UI"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same as the earlier registration/login aggregation: the UI component combines both GT frontend nodes and stays in the correct boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Backend::Base Algorithm Layer::Bipartite Matching",
+    "Backend::Base Algorithm Layer::Strict Matching",
+    "Backend::Base Algorithm Layer::String Similarity",
+    "Backend::Base Algorithm Layer::Type Similarity",
+    "Backend::Base Algorithm Layer::Weighted Graph Construction",
+    "Backend::Business Logic Layer::Build Topology",
+    "Backend::Business Logic Layer::Class Attr vs DB Field Inconsistency Detection",
+    "Backend::Business Logic Layer::Class Diagram Modification",
+    "Backend::Business Logic Layer::Class vs DB Table Inconsistency Detection",
+    "Backend::Business Logic Layer::DB & Class Diagram Format Conversion",
+    "Backend::Business Logic Layer::DB & Class Diagram Matching",
+    "Backend::Business Logic Layer::Generate Modification Command",
+    "Backend::Business Logic Layer::Relationship Inconsistency Detection",
+    "Backend::Business Logic Layer::User Input Acquisition",
+    "Backend::Data Access Layer::Class Diagram Parser",
+    "Backend::Data Access Layer::Database Connection",
+    "Backend::Data Access Layer::Database Parser",
+    "Backend::Unified Abstraction Layer::Comparable Entity Construction",
+    "Backend::Unified Abstraction Layer::Data Type Mapping",
+    "Backend::Unified Abstraction Layer::Database Relationship Identification",
+    "Frontend (User Interface Layer::Detection Settings",
+    "Frontend (User Interface Layer::Display Modification Results",
+    "Frontend (User Interface Layer::File Management",
+    "Frontend (User Interface Layer::Generate Modification Suggestions",
+    "Frontend (User Interface Layer::New User Tutorial",
+    "Frontend (User Interface Layer::User Login",
+    "Frontend (User Interface Layer::User Registration"
+  ],
+  "unmatched_predicted_nodes": [
+    "Business Logic Layer::Access & Gateway::AuthManager",
+    "Business Logic Layer::Access & Gateway::GuestDetectionFacade",
+    "Business Logic Layer::Access & Gateway::OpenAPIGateway",
+    "Business Logic Layer::File & Content Services::FileManagementService",
+    "Business Logic Layer::File & Content Services::HelpAndCaseService",
+    "Business Logic Layer::Infrastructure Services::AsyncTaskManager",
+    "Business Logic Layer::Infrastructure Services::OperationLogService",
+    "Business Logic Layer::Matching & Detection::DetectionExceptionConfigService",
+    "Business Logic Layer::Matching & Detection::DetectionRuleConfigService",
+    "Business Logic Layer::Matching & Detection::EntityMatchingEngine",
+    "Business Logic Layer::Matching & Detection::InconsistencyDetectionEngine",
+    "Business Logic Layer::Parsing Pipeline::DatabaseParser",
+    "Business Logic Layer::Parsing Pipeline::DatabaseRelationshipExtractor",
+    "Business Logic Layer::Parsing Pipeline::JSONConverter",
+    "Business Logic Layer::Parsing Pipeline::MDJParser\n(+ Jackson Java Object Model",
+    "Business Logic Layer::Repair Services::AutoRepairExecutor",
+    "Business Logic Layer::Repair Services::RepairOrderScheduler",
+    "Business Logic Layer::Repair Services::RepairSuggestionGenerator",
+    "Business Logic Layer::Reporting & History::DetectionReportService",
+    "Business Logic Layer::Reporting & History::HistoricalRecordService",
+    "Business Logic Layer::Reporting & History::ReportExportService",
+    "Data Access Layer::Application Database\n(Users, Files, Models,\nDetection Results,\nRepair Records, Rules,\nExceptions, History,\nLogs, Help",
+    "Data Access Layer::JDBCConnector",
+    "External Systems::MySQL Database\n(External Target",
+    "External Systems::StarUML\n(.mdj export files",
+    "Global::External Systems",
+    "User Interface Layer::Detection Configuration UI",
+    "User Interface Layer::File Management UI",
+    "User Interface Layer::Guest / Unauthenticated Detection UI",
+    "User Interface Layer::Help & Cases UI",
+    "User Interface Layer::Historical Records UI",
+    "User Interface Layer::Registration / Login UI",
+    "User Interface Layer::Repair Interaction UI",
+    "User Interface Layer::Report Export UI",
+    "User Interface Layer::Results Display UI"
+  ]
+}

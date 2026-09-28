@@ -1,0 +1,124 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "cadctl::CHGM investigation",
+        "cadctl::CPD investigation",
+        "cadctl::Future investigations",
+        "cadctl::switch(alerttype"
+      ],
+      "predicted_nodes": [
+        "CLI Layer::cadctl"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT nodes are individual cadctl subcommands/commands, while the prediction aggregates them into the cadctl CLI layer. This is a reasonable semantic merge and the CLI boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton\\nEvent\\nListener"
+      ],
+      "predicted_nodes": [
+        "Execution Layer::Tekton EventListener"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Tekton EventListener component in the event-driven execution path, and the execution/deployment boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?"
+      ],
+      "predicted_nodes": [
+        "Execution Layer::Tekton EventListener"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT interceptor annotation corresponds to the Tekton event-listener-triggered alert handling path. Mapping it to the Tekton EventListener is acceptable, with correct execution boundary attribution."
+    },
+    {
+      "gt_nodes": [
+        "Global::Escalate alert to\\non-call SRE"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Escalation to on-call SRE is functionally represented by PagerDuty integration. The external systems boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster",
+        "PagerDuty Team::app-sre-alertmanager",
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT contains multiple PagerDuty team targets, while the prediction consolidates them into the PagerDuty external system. This is a valid aggregation and the boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Alert Source::app-sre\\nalertmanager",
+        "Alert Source::cluster\\nalertmanager",
+        "Alert Source::deadmanssnitch",
+        "Alerts::CHGM",
+        "Alerts::CPD",
+        "Alerts::all cluster\\nalerts"
+      ],
+      "predicted_nodes": [
+        "Execution Layer::Tekton EventListener"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "These GT nodes describe alert sources and alert categories that feed the normal investigation workflow. The prediction only captures the EventListener execution component and omits the alert-source/domain semantics, so this is not an accurate semantic match."
+    },
+    {
+      "gt_nodes": [
+        "Global::Update Incident\\nNotes"
+      ],
+      "predicted_nodes": [
+        "External Systems::OCM"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Updating incident notes is consistent with operations-system follow-up handling, and OCM is a plausible external system target. The external systems boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton\\nEvent\\nListener"
+      ],
+      "predicted_nodes": [
+        "Global::Execution Layer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "This is a severe boundary error because a concrete Tekton component was generalized into a generic global layer node rather than being placed within the execution/deployment boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Alert Source::app-sre\\nalertmanager",
+    "Alert Source::cluster\\nalertmanager",
+    "Alert Source::deadmanssnitch",
+    "Alerts::CHGM",
+    "Alerts::CPD",
+    "Alerts::all cluster\\nalerts"
+  ],
+  "unmatched_predicted_nodes": [
+    "Deployment Layer::Deployment Template Artifacts",
+    "Deployment Layer::Template Update Utility",
+    "Execution Layer::Skip-Webhook Executor",
+    "Execution Layer::Tekton PipelineRun",
+    "External Systems::AWS",
+    "Global::CLI Layer",
+    "Global::Deployment Layer",
+    "Global::Execution Layer",
+    "Global::External Systems",
+    "Global::Integration Layer",
+    "Global::Tekton Pipeline (cad-checks-pipeline",
+    "Integration Layer::Integration Library"
+  ]
+}

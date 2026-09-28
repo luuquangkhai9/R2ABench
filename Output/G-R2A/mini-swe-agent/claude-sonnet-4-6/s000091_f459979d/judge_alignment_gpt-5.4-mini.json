@@ -1,0 +1,105 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Blockchain Network\\nEthereum / Web3j"
+      ],
+      "predicted_nodes": [
+        "External Systems::Ethereum-Compatible\\nBlockchain Node\\n(HTTP endpoint",
+        "Blockchain Integration Layer::Blockchain Service\\n(Web3j HTTP Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT combines the Ethereum/Web3j blockchain network concern into one node; the prediction splits it into the external Ethereum-compatible node and the Web3j client integration, which are semantically equivalent and correctly placed across external systems and integration layers."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::BootstrapStore\\nSmart Contract"
+      ],
+      "predicted_nodes": [
+        "External Systems::Deployed Smart Contract\\n(Client/Bootstrap Storage",
+        "Blockchain Integration Layer::Smart Contract Interface\\n(getAllClients / addClient / getClientByEndpoint"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The smart contract storage/computation is represented by the deployed contract, and the interface node captures the contract operations. This is a valid split and the boundary attribution is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::External Applications\\nusing LwM2M"
+      ],
+      "predicted_nodes": [
+        "Global::Client Layer",
+        "Client Layer::LwM2M Service Component"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT external application usage is abstractly represented by the client-side LwM2M service component and its enclosing client layer. The decomposition is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Bootstrap Server"
+      ],
+      "predicted_nodes": [
+        "Client Layer::LwM2M Service Component",
+        "LwM2M Processing Layer::Bootstrap Configuration Builder"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The bootstrap server-related functionality is reflected by the bootstrap configuration handling in the LwM2M processing layer, with the client layer as the consumer side. This is a reasonable functional match."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Client\\nDevice 1",
+        "LwM2M Blockchain Platform::LwM2M Client\\nDevice 2"
+      ],
+      "predicted_nodes": [
+        "Client Layer::LwM2M Service Component"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The two GT device nodes are multiple instances of LwM2M client-side participants, and the AI aggregates them into a single client-side component. This is a valid merged representation."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Server\\nLeshan server component"
+      ],
+      "predicted_nodes": [
+        "Global::LwM2M Processing Layer",
+        "LwM2M Processing Layer::LwM2M Node Deserializer\\n(Leshan/LwM2M JSON Parser"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT server-side Leshan/LwM2M handling is represented by the LwM2M processing layer and deserializer/parser component. The mapping is semantically aligned, though more abstract."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Secure API\\nAuthenticated HTTP endpoints"
+      ],
+      "predicted_nodes": [
+        "Global::Spring Backend Layer",
+        "Spring Backend Layer::JWT Token Validator\\n(JwtUtility.isValidToken",
+        "Spring Backend Layer::User Management Controller\\n(Spring HTTP Controller",
+        "Spring Backend Layer::User Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The secure API endpoints are decomposed into controller, token validation, and user service concerns. This matches the authenticated HTTP endpoint functionality and the backend layer placement is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "LwM2M Blockchain Platform::Management Web UI"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Blockchain Integration Layer",
+    "Global::Client Layer",
+    "Global::External Systems",
+    "Global::LwM2M Processing Layer",
+    "Global::Spring Backend Layer",
+    "Blockchain Integration Layer::Bootstrap Data Encoder/Decoder\\n(Fixed 32-byte ASCII",
+    "Client Layer::Authenticated API Client\\n(HTTP + Authorization Header",
+    "External Systems::Ethereum-Compatible\\nBlockchain Node\\n(HTTP endpoint",
+    "LwM2M Processing Layer::Bootstrap Configuration Builder",
+    "Spring Backend Layer::User Data Store"
+  ]
+}

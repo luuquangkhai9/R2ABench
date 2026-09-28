@@ -1,0 +1,167 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::API Gateway"
+      ],
+      "predicted_nodes": [
+        "API Layer::Amazon API Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct functional match for the system's entry point. The AI's 'API Layer' is a standard and semantically equivalent boundary to the GT's 'Global' for this component."
+    },
+    {
+      "gt_nodes": [
+        "Global::Cognito"
+      ],
+      "predicted_nodes": [
+        "Security & Identity::Amazon Cognito"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the authentication service. The AI's 'Security & Identity' boundary is a more precise and appropriate classification than the GT's 'Global'."
+    },
+    {
+      "gt_nodes": [
+        "Global::S3"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web Frontend\\n(HTML/CSS/Bootstrap/jQuery)\\nAmazon S3 Hosting"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified that S3 is used for hosting the frontend, combining the technology and hosting service into one descriptive node. 'Presentation Layer' is a correct and more specific boundary than 'Global'."
+    },
+    {
+      "gt_nodes": [
+        "Fixtures Service::fixtures\\nLambda",
+        "Standing Service::standing\\nLambda"
+      ],
+      "predicted_nodes": [
+        "Backend Services (AWS Lambda::Match Info Service"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated two specific data-providing Lambdas from the GT into a single, logically cohesive 'Match Info Service'. This is a valid abstraction. The 'Backend Services (AWS Lambda)' boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::live_score\\nLambda"
+      ],
+      "predicted_nodes": [
+        "Backend Services (AWS Lambda::Live Score Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct functional match for the service handling live score updates. Placing this Lambda in the 'Backend Services' boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Recommendation Service::recommendation\\nLambda"
+      ],
+      "predicted_nodes": [
+        "Backend Services (AWS Lambda::Chatbot Service",
+        "Backend Services (AWS Lambda::Screening Recommendation Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly interpreted the PRD (FR-009, FR-010) and split the single generic GT 'recommendationLambda' into two specific microservices for Chatbot and Screening Recommendations. The 'Backend Services' boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::DynamoDB\\nLive Scores",
+        "Prediction Service::DynamoDB\\nPredictions",
+        "Standing Service::DynamoDB\\nStandings"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Amazon DynamoDB"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the GT's multiple, context-specific DynamoDB instances into a single component within a standard 'Data Layer'. This is a common and valid architectural representation."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::Elasticsearch",
+        "Prediction Service::Elasticsearch",
+        "Standing Service::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Elasticsearch"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Similar to DynamoDB, the AI aggregated the context-specific Elasticsearch nodes from the GT into a single node in the 'Data Layer', which is a correct abstraction."
+    },
+    {
+      "gt_nodes": [
+        "Notification Service::SNS"
+      ],
+      "predicted_nodes": [
+        "Notification::Amazon SNS\\n(SMS Notifications"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the SMS notification component. The 'Notification' boundary is semantically identical to the GT's 'Notification Service'."
+    },
+    {
+      "gt_nodes": [
+        "Fixtures Service::SQS",
+        "Notification Service::SQS"
+      ],
+      "predicted_nodes": [
+        "Notification::Amazon SQS\\n(Reminder Queue"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified that the two SQS nodes in the GT serve the same purpose (queuing reminders) and merged them into a single, clearly named component. The 'Notification' boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::SageMaker"
+      ],
+      "predicted_nodes": [
+        "Prediction::Amazon SageMaker"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the machine learning service. The AI's 'Prediction' boundary is equivalent to the GT's 'Prediction Service'."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::prediction\\nLambda"
+      ],
+      "predicted_nodes": [
+        "Backend Services (AWS Lambda::Prediction Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct functional match for the backend logic that interacts with the prediction service. The AI correctly places it in the 'Backend Services' layer."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2",
+        "Live Score Pipeline::EC2::Kafka",
+        "Live Score Pipeline::EC2::M4",
+        "Live Score Pipeline::EC2::foot app"
+      ],
+      "predicted_nodes": [
+        "Streaming Layer::Amazon EC2",
+        "Streaming Layer::Amazon EC2::Kafka Cluster\\n(Apache Avro"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the Kafka on EC2 setup for the streaming pipeline. It abstracted the GT's overly specific details (M4, foot app) into a cleaner representation of the core components. The 'Streaming Layer' is a perfect semantic match for the 'Live Score Pipeline'."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::User",
+    "Recommendation Service::Lex"
+  ],
+  "unmatched_predicted_nodes": [
+    "Backend Services (AWS Lambda::Reminder Service",
+    "Backend Services (AWS Lambda::Search Service",
+    "Security & Identity::AWS IAM"
+  ]
+}

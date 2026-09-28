@@ -1,0 +1,94 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "cadctl::switch(alerttype)"
+      ],
+      "predicted_nodes": [
+        "Interface / Entry Layer::cadctl CLI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node describes the core internal logic of the CLI, while the AI node represents the CLI as a single user-facing component. This is a reasonable 1:1 conceptual mapping. The 'Interface / Entry Layer' boundary is appropriate for a Command-Line Interface."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::CHGM investigation",
+        "cadctl::CPD investigation"
+      ],
+      "predicted_nodes": [
+        "Application Layer::CAD Workflows (CHGM, Anomaly Detection, Communications, Mitigation/Disposition"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT nodes list specific investigation workflows. The AI correctly aggregates these into a broader 'Workflows' component that aligns with the business logic described in the PRD's functional requirements. The 'Application Layer' is a suitable boundary for this business logic."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton\nEvent\nListener",
+        "Global::Tekton Interceptor:\nAlert investigation\nimplemented in CAD?"
+      ],
+      "predicted_nodes": [
+        "Orchestration Layer::Tekton::Tekton EventListener",
+        "Orchestration Layer::Tekton::Tekton Trigger"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "A direct functional match. The GT's 'Tekton Event Listener' maps directly. The GT's 'Tekton Interceptor' which decides if an investigation should run is the exact function of a 'Tekton Trigger' in this context. The AI's 'Orchestration Layer' is more specific and accurate than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Alert Source::app-sre\\nalertmanager",
+        "Alert Source::cluster\\nalertmanager",
+        "Alert Source::deadmanssnitch",
+        "Alerts::CHGM",
+        "Alerts::CPD",
+        "Alerts::all cluster\\nalerts"
+      ],
+      "predicted_nodes": [
+        "Interface / Entry Layer::Alert Webhook Input"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT nodes detail specific external sources and types of alerts. The AI aggregates these into the system's single entry point for this data, the 'Alert Webhook Input'. This is a valid abstraction. The 'Interface / Entry Layer' boundary is semantically correct for an input interface."
+    },
+    {
+      "gt_nodes": [
+        "Global::Escalate alert to\\non-call SRE",
+        "Global::Update Incident\\nNotes",
+        "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster",
+        "PagerDuty Team::app-sre-alertmanager",
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty",
+        "Integration Layer::PagerDuty Integration"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The GT lists specific actions and configurations related to PagerDuty. The AI correctly abstracts this into two standard architectural components: the external system itself ('PagerDuty') and the internal component that integrates with it ('PagerDuty Integration'). The AI's layered boundaries are more descriptive and standard than the GT's."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "cadctl::Future investigations"
+  ],
+  "unmatched_predicted_nodes": [
+    "Build Layer::Go 1.17 Builder Image",
+    "Deployment / Utilities Layer::Deployment Manifests",
+    "Deployment / Utilities Layer::Template Update Utility",
+    "External Systems::AWS",
+    "External Systems::OCM",
+    "Integration Layer::AWS Integration",
+    "Integration Layer::Integration Library",
+    "Integration Layer::OCM Integration",
+    "Orchestration Layer::Tekton",
+    "Orchestration Layer::Tekton::Namespace: configuration-anomaly-detection",
+    "Orchestration Layer::Tekton::Namespace: configuration-anomaly-detection::CAD Checks Pipeline (cad-checks-pipeline",
+    "Orchestration Layer::Tekton::Namespace: configuration-anomaly-detection::Tekton PipelineRun",
+    "Orchestration Layer::Tekton::Pipeline Steps invoking cadctl",
+    "Orchestration Layer::Tekton::Skip-webhook Direct Invocation Path",
+    "Orchestration Layer::Tekton::payload: JSON (contains event.data.id",
+    "Platform / Runtime Layer::CLI Container Image (/bin/cadctl",
+    "Platform / Runtime Layer::UBI Minimal Base Image"
+  ]
+}

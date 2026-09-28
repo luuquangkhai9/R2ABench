@@ -1,0 +1,73 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::HypnoLog\\nServer"
+      ],
+      "predicted_nodes": [
+        "Global::HypnoLog Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the core HypnoLog server component. The naming differs only in formatting, and the Global boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::In Browser Log"
+      ],
+      "predicted_nodes": [
+        "Global::Browser Client",
+        "Global::Converts invalid messages",
+        "Global::Dispatches to windows",
+        "Global::Implements canDisplay",
+        "Global::Implements display",
+        "Global::Loaded from configuration",
+        "Global::Stores received data",
+        "Global::Validates received messages",
+        "Global::Visualizer",
+        "Global::Window"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents browser-side logging/display behavior, and the predicted nodes split that behavior into its browser client subcomponents and related UI/rendering responsibilities. The boundary remains semantically consistent as browser-side."
+    },
+    {
+      "gt_nodes": [
+        "Global::HTTP"
+      ],
+      "predicted_nodes": [
+        "Global::Logging Producer",
+        "Global::Mounts routes under /logger",
+        "Global::Parses JSON bodies",
+        "Global::Serves static files from public/",
+        "Global::Socket.IO",
+        "Global::js/Express application",
+        "Global::time communication"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT HTTP node corresponds to the server/client HTTP and related communication stack. The predicted nodes decompose that into HTTP producers, Express routing, body parsing, static serving, and Socket.IO transport. These are architecturally consistent with the same communication/server boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::C#"
+      ],
+      "predicted_nodes": [
+        "Global::Node"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "There is no semantic equivalence. GT 'C#' appears to represent a language/runtime context unrelated to the actual Node.js/Express architecture, while the predicted node is the correct Node runtime. This is not a valid match."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::C#",
+    "Global::Python"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::",
+    "Global::Real",
+    "Global::Node",
+    "Global::time communication"
+  ]
+}

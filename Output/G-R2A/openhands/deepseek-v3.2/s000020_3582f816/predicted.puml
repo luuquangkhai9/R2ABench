@@ -1,0 +1,176 @@
+@startuml
+
+!define LIGHTBLUE #ADD8E6
+!define LIGHTGREEN #90EE90
+!define LIGHTYELLOW #FFFACD
+!define LIGHTORANGE #FFDAB9
+!define LIGHTPURPLE #E6E6FA
+
+title MyEMS System Architecture
+
+skinparam component {
+  BackgroundColor LIGHTBLUE
+  BorderColor #666666
+  ArrowColor #666666
+  FontColor #333333
+}
+
+skinparam node {
+  BackgroundColor LIGHTGREEN
+  BorderColor #666666
+  FontColor #333333
+}
+
+skinparam database {
+  BackgroundColor LIGHTYELLOW
+  BorderColor #666666
+  FontColor #333333
+}
+
+skinparam cloud {
+  BackgroundColor LIGHTPURPLE
+  BorderColor #666666
+  FontColor #333333
+}
+
+' ==== MAIN COMPONENTS ====
+component "MyEMS Admin Application" as admin {
+  component "Browser Environment" as browser
+  component "Routing Configuration" as routing
+  component "Lazy-Loaded Modules" as lazy_modules
+  component "API Base Path Resolver" as api_resolver
+  
+  browser --> routing : "Navigates to routes"
+  routing --> lazy_modules : "Loads on demand"
+  routing --> api_resolver : "Computes API path"
+}
+
+component "REST API Service" as api_service {
+  component "Python Runtime" as python_runtime
+  component "RESTful Endpoints" as endpoints
+  component "Dependency Manager" as deps
+  
+  python_runtime --> endpoints : "Hosts"
+  deps --> python_runtime : "Provides packages"
+}
+
+database "MySQL Database" as mysql_db {
+  component "Persistent Storage" as storage
+  component "API Data" as api_data
+}
+
+' ==== EXTERNAL SYSTEMS ====
+cloud "MyEMS Components" as myems_components
+cloud "Third-Party Applications" as third_party
+
+' ==== DEPLOYMENT INFRASTRUCTURE ====
+node "Reverse Proxy (Optional)" as reverse_proxy {
+  component "Nginx" as nginx
+  component "/api/ Routing" as api_routing
+}
+
+node "Development Environment" as dev_env {
+  component "Linux Quick-Run" as linux_run
+  component "Windows Quick-Run" as windows_run
+}
+
+node "Docker Environment" as docker_env {
+  component "Container Runtime" as container
+  component "Docker Installation" as docker_install
+}
+
+' ==== CONNECTIONS AND RELATIONSHIPS ====
+
+' Admin to API communication
+api_resolver --> api_service : "HTTP/HTTPS requests\nvia /api/ path"
+api_resolver --> reverse_proxy : "May route through\nreverse proxy"
+
+' Reverse proxy to API
+reverse_proxy --> api_service : "Forwards /api/ traffic"
+
+' External systems to API
+myems_components --> api_service : "RESTful API calls"
+third_party --> api_service : "Integration requests"
+
+' API to database
+api_service --> mysql_db : "Persistent data storage\nwhen MySQL features enabled"
+
+' Development environments
+dev_env --> api_service : "Development execution"
+linux_run --> api_service : "Linux quick-run"
+windows_run --> api_service : "Windows quick-run"
+
+' Docker deployment
+docker_env --> api_service : "Containerized installation"
+docker_install --> api_service : "Setup and preparation"
+
+' ==== DETAILED ADMIN ROUTES ====
+component "Admin Routes" as admin_routes {
+  component "/user route" as user_route [
+    User Settings
+    --
+    Title: MENU.USERSETTING.USER
+    Modules: User services/controllers
+  ]
+  
+  component "/contact route" as contact_route [
+    Contact Settings  
+    --
+    Title: MENU.SETTINGS.CONTACT
+    Modules: Contact settings
+  ]
+  
+  component "Tariff Settings" as tariff_route [
+    Tariff Workflows
+    --
+    Where configured
+  ]
+  
+  component "Category Settings" as category_route [
+    Category Workflows
+    --
+    Where configured
+  ]
+}
+
+routing --> admin_routes : "Defines and manages"
+admin_routes --> lazy_modules : "Requires specific modules"
+
+' ==== API DEPENDENCIES ====
+component "API Dependencies" as api_deps [
+  REST framework
+  CORS support
+  WSGI execution
+  Spreadsheet handling
+  Image processing
+  MySQL connector
+]
+
+deps --> api_deps : "Manages"
+api_deps --> python_runtime : "Required for operation"
+
+' ==== NOTES AND CONSTRAINTS ====
+note top of admin
+  • Lazy-loads route-specific modules
+  • Calculates API path from browser origin
+  • Uses localization keys for route titles
+end note
+
+note right of api_service
+  • Python environment required
+  • Development quick-run modes
+  • Docker-based installation support
+end note
+
+note right of mysql_db
+  • Required for MySQL-backed API features
+  • Compatible configuration needed
+end note
+
+note bottom of reverse_proxy
+  • Optional deployment component
+  • Avoids cross-origin restrictions
+  • Routes /api/ traffic to API service
+end note
+
+@enduml

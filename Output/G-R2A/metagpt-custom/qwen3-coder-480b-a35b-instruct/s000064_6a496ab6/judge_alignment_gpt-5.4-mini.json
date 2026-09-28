@@ -1,0 +1,253 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Backend::BFF / API Gateway::Admin Console Gateway"
+      ],
+      "predicted_nodes": [
+        "Client Access Layer::Gateway/BFF",
+        "Global::Gateway/BFF"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the client-facing gateway/BFF layer used for administrative access. The AI split the concept into a generic gateway node plus a global duplicate, but the architectural boundary is still semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Backend::BFF / API Gateway::Native App Gateway"
+      ],
+      "predicted_nodes": [
+        "Client Access Layer::Gateway/BFF",
+        "Global::Gateway/BFF"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the client-facing gateway/BFF layer for native app access. The AI used a generalized gateway node and a duplicate global node, which is semantically equivalent and not a boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Database::NoSQL\n(Firestore"
+      ],
+      "predicted_nodes": [
+        "GCP Infrastructure::Data Layer::NoSQL Storage",
+        "GCP Infrastructure::Data Layer::NoSQL Storage::Message Store"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT NoSQL/Firestore store is represented by a broader NoSQL storage node and a more specific message store. This is a reasonable split and the data/storage boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Database::RDB\n(MySQL"
+      ],
+      "predicted_nodes": [
+        "GCP Infrastructure::Data Layer::MySQL Data Stores",
+        "GCP Infrastructure::Data Layer::MySQL Data Stores::Book DB",
+        "GCP Infrastructure::Data Layer::MySQL Data Stores::EC Site DB",
+        "GCP Infrastructure::Data Layer::MySQL Data Stores::User DB"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT MySQL database is split into domain-specific MySQL stores, which is consistent with the requirement set. The boundary attribution to data layer / infrastructure is correct."
+    },
+    {
+      "gt_nodes": [
+        "Backend::External APIs::Email Sending\n(SendGrid"
+      ],
+      "predicted_nodes": [
+        "External Systems::Email Notification Provider"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "SendGrid email sending and an email notification provider are semantically equivalent external integrations. The external systems boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Backend::External APIs::Firebase\nAuthentication"
+      ],
+      "predicted_nodes": [
+        "External Systems::Firebase Authentication"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is the same external authentication dependency. The boundary is correctly placed under external systems."
+    },
+    {
+      "gt_nodes": [
+        "Backend::External APIs::Google Books API"
+      ],
+      "predicted_nodes": [
+        "External Systems::Book Search API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT uses Google Books API as the concrete provider, while the prediction uses the generic book search API described in the PRD. This is semantically equivalent and the boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Backend::External APIs::Push Notification\n(FCM"
+      ],
+      "predicted_nodes": [
+        "External Systems::Push Notification Provider"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "FCM is a push notification provider, so the functionality matches. External systems boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Backend::External APIs::Stripe"
+      ],
+      "predicted_nodes": [
+        "External Systems::Stripe"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact semantic match for the payment integration, with correct external systems placement."
+    },
+    {
+      "gt_nodes": [
+        "Backend::File Storage::NAS\n(Cloud Storage"
+      ],
+      "predicted_nodes": [
+        "GCP Infrastructure::Data Layer::Object Storage",
+        "GCP Infrastructure::Data Layer::Object Storage::Thumbnail Store"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT file storage node corresponds to object storage for thumbnails/assets. The AI split it into object storage and a thumbnail store, which is semantically aligned and in the correct infrastructure/data boundary."
+    },
+    {
+      "gt_nodes": [
+        "Backend::L7 Load Balancer"
+      ],
+      "predicted_nodes": [
+        "GCP Infrastructure::Load Balancer",
+        "GCP Infrastructure::Load Balancer::Global Load Balancer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT L7 load balancer is represented by a load balancer node with a more specific global load balancer child. This is a valid infrastructure-layer refinement."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Admin Service"
+      ],
+      "predicted_nodes": [
+        "Global::Administrative Web Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a backend microservice, while the prediction maps it to a frontend administrative web application, which is a severe boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Auth API"
+      ],
+      "predicted_nodes": [
+        "GCP Infrastructure::GKE Cluster::API Layer::Authentication API",
+        "Global::Authentication API"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the authentication backend API. The AI duplicated it at global and cluster/API layers, but the functional component is equivalent and still within a backend/API boundary."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Book Service"
+      ],
+      "predicted_nodes": [
+        "GCP Infrastructure::GKE Cluster::API Layer::Book Management API",
+        "Global::Book Management API"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The book service and book management API are semantically the same backend capability. The boundary is acceptable despite duplication."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Notification Service"
+      ],
+      "predicted_nodes": [
+        "External Systems::Email Notification Provider",
+        "External Systems::Push Notification Provider"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT notification service appears to be an internal backend service, while the prediction splits it into external providers only. This loses the internal service boundary and confuses service responsibility with integrations."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Store Service"
+      ],
+      "predicted_nodes": [
+        "GCP Infrastructure::GKE Cluster::API Layer::EC Site API",
+        "Global::EC Site API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Store service corresponds to the EC site API in the PRD context. Although the names differ, the functional role matches and the backend API boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Support Service"
+      ],
+      "predicted_nodes": [
+        "GCP Infrastructure::GKE Cluster::API Layer::Support API",
+        "Global::Support API"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The support service maps directly to the support API. The duplication across cluster and global nodes is acceptable and the backend boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::User Service"
+      ],
+      "predicted_nodes": [
+        "GCP Infrastructure::GKE Cluster::API Layer::User Management API",
+        "Global::User Management API"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "User service and user management API are semantically equivalent. The boundary remains correct within the backend/API layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::Native App"
+      ],
+      "predicted_nodes": [
+        "Client Access Layer::Native Mobile Application",
+        "Global::Native Mobile Application"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The native app is correctly recognized as a client-side application. The AI used a more explicit mobile application naming, which is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Web Admin App"
+      ],
+      "predicted_nodes": [
+        "Client Access Layer::Administrative Web Application",
+        "Global::Administrative Web Application"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The web admin app and administrative web application are the same frontend concept. The client access boundary is appropriate."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "GCP Infrastructure::GKE Cluster",
+    "GCP Infrastructure::Virtual Machine Operations",
+    "GCP Infrastructure::Virtual Machine Operations::GCE VM - Operations",
+    "GCP Infrastructure::Virtual Machine Operations::TLS Certificate Manager",
+    "Global::Client Access Layer",
+    "Global::External Systems",
+    "Global::GCE VM - Operations",
+    "Global::GCP Infrastructure",
+    "Global::Global Load Balancer",
+    "Global::TLS Certificate Manager"
+  ]
+}

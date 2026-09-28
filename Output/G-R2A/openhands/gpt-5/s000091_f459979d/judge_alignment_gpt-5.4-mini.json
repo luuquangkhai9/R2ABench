@@ -1,0 +1,83 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Blockchain Network\\nEthereum / Web3j"
+      ],
+      "predicted_nodes": [
+        "Global::Ethereum-Compatible Node\\n(Web3j HTTP",
+        "Blockchain Integration::Web3j Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents the blockchain/network connectivity stack, which is split in the prediction into the Ethereum-compatible node and the Web3j client. This is a semantically correct decomposition and the boundary placement is consistent."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::BootstrapStore\\nSmart Contract"
+      ],
+      "predicted_nodes": [
+        "Blockchain Integration::ClientBootstrapContract",
+        "Blockchain Integration::BlockchainService\\n- getAllClientSecurity()\\n- addClient()\\n- getClientByEndpoint"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT smart contract node corresponds to the contract plus its service wrapper operations. The prediction splits the functionality into the contract and a higher-level blockchain service, which is acceptable and boundary-consistent."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Secure API\\nAuthenticated HTTP endpoints"
+      ],
+      "predicted_nodes": [
+        "Management API (Spring::UserController\\n- GET /users\\n- POST /add",
+        "Management API (Spring::JwtUtility\\nisValidToken(auth,1"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT secure API is represented by the protected Spring controller endpoints and the JWT validation utility. This is a correct functional split within the management API boundary."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Server\\nLeshan server component"
+      ],
+      "predicted_nodes": [
+        "Global::LwM2M Service Component",
+        "LwM2M Handling::Leshan/LwM2M Model Types",
+        "LwM2M Handling::LwM2MNodeParser\\n(JSON -> typed nodes"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Leshan/LwM2M server component is captured by the LwM2M service, model types, and node parser. The prediction decomposes the server-side LwM2M handling appropriately without crossing into an incorrect domain."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::External Applications\\nusing LwM2M"
+      ],
+      "predicted_nodes": [
+        "Global::LwM2M Service Component"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the external LwM2M-consuming application/service side. The names differ, but the functional role is equivalent and the boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Management Web UI"
+      ],
+      "predicted_nodes": [
+        "Global::Authenticated API Client\\n(HTTP + Authorization"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a management web UI, while the predicted node is an authenticated API client. Although both are actors interacting with the system, the predicted node is not the same architectural element and does not preserve the UI boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "LwM2M Blockchain Platform::LwM2M Client\\nDevice 1",
+    "LwM2M Blockchain Platform::LwM2M Client\\nDevice 2"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Backend Integration Service",
+    "Management API (Spring::UserService"
+  ]
+}

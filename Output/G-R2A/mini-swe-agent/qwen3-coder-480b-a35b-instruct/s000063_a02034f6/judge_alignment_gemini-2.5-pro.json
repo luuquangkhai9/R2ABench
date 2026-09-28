@@ -1,0 +1,118 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Access Layer::Gateway"
+      ],
+      "predicted_nodes": [
+        "Client Access Layer::MTProto Server Interface"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the entry point or gateway handling MTProto client connections. 'Access Layer' and 'Client Access Layer' are semantically equivalent boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Auth Session"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Authorization Services"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both handle authorization keys and initial auth flows. However, the GT specifically categorizes this under the 'Access Layer', while the AI shifted it to the 'Service Layer', violating the GT's architectural separation."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Session"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Session Management"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both components manage MTProto sessions. Similar to Auth Session, the AI moved this component to the 'Service Layer', mismatching the GT's explicit placement in the 'Access Layer'."
+    },
+    {
+      "gt_nodes": [
+        "Global::BFF"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Access-Facing Services"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "BFF (Backend for Frontend) functions as the access-facing service. The GT lacked a specific boundary ('Global'), so the AI's placement into 'Service Layer' is a valid and acceptable attribution."
+    },
+    {
+      "gt_nodes": [
+        "Services::Msg"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Messaging Services"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the core messaging services. 'Services' and 'Service Layer' are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "Infrastructure & Storage::Kafka"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Kafka message broker. Moving from 'Global' to 'Infrastructure & Storage' is an accurate boundary resolution."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MinIO"
+      ],
+      "predicted_nodes": [
+        "Infrastructure & Storage::MinIO"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the MinIO object storage. 'Storages' and 'Infrastructure & Storage' are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MySQL"
+      ],
+      "predicted_nodes": [
+        "Infrastructure & Storage::MySQL"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the MySQL database. Boundary attribution is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Storages::Redis"
+      ],
+      "predicted_nodes": [
+        "Infrastructure & Storage::Redis"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Redis caching/storage component. Boundary attribution is semantically equivalent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer::Status",
+    "Clients::Android",
+    "Clients::PC",
+    "Clients::Web",
+    "Clients::iOS",
+    "Global::Push",
+    "Global::Sync",
+    "Services::DFS",
+    "Services::Services"
+  ],
+  "unmatched_predicted_nodes": [
+    "Infrastructure & Storage::etcd",
+    "Supporting Components::Media Processing (Optional"
+  ]
+}

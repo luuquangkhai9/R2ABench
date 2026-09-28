@@ -1,0 +1,75 @@
+@startuml
+
+' Define colors for layers
+!define LAYER_COLOR #E6F3FF
+!define EXTERNAL_COLOR #FFE6E6
+
+' External Systems Layer
+cloud "Ethereum Network" as ethereum {
+    database "Ethereum Blockchain" as blockchain
+}
+
+cloud "ENS" as ens {
+    component "ENS Resolver" as ens_resolver
+}
+
+cloud "Oracle/Rate Provider" as oracle {
+    interface "Rate Provider Interface" as rate_interface
+}
+
+' Smart Contract Layer
+rectangle "Smart Contract Layer" #LAYER_COLOR {
+    component "Consumer Contract Wallet" as wallet
+    component "Controller Contracts" as controller
+    component "Token Whitelist Contract" as token_whitelist
+    component "TKN Holder Contract" as tkn_holder
+    component "Oracle/Licence Components" as oracle_components
+    
+    component "Gas Tank" as gas_tank
+}
+
+' Binding/Integration Layer
+rectangle "Binding/Integration Layer" #LAYER_COLOR {
+    component "Go Bindings (Read-Only)" as go_bindings_read
+    component "Go Bindings (Paid)" as go_bindings_paid
+}
+
+' External dependencies
+wallet --> blockchain : deployed on\n& executes via
+ens_resolver --> blockchain : queries
+rate_interface --> blockchain : may query
+
+' ENS resolution for all supporting contracts
+controller --> ens_resolver : resolves via ENS
+token_whitelist --> ens_resolver : resolves via ENS
+oracle_components --> ens_resolver : resolves via ENS
+
+' Contract interactions
+wallet --> ens_resolver : resolves addresses
+wallet --> token_whitelist : checks eligibility\n& exchange rates
+wallet --> rate_interface : obtains rate data
+wallet --> tkn_holder : checks burnability
+token_whitelist --> rate_interface : records exchange rates
+controller --> wallet : controls
+
+' Controller interfaces
+controller --> go_bindings_read : adminCount\ncontrollerCount
+
+' Gas Tank separation
+gas_tank ..> wallet : funds transactions\n(separate security)
+
+' Binding generation
+wallet ..> go_bindings_read : generates
+wallet ..> go_bindings_paid : generates
+controller ..> go_bindings_read : generates
+controller ..> go_bindings_paid : generates
+token_whitelist ..> go_bindings_read : generates
+tkn_holder ..> go_bindings_read : generates
+
+' Layer ordering
+ethereum -[hidden]> ens
+ens -[hidden]> oracle
+oracle -[hidden]> "Smart Contract Layer"
+"Smart Contract Layer" -[hidden]> "Binding/Integration Layer"
+
+@enduml

@@ -1,0 +1,100 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process"
+      ],
+      "predicted_nodes": [
+        "Shared/Distributed-Memory Platform::MPI Process (Rank 0)",
+        "Shared/Distributed-Memory Platform::MPI Process (Rank 1..N-1)"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT MPI Process is correctly split by the AI into a primary process (Rank 0) and worker processes (Rank 1..N-1), reflecting the logic in the PRD. The GT boundary 'Compute node' is semantically equivalent to the AI's 'Shared/Distributed-Memory Platform'."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Worker\\nThread"
+      ],
+      "predicted_nodes": [
+        "Shared/Distributed-Memory Platform::MPI Process (Rank 0)::torc_py Runtime (Rank 0)::Worker Thread Pool",
+        "Shared/Distributed-Memory Platform::MPI Process (Rank 1..N-1)::torc_py Runtime (Other Ranks)::Worker Thread Pool"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT Worker Thread concept is correctly expanded by the AI into a 'Worker Thread Pool' component instantiated within both primary and worker MPI processes. The placement within the respective MPI process boundaries is correct."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Task Queue"
+      ],
+      "predicted_nodes": [
+        "Shared/Distributed-Memory Platform::MPI Process (Rank 0)::torc_py Runtime (Rank 0)::Worker Queues",
+        "Shared/Distributed-Memory Platform::MPI Process (Rank 1..N-1)::torc_py Runtime (Other Ranks)::Worker Queues"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's single 'Task Queue' node is correctly instantiated by the AI as 'Worker Queues' within both primary (Rank 0) and worker MPI processes, which is a more detailed and accurate representation. The boundary placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "Shared/Distributed-Memory Platform::MPI Process (Rank 0)::torc_py Runtime (Rank 0)::MPI Adapter (mpi4py)",
+        "Shared/Distributed-Memory Platform::MPI Process (Rank 1..N-1)::torc_py Runtime (Other Ranks)::MPI Adapter (mpi4py)"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's global MPI system is represented by the AI as an 'MPI Adapter' component within each process. While the GT models it as an external system ('Global'), the AI models the component that interacts with it. This is a valid modeling choice and not a boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Server\\nThread"
+      ],
+      "predicted_nodes": [
+        "Shared/Distributed-Memory Platform::MPI Process (Rank 0)::torc_py Runtime (Rank 0)::Task Scheduler & Dispatcher"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'Server Thread', responsible for control flow, functionally maps to the AI's 'Task Scheduler & Dispatcher' on the primary rank (Rank 0). The placement within the Rank 0 process is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Task Queue (in detail::...",
+    "Task Queue (in detail::A1",
+    "Task Queue (in detail::A2",
+    "Task Queue (in detail::A3",
+    "Task Queue (in detail::B1",
+    "Task Queue (in detail::B2",
+    "Task Queue (in detail::Level 0",
+    "Task Queue (in detail::Level 1",
+    "Task Queue (in detail::Level 2",
+    "Task Queue (in detail::Level 3",
+    "Task Queue (in detail::Level 4",
+    "Task Queue (in detail::Level 5"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::HDF5 Output File",
+    "Global::Shared/Distributed-Memory Platform",
+    "Optional Example Dependencies::cma",
+    "Optional Example Dependencies::h5py",
+    "Optional Example Dependencies::numpy",
+    "Optional Example Dependencies::pillow",
+    "Shared/Distributed-Memory Platform::MPI Process (Rank 0)::Python Application",
+    "Shared/Distributed-Memory Platform::MPI Process (Rank 0)::torc_py Runtime (Rank 0)::Callback Manager",
+    "Shared/Distributed-Memory Platform::MPI Process (Rank 0)::torc_py Runtime (Rank 0)::Env Config Manager",
+    "Shared/Distributed-Memory Platform::MPI Process (Rank 0)::torc_py Runtime (Rank 0)::Future Store\\n(Task Descriptors)",
+    "Shared/Distributed-Memory Platform::MPI Process (Rank 1..N-1)::torc_py Runtime (Other Ranks)::Future Store\\n(Task Descriptors)",
+    "Shared/Distributed-Memory Platform::MPI Process (Rank 0)::torc_py Runtime (Rank 0)::Map Engine",
+    "Shared/Distributed-Memory Platform::MPI Process (Rank 0)::torc_py Runtime (Rank 0)::Python API\\n- submit, wait, map, as_completed\\n- start/init/launch/shutdown\\n- spmd, enable/disable_stealing\\n- worker_id/num_workers\\n- node_id/num_nodes, gettime",
+    "Shared/Distributed-Memory Platform::MPI Process (Rank 0)::torc_py Runtime (Rank 0)::SPMD Function Execution",
+    "Shared/Distributed-Memory Platform::MPI Process (Rank 1..N-1)::torc_py Runtime (Other Ranks)::SPMD Function Execution",
+    "Shared/Distributed-Memory Platform::MPI Process (Rank 0)::torc_py Runtime (Rank 0)::SPMD Manager",
+    "Shared/Distributed-Memory Platform::MPI Process (Rank 1..N-1)::torc_py Runtime (Other Ranks)::SPMD Manager",
+    "Shared/Distributed-Memory Platform::MPI Process (Rank 0)::torc_py Runtime (Rank 0)::Stealing Manager",
+    "Shared/Distributed-Memory Platform::MPI Process (Rank 1..N-1)::torc_py Runtime (Other Ranks)::Stealing Manager",
+    "Shared/Distributed-Memory Platform::MPI Process (Rank 0)::torc_py Runtime (Rank 0)::Timing Service",
+    "Shared/Distributed-Memory Platform::MPI Process (Rank 1..N-1)::torc_py Runtime (Other Ranks)::Task Scheduler & Dispatcher"
+  ]
+}

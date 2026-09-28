@@ -1,0 +1,151 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Event Bus"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Event Bus",
+        "Application Layer::Event Bus::Event Consumers",
+        "Application Layer::Event Bus::Location Event Publisher"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT event bus is split into a shared event bus plus publisher/consumer subnodes. The architectural boundary is consistent with an application-layer event distribution mechanism."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Location Capture::Google Play Services\\nLocation Provider",
+        "GPSLogger Android Application::Location Capture::Location Listeners"
+      ],
+      "predicted_nodes": [
+        "Application Layer::GPS Logging Service",
+        "Application Layer::GPS Logging Service::Location Listener",
+        "Application Layer::GPS Logging Service::Location Processor",
+        "External Systems::Android Platform::GPS Hardware",
+        "External Systems::Android Platform::Google Play Services"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT location capture concerns are represented by the GPS logging service, its listeners/processor, and the external GPS/Google Play Services dependencies. The placement is semantically aligned and not a severe boundary error."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::CSV / URL Loggers",
+        "GPSLogger Android Application::Logging::GPX Logger",
+        "GPSLogger Android Application::Logging::KML Logger",
+        "GPSLogger Android Application::Logging::Loggers"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Loggers",
+        "Business Logic Layer::Loggers::GPX Logger",
+        "Business Logic Layer::Loggers::KML Logger",
+        "Business Logic Layer::Loggers::Text File Logger",
+        "Data Layer::Local Storage::GPX Files",
+        "Data Layer::Local Storage::KML Files",
+        "Data Layer::Local Storage::Text Log Files"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT logger group is decomposed into concrete logger implementations and storage targets. The business-logic placement for loggers is appropriate, and the local storage nodes are consistent with output file persistence."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::NMEA / GPRMC Encoder"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Data Encoders",
+        "Business Logic Layer::Data Encoders::GPRMC Encoder",
+        "Business Logic Layer::Data Encoders::SerializableLocation Converter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT encoder is split into a GPRMC encoder and a SerializableLocation conversion component. This remains within a semantically correct business-logic/data-encoding boundary."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Upload::Upload Jobs",
+        "GPSLogger Android Application::Upload::Uploaders"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Uploaders",
+        "Business Logic Layer::Uploaders::Dropbox Uploader",
+        "Business Logic Layer::Uploaders::OpenGTS Uploader",
+        "Business Logic Layer::Uploaders::OpenStreetMap Uploader"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT upload infrastructure is represented by uploader components and specific external-service uploaders. The business-logic boundary is acceptable for these workflow/integration nodes."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::User Interface::Detailed View",
+        "GPSLogger Android Application::User Interface::Main Activity",
+        "GPSLogger Android Application::User Interface::Other Fragments",
+        "GPSLogger Android Application::User Interface::Simple View"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Main Activity/Fragments",
+        "Presentation Layer::Main Activity/Fragments::Settings UI",
+        "Presentation Layer::Main Activity/Fragments::UI Fragments"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT UI nodes are consolidated under a presentation-layer activity/fragments structure. Although simplified, the boundary attribution is correct for user-facing screens and fragments."
+    },
+    {
+      "gt_nodes": [
+        "Global::Dropbox"
+      ],
+      "predicted_nodes": [
+        "External Systems::Dropbox API",
+        "External Systems::Dropbox API::Dropbox Service",
+        "Business Logic Layer::Uploaders::Dropbox Uploader"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT external Dropbox integration maps to the Dropbox API/service and related uploader. External-system placement is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenGTS Endpoint\\nUDP server"
+      ],
+      "predicted_nodes": [
+        "External Systems::OpenGTS Server",
+        "External Systems::OpenGTS Server::UDP Endpoint",
+        "Business Logic Layer::Uploaders::OpenGTS Uploader"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT OpenGTS UDP server endpoint is captured by the OpenGTS server/UDP endpoint nodes and the uploader that sends to it. The external-systems boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenStreetMap"
+      ],
+      "predicted_nodes": [
+        "External Systems::OpenStreetMap API",
+        "External Systems::OpenStreetMap API::OSM Service",
+        "Business Logic Layer::Uploaders::OpenStreetMap Uploader"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT OpenStreetMap integration is represented by the OpenStreetMap API/service and uploader. Boundary attribution is consistent with an external integration."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Data Layer::Application Settings",
+    "Data Layer::Application Settings::Service Configurations",
+    "Data Layer::Application Settings::User Preferences",
+    "Data Layer::Configuration Manager",
+    "Data Layer::Configuration Manager::Build Configuration",
+    "Data Layer::Configuration Manager::Gradle Properties Parser",
+    "Development Environment::Android SDK",
+    "Development Environment::Android SDK::Build Tools 19.0.3",
+    "Development Environment::Android SDK::Support Libraries",
+    "Development Environment::Build System",
+    "Development Environment::Build System::Gradle Properties",
+    "Development Environment::Build System::local.properties"
+  ]
+}

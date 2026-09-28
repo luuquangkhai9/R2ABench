@@ -1,0 +1,126 @@
+@startuml
+!define RECTANGLE class
+
+rectangle "Airflow Spark Docker Integration" as system {
+  actor "Data Engineer" as engineer
+  
+  rectangle "Services" as services {
+    RECTANGLE airflow [
+      Airflow Webserver
+      ----
+      + DAG Scheduler
+      + SparkSubmitOperator
+      + LocalExecutor
+      + PySpark environment
+    ]
+    
+    RECTANGLE postgres [
+      Postgres
+      ----
+      + Metadata Storage
+      + Port: 5432
+    ]
+    
+    RECTANGLE spark_master [
+      Spark Master
+      ----
+      + Cluster Manager
+      + Port: 7077 (cluster)
+      + Port: 8181 (UI)
+    ]
+    
+    rectangle "Spark Workers" as workers {
+      RECTANGLE spark_worker1 [
+        Spark Worker 1
+      ]
+      
+      RECTANGLE spark_worker2 [
+        Spark Worker 2
+      ]
+      
+      RECTANGLE spark_worker3 [
+        Spark Worker 3
+      ]
+    }
+    
+    RECTANGLE jupyter [
+      Jupyter/PySpark
+      ----
+      + Interactive Notebooks
+      + Port: 8888 (Notebook)
+      + Ports: 4040-4080 (App UI)
+    ]
+  }
+  
+  rectangle "Shared Resources" as shared {
+    folder DAGs [
+      DAG Files
+    ]
+    
+    folder apps [
+      Spark Applications
+    ]
+    
+    folder notebooks [
+      Notebook Files
+    ]
+    
+    folder data [
+      Input Data Files
+    ]
+  }
+}
+
+engineer --> airflow : Access UI (8282)
+engineer --> jupyter : Access UI (8888)
+engineer --> spark_master : Monitor Jobs (8181)
+
+airflow --> postgres : Store Metadata
+airflow --> spark_master : Submit Jobs (spark://spark:7077)
+spark_master --> spark_worker1 : Coordinate Work
+spark_master --> spark_worker2 : Coordinate Work
+spark_master --> spark_worker3 : Coordinate Work
+
+airflow ..> DAGs : Load DAGs
+airflow ..> apps : Submit Apps
+airflow ..> data : Access Data
+
+jupyter ..> notebooks : Load/Edit Notebooks
+jupyter ..> apps : Access Apps
+jupyter ..> data : Access Data
+
+spark_worker1 ..> apps : Execute Apps
+spark_worker1 ..> data : Process Data
+
+spark_worker2 ..> apps : Execute Apps
+spark_worker2 ..> data : Process Data
+
+spark_worker3 ..> apps : Execute Apps
+spark_worker3 ..> data : Process Data
+
+note right of airflow
+  Image: docker-airflow-spark:latest
+  Depends on: Postgres
+end note
+
+note right of spark_master
+  Image: bitnami/spark:latest
+  Mode: master
+end note
+
+note right of spark_worker1
+  Image: bitnami/spark:latest
+  Mode: worker
+  Connects to: spark://spark:7077
+end note
+
+note right of jupyter
+  Image: jupyter/pyspark-notebook
+end note
+
+note bottom of shared
+  Shared mounted directories
+  accessible by relevant containers
+end note
+
+@enduml

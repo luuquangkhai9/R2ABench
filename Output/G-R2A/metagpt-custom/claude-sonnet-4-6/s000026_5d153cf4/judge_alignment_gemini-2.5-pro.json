@@ -1,0 +1,66 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Orchestration Layer::Deployment\\n[adapter pods",
+        "Kubernetes Orchestration Layer::LoadBalancer Service\\n[TCP :80 → :8080",
+        "Kubernetes Orchestration Layer::HorizontalPodAutoscaler\\n[min:1, max:2, CPU:80%"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's single 'Compute Engine' node is a vague, physical-layer representation of the runtime environment. The AI correctly expands this into the specific logical Kubernetes objects (Deployment, Service, HPA) that define the runtime, as detailed in the PRD. The AI's 'Kubernetes Orchestration Layer' is a more accurate and semantically correct boundary than the GT's 'Compute Engine'."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine::pulltop"
+      ],
+      "predicted_nodes": [
+        "Container Runtime Layer\\n(Adapter Pod::pulltop\\n[Node.js Process"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are functionally identical. The AI's boundary 'Container Runtime Layer\\n(Adapter Pod' is more specific and accurate for a containerized process than the GT's '...::Compute Engine'."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine::websocketd"
+      ],
+      "predicted_nodes": [
+        "Container Runtime Layer\\n(Adapter Pod::websocketd\\n[WebSocket Bridge :8080"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are functionally identical. The AI's boundary 'Container Runtime Layer\\n(Adapter Pod' is more specific and accurate for a containerized process than the GT's '...::Compute Engine'."
+    },
+    {
+      "gt_nodes": [
+        "pubsub-public-data project::Cloud Pub/Sub\\ntopic"
+      ],
+      "predicted_nodes": [
+        "GCP Infrastructure Layer\\n(Google Cloud Platform Project::Google Cloud Pub/Sub::Pub/Sub Topic\\n[configured topic",
+        "GCP Infrastructure Layer\\n(Google Cloud Platform Project::Google Cloud Pub/Sub::Pub/Sub Subscription\\n(per adapter instance"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's single 'topic' node is a high-level representation of the Pub/Sub interaction. The AI correctly decomposes this into both the 'Pub/Sub Topic' being read and the 'Pub/Sub Subscription' created per instance, as detailed in FR-007. The boundaries are semantically equivalent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Browser"
+  ],
+  "unmatched_predicted_nodes": [
+    "Container Runtime Layer\\n(Adapter Pod::Message Cache\\n[last 10 messages",
+    "Container Runtime Layer\\n(Adapter Pod::SYMBOL\\nEnv Variable\\n[SI-004 / FR-004 / DR-002",
+    "Container Runtime Layer\\n(Adapter Pod::exec.sh\\n[Entrypoint Script",
+    "GCP Infrastructure Layer\\n(Google Cloud Platform Project::Google Cloud Pub/Sub",
+    "GCP Infrastructure Layer\\n(Google Cloud Platform Project::IAM & Billing",
+    "GCP Infrastructure Layer\\n(Google Cloud Platform Project::IAM & Billing::Subscription Creation\\nPermission\\n[FR-010 / CON-003",
+    "GCP Infrastructure Layer\\n(Google Cloud Platform Project::IAM & Billing::Topic Read-Access\\nPermission\\n[CON-002 / FR-010",
+    "Global::GCP Infrastructure Layer\\n(Google Cloud Platform Project",
+    "Kubernetes Orchestration Layer::ConfigMap\\n[topic key → SYMBOL",
+    "Kubernetes Orchestration Layer::WebSocket Endpoint\\n[ws://<LB-IP>:80"
+  ]
+}

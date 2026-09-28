@@ -1,0 +1,121 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Result"
+      ],
+      "predicted_nodes": [
+        "Data & IO Layer::Result Model"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the core allocation result object returned by the system. The GT is global while the prediction places it in a data/model layer, which is semantically consistent for a shared result model."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tally"
+      ],
+      "predicted_nodes": [
+        "Data & IO Layer::Tally Model"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the tally data model used as primary input for allocation. The predicted data/model boundary is compatible with the GT global node."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::Parameters"
+      ],
+      "predicted_nodes": [
+        "Data & IO Layer::Processor Configuration\n(Properties"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to configuration parameters/properties used to control allocation processing. The predicted node groups processor configuration and properties in a data/IO layer, which is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::ResultDecorators"
+      ],
+      "predicted_nodes": [
+        "Processing Layer::Result Decorator Pipeline"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the result decoration extension point. A pipeline implementation in the processing layer is a reasonable architectural placement for the GT configuration node."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::Seat Allocation\nMethod"
+      ],
+      "predicted_nodes": [
+        "Processing Layer::Allocation Methods\n(Contract + Implementations"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the allocation method contract and its implementations. The predicted processing-layer placement is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::TallyFilters"
+      ],
+      "predicted_nodes": [
+        "Processing Layer::Tally Filter Pipeline"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent pre-allocation tally filtering. The predicted processing pipeline matches the GT configuration concern."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::TieBreaker"
+      ],
+      "predicted_nodes": [
+        "Processing Layer::Tie-breaking Rules"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to tie-breaking rules used during allocation. The predicted processing layer is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Processor::Decorate"
+      ],
+      "predicted_nodes": [
+        "Processing Layer::Result Decorator Pipeline"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both correspond to the decoration step after allocation. The predicted node accurately reflects the processor decorate responsibility."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Processor::Filter"
+      ],
+      "predicted_nodes": [
+        "Processing Layer::Tally Filter Pipeline"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both correspond to the filtering step before allocation. The architectural layer is correct."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Processor::Process"
+      ],
+      "predicted_nodes": [
+        "Processing Layer::Processor Orchestrator\n(Filtering, Allocation, Decoration"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT processor process node is the orchestrator of filtering, allocation, and decoration. The predicted orchestrator node matches this function and is correctly placed."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Data & IO Layer::XML IO (Tally.fromXML,\nConfig/Result IO",
+    "Global::File System",
+    "Interface Layer::CLI Launcher",
+    "Interface Layer::Java Allocation API"
+  ]
+}

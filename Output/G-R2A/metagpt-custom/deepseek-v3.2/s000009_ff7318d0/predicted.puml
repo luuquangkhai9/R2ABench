@@ -1,0 +1,64 @@
+@startuml
+left to right direction
+
+' Infrastructure Layer (AWS Cloud Services)
+cloud "AWS Cloud" {
+  component "Cognito/IAM" as cognito
+  component "S3" as s3
+  component "Lambda" as lambda
+  component "SageMaker" as sagemaker
+  component "SQS" as sqs
+  component "SNS" as sns
+  component "EC2" as ec2
+  component "API Gateway\n(execute-api)\nAWS SigV4" as api_gateway
+}
+
+' Data Layer
+component "DynamoDB" as dynamodb
+component "Elasticsearch" as elasticsearch
+component "Apache Kafka\nStreaming Pipeline" as kafka_pipeline
+component "Apache Avro" as avro
+
+' Application Services
+component "Backend Services\n(Python/Node.js)" as backend_services
+component "Chatbot Handler" as chatbot_handler
+component "Prediction Service" as prediction_service
+component "Notification Service" as notification_service
+
+' Presentation Layer
+component "Web Frontend\n(HTML/CSS/Bootstrap/jQuery)" as web_frontend
+
+' Dependencies and Data Flows
+web_frontend --> api_gateway : "HTTP requests"
+api_gateway --> cognito : "Authentication"
+api_gateway --> backend_services : "Routes requests"
+api_gateway --> chatbot_handler : "Routes chatbot requests"
+api_gateway --> prediction_service : "Routes prediction requests"
+api_gateway --> notification_service : "Routes notification requests"
+
+backend_services --> dynamodb : "Stores/retrieves data"
+backend_services --> elasticsearch : "Searches match data"
+backend_services --> prediction_service : "Gets predictions"
+backend_services --> notification_service : "Queues reminders"
+
+chatbot_handler --> backend_services : "Fetches football info"
+
+prediction_service --> sagemaker : "ML inference"
+
+notification_service --> sqs : "Queues reminders"
+sqs --> sns : "Publishes notifications"
+sns --> : "Sends SMS"
+
+kafka_pipeline --> avro : "Uses for encoding"
+dynamodb --> kafka_pipeline : "Live score updates"
+elasticsearch --> kafka_pipeline : "Live score updates"
+ec2 --> kafka_pipeline : "Hosts pipeline"
+
+' Infrastructure dependencies
+web_frontend --> s3 : "Static hosting"
+backend_services ..> lambda : "implemented by"
+chatbot_handler ..> lambda : "implemented by"
+prediction_service ..> lambda : "implemented by"
+notification_service ..> lambda : "implemented by"
+
+@enduml

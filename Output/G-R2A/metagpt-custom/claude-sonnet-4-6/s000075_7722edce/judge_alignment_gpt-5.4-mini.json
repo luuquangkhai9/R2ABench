@@ -1,0 +1,110 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Statlord::Browser Editor\nLayout authoring"
+      ],
+      "predicted_nodes": [
+        "Container Runtime\n(Docker / Python 3.7 base::Client / Editor Layer::EditorSPA\n(TypeScript / React SPA"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the browser-based editor used for layout authoring. The predicted node places it in the client/editor layer, which is semantically consistent with the GT Browser Editor boundary."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Displays\nOLED, e-paper, LCD, browser"
+      ],
+      "predicted_nodes": [
+        "External Systems::API Clients",
+        "External Systems::HeadlessBrowser\n(automated rendering",
+        "External Systems::Human User\n(Browser"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a product-facing display target/domain concept. The predicted nodes instead model external actors/clients and a browser agent, which is a boundary confusion rather than an equivalent decomposition of the displays concept."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Display Resource\nresolution and state"
+      ],
+      "predicted_nodes": [
+        "Container Runtime\n(Docker / Python 3.7 base::Server / API Layer::REST API Resources::DisplayAPI\n(key, available, resolution,\\ncurrent_layout, display_data,\\nrotation"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is the same server-side display resource. The predicted node correctly places it under the server/API resource boundary, matching the GT server display resource concept."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Gauge Resource\nkey, value"
+      ],
+      "predicted_nodes": [
+        "Container Runtime\n(Docker / Python 3.7 base::Server / API Layer::REST API Resources::GaugeAPI\n(key, value"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The gauge resource matches exactly in meaning and fields, and it is placed correctly in the server/API resource boundary."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Layout Resource\ndata and display positions"
+      ],
+      "predicted_nodes": [
+        "Container Runtime\n(Docker / Python 3.7 base::Server / API Layer::REST API Resources::LayoutAPI\n(key, data, display_positions"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The layout resource is semantically equivalent and the server/API resource boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::PostgreSQL\npersistent models"
+      ],
+      "predicted_nodes": [
+        "Container Runtime\n(Docker / Python 3.7 base::Persistence Layer::PostgreSQLDatabase\n(Gauge | Display | Layout)\n<<database>>"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the persistent PostgreSQL storage for the system models. The predicted persistence/database layer attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Python / Django API"
+      ],
+      "predicted_nodes": [
+        "Container Runtime\n(Docker / Python 3.7 base::Server / API Layer::DjangoServer\n(manage.py runserver"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node accurately represents the Django server/API component described by the GT node, and the server/API boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Viewer Instances\nheadless browsers"
+      ],
+      "predicted_nodes": [
+        "Container Runtime\n(Docker / Python 3.7 base::Viewer / Rendering Layer::ViewerRenderer\n(B&W pixel output\nat display resolution"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the viewer/rendering path for display output. The predicted rendering layer is a reasonable equivalent of the headless-browser viewer instances."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Build Toolchain\n(Node.js / npm)\\n[image-build-time only::npm install + npm run build\\n→ produces /static/ assets",
+    "Container Image\n(baked static assets::Built SPA Assets\\n(HTML / JS / CSS",
+    "Container Runtime\n(Docker / Python 3.7 base::Client / Editor Layer::Redux Store::ControlsSlice",
+    "Container Runtime\n(Docker / Python 3.7 base::Client / Editor Layer::Redux Store::DisplaysSlice\\n(key, available, resolution_x,\\nresolution_y, display_data,\\nrotation",
+    "Container Runtime\n(Docker / Python 3.7 base::Client / Editor Layer::Redux Store::ElementsSlice",
+    "Container Runtime\n(Docker / Python 3.7 base::Client / Editor Layer::Redux Store::GaugesSlice",
+    "Container Runtime\n(Docker / Python 3.7 base::Client / Editor Layer::Redux Store::LayoutsSlice",
+    "Container Runtime\n(Docker / Python 3.7 base::Client / Editor Layer::ReduxMiddleware\\n(thunks / HTTP dispatch",
+    "Container Runtime\n(Docker / Python 3.7 base::Server / API Layer::StaticAssetHost\\n(Django static file serving\\ncapability",
+    "Global::Build Toolchain\n(Node.js / npm)\\n[image-build-time only",
+    "Global::Container Image\n(baked static assets",
+    "Global::Container Runtime\n(Docker / Python 3.7 base",
+    "Global::External Systems"
+  ]
+}

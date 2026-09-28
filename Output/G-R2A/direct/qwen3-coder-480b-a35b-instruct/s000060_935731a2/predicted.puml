@@ -1,0 +1,97 @@
+@startuml
+!define RECTANGLE class
+
+RECTANGLE "Integrating Application" as App {
+    + invokeAuditingAPI()
+}
+
+RECTANGLE "Auditor Library (Kotlin/JVM)" as Auditor {
+    + accept(oldObject, newObject, config)
+    + generateAuditEvent()
+    + applyConfiguration()
+    + filterElements()
+    + publishEvent()
+}
+
+RECTANGLE "AuditorEventConfig" as Config {
+    + applicationName
+    + eventSource
+    + eventSubType
+    + metadata
+    + filters
+}
+
+RECTANGLE "AuditEvent" as Event {
+    + eventType (CREATED/UPDATED/DELETED)
+    + elements[]
+    + metadata
+}
+
+RECTANGLE "EventPublisher" as Publisher <<Interface>> {
+    + publish(event: AuditEvent)
+}
+
+RECTANGLE "LogProvider" as Logger <<Interface>> {
+    + log(message)
+}
+
+RECTANGLE "AuditEventElementFilter" as Filter <<Interface>> {
+    + include(element): Boolean
+}
+
+RECTANGLE "KafkaEventPublisher" as KafkaPub {
+    + publishToKafka(topic, payload)
+}
+
+App --> Auditor : uses
+Auditor --> Config : accepts
+Auditor --> Event : generates
+Auditor --> Publisher : uses
+Auditor --> Logger : uses
+Auditor --> Filter : uses
+Publisher <|-- KafkaPub : implements
+KafkaPub --> Event : serializes & sends
+
+note right of Auditor
+  Core Functions:
+  - Compare object states
+  - Generate AuditEvent
+  - Apply configuration
+  - Filter elements
+  - Publish events
+end note
+
+note right of Publisher
+  Abstraction for event delivery
+  Default impl: Kafka
+end note
+
+note right of Filter
+  Element inclusion/exclusion
+  logic during audit
+end note
+
+note top of Event
+  JSON-serializable payload
+  Contains field diffs with
+  previous/updated values
+end note
+
+cloud "Kafka Cluster" {
+    rectangle "Audit Events Topic" as Topic
+}
+
+KafkaPub --> Topic : publishes events
+
+rectangle "Downstream Consumer" as Consumer {
+    + consumeAndPersist()
+}
+
+Consumer <-- Topic : consumes
+
+note right of Consumer
+  Outside SRS scope
+  Processes and stores
+  audit events
+end note
+@enduml

@@ -1,0 +1,99 @@
+@startuml
+!define RECTANGLE rectangle
+skinparam componentStyle rectangle
+skinparam linetype ortho
+skinparam nodesep 20
+skinparam ranksep минимум 50
+
+title Earth Defender - System Architecture
+
+package "Client Side" {
+  component "Browser Client" as Client [
+    Three.js Game Client
+    - Downloads static assets
+    - Connects via WebSocket
+    - Sends: [event, data] JSON
+    - Receives: [action, data?] JSON
+    - Handles reconnect & heartbeat
+  ]
+  
+  note right of Client
+    Technologies: Three.js
+    Communication: WebSocket over HTTP
+    Message Format: JSON arrays
+    Heartbeat: ping/pong every 60s
+  end note
+}
+
+package "Server Infrastructure" {
+  component "Web Server" as WebServer [
+    Static Asset Server
+    - Serves HTML, CSS, JS
+    - Accessed via DNS/Load Balancer
+  ]
+  
+  component "Game Server" as GameServer [
+    Erlang/OTP Game Server
+    - Master/Slave structure
+    - Manages multiplayer rooms
+    - Handles game state
+    - Fault-tolerant design
+  ]
+  
+  component "Replica Server" as Replica [
+    Replica Node
+    - Fault tolerance backup
+    - Master/Slave topology
+  ]
+}
+
+' Communication paths
+WebServer --> Client : "HTTP\nStatic Assets"
+Client --> GameServer : "WebSocket over HTTP\nGame Communication"
+GameServer <--> Replica : "Master/Slave\nReplication"
+
+' Data flows
+Client -[hidden]down-> WebServer
+Client -[hidden]right-> GameServer
+
+' Interfaces
+package "Interfaces" {
+  interface "Client-WebServer Interface" as CWSI
+  interface "Client-GameServer Session" as CGSI
+  interface "Server Replication Interface" as SRI
+}
+
+Client .. CWSI : "Retrieves static assets"
+CWSI .. WebServer : "Serves static assets"
+
+Client .. CGSI : "Initiates connection"
+CGSI .. GameServer : "Accepts connections"
+CGSI ..[#red] note right : "JSON arrays:\n[event, data] →\n[action, data?] ←"
+
+GameServer .. SRI : "Master/Slave sync"
+SRI .. Replica : "Fault tolerance"
+
+' Key flows
+package "Key Functional Flows" {
+  cloud "Multiplayer Room Workflow" as MRW
+  cloud "Heartbeat/Ping-Pong" as HBP
+  cloud "Reconnection Flow" as RCF
+  cloud "Server List Management" as SLM
+}
+
+MRW -[#blue]--> GameServer : "Room create/join"
+HBP -[#green]--> Client : "60s intervals"
+HBP -[#green]--> GameServer : "pong responses"
+RCF -[#orange]--> Client : "Auto-reconnect\nwith context"
+SLM -[#purple]--> GameServer : "servers_list\nservers_list_redirect"
+
+' Non-functional aspects
+note bottom of GameServer
+  **Non-Functional:**
+  - Soft real-time
+  - Fault tolerant
+  - High availability
+  - Concurrent communication
+end note
+
+@enduml

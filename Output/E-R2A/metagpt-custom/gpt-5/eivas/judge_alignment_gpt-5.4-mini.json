@@ -1,0 +1,308 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Frontend Layer (React, Antd, AMap::Case Management::Case Inquiry"
+      ],
+      "predicted_nodes": [
+        "Presentation (Web UI::Case Management UI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the case management browsing/query screen in the web frontend. The predicted node uses a more generic UI boundary, but it is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer (React, Antd, AMap::Case Management::Filtering & Sorting"
+      ],
+      "predicted_nodes": [
+        "Presentation (Web UI::Case Management UI"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Filtering and sorting are functions within the case management UI. The AI aggregated these frontend concerns into a single case management UI node, which is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer (React, Antd, AMap::Epidemic Reporting::Information Trigger"
+      ],
+      "predicted_nodes": [
+        "Presentation (Web UI::Reporting Form UI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both correspond to the epidemiological reporting form interface used for data entry."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer (React, Antd, AMap::Epidemic Reporting::Travel Visualization"
+      ],
+      "predicted_nodes": [
+        "Presentation (Web UI::Map Display UI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both are map-based visual displays for itinerary/path confirmation in the reporting workflow."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer (React, Antd, AMap::Individual Case Analysis::Associated Location Inquiry"
+      ],
+      "predicted_nodes": [
+        "Presentation (Web UI::Association List UI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to viewing associated case/location entries for an individual case analysis."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer (React, Antd, AMap::Individual Case Analysis::Person Relationship Map"
+      ],
+      "predicted_nodes": [
+        "Presentation (Web UI::Relationship Graph UI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the confirmed case relationship graph visualization."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer (React, Antd, AMap::Overall Analysis::Aggregate Transmission Viz",
+        "Frontend Layer (React, Antd, AMap::Overall Analysis::Regional Flow Viz"
+      ],
+      "predicted_nodes": [
+        "Presentation (Web UI::Statistical Charts UI"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both GT nodes are overall-analysis visualizations. The AI aggregated them into a generic statistical charts UI, which is semantically acceptable even though it is less specific."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer (Django::Data Collection & Entry::Auto-Brief Generation"
+      ],
+      "predicted_nodes": [
+        "Primary Cluster::Application/API::Web API/Controller",
+        "Backup Cluster::Application/API::Web API/Controller (Backup"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a backend service for data collection/entry assistance, but the predicted nodes are generic web API/controller nodes duplicated across primary and backup clusters. This does not preserve the intended service boundary or component identity."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer (Django::Data Collection & Entry::Fast Query Matching"
+      ],
+      "predicted_nodes": [
+        "Primary Cluster::Application/API::Case Management Service",
+        "Backup Cluster::Application/API::Case Management Service (Backup"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both relate to fast case query/matching functionality in the service layer. The AI split deployment into primary and backup instances, which is acceptable at the architecture level."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer (Django::Data Collection & Entry::Map Data Interaction"
+      ],
+      "predicted_nodes": [
+        "Global::Map / Geographic Visualization Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The functionality is related, but the GT node is a backend service for map data interaction, while the prediction elevates it to a global standalone map service, losing the service-layer boundary and causing architectural drift."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer (Django::Data Collection & Entry::Metadata Standardization"
+      ],
+      "predicted_nodes": [
+        "Primary Cluster::Application/API::Data Quality Checker",
+        "Backup Cluster::Application/API::Data Quality Checker (Backup"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "Metadata standardization is not equivalent to data quality checking. The prediction changes the component responsibility and therefore crosses the semantic boundary."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer (Django::Epidemic Tracing & Analysis::Aggregate Block Generation"
+      ],
+      "predicted_nodes": [
+        "Primary Cluster::Algorithm Module::Case Clustering Engine",
+        "Backup Cluster::Algorithm Module::Case Clustering Engine (Backup"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Aggregate block generation is functionally aligned with clustering/aggregation logic used in outbreak analysis. The algorithm-module boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer (Django::Epidemic Tracing & Analysis::Graph Matching & Generation"
+      ],
+      "predicted_nodes": [
+        "Primary Cluster::Application/API::Relationship Graph Service",
+        "Backup Cluster::Application/API::Relationship Graph Service (Backup"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe graph generation for case relationships, and the predicted service boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer (Django::Epidemic Tracing & Analysis::Location Co-presence Query"
+      ],
+      "predicted_nodes": [
+        "Primary Cluster::Application/API::Association Query Service",
+        "Backup Cluster::Application/API::Association Query Service (Backup"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Location co-presence querying matches association querying by spatial/temporal proximity."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer (Django::Epidemic Tracing & Analysis::Similarity Calculation"
+      ],
+      "predicted_nodes": [
+        "Primary Cluster::Algorithm Module::Flow Risk Calculator",
+        "Backup Cluster::Algorithm Module::Flow Risk Calculator (Backup"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "Similarity calculation is not semantically the same as flow risk calculation. This is a mismatch in function identity."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer (Django::Epidemic Tracing & Analysis::Transmission Relation Calculation"
+      ],
+      "predicted_nodes": [
+        "Primary Cluster::Application/API::Relationship Graph Service",
+        "Backup Cluster::Application/API::Relationship Graph Service (Backup"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both concern deriving and presenting transmission/relationship links among cases."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer (Django::Epidemic Tracing & Analysis::Travel Risk Calculation"
+      ],
+      "predicted_nodes": [
+        "Primary Cluster::Algorithm Module::Flow Risk Calculator",
+        "Backup Cluster::Algorithm Module::Flow Risk Calculator (Backup"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Travel risk calculation is directly equivalent to a flow/risk calculator in the algorithm module."
+    },
+    {
+      "gt_nodes": [
+        "Storage Layer (Neo4j, MongoDB::Epidemiological Database::Basic Info"
+      ],
+      "predicted_nodes": [
+        "Primary Cluster::Data Storage::Back-end Database",
+        "Backup Cluster::Data Storage::Back-end Database (Replica"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the backing database storage for case basic information. The AI split primary and backup storage, which is architecturally plausible."
+    },
+    {
+      "gt_nodes": [
+        "Storage Layer (Neo4j, MongoDB::Epidemiological Database::Diagnosis Info"
+      ],
+      "predicted_nodes": [
+        "Primary Cluster::Data Storage::Back-end Database",
+        "Backup Cluster::Data Storage::Back-end Database (Replica"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Diagnosis information is stored in the main back-end database, and the predicted storage boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Storage Layer (Neo4j, MongoDB::Epidemiological Database::Travel Info"
+      ],
+      "predicted_nodes": [
+        "Primary Cluster::Data Storage::Back-end Database",
+        "Backup Cluster::Data Storage::Back-end Database (Replica"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Travel information storage aligns with the general back-end database node."
+    },
+    {
+      "gt_nodes": [
+        "Storage Layer (Neo4j, MongoDB::External Data"
+      ],
+      "predicted_nodes": [
+        "Global::Weather/Climate Data Provider"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This matches the external data source used for temperature/humidity trends, and the global boundary is acceptable for an external provider."
+    },
+    {
+      "gt_nodes": [
+        "Storage Layer (Neo4j, MongoDB::Graph Database::Close Contact Relations"
+      ],
+      "predicted_nodes": [
+        "Primary Cluster::Data Storage::Back-end Database",
+        "Backup Cluster::Data Storage::Back-end Database (Replica"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Close contact relations are stored in the back-end database/graph store. The prediction is generic but boundary-consistent."
+    },
+    {
+      "gt_nodes": [
+        "Storage Layer (Neo4j, MongoDB::Graph Database::Location Relations"
+      ],
+      "predicted_nodes": [
+        "Primary Cluster::Data Storage::Back-end Database",
+        "Backup Cluster::Data Storage::Back-end Database (Replica"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Location relations are also database-backed graph data. The prediction remains within an appropriate storage boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Frontend Layer (React, Antd, AMap::Epidemic Overview::Natural Characteristics",
+    "Frontend Layer (React, Antd, AMap::Epidemic Overview::Population Characteristics",
+    "Service Layer (Django::Data Collection & Entry::Auto-Brief Generation",
+    "Service Layer (Django::Data Collection & Entry::Metadata Standardization",
+    "Service Layer (Django::Epidemic Tracing & Analysis::Similarity Calculation",
+    "Storage Layer (Neo4j, MongoDB::Graph Database::Close Contact Relations",
+    "Storage Layer (Neo4j, MongoDB::Graph Database::Location Relations"
+  ],
+  "unmatched_predicted_nodes": [
+    "Backup Cluster::Algorithm Module (Backup::Case Clustering Engine (Backup",
+    "Backup Cluster::Algorithm Module (Backup::Flow Risk Calculator (Backup",
+    "Backup Cluster::Application/API (Backup::Analysis Orchestration Service (Backup",
+    "Backup Cluster::Application/API (Backup::Association Query Service (Backup",
+    "Backup Cluster::Application/API (Backup::Case Management Service (Backup",
+    "Backup Cluster::Application/API (Backup::Data Quality Checker (Backup",
+    "Backup Cluster::Application/API (Backup::Itinerary Service (Backup",
+    "Backup Cluster::Application/API (Backup::Relationship Graph Service (Backup",
+    "Backup Cluster::Application/API (Backup::Web API/Controller (Backup",
+    "Backup Cluster::Data Storage (Backup::Back-end Database (Replica",
+    "Global::Backup Cluster",
+    "Global::Primary Cluster",
+    "Infrastructure & Security::API Gateway (TLS Termination",
+    "Infrastructure & Security::Failover Manager / Traffic Switch",
+    "Infrastructure & Security::Rate Limiter / IP Cooldown",
+    "Primary Cluster::Algorithm Module::Case Clustering Engine",
+    "Primary Cluster::Algorithm Module::Flow Risk Calculator",
+    "Primary Cluster::Application/API::Analysis Orchestration Service",
+    "Primary Cluster::Application/API::Association Query Service",
+    "Primary Cluster::Application/API::Case Management Service",
+    "Primary Cluster::Application/API::Data Quality Checker",
+    "Primary Cluster::Application/API::Itinerary Service",
+    "Primary Cluster::Application/API::Relationship Graph Service",
+    "Primary Cluster::Application/API::Web API/Controller",
+    "Primary Cluster::Data Storage::Back-end Database"
+  ]
+}

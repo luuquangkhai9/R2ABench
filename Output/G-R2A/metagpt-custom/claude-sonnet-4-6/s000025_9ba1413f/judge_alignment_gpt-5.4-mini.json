@@ -1,0 +1,96 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Backend::Create\nTask"
+      ],
+      "predicted_nodes": [
+        "Backend Layer (Firebase Functions / Next.js API Routes::OnFleetTaskHandler\n(Task Creation Coordinator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the backend task creation responsibility that ultimately creates a task via OnFleet."
+    },
+    {
+      "gt_nodes": [
+        "Backend::OnFleet"
+      ],
+      "predicted_nodes": [
+        "External Integration Layer::OnFleet\n(Task Management /\nDelivery Platform"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The semantic component is the same external OnFleet integration. The boundary naming is different but consistent with the GT backend/external integration context."
+    },
+    {
+      "gt_nodes": [
+        "End user::Next.js\nFrontend form"
+      ],
+      "predicted_nodes": [
+        "Frontend / Channel Entry Layer (Next.js::FormTaskEntryPoint\n(Web Form UI Intake"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the Next.js form-based entry point for help-task requests."
+    },
+    {
+      "gt_nodes": [
+        "End user::Twilio Studio\nText + Call"
+      ],
+      "predicted_nodes": [
+        "Frontend / Channel Entry Layer (Next.js::ExternalUserChannel\n(SMS / Telephony / Text-Call\nCI-003 / UI-002"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the external end-user channel entry path via text/call style interaction. The AI generalized Twilio Studio into a broader external user channel."
+    },
+    {
+      "gt_nodes": [
+        "Frontend::Create task request"
+      ],
+      "predicted_nodes": [
+        "Frontend / Channel Entry Layer (Next.js::SessionHandler\n(getIdToken / dispatch login|logout"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "This is not a semantic match. The predicted node is about session login/logout handling, not task request creation."
+    },
+    {
+      "gt_nodes": [
+        "Middleware::Address-to-neighborhood\nsystem"
+      ],
+      "predicted_nodes": [
+        "Middleware Layer::TaskMiddleware\n(Address Resolution /\nService-Area Eligibility"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both capture middleware address resolution and neighborhood/service-area processing."
+    },
+    {
+      "gt_nodes": [
+        "Middleware::Service-area\nEligibility Check"
+      ],
+      "predicted_nodes": [
+        "Middleware Layer::ServiceAreaRejector\n(Returns rejection response\nwhen outside operated area\nFR-011 / DR-008"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the service-area eligibility decision in middleware, with the predicted node emphasizing the rejection outcome."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Frontend::Create task request"
+  ],
+  "unmatched_predicted_nodes": [
+    "Backend Layer (Firebase Functions / Next.js API Routes::FirebaseAdminVerifier\n(Firebase Admin SDK /\nToken Verification",
+    "Backend Layer (Firebase Functions / Next.js API Routes::LoginApiRoute\n(POST /api/login",
+    "Backend Layer (Firebase Functions / Next.js API Routes::LogoutApiRoute\n(POST /api/logout",
+    "Backend Layer (Firebase Functions / Next.js API Routes::ServerSideSession\n<<session data store>>\n(decoded token data +\noriginal token\nDR-004 / FR-006 / SI-004",
+    "Backend Layer (Firebase Functions / Next.js API Routes::SessionMiddleware\n(Server-Side Session Provider\n<<wraps LoginApiRoute>>\nSI-004 / CON-004",
+    "Build Configuration Layer (CON-005::NextJsBuildConfig\n(CSS / Sass / Static Asset\nConfiguration\nCON-005",
+    "Configuration Layer::EnvStore\n(OS Env / .env / Secrets Manager)\n- FIREBASE_AUTH_DOMAIN\n- FIREBASE_DATABASE_URL\n- FIREBASE_PROJECT_ID\n- FIREBASE_PUBLIC_API_KEY",
+    "Configuration Layer::FirebaseConfigLoader\n(Reads & exposes Firebase\nruntime config values",
+    "External Integration Layer::Firebase Authentication\n(Token Issuance &\nAdmin Verification",
+    "Frontend / Channel Entry Layer (Next.js::NextJsApp\n(Host Runtime"
+  ]
+}

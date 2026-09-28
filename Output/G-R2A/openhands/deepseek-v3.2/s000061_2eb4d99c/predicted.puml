@@ -1,0 +1,142 @@
+@startuml
+!define AWSPUML https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v16.0/dist
+!include AWSPUML/AWSCommon.puml
+!include AWSPUML/Compute/Lambda.puml
+!include AWSPUML/ApplicationIntegration/StepFunctions.puml
+!include AWSPUML/Storage/SimpleStorageServiceS3.puml
+!include AWSPUML/InternetOfThings/InternetOfThings.puml
+!include AWSPUML/Mobile/APIGateway.puml
+!include AWSPUML/Database/DynamoDB.puml
+!include AWSPUML/ManagementGovernance/CloudFormation.puml
+!include AWSPUML/SecurityIdentityAndCompliance/IAM.puml
+!include AWSPUML/General/Users.puml
+
+skinparam componentStyle rectangle
+skinparam defaultTextAlignment center
+skinparam backgroundColor #f0f0f0
+skinparam component {
+  BackgroundColor #ffffff
+  BorderColor #333333
+  FontSize 12
+}
+
+title AWS IoT Device Simulator - System Architecture
+
+' === User Actors ===
+actor "Administrator" as Admin
+actor "API Client" as APIClient
+actor "AWS CloudFormation" as CF
+
+' === Frontend Layer ===
+package "Web Layer" {
+  component "Web Management Console" as WebConsole
+}
+
+' === API Layer ===
+component "API Gateway\nRegional REST API\n(prod stage)" as APIGateway {
+  rectangle "CORS Configuration\nMethods: GET, POST, PUT, DELETE, OPTIONS\nHeaders: Authorization, Content-Type, X-Amz-Date,\nX-Amz-Security-Token, X-Api-Key" as CORS
+  rectangle "Request Validation\nParameters & Body Validation" as Validation
+  rectangle "Access Logging\nJSON Format" as Logging
+}
+
+' === Compute Layer ===
+package "Lambda Functions" {
+  component "Service Integration\nLambda" as ServiceLambda
+  component "Custom-Resource\nProcessing Lambda" as CustomLambda
+  component "Route Loading\nLambda" as RouteLambda
+  component "Device Simulation\nLambda" as SimLambda
+  component "Message Publication\nLambda" as MsgLambda
+  
+  rectangle "Lambda Context\nExecution Context\nSolution ID/Version" as LambdaContext
+}
+
+' === Data Layer ===
+package "Data Storage" {
+  component "Route Data\nAmazon S3 Bucket" as S3Bucket
+  component "Persistence\nAmazon DynamoDB" as DynamoDB
+}
+
+' === Orchestration ===
+component "Workflow Orchestration\nAWS Step Functions" as StepFunctions
+
+' === Messaging ===
+component "AWS IoT Core\nMessage Publication" as IoTCore
+
+' === Deployment Layer ===
+component "AWS CloudFormation\nDeployment & Custom Resources" as CloudFormation
+
+' === Security Layer ===
+component "IAM Roles & Policies" as IAM
+
+' === Relationships ===
+' User interactions
+Admin --> WebConsole : "Manages simulations &\ndevice types"
+WebConsole --> APIGateway : "REST API calls"
+
+' API Gateway flows
+APIClient --> APIGateway : "HTTP requests\n(GET, POST, PUT, DELETE, OPTIONS)"
+APIGateway --> ServiceLambda : "Service API calls"
+APIGateway --> RouteLambda : "Route data requests"
+APIGateway --> CustomLambda : "Custom-resource requests"
+
+' Custom-resource flow
+CF --> CloudFormation : "Deployment events"
+CloudFormation --> CustomLambda : "Invocation events"
+CustomLambda --> CloudFormation : "Response body"
+
+' Route data flow
+RouteLambda --> S3Bucket : "Read route JSON\n(ROUTE_BUCKET)"
+S3Bucket --> RouteLambda : "Route data\n(JSON format)"
+
+' Simulation execution flow
+ServiceLambda --> StepFunctions : "Triggers simulation workflows"
+StepFunctions --> SimLambda : "Executes device simulation"
+SimLambda --> MsgLambda : "Generates simulated messages"
+MsgLambda --> IoTCore : "Publishes to IoT topics"
+
+' Data persistence
+ServiceLambda --> DynamoDB : "Stores simulation state &\ndevice configurations"
+
+' Security context
+IAM --> ServiceLambda : "Execution role"
+IAM --> CustomLambda : "Execution role"
+IAM --> RouteLambda : "Execution role"
+IAM --> SimLambda : "Execution role"
+IAM --> MsgLambda : "Execution role"
+
+' Configuration context
+LambdaContext --> CustomLambda : "Solution configuration"
+
+' === Notes and Constraints ===
+note top of APIGateway
+  **Constraints:**
+  - Endpoint type: REGIONAL
+  - Stage: prod
+  - Logging level: INFO
+  - Tracing: Enabled
+end note
+
+note right of S3Bucket
+  **Route Loading Logic:**
+  - Uses ROUTE_BUCKET environment variable
+  - Route key: routeInfo.routeName or
+    generated 'route-{random-id}.json'
+  - Returns route state with metadata
+  - Propagates S3 errors
+end note
+
+note left of CloudFormation
+  **Custom-Resource Constraints:**
+  - Uses CloudFormation event data
+  - Receives stack name as input property
+  - Depends on solution configuration
+end note
+
+note bottom of StepFunctions
+  **Simulation Capabilities:**
+  - Executes device behavior
+  - Manages simulation lifecycle
+  - Coordinates message generation
+end note
+
+@enduml

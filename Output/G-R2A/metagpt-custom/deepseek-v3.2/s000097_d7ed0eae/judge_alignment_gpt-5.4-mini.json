@@ -1,0 +1,85 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Browser Extension::React UI\\nExtension",
+        "Browser Extension::TypeScript\\nExtension code"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Browser Extension Client"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates the browser extension into UI and code artifacts, while the prediction aggregates them into a single client-layer node. This is a reasonable semantic merge and the client-layer boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Website::React UI\\nBeeGreen site",
+        "Website::TypeScript\\nWebsite code"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Website Client"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates the website into UI and code artifacts, while the prediction aggregates them into a single website client node. This is a valid functional merge and the client-layer boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Cloudant\\nUser and API data"
+      ],
+      "predicted_nodes": [
+        "Persistence Layer::Persistent Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Cloudant is the concrete persistent data store in the GT, and the predicted persistent storage node is semantically equivalent at a higher abstraction level. The persistence-layer attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Express App",
+        "IBM Cloud::LoopBack Generated Code",
+        "IBM Cloud::Node.js Runtime"
+      ],
+      "predicted_nodes": [
+        "API Layer::Backend Server"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "These GT nodes collectively represent the backend server stack/runtime/application generation. The predicted backend server node is an acceptable aggregation, and the API-layer boundary is appropriate for the backend service."
+    },
+    {
+      "gt_nodes": [
+        "Global::User\\nShopping at online stores",
+        "Global::User\\nVisiting BeeGreen site"
+      ],
+      "predicted_nodes": [
+        "Global::API Layer",
+        "Global::Data/Service Layer",
+        "Global::Persistence Layer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT nodes are end-user actors/scenarios, not architecture layers. The predicted nodes are generic system layers and do not semantically correspond to these user nodes, so this is not a valid match."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "IBM Cloud::CSV File\\nExport / training data",
+    "IBM Cloud::Object Storage",
+    "IBM Cloud::Watson Studio"
+  ],
+  "unmatched_predicted_nodes": [
+    "API Layer::Ping Controller",
+    "API Layer::User Controller",
+    "Data Access Layer::InventoryItemRepository",
+    "Data Access Layer::UserRepository",
+    "Data Model Layer::InventoryItem Model",
+    "Data Model Layer::PingResponse Model",
+    "Data Model Layer::User Model",
+    "Data/Service Layer::Recommendation Workflow",
+    "Data/Service Layer::Sustainability Scoring Service",
+    "Global::API Layer",
+    "Global::Data/Service Layer",
+    "Global::Persistence Layer"
+  ]
+}

@@ -1,0 +1,114 @@
+@startuml
+!define AWSCOLOR #FF9900
+!define COMPONENT_COLOR #4286f4
+!define DATASTORE_COLOR #333333
+
+skinparam component {
+  BackgroundColor COMPONENT_COLOR
+  BorderColor black
+  FontColor white
+}
+
+skinparam rectangle {
+  BackgroundColor DATASTORE_COLOR
+  FontColor white
+}
+
+skinparam database {
+  BackgroundColor DATASTORE_COLOR
+  FontColor white
+}
+
+skinparam actor {
+  BackgroundColor white
+  BorderColor black
+}
+
+title Foot365 System Architecture
+
+actor "Football Enthusiast" as user
+actor "Chatbot User" as chatbot_user
+actor "Reminder Requester" as reminder_user
+actor "Application Maintainer" as maintainer
+
+package "AWS Cloud" {
+  package "Frontend Layer" {
+    [S3\n(Web Hosting)] as s3
+    [CloudFront\n(CDN)] as cloudfront
+  }
+  
+  package "API Layer" {
+    [API Gateway] as api_gateway
+    [Lambda\n(API Handlers)] as lambda
+  }
+  
+  package "Authentication" {
+    [Cognito\n(User Management)] as cognito
+    [IAM\n(Service Authorization)] as iam
+  }
+  
+  package "Data Layer" {
+    [DynamoDB\n(Match Data)] as dynamodb
+    [Elasticsearch\n(Search Engine)] as elasticsearch
+  }
+  
+  package "Prediction Services" {
+    [SageMaker\n(Prediction Models)] as sagemaker
+  }
+  
+  package "Notification Services" {
+    [SQS\n(Message Queue)] as sqs
+    [SNS\n(Notification Service)] as sns
+  }
+  
+  package "Streaming Services" {
+    [EC2\n(Kafka + Avro)] as ec2_kafka
+  }
+}
+
+' Data Stores
+database "Match Data Store" as match_data [
+  DynamoDB
+  Elasticsearch
+]
+
+' External Services
+rectangle "SMS Provider" as sms_provider
+
+' Connections
+user --> cloudfront : Access web app
+chatbot_user --> cloudfront : Chatbot queries
+reminder_user --> cloudfront : Request reminders
+cloudfront --> s3 : Static content
+s3 --> api_gateway : API calls
+api_gateway --> lambda : Route requests
+lambda --> dynamodb : Read/write data
+lambda --> elasticsearch : Search queries
+lambda --> sagemaker : Get predictions
+lambda --> sqs : Queue reminders
+lambda --> ec2_kafka : Live score updates
+lambda --> cognito : Authenticate users
+sqs --> sns : Process messages
+sns --> sms_provider : Send SMS
+ec2_kafka --> lambda : Stream updates
+dynamodb --> match_data : Store data
+elasticsearch --> match_data : Index data
+lambda --> lambda : Internal processing
+
+note right of s3
+  HTML, CSS, Bootstrap, jQuery
+end note
+
+note right of lambda
+  Python and Node.js
+end note
+
+note right of ec2_kafka
+  Kafka with Apache Avro
+end note
+
+note right of sagemaker
+  ML Predictions
+end note
+
+@enduml

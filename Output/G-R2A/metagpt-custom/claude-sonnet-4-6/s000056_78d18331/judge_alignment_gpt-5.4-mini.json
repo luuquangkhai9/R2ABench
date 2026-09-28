@@ -1,0 +1,56 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Go build tags"
+      ],
+      "predicted_nodes": [
+        "Go Build Toolchain\\n(//go:build <provider>::Build Tag Selector"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent provider-specific selection via Go build tags. The predicted node is more detailed but semantically equivalent, and the boundary/package attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Host Scanner Endpoint Tests::endpoint_platform1_test.go\\nplatform-specific expected data",
+        "Host Scanner Endpoint Tests::endpoint_platform2_test.go\\nplatform-specific expected data"
+      ],
+      "predicted_nodes": [
+        "host-scanner DaemonSet (Privileged Pod::Test Layer::ProviderExpectedData\\n(//go:build <provider>"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The two GT platform-specific test data nodes are aggregated into a single provider-expected-data node. This is a valid merge, and the test-layer attribution is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Host Scanner Endpoint Tests::endpoint_test.go\\ncommon endpoint tests"
+      ],
+      "predicted_nodes": [
+        "host-scanner DaemonSet (Privileged Pod::Test Layer::E2ETestSuite\\n(HTTP-based"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to common HTTP endpoint tests. The predicted node uses a broader but compatible test-suite label, and the test-layer placement is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::HTTP Clients\\n(e.g. Kubescape",
+    "Global::Kubernetes Node",
+    "Global::host-scanner DaemonSet (Privileged Pod",
+    "Kubernetes Node::CRI-O",
+    "Kubernetes Node::Host Filesystem\\n(/etc, /run, /var/lib",
+    "Kubernetes Node::containerd",
+    "Kubernetes Node::kubelet",
+    "host-scanner DaemonSet (Privileged Pod::API Layer::EndpointRouter",
+    "host-scanner DaemonSet (Privileged Pod::API Layer::HTTPServer",
+    "host-scanner DaemonSet (Privileged Pod::API Layer::NotFoundHandler\\n(HTTP 404",
+    "host-scanner DaemonSet (Privileged Pod::Business Logic Layer::CNIDirectoryResolver",
+    "host-scanner DaemonSet (Privileged Pod::Business Logic Layer::EncryptionSecretSanitizer",
+    "host-scanner DaemonSet (Privileged Pod::Input Interfaces::CLIArgsParser",
+    "host-scanner DaemonSet (Privileged Pod::Input Interfaces::ControlPlaneJSONInput",
+    "host-scanner DaemonSet (Privileged Pod::Test Layer::LogicTestSuite\\n(unit/integration"
+  ]
+}

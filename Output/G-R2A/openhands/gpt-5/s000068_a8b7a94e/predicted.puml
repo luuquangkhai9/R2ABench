@@ -1,0 +1,84 @@
+@startuml
+title cFS Subset Architecture (s000068_a8b7a94e)
+
+actor "Developer/Build User" as Dev
+actor "Functional Tester" as Tester
+actor "Telemetry Operator" as Op
+
+package "Build & Install" as Build {
+  component "Makefile.sample\nsample_defs" as MakeAssets
+  component "make prep\nmake install" as MakeSteps
+  artifact "Build Artifacts\n(debug | release)" as Artifacts
+}
+
+package "Runtime Target" as Target {
+  [core-cpu1] as CoreCPU1
+  component cFE
+  component OSAL
+  component PSP
+}
+
+package "Host Utilities" as Host {
+  [cmdUtil] as CmdUtil
+  component "Telemetry Sink\n(Operator-configured IP)" as TelemetrySink
+}
+
+node "GitHub Actions (CI)" as GHA {
+  component "Changelog Workflow\n(ubuntu-latest)" as Changelog
+  component "Duplicate Check Workflow\n(ubuntu-latest)" as DupCheck
+  component "Format Check Workflow\n(ubuntu-18.04)" as FormatCheck
+  component "Functional Test Workflow\n(ubuntu-18.04, 15m timeout)" as FuncTest
+  component "Reusable Workflows\n(workflow_call)" as ReusableWF
+  artifact "Changelog Artifact" as ChangelogArtifact
+}
+
+Dev --> MakeSteps : build
+MakeAssets --> MakeSteps : assets
+MakeSteps --> Artifacts : produce
+Artifacts --> CoreCPU1 : deploy/run
+
+Tester --> CoreCPU1 : functional tests
+
+CmdUtil --> CoreCPU1 : commands\n(--pktid, --cmdcode,\n--endian, --uint32...)
+CoreCPU1 --> TelemetrySink : telemetry\n(to configured IP)
+Op --> TelemetrySink : enter IP\n(e.g., 127.0.0.1)
+
+GHA --> Changelog
+GHA --> DupCheck
+GHA --> FormatCheck
+GHA --> FuncTest
+Changelog --> ChangelogArtifact
+ReusableWF <.. Changelog : reuse
+ReusableWF <.. FormatCheck : reuse
+ReusableWF <.. FuncTest : reuse
+
+CoreCPU1 ..> cFE : uses
+CoreCPU1 ..> OSAL : uses
+CoreCPU1 ..> PSP : uses
+
+note right of MakeSteps
+  Uses provided make assets.
+  Source checkout includes submodules.
+end note
+
+note bottom of CoreCPU1
+  Accepts host commands from cmdUtil.
+  Produces telemetry to operator-configured IP.
+end note
+
+note right of Changelog
+  Organizes sections:
+  Closed issues, Breaking changes,
+  Enhancements, Bugs, Deprecated,
+  Removed, Security fixes.
+end note
+
+note right of FormatCheck
+  Runs on: push, pull_request, workflow_call.
+end note
+
+note over GHA
+  Some reviewed workflows marked deprecated;
+  revalidate applicability.
+end note
+@enduml

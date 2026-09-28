@@ -1,0 +1,159 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::OpenVR\\nSteamVR Runtime"
+      ],
+      "predicted_nodes": [
+        "External Runtime::SteamVR / OpenVR Runtime"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the external SteamVR/OpenVR runtime dependency. The predicted boundary differs in wording but is semantically equivalent and correctly places this as an external runtime."
+    },
+    {
+      "gt_nodes": [
+        "Global::User Application"
+      ],
+      "predicted_nodes": [
+        "VirtualMotionTracker System::Management Layer::VMT Manager::OSC Input Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The User Application is the external source of control input, but the predicted node is an internal OSC input handler inside the VMT Manager boundary. This confuses the external application with an internal component, so the boundary attribution is incorrect."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::VMT Manager\\nC#"
+      ],
+      "predicted_nodes": [
+        "VirtualMotionTracker System::Management Layer::VMT Manager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These refer to the same VMT Manager component. The predicted placement under the Management Layer is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::VMT Driver\\nC++"
+      ],
+      "predicted_nodes": [
+        "VirtualMotionTracker System::Driver Layer::VMT Driver"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These refer to the same VMT Driver component. The predicted placement under the Driver Layer is correct."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::Legacy Controller Binding\\nmycontroller JSON"
+      ],
+      "predicted_nodes": [
+        "VirtualMotionTracker System::Driver Layer::VMT Driver::OpenVR Driver\\nInterface Adapter"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a legacy controller binding artifact, while the predicted node is an OpenVR driver interface adapter. They are different concerns, so this is not a valid semantic match."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::OpenVR Path Constants\\n/user/body and /client_info"
+      ],
+      "predicted_nodes": [
+        "VirtualMotionTracker System::Driver Layer::VMT Driver::OpenVR Driver\\nInterface Adapter"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents OpenVR path constants, which are dependency/context details around the driver interface. The predicted OpenVR adapter is not the same artifact, but the boundary placement within the driver/OpenVR integration area is semantically acceptable for this architecture-level comparison."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::VMT Manager\\nC#"
+      ],
+      "predicted_nodes": [
+        "VirtualMotionTracker System::Management Layer::VMT Manager::Shared Memory\\nMessage Consumer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT manager node is split into more specific responsibilities in the predicted diagram, including shared-memory message consumption. This is a reasonable decomposition and remains within the correct management boundary."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::VMT Manager\\nC#"
+      ],
+      "predicted_nodes": [
+        "VirtualMotionTracker System::Management Layer::VMT Manager::Shared Memory\\nMessage Producer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT manager node is split into more specific responsibilities in the predicted diagram, including shared-memory message production. This is a reasonable decomposition and remains within the correct management boundary."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::VMT Driver\\nC++"
+      ],
+      "predicted_nodes": [
+        "VirtualMotionTracker System::Driver Layer::VMT Driver::Shared Memory\\nMessage Consumer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT driver node is split into more specific responsibilities in the predicted diagram, including shared-memory message consumption. This is a valid refinement within the driver boundary."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::VMT Driver\\nC++"
+      ],
+      "predicted_nodes": [
+        "VirtualMotionTracker System::Driver Layer::VMT Driver::Shared Memory\\nMessage Producer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT driver node is split into more specific responsibilities in the predicted diagram, including shared-memory message production. This is a valid refinement within the driver boundary."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::VMT Manager\\nC#",
+        "Virtual Motion Tracker::VMT Driver\\nC++"
+      ],
+      "predicted_nodes": [
+        "VirtualMotionTracker System::IPC Layer::Shared Memory\\n(JSON Messages"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The shared-memory JSON communication between manager and driver is represented as a single IPC-layer node, which correctly aggregates the interaction described across the two GT components."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::VMT Manager\\nC#",
+        "Virtual Motion Tracker::VMT Driver\\nC++"
+      ],
+      "predicted_nodes": [
+        "VirtualMotionTracker System::IPC Layer::Shared Memory\\n(JSON Messages::Driver-to-Manager Channel\\n(send count, handshake count,\\nmessage length, JSON payload"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a detailed decomposition of the shared-memory IPC between manager and driver, specifically the driver-to-manager direction. It is correctly placed under IPC/shared memory."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::VMT Manager\\nC#",
+        "Virtual Motion Tracker::VMT Driver\\nC++"
+      ],
+      "predicted_nodes": [
+        "VirtualMotionTracker System::IPC Layer::Shared Memory\\n(JSON Messages::Manager-to-Driver Channel\\n(send count, handshake count,\\nmessage length, JSON payload"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a detailed decomposition of the shared-memory IPC between manager and driver, specifically the manager-to-driver direction. It is correctly placed under IPC/shared memory."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Virtual Motion Tracker::Legacy Controller Binding\\nmycontroller JSON",
+    "Virtual Motion Tracker::OpenVR Path Constants\\n/user/body and /client_info"
+  ],
+  "unmatched_predicted_nodes": [
+    "VirtualMotionTracker System::Driver Layer::VMT Driver::OpenVR Driver\\nInterface Adapter",
+    "VirtualMotionTracker System::IPC Layer::Shared Memory\\n(JSON Messages::Driver-to-Manager Channel\\n(send count, handshake count,\\nmessage length, JSON payload",
+    "VirtualMotionTracker System::IPC Layer::Shared Memory\\n(JSON Messages::Manager-to-Driver Channel\\n(send count, handshake count,\\nmessage length, JSON payload"
+  ]
+}

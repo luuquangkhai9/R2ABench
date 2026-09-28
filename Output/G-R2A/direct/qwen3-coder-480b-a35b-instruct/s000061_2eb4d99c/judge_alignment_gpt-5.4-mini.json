@@ -1,0 +1,142 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS CloudFormation\nCustom resources"
+      ],
+      "predicted_nodes": [
+        "Global::AWS_CloudFormation",
+        "Global::Custom_Resource_Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT custom-resources component is split into a CloudFormation-related node and a handler node. This preserves the same deployment-time custom-resource responsibility, and the Global boundary is acceptable as a generic top-level grouping."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS IoT Core"
+      ],
+      "predicted_nodes": [
+        "Global::AWS_IoT_Core",
+        "Global::Message_Publisher"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT IoT Core node corresponds to the message publication target. The AI split the service and its publishing function into separate nodes, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS Lambda\nSimulator API"
+      ],
+      "predicted_nodes": [
+        "Global::AWS_Lambda",
+        "Global::REST_API_Interface"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node combines Lambda-backed simulator API functionality. The predicted nodes separate the Lambda platform and the REST API interface, which is a reasonable decomposition and boundary placement."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS Step Functions\nSimulation workflow"
+      ],
+      "predicted_nodes": [
+        "Global::AWS_Step_Functions",
+        "Global::Simulation_Engine",
+        "Global::Device_Simulator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT workflow node is decomposed into step functions plus simulation-related execution nodes. This is semantically aligned and does not indicate a boundary error."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon API Gateway\nREST API"
+      ],
+      "predicted_nodes": [
+        "Global::AWS_API_Gateway",
+        "Global::REST_API_Interface"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted nodes capture the same API Gateway REST API concept, split into the platform service and the REST interface. The boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon DynamoDB\nSimulator state"
+      ],
+      "predicted_nodes": [
+        "Global::AWS_DynamoDB",
+        "Global::Device_State_Store"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT DynamoDB-backed simulator state is represented by the database service and its stored-state role. This is a valid semantic match."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon S3\nRoute data bucket"
+      ],
+      "predicted_nodes": [
+        "Global::AWS_S3",
+        "Global::Route_Data_Store",
+        "Global::Route_Loader"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT route-data bucket is decomposed into S3 plus route data storage and loading responsibilities. This is semantically correct and does not cross architectural boundaries incorrectly."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon S3\nWeb UI bucket"
+      ],
+      "predicted_nodes": [
+        "Global::AWS_S3",
+        "Global::Web"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT static web UI bucket is represented by S3 plus a web/static UI node. The mapping is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Browser Web UI\nstatic app client"
+      ],
+      "predicted_nodes": [
+        "Global::Web",
+        "Global::Web_Management_Console",
+        "Global::based UI for managing"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI decomposed the browser web UI into web/management-console related nodes. Although the naming is noisy, it corresponds to the same frontend management client and stays within the correct UI boundary."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Users"
+      ],
+      "predicted_nodes": [
+        "Global::based UI for managing"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This predicted node appears to represent the human users interacting with the management UI. Despite the awkward label, it is semantically aligned with the GT Users node."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "AWS IoT Device Simulator::Amazon CloudFront",
+    "AWS IoT Device Simulator::Amazon Cognito"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::!define AWSPrefix(x) aws",
+    "Global::8 format",
+    "Global::x",
+    "Global::Device_State_Store",
+    "Global::Device_Simulator",
+    "Global::Message_Publisher",
+    "Global::Route_Data_Store",
+    "Global::Simulation_Engine",
+    "Global::Web_Management_Console",
+    "Global::in UTF"
+  ]
+}

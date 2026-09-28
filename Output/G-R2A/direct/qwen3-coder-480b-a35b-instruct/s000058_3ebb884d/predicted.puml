@@ -1,0 +1,75 @@
+@startuml
+!define RECTANGLE class
+
+title macpro-appian-connector System Architecture
+
+' Actors
+actor Developer
+actor Operator
+actor "Repository Maintainer" as Maintainer
+
+' Systems
+RECTANGLE "AWS Environment" {
+  rectangle "EventBridge" as eventbridge
+  rectangle "SNS Topic" as sns
+  rectangle "Connector Service" as connector_service
+  rectangle "Stage Listing Service" as stage_service
+}
+
+rectangle "GitHub" as github {
+  rectangle "Actions API" as actions_api
+  rectangle "Pull Requests API" as pr_api
+}
+
+rectangle "Local Environment" as local_env {
+  rectangle "Terminal Interface" as terminal
+  rectangle "AWS CLI" as aws_cli
+}
+
+' Interactions
+Developer --> terminal : uses
+Operator --> terminal : uses
+Maintainer --> terminal : uses
+
+terminal --> aws_cli : requires credentials
+aws_cli --> stage_service : enables querying
+stage_service --> aws_cli : uses for auth
+
+connector_service <-- Maintainer : manages configurations
+connector_service --> aws_cli : uses for deployment
+
+eventbridge --> sns : routes events
+sns --> Operator : sends notifications
+Operator --> sns : manages subscriptions
+
+github --> actions_api : provides workflow data
+github --> pr_api : provides PR data
+actions_api --> Maintainer : reports deployment metrics
+pr_api --> Maintainer : reports PR merge times
+
+note right of eventbridge
+  Event filtering and routing
+  based on service events
+end note
+
+note right of sns
+  Manually managed
+  subscriptions
+end note
+
+note bottom of github
+  Paginated API access
+  for metrics collection
+end note
+
+note top of stage_service
+  Lists running stages
+  in current AWS context
+end note
+
+note right of connector_service
+  Applies configurations
+  Restarts connectors
+end note
+
+@enduml

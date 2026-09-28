@@ -1,0 +1,52 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::gRPC Gateway\\n(HTTP-gRPC Proxy)\\nGolang"
+      ],
+      "predicted_nodes": [
+        "API Gateway Layer::gRPC-Gateway\\n(HTTP <-> gRPC"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the gRPC-Gateway middleware that translates HTTP requests to gRPC calls. The predicted boundary 'API Gateway Layer' is semantically consistent with the GT global middleware node."
+    },
+    {
+      "gt_nodes": [
+        "Flutter-based app::Android",
+        "Flutter-based app::Dart",
+        "Flutter-based app::MacOS",
+        "Flutter-based app::Web",
+        "Flutter-based app::iOS"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Flutter/Dart\\nHome Recipes Client"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT lists multiple platform-specific client nodes, while the prediction aggregates them into one Flutter/Dart client node. This is a valid merge, and the client-layer boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Hosted in Azure Kubernetes Service::Docker container",
+        "Hosted in Azure Kubernetes Service::Docker container::Recipes Server\\n(gRPC Server)\\nGolang"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Go gRPC Server"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted Go gRPC Server corresponds functionally to the GT Recipes Server inside the Docker container, but the boundary is incorrect because the GT places this server within the Docker container under AKS hosting, while the prediction places it in a generic service layer and omits the deployment/container context."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Hosted in Azure Kubernetes Service",
+    "Global::Postman",
+    "Global::Test Client 1\\nNodeJS",
+    "Global::Test Client 2\\nGolang"
+  ],
+  "unmatched_predicted_nodes": [
+    "Service Layer::IngredientService",
+    "Service Layer::RecipeService"
+  ]
+}

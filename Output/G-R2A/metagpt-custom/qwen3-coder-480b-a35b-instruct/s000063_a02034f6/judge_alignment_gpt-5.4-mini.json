@@ -1,0 +1,179 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Access Layer::Gateway"
+      ],
+      "predicted_nodes": [
+        "Client Access Layer::MTProto Server",
+        "Deployment Context::MTProto Server"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both predicted nodes represent the GT gateway/access entrypoint for MTProto client traffic. 'Client Access Layer' is semantically aligned with 'Access Layer', and 'Deployment Context' here is an acceptable packaging difference for the same MTProto server component."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Auth Session"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Authorization Service",
+        "Service Layer::Session Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node combines authorization/session access behavior, and the AI split it into authorization and session services, which is semantically reasonable. However, placing these under a generic 'Service Layer' rather than the GT 'Access Layer' is a boundary shift that is not clearly equivalent and risks context confusion."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Session"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Session Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The session functionality matches, but the GT places it in the Access Layer while the prediction places it in the Service Layer. For this architecture, that is a non-trivial boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Status"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Verification Code Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The prediction appears to relate to verification/status-like protocol handling, but it is not the same as the GT 'Status' access-layer node and is placed in a different functional layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::BFF"
+      ],
+      "predicted_nodes": [
+        "Global::Deployment Context"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node is a broad deployment grouping, not the BFF component itself. This is not a semantic match."
+    },
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "Deployment Context::Kafka",
+        "Infrastructure Layer::Message Queue Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Kafka node is represented by an infrastructure/deployment Kafka component plus a queue client abstraction. The Kafka boundary is preserved semantically, and the packaging differs but remains acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Global::Push"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Verification Code Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT push component is an asynchronous/supporting flow, but the predicted verification-code service is a different function. No valid semantic equivalence."
+    },
+    {
+      "gt_nodes": [
+        "Global::Sync"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Session Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Session handling may relate loosely to sync behavior, but this is not a faithful match to the GT sync component. The semantics are too different."
+    },
+    {
+      "gt_nodes": [
+        "Services::Msg"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Service Message Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct semantic match: service-message handling corresponds to the GT messaging service node, and the service-layer boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MinIO"
+      ],
+      "predicted_nodes": [
+        "Deployment Context::MinIO",
+        "Global::MinIO",
+        "Storage Layer::Object Storage Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The MinIO storage dependency is represented by deployment/global MinIO nodes and an object storage client. This is semantically consistent with the GT storage node."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MySQL"
+      ],
+      "predicted_nodes": [
+        "Deployment Context::MySQL",
+        "Global::MySQL",
+        "Storage Layer::Database Adapters"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The MySQL storage dependency is correctly captured, and the storage/database adapter abstraction is semantically consistent with the GT storage node."
+    },
+    {
+      "gt_nodes": [
+        "Storages::Redis"
+      ],
+      "predicted_nodes": [
+        "Deployment Context::Redis",
+        "Global::Redis"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The Redis dependency is correctly represented. The boundary differs, but it is still semantically equivalent to the GT storage node."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Clients::Android",
+    "Clients::PC",
+    "Clients::Web",
+    "Clients::iOS",
+    "Global::Push",
+    "Global::Sync",
+    "Services::DFS",
+    "Services::Services"
+  ],
+  "unmatched_predicted_nodes": [
+    "Deployment Context::Kafka",
+    "Deployment Context::MTProto Server",
+    "Deployment Context::MinIO",
+    "Deployment Context::MySQL",
+    "Deployment Context::Redis",
+    "Deployment Context::etcd",
+    "Global::Deployment Context",
+    "Global::Kafka",
+    "Global::MinIO",
+    "Global::MySQL",
+    "Global::Redis",
+    "Global::etcd",
+    "Infrastructure Layer::Message Queue Client",
+    "Service Layer::Authorization Service",
+    "Service Layer::Future Salt Service",
+    "Service Layer::Media Processing Service",
+    "Service Layer::Registration Service",
+    "Service Layer::Salt Service",
+    "Service Layer::Service Message Handler",
+    "Service Layer::Session Service",
+    "Service Layer::Verification Code Service",
+    "Storage Layer::Database Adapters",
+    "Storage Layer::Object Storage Client"
+  ]
+}

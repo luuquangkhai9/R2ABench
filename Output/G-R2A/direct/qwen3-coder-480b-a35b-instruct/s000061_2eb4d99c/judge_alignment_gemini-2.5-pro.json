@@ -1,0 +1,105 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon API Gateway\\nREST API"
+      ],
+      "predicted_nodes": [
+        "Global::AWS_API_Gateway",
+        "Global::REST_API_Interface"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The AI correctly identified the API Gateway service and its functional role as a REST interface, splitting the single GT node into two. However, it failed to place them within the 'AWS IoT Device Simulator' system boundary, assigning them to 'Global' instead, which is a major boundary error."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS CloudFormation\\nCustom resources"
+      ],
+      "predicted_nodes": [
+        "Global::AWS_CloudFormation",
+        "Global::Custom_Resource_Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The AI correctly identified the CloudFormation service and the specific 'Custom Resource Handler' function described in the PRD. The boundary attribution is incorrect as 'Global' is used instead of the specific system boundary."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS IoT Core"
+      ],
+      "predicted_nodes": [
+        "Global::AWS_IoT_Core",
+        "Global::Message_Publisher"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The AI identified both the AWS service and its functional role as a 'Message Publisher'. The boundary is incorrect, as it's placed in 'Global' rather than the 'AWS IoT Device Simulator' context."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS Lambda\\nSimulator API",
+        "AWS IoT Device Simulator::AWS Step Functions\\nSimulation workflow"
+      ],
+      "predicted_nodes": [
+        "Global::AWS_Lambda",
+        "Global::AWS_Step_Functions",
+        "Global::Device_Simulator",
+        "Global::Simulation_Engine",
+        "Global::Route_Loader"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": false,
+      "reasoning": "The AI identified the core compute services (Lambda, Step Functions) and also extracted more granular functional components ('Device_Simulator', 'Simulation_Engine', 'Route_Loader') that are executed by them. This represents a re-organization of the GT's concepts. The boundary is incorrect as all nodes are in 'Global'."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon DynamoDB\\nSimulator state"
+      ],
+      "predicted_nodes": [
+        "Global::AWS_DynamoDB",
+        "Global::Device_State_Store"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The AI correctly identified the DynamoDB service and its functional role for storing state. The boundary is incorrect, as the 'Global' context lacks the specificity of the GT's system boundary."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon S3\\nRoute data bucket",
+        "AWS IoT Device Simulator::Amazon S3\\nWeb UI bucket"
+      ],
+      "predicted_nodes": [
+        "Global::AWS_S3",
+        "Global::Route_Data_Store"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The AI aggregated two distinct S3 buckets from the GT into a single generic 'AWS_S3' service node and a functional node for only one of its roles ('Route_Data_Store'), losing the 'Web UI bucket' context. The boundary is incorrect."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Browser Web UI\\nstatic app client"
+      ],
+      "predicted_nodes": [
+        "Global::Web_Management_Console",
+        "Global::Web"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The AI correctly identified the 'Web Management Console' and a related generic 'Web' node, which map to the GT's UI client. The boundary is incorrect as it's placed in 'Global'."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "AWS IoT Device Simulator::Amazon CloudFront",
+    "AWS IoT Device Simulator::Amazon Cognito",
+    "AWS IoT Device Simulator::Users"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::!define AWSPrefix(x) aws",
+    "Global::8 format",
+    "Global::based UI for managing",
+    "Global::in UTF",
+    "Global::x"
+  ]
+}

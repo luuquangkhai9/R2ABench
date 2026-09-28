@@ -1,0 +1,105 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS CloudFormation\nCustom resources"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::AWS Lambda\nCustom Resource Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the CloudFormation custom resource processing component. The boundaries ('AWS IoT Device Simulator' and 'AWS Account / Region') are semantically equivalent representations of the AWS cloud environment."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS IoT Core"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::AWS IoT Core\nIoT Topics"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the AWS IoT Core component responsible for handling simulated device messages and topics."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS Lambda\nSimulator API"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::AWS Lambda\nAPI Backend",
+        "AWS Account / Region::AWS Lambda\nDevice Simulator Worker",
+        "AWS Account / Region::AWS Lambda\nRoute Loader"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node groups the simulator backend logic into a single AWS Lambda node, whereas the AI explicitly split the backend processing, worker, and route loading into distinct Lambda functions based on the PRD."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS Step Functions\nSimulation workflow"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::AWS Step Functions\nSimulation Orchestrator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes identify the AWS Step Functions component orchestrating the simulation workflow."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon API Gateway\nREST API"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::Amazon API Gateway\nREST API (Stage: prod, Type: REGIONAL"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes correctly identify the API Gateway used to expose the REST API."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon Cognito"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::Identity & Auth Service\n(e.g., Cognito / OIDC"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes denote the identity and authentication service powered by Amazon Cognito."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon DynamoDB\nSimulator state"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::Amazon DynamoDB\nTables: Simulations, DeviceTypes"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes map to the DynamoDB persistence layer used for storing simulation states and device types."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon CloudFront",
+        "AWS IoT Device Simulator::Amazon S3\nWeb UI bucket",
+        "AWS IoT Device Simulator::Browser Web UI\nstatic app client"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::Web Management Console\n(Hosted & Distributed"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT diagram explicitly models the underlying infrastructure (CloudFront, S3) and frontend client for the Web UI, whereas the AI aggregated them into a single Web Management Console node."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "AWS IoT Device Simulator::Amazon S3\nRoute data bucket",
+    "AWS IoT Device Simulator::Users"
+  ],
+  "unmatched_predicted_nodes": [
+    "AWS Account / Region::Amazon CloudWatch Logs\nAPI Access Logs (JSON",
+    "AWS Account / Region::AWS X-Ray\nTracing Enabled",
+    "Global::AWS Account / Region"
+  ]
+}

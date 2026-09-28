@@ -1,0 +1,173 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Backend (Flask Microservices"
+      ],
+      "predicted_nodes": [
+        "Global::Local Computer Deployment",
+        "Global::Server Deployment"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "Both describe top-level backend deployment/context, but GT is a single global backend boundary while the prediction incorrectly splits it into deployment locations rather than the backend architectural boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Frontend (Vue.js 2.0"
+      ],
+      "predicted_nodes": [
+        "Front-end Layer::Vue.js Web Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the same frontend client built with Vue.js, and the boundary attribution is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Network & Gateway Layer"
+      ],
+      "predicted_nodes": [
+        "Gateway Layer::API Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted gateway component matches the GT network/gateway layer concept, with an acceptable boundary name refinement."
+    },
+    {
+      "gt_nodes": [
+        "Network & Gateway Layer::API Gateway"
+      ],
+      "predicted_nodes": [
+        "Gateway Layer::API Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same API gateway component; only the package label differs slightly."
+    },
+    {
+      "gt_nodes": [
+        "Network & Gateway Layer::API Gateway::Identity Verification"
+      ],
+      "predicted_nodes": [
+        "Global::Security Layer",
+        "Security Layer::HTTPS/TLS"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a gateway-level identity verification function, while the prediction shifts it into a generic security layer and transport security concern, which is not semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Network & Gateway Layer::API Gateway::Request Forwarding"
+      ],
+      "predicted_nodes": [
+        "Gateway Layer::API Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Request forwarding is a core responsibility of the API gateway, so this is functionally equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Network & Gateway Layer::API Gateway::Return Response"
+      ],
+      "predicted_nodes": [
+        "Gateway Layer::API Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Returning responses is part of API gateway behavior, so the match is valid."
+    },
+    {
+      "gt_nodes": [
+        "Network & Gateway Layer::HTTP Protocol"
+      ],
+      "predicted_nodes": [
+        "Security Layer::HTTPS/TLS"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "HTTP protocol is a communication/protocol concern, while HTTPS/TLS is a security transport mechanism; related but not equivalent, and the boundary is materially different."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices"
+      ],
+      "predicted_nodes": [
+        "Local Computer Deployment::Service Layer::Project Management Service",
+        "Local Computer Deployment::Service Layer::Requirements Management Service",
+        "Local Computer Deployment::Service Layer::User Management Service",
+        "Server Deployment::Service Layer::Algorithm Service\\n(NLP/PyTorch"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT microservices container is represented by the predicted individual service nodes; this is a valid decomposition and the service-layer placement is consistent overall."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices::Algorithm Service"
+      ],
+      "predicted_nodes": [
+        "Server Deployment::Service Layer::Algorithm Service\\n(NLP/PyTorch"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same algorithm service, and placing it under server deployment matches the PRD constraints."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices::Project Management Service"
+      ],
+      "predicted_nodes": [
+        "Local Computer Deployment::Service Layer::Project Management Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same project management service, and local deployment is consistent with the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices::Requirement Management Service"
+      ],
+      "predicted_nodes": [
+        "Local Computer Deployment::Service Layer::Requirements Management Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same requirement management service, with a semantically equivalent boundary."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices::User Management Service"
+      ],
+      "predicted_nodes": [
+        "Local Computer Deployment::Service Layer::User Management Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same user management service, and the deployment boundary is consistent with the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Global::Storage Layer (MongoDB"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MongoDB Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the MongoDB storage layer, with semantically equivalent boundary naming."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Backend (Flask Microservices::Internal HTTP",
+    "Storage Layer (MongoDB::Project Collection",
+    "Storage Layer (MongoDB::Requirement Collection",
+    "Storage Layer (MongoDB::User Collection"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Local Computer Deployment",
+    "Global::Security Layer"
+  ]
+}

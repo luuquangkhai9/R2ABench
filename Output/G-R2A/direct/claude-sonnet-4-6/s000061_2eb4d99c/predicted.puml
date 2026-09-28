@@ -1,0 +1,125 @@
+@startuml
+!define AWSPuml https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v18.0/dist
+!include AWSPuml/AWSCommon.puml
+!include AWSPuml/General/Users.puml
+!include AWSPuml/ApplicationIntegration/APIGateway.puml
+!include AWSPuml/Compute/Lambda.puml
+!include AWSPuml/Database/DynamoDB.puml
+!include AWSPuml/Storage/S3.puml
+!include AWSPuml/InternetOfThings/IoTCore.puml
+!include AWSPuml/ApplicationIntegration/StepFunctions.puml
+!include AWSPuml/SecurityIdentityCompliance/Cognito.puml
+!include AWSPuml/ManagementGovernance/CloudFormation.puml
+!include AWSPuml/NetworkingContentDelivery/CloudFront.puml
+!include AWSPuml/ManagementGovernance/CloudWatch.puml
+!include AWSPuml/ManagementGovernance/XRay.puml
+
+skinparam rectangle {
+    RoundCorner 10
+    BorderColor #232F3E
+    BackgroundColor #FAFAFA
+}
+
+skinparam node {
+    BorderColor #232F3E
+    BackgroundColor #F0F0F0
+}
+
+skinparam component {
+    BorderColor #232F3E
+    BackgroundColor #FFFDE7
+}
+
+skinparam arrow {
+    Color #232F3E
+    FontSize 11
+}
+
+skinparam defaultFontSize 12
+
+title IoT Device Simulator - System Architecture
+
+actor "Administrator /\nOperator" as AdminUser
+actor "API Client" as APIClient
+actor "AWS Deployment\nWorkflow" as DeployWorkflow
+
+rectangle "AWS Cloud" {
+
+    rectangle "Web Console Layer" {
+        [Web Management Console\n(SPA)] as WebConsole
+        CloudFrontPuml(cf, "CloudFront\nDistribution", "CDN / Hosting")
+    }
+
+    rectangle "Identity & Auth" {
+        CognitoPuml(cognito, "Amazon Cognito", "Identity & Authentication")
+    }
+
+    rectangle "API Layer\n(Regional REST API - stage: prod)" {
+        APIGatewayPuml(apigw, "Amazon API Gateway\n(Regional Endpoint)", "REST API\nGET, POST, PUT, DELETE, OPTIONS\nCORS / Request Validation\nAccess Logging (JSON)\nINFO Logging / Tracing")
+    }
+
+    rectangle "Lambda Service Functions" {
+        LambdaPuml(simMgmtLambda, "Simulation Management\nLambda", "Manage simulations\n& device types")
+        LambdaPuml(deviceTypeLambda, "Device Type Management\nLambda", "Manage device type\ndefinitions")
+        LambdaPuml(customResourceLambda, "Custom Resource\nLambda", "CloudFormation custom-\nresource processing\n(response body construction)")
+    }
+
+    rectangle "Simulation Execution Layer" {
+        LambdaPuml(simulatorLambda, "Device Simulator\nLambda", "Execute simulated\ndevice behavior\nLoad route state\nPublish messages")
+        StepFunctionsPuml(stepFn, "AWS Step Functions", "Simulation\nOrchestration")
+    }
+
+    rectangle "Data & Storage" {
+        DynamoDBPuml(dynamodb, "Amazon DynamoDB", "Simulation & Device\nType Persistence")
+        S3Puml(routeBucket, "Amazon S3\n(ROUTE_BUCKET)", "Route JSON Data\nroute-{id}.json\nor named route key")
+        S3Puml(assetsBucket, "Amazon S3\n(Assets / Console)", "Web Console\nStatic Assets")
+    }
+
+    rectangle "Messaging & IoT" {
+        IoTCorePuml(iotCore, "AWS IoT Core", "IoT Topics\nSimulated Device\nMessage Publication")
+    }
+
+    rectangle "Observability" {
+        CloudWatchPuml(cw, "Amazon CloudWatch", "Access Logs (JSON)\nMethod Logs (INFO)")
+        XRayPuml(xray, "AWS X-Ray", "Distributed Tracing")
+    }
+
+    rectangle "Deployment" {
+        CloudFormationPuml(cfn, "AWS CloudFormation", "Stack Deployment\nCustom Resource Invocation")
+    }
+}
+
+AdminUser --> cf : "HTTPS - Web Console"
+APIClient --> apigw : "HTTPS REST Calls\n(GET/POST/PUT/DELETE/OPTIONS)"
+DeployWorkflow --> cfn : "Deploy / Update Stack"
+
+cf --> assetsBucket : "Serve static assets"
+WebConsole --> cognito : "Authenticate"
+WebConsole --> apigw : "Authenticated API Calls"
+
+cognito --> apigw : "Token validation"
+
+apigw --> simMgmtLambda : "Simulation API\nRequests"
+apigw --> deviceTypeLambda : "Device Type API\nRequests"
+apigw --> cw : "Access Logs (JSON)"
+apigw --> xray : "Traces"
+
+simMgmtLambda --> dynamodb : "Read/Write\nSimulation Records"
+simMgmtLambda --> stepFn : "Start/Stop\nSimulation Workflows"
+deviceTypeLambda --> dynamodb : "Read/Write\nDevice Type Records"
+
+stepFn --> simulatorLambda : "Invoke simulation\nexecution steps"
+
+simulatorLambda --> routeBucket : "GetObject\n(routeName or route-{id}.json)\nParse UTF-8 JSON"
+simulatorLambda --> dynamodb : "Read device state"
+simulatorLambda --> iotCore : "Publish simulated\ndevice messages\nto IoT topics"
+
+cfn --> customResourceLambda : "Custom Resource Event\n(stack name, context,\nsolution ID/version)"
+customResourceLambda --> cfn : "CloudFormation\nResponse Body"
+
+simulatorLambda --> cw : "Operational Logs"
+simMgmtLambda --> cw : "Operational Logs"
+deviceTypeLambda --> cw : "Operational Logs"
+customResourceLambda --> cw : "Operational Logs"
+
+@enduml

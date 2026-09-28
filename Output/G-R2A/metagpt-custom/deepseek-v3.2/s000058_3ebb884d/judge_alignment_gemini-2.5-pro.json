@@ -1,0 +1,86 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nAppian Source::VPC::Appian\\nOracle DB"
+      ],
+      "predicted_nodes": [
+        "Global::Appian"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The nodes are semantically equivalent, representing the Appian source system. However, the AI placed it in a 'Global' boundary, completely missing the crucial architectural context of it residing within a specific AWS account ('Appian Source') and VPC, as specified in the GT."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::AWS EventBridge"
+      ],
+      "predicted_nodes": [
+        "Global::AWS EventBridge"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The nodes correctly identify the AWS EventBridge service. The boundary attribution is incorrect as the AI placed it in 'Global' instead of the specified 'AWS Cloud\\nConnector Account' boundary from the GT."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::SNS Topic\\nalerts"
+      ],
+      "predicted_nodes": [
+        "Global::SNS Topic"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The nodes represent the same SNS topic for alerts. The AI's boundary is incorrect; it used 'Global' while the GT correctly places it within the 'AWS Cloud\\nConnector Account' and provides a more specific 'SNS Topic' sub-boundary."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::CMS BigMAC"
+      ],
+      "predicted_nodes": [
+        "Global::CMS BigMAC"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both nodes refer to the CMS BigMAC destination system. The AI's boundary is incorrect, failing to place the system within the 'AWS Cloud\\nConnector Account::VPC' as depicted in the GT."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::connector::Private subnet::AWS Fargate\\nKafka Connect Cluster"
+      ],
+      "predicted_nodes": [
+        "Global::Connector Manager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The match is based on functional equivalence. The GT node represents the physical data plane component (Kafka Connect Cluster on Fargate) that performs the data transfer, while the predicted node represents the logical control plane component ('Connector Manager' script) that configures and restarts it. They both refer to the core 'connector' function. The boundary is severely incorrect; the AI used 'Global' instead of the detailed physical topology of 'Account -> VPC -> subnet'."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "AWS Cloud\\nConnector Account::Chat notification",
+    "AWS Cloud\\nConnector Account::Email notification",
+    "AWS Cloud\\nConnector Account::Slack notification",
+    "AWS Cloud\\nConnector Account::VPC::topics::Private subnet::AWS Lambda\\ncreate/delete topics",
+    "Global::VPC peering\\nconnection"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::AWS CLI",
+    "Global::AWS Services",
+    "Global::Actions API",
+    "Global::Connector Definitions",
+    "Global::Deployment Metrics Collector",
+    "Global::Environment Values",
+    "Global::Event Filter",
+    "Global::Event Router",
+    "Global::GitHub",
+    "Global::Manual Operations",
+    "Global::Metrics Output",
+    "Global::PR Metrics Collector",
+    "Global::Pull Requests API",
+    "Global::Stage Lister",
+    "Manual Operations::SNS Subscription Manager",
+    "Metrics Output::Avg Time to Merge",
+    "Metrics Output::Failed Runs",
+    "Metrics Output::Passed Runs"
+  ]
+}

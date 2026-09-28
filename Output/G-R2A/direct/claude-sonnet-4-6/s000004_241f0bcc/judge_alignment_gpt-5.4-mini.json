@@ -1,0 +1,237 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Client-side::Logic::Angular Services"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Angular ClientApp::Front-End Service Wrappers::Evacuee Service [READ]",
+        "Web Browser::Angular ClientApp::Front-End Service Wrappers::Incident-Task Service [CREATE, READ, UPDATE]",
+        "Web Browser::Angular ClientApp::Front-End Service Wrappers::Organization Service [CREATE, READ, UPDATE]",
+        "Web Browser::Angular ClientApp::Front-End Service Wrappers::Referral Service [CREATE, READ, UPDATE, DELETE]",
+        "Web Browser::Angular ClientApp::Front-End Service Wrappers::Registration Service [CREATE, READ, UPDATE] + PDF Collection",
+        "Web Browser::Angular ClientApp::Front-End Service Wrappers::Notification Queue Service",
+        "Web Browser::Angular ClientApp::Front-End Service Wrappers::Controlled-List Loader (Initialization)",
+        "Web Browser::Angular ClientApp::Front-End Service Wrappers::Cookie Service [GET, SET]"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Angular services are correctly decomposed into specific front-end service wrappers under the browser/Angular client boundary."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Logic::UI Components"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Angular ClientApp::UI Components::Landing Page",
+        "Web Browser::Angular ClientApp::UI Components::Login Page",
+        "Web Browser::Angular ClientApp::UI Components::Notifier Component",
+        "Web Browser::Angular ClientApp::UI Components::Role-Appropriate Pages"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These are appropriate UI component refinements within the client UI boundary."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Logic::UI Components::Component Class",
+        "Client-side::Logic::UI Components::HTML Templates"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Angular ClientApp::UI Components::Landing Page",
+        "Web Browser::Angular ClientApp::UI Components::Login Page",
+        "Web Browser::Angular ClientApp::UI Components::Notifier Component",
+        "Web Browser::Angular ClientApp::UI Components::Role-Appropriate Pages"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates component class and template concerns, while the prediction merges them into concrete Angular UI components. The boundary remains correct."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Technology::Angular 7"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Angular ClientApp",
+        "Global::Web Browser"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The Angular technology is represented in the browser-based Angular client context, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Data::ngRX state store"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Angular ClientApp::NgRx State Store::Actions / Reducers",
+        "Web Browser::Angular ClientApp::NgRx State Store::Controlled-List State",
+        "Web Browser::Angular ClientApp::NgRx State Store::Shared Client State"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT NgRx store is correctly split into state, actions/reducers, and shared-client-state subnodes under the Angular client."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Data::View-Models (JSON"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Angular ClientApp::NgRx State Store::Shared Client State"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT view-model data is reasonably represented as shared client state/data in the client store boundary."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::WebAPI Controllers"
+      ],
+      "predicted_nodes": [
+        ".NET Core WebAPI Server::Controllers::Evacuee Controller",
+        ".NET Core WebAPI Server::Controllers::Incident-Task Controller",
+        ".NET Core WebAPI Server::Controllers::Organization Controller",
+        ".NET Core WebAPI Server::Controllers::Referral Controller",
+        ".NET Core WebAPI Server::Controllers::Registration Controller"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The generic GT WebAPI controllers are correctly decomposed into specific backend API controllers."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Technology::.NET Core WebAPI"
+      ],
+      "predicted_nodes": [
+        "Global::.NET Core WebAPI Server",
+        ".NET Core WebAPI Server::Controllers::Evacuee Controller",
+        ".NET Core WebAPI Server::Controllers::Incident-Task Controller",
+        ".NET Core WebAPI Server::Controllers::Organization Controller",
+        ".NET Core WebAPI Server::Controllers::Referral Controller",
+        ".NET Core WebAPI Server::Controllers::Registration Controller",
+        ".NET Core WebAPI Server::Domain Layer::C# Domain Classes",
+        ".NET Core WebAPI Server::Domain Layer::Domain Services",
+        ".NET Core WebAPI Server::Data Access Layer::Entity Framework / DbContext",
+        ".NET Core WebAPI Server::Data Access Layer::Persistent Database Entities"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted architecture correctly places the WebAPI within the server-side .NET Core boundary and further elaborates its internal layers."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Technology::Entity Framework (ORM",
+        "Server-side::Logic::DbContext",
+        "Server-side::Data::DB Entities (Registration, Community, etc."
+      ],
+      "predicted_nodes": [
+        ".NET Core WebAPI Server::Data Access Layer::Entity Framework / DbContext",
+        ".NET Core WebAPI Server::Data Access Layer::Persistent Database Entities",
+        "MS SQL Database::Persistent Data Entities"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT persistence stack is correctly represented as Entity Framework/DbContext plus persistent entities, with the database entity boundary preserved."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::Domain Services"
+      ],
+      "predicted_nodes": [
+        ".NET Core WebAPI Server::Domain Layer::Domain Services"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Domain services are preserved in the correct backend domain layer."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::Domain Services::CAPTCHA"
+      ],
+      "predicted_nodes": [
+        ".NET Core WebAPI Server::Domain Layer::Domain Services"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "CAPTCHA appears as a specialized domain service variant and remains within the domain services boundary."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::Domain Services::Email"
+      ],
+      "predicted_nodes": [
+        ".NET Core WebAPI Server::Domain Layer::Domain Services"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Email is a specialized domain service variant and remains within the domain services boundary."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::Domain Services::PDF"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Angular ClientApp::Front-End Service Wrappers::Registration Service [CREATE, READ, UPDATE] + PDF Collection"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The PDF capability is a backend registration-service concern in the GT, but the prediction places it inside a front-end service wrapper, which is a boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Technology::Standard C# Classes"
+      ],
+      "predicted_nodes": [
+        ".NET Core WebAPI Server::Domain Layer::C# Domain Classes"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Standard C# classes are semantically aligned with C# domain classes in the server-side domain layer."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Logic::UI Components::Component Class",
+        "Client-side::Logic::UI Components::HTML Templates"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Angular ClientApp::Routing & Guards::Auth / Role Guard",
+        "Web Browser::Angular ClientApp::Routing & Guards::Redirect Guard",
+        "Web Browser::Angular ClientApp::Routing & Guards::Role-Based Router",
+        "Web Browser::Angular ClientApp::Routing & Guards::Module Import Diagnostic",
+        "Web Browser::Angular ClientApp::Session & Auth::Login Handler",
+        "Web Browser::Angular ClientApp::Session & Auth::Session-Expired Page",
+        "Web Browser::Angular ClientApp::Session & Auth::SiteMinder Context"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "These are additional Angular client structural elements that fit within the broader UI/component and routing/auth concern set."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Client-side::Logic::UI Components::Component Class",
+    "Client-side::Logic::UI Components::HTML Templates",
+    "Client-side::Technology::Angular 7",
+    "Server-side::Data::View-Models (C#",
+    "Server-side::Logic::DbContext",
+    "Server-side::Logic::Domain Services::CAPTCHA",
+    "Server-side::Logic::Domain Services::Email"
+  ],
+  "unmatched_predicted_nodes": [
+    ".NET Core WebAPI Server::Development Back Door (Dev Environment Only::Dev Bypass Mechanism (Backend-Only",
+    "Global::MS SQL Database",
+    "Global::Web Browser",
+    "MS SQL Database::Persistent Data Entities",
+    "MS SQL Database::SQL Maintenance Scripts (Transactional, Filtered",
+    "MS SQL Database::Volunteer Table (Volunteer.Active",
+    "Web Browser::Angular ClientApp::HTTP Layer::HTTP Interceptor",
+    "Web Browser::Angular ClientApp::Local Dev Configuration::Proxy Configuration",
+    "Web Browser::Angular ClientApp::Local Dev Configuration::Role-Paired SM_TOKEN (volunteer / local authority / provincial admin",
+    "Web Browser::Angular ClientApp::Routing & Guards::Auth / Role Guard",
+    "Web Browser::Angular ClientApp::Routing & Guards::Module Import Diagnostic",
+    "Web Browser::Angular ClientApp::Routing & Guards::Redirect Guard",
+    "Web Browser::Angular ClientApp::Routing & Guards::Role-Based Router",
+    "Web Browser::Angular ClientApp::Session & Auth::Login Handler",
+    "Web Browser::Angular ClientApp::Session & Auth::Session-Expired Page",
+    "Web Browser::Angular ClientApp::Session & Auth::SiteMinder Context"
+  ]
+}

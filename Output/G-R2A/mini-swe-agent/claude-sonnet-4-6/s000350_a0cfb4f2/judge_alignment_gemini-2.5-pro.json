@@ -1,0 +1,94 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::GoDaddy API\\nDomain availability"
+      ],
+      "predicted_nodes": [
+        "External Services::GoDaddy Domain API\\n(sso-key auth"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are semantically identical. The AI correctly placed the third-party service in an 'External Services' boundary, which is more specific and accurate than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::HTTP API\\nSession and attack requests"
+      ],
+      "predicted_nodes": [
+        "API Server Process::HTTP API Handler\\n(GET /, GET /api...",
+        "API Server Process::Job Publisher",
+        "API Server Process::Session Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly decomposed the single GT 'HTTP API' node into its specific functional responsibilities as described in the PRD (request handling, session management, job publication). All are correctly grouped within the 'API Server Process' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Redis\\nCommand and reporting queues"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Layer::Redis\\n(Job Channel & Reporting"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are semantically identical. The AI correctly categorized Redis as part of the 'Infrastructure Layer', which is a standard and more accurate architectural classification than 'Global'."
+    },
+    {
+      "gt_nodes": [
+        "Global::Socket.io\\nWebSocket result channel"
+      ],
+      "predicted_nodes": [
+        "API Server Process::Report Router",
+        "API Server Process::WebSocket / Socket.IO Server"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the components responsible for asynchronous reporting: the WebSocket server itself and the logic ('Report Router') for routing Redis messages to the correct client session. Both are correctly located within the 'API Server Process'."
+    },
+    {
+      "gt_nodes": [
+        "Global::Squatm3\\nDomain generation engine"
+      ],
+      "predicted_nodes": [
+        "Domain Generation Layer::squatm3 CLI Engine\\n(subprocess"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are semantically identical. The AI placed the core generation engine in a dedicated 'Domain Generation Layer', which is a logical and more descriptive boundary than 'Global'."
+    },
+    {
+      "gt_nodes": [
+        "Global::Web UI\\nindex.html"
+      ],
+      "predicted_nodes": [
+        "Static Assets::index.html\\n(Web Entry Page"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are semantically identical. The AI correctly placed the static entry page into a 'Static Assets' boundary, which is a more specific and appropriate classification than 'Global'."
+    },
+    {
+      "gt_nodes": [
+        "Global::Workers\\nCommand consumers"
+      ],
+      "predicted_nodes": [
+        "API Server Process::Background Consumer Thread"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are semantically identical. The AI correctly placed the worker component within the 'API Server Process' boundary, accurately reflecting the PRD which states it is a 'background consumer thread started by the API process'."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Client Layer::Web Browser / Client",
+    "Global::API Server Process",
+    "Global::Client Layer",
+    "Global::Domain Generation Layer",
+    "Global::External Services",
+    "Global::Infrastructure Layer",
+    "Global::Static Assets"
+  ]
+}

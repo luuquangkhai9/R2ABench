@@ -1,0 +1,349 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "AWS IoT Device Simulator::AWS CloudFormation\\nCustom resources",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Lambda Service Functions::Custom Resource\\nHandler Lambda\\n(CloudFormation Init"
+      ],
+      "reasoning": "The GT custom resources node is covered by the predicted CloudFormation init/custom-resource handler Lambda, which matches the deployment-time custom-resource processing responsibility."
+    },
+    {
+      "gt_node": "AWS IoT Device Simulator::AWS IoT Core",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "IoT Messaging::AWS IoT Core\\n(Topic Publication"
+      ],
+      "reasoning": "The predicted IoT Messaging node covers the same AWS IoT Core message publication responsibility."
+    },
+    {
+      "gt_node": "AWS IoT Device Simulator::AWS Lambda\\nSimulator API",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Lambda Service Functions::Device Type Management\\nLambda",
+        "Lambda Service Functions::Simulation Management\\nLambda",
+        "Lambda Service Functions::Simulator / Route Loader\\nLambda"
+      ],
+      "reasoning": "The GT simulator API Lambda is split into multiple more specific Lambda functions in the predicted architecture, collectively covering the simulator API responsibility."
+    },
+    {
+      "gt_node": "AWS IoT Device Simulator::AWS Step Functions\\nSimulation workflow",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Orchestration::AWS Step Functions\\n(Simulation Workflow"
+      ],
+      "reasoning": "The predicted orchestration node directly covers the simulation workflow responsibility."
+    },
+    {
+      "gt_node": "AWS IoT Device Simulator::Amazon API Gateway\\nREST API",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "API Layer::Amazon API Gateway\\nREST API (REGIONAL)\\nStage: prod\\nMethods: GET POST PUT DELETE OPTIONS\\nCORS: Authorization, Content-Type,\\nX-Amz-Date, X-Amz-Security-Token, X-Api-Key\\nRequest Validation Enabled\\nAccess Logging (JSON) | Tracing | INFO"
+      ],
+      "reasoning": "The predicted API Layer node clearly represents the same REST API, including deployment and configuration details."
+    },
+    {
+      "gt_node": "AWS IoT Device Simulator::Amazon CloudFront",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Web Tier::Amazon CloudFront\\n/ S3 Hosting"
+      ],
+      "reasoning": "The predicted web tier includes CloudFront, matching the GT CloudFront distribution responsibility."
+    },
+    {
+      "gt_node": "AWS IoT Device Simulator::Amazon Cognito",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Identity & Auth::Amazon Cognito\\n(User Pools / Identity"
+      ],
+      "reasoning": "The predicted identity/auth node covers the Cognito user pool / identity service responsibility."
+    },
+    {
+      "gt_node": "AWS IoT Device Simulator::Amazon DynamoDB\\nSimulator state",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Persistence::Amazon DynamoDB\\n(Simulations &\\nDevice Types"
+      ],
+      "reasoning": "The predicted DynamoDB persistence node covers simulator state storage, even though it also includes device types."
+    },
+    {
+      "gt_node": "AWS IoT Device Simulator::Amazon S3\\nRoute data bucket",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Route Data Store::Amazon S3\\nRoute Bucket\\n(ROUTE_BUCKET)\\nJSON route objects"
+      ],
+      "reasoning": "The predicted route data store node directly covers the S3 route bucket responsibility."
+    },
+    {
+      "gt_node": "AWS IoT Device Simulator::Amazon S3\\nWeb UI bucket",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Web Tier::Amazon CloudFront\\n/ S3 Hosting"
+      ],
+      "reasoning": "The predicted web tier includes S3 hosting for the static web UI, which covers the web UI bucket responsibility."
+    },
+    {
+      "gt_node": "AWS IoT Device Simulator::Browser Web UI\\nstatic app client",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Web Tier::Web Management\\nConsole\\n(SPA"
+      ],
+      "reasoning": "The predicted web management console SPA covers the browser-based static web UI client responsibility."
+    },
+    {
+      "gt_node": "AWS IoT Device Simulator::Users",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Web Tier::Web Management\\nConsole\\n(SPA",
+        "Identity & Auth::Amazon Cognito\\n(User Pools / Identity"
+      ],
+      "reasoning": "The user role is represented by the web console interaction and authentication context; these predicted nodes collectively cover the user-facing responsibility."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "API Layer::Amazon API Gateway\\nREST API (REGIONAL)\\nStage: prod\\nMethods: GET POST PUT DELETE OPTIONS\\nCORS: Authorization, Content-Type,\\nX-Amz-Date, X-Amz-Security-Token, X-Api-Key\\nRequest Validation Enabled\\nAccess Logging (JSON) | Tracing | INFO",
+      "grounded": true,
+      "reference_nodes": [
+        "AWS IoT Device Simulator::Amazon API Gateway\\nREST API"
+      ],
+      "reasoning": "This is grounded in the GT API Gateway REST API node and adds detailed configuration consistent with the PRD."
+    },
+    {
+      "predicted_node": "Identity & Auth::Amazon Cognito\\n(User Pools / Identity",
+      "grounded": true,
+      "reference_nodes": [
+        "AWS IoT Device Simulator::Amazon Cognito"
+      ],
+      "reasoning": "This corresponds directly to the Cognito component in the GT architecture."
+    },
+    {
+      "predicted_node": "IoT Messaging::AWS IoT Core\\n(Topic Publication",
+      "grounded": true,
+      "reference_nodes": [
+        "AWS IoT Device Simulator::AWS IoT Core"
+      ],
+      "reasoning": "This directly matches the GT AWS IoT Core node and its message publication role."
+    },
+    {
+      "predicted_node": "Lambda Service Functions::Custom Resource\\nHandler Lambda\\n(CloudFormation Init",
+      "grounded": true,
+      "reference_nodes": [
+        "AWS IoT Device Simulator::AWS CloudFormation\\nCustom resources"
+      ],
+      "reasoning": "This is grounded in the GT CloudFormation custom resources node."
+    },
+    {
+      "predicted_node": "Lambda Service Functions::Device Type Management\\nLambda",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node explicitly corresponds to a separate device type management Lambda; this appears to be a finer-grained decomposition not present in the manual design."
+    },
+    {
+      "predicted_node": "Lambda Service Functions::Simulation Management\\nLambda",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node explicitly corresponds to a separate simulation management Lambda."
+    },
+    {
+      "predicted_node": "Lambda Service Functions::Simulator / Route Loader\\nLambda",
+      "grounded": true,
+      "reference_nodes": [
+        "AWS IoT Device Simulator::AWS Lambda\\nSimulator API",
+        "AWS IoT Device Simulator::Amazon S3\\nRoute data bucket"
+      ],
+      "reasoning": "This Lambda is grounded in the GT simulator API Lambda and route-loading behavior, though it combines responsibilities from the manual design."
+    },
+    {
+      "predicted_node": "Observability::Amazon CloudWatch Logs\\n(API Access Logs",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT list does not contain a CloudWatch Logs node, even though logging is mentioned in the PRD. This is an added architectural element rather than a direct GT node match."
+    },
+    {
+      "predicted_node": "Orchestration::AWS Step Functions\\n(Simulation Workflow",
+      "grounded": true,
+      "reference_nodes": [
+        "AWS IoT Device Simulator::AWS Step Functions\\nSimulation workflow"
+      ],
+      "reasoning": "This directly corresponds to the GT Step Functions simulation workflow node."
+    },
+    {
+      "predicted_node": "Persistence::Amazon DynamoDB\\n(Simulations &\\nDevice Types",
+      "grounded": true,
+      "reference_nodes": [
+        "AWS IoT Device Simulator::Amazon DynamoDB\\nSimulator state"
+      ],
+      "reasoning": "This is grounded in the GT DynamoDB simulator state component, though it broadens the stored domain to include device types."
+    },
+    {
+      "predicted_node": "Route Data Store::Amazon S3\\nRoute Bucket\\n(ROUTE_BUCKET)\\nJSON route objects",
+      "grounded": true,
+      "reference_nodes": [
+        "AWS IoT Device Simulator::Amazon S3\\nRoute data bucket"
+      ],
+      "reasoning": "This directly matches the GT route data S3 bucket."
+    },
+    {
+      "predicted_node": "Web Tier::Amazon CloudFront\\n/ S3 Hosting",
+      "grounded": true,
+      "reference_nodes": [
+        "AWS IoT Device Simulator::Amazon CloudFront",
+        "AWS IoT Device Simulator::Amazon S3\\nWeb UI bucket"
+      ],
+      "reasoning": "This corresponds to the GT CloudFront and web UI S3 hosting responsibilities."
+    },
+    {
+      "predicted_node": "Web Tier::Web Management\\nConsole\\n(SPA",
+      "grounded": true,
+      "reference_nodes": [
+        "AWS IoT Device Simulator::Browser Web UI\\nstatic app client",
+        "AWS IoT Device Simulator::Users"
+      ],
+      "reasoning": "This is grounded in the GT browser web UI and user interaction concepts."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS CloudFormation\\nCustom resources"
+      ],
+      "predicted_nodes": [
+        "Lambda Service Functions::Custom Resource\\nHandler Lambda\\n(CloudFormation Init"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The component match is direct, and placing the custom-resource handler under Lambda service functions is semantically appropriate."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS IoT Core"
+      ],
+      "predicted_nodes": [
+        "IoT Messaging::AWS IoT Core\\n(Topic Publication"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The IoT Core component is preserved with an equivalent boundary."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS Lambda\\nSimulator API"
+      ],
+      "predicted_nodes": [
+        "Lambda Service Functions::Device Type Management\\nLambda",
+        "Lambda Service Functions::Simulation Management\\nLambda",
+        "Lambda Service Functions::Simulator / Route Loader\\nLambda"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Lambda responsibility is split into multiple specific Lambda functions; the boundary remains correct because all are still Lambda service functions."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS Step Functions\\nSimulation workflow"
+      ],
+      "predicted_nodes": [
+        "Orchestration::AWS Step Functions\\n(Simulation Workflow"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match with equivalent orchestration boundary."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon API Gateway\\nREST API"
+      ],
+      "predicted_nodes": [
+        "API Layer::Amazon API Gateway\\nREST API (REGIONAL)\\nStage: prod\\nMethods: GET POST PUT DELETE OPTIONS\\nCORS: Authorization, Content-Type,\\nX-Amz-Date, X-Amz-Security-Token, X-Api-Key\\nRequest Validation Enabled\\nAccess Logging (JSON) | Tracing | INFO"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted API Layer node accurately reflects the GT API Gateway REST API and its deployment configuration."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon CloudFront"
+      ],
+      "predicted_nodes": [
+        "Web Tier::Amazon CloudFront\\n/ S3 Hosting"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "CloudFront is retained under an equivalent web-tier boundary."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon Cognito"
+      ],
+      "predicted_nodes": [
+        "Identity & Auth::Amazon Cognito\\n(User Pools / Identity"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match with a semantically equivalent identity/auth boundary."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon DynamoDB\\nSimulator state"
+      ],
+      "predicted_nodes": [
+        "Persistence::Amazon DynamoDB\\n(Simulations &\\nDevice Types"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The DynamoDB responsibility is preserved, though broadened to include device types."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon S3\\nRoute data bucket"
+      ],
+      "predicted_nodes": [
+        "Route Data Store::Amazon S3\\nRoute Bucket\\n(ROUTE_BUCKET)\\nJSON route objects"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match for the route data S3 bucket."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon S3\\nWeb UI bucket"
+      ],
+      "predicted_nodes": [
+        "Web Tier::Amazon CloudFront\\n/ S3 Hosting"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The web UI bucket is captured as part of the web-tier hosting setup."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Browser Web UI\\nstatic app client"
+      ],
+      "predicted_nodes": [
+        "Web Tier::Web Management\\nConsole\\n(SPA"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The SPA web management console semantically matches the browser static app client."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Users"
+      ],
+      "predicted_nodes": [
+        "Web Tier::Web Management\\nConsole\\n(SPA",
+        "Identity & Auth::Amazon Cognito\\n(User Pools / Identity"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The user concept is distributed across the web console interaction and Cognito-based identity boundary; no severe boundary crossing is present."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Lambda Service Functions::Device Type Management\\nLambda",
+    "Lambda Service Functions::Simulation Management\\nLambda",
+    "Observability::Amazon CloudWatch Logs\\n(API Access Logs"
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Simulator"
+      ],
+      "predicted_nodes": [
+        "Framework Core::Simulator Builder",
+        "Framework Core::OpenAI Gym\\nInterface",
+        "Outputs & Artifacts::Standalone Gym-Compatible\\nSimulator Package"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node represents the simulator as a whole, while the predicted diagram splits it into builder, interface, and packaged output. This is a reasonable functional decomposition, but it does not preserve the GT node as a single architectural boundary and mixes construction/runtime/package concerns."
+    },
+    {
+      "gt_nodes": [
+        "Biomechanical Model::BaseBMModel",
+        "Biomechanical Model::DerivedClass",
+        "Biomechanical Model::MoblArmsIndex"
+      ],
+      "predicted_nodes": [
+        "Modular Components::Biomechanical Model\\nModules",
+        "External Inputs::MuJoCo XML\\nBiomechanical Model"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These GT biomechanical model nodes are represented at a higher aggregation level in the predicted diagram. The modular components boundary is appropriate, and the MuJoCo XML input node aligns with the biomechanical model integration context."
+    },
+    {
+      "gt_nodes": [
+        "Interaction Task::BaseTask",
+        "Interaction Task::DerivedClass",
+        "Interaction Task::Pointing",
+        "Interaction Task::Tracking"
+      ],
+      "predicted_nodes": [
+        "Modular Components::Interaction Task\\nModules",
+        "External Inputs::MuJoCo XML\\nInteraction Task"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT interaction task hierarchy is aggregated into a task modules boundary, with the corresponding MuJoCo XML input separated out. This is semantically consistent with the PRD and not a boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Perception::BaseModule",
+        "Perception::BasicWithEEPos",
+        "Perception::DerivedClass",
+        "Perception::FixedEye",
+        "Perception::Modalities::Modality",
+        "Perception::Modalities::Proprioception",
+        "Perception::Modalities::Vision",
+        "Perception::Perception"
+      ],
+      "predicted_nodes": [
+        "Modular Components::Perception Modules\\n(Vision, Proprioception"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node aggregates the GT perception base classes and modality-specific modules into a single perception-modules boundary. This is consistent with the PRD's modality-based organization."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Framework Core::MuJoCo XML\\nIntegration Layer"
+      ],
+      "match_type": "unmatched_predicted",
+      "is_boundary_correct": false,
+      "reasoning": "This is a plausible architectural component from the PRD, but there is no directly corresponding GT node in the provided list."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Training & Evaluation::Evaluation Runner"
+      ],
+      "match_type": "unmatched_predicted",
+      "is_boundary_correct": false,
+      "reasoning": "This component is supported by the PRD, but no direct GT node is provided in the manual node list."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Training & Evaluation::Reinforcement Learning\\nTraining Workflow"
+      ],
+      "match_type": "unmatched_predicted",
+      "is_boundary_correct": false,
+      "reasoning": "This component is supported by the PRD, but no direct GT node is provided in the manual node list."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Biomechanical Model::BaseBMModel",
+    "Biomechanical Model::DerivedClass",
+    "Biomechanical Model::MoblArmsIndex",
+    "Global::Simulator",
+    "Interaction Task::BaseTask",
+    "Interaction Task::DerivedClass",
+    "Interaction Task::Pointing",
+    "Interaction Task::Tracking",
+    "Perception::BaseModule",
+    "Perception::BasicWithEEPos",
+    "Perception::DerivedClass",
+    "Perception::FixedEye",
+    "Perception::Modalities::Modality",
+    "Perception::Modalities::Proprioception",
+    "Perception::Modalities::Vision",
+    "Perception::Perception"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Inputs::MuJoCo XML\\nBiomechanical Model",
+    "External Inputs::MuJoCo XML\\nInteraction Task",
+    "Framework Core::MuJoCo XML\\nIntegration Layer",
+    "Framework Core::OpenAI Gym\\nInterface",
+    "Framework Core::Simulator Builder",
+    "Global::External Inputs",
+    "Global::Framework Core",
+    "Global::Modular Components",
+    "Global::Outputs & Artifacts",
+    "Global::Training & Evaluation",
+    "Modular Components::Biomechanical Model\\nModules",
+    "Modular Components::Interaction Task\\nModules",
+    "Modular Components::Perception Modules\\n(Vision, Proprioception",
+    "Outputs & Artifacts::Standalone Gym-Compatible\\nSimulator Package",
+    "Training & Evaluation::Evaluation Runner",
+    "Training & Evaluation::Reinforcement Learning\\nTraining Workflow"
+  ]
+}

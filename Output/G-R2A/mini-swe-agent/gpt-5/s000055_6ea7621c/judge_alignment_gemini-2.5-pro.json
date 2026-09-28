@@ -1,0 +1,72 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "BACKEND::Router"
+      ],
+      "predicted_nodes": [
+        "Web/HTTP Layer::HTTP Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the backend web server entry point responsible for accepting HTTP requests and routing/dispatching them."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::algorithm"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Autocomplete Service\n(prefix match, limit 10",
+        "Application Layer::Value Extraction Utility\n(field values from objects"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT algorithm node is split by the AI into more detailed functional components (autocomplete logic and value extraction). The boundary mappings correspond to backend logic correctly."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::handlers"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Home Page Handler\n(GET /",
+        "Application Layer::Not Found Handler\n(404 HTML",
+        "Application Layer::Static Asset Handler\n(public assets, sets Content-Type"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single handlers node in the GT is split into distinct endpoint-specific handlers by the AI. The boundary maps correctly to the backend application layer."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::data.json"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Laureate Data (JSON",
+        "Data Layer::Local Data Access\n(JSON reader"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The static JSON data node in GT is divided by the AI into the data entity itself and its file reading/access component. Both map correctly to the data layer."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::index.html",
+        "FRONTEND::main.css",
+        "FRONTEND::userInput"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Browser UI\n(HTML/CSS/JS)\n- Search Input\n- Suggestions List"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The individual frontend assets and user input nodes from the GT are aggregated into a single comprehensive Client Browser UI node by the AI. The frontend/client boundary aligns perfectly."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "BACKEND::public assets\nhtml\ncss\njs",
+    "FRONTEND::XMLHttpRequest"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Heroku (PaaS"
+  ]
+}

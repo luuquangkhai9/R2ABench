@@ -1,0 +1,155 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Event Bus"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::GPSLogger App::Event Bus"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the internal Event Bus used for publishing location updates. The boundaries (GPSLogger Android Application vs GPSLogger App) are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Location Capture::Google Play Services\nLocation Provider"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::Google Play Services\n(Runtime"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Google Play Services location provider. The AI places it in the Android Device runtime boundary which is technically accurate for this external framework dependency, matching the semantic intent."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Location Capture::Location Listeners"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::GPSLogger App::Location Listeners\n(Android Location API / Fused"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Location Listeners. The boundary assignment corresponds to the main application context in both cases."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::CSV / URL Loggers"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::GPSLogger App::Loggers::Text Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the text/CSV based logging functionality mentioned in the PRD. The layer and boundary assignments represent the app's logging module accurately."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::GPX Logger"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::GPSLogger App::Loggers::GPX Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact match for the GPX Logger component within the logging boundaries."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::KML Logger"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::GPSLogger App::Loggers::KML Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact match for the KML Logger component within the logging boundaries."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::NMEA / GPRMC Encoder"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::GPSLogger App::GPRMC Encoder"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the GPRMC string encoding logic. They are appropriately mapped to the app boundary."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Upload::Upload Jobs",
+        "GPSLogger Android Application::Upload::Uploaders"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::GPSLogger App::Dropbox\nUploader",
+        "Android Device / Emulator::GPSLogger App::OpenGTS Uploader\n(UDP"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT generalizes uploaders and jobs, whereas the predicted nodes split them into specific implemented uploaders (Dropbox, OpenGTS). The boundaries are correctly attributed to the app."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::User Interface::Detailed View",
+        "GPSLogger Android Application::User Interface::Main Activity",
+        "GPSLogger Android Application::User Interface::Other Fragments",
+        "GPSLogger Android Application::User Interface::Simple View"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::GPSLogger App::Main Activity /\nFragments"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated multiple UI fragment nodes from the GT into a single Main Activity / Fragments node. The boundary accurately reflects the UI layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::Dropbox"
+      ],
+      "predicted_nodes": [
+        "External Services::Dropbox API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the external Dropbox service. Global vs External Services boundary mappings are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenGTS Endpoint\nUDP server"
+      ],
+      "predicted_nodes": [
+        "External Services::OpenGTS Server\n(UDP Endpoint"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the external OpenGTS UDP endpoint. Boundaries are semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenStreetMap"
+      ],
+      "predicted_nodes": [
+        "External Services::OpenStreetMap API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the external OpenStreetMap service. Boundaries correctly identify it as an external dependency."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "GPSLogger Android Application::Logging::Loggers"
+  ],
+  "unmatched_predicted_nodes": [
+    "Android Device / Emulator::GPSLogger App::GPS Logging Service",
+    "Android Device / Emulator::GPSLogger App::OpenGTS Transmission\nConfiguration",
+    "Android Device / Emulator::GPSLogger App::OpenStreetMap\nIntegration",
+    "Android Device / Emulator::GPSLogger App::Settings /\nSession",
+    "Build Environment::Google Play Services\n(dependency",
+    "Build Environment::Gradle Build",
+    "Global::Android Device / Emulator",
+    "Global::Build Environment",
+    "Global::External Services"
+  ]
+}

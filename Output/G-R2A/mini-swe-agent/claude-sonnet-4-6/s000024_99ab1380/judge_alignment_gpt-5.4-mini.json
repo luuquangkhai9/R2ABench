@@ -1,0 +1,150 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Internet"
+      ],
+      "predicted_nodes": [
+        "OCI Infrastructure Layer::OCI Tenancy / Compartment::Virtual Cloud Network (VCN::Public Subnet::Load Balancer\n(optional public entry"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Internet node is functionally represented by the public-facing load balancer entry path in the predicted architecture. The boundary is not identical, but it remains within a reasonable OCI networking/public-exposure context."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Internet\\nGateway"
+      ],
+      "predicted_nodes": [
+        "OCI Infrastructure Layer::OCI Tenancy / Compartment::OCI Networking Objects\\n(Route Tables, DHCP, Security Lists,\\nSubnets, VNICs",
+        "OCI Infrastructure Layer::OCI Tenancy / Compartment::Virtual Cloud Network (VCN::NAT Gateway\\n(Outbound Connectivity",
+        "OCI Infrastructure Layer::OCI Tenancy / Compartment::Virtual Cloud Network (VCN::Public Subnet::Load Balancer\\n(optional public entry"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted model splits and generalizes the network layer, but it does not explicitly preserve the Internet Gateway as a distinct node. The functional intent is only partially covered, so boundary attribution is not strictly correct."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::NAT\\nGateway"
+      ],
+      "predicted_nodes": [
+        "OCI Infrastructure Layer::OCI Tenancy / Compartment::Virtual Cloud Network (VCN::Private Subnet(s::NAT Gateway\\n(Outbound Connectivity"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct semantic match: NAT gateway for outbound connectivity in OCI VCN. The package/boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Load Balancer\\n(primary",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Load Balancer\\n(standby"
+      ],
+      "predicted_nodes": [
+        "OCI Infrastructure Layer::OCI Tenancy / Compartment::Virtual Cloud Network (VCN::Public Subnet::Load Balancer\\n(optional public entry"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has primary and standby load balancer nodes, while the AI aggregates them into a single load balancer node. This is a valid merge, and the public subnet / load balancer boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Route Table"
+      ],
+      "predicted_nodes": [
+        "OCI Infrastructure Layer::OCI Tenancy / Compartment::OCI Networking Objects\\n(Route Tables, DHCP, Security Lists,\\nSubnets, VNICs"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node groups route tables into a networking-objects layer. This is semantically equivalent and boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Security List"
+      ],
+      "predicted_nodes": [
+        "OCI Infrastructure Layer::OCI Tenancy / Compartment::OCI Networking Objects\\n(Route Tables, DHCP, Security Lists,\\nSubnets, VNICs"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Security list is correctly represented as part of OCI networking objects. Boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\\n(Public/Regional::Bastion\\nHost"
+      ],
+      "predicted_nodes": [
+        "OCI Infrastructure Layer::OCI Tenancy / Compartment::Virtual Cloud Network (VCN::Bastion Host\\n(Controlled SSH Access"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The bastion host is semantically equivalent and placed in the correct OCI VCN/public-access context."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Jenkins\\nController"
+      ],
+      "predicted_nodes": [
+        "OCI Infrastructure Layer::OCI Tenancy / Compartment::Virtual Cloud Network (VCN::Public Subnet::Jenkins Master Instance\\n(Compute VM"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT Jenkins controller/master is in a private subnet, while the AI places the master instance in a public subnet. This is a boundary and topology mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\\n(Private/Regional::Agent Node\\n(Fault Domain X",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\\n(Private/Regional::Agent Node\\n(Fault Domain Y"
+      ],
+      "predicted_nodes": [
+        "OCI Infrastructure Layer::OCI Tenancy / Compartment::Virtual Cloud Network (VCN::Private Subnet(s::Jenkins Slave/Agent\\nInstances (Compute VMs"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has two separate agent nodes split by fault domain; the AI aggregates them into a generic slave/agent instances node. This is an acceptable merge and the private subnet boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\\n(Private/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\\n(Private/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\\n(Private/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\\n(Private/Regional::Security List"
+      ],
+      "predicted_nodes": [
+        "OCI Infrastructure Layer::OCI Tenancy / Compartment::OCI Networking Objects\\n(Route Tables, DHCP, Security Lists,\\nSubnets, VNICs"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Multiple route tables and security lists are aggregated into a broader networking objects node. This is a valid merge with acceptable boundary attribution."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Healthcheck"
+      ],
+      "predicted_nodes": [
+        "OCI Infrastructure Layer::OCI Tenancy / Compartment::OCI Networking Objects\\n(Route Tables, DHCP, Security Lists,\\nSubnets, VNICs"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The healthcheck-related infrastructure is not represented as a distinct predicted node, but it is broadly subsumed under OCI networking objects. This is an approximate semantic match with acceptable boundary placement."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\\n(Public/Regional::Route Table",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\\n(Public/Regional::Security List"
+  ],
+  "unmatched_predicted_nodes": [
+    "Configuration & Security Layer::Cloud-Init Data\\n(base64-encoded",
+    "Configuration & Security Layer::Jenkins Cluster Config\\n(label_prefix, version,\\npassword, http_port, jnlp_port,\\nplugins",
+    "Configuration & Security Layer::SSH Key Material\\n(ssh_authorized_keys,\\nssh_private_key",
+    "Deployment Workflow Layer::JSON Input Files",
+    "Deployment Workflow Layer::Terraform CLI",
+    "Deployment Workflow Layer::Terraform Modules",
+    "Deployment Workflow Layer::Terraform Modules::Jenkins Master Module",
+    "Deployment Workflow Layer::Terraform Modules::Jenkins Slave/Agent Module",
+    "Deployment Workflow Layer::Terraform Modules::Root Module\\n(OCI + SSH + Cluster Config",
+    "Deployment Workflow Layer::terraform.tfvars\\n(Variable Files"
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Event Bus"
+      ],
+      "predicted_nodes": [
+        "Application/Service Layer::Event Bus"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are functionally identical. The AI's 'Application/Service Layer' boundary is semantically equivalent to the GT's 'GPSLogger Android Application' boundary for this component."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Location Capture::Google Play Services\\nLocation Provider"
+      ],
+      "predicted_nodes": [
+        "Android Framework::Google Play Services"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the Google Play Services dependency. The AI correctly places it in an 'Android Framework' boundary, which is a valid architectural representation for an external platform dependency, while the GT views it from within the application's 'Location Capture' context. The boundaries are semantically compatible."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Location Capture::Location Listeners"
+      ],
+      "predicted_nodes": [
+        "Application/Service Layer::Location Listeners"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are functionally identical. The AI's 'Application/Service Layer' is a correct and semantically equivalent boundary to the GT's 'GPSLogger Android Application::Location Capture' grouping."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::CSV / URL Loggers",
+        "GPSLogger Android Application::Logging::GPX Logger",
+        "GPSLogger Android Application::Logging::KML Logger",
+        "GPSLogger Android Application::Logging::Loggers"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Loggers",
+        "Data Layer::Log Files\\n(GPX, KML, text"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated the various specific logger components from the GT into a general 'Loggers' component and a 'Log Files' artifact node, which is a valid abstraction. Placing these logging-related components in the 'Data Layer' is architecturally correct and semantically equivalent to the GT's 'Logging' sub-boundary."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::NMEA / GPRMC Encoder"
+      ],
+      "predicted_nodes": [
+        "Data Layer::GPRMC Encoder"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are functionally identical, as GPRMC is the specific format mentioned in the PRD. Placing a data encoder in the 'Data Layer' is a sound architectural choice and is semantically consistent with the GT's 'Logging' sub-boundary."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::User Interface::Detailed View",
+        "GPSLogger Android Application::User Interface::Main Activity",
+        "GPSLogger Android Application::User Interface::Other Fragments",
+        "GPSLogger Android Application::User Interface::Simple View"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Fragments",
+        "Presentation Layer::Main Activity"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated the specific view/fragment nodes from the GT into a single 'Fragments' node, which is a valid simplification. The 'Presentation Layer' boundary is a standard architectural term and is semantically identical to the GT's 'User Interface' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Dropbox"
+      ],
+      "predicted_nodes": [
+        "External Systems::Dropbox"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are identical. The AI's 'External Systems' boundary is more specific and arguably better than 'Global', and it is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenGTS Endpoint\\nUDP server"
+      ],
+      "predicted_nodes": [
+        "External Systems::OpenGTS Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are semantically identical. The AI's 'External Systems' boundary is more specific and accurate than 'Global'."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenStreetMap"
+      ],
+      "predicted_nodes": [
+        "External Systems::OpenStreetMap"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are identical. The AI's 'External Systems' boundary is more specific and accurate than 'Global'."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "GPSLogger Android Application::Upload::Upload Jobs",
+    "GPSLogger Android Application::Upload::Uploaders"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application/Service Layer::GPS Logging Service",
+    "Build System::Gradle Properties",
+    "Global::Android Framework",
+    "Global::Build System",
+    "Global::External Systems"
+  ]
+}

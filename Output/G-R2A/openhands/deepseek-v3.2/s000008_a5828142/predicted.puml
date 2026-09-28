@@ -1,0 +1,127 @@
+@startuml
+title Bunny Code - System Architecture Diagram
+
+' Define components
+component "Vue Frontend" as frontend {
+    () "Browser App"
+    () "Workspace Editor"
+    () "Battle View"
+    () "Playback View"
+}
+
+component "Node.js/Express Backend" as backend {
+    () "REST API"
+    () "Socket.IO Server"
+    () "Authentication"
+    () "Project Management"
+    () "Battle Coordination"
+    () "File Upload"
+}
+
+database "MySQL" as mysql {
+    () "Users"
+    () "Projects"
+    () "Versions"
+    () "Battles"
+}
+
+database "InfluxDB" as influxdb {
+    () "Coding Process Records"
+    () "Time-series Data"
+}
+
+database "Redis" as redis {
+    () "Workspace Mappings"
+    () "Battle Invitations"
+    () "Battle State"
+    () "Live Coordination"
+}
+
+component "Docker Sandbox" as docker {
+    () "Code Execution"
+    () "Compilation"
+    () "Isolated Environment"
+}
+
+component "S3 Object Storage" as s3 {
+    () "Code Files"
+    () "Battle Results"
+    () "User Files"
+    () "Static Assets"
+    () "Archives"
+}
+
+component "CDN Distribution" as cdn {
+    () "Asset URLs"
+    () "File Distribution"
+}
+
+component "Nginx" as nginx {
+    () "Reverse Proxy"
+    () "Load Balancing"
+}
+
+' Define relationships and data flows
+frontend --> backend : "REST API\n(JWT Authentication)"
+frontend <-> backend : "Socket.IO\n(Real-time)"
+frontend --> nginx : "HTTP Requests"
+nginx --> backend : "Proxied Requests"
+
+backend --> mysql : "CRUD Operations\n(User, Project, Version, Battle Data)"
+backend --> influxdb : "Store/Query\nCoding Process Records"
+backend --> redis : "Cache Operations\n(Workspace, Battle State)"
+backend --> docker : "Submit Code\nfor Execution"
+backend --> s3 : "Upload Files\n(Code, Battle Results, Assets)"
+
+docker --> backend : "Execution Results"
+s3 --> cdn : "Storage Backend"
+cdn --> frontend : "Distributable URLs"
+
+' Deployment environment boundaries
+cloud "Browser Environment" {
+    frontend
+}
+
+cloud "Server Environment" {
+    nginx
+    backend
+    mysql
+    influxdb
+    redis
+    docker
+    s3
+    cdn
+}
+
+' Add notes for key requirements
+note top of backend
+  Authentication: JWT validation
+  Project Authorization: readOnly/authorization status
+  Battle Acceptance: Redis isolated execution
+  Code Execution: Docker sandbox isolation
+end note
+
+note right of redis
+  Required for:
+  - Workspace socket mappings
+  - Battle invitation state
+  - Live coordination
+  - Concurrency control
+end note
+
+note right of docker
+  Isolated execution environment
+  Compilation/execution results
+  Safety requirement NFR-005
+end note
+
+note right of s3
+  Stores:
+  - Code files
+  - Battle result files
+  - User files
+  - Static assets
+  - Archive files
+end note
+
+@enduml

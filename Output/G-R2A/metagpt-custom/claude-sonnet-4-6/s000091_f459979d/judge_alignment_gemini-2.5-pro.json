@@ -1,0 +1,67 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::BootstrapStore\nSmart Contract"
+      ],
+      "predicted_nodes": [
+        "Ethereum-compatible Blockchain Node::Ethereum Smart Contract\n(getAllClients / addClient /\ngetClientByEndpoint"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Ethereum smart contract responsible for bootstrap storage. The boundary attribution is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Blockchain Network\nEthereum / Web3j"
+      ],
+      "predicted_nodes": [
+        "LwM2M Device Management Backend (Java::Blockchain Integration Layer::Web3jConnector\n[Web3j library embedded",
+        "LwM2M Device Management Backend (Java::Blockchain Integration Layer::SmartContractProxy",
+        "LwM2M Device Management Backend (Java::Blockchain Integration Layer::BootstrapDataEncoder",
+        "LwM2M Device Management Backend (Java::Service Layer::BlockchainClientService\n[returns empty collection\non contract failure"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node representing the general Ethereum/Web3j integration network is split into finer-grained blockchain integration and service components by the AI. The boundary placement inside the backend correctly reflects their architectural role."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Secure API\nAuthenticated HTTP endpoints"
+      ],
+      "predicted_nodes": [
+        "LwM2M Device Management Backend (Java::API Layer::UserController",
+        "LwM2M Device Management Backend (Java::API Layer::JwtUtility\n[local token validation",
+        "LwM2M Device Management Backend (Java::Service Layer::UserService"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The secure API endpoints from GT are accurately mapped to the specific user-management API controller, service logic, and JWT validation utility by the AI. Boundaries align correctly as backend API and Service layers."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Server\nLeshan server component"
+      ],
+      "predicted_nodes": [
+        "Global::Leshan / Eclipse LwM2M Library",
+        "LwM2M Device Management Backend (Java::LwM2M / Parsing Layer::LwM2MNodeDeserializer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The LwM2M server component in the GT is split into the core Leshan library and the specific LwM2M node deserializer handling the JSON parsing logic. Boundary mappings are semantically acceptable."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "LwM2M Blockchain Platform::External Applications\nusing LwM2M",
+    "LwM2M Blockchain Platform::LwM2M Bootstrap Server",
+    "LwM2M Blockchain Platform::LwM2M Client\nDevice 1",
+    "LwM2M Blockchain Platform::LwM2M Client\nDevice 2",
+    "LwM2M Blockchain Platform::Management Web UI"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::LwM2M Device Management Backend (Java",
+    "LwM2M Device Management Backend (Java::Data / Model Layer::ClientBootstrapPayload",
+    "LwM2M Device Management Backend (Java::Data / Model Layer::SecurityInfoRecord",
+    "LwM2M Device Management Backend (Java::Data / Model Layer::User"
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Internet"
+      ],
+      "predicted_nodes": [
+        "Global::External Systems"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent external users or systems accessing the application. The 'Global' boundary is identical and correct for both."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Proxy"
+      ],
+      "predicted_nodes": [
+        "Proxy Layer::PlugIt Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the central proxy component. The AI's 'Proxy Layer' is a logical architectural layer, which is semantically equivalent to the GT's network boundary 'Internal Network' for this component."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB_Proxy"
+      ],
+      "predicted_nodes": [
+        "Proxy Layer::Proxy Data Store"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "'DB_Proxy' is a specific instance of the 'Proxy Data Store' mentioned in the PRD. The AI correctly placed this within the 'Proxy Layer' along with the PlugIt Proxy, which is a valid architectural grouping. This layer is semantically equivalent to the GT's 'Internal Network' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Service 1",
+        "Internal Network::PlugIt Service 2",
+        "Internal Network::PlugIt Service 3"
+      ],
+      "predicted_nodes": [
+        "Service Layer::PlugIt Service"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the multiple specific service instances from the GT into a single, abstract 'PlugIt Service' node. The 'Service Layer' is a correct and semantically equivalent architectural boundary compared to the GT's more generic 'Internal Network'."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB 1",
+        "Internal Network::DB 2",
+        "Internal Network::DB 3"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Service Data Store"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated the multiple service-specific databases from the GT into a single abstract 'Service Data Store' node. The AI's use of a dedicated 'Data Layer' is a standard and correct architectural practice, and it is semantically equivalent to the GT's 'Internal Network' context for these data stores."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Configuration Layer::API Endpoint Configuration",
+    "Configuration Layer::Private Settings Manager",
+    "Configuration Layer::Service Configuration Files",
+    "Data Layer::Alembic Migration Interface",
+    "External Integration Layer::API Client",
+    "Optional Components::Mail Processor"
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::GoDaddy API\\nDomain availability"
+      ],
+      "predicted_nodes": [
+        "External Systems::GoDaddy API",
+        "External Systems::GoDaddy API::Domain Availability Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT GoDaddy integration node is represented in the prediction as a parent API node plus a more specific domain-availability subnode. This is a valid split with semantically consistent external-system boundary attribution."
+    },
+    {
+      "gt_nodes": [
+        "Global::HTTP API\\nSession and attack requests"
+      ],
+      "predicted_nodes": [
+        "Application Layer::HTTP API Server",
+        "Application Layer::HTTP API Server::Job Publisher",
+        "Application Layer::HTTP API Server::Request Handler",
+        "Application Layer::HTTP API Server::Session Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT HTTP API node is decomposed into request handling, session management, and job publication responsibilities. These are functionally equivalent and remain within an appropriate application-layer boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Redis\\nCommand and reporting queues"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Redis Message Queue",
+        "Data Layer::Redis Message Queue::Job Channel",
+        "Data Layer::Redis Message Queue::Report Channel"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The Redis queue concept is preserved and split into job and report channels. The data-layer placement is semantically consistent with the GT node."
+    },
+    {
+      "gt_nodes": [
+        "Global::Socket.io\\nWebSocket result channel"
+      ],
+      "predicted_nodes": [
+        "Application Layer::WebSocket Server",
+        "Application Layer::WebSocket Server::Result Streamer",
+        "Application Layer::WebSocket Server::Session-based Channel"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted WebSocket server and its stream/session subcomponents correspond to the GT Socket.io result channel. Although more detailed, the functional role and boundary are consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Squatm3\\nDomain generation engine"
+      ],
+      "predicted_nodes": [
+        "Processing Layer::Domain Generation Engine",
+        "Processing Layer::Domain Generation Engine::squatm3 CLI Wrapper"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The wrapped squatm3 engine is correctly represented as a processing component with a CLI wrapper subnode. This matches the GT domain-generation engine boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Web UI\\nindex.html"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web UI",
+        "Presentation Layer::Web UI::Main Page"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT web UI entry page is captured by the presentation-layer web UI and its main page subnode. The boundary attribution is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::Workers\\nCommand consumers"
+      ],
+      "predicted_nodes": [
+        "Processing Layer::Background Consumer",
+        "Processing Layer::Background Consumer::Command Builder",
+        "Processing Layer::Background Consumer::Job Listener",
+        "Processing Layer::Background Consumer::Result Reporter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT command consumer workers are decomposed into listener, builder, and reporter responsibilities. This is a faithful functional split within the processing layer."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Application Layer::HTTP API Server",
+    "Application Layer::HTTP API Server::Job Publisher",
+    "Application Layer::HTTP API Server::Request Handler",
+    "Application Layer::HTTP API Server::Session Manager",
+    "Application Layer::WebSocket Server",
+    "Application Layer::WebSocket Server::Result Streamer",
+    "Application Layer::WebSocket Server::Session-based Channel",
+    "Data Layer::Redis Message Queue",
+    "Data Layer::Redis Message Queue::Job Channel",
+    "Data Layer::Redis Message Queue::Report Channel",
+    "External Systems::GoDaddy API",
+    "External Systems::GoDaddy API::Domain Availability Service",
+    "Presentation Layer::Web UI",
+    "Presentation Layer::Web UI::Main Page",
+    "Presentation Layer::Web UI::WebSocket Client",
+    "Processing Layer::Background Consumer",
+    "Processing Layer::Background Consumer::Command Builder",
+    "Processing Layer::Background Consumer::Job Listener",
+    "Processing Layer::Background Consumer::Result Reporter",
+    "Processing Layer::Domain Generation Engine",
+    "Processing Layer::Domain Generation Engine::squatm3 CLI Wrapper"
+  ]
+}

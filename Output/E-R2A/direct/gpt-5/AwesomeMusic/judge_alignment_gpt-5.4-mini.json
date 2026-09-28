@@ -1,0 +1,129 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone",
+        "Awesome Music System::Security Critical Zone::Nginx Cluster"
+      ],
+      "predicted_nodes": [
+        "Global::DMZ / Edge",
+        "DMZ / Edge::Gateway VM\\nUbuntu 18.04",
+        "DMZ / Edge::Gateway VM\\nUbuntu 18.04::nginx",
+        "DMZ / Edge::Gateway VM\\nUbuntu 18.04::fe"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT's security/perimeter zone containing the Nginx cluster is semantically represented by the predicted DMZ/Edge area with gateway VM and nginx. The AI split the perimeter-related deployment into more concrete nodes, and the boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer",
+        "Awesome Music System::Micro Service Layer::service-web"
+      ],
+      "predicted_nodes": [
+        "Internal Network::App VM(s)\\nUbuntu 18.04",
+        "Internal Network::App VM(s)\\nUbuntu 18.04::backA",
+        "Internal Network::App VM(s)\\nUbuntu 18.04::backB"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The web/backend application services in GT are grouped under the application VM boundary in the prediction. Although the GT names are service-oriented and the prediction is VM-oriented, they are semantically aligned at the application/service deployment layer."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-scheduler"
+      ],
+      "predicted_nodes": [
+        "Internal Network::App VM(s)\\nUbuntu 18.04::sched"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The scheduler service is correctly identified and placed in the application/internal network boundary, matching the backend scheduling role in the GT."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-auth"
+      ],
+      "predicted_nodes": [
+        "Internal Network::App VM(s)\\nUbuntu 18.04::backA"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The AI likely intended an authentication/backend service match, but the node name is generic and does not clearly preserve the auth-specific boundary/component identity. This is too ambiguous to confirm as a correct semantic match."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-discovery"
+      ],
+      "predicted_nodes": [
+        "Internal Network::Infrastructure VM(s)\\nUbuntu 18.04::etcd"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Service discovery in the GT is semantically equivalent to etcd-based discovery infrastructure in the prediction. The boundary is correct because discovery is placed in the infrastructure/service-discovery role."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer",
+        "Awesome Music System::Infra Layer::MySQL",
+        "Awesome Music System::Infra Layer::Prometheus",
+        "Awesome Music System::Infra Layer::RabbitMQ",
+        "Awesome Music System::Infra Layer::Redis"
+      ],
+      "predicted_nodes": [
+        "Internal Network::Infrastructure VM(s)\\nUbuntu 18.04",
+        "Internal Network::Infrastructure VM(s)\\nUbuntu 18.04::db",
+        "Internal Network::Infrastructure VM(s)\\nUbuntu 18.04::mq"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT infrastructure stack is partially reproduced by the predicted infrastructure VM with database and message queue components. MySQL maps to db and RabbitMQ maps to mq. Prometheus, Redis, and the overall infra layer are not fully represented, but the matched infrastructure placement is consistent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Awesome Music System::Micro Service Layer::service-auth::auth1",
+    "Awesome Music System::Micro Service Layer::service-auth::auth2",
+    "Awesome Music System::Micro Service Layer::service-auth::auth3",
+    "Awesome Music System::Micro Service Layer::service-discovery::discovery1",
+    "Awesome Music System::Micro Service Layer::service-discovery::discovery2",
+    "Awesome Music System::Micro Service Layer::service-discovery::discovery3",
+    "Awesome Music System::Micro Service Layer::service-scheduler::scheduler1",
+    "Awesome Music System::Micro Service Layer::service-scheduler::scheduler2",
+    "Awesome Music System::Micro Service Layer::service-scheduler::scheduler3",
+    "Awesome Music System::Micro Service Layer::service-web::web1",
+    "Awesome Music System::Micro Service Layer::service-web::web2",
+    "Awesome Music System::Micro Service Layer::service-web::web3",
+    "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx1",
+    "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx2",
+    "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx3",
+    "Awesome Music System::Security Critical Zone::Spring Cloud Gateway",
+    "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway1",
+    "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway2",
+    "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway3",
+    "Awesome Music System::Security Critical Zone::Static Resource Server",
+    "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server1",
+    "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server2",
+    "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server3"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::External Network",
+    "Global::Internal Network",
+    "Internal Network::AI VM(s)\\nUbuntu 18.04",
+    "Internal Network::AI VM(s)\\nUbuntu 18.04::classw",
+    "Internal Network::AI VM(s)\\nUbuntu 18.04::genw",
+    "Internal Network::AI VM(s)\\nUbuntu 18.04::recow",
+    "Internal Network::AI VM(s)\\nUbuntu 18.04::trainw",
+    "Internal Network::App VM(s)\\nUbuntu 18.04",
+    "Internal Network::App VM(s)\\nUbuntu 18.04::backA",
+    "Internal Network::App VM(s)\\nUbuntu 18.04::backB",
+    "Internal Network::App VM(s)\\nUbuntu 18.04::sched",
+    "Internal Network::Infrastructure VM(s)\\nUbuntu 18.04",
+    "Internal Network::Infrastructure VM(s)\\nUbuntu 18.04::db",
+    "Internal Network::Infrastructure VM(s)\\nUbuntu 18.04::etcd",
+    "Internal Network::Infrastructure VM(s)\\nUbuntu 18.04::hdfs",
+    "Internal Network::Infrastructure VM(s)\\nUbuntu 18.04::mq",
+    "DMZ / Edge::Gateway VM\\nUbuntu 18.04",
+    "DMZ / Edge::Gateway VM\\nUbuntu 18.04::fe",
+    "DMZ / Edge::Gateway VM\\nUbuntu 18.04::nginx"
+  ]
+}

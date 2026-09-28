@@ -1,0 +1,159 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "Global::Kafka Topic\\n(Event Stream"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the Kafka event-stream transport used for audit-event publication. The boundary is consistent at the global/infrastructure level."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "predicted_nodes": [
+        "Global::JVM Application (Java 11 / JVM 11",
+        "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT application server is represented by a broader JVM application/library boundary in the prediction, which aligns semantically with the client-library runtime context. The split into JVM application and library component is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "predicted_nodes": [
+        "JVM Application (Java 11 / JVM 11::Application Code",
+        "JVM Application (Java 11 / JVM 11::Application Code::Caller / Client Code"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The three GT client applications are abstracted into generic caller/client code in the predicted diagram. This is a valid aggregation of multiple integrating application clients into one caller-side node."
+    },
+    {
+      "gt_nodes": [
+        "Global::Databases / Filestores\\nElastic, Hadoop, etc."
+      ],
+      "predicted_nodes": [
+        "Global::Downstream Consumer\\nService"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents downstream storage/consumption systems outside the auditor scope; the predicted downstream consumer service is semantically similar as an out-of-scope consumer-side endpoint. The exact storage aspect is not preserved, but the architectural boundary remains external/global."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "predicted_nodes": [
+        "Global::AuditEvent\\n(JSON Payload"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT server produces audit events, and the predicted node captures the emitted AuditEvent payload at the global integration boundary. This is a reasonable representation of the externally visible output of the server component."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "predicted_nodes": [
+        "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::Auditing API\\nEntry Point",
+        "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::Object Diff Engine",
+        "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::AuditEvent Builder",
+        "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::Event Publisher\\nOrchestrator",
+        "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::AuditorEventConfig\\nResolver",
+        "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::Element Filter Engine"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT server-level auditor component is decomposed into its internal library responsibilities in the predicted diagram. The functional split into API entry point, diff engine, builder, config resolution, filtering, and publishing orchestration is architecturally consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "predicted_nodes": [
+        "JVM Application (Java 11 / JVM 11::Default Infrastructure Implementations",
+        "JVM Application (Java 11 / JVM 11::Default Infrastructure Implementations::Kafka EventPublisher\\nImplementation",
+        "JVM Application (Java 11 / JVM 11::Default Infrastructure Implementations::Application LogProvider\\nImplementation",
+        "JVM Application (Java 11 / JVM 11::Default Infrastructure Implementations::Custom Element Filter\\nImplementation"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These nodes represent the pluggable infrastructure dependencies of the auditor client library, which are part of the GT server/library ecosystem. The boundary attribution is appropriate for default implementations."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "predicted_nodes": [
+        "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::EventPublisher\\n<<interface>>",
+        "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::LogProvider\\n<<interface>>",
+        "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::Element Filter Engine::AuditEventElementFilter\\n<<interface>>",
+        "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::Element Filter Engine::InclusionFilter\\n(includes list"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT auditor server/client library depends on these abstractions and filter types. The predicted placement inside the client library boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "predicted_nodes": [
+        "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::AuditorEventConfig\\nResolver::applicationName",
+        "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::AuditorEventConfig\\nResolver::eventSource",
+        "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::AuditorEventConfig\\nResolver::eventSubType",
+        "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::AuditorEventConfig\\nResolver::metadata"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These are specific configuration fields of AuditorEventConfig, which belongs within the auditor library boundary. The finer split is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "predicted_nodes": [
+        "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::Object Diff Engine::Change Classifier\\n(CREATED / UPDATED / DELETED",
+        "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::Object Diff Engine::Field Comparator\\n(scalar, map, list,\\nnested, UUID, nullable"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT auditor server includes change detection logic, and the predicted diff engine components match that responsibility. The classification and comparison breakdown is architecturally appropriate."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::AuditEvent\\n(JSON Payload",
+    "Global::Downstream Consumer\\nService",
+    "Global::JVM Application (Java 11 / JVM 11",
+    "JVM Application (Java 11 / JVM 11::Application Code",
+    "JVM Application (Java 11 / JVM 11::Application Code::Caller / Client Code",
+    "JVM Application (Java 11 / JVM 11::Default Infrastructure Implementations",
+    "JVM Application (Java 11 / JVM 11::Default Infrastructure Implementations::Application LogProvider\\nImplementation",
+    "JVM Application (Java 11 / JVM 11::Default Infrastructure Implementations::Custom Element Filter\\nImplementation",
+    "JVM Application (Java 11 / JVM 11::Default Infrastructure Implementations::Kafka EventPublisher\\nImplementation",
+    "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library",
+    "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::AuditEvent Builder",
+    "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::AuditEvent Builder::Element Assembler\\n(name, updatedValue,\\npreviousValue, metadata.fqdn",
+    "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::Auditing API\\nEntry Point",
+    "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::AuditorEventConfig\\nResolver",
+    "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::Element Filter Engine",
+    "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::Element Filter Engine::AuditEventElementFilter\\n<<interface>>",
+    "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::Element Filter Engine::InclusionFilter\\n(includes list",
+    "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::Event Publisher\\nOrchestrator",
+    "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::EventPublisher\\n<<interface>>",
+    "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::LogProvider\\n<<interface>>",
+    "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::Object Diff Engine",
+    "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::Object Diff Engine::Change Classifier\\n(CREATED / UPDATED / DELETED",
+    "JVM Application (Java 11 / JVM 11::lowes/auditor\\nKotlin Client Library::Object Diff Engine::Field Comparator\\n(scalar, map, list,\\nnested, UUID, nullable"
+  ]
+}

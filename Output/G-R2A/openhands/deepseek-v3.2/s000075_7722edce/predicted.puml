@@ -1,0 +1,169 @@
+@startuml
+!define RECTANGLE class
+skinparam componentStyle rectangle
+skinparam backgroundColor #F0F0F0
+skinparam defaultFontSize 14
+title System Architecture: statlord - Real-time Display Data System
+
+package "Client Layer" {
+  [Browser Editor]
+  [Viewer Component]
+  [Display Devices]
+}
+
+package "Server Layer" {
+  [Python/Django Server]
+  [Static Assets Server]
+  [API Endpoints]
+}
+
+package "Data Layer" {
+  [PostgreSQL Database]
+  [Data Entities]
+}
+
+package "External Systems" {
+  [API Clients]
+  [Build System]
+}
+
+' Core system components and relationships
+Browser Editor -down-> [TypeScript/React SPA]
+Browser Editor -down-> [Redux State Management]
+Browser Editor -down-> [Canvas Editor]
+
+Viewer Component -down-> [Display Renderer]
+Viewer Component -down-> [Pixel Generator]
+
+Display Devices -down-> [OLED Displays]
+Display Devices -down-> [E-paper Displays] 
+Display Devices -down-> [LCD Displays]
+Display Devices -down-> [Browser Views]
+
+Python/Django Server -down-> [API Controllers]
+Python/Django Server -down-> [Data Models]
+Python/Django Server -down-> [Business Logic]
+
+Static Assets Server -down-> [Client Build Output]
+Static Assets Server -down-> [Web Resources]
+
+API Endpoints -down-> [Gauge API]
+API Endpoints -down-> [Display API]
+API Endpoints -down-> [Layout API]
+
+PostgreSQL Database -down-> [Gauge Table]
+PostgreSQL Database -down-> [Display Table]
+PostgreSQL Database -down-> [Layout Table]
+
+Data Entities -down-> [Gauge Entity]
+Data Entities -down-> [Display Entity]
+Data Entities -down-> [Layout Entity]
+
+API Clients -down-> [Data Posting]
+API Clients -down-> [Display Registration]
+
+Build System -down-> [Node.js/npm]
+Build System -down-> [Python 3.7+]
+
+' Main data flows and interactions
+Browser Editor --> Static Assets Server : Serves static files
+Browser Editor --> API Endpoints : CRUD operations
+Browser Editor --> Viewer Component : Render requests
+
+Viewer Component --> API Endpoints : Fetch display data
+Viewer Component --> Display Devices : Render output
+
+API Clients --> API Endpoints : Post data / Register displays
+API Endpoints --> Python/Django Server : Process requests
+Python/Django Server --> PostgreSQL Database : Persist data
+Python/Django Server --> Data Entities : Business logic
+
+Build System --> Static Assets Server : Builds client assets
+Static Assets Server --> Browser Editor : Serves application
+
+' Component details and annotations
+note top of [Browser Editor]
+  TypeScript/React Single-Page Application
+  Redux-managed state for:
+  - Controls
+  - Elements
+  - Layouts
+  - Gauges
+  - Displays
+  Canvas-based layout editing
+end note
+
+note top of [Python/Django Server]
+  Python 3.7+ runtime
+  Development server (runserver)
+  API-backed data entities
+  Containerized deployment
+  Development-grade (not production-ready)
+end note
+
+note top of [Viewer Component]
+  Display-oriented rendering path
+  Black-and-white pixel generation
+  Resolution-specific output
+  Browser-based rendering
+end note
+
+note top of [PostgreSQL Database]
+  Required for development
+  Persists:
+  - Gauge data (key, value)
+  - Display records
+  - Layout definitions
+  Foreign key relationships
+end note
+
+note top of [API Endpoints]
+  RESTful API for:
+  - Gauge resources (key, value)
+  - Display registration
+  - Layout management
+  Structured JSON payloads
+end note
+
+note top of [Display Devices]
+  Multiple display types supported:
+  - OLEDs
+  - E-paper
+  - LCDs
+  - Browsers
+  Unique identifiers
+  Resolution metadata
+  Rotation support
+end note
+
+' System boundaries
+rectangle "Development Environment" {
+  [Browser Editor]
+  [Viewer Component]
+  [Python/Django Server]
+  [Static Assets Server]
+  [PostgreSQL Database]
+  [Build System]
+}
+
+rectangle "External Integration" {
+  [API Clients]
+  [Display Devices]
+}
+
+' Key relationships and dependencies
+BuildSystem ..> Node.js/npm : requires
+BuildSystem ..> Python 3.7+ : requires
+Python/Django Server ..> PostgreSQL Database : depends on
+Browser Editor ..> Static Assets Server : depends on
+API Endpoints ..> Data Entities : manages
+
+' Data model relationships
+[Gauge Entity] --> [Gauge Table] : persists to
+[Display Entity] --> [Display Table] : persists to
+[Layout Entity] --> [Layout Table] : persists to
+
+[Display Entity] --> [Layout Entity] : references (current_layout)
+[Layout Entity] --> [Display Entity] : positions (display_positions)
+
+@enduml

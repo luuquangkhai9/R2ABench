@@ -1,0 +1,129 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::End User",
+        "Frontend Repo::Vue 3"
+      ],
+      "predicted_nodes": [
+        "External User::Web Browser (Vue Frontend"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly merged the end-user actor and the frontend technology (Vue) into a single logical client-side node. The predicted boundary 'External User' is semantically equivalent to the GT's 'Global' (for the user) and a reasonable grouping for the client-facing application."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Reverse Proxy::Nginx"
+      ],
+      "predicted_nodes": [
+        "Load Balancer / Reverse Proxy::Nginx"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct functional match for the Nginx reverse proxy. The predicted boundary 'Load Balancer / Reverse Proxy' is semantically identical to the GT's 'Application Runtime::Reverse Proxy'."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Reverse Proxy::Express",
+        "Backend Repo::Node.js"
+      ],
+      "predicted_nodes": [
+        "Application Backend::Node.js/Express Server",
+        "Application Backend::Socket.IO Server"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly consolidated the backend framework (Express) and runtime (Node.js) into a logical server component. It also accurately identified the Socket.IO server as a key part of the backend, which is mentioned in the PRD but not a top-level node in the GT. The 'Application Backend' boundary is a more accurate and cohesive grouping than the GT's separate 'Application Runtime' and 'Backend Repo'."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Data Storage::MySQL\\n(Relational Data",
+        "Data Storage::MySQL\\n(Relational Data::Battles",
+        "Data Storage::MySQL\\n(Relational Data::Projects",
+        "Data Storage::MySQL\\n(Relational Data::Users",
+        "Data Storage::MySQL\\n(Relational Data::Versions"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly expanded the generic MySQL node into a more detailed representation, showing the specific data domains it manages as described in the PRD. The predicted boundary 'Data Storage' is semantically equivalent to the GT's 'Application Runtime::Database'."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::InfluxDB"
+      ],
+      "predicted_nodes": [
+        "Data Storage::InfluxDB\\n(Time-Series",
+        "Data Storage::InfluxDB\\n(Time-Series::Coding Process Records"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly split the InfluxDB node to specify its purpose of storing 'Coding Process Records', as per the PRD. The 'Data Storage' boundary is semantically equivalent to the GT's 'Application Runtime::Database'."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::Redis"
+      ],
+      "predicted_nodes": [
+        "Data Storage::Redis\\n(Cache & Coordination",
+        "Data Storage::Redis\\n(Cache & Coordination::Battle Invitations",
+        "Data Storage::Redis\\n(Cache & Coordination::Battle State",
+        "Data Storage::Redis\\n(Cache & Coordination::Workspace Mappings"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI accurately expanded the generic Redis node to detail its specific functions (battle state, invitations, workspace coordination) mentioned in the PRD. The 'Data Storage' boundary is semantically equivalent to the GT's 'Application Runtime::Database'."
+    },
+    {
+      "gt_nodes": [
+        "Coding Sandbox::Coding Sandbox 1::Docker",
+        "Coding Sandbox::Coding Sandbox 2::Docker"
+      ],
+      "predicted_nodes": [
+        "Execution & File Services::Docker Sandbox\\n(Code Execution"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the two redundant Docker sandbox instances from the GT into a single logical 'Docker Sandbox' component. The predicted boundary 'Execution & File Services' is a reasonable semantic grouping for this component."
+    },
+    {
+      "gt_nodes": [
+        "Static Asset Delivery::Storage\\nS3 bucket"
+      ],
+      "predicted_nodes": [
+        "Execution & File Services::S3-Compatible\\nObject Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct functional match for object storage. While the boundary names differ, 'Execution & File Services' is an acceptable, though broad, semantic grouping for a service that provides file storage."
+    },
+    {
+      "gt_nodes": [
+        "Static Asset Delivery::CDN\\nCloudFront"
+      ],
+      "predicted_nodes": [
+        "Execution & File Services::CDN / Distribution"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct functional match for the CDN. The AI correctly uses a generic name. The 'Execution & File Services' boundary is an acceptable semantic grouping for a distribution service."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Backend Repo::CI/CD Workflow",
+    "Backend Repo::Deploy Key",
+    "Backend Repo::GitHub",
+    "Coding Sandbox::Coding Sandbox 1::Exporter",
+    "Coding Sandbox::Coding Sandbox 1::Node.js",
+    "Coding Sandbox::Coding Sandbox 2::Exporter",
+    "Coding Sandbox::Coding Sandbox 2::Node.js",
+    "Frontend Repo::CI/CD Workflow",
+    "Frontend Repo::Deploy Key",
+    "Frontend Repo::GitHub",
+    "Global::Developer"
+  ],
+  "unmatched_predicted_nodes": []
+}

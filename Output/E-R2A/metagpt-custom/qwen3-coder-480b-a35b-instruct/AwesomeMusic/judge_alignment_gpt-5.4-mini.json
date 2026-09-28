@@ -1,0 +1,177 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::RabbitMQ"
+      ],
+      "predicted_nodes": [
+        "External Systems::RabbitMQ"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the RabbitMQ message broker. The predicted boundary is different but semantically equivalent as an external infrastructure dependency."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::MySQL"
+      ],
+      "predicted_nodes": [
+        "Data Tier::Database Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent persistent database storage. The predicted node is generic rather than MySQL-specific, but it is still the same storage responsibility and boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::Prometheus"
+      ],
+      "predicted_nodes": [
+        "Global::Application Tier"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No clear semantic equivalent is present; Prometheus monitoring is not represented in the predicted nodes."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::Redis"
+      ],
+      "predicted_nodes": [
+        "Global::Application Tier"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No clear semantic equivalent is present; Redis cache/storage is not represented in the predicted nodes."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-auth",
+        "Awesome Music System::Micro Service Layer::service-auth::auth1",
+        "Awesome Music System::Micro Service Layer::service-auth::auth2",
+        "Awesome Music System::Micro Service Layer::service-auth::auth3"
+      ],
+      "predicted_nodes": [
+        "Application Tier::Web Backend::Authentication Service",
+        "Global::User API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT auth service cluster is aggregated into a single Authentication Service. This is semantically correct and stays within the backend/application layer."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-scheduler",
+        "Awesome Music System::Micro Service Layer::service-scheduler::scheduler1",
+        "Awesome Music System::Micro Service Layer::service-scheduler::scheduler2",
+        "Awesome Music System::Micro Service Layer::service-scheduler::scheduler3"
+      ],
+      "predicted_nodes": [
+        "Application Tier::Scheduling Layer::Task Scheduler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the scheduling component that triggers training and generation tasks. The boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-web",
+        "Awesome Music System::Micro Service Layer::service-web::web1",
+        "Awesome Music System::Micro Service Layer::service-web::web2",
+        "Awesome Music System::Micro Service Layer::service-web::web3"
+      ],
+      "predicted_nodes": [
+        "Application Tier::Web Backend::User Management",
+        "Application Tier::Web Backend::Score Management",
+        "Application Tier::Web Backend::Search Service",
+        "Application Tier::Web Backend::Hot Charts Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT web backend service is split into functional backend services. This is a reasonable decomposition within the backend/application layer."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone::Spring Cloud Gateway",
+        "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway1",
+        "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway2",
+        "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway3"
+      ],
+      "predicted_nodes": [
+        "Global::Application Tier"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "The gateway is a security boundary component, but the predicted nodes do not explicitly represent it. Placing it under generic application tier would be a boundary confusion if it were intended."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone::Nginx Cluster",
+        "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx1",
+        "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx2",
+        "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx3"
+      ],
+      "predicted_nodes": [
+        "External Systems::Apache Hadoop",
+        "External Systems::RabbitMQ",
+        "External Systems::etcd"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "Nginx is not represented among the predicted nodes. The external systems listed are unrelated."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone::Static Resource Server",
+        "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server1",
+        "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server2",
+        "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server3"
+      ],
+      "predicted_nodes": [
+        "Web Tier::Web Frontend::Frontend UI"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "Static resource serving is not explicitly represented; the frontend UI is related but not functionally equivalent to the static resource server cluster."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Awesome Music System::Infra Layer::Prometheus",
+    "Awesome Music System::Infra Layer::Redis",
+    "Awesome Music System::Security Critical Zone::Nginx Cluster",
+    "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx1",
+    "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx2",
+    "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx3",
+    "Awesome Music System::Security Critical Zone::Spring Cloud Gateway",
+    "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway1",
+    "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway2",
+    "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway3",
+    "Awesome Music System::Security Critical Zone::Static Resource Server",
+    "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server1",
+    "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server2",
+    "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server3"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application Tier::Algorithm Service::AI Generation Engine",
+    "Application Tier::Algorithm Service::Model Training Service",
+    "Application Tier::Algorithm Service::Recommendation Engine",
+    "Application Tier::Web Backend::Authentication Service",
+    "Application Tier::Web Backend::Hot Charts Service",
+    "Application Tier::Web Backend::Score Management",
+    "Application Tier::Web Backend::Search Service",
+    "Application Tier::Web Backend::User Management",
+    "Data Tier::Database Storage",
+    "External Systems::Apache Hadoop",
+    "External Systems::etcd",
+    "Global::AI API",
+    "Global::Application Tier",
+    "Global::Charts API",
+    "Global::Data Tier",
+    "Global::External Systems",
+    "Global::Score API",
+    "Global::Search API",
+    "Global::User API",
+    "Global::Web Tier",
+    "Web Tier::Web Frontend::Frontend UI"
+  ]
+}

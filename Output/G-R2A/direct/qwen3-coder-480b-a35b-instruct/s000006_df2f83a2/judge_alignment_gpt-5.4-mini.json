@@ -1,0 +1,135 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Biomechanical Model::BaseBMModel",
+        "Biomechanical Model::DerivedClass",
+        "Biomechanical Model::MoblArmsIndex"
+      ],
+      "predicted_nodes": [
+        "Global::Biomechanical Model Modules"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT contains multiple biomechanical model implementation nodes, while the prediction aggregates them into a single module boundary. This is semantically consistent with the PRD's modular biomechanical model organization."
+    },
+    {
+      "gt_nodes": [
+        "Interaction Task::BaseTask",
+        "Interaction Task::DerivedClass",
+        "Interaction Task::Pointing",
+        "Interaction Task::Tracking"
+      ],
+      "predicted_nodes": [
+        "Global::Interaction Task Modules"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The prediction correctly aggregates the GT interaction task base and concrete task nodes into a higher-level task modules node, which matches the architecture context."
+    },
+    {
+      "gt_nodes": [
+        "Perception::BaseModule",
+        "Perception::BasicWithEEPos",
+        "Perception::DerivedClass",
+        "Perception::FixedEye",
+        "Perception::Perception"
+      ],
+      "predicted_nodes": [
+        "Global::Perception Modules"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT perception hierarchy is consolidated into a single perception modules node. This is a valid abstraction and stays within the correct perception boundary."
+    },
+    {
+      "gt_nodes": [
+        "Perception::Modalities::Modality",
+        "Perception::Modalities::Proprioception",
+        "Perception::Modalities::Vision"
+      ],
+      "predicted_nodes": [
+        "Global::Perception Modules"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The modality-specific GT nodes are subsumed by the broader perception modules grouping. Although the prediction does not explicitly preserve the modality sub-boundary, it remains semantically within the correct perception area rather than crossing into an incorrect layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::Simulator"
+      ],
+      "predicted_nodes": [
+        "Global::Gym-Compatible Simulator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These refer to the produced standalone simulator package exposed through the Gym interface. The naming differs, but the component is semantically equivalent and correctly placed in the global system boundary."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Global::Simulator Builder"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a valid architectural component implied by the PRD, but there is no directly corresponding GT node in the provided manual list."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Global::MuJoCo XML Integration Layer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a valid architectural component implied by the PRD, but there is no directly corresponding GT node in the provided manual list."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Global::YAML Configuration"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a valid architectural input artifact implied by the PRD, but there is no directly corresponding GT node in the provided manual list."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Global::Reinforcement Learning Workflow"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This aligns with the PRD's training workflow, but the manual GT node list does not include a distinct training workflow node."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Global::Evaluation Runner"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This aligns with the PRD's evaluation functionality, but the manual GT node list does not include a distinct evaluation runner node."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Global::Run Folder Artifacts"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This matches the PRD's run-folder artifacts concept, but there is no corresponding GT node in the provided manual list."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Global::Simulator Packaging"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This matches the PRD's standalone packaging requirement, but there is no corresponding GT node in the provided manual list."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

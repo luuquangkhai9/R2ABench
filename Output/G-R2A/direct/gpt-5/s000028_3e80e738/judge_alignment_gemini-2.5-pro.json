@@ -1,0 +1,67 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "API Gateway Account::API Gateway"
+      ],
+      "predicted_nodes": [
+        "API Gateway Account::Amazon API Gateway\\n(REST API",
+        "API Gateway Account::Method: GET /whoami\\n(WhoAmI",
+        "API Gateway Account::Method: ANY /ecs\\n(ECS Proxy",
+        "API Gateway Account::Deployment & Stage\\n(Output: CallbackURL"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The generic GT 'API Gateway' node is correctly expanded by the AI into its specific constituent components as detailed in the PRD (the gateway resource itself, the 'WhoAmI' and 'ECS' methods, and the deployment stage). All components are accurately placed within the 'API Gateway Account' boundary."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::Cognito-authorizer::hello-function",
+        "API Gateway Account::auth-function"
+      ],
+      "predicted_nodes": [
+        "API Gateway Account::Cognito Authorizer\\n(type: COGNITO_USER_POOLS"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's abstract functional descriptions ('auth-function', 'hello-function') are correctly consolidated by the AI into the specific technical component, 'Cognito Authorizer', as required by PRD FR-009. The boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Cognito Account::Cognito User Pool"
+      ],
+      "predicted_nodes": [
+        "Cognito Account::Cognito User Pool"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "An exact match of the component name and its boundary. Both GT and AI correctly identify the 'Cognito User Pool' within the 'Cognito Account'."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "API Gateway Account::Calls hello/GET with id_token in headers",
+    "API Gateway Account::Returns hello plus user name when authorized",
+    "Cognito Account::Cognito Hosted UI",
+    "Global::User"
+  ],
+  "unmatched_predicted_nodes": [
+    "API Gateway Account::API Gateway Stack",
+    "API Gateway Account::Amazon SQS (Regional Service",
+    "API Gateway Account::Integration: VPC Link\\n-> NLB (input ARN",
+    "API Gateway Account::Network Load Balancer\\n(provided input",
+    "API Gateway Account::Networking (VPC::Interface VPC Endpoint\\nService: com.amazonaws.<region>.sqs\\nPrivate DNS: true",
+    "API Gateway Account::Networking (VPC::Security Group\\nIngress: TCP 0-65535\\nSource: VpcCidr",
+    "API Gateway Account::Networking (VPC::Subnets\\n(configured list",
+    "API Gateway Account::Networking (VPC::VPC\\n(VpcId, VpcCidr",
+    "Cognito Account::Cognito Stack",
+    "Cognito Account::IAM Role (Authenticated",
+    "Cognito Account::IAM Role (Unauthenticated)\\nAssumeRoleWithWebIdentity\\nPrincipal: cognito-identity.amazonaws.com\\nConditions: amr=unauthenticated, aud=IdentityPoolId",
+    "Cognito Account::Identity Pool Role Attachment",
+    "Cognito Account::Identity Pool\\n(AllowUnauthenticated = true",
+    "Cognito Account::User Pool Client\\n(read/write attributes: custom:Role, email",
+    "Cognito Account::days|hours|minutes|seconds",
+    "Global::API Gateway Account",
+    "Global::Cognito Account",
+    "Installation & Orchestration::CloudFormation Templates\\n(YAML, 2010-09-09"
+  ]
+}

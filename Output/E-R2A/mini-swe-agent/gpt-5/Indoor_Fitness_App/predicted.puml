@@ -1,0 +1,62 @@
+@startuml
+skinparam componentStyle rectangle
+title Indoor Fitness App - Layered Component Architecture
+
+package Presentation Layer {
+  [Mobile App UI] as MobileUI
+}
+
+package Device Layer (On-Device) {
+  [Camera Capture] as Camera
+  [Pose Estimation Model Runtime] as ModelRuntime
+  [Pose Estimation Engine] as PoseEngine
+  [Posture Evaluation] as PostureEval
+  [Casting Module] as Casting
+}
+
+package Integration Layer {
+  [Network Connectivity (HTTPS/WebSocket)] as Net
+}
+
+package Service Layer (Backend) {
+  [API Gateway and Web Service] as API
+  [Auth and User Management Service] as AuthSvc
+  [Recommendation Service] as RecoSvc
+  [Report and Poster Service] as ReportSvc
+  [Training History Service] as HistorySvc
+}
+
+package Data Layer {
+  database User and Training SQL Database as SQLDB
+  [Standard Movement Repository] as StdRepo
+  [Media and Object Storage] as ObjStore
+}
+
+package External Devices {
+  [Android Casting Target Device] as AndroidCast
+}
+
+MobileUI --> Camera
+Camera --> PoseEngine
+PoseEngine --> ModelRuntime
+PoseEngine --> PostureEval
+MobileUI --> PostureEval
+MobileUI --> Casting
+Casting --> AndroidCast
+
+MobileUI --> Net
+Net --> API
+
+API --> AuthSvc
+API --> RecoSvc
+API --> ReportSvc
+API --> HistorySvc
+
+AuthSvc --> SQLDB
+HistorySvc --> SQLDB
+RecoSvc --> SQLDB
+ReportSvc --> SQLDB
+ReportSvc --> ObjStore
+RecoSvc --> StdRepo
+
+@enduml

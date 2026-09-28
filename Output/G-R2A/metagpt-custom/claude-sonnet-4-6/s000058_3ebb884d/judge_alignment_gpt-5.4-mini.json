@@ -1,0 +1,138 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::AWS EventBridge"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::AWS Infrastructure::EventBridge Rule"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the EventBridge-based routing component responsible for matching events and forwarding them onward."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::SNS Topic\\nalerts"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::AWS Infrastructure::SNS Topic"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the SNS topic used as the alert notification destination."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::Chat notification",
+        "AWS Cloud\\nConnector Account::Email notification",
+        "AWS Cloud\\nConnector Account::Slack notification"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::AWS Infrastructure::SNS Subscription Targets\\n(manually maintained endpoints"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT shows multiple notification endpoints; the AI aggregated them into a single manually maintained SNS subscription targets node, which is semantically equivalent and boundary-consistent."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::CMS BigMAC"
+      ],
+      "predicted_nodes": [
+        "CMS BigMAC::BigMAC Data Receiver"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the downstream CMS BigMAC side receiving transferred data, though the AI uses a more functional label."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::connector::Private subnet::AWS Fargate\\nKafka Connect Cluster"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::AWS Infrastructure::ECS Cluster"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "This is a severe boundary/modeling mismatch: the GT is a Kafka Connect cluster in a private subnet on Fargate, while the AI placed it as a generic ECS cluster, which changes the underlying runtime and architecture."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::topics::Private subnet::AWS Lambda\\ncreate/delete topics"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::Connector Management Layer::Connector Configuration Handler\\n(cluster + service + connector defs",
+        "AWS Account / Region::Connector Management Layer::Connector Management Library\\nput / delete(empty-set) / restart\\n(FR-002, DR-002"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Lambda responsible for create/delete topic operations is represented by the AI as connector-management logic. While the decomposition differs, it remains within the same connector-management responsibility and does not indicate a cross-context error."
+    },
+    {
+      "gt_nodes": [
+        "Global::VPC peering\\nconnection"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::AWS Infrastructure::VPC peering connection"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the same VPC peering connectivity element, with only the boundary labeling changed."
+    },
+    {
+      "gt_nodes": [
+        "Appian::Appian Data Source"
+      ],
+      "predicted_nodes": [
+        "Global::Appian"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Appian external source/system."
+    },
+    {
+      "gt_nodes": [
+        "CMS BigMAC::BigMAC Data Receiver"
+      ],
+      "predicted_nodes": [
+        "Global::CMS BigMAC"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the external CMS BigMAC system."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::AWS EventBridge"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::AWS Infrastructure::IAM Policy\\n(EventBridge publish\\npermission on SNS"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "This does not match the EventBridge service itself; it matches a permission artifact for publishing to SNS, which is a different architectural element."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "AWS Cloud\\nAppian Source::VPC::Appian\\nOracle DB"
+  ],
+  "unmatched_predicted_nodes": [
+    "AWS Account / Region::AWS Infrastructure::AWS CLI Credentials",
+    "AWS Account / Region::AWS Infrastructure::ECS Service\\n(runtime event producer",
+    "AWS Account / Region::AWS Infrastructure::IAM Policy\\n(EventBridge publish\\npermission on SNS",
+    "AWS Account / Region::AWS Infrastructure::SNS Subscription Targets\\n(manually maintained endpoints",
+    "AWS Account / Region::AWS Infrastructure::SNS Topic",
+    "AWS Account / Region::CI/CD Layer::GitHub Actions Workflow\\n(deploy.yml",
+    "AWS Account / Region::CLI / Script Layer::Stage Listing Script\\n(listRunningStages",
+    "AWS Account / Region::Connector Management Layer::Connector Configuration Handler\\n(cluster + service + connector defs",
+    "AWS Account / Region::Connector Management Layer::Connector Management Library\\nput / delete(empty-set) / restart\\n(FR-002, DR-002",
+    "AWS Account / Region::Event Routing & Alerting Layer::SNS Subscription Manager\\n(manual / out-of-band operator action)\\n(FR-004, NFR-002",
+    "AWS Account / Region::Metrics Collection Layer::Deployment Metrics Collector\\nfailedRuns / passedRuns\\n(FR-005",
+    "AWS Account / Region::Metrics Collection Layer::PR Metrics Collector\\ncreated_at / merged_at\\nwhole-hour difference\\n(FR-006, DR-005",
+    "AWS Account / Region::Metrics Collection Layer::Paginated Result Aggregator\\nper_page=100\\n(NFR-004",
+    "AWS Account / Region::Runtime Environment::Node Version Manager\\n(nvm use - NFR-001",
+    "GitHub Platform::GitHub Actions API",
+    "GitHub Platform::GitHub Pull Requests API"
+  ]
+}

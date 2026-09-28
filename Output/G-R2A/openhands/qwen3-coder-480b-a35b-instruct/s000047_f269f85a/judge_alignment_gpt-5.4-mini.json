@@ -1,0 +1,199 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Archifiltre::Electron",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Electron Desktop Application::Main Process",
+        "Electron Desktop Application::Renderer Process",
+        "Electron Desktop Application::Controller Layer::Export Controller",
+        "Electron Desktop Application::Controller Layer::Hash Controller",
+        "Electron Desktop Application::Controller Layer::Settings Controller"
+      ],
+      "reasoning": "The predicted architecture clearly grounds the Electron desktop application runtime, with main/renderer process and controller/workflow nodes covering the Electron concern."
+    },
+    {
+      "gt_node": "Archifiltre::React.js",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Electron Desktop Application::Renderer Process"
+      ],
+      "reasoning": "The renderer process is the most direct predicted concept corresponding to the React.js frontend UI layer, even though React is not named explicitly."
+    },
+    {
+      "gt_node": "Archifiltre::Redux",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Electron Desktop Application::Renderer Process",
+        "Electron Desktop Application::Controller Layer::Settings Controller"
+      ],
+      "reasoning": "Redux is a frontend state-management concern typically associated with the renderer/UI layer; the renderer process and related controller coverage provide partial conceptual grounding."
+    },
+    {
+      "gt_node": "GitHub::Continuous Integration /\\nContinuous Deployment",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node corresponds to CI/CD concerns."
+    },
+    {
+      "gt_node": "GitHub::Issues /\\nPull requests",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node corresponds to issues or pull-request workflow concerns."
+    },
+    {
+      "gt_node": "GitHub::Releases",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node corresponds to release management."
+    },
+    {
+      "gt_node": "Global::Matomo",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted analytics/tracking node is present."
+    },
+    {
+      "gt_node": "Global::Sentry",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted error-monitoring/telemetry node is present."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Electron Desktop Application::Controller Layer::Export Controller",
+      "grounded": true,
+      "reference_nodes": [
+        "Archifiltre::Electron",
+        "Archifiltre::React.js",
+        "Archifiltre::Redux"
+      ],
+      "reasoning": "This is grounded in the Electron application architecture and the document's controller-level export workflows."
+    },
+    {
+      "predicted_node": "Electron Desktop Application::Controller Layer::Hash Controller",
+      "grounded": true,
+      "reference_nodes": [
+        "Archifiltre::Electron"
+      ],
+      "reasoning": "This controller is grounded by the Electron runtime and the hash-computation workflow described in the PRD."
+    },
+    {
+      "predicted_node": "Electron Desktop Application::Controller Layer::Settings Controller",
+      "grounded": true,
+      "reference_nodes": [
+        "Archifiltre::Electron",
+        "Archifiltre::Redux"
+      ],
+      "reasoning": "Settings sanitization and persisted settings handling are grounded in the Electron app and frontend state-management context."
+    },
+    {
+      "predicted_node": "Electron Desktop Application::Main Process",
+      "grounded": true,
+      "reference_nodes": [
+        "Archifiltre::Electron"
+      ],
+      "reasoning": "This directly corresponds to the Electron application runtime structure."
+    },
+    {
+      "predicted_node": "Electron Desktop Application::Renderer Process",
+      "grounded": true,
+      "reference_nodes": [
+        "Archifiltre::Electron",
+        "Archifiltre::React.js",
+        "Archifiltre::Redux"
+      ],
+      "reasoning": "This is grounded as the frontend/UI process associated with React.js and Redux in an Electron app."
+    },
+    {
+      "predicted_node": "Electron Desktop Application::Translation Module",
+      "grounded": true,
+      "reference_nodes": [
+        "Archifiltre::React.js",
+        "Archifiltre::Redux"
+      ],
+      "reasoning": "The PRD explicitly references passing the translation module's current language into export workers."
+    },
+    {
+      "predicted_node": "Electron Desktop Application::User Data Storage",
+      "grounded": true,
+      "reference_nodes": [
+        "Archifiltre::Electron"
+      ],
+      "reasoning": "This is grounded by the requirement to write hash debug artifacts under the Electron application user data directory."
+    },
+    {
+      "predicted_node": "Electron Desktop Application::Worker Layer::CSV Export Worker",
+      "grounded": true,
+      "reference_nodes": [
+        "Archifiltre::Electron"
+      ],
+      "reasoning": "This is grounded by the asynchronous CSV export worker requirement."
+    },
+    {
+      "predicted_node": "Electron Desktop Application::Worker Layer::Excel Export Worker",
+      "grounded": true,
+      "reference_nodes": [
+        "Archifiltre::Electron"
+      ],
+      "reasoning": "This is grounded by the asynchronous Excel export worker requirement."
+    },
+    {
+      "predicted_node": "Electron Desktop Application::Worker Layer::Hash Computation Worker",
+      "grounded": true,
+      "reference_nodes": [
+        "Archifiltre::Electron"
+      ],
+      "reasoning": "This is grounded by the batch hash computation and background-processing requirements."
+    },
+    {
+      "predicted_node": "Electron Desktop Application::Worker Layer::RESIP Export Worker",
+      "grounded": true,
+      "reference_nodes": [
+        "Archifiltre::Electron"
+      ],
+      "reasoning": "This is grounded by the asynchronous RESIP export workflow."
+    },
+    {
+      "predicted_node": "Electron Desktop Application::Worker Layer::Tree CSV Worker",
+      "grounded": true,
+      "reference_nodes": [
+        "Archifiltre::Electron"
+      ],
+      "reasoning": "This is grounded by the asynchronous tree CSV export workflow."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Archifiltre::Electron"
+      ],
+      "predicted_nodes": [
+        "Electron Desktop Application::Main Process",
+        "Electron Desktop Application::Renderer Process",
+        "Electron Desktop Application::Controller Layer::Export Controller",
+        "Electron Desktop Application::Controller Layer::Hash Controller",
+        "Electron Desktop Application::Controller Layer::Settings Controller",
+        "Electron Desktop Application::Translation Module",
+        "Electron Desktop Application::User Data Storage",
+        "Electron Desktop Application::Worker Layer::CSV Export Worker",
+        "Electron Desktop Application::Worker Layer::Excel Export Worker",
+        "Electron Desktop Application::Worker Layer::Hash Computation Worker",
+        "Electron Desktop Application::Worker Layer::RESIP Export Worker",
+        "Electron Desktop Application::Worker Layer::Tree CSV Worker"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted nodes decompose the Electron application into its runtime, controller, translation, storage, and worker concerns, which are semantically consistent with the GT Electron boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "GitHub::Continuous Integration /\\nContinuous Deployment",
+    "GitHub::Issues /\\nPull requests",
+    "GitHub::Releases",
+    "Global::Matomo",
+    "Global::Sentry"
+  ],
+  "unmatched_predicted_nodes": []
+}

@@ -1,0 +1,202 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Event Bus"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::Application Layer::Core Services::Event Bus"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same component; the predicted placement within application core services is semantically consistent with the GT application boundary."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Location Capture::Google Play Services\\nLocation Provider"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::Android Platform::Google Play Services"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node refers to the Google Play Services-backed location provider, which matches the predicted Google Play Services platform dependency. Boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Location Capture::Location Listeners"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::Application Layer::Core Services::Location Listeners"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same functional component and correctly placed in the application layer."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::GPX Logger"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::Application Layer::Loggers::GPX Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same logger component; boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::KML Logger"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::Application Layer::Loggers::KML Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same logger component; boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::CSV / URL Loggers"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::Application Layer::Loggers::Text File Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The prediction does not accurately reproduce the GT scope. GT indicates CSV/URL loggers, while the AI replaced it with a text file logger, which is not semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::Loggers"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::Application Layer::Loggers::GPX Logger",
+        "Android Device / Emulator::Application Layer::Loggers::KML Logger",
+        "Android Device / Emulator::Application Layer::Loggers::Text File Logger"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT appears to be a container/aggregate for concrete logger implementations, and the prediction splits it into specific logger nodes within the same application-layer boundary."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::NMEA / GPRMC Encoder"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::Application Layer::Upload / Integration::GPRMC Encoder"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same encoding responsibility; placement under integration/upload is acceptable given its OpenGTS-facing role."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Upload::Upload Jobs"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::Application Layer::Upload / Integration::OpenGTS Uploader"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "GT describes a broader upload-job abstraction, while the prediction narrows it to only OpenGTS uploader behavior. This is an incomplete and boundary-shifted reproduction of the GT node."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Upload::Uploaders"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::Application Layer::Upload / Integration::Dropbox Uploader",
+        "Android Device / Emulator::Application Layer::Upload / Integration::OpenGTS Uploader",
+        "Android Device / Emulator::Application Layer::Upload / Integration::OpenStreetMap Uploader"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT aggregate uploaders are reasonably split into specific integration uploaders; the application-layer attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::User Interface::Detailed View",
+        "GPSLogger Android Application::User Interface::Simple View",
+        "GPSLogger Android Application::User Interface::Other Fragments"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::Application Layer::UI Fragments"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT UI fragment nodes are aggregated into a single UI Fragments node. This is a valid merge and remains within the application/UI boundary."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::User Interface::Main Activity"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::Application Layer::Main Activity"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same component with acceptable application-layer placement."
+    },
+    {
+      "gt_nodes": [
+        "Global::Dropbox"
+      ],
+      "predicted_nodes": [
+        "External Services::Dropbox API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Semantically equivalent external integration target; boundary attribution to external services is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenStreetMap"
+      ],
+      "predicted_nodes": [
+        "External Services::OpenStreetMap API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Semantically equivalent external integration target; boundary attribution to external services is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenGTS Endpoint\\nUDP server"
+      ],
+      "predicted_nodes": [
+        "External Services::OpenGTS Server\\n(UDP endpoint"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the same OpenGTS UDP server endpoint, and the external-services boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::CSV / URL Loggers"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::Local File Storage::Text Log Files"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "This does not match the GT node. CSV/URL logging is not equivalent to plain text log file storage."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Android Device / Emulator::Android Platform::Android SDK",
+    "Android Device / Emulator::Android Platform::Google Play Services",
+    "Android Device / Emulator::Application Layer::Configuration::Session / App Settings",
+    "Android Device / Emulator::Application Layer::Core Services::GPS Logging Service",
+    "Android Device / Emulator::Build Layer::Gradle Build System",
+    "Android Device / Emulator::Build Layer::gradle.properties\\n(OSM / Dropbox credentials",
+    "Android Device / Emulator::Build Layer::local.properties\\n(sdk.dir",
+    "Android Device / Emulator::Local File Storage",
+    "Android Device / Emulator::Local File Storage::GPX Files",
+    "Android Device / Emulator::Local File Storage::KML Files",
+    "Android Device / Emulator::Local File Storage::Text Log Files",
+    "Global::Android Device / Emulator",
+    "Global::External Services"
+  ]
+}

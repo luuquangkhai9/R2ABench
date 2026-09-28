@@ -1,0 +1,51 @@
+@startuml
+!define RECTANGLE class
+
+RECTANGLE "Client Applications" as Clients {
+  [Website Client]
+  [Browser Extension]
+}
+
+package "BeeGreen System" {
+  package "Backend API Tier" {
+    RECTANGLE "LoopBack Server" as Server {
+      [User Controller]
+      [Ping Controller]
+    }
+    
+    package "Data Access Layer" {
+      [User Repository]
+    }
+  }
+  
+  package "Data/Service Layer" {
+    [Persistent Storage]
+    [Data Processing Services]
+  }
+}
+
+Clients --> Server : HTTP/REST\n(application/json)
+Server --> User Repository : Data Operations
+User Repository --> Persistent Storage : CRUD Operations
+Server --> Data Processing Services : Support Services
+
+note right of Server
+  REST Endpoints:
+  POST /users
+  GET /users
+  PATCH /users
+  GET /users/{id}
+  GET /ping
+end note
+
+note right of User Repository
+  Manages User records
+  Handles persistence operations
+end note
+
+note right of Data Processing Services
+  Sustainability scoring
+  Recommendation workflows
+end note
+
+@enduml

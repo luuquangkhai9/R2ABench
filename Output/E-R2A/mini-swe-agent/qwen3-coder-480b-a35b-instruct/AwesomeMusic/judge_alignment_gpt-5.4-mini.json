@@ -1,0 +1,98 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Algorithm Service",
+        "Application Layer::Scheduling Module",
+        "Application Layer::Web Backend"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT microservice layer is a coarse-grained container that is semantically represented by the predicted application-layer service group. The AI split the layer into concrete application services, which is consistent with the intended architecture."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Database",
+        "Data Layer::File Storage",
+        "Data Layer::Message Queue",
+        "External Systems::Hadoop",
+        "External Systems::Nginx",
+        "External Systems::RabbitMQ",
+        "External Systems::etcd"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT infrastructure layer is broadly covered by the predicted storage/infrastructure/external dependency nodes. Although the naming differs, the components are semantically aligned with infrastructure concerns."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web Frontend",
+        "Application Layer::Web Backend",
+        "Application Layer::Scheduling Module",
+        "Application Layer::Algorithm Service",
+        "Data Layer::Database",
+        "Data Layer::File Storage",
+        "Data Layer::Message Queue"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT security-critical zone specifically contains Nginx gateway/cluster and static resource server responsibilities. The predicted nodes flatten these into unrelated presentation/application/data layers and omit the actual security boundary components, so the boundary attribution is incorrect."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Awesome Music System::Infra Layer::MySQL",
+    "Awesome Music System::Infra Layer::Prometheus",
+    "Awesome Music System::Infra Layer::RabbitMQ",
+    "Awesome Music System::Infra Layer::Redis",
+    "Awesome Music System::Micro Service Layer::service-auth",
+    "Awesome Music System::Micro Service Layer::service-auth::auth1",
+    "Awesome Music System::Micro Service Layer::service-auth::auth2",
+    "Awesome Music System::Micro Service Layer::service-auth::auth3",
+    "Awesome Music System::Micro Service Layer::service-discovery",
+    "Awesome Music System::Micro Service Layer::service-discovery::discovery1",
+    "Awesome Music System::Micro Service Layer::service-discovery::discovery2",
+    "Awesome Music System::Micro Service Layer::service-discovery::discovery3",
+    "Awesome Music System::Micro Service Layer::service-scheduler",
+    "Awesome Music System::Micro Service Layer::service-scheduler::scheduler1",
+    "Awesome Music System::Micro Service Layer::service-scheduler::scheduler2",
+    "Awesome Music System::Micro Service Layer::service-scheduler::scheduler3",
+    "Awesome Music System::Micro Service Layer::service-web",
+    "Awesome Music System::Micro Service Layer::service-web::web1",
+    "Awesome Music System::Micro Service Layer::service-web::web2",
+    "Awesome Music System::Micro Service Layer::service-web::web3",
+    "Awesome Music System::Security Critical Zone::Nginx Cluster",
+    "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx1",
+    "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx2",
+    "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx3",
+    "Awesome Music System::Security Critical Zone::Spring Cloud Gateway",
+    "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway1",
+    "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway2",
+    "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway3",
+    "Awesome Music System::Security Critical Zone::Static Resource Server",
+    "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server1",
+    "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server2",
+    "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server3"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application Layer::Algorithm Service",
+    "Application Layer::Scheduling Module",
+    "Application Layer::Web Backend",
+    "Data Layer::Database",
+    "Data Layer::File Storage",
+    "Data Layer::Message Queue",
+    "External Systems::Hadoop",
+    "External Systems::Nginx",
+    "External Systems::RabbitMQ",
+    "External Systems::etcd",
+    "Presentation Layer::Web Frontend"
+  ]
+}

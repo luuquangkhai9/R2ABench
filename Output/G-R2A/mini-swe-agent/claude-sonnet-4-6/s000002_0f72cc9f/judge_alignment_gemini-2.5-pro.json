@@ -1,0 +1,62 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::<b><u>DATABASE</u></b>\n\n* MariaDB\n  * Users\n  * Likes\n  * Photos\n  * Comments"
+      ],
+      "predicted_nodes": [
+        "Persistence Layer::MariaDB\\n(users, likes, photos, comments"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the MariaDB database and its entities. The predicted 'Persistence Layer' boundary is semantically equivalent to the GT's global database node."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\n\n* A-Frame\n* React\n* React-Router"
+      ],
+      "predicted_nodes": [
+        "Browser Client::Auth Views\\n(Sign-up / Sign-in",
+        "Browser Client::Content Retrieval\\n(jQuery / fetch",
+        "Browser Client::React App\\n(React + React-Router",
+        "Browser Client::Scene Components\\n(Lobby, SF, Louvre, Berlin,\\nMilan, Rome, Hack,\\nCamera, Sky, Plane, TextPlane",
+        "Browser Client::Scene Renderer\\n(A-Frame + aframe-react",
+        "Browser Client::Shared Credential Handlers"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single monolithic Web Client node in the GT was split into finer-grained frontend modules (React, A-Frame, views, and handlers) by the AI. The predicted 'Browser Client' boundary accurately reflects the GT's 'WEB CLIENT' concept."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>WEB SERVER</u></b>\n\n* Node\n* Express\n* DigitalOcean (Deployment"
+      ],
+      "predicted_nodes": [
+        "Web Server::Node.js / Express Server",
+        "Web Server::Auth Routes\\n(Register / Login",
+        "Web Server::Content Routes",
+        "Web Server::User Controller",
+        "Persistence Layer::User Model",
+        "Persistence Layer::bcrypt-nodejs\\n(Password Verification"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single Web Server node in the GT is detailed by the AI into routing, controllers, Node.js server base, and data logic (Model, bcrypt). The boundaries 'Web Server' and 'Persistence Layer' properly describe server-side operational layers matching the GT."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b>REDIS CACHE</b>"
+      ],
+      "predicted_nodes": [
+        "External Services::Redis Cache"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes accurately refer to the Redis caching component. The AI categorized it under 'External Services', which is a valid boundary for a cache service."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::<b>AWS S3</b>"
+  ],
+  "unmatched_predicted_nodes": []
+}

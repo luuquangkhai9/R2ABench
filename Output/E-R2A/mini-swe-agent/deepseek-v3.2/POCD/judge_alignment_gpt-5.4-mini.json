@@ -1,0 +1,343 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Backend::Data Access Layer::Class Diagram Parser"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Class Diagram Parser",
+        "Business Logic Layer::Class Diagram Parser::Class/Interface Extractor",
+        "Business Logic Layer::Class Diagram Parser::MDJ File Parser",
+        "Business Logic Layer::Class Diagram Parser::Relationship Analyzer",
+        "Business Logic Layer::Class Diagram Parser::JSON Converter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "Both represent the class diagram parsing capability, but GT places it in the Data Access Layer while the AI moved it into the Business Logic Layer. The parser decomposition is reasonable, yet the architectural boundary is incorrect."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Data Access Layer::Database Parser"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Database Parser",
+        "Business Logic Layer::Database Parser::JDBC Connector",
+        "Business Logic Layer::Database Parser::JSON Converter",
+        "Business Logic Layer::Database Parser::MySQL Parser",
+        "Business Logic Layer::Database Parser::Relationship Detector",
+        "Business Logic Layer::Database Parser::Schema Extractor"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The database parsing functionality matches, but GT locates it in the Data Access Layer whereas the AI placed it in the Business Logic Layer. This is a boundary misplacement."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Data Access Layer::Database Connection"
+      ],
+      "predicted_nodes": [
+        "External MySQL Database::Connection via JDBC"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the JDBC-based database connection used for accessing MySQL. Although the predicted node is modeled as an external database connection, it is semantically aligned with the GT database connection boundary."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::DB & Class Diagram Format Conversion"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Class Diagram Parser::JSON Converter",
+        "Business Logic Layer::Database Parser::JSON Converter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT has a shared format conversion responsibility, and the AI split it into parser-specific JSON conversion nodes. The boundary remains within the business logic layer and is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::DB & Class Diagram Matching"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Entity Matching Service",
+        "Business Logic Layer::Entity Matching Service::Attribute Matcher",
+        "Business Logic Layer::Entity Matching Service::Entity Matcher",
+        "Business Logic Layer::Entity Matching Service::Relationship Matcher",
+        "Business Logic Layer::Entity Matching Service::Similarity Analyzer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted entity matching service decomposes the GT matching function into entity, attribute, relationship, and similarity subcomponents. This is a valid refinement and stays in the correct logical layer."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::Class Attr vs DB Field Inconsistency Detection"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Inconsistency Detection Engine::Field Inconsistency Detector",
+        "Business Logic Layer::Inconsistency Detection Engine::Attribute/Column Mismatch Detector"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI split the GT field inconsistency detection into more specific detectors. This is semantically equivalent and placed in the proper business logic boundary."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::Class vs DB Table Inconsistency Detection"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Inconsistency Detection Engine::Class/Table Mismatch Detector"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes describe the same class/table inconsistency detection function and remain in the business logic layer."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::Relationship Inconsistency Detection"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Inconsistency Detection Engine::Relationship Analyzer",
+        "Business Logic Layer::Inconsistency Detection Engine::Type Inconsistency Detector"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT relationship inconsistency detection is represented by multiple predicted relationship-related detectors. This is functionally aligned and boundary-correct."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::Generate Modification Command"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Repair Engine::Repair Order Planner",
+        "Business Logic Layer::Repair Engine::Class Diagram Repair",
+        "Business Logic Layer::Repair Engine::Database Repair"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT command-generation step is expanded into repair planning and repair execution components. The decomposition fits the repair workflow and stays within the business logic layer."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::Class Diagram Modification"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Repair Engine::Class Diagram Repair"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both indicate class diagram modification/repair functionality, and the predicted node is in the correct layer."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::Build Topology"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Repair Engine::Repair Order Planner"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT topology-building step corresponds to planning repair order/topology for automatic repair, which is semantically consistent and correctly placed."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::Class vs DB Table Inconsistency Detection",
+        "Backend::Business Logic Layer::Class Attr vs DB Field Inconsistency Detection",
+        "Backend::Business Logic Layer::Relationship Inconsistency Detection"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Inconsistency Detection Engine::Field Inconsistency Detector",
+        "Business Logic Layer::Inconsistency Detection Engine::Attribute/Column Mismatch Detector",
+        "Business Logic Layer::Inconsistency Detection Engine::Class/Table Mismatch Detector",
+        "Business Logic Layer::Inconsistency Detection Engine::Relationship Analyzer",
+        "Business Logic Layer::Inconsistency Detection Engine::Type Inconsistency Detector"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT detection nodes are consolidated under a single inconsistency detection engine with several detectors. This is a valid merge and the layer attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::User Input Acquisition"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Account Management Service::Authentication",
+        "Business Logic Layer::Account Management Service::Session Management",
+        "Business Logic Layer::Account Management Service::User Registration",
+        "Business Logic Layer::Detection Configuration Service::Rule Management",
+        "Business Logic Layer::Detection Configuration Service::Exception Configuration",
+        "Business Logic Layer::File Management Service::File Metadata",
+        "Business Logic Layer::Report Service::History Manager",
+        "Business Logic Layer::Help & Examples Service::Help Documentation"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT user input acquisition is a broad interaction-handling concern, and the predicted system distributes it across functional services. This is a reasonable functional decomposition within the backend."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::DB & Class Diagram Matching",
+        "Backend::Business Logic Layer::Class Attr vs DB Field Inconsistency Detection",
+        "Backend::Business Logic Layer::Class vs DB Table Inconsistency Detection",
+        "Backend::Business Logic Layer::Relationship Inconsistency Detection",
+        "Backend::Business Logic Layer::Generate Modification Command",
+        "Backend::Business Logic Layer::Class Diagram Modification",
+        "Backend::Business Logic Layer::Build Topology"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Entity Matching Service",
+        "Business Logic Layer::Inconsistency Detection Engine",
+        "Business Logic Layer::Repair Engine"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT business workflow nodes are aggregated into broader service engines in the prediction. This is semantically consistent and remains within the backend business logic layer."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (User Interface Layer::User Registration"
+      ],
+      "predicted_nodes": [
+        "User Interface Layer::Web Frontend::Authentication Module"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The registration function belongs to the UI/authentication area and the predicted node is a valid frontend module, despite the naming differences."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (User Interface Layer::User Login"
+      ],
+      "predicted_nodes": [
+        "User Interface Layer::Web Frontend::Authentication Module"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Login is correctly mapped to the frontend authentication module."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (User Interface Layer::File Management"
+      ],
+      "predicted_nodes": [
+        "User Interface Layer::Web Frontend::File Upload/Download"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The file management UI includes upload/download and related operations, which aligns with the predicted frontend module."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (User Interface Layer::Detection Settings"
+      ],
+      "predicted_nodes": [
+        "User Interface Layer::Web Frontend::Configuration Interface"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Detection settings correspond to a configuration interface in the frontend and the boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (User Interface Layer::Generate Modification Suggestions"
+      ],
+      "predicted_nodes": [
+        "User Interface Layer::Web Frontend::Report Viewer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The frontend report viewer can present repair suggestions to the user. This is a reasonable UI-level match."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (User Interface Layer::Display Modification Results"
+      ],
+      "predicted_nodes": [
+        "User Interface Layer::Web Frontend::Report Viewer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Displaying repair/modification results is consistent with a report viewing UI component."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (User Interface Layer::New User Tutorial"
+      ],
+      "predicted_nodes": [
+        "User Interface Layer::Web Frontend::Help System"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The tutorial/help capability is correctly represented by the frontend help system."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Data Access Layer::Class Diagram Parser",
+        "Backend::Data Access Layer::Database Parser",
+        "Backend::Data Access Layer::Database Connection"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Class Diagram Parser",
+        "Business Logic Layer::Database Parser",
+        "External MySQL Database::Connection via JDBC"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "Although the components are semantically aligned, two of the GT nodes are placed in the wrong architectural layer in the prediction: parsers are moved from Data Access Layer to Business Logic Layer. The database connection is acceptable, but the overall mapping includes a significant boundary error."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Backend::Base Algorithm Layer::Bipartite Matching",
+    "Backend::Base Algorithm Layer::Strict Matching",
+    "Backend::Base Algorithm Layer::String Similarity",
+    "Backend::Base Algorithm Layer::Type Similarity",
+    "Backend::Base Algorithm Layer::Weighted Graph Construction",
+    "Backend::Unified Abstraction Layer::Comparable Entity Construction",
+    "Backend::Unified Abstraction Layer::Data Type Mapping",
+    "Backend::Unified Abstraction Layer::Database Relationship Identification",
+    "Frontend (User Interface Layer::Generate Modification Suggestions"
+  ],
+  "unmatched_predicted_nodes": [
+    "Business Logic Layer::Account Management Service",
+    "Business Logic Layer::File Management Service",
+    "Business Logic Layer::Help & Examples Service",
+    "Business Logic Layer::Report Service",
+    "Business Logic Layer::Detection Configuration Service",
+    "Data Access Layer::Configuration Database",
+    "Data Access Layer::Configuration Database::Detection Rules",
+    "Data Access Layer::Configuration Database::Exception Rules",
+    "Data Access Layer::Configuration Database::System Settings",
+    "Data Access Layer::Detection Results Database",
+    "Data Access Layer::Detection Results Database::Historical Records",
+    "Data Access Layer::Detection Results Database::Inconsistency Reports",
+    "Data Access Layer::Detection Results Database::Matching Results",
+    "Data Access Layer::Detection Results Database::Parsing Results",
+    "Data Access Layer::Detection Results Database::Repair Suggestions",
+    "Data Access Layer::File Storage",
+    "Data Access Layer::File Storage::Class Diagram Files",
+    "Data Access Layer::File Storage::Database Files",
+    "Data Access Layer::File Storage::Uploaded Files",
+    "Data Access Layer::Help Database",
+    "Data Access Layer::Help Database::Case Files",
+    "Data Access Layer::Help Database::Help Documents",
+    "Data Access Layer::Help Database::Sample Data",
+    "Data Access Layer::User Database",
+    "Data Access Layer::User Database::Permissions",
+    "Data Access Layer::User Database::Sessions",
+    "Data Access Layer::User Database::User Accounts",
+    "External MySQL Database::Target Database",
+    "Global::External MySQL Database",
+    "Global::StarUML Tool",
+    "Global::User Browser",
+    "StarUML Tool::MDJ File Export",
+    "User Browser::SSL Connection",
+    "User Browser::Web Client",
+    "User Interface Layer::Web Frontend",
+    "User Interface Layer::Web Frontend::Authentication Module",
+    "User Interface Layer::Web Frontend::Configuration Interface",
+    "User Interface Layer::Web Frontend::File Upload/Download",
+    "User Interface Layer::Web Frontend::Help System",
+    "User Interface Layer::Web Frontend::Report Viewer",
+    "User Interface Layer::Web Frontend::User Interface"
+  ]
+}

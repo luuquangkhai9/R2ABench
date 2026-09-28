@@ -1,0 +1,325 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::API Gateway"
+      ],
+      "predicted_nodes": [
+        "API Gateway Layer::API Gateway",
+        "API Gateway Layer::API Gateway::REST APIs"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT API Gateway is represented by the predicted API Gateway layer and its REST API detail node. The boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Cognito"
+      ],
+      "predicted_nodes": [
+        "Security Layer::Cognito",
+        "Security Layer::Cognito::Authentication",
+        "Security Layer::Cognito::User Management"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Cognito is correctly mapped to the security layer, and the additional subnodes are valid refinements of the same component."
+    },
+    {
+      "gt_nodes": [
+        "Global::S3"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web Frontend::S3 Hosted"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "S3 hosting for the frontend is correctly captured, and the presentation/web frontend boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::User"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Mobile Users",
+        "Presentation Layer::Mobile Users::Football Enthusiasts",
+        "Presentation Layer::Mobile Users::Chatbot Users",
+        "Presentation Layer::Mobile Users::Reminder Requesters"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The generic user actor is expanded into user personas. This is a reasonable refinement within the presentation/user boundary."
+    },
+    {
+      "gt_nodes": [
+        "Notification Service::SQS"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Notification Service::SQS Queue"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The SQS queue component is correctly matched to notification handling, with an acceptable application-layer placement."
+    },
+    {
+      "gt_nodes": [
+        "Notification Service::SNS"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Notification Service::SMS Delivery"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "SNS-based SMS delivery is semantically equivalent to the GT SNS node, and the notification service boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::SageMaker"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Prediction Service::SageMaker Integration"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The SageMaker prediction component is correctly represented, with only a naming refinement."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::DynamoDB\\nPredictions"
+      ],
+      "predicted_nodes": [
+        "Data Layer::DynamoDB::Match Data"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT prediction datastore is represented by the predicted DynamoDB data layer. The naming is broader, but the storage boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Elasticsearch::Search Index",
+        "Data Layer::Elasticsearch::Data Retrieval"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Elasticsearch node is split into search/index and retrieval details, which is a valid decomposition within the same data layer."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::prediction\\nLambda"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Lambda Functions",
+        "Application Layer::Lambda Functions::Backend Logic",
+        "Application Layer::Lambda Functions::Python/Node.js"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The prediction Lambda is represented as a generic Lambda Functions node with backend/runtime details. This is a legitimate aggregation/refinement."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::DynamoDB\\nLive Scores"
+      ],
+      "predicted_nodes": [
+        "Data Layer::DynamoDB::Fixtures/Results",
+        "Data Layer::DynamoDB::Match Data"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT live score datastore is mapped to DynamoDB in the data layer. Although broader, the boundary remains semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Elasticsearch::Search Index",
+        "Data Layer::Elasticsearch::Data Retrieval"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Elasticsearch node is correctly reproduced as data-layer search/retrieval components."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::live_score\\nLambda"
+      ],
+      "predicted_nodes": [
+        "Streaming Layer::Live Score Pipeline"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT specific Lambda component is collapsed into a broader streaming pipeline node, losing the function-level boundary. This is only partially equivalent and the architectural granularity is mismatched."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2"
+      ],
+      "predicted_nodes": [
+        "Streaming Layer::Live Score Pipeline::Kafka on EC2"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The EC2 runtime for the live score pipeline is correctly captured, and the Kafka-on-EC2 detail aligns with the GT context."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2::Kafka"
+      ],
+      "predicted_nodes": [
+        "Streaming Layer::Live Score Pipeline::Kafka on EC2"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Kafka on EC2 matches the GT Kafka component within the live score pipeline."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2::M4"
+      ],
+      "predicted_nodes": [
+        "Streaming Layer::Live Score Pipeline::Kafka on EC2"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The EC2 instance type detail (M4) is not preserved, but the predicted node remains within the correct streaming/EC2 context."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2::foot app"
+      ],
+      "predicted_nodes": [
+        "Streaming Layer::Live Score Pipeline"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The specific application running on EC2 is omitted into a generic streaming pipeline, causing loss of component-level architectural meaning."
+    },
+    {
+      "gt_nodes": [
+        "Fixtures Service::SQS"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Notification Service::SQS Queue"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT SQS node belongs to a Fixtures Service context, but the predicted node places SQS under Notification Service. This is a context mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Fixtures Service::fixtures\\nLambda"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Lambda Functions"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The Lambda component exists, but it is placed generically under application logic rather than the Fixtures Service boundary."
+    },
+    {
+      "gt_nodes": [
+        "Recommendation Service::Lex"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Chatbot Handler::Conversation Logic",
+        "Application Layer::Chatbot Handler::Intent Processing"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "Lex is a distinct chatbot/AI service in the GT, but the prediction reinterprets it as generic chatbot handler logic. This is a functional boundary shift."
+    },
+    {
+      "gt_nodes": [
+        "Recommendation Service::recommendation\\nLambda"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Chatbot Handler",
+        "Application Layer::Chatbot Handler::Conversation Logic",
+        "Application Layer::Chatbot Handler::Intent Processing"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT recommendation Lambda is absorbed into chatbot handling rather than a dedicated recommendation service. This changes the architectural context."
+    },
+    {
+      "gt_nodes": [
+        "Standing Service::DynamoDB\\nStandings"
+      ],
+      "predicted_nodes": [
+        "Data Layer::DynamoDB::Fixtures/Results",
+        "Data Layer::DynamoDB::Match Data"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The standing datastore is represented within the broader DynamoDB data layer. The boundary is acceptable despite the generalized naming."
+    },
+    {
+      "gt_nodes": [
+        "Standing Service::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Elasticsearch::Search Index",
+        "Data Layer::Elasticsearch::Data Retrieval"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The Elasticsearch search/retrieval functions align with the GT standings search datastore."
+    },
+    {
+      "gt_nodes": [
+        "Standing Service::standing\\nLambda"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Lambda Functions",
+        "Application Layer::Lambda Functions::Backend Logic"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The standing Lambda is represented as a generic backend Lambda function, which is an acceptable abstraction within the application layer."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "API Gateway Layer::API Gateway::Authentication",
+    "API Gateway Layer::API Gateway::JSON Payloads",
+    "Application Layer::Chatbot Handler",
+    "Application Layer::Chatbot Handler::Conversation Logic",
+    "Application Layer::Chatbot Handler::Intent Processing",
+    "Application Layer::Lambda Functions",
+    "Application Layer::Lambda Functions::Backend Logic",
+    "Application Layer::Lambda Functions::Python/Node.js",
+    "Application Layer::Notification Service",
+    "Application Layer::Notification Service::SMS Delivery",
+    "Application Layer::Notification Service::SQS Queue",
+    "Application Layer::Prediction Service",
+    "Application Layer::Prediction Service::ML Predictions",
+    "Application Layer::Prediction Service::SageMaker Integration",
+    "Data Layer::DynamoDB",
+    "Data Layer::DynamoDB::Fixtures/Results",
+    "Data Layer::DynamoDB::Match Data",
+    "Data Layer::Elasticsearch",
+    "Data Layer::Elasticsearch::Data Retrieval",
+    "Data Layer::Elasticsearch::Search Index",
+    "External Data Sources::Live Score Feeds",
+    "External Data Sources::Match Statistics",
+    "Global::External Data Sources",
+    "Presentation Layer::Mobile Users",
+    "Presentation Layer::Mobile Users::Chatbot Users",
+    "Presentation Layer::Mobile Users::Football Enthusiasts",
+    "Presentation Layer::Mobile Users::Reminder Requesters",
+    "Presentation Layer::Web Frontend",
+    "Presentation Layer::Web Frontend::HTML/CSS/Bootstrap/jQuery",
+    "Presentation Layer::Web Frontend::S3 Hosted",
+    "Security Layer::Cognito::Authentication",
+    "Security Layer::Cognito::User Management",
+    "Security Layer::IAM",
+    "Security Layer::IAM::Access Control",
+    "Security Layer::IAM::Permissions",
+    "Streaming Layer::Live Score Pipeline",
+    "Streaming Layer::Live Score Pipeline::Apache Avro"
+  ]
+}

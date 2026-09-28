@@ -1,0 +1,90 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Application"
+      ],
+      "predicted_nodes": [
+        "Global::Android Device::Host Android App"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the host application environment that contains/integrates the SDK, and the broader boundary attribution is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_Plugin::Plugin init compile",
+        "QAPM_Plugin::QAPM_Plugin"
+      ],
+      "predicted_nodes": [
+        "Global::Android Device"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT plugin-related nodes describe build-time/initialization plugin concerns, while the predicted node is only a generic Android device boundary and does not preserve the plugin context. This is a severe boundary/context mismatch."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "predicted_nodes": [
+        "Android Device::Host Android App::APM SDK Component"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the core APM SDK component integrated into the host Android app. The boundary attribution is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Collect"
+      ],
+      "predicted_nodes": [
+        "Android Device::Host Android App::APM SDK Component::Upload Processing Layer::UploadCoordinator",
+        "Android Device::Host Android App::APM SDK Component::Upload Processing Layer::FileContentReader",
+        "Android Device::Host Android App::APM SDK Component::Upload Processing Layer::ContextParamDeriver",
+        "Android Device::Host Android App::APM SDK Component::Upload Processing Layer::StoragePopper",
+        "Android Device::Host Android App::APM SDK Component::Upload Processing Layer::UploadDirectoryAccessor",
+        "Android Device::Host Android App::APM SDK Component::Upload Processing Layer::UploadResultHandler",
+        "Android Device::Host Android App::APM SDK Component::Platform/Environment Adapters Layer::NetworkConnectivityChecker",
+        "Android Device::Host Android App::APM SDK Component::Sender Integration Layer::SenderAdapter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT collection/storage/reporting functionality is represented by a set of more detailed upload-processing and environment/sender components. This is a reasonable functional decomposition, and the boundaries remain within the SDK/component scope."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "predicted_nodes": [
+        "Android Device::Host Android App::APM SDK Component::HTTP Instrumentation Layer::ResponseHandlerInstrumentor",
+        "Android Device::Host Android App::APM SDK Component::HTTP Instrumentation Layer::ContentBufferingEntityWrapper",
+        "Android Device::Host Android App::APM SDK Component::HTTP Instrumentation Layer::TransactionStateRegistry",
+        "Android Device::Host Android App::APM SDK Component::HTTP Instrumentation Layer::CountingInputStreamCache"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT reporting module is represented by the HTTP instrumentation/reporting-related subcomponents. Although more specific, the decomposition is functionally consistent and remains within the SDK boundary."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "predicted_nodes": [
+        "Android Device::Local Upload Directory / File System",
+        "Android Device::QAPM Configuration Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT storage concern is reflected by the local upload directory/file system and configuration-managed sender-related storage interactions. The boundary attribution is acceptable at this abstraction level."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Android Device::Android Context",
+    "Android Device::Android Handler/HandlerThread/Looper APIs",
+    "Android Device::Apache HttpClient::HttpEntity",
+    "Android Device::Apache HttpClient::HttpResponse",
+    "Android Device::Apache HttpClient::ResponseHandler"
+  ]
+}

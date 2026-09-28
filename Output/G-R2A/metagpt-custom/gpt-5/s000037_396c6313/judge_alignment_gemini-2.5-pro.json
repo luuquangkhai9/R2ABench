@@ -1,0 +1,123 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::plugin"
+      ],
+      "predicted_nodes": [
+        "Packaging/Example Tools Layer::Python Example Container",
+        "Packaging/Example Tools Layer::scan.py",
+        "Packaging/Example Tools Layer::Entrypoint Script /tool/entrypoint.sh",
+        "Packaging/Example Tools Layer::Dependency Installer (pip install -r requirements.txt"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The abstract GT node 'plugin' is correctly detailed by the AI as the specific components of the Python example plugin mentioned in the PRD (FR-006, CON-005, CON-006). The `Packaging/Example Tools Layer` boundary is more specific and appropriate than the GT's `Global`."
+    },
+    {
+      "gt_nodes": [
+        "Global::runner"
+      ],
+      "predicted_nodes": [
+        "Runner/Execution Layer::Runner Image (veinmind-runner",
+        "Runner/Execution Layer::Parallel-Container Startup Script ./run.sh"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The abstract GT node 'runner' is correctly split into the runner image and startup script as described in the PRD (FR-003, NFR-001). The `Runner/Execution Layer` is an accurate boundary for these components."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::containerd"
+      ],
+      "predicted_nodes": [
+        "External Systems::Containerd"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match for the container runtime mentioned in NFR-002. The AI's `External Systems` boundary is semantically equivalent to the GT's `Infrastructure and Input Backends`."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::docker"
+      ],
+      "predicted_nodes": [
+        "External Systems::Docker"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match for the primary container runtime dependency (CON-001). The AI's `External Systems` boundary is semantically equivalent to the GT's `Infrastructure and Input Backends`."
+    },
+    {
+      "gt_nodes": [
+        "SDK::interact system",
+        "SDK::plugin system"
+      ],
+      "predicted_nodes": [
+        "External Systems::veinmind-sdk / libveinmind",
+        "SDK Integration Layer::SDK Integration Adapter"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's abstract SDK nodes are mapped to the external SDK library (API-001) and an internal adapter. This is a sound architectural pattern, and the boundary separation (`External Systems` vs. `SDK Integration Layer`) is more precise and correct than the GT's single `SDK` boundary."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::image"
+      ],
+      "predicted_nodes": [
+        "CLI Layer::scan-image Command Handler",
+        "Scanning Services Layer::Image Scanner"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node representing the scan target 'image' is mapped to the specific AI-predicted components that perform the image scan (FR-001). The AI's layer attribution ('CLI Layer', 'Scanning Services Layer') is a valid and more detailed architectural representation."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::container"
+      ],
+      "predicted_nodes": [
+        "CLI Layer::scan-container Command Handler",
+        "Scanning Services Layer::Container Scanner"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node for the 'container' scan target is correctly mapped to the AI's CLI handler and scanner service that perform the scan (FR-002). The AI's architectural layering is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::iac",
+        "Infrastructure and Input Backends::dockerfile",
+        "Infrastructure and Input Backends::kubernetes"
+      ],
+      "predicted_nodes": [
+        "CLI Layer::IaC Scan Command Handler",
+        "Scanning Services Layer::IaC Scanner",
+        "Scanning Services Layer::Policy Library Loader",
+        "Scanning Services Layer::IaC Result Grouper"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's abstract 'iac' scan target and specific input types ('dockerfile', 'kubernetes') are mapped to the AI's detailed set of components for IaC scanning, which were derived from the PRD (FR-007). The AI's layer attribution is appropriate for the functions performed."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Infrastructure and Input Backends::tarball",
+    "Scan Targets::cluster"
+  ],
+  "unmatched_predicted_nodes": [
+    "Authorization Routing Layer::Authorization Route Configuration",
+    "Authorization Routing Layer::Docker Authorization Router",
+    "Authorization Routing Layer::Docker Plugin Action Result",
+    "Authorization Routing Layer::NoneDockerPlugin (Fallback",
+    "External Systems::Docker Registry",
+    "External Systems::Docker authorization request interface",
+    "External Systems::DockerHub",
+    "External Systems::Harbor",
+    "External Systems::veinmind/python3.6:1.3.1-stretch",
+    "Reporting/Data Model Layer::IaC Report Model",
+    "Reporting/Data Model Layer::Malicious-File Report Model",
+    "Reporting/Data Model Layer::Report Event Client"
+  ]
+}

@@ -1,0 +1,58 @@
+@startuml
+title Squatm3gator System Architecture
+
+skinparam componentStyle rectangle
+
+package "Web Tier" {
+  [Web UI] as webui
+  [HTTP API] as api
+  [WebSocket Channel] as ws
+}
+
+package "Processing Tier" {
+  [Background Consumer] as consumer
+  [Domain Generation Engine (squatm3)] as squatm3
+}
+
+database "Redis" as redis {
+  [Job Queue] as jobq
+  [Reporting Channel] as repchan
+}
+
+cloud "GoDaddy API" as godaddy
+
+webui --> api : HTTP GET /
+(session creation)
+api --> jobq : Publish job
+(with session key)
+api --> ws : Establish connection
+consumer --> jobq : Listen for jobs
+consumer --> squatm3 : Execute domain
+generation subprocess
+squatm3 --> repchan : Report progress/results
+repchan --> consumer : Retrieve reports
+consumer --> ws : Send updates to
+matching session
+ws --> webui : Stream results
+
+api --> godaddy : Optional domain
+availability check
+consumer --> godaddy : Optional domain
+availability check
+
+note right of redis
+  Redis acts as message broker
+  for job queue and reporting
+end note
+
+note right of consumer
+  Started as background thread
+  by the API process
+end note
+
+note right of squatm3
+  Wrapped third-party CLI tool
+  invoked as subprocess
+end note
+
+@enduml

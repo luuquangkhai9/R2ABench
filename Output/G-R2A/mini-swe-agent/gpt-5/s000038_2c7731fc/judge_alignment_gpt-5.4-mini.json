@@ -1,0 +1,70 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Web2 application stack::Applications",
+        "Web3 application stack::Applications"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Redis-based Applications",
+        "Client Layer::Pub/Sub Clients (Redis-style"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both GT nodes represent client/application entry points using Redis-style interactions. The AI split them into Redis-based application clients and Pub/Sub clients, which is semantically consistent with the PRD scope."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::IceFireDB",
+        "Web3 application stack::IceFireDB"
+      ],
+      "predicted_nodes": [
+        "Middleware Layer::IceFireDB-Redis-Proxy Agent A",
+        "Middleware Layer::IceFireDB-Redis-Proxy Agent B",
+        "Middleware Layer::IceFireDB-PubSub Node A",
+        "Middleware Layer::IceFireDB-PubSub Node B"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has a single IceFireDB system node per stack, while the AI split it into concrete runtime nodes for Redis Proxy and Pub/Sub. This is a valid refinement and the middleware placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::Platform",
+        "Web3 application stack::Platform"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Redis Standalone",
+        "Data Layer::Redis Cluster",
+        "Discovery & Routing::Kademlia DHT\n(libp2p/IPFS-style"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Platform nodes are generic infrastructure/platform elements. The predicted nodes correspond to the Redis storage backends and peer discovery/routing infrastructure described in the PRD, which fits the platform/infrastructure role."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::Processing\nBusiness Logic",
+        "Web3 application stack::Decentralized Processing\nBusiness Logic"
+      ],
+      "predicted_nodes": [
+        "Middleware Layer::IceFireDB-Redis-Proxy Agent A",
+        "Middleware Layer::IceFireDB-Redis-Proxy Agent B",
+        "Middleware Layer::IceFireDB-PubSub Node A",
+        "Middleware Layer::IceFireDB-PubSub Node B",
+        "Middleware Layer::Internal SQL/MySQL Result Handling\n(Internal data handling only"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These GT nodes represent processing/business logic, which is realized in the AI output as proxy agents, Pub/Sub nodes, and internal SQL result handling. The middleware-layer attribution is appropriate for these runtime processing components."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Web2 application stack::BlockChain Database\\nTransactions, Contracts,\\nCertificates and Receipts",
+    "Web2 application stack::File System\\nLarge Files and Media",
+    "Web2 application stack::Web2 application stack::IceFireDB",
+    "Web3 application stack::BlockChain Database\\nTransactions, Contracts,\\nCertificates and Receipts",
+    "Web3 application stack::Decentralized File System\\nLarge Files and Media"
+  ],
+  "unmatched_predicted_nodes": []
+}

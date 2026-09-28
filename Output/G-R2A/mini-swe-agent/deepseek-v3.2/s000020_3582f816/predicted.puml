@@ -1,0 +1,103 @@
+@startuml
+!define LAYER_COLOR #DDDDDD
+!define COMPONENT_COLOR #CCCCFF
+!define EXTERNAL_COLOR #FFCCCC
+!define DATASTORE_COLOR #CCFFCC
+
+skinparam component {
+  BackgroundColor<<Layer>> LAYER_COLOR
+  BackgroundColor<<Component>> COMPONENT_COLOR
+  BackgroundColor<<External>> EXTERNAL_COLOR
+  BackgroundColor<<DataStore>> DATASTORE_COLOR
+  BorderColor #666666
+  ArrowColor #333333
+}
+
+title MyEMS REST API and Admin Routing Architecture
+
+package "Presentation Layer" <<Layer>> {
+  component "Browser Admin Application" <<Component>> {
+    component "Routing Configuration" as RoutingConfig
+    component "User Settings Module" as UserModule
+    component "Contact Settings Module" as ContactModule
+    component "API Base Path Resolver" as APIResolver
+  }
+}
+
+package "API Layer" <<Layer>> {
+  component "REST API Service" <<Component>> {
+    component "RESTful Endpoints" as RESTEndpoints
+    component "Python Runtime" as PythonRuntime
+    component "Dependency Manager" as DepManager
+  }
+}
+
+package "Data Layer" <<Layer>> {
+  database "MySQL Database" <<DataStore>> as MySQLDB
+  component "Database Configuration" as DBConfig
+}
+
+package "External Systems" <<Layer>> {
+  component "MyEMS Components" <<External>> as MyEMSComponents
+  component "Third-Party Applications" <<External>> as ThirdPartyApps
+  component "Administrators" <<External>> as Administrators
+}
+
+package "Infrastructure Layer" <<Layer>> {
+  component "Reverse Proxy (Nginx)" <<Component>> as ReverseProxy
+  component "Docker Runtime" <<Component>> as DockerRuntime
+  component "Development Environment" <<Component>> as DevEnv
+}
+
+' Browser Admin Application connections
+Browser Admin Application --> APIResolver : "computes base path"
+RoutingConfig --> UserModule : "lazy loads for /user"
+RoutingConfig --> ContactModule : "lazy loads for /contact"
+UserModule --> APIResolver : "uses API path"
+ContactModule --> APIResolver : "uses API path"
+
+' API Layer connections
+REST API Service --> RESTEndpoints : "exposes"
+REST API Service --> PythonRuntime : "runs on"
+REST API Service --> DepManager : "manages dependencies"
+
+' External access to API
+MyEMSComponents --> REST API Service : "REST API calls"
+ThirdPartyApps --> REST API Service : "REST API calls"
+Administrators --> Browser Admin Application : "accesses Admin UI"
+
+' Data layer connections
+REST API Service --> DBConfig : "uses configuration"
+DBConfig --> MySQLDB : "connects to"
+
+' Infrastructure connections
+ReverseProxy --> REST API Service : "routes /api/ requests"
+Browser Admin Application --> ReverseProxy : "sends API requests via /api/"
+DockerRuntime --> REST API Service : "containerizes"
+DevEnv --> REST API Service : "development quick-run"
+
+' Non-functional aspects
+note top of REST API Service
+  Python dependencies:
+  - REST framework
+  - CORS support
+  - WSGI execution
+  - Spreadsheet/image handling
+  - MySQL connector
+end note
+
+note right of Browser Admin Application
+  Lazy-loaded modules:
+  - User settings modules
+  - Contact settings modules
+  - Tariff/category modules
+  (when configured)
+end note
+
+note left of ReverseProxy
+  Optional deployment component
+  Routes /api/ traffic
+  Avoids CORS restrictions
+end note
+
+@enduml

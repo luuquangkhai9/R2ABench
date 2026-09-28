@@ -1,0 +1,623 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Application Runtime::Database::InfluxDB",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Data Layer::InfluxDB\\n(Coding-Process\\nTime-Series Records",
+        "Global::Data Layer"
+      ],
+      "reasoning": "The predicted InfluxDB node directly covers the time-series database responsibility; the generic data-layer node also supports the same concept."
+    },
+    {
+      "gt_node": "Application Runtime::Database::MySQL",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Data Layer::MySQL\\n(Users / Projects /\\nVersions / Battles",
+        "Global::Data Layer"
+      ],
+      "reasoning": "The predicted MySQL node directly covers relational storage for users, projects, versions, and battles."
+    },
+    {
+      "gt_node": "Application Runtime::Database::Redis",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Data Layer::Redis Cache\\n(Workspace Mappings /\\nBattle State /\\nTemp Invitations",
+        "Global::Data Layer"
+      ],
+      "reasoning": "The predicted Redis cache node covers workspace mappings, battle state, and temporary invitations, matching the GT Redis responsibility."
+    },
+    {
+      "gt_node": "Application Runtime::Reverse Proxy::Express",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "The predicted diagram includes Node.js/Express backend and Nginx reverse proxy, but does not explicitly represent Express as a reverse proxy boundary/component."
+    },
+    {
+      "gt_node": "Application Runtime::Reverse Proxy::Nginx",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Nginx Reverse Proxy::Reverse Proxy\\n(HTTP / WS",
+        "Global::Nginx Reverse Proxy"
+      ],
+      "reasoning": "The predicted reverse proxy node covers the Nginx reverse proxy function."
+    },
+    {
+      "gt_node": "Backend Repo::CI/CD Workflow",
+      "covered": false,
+      "covering_predicted_nodes": [
+        "Deployment Infrastructure::Automated Deployment\\nScripts"
+      ],
+      "reasoning": "Automated deployment scripts are related but do not clearly cover the specific backend repository CI/CD workflow responsibility."
+    },
+    {
+      "gt_node": "Backend Repo::Deploy Key",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node represents a deploy key or equivalent credential artifact."
+    },
+    {
+      "gt_node": "Backend Repo::GitHub",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "The repository host boundary is omitted; no predicted node corresponds to GitHub as the backend repo boundary."
+    },
+    {
+      "gt_node": "Backend Repo::Node.js",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Node.js / Express Backend"
+      ],
+      "reasoning": "The predicted backend node includes Node.js/Express backend runtime, covering the Node.js repository/runtime concept."
+    },
+    {
+      "gt_node": "Coding Sandbox::Coding Sandbox 1::Docker",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Docker Sandbox::Code Execution\\nSandbox",
+        "Global::Docker Sandbox"
+      ],
+      "reasoning": "The predicted Docker sandbox directly covers code execution sandboxing, although it is aggregated rather than split into two sandbox instances."
+    },
+    {
+      "gt_node": "Coding Sandbox::Coding Sandbox 1::Exporter",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node corresponds to an exporter component for the sandbox."
+    },
+    {
+      "gt_node": "Coding Sandbox::Coding Sandbox 1::Node.js",
+      "covered": false,
+      "covering_predicted_nodes": [
+        "Global::Node.js / Express Backend"
+      ],
+      "reasoning": "The predicted Node.js backend is not clearly the sandbox-side Node.js runtime; this GT sandbox-specific node is not directly covered."
+    },
+    {
+      "gt_node": "Coding Sandbox::Coding Sandbox 2::Docker",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Docker Sandbox::Code Execution\\nSandbox",
+        "Global::Docker Sandbox"
+      ],
+      "reasoning": "Same as Coding Sandbox 1 Docker: the predicted sandbox covers the Docker execution environment, albeit merged."
+    },
+    {
+      "gt_node": "Coding Sandbox::Coding Sandbox 2::Exporter",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted exporter component is present."
+    },
+    {
+      "gt_node": "Coding Sandbox::Coding Sandbox 2::Node.js",
+      "covered": false,
+      "covering_predicted_nodes": [
+        "Global::Node.js / Express Backend"
+      ],
+      "reasoning": "The sandbox-specific Node.js component is not explicitly modeled in the predicted nodes."
+    },
+    {
+      "gt_node": "Frontend Repo::CI/CD Workflow",
+      "covered": false,
+      "covering_predicted_nodes": [
+        "Deployment Infrastructure::Automated Deployment\\nScripts"
+      ],
+      "reasoning": "Deployment scripts are adjacent but not a clear match for the frontend repo CI/CD workflow."
+    },
+    {
+      "gt_node": "Frontend Repo::Deploy Key",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No deploy key node is predicted."
+    },
+    {
+      "gt_node": "Frontend Repo::GitHub",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No repository host/boundary for the frontend repo is represented."
+    },
+    {
+      "gt_node": "Frontend Repo::Vue 3",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Browser::Vue Frontend\\n(Web App",
+        "Global::Browser"
+      ],
+      "reasoning": "The predicted frontend browser app directly represents the Vue frontend."
+    },
+    {
+      "gt_node": "Global::Developer",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No explicit developer actor is modeled in the predicted nodes."
+    },
+    {
+      "gt_node": "Global::End User",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Browser",
+        "Browser::Vue Frontend\\n(Web App",
+        "Browser::Vue Frontend\\n(Web App::Login / Register View",
+        "Browser::Vue Frontend\\n(Web App::Battle View",
+        "Browser::Vue Frontend\\n(Web App::Playback View",
+        "Browser::Vue Frontend\\n(Web App::Project Workspace\\n(Code Editor"
+      ],
+      "reasoning": "The predicted browser/frontend nodes cover the end-user interaction surfaces."
+    },
+    {
+      "gt_node": "Static Asset Delivery::CDN\\nCloudFront",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Object Storage & CDN::CDN Distribution\\n(Static Assets /\\nArchives",
+        "Global::Object Storage & CDN"
+      ],
+      "reasoning": "The predicted CDN distribution node covers the CloudFront-style CDN delivery responsibility."
+    },
+    {
+      "gt_node": "Static Asset Delivery::Storage\\nS3 bucket",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Object Storage & CDN::S3-Compatible\\nObject Storage",
+        "Global::Object Storage & CDN"
+      ],
+      "reasoning": "The predicted S3-compatible object storage node directly covers the S3 bucket storage responsibility."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Browser::Vue Frontend\\n(Web App",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend Repo::Vue 3",
+        "Global::End User"
+      ],
+      "reasoning": "This is grounded in the Vue frontend and end-user browser UI concepts."
+    },
+    {
+      "predicted_node": "Browser::Vue Frontend\\n(Web App::Battle View",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend Repo::Vue 3",
+        "Global::End User"
+      ],
+      "reasoning": "Battle view is a direct UI refinement of the frontend requirements."
+    },
+    {
+      "predicted_node": "Browser::Vue Frontend\\n(Web App::Login / Register View",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend Repo::Vue 3",
+        "Global::End User"
+      ],
+      "reasoning": "Login/register UI is explicitly required by the PRD."
+    },
+    {
+      "predicted_node": "Browser::Vue Frontend\\n(Web App::Playback View",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend Repo::Vue 3",
+        "Global::End User"
+      ],
+      "reasoning": "Playback UI is explicitly required by the PRD."
+    },
+    {
+      "predicted_node": "Browser::Vue Frontend\\n(Web App::Project Workspace\\n(Code Editor",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend Repo::Vue 3",
+        "Global::End User"
+      ],
+      "reasoning": "Project workspace/code editor is explicitly required by the PRD."
+    },
+    {
+      "predicted_node": "Data Layer::InfluxDB\\n(Coding-Process\\nTime-Series Records",
+      "grounded": true,
+      "reference_nodes": [
+        "Application Runtime::Database::InfluxDB"
+      ],
+      "reasoning": "Directly grounded in the InfluxDB time-series storage requirement."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL\\n(Users / Projects /\\nVersions / Battles",
+      "grounded": true,
+      "reference_nodes": [
+        "Application Runtime::Database::MySQL"
+      ],
+      "reasoning": "Directly grounded in the MySQL relational storage requirement."
+    },
+    {
+      "predicted_node": "Data Layer::Redis Cache\\n(Workspace Mappings /\\nBattle State /\\nTemp Invitations",
+      "grounded": true,
+      "reference_nodes": [
+        "Application Runtime::Database::Redis"
+      ],
+      "reasoning": "Directly grounded in the Redis cache requirement."
+    },
+    {
+      "predicted_node": "Deployment Infrastructure::Automated Deployment\\nScripts",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Repo::CI/CD Workflow",
+        "Frontend Repo::CI/CD Workflow"
+      ],
+      "reasoning": "Automated deployment scripts are grounded in the deployment workflow requirements, though the exact repo-specific CI/CD boundaries are generalized."
+    },
+    {
+      "predicted_node": "Docker Sandbox::Code Execution\\nSandbox",
+      "grounded": true,
+      "reference_nodes": [
+        "Coding Sandbox::Coding Sandbox 1::Docker",
+        "Coding Sandbox::Coding Sandbox 2::Docker"
+      ],
+      "reasoning": "This directly corresponds to the Docker-based code execution sandbox."
+    },
+    {
+      "predicted_node": "Global::Browser",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend Repo::Vue 3",
+        "Global::End User"
+      ],
+      "reasoning": "The browser boundary is consistent with the frontend runtime and end-user access."
+    },
+    {
+      "predicted_node": "Global::Data Layer",
+      "grounded": true,
+      "reference_nodes": [
+        "Application Runtime::Database::InfluxDB",
+        "Application Runtime::Database::MySQL",
+        "Application Runtime::Database::Redis"
+      ],
+      "reasoning": "This is a generic aggregation of the database/storage layer and is grounded by the listed data stores."
+    },
+    {
+      "predicted_node": "Global::Deployment Infrastructure",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Repo::CI/CD Workflow",
+        "Frontend Repo::CI/CD Workflow"
+      ],
+      "reasoning": "Grounded in the deployment-related parts of the PRD."
+    },
+    {
+      "predicted_node": "Global::Docker Sandbox",
+      "grounded": true,
+      "reference_nodes": [
+        "Coding Sandbox::Coding Sandbox 1::Docker",
+        "Coding Sandbox::Coding Sandbox 2::Docker"
+      ],
+      "reasoning": "A generic sandbox boundary grounded by the two Docker sandbox instances in the GT."
+    },
+    {
+      "predicted_node": "Global::Nginx Reverse Proxy",
+      "grounded": true,
+      "reference_nodes": [
+        "Application Runtime::Reverse Proxy::Nginx"
+      ],
+      "reasoning": "Directly grounded in the Nginx reverse proxy requirement."
+    },
+    {
+      "predicted_node": "Global::Node.js / Express Backend",
+      "grounded": true,
+      "reference_nodes": [
+        "Application Runtime::Reverse Proxy::Express",
+        "Backend Repo::Node.js"
+      ],
+      "reasoning": "This aggregates the Node.js backend and Express server concepts present in the GT and PRD."
+    },
+    {
+      "predicted_node": "Global::Object Storage & CDN",
+      "grounded": true,
+      "reference_nodes": [
+        "Static Asset Delivery::CDN\\nCloudFront",
+        "Static Asset Delivery::Storage\\nS3 bucket"
+      ],
+      "reasoning": "Directly grounded in the object storage and CDN delivery requirements."
+    },
+    {
+      "predicted_node": "Nginx Reverse Proxy::Reverse Proxy\\n(HTTP / WS",
+      "grounded": true,
+      "reference_nodes": [
+        "Application Runtime::Reverse Proxy::Nginx",
+        "Application Runtime::Reverse Proxy::Express"
+      ],
+      "reasoning": "This is a valid reverse-proxy node grounded by the Nginx/Express reverse proxy concepts, though the boundary is merged."
+    },
+    {
+      "predicted_node": "Node.js / Express Backend::Business Services::Battle Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Repo::Node.js"
+      ],
+      "reasoning": "Grounded in the backend business logic for battles described in the PRD."
+    },
+    {
+      "predicted_node": "Node.js / Express Backend::Business Services::Code Execution Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Repo::Node.js"
+      ],
+      "reasoning": "Grounded in the backend code execution responsibility."
+    },
+    {
+      "predicted_node": "Node.js / Express Backend::Business Services::Coding Process Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Repo::Node.js"
+      ],
+      "reasoning": "Grounded in the coding-process recording/playback backend responsibility."
+    },
+    {
+      "predicted_node": "Node.js / Express Backend::Business Services::File / Storage Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Repo::Node.js"
+      ],
+      "reasoning": "Grounded in backend file upload/storage responsibilities."
+    },
+    {
+      "predicted_node": "Node.js / Express Backend::Business Services::JWT Auth Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Repo::Node.js"
+      ],
+      "reasoning": "Grounded in the authentication and JWT validation responsibilities."
+    },
+    {
+      "predicted_node": "Node.js / Express Backend::Business Services::Project Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Repo::Node.js"
+      ],
+      "reasoning": "Grounded in the project management requirements."
+    },
+    {
+      "predicted_node": "Node.js / Express Backend::Business Services::Workspace Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Repo::Node.js"
+      ],
+      "reasoning": "Grounded in workspace authorization and coordination requirements."
+    },
+    {
+      "predicted_node": "Node.js / Express Backend::REST API Layer::Auth API\\n(Register / Login / JWT",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Repo::Node.js"
+      ],
+      "reasoning": "Grounded in the authentication API requirements."
+    },
+    {
+      "predicted_node": "Node.js / Express Backend::REST API Layer::Code Execution API",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Repo::Node.js"
+      ],
+      "reasoning": "Grounded in the code execution API requirements."
+    },
+    {
+      "predicted_node": "Node.js / Express Backend::REST API Layer::File Upload API",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Repo::Node.js"
+      ],
+      "reasoning": "Grounded in the file upload API requirements."
+    },
+    {
+      "predicted_node": "Node.js / Express Backend::REST API Layer::Playback / Recording API",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Repo::Node.js"
+      ],
+      "reasoning": "Grounded in the playback and recording API requirements."
+    },
+    {
+      "predicted_node": "Node.js / Express Backend::REST API Layer::Project API\\n(Create / Query / Update",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Repo::Node.js"
+      ],
+      "reasoning": "Grounded in the project API requirements."
+    },
+    {
+      "predicted_node": "Node.js / Express Backend::REST API Layer::Version & File API",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Repo::Node.js"
+      ],
+      "reasoning": "Grounded in the version and initial file requirements."
+    },
+    {
+      "predicted_node": "Node.js / Express Backend::Socket.IO Layer::Battle Socket\\n(Invite / Accept / Ready /\\nSync / Judge / End / Leave",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Repo::Node.js"
+      ],
+      "reasoning": "Grounded in the battle socket workflow requirements."
+    },
+    {
+      "predicted_node": "Node.js / Express Backend::Socket.IO Layer::Workspace Socket\\n(Auth / Edit / Leave / Disconnect",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Repo::Node.js"
+      ],
+      "reasoning": "Grounded in the workspace socket workflow requirements."
+    },
+    {
+      "predicted_node": "Object Storage & CDN::CDN Distribution\\n(Static Assets /\\nArchives",
+      "grounded": true,
+      "reference_nodes": [
+        "Static Asset Delivery::CDN\\nCloudFront"
+      ],
+      "reasoning": "Directly grounded in CDN-based static asset and archive distribution."
+    },
+    {
+      "predicted_node": "Object Storage & CDN::S3-Compatible\\nObject Storage",
+      "grounded": true,
+      "reference_nodes": [
+        "Static Asset Delivery::Storage\\nS3 bucket"
+      ],
+      "reasoning": "Directly grounded in the object storage requirement."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::InfluxDB"
+      ],
+      "predicted_nodes": [
+        "Data Layer::InfluxDB\\n(Coding-Process\\nTime-Series Records",
+        "Global::Data Layer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The storage responsibility matches, and the data-layer boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL\\n(Users / Projects /\\nVersions / Battles",
+        "Global::Data Layer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The relational database responsibility matches, and the boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::Redis"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Redis Cache\\n(Workspace Mappings /\\nBattle State /\\nTemp Invitations",
+        "Global::Data Layer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The Redis cache responsibility matches, and the data-layer boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Reverse Proxy::Nginx"
+      ],
+      "predicted_nodes": [
+        "Nginx Reverse Proxy::Reverse Proxy\\n(HTTP / WS",
+        "Global::Nginx Reverse Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The reverse proxy functionality matches and remains within the correct infrastructure boundary."
+    },
+    {
+      "gt_nodes": [
+        "Backend Repo::Node.js"
+      ],
+      "predicted_nodes": [
+        "Global::Node.js / Express Backend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The backend runtime matches, though the predicted node aggregates Node.js with Express backend concerns."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Repo::Vue 3"
+      ],
+      "predicted_nodes": [
+        "Browser::Vue Frontend\\n(Web App",
+        "Global::Browser"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The Vue frontend is represented by the browser web app boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::End User"
+      ],
+      "predicted_nodes": [
+        "Browser::Vue Frontend\\n(Web App",
+        "Browser::Vue Frontend\\n(Web App::Battle View",
+        "Browser::Vue Frontend\\n(Web App::Login / Register View",
+        "Browser::Vue Frontend\\n(Web App::Playback View",
+        "Browser::Vue Frontend\\n(Web App::Project Workspace\\n(Code Editor"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The end-user concept is implemented through multiple frontend UI nodes."
+    },
+    {
+      "gt_nodes": [
+        "Static Asset Delivery::CDN\\nCloudFront"
+      ],
+      "predicted_nodes": [
+        "Object Storage & CDN::CDN Distribution\\n(Static Assets /\\nArchives",
+        "Global::Object Storage & CDN"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The CDN delivery concept matches and the boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Static Asset Delivery::Storage\\nS3 bucket"
+      ],
+      "predicted_nodes": [
+        "Object Storage & CDN::S3-Compatible\\nObject Storage",
+        "Global::Object Storage & CDN"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The object storage concept matches and the boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Coding Sandbox::Coding Sandbox 1::Docker",
+        "Coding Sandbox::Coding Sandbox 2::Docker"
+      ],
+      "predicted_nodes": [
+        "Docker Sandbox::Code Execution\\nSandbox",
+        "Global::Docker Sandbox"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Two GT Docker sandbox instances are merged into one generic execution sandbox, which is semantically consistent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Application Runtime::Reverse Proxy::Express",
+    "Backend Repo::CI/CD Workflow",
+    "Backend Repo::Deploy Key",
+    "Backend Repo::GitHub",
+    "Coding Sandbox::Coding Sandbox 1::Exporter",
+    "Coding Sandbox::Coding Sandbox 1::Node.js",
+    "Coding Sandbox::Coding Sandbox 2::Exporter",
+    "Coding Sandbox::Coding Sandbox 2::Node.js",
+    "Frontend Repo::CI/CD Workflow",
+    "Frontend Repo::Deploy Key",
+    "Frontend Repo::GitHub",
+    "Global::Developer"
+  ],
+  "unmatched_predicted_nodes": []
+}

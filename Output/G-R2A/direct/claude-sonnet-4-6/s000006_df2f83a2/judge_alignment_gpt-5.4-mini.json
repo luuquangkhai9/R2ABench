@@ -1,0 +1,146 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Simulator"
+      ],
+      "predicted_nodes": [
+        "Global::OpenAI Gym\\nCompatible Runtime / Consumer",
+        "User-in-the-box Framework::Standalone Simulator\\nPackage\\n(OpenAI Gym Interface"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT simulator node corresponds to the produced standalone simulator and its Gym-compatible runtime exposure. The predicted nodes split the concept into the packaged simulator and its runtime/interface consumer, which is semantically consistent with the GT boundary."
+    },
+    {
+      "gt_nodes": [
+        "Interaction Task::BaseTask",
+        "Interaction Task::DerivedClass",
+        "Interaction Task::Pointing",
+        "Interaction Task::Tracking"
+      ],
+      "predicted_nodes": [
+        "User-in-the-box Framework::Interaction Task Modules::Interaction Task\\nBase / Interface",
+        "User-in-the-box Framework::Interaction Task Modules::HCI Task\\nImplementations"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT interaction task abstraction and concrete task examples are represented by a base/interface plus concrete HCI task implementations. The boundary placement under Interaction Task Modules is correct."
+    },
+    {
+      "gt_nodes": [
+        "Perception::Perception",
+        "Perception::BaseModule",
+        "Perception::DerivedClass",
+        "Perception::BasicWithEEPos",
+        "Perception::FixedEye",
+        "Perception::Modalities::Modality",
+        "Perception::Modalities::Proprioception",
+        "Perception::Modalities::Vision"
+      ],
+      "predicted_nodes": [
+        "User-in-the-box Framework::Perception Modules::Perception Base\\nModule / Interface",
+        "User-in-the-box Framework::Perception Modules::Egocentric\\nVision Module",
+        "User-in-the-box Framework::Perception Modules::Proprioception\\nModule"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT perception abstraction, base module, derived modules, and modality organization are consolidated into perception base/interface plus modality-specific modules. Egocentric vision and proprioception align with the GT vision and proprioception modality concepts, and the boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Biomechanical Model::BaseBMModel",
+        "Biomechanical Model::DerivedClass",
+        "Biomechanical Model::MoblArmsIndex"
+      ],
+      "predicted_nodes": [
+        "User-in-the-box Framework::Biomechanical Model Modules::Biomechanical Model\\nBase / Interface\\n(action [-1,1] → control [0,1",
+        "User-in-the-box Framework::Biomechanical Model Modules::Motor Actuator\\nModel",
+        "User-in-the-box Framework::Biomechanical Model Modules::Muscle-Actuated\\nModel"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT biomechanical model base and concrete model are represented by a base/interface plus concrete motor-actuator and muscle-actuated model variants. This is semantically consistent with the biomechanical model boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Simulator"
+      ],
+      "predicted_nodes": [
+        "User-in-the-box Framework::Simulator Builder::Component\\nInitializer",
+        "User-in-the-box Framework::Simulator Builder::MuJoCo XML\\nIntegration Layer",
+        "User-in-the-box Framework::Simulator Builder::YAML Configuration\\nParser"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT simulator construction concept is split into builder responsibilities: YAML parsing, MuJoCo XML integration, and component initialization. These are correct architectural subnodes for simulator building, though the GT only shows the higher-level simulator node."
+    },
+    {
+      "gt_nodes": [
+        "Global::Simulator"
+      ],
+      "predicted_nodes": [
+        "User-in-the-box Framework::Standalone Simulator\\nPackage\\n(OpenAI Gym Interface"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The standalone packaged simulator with Gym interface is functionally equivalent to the GT simulator node."
+    },
+    {
+      "gt_nodes": [
+        "Global::Simulator"
+      ],
+      "predicted_nodes": [
+        "Global::YAML Simulator\\nConfiguration File"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The YAML configuration file is a build input closely associated with the simulator construction context in the GT. Boundary attribution is acceptable as a global input artifact."
+    },
+    {
+      "gt_nodes": [
+        "Global::Simulator"
+      ],
+      "predicted_nodes": [
+        "Global::MuJoCo XML\\nBiomechanical Model\\nDefinition",
+        "Global::MuJoCo XML\\nInteraction Task\\nEnvironment Definition"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These two XML definitions correspond to the MuJoCo model/environment inputs used in simulator construction. They are correctly placed as global artifacts supporting the simulator."
+    },
+    {
+      "gt_nodes": [
+        "Global::Simulator"
+      ],
+      "predicted_nodes": [
+        "User-in-the-box Framework::Reinforcement Learning\\nTraining Workflow::RL Training\\nRunner",
+        "User-in-the-box Framework::Reinforcement Learning\\nTraining Workflow::Training Configuration\\n(from YAML"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT simulator/training workflow is represented by RL training runner plus YAML training configuration. The boundary under the training workflow is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::Simulator"
+      ],
+      "predicted_nodes": [
+        "User-in-the-box Framework::Evaluation Runner::Evaluation\\nOrchestrator",
+        "User-in-the-box Framework::Evaluation Runner::Checkpoint\\nLoader",
+        "User-in-the-box Framework::Evaluation Runner::Action Logger"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT evaluation-related simulator functionality is split into orchestration, checkpoint loading, and logging. This is semantically aligned with the evaluation runner boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Action Log File",
+    "Global::Run Folder (File System",
+    "Run Folder (File System::checkpoints/\\n(model checkpoint artifacts",
+    "Run Folder (File System::evaluate/\\n(evaluation output directory",
+    "Run Folder (File System::training run\\nartifacts"
+  ]
+}

@@ -1,0 +1,71 @@
+@startuml
+title POCD Persistent Object Consistency Detection - Layered Architecture
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+node User Browser as Browser
+package User Interface Layer {
+  [Web UI (Front-end SPA)] as WebUI
+}
+
+package Business Logic Layer (Back-end API) {
+  [REST API Gateway] as API
+  [Account Service] as Account
+  [File Management Service] as FileSvc
+  [Parsing Service (MDJ and DB)] as Parsing
+  [Matching and Detection Engine] as Detect
+  [Repair Engine] as Repair
+  [Config and Exception Manager] as Config
+  [Report Service] as Report
+  [History and Audit Service] as HistorySvc
+}
+
+package Data Access Layer {
+  [Repository / DAO] as DAO
+  database Application DB as AppDB
+  [File Storage] as FileStore
+  [Operation Logs] as Logs
+}
+
+package External Systems and Dependencies {
+  database MySQL Server (Target Schema) as MySQL
+  component StarUML (MDJ Files) as StarUML
+  artifact JDBC Driver as JDBC
+  artifact Jackson JSON Mapper as Jackson
+  boundary SSL/TLS as TLS
+}
+
+Browser --^> WebUI : Loads SPA
+WebUI --^> API : REST/JSON over HTTPS
+API --^> Account
+API --^> FileSvc
+API --^> Parsing
+API --^> Detect
+API --^> Repair
+API --^> Config
+API --^> Report
+API --^> HistorySvc
+
+Account --^> DAO
+FileSvc --^> FileStore
+Parsing --^> DAO : persist parsed models
+Parsing --^> Jackson : JSON mapping
+Parsing --^> JDBC
+JDBC --^> MySQL : connect/parse schema
+Detect --^> DAO : read models/matches
+Detect --^> Config : rules and exceptions
+Detect --^> Report : generate detection report
+Repair --^> DAO : read models
+Repair --^> MySQL : apply DB repairs
+Repair --^> FileStore : write repaired class diagrams
+Report --^> FileStore : export reports
+HistorySvc --^> DAO : save history
+HistorySvc --^> Logs : write operation logs
+Config --^> DAO : persist configurations
+DAO --^> AppDB
+
+StarUML --^> FileSvc : MDJ upload/download
+WebUI --^> FileSvc : file upload/download via API
+
+@enduml

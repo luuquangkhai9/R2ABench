@@ -1,0 +1,125 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon API Gateway\\nREST API"
+      ],
+      "predicted_nodes": [
+        "API Gateway Layer::API Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the deployed REST API component. The predicted boundary is semantically equivalent to the GT API Gateway package."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS Lambda\\nSimulator API"
+      ],
+      "predicted_nodes": [
+        "Application Layer::API Service Lambdas"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Lambda-backed simulator API is functionally represented by the API service Lambdas. The application-layer boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS CloudFormation\\nCustom resources"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Custom-Resource Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the CloudFormation custom-resource processing logic. Application layer placement is acceptable for the handler implementation."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS Step Functions\\nSimulation workflow"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Step Functions"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node captures the Step Functions-based simulation workflow from the GT. The layer attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon DynamoDB\\nSimulator state"
+      ],
+      "predicted_nodes": [
+        "Data Layer::DynamoDB Tables"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT simulator state persistence corresponds to DynamoDB tables. Data-layer placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon S3\\nRoute data bucket"
+      ],
+      "predicted_nodes": [
+        "Data Layer::S3 Bucket (Route Data"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the S3 bucket holding route data. Data-layer attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon S3\\nWeb UI bucket"
+      ],
+      "predicted_nodes": [
+        "Data Layer::S3 Bucket (Configuration"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This appears to represent the S3-backed static asset/configuration bucket for the web UI. Data-layer placement is acceptable, though the predicted name is less precise."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Browser Web UI\\nstatic app client"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web Management Console"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the browser-based management UI. Presentation-layer attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS IoT Core"
+      ],
+      "predicted_nodes": [
+        "Global::AWS IoT"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "AWS IoT Core in GT is captured by AWS IoT in the prediction. As an external managed service, the global boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon Cognito"
+      ],
+      "predicted_nodes": [
+        "Global::AWS CloudFormation"
+      ],
+      "match_type": "unmatched"
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "AWS IoT Device Simulator::Amazon CloudFront",
+    "AWS IoT Device Simulator::Amazon Cognito",
+    "AWS IoT Device Simulator::Users"
+  ],
+  "unmatched_predicted_nodes": [
+    "API Gateway Layer::CloudWatch Logs",
+    "Application Layer::Device Simulator",
+    "Application Layer::Route Loader",
+    "Data Layer::S3 Bucket (Configuration",
+    "Global::AWS CloudFormation",
+    "Global::X-Ray"
+  ]
+}

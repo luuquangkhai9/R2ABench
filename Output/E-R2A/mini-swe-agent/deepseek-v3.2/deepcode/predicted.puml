@@ -1,0 +1,176 @@
+@startuml  
+title DeepCode - AI-Assisted Online Programming Platform  
+'Architecture Diagram'  
+  
+skinparam componentStyle rectangle  
+skinparam backgroundColor #F5F5F5  
+skinparam component {  
+  BackgroundColor #E6F3FF  
+  BorderColor #0066CC  
+  FontColor #000000  
+  ArrowColor #0066CC  
+} 
+  
+'=== LAYER 1: CLIENT LAYER ==='  
+package "Client Layer" {  
+  component "Web Browser" as Browser [  
+    Vue 3 Frontend  
+    HTML5, TypeScript  
+    Ant Design Vue  
+  ]  
+} 
+  
+'=== LAYER 2: PRESENTATION LAYER ==='  
+package "Presentation Layer" {  
+  component "API Gateway" as Gateway [  
+    RESTful API Gateway  
+    HTTPS, Load Balancing  
+  ]  
+  
+  component "Authentication Service" as Auth [  
+    JWT/OAuth 2.0  
+    Login/Registration  
+    Permission Filter  
+  ]  
+} 
+  
+'=== LAYER 3: BUSINESS LAYER ==='  
+package "Business Layer" {  
+  component "User Management" as UserMgmt [  
+    User Registration/Login  
+    Profile Management  
+    Activity Tracking  
+  ]  
+  
+  component "Problem Management" as ProblemMgmt [  
+    Problem Bank  
+    Problem Upload/Review  
+    Test Case Management  
+  ]  
+  
+  component "Solution Management" as SolutionMgmt [  
+    Solution Publishing  
+    Solution Comments/Likes  
+    Solution Tags  
+  ]  
+  
+  component "Forum Management" as ForumMgmt [  
+    Discussion Posts  
+    Comments/Replies  
+    Likes/Reports  
+  ]  
+  
+  component "Submission Service" as Submission [  
+    Code Submission  
+    Submission Records  
+    Result Processing  
+  ]  
+  
+  component "AI Service Integration" as AIService [  
+    LangChain4j Integration  
+    LLM Interface  
+    AI Results Cache  
+  ]  
+} 
+  
+'=== LAYER 4: DATA ACCESS LAYER ==='  
+package "Data Access Layer" {  
+  component "MySQL Database" as MySQL [  
+    Business Data Storage  
+    User, Problem, Solution  
+    Forum, Submission Records  
+  ]  
+  
+  component "Redis Cache" as Redis [  
+    Session Cache  
+    High-Frequency Data  
+    Temporary Storage  
+  ]  
+  
+  component "MinIO Object Storage" as MinIO [  
+    File Storage  
+    Test Cases  
+    Images, Files  
+  ]  
+} 
+  
+'=== LAYER 5: EXTERNAL SERVICES ==='  
+package "External Services" {  
+  component "Judging Service" as JudgeService [  
+    JudgeHost + JudgeCore  
+    Code Execution Sandbox  
+    Resource Limiting  
+  ]  
+  
+  component "LLM Service" as LLM [  
+    Large Language Model  
+    AI Recommendations  
+    Code Analysis  
+  ]  
+  
+  component "SMTP Service" as SMTP [  
+    Email Notifications  
+    User Communication  
+  ]  
+} 
+  
+'=== LAYER 6: OPERATIONS ==='  
+package "Operations & Monitoring" {  
+  component "Monitoring System" as Monitoring [  
+    Infrastructure Metrics  
+    Application Performance  
+    Database Metrics  
+  ]  
+  
+  component "CI/CD Pipeline" as CICD [  
+    GitLab CI/CD  
+    Docker Containerization  
+    Kubernetes Deployment  
+  ]  
+} 
+  
+'=== CONNECTIONS ==='  
+Browser -- : "RESTful API (HTTPS)"  
+Gateway -- : "Authentication"  
+Auth -- : "User Context"  
+  
+UserMgmt -- : "CRUD Operations"  
+ProblemMgmt -- : "Problem Data"  
+SolutionMgmt -- : "Solution Data"  
+ForumMgmt -- : "Forum Data"  
+Submission -- : "Submission Records"  
+  
+UserMgmt -- : "Session Cache"  
+ProblemMgmt -- : "Problem Cache"  
+ForumMgmt -- : "Forum Cache"  
+  
+ProblemMgmt -- : "Test Case Files"  
+SolutionMgmt -- : "Solution Images"  
+ForumMgmt -- : "Post Images"  
+  
+Submission -- : "Code Judging Request"  
+JudgeService -- : "Test Case Retrieval"  
+  
+AIService -- : "AI API Calls"  
+AIService -- : "AI Results Storage"  
+AIService -- : "AI Cache"  
+  
+UserMgmt -- : "Email Notifications"  
+ProblemMgmt -- : "Review Notifications"  
+  
+'=== ADMINISTRATION FLOWS ==='  
+Gateway -- : "Problem Review (Admin)"  
+Gateway -- : "User Management (Admin)"  
+Gateway -- : "Content Moderation (Admin)"  
+  
+'=== MONITORING CONNECTIONS ==='  
+MySQL -- : "Database Metrics"  
+Redis -- : "Cache Metrics"  
+Gateway -- : "API Metrics"  
+JudgeService -- : "Judging Metrics"  
+  
+'=== DEPLOYMENT ==='  
+CICD .. : "Deploys"  
+CICD .. : "Deploys"  
+CICD .. : "Deploys" 
+@enduml 

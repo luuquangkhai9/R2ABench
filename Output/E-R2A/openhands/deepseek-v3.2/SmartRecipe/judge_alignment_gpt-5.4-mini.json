@@ -1,0 +1,919 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Business Layer (Spring Boot Framework::Modules::Admin Audit",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Backend Service Layer::Spring Boot Application::Service Layer::Admin Service",
+        "Backend Service Layer::Spring Boot Application::Controller Layer::Admin Controller"
+      ],
+      "reasoning": "The GT admin audit module is represented by admin-facing controller/service components that handle administrator review and management responsibilities."
+    },
+    {
+      "gt_node": "Business Layer (Spring Boot Framework::Modules::Community Sharing",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Backend Service Layer::Spring Boot Application::Service Layer::Community Service",
+        "Backend Service Layer::Spring Boot Application::Controller Layer::Community Controller"
+      ],
+      "reasoning": "The community sharing responsibilities are covered by the predicted community controller and service."
+    },
+    {
+      "gt_node": "Business Layer (Spring Boot Framework::Modules::Health Management",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Backend Service Layer::Spring Boot Application::Service Layer::Health Analysis Service",
+        "Backend Service Layer::Spring Boot Application::Controller Layer::Health Controller",
+        "Backend Service Layer::Spring Boot Application::Business Logic Layer::Nutrition Analysis Engine",
+        "Backend Service Layer::Spring Boot Application::Business Logic Layer::Diet Plan Generator",
+        "Backend Service Layer::Spring Boot Application::Business Logic Layer::Calorie Calculator",
+        "Backend Service Layer::Spring Boot Application::Business Logic Layer::Personalization Engine"
+      ],
+      "reasoning": "The GT health management module is broadly covered by health analysis, nutrition, diet planning, calorie calculation, and personalization components."
+    },
+    {
+      "gt_node": "Business Layer (Spring Boot Framework::Modules::Recipe Search",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Backend Service Layer::Spring Boot Application::Service Layer::Search Service",
+        "Backend Service Layer::Spring Boot Application::Controller Layer::Search Controller"
+      ],
+      "reasoning": "The recipe search function is directly represented by the predicted search controller and service."
+    },
+    {
+      "gt_node": "Business Layer (Spring Boot Framework::Modules::Smart Recommendation",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Backend Service Layer::Spring Boot Application::Service Layer::Recommendation Service",
+        "Backend Service Layer::Spring Boot Application::Business Logic Layer::Personalization Engine"
+      ],
+      "reasoning": "The recommendation module is covered by recommendation-specific and personalization components."
+    },
+    {
+      "gt_node": "Business Layer (Spring Boot Framework::Modules::User Information",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Backend Service Layer::Spring Boot Application::Service Layer::User Service",
+        "Backend Service Layer::Spring Boot Application::Controller Layer::User Controller"
+      ],
+      "reasoning": "User information management, login, and account-related behavior are covered by the user controller and service."
+    },
+    {
+      "gt_node": "Data Layer::Data Cleaning",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node explicitly covers data cleaning/preprocessing as a backend data-layer responsibility."
+    },
+    {
+      "gt_node": "Data Layer::Dataset",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Data Layer::Food Images",
+        "Data Layer::Recipe Images",
+        "Data Layer::User Uploads",
+        "Data Layer::MySQL Database::Recipe Tables",
+        "Data Layer::MySQL Database::Nutrition Tables",
+        "Data Layer::MySQL Database::User Tables",
+        "Data Layer::MySQL Database::Community Tables",
+        "Data Layer::Redis Cache::Recipe Cache",
+        "Data Layer::Redis Cache::Health Data Cache",
+        "Data Layer::Redis Cache::Recommendation Cache"
+      ],
+      "reasoning": "The GT dataset concept is covered by the predicted data repositories and storage tables, though fragmented into multiple concrete stores."
+    },
+    {
+      "gt_node": "Data Layer::Read/Write Database",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Data Layer::MySQL Database"
+      ],
+      "reasoning": "The general database read/write role is covered by the MySQL database node."
+    },
+    {
+      "gt_node": "Database::MySQL",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Data Layer::MySQL Database"
+      ],
+      "reasoning": "The predicted MySQL database node is a direct semantic match."
+    },
+    {
+      "gt_node": "Database::Redis",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Data Layer::Redis Cache"
+      ],
+      "reasoning": "The predicted Redis cache node corresponds to the GT Redis database/cache dependency."
+    },
+    {
+      "gt_node": "Frontend UI::Recipe App",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "User Layer::Mobile App (Android/iOS",
+        "User Layer::Mobile App (Android/iOS::User Interface Layer",
+        "User Layer::Mobile App (Android/iOS::User Interface Layer::Main Interface",
+        "User Layer::Mobile App (Android/iOS::User Interface Layer::Photo Recognition Interface",
+        "User Layer::Mobile App (Android/iOS::User Interface Layer::Recipe Display Interface",
+        "User Layer::Mobile App (Android/iOS::User Interface Layer::Health Center Interface",
+        "User Layer::Mobile App (Android/iOS::User Interface Layer::Community Interface",
+        "User Layer::Mobile App (Android/iOS::User Interface Layer::Recommendation Interface",
+        "User Layer::Mobile App (Android/iOS::User Interface Layer::Login Interface",
+        "User Layer::Mobile App (Android/iOS::User Interface Layer::Admin Interface",
+        "User Layer::Mobile App (Android/iOS::App Logic Layer"
+      ],
+      "reasoning": "The GT frontend recipe app is covered by the predicted mobile app UI and app logic components, despite finer-grained decomposition."
+    },
+    {
+      "gt_node": "Runtime Environment::Flask Service",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Backend Service Layer::Flask Model Service",
+        "Backend Service Layer::Flask Model Service::Image Recognition Model",
+        "Backend Service Layer::Flask Model Service::Model Inference Engine",
+        "Backend Service Layer::Flask Model Service::Recipe Generator"
+      ],
+      "reasoning": "The Flask runtime/service is represented by the predicted Flask model service and its inference subcomponents."
+    },
+    {
+      "gt_node": "Runtime Environment::Springboot Service",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Backend Service Layer::Spring Boot Application"
+      ],
+      "reasoning": "The Spring Boot backend runtime is directly covered by the Spring Boot application node."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Backend Service Layer::Flask Model Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Runtime Environment::Flask Service",
+        "Business Layer (Spring Boot Framework::Modules::Health Management",
+        "Business Layer (Spring Boot Framework::Modules::Recipe Search"
+      ],
+      "reasoning": "This node is grounded in the GT Flask service and the ML/inference-related parts of the recipe recognition workflow."
+    },
+    {
+      "predicted_node": "Backend Service Layer::Flask Model Service::Image Recognition Model",
+      "grounded": true,
+      "reference_nodes": [
+        "Runtime Environment::Flask Service"
+      ],
+      "reasoning": "The image recognition model is directly implied by the GT Flask inference service."
+    },
+    {
+      "predicted_node": "Backend Service Layer::Flask Model Service::Model Inference Engine",
+      "grounded": true,
+      "reference_nodes": [
+        "Runtime Environment::Flask Service"
+      ],
+      "reasoning": "This is a finer-grained elaboration of the GT Flask inference service."
+    },
+    {
+      "predicted_node": "Backend Service Layer::Flask Model Service::Recipe Generator",
+      "grounded": true,
+      "reference_nodes": [
+        "Runtime Environment::Flask Service",
+        "Business Layer (Spring Boot Framework::Modules::Recipe Search"
+      ],
+      "reasoning": "Recipe generation via inference is consistent with the GT Flask service and recipe-related backend functionality."
+    },
+    {
+      "predicted_node": "Backend Service Layer::Spring Boot Application",
+      "grounded": true,
+      "reference_nodes": [
+        "Runtime Environment::Springboot Service",
+        "Business Layer (Spring Boot Framework::Modules::Admin Audit",
+        "Business Layer (Spring Boot Framework::Modules::Community Sharing",
+        "Business Layer (Spring Boot Framework::Modules::Health Management",
+        "Business Layer (Spring Boot Framework::Modules::Recipe Search",
+        "Business Layer (Spring Boot Framework::Modules::Smart Recommendation",
+        "Business Layer (Spring Boot Framework::Modules::User Information"
+      ],
+      "reasoning": "The Spring Boot application is grounded in the GT Spring Boot runtime and business modules."
+    },
+    {
+      "predicted_node": "Backend Service Layer::Spring Boot Application::Business Logic Layer",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Admin Audit",
+        "Business Layer (Spring Boot Framework::Modules::Community Sharing",
+        "Business Layer (Spring Boot Framework::Modules::Health Management",
+        "Business Layer (Spring Boot Framework::Modules::Recipe Search",
+        "Business Layer (Spring Boot Framework::Modules::Smart Recommendation",
+        "Business Layer (Spring Boot Framework::Modules::User Information"
+      ],
+      "reasoning": "This is a valid aggregation of the GT business modules."
+    },
+    {
+      "predicted_node": "Backend Service Layer::Spring Boot Application::Business Logic Layer::Calorie Calculator",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Health Management"
+      ],
+      "reasoning": "Calorie calculation is part of health management."
+    },
+    {
+      "predicted_node": "Backend Service Layer::Spring Boot Application::Business Logic Layer::Diet Plan Generator",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Health Management"
+      ],
+      "reasoning": "Diet plan generation is covered by the GT health management module."
+    },
+    {
+      "predicted_node": "Backend Service Layer::Spring Boot Application::Business Logic Layer::Food Combination Checker",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Health Management"
+      ],
+      "reasoning": "Food-combination taboo checking is part of the health-related functionality."
+    },
+    {
+      "predicted_node": "Backend Service Layer::Spring Boot Application::Business Logic Layer::Nutrition Analysis Engine",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Health Management"
+      ],
+      "reasoning": "Nutrition analysis is directly grounded in the GT health management module."
+    },
+    {
+      "predicted_node": "Backend Service Layer::Spring Boot Application::Business Logic Layer::Personalization Engine",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Smart Recommendation",
+        "Business Layer (Spring Boot Framework::Modules::Health Management"
+      ],
+      "reasoning": "Personalization spans recommendation and health management in the GT."
+    },
+    {
+      "predicted_node": "Backend Service Layer::Spring Boot Application::Controller Layer",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Admin Audit",
+        "Business Layer (Spring Boot Framework::Modules::Community Sharing",
+        "Business Layer (Spring Boot Framework::Modules::Health Management",
+        "Business Layer (Spring Boot Framework::Modules::Recipe Search",
+        "Business Layer (Spring Boot Framework::Modules::Smart Recommendation",
+        "Business Layer (Spring Boot Framework::Modules::User Information"
+      ],
+      "reasoning": "The controller layer is a reasonable decomposition of the GT backend modules."
+    },
+    {
+      "predicted_node": "Backend Service Layer::Spring Boot Application::Controller Layer::Admin Controller",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Admin Audit"
+      ],
+      "reasoning": "This corresponds to the GT admin audit functionality."
+    },
+    {
+      "predicted_node": "Backend Service Layer::Spring Boot Application::Controller Layer::Community Controller",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Community Sharing"
+      ],
+      "reasoning": "This corresponds to community sharing."
+    },
+    {
+      "predicted_node": "Backend Service Layer::Spring Boot Application::Controller Layer::Health Controller",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Health Management"
+      ],
+      "reasoning": "This corresponds to health management."
+    },
+    {
+      "predicted_node": "Backend Service Layer::Spring Boot Application::Controller Layer::Recipe Controller",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Recipe Search"
+      ],
+      "reasoning": "This corresponds to recipe-related backend operations."
+    },
+    {
+      "predicted_node": "Backend Service Layer::Spring Boot Application::Controller Layer::Search Controller",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Recipe Search"
+      ],
+      "reasoning": "This is directly grounded in the GT search module."
+    },
+    {
+      "predicted_node": "Backend Service Layer::Spring Boot Application::Controller Layer::User Controller",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::User Information"
+      ],
+      "reasoning": "This corresponds to user information management."
+    },
+    {
+      "predicted_node": "Backend Service Layer::Spring Boot Application::Service Layer",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Admin Audit",
+        "Business Layer (Spring Boot Framework::Modules::Community Sharing",
+        "Business Layer (Spring Boot Framework::Modules::Health Management",
+        "Business Layer (Spring Boot Framework::Modules::Recipe Search",
+        "Business Layer (Spring Boot Framework::Modules::Smart Recommendation",
+        "Business Layer (Spring Boot Framework::Modules::User Information"
+      ],
+      "reasoning": "This is a valid service-layer aggregation of the GT business modules."
+    },
+    {
+      "predicted_node": "Backend Service Layer::Spring Boot Application::Service Layer::Admin Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Admin Audit"
+      ],
+      "reasoning": "Grounded in admin audit/review management."
+    },
+    {
+      "predicted_node": "Backend Service Layer::Spring Boot Application::Service Layer::Community Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Community Sharing"
+      ],
+      "reasoning": "Grounded in community sharing."
+    },
+    {
+      "predicted_node": "Backend Service Layer::Spring Boot Application::Service Layer::Health Analysis Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Health Management"
+      ],
+      "reasoning": "Grounded in health management."
+    },
+    {
+      "predicted_node": "Backend Service Layer::Spring Boot Application::Service Layer::Recipe Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Recipe Search"
+      ],
+      "reasoning": "Grounded in recipe-related backend functionality."
+    },
+    {
+      "predicted_node": "Backend Service Layer::Spring Boot Application::Service Layer::Recommendation Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Smart Recommendation"
+      ],
+      "reasoning": "Direct match to recommendation functionality."
+    },
+    {
+      "predicted_node": "Backend Service Layer::Spring Boot Application::Service Layer::Search Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Recipe Search"
+      ],
+      "reasoning": "Direct match to recipe search functionality."
+    },
+    {
+      "predicted_node": "Backend Service Layer::Spring Boot Application::Service Layer::User Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::User Information"
+      ],
+      "reasoning": "Direct match to user information/account management."
+    },
+    {
+      "predicted_node": "Communication Layer::Internet",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT mentions mobile app/back-end communication, but not an explicit Internet node as a distinct architecture component."
+    },
+    {
+      "predicted_node": "Communication Layer::REST API Gateway",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT describes Ajax/direct interaction, not a REST API gateway component."
+    },
+    {
+      "predicted_node": "Communication Layer::REST API Gateway::Authentication Service",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "Authentication exists in the GT, but not as a separate API gateway service/component."
+    },
+    {
+      "predicted_node": "Communication Layer::REST API Gateway::Rate Limiter",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No rate-limiting component is described in the GT."
+    },
+    {
+      "predicted_node": "Communication Layer::REST API Gateway::Request Router",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No gateway routing component is specified in the GT."
+    },
+    {
+      "predicted_node": "Data Layer::Food Images",
+      "grounded": true,
+      "reference_nodes": [
+        "Data Layer::Dataset",
+        "Data Layer::Read/Write Database",
+        "Frontend UI::Recipe App"
+      ],
+      "reasoning": "Food image storage is grounded in the GT image/data requirements, though more specifically decomposed."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database",
+      "grounded": true,
+      "reference_nodes": [
+        "Database::MySQL"
+      ],
+      "reasoning": "Direct semantic match."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database::Community Tables",
+      "grounded": true,
+      "reference_nodes": [
+        "Database::MySQL"
+      ],
+      "reasoning": "Community tables are a concrete subdivision of the GT MySQL-backed storage."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database::Health Tables",
+      "grounded": true,
+      "reference_nodes": [
+        "Database::MySQL"
+      ],
+      "reasoning": "Health tables are a concrete subdivision of the GT MySQL-backed storage."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database::Merchant Tables",
+      "grounded": true,
+      "reference_nodes": [
+        "Database::MySQL"
+      ],
+      "reasoning": "Merchant data storage is grounded in the GT MySQL database."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database::Nutrition Tables",
+      "grounded": true,
+      "reference_nodes": [
+        "Database::MySQL"
+      ],
+      "reasoning": "Nutrition tables are grounded in the GT MySQL database."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database::Recipe Tables",
+      "grounded": true,
+      "reference_nodes": [
+        "Database::MySQL"
+      ],
+      "reasoning": "Recipe table storage is grounded in the GT MySQL database."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database::User Tables",
+      "grounded": true,
+      "reference_nodes": [
+        "Database::MySQL"
+      ],
+      "reasoning": "User table storage is grounded in the GT MySQL database."
+    },
+    {
+      "predicted_node": "Data Layer::Recipe Images",
+      "grounded": true,
+      "reference_nodes": [
+        "Data Layer::Dataset",
+        "Frontend UI::Recipe App"
+      ],
+      "reasoning": "Recipe image storage is grounded in the GT recipe/image data requirements."
+    },
+    {
+      "predicted_node": "Data Layer::Redis Cache",
+      "grounded": true,
+      "reference_nodes": [
+        "Database::Redis"
+      ],
+      "reasoning": "Direct semantic match to the GT Redis cache/database dependency."
+    },
+    {
+      "predicted_node": "Data Layer::Redis Cache::Health Data Cache",
+      "grounded": true,
+      "reference_nodes": [
+        "Database::Redis",
+        "Business Layer (Spring Boot Framework::Modules::Health Management"
+      ],
+      "reasoning": "Health data caching is grounded in the GT Redis cache and health functionality."
+    },
+    {
+      "predicted_node": "Data Layer::Redis Cache::Recipe Cache",
+      "grounded": true,
+      "reference_nodes": [
+        "Database::Redis",
+        "Business Layer (Spring Boot Framework::Modules::Recipe Search"
+      ],
+      "reasoning": "Recipe caching is grounded in the GT Redis cache and recipe-related functions."
+    },
+    {
+      "predicted_node": "Data Layer::Redis Cache::Recommendation Cache",
+      "grounded": true,
+      "reference_nodes": [
+        "Database::Redis",
+        "Business Layer (Spring Boot Framework::Modules::Smart Recommendation"
+      ],
+      "reasoning": "Recommendation caching is grounded in the GT Redis cache and recommendation functions."
+    },
+    {
+      "predicted_node": "Data Layer::Redis Cache::Session Cache",
+      "grounded": true,
+      "reference_nodes": [
+        "Database::Redis",
+        "Business Layer (Spring Boot Framework::Modules::User Information"
+      ],
+      "reasoning": "A session cache is consistent with GT login/token-related storage needs, though more detailed than the GT."
+    },
+    {
+      "predicted_node": "Data Layer::User Uploads",
+      "grounded": true,
+      "reference_nodes": [
+        "Data Layer::Dataset",
+        "Frontend UI::Recipe App"
+      ],
+      "reasoning": "User upload storage is grounded in the GT's image upload and community sharing data."
+    },
+    {
+      "predicted_node": "External Systems::Catering Companies",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Smart Recommendation"
+      ],
+      "reasoning": "Catering companies are explicitly mentioned in the GT as an external user class supported by the system."
+    },
+    {
+      "predicted_node": "External Systems::Health Data Sources",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Health Management"
+      ],
+      "reasoning": "Health data sources are grounded in the GT health analysis dependencies."
+    },
+    {
+      "predicted_node": "External Systems::Third-Party Services",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT mentions some external interfaces, but not a generic third-party services container as a standalone component."
+    },
+    {
+      "predicted_node": "External Systems::Third-Party Services::Authentication Provider",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::User Information"
+      ],
+      "reasoning": "Authentication is grounded by the GT login functionality, though the external provider is an added architectural assumption."
+    },
+    {
+      "predicted_node": "External Systems::Third-Party Services::Map Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Community Sharing"
+      ],
+      "reasoning": "Map service is grounded by the GT merchant location display requirement."
+    },
+    {
+      "predicted_node": "External Systems::Third-Party Services::Nutrition API",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Health Management"
+      ],
+      "reasoning": "Nutrition API usage is grounded by health analysis and nutrition advice requirements."
+    },
+    {
+      "predicted_node": "User Layer::Mobile App (Android/iOS",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend UI::Recipe App"
+      ],
+      "reasoning": "This is a direct match to the GT mobile frontend app, though the naming is incomplete."
+    },
+    {
+      "predicted_node": "User Layer::Mobile App (Android/iOS::App Logic Layer",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend UI::Recipe App"
+      ],
+      "reasoning": "App logic is part of the GT frontend application."
+    },
+    {
+      "predicted_node": "User Layer::Mobile App (Android/iOS::App Logic Layer::API Client",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend UI::Recipe App"
+      ],
+      "reasoning": "The API client is grounded in the GT app-backend interaction requirement."
+    },
+    {
+      "predicted_node": "User Layer::Mobile App (Android/iOS::App Logic Layer::Image Preprocessing",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend UI::Recipe App"
+      ],
+      "reasoning": "Image preprocessing is explicitly described in the GT photo recognition flow."
+    },
+    {
+      "predicted_node": "User Layer::Mobile App (Android/iOS::App Logic Layer::Local Food Check",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend UI::Recipe App"
+      ],
+      "reasoning": "Local food checking is explicitly described in the GT photo recognition flow."
+    },
+    {
+      "predicted_node": "User Layer::Mobile App (Android/iOS::App Logic Layer::Local Storage",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend UI::Recipe App"
+      ],
+      "reasoning": "Local storage is a plausible elaboration of the GT mobile app, though not explicitly named."
+    },
+    {
+      "predicted_node": "User Layer::Mobile App (Android/iOS::User Interface Layer",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend UI::Recipe App"
+      ],
+      "reasoning": "This is a valid decomposition of the GT frontend UI."
+    },
+    {
+      "predicted_node": "User Layer::Mobile App (Android/iOS::User Interface Layer::Admin Interface",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend UI::Recipe App"
+      ],
+      "reasoning": "Admin-facing UI is grounded in the GT administrator interface."
+    },
+    {
+      "predicted_node": "User Layer::Mobile App (Android/iOS::User Interface Layer::Community Interface",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend UI::Recipe App"
+      ],
+      "reasoning": "Community UI is grounded in the GT community sharing interface."
+    },
+    {
+      "predicted_node": "User Layer::Mobile App (Android/iOS::User Interface Layer::Health Center Interface",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend UI::Recipe App"
+      ],
+      "reasoning": "Health center UI is grounded in the GT health/nutrition analysis interface."
+    },
+    {
+      "predicted_node": "User Layer::Mobile App (Android/iOS::User Interface Layer::Login Interface",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend UI::Recipe App"
+      ],
+      "reasoning": "Login UI is grounded in the GT login interface."
+    },
+    {
+      "predicted_node": "User Layer::Mobile App (Android/iOS::User Interface Layer::Main Interface",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend UI::Recipe App"
+      ],
+      "reasoning": "Main UI is grounded in the GT user main interface."
+    },
+    {
+      "predicted_node": "User Layer::Mobile App (Android/iOS::User Interface Layer::Photo Recognition Interface",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend UI::Recipe App"
+      ],
+      "reasoning": "Photo recognition UI is grounded in the GT photo recognition interface."
+    },
+    {
+      "predicted_node": "User Layer::Mobile App (Android/iOS::User Interface Layer::Recipe Display Interface",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend UI::Recipe App"
+      ],
+      "reasoning": "Recipe display UI is grounded in the GT recipe display interface."
+    },
+    {
+      "predicted_node": "User Layer::Mobile App (Android/iOS::User Interface Layer::Recommendation Interface",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend UI::Recipe App"
+      ],
+      "reasoning": "Recommendation UI is grounded in the GT recommendation interface."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Admin Audit",
+        "Business Layer (Spring Boot Framework::Modules::Community Sharing",
+        "Business Layer (Spring Boot Framework::Modules::Health Management",
+        "Business Layer (Spring Boot Framework::Modules::Recipe Search",
+        "Business Layer (Spring Boot Framework::Modules::Smart Recommendation",
+        "Business Layer (Spring Boot Framework::Modules::User Information"
+      ],
+      "predicted_nodes": [
+        "Backend Service Layer::Spring Boot Application::Business Logic Layer"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted business logic layer aggregates the GT Spring Boot business modules and stays within the backend/business boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Admin Audit"
+      ],
+      "predicted_nodes": [
+        "Backend Service Layer::Spring Boot Application::Controller Layer::Admin Controller",
+        "Backend Service Layer::Spring Boot Application::Service Layer::Admin Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT admin audit module is decomposed into controller and service layers, which is a semantically consistent split."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Community Sharing"
+      ],
+      "predicted_nodes": [
+        "Backend Service Layer::Spring Boot Application::Controller Layer::Community Controller",
+        "Backend Service Layer::Spring Boot Application::Service Layer::Community Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Community sharing is split into controller and service components within the correct backend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Health Management"
+      ],
+      "predicted_nodes": [
+        "Backend Service Layer::Spring Boot Application::Controller Layer::Health Controller",
+        "Backend Service Layer::Spring Boot Application::Service Layer::Health Analysis Service",
+        "Backend Service Layer::Spring Boot Application::Business Logic Layer::Calorie Calculator",
+        "Backend Service Layer::Spring Boot Application::Business Logic Layer::Diet Plan Generator",
+        "Backend Service Layer::Spring Boot Application::Business Logic Layer::Food Combination Checker",
+        "Backend Service Layer::Spring Boot Application::Business Logic Layer::Nutrition Analysis Engine",
+        "Backend Service Layer::Spring Boot Application::Business Logic Layer::Personalization Engine"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Health management is elaborated into several related backend subcomponents, all still within the backend domain."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Recipe Search"
+      ],
+      "predicted_nodes": [
+        "Backend Service Layer::Spring Boot Application::Controller Layer::Search Controller",
+        "Backend Service Layer::Spring Boot Application::Service Layer::Search Service",
+        "Backend Service Layer::Spring Boot Application::Service Layer::Recipe Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The recipe search module is represented by search-related controller/service components, with a minor decomposition difference."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Smart Recommendation"
+      ],
+      "predicted_nodes": [
+        "Backend Service Layer::Spring Boot Application::Service Layer::Recommendation Service",
+        "Backend Service Layer::Spring Boot Application::Business Logic Layer::Personalization Engine"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Recommendation is split into recommendation and personalization components, which is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::User Information"
+      ],
+      "predicted_nodes": [
+        "Backend Service Layer::Spring Boot Application::Controller Layer::User Controller",
+        "Backend Service Layer::Spring Boot Application::Service Layer::User Service",
+        "Backend Service Layer::Spring Boot Application::Business Logic Layer::Personalization Engine"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "User information is represented by user controller/service components; personalization is related but secondary."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Dataset"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Food Images",
+        "Data Layer::Recipe Images",
+        "Data Layer::User Uploads",
+        "Data Layer::MySQL Database::Community Tables",
+        "Data Layer::MySQL Database::Health Tables",
+        "Data Layer::MySQL Database::Merchant Tables",
+        "Data Layer::MySQL Database::Nutrition Tables",
+        "Data Layer::MySQL Database::Recipe Tables",
+        "Data Layer::MySQL Database::User Tables",
+        "Data Layer::Redis Cache::Health Data Cache",
+        "Data Layer::Redis Cache::Recipe Cache",
+        "Data Layer::Redis Cache::Recommendation Cache",
+        "Data Layer::Redis Cache::Session Cache"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT dataset concept is fragmented into specific data stores and caches, which remains within the data boundary."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Read/Write Database"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct storage-layer equivalence."
+    },
+    {
+      "gt_nodes": [
+        "Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match."
+    },
+    {
+      "gt_nodes": [
+        "Database::Redis"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Redis Cache"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match."
+    },
+    {
+      "gt_nodes": [
+        "Frontend UI::Recipe App"
+      ],
+      "predicted_nodes": [
+        "User Layer::Mobile App (Android/iOS",
+        "User Layer::Mobile App (Android/iOS::App Logic Layer",
+        "User Layer::Mobile App (Android/iOS::App Logic Layer::API Client",
+        "User Layer::Mobile App (Android/iOS::App Logic Layer::Image Preprocessing",
+        "User Layer::Mobile App (Android/iOS::App Logic Layer::Local Food Check",
+        "User Layer::Mobile App (Android/iOS::App Logic Layer::Local Storage",
+        "User Layer::Mobile App (Android/iOS::User Interface Layer",
+        "User Layer::Mobile App (Android/iOS::User Interface Layer::Admin Interface",
+        "User Layer::Mobile App (Android/iOS::User Interface Layer::Community Interface",
+        "User Layer::Mobile App (Android/iOS::User Interface Layer::Health Center Interface",
+        "User Layer::Mobile App (Android/iOS::User Interface Layer::Login Interface",
+        "User Layer::Mobile App (Android/iOS::User Interface Layer::Main Interface",
+        "User Layer::Mobile App (Android/iOS::User Interface Layer::Photo Recognition Interface",
+        "User Layer::Mobile App (Android/iOS::User Interface Layer::Recipe Display Interface",
+        "User Layer::Mobile App (Android/iOS::User Interface Layer::Recommendation Interface"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The frontend app is decomposed into mobile UI and app-logic subcomponents, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Runtime Environment::Flask Service"
+      ],
+      "predicted_nodes": [
+        "Backend Service Layer::Flask Model Service",
+        "Backend Service Layer::Flask Model Service::Image Recognition Model",
+        "Backend Service Layer::Flask Model Service::Model Inference Engine",
+        "Backend Service Layer::Flask Model Service::Recipe Generator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The Flask runtime/service is represented by a more detailed model-service decomposition within the backend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Runtime Environment::Springboot Service"
+      ],
+      "predicted_nodes": [
+        "Backend Service Layer::Spring Boot Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Data Layer::Data Cleaning"
+  ],
+  "unmatched_predicted_nodes": [
+    "Communication Layer::Internet",
+    "Communication Layer::REST API Gateway",
+    "Communication Layer::REST API Gateway::Authentication Service",
+    "Communication Layer::REST API Gateway::Rate Limiter",
+    "Communication Layer::REST API Gateway::Request Router",
+    "External Systems::Third-Party Services"
+  ]
+}

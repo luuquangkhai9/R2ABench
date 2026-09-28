@@ -1,0 +1,391 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Access Layer::Thread Pool"
+      ],
+      "predicted_nodes": [
+        "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger::Access Layer::Repositories (MyBatis-Plus)\nTransactions & Rollback"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT access-layer thread pool capability is not modeled as a standalone node, but the predicted backend access-layer repository/transaction node reflects backend access-layer infrastructure concerns; this is only a loose semantic fit."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::WebFlux"
+      ],
+      "predicted_nodes": [
+        "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "WebFlux is preserved as part of the backend stack and remains in the backend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Interceptor"
+      ],
+      "predicted_nodes": [
+        "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger::Proxy Layer::Security Filters / Interceptors\n- Enforce HTTPS\n- JWT/OAuth2 Authentication\n- Permission checks\n- Validation & Rate limiting"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "Interceptor responsibilities are merged into proxy-layer security filters/interceptors. The functionality is related, but the GT places this in the business layer whereas the prediction moves it to a proxy layer, which is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::JWT Authentication"
+      ],
+      "predicted_nodes": [
+        "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger::Proxy Layer::Security Filters / Interceptors\n- Enforce HTTPS\n- JWT/OAuth2 Authentication\n- Permission checks\n- Validation & Rate limiting"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "JWT authentication is semantically present, but the prediction places it in the proxy/security-filter layer instead of the GT business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::LomBok"
+      ],
+      "predicted_nodes": [
+        "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Lombok is included in the backend technology stack with an equivalent boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Mybatis Plus"
+      ],
+      "predicted_nodes": [
+        "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger::Access Layer::Repositories (MyBatis-Plus)\nTransactions & Rollback"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "MyBatis-Plus is represented under repository/access-layer concerns, which is semantically aligned and not a severe boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::SMTP Service"
+      ],
+      "predicted_nodes": [
+        "Global::SMTP Provider"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The SMTP integration is preserved, and placing it as an external provider/global service is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Sandbox Management"
+      ],
+      "predicted_nodes": [
+        "Judging Service::JudgeCore\n- Compile & Execute\n- Docker Sandbox (resource limits)\n- seccomp syscall filters"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT sandbox management is a backend business concern around judging sandbox control, while the prediction places it inside JudgeCore. That is a significant context shift into the judging subsystem boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot"
+      ],
+      "predicted_nodes": [
+        "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Spring Boot is correctly captured in the backend application boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Swagger API"
+      ],
+      "predicted_nodes": [
+        "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger",
+        "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger::Presentation Layer::REST Controllers\nSwagger UI / OpenAPI (dev"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Swagger is split between backend stack and presentation/documentation concerns, which is acceptable and remains within backend-related boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::MySQL 5.7.44\n(Business Data, FK constraints, Indexes"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "MySQL is correctly mapped to the database boundary."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Database::Redis"
+      ],
+      "predicted_nodes": [
+        "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::Redis 7.4.6\n(High-frequency cache / tokens / sessions"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Redis is correctly mapped to the cache/database boundary."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Distributed Storage::Object Storage Service OSS",
+        "Data Layer::Distributed Storage::Qiniu Cloud Storage"
+      ],
+      "predicted_nodes": [
+        "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::MinIO\n(Object Storage: images, test cases, files"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT lists object storage implementation options, while the prediction consolidates them into MinIO, which matches the PRD and preserves the storage boundary."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::ESLint"
+      ],
+      "predicted_nodes": [
+        "Global::Browser Client (HTML5)\nVue 3 SPA (TS, Vuex, Router, Ant Design Vue,\nCodeMirror, ECharts, Axios"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "ESLint is a frontend tool, but the prediction aggregates it into a browser client node rather than explicitly modeling the frontend tooling boundary."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::TypeScript"
+      ],
+      "predicted_nodes": [
+        "Global::Browser Client (HTML5)\nVue 3 SPA (TS, Vuex, Router, Ant Design Vue,\nCodeMirror, ECharts, Axios"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "TypeScript belongs to the frontend stack, but the predicted node is too coarse and is attributed to a global browser-client node."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::Vue3"
+      ],
+      "predicted_nodes": [
+        "Global::Browser Client (HTML5)\nVue 3 SPA (TS, Vuex, Router, Ant Design Vue,\nCodeMirror, ECharts, Axios"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Vue 3 is functionally present, but the boundary is collapsed into a global browser-client node rather than the frontend layer."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::Vuex"
+      ],
+      "predicted_nodes": [
+        "Global::Browser Client (HTML5)\nVue 3 SPA (TS, Vuex, Router, Ant Design Vue,\nCodeMirror, ECharts, Axios"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Vuex is present but not preserved in the frontend layer boundary."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::Webpack"
+      ],
+      "predicted_nodes": [
+        "Global::Browser Client (HTML5)\nVue 3 SPA (TS, Vuex, Router, Ant Design Vue,\nCodeMirror, ECharts, Axios"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Webpack is only implicitly included in the browser/client aggregate, which is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::antd-vue"
+      ],
+      "predicted_nodes": [
+        "Global::Browser Client (HTML5)\nVue 3 SPA (TS, Vuex, Router, Ant Design Vue,\nCodeMirror, ECharts, Axios"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Ant Design Vue is present in the predicted aggregate, but not as a correct frontend-layer node."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::axios"
+      ],
+      "predicted_nodes": [
+        "Global::Browser Client (HTML5)\nVue 3 SPA (TS, Vuex, Router, Ant Design Vue,\nCodeMirror, ECharts, Axios"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Axios is collapsed into a global browser-client node rather than kept in the frontend layer."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::vue-router"
+      ],
+      "predicted_nodes": [
+        "Global::Browser Client (HTML5)\nVue 3 SPA (TS, Vuex, Router, Ant Design Vue,\nCodeMirror, ECharts, Axios"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Vue-router is functionally included, but the boundary attribution is not accurate."
+    },
+    {
+      "gt_nodes": [
+        "Global::Logging / Log Record"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No explicit logging/log record node appears in the prediction."
+    },
+    {
+      "gt_nodes": [
+        "Global::Permission / Access Control"
+      ],
+      "predicted_nodes": [
+        "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger::Proxy Layer::Security Filters / Interceptors\n- Enforce HTTPS\n- JWT/OAuth2 Authentication\n- Permission checks\n- Validation & Rate limiting"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Permission/access control is captured by the security filter/interceptor node, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Network / Proxy Layer::Nginx Reverse Proxy"
+      ],
+      "predicted_nodes": [
+        "Global::Nginx Reverse Proxy\n- HTTPS termination\n- Routes /api -> Backend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Nginx reverse proxy is correctly preserved, albeit placed in Global rather than an explicit network/proxy layer."
+    },
+    {
+      "gt_nodes": [
+        "Persistence Layer::Concurrency Control"
+      ],
+      "predicted_nodes": [
+        "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger::Access Layer::Repositories (MyBatis-Plus)\nTransactions & Rollback"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Concurrency control is not explicitly modeled; the prediction only suggests transactions and rollback, which does not faithfully reproduce the GT persistence concern."
+    },
+    {
+      "gt_nodes": [
+        "Persistence Layer::Data Caching"
+      ],
+      "predicted_nodes": [
+        "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::Redis 7.4.6\n(High-frequency cache / tokens / sessions"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Caching is correctly mapped to Redis."
+    },
+    {
+      "gt_nodes": [
+        "Persistence Layer::Optimistic Locking"
+      ],
+      "predicted_nodes": [
+        "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger::Access Layer::Repositories (MyBatis-Plus)\nTransactions & Rollback"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Optimistic locking is not explicitly represented; transaction rollback is not equivalent to optimistic locking."
+    },
+    {
+      "gt_nodes": [
+        "Persistence Layer::Transaction Control"
+      ],
+      "predicted_nodes": [
+        "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger::Access Layer::Repositories (MyBatis-Plus)\nTransactions & Rollback"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Transaction control is captured by the repositories/transactions node."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Ajax Interaction: GET POST PUT DELETE"
+      ],
+      "predicted_nodes": [
+        "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger::Presentation Layer::REST Controllers\nSwagger UI / OpenAPI (dev"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "REST controllers reasonably correspond to presentation-layer HTTP interaction handling."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Routing Control"
+      ],
+      "predicted_nodes": [
+        "Global::Browser Client (HTML5)\nVue 3 SPA (TS, Vuex, Router, Ant Design Vue,\nCodeMirror, ECharts, Axios"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Routing control is present via vue-router, but it is folded into a global browser-client aggregate rather than the presentation layer."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Vue Template Rendering Engine"
+      ],
+      "predicted_nodes": [
+        "Global::Browser Client (HTML5)\nVue 3 SPA (TS, Vuex, Router, Ant Design Vue,\nCodeMirror, ECharts, Axios"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Vue template rendering is present, but the prediction does not preserve the presentation-layer boundary."
+    },
+    {
+      "gt_nodes": [
+        "Security Sandbox::Docker Singleton Mode::Seccomp: Restrict System Calls::uLimit: Restrict Process Resources::Execute User Code"
+      ],
+      "predicted_nodes": [
+        "Judging Service::JudgeCore\n- Compile & Execute\n- Docker Sandbox (resource limits)\n- seccomp syscall filters"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The core sandboxing behavior is semantically aligned, but the GT models it as a dedicated security sandbox boundary, whereas the prediction places it inside the judging service’s JudgeCore boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "CI/CD & Deployment::Backup Job\n(Daily DB backup",
+    "CI/CD & Deployment::GitLab CI/CD\n(Build/Test/Pipeline",
+    "CI/CD & Deployment::Kubernetes\n(Deploy/Scale/Rollback",
+    "CI/CD & Deployment::Offsite Backup Storage",
+    "CI/CD & Deployment::Private Docker Registry",
+    "Global::Browser Client (HTML5)\nVue 3 SPA (TS, Vuex, Router, Ant Design Vue,\nCodeMirror, ECharts, Axios",
+    "Global::CDN (Static Assets & Public Objects",
+    "Global::DNS",
+    "Global::LLM Service\n(Provider TBD",
+    "Global::Nginx Reverse Proxy\n- HTTPS termination\n- Routes /api -> Backend",
+    "Global::SMTP Provider",
+    "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger",
+    "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger::Access Layer::Cache Access",
+    "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger::Access Layer::Object Storage Access\n(S3 API",
+    "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger::Access Layer::Repositories (MyBatis-Plus)\nTransactions & Rollback",
+    "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger::Business Layer::AI Assistant Adapter\n(LangChain4j",
+    "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger::Business Layer::Admin Service",
+    "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger::Business Layer::Forum Service",
+    "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger::Business Layer::Judging Adapter\n(HTTP client, queue-aware",
+    "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger::Business Layer::Notification Service\n(SMTP Email",
+    "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger::Business Layer::Problem Service",
+    "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger::Business Layer::Solution Service",
+    "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger::Business Layer::User Service",
+    "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger::Presentation Layer::REST Controllers\nSwagger UI / OpenAPI (dev",
+    "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::DeepCode Backend\nSpring Boot 3.1.2 (WebFlux)\nJDK 21, Lombok, Swagger::Proxy Layer::Security Filters / Interceptors\n- Enforce HTTPS\n- JWT/OAuth2 Authentication\n- Permission checks\n- Validation & Rate limiting",
+    "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::MinIO\n(Object Storage: images, test cases, files",
+    "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::MySQL 5.7.44\n(Business Data, FK constraints, Indexes",
+    "Intranet / Kubernetes Cluster (Ubuntu 22.04 LTS, Docker, Firewall-restricted::Redis 7.4.6\n(High-frequency cache / tokens / sessions",
+    "Judging Service::JudgeCore\n- Compile & Execute\n- Docker Sandbox (resource limits)\n- seccomp syscall filters",
+    "Observability::Alerting\n(PagerDuty / DingTalk",
+    "Observability::Grafana\n(Dashboards",
+    "Observability::Prometheus\n(Metrics scraping"
+  ]
+}

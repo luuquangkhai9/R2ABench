@@ -1,0 +1,82 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "External Systems::Kafka Cluster",
+        "External Systems::Kafka Cluster::Audit Events Topic",
+        "Infrastructure Layer::Kafka Publisher",
+        "Infrastructure Layer::Kafka Publisher::Kafka Producer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Kafka node is represented by the predicted Kafka cluster/topic and publisher/producer components. The boundary attribution is semantically consistent because Kafka is modeled as external infrastructure supporting event publication."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\\nserver",
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Client Application",
+        "Application Layer::Client Application::Auditing API Client"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT shows one auditor application server and multiple client applications; the predicted diagram aggregates the client-side usage into a generic client application. This is semantically aligned with the PRD as a JVM client library integrated into applications."
+    },
+    {
+      "gt_nodes": [
+        "Global::Databases / Filestores\\nElastic, Hadoop, etc."
+      ],
+      "predicted_nodes": [
+        "External Systems::Downstream Consumers",
+        "External Systems::Downstream Consumers::Analytics Systems",
+        "External Systems::Downstream Consumers::Data Warehouses",
+        "External Systems::Downstream Consumers::Event Processing Services"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT external storage/filestore category is represented by downstream consumers and external systems in the prediction. This is a reasonable semantic expansion of out-of-scope persistence/consumption targets, with no serious boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "predicted_nodes": [
+        "Auditor Library Layer::Auditor Core",
+        "Auditor Library Layer::Auditor Core::Audit Service",
+        "Auditor Library Layer::Auditor Core::Event Generator",
+        "Auditor Library Layer::Auditor Core::Object Comparator",
+        "Auditor Library Layer::Configuration Handler",
+        "Auditor Library Layer::Configuration Handler::Config Parser",
+        "Auditor Library Layer::Configuration Handler::Filter Manager",
+        "Integration Layer::Event Publisher Abstraction",
+        "Integration Layer::Event Publisher Abstraction::EventPublisher Interface",
+        "Integration Layer::Filter Abstraction",
+        "Integration Layer::Filter Abstraction::AuditEventElementFilter Interface",
+        "Integration Layer::Logging Abstraction",
+        "Integration Layer::Logging Abstraction::LogProvider Interface",
+        "Configuration Store::AuditorEventConfig",
+        "Configuration Store::Filter Rules",
+        "Event Data::AuditEvent Objects",
+        "Event Data::JSON Payloads",
+        "Infrastructure Layer::Filter Implementation",
+        "Infrastructure Layer::Filter Implementation::InclusionFilter",
+        "Infrastructure Layer::Log Implementation",
+        "Infrastructure Layer::Log Implementation::Logger Implementation",
+        "Global::Configuration Store",
+        "Global::Event Data"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT server-side auditor component is decomposed into core logic, configuration handling, abstractions, data objects, and infrastructure implementations. This matches the PRD's client-library architecture and is boundary-consistent overall."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

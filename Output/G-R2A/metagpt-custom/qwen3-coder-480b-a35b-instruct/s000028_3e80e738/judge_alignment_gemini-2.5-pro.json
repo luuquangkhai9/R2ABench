@@ -1,0 +1,70 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Cognito Account::Cognito User Pool"
+      ],
+      "predicted_nodes": [
+        "Authentication Layer::CognitoUserPool",
+        "Authentication Layer::CognitoIdentityPool",
+        "Authentication Layer::UserPoolClient",
+        "External Systems::AWS Cognito"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's single `Cognito User Pool` node is correctly expanded by the AI into the specific, related Cognito components (`UserPool`, `IdentityPool`, `UserPoolClient`) and the parent AWS service, all of which are explicitly mentioned in the PRD (FR-001, FR-004, CON-002). The GT's `Cognito Account` boundary is a physical separation, while the AI's `Authentication Layer` is a logical one. This is a valid and semantically equivalent architectural viewpoint."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::API Gateway"
+      ],
+      "predicted_nodes": [
+        "External Systems::API Gateway",
+        "Integration Layer::ApiStageDeployment",
+        "Integration Layer::CallbackUrlOutput"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's generic `API Gateway` node is matched with the AI's representation of the service itself, plus its core deployment and output components (`ApiStageDeployment`, `CallbackUrlOutput`) which are detailed in the PRD (FR-008, FR-012). The boundary mapping from a physical account (`API Gateway Account`) to logical layers (`External Systems`, `Integration Layer`) is a valid architectural abstraction."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::Cognito-authorizer::hello-function",
+        "API Gateway Account::auth-function"
+      ],
+      "predicted_nodes": [
+        "Authorization Layer::CognitoAuthorizer",
+        "Integration Layer::EcsProxyMethod",
+        "Integration Layer::WhoAmIMethod"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT uses simplified, example function names (`hello-function`, `auth-function`) to represent protected API endpoints. The AI correctly identified the actual, specific methods from the PRD (`WhoAmIMethod`, `EcsProxyMethod` from FR-010, FR-011) and correctly extracted the `CognitoAuthorizer` (FR-009) as a distinct component. This is a successful N:N mapping from conceptual examples to specified implementations. The boundary is considered correct as it uses a valid logical layering."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "API Gateway Account::Calls hello/GET with id_token in headers",
+    "API Gateway Account::Returns hello plus user name when authorized",
+    "Cognito Account::Cognito Hosted UI",
+    "Global::User"
+  ],
+  "unmatched_predicted_nodes": [
+    "Authorization Layer::AuthRoleMapping",
+    "External Systems::AWS IAM",
+    "External Systems::AWS VPC",
+    "External Systems::Amazon SQS",
+    "External Systems::ECS",
+    "Global::Authentication Layer",
+    "Global::Authorization Layer",
+    "Global::External Systems",
+    "Global::Infrastructure Layer",
+    "Global::Integration Layer",
+    "Global::Networking Layer",
+    "Infrastructure Layer::ApiGatewayStack",
+    "Infrastructure Layer::CognitoStack",
+    "Infrastructure Layer::VpcEndpointTemplate",
+    "Integration Layer::VpcLink",
+    "Networking Layer::SqsVpcEndpoint",
+    "Networking Layer::VpcSecurityGroup"
+  ]
+}

@@ -1,0 +1,124 @@
+@startuml
+title Zhiyan Tongjie Requirements Review Checklist & Report - System Architecture
+
+left to right direction
+skinparam componentStyle rectangle
+
+' Context actors
+rectangle "Reviewer" as Reviewer
+rectangle "Requirements Owner" as Owner
+rectangle "Developer" as Dev
+rectangle "Tester" as Tester
+rectangle "Project Stakeholder" as Stakeholder
+
+artifact "Requirements Document\nUnder Review" as ReqDoc
+folder "Standards & Specifications\n- Industry standards\n- Product specs\n- Business rules\n- Documentation norms" as Standards
+
+node "Markdown-capable Environment\n(Editor/Viewer)" as MDEnv
+
+' Artifact components
+artifact "Checklist Template (Markdown)" <<Template>> as Template
+artifact "Review Report (Markdown)" <<Review Artifact>> as Report
+
+' Structure of Review Report
+package "Review Artifact Structure" {
+  component "Objectives & Basis" as Sec1
+  component "Completeness" as SecComp
+  component "Exceptions & Auxiliary" as SecEx
+  component "Understandability" as SecUnd
+  component "Model Accuracy" as SecModel
+  component "Extension & Improvement" as SecExt
+  component "Problem Report" as SecProb
+  component "Scoring (4 x 10 + Total 40)" as SecScore
+  component "Reviewer Metadata" as SecMeta
+}
+
+' Containment (visual)
+Report -down- Sec1
+Report -down- SecComp
+Report -down- SecEx
+Report -down- SecUnd
+Report -down- SecModel
+Report -down- SecExt
+Report -down- SecProb
+Report -down- SecScore
+Report -down- SecMeta
+
+' Data requirements mapped
+note right of Sec1
+DR-001: Review purpose (goal, method, report purpose, basis)
+FR-001: Define objectives and methods
+FR-002: Standards-based review
+C-001, C-002 apply
+end note
+
+note right of SecComp
+FR-003: Core/basic functions align with user needs
+NFR-001: Completeness checks
+end note
+
+note right of SecEx
+FR-004: Special cases, exceptions, auxiliary functions
+NFR-001 applies
+end note
+
+note right of SecUnd
+FR-005: Clarity, understandability, specificity, detail, refinement
+NFR-002: Understandability checks
+end note
+
+note right of SecModel
+FR-006: Conformance, reasonableness, rigor, accuracy of models
+NFR-003: Model quality checks
+end note
+
+note right of SecExt
+FR-007: Extension & improvement goals are clear, feasible, concrete, demonstrable
+end note
+
+note right of SecProb
+FR-008 / DR-003: Problems, overall evaluation, improvement suggestions
+end note
+
+note right of SecScore
+FR-009 / DR-004: Four 10-point dimensions + total (out of 40)
+NFR-004, C-003 apply
+end note
+
+note right of SecMeta
+FR-010 / DR-005: Reviewer identity and review date
+end note
+
+' Flows and interactions
+Reviewer -[#blue]-> MDEnv : edits/inspects
+MDEnv -[#green]-> Template : uses checklist
+Reviewer -[#blue]-> Template : initiates review (FR-001)
+Template -[#brown]-> Report : instantiated as review report
+Reviewer -[#blue]-> Report : fills sections, records findings
+Report -[#gray]-> ReqDoc : inspects requirement content (FR-003..FR-007)
+Report -[#gray]-> Standards : references basis (FR-002, C-002)
+MDEnv -[#green]-> Report : stores/displays Markdown
+
+' Score aggregation
+SecComp -[dashed,#darkgray]-> SecScore : dimension score
+SecUnd -[dashed,#darkgray]-> SecScore : dimension score
+SecModel -[dashed,#darkgray]-> SecScore : dimension score
+SecExt -[dashed,#darkgray]-> SecScore : dimension score
+
+' Consumers of the review report
+Owner -[#purple]-> Report : receives findings & suggestions
+Dev -[#purple]-> Report : consumes review findings
+Tester -[#purple]-> Report : consumes review findings
+Stakeholder -[#purple]-> Report : reads concise result
+
+' Constraints / assumptions
+note bottom of Template
+C-004: Business-specific functional requirements are outside this checklist.
+end note
+
+note bottom of Report
+Format: Markdown checklist incl. items, scores, reviewer metadata, comments.
+Data exchange: single Markdown file artifact
+end note
+
+@enduml

@@ -1,0 +1,434 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Alert Source::app-sre\\nalertmanager",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Alert Webhook Payload",
+        "Global::External Alert System"
+      ],
+      "reasoning": "This GT node represents an alert source feeding the CAD alert-driven path. The predicted alert payload and external alert source together cover that responsibility, though not at the same granularity."
+    },
+    {
+      "gt_node": "Alert Source::cluster\\nalertmanager",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Alert Webhook Payload",
+        "Global::External Alert System"
+      ],
+      "reasoning": "The predicted alert ingestion concepts cover an external alertmanager source producing webhook input."
+    },
+    {
+      "gt_node": "Alert Source::deadmanssnitch",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::External Alert System",
+        "Global::Alert Webhook Payload"
+      ],
+      "reasoning": "The predicted generic external alert source and webhook payload cover this alert-source responsibility."
+    },
+    {
+      "gt_node": "Alerts::CHGM",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "CAD System::CHGM Workflow Engine"
+      ],
+      "reasoning": "The predicted CHGM workflow engine directly covers the CHGM alert handling responsibility."
+    },
+    {
+      "gt_node": "Alerts::CPD",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node specifically covers CPD alert handling."
+    },
+    {
+      "gt_node": "Alerts::all cluster\\nalerts",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::External Alert System",
+        "Global::Alert Webhook Payload",
+        "Tekton Execution Environment::Tekton EventListener",
+        "Tekton Execution Environment::Tekton Trigger"
+      ],
+      "reasoning": "The predicted event-driven execution path covers generic cluster alert handling, though it is not specialized to a named alert grouping."
+    },
+    {
+      "gt_node": "Global::Escalate alert to\\non-call SRE",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "CAD System::Mitigation & Disposition Handler"
+      ],
+      "reasoning": "The mitigation/disposition handler covers escalation behavior as part of follow-up action handling."
+    },
+    {
+      "gt_node": "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node corresponds to an interceptor specifically performing alert investigation logic."
+    },
+    {
+      "gt_node": "Global::Tekton\\nEvent\\nListener",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Tekton Execution Environment::Tekton EventListener"
+      ],
+      "reasoning": "This is directly covered by the predicted Tekton EventListener node."
+    },
+    {
+      "gt_node": "Global::Update Incident\\nNotes",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "CAD System::Mitigation & Disposition Handler"
+      ],
+      "reasoning": "Updating incident notes is a plausible part of the predicted mitigation/disposition handling responsibility."
+    },
+    {
+      "gt_node": "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::PagerDuty",
+        "CAD System::Integration Library::PagerDuty Integration"
+      ],
+      "reasoning": "The team-specific PagerDuty destination is covered at a higher level by the PagerDuty integration concept."
+    },
+    {
+      "gt_node": "PagerDuty Team::app-sre-alertmanager",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::PagerDuty",
+        "CAD System::Integration Library::PagerDuty Integration"
+      ],
+      "reasoning": "The predicted PagerDuty integration covers this team destination concept."
+    },
+    {
+      "gt_node": "PagerDuty Team::prod-deadmanssnitch",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::PagerDuty",
+        "CAD System::Integration Library::PagerDuty Integration"
+      ],
+      "reasoning": "The predicted PagerDuty integration covers this team destination concept."
+    },
+    {
+      "gt_node": "cadctl::CHGM investigation",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::CLI (cadctl",
+        "CAD System::CHGM Workflow Engine"
+      ],
+      "reasoning": "The CLI plus CHGM workflow engine covers this investigation command responsibility."
+    },
+    {
+      "gt_node": "cadctl::CPD investigation",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "There is no predicted node specific to CPD investigation."
+    },
+    {
+      "gt_node": "cadctl::Future investigations",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::CLI (cadctl"
+      ],
+      "reasoning": "The CLI node covers future investigation commands at a generic level."
+    },
+    {
+      "gt_node": "cadctl::switch(alerttype",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node explicitly covers alert-type switching behavior."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "CAD System::CAD Container Runtime",
+      "grounded": true,
+      "reference_nodes": [
+        "cadctl::CHGM investigation",
+        "cadctl::CPD investigation",
+        "cadctl::Future investigations",
+        "cadctl::switch(alerttype"
+      ],
+      "reasoning": "The runtime container is grounded in the CLI delivery concept, though the GT focuses on CLI functions rather than packaging."
+    },
+    {
+      "predicted_node": "CAD System::CAD Container Runtime::/bin/cadctl",
+      "grounded": true,
+      "reference_nodes": [
+        "cadctl::CHGM investigation",
+        "cadctl::CPD investigation",
+        "cadctl::Future investigations",
+        "cadctl::switch(alerttype"
+      ],
+      "reasoning": "The CLI binary is directly grounded in the GT cadctl command nodes."
+    },
+    {
+      "predicted_node": "CAD System::CHGM Workflow Engine",
+      "grounded": true,
+      "reference_nodes": [
+        "Alerts::CHGM",
+        "cadctl::CHGM investigation"
+      ],
+      "reasoning": "This matches the CHGM investigation workflow responsibility."
+    },
+    {
+      "predicted_node": "CAD System::Integration Library",
+      "grounded": true,
+      "reference_nodes": [
+        "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster",
+        "PagerDuty Team::app-sre-alertmanager",
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "reasoning": "The integration library is grounded in the GT integration-related responsibilities, especially PagerDuty-related workflows."
+    },
+    {
+      "predicted_node": "CAD System::Integration Library::AWS Integration",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT nodes do not show an explicit AWS-specific component or responsibility, only external integrations at a broader level."
+    },
+    {
+      "predicted_node": "CAD System::Integration Library::OCM Integration",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node explicitly represents OCM integration."
+    },
+    {
+      "predicted_node": "CAD System::Integration Library::PagerDuty Integration",
+      "grounded": true,
+      "reference_nodes": [
+        "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster",
+        "PagerDuty Team::app-sre-alertmanager",
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "reasoning": "This is directly grounded in the PagerDuty team nodes."
+    },
+    {
+      "predicted_node": "CAD System::Mitigation & Disposition Handler",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Escalate alert to\\non-call SRE",
+        "Global::Update Incident\\nNotes"
+      ],
+      "reasoning": "This predicted handler is grounded in escalation and incident-note update responsibilities."
+    },
+    {
+      "predicted_node": "CAD System::Template Update Utility",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node represents template update utility behavior."
+    },
+    {
+      "predicted_node": "Global::AWS",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "AWS is mentioned in the PRD, but there is no corresponding GT node in the provided manual diagram."
+    },
+    {
+      "predicted_node": "Global::Alert Webhook Payload",
+      "grounded": true,
+      "reference_nodes": [
+        "Alert Source::app-sre\\nalertmanager",
+        "Alert Source::cluster\\nalertmanager",
+        "Alert Source::deadmanssnitch",
+        "Alerts::all cluster\\nalerts"
+      ],
+      "reasoning": "This is grounded in the alert source and alert ingestion concepts."
+    },
+    {
+      "predicted_node": "Global::CLI (cadctl",
+      "grounded": true,
+      "reference_nodes": [
+        "cadctl::CHGM investigation",
+        "cadctl::CPD investigation",
+        "cadctl::Future investigations",
+        "cadctl::switch(alerttype"
+      ],
+      "reasoning": "This directly corresponds to the cadctl CLI node family."
+    },
+    {
+      "predicted_node": "Global::Deployment Engineer",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is a user persona from the PRD, not a GT architecture node."
+    },
+    {
+      "predicted_node": "Global::Developer/Contributor",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is a user persona from the PRD, not a GT architecture node."
+    },
+    {
+      "predicted_node": "Global::External Alert System",
+      "grounded": true,
+      "reference_nodes": [
+        "Alert Source::app-sre\\nalertmanager",
+        "Alert Source::cluster\\nalertmanager",
+        "Alert Source::deadmanssnitch",
+        "Alerts::all cluster\\nalerts"
+      ],
+      "reasoning": "This is a generic grounding for the alert-source nodes."
+    },
+    {
+      "predicted_node": "Global::JSON Payload",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT does not contain a separate JSON payload node; payload is a PRD/data requirement, not a manual diagram concept."
+    },
+    {
+      "predicted_node": "Global::OCM",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "OCM is not represented as a GT node."
+    },
+    {
+      "predicted_node": "Global::PagerDuty",
+      "grounded": true,
+      "reference_nodes": [
+        "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster",
+        "PagerDuty Team::app-sre-alertmanager",
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "reasoning": "This is grounded in the PagerDuty team nodes."
+    },
+    {
+      "predicted_node": "Global::SRE/Operations User",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is a persona from the PRD, not a GT architecture node."
+    },
+    {
+      "predicted_node": "Global::YAML Manifests",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "YAML manifests are a PRD artifact format, not a GT node in the manual diagram."
+    },
+    {
+      "predicted_node": "Tekton Execution Environment::PipelineRun Manifest",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT includes Tekton EventListener, but no explicit PipelineRun manifest node."
+    },
+    {
+      "predicted_node": "Tekton Execution Environment::Tekton EventListener",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Tekton\\nEvent\\nListener"
+      ],
+      "reasoning": "Directly grounded in the GT Tekton EventListener node."
+    },
+    {
+      "predicted_node": "Tekton Execution Environment::Tekton PipelineRun",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT does not explicitly contain a Tekton PipelineRun node."
+    },
+    {
+      "predicted_node": "Tekton Execution Environment::Tekton Trigger",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT includes an interceptor and EventListener, but no explicit Trigger node."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "cadctl::CHGM investigation",
+        "cadctl::CPD investigation",
+        "cadctl::Future investigations",
+        "cadctl::switch(alerttype"
+      ],
+      "predicted_nodes": [
+        "Global::CLI (cadctl",
+        "CAD System::CAD Container Runtime::/bin/cadctl"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT CLI responsibilities are aggregated into the predicted CLI/runtime nodes, with semantically consistent boundary placement."
+    },
+    {
+      "gt_nodes": [
+        "Alerts::CHGM"
+      ],
+      "predicted_nodes": [
+        "CAD System::CHGM Workflow Engine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The CHGM alert handling responsibility matches directly, and the CAD System boundary is semantically appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton\\nEvent\\nListener"
+      ],
+      "predicted_nodes": [
+        "Tekton Execution Environment::Tekton EventListener"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The component matches directly and remains within the Tekton execution boundary."
+    },
+    {
+      "gt_nodes": [
+        "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster",
+        "PagerDuty Team::app-sre-alertmanager",
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "Global::PagerDuty",
+        "CAD System::Integration Library::PagerDuty Integration"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Multiple GT PagerDuty team concepts are consolidated into a generic PagerDuty integration representation, which is boundary-consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Escalate alert to\\non-call SRE",
+        "Global::Update Incident\\nNotes"
+      ],
+      "predicted_nodes": [
+        "CAD System::Mitigation & Disposition Handler"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT follow-up actions are merged into the mitigation/disposition handler, which is a semantically appropriate abstraction."
+    },
+    {
+      "gt_nodes": [
+        "Alert Source::app-sre\\nalertmanager",
+        "Alert Source::cluster\\nalertmanager",
+        "Alert Source::deadmanssnitch",
+        "Alerts::all cluster\\nalerts"
+      ],
+      "predicted_nodes": [
+        "Global::External Alert System",
+        "Global::Alert Webhook Payload"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT alert-source concepts are represented by a generic external alert source plus webhook payload, which is boundary-consistent at a higher abstraction level."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Alerts::CPD",
+    "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?",
+    "cadctl::CPD investigation",
+    "cadctl::switch(alerttype"
+  ],
+  "unmatched_predicted_nodes": [
+    "CAD System::Integration Library::AWS Integration",
+    "CAD System::Integration Library::OCM Integration",
+    "CAD System::Template Update Utility",
+    "Global::AWS",
+    "Global::Deployment Engineer",
+    "Global::Developer/Contributor",
+    "Global::JSON Payload",
+    "Global::OCM",
+    "Global::SRE/Operations User",
+    "Global::YAML Manifests",
+    "Tekton Execution Environment::PipelineRun Manifest",
+    "Tekton Execution Environment::Tekton PipelineRun",
+    "Tekton Execution Environment::Tekton Trigger"
+  ]
+}

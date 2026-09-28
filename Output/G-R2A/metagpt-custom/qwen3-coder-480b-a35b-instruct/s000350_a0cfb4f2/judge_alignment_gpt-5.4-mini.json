@@ -1,0 +1,93 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::GoDaddy API\nDomain availability"
+      ],
+      "predicted_nodes": [
+        "External Systems::GoDaddy API",
+        "Integration Layer::GoDaddy Integration"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both predicted nodes represent the same optional GoDaddy integration present in the GT. Splitting the external API and its integration wrapper is acceptable, and the boundary placement is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::HTTP API\nSession and attack requests"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::HTTP API Handler",
+        "Presentation Layer::Query String Parser",
+        "Service Layer::Attack Option Parser",
+        "Service Layer::Session Manager",
+        "Service Layer::Job Publisher",
+        "Presentation Layer::Error Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT HTTP API node covers session handling, request parsing, job creation/publication, and error handling. The predicted model splits these responsibilities into reasonable presentation and service-layer components, with no severe boundary confusion."
+    },
+    {
+      "gt_nodes": [
+        "Global::Redis\nCommand and reporting queues"
+      ],
+      "predicted_nodes": [
+        "External Systems::Redis",
+        "Integration Layer::Redis Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The Redis queue/communication responsibility is preserved. Representing Redis as an external system plus a client integration wrapper is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Socket.io\nWebSocket result channel"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::WebSocket Manager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted WebSocket manager corresponds to the GT Socket.io/WebSocket result channel, and the presentation-layer placement is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::Squatm3\nDomain generation engine"
+      ],
+      "predicted_nodes": [
+        "External Systems::squatm3 Engine",
+        "Integration Layer::squatm3 Engine Wrapper"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT engine is represented correctly as the external CLI engine plus its wrapper. This matches the PRD description of a wrapped subprocess engine."
+    },
+    {
+      "gt_nodes": [
+        "Global::Web UI\nindex.html"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web UI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted Web UI node matches the GT web entry page rendered from index.html."
+    },
+    {
+      "gt_nodes": [
+        "Global::Workers\nCommand consumers"
+      ],
+      "predicted_nodes": [
+        "Background Processing Layer::Background Consumer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT workers/command consumers correspond directly to the background consumer thread. The background-processing boundary is accurate."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::External Systems"
+  ]
+}

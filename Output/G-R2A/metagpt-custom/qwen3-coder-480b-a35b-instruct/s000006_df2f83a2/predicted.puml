@@ -1,0 +1,87 @@
+@startuml
+' Deployment Node for the overall system boundary
+node "User-in-the-Box Framework" {
+    
+    ' Configuration Layer
+    package "Configuration Layer" {
+        component "Simulator Builder"
+        component "YAML Configuration Parser"
+    }
+
+    ' Integration Layer
+    package "Integration Layer" {
+        component "MuJoCo XML Integrator"
+    }
+
+    ' Core Components (not grouped into undefined layers)
+    component "Biomechanical Model Loader"
+    component "Perception Module Manager"
+    component "Interaction Task Loader"
+    component "Control Value Converter"
+    component "Action Logger"
+
+    ' Runtime Interface Layer
+    package "Runtime Interface Layer" {
+        component "Gym Interface Adapter"
+    }
+
+    ' Execution Layer
+    package "Execution Layer" {
+        component "Reinforcement Learning Trainer"
+    }
+
+    ' Evaluation Layer
+    package "Evaluation Layer" {
+        component "Evaluation Runner"
+    }
+
+    ' Packaging Component
+    component "Simulator Packager"
+
+    ' External Systems
+    cloud "External Systems" {
+        database "MuJoCo Simulation Engine"
+        database "OpenAI Gym Framework"
+        database "File System"
+    }
+
+    folder "Run Folder" {
+        folder "checkpoints"
+        folder "evaluate"
+    }
+}
+
+' Dependencies between components
+Simulator Builder --> YAML Configuration Parser
+Simulator Builder --> MuJoCo XML Integrator
+Simulator Builder --> Biomechanical Model Loader
+Simulator Builder --> Perception Module Manager
+Simulator Builder --> Interaction Task Loader
+Simulator Builder --> Simulator Packager
+
+MuJoCo XML Integrator --> Biomechanical Model Loader
+MuJoCo XML Integrator --> Interaction Task Loader
+
+Perception Module Manager --> MuJoCo Simulation Engine
+
+Reinforcement Learning Trainer --> Gym Interface Adapter
+Reinforcement Learning Trainer --> Control Value Converter
+
+Evaluation Runner --> Gym Interface Adapter
+Evaluation Runner <--> Simulator Builder
+Evaluation Runner --> Action Logger
+
+' Interfaces to external systems
+Simulator Builder --> File System : reads YAML configs
+MuJoCo XML Integrator --> File System : reads XML files
+Biomechanical Model Loader --> MuJoCo Simulation Engine
+Interaction Task Loader --> MuJoCo Simulation Engine
+Gym Interface Adapter --> OpenAI Gym Framework
+Reinforcement Learning Trainer --> File System : writes checkpoints/runs
+Simulator Packager --> File System : outputs packages
+Evaluation Runner --> File System : loads runs/checkpoints
+Evaluation Runner --> Run Folder : manages folders
+Action Logger --> Run Folder/checkpoints : logs actions
+Action Logger --> Run Folder/evaluate : logs eval actions
+
+@enduml

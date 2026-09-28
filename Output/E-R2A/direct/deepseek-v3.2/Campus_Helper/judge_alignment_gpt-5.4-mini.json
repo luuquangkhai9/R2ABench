@@ -1,0 +1,387 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Admin Mgmt Service"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Admin Product Service",
+        "Business Layer::Admin Order Service",
+        "Business Layer::Admin User Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT admin management service is split into separate admin product/order/user services in the prediction. This is a valid functional decomposition within the same business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Help Goods Service"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Product Browsing Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the core product browsing/help-goods service responsible for viewing products and related browsing flows, and the boundary remains in the business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Order Mgmt Service"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Order Management Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The names differ slightly but the component is the same order management business service, and it is placed in the correct business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Personal Center Service"
+      ],
+      "predicted_nodes": [
+        "Business Layer::User Profile Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The personal center/user profile functionality is semantically equivalent, and the boundary is correctly in the business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Create Order Module"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Order Interface"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The order creation function is represented, but the GT places it as a business-layer functional module, while the prediction places it in the presentation layer. This is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Favorites Module"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Personal Center UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "Favorites are a sub-function of personal center, but the GT explicitly models it as a business functional module. Mapping it only to the personal center UI shifts it to presentation and loses the business-module boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Goods Category Module"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Product Category UI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The functionality matches, but the GT node is a business-layer module while the prediction places it in the presentation layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Hot Items Module"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Homepage / Popular Products UI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Popular products/hot items are semantically equivalent, but the prediction incorrectly places the component in the presentation layer instead of the business functional module layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Modify User Info Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::User Profile Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "User info modification corresponds to the user profile service/functionality, and both are in the business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Order Record Module"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Personal Center UI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Order record viewing is semantically covered, but the GT module belongs to the business layer and the prediction places it in presentation."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Platform Mgmt Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Admin Product Service",
+        "Business Layer::Admin Order Service",
+        "Business Layer::Admin User Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The platform management module is decomposed into separate admin-domain services, which is a valid business-layer split."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Custom Functions"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Admin Log Data Access",
+        "Data Layer::Favorite Data Access",
+        "Data Layer::Order Data Access",
+        "Data Layer::Product Data Access",
+        "Data Layer::Tag/Category Data Access",
+        "Data Layer::User Data Access"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT custom functions node is a broad data-layer utility node, and the prediction splits it into concrete data access components within the same data layer."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Backup"
+      ],
+      "predicted_nodes": [
+        "Global::Fault Recovery"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Backup is related to fault recovery, but the prediction moves it into a global fault-recovery grouping rather than keeping it as a data-layer function."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Cache"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No clear predicted node corresponds to caching."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Recovery"
+      ],
+      "predicted_nodes": [
+        "Global::Fault Recovery"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The functionality is related, but the GT node is a data-layer capability while the prediction places it under a global fault-recovery category."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Read/Write Database"
+      ],
+      "predicted_nodes": [
+        "Data Entity Layer (Database::Platform Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the main database read/write persistence boundary. The naming differs, but the semantic role is equivalent and the database/entity-layer placement is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Stored Procedures"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node clearly corresponds to stored procedures."
+    },
+    {
+      "gt_nodes": [
+        "Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Data Entity Layer (Database::Platform Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The prediction’s platform database is evidently intended to be the MySQL database from the GT, and the database boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Display Layer::GET Request"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Homepage / Popular Products UI",
+        "Presentation Layer::Product Category UI",
+        "Presentation Layer::Product Detail UI",
+        "Presentation Layer::Personal Center UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GET request behavior is embodied by multiple read-only UI pages. The prediction expands the display-layer interaction into concrete screens, which is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Display Layer::POST Request"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Order Interface",
+        "Presentation Layer::Admin Product Mgmt UI",
+        "Presentation Layer::Admin Order Mgmt UI",
+        "Presentation Layer::Admin User Mgmt UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "POST request behavior is represented by pages that submit state-changing operations. The mapping is a valid presentation-layer decomposition."
+    },
+    {
+      "gt_nodes": [
+        "Display Layer::Template Engine Rendering\\n(pages"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Admin Order Mgmt UI",
+        "Presentation Layer::Admin Product Mgmt UI",
+        "Presentation Layer::Admin User Mgmt UI",
+        "Presentation Layer::Homepage / Popular Products UI",
+        "Presentation Layer::Order Interface",
+        "Presentation Layer::Personal Center UI",
+        "Presentation Layer::Product Category UI",
+        "Presentation Layer::Product Detail UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The template/page rendering node corresponds to the set of concrete UI pages in the presentation layer."
+    },
+    {
+      "gt_nodes": [
+        "Display Layer::wx.request Interaction"
+      ],
+      "predicted_nodes": [
+        "Client Environment::WeChat Mini Program Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "wx.request is a client-side interaction mechanism, but the prediction only names the client environment rather than the request interaction component itself. This is too coarse and conflates environment with interaction."
+    },
+    {
+      "gt_nodes": [
+        "Global::Log Recording"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Monitoring & Logging Service",
+        "Global::Monitoring & Observability"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Log recording is captured by the monitoring/logging service and global observability concern. The boundary is acceptable because logging is preserved within the system architecture context."
+    },
+    {
+      "gt_nodes": [
+        "Global::Permission Control"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Authentication & Authorization Service",
+        "Global::Security & Protection"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Permission control is functionally equivalent to authentication/authorization and global security protection, with no severe boundary confusion."
+    },
+    {
+      "gt_nodes": [
+        "Mini-program UI::JavaScript"
+      ],
+      "predicted_nodes": [
+        "Client Environment::WeChat Mini Program Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "JavaScript is a specific UI implementation technology, but the prediction only names the overall client environment. This is not a semantically precise match."
+    },
+    {
+      "gt_nodes": [
+        "Mini-program UI::Wxml"
+      ],
+      "predicted_nodes": [
+        "Client Environment::WeChat Mini Program Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "WXML is a specific UI markup technology, but the prediction only names the client environment, which is too generic."
+    },
+    {
+      "gt_nodes": [
+        "Mini-program UI::Wxss"
+      ],
+      "predicted_nodes": [
+        "Client Environment::WeChat Mini Program Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "WXSS is a specific styling technology, but the prediction only names the client environment, so the match is not precise."
+    },
+    {
+      "gt_nodes": [
+        "Runtime Environment::MySQL 106.55.224.139\\n2 Cores 4GB"
+      ],
+      "predicted_nodes": [
+        "Data Entity Layer (Database::Platform Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a runtime deployment environment specification, while the prediction models it as a database entity-layer component. This is a boundary/category mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Runtime Environment::Tencent Cloud\\nLightweight App Server"
+      ],
+      "predicted_nodes": [
+        "Client Environment::WeChat Mini Program Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a server runtime environment, but the prediction maps to a client environment, which is a severe boundary error."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Data Layer::Data Cache",
+    "Data Layer::Stored Procedures"
+  ],
+  "unmatched_predicted_nodes": [
+    "Business Layer::Authentication & Authorization Service",
+    "Business Layer::Monitoring & Logging Service",
+    "Client Environment::WeChat Mini Program Client",
+    "Data Entity Layer (Database::Platform Database",
+    "Data Entity Layer (Database::Platform Database::Administration Log Data",
+    "Data Entity Layer (Database::Platform Database::Fault & Monitoring Data",
+    "Data Entity Layer (Database::Platform Database::Favorite Data",
+    "Data Entity Layer (Database::Platform Database::Order Data",
+    "Data Entity Layer (Database::Platform Database::Product Data",
+    "Data Entity Layer (Database::Platform Database::Tag & Category Data",
+    "Data Entity Layer (Database::Platform Database::User & Permission Data",
+    "Data Layer::Admin Log Data Access",
+    "Data Layer::Favorite Data Access",
+    "Data Layer::Order Data Access",
+    "Data Layer::Product Data Access",
+    "Data Layer::Tag/Category Data Access",
+    "Data Layer::User Data Access",
+    "Fault Recovery::Emergency Update",
+    "Fault Recovery::Hardware Replacement Process",
+    "Fault Recovery::Service Rollback/Restart",
+    "Global::Fault Recovery",
+    "Global::Monitoring & Observability",
+    "Global::Security & Protection",
+    "Monitoring & Observability::CPU/Memory/I/O Monitoring",
+    "Monitoring & Observability::Database Load & Slow Queries",
+    "Monitoring & Observability::Error Code Tracking",
+    "Monitoring & Observability::Response Time & QPS",
+    "Presentation Layer::Admin Order Mgmt UI",
+    "Presentation Layer::Admin Product Mgmt UI",
+    "Presentation Layer::Admin User Mgmt UI",
+    "Presentation Layer::Homepage / Popular Products UI",
+    "Presentation Layer::Order Interface",
+    "Presentation Layer::Personal Center UI",
+    "Presentation Layer::Product Category UI",
+    "Presentation Layer::Product Detail UI",
+    "Security & Protection::Human-Machine Recognition",
+    "Security & Protection::Input Validation",
+    "Security & Protection::SQL Injection Prevention"
+  ]
+}

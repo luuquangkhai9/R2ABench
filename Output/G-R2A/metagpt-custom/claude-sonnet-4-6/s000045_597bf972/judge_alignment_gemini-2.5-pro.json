@@ -1,0 +1,71 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Application"
+      ],
+      "predicted_nodes": [
+        "Global::Host Android Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct semantic match for the host application that integrates the QAPM SDK. The 'Global' boundary is identical and correct."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "predicted_nodes": [
+        "Scheduling & Dispatch Layer::MainThreadHandler\\n(Main Looper",
+        "Scheduling & Dispatch Layer::QAPMHandlerThreadManager\\n(Background Handler",
+        "HTTP Instrumentation Layer::CountingInputStream",
+        "HTTP Instrumentation Layer::InstrumentedHttpEntity",
+        "HTTP Instrumentation Layer::InstrumentedResponseHandler",
+        "HTTP Instrumentation Layer::TransactionState",
+        "Configuration Layer::QAPMConfigurationManager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's general 'QAPM-SDK' node is decomposed by the AI into several core functional components (scheduling, instrumentation, configuration) detailed in the PRD. The AI's layers ('Scheduling & Dispatch Layer', 'HTTP Instrumentation Layer', 'Configuration Layer') are valid, more detailed sub-boundaries that correctly reside within the overall SDK."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "predicted_nodes": [
+        "Upload Processing Layer::FailureLogger",
+        "Upload Processing Layer::ForcedSendStoragePopper",
+        "Upload Processing Layer::NetworkConnectivityChecker",
+        "Upload Processing Layer::UploadProcessor"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly expanded the high-level 'QAPM_Report' node into the specific components of the upload processing pipeline described in the PRD (FR-003 to FR-007). The 'Upload Processing Layer' is a valid internal layer of the SDK, semantically equivalent to the reporting/upload function."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "predicted_nodes": [
+        "Local Storage Layer::Pending Data Store\\n(Forced-Send Queue",
+        "Local Storage Layer::Upload Directory\\n& Upload Files"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's generic 'QAPM_Storage' node is correctly detailed by the AI into specific storage entities ('Pending Data Store', 'Upload Directory') mentioned in the PRD. The 'Local Storage Layer' is a semantically correct boundary within the SDK."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "QAPM_Plugin::Plugin init compile",
+    "QAPM_Plugin::QAPM_Plugin",
+    "QAPM_SDK::QAPM_Collect"
+  ],
+  "unmatched_predicted_nodes": [
+    "Android Platform Runtime::Context / ConnectivityManager",
+    "Android Platform Runtime::Handler / HandlerThread / Looper",
+    "Apache HttpClient Library::HttpEntity",
+    "Apache HttpClient Library::ResponseHandler / HttpResponse",
+    "Global::Android Platform Runtime",
+    "Global::Apache HttpClient Library"
+  ]
+}

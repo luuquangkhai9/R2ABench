@@ -1,0 +1,124 @@
+@startuml
+!theme plain
+skinparam component {
+  BackgroundColor White
+  BorderColor Black
+  FontSize 14
+}
+skinparam node {
+  BackgroundColor White
+  BorderColor Black
+  FontSize 14
+}
+skinparam rectangle {
+  BackgroundColor White
+  BorderColor Black
+  FontSize 14
+}
+skinparam arrow {
+  Color Black
+  FontSize 12
+}
+
+title System Architecture: LwM2M Device Management with Blockchain Integration
+
+package "External Systems" {
+  [Authenticated API Client] as API_CLIENT
+  [Ethereum-Compatible Blockchain Node] as BLOCKCHAIN_NODE
+  [LwM2M Service Component] as LWM2M_SERVICE
+}
+
+package "Core Backend System" {
+  [Spring-Based Backend] as SPRING_BACKEND {
+    component "User Management API" as USER_API
+    component "Token Validator" as TOKEN_VALIDATOR
+    component "User Service" as USER_SERVICE
+  }
+
+  [Blockchain Integration Layer] as BLOCKCHAIN_INTEGRATION {
+    component "Web3j Client" as WEB3J_CLIENT
+    component "Smart Contract Interface" as CONTRACT_INTERFACE
+    component "String Encoder/Decoder" as ENCODER_DECODER
+  }
+
+  [LwM2M Data Processing] as LWM2M_PROCESSING {
+    component "JSON Deserializer" as JSON_DESERIALIZER
+    component "Node Structure Builder" as NODE_BUILDER
+    component "Type Mapper" as TYPE_MAPPER
+  }
+
+  [Data Store Layer] as DATA_STORE {
+    database "User Database" as USER_DB
+    database "Bootstrap Config Cache" as CONFIG_CACHE
+  }
+}
+
+' Connections between internal components
+USER_API --> TOKEN_VALIDATOR : validates\nAuthorization header
+TOKEN_VALIDATOR --> USER_SERVICE : authorization\nresult
+USER_SERVICE --> USER_DB : CRUD operations
+USER_API --> USER_SERVICE : user retrieval/\ncreation requests
+
+WEB3J_CLIENT --> BLOCKCHAIN_NODE : HTTP transport\ncontract calls
+CONTRACT_INTERFACE --> WEB3J_CLIENT : contract\ninteraction
+ENCODER_DECODER --> CONTRACT_INTERFACE : encode/decode\nstring fields
+
+JSON_DESERIALIZER --> NODE_BUILDER : parsed JSON\nstructure
+NODE_BUILDER --> TYPE_MAPPER : type conversion\nmapping
+
+' External connections
+API_CLIENT --> USER_API : HTTP requests\nwith Auth header
+LWM2M_SERVICE --> JSON_DESERIALIZER : LwM2M node\nJSON payload
+
+' Blockchain data flow
+CONTRACT_INTERFACE --> CONFIG_CACHE : cache retrieved\nbootstrap configs
+CONTRACT_INTERFACE --> USER_SERVICE : client/security\ninformation
+
+' Component annotations
+note top of SPRING_BACKEND
+  Exposes protected user operations
+  Validates tokens via JwtUtility
+  Handles HTTP request/response
+end note
+
+note right of BLOCKCHAIN_INTEGRATION
+  Uses Web3j HTTP transport
+  Fixed 32-byte ASCII encoding
+  Smart contract interactions
+end note
+
+note left of LWM2M_PROCESSING
+  Leshan/LwM2M model types
+  Validates node structure
+  Type mapping: boolean, string,
+  integer, float
+end note
+
+' Interfaces
+interface "User HTTP API" as IF_USER_API
+interface "Blockchain Client/Bootstrap Interface" as IF_BLOCKCHAIN
+interface "Ethereum Connectivity Interface" as IF_ETHEREUM
+interface "LwM2M Node Deserialization Interface" as IF_LWM2M
+
+USER_API - IF_USER_API
+CONTRACT_INTERFACE - IF_BLOCKCHAIN
+WEB3J_CLIENT - IF_ETHEREUM
+JSON_DESERIALIZER - IF_LWM2M
+
+' Data flow labels
+SPRING_BACKEND ..> BLOCKCHAIN_INTEGRATION : retrieves client/\nsecurity information
+SPRING_BACKEND ..> BLOCKCHAIN_INTEGRATION : submits client\nbootstrap data
+BLOCKCHAIN_INTEGRATION ..> LWM2M_PROCESSING : provides bootstrap\nconfiguration
+LWM2M_PROCESSING ..> SPRING_BACKEND : parsed node structures
+
+' Legend
+legend right
+  == Component Types ==
+  [External System]
+  [Internal Component]
+  (Database)
+  -- Interface --
+  -> Data Flow
+end legend
+
+@enduml

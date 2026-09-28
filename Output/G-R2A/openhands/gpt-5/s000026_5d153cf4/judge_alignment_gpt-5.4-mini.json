@@ -1,0 +1,69 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Browser"
+      ],
+      "predicted_nodes": [
+        "Global::Web Clients\\n(WebSocket"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the external web client consuming the WebSocket endpoint. The boundary remains global/external."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine",
+        "Your GCP project::Compute Engine::pulltop",
+        "Your GCP project::Compute Engine::websocketd"
+      ],
+      "predicted_nodes": [
+        "GKE Cluster::Namespace::Adapter Pod #1",
+        "GKE Cluster::Namespace::Adapter Pod #1::Container: Adapter Runtime",
+        "GKE Cluster::Namespace::Adapter Pod #1::exec.sh",
+        "GKE Cluster::Namespace::Adapter Pod #1::pulltop",
+        "GKE Cluster::Namespace::Adapter Pod #1::websocketd :8080",
+        "GKE Cluster::Namespace::Adapter Pod #2",
+        "GKE Cluster::Namespace::Adapter Pod #2::Container: Adapter Runtime",
+        "GKE Cluster::Namespace::Adapter Pod #2::exec.sh",
+        "GKE Cluster::Namespace::Adapter Pod #2::pulltop",
+        "GKE Cluster::Namespace::Adapter Pod #2::websocketd :8080"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The runtime components pulltop and websocketd are semantically the same, but the GT places them under a Compute Engine-based runtime boundary while the prediction moves them into GKE Pod/container boundaries and duplicates them across two pods. This is a major boundary/context shift relative to the GT."
+    },
+    {
+      "gt_nodes": [
+        "pubsub-public-data project::Cloud Pub/Sub\\ntopic"
+      ],
+      "predicted_nodes": [
+        "GCP::Pub/Sub Topic\\nprojects/<project-id>/topics/<topic-name>"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the configured Pub/Sub topic resource. The project/boundary naming differs, but it is semantically equivalent to the external Pub/Sub topic referenced by the GT."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "GKE Cluster::Namespace::Adapter Pod #1",
+    "GKE Cluster::Namespace::Adapter Pod #1::Container: Adapter Runtime",
+    "GKE Cluster::Namespace::Adapter Pod #1::Recent Message Cache\\n(last 10",
+    "GKE Cluster::Namespace::Adapter Pod #1::exec.sh",
+    "GKE Cluster::Namespace::Adapter Pod #1::pulltop",
+    "GKE Cluster::Namespace::Adapter Pod #1::websocketd :8080",
+    "GKE Cluster::Namespace::Adapter Pod #2",
+    "GKE Cluster::Namespace::Adapter Pod #2::Container: Adapter Runtime",
+    "GKE Cluster::Namespace::Adapter Pod #2::Recent Message Cache\\n(last 10",
+    "GKE Cluster::Namespace::Adapter Pod #2::exec.sh",
+    "GKE Cluster::Namespace::Adapter Pod #2::pulltop",
+    "GKE Cluster::Namespace::Adapter Pod #2::websocketd :8080",
+    "GKE Cluster::Namespace::ConfigMap\\nkey: topic",
+    "GKE Cluster::Namespace::Deployment\\nAdapter",
+    "GKE Cluster::Namespace::HPA\\nmin=1, max=2,\\nCPU=80%",
+    "GKE Cluster::Namespace::Service\\nType: LoadBalancer\\n80 -> 8080",
+    "Global::GCP",
+    "Global::GKE Cluster"
+  ]
+}

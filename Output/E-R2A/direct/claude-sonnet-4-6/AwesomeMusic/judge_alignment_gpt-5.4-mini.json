@@ -1,0 +1,325 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone"
+      ],
+      "predicted_nodes": [
+        "Global::VM-1: Gateway & Frontend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the external-access/security boundary area that hosts the gateway and frontend entry layer, which is semantically consistent even though the naming differs."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone::Nginx Cluster",
+        "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx1",
+        "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx2",
+        "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx3"
+      ],
+      "predicted_nodes": [
+        "VM-1: Gateway & Frontend::Nginx 1.19.8\\nReverse Proxy / Load Balancer\\nExternal-Internal Isolation"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT models an Nginx cluster with multiple instances, while the AI aggregates it into one Nginx reverse-proxy/load-balancer node. The boundary placement under the gateway/frontend perimeter is correct."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone::Spring Cloud Gateway",
+        "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway1",
+        "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway2",
+        "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway3"
+      ],
+      "predicted_nodes": [
+        "Global::VM-1: Gateway & Frontend",
+        "VM-1: Gateway & Frontend::Nginx 1.19.8\\nReverse Proxy / Load Balancer\\nExternal-Internal Isolation"
+      ],
+      "match_type": "1:2",
+      "is_boundary_correct": true,
+      "reasoning": "The GT gateway cluster is functionally represented by the AI's external gateway/load-balancing boundary. Although the specific Spring Cloud Gateway technology is replaced by Nginx in the prediction, the architectural role as the secure ingress gateway is preserved."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone::Static Resource Server",
+        "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server1",
+        "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server2",
+        "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server3"
+      ],
+      "predicted_nodes": [
+        "VM-1: Gateway & Frontend::Web Frontend\\nHTML + CSS + JavaScript\\n+ Bootstrap Framework"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT static resource server cluster is functionally absorbed into the frontend delivery node. This is acceptable as a merged representation of frontend/static content hosting."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer",
+        "Awesome Music System::Micro Service Layer::service-web",
+        "Awesome Music System::Micro Service Layer::service-web::web1",
+        "Awesome Music System::Micro Service Layer::service-web::web2",
+        "Awesome Music System::Micro Service Layer::service-web::web3"
+      ],
+      "predicted_nodes": [
+        "Global::VM-2: Web Backend",
+        "VM-2: Web Backend::Backend API Server\\nGolang + Gin Framework",
+        "VM-2: Web Backend::Core Backend Services"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT web service layer is correctly mapped into the backend VM and backend service grouping. The AI introduces a more generic backend API/core services decomposition, which is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-auth",
+        "Awesome Music System::Micro Service Layer::service-auth::auth1",
+        "Awesome Music System::Micro Service Layer::service-auth::auth2",
+        "Awesome Music System::Micro Service Layer::service-auth::auth3"
+      ],
+      "predicted_nodes": [
+        "VM-2: Web Backend::Core Backend Services::Account Service\\nRegister / Login\\nFR-001, FR-002"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Auth service cluster corresponds to the account service responsible for registration and login. Boundary attribution to backend core services is correct."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-discovery",
+        "Awesome Music System::Micro Service Layer::service-discovery::discovery1",
+        "Awesome Music System::Micro Service Layer::service-discovery::discovery2",
+        "Awesome Music System::Micro Service Layer::service-discovery::discovery3"
+      ],
+      "predicted_nodes": [
+        "VM-4: Data & Middleware::etcd 3.4.15\\nDistributed Config &\\nService Registry\\nNFR-022"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT discovery service is represented by etcd as the distributed service registry/configuration component. This is architecturally consistent."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-scheduler",
+        "Awesome Music System::Micro Service Layer::service-scheduler::scheduler1",
+        "Awesome Music System::Micro Service Layer::service-scheduler::scheduler2",
+        "Awesome Music System::Micro Service Layer::service-scheduler::scheduler3"
+      ],
+      "predicted_nodes": [
+        "VM-2: Web Backend::Core Backend Services::Scheduling Module\\nDaily 02:00 Trigger\\nFR-016, FR-017"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The scheduler cluster maps directly to the backend scheduling module. The layer attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::RabbitMQ"
+      ],
+      "predicted_nodes": [
+        "VM-4: Data & Middleware::Message Queue\\nRabbitMQ 3.8.14\\n[Training Tasks]\\n[Classification Tasks]\\n[Recommendation Tasks]\\n[Generation Tasks]\\nFR-016, FR-017"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote RabbitMQ as the message queue infrastructure. Boundary placement under middleware/data infrastructure is correct."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::MySQL"
+      ],
+      "predicted_nodes": [
+        "VM-4: Data & Middleware::Primary Database\\n(3-replica, NFR-021)\\n[User Accounts DR-001]\\n[Score Data DR-004]\\n[Favorite Records DR-002,DR-005]\\n[Follow Relationships DR-003]\\n[Score Labels DR-013]\\n[Hot-Chart Data DR-016]\\n[Task Metadata DR-014"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted primary database corresponds to the GT MySQL persistence layer. The storage boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::Redis"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched_gt",
+      "is_boundary_correct": false,
+      "reasoning": "No explicit Redis component is present in the predicted diagram."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::Prometheus"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched_gt",
+      "is_boundary_correct": false,
+      "reasoning": "No explicit Prometheus monitoring component is present in the predicted diagram."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-web",
+        "Awesome Music System::Micro Service Layer::service-web::web1",
+        "Awesome Music System::Micro Service Layer::service-web::web2",
+        "Awesome Music System::Micro Service Layer::service-web::web3"
+      ],
+      "predicted_nodes": [
+        "VM-2: Web Backend::Score Content Service\\nUpload / Download / Search\\nFavorite / Hot Chart\\nFR-003, FR-006, FR-009\\nFR-010, FR-011"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT web service responsibilities are decomposed into a score-content service in the backend. Functionally equivalent, and the backend placement is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-web",
+        "Awesome Music System::Micro Service Layer::service-web::web1",
+        "Awesome Music System::Micro Service Layer::service-web::web2",
+        "Awesome Music System::Micro Service Layer::service-web::web3"
+      ],
+      "predicted_nodes": [
+        "VM-2: Web Backend::Recommendation Service\\nHomepage Playlist\\nHot Chart Update\\nFR-008, FR-018"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Recommendation and hot-chart update are part of the backend service responsibilities and align with the GT web/backend service scope."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-web",
+        "Awesome Music System::Micro Service Layer::service-web::web1",
+        "Awesome Music System::Micro Service Layer::service-web::web2",
+        "Awesome Music System::Micro Service Layer::service-web::web3"
+      ],
+      "predicted_nodes": [
+        "VM-2: Web Backend::Model Service\\nFavorite Model\\nFR-007"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Model favoriting is a backend web-service responsibility. The AI's model service is a reasonable semantic match."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-web",
+        "Awesome Music System::Micro Service Layer::service-web::web1",
+        "Awesome Music System::Micro Service Layer::service-web::web2",
+        "Awesome Music System::Micro Service Layer::service-web::web3"
+      ],
+      "predicted_nodes": [
+        "VM-2: Web Backend::User Relationship Service\\nFollow / Unfollow\\nFR-004"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Follow/unfollow functionality matches the GT web service responsibilities and is correctly placed in the backend."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-web",
+        "Awesome Music System::Micro Service Layer::service-web::web1",
+        "Awesome Music System::Micro Service Layer::service-web::web2",
+        "Awesome Music System::Micro Service Layer::service-web::web3"
+      ],
+      "predicted_nodes": [
+        "VM-2: Web Backend::Score Generation Coordinator\\nSubmit & Poll Generation Task\\nFR-005, FR-017"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Generation-task coordination is consistent with the backend web service role in the GT."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-discovery"
+      ],
+      "predicted_nodes": [
+        "VM-4: Data & Middleware::etcd 3.4.15\\nDistributed Config &\\nService Registry\\nNFR-022"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The discovery node and etcd registry are semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-auth"
+      ],
+      "predicted_nodes": [
+        "VM-2: Web Backend::Backend API Server\\nGolang + Gin Framework",
+        "VM-2: Web Backend::Core Backend Services::Account Service\\nRegister / Login\\nFR-001, FR-002"
+      ],
+      "match_type": "1:2",
+      "is_boundary_correct": true,
+      "reasoning": "Authentication is split across the generic backend server and the specific account service, which is acceptable because the logical auth function is preserved within the backend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-scheduler"
+      ],
+      "predicted_nodes": [
+        "VM-2: Web Backend::Core Backend Services::Scheduling Module\\nDaily 02:00 Trigger\\nFR-016, FR-017"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Scheduler service matches directly and is correctly located in backend core services."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer"
+      ],
+      "predicted_nodes": [
+        "Global::VM-4: Data & Middleware"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT infrastructure layer is represented by the AI's data/middleware VM grouping, which is a semantically acceptable boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Awesome Music System::Infra Layer::Prometheus",
+    "Awesome Music System::Infra Layer::Redis",
+    "Awesome Music System::Micro Service Layer::service-web::web1",
+    "Awesome Music System::Micro Service Layer::service-web::web2",
+    "Awesome Music System::Micro Service Layer::service-web::web3",
+    "Awesome Music System::Micro Service Layer::service-auth::auth1",
+    "Awesome Music System::Micro Service Layer::service-auth::auth2",
+    "Awesome Music System::Micro Service Layer::service-auth::auth3",
+    "Awesome Music System::Micro Service Layer::service-discovery::discovery1",
+    "Awesome Music System::Micro Service Layer::service-discovery::discovery2",
+    "Awesome Music System::Micro Service Layer::service-discovery::discovery3",
+    "Awesome Music System::Micro Service Layer::service-scheduler::scheduler1",
+    "Awesome Music System::Micro Service Layer::service-scheduler::scheduler2",
+    "Awesome Music System::Micro Service Layer::service-scheduler::scheduler3",
+    "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx1",
+    "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx2",
+    "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx3",
+    "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway1",
+    "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway2",
+    "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway3",
+    "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server1",
+    "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server2",
+    "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server3"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::External Network (HTTPS / TCP/IP",
+    "Global::VM-1: Gateway & Frontend",
+    "Global::VM-2: Web Backend",
+    "Global::VM-3: Algorithm Service",
+    "Global::VM-4: Data & Middleware",
+    "VM-1: Gateway & Frontend::Nginx 1.19.8\\nReverse Proxy / Load Balancer\\nExternal-Internal Isolation",
+    "VM-1: Gateway & Frontend::Web Frontend\\nHTML + CSS + JavaScript\\n+ Bootstrap Framework",
+    "VM-2: Web Backend::Backend API Server\\nGolang + Gin Framework",
+    "VM-2: Web Backend::Core Backend Services",
+    "VM-2: Web Backend::Core Backend Services::Account Service\\nRegister / Login\\nFR-001, FR-002",
+    "VM-2: Web Backend::Core Backend Services::Model Service\\nFavorite Model\\nFR-007",
+    "VM-2: Web Backend::Core Backend Services::Recommendation Service\\nHomepage Playlist\\nHot Chart Update\\nFR-008, FR-018",
+    "VM-2: Web Backend::Core Backend Services::Scheduling Module\\nDaily 02:00 Trigger\\nFR-016, FR-017",
+    "VM-2: Web Backend::Core Backend Services::Score Content Service\\nUpload / Download / Search\\nFavorite / Hot Chart\\nFR-003, FR-006, FR-009\\nFR-010, FR-011",
+    "VM-2: Web Backend::Core Backend Services::Score Generation Coordinator\\nSubmit & Poll Generation Task\\nFR-005, FR-017",
+    "VM-2: Web Backend::Core Backend Services::User Relationship Service\\nFollow / Unfollow\\nFR-004",
+    "VM-3: Algorithm Service::Offline / Batch Service",
+    "VM-3: Algorithm Service::Offline / Batch Service::Model Training Service\\nFine-tune GPT-2 per user\\nFR-012",
+    "VM-3: Algorithm Service::Offline / Batch Service::Score Classification Service\\nLSTM representations + labels\\nFR-014",
+    "VM-3: Algorithm Service::Offline / Batch Service::Song Recommendation Service\\nCosine similarity / user sim\\nFR-015",
+    "VM-3: Algorithm Service::Online Service",
+    "VM-3: Algorithm Service::Online Service::Score Generation Service\\nGPT-2 per-user model\\nMidi→Abc→Seeds→Score→Midi\\nFR-013",
+    "VM-4: Data & Middleware::Message Queue\\nRabbitMQ 3.8.14\\n[Training Tasks]\\n[Classification Tasks]\\n[Recommendation Tasks]\\n[Generation Tasks]\\nFR-016, FR-017",
+    "VM-4: Data & Middleware::Model Parameter Store\\n(Hadoop 3.2.2)\\n[GPT-2 per-user params DR-011]\\n[LSTM representations DR-012]\\n[Midi / Abc files DR-008,DR-009]\\n[Track Seeds DR-010",
+    "VM-4: Data & Middleware::Primary Database\\n(3-replica, NFR-021)\\n[User Accounts DR-001]\\n[Score Data DR-004]\\n[Favorite Records DR-002,DR-005]\\n[Follow Relationships DR-003]\\n[Score Labels DR-013]\\n[Hot-Chart Data DR-016]\\n[Task Metadata DR-014",
+    "VM-4: Data & Middleware::etcd 3.4.15\\nDistributed Config &\\nService Registry\\nNFR-022"
+  ]
+}

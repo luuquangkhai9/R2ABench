@@ -1,0 +1,98 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Data Engineer"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Data Engineer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the user actor. Placing it within a 'Host Machine' boundary is a reasonable and more specific refinement compared to the 'Global' scope, as the engineer interacts with the system via their host machine."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Network::Airflow Webserver",
+        "Docker Compose Network::Airflow Webserver::LocalExecutor",
+        "Docker Compose Network::Airflow Webserver::Scheduler",
+        "Docker Compose Network::Airflow Webserver::SparkSubmitOperator",
+        "Docker Compose Network::Airflow Webserver::Web UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly decomposed the single GT 'Airflow' node into its key sub-components (Webserver, Scheduler, Executor, etc.) as detailed in the PRD. The 'Docker Compose Network' boundary is semantically equivalent to 'Docker Compose Environment'."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Cluster Manager\\n(Spark Standalone"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Network::Spark Master",
+        "Docker Compose Network::Spark Master::Cluster Manager",
+        "Docker Compose Network::Spark Master::Master UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'Cluster Manager' node is correctly matched with the AI's 'Spark Master' service, which is accurately split into its management and UI components based on the PRD. The boundary attribution is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Network::Jupyter/PySpark",
+        "Docker Compose Network::Jupyter/PySpark::Notebook Server",
+        "Docker Compose Network::Jupyter/PySpark::PySpark Kernel"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the Jupyter service and split it into its core server and PySpark kernel components, reflecting the functionality described in the PRD. The boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Postgres"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Network::Postgres (9.6",
+        "Docker Compose Network::Postgres (9.6::Metadata Database"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's single 'Postgres' node is correctly matched and expanded by the AI to represent both the service container and the logical 'Metadata Database' it holds for Airflow. The boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 1",
+        "Docker Compose Environment::Spark Workers::Worker 2",
+        "Docker Compose Environment::Spark Workers::Worker 3"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Network::Spark Worker 1",
+        "Docker Compose Network::Spark Worker 1::Executor",
+        "Docker Compose Network::Spark Worker 2",
+        "Docker Compose Network::Spark Worker 2::Executor",
+        "Docker Compose Network::Spark Worker 3",
+        "Docker Compose Network::Spark Worker 3::Executor"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the three specified Spark worker services. It further refined each by adding an 'Executor' sub-component, which is functionally accurate. The AI correctly placed them within the main 'Docker Compose Network' boundary, which is equivalent to the GT's parent boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Docker Compose Environment::Spark Workers::Worker N"
+  ],
+  "unmatched_predicted_nodes": [
+    "Bundled Spark CLI::ML libsvm loader",
+    "Bundled Spark CLI::pyspark shell",
+    "Bundled Spark CLI::run-example",
+    "Docker Compose Network::Shared Volumes",
+    "Global::Bundled Spark CLI",
+    "Global::Docker Compose Network",
+    "Global::Host Machine"
+  ]
+}

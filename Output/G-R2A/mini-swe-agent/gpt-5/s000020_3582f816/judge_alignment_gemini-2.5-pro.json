@@ -1,0 +1,155 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "数据可视化::Web UI"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer (Browser Admin::MyEMS Admin SPA",
+        "Presentation Layer (Browser Admin::/contact Route Module",
+        "Presentation Layer (Browser Admin::/user Route Module",
+        "Presentation Layer (Browser Admin::API Base Path Resolver\\n(same-origin + /api/",
+        "Presentation Layer (Browser Admin::Category Settings Module",
+        "Presentation Layer (Browser Admin::HTTP Client",
+        "Presentation Layer (Browser Admin::Routing & Lazy Loader",
+        "Presentation Layer (Browser Admin::Tariff Settings Module"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the Admin Web UI (MyEMS Admin SPA) and decomposed it into its functional modules (routes, lazy loading, API resolver, HTTP client) as detailed in the SRS. This is a valid and detailed breakdown of the generic GT 'Web UI' node. The 'Presentation Layer' boundary is semantically equivalent to the 'Data Visualization' boundary for a web application."
+    },
+    {
+      "gt_nodes": [
+        "数据分析服务::API"
+      ],
+      "predicted_nodes": [
+        "API Layer (Python REST Service::MyEMS REST API Service",
+        "API Layer (Python REST Service::REST Framework & CORS",
+        "API Layer (Python REST Service::WSGI Server"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the main API service from the SRS and broke it down into its core technological components (REST Framework, WSGI) also mentioned in the SRS. This is a valid decomposition of the high-level GT API node. The 'API Layer' boundary is a standard and logical choice."
+    },
+    {
+      "gt_nodes": [
+        "第三方应用::...",
+        "第三方应用::AR",
+        "第三方应用::BMS",
+        "第三方应用::ERP"
+      ],
+      "predicted_nodes": [
+        "Integration Clients::Third-Party Applications"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated various types of external applications mentioned in the GT into a single logical group 'Third-Party Applications', which is explicitly mentioned as a user of the API in the PRD. The 'Integration Clients' boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::数据库集群"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the specific database technology (MySQL) from the SRS, whereas the GT node is generic. The AI's 'Data Layer' boundary is a standard logical layer, which is a correct way to model it, even if the GT used a deployment-centric 'Containerized Server Cluster' boundary."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::Docker Engine"
+      ],
+      "predicted_nodes": [
+        "Deployment & Ops Support::Docker-based Installation/Setup"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the Docker support mentioned in the SRS. The AI's 'Deployment & Ops Support' boundary is a logical grouping that is semantically equivalent to the GT's containerization context."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::Web Server"
+      ],
+      "predicted_nodes": [
+        "Edge/Proxy Layer::Reverse Proxy (e.g., Nginx"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the optional reverse proxy component mentioned in the PRD. A reverse proxy is a type of web server, making this a valid match. The AI's 'Edge/Proxy Layer' boundary is more specific and architecturally precise than the GT's generic grouping."
+    },
+    {
+      "gt_nodes": [
+        "安全::HTTPS"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer (Browser Admin::HTTP Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The PRD specifies communication over HTTP/HTTPS. The AI's HTTP Client component is the actor responsible for initiating this secure communication. While the GT groups this under a 'Security' boundary, placing it within the component that handles communication is also a valid architectural decision."
+    },
+    {
+      "gt_nodes": [
+        "数据分析服务::...",
+        "数据分析服务::Excel导出",
+        "数据分析服务::FDD规则引擎",
+        "数据分析服务::邮件/短信/微信",
+        "数据分析服务::高级报表引擎",
+        "数据计算服务::...",
+        "数据计算服务::成本数据",
+        "数据计算服务::数据清洗",
+        "数据计算服务::数据规范化",
+        "数据计算服务::碳排放数据",
+        "数据计算服务::租户数据",
+        "数据计算服务::空间数据",
+        "数据计算服务::组合设备数据",
+        "数据计算服务::计量表数据",
+        "数据计算服务::设备数据",
+        "数据计算服务::车间数据",
+        "数据计算服务::门店数据",
+        "数据采集服务::...",
+        "数据采集服务::BACnet",
+        "数据采集服务::EtherNet/IP",
+        "数据采集服务::Kafka",
+        "数据采集服务::MQTT",
+        "数据采集服务::Modbus",
+        "数据采集服务::OPC UA",
+        "数据采集服务::S7"
+      ],
+      "predicted_nodes": [
+        "Integration Clients::MyEMS Components"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified 'MyEMS Components' as a major client of the API, as stated in the PRD. It has logically aggregated the numerous potential internal services (data collection, calculation, analysis) listed in the GT's broader scope into this single, appropriate client group."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "其它数据源::BMS",
+    "其它数据源::ERP",
+    "其它数据源::MES",
+    "其它数据源::天气",
+    "其它数据源::手工录入",
+    "安全::API Access",
+    "安全::用户权限",
+    "容器化服务器集群::...",
+    "容器化服务器集群::Kafka Broker",
+    "容器化服务器集群::MQTT Broker",
+    "容器化服务器集群::云端Kubernetes集群",
+    "容器化服务器集群::本地Kubernetes集群",
+    "容器化服务器集群::虚拟机",
+    "容器化服务器集群::裸金属服务器",
+    "数据可视化::...",
+    "数据可视化::BI",
+    "数据可视化::大屏",
+    "数据可视化::小程序",
+    "数据可视化::手机应用",
+    "硬件网关::数据采集",
+    "硬件网关::设备控制"
+  ],
+  "unmatched_predicted_nodes": [
+    "Deployment & Ops Support::Dev Quick-Run\\n(Linux & Windows",
+    "Deployment & Ops Support::Python Dependencies\\n(REST, CORS, WSGI, Spreadsheet/Image, MySQL Connector"
+  ]
+}

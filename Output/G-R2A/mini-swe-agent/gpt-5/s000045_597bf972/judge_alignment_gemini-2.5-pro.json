@@ -1,0 +1,77 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Application"
+      ],
+      "predicted_nodes": [
+        "Host Android Application::Host Android Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the host Android application that integrates the SDK."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK::WorkHandlerManager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The general SDK node in the GT is mapped to the core WorkHandlerManager, representing the SDK's central initialization and dispatch behavior."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Collect"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK::HttpClientInstrumentation::CountingInputStream",
+        "QAPM SDK::HttpClientInstrumentation::ResponseEntityWrapper",
+        "QAPM SDK::HttpClientInstrumentation::ResponseHandlerWrapper",
+        "QAPM SDK::HttpClientInstrumentation::TransactionState"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT collection module is expanded by the AI into detailed HTTP client instrumentation components responsible for data collection."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK::DataSender",
+        "QAPM SDK::UploadProcessor"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT reporting module is split by the AI into specific upload processing and data sending components handling the reporting pipeline."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "predicted_nodes": [
+        "Local Storage::Upload Directory"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both represent the storage handling for pending upload data, but the AI classified it as an external local storage environment rather than an internal SDK module boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "QAPM_Plugin::Plugin init compile",
+    "QAPM_Plugin::QAPM_Plugin"
+  ],
+  "unmatched_predicted_nodes": [
+    "Android Platform::Context",
+    "Android Platform::HandlerThread/Looper",
+    "Android Platform::Main Looper",
+    "Android Platform::NetworkConnectivityService",
+    "Apache HttpClient Library::HttpClient",
+    "Apache HttpClient Library::HttpEntity",
+    "Apache HttpClient Library::ResponseHandler",
+    "Remote Systems::Remote Reporting Endpoint"
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::GoDaddy API\\nDomain availability"
+      ],
+      "predicted_nodes": [
+        "External Systems::GoDaddy API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the external GoDaddy API. The 'External Systems' boundary is more specific and appropriate than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Redis\\nCommand and reporting queues"
+      ],
+      "predicted_nodes": [
+        "External Systems::Redis",
+        "External Systems::Redis::Job Channel",
+        "External Systems::Redis::Reporting Channel"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified Redis as an external system and accurately split the single GT node into the main service and its specific channels ('job' and 'reporting') as described in the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Global::Socket.io\\nWebSocket result channel"
+      ],
+      "predicted_nodes": [
+        "squatm3gator API Server::Web Server::WebSocket"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct functional match for the real-time communication channel. The predicted node is correctly placed within the 'squatm3gator API Server', which is a more accurate boundary than 'Global'."
+    },
+    {
+      "gt_nodes": [
+        "Global::Web UI\\nindex.html"
+      ],
+      "predicted_nodes": [
+        "External Systems::Web Browser"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI semantically matched the server-side UI artifact (index.html) with the client-side entity (Web Browser) that renders it. This represents the user interface component. The 'External Systems' boundary is correct for a user's browser."
+    },
+    {
+      "gt_nodes": [
+        "Global::Workers\\nCommand consumers"
+      ],
+      "predicted_nodes": [
+        "squatm3gator API Server::Background Consumer",
+        "squatm3gator API Server::Background Consumer::Job Processor",
+        "squatm3gator API Server::Background Consumer::Result Router",
+        "squatm3gator API Server::squatm3 Engine Wrapper"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly decomposed the generic 'Workers' node into the specific background consumer thread and its internal logic (job processing, result routing, engine wrapper), as described in the PRD. The placement within the 'squatm3gator API Server' is correct as it's an in-process thread."
+    },
+    {
+      "gt_nodes": [
+        "Global::HTTP API\\nSession and attack requests"
+      ],
+      "predicted_nodes": [
+        "squatm3gator API Server::Request Handler",
+        "squatm3gator API Server::Request Handler::Attack Parser",
+        "squatm3gator API Server::Request Handler::Error Handler",
+        "squatm3gator API Server::Request Handler::Job Creator",
+        "squatm3gator API Server::Session Manager",
+        "squatm3gator API Server::Web Server::HTTP API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly decomposed the high-level HTTP API into its logical sub-components (handler, parser, session manager, etc.) based on the PRD. The 'squatm3gator API Server' boundary correctly groups these as internal application components."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Squatm3\\nDomain generation engine"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::squatm3gator API Server",
+    "squatm3gator API Server::Web Server"
+  ]
+}

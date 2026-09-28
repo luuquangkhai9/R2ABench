@@ -1,0 +1,96 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "predicted_nodes": [
+        "Global::hAFL2 Controller/Orchestrator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both nodes refer to the hAFL2 orchestrator/controller. However, the predicted node places it globally, failing to capture its execution boundary inside the KVM L0 hypervisor layer as modeled in the Ground Truth."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\nGuest VM (L2"
+      ],
+      "predicted_nodes": [
+        "Global::Hyper-V Child Partition VM"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both represent the Hyper-V child partition VM. The GT accurately nests it under the KVM and Hyper-V L1 Host boundaries, whereas the predicted node places it globally, missing the hierarchical hypervisor architecture."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\nGuest VM (L2::harness.sys"
+      ],
+      "predicted_nodes": [
+        "Hyper-V Child Partition VM::Windows Hyper-V Fuzzing::Child Partition Harness",
+        "Hyper-V Child Partition VM::Windows Hyper-V Fuzzing::Harness Driver(s"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the harness driver within the child partition. The predicted nodes split this into multiple items but correctly encapsulate them within the child partition VM boundary, semantically aligning with the GT."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\nHost OS (L2"
+      ],
+      "predicted_nodes": [
+        "Global::Hyper-V Root Partition VM"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both represent the Hyper-V root partition VM. Similar to the child partition, the GT nests it under the KVM and Hyper-V host layers, while the predicted node places it globally."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\nHost OS (L2::CrashMonitoring.sys"
+      ],
+      "predicted_nodes": [
+        "Hyper-V Root Partition VM::Crash Monitoring & Feedback::Root Partition Crash Monitor"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the crash monitoring component running in the root partition. The predicted node properly assigns it to the root partition VM boundary, matching the GT's placement context."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\nHost OS (L2::vmswitch.sys"
+      ],
+      "predicted_nodes": [
+        "Global::Windows VMSwitch"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both represent the Windows vmswitch.sys component. The GT correctly places it inside the Root Partition boundary, but the predicted architecture incorrectly places it globally."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::KVM (L0",
+    "KVM (L0::Hyper-V (L1) - Host"
+  ],
+  "unmatched_predicted_nodes": [
+    "Build & Configuration Tooling::Offset Configuration Source",
+    "Build & Configuration Tooling::Windows Build Artifacts",
+    "Build & Configuration Tooling::Windows Build Script",
+    "Global::Host Filesystem/Shared Libraries",
+    "Global::Python 3 runtime",
+    "Global::VMBus/netvsc channels",
+    "Global::Visual Studio Toolchain",
+    "Global::bash environment",
+    "Global::kAFL Hypervisor/Fuzzer Framework",
+    "Global::kAFL hypercalls",
+    "Global::pytest",
+    "Guest I/O & Forkserver::Embedded Forkserver",
+    "Hyper-V Child Partition VM::Windows Hyper-V Fuzzing::loader.exe",
+    "Hyper-V Child Partition VM::Windows Hyper-V Fuzzing::packet_sender.exe",
+    "Linux Userspace Fuzzing::Initrd Packager",
+    "Linux Userspace Fuzzing::Linux Launch Scripts",
+    "Linux Userspace Fuzzing::Shared Library Resolver",
+    "Orchestration & Test::Standalone Test Runner",
+    "Orchestration & Test::kAFL-Fuzzer Test Suites"
+  ]
+}

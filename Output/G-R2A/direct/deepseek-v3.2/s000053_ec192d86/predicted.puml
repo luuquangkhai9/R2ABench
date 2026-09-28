@@ -1,0 +1,125 @@
+@startuml
+!define RECTANGLE class
+skinparam componentStyle rectangle
+skinparam rectangle {
+  BackgroundColor White
+  BorderColor Black
+  ArrowColor Black
+}
+
+title Configuration Anomaly Detection (CAD) System Architecture
+
+package "External Systems" {
+  [External Alert Source] as ALERT_SRC
+  [PagerDuty] as PD
+  [AWS] as AWS
+  [OCM] as OCM
+}
+
+package "CAD Runtime Environment" {
+  [Tekton EventListener] as EVENT_LISTENER
+  [Tekton Trigger] as TRIGGER
+  [Tekton PipelineRun] as PIPELINE_RUN
+  [cad-checks-pipeline] as CAD_PIPELINE
+  [configuration-anomaly-detection\nNamespace] as NAMESPACE
+}
+
+package "Core CAD System" {
+  [CLI: cadctl] as CADCTL
+  [Integration Library] as INT_LIB
+  [Template Update Utility] as TEMPLATE_UTIL
+}
+
+package "Execution Paths" {
+  [Standard Event-Driven Path] as STD_PATH
+  [Skip-Webhook Path] as SKIP_PATH
+}
+
+' External Interfaces
+ALERT_SRC --> EVENT_LISTENER : Alert Webhook (JSON)
+CADCTL --> PD : Integration Calls
+CADCTL --> AWS : Integration Calls
+CADCTL --> OCM : Integration Calls
+
+' Core System Relationships
+CADCTL --> INT_LIB : Uses
+CADCTL --> TEMPLATE_UTIL : Invokes
+INT_LIB ..> PD : Integrates with
+INT_LIB ..> AWS : Integrates with
+INT_LIB ..> OCM : Integrates with
+
+' Tekton Environment Setup
+EVENT_LISTENER --> TRIGGER : Triggers
+TRIGGER --> PIPELINE_RUN : Creates
+PIPELINE_RUN --> CAD_PIPELINE : Executes
+CAD_PIPELINE --> NAMESPACE : In
+PIPELINE_RUN --> NAMESPACE : In
+
+' Execution Paths Definition
+STD_PATH ..> EVENT_LISTENER : Uses
+STD_PATH ..> TRIGGER : Uses
+STD_PATH ..> PIPELINE_RUN : Produces
+
+SKIP_PATH ..> PIPELINE_RUN : Creates Directly
+SKIP_PATH ..[#blue] CAD_PIPELINE : References
+SKIP_PATH ..[#blue] NAMESPACE : Uses
+
+' Data Flow
+note on link of SKIP_PATH to PIPELINE_RUN
+  PipelineRun Manifest (YAML)
+  with JSON payload
+  containing event.data.id
+end note
+
+note on link of ALERT_SRC to EVENT_LISTENER
+  Alert Webhook Payload
+end note
+
+' Container Runtime Context
+rectangle "Container Runtime (UBI Minimal)" as CONTAINER {
+  [cadctl Binary] as BINARY
+  BINARY --> CADCTL : Implements
+}
+
+' Build Context
+database "Build Environment" as BUILD {
+  [Go 1.17 Builder] as BUILDER
+  BUILDER --> CONTAINER : Produces
+}
+
+' Template Artifacts
+folder "Deployment Templates" as TEMPLATES {
+  [Template Artifacts] as ARTIFACTS
+}
+TEMPLATE_UTIL --> ARTIFACTS : Updates
+
+' User Interactions
+actor "SRE/Operations User" as SRE_USER
+actor "Deployment Engineer" as DEPLOY_USER
+actor "Developer/Contributor" as DEV_USER
+
+SRE_USER --> CADCTL : Invokes workflows\n(CHGM, Anomaly Detection)
+DEPLOY_USER --> STD_PATH : Operates
+DEPLOY_USER --> SKIP_PATH : Operates
+DEV_USER --> INT_LIB : Extends
+DEV_USER --> TEMPLATE_UTIL : Uses
+DEV_USER --> CADCTL : Extends commands
+
+' System Boundaries
+rectangle "CAD Product Scope" {
+  CADCTL
+  INT_LIB
+  TEMPLATE_UTIL
+  STD_PATH
+  SKIP_PATH
+}
+
+rectangle "Tekton Execution Environment" {
+  EVENT_LISTENER
+  TRIGGER
+  PIPELINE_RUN
+  CAD_PIPELINE
+  NAMESPACE
+}
+
+@enduml

@@ -1,0 +1,76 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Airflow\n(Spark Driver"
+      ],
+      "predicted_nodes": [
+        "Airflow Service::Airflow Webserver\n(localhost:8282",
+        "Airflow Service::spark_default\nConnection"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Airflow driver/scheduler node is represented by two predicted components: the Airflow webserver and its Spark connection. This is a reasonable split of the Airflow responsibility, and the service boundary is still within the Airflow context."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Cluster Manager\n(Spark Standalone"
+      ],
+      "predicted_nodes": [
+        "Spark Service::Spark Master\n(localhost:8181, spark:7077",
+        "Spark Service::spark-worker-1",
+        "Spark Service::spark-worker-2",
+        "Spark Service::spark-worker-3"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Spark standalone cluster is decomposed into the master plus worker services. This matches the intended cluster boundary and architectural layer."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\n(Spark"
+      ],
+      "predicted_nodes": [
+        "Jupyter Service::Jupyter/PySpark\n(localhost:8888"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Jupyter/PySpark notebook service. The boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Postgres"
+      ],
+      "predicted_nodes": [
+        "Data & Storage::PostgreSQL\n(Airflow Metadata"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the Postgres metadata store for Airflow. The storage boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Data Engineer"
+      ],
+      "predicted_nodes": [
+        "Global::Host Machine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "This is not semantically equivalent. The GT node is the human actor, while the predicted node is the physical host environment."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Docker Compose Environment::Spark Workers::Worker 1",
+    "Docker Compose Environment::Spark Workers::Worker 2",
+    "Docker Compose Environment::Spark Workers::Worker 3",
+    "Docker Compose Environment::Spark Workers::Worker N"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Airflow Service",
+    "Global::Data & Storage",
+    "Global::Docker Engine",
+    "Global::Jupyter Service",
+    "Global::Spark Service"
+  ]
+}

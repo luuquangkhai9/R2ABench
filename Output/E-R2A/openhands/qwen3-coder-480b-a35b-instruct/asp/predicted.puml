@@ -1,0 +1,59 @@
+@startuml
+!theme plain
+skinparam rectangleLineWidth 1
+skinparam noteFontSize 10
+skinparam noteBackgroundColor #FFFFCC
+
+rectangle "Requirements Review\nChecklist System" as system {
+  rectangle "Review Artifact\n(Markdown)" as artifact [
+    Review Objectives
+    Standards Compliance
+    Completeness Check
+    Exception Coverage
+    Understandability
+    Model Accuracy
+    Extension Review
+    Problem Reporting
+    Scoring System
+    Review Metadata
+  ]
+  
+  rectangle "Reviewer" as reviewer
+  rectangle "Requirements Owner" as owner
+  rectangle "Project Stakeholder" as stakeholder
+}
+
+reviewer -down-> artifact : "Completes checklist,\nrecords findings,\nassigns scores"
+artifact -down-> owner : "Provides review\nfindings and\nsuggestions"
+artifact -down-> stakeholder : "Shows review\nresults and\nquality status"
+
+note right of artifact
+  Markdown-based checklist
+  Four review dimensions:
+  1. Completeness
+  2. Understandability
+  3. Model Accuracy
+  4. Extensions/Improvements
+  Four 10-point scales + total score
+end note
+
+note bottom of reviewer
+  - Defines review goals
+  - Performs checklist inspection
+  - Records problems
+  - Assigns scores
+  - Signs review
+end note
+
+note bottom of owner
+  Receives review findings
+  and improvement suggestions
+end note
+
+note bottom of stakeholder
+  Reads review results to
+  understand requirement
+  quality status
+end note
+
+@enduml

@@ -1,0 +1,59 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Cognito Account::Cognito User Pool"
+      ],
+      "predicted_nodes": [
+        "AWS Account: Cognito Account::Authentication Layer::CognitoUserPool\\n(token validity, custom:Role, email"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the core Cognito User Pool component. The AI's boundary attribution ('AWS Account: Cognito Account') is semantically identical to the GT ('Cognito Account') and adds a reasonable sub-layer ('Authentication Layer')."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::API Gateway",
+        "API Gateway Account::Cognito-authorizer::hello-function",
+        "API Gateway Account::auth-function"
+      ],
+      "predicted_nodes": [
+        "AWS Account: API Gateway Account::API Gateway Layer::ApiGatewayDeployment\\n(stage deployment",
+        "AWS Account: API Gateway Account::API Gateway Layer::ApiGatewayVpcLink\\n(NLB ARN integration",
+        "AWS Account: API Gateway Account::API Gateway Layer::CallbackURLOutput\\n(API GW ID + region + stage",
+        "AWS Account: API Gateway Account::API Gateway Layer::CognitoUserPoolAuthorizer\\n(cross-account user-pool ARN",
+        "AWS Account: API Gateway Account::API Gateway Layer::ECSProxyMethod\\n(x-pagopa-pn-cx-role request header\\nVPC link integration",
+        "AWS Account: API Gateway Account::API Gateway Layer::WhoAmIMethod\\n(x-pagopa-pn-cx-role response header\\ncustom:Role claim mapping)\\n<<HTTP 200 response defined>>"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly expands the GT's abstract 'API Gateway' and related function nodes into the specific, documented components from the SRS, including deployment, VPC link, outputs, authorizer, and methods. All nodes are correctly placed in the 'API Gateway Account'."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "API Gateway Account::Calls hello/GET with id_token in headers",
+    "API Gateway Account::Returns hello plus user name when authorized",
+    "Cognito Account::Cognito Hosted UI",
+    "Global::User"
+  ],
+  "unmatched_predicted_nodes": [
+    "AWS Account: API Gateway Account::Private Network Connectivity Layer::SQSEndpointSecurityGroup\\n(TCP 0-65535, VPC CIDR ingress",
+    "AWS Account: API Gateway Account::Private Network Connectivity Layer::SQSVpcInterfaceEndpoint\\n(interface type, regional SQS service",
+    "AWS Account: Cognito Account::Authentication Layer::CognitoIdentityPool\\n(provider binding, unauth identities",
+    "AWS Account: Cognito Account::Authentication Layer::CognitoUserPoolClient\\n(attribute scope, ClientId",
+    "AWS Account: Cognito Account::Authentication Layer::IdentityPoolRoleAttachment\\n(auth + unauth role mapping",
+    "AWS Account: Cognito Account::Authorization & Identity Layer::AuthenticatedIAMRole\\n(sts:AssumeRoleWithWebIdentity",
+    "AWS Account: Cognito Account::Authorization & Identity Layer::UnauthenticatedIAMRole\\n(sts:AssumeRoleWithWebIdentity",
+    "Global::AWS Account: API Gateway Account",
+    "Global::AWS Account: Cognito Account",
+    "Global::AWS CLI",
+    "Global::AWS CloudFormation\\n(Provisioning Engine",
+    "Global::AWS IAM\\n(Web-Identity Federation",
+    "Global::AWS VPC / EC2 Networking\\n(VPC, subnets, security groups",
+    "Global::Amazon SQS\\n(private access target",
+    "Global::Network Load Balancer\\n(ECS Target ARN",
+    "Infrastructure Provisioning Layer::CloudFormation Templates\\n(YAML 2010-09-09",
+    "Infrastructure Provisioning Layer::Installation Scripts\\n(AWS CLI profiles & env params",
+    "Infrastructure Provisioning Layer::TokenValidityParams\\n(AccessTokenValidityUnits,\\nIdTokenValidityUnits,\\nRefreshTokenValidityUnits"
+  ]
+}

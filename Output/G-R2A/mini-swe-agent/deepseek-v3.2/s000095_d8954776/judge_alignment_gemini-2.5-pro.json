@@ -1,0 +1,187 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Event Bus"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Event Bus",
+        "Application Layer::Event Bus::Event Consumers",
+        "Application Layer::Event Bus::Location Event Publisher"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's `Event Bus` is correctly identified and split by the AI into more detailed publisher/consumer components, as described in FR-001. The `Application Layer` boundary is semantically equivalent to the GT's top-level `GPSLogger Android Application`."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Location Capture::Location Listeners"
+      ],
+      "predicted_nodes": [
+        "Application Layer::GPS Logging Service",
+        "Application Layer::GPS Logging Service::Location Listener"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's `Location Listeners` node is correctly identified and expanded by the AI into a more abstract `GPS Logging Service` containing the listener. This aligns well with the PRD's description of a central service for location handling. The `Application Layer` boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::GPX Logger"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Loggers::GPX Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct functional match for GPX file logging (FR-007). The AI's `Business Logic Layer::Loggers` boundary is a correct, standard architectural classification for the GT's `GPSLogger Android Application::Logging`."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::KML Logger"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Loggers::KML Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct functional match for KML file logging (FR-007). The boundary attribution is correct and semantically equivalent to the GT."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::CSV / URL Loggers"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Loggers::Text File Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A correct semantic match. The GT's `CSV / URL Loggers` corresponds to the `text-file outputs` mentioned in FR-007, which the AI has named `Text File Logger`. The boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::Loggers"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Loggers"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The generic grouping node for the logger components is correctly matched. The `Business Logic Layer` is an appropriate classification for this functionality."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::NMEA / GPRMC Encoder"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Data Encoders::GPRMC Encoder"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the GPRMC encoding functionality (FR-006). The AI correctly places it in a `Data Encoders` sub-boundary, which is a valid refinement of the GT's `Logging` boundary."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Upload::Uploaders"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Uploaders",
+        "Business Logic Layer::Uploaders::Dropbox Uploader",
+        "Business Logic Layer::Uploaders::OpenGTS Uploader",
+        "Business Logic Layer::Uploaders::OpenStreetMap Uploader"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's general `Uploaders` component is correctly split by the AI into a parent component and specific implementations for each external service (Dropbox, OpenGTS, OpenStreetMap) mentioned in the PRD. The `Business Logic Layer` boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::User Interface::Detailed View",
+        "GPSLogger Android Application::User Interface::Main Activity",
+        "GPSLogger Android Application::User Interface::Other Fragments",
+        "GPSLogger Android Application::User Interface::Simple View"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Main Activity/Fragments",
+        "Presentation Layer::Main Activity/Fragments::UI Fragments"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregates the multiple specific UI component nodes from the GT into a consolidated `Main Activity/Fragments` component. The `Presentation Layer` boundary is a standard and correct equivalent for the GT's `User Interface` boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Dropbox"
+      ],
+      "predicted_nodes": [
+        "External Systems::Dropbox API",
+        "External Systems::Dropbox API::Dropbox Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identifies Dropbox as an external system and logically splits the single GT node into an API and a Service. The `External Systems` boundary is semantically identical to `Global`."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenGTS Endpoint\\nUDP server"
+      ],
+      "predicted_nodes": [
+        "External Systems::OpenGTS Server",
+        "External Systems::OpenGTS Server::UDP Endpoint"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identifies the OpenGTS endpoint as an external system and details the GT's single node into a server and its specific UDP endpoint (FR-005). The `External Systems` boundary is equivalent to `Global`."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenStreetMap"
+      ],
+      "predicted_nodes": [
+        "External Systems::OpenStreetMap API",
+        "External Systems::OpenStreetMap API::OSM Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identifies OpenStreetMap as an external system and logically splits the single GT node into an API and a Service. The `External Systems` boundary is equivalent to `Global`."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Location Capture::Google Play Services\\nLocation Provider"
+      ],
+      "predicted_nodes": [
+        "External Systems::Android Platform::Google Play Services"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The node for the Google Play Services dependency is correctly matched. The AI's classification as an `External System` is a valid and precise boundary assignment, whereas the GT groups it functionally under `Location Capture`."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "GPSLogger Android Application::Upload::Upload Jobs"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application Layer::GPS Logging Service::Location Processor",
+    "Business Logic Layer::Data Encoders",
+    "Business Logic Layer::Data Encoders::SerializableLocation Converter",
+    "Data Layer::Application Settings",
+    "Data Layer::Application Settings::Service Configurations",
+    "Data Layer::Application Settings::User Preferences",
+    "Data Layer::Configuration Manager",
+    "Data Layer::Configuration Manager::Build Configuration",
+    "Data Layer::Configuration Manager::Gradle Properties Parser",
+    "Data Layer::Local Storage",
+    "Data Layer::Local Storage::GPX Files",
+    "Data Layer::Local Storage::KML Files",
+    "Data Layer::Local Storage::Text Log Files",
+    "Development Environment::Android SDK",
+    "Development Environment::Android SDK::Build Tools 19.0.3",
+    "Development Environment::Android SDK::Support Libraries",
+    "Development Environment::Build System",
+    "Development Environment::Build System::Gradle Properties",
+    "Development Environment::Build System::local.properties",
+    "External Systems::Android Platform",
+    "External Systems::Android Platform::GPS Hardware",
+    "Presentation Layer::Main Activity/Fragments::Settings UI"
+  ]
+}

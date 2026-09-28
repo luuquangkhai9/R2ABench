@@ -1,0 +1,103 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Application"
+      ],
+      "predicted_nodes": [
+        "Android Host Application::Android Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the host Android application context in which the SDK is integrated. The boundary attribution is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_Plugin::Plugin init compile",
+        "QAPM_Plugin::QAPM_Plugin"
+      ],
+      "predicted_nodes": [],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT contains plugin-related nodes, but the predicted list does not include an equivalent plugin/init compilation component. This is an omission rather than a successful match."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK::Upload Scheduler",
+        "QAPM SDK::Work Handler Manager",
+        "QAPM SDK::Background Scheduling Layer::Background Handler Thread",
+        "QAPM SDK::Background Scheduling Layer::Main Thread Handler",
+        "QAPM SDK::Configuration Management::QAPM Configuration Manager",
+        "QAPM SDK::Data Sending Layer::Data Sender",
+        "QAPM SDK::Data Sending Layer::Sender Callback Handler",
+        "QAPM SDK::HTTP Instrumentation Layer::Content Buffering Entity",
+        "QAPM SDK::HTTP Instrumentation Layer::Response Handler Wrapper",
+        "QAPM SDK::HTTP Instrumentation Layer::Transaction State Manager",
+        "QAPM SDK::Upload Processing Layer::Network Gate",
+        "QAPM SDK::Upload Processing Layer::Parameter Deriver",
+        "QAPM SDK::Upload Processing Layer::Upload File Processor"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT SDK node is decomposed into multiple functional subnodes in the predicted diagram. This is a valid split, and all predicted subnodes remain within the QAPM SDK boundary, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Collect"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:0",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node corresponds to the collection module. It is omitted."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "predicted_nodes": [
+        "External Systems::Remote Reporting Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node captures an external reporting endpoint, but the GT node is the SDK's internal reporting module. This is a boundary/context mismatch, not a semantically equivalent internal component."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "predicted_nodes": [
+        "Data Storage::Local Storage",
+        "Data Storage::Upload Directory"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT storage module is represented by more specific local storage and upload directory nodes. This split is semantically consistent and the storage boundary is appropriate."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "QAPM_SDK::QAPM_Collect",
+    "QAPM_SDK::QAPM_Report"
+  ],
+  "unmatched_predicted_nodes": [
+    "Android Host Application::Android Context",
+    "Android Host Application::Network Connectivity",
+    "External Systems::Apache HttpClient",
+    "External Systems::Remote Reporting Server",
+    "QAPM SDK::Background Scheduling Layer::Background Handler Thread",
+    "QAPM SDK::Background Scheduling Layer::Main Thread Handler",
+    "QAPM SDK::Background Scheduling Layer::Work Handler Manager",
+    "QAPM SDK::Configuration Management::QAPM Configuration Manager",
+    "QAPM SDK::Data Sending Layer::Data Sender",
+    "QAPM SDK::Data Sending Layer::Sender Callback Handler",
+    "QAPM SDK::HTTP Instrumentation Layer::Content Buffering Entity",
+    "QAPM SDK::HTTP Instrumentation Layer::Response Handler Wrapper",
+    "QAPM SDK::HTTP Instrumentation Layer::Transaction State Manager",
+    "QAPM SDK::Upload Processing Layer::Network Gate",
+    "QAPM SDK::Upload Processing Layer::Parameter Deriver",
+    "QAPM SDK::Upload Processing Layer::Upload File Processor",
+    "QAPM SDK::Upload Processing Layer::Upload Scheduler"
+  ]
+}

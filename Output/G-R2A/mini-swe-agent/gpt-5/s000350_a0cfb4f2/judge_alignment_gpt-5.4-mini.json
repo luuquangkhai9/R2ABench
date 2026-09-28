@@ -1,0 +1,84 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::GoDaddy API\\nDomain availability"
+      ],
+      "predicted_nodes": [
+        "External Services::GoDaddy Domains API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the optional external GoDaddy integration for domain availability checks. The boundary differs in wording, but it is semantically equivalent as an external service boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::HTTP API\\nSession and attack requests"
+      ],
+      "predicted_nodes": [
+        "API Layer (Server Process::HTTP API\\n(REST/GET",
+        "API Layer (Server Process::Session Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node covers the HTTP API handling of session creation and attack-related requests. The prediction splits this into HTTP API and Session Manager, which is a valid decomposition and remains within the correct API/server-process boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Redis\\nCommand and reporting queues"
+      ],
+      "predicted_nodes": [
+        "Messaging::Redis Message Broker"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent Redis-backed messaging used for job publication and reporting. The boundary label is equivalent in meaning."
+    },
+    {
+      "gt_nodes": [
+        "Global::Socket.io\\nWebSocket result channel"
+      ],
+      "predicted_nodes": [
+        "API Layer (Server Process::WebSocket Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the asynchronous WebSocket/Socket.IO result delivery channel. The predicted boundary is a reasonable architectural equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Squatm3\\nDomain generation engine"
+      ],
+      "predicted_nodes": [
+        "Worker/Execution::squatm3 CLI Engine\\n(subprocess"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the wrapped squatm3 domain-generation engine invoked as a subprocess. The worker/execution boundary is consistent with the GT's engine component."
+    },
+    {
+      "gt_nodes": [
+        "Global::Web UI\\nindex.html"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Web Browser\\n(UI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is the server-rendered web UI entry page (index.html), while the prediction places it in the client browser layer. This is a boundary mismatch because the diagram node should represent the application-provided UI, not the consumer browser."
+    },
+    {
+      "gt_nodes": [
+        "Global::Workers\\nCommand consumers"
+      ],
+      "predicted_nodes": [
+        "API Layer (Server Process::Background Consumer Thread"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT command consumers correspond to the in-process background consumer thread started by the API process. This is a correct semantic match and boundary placement."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

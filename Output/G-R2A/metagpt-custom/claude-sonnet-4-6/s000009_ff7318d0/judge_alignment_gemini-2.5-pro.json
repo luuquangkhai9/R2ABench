@@ -1,0 +1,145 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::S3"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::StaticHostingBucket\n(Amazon S3",
+        "Presentation Layer::WebFrontend\n(HTML / CSS / Bootstrap / jQuery"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI split the global GT S3 node into a static hosting bucket and the web frontend hosted on it. The boundary mapping is semantically consistent with the Presentation Layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::API Gateway"
+      ],
+      "predicted_nodes": [
+        "API Gateway Layer::APIGateway\n(Amazon API Gateway\nAWS Sig V4 · JSON"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the API Gateway component, with the AI correctly grouping it under the API Gateway Layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::Cognito"
+      ],
+      "predicted_nodes": [
+        "Authentication & Security Layer::CognitoUserPool\n(Amazon Cognito"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes correspond to Amazon Cognito for authentication, effectively mapped to the security boundary."
+    },
+    {
+      "gt_nodes": [
+        "Fixtures Service::fixtures\nLambda",
+        "Live Score Pipeline::live_score\nLambda",
+        "Prediction Service::prediction\nLambda",
+        "Standing Service::standing\nLambda"
+      ],
+      "predicted_nodes": [
+        "Application / Backend Layer::BackendLambda\n(Python / Node.js\nData · Reminders · Recommendations"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated multiple microservice-specific GT Lambdas into a unified backend Lambda node. The boundary transition to the Backend layer is functionally correct."
+    },
+    {
+      "gt_nodes": [
+        "Recommendation Service::recommendation\nLambda"
+      ],
+      "predicted_nodes": [
+        "Application / Backend Layer::ChatbotHandler\n(Python / Node.js\nIntent Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT recommendation Lambda fulfills the conversation handler role defined in the SRS, mapping perfectly to the predicted ChatbotHandler Lambda."
+    },
+    {
+      "gt_nodes": [
+        "Fixtures Service::SQS",
+        "Notification Service::SQS"
+      ],
+      "predicted_nodes": [
+        "Notification Layer::SQSQueue\n(Amazon SQS\nReminder Request Buffer"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated multiple SQS queues distributed across GT services into a single unified SQS component in the Notification layer."
+    },
+    {
+      "gt_nodes": [
+        "Notification Service::SNS"
+      ],
+      "predicted_nodes": [
+        "Notification Layer::SNSService\n(Amazon SNS\nSMS Delivery"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes accurately represent the SNS service for notifications, placed inside semantically equivalent notification boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::SageMaker"
+      ],
+      "predicted_nodes": [
+        "Prediction Layer::SageMakerEndpoint\n(Amazon SageMaker\nML Match Outcome Model"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent SageMaker for ML outcome predictions."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::DynamoDB\nLive Scores",
+        "Prediction Service::DynamoDB\nPredictions",
+        "Standing Service::DynamoDB\nStandings"
+      ],
+      "predicted_nodes": [
+        "Data Storage & Search Layer::DynamoDB\n(Match Results · Fixtures · Stats"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI combined the distinct DynamoDB tables from the GT microservices into a single consolidated node inside a unified Data Storage layer."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::Elasticsearch",
+        "Prediction Service::Elasticsearch",
+        "Standing Service::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "Data Storage & Search Layer::Elasticsearch\n(Amazon Elasticsearch Service\nSearch & Retrieval"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Similar to DynamoDB, the AI merged the service-specific GT Elasticsearch nodes into a unified search node in the data layer."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2",
+        "Live Score Pipeline::EC2::Kafka",
+        "Live Score Pipeline::EC2::M4",
+        "Live Score Pipeline::EC2::foot app"
+      ],
+      "predicted_nodes": [
+        "Streaming Layer\n(Amazon EC2::KafkaCluster\n(Apache Kafka with Apache Avro\nLive Score Event Ingestion"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT explicitly decomposed the streaming instance into EC2, Kafka, M4 type, and foot app. The AI correctly abstracted these details into a unified EC2 Kafka Cluster."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::User",
+    "Recommendation Service::Lex"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application / Backend Layer::SQSConsumerLambda\n(Python / Node.js\nReminder Dispatcher",
+    "Authentication & Security Layer::IAMPolicies\n(AWS IAM"
+  ]
+}

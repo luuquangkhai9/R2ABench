@@ -1,0 +1,98 @@
+@startuml
+title User-in-the-Box Simulator Framework - Architecture
+
+skinparam componentStyle rectangle
+skinparam rectangle {
+  BackgroundColor<<layer>> #E8F4F8
+  BorderColor<<layer>> #2980B9
+}
+
+' External Systems
+rectangle "External Systems" <<layer>> {
+  component [MuJoCo Engine] as MuJoCo #LightYellow
+  component [OpenAI Gym Interface] as GymAPI #LightYellow
+  component [RL Training Library] as RLLib #LightYellow
+}
+
+' Configuration Layer
+rectangle "Configuration Layer" <<layer>> {
+  component [YAML Configuration Files] as YAMLConfig
+  component [MuJoCo XML Definitions\n(Biomechanical + Task)] as MuJoCoXML
+}
+
+' Framework Core
+rectangle "Framework Core" <<layer>> {
+  component [Simulator Builder] as SimBuilder
+  component [MuJoCo XML Integration Layer] as XMLIntegration
+}
+
+' Simulator Components
+rectangle "Simulator Components" <<layer>> {
+  component [Biomechanical Model Module\n(Muscle-Actuated User Model)] as BioModel
+  rectangle "Perception Modules" {
+    component [Egocentric Vision Module] as VisionMod
+    component [Proprioception Module] as PropMod
+    component [Perception Base Class] as PercBase
+  }
+  component [Interaction Task Module] as TaskMod
+}
+
+' Simulator Package
+rectangle "Gym-Compatible Simulator Package" <<layer>> {
+  component [Simulator (OpenAI Gym Env)] as SimPackage
+}
+
+' Training Workflow
+rectangle "Training Workflow" <<layer>> {
+  component [RL Training Runner] as TrainRunner
+}
+
+' Evaluation Workflow
+rectangle "Evaluation Workflow" <<layer>> {
+  component [Evaluation Runner] as EvalRunner
+  component [Action Logger] as ActionLogger
+}
+
+' File System Artifacts
+rectangle "File System Artifacts" <<layer>> {
+  database [Run Folder] as RunFolder {
+    component [Checkpoint Directory] as CheckpointDir
+    component [Evaluate Directory\n(Evaluation Outputs)] as EvalDir
+  }
+  component [Action Log File] as ActionLogFile
+}
+
+' Data Flows
+YAMLConfig --> SimBuilder : "YAML config\n(model, task, perception,\ntraining params)"
+MuJoCoXML --> XMLIntegration : "XML definitions"
+SimBuilder --> XMLIntegration : "trigger XML merge"
+XMLIntegration --> BioModel : "initialize"
+XMLIntegration --> TaskMod : "initialize"
+SimBuilder --> BioModel : "select & configure"
+SimBuilder --> TaskMod : "select & configure"
+SimBuilder --> VisionMod : "select & configure"
+SimBuilder --> PropMod : "select & configure"
+VisionMod -up-> PercBase : "extends"
+PropMod -up-> PercBase : "extends"
+
+BioModel --> SimPackage : "provides actuation\n(actions [-1,1], controls [0,1])"
+TaskMod --> SimPackage : "provides task environment"
+VisionMod --> SimPackage : "provides vision observations"
+PropMod --> SimPackage : "provides proprioception"
+SimPackage --> GymAPI : "implements Gym interface"
+SimPackage --> MuJoCo : "runs simulation"
+
+YAMLConfig --> TrainRunner : "training config"
+SimPackage --> TrainRunner : "Gym-compatible env"
+RLLib --> TrainRunner : "RL algorithm"
+TrainRunner --> RunFolder : "writes training run output"
+TrainRunner --> CheckpointDir : "writes model checkpoints"
+
+RunFolder --> EvalRunner : "run folder path"
+CheckpointDir --> EvalRunner : "load checkpoint"
+EvalRunner --> SimPackage : "load simulator"
+EvalRunner --> EvalDir : "write evaluation artifacts"
+EvalRunner --> ActionLogger : "log actions (if enabled)"
+ActionLogger --> ActionLogFile : "write action log"
+
+@enduml

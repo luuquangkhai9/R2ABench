@@ -1,0 +1,118 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "External Dependencies::MPI Runtime",
+        "Parallel Execution Layer::MPI Layer::MPI Communicator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents the MPI dependency/communication substrate. The prediction splits it into the external MPI runtime and the internal communicator layer, which is semantically consistent and boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process"
+      ],
+      "predicted_nodes": [
+        "Parallel Execution Layer::MPI Layer::Task Stealing Manager",
+        "Parallel Execution Layer::Thread Pool::Worker Queues",
+        "Parallel Execution Layer::Thread Pool::Worker Threads",
+        "Core Runtime System::Worker Scheduler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a process-level execution container containing worker threads, server thread, and queues. The prediction decomposes this runtime structure into scheduling, queues, threads, and stealing management, which is functionally aligned."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Worker\\nThread"
+      ],
+      "predicted_nodes": [
+        "Parallel Execution Layer::Thread Pool::Worker Threads"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the worker-thread execution unit used to run tasks."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Task Queue"
+      ],
+      "predicted_nodes": [
+        "Parallel Execution Layer::Thread Pool::Worker Queues"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the task queueing structure associated with workers and task stealing."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Server\\nThread"
+      ],
+      "predicted_nodes": [
+        "Core Runtime System::Task Manager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT server thread is the runtime control/scheduling thread inside each MPI process. The predicted task manager is a semantically equivalent control component."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::...",
+        "Task Queue (in detail::A1",
+        "Task Queue (in detail::A2",
+        "Task Queue (in detail::A3",
+        "Task Queue (in detail::B1",
+        "Task Queue (in detail::B2",
+        "Task Queue (in detail::Level 0",
+        "Task Queue (in detail::Level 1",
+        "Task Queue (in detail::Level 2",
+        "Task Queue (in detail::Level 3",
+        "Task Queue (in detail::Level 4",
+        "Task Queue (in detail::Level 5"
+      ],
+      "predicted_nodes": [
+        "Parallel Execution Layer::Thread Pool::Worker Queues",
+        "Parallel Execution Layer::MPI Layer::Task Stealing Manager",
+        "Core Runtime System::Task Manager"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT detailed queue hierarchy is an expanded view of queue structure and queue levels. The prediction aggregates this into worker queues plus stealing/runtime management, which is acceptable and semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::..."
+      ],
+      "predicted_nodes": [
+        "Core Runtime System::Task Descriptor Store"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The detailed GT queue illustration likely includes task descriptors and queue contents. The task descriptor store is a reasonable abstraction of stored queued task metadata."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Configuration & Environment::Environment Variables",
+    "Configuration & Environment::Runtime Configuration",
+    "Core Runtime System::Callback Handler",
+    "Core Runtime System::Map Executor",
+    "Core Runtime System::Task Descriptor Store",
+    "Core Runtime System::Task Manager",
+    "Core Runtime System::Worker Scheduler",
+    "External Dependencies::Optional Libraries",
+    "External Dependencies::Python Runtime",
+    "Parallel Execution Layer::MPI Layer::SPMD Executor",
+    "Python Application Layer::Application Code",
+    "Python Application Layer::Example Applications",
+    "Python Application Layer::Test Suite",
+    "torc Public API::Control API",
+    "torc Public API::Query API",
+    "torc Public API::SPMD API",
+    "torc Public API::Task Submission API"
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "External Systems::Kafka Topic\\n(Audit Event Stream",
+        "Infrastructure / Plugin Layer::Kafka Event Publisher\\n(Default EventPublisher impl"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Kafka node is represented by the Kafka topic/stream and the default Kafka-based event publisher. Splitting into transport/topic plus publisher implementation is semantically consistent with the GT node."
+    },
+    {
+      "gt_nodes": [
+        "Global::Databases / Filestores\\nElastic, Hadoop, etc."
+      ],
+      "predicted_nodes": [
+        "External Systems::Downstream Consumer\\n(deserializes AuditEvent JSON"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "This is not a true semantic match. The GT node represents persistence/storage systems, while the predicted node is a consumer. It is a boundary/context confusion and should not be matched."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "predicted_nodes": [
+        "Global::Auditor Client Library (Kotlin / JVM 11",
+        "JVM Application Layer::Integrating Application"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a server-side app, while the predicted nodes describe a client library and integrating application. This is a significant architectural mismatch across deployment/runtime boundaries."
+    },
+    {
+      "gt_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "predicted_nodes": [
+        "JVM Application Layer::Integrating Application",
+        "Auditor Client Library (Kotlin / JVM 11::Auditing API\\n(accept oldObject, newObject,\\nAuditorEventConfig",
+        "Auditor Client Library (Kotlin / JVM 11::Audit Engine\\n(Object Diff / Change Detection",
+        "Auditor Client Library (Kotlin / JVM 11::AuditEvent Builder\\n(CREATED / UPDATED / DELETED",
+        "Auditor Client Library (Kotlin / JVM 11::Element Filter\\n(AuditEventElementFilter",
+        "Auditor Client Library (Kotlin / JVM 11::Event Publisher Abstraction\\n(EventPublisher interface",
+        "Auditor Client Library (Kotlin / JVM 11::Log Provider Abstraction\\n(LogProvider interface",
+        "Infrastructure / Plugin Layer::Custom Element Filter\\n(AuditEventElementFilter impl",
+        "Infrastructure / Plugin Layer::Kafka Event Publisher\\n(Default EventPublisher impl",
+        "Infrastructure / Plugin Layer::Logger Implementation\\n(LogProvider impl"
+      ],
+      "match_type": "3:N",
+      "is_boundary_correct": true,
+      "reasoning": "The three GT client nodes are effectively the integrating applications that consume the auditor library. The predicted diagram includes the application layer and the library/plugin abstractions involved in those clients. The higher-level boundary attribution is consistent with a client-library architecture, though the GT’s three separate client instances are collapsed into one integrating application node."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Databases / Filestores\\nElastic, Hadoop, etc.",
+    "Global::auditor-v1 app\\nserver"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::External Systems",
+    "Global::Infrastructure / Plugin Layer",
+    "Global::JVM Application Layer",
+    "External Systems::Downstream Consumer\\n(deserializes AuditEvent JSON",
+    "External Systems::Kafka Topic\\n(Audit Event Stream",
+    "Global::Auditor Client Library (Kotlin / JVM 11",
+    "Auditor Client Library (Kotlin / JVM 11::Audit Engine\\n(Object Diff / Change Detection",
+    "Auditor Client Library (Kotlin / JVM 11::AuditEvent Builder\\n(CREATED / UPDATED / DELETED",
+    "Auditor Client Library (Kotlin / JVM 11::Auditing API\\n(accept oldObject, newObject,\\nAuditorEventConfig",
+    "Auditor Client Library (Kotlin / JVM 11::Element Filter\\n(AuditEventElementFilter",
+    "Auditor Client Library (Kotlin / JVM 11::Event Publisher Abstraction\\n(EventPublisher interface",
+    "Auditor Client Library (Kotlin / JVM 11::Log Provider Abstraction\\n(LogProvider interface",
+    "Infrastructure / Plugin Layer::Custom Element Filter\\n(AuditEventElementFilter impl",
+    "Infrastructure / Plugin Layer::Kafka Event Publisher\\n(Default EventPublisher impl",
+    "Infrastructure / Plugin Layer::Logger Implementation\\n(LogProvider impl",
+    "JVM Application Layer::Integrating Application"
+  ]
+}

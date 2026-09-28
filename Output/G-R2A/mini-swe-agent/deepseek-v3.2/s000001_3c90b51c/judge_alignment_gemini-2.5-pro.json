@@ -1,0 +1,151 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Tally"
+      ],
+      "predicted_nodes": [
+        "Core Processing Layer::Tally Management::Tally Data Model",
+        "Core Processing Layer::Tally Management::Protected Tally View",
+        "Core Processing Layer::Tally Management::Tally XML Loader",
+        "Data Storage::Input Data::Tally Data",
+        "Data Storage::Input Data::Candidate Vote Counts"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's single 'Tally' data model node is correctly expanded by the AI into the model itself, its XML loading function (FR-008), the contract-specific 'Protected Tally View' (FR-001B), and its constituent data parts. The AI's boundary attribution to 'Core Processing Layer' and 'Data Storage' is a reasonable logical grouping for these components."
+    },
+    {
+      "gt_nodes": [
+        "Global::Result"
+      ],
+      "predicted_nodes": [
+        "Data Storage::Output Data::Allocation Results",
+        "Data Storage::Output Data::Result Objects"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'Result' data model is matched to two semantically equivalent nodes from the AI. The AI's 'Data Storage::Output Data' boundary is a logical and acceptable grouping for output data types."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::Seat Allocation Method"
+      ],
+      "predicted_nodes": [
+        "Allocation Methods::Equal Proportions",
+        "Allocation Methods::Equal Proportions::Huntington-Hill",
+        "Allocation Methods::Highest Averages",
+        "Allocation Methods::Highest Averages::Danish",
+        "Allocation Methods::Highest Averages::Imperiali",
+        "Allocation Methods::Highest Averages::Sainte-Lague/Webster",
+        "Allocation Methods::Largest Remainder",
+        "Allocation Methods::Largest Remainder::Droop",
+        "Allocation Methods::Largest Remainder::Hare",
+        "Allocation Methods::Largest Remainder::Imperiali",
+        "Allocation Methods::Majority Methods",
+        "Allocation Methods::Majority Methods::Absolute Majority",
+        "Allocation Methods::Majority Methods::Qualified Majority",
+        "Allocation Methods::Majority Methods::Simple Majority",
+        "Allocation Methods::Ranked Methods",
+        "Allocation Methods::Ranked Methods::By Votes Ranking",
+        "Core Processing Layer::Allocation Engine::Allocation Method Contract",
+        "Core Processing Layer::Allocation Engine::Method Registry"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's abstract 'Seat Allocation Method' node is correctly and extensively decomposed by the AI into all specific electoral methods listed in the PRD (FR-003), the 'Allocation Method Contract' (FR-001B), and a 'Method Registry'. The AI's architectural choice to separate method implementations into their own boundary is superior to the GT's approach of treating it as simple configuration."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::Parameters"
+      ],
+      "predicted_nodes": [
+        "Data Storage::Configuration Data::Method Parameters",
+        "Data Storage::Configuration Data::Processor Properties"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly splits the generic 'Parameters' node into more specific types ('Method Parameters' and 'Processor Properties'), as implied by the PRD (FR-004, FR-011). The 'Data Storage::Configuration Data' boundary is a semantically equivalent grouping."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::ResultDecorators"
+      ],
+      "predicted_nodes": [
+        "Core Processing Layer::Decoration Module::Result Decorator Interface",
+        "Core Processing Layer::Decoration Module::Built-in Decorators",
+        "External Interfaces::Java API::Result Decoration API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly decomposes the 'ResultDecorators' concept from a mere configuration item into its core components: the external API, the internal interface/contract, and potential built-in implementations. Placing these within 'Core Processing Layer' and 'External Interfaces' is a more accurate architectural representation."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::TallyFilters"
+      ],
+      "predicted_nodes": [
+        "Core Processing Layer::Filtering Module::Tally Filter Interface",
+        "Core Processing Layer::Filtering Module::Built-in Filters",
+        "External Interfaces::Java API::Tally Filtering API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Similar to decorators, the AI correctly expands the 'TallyFilters' concept into its architectural components: the external API, the internal contract, and implementations. The boundary placement is architecturally sound."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::TieBreaker"
+      ],
+      "predicted_nodes": [
+        "Core Processing Layer::Allocation Engine::Tie-breaking Rules"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are semantically equivalent. The AI correctly places the tie-breaking logic within the 'Allocation Engine', which is a more precise location than the GT's generic 'Configuration' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Processor::Process"
+      ],
+      "predicted_nodes": [
+        "Core Processing Layer::Allocation Processor::Workflow Orchestrator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI provides a more descriptive name, 'Workflow Orchestrator', for the GT's generic 'Process' node, accurately reflecting its function of orchestrating the configurable workflow (FR-011). The boundaries are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Processor::Filter"
+      ],
+      "predicted_nodes": [
+        "Core Processing Layer::Filtering Module"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'Filter' action node is correctly mapped to the AI's 'Filtering Module', which is the component responsible for executing this step in the process. The boundaries are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Processor::Decorate"
+      ],
+      "predicted_nodes": [
+        "Core Processing Layer::Decoration Module"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'Decorate' action node is correctly mapped to the AI's 'Decoration Module', the component responsible for this post-processing step. The boundaries are semantically equivalent."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Core Processing Layer::Allocation Processor::Processor Configuration Manager",
+    "External Interfaces::Command Line Interface (CLI::CLI Launcher",
+    "External Interfaces::Command Line Interface (CLI::CLI Output Handler",
+    "External Interfaces::Command Line Interface (CLI::CLI Parser",
+    "External Interfaces::External Systems::Command Line Shell",
+    "External Interfaces::External Systems::Java Runtime Environment",
+    "External Interfaces::Java API::Caller-facing Allocation API"
+  ]
+}

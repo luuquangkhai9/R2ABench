@@ -1,0 +1,95 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Service / Backend Layer"
+      ],
+      "predicted_nodes": [
+        "Review Artifact Interface::Checklist Viewer and Editor",
+        "Review Inspection Services::Completeness Review Module",
+        "Review Inspection Services::Extension Improvement Review Module",
+        "Review Inspection Services::Model Accuracy Review Module",
+        "Review Inspection Services::Understandability Review Module",
+        "Review Recording Services::Problem Report Recorder",
+        "Review Recording Services::Review Metadata Recorder",
+        "Review Recording Services::Scoring Engine"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted nodes collectively represent the backend/service responsibilities of the review artifact, but they are placed under multiple more specific service boundaries rather than the GT's generic backend layer. This is not a severe context error, but the boundary attribution is not a strict match to the manual design."
+    },
+    {
+      "gt_nodes": [
+        "Global::Storage / Database Layer"
+      ],
+      "predicted_nodes": [
+        "Data Storage::Checklist Items Store",
+        "Data Storage::Problem Report Store",
+        "Data Storage::Review Metadata Store",
+        "Data Storage::Review Purpose Store",
+        "Data Storage::Score Record Store"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These predicted nodes are a reasonable decomposition of the GT storage/database layer into separate data stores. The boundary is semantically consistent with the storage layer."
+    },
+    {
+      "gt_nodes": [
+        "Storage / Database Layer::MySQL Database",
+        "Storage / Database Layer::Elasticsearch",
+        "Storage / Database Layer::Redis Cache"
+      ],
+      "predicted_nodes": [
+        "Data Storage::Checklist Items Store",
+        "Data Storage::Problem Report Store",
+        "Data Storage::Review Metadata Store",
+        "Data Storage::Review Purpose Store",
+        "Data Storage::Score Record Store"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT design includes general persistence technologies, while the AI expands this into logical stores. Although the technologies are not explicitly reproduced, the predicted nodes are functionally equivalent storage components and remain within an appropriate data/storage boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Client Layer"
+      ],
+      "predicted_nodes": [
+        "Review Artifact Interface::Checklist Viewer and Editor"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The review checklist viewer/editor is the client-facing artifact and matches the GT client layer conceptually. The more specific UI boundary is acceptable."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Client Layer::Client Terminal",
+    "Client Layer::Cloud DNS",
+    "Global::Network / Gateway Layer",
+    "Network / Gateway Layer::Machine 01",
+    "Network / Gateway Layer::Machine 01::LVS - Linux Virtual Server",
+    "Network / Gateway Layer::Machine 01::Nginx",
+    "Network / Gateway Layer::Machine 02",
+    "Network / Gateway Layer::Machine 02::LVS - Linux Virtual Server",
+    "Network / Gateway Layer::Machine 02::Nginx",
+    "Network / Gateway Layer::Machine 03",
+    "Network / Gateway Layer::Machine 03::LVS - Linux Virtual Server",
+    "Network / Gateway Layer::Machine 03::Nginx",
+    "Service / Backend Layer::Back-office Management",
+    "Service / Backend Layer::Django Service Clusters",
+    "Service / Backend Layer::Literature Service",
+    "Service / Backend Layer::Socializing Service",
+    "Service / Backend Layer::User Information Service"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Standards and References::Business Specifications",
+    "External Standards and References::Documentation Norms",
+    "External Standards and References::Industry Standards",
+    "External Standards and References::Product Specifications",
+    "Global::Source Requirements Document",
+    "Review Inspection Services::Completeness Review Module",
+    "Review Inspection Services::Extension Improvement Review Module",
+    "Review Inspection Services::Model Accuracy Review Module",
+    "Review Inspection Services::Understandability Review Module"
+  ]
+}

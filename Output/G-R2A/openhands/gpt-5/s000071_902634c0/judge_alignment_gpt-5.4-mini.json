@@ -1,0 +1,123 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "ClearML Server::Backend Service API"
+      ],
+      "predicted_nodes": [
+        "ClearML Server::Backend Services::API Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the ClearML backend API entry point; the predicted node is a semantically equivalent decomposition/name variant within the same server boundary."
+    },
+    {
+      "gt_nodes": [
+        "ClearML Server::ML Ops::Execution Queue"
+      ],
+      "predicted_nodes": [
+        "ClearML Server::Backend Services::Execution Queue"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The execution queue component is the same functional concept. The boundary name differs slightly, but it remains within the ClearML server/backend domain and is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::ClearML Agent\\nService Pod"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Service Pod Mode",
+        "Kubernetes Cluster::Service Pod Mode::Pod: clearml-agent",
+        "Kubernetes Cluster::Service Pod Mode::Pod: clearml-agent::ClearML Agent"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT service-pod concept is split into mode, pod, and agent subnodes. This is a valid refinement, and the Kubernetes cluster/service-pod boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Kubernetes Glue"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Kubernetes Glue Mode",
+        "Kubernetes Cluster::Kubernetes Glue Mode::K8s Glue Adapter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Kubernetes Glue component is represented as a mode plus adapter. This is a reasonable decomposition with correct Kubernetes-related placement."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Kubernetes Job"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Kubernetes Glue Mode::Kubernetes Job(s"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the Kubernetes Job created/executed as part of the Glue flow. The boundary is correct within Kubernetes Cluster."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Mapped Docker Socket\\nSibling Containers"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Service Pod Mode::Pod: clearml-agent::Docker Socket (/var/run/docker.sock"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node captures the same Docker socket mapping used for sibling container management. The boundary is semantically correct within service-pod mode."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Pod Execution Environment\\nand Docker User Code"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Service Pod Mode::Pod: clearml-agent::ClearML Agent"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The agent node is functionally responsible for setting up and running the pod execution environment and user code. The placement under the service-pod pod is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::YAML Job Template"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Kubernetes Glue Mode::K8s Glue Adapter"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted Glue adapter implicitly consumes the YAML template for job preparation. Although the template is not explicitly named, the functional relationship is preserved and the Kubernetes Glue boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Data Scientist Environment::ClearML Snippet"
+      ],
+      "predicted_nodes": [
+        "ClearML Server::Backend Services::API Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a client-side/snippet component in the data scientist environment, while the predicted node is a backend server component. This is a severe boundary mismatch."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "ClearML Server::Experiment Manager::Collaboration",
+    "ClearML Server::Experiment Manager::Data Tracking",
+    "ClearML Server::Experiment Manager::Versioning",
+    "ClearML Server::Experiment Manager::Visualization",
+    "ClearML Server::ML Ops::Monitoring",
+    "ClearML Server::ML Ops::Orchestration",
+    "Data Scientist Environment::Python ML / DL Code"
+  ],
+  "unmatched_predicted_nodes": [
+    "ClearML Server::Backend Services::Events Service v2.5",
+    "ClearML Server::Backend Services::Models Service v2.4",
+    "Global::ClearML Server",
+    "Global::Kubernetes Cluster",
+    "Kubernetes Cluster::Service Pod Mode::Pod: clearml-agent::Backend Client",
+    "Kubernetes Cluster::Service Pod Mode::Pod: clearml-agent::Worker Telemetry"
+  ]
+}

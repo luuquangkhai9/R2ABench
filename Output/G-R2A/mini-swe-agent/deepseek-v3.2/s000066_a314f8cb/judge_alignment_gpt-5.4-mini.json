@@ -1,0 +1,97 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Browser Clients::Client Browser\nPlayer 1",
+        "Browser Clients::Client Browser\nPlayer 2",
+        "Browser Clients::Client Browser\nPlayer 3"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Browser Client"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has three duplicated browser client nodes representing multiple players/instances, while the predicted diagram aggregates them into a single browser client node. The client-side boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\nErlang"
+      ],
+      "predicted_nodes": [
+        "Game Server Layer::Master Game Server",
+        "Game Server Layer::Master Game Server::Erlang/OTP Server"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The master server component is preserved and refined into a more explicit internal node. The predicted boundary remains on the server side and is consistent with the GT master server cluster boundary."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Slave\nErlang"
+      ],
+      "predicted_nodes": [
+        "Game Server Layer::Replica Server",
+        "Game Server Layer::Replica Server::Erlang/OTP Replica"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT slave/replica server is split into a replica server boundary and its implementation node. This is semantically aligned with the fault-tolerant replica role in the GT."
+    },
+    {
+      "gt_nodes": [
+        "Global::DNS"
+      ],
+      "predicted_nodes": [
+        "Global::Internet"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node is too broad and does not specifically represent DNS/load balancing. This is a semantic mismatch, not an equivalent architectural component."
+    },
+    {
+      "gt_nodes": [
+        "Global::Erlang / OTP Game Server Cluster"
+      ],
+      "predicted_nodes": [
+        "Game Server Layer::Master Game Server",
+        "Game Server Layer::Replica Server"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node represents the overall game server cluster, while the prediction splits it into master and replica server boundaries. Although related, the predicted decomposition loses the original cluster-level boundary and introduces a lower-level architectural focus, so the boundary attribution is not strictly equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Static Web Tier::Web Server\nGame assets, HTML, CSS, JS"
+      ],
+      "predicted_nodes": [
+        "Web Server Layer::Static Asset Server",
+        "Web Server Layer::Static Asset Server::HTTP Server",
+        "Web Server Layer::Static Asset Server::Static File Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The static web server serving HTML/CSS/JS assets is correctly represented by the static asset server and its internal HTTP/static file handler nodes. The boundary is semantically consistent with the GT static web tier."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Client Layer::Browser Client::Game State Manager",
+    "Client Layer::Browser Client::Room Manager",
+    "Client Layer::Browser Client::Three.js Game Engine",
+    "Client Layer::Browser Client::WebSocket Client",
+    "Data Layer::Game State Database",
+    "Data Layer::Game State Database::Game State",
+    "Data Layer::Game State Database::Player Sessions",
+    "Data Layer::Game State Database::Room Data",
+    "Data Layer::Session Store",
+    "Data Layer::Session Store::Connection States",
+    "Data Layer::Session Store::Player Contexts",
+    "Game Server Layer::Master Game Server::Game Logic Engine",
+    "Game Server Layer::Master Game Server::Player Session Manager",
+    "Game Server Layer::Master Game Server::Room Management",
+    "Game Server Layer::Master Game Server::WebSocket Handler",
+    "Game Server Layer::Replica Server::Fault Tolerance Handler",
+    "Game Server Layer::Replica Server::State Synchronization"
+  ]
+}

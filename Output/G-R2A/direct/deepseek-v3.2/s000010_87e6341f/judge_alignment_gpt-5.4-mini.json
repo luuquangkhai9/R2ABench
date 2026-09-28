@@ -1,0 +1,83 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Flutter-based app::Android",
+        "Flutter-based app::Dart",
+        "Flutter-based app::MacOS",
+        "Flutter-based app::Web",
+        "Flutter-based app::iOS"
+      ],
+      "predicted_nodes": [
+        "Client Tier::Flutter/Dart Client\n(Android, iOS, Web, macOS"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates the Flutter/Dart client by target platform and Dart/client code, while the AI aggregates them into one client node. This is a valid merge and the client tier boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Hosted in Azure Kubernetes Service"
+      ],
+      "predicted_nodes": [
+        "Deployment & Runtime::Azure Kubernetes\nService (AKS"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the AKS hosting/deployment environment. The naming differs, but the boundary attribution is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Hosted in Azure Kubernetes Service::Docker container",
+        "Hosted in Azure Kubernetes Service::Docker container::Recipes Server\n(gRPC Server)\nGolang"
+      ],
+      "predicted_nodes": [
+        "Deployment & Runtime::Docker Runtime"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT models the Docker-hosted server stack with a container and the contained Go gRPC server. The predicted diagram collapses this into a Docker runtime node, which is a reasonable aggregation and stays within the deployment/runtime boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::gRPC Gateway\n(HTTP-gRPC Proxy)\nGolang"
+      ],
+      "predicted_nodes": [
+        "Server Tier::gRPC-Gateway\nMiddleware"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the gRPC-Gateway middleware translating HTTP to gRPC. The naming and boundary are aligned."
+    },
+    {
+      "gt_nodes": [
+        "Global::Test Client 1\nNodeJS",
+        "Global::Test Client 2\nGolang",
+        "Global::Postman"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT includes standalone API test/consumer tools used to exercise the gateway. The predicted architecture omits these tools entirely rather than representing them as separate nodes."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Deployment & Runtime::Local Kubernetes\nCluster",
+        "Server Tier::Go gRPC Server"
+      ],
+      "match_type": "unmatched_predicted",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted Local Kubernetes Cluster and Go gRPC Server do correspond to GT concepts, but they are not directly matched here because the GT list does not contain a separately named local Kubernetes cluster node, and the Go gRPC server is already covered only as part of the Docker-hosted server stack. These predicted nodes are therefore treated as unmatched additions at the diagram-node level."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Postman",
+    "Global::Test Client 1\nNodeJS",
+    "Global::Test Client 2\nGolang"
+  ],
+  "unmatched_predicted_nodes": [
+    "Deployment & Runtime::Local Kubernetes\nCluster",
+    "Server Tier::Go gRPC Server"
+  ]
+}

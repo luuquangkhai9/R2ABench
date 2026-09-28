@@ -1,0 +1,190 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Browser Extension::React UI\\nExtension"
+      ],
+      "predicted_nodes": [
+        "Client Tier::Chrome Extension"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the browser extension client UI surface; the naming differs, but the architectural boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Browser Extension::TypeScript\\nExtension code"
+      ],
+      "predicted_nodes": [
+        "Client Tier::Chrome Extension"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The extension implementation code is consolidated into the Chrome Extension client boundary, which is a reasonable semantic equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Website::React UI\\nBeeGreen site"
+      ],
+      "predicted_nodes": [
+        "Client Tier::Website Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the website client UI; the boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Website::TypeScript\\nWebsite code"
+      ],
+      "predicted_nodes": [
+        "Client Tier::Website Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The website implementation code is represented within the website client boundary, which is semantically acceptable."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Cloudant\\nUser and API data"
+      ],
+      "predicted_nodes": [
+        "Persistent Storage::Users Collection"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Cloudant is the persistent data store in the GT, and the Users Collection is a plausible storage-level decomposition of the same data persistence role."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Express App"
+      ],
+      "predicted_nodes": [
+        "Backend Tier::Backend API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The Express app corresponds to the backend application layer; the predicted backend API boundary is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::LoopBack Generated Code"
+      ],
+      "predicted_nodes": [
+        "Backend Tier::Backend API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "LoopBack generated code is part of the backend API implementation, so the broader backend API boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Node.js Runtime"
+      ],
+      "predicted_nodes": [
+        "Backend Tier::Backend API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The Node.js runtime is an execution platform/infrastructure layer, not the backend API component itself; placing it under Backend API confuses runtime and application boundaries."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Watson Studio"
+      ],
+      "predicted_nodes": [
+        "Global::Data Processing / Scoring Services"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Watson Studio is used for data processing/modeling support in the GT; the predicted data processing/scoring services boundary is a reasonable semantic equivalent."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::CSV File\\nExport / training data"
+      ],
+      "predicted_nodes": [
+        "Global::Data Processing / Scoring Services"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The CSV export/training data belongs to the data-processing support area, and the predicted global data processing/scoring boundary is sufficiently aligned."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Object Storage"
+      ],
+      "predicted_nodes": [
+        "Global::Persistent Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Object Storage is a persistent storage service, and the predicted persistent storage boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::User\\nShopping at online stores",
+        "Global::User\\nVisiting BeeGreen site"
+      ],
+      "predicted_nodes": [
+        "Client Tier::Chrome Extension",
+        "Client Tier::Website Client"
+      ],
+      "match_type": "2:2",
+      "is_boundary_correct": true,
+      "reasoning": "The GT user actors map to the two client entry points in the predicted architecture; this is a valid aggregation of end-user interaction surfaces."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Cloudant\\nUser and API data"
+      ],
+      "predicted_nodes": [
+        "Persistent Storage::Users Collection",
+        "Persistent Storage::InventoryItems Collection"
+      ],
+      "match_type": "1:2",
+      "is_boundary_correct": true,
+      "reasoning": "The GT storage node is split into separate persisted collections. The boundary remains consistent as persistent storage, and the split is structurally reasonable."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Express App",
+        "IBM Cloud::LoopBack Generated Code",
+        "IBM Cloud::Node.js Runtime"
+      ],
+      "predicted_nodes": [
+        "Backend Tier::Backend API",
+        "Backend Tier::Backend API::GET /ping\\nPing",
+        "Backend Tier::Backend API::GET /users/{id}\\nGet User by ID",
+        "Backend Tier::Backend API::GET /users\\nList Users",
+        "Backend Tier::Backend API::PATCH /users\\nBulk Update Users",
+        "Backend Tier::Backend API::POST /users\\nCreate User",
+        "Backend Tier::Backend API::Ping API",
+        "Backend Tier::Backend API::UserRepository",
+        "Backend Tier::Backend API::Users API"
+      ],
+      "match_type": "3:8",
+      "is_boundary_correct": false,
+      "reasoning": "The backend implementation stack is over-split into API endpoints and repository internals. While the backend area is broadly correct, including a runtime as API and mixing platform, application, controller, and repository nodes indicates boundary granularity mismatch and some category confusion."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "IBM Cloud::Cloudant\\nUser and API data"
+  ],
+  "unmatched_predicted_nodes": [
+    "Backend Tier::Backend API",
+    "Backend Tier::Backend API::GET /ping\\nPing",
+    "Backend Tier::Backend API::GET /users/{id}\\nGet User by ID",
+    "Backend Tier::Backend API::GET /users\\nList Users",
+    "Backend Tier::Backend API::PATCH /users\\nBulk Update Users",
+    "Backend Tier::Backend API::POST /users\\nCreate User",
+    "Backend Tier::Backend API::Ping API",
+    "Backend Tier::Backend API::UserRepository",
+    "Backend Tier::Backend API::Users API",
+    "Global::Backend Tier",
+    "Global::Data Processing / Scoring Services",
+    "Global::Persistent Storage",
+    "Persistent Storage::InventoryItems Collection",
+    "Persistent Storage::Users Collection"
+  ]
+}

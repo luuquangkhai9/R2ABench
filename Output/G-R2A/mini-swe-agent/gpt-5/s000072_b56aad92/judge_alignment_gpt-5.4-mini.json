@@ -1,0 +1,88 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Drivers and Kernels::OS Kernel\\nMemory Hooks"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem::Flow Control State"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node refers to OS-kernel memory-hook functionality, while the predicted node is a communication-layer flow-control concept. They are not semantically equivalent, so this is not a valid match."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Message Passing API\\nTag Matching, Rendezvous"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem::Send State Machine",
+        "Communication Subsystem::Packet Buffer",
+        "Communication Subsystem::Pinned User Data",
+        "Communication Subsystem::Network Send Descriptor",
+        "Communication Subsystem::Flow Control State"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted nodes collectively describe send-path behavior such as flow control, packet buffering, and descriptor handling, which partially overlaps with rendezvous/message-passing semantics in the GT. However, the GT node is specifically the UCX message-passing API layer, while the predicted nodes are decomposed into a broader communication-subsystem design and include elements that do not align cleanly with the UCX boundary. This is a boundary/context mismatch."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCS Services\\nCommon Utilities::Memory Management"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem::Pinned User Data"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Pinned user data is a send-path data concept, not a common memory-management utility node. The semantics do not match closely enough for a valid equivalence."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Drivers and Kernels::Cray Driver",
+    "Drivers and Kernels::OS Kernel\\nEthernet",
+    "Drivers and Kernels::OS Kernel\\nHost Memory",
+    "Drivers and Kernels::OS Kernel\\nRDMA Verbs Driver",
+    "Drivers and Kernels::ROCm / CUDA",
+    "Global::Applications\\nHPC, AI, ML, Big Data",
+    "Global::Hardware",
+    "Programming Models and Frameworks::AI / ML Frameworks\\nTensorFlow, Burst Buffer",
+    "Programming Models and Frameworks::MPI\\nMPICH, Open-MPI",
+    "Programming Models and Frameworks::PGAS / SHMEM\\nOpenSHMEM, UPC, CAF, X10, Chapel",
+    "Programming Models and Frameworks::Task Runtimes\\nParsec, OCR, Legion",
+    "UCX::UCM Memory Services::Memory Hooks",
+    "UCX::UCP Protocols\\nHigh Level API::Cross-Transport Multi-Rail",
+    "UCX::UCP Protocols\\nHigh Level API::Fragmentation",
+    "UCX::UCP Protocols\\nHigh Level API::I/O API\\nStream",
+    "UCX::UCP Protocols\\nHigh Level API::PGAS API\\nRMAs, Atomics",
+    "UCX::UCP Protocols\\nHigh Level API::Software Protocols",
+    "UCX::UCP Protocols\\nHigh Level API::Task Based API\\nActive Messages",
+    "UCX::UCP Protocols\\nHigh Level API::Transport Selection",
+    "UCX::UCS Services\\nCommon Utilities::Data Structures",
+    "UCX::UCS Services\\nCommon Utilities::Utilities",
+    "UCX::UCT Hardware Transports\\nLow Level API::DCT",
+    "UCX::UCT Hardware Transports\\nLow Level API::Ethernet Transport\\nTCP/IP Sockets",
+    "UCX::UCT Hardware Transports\\nLow Level API::GPU Transport\\nNVIDIA CUDA, AMD ROCm",
+    "UCX::UCT Hardware Transports\\nLow Level API::Gemini / Aries Transport\\nGNI",
+    "UCX::UCT Hardware Transports\\nLow Level API::Intra-node Host Memory\\nSYSV, POSIX, KNEM, CMA, XPMEM",
+    "UCX::UCT Hardware Transports\\nLow Level API::RC",
+    "UCX::UCT Hardware Transports\\nLow Level API::RDMA Verbs Transport\\nInfiniBand, ROCE, OPA",
+    "UCX::UCT Hardware Transports\\nLow Level API::UD"
+  ],
+  "unmatched_predicted_nodes": [
+    "Build & Verification (Manual::Autogen/Configure/Make",
+    "Build & Verification (Manual::Embedded hwloc Verification",
+    "Build & Verification (Manual::run-embedded-tests.sh",
+    "Communication Subsystem::Connection Manager",
+    "Communication Subsystem::Initialization/Finalization",
+    "Communication Subsystem::One-to-Many Transfer",
+    "Communication Subsystem::Progress Engine",
+    "External Systems & Libraries::Network Device",
+    "External Systems & Libraries::libibverbs >= 1.1.8",
+    "External Systems & Libraries::librdmacm >= 1.0.16",
+    "Transport Layer (CH4 Netmod::OFI/Libfabric Module (embedded",
+    "Transport Layer (CH4 Netmod::Transport Abstraction",
+    "Transport Layer (CH4 Netmod::UCX Integration (optional",
+    "Transport Layer (CH4 Netmod::Verbs Provider (optional"
+  ]
+}

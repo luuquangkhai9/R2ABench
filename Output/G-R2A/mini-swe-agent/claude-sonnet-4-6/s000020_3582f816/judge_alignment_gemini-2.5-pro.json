@@ -1,0 +1,150 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "数据可视化::Web UI"
+      ],
+      "predicted_nodes": [
+        "Browser Environment::MyEMS Admin Application",
+        "Browser Environment::MyEMS Admin Application::API Base Path Resolver",
+        "Browser Environment::MyEMS Admin Application::Category Settings Module",
+        "Browser Environment::MyEMS Admin Application::Client-Side Router",
+        "Browser Environment::MyEMS Admin Application::Contact Settings Module\\n(/contact",
+        "Browser Environment::MyEMS Admin Application::Lazy Module Loader",
+        "Browser Environment::MyEMS Admin Application::Tariff Settings Module",
+        "Browser Environment::MyEMS Admin Application::User Settings Module\\n(/user"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's generic 'Web UI' node is correctly expanded by the AI into the specific 'MyEMS Admin Application' and its functional modules, as detailed in the PRD. The GT boundary '数据可视化' (Data Visualization) is semantically equivalent to the AI's 'Browser Environment' for a web client."
+    },
+    {
+      "gt_nodes": [
+        "数据分析服务::API"
+      ],
+      "predicted_nodes": [
+        "Deployment Layer::MyEMS API Service (Python)"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT 'API' node functionally matches the core 'MyEMS API Service' predicted by the AI. The AI's 'Deployment Layer' is a valid architectural layer for the GT's functional '数据分析服务' (Data Analysis Service) boundary."
+    },
+    {
+      "gt_nodes": [
+        "安全::API Access"
+      ],
+      "predicted_nodes": [
+        "Deployment Layer::MyEMS API Service (Python)::REST API Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'API Access' node represents the security and access control aspect, which is implemented by the 'REST API Handler' in the AI's model. The boundaries ('安全' vs. 'Deployment Layer') represent different but valid architectural viewpoints (functional vs. physical) for the same component and are not a mismatch."
+    },
+    {
+      "gt_nodes": [
+        "数据分析服务::Excel导出"
+      ],
+      "predicted_nodes": [
+        "Deployment Layer::MyEMS API Service (Python)::Spreadsheet/Image Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct functional match between the GT's 'Excel Export' capability and the AI's 'Spreadsheet/Image Handler' component from the PRD. The boundary attribution is consistent with the parent API service match."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::数据库集群"
+      ],
+      "predicted_nodes": [
+        "Deployment Layer::MySQL Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's generic 'Database Cluster' matches the AI's specific 'MySQL Database' as described in the PRD. The scale is different (cluster vs. instance), but the function is identical. The GT's '容器化服务器集群' (Containerized Server Cluster) boundary is semantically equivalent to the AI's 'Deployment Layer' as a location for services."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::Docker Engine"
+      ],
+      "predicted_nodes": [
+        "Deployment Infrastructure::Docker Container\\n(Docker-based Install)"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match of the containerization technology. The GT boundary '容器化服务器集群' is equivalent to the AI's 'Deployment Infrastructure' layer."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::Web Server"
+      ],
+      "predicted_nodes": [
+        "Deployment Layer::Reverse Proxy (e.g., Nginx)\\n[Optional",
+        "Deployment Layer::Reverse Proxy (e.g., Nginx)\\n[Optional::Route /api/ Traffic"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's generic 'Web Server' is represented by the more specific 'Reverse Proxy' and its routing function, which is a common role for a web server in this architecture. The boundaries are semantically equivalent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "其它数据源::BMS",
+    "其它数据源::ERP",
+    "其它数据源::MES",
+    "其它数据源::天气",
+    "其它数据源::手工录入",
+    "安全::HTTPS",
+    "安全::用户权限",
+    "容器化服务器集群::...",
+    "容器化服务器集群::Kafka Broker",
+    "容器化服务器集群::MQTT Broker",
+    "容器化服务器集群::云端Kubernetes集群",
+    "容器化服务器集群::本地Kubernetes集群",
+    "容器化服务器集群::虚拟机",
+    "容器化服务器集群::裸金属服务器",
+    "数据分析服务::...",
+    "数据分析服务::FDD规则引擎",
+    "数据分析服务::邮件/短信/微信",
+    "数据分析服务::高级报表引擎",
+    "数据可视化::...",
+    "数据可视化::BI",
+    "数据可视化::大屏",
+    "数据可视化::小程序",
+    "数据可视化::手机应用",
+    "数据计算服务::...",
+    "数据计算服务::成本数据",
+    "数据计算服务::数据清洗",
+    "数据计算服务::数据规范化",
+    "数据计算服务::碳排放数据",
+    "数据计算服务::租户数据",
+    "数据计算服务::空间数据",
+    "数据计算服务::组合设备数据",
+    "数据计算服务::计量表数据",
+    "数据计算服务::设备数据",
+    "数据计算服务::车间数据",
+    "数据计算服务::门店数据",
+    "数据采集服务::...",
+    "数据采集服务::BACnet",
+    "数据采集服务::EtherNet/IP",
+    "数据采集服务::Kafka",
+    "数据采集服务::MQTT",
+    "数据采集服务::Modbus",
+    "数据采集服务::OPC UA",
+    "数据采集服务::S7",
+    "硬件网关::数据采集",
+    "硬件网关::设备控制",
+    "第三方应用::...",
+    "第三方应用::AR",
+    "第三方应用::BMS",
+    "第三方应用::ERP"
+  ],
+  "unmatched_predicted_nodes": [
+    "Deployment Infrastructure::Linux/Windows\\nQuick-Run Environment",
+    "Deployment Infrastructure::Python Runtime\\n(Dependencies",
+    "Deployment Layer::MyEMS API Service (Python)::CORS Support",
+    "Deployment Layer::MyEMS API Service (Python)::MySQL Connector",
+    "Deployment Layer::MyEMS API Service (Python)::WSGI Server",
+    "Global::Browser Environment",
+    "Global::Deployment Infrastructure",
+    "Global::Deployment Layer"
+  ]
+}

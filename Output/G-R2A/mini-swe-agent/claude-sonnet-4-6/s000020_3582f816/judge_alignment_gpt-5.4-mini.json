@@ -1,0 +1,186 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "容器化服务器集群::Docker Engine"
+      ],
+      "predicted_nodes": [
+        "Deployment Infrastructure::Docker Container\\n(Docker-based Install"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both refer to Docker-related deployment/containerization capability, but the GT node is a specific infrastructure component (Docker Engine) while the prediction places it as a container install environment, which is a boundary/context shift."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::数据库集群"
+      ],
+      "predicted_nodes": [
+        "Deployment Layer::MySQL Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT shows a database cluster and the prediction specifies MySQL Database; this is semantically equivalent for the checked PRD because the API may rely on MySQL-compatible database configuration. The deployment/database boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::Web Server"
+      ],
+      "predicted_nodes": [
+        "Deployment Layer::Reverse Proxy (e.g., Nginx)\\n[Optional",
+        "Deployment Layer::Reverse Proxy (e.g., Nginx)\\n[Optional::Route /api/ Traffic"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT web server corresponds to the optional reverse proxy/web-serving layer used to route /api/ traffic. Splitting into the reverse proxy node and its /api/ routing child is acceptable and stays within the same deployment boundary."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::云端Kubernetes集群"
+      ],
+      "predicted_nodes": [
+        "Global::Deployment Infrastructure"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The prediction is broader and less specific, but it still captures the deployment infrastructure context that includes Kubernetes-based hosting. This is a semantically acceptable abstraction."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::本地Kubernetes集群"
+      ],
+      "predicted_nodes": [
+        "Global::Deployment Infrastructure"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same as above: the predicted node is a broader deployment infrastructure abstraction covering local Kubernetes deployment."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::虚拟机"
+      ],
+      "predicted_nodes": [
+        "Global::Deployment Infrastructure"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted deployment infrastructure abstraction reasonably covers virtual machine deployment."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::裸金属服务器"
+      ],
+      "predicted_nodes": [
+        "Global::Deployment Infrastructure"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The prediction is a higher-level deployment infrastructure node, which can semantically include bare metal servers."
+    },
+    {
+      "gt_nodes": [
+        "数据分析服务::API"
+      ],
+      "predicted_nodes": [
+        "Deployment Layer::MyEMS API Service (Python",
+        "Deployment Layer::MyEMS API Service (Python::REST API Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT API node maps to the Python REST API service and its REST handler. The split into service and handler is consistent with the PRD's RESTful API service."
+    },
+    {
+      "gt_nodes": [
+        "数据分析服务::邮件/短信/微信"
+      ],
+      "predicted_nodes": [
+        "Deployment Layer::MyEMS API Service (Python"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a notification/integration service, while the prediction only provides the core API service. This is a functional mismatch rather than a boundary-equivalent match."
+    },
+    {
+      "gt_nodes": [
+        "第三方应用::AR"
+      ],
+      "predicted_nodes": [
+        "Browser Environment::MyEMS Admin Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted admin browser application is not semantically equivalent to third-party AR applications."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "其它数据源::BMS",
+    "其它数据源::ERP",
+    "其它数据源::MES",
+    "其它数据源::天气",
+    "其它数据源::手工录入",
+    "安全::API Access",
+    "安全::HTTPS",
+    "安全::用户权限",
+    "容器化服务器集群::Kafka Broker",
+    "容器化服务器集群::MQTT Broker",
+    "容器化服务器集群::云端Kubernetes集群",
+    "容器化服务器集群::本地Kubernetes集群",
+    "容器化服务器集群::虚拟机",
+    "容器化服务器集群::裸金属服务器",
+    "数据分析服务::Excel导出",
+    "数据分析服务::FDD规则引擎",
+    "数据分析服务::高级报表引擎",
+    "数据可视化::BI",
+    "数据可视化::Web UI",
+    "数据可视化::大屏",
+    "数据可视化::小程序",
+    "数据可视化::手机应用",
+    "数据计算服务::成本数据",
+    "数据计算服务::数据清洗",
+    "数据计算服务::数据规范化",
+    "数据计算服务::碳排放数据",
+    "数据计算服务::租户数据",
+    "数据计算服务::空间数据",
+    "数据计算服务::组合设备数据",
+    "数据计算服务::计量表数据",
+    "数据计算服务::设备数据",
+    "数据计算服务::车间数据",
+    "数据计算服务::门店数据",
+    "数据采集服务::BACnet",
+    "数据采集服务::EtherNet/IP",
+    "数据采集服务::Kafka",
+    "数据采集服务::MQTT",
+    "数据采集服务::Modbus",
+    "数据采集服务::OPC UA",
+    "数据采集服务::S7",
+    "硬件网关::数据采集",
+    "硬件网关::设备控制",
+    "第三方应用::BMS",
+    "第三方应用::ERP"
+  ],
+  "unmatched_predicted_nodes": [
+    "Browser Environment::MyEMS Admin Application::API Base Path Resolver",
+    "Browser Environment::MyEMS Admin Application::Category Settings Module",
+    "Browser Environment::MyEMS Admin Application::Client-Side Router",
+    "Browser Environment::MyEMS Admin Application::Contact Settings Module\\n(/contact",
+    "Browser Environment::MyEMS Admin Application::Lazy Module Loader",
+    "Browser Environment::MyEMS Admin Application::Tariff Settings Module",
+    "Browser Environment::MyEMS Admin Application::User Settings Module\\n(/user",
+    "Deployment Infrastructure::Docker Container\\n(Docker-based Install",
+    "Deployment Infrastructure::Linux/Windows\\nQuick-Run Environment",
+    "Deployment Infrastructure::Python Runtime\\n(Dependencies",
+    "Deployment Layer::MyEMS API Service (Python",
+    "Deployment Layer::MyEMS API Service (Python::CORS Support",
+    "Deployment Layer::MyEMS API Service (Python::MySQL Connector",
+    "Deployment Layer::MyEMS API Service (Python::REST API Handler",
+    "Deployment Layer::MyEMS API Service (Python::Spreadsheet/Image Handler",
+    "Deployment Layer::MyEMS API Service (Python::WSGI Server",
+    "Deployment Layer::MySQL Database",
+    "Deployment Layer::Reverse Proxy (e.g., Nginx)\\n[Optional",
+    "Deployment Layer::Reverse Proxy (e.g., Nginx)\\n[Optional::Route /api/ Traffic",
+    "Global::Browser Environment",
+    "Global::Deployment Infrastructure",
+    "Global::Deployment Layer"
+  ]
+}

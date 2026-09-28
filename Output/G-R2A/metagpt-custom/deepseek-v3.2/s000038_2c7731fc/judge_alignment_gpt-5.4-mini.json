@@ -1,0 +1,60 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Web3 application stack::Applications",
+        "Web2 application stack::Applications"
+      ],
+      "predicted_nodes": [
+        "External Systems::Redis-based Applications",
+        "External Systems::Redis Pub/Sub-style Applications"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": false,
+      "reasoning": "Both GT 'Applications' nodes represent client/application actors interacting with IceFireDB. The predicted nodes capture the same external application role, but they are over-specified as Redis-based / Redis Pub/Sub-style applications rather than the broader application boundary shown in the GT. This is a semantic match with acceptable granularity, but the boundary attribution is not strictly faithful to the manual design."
+    },
+    {
+      "gt_nodes": [
+        "Web3 application stack::IceFireDB",
+        "Web2 application stack::IceFireDB"
+      ],
+      "predicted_nodes": [
+        "Global::Pub/Sub Network",
+        "Global::Redis Agent Network",
+        "Pub/Sub Network::PubSub Service Node 1",
+        "Pub/Sub Network::PubSub Service Node 2",
+        "Pub/Sub Network::PubSub Service Node N",
+        "Redis Agent Network::Redis Proxy Agent 1",
+        "Redis Agent Network::Redis Proxy Agent 2",
+        "Redis Agent Network::Redis Proxy Agent N"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT 'IceFireDB' nodes denote the core product/system boundary. The predicted nodes decompose the system into runtime subcomponents and networks, which is directionally aligned, but they do not preserve the GT's top-level product boundary placement. This is a partial structural match, yet the boundary attribution is not equivalent to the manual diagram."
+    },
+    {
+      "gt_nodes": [
+        "Web3 application stack::Platform",
+        "Web2 application stack::Platform"
+      ],
+      "predicted_nodes": [
+        "Global::Peer Discovery & Routing\\n(Kademlia DHT / libp2p"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT 'Platform' nodes are generic platform/infrastructure layers, while the predicted peer-discovery node is a specific networking capability. They are not functionally equivalent at the same architectural level, so this is not a valid strict match."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Web2 application stack::BlockChain Database\\nTransactions, Contracts,\\nCertificates and Receipts",
+    "Web2 application stack::File System\\nLarge Files and Media",
+    "Web2 application stack::Processing\\nBusiness Logic",
+    "Web3 application stack::BlockChain Database\\nTransactions, Contracts,\\nCertificates and Receipts",
+    "Web3 application stack::Decentralized File System\\nLarge Files and Media",
+    "Web3 application stack::Decentralized Processing\\nBusiness Logic"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::Redis Storage\\n(standalone/cluster",
+    "Global::Peer Discovery & Routing\\n(Kademlia DHT / libp2p"
+  ]
+}

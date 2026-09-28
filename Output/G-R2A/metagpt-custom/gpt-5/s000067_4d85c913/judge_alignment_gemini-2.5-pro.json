@@ -1,0 +1,86 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::TraceLeft\nCLI and library tracer"
+      ],
+      "predicted_nodes": [
+        "CLI Layer::CLI Entry Point",
+        "CLI Layer::Event Registration Parser",
+        "CLI Layer::Trace Command",
+        "Userspace Library/Tracer Layer::TraceLeft Library",
+        "Userspace Library/Tracer Layer::Userspace Tracer",
+        "Userspace Library/Tracer Layer::Probe Loader/Installer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT abstracts the entire TraceLeft userspace CLI and library into a single node, while the predicted nodes decompose it into specific functional components across the CLI and Userspace Library layers."
+    },
+    {
+      "gt_nodes": [
+        "Event Handler eBPF Programs::Default Handler Probes",
+        "Event Handler eBPF Programs::Process Specific\nHandler Probes",
+        "Event Handler eBPF Programs::Handler Probe\nhandle_syscall_write"
+      ],
+      "predicted_nodes": [
+        "Linux OS Environment::Kernel eBPF Runtime Layer::Handler eBPF Programs"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Multiple specific handler probes in the GT are aggregated into a single 'Handler eBPF Programs' node by the AI. The boundary placement in the kernel eBPF runtime is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Perf Event Map\nshared event map"
+      ],
+      "predicted_nodes": [
+        "Linux OS Environment::Kernel eBPF Runtime Layer::Linux perf event channel"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The perf event map in the GT corresponds to the Linux perf event channel in the predicted list, serving as the event delivery mechanism."
+    },
+    {
+      "gt_nodes": [
+        "Global::Prog ID Map\npid to id",
+        "Main eBPF Program::Prog Map\npid to fd",
+        "Main eBPF Program::Prog Maps\nhandler mappings",
+        "Main eBPF Program::Ret Prog Map\npid to fd"
+      ],
+      "predicted_nodes": [
+        "Linux OS Environment::Kernel eBPF Runtime Layer::Handler Maps and Return-Program Maps"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT explicitly maps out various eBPF maps used for handler selection and mapping, which the AI correctly aggregates into a single 'Handler Maps and Return-Program Maps' node."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Kprobe / Kretprobe\nother traced calls",
+        "Main eBPF Program::Kprobe\nentry probe",
+        "Main eBPF Program::Kretprobe\nreturn probe"
+      ],
+      "predicted_nodes": [
+        "Linux OS Environment::Kernel eBPF Runtime Layer::Main eBPF Program",
+        "Linux OS Environment::Kernel eBPF Runtime Layer::kprobe/kretprobe"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates the Main eBPF program hooks into specific Kprobe and Kretprobe instances, which map correctly to the AI's Main eBPF Program and kprobe/kretprobe facility."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Linux Kernel Functions::inet_csk_accept",
+    "Linux Kernel Functions::sys_open",
+    "Linux Kernel Functions::sys_write"
+  ],
+  "unmatched_predicted_nodes": [
+    "Code Generation Layer::Code Generator",
+    "Global::Linux OS Environment",
+    "Global::Proto/JSON Event Configuration Source",
+    "Global::gobpf",
+    "Linux OS Environment::Linux kernel eBPF subsystem",
+    "Userspace Library/Tracer Layer::Common Event Header",
+    "Userspace Library/Tracer Layer::Handler Naming Scheme"
+  ]
+}

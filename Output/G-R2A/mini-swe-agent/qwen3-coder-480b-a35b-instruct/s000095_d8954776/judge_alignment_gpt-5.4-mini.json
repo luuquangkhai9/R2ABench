@@ -1,0 +1,120 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Event Bus"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Event Bus"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the in-app event bus used to publish and consume location events. The boundary name differs, but it is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::NMEA / GPRMC Encoder"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::GPRMC Encoder"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the OpenGTS GPRMC encoding function. The predicted layer name differs, but the architectural placement is still semantically acceptable."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Location Capture::Location Listeners"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Location Listeners"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the location listener component responsible for receiving location updates. The boundary attribution is sufficiently aligned."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Upload::Upload Jobs",
+        "GPSLogger Android Application::Upload::Uploaders"
+      ],
+      "predicted_nodes": [
+        "Data Access Layer::Dropbox Uploader",
+        "Data Access Layer::OSM Uploader",
+        "Data Access Layer::OpenGTS Uploader"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT has generic upload orchestration components, while the AI split them into specific external-service uploaders. Although functionally related, this over-specifies and misplaces the architecture by turning application upload logic into data access/external integration components."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::CSV / URL Loggers",
+        "GPSLogger Android Application::Logging::GPX Logger",
+        "GPSLogger Android Application::Logging::KML Logger"
+      ],
+      "predicted_nodes": [
+        "Data Access Layer::File Loggers"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node aggregates multiple logging outputs correctly at a high level, but the boundary is not accurate. These are application logging components, not a generic data access layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::Dropbox"
+      ],
+      "predicted_nodes": [
+        "External Systems::Dropbox API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Dropbox external integration. The predicted boundary is an acceptable equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenStreetMap"
+      ],
+      "predicted_nodes": [
+        "External Systems::OpenStreetMap API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the OpenStreetMap external integration. The predicted boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenGTS Endpoint\\nUDP server"
+      ],
+      "predicted_nodes": [
+        "External Systems::OpenGTS Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the OpenGTS endpoint/server used for message transmission. The prediction is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::User Interface::Main Activity",
+        "GPSLogger Android Application::User Interface::Other Fragments",
+        "GPSLogger Android Application::User Interface::Detailed View",
+        "GPSLogger Android Application::User Interface::Simple View"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Main Activity/Fragments"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node aggregates the main activity and fragment-based UI into one presentation-layer node, which is a reasonable abstraction of the GT UI components."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "GPSLogger Android Application::Location Capture::Google Play Services\\nLocation Provider"
+  ],
+  "unmatched_predicted_nodes": [
+    "Business Logic Layer::GPS Logging Service",
+    "Business Logic Layer::Settings Manager",
+    "External Systems::Android Location APIs",
+    "External Systems::File System"
+  ]
+}

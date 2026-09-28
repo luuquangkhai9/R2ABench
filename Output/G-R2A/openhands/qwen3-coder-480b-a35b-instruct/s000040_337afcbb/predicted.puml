@@ -1,0 +1,104 @@
+@startuml
+!define RECTANGLE rectangle linewidth 1
+
+' Main components
+RECTANGLE "External Users/\nSystems" as external_users
+RECTANGLE "PlugIt Proxy" as proxy #LightBlue
+RECTANGLE "PlugIt Services" as services #LightGreen
+RECTANGLE "Service 1" as service1 #LightGreen
+RECTANGLE "Service 2" as service2 #LightGreen
+RECTANGLE "Service N" as servicen #LightGreen
+RECTANGLE "Proxy Data Store" as proxy_db #LightYellow
+RECTANGLE "Service 1 Data Store" as service1_db #LightYellow
+RECTANGLE "Service 2 Data Store" as service2_db #LightYellow
+RECTANGLE "Service N Data Store" as servicen_db #LightYellow
+RECTANGLE "Configuration Files" as config #LightGray
+RECTANGLE "Local/Private Settings" as local_config #LightGray
+RECTANGLE "Inbound Mail" as mail #LightPink
+RECTANGLE "Mail Handler" as mail_handler #LightPink
+
+' Relationships
+external_users --> proxy : "Access services\nthrough proxy"
+proxy --> service1 : "PlugIt protocol"
+proxy --> service2 : "PlugIt protocol"
+proxy --> servicen : "PlugIt protocol"
+service1 --> service1_db : "Database\nconnection"
+service2 --> service2_db : "Database\nconnection"
+servicen --> servicen_db : "Database\nconnection"
+proxy --> proxy_db : "Data storage"
+config --> service1 : "Project\nconfiguration"
+config --> service2 : "Project\nconfiguration"
+config --> servicen : "Project\nconfiguration"
+local_config --> service1 : "Local\nsettings"
+local_config --> service2 : "Local\nsettings"
+local_config --> servicen : "Local\nsettings"
+config --> proxy : "Proxy\nconfiguration"
+local_config --> proxy : "Local\nsettings"
+service1 ..> config : "Uses API_URL,\nSQLALCHEMY_URL,\nPI_BASE_URL,\nPI_ALLOWED_NETWORKS"
+service1 ..> local_config : "Uses private\nsettings"
+proxy ..> config : "Uses API endpoint\nconfiguration"
+services ... service1
+services ... service2
+services ... servicen
+
+' Mail processing (standalone/example)
+mail --> proxy : "Inbound email"
+proxy --> mail_handler : "Pass routing data\nand text payload"
+mail_handler --> proxy : "Acknowledgement"
+
+' Notes
+note right of proxy
+  Central access point for all services
+  Manages unified user experience
+end note
+
+note right of services
+  Isolated micro-services
+  Each with own data boundary
+end note
+
+note right of config
+  Contains:
+  - API_URL
+  - SQLALCHEMY_URL
+  - DEBUG
+  - PI_BASE_URL
+  - PI_ALLOWED_NETWORKS
+end note
+
+note right of local_config
+  Private deployment settings
+  Excluded from source control
+end note
+
+note right of mail_handler
+  Standalone proxy example scope
+  Processes validated mail routing data
+  Extracts text payloads
+end note
+
+' Grouping
+package "PlugIt Framework" {
+  proxy
+  proxy_db
+  services
+  service1
+  service2
+  servicen
+  service1_db
+  service2_db
+  servicen_db
+}
+
+package "Configuration" {
+  config
+  local_config
+}
+
+package "External Systems" {
+  external_users
+  mail
+  mail_handler
+}
+
+@enduml

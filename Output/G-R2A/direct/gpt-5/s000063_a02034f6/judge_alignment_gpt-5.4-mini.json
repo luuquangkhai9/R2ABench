@@ -1,0 +1,177 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Access Layer::Gateway"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go::Client Access Layer::MTProto Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the MTProto gateway/client ingress component. The predicted boundary is a more detailed but semantically equivalent access-layer placement."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Auth Session"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go::Service Layer::Auth Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the authorization/auth-session handling area. The AI modeled it as a service-layer component, which is consistent with the GT access-layer auth/session function."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Session"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go::Service Layer::Session Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe session management. The boundary differs in naming granularity, but it remains within the expected server-side session handling context."
+    },
+    {
+      "gt_nodes": [
+        "Global::BFF"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go::Client Access Layer::BFF / Edge Orchestrator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node is a clear semantic equivalent of the BFF component, with a more explicit edge/orchestration label."
+    },
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "External Infrastructure & Integrations::Kafka",
+        "Teamgram Server (Go::Adapters::Kafka Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT infrastructure node is split into the external Kafka dependency and an internal Kafka client adapter. This is a reasonable decomposition and boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Push"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go::Service Layer::Push Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to push-related functionality. The predicted service-layer placement is consistent with the GT global supporting component."
+    },
+    {
+      "gt_nodes": [
+        "Global::Sync"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go::Service Layer::Sync Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to sync-related functionality. The layer attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Services::DFS"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go::Adapters::Media Wrapper"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT DFS service is likely a storage/file service, while the predicted media wrapper is an FFmpeg/FFProbe-related adapter. These are not semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Services::Msg"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go::Service Layer::Messaging Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to messaging functionality. The service-layer placement is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Services::Services"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go::Service Layer::Service Message Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This GT node is a generic services aggregate, and the predicted service-message handler is a reasonable subset aligned with the PRD's MTProto service-message handling."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MinIO"
+      ],
+      "predicted_nodes": [
+        "External Infrastructure & Integrations::MinIO",
+        "Teamgram Server (Go::Adapters::MinIO Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The external MinIO dependency is split into infrastructure and client-adapter nodes. This is a valid decomposition with correct boundary semantics."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MySQL"
+      ],
+      "predicted_nodes": [
+        "External Infrastructure & Integrations::MySQL",
+        "Teamgram Server (Go::Adapters::MySQL DAO"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The database storage node is split into the external MySQL service and an internal DAO adapter, which is a semantically consistent decomposition."
+    },
+    {
+      "gt_nodes": [
+        "Storages::Redis"
+      ],
+      "predicted_nodes": [
+        "External Infrastructure & Integrations::Redis",
+        "Teamgram Server (Go::Adapters::Redis Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The Redis storage node is split into the external Redis service and an internal client adapter. This is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Status"
+      ],
+      "predicted_nodes": [
+        "Global::Teamgram Server (Go"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT status node is not represented explicitly. The predicted top-level server node is too generic and does not semantically capture a status component."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer::Status",
+    "Clients::Android",
+    "Clients::PC",
+    "Clients::Web",
+    "Clients::iOS"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Infrastructure & Integrations::External Verification Service",
+    "External Infrastructure & Integrations::FFmpeg / FFProbe",
+    "External Infrastructure & Integrations::etcd",
+    "Global::Teamgram Server (Go",
+    "Teamgram Server (Go::Adapters::Default None-Verifier\n(accepts code 12345",
+    "Teamgram Server (Go::Adapters::Verification Adapter"
+  ]
+}

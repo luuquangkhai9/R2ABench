@@ -1,0 +1,192 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "Global::MPI runtime + mpi4py"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the MPI runtime dependency/support used by the library. The Global boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process"
+      ],
+      "predicted_nodes": [
+        "Global::torc MPI Rank Process"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node represents the MPI process/rank execution unit, which matches the GT concept. However, placing it under Global instead of the compute-node/MPI-process boundary is a boundary attribution mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Server\\nThread"
+      ],
+      "predicted_nodes": [
+        "torc MPI Rank Process::Interprocess Communication Layer (MPI::Server Message Pump\\n(server thread"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The server thread/message pump is semantically the same runtime thread within each MPI process. The boundary is acceptable because it remains inside the MPI process context."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Worker\\nThread"
+      ],
+      "predicted_nodes": [
+        "torc MPI Rank Process::Worker Execution Layer (Threads::Worker Queues & Executor"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This corresponds to the worker-thread execution component. The predicted boundary is a reasonable layer decomposition inside the MPI process."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Task Queue",
+        "Task Queue (in detail::...",
+        "Task Queue (in detail::A1",
+        "Task Queue (in detail::A2",
+        "Task Queue (in detail::A3",
+        "Task Queue (in detail::B1",
+        "Task Queue (in detail::B2",
+        "Task Queue (in detail::Level 0",
+        "Task Queue (in detail::Level 1",
+        "Task Queue (in detail::Level 2",
+        "Task Queue (in detail::Level 3",
+        "Task Queue (in detail::Level 4",
+        "Task Queue (in detail::Level 5"
+      ],
+      "predicted_nodes": [
+        "torc MPI Rank Process::Task Scheduling & Queueing Layer::Scheduler",
+        "torc MPI Rank Process::Task Scheduling & Queueing Layer::Callback Dispatcher",
+        "torc MPI Rank Process::Worker Execution Layer (Threads::Worker Queues & Executor"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT shows a task queue with detailed hierarchy, while the AI splits functionality into scheduler/queue/executor and callback dispatching. This is a valid semantic decomposition of the queueing/scheduling subsystem, and the boundary remains within the MPI process/tasking runtime context."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::A1",
+        "Task Queue (in detail::A2",
+        "Task Queue (in detail::A3",
+        "Task Queue (in detail::B1",
+        "Task Queue (in detail::B2",
+        "Task Queue (in detail::Level 0",
+        "Task Queue (in detail::Level 1",
+        "Task Queue (in detail::Level 2",
+        "Task Queue (in detail::Level 3",
+        "Task Queue (in detail::Level 4",
+        "Task Queue (in detail::Level 5"
+      ],
+      "predicted_nodes": [
+        "torc MPI Rank Process::Task Scheduling & Queueing Layer::Scheduler"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The detailed GT queue hierarchy is abstracted into a scheduler/queueing layer in the prediction. This is a reasonable merge, and the boundary is still appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "torc MPI Rank Process::Interprocess Communication Layer (MPI::MPI Communicator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both indicate MPI communication/communicator functionality. The predicted layering is consistent with the global MPI concept."
+    },
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "torc MPI Rank Process::Interprocess Communication Layer (MPI::SPMD Executor\\n(torc.spmd",
+        "torc MPI Rank Process::Python API Layer::SPMD API\\n(torc.spmd"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT MPI concept is realized in the AI as both an API entry point and an internal executor for SPMD behavior. This is a valid functional split with acceptable boundary placement."
+    },
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "torc MPI Rank Process::Interprocess Communication Layer (MPI::Stealing Controller\\n(torc.enable/disable_stealing"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Task stealing is an MPI-based interprocess coordination feature in the GT context. The predicted placement under interprocess communication is semantically appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "torc MPI Rank Process::Interprocess Communication Layer (MPI::MPI Communicator",
+        "torc MPI Rank Process::Interprocess Communication Layer (MPI::SPMD Executor\\n(torc.spmd",
+        "torc MPI Rank Process::Interprocess Communication Layer (MPI::Server Message Pump\\n(server thread",
+        "torc MPI Rank Process::Interprocess Communication Layer (MPI::Stealing Controller\\n(torc.enable/disable_stealing"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The overall GT MPI runtime is decomposed into communicator, SPMD, server/message pump, and stealing controller. This is a reasonable architectural refinement."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process"
+      ],
+      "predicted_nodes": [
+        "torc MPI Rank Process::Configuration Layer::Config Manager",
+        "torc MPI Rank Process::Data Model Layer::Task Descriptor\\n(Future",
+        "torc MPI Rank Process::Python API Layer::Lifecycle API\\n(torc.start/init/launch/shutdown",
+        "torc MPI Rank Process::Python API Layer::Map Engine\\n(torc.map",
+        "torc MPI Rank Process::Python API Layer::SPMD API\\n(torc.spmd",
+        "torc MPI Rank Process::Python API Layer::Submission API\\n(torc.submit",
+        "torc MPI Rank Process::Python API Layer::Wait/Completion API\\n(torc.wait, as_completed",
+        "torc MPI Rank Process::Runtime Lifecycle Layer::Lifecycle Manager\\n(torc.start/init/launch/shutdown",
+        "torc MPI Rank Process::Utilities & Introspection Layer::Identity Service\\n(torc.worker_id/num_workers,\\n torc.node_id/num_nodes",
+        "torc MPI Rank Process::Utilities & Introspection Layer::Timing Service\\n(torc.gettime",
+        "torc MPI Rank Process::Task Scheduling & Queueing Layer::Callback Dispatcher",
+        "torc MPI Rank Process::Task Scheduling & Queueing Layer::Scheduler",
+        "torc MPI Rank Process::Worker Execution Layer (Threads::Worker Queues & Executor",
+        "torc MPI Rank Process::Interprocess Communication Layer (MPI::MPI Communicator",
+        "torc MPI Rank Process::Interprocess Communication Layer (MPI::SPMD Executor\\n(torc.spmd",
+        "torc MPI Rank Process::Interprocess Communication Layer (MPI::Server Message Pump\\n(server thread",
+        "torc MPI Rank Process::Interprocess Communication Layer (MPI::Stealing Controller\\n(torc.enable/disable_stealing"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted model expands the GT MPI process into a full layered runtime architecture. This is a valid decomposition of the same execution context."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Task Queue (in detail::...",
+    "Task Queue (in detail::A1",
+    "Task Queue (in detail::A2",
+    "Task Queue (in detail::A3",
+    "Task Queue (in detail::B1",
+    "Task Queue (in detail::B2",
+    "Task Queue (in detail::Level 0",
+    "Task Queue (in detail::Level 1",
+    "Task Queue (in detail::Level 2",
+    "Task Queue (in detail::Level 3",
+    "Task Queue (in detail::Level 4",
+    "Task Queue (in detail::Level 5"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Examples & Workflows\\n(master-worker, SPMD, stealing,\\n image preprocessing, optimization",
+    "Global::HDF5 files",
+    "Global::Image dataset files",
+    "Global::Operating System Environment\\n(TORC_* env vars",
+    "Global::Optional example packages\\n(numpy, cma, h5py, pillow",
+    "Global::Python runtime",
+    "Global::mpirun"
+  ]
+}

@@ -1,0 +1,154 @@
+@startuml
+!define RECTANGLE class
+skinparam componentStyle rectangle
+skinparam arrowColor #333333
+skinparam backgroundColor #FFFFFF
+skinparam classBackgroundColor #F8F8F8
+skinparam classBorderColor #333333
+title veinmind-tools System Architecture
+
+package "External Infrastructure" {
+  component "Docker Runtime" as docker {
+    component "Containerd" as containerd
+  }
+  
+  package "Image Registries" {
+    component "DockerHub" as dockerhub
+    component "Docker Registry" as docker_registry
+    component "Harbor" as harbor
+  }
+}
+
+package "Core Execution Environment" {
+  component "veinmind-runner" as runner {
+    component "Parallel-Container Startup Script" as startup_script
+  }
+  
+  component "Python Example Container" as python_example [
+    Base: veinmind/python3.6:1.3.1-stretch
+    Entrypoint: /tool/entrypoint.sh
+    Command: python scan.py $*
+  ]
+}
+
+package "veinmind-tools Suite" {
+  component "CLI Interface" as cli {
+    component "scan-image" as scan_image
+    component "scan-container" as scan_container
+    component "scan-iac" as scan_iac
+    component "./run.sh scan-host image" as quick_start
+  }
+  
+  package "Scanning Engine" {
+    component "Image Scanner" as image_scanner
+    component "Container Scanner" as container_scanner
+    component "IaC Scanner" as iac_scanner [
+      Loads policy libraries
+      Scans IaC input
+      Merges duplicate result groups
+    ]
+  }
+  
+  component "Authorization Routing" as auth_routing [
+    Matches request method/URI
+    Returns Docker plugin action
+    Fallback: NoneDockerPlugin
+  ]
+  
+  component "Report System" as report_system {
+    component "Malicious-File Report" as malicious_report [
+      ReportData
+      ReportImage
+      ReportLayer
+      MaliciousFileInfo
+    ]
+    component "IaC Alert Report" as iac_report [
+      Rule metadata
+      File-location detail
+      Alert detail
+    ]
+  }
+  
+  component "veinmind-sdk/libveinmind" as sdk [
+    SDK/library family
+    Tool/plugin integration
+  ]
+  
+  component "Plugin Examples" as plugin_examples [
+    SDK-backed implementation
+    Command mapping support
+  ]
+}
+
+package "User Classes" {
+  actor "Security Operator" as security_operator
+  actor "Plugin Developer" as plugin_developer
+  actor "Deployment Operator" as deployment_operator
+  actor "Integrator" as integrator
+}
+
+' Relationships
+
+security_operator --> cli : "Invokes\nscan commands"
+cli --> image_scanner : "Triggers\nimage scan"
+cli --> container_scanner : "Triggers\ncontainer scan"
+cli --> iac_scanner : "Triggers\nIaC scan"
+quick_start --> startup_script : "Executes via\nparallel-container"
+
+image_scanner --> docker : "Scans\nlocal images"
+container_scanner --> docker : "Scans\nrunning containers"
+docker --> dockerhub : "Pulls/pushes images"
+docker --> docker_registry : "Pulls/pushes images"
+docker --> harbor : "Pulls/pushes images"
+
+iac_scanner --> iac_report : "Publishes\nalert details"
+image_scanner --> malicious_report : "Generates\nmalicious-file reports"
+container_scanner --> malicious_report : "Generates\nmalicious-file reports"
+
+sdk --> image_scanner : "Provides\nscan logic"
+sdk --> container_scanner : "Provides\nscan logic"
+sdk --> iac_scanner : "Provides\nscan logic"
+sdk --> plugin_examples : "Enables\nplugin development"
+
+plugin_developer --> plugin_examples : "Develops/extends\nplugins"
+deployment_operator --> runner : "Prepares\nexecution environment"
+deployment_operator --> python_example : "Deploys\ncontainer"
+deployment_operator --> startup_script : "Prepares\nstartup script"
+
+docker --> auth_routing : "Sends authorization\nrequests"
+auth_routing --> integrator : "Returns plugin\naction results"
+integrator --> report_system : "Handles\nscan results"
+
+runner --> docker : "Runs in\ncontainer mode"
+python_example --> sdk : "Uses SDK for\nscan implementation"
+
+' Data flow annotations
+note right of image_scanner
+  Processes:
+  - Image scan context
+  - Image handle
+end note
+
+note right of container_scanner
+  Processes:
+  - Container scan context
+  - Container handle
+end note
+
+note right of iac_scanner
+  Processes:
+  - IaC input files
+  - Policy libraries
+  - Alert details
+end note
+
+note right of auth_routing
+  Inputs:
+  - Request method
+  - Request URI
+  Outputs:
+  - Docker plugin action
+  - NoneDockerPlugin (fallback)
+end note
+
+@enduml

@@ -1,0 +1,69 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Browser"
+      ],
+      "predicted_nodes": [
+        "Global::Web Clients"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are semantically identical, referring to the end-users connecting to the system. The 'Global' boundary is correct for both."
+    },
+    {
+      "gt_nodes": [
+        "pubsub-public-data project::Cloud Pub/Sub\\ntopic"
+      ],
+      "predicted_nodes": [
+        "Global::Google Cloud Pub/Sub"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the external Google Cloud Pub/Sub service. The AI's 'Global' boundary is a reasonable and semantically equivalent abstraction for an external cloud service compared to the GT's specific project boundary."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine"
+      ],
+      "predicted_nodes": [
+        "Infrastructure/Platform Layer::GKE Cluster",
+        "Infrastructure/Platform Layer::GKE Cluster::Kubernetes Deployment",
+        "Infrastructure/Platform Layer::GKE Cluster::Kubernetes Service\\n(LoadBalancer",
+        "Infrastructure/Platform Layer::GKE Cluster::Kubernetes ConfigMap",
+        "Infrastructure/Platform Layer::GKE Cluster::Horizontal Pod Autoscaler (HPA",
+        "Application/Business Logic Layer::Adapter Container",
+        "Application/Business Logic Layer::Adapter Container::exec.sh"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's single abstract 'Compute Engine' node, representing the entire GKE-based deployment, is correctly expanded by the AI into the specific, constituent Kubernetes components (Cluster, Deployment, Service, etc.) and the application container, all explicitly mentioned in the PRD. The AI's use of 'Infrastructure' and 'Application' layers is a valid and more detailed architectural representation."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine::pulltop"
+      ],
+      "predicted_nodes": [
+        "Application/Business Logic Layer::Adapter Container::pulltop process"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are functionally identical. The AI's boundary 'Application/Business Logic Layer::Adapter Container' is a more precise and logical representation for the application process than the GT's more physical 'Compute Engine' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine::websocketd"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::websocketd"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "While functionally a match, the AI has made a boundary error. The PRD (FR-002, 2.1) states that 'pulltop' and 'websocketd' are composed together in the same container runtime. The AI incorrectly separates 'websocketd' into a 'Presentation Layer' while placing 'pulltop process' in the 'Application/Business Logic Layer::Adapter Container', breaking their described co-location and tight coupling."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Presentation Layer::WebSocket Endpoint"
+  ]
+}

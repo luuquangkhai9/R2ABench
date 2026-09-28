@@ -1,0 +1,233 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Access Layer::Auth Session"
+      ],
+      "predicted_nodes": [
+        "BFF/Access-Facing Layer::Authorization Service",
+        "BFF/Access-Facing Layer::Session Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node combines authorization-session concerns, while the AI split them into authorization and session management components. The functional mapping is consistent and the access-facing boundary is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Gateway"
+      ],
+      "predicted_nodes": [
+        "BFF/Access-Facing Layer::BFF Gateway",
+        "Client Access Layer::MTProto Server",
+        "Client Access Layer::MTProto Protocol Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT gateway corresponds to the client-facing ingress/API boundary. The predicted nodes further decompose it into protocol handling and gateway/server responsibilities, which is a semantically consistent placement."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Session"
+      ],
+      "predicted_nodes": [
+        "BFF/Access-Facing Layer::Session Manager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to session lifecycle handling in the access-facing layer."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Status"
+      ],
+      "predicted_nodes": [
+        "BFF/Access-Facing Layer::Session Manager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "There is no clear equivalent predicted node for a status/access-state node. Session management is not a semantically valid substitute for a status boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::BFF"
+      ],
+      "predicted_nodes": [
+        "BFF/Access-Facing Layer::BFF Gateway",
+        "BFF/Access-Facing Layer::Authorization Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has a single global BFF node, and the AI decomposed it into access-facing BFF components. This is a reasonable refinement with correct architectural placement."
+    },
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "Storage/Data Layer::Kafka",
+        "Infrastructure/Supporting Layer::Kafka Consumer",
+        "Infrastructure/Supporting Layer::Kafka Producer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Kafka node is represented as the broker plus its supporting producer/consumer roles. The infrastructure/storage placement is semantically appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::Push"
+      ],
+      "predicted_nodes": [
+        "Business/Service Layer::Push Notification Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe push notification functionality, and the business/service layer is a sensible location."
+    },
+    {
+      "gt_nodes": [
+        "Global::Sync"
+      ],
+      "predicted_nodes": [
+        "Business/Service Layer::Sync Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted sync service matches the GT sync component and is correctly placed in the service layer."
+    },
+    {
+      "gt_nodes": [
+        "Services::Msg"
+      ],
+      "predicted_nodes": [
+        "Business/Service Layer::Messaging Service",
+        "BFF/Access-Facing Layer::Service Message Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT messaging service is split into business messaging logic and access-facing service-message handling. This decomposition is consistent with the PRD's service-message support."
+    },
+    {
+      "gt_nodes": [
+        "Services::Services"
+      ],
+      "predicted_nodes": [
+        "Business/Service Layer::Registration/Verification Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The generic services node is reasonably matched to a concrete business service component, especially given the PRD emphasis on registration and verification flows."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MinIO"
+      ],
+      "predicted_nodes": [
+        "Storage/Data Layer::MinIO"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct storage component match with correct boundary."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MySQL"
+      ],
+      "predicted_nodes": [
+        "Storage/Data Layer::MySQL"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct storage component match with correct boundary."
+    },
+    {
+      "gt_nodes": [
+        "Storages::Redis"
+      ],
+      "predicted_nodes": [
+        "Storage/Data Layer::Redis"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct storage component match with correct boundary."
+    },
+    {
+      "gt_nodes": [
+        "Clients::Android"
+      ],
+      "predicted_nodes": [
+        "Client Access Layer::MTProto Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted nodes do not explicitly model Android clients; using a generic MTProto client loses the client-specific boundary and is not an exact semantic equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Clients::PC"
+      ],
+      "predicted_nodes": [
+        "Client Access Layer::MTProto Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted nodes do not explicitly model PC clients; the generic client access component is not equivalent to this specific client node."
+    },
+    {
+      "gt_nodes": [
+        "Clients::Web"
+      ],
+      "predicted_nodes": [
+        "Client Access Layer::MTProto Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The AI did not preserve the specific web-client node; a generic MTProto client is too broad and not a faithful match."
+    },
+    {
+      "gt_nodes": [
+        "Clients::iOS"
+      ],
+      "predicted_nodes": [
+        "Client Access Layer::MTProto Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node is generic and does not specifically represent the iOS client boundary."
+    },
+    {
+      "gt_nodes": [
+        "Services::DFS"
+      ],
+      "predicted_nodes": [
+        "Infrastructure/Supporting Layer::Media Processor",
+        "External Tools::FFmpeg/FFProbe"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT DFS node likely refers to file/media distribution or storage-related service behavior, but the AI mapped it to media processing and external tools. This is a boundary/context mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Global::BFF"
+      ],
+      "predicted_nodes": [
+        "Global::External Tools"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "External tools are unrelated to the BFF architectural component; this is a severe semantic mismatch."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Client Access Layer::MTProto Protocol Handler",
+    "Client Access Layer::MTProto Server",
+    "External Tools::FFmpeg/FFProbe",
+    "Global::External Tools",
+    "Infrastructure/Supporting Layer::Kafka Consumer",
+    "Infrastructure/Supporting Layer::Kafka Producer",
+    "Infrastructure/Supporting Layer::Media Processor",
+    "Storage/Data Layer::Kafka",
+    "Storage/Data Layer::etcd"
+  ]
+}

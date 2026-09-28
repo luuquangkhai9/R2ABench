@@ -1,0 +1,152 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::TraceLeft\nCLI and library tracer"
+      ],
+      "predicted_nodes": [
+        "User_Interface_Layer::cli_entry_point",
+        "User_Interface_Layer::trace_command_handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT single node covers both the CLI entry point and library tracer responsibilities, which are split into separate CLI-related predicted nodes. The functionality matches, but the AI placed them in a user-interface layer rather than the combined global CLI/library boundary used in GT."
+    },
+    {
+      "gt_nodes": [
+        "Event Handler eBPF Programs::Default Handler Probes",
+        "Event Handler eBPF Programs::Process Specific\nHandler Probes",
+        "Event Handler eBPF Programs::Handler Probe\nhandle_syscall_write"
+      ],
+      "predicted_nodes": [
+        "Kernel_Interface_Layer::event_handler_loader",
+        "Kernel_Interface_Layer::probe_manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted loader/manager nodes correspond to the GT event-handler probe loading and management area, including default, process-specific, and specific handler probe concepts. However, the AI modeled them as kernel-interface management components rather than within the event-handler eBPF programs boundary, so the boundary attribution is not faithful."
+    },
+    {
+      "gt_nodes": [
+        "Global::Perf Event Map\nshared event map"
+      ],
+      "predicted_nodes": [
+        "Global::Perf_Event_Queue"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the shared perf-based event delivery mechanism between kernel-space handlers and userspace. The boundary remains global and is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Prog ID Map\npid to id"
+      ],
+      "predicted_nodes": [
+        "Global::handle_name_progs",
+        "Global::handle_name_progs_ret"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT program-ID map and the predicted handler map names both represent global handler-selection/registration maps used by the probe loader. The predicted nodes reflect the documented naming scheme from the PRD and fit the same global mapping concern."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Prog Maps\nhandler mappings"
+      ],
+      "predicted_nodes": [
+        "Global::handle_name_progs",
+        "Global::handle_name_progs_ret"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT handler mappings are directly represented by the predicted named handler maps. Although the AI placed them under Global rather than the Main eBPF Program boundary, this is semantically equivalent because these are globally named handler maps used by the loader."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Prog Map\npid to fd",
+        "Main eBPF Program::Ret Prog Map\npid to fd"
+      ],
+      "predicted_nodes": [
+        "Linux_Kernel::ebpf_runtime",
+        "Linux_Kernel::kprobe_kretprobe"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted runtime/probe nodes are too abstract and do not specifically capture the GT's program and return-program maps keyed by process context. This is a partial functional overlap but not a faithful semantic match, so boundary placement is incorrect."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Kprobe / Kretprobe\nother traced calls",
+        "Main eBPF Program::Kprobe\nentry probe",
+        "Main eBPF Program::Kretprobe\nreturn probe"
+      ],
+      "predicted_nodes": [
+        "Linux_Kernel::kprobe_kretprobe",
+        "Linux_Kernel::ebpf_runtime"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT nodes describe kprobe/kretprobe-based main eBPF behavior, and the predicted nodes capture the same kernel probe runtime concept at a higher level. The boundary is acceptable because both are placed in the Linux/kernel area."
+    },
+    {
+      "gt_nodes": [
+        "Linux Kernel Functions::inet_csk_accept",
+        "Linux Kernel Functions::sys_open",
+        "Linux Kernel Functions::sys_write"
+      ],
+      "predicted_nodes": [
+        "Linux_Kernel::ebpf_runtime",
+        "Linux_Kernel::kprobe_kretprobe"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT nodes are specific traced kernel functions, while the predicted nodes are generic runtime/probe infrastructure. They are related but not equivalent components, so this is not a correct match."
+    },
+    {
+      "gt_nodes": [
+        "Global::Event Configuration Metadata"
+      ],
+      "predicted_nodes": [
+        "Global::Event_Configuration_Metadata",
+        "Library_Core_Layer::handler_code_generator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The metadata node matches directly, and the generator node is the corresponding consumer/producer in the PRD's configuration-driven handler generation flow. The metadata itself remains correctly global."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "External_Libraries::gobpf_library",
+        "Global::External_Libraries"
+      ],
+      "match_type": "unmatched_predicted",
+      "is_boundary_correct": false,
+      "reasoning": "These are supporting dependency/modeling nodes introduced by the AI. They are not explicit GT architecture nodes, so they are treated as hallucinated or over-abstracted predicted nodes."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Global::Linux_Kernel"
+      ],
+      "match_type": "unmatched_predicted",
+      "is_boundary_correct": false,
+      "reasoning": "This is a broad environment node not present in the GT node list. It is contextually related to the PRD but not a direct equivalent of any GT node."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Main eBPF Program::Kprobe / Kretprobe\nother traced calls",
+    "Main eBPF Program::Kprobe\nentry probe",
+    "Main eBPF Program::Kretprobe\nreturn probe",
+    "Main eBPF Program::Prog Map\npid to fd",
+    "Main eBPF Program::Ret Prog Map\npid to fd",
+    "Linux Kernel Functions::inet_csk_accept",
+    "Linux Kernel Functions::sys_open",
+    "Linux Kernel Functions::sys_write"
+  ],
+  "unmatched_predicted_nodes": [
+    "External_Libraries::gobpf_library",
+    "Global::External_Libraries",
+    "Global::Linux_Kernel"
+  ]
+}

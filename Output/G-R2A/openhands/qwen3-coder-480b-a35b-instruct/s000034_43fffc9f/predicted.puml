@@ -1,0 +1,157 @@
+@startuml
+' torc_py System Architecture Diagram
+
+package "Application Layer" {
+  [Python Application] as app
+  [SPMD Functions] as spmd_func
+  [Callback Functions] as callback_func
+  [Map Functions] as map_func
+}
+
+package "torc_py Library" {
+  package "Public API" {
+    [torc.submit()] as submit
+    [torc.wait()] as wait
+    [torc.map()] as map_api
+    [torc.as_completed()] as as_completed
+    [torc.start()] as start
+    [torc.init()] as init
+    [torc.launch()] as launch
+    [torc.shutdown()] as shutdown
+    [torc.spmd()] as spmd_api
+    [torc.enable_stealing()] as enable_stealing
+    [torc.disable_stealing()] as disable_stealing
+    [torc.gettime()] as gettime
+    [torc.worker_id()] as worker_id
+    [torc.num_workers()] as num_workers
+    [torc.node_id()] as node_id
+    [torc.num_nodes()] as num_nodes
+  }
+
+  package "Task Management" {
+    [Task Scheduler] as scheduler
+    [Task Queue Manager] as queue_manager
+    [Task Descriptors] as task_descriptors
+    [Future Objects] as futures
+  }
+
+  package "Execution Engine" {
+    package "Worker Threads" {
+      [Worker Thread 1] as worker1
+      [Worker Thread 2] as worker2
+      [Worker Thread N] as workerN
+    }
+    
+    package "MPI Processes" {
+      [MPI Process 0] as mpi0
+      [MPI Process 1] as mpi1
+      [MPI Process M] as mpiM
+    }
+    
+    [Thread Pool Manager] as thread_manager
+    [Load Balancer] as load_balancer
+  }
+
+  package "Communication Layer" {
+    [MPI Communicator] as mpi_comm
+    [Inter-process Messaging] as ipc
+    [Task Stealing Protocol] as steal_protocol
+  }
+
+  package "Configuration" {
+    [Environment Variables] as env_vars
+    [Runtime Configuration] as config
+  }
+}
+
+package "External Systems" {
+  [MPI Runtime] as mpi_runtime
+  [Python Interpreter] as python
+  [Operating System] as os
+  [File System] as fs
+}
+
+' Relationships
+app --> submit : uses
+app --> wait : uses
+app --> map_api : uses
+app --> as_completed : uses
+app --> start : uses
+app --> init : uses
+app --> launch : uses
+app --> shutdown : uses
+app --> spmd_api : uses
+app --> enable_stealing : uses
+app --> disable_stealing : uses
+
+spmd_func <-- spmd_api : executed by
+callback_func <-- submit : associated with
+map_func <-- map_api : executed by
+
+submit --> scheduler : creates tasks
+wait --> scheduler : waits for tasks
+map_api --> scheduler : creates map tasks
+as_completed --> scheduler : retrieves completed tasks
+
+scheduler --> queue_manager : manages
+queue_manager --> task_descriptors : creates
+task_descriptors --> futures : implements
+
+scheduler --> thread_manager : assigns tasks
+thread_manager --> worker1 : dispatches
+thread_manager --> worker2 : dispatches
+thread_manager --> workerN : dispatches
+
+worker1 --> mpi_comm : communicates
+worker2 --> mpi_comm : communicates
+workerN --> mpi_comm : communicates
+
+mpi0 --> mpi_comm : hosts
+mpi1 --> mpi_comm : hosts
+mpiM --> mpi_comm : hosts
+
+load_balancer --> queue_manager : monitors
+load_balancer --> steal_protocol : initiates
+steal_protocol --> ipc : uses
+
+env_vars --> config : provides
+config --> scheduler : influences
+config --> thread_manager : influences
+config --> load_balancer : influences
+
+mpi_comm --> mpi_runtime : uses
+worker1 --> python : executes in
+worker2 --> python : executes in
+workerN --> python : executes in
+
+mpi0 --> os : runs on
+mpi1 --> os : runs on
+mpiM --> os : runs on
+
+fs --> app : provides data
+fs --> spmd_func : provides data
+
+note right of Task Management
+  Task descriptors store input 
+  and result values for access
+  through input() and result()
+end note
+
+note right of Execution Engine
+  Worker threads execute tasks
+  locally within each MPI process
+end note
+
+note right of Communication Layer
+  MPI communicator handles 
+  inter-process communication
+  and task stealing protocol
+end note
+
+note right of Configuration
+  TORC_WORKERS, TORC_STEALING,
+  TORC_SERVER_YIELDTIME, and
+  TORC_WORKER_YIELDTIME
+end note
+
+@enduml

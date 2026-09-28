@@ -1,0 +1,165 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon API Gateway\nREST API"
+      ],
+      "predicted_nodes": [
+        "API Gateway::API Gateway REST",
+        "Global::API Gateway"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both predicted nodes refer to the same API Gateway REST API component. The package names differ, but the architectural boundary is semantically equivalent and correctly placed."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS Lambda\nSimulator API"
+      ],
+      "predicted_nodes": [
+        "Compute::Compute",
+        "Compute::Route Management Lambda",
+        "Compute::Simulation Control Lambda",
+        "Compute::Custom Resource Lambda"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has a single Lambda-based simulator API node, while the AI split Lambda responsibilities into multiple compute nodes. This is a valid refinement, and the compute boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS Step Functions\nSimulation workflow"
+      ],
+      "predicted_nodes": [
+        "AWS Environment::Step Functions",
+        "Global::AWS Environment"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The functionality matches the Step Functions simulation workflow. The boundary naming is different but semantically equivalent and not a boundary violation."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS IoT Core"
+      ],
+      "predicted_nodes": [
+        "AWS Services::AWS IoT Core",
+        "Global::AWS Services"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted IoT Core node corresponds directly to the GT AWS IoT Core node. The service boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon S3\nRoute data bucket"
+      ],
+      "predicted_nodes": [
+        "Storage::Amazon S3",
+        "Global::Storage",
+        "Global::Route Loader"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT S3 route data bucket is represented by the predicted S3 storage node, and the route-loading concern is captured separately. The storage boundary is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon S3\nWeb UI bucket"
+      ],
+      "predicted_nodes": [
+        "Storage::Amazon S3",
+        "Global::Storage",
+        "Frontend::Web Console"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The web UI bucket is an S3-hosted frontend asset store. The predicted storage and frontend nodes collectively capture the same subsystem, with a semantically correct boundary."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon CloudFront"
+      ],
+      "predicted_nodes": [
+        "Frontend::Web Console",
+        "Global::Frontend"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "CloudFront is associated with frontend distribution/hosting. The predicted frontend boundary is semantically consistent with the GT CloudFront node."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon Cognito"
+      ],
+      "predicted_nodes": [
+        "Frontend::Web Console",
+        "Global::Frontend"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "Although Cognito is part of the user-facing authentication flow, the predicted nodes do not explicitly represent Cognito or identity services. This is not a clear semantic match."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon DynamoDB\nSimulator state"
+      ],
+      "predicted_nodes": [
+        "Storage::Amazon S3",
+        "Global::Storage"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT contains a DynamoDB-backed simulator state store, but the AI predicted S3/storage nodes instead. This is a different persistence technology and a boundary/semantic mismatch."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Browser Web UI\nstatic app client"
+      ],
+      "predicted_nodes": [
+        "Frontend::Web Console",
+        "Global::Frontend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The browser web UI static app client corresponds to the web console frontend. The frontend boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Users"
+      ],
+      "predicted_nodes": [
+        "Frontend::Web Console",
+        "Global::Frontend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Users are actors, not the web console component itself. The predicted node confuses the user boundary with the frontend system component."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS CloudFormation\nCustom resources"
+      ],
+      "predicted_nodes": [
+        "Compute::Custom Resource Lambda",
+        "Global::CloudFormation"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT custom resources node is represented by the custom resource Lambda and CloudFormation context. This is a correct functional decomposition and boundary attribution."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "API Gateway::Access Logger",
+    "API Gateway::CORS Configuration",
+    "API Gateway::Method Logging",
+    "API Gateway::Request Validator",
+    "API Gateway::Tracing Config",
+    "Global::Device Simulator",
+    "Global::Message Publisher",
+    "Compute::Route Management Lambda",
+    "Compute::Simulation Control Lambda",
+    "Storage::CloudWatch Logs"
+  ]
+}

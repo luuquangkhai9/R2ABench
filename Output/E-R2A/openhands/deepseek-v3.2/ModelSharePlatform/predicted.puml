@@ -1,0 +1,354 @@
+@startuml
+!define RECTANGLE rectangle
+!define COMPONENT component
+!define DATABASE database
+!define CLOUD cloud
+!define QUEUE queue
+!define INTERFACE interface
+
+skinparam {
+  BackgroundColor #F5F5F5
+  ArrowColor #333333
+  ActorBorderColor #333333
+  ComponentBorderColor #333333
+  DatabaseBorderColor #333333
+  CloudBorderColor #333333
+  QueueBorderColor #333333
+  InterfaceBorderColor #333333
+  RectangleBorderColor #333333
+  
+  ActorBackgroundColor #E3F2FD
+  ComponentBackgroundColor #FFF3E0
+  DatabaseBackgroundColor #E8F5E8
+  CloudBackgroundColor #F3E5F5
+  QueueBackgroundColor #FFEBEE
+  InterfaceBackgroundColor #E0F7FA
+  RectangleBackgroundColor #F5F5F5
+  
+  FontSize 13
+  FontName Helvetica
+}
+
+title Deep Learning Model Sharing Platform - System Architecture
+
+' ========== USER LAYER ==========
+package "User Layer" {
+  actor "General User" as GeneralUser #lightblue
+  actor "Administrator" as Admin #lightgreen
+  
+  note right of GeneralUser
+    <b>Capabilities:</b>
+    - Account Management
+    - Q&A Community
+    - Blog Sharing
+    - Model Management
+    - Dataset Management
+    - Online Model Invocation
+    - Model Purchase
+    - Follow Management
+  end note
+  
+  note right of Admin
+    <b>Capabilities:</b>
+    - Account Cancellation
+    - Illegal Content Deletion
+    - Platform Governance
+  end note
+}
+
+' ========== PRESENTATION LAYER ==========
+package "Presentation Layer" {
+  INTERFACE "Web Interface" as WebInterface {
+    RECTANGLE "Account Interface" as AccountUI
+    RECTANGLE "Q&A Community Interface" as QnAUI
+    RECTANGLE "Blog Interface" as BlogUI
+    RECTANGLE "Model Interface" as ModelUI
+    RECTANGLE "Dataset Interface" as DatasetUI
+    RECTANGLE "Follow Interface" as FollowUI
+    RECTANGLE "Admin Interface" as AdminUI
+    RECTANGLE "Multilingual Support" as I18N
+  }
+  
+  note right of WebInterface
+    <b>Technologies:</b>
+    - Vue.js
+    - TypeScript
+    - Modern Browsers
+    - Responsive Design
+  end note
+}
+
+' ========== APPLICATION LAYER ==========
+package "Application Layer" {
+  COMPONENT "Authentication Service" as AuthService
+  COMPONENT "User Management Service" as UserService
+  COMPONENT "Q&A Service" as QnAService
+  COMPONENT "Blog Service" as BlogService
+  COMPONENT "Model Service" as ModelService
+  COMPONENT "Dataset Service" as DatasetService
+  COMPONENT "Payment Service" as PaymentService
+  COMPONENT "Recommendation Service" as RecService
+  COMPONENT "Follow Service" as FollowService
+  COMPONENT "Admin Service" as AdminService
+  
+  note right of AuthService
+    <b>Functions:</b>
+    - Registration
+    - Login
+    - Password Recovery
+    - Session Management
+  end note
+  
+  note right of ModelService
+    <b>Functions:</b>
+    - Model Upload
+    - Model Download
+    - Online Invocation
+    - Model Review
+    - Model Modification
+  end note
+  
+  note right of PaymentService
+    <b>Functions:</b>
+    - Purchase Processing
+    - Payment Integration
+    - Transaction Management
+  end note
+}
+
+' ========== DATA LAYER ==========
+package "Data Layer" {
+  DATABASE "User Database" as UserDB {
+    table "User Accounts" as UserTable
+    table "User Profiles" as ProfileTable
+    table "Follow Relationships" as FollowTable
+  }
+  
+  DATABASE "Content Database" as ContentDB {
+    table "Questions" as QuestionTable
+    table "Answers" as AnswerTable
+    table "Blog Articles" as BlogTable
+    table "Blog Comments" as CommentTable
+  }
+  
+  DATABASE "Model Database" as ModelDB {
+    table "Models" as ModelTable
+    table "Model Metadata" as ModelMetaTable
+    table "Purchases" as PurchaseTable
+    table "Reviews" as ReviewTable
+  }
+  
+  DATABASE "Dataset Database" as DatasetDB {
+    table "Datasets" as DatasetTable
+    table "Dataset Metadata" as DatasetMetaTable
+  }
+  
+  DATABASE "Recommendation Database" as RecDB {
+    table "User Browsing History" as HistoryTable
+    table "Recommendation Models" as RecModelTable
+    table "User Preferences" as PrefTable
+  }
+  
+  CLOUD "File Storage" as FileStorage {
+    COMPONENT "Model Files" as ModelFiles
+    COMPONENT "Dataset Files" as DatasetFiles
+    COMPONENT "Blog Assets" as BlogAssets
+  }
+  
+  note right of FileStorage
+    <b>Storage Requirements:</b>
+    - Minimum 30GB available
+    - Scalable storage
+    - Secure file access
+  end note
+}
+
+' ========== INFRASTRUCTURE LAYER ==========
+package "Infrastructure Layer" {
+  RECTANGLE "Spring Boot Application Server" as AppServer
+  RECTANGLE "Load Balancer" as LoadBalancer
+  RECTANGLE "Security Layer" as SecurityLayer
+  RECTANGLE "Monitoring & Logging" as Monitoring
+  
+  note right of AppServer
+    <b>Runtime Requirements:</b>
+    - x86-64 or ARM CPU
+    - Minimum 4GB RAM
+    - Spring Boot Framework
+  end note
+  
+  note right of SecurityLayer
+    <b>Security Features:</b>
+    - Injection Attack Prevention
+    - Secure Authentication
+    - Role-Based Access Control
+    - Data Encryption
+  end note
+}
+
+' ========== EXTERNAL SYSTEMS ==========
+package "External Systems" {
+  CLOUD "Email Service" as EmailService
+  CLOUD "Payment Gateway" as PaymentGateway
+  CLOUD "Model Execution Engine" as ModelEngine
+  
+  note right of EmailService
+    <b>Functions:</b>
+    - Password Recovery Emails
+    - Notification Emails
+  end note
+  
+  note right of PaymentGateway
+    <b>Functions:</b>
+    - Payment Processing
+    - Transaction Verification
+  end note
+  
+  note right of ModelEngine
+    <b>Functions:</b>
+    - Online Model Execution
+    - Result Computation
+    - Dataset Processing
+  end note
+}
+
+' ========== CONNECTIONS ==========
+' User Layer to Presentation Layer
+GeneralUser --> AccountUI : Uses
+GeneralUser --> QnAUI : Uses
+GeneralUser --> BlogUI : Uses
+GeneralUser --> ModelUI : Uses
+GeneralUser --> DatasetUI : Uses
+GeneralUser --> FollowUI : Uses
+Admin --> AdminUI : Uses
+Admin --> AccountUI : Uses
+
+' Presentation Layer to Application Layer
+AccountUI --> AuthService : Authenticates
+AccountUI --> UserService : Manages Profile
+QnAUI --> QnAService : Posts/Edits Questions
+BlogUI --> BlogService : Manages Blogs
+ModelUI --> ModelService : Manages Models
+ModelUI --> PaymentService : Processes Payments
+DatasetUI --> DatasetService : Manages Datasets
+FollowUI --> FollowService : Manages Follows
+AdminUI --> AdminService : Administers
+I18N --> WebInterface : Provides Localization
+
+' Application Layer to Data Layer
+AuthService --> UserDB : Stores Credentials
+UserService --> UserDB : Manages Users
+QnAService --> ContentDB : Stores Q&A
+BlogService --> ContentDB : Stores Blogs
+ModelService --> ModelDB : Stores Model Info
+ModelService --> FileStorage : Stores Model Files
+DatasetService --> DatasetDB : Stores Dataset Info
+DatasetService --> FileStorage : Stores Dataset Files
+PaymentService --> ModelDB : Records Purchases
+RecService --> RecDB : Analyzes Preferences
+FollowService --> UserDB : Manages Relationships
+AdminService --> UserDB : Manages Accounts
+AdminService --> ContentDB : Moderates Content
+AdminService --> ModelDB : Reviews Models
+AdminService --> DatasetDB : Moderates Datasets
+
+' Application Layer to External Systems
+AuthService --> EmailService : Sends Recovery Emails
+PaymentService --> PaymentGateway : Processes Payments
+ModelService --> ModelEngine : Executes Models
+
+' Application Layer Internal Communications
+RecService --> ModelService : Recommends Models
+RecService --> UserService : Analyzes Behavior
+ModelService --> DatasetService : Uses Datasets
+
+' Infrastructure Layer Connections
+AppServer --> SecurityLayer : Enforces Security
+AppServer --> Monitoring : Logs Activities
+LoadBalancer --> AppServer : Distributes Load
+
+' ========== KEY DATA FLOWS ==========
+note top of AuthService
+  <b>Key Data Flow 1: User Registration</b>
+  1. User submits registration form
+  2. AuthService validates data
+  3. UserDB stores account info
+  4. EmailService sends confirmation
+end note
+
+note top of ModelService
+  <b>Key Data Flow 2: Model Upload & Sale</b>
+  1. User uploads model with metadata
+  2. ModelService validates & stores
+  3. ModelDB records model info
+  4. FileStorage stores model files
+  5. PaymentService handles sales
+end note
+
+note top of QnAService
+  <b>Key Data Flow 3: Q&A Community</b>
+  1. User posts question/answer
+  2. QnAService validates content
+  3. ContentDB stores Q&A data
+  4. FollowService notifies followers
+end note
+
+' ========== QUALITY ATTRIBUTES ==========
+note bottom of SecurityLayer
+  <b>Security Requirements:</b>
+  - NFR-001: Multiple security mechanisms
+  - NFR-002: Injection attack prevention
+  - NFR-003: Secure authentication
+end note
+
+note bottom of AppServer
+  <b>Performance Requirements:</b>
+  - NFR-010: 1000 requests/second
+  - NFR-004: 3-second data consistency
+  - NFR-007: >1 year uptime target
+end note
+
+note bottom of UserDB
+  <b>Data Requirements:</b>
+  - DR-001: User account data
+  - DR-002: Question data
+  - DR-003: Answer data
+  - DR-004: Blog article data
+  - DR-005: Blog comment data
+  - DR-006: Model data
+  - DR-007: Dataset data
+  - DR-008: Follow relationship data
+  - DR-009: Recommendation data
+  - DR-010: Admin governance data
+end note
+
+note bottom of WebInterface
+  <b>Usability Requirements:</b>
+  - NFR-005: Modern aesthetic design
+  - NFR-006: Obvious operation entries
+  - NFR-012: Chinese/English support
+end note
+
+' ========== CONSTRAINTS ==========
+note left of AppServer
+  <b>Technical Constraints:</b>
+  - C-001: MySQL, Spring Boot, Vue, TypeScript
+  - C-002: x86-64 or ARM CPU
+  - C-003: ≥4GB RAM
+  - C-004: ≥30GB disk space
+  - C-005: Modern browsers only
+  - C-006: No IE support
+  - C-007: Early May deadline
+end note
+
+' ========== DEPENDENCIES ==========
+note right of RecService
+  <b>Assumptions & Dependencies:</b>
+  - AD-001: Core features require login
+  - AD-002: Admin features require admin role
+  - AD-003: Recommendations use browsing history
+  - AD-004: Dataset ops require existing data
+  - AD-005: Review process undefined
+end note
+
+@enduml

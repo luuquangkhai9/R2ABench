@@ -1,0 +1,111 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Statlord::Browser Editor\nLayout authoring"
+      ],
+      "predicted_nodes": [
+        "Client / Presentation Layer::Web Browser::Editor SPA (TypeScript/React",
+        "Client / Presentation Layer::Web Browser::Redux Store"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT browser editor is represented by the editor SPA plus its Redux state management. Although split into two predicted nodes, the semantic component matches and stays within the correct client/presentation boundary."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Displays\nOLED, e-paper, LCD, browser"
+      ],
+      "predicted_nodes": [
+        "External Systems::API Client (Data Poster/Display Registrar"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node represents the display endpoints/device targets, while the predicted node is an API client that posts data/registers displays. This is a functional mismatch and the boundary is incorrect."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Display Resource\nresolution and state"
+      ],
+      "predicted_nodes": [
+        "Data / Persistence Layer::Data Models / ORM::Display Model",
+        "Server / API Layer::Python/Django App Server::Display API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT display resource is split into the data model and API handling. This is semantically equivalent and the boundaries are acceptable because the resource spans API and persistence concerns."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Gauge Resource\nkey, value"
+      ],
+      "predicted_nodes": [
+        "Data / Persistence Layer::Data Models / ORM::Gauge Model",
+        "Server / API Layer::Python/Django App Server::Gauge API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT gauge resource is split into model and API nodes. This is a valid decomposition with consistent server-side boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Layout Resource\ndata and display positions"
+      ],
+      "predicted_nodes": [
+        "Data / Persistence Layer::Data Models / ORM::Layout Model",
+        "Server / API Layer::Python/Django App Server::Layout API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT layout resource is decomposed into model and API nodes. The semantic match is correct and the boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::PostgreSQL\npersistent models"
+      ],
+      "predicted_nodes": [
+        "Data / Persistence Layer::PostgreSQL"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the PostgreSQL persistence layer. The boundary differs in naming style but is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Python / Django API"
+      ],
+      "predicted_nodes": [
+        "Server / API Layer::Python/Django App Server",
+        "Server / API Layer::Python/Django App Server::Django API Server"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Python/Django API is represented by the application server and its Django API server subnode. This is a correct architectural decomposition within the server/API boundary."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Viewer Instances\nheadless browsers"
+      ],
+      "predicted_nodes": [
+        "External Systems::Headless Browser",
+        "Client / Presentation Layer::Web Browser::Viewer UI (B/W Renderer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT viewer instances are headless browser renderers. The predicted split introduces a viewer UI in the browser client, which is a boundary/context drift away from the GT headless viewer instances."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Build / Deployment Layer::Client Build Pipeline",
+    "Build / Deployment Layer::Containerized Dev Runtime (Python 3.7",
+    "Client / Presentation Layer::Web Browser",
+    "Data / Persistence Layer::Data Models / ORM::Display Model",
+    "Data / Persistence Layer::Data Models / ORM::Gauge Model",
+    "Data / Persistence Layer::Data Models / ORM::Layout Model",
+    "External Systems::Docker Engine",
+    "External Systems::Node.js & npm",
+    "Server / API Layer::Python/Django App Server::Static Asset Serving",
+    "Server / API Layer::Python/Django App Server::Viewer Route"
+  ]
+}

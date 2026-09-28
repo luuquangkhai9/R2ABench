@@ -1,0 +1,120 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::KVM (L0",
+        "KVM (L0::Hyper-V (L1) - Host"
+      ],
+      "predicted_nodes": [
+        "Global::Virtualization Layer",
+        "Virtualization Layer::Hypervisor"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These GT nodes represent the top-level virtualization host / Hyper-V layer. The predicted nodes use a more generic but semantically equivalent virtualization boundary."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2",
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2::harness.sys"
+      ],
+      "predicted_nodes": [
+        "Virtualization Layer::Windows Child Partition VM",
+        "Virtualization Layer::Windows Child Partition VM::Harness Driver"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT child partition guest VM and its harness driver are accurately reproduced as a Windows child partition VM boundary with a harness driver component."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2",
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::CrashMonitoring.sys",
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::vmswitch.sys"
+      ],
+      "predicted_nodes": [
+        "Virtualization Layer::Windows Root Partition VM",
+        "Virtualization Layer::Windows Root Partition VM::Crash Monitor",
+        "Virtualization Layer::Windows Root Partition VM::VMSwitch Target"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT root partition host OS contains crash monitoring and vmswitch components. The AI split this into a root partition VM boundary plus corresponding crash monitor and VMSwitch target nodes, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "predicted_nodes": [
+        "Host System::hAFL2 Fuzzing Platform",
+        "Host System::hAFL2 Fuzzing Platform::Fuzzing Controller",
+        "Host System::hAFL2 Fuzzing Platform::Linux Fuzzing Workflow",
+        "Host System::hAFL2 Fuzzing Platform::Test Runner",
+        "Host System::hAFL2 Fuzzing Platform::Windows Fuzzing Workflow",
+        "Host System::hAFL2 Fuzzing Platform::kAFL-Fuzzer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT hAFL2 node is expanded into platform-level host components and workflows. This is a reasonable decomposition of the same system boundary."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2::harness.sys"
+      ],
+      "predicted_nodes": [
+        "Virtualization Layer::Windows Child Partition VM::Harness Driver"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The harness driver corresponds directly to the GT harness.sys within the child partition VM."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::CrashMonitoring.sys"
+      ],
+      "predicted_nodes": [
+        "Virtualization Layer::Windows Root Partition VM::Crash Monitor"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "CrashMonitoring.sys is semantically equivalent to the crash monitor component in the root partition."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::vmswitch.sys"
+      ],
+      "predicted_nodes": [
+        "Virtualization Layer::Windows Root Partition VM::VMSwitch Target"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "vmswitch.sys is correctly represented as the VMSwitch target within the root partition VM."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "External Systems::Build Tools",
+    "External Systems::Command Line Interface",
+    "External Systems::VM Management",
+    "External Systems::Visual Studio",
+    "Global::External Systems",
+    "Global::Host System",
+    "Host System::Effector Maps",
+    "Host System::Mutation Payloads",
+    "Host System::Shared Libraries",
+    "Host System::Target Binaries",
+    "Host System::hAFL2 Fuzzing Platform",
+    "Host System::hAFL2 Fuzzing Platform::Fuzzing Controller",
+    "Host System::hAFL2 Fuzzing Platform::Linux Fuzzing Workflow",
+    "Host System::hAFL2 Fuzzing Platform::Test Runner",
+    "Host System::hAFL2 Fuzzing Platform::Windows Fuzzing Workflow",
+    "Host System::hAFL2 Fuzzing Platform::kAFL-Fuzzer",
+    "Virtualization Layer::Linux Guest VM",
+    "Virtualization Layer::Linux Guest VM::Embedded Forkserver",
+    "Virtualization Layer::Linux Guest VM::Linux Target Binary",
+    "Virtualization Layer::Linux Guest VM::initrd Image",
+    "Virtualization Layer::Windows Child Partition VM::Crash Monitor",
+    "Virtualization Layer::Windows Child Partition VM::loader.exe",
+    "Virtualization Layer::Windows Child Partition VM::packet_sender.exe"
+  ]
+}

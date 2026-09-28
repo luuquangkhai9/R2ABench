@@ -1,0 +1,66 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine::pulltop"
+      ],
+      "predicted_nodes": [
+        "GCP Project::GKE Cluster::Deployment: Adapter (1 topic per deployment::Pod (replicas N::Adapter Container::pulltop (Node.js)\\nconsume topic messages"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both refer to the pulltop runtime process, but GT places it under Compute Engine while the prediction places it inside a GKE pod/container. This is a significant boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine::websocketd"
+      ],
+      "predicted_nodes": [
+        "GCP Project::GKE Cluster::Deployment: Adapter (1 topic per deployment::Pod (replicas N::Adapter Container::websocketd\\nlisten :8080"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both refer to websocketd, but GT places it under Compute Engine while the prediction places it in a Kubernetes pod/container boundary. The functional component matches, but the architectural boundary does not."
+    },
+    {
+      "gt_nodes": [
+        "pubsub-public-data project::Cloud Pub/Sub\\ntopic"
+      ],
+      "predicted_nodes": [
+        "Google Cloud Pub/Sub::Topic"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Pub/Sub topic source. The project boundary naming differs, but it is semantically equivalent and correctly placed in the Pub/Sub boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Browser"
+      ],
+      "predicted_nodes": [
+        "GCP Project::GKE Cluster::Kubernetes Service\\nType: LoadBalancer\\nTCP 80 -> Pod 8080"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No direct node equivalent for Browser was explicitly drawn in the prediction; the service node is infrastructure, not the browser/client actor."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Browser",
+    "Your GCP project::Compute Engine"
+  ],
+  "unmatched_predicted_nodes": [
+    "GCP Project::GKE Cluster",
+    "GCP Project::GKE Cluster::Deployment: Adapter (1 topic per deployment",
+    "GCP Project::GKE Cluster::Deployment: Adapter (1 topic per deployment::Pod (replicas N",
+    "GCP Project::GKE Cluster::Deployment: Adapter (1 topic per deployment::Pod (replicas N::Adapter Container",
+    "GCP Project::GKE Cluster::Deployment: Adapter (1 topic per deployment::Pod (replicas N::Adapter Container::Recent Message Cache\\n(last 10 messages",
+    "GCP Project::GKE Cluster::Deployment: Adapter (1 topic per deployment::Pod (replicas N::Adapter Container::exec.sh\\n(entrypoint",
+    "GCP Project::GKE Cluster::Horizontal Pod Autoscaler (HPA)\\nmin=1, max=2, CPU=80%",
+    "GCP Project::GKE Cluster::Kubernetes ConfigMap\\nitem: topic -> env SYMBOL",
+    "GCP Project::GKE Cluster::Kubernetes Service\\nType: LoadBalancer\\nTCP 80 -> Pod 8080",
+    "Global::GCP Project",
+    "Global::Google Cloud Pub/Sub",
+    "Google Cloud Pub/Sub::Subscription\\n(1 per running Pod"
+  ]
+}

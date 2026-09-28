@@ -1,0 +1,83 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Worker\\nThread"
+      ],
+      "predicted_nodes": [
+        "Parallel Execution Layer::Thread Pool::Worker Threads"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct functional match for the threads that execute tasks, as described in section 1.4 and C-003. The GT's runtime boundary 'Compute node::MPI Process' is semantically equivalent to the AI's logical 'Parallel Execution Layer::Thread Pool' boundary for this component."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Task Queue",
+        "Task Queue (in detail::...",
+        "Task Queue (in detail::A1",
+        "Task Queue (in detail::A2",
+        "Task Queue (in detail::A3",
+        "Task Queue (in detail::B1",
+        "Task Queue (in detail::B2",
+        "Task Queue (in detail::Level 0",
+        "Task Queue (in detail::Level 1",
+        "Task Queue (in detail::Level 2",
+        "Task Queue (in detail::Level 3",
+        "Task Queue (in detail::Level 4",
+        "Task Queue (in detail::Level 5"
+      ],
+      "predicted_nodes": [
+        "Parallel Execution Layer::Thread Pool::Worker Queues"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregates the GT's main Task Queue node and its exploded detail view into a single logical component 'Worker Queues' (DE-005, FR-001). The GT's runtime boundary is semantically equivalent to the AI's logical layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "External Dependencies::MPI Runtime"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the underlying MPI system as an external dependency (AD-001, C-002). The 'Global' boundary in GT is semantically equivalent to 'External Dependencies' in the AI's prediction."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Server\\nThread"
+      ],
+      "predicted_nodes": [
+        "Core Runtime System::Task Manager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'Server Thread', implied by PRD C-006, likely handles task orchestration and state management. This function is best represented by the AI's 'Task Manager'. The AI further refines other server-related duties into separate components (e.g., Task Stealing Manager). The boundaries are semantically consistent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Compute node::MPI Process"
+  ],
+  "unmatched_predicted_nodes": [
+    "Configuration & Environment::Environment Variables",
+    "Configuration & Environment::Runtime Configuration",
+    "Core Runtime System::Callback Handler",
+    "Core Runtime System::Map Executor",
+    "Core Runtime System::Task Descriptor Store",
+    "Core Runtime System::Worker Scheduler",
+    "External Dependencies::Optional Libraries",
+    "External Dependencies::Python Runtime",
+    "Parallel Execution Layer::MPI Layer::MPI Communicator",
+    "Parallel Execution Layer::MPI Layer::SPMD Executor",
+    "Parallel Execution Layer::MPI Layer::Task Stealing Manager",
+    "Python Application Layer::Application Code",
+    "Python Application Layer::Example Applications",
+    "Python Application Layer::Test Suite",
+    "torc Public API::Control API",
+    "torc Public API::Query API",
+    "torc Public API::SPMD API",
+    "torc Public API::Task Submission API"
+  ]
+}

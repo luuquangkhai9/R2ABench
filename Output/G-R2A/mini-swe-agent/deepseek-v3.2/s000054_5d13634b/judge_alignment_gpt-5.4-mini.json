@@ -1,0 +1,160 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::controller.sol"
+      ],
+      "predicted_nodes": [
+        "Smart Contract Layer::Controller Contracts",
+        "Smart Contract Layer::Controller Contracts::Admin Management",
+        "Smart Contract Layer::Controller Contracts::Control Operations",
+        "Smart Contract Layer::Controller Contracts::Count Registry"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT controller contract is decomposed into a controller contract group plus its read-only/admin/control subfunctions. This is a semantically consistent refinement within the smart contract layer."
+    },
+    {
+      "gt_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::license.sol"
+      ],
+      "predicted_nodes": [
+        "Smart Contract Layer::Licence/Oracle Contract"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The license contract maps to the predicted licence/oracle contract boundary, which is functionally aligned."
+    },
+    {
+      "gt_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::oracle.sol"
+      ],
+      "predicted_nodes": [
+        "Smart Contract Layer::Licence/Oracle Contract",
+        "Smart Contract Layer::Licence/Oracle Contract::Rate Integration",
+        "Oracle/Rate Provider::Exchange Rate Data"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT oracle contract is represented as a combined licence/oracle contract with rate integration and exchange-rate data details. This is a reasonable functional split without boundary confusion."
+    },
+    {
+      "gt_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::tokenWhitelist.sol"
+      ],
+      "predicted_nodes": [
+        "Smart Contract Layer::Token Whitelist Contract",
+        "Smart Contract Layer::Token Whitelist Contract::Loadability Rules",
+        "Smart Contract Layer::Token Whitelist Contract::Rate Storage",
+        "Smart Contract Layer::Token Whitelist Contract::Token Registry"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The whitelist contract is expanded into its key responsibilities: token registry, rate storage, and loadability rules. This preserves the same architectural boundary."
+    },
+    {
+      "gt_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::wallet.sol"
+      ],
+      "predicted_nodes": [
+        "Smart Contract Layer::Consumer Contract Wallet",
+        "Smart Contract Layer::Consumer Contract Wallet::ETH/ERC20 Asset Storage",
+        "Smart Contract Layer::Consumer Contract Wallet::Wallet Operations"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The consumer wallet contract is correctly mapped to the consumer contract wallet and its internal asset storage/operations. Boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::walletCache.sol"
+      ],
+      "predicted_nodes": [
+        "Smart Contract Layer::Consumer Contract Wallet::Wallet Operations"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Wallet cache functionality appears to be absorbed into wallet operations in the predicted model. This is acceptable as a functional consolidation within the wallet contract boundary."
+    },
+    {
+      "gt_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::walletDeployer.sol"
+      ],
+      "predicted_nodes": [
+        "Smart Contract Layer::Consumer Contract Wallet",
+        "Smart Contract Layer::Consumer Contract Wallet::Wallet Operations"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The deployer is represented as part of the wallet-related smart contract structure. Although simplified, it remains within the correct smart contract boundary."
+    },
+    {
+      "gt_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::TKN Holder Contract\\nholder.sol"
+      ],
+      "predicted_nodes": [
+        "Smart Contract Layer::Token Whitelist Contract"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT TKN holder contract is not modeled as a separate node, but its burnability-related responsibilities are folded into the token whitelist contract, which is functionally related and acceptable at this abstraction level."
+    },
+    {
+      "gt_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::Proxy.sol"
+      ],
+      "predicted_nodes": [
+        "Smart Contract Layer::Consumer Contract Wallet"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The proxy is not explicitly represented, but the predicted architecture places the relevant wallet behavior under the smart contract layer rather than a conflicting boundary. This is a coarse but acceptable consolidation."
+    },
+    {
+      "gt_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::Gnosis MultiSig\\ncryptofloat.tokencard.eth"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Controller Addresses",
+        "Smart Contract Layer::Controller Contracts"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT multisig/ENS-related controller element is only loosely reflected. The predicted controller address/data modeling and controller contracts do not cleanly preserve the multisig contract boundary, so this is not a precise boundary match."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "TokenCard Contracts\\nHigh Level Architecture::Gnosis MultiSig\\ncryptofloat.tokencard.eth",
+    "TokenCard Contracts\\nHigh Level Architecture::Proxy.sol"
+  ],
+  "unmatched_predicted_nodes": [
+    "Data Layer::Controller Addresses",
+    "Data Layer::Gas Tank",
+    "Data Layer::Owner Address",
+    "Ethereum Name Service (ENS::ENS Registry",
+    "Ethereum Network::Blockchain",
+    "Global::Ethereum Name Service (ENS",
+    "Global::Ethereum Network",
+    "Global::Oracle/Rate Provider",
+    "Integration Layer::Go Bindings",
+    "Integration Layer::Go Bindings::Paid Transactions",
+    "Integration Layer::Go Bindings::Read-only Calls",
+    "Integration Layer::Go Bindings::Transfer Operations",
+    "Integration Layer::Integrator/Developer",
+    "Integration Layer::Integrator/Developer::Application Code",
+    "Oracle/Rate Provider::Exchange Rate Data",
+    "Smart Contract Layer::Consumer Contract Wallet",
+    "Smart Contract Layer::Consumer Contract Wallet::ETH/ERC20 Asset Storage",
+    "Smart Contract Layer::Consumer Contract Wallet::Wallet Operations",
+    "Smart Contract Layer::Controller Contracts",
+    "Smart Contract Layer::Controller Contracts::Admin Management",
+    "Smart Contract Layer::Controller Contracts::Control Operations",
+    "Smart Contract Layer::Controller Contracts::Count Registry",
+    "Smart Contract Layer::Licence/Oracle Contract",
+    "Smart Contract Layer::Licence/Oracle Contract::Rate Integration",
+    "Smart Contract Layer::Token Whitelist Contract",
+    "Smart Contract Layer::Token Whitelist Contract::Loadability Rules",
+    "Smart Contract Layer::Token Whitelist Contract::Rate Storage",
+    "Smart Contract Layer::Token Whitelist Contract::Token Registry"
+  ]
+}

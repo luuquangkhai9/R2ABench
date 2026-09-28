@@ -1,0 +1,114 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Audit\\nService"
+      ],
+      "predicted_nodes": [
+        "Core Runtime Services::Audit Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Audit Service. The predicted boundary is different but semantically equivalent to the GT runtime application context."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Notification\\nService"
+      ],
+      "predicted_nodes": [
+        "Supporting Services::Notification Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Notification Service. The predicted boundary is a reasonable architectural grouping and does not change the component meaning."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Query\\nService"
+      ],
+      "predicted_nodes": [
+        "Core Runtime Services::Query Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Query Service. The predicted boundary is semantically aligned with the GT service role."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Customer\\nLogic",
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Out of the\\nBox Services"
+      ],
+      "predicted_nodes": [
+        "Supporting Services::Cloud Connectors"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates cloud connector subcomponents into two nodes, while the AI aggregates them into a single Cloud Connectors node. This is a valid merge and the boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::BPMN, Form\\nand Rule Defs",
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::Process\\nRuntime"
+      ],
+      "predicted_nodes": [
+        "Core Runtime Services::Example Runtime Bundle",
+        "Core Runtime Services::ProcessRuntime API",
+        "Process Components::SimpleProcess Definition",
+        "Process Components::Process Instance",
+        "Process Components::Human Participant"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Runtime Bundle node is split into several more specific runtime and process-related nodes. This is semantically consistent, and the predicted boundaries remain within the runtime/process domain."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Gateway"
+      ],
+      "predicted_nodes": [
+        "API Gateway & Routing::Gateway/API Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes denote the gateway component. The predicted boundary elaborates the role but remains semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Config Maps\\n(Kubernetes",
+        "Activiti Cloud Infrastructure::Registry\\n(Kubernetes"
+      ],
+      "predicted_nodes": [
+        "Deployment & Configuration::Registry/Config Maps"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates registry and config map concepts, while the prediction merges them. This is acceptable and the boundary attribution is still aligned with deployment/configuration infrastructure."
+    },
+    {
+      "gt_nodes": [
+        "Global::SSO/IDM\\n(Keycloak"
+      ],
+      "predicted_nodes": [
+        "Identity & Access Management::Keycloak"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to Keycloak as the identity provider. The predicted IAM boundary is semantically equivalent to the GT global identity component."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Client"
+  ],
+  "unmatched_predicted_nodes": [
+    "API Gateway & Routing::NGINX Ingress Controller",
+    "Core Runtime Services::TaskRuntime API",
+    "Deployment & Configuration::Deployment Descriptors",
+    "Deployment & Configuration::Kubernetes/GKE",
+    "External Environment::Cluster Operator",
+    "External Environment::Developer/Integrator",
+    "External Environment::External User",
+    "External Environment::Public IP",
+    "Identity & Access Management::Authentication Token",
+    "Identity & Access Management::Spring Security"
+  ]
+}

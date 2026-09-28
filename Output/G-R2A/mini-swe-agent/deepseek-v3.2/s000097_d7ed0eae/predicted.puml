@@ -1,0 +1,104 @@
+@startuml
+!define LAYER_COLOR #E6F3FF
+!define COMPONENT_COLOR #F0F8FF
+!define DATABASE_COLOR #FFF0F5
+!define EXTERNAL_COLOR #F5F5DC
+
+skinparam component {
+  BackgroundColor<<Layer>> LAYER_COLOR
+  BackgroundColor<<Component>> COMPONENT_COLOR
+  BackgroundColor<<Database>> DATABASE_COLOR
+  BackgroundColor<<External>> EXTERNAL_COLOR
+  BorderColor #333333
+  ArrowColor #333333
+}
+
+title BeeGreen System Architecture
+
+package "Client Layer" <<Layer>> {
+  [React/TypeScript Website] <<Component>>
+  [Chrome Browser Extension] <<Component>>
+}
+
+package "API Layer" <<Layer>> {
+  [Node.js/LoopBack Backend API] <<Component>> {
+    [User Controller] <<Component>>
+    [Ping Controller] <<Component>>
+    [User Repository] <<Component>>
+  }
+}
+
+package "Data Layer" <<Layer>> {
+  database "User Database" <<Database>> {
+    [User Records]
+  }
+  
+  database "Inventory Database" <<Database>> {
+    [InventoryItem Records]
+  }
+}
+
+package "External/Supporting Layer" <<Layer>> {
+  [Sustainability Scoring Service] <<External>>
+  [Recommendation Workflows] <<External>>
+  [Data Processing Assets] <<External>>
+}
+
+' Client to API connections
+[React/TypeScript Website] --> [User Controller] : HTTP/JSON\nPOST/GET/PATCH /users
+[React/TypeScript Website] --> [Ping Controller] : HTTP/JSON\nGET /ping
+[Chrome Browser Extension] --> [User Controller] : HTTP/JSON\nPOST/GET/PATCH /users
+[Chrome Browser Extension] --> [Ping Controller] : HTTP/JSON\nGET /ping
+
+' API internal connections
+[User Controller] --> [User Repository] : CRUD operations
+[Ping Controller] --> [HTTP Context] : Request data
+
+' API to Data connections
+[User Repository] --> [User Database] : Persist/Retrieve\nUser entities
+[User Repository] --> [Inventory Database] : Access\nInventoryItem entities
+
+' Supporting services connections
+[User Controller] ..> [Sustainability Scoring Service] : May use for\nfuture features
+[User Controller] ..> [Recommendation Workflows] : May use for\nfuture features
+[Sustainability Scoring Service] --> [Data Processing Assets] : Uses
+[Recommendation Workflows] --> [Data Processing Assets] : Uses
+
+note right of [User Controller]
+  Endpoints:
+  - POST /users (create)
+  - GET /users (list with filter)
+  - PATCH /users (bulk update)
+  - GET /users/{id} (read by id)
+end note
+
+note right of [Ping Controller]
+  Endpoint:
+  - GET /ping (diagnostic)
+  Returns: greeting, date,
+  url, headers
+end note
+
+note bottom of [User Database]
+  Stores User entities with:
+  - id (string)
+  - ip (string)
+  - creationDate (date)
+  - purchaseIds (string[])
+  - username (string)
+  - region (string)
+end note
+
+note bottom of [Inventory Database]
+  Stores InventoryItem entities with:
+  - id (string)
+  - stats (object)
+  - totalScore (number)
+  - category (string)
+  - details (string)
+  - comments (object[])
+  - name (string)
+  - associatedStores (string[])
+end note
+
+@enduml

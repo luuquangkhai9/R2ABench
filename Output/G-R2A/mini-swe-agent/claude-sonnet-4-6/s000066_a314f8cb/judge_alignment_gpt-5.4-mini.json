@@ -1,0 +1,88 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Browser Clients::Client Browser\nPlayer 1",
+        "Browser Clients::Client Browser\nPlayer 2",
+        "Browser Clients::Client Browser\nPlayer 3"
+      ],
+      "predicted_nodes": [
+        "Browser Client Layer::Three.js Game Client"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has multiple browser client instances, while the prediction aggregates them into a single browser client component. Functionally equivalent at the architecture level, and the browser client boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\nErlang"
+      ],
+      "predicted_nodes": [
+        "Game Server Layer (Erlang/OTP::Master Game Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the master game server node in the Erlang/OTP backend. Boundary attribution is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Slave\nErlang"
+      ],
+      "predicted_nodes": [
+        "Fault Tolerance Layer (Erlang/OTP::Replica / Slave Node"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted replica/slave node matches the GT slave server role. The fault-tolerance/replica boundary is semantically consistent with the GT cluster boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::DNS"
+      ],
+      "predicted_nodes": [
+        "Network Infrastructure::DNS / Load Balancer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "DNS is explicitly present in the GT and the predicted node includes DNS. Adding load balancer is compatible with the PRD context and does not conflict with the GT boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Erlang / OTP Game Server Cluster"
+      ],
+      "predicted_nodes": [
+        "Global::Game Server Layer (Erlang/OTP"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the overall Erlang/OTP game server cluster. The predicted naming is slightly different but semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Static Web Tier::Web Server\nGame assets, HTML, CSS, JS"
+      ],
+      "predicted_nodes": [
+        "Web Server Layer::Static Asset Server\n(HTML, CSS, JS, Images"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the static web server responsible for serving game assets and frontend files. The boundary and role are consistent."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Browser Client Layer::Asset Loader",
+    "Browser Client Layer::Heartbeat Manager\n(ping/pong, 60s interval",
+    "Browser Client Layer::Message Handler\n(JSON [action, data?",
+    "Browser Client Layer::Reconnect Manager",
+    "Browser Client Layer::Room Manager\n(room ID, player ID, ship index",
+    "Browser Client Layer::WebSocket Client",
+    "Game Server Layer (Erlang/OTP::Room Session Manager",
+    "Game Server Layer (Erlang/OTP::Server List Provider",
+    "Game Server Layer (Erlang/OTP::WebSocket Handler",
+    "Global::Browser Client Layer",
+    "Global::Fault Tolerance Layer (Erlang/OTP",
+    "Global::Network Infrastructure",
+    "Global::Web Server Layer"
+  ]
+}

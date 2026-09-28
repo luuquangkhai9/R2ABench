@@ -1,0 +1,38 @@
+@startuml
+skinparam componentStyle rectangle
+
+actor Epidemiological\nForm Filler as Filler
+actor Epidemiological\nAnalyst as Analyst
+
+rectangle Presentation Layer {
+  component Web Front-End\n(Reporting Forms,\nCase Management,\nMap/Association/Charts) as FE
+  component Charting Library as Charts
+  component Map Visualization Library as MapLib
+}
+
+rectangle Application/Service Layer {
+  component API Backend\n(REST, Business Logic) as API
+  component Algorithm Module\n(Risk Analysis, Clustering,\nRelationship Graph) as Algo
+}
+
+rectangle Data Layer {
+  database Back-End Database\n(Cases, Itineraries,\nAssociations) as DB
+}
+
+rectangle External Systems {
+  component Map / Geocoding Service as MapSvc
+}
+
+Filler --> FE
+Analyst --> FE
+
+FE --> API : HTTP(S)
+FE --> Charts
+FE --> MapLib
+MapLib --> MapSvc : tiles/geocoding
+
+API --> DB : queries
+API --> Algo : analysis jobs
+Algo --> DB : read/write
+
+@enduml

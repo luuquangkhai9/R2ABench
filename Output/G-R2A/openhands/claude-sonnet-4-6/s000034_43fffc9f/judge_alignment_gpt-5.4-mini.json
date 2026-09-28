@@ -1,0 +1,483 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Compute node::MPI Process",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "torc Package::Execution Layer::MPI Process (Rank 0::Primary Application Task",
+        "torc Package::Execution Layer::MPI Process (Rank 0::Server Thread",
+        "torc Package::Execution Layer::MPI Process (Rank 0::Worker Queue 0",
+        "torc Package::Execution Layer::MPI Process (Rank 0::Worker Thread Pool\\n(TORC_WORKERS",
+        "torc Package::Execution Layer::MPI Process (Rank N::Server Thread",
+        "torc Package::Execution Layer::MPI Process (Rank N::Worker Queue N",
+        "torc Package::Execution Layer::MPI Process (Rank N::Worker Thread Pool\\n(TORC_WORKERS"
+      ],
+      "reasoning": "The predicted architecture includes MPI process-level execution units and their internal runtime structure, covering the GT MPI process concept."
+    },
+    {
+      "gt_node": "Compute node::MPI Process::Server\\nThread",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "torc Package::Execution Layer::MPI Process (Rank 0::Server Thread",
+        "torc Package::Execution Layer::MPI Process (Rank N::Server Thread"
+      ],
+      "reasoning": "The server thread is explicitly represented for MPI rank 0 and rank N."
+    },
+    {
+      "gt_node": "Compute node::MPI Process::Task Queue",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "torc Package::Execution Layer::MPI Process (Rank 0::Worker Queue 0",
+        "torc Package::Execution Layer::MPI Process (Rank N::Worker Queue N",
+        "torc Package::Task Management::Task Scheduler\\n(Cyclic Assignment"
+      ],
+      "reasoning": "Worker queues and cyclic scheduling together cover the task queue responsibility in the GT diagram."
+    },
+    {
+      "gt_node": "Compute node::MPI Process::Worker\\nThread",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "torc Package::Execution Layer::MPI Process (Rank 0::Worker Thread Pool\\n(TORC_WORKERS",
+        "torc Package::Execution Layer::MPI Process (Rank N::Worker Thread Pool\\n(TORC_WORKERS",
+        "External Runtime::Python Threading\\nSubsystem"
+      ],
+      "reasoning": "The worker-thread pool directly corresponds to the worker thread concept."
+    },
+    {
+      "gt_node": "Global::MPI",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Runtime::MPI Runtime\\n(mpi4py",
+        "torc Package::Inter-Process Communication::MPI Communication Layer\\n(mpi4py"
+      ],
+      "reasoning": "MPI is represented as an external runtime and an internal communication layer."
+    },
+    {
+      "gt_node": "Task Queue (in detail::...",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "torc Package::Execution Layer::MPI Process (Rank 0::Worker Queue 0",
+        "torc Package::Execution Layer::MPI Process (Rank N::Worker Queue N",
+        "torc Package::Task Management::Task Scheduler\\n(Cyclic Assignment",
+        "torc Package::Inter-Process Communication::Task Stealing Engine\\n(TORC_STEALING"
+      ],
+      "reasoning": "The detailed task queue structure is covered by the worker queues, scheduler, and stealing engine."
+    },
+    {
+      "gt_node": "Task Queue (in detail::A1",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node expresses this specific detailed sub-queue node."
+    },
+    {
+      "gt_node": "Task Queue (in detail::A2",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node expresses this specific detailed sub-queue node."
+    },
+    {
+      "gt_node": "Task Queue (in detail::A3",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node expresses this specific detailed sub-queue node."
+    },
+    {
+      "gt_node": "Task Queue (in detail::B1",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node expresses this specific detailed sub-queue node."
+    },
+    {
+      "gt_node": "Task Queue (in detail::B2",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node expresses this specific detailed sub-queue node."
+    },
+    {
+      "gt_node": "Task Queue (in detail::Level 0",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node expresses this specific hierarchical level node."
+    },
+    {
+      "gt_node": "Task Queue (in detail::Level 1",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node expresses this specific hierarchical level node."
+    },
+    {
+      "gt_node": "Task Queue (in detail::Level 2",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node expresses this specific hierarchical level node."
+    },
+    {
+      "gt_node": "Task Queue (in detail::Level 3",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node expresses this specific hierarchical level node."
+    },
+    {
+      "gt_node": "Task Queue (in detail::Level 4",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node expresses this specific hierarchical level node."
+    },
+    {
+      "gt_node": "Task Queue (in detail::Level 5",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node expresses this specific hierarchical level node."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Application Layer::Python Application",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::MPI"
+      ],
+      "reasoning": "This is a reasonable surrounding application actor implied by the PRD, though not explicitly drawn in GT."
+    },
+    {
+      "predicted_node": "Example Workloads::Image Preprocessing\\nExample",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node represents examples or workload-specific example diagrams."
+    },
+    {
+      "predicted_node": "Example Workloads::Master-Worker\\nExample",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node represents this example workload."
+    },
+    {
+      "predicted_node": "Example Workloads::Numerical Optimization\\nExample",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node represents this example workload."
+    },
+    {
+      "predicted_node": "Example Workloads::SPMD Switching\\nExample",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node represents this example workload."
+    },
+    {
+      "predicted_node": "Example Workloads::Task Stealing\\nExample",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node represents this example workload."
+    },
+    {
+      "predicted_node": "External Runtime::MPI Runtime\\n(mpi4py",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::MPI"
+      ],
+      "reasoning": "This grounds the GT MPI concept as an external runtime dependency."
+    },
+    {
+      "predicted_node": "External Runtime::Python Threading\\nSubsystem",
+      "grounded": true,
+      "reference_nodes": [
+        "Compute node::MPI Process::Worker\\nThread"
+      ],
+      "reasoning": "This corresponds to the worker-thread execution concept in the GT."
+    },
+    {
+      "predicted_node": "Global::HDF5 Output File",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is only supported by PRD example context, not present in the GT diagram."
+    },
+    {
+      "predicted_node": "Global::Image Dataset\\n(Labeled Subfolders",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is only supported by PRD example context, not present in the GT diagram."
+    },
+    {
+      "predicted_node": "Optional Dependencies::cma",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT concept corresponds to optional dependency nodes."
+    },
+    {
+      "predicted_node": "Optional Dependencies::h5py",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT concept corresponds to optional dependency nodes."
+    },
+    {
+      "predicted_node": "Optional Dependencies::numpy",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT concept corresponds to optional dependency nodes."
+    },
+    {
+      "predicted_node": "Optional Dependencies::pillow",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT concept corresponds to optional dependency nodes."
+    },
+    {
+      "predicted_node": "Optional Dependencies::termcolor",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT concept corresponds to optional dependency nodes."
+    },
+    {
+      "predicted_node": "torc Package::Execution Layer::MPI Process (Rank 0::Primary Application Task",
+      "grounded": true,
+      "reference_nodes": [
+        "Compute node::MPI Process",
+        "Global::MPI"
+      ],
+      "reasoning": "This is consistent with the primary rank-0 execution role in the PRD, but it is more specific than the GT node set."
+    },
+    {
+      "predicted_node": "torc Package::Execution Layer::MPI Process (Rank 0::Server Thread",
+      "grounded": true,
+      "reference_nodes": [
+        "Compute node::MPI Process::Server\\nThread"
+      ],
+      "reasoning": "Directly corresponds to the GT server thread concept."
+    },
+    {
+      "predicted_node": "torc Package::Execution Layer::MPI Process (Rank 0::Worker Queue 0",
+      "grounded": true,
+      "reference_nodes": [
+        "Compute node::MPI Process::Task Queue",
+        "Task Queue (in detail::..."
+      ],
+      "reasoning": "This is a specific instantiation of the GT task queue."
+    },
+    {
+      "predicted_node": "torc Package::Execution Layer::MPI Process (Rank 0::Worker Thread Pool\\n(TORC_WORKERS",
+      "grounded": true,
+      "reference_nodes": [
+        "Compute node::MPI Process::Worker\\nThread"
+      ],
+      "reasoning": "The worker thread pool grounds the GT worker thread concept."
+    },
+    {
+      "predicted_node": "torc Package::Execution Layer::MPI Process (Rank N::Server Thread",
+      "grounded": true,
+      "reference_nodes": [
+        "Compute node::MPI Process::Server\\nThread"
+      ],
+      "reasoning": "Directly corresponds to the GT server thread concept."
+    },
+    {
+      "predicted_node": "torc Package::Execution Layer::MPI Process (Rank N::Worker Queue N",
+      "grounded": true,
+      "reference_nodes": [
+        "Compute node::MPI Process::Task Queue",
+        "Task Queue (in detail::..."
+      ],
+      "reasoning": "This is a specific instantiation of the GT task queue."
+    },
+    {
+      "predicted_node": "torc Package::Execution Layer::MPI Process (Rank N::Worker Thread Pool\\n(TORC_WORKERS",
+      "grounded": true,
+      "reference_nodes": [
+        "Compute node::MPI Process::Worker\\nThread"
+      ],
+      "reasoning": "The worker thread pool grounds the GT worker thread concept."
+    },
+    {
+      "predicted_node": "torc Package::Inter-Process Communication::MPI Communication Layer\\n(mpi4py",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::MPI"
+      ],
+      "reasoning": "This grounds the GT MPI concept as internal communication infrastructure."
+    },
+    {
+      "predicted_node": "torc Package::Inter-Process Communication::Task Stealing Engine\\n(TORC_STEALING",
+      "grounded": true,
+      "reference_nodes": [
+        "Compute node::MPI Process::Task Queue",
+        "Task Queue (in detail::..."
+      ],
+      "reasoning": "Task stealing is part of the GT task queue behavior and detailed queue mechanism."
+    },
+    {
+      "predicted_node": "torc Package::Public API::Lifecycle API\\nstart / init / launch / shutdown",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::MPI"
+      ],
+      "reasoning": "This corresponds to runtime lifecycle control described in the PRD, though no dedicated GT node exists."
+    },
+    {
+      "predicted_node": "torc Package::Public API::Query API\\nworker_id / num_workers\\nnode_id / num_nodes / gettime",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::MPI"
+      ],
+      "reasoning": "This is supported by the PRD's runtime query functions, but not explicitly represented in the GT diagram."
+    },
+    {
+      "predicted_node": "torc Package::Public API::SPMD API\\nspmd",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::MPI"
+      ],
+      "reasoning": "This is grounded in the PRD's SPMD execution concept, though not explicitly drawn in GT."
+    },
+    {
+      "predicted_node": "torc Package::Public API::Stealing Control API\\nenable_stealing / disable_stealing",
+      "grounded": true,
+      "reference_nodes": [
+        "Compute node::MPI Process::Task Queue",
+        "Task Queue (in detail::..."
+      ],
+      "reasoning": "This is a control surface for the GT task-stealing/task-queue behavior."
+    },
+    {
+      "predicted_node": "torc Package::Public API::Task Submission API\\nsubmit / wait / map / as_completed",
+      "grounded": true,
+      "reference_nodes": [
+        "Compute node::MPI Process::Task Queue",
+        "Compute node::MPI Process::Worker\\nThread",
+        "Global::MPI"
+      ],
+      "reasoning": "Task submission, waiting, mapping, and completion ordering are all consistent with the GT runtime concepts, though no single GT node aggregates these APIs."
+    },
+    {
+      "predicted_node": "torc Package::Runtime Configuration::Environment Variables\\nTORC_WORKERS\\nTORC_STEALING\\nTORC_SERVER_YIELDTIME\\nTORC_WORKER_YIELDTIME",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "Environment-variable configuration is in the PRD, but there is no corresponding GT node in the manual diagram."
+    },
+    {
+      "predicted_node": "torc Package::Task Management::Callback Executor",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "Callbacks are part of the PRD, but no GT node represents callback execution."
+    },
+    {
+      "predicted_node": "torc Package::Task Management::Parallel Map Engine\\n(chunksize",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "Parallel map is in the PRD, but no GT node represents map execution."
+    },
+    {
+      "predicted_node": "torc Package::Task Management::Task Descriptor\\n(Future",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "Task descriptor is a PRD concept, but there is no explicit GT node for it."
+    },
+    {
+      "predicted_node": "torc Package::Task Management::Task Scheduler\\n(Cyclic Assignment",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "Scheduling is present in the PRD, but the GT diagram only shows queue/process-level detail and does not explicitly model a scheduler node."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process"
+      ],
+      "predicted_nodes": [
+        "torc Package::Execution Layer::MPI Process (Rank 0::Primary Application Task",
+        "torc Package::Execution Layer::MPI Process (Rank 0::Server Thread",
+        "torc Package::Execution Layer::MPI Process (Rank 0::Worker Queue 0",
+        "torc Package::Execution Layer::MPI Process (Rank 0::Worker Thread Pool\\n(TORC_WORKERS",
+        "torc Package::Execution Layer::MPI Process (Rank N::Server Thread",
+        "torc Package::Execution Layer::MPI Process (Rank N::Worker Queue N",
+        "torc Package::Execution Layer::MPI Process (Rank N::Worker Thread Pool\\n(TORC_WORKERS"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT single MPI process node is expanded into rank-specific execution-layer components, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Server\\nThread"
+      ],
+      "predicted_nodes": [
+        "torc Package::Execution Layer::MPI Process (Rank 0::Server Thread",
+        "torc Package::Execution Layer::MPI Process (Rank N::Server Thread"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The server thread is preserved under the MPI process execution boundary."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Task Queue"
+      ],
+      "predicted_nodes": [
+        "torc Package::Execution Layer::MPI Process (Rank 0::Worker Queue 0",
+        "torc Package::Execution Layer::MPI Process (Rank N::Worker Queue N",
+        "torc Package::Task Management::Task Scheduler\\n(Cyclic Assignment",
+        "torc Package::Inter-Process Communication::Task Stealing Engine\\n(TORC_STEALING"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT task queue responsibility is split across queue instances and task-management behavior, which is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Worker\\nThread"
+      ],
+      "predicted_nodes": [
+        "torc Package::Execution Layer::MPI Process (Rank 0::Worker Thread Pool\\n(TORC_WORKERS",
+        "torc Package::Execution Layer::MPI Process (Rank N::Worker Thread Pool\\n(TORC_WORKERS",
+        "External Runtime::Python Threading\\nSubsystem"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Worker threads are represented as thread pools under the execution layer and are consistent with Python threading."
+    },
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "External Runtime::MPI Runtime\\n(mpi4py",
+        "torc Package::Inter-Process Communication::MPI Communication Layer\\n(mpi4py"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "MPI is grounded as external runtime and internal communication infrastructure, which matches the GT global MPI concept."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Task Queue (in detail::A1",
+    "Task Queue (in detail::A2",
+    "Task Queue (in detail::A3",
+    "Task Queue (in detail::B1",
+    "Task Queue (in detail::B2",
+    "Task Queue (in detail::Level 0",
+    "Task Queue (in detail::Level 1",
+    "Task Queue (in detail::Level 2",
+    "Task Queue (in detail::Level 3",
+    "Task Queue (in detail::Level 4",
+    "Task Queue (in detail::Level 5"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application Layer::Python Application",
+    "Example Workloads::Image Preprocessing\\nExample",
+    "Example Workloads::Master-Worker\\nExample",
+    "Example Workloads::Numerical Optimization\\nExample",
+    "Example Workloads::SPMD Switching\\nExample",
+    "Example Workloads::Task Stealing\\nExample",
+    "Global::HDF5 Output File",
+    "Global::Image Dataset\\n(Labeled Subfolders",
+    "Optional Dependencies::cma",
+    "Optional Dependencies::h5py",
+    "Optional Dependencies::numpy",
+    "Optional Dependencies::pillow",
+    "Optional Dependencies::termcolor",
+    "torc Package::Runtime Configuration::Environment Variables\\nTORC_WORKERS\\nTORC_STEALING\\nTORC_SERVER_YIELDTIME\\nTORC_WORKER_YIELDTIME",
+    "torc Package::Task Management::Callback Executor",
+    "torc Package::Task Management::Parallel Map Engine\\n(chunksize",
+    "torc Package::Task Management::Task Descriptor\\n(Future",
+    "torc Package::Task Management::Task Scheduler\\n(Cyclic Assignment"
+  ]
+}

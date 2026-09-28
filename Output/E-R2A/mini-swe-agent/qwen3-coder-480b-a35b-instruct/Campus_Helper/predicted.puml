@@ -1,0 +1,90 @@
+@startuml
+skinparam componentStyle rectangle
+
+' Layers
+package "Presentation Layer" {
+  [WeChat Mini Program Client] as client
+}
+
+package "Business Logic Layer" {
+  [User Management Service] as userService
+  [Product Management Service] as productService
+  [Order Management Service] as orderService
+  [Favorite Management Service] as favoriteService
+  [Admin Management Service] as adminService
+  [Authentication Service] as authService
+}
+
+package "Data Access Layer" {
+  [Data Access Components] as dataAccess
+}
+
+package "Data Entity Layer" {
+  [Database] as database
+}
+
+' External Systems
+[WeChat Platform] as wechat
+
+' Relationships
+client --> authService : uses
+client --> userService : uses
+client --> productService : uses
+client --> orderService : uses
+client --> favoriteService : uses
+client --> adminService : uses
+wechat <-- client : hosted on
+
+authService --> dataAccess : uses
+userService --> dataAccess : uses
+productService --> dataAccess : uses
+orderService --> dataAccess : uses
+favoriteService --> dataAccess : uses
+adminService --> dataAccess : uses
+
+dataAccess --> database : accesses
+
+' Data Entities in Database
+database contains [User Data]
+database contains [Product Data]
+database contains [Order Data]
+database contains [Favorite Data]
+database contains [Tag/Category Data]
+database contains [Administration Log Data]
+
+dataAccess --> [User Data] : CRUD
+dataAccess --> [Product Data] : CRUD
+dataAccess --> [Order Data] : CRUD
+dataAccess --> [Favorite Data] : CRUD
+dataAccess --> [Tag/Category Data] : CRUD
+dataAccess --> [Administration Log Data] : CRUD
+
+' User Roles
+actor "Guest" as guest
+actor "Registered User" as regUser
+actor "Customer" as customer
+actor "Seller" as seller
+actor "Administrator" as admin
+
+guest --> client : uses
+regUser --> client : uses
+customer --> client : uses
+seller --> client : uses
+admin --> client : uses
+
+note right of client
+  Campus Helper Platform
+  WeChat Mini Program Client
+end note
+
+note right of database
+  Data Entities:
+  - User Data
+  - Product Data
+  - Order Data
+  - Favorite Data
+  - Tag/Category Data
+  - Administration Log Data
+end note
+
+@enduml

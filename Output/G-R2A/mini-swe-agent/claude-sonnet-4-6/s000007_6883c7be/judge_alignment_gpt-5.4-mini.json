@@ -1,0 +1,164 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "CGI Portal::Http Test\nClient"
+      ],
+      "predicted_nodes": [
+        "Test Utilities Layer::Test Client\n(Async HTTP Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the HTTP test client utility used to issue asynchronous requests and evaluate responses. The predicted boundary is a semantically appropriate renaming from CGI Portal to Test Utilities Layer."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Proxy Core"
+      ],
+      "predicted_nodes": [
+        "HTTP Proxy Layer::HTTP Proxy\n(Netty-based",
+        "HTTP Proxy Layer::Request Forwarding Handler\n(FullHttpRequest Forwarding"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT proxy core is split into a proxy component and a forwarding handler in the prediction. This is a reasonable functional decomposition, and the HTTP Proxy Layer boundary is consistent with the GT proxy layer."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Download"
+      ],
+      "predicted_nodes": [
+        "Test Utilities Layer::File Download Endpoint\nGET /download"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the file download behavior for GET /download, including attachment-oriented response handling. The test utility boundary is appropriate for this in-scope test server endpoint."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Upload"
+      ],
+      "predicted_nodes": [
+        "Test Utilities Layer::File Upload Handler\n(/upload, map payload"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the file upload handling workflow that returns a filepath map payload. The predicted boundary fits the test utility/server-side handler role."
+    },
+    {
+      "gt_nodes": [
+        "CGI Portal::Service\nManager"
+      ],
+      "predicted_nodes": [
+        "Test Utilities Layer::Test Server\n(Grizzly/Jersey"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT service manager corresponds to the component responsible for starting and managing the local test server. The Grizzly/Jersey test server boundary is an acceptable semantic match."
+    },
+    {
+      "gt_nodes": [
+        "CGI Portal::Log & Tree\ninquire"
+      ],
+      "predicted_nodes": [
+        "Build & Runtime Environment::Debug Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both involve observability/diagnostic concerns, but the GT node is a specific inquiry/log UI or portal capability, while the predicted node is a runtime debug logger. This is only a loose functional relation and the boundary attribution is not equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Logging"
+      ],
+      "predicted_nodes": [
+        "Build & Runtime Environment::Debug Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT logging concern aligns with the predicted debug logger, and the build/runtime boundary is acceptable because the SRS explicitly includes debug logging behavior."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Formatter"
+      ],
+      "predicted_nodes": [
+        "Test Utilities Layer::Response Object\n(code, msg, data"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT formatter is a generic formatting component, while the predicted node is specifically the structured response object. These are not semantically equivalent enough to be considered the same architectural node."
+    },
+    {
+      "gt_nodes": [
+        "Global::Log consumer"
+      ],
+      "predicted_nodes": [
+        "Build & Runtime Environment::Debug Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "A log consumer is not the same as a debug logger. The prediction confuses log emission with log consumption."
+    },
+    {
+      "gt_nodes": [
+        "Support Platform::Mysql"
+      ],
+      "predicted_nodes": [
+        "Global::Local Filesystem"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "These are unrelated infrastructure elements; no meaningful semantic equivalence exists."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer\\nKeepalived(VIP::Openresty",
+    "Business Servers::......",
+    "Business Servers::Business Server A",
+    "Business Servers::Business Server B",
+    "Business Servers::Business Server C",
+    "CGI Portal::Appkey\\nManager",
+    "CGI Portal::CGI Manager",
+    "CGI Portal::Case Manager",
+    "CGI Portal::Document\\nGenerate",
+    "CGI Portal::Metrics &\\nReport",
+    "CGI Portal::Login &\\nPermission",
+    "Proxy Layer::cgi_proxy 1::Appkey\\nValidate",
+    "Proxy Layer::cgi_proxy 1::Global Limit",
+    "Proxy Layer::cgi_proxy 1::Plugin::Agent",
+    "Proxy Layer::cgi_proxy 1::Plugin::Attach Check",
+    "Proxy Layer::cgi_proxy 1::Plugin::Check\\nParameter",
+    "Proxy Layer::cgi_proxy 1::Plugin::Mock",
+    "Proxy Layer::cgi_proxy 2",
+    "Support Platform::Data Bank\\nHDFS/Hbase/Druid",
+    "Support Platform::Msg Center\\nKafka",
+    "Support Platform::Mysql",
+    "Support Platform::Permission\\nCenter",
+    "Support Platform::Redis Cache",
+    "Support Platform::User Center",
+    "Task Scheduler::CGI Case\\nExecutor",
+    "Task Scheduler::CGI Health\\nCheck",
+    "Task Scheduler::Daily Report",
+    "Task Scheduler::Log Analysis",
+    "Task Scheduler::Monitor/Alarm",
+    "Clients::APP Client",
+    "Clients::Business Server",
+    "Clients::Developer",
+    "Clients::Web Client"
+  ],
+  "unmatched_predicted_nodes": [
+    "HTTP Proxy Layer::HTTP Proxy\\n(Netty-based",
+    "HTTP Proxy Layer::Request Forwarding Handler\\n(FullHttpRequest Forwarding",
+    "Test Utilities Layer::Async Workload Generator\\n(50 threads, 1000 req/thread",
+    "Test Utilities Layer::File Download Endpoint\\nGET /download",
+    "Test Utilities Layer::File Upload Handler\\n(/upload, map payload",
+    "Test Utilities Layer::Response Object\\n(code, msg, data",
+    "Test Utilities Layer::Test Client\\n(Async HTTP Client",
+    "Test Utilities Layer::Test Server\\n(Grizzly/Jersey",
+    "Upstream / External Systems::Upstream Server\\n(Server-side Channel",
+    "Build & Runtime Environment::Debug Logger",
+    "Build & Runtime Environment::Maven Multi-Module Build\\n(Java 1.8 / Java 1.7 targets",
+    "Global::Local Filesystem"
+  ]
+}

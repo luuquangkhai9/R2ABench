@@ -1,0 +1,95 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "ClearML Server::Backend Service API"
+      ],
+      "predicted_nodes": [
+        "ClearML Agent::Backend Service Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the backend service interface used for create/get/get_by_id/get_all/get_all_ex operations. The boundary names differ, but they are semantically aligned as the backend service API/client interaction layer."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Kubernetes Glue"
+      ],
+      "predicted_nodes": [
+        "ClearML Agent::Kubernetes Glue Mode"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the Kubernetes Glue execution mode that pulls jobs from the execution queue and prepares Kubernetes jobs from a YAML template. The boundary attribution is semantically equivalent despite different naming."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::ClearML Agent\\nService Pod"
+      ],
+      "predicted_nodes": [
+        "ClearML Agent::Service Pod Mode"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the long-lasting service-pod integration mode of the ClearML agent. The package boundary is consistent at a higher abstraction level."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Pod Execution Environment\\nand Docker User Code"
+      ],
+      "predicted_nodes": [
+        "ClearML Agent::Job Execution Engine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node covers the in-pod environment installation and execution of user code, which is functionally captured by the predicted job execution engine. The abstraction differs, but the placement remains within the agent/runtime execution boundary."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Mapped Docker Socket\\nSibling Containers"
+      ],
+      "predicted_nodes": [
+        "External Systems::Docker Daemon"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is about Docker socket-based sibling container management, and the predicted Docker Daemon node is the external Docker dependency enabling that behavior. This is a semantically acceptable boundary representation."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::YAML Job Template"
+      ],
+      "predicted_nodes": [
+        "External Systems::Kubernetes Cluster"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is specifically the YAML job template input, while the predicted node is the Kubernetes Cluster, which is the execution environment rather than the template artifact. This is a boundary/context mismatch."
+    },
+    {
+      "gt_nodes": [
+        "ClearML Server::ML Ops::Monitoring"
+      ],
+      "predicted_nodes": [
+        "ClearML Agent::Worker Telemetry"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Worker telemetry corresponds to status reporting and server ping related to monitoring. Although one is server-side product scope and the other is agent-side behavior, the functional match is correct and boundary placement is acceptable at this abstraction."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "ClearML Server::Experiment Manager::Collaboration",
+    "ClearML Server::Experiment Manager::Data Tracking",
+    "ClearML Server::Experiment Manager::Versioning",
+    "ClearML Server::Experiment Manager::Visualization",
+    "ClearML Server::ML Ops::Execution Queue",
+    "ClearML Server::ML Ops::Orchestration",
+    "Data Scientist Environment::ClearML Snippet",
+    "Data Scientist Environment::Python ML / DL Code",
+    "GPU / Kubernetes Workers\\nOn Prem or Cloud::Kubernetes Job"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::ClearML Server"
+  ]
+}

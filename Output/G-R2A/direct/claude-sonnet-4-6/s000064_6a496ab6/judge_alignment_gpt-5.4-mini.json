@@ -1,0 +1,238 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Backend::BFF / API Gateway::Admin Console Gateway"
+      ],
+      "predicted_nodes": [
+        "GCP Cloud Infrastructure::Gateway / BFF Layer::API Gateway / BFF\n(Node.js-style"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the administrative client-facing gateway/BFF component. The predicted node is placed in a broader but semantically equivalent gateway/BFF boundary."
+    },
+    {
+      "gt_nodes": [
+        "Backend::BFF / API Gateway::Native App Gateway"
+      ],
+      "predicted_nodes": [
+        "GCP Cloud Infrastructure::Gateway / BFF Layer::API Gateway / BFF\n(Node.js-style"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the native-app-facing gateway/BFF component. The predicted boundary is acceptable as a semantically equivalent gateway/BFF layer."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Database::NoSQL\\n(Firestore"
+      ],
+      "predicted_nodes": [
+        "GCP Cloud Infrastructure::Data Stores::NoSQL Storage\\n(Message Data)\\n[DR-005"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the NoSQL datastore for message-related data; Firestore is a reasonable concrete implementation of the NoSQL storage boundary."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Database::RDB\\n(MySQL"
+      ],
+      "predicted_nodes": [
+        "GCP Cloud Infrastructure::Data Stores::MySQL\\n(Book Data)\\n[DR-003",
+        "GCP Cloud Infrastructure::Data Stores::MySQL\\n(EC Site Data)\\n[DR-004",
+        "GCP Cloud Infrastructure::Data Stores::MySQL\\n(User Data)\\n[DR-002"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has one general MySQL/RDB node, while the AI split it into function-specific MySQL nodes for user, book, and EC site data. This is a valid decomposition and boundary attribution remains consistent."
+    },
+    {
+      "gt_nodes": [
+        "Backend::External APIs::Email Sending\\n(SendGrid"
+      ],
+      "predicted_nodes": [
+        "External Services::Email Notification\\nProvider\\n[NFR-004"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the external email notification integration. The provider name differs but remains semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Backend::External APIs::Firebase\\nAuthentication"
+      ],
+      "predicted_nodes": [
+        "External Services::Firebase Authentication\\n[DR-001, FR-001"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent Firebase Authentication as the external auth service, with correct external-services boundary placement."
+    },
+    {
+      "gt_nodes": [
+        "Backend::External APIs::Google Books API"
+      ],
+      "predicted_nodes": [
+        "External Services::Book-Search API\\n[FR-005, C-007"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The exact provider name differs, but both refer to the external book-search integration required by the PRD. The generalized external-service boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Backend::External APIs::Push Notification\\n(FCM"
+      ],
+      "predicted_nodes": [
+        "External Services::Push Notification\\nProvider\\n[NFR-004"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the push notification external integration. The predicted node is correctly placed under external services."
+    },
+    {
+      "gt_nodes": [
+        "Backend::External APIs::Stripe"
+      ],
+      "predicted_nodes": [
+        "External Services::Stripe\\n(Payment Processing)\\n[FR-006"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Stripe payment integration, correctly attributed to external services."
+    },
+    {
+      "gt_nodes": [
+        "Backend::File Storage::NAS\\n(Cloud Storage"
+      ],
+      "predicted_nodes": [
+        "GCP Cloud Infrastructure::Data Stores::Object Storage\\n(Thumbnails)\\n[DR-006"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to object/file storage for related assets such as thumbnails. The predicted placement in cloud infrastructure/data storage is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Backend::L7 Load Balancer"
+      ],
+      "predicted_nodes": [
+        "GCP Cloud Infrastructure::Network / Access Layer::Cloud Load Balancer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both are load balancer components at the network/access layer, with an equivalent cloud load balancer boundary."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Admin Service"
+      ],
+      "predicted_nodes": [
+        "GCP Cloud Infrastructure::Backend Microservices (Containerised on GKE"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The admin service is preserved as part of the backend microservices deployment boundary, though the AI aggregated it under a broader microservices container node."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Auth API"
+      ],
+      "predicted_nodes": [
+        "GCP Cloud Infrastructure::Backend Microservices (Containerised on GKE::Authentication API\\n(FR-001"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the authentication API microservice. The GKE/containerized boundary is consistent with the backend deployment context."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Book Service"
+      ],
+      "predicted_nodes": [
+        "GCP Cloud Infrastructure::Backend Microservices (Containerised on GKE::Book Management API\\n(FR-003, Golang"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Book Service and Book Management API are functionally equivalent. The backend microservices boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Notification Service"
+      ],
+      "predicted_nodes": [
+        "GCP Cloud Infrastructure::Backend Microservices (Containerised on GKE::Notification\\nService"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These are the same notification backend component, and the predicted boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Store Service"
+      ],
+      "predicted_nodes": [
+        "GCP Cloud Infrastructure::Backend Microservices (Containerised on GKE::EC Site API\\n(FR-004, Golang"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The store service corresponds to the EC site API in the PRD context. The backend microservice boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Support Service"
+      ],
+      "predicted_nodes": [
+        "GCP Cloud Infrastructure::Backend Microservices (Containerised on GKE::Support API\\n(FR-007, Golang"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Support Service and Support API are functionally equivalent, and the boundary placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::User Service"
+      ],
+      "predicted_nodes": [
+        "GCP Cloud Infrastructure::Backend Microservices (Containerised on GKE::User Management API\\n(FR-002, Golang"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "User Service and User Management API are equivalent. The GKE/containerized microservice boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::Native App"
+      ],
+      "predicted_nodes": [
+        "Frontend Clients::Native Mobile\\nApplications"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the native mobile client applications. The frontend clients boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Web Admin App"
+      ],
+      "predicted_nodes": [
+        "Frontend Clients::Administrative\\nWeb Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the administrative web client. The frontend clients boundary is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "GCP Cloud Infrastructure::Backend Microservices (Containerised on GKE",
+    "GCP Cloud Infrastructure::Data Stores",
+    "GCP Cloud Infrastructure::Gateway / BFF Layer",
+    "GCP Cloud Infrastructure::Network / Access Layer",
+    "GCP Cloud Infrastructure::VM / Ops Layer (GCE",
+    "GCP Cloud Infrastructure::VM / Ops Layer (GCE::GKE Cluster\\n(Container Orchestration",
+    "Global::External Services",
+    "Global::Frontend Clients",
+    "Global::GCP Cloud Infrastructure"
+  ]
+}

@@ -1,0 +1,111 @@
+@startuml
+!define RECTANGLE class
+
+package "GPSLogger Application" {
+  RECTANGLE MainActivity {
+    +onCreate()
+    +onStart()
+    +onStop()
+  }
+  
+  RECTANGLE SettingsFragment {
+    +loadSettings()
+    +saveSettings()
+  }
+  
+  RECTANGLE GpsLoggingService {
+    +startLogging()
+    +stopLogging()
+    +onLocationChanged()
+    +createLoggers()
+  }
+  
+  RECTANGLE EventBus {
+    +post()
+    +register()
+    +unregister()
+  }
+  
+  RECTANGLE LocationListener {
+    +onLocationChanged()
+    +onProviderDisabled()
+    +onProviderEnabled()
+  }
+  
+  package "Loggers" {
+    RECTANGLE GpxLogger {
+      +logLocation()
+    }
+    
+    RECTANGLE KmlLogger {
+      +logLocation()
+    }
+    
+    RECTANGLE TextLogger {
+      +logLocation()
+    }
+  }
+  
+  package "Uploaders" {
+    RECTANGLE OpenStreetMapUploader {
+      +upload()
+      +authenticate()
+    }
+    
+    RECTANGLE DropboxUploader {
+      +upload()
+      +authenticate()
+    }
+    
+    RECTANGLE OpenGTSUploader {
+      +sendUdpMessage()
+      +encodeGPRMC()
+    }
+  }
+}
+
+package "External Systems" {
+  rectangle "OpenStreetMap" as OSM
+  rectangle "Dropbox" as DB
+  rectangle "OpenGTS Server" as OpenGTS
+}
+
+' Relationships
+MainActivity --> GpsLoggingService : starts/stops
+MainActivity --> SettingsFragment : manages
+GpsLoggingService --> LocationListener : uses
+LocationListener --> EventBus : posts location events
+EventBus --> GpsLoggingService : receives events
+GpsLoggingService --> GpxLogger : creates
+GpsLoggingService --> KmlLogger : creates
+GpsLoggingService --> TextLogger : creates
+GpsLoggingService --> OpenStreetMapUploader : creates
+GpsLoggingService --> DropboxUploader : creates
+GpsLoggingService --> OpenGTSUploader : creates
+GpxLogger --> EventBus : subscribes
+KmlLogger --> EventBus : subscribes
+TextLogger --> EventBus : subscribes
+OpenStreetMapUploader --> OSM : uploads to
+DropboxUploader --> DB : uploads to
+OpenGTSUploader --> OpenGTS : sends UDP packets
+
+note right of GpsLoggingService
+  Core service responsible for:
+  - Managing location acquisition
+  - Creating loggers based on settings
+  - Creating uploaders for enabled services
+  - Coordinating logging and upload operations
+end note
+
+note right of OpenGTSUploader
+  Encodes location data as GPRMC strings
+  Sends UDP datagrams to configured endpoint
+end note
+
+note right of EventBus
+  Publish-subscribe pattern for:
+  - Location events distribution
+  - Fragment communication
+end note
+
+@enduml

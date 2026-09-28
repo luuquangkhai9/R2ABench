@@ -1,0 +1,192 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Admin Audit"
+      ],
+      "predicted_nodes": [
+        "Smart Recipe System::Control Layer::Admin Management Controller",
+        "Smart Recipe System::Service Layer::Admin Management Service",
+        "Smart Recipe System::Data Access Layer::Feedback DAO"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These nodes collectively represent the administrator review/audit and management functionality from the GT. The AI split the capability across controller/service/DAO layers, which is consistent with the backend architectural decomposition."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Community Sharing"
+      ],
+      "predicted_nodes": [
+        "Smart Recipe System::Control Layer::Community Sharing Controller",
+        "Smart Recipe System::Service Layer::Community Sharing Service",
+        "Smart Recipe System::Data Access Layer::Community DAO"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The community sharing module is functionally equivalent. Splitting into controller, service, and DAO is an acceptable architectural refinement and stays within the backend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Health Management"
+      ],
+      "predicted_nodes": [
+        "Smart Recipe System::Control Layer::Health Analysis Controller",
+        "Smart Recipe System::Service Layer::Health Analysis Service",
+        "Smart Recipe System::Data Access Layer::Health Data DAO",
+        "Smart Recipe System::Data Storage Layer::Personal Health Info Store"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "This matches the GT health management capability, including nutrition/health analysis and personal health data handling. The AI decomposition across layers is semantically aligned with the backend design."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Recipe Search"
+      ],
+      "predicted_nodes": [
+        "Smart Recipe System::Control Layer::Recipe Search Controller",
+        "Smart Recipe System::Service Layer::Recipe Search Service",
+        "Smart Recipe System::Data Access Layer::Recipe DAO"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Recipe search is preserved as the same business capability. The predicted layered implementation is architecturally consistent with the GT backend module."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Smart Recommendation"
+      ],
+      "predicted_nodes": [
+        "Smart Recipe System::Control Layer::Recommendation Controller",
+        "Smart Recipe System::Service Layer::Recommendation Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The recommendation feature matches the GT smart recommendation module. The split across control and service layers is reasonable and boundary-correct."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::User Information"
+      ],
+      "predicted_nodes": [
+        "Smart Recipe System::Control Layer::User Management Controller",
+        "Smart Recipe System::Service Layer::User Management Service",
+        "Smart Recipe System::Data Access Layer::User DAO"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "User information management corresponds to the GT user information module. The AI’s controller/service/DAO split is acceptable and within the correct backend context."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Cleaning"
+      ],
+      "predicted_nodes": [
+        "Smart Recipe System::Service Layer::Photo Recognition Service",
+        "Smart Recipe System::Service Layer::Model Inference Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT data cleaning role is represented in the predicted preprocessing/inference pipeline. Although not named identically, the AI’s model/input processing services semantically cover the same data preparation function and remain in backend processing boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Dataset"
+      ],
+      "predicted_nodes": [
+        "Smart Recipe System::Data Storage Layer::MySQL Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The dataset corresponds to stored structured recipe/user/nutrition data, and mapping it to the MySQL storage boundary is semantically appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Read/Write Database"
+      ],
+      "predicted_nodes": [
+        "Smart Recipe System::Data Access Layer::Catering DAO",
+        "Smart Recipe System::Data Access Layer::Community DAO",
+        "Smart Recipe System::Data Access Layer::Feedback DAO",
+        "Smart Recipe System::Data Access Layer::Health Data DAO",
+        "Smart Recipe System::Data Access Layer::Location DAO",
+        "Smart Recipe System::Data Access Layer::Recipe DAO",
+        "Smart Recipe System::Data Access Layer::User DAO"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT read/write database access layer is decomposed into multiple DAOs in the prediction. This is a normal and correct refinement of the persistence boundary."
+    },
+    {
+      "gt_nodes": [
+        "Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Smart Recipe System::Data Storage Layer::MySQL Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is the same database technology and storage boundary, expressed with a slightly different package naming convention."
+    },
+    {
+      "gt_nodes": [
+        "Database::Redis"
+      ],
+      "predicted_nodes": [
+        "Smart Recipe System::Data Storage Layer::Redis Cache"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This matches the GT Redis cache component and is placed in an appropriate data storage/cache boundary."
+    },
+    {
+      "gt_nodes": [
+        "Frontend UI::Recipe App"
+      ],
+      "predicted_nodes": [
+        "Smart Recipe System::Mobile App Layer::Mobile App"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The mobile app frontend is correctly represented as the mobile app layer. The boundary differs in wording but is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Runtime Environment::Flask Service"
+      ],
+      "predicted_nodes": [
+        "Smart Recipe System::Service Layer::Model Inference Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The function matches Flask-based model inference, but the predicted node is placed under Service Layer instead of a runtime/framework environment boundary. This is a boundary attribution error."
+    },
+    {
+      "gt_nodes": [
+        "Runtime Environment::Springboot Service"
+      ],
+      "predicted_nodes": [
+        "Smart Recipe System::Service Layer::Admin Management Service",
+        "Smart Recipe System::Service Layer::Catering Data Service",
+        "Smart Recipe System::Service Layer::Community Sharing Service",
+        "Smart Recipe System::Service Layer::Health Analysis Service",
+        "Smart Recipe System::Service Layer::Location Service",
+        "Smart Recipe System::Service Layer::Photo Recognition Service",
+        "Smart Recipe System::Service Layer::Recipe Search Service",
+        "Smart Recipe System::Service Layer::Recommendation Service",
+        "Smart Recipe System::Service Layer::User Management Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "These services collectively correspond to the Spring Boot backend application domain, but the prediction places application services where the GT explicitly identifies a runtime/framework service boundary. This is a significant layer mismatch rather than a mere naming difference."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Smart Recipe System",
+    "Smart Recipe System::Control Layer::Location Controller",
+    "Smart Recipe System::Control Layer::Photo Recognition Controller",
+    "Smart Recipe System::Data Storage Layer::Personal Health Info Store"
+  ]
+}

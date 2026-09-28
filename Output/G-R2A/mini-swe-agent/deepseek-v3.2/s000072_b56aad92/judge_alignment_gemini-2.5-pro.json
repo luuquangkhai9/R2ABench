@@ -1,0 +1,109 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "UCX::UCM Memory Services::Memory Hooks",
+        "UCX::UCP Protocols\\nHigh Level API::Cross-Transport Multi-Rail",
+        "UCX::UCP Protocols\\nHigh Level API::Fragmentation",
+        "UCX::UCP Protocols\\nHigh Level API::I/O API\\nStream",
+        "UCX::UCP Protocols\\nHigh Level API::Message Passing API\\nTag Matching, Rendezvous",
+        "UCX::UCP Protocols\\nHigh Level API::PGAS API\\nRMAs, Atomics",
+        "UCX::UCP Protocols\\nHigh Level API::Software Protocols",
+        "UCX::UCP Protocols\\nHigh Level API::Task Based API\\nActive Messages",
+        "UCX::UCP Protocols\\nHigh Level API::Transport Selection",
+        "UCX::UCS Services\\nCommon Utilities::Data Structures",
+        "UCX::UCS Services\\nCommon Utilities::Memory Management",
+        "UCX::UCS Services\\nCommon Utilities::Utilities",
+        "UCX::UCT Hardware Transports\\nLow Level API::DCT",
+        "UCX::UCT Hardware Transports\\nLow Level API::Ethernet Transport\\nTCP/IP Sockets",
+        "UCX::UCT Hardware Transports\\nLow Level API::GPU Transport\\nNVIDIA CUDA, AMD ROCm",
+        "UCX::UCT Hardware Transports\\nLow Level API::Gemini / Aries Transport\\nGNI",
+        "UCX::UCT Hardware Transports\\nLow Level API::Intra-node Host Memory\\nSYSV, POSIX, KNEM, CMA, XPMEM",
+        "UCX::UCT Hardware Transports\\nLow Level API::RC",
+        "UCX::UCT Hardware Transports\\nLow Level API::RDMA Verbs Transport\\nInfiniBand, ROCE, OPA",
+        "UCX::UCT Hardware Transports\\nLow Level API::UD"
+      ],
+      "predicted_nodes": [
+        "Transport Layer::Optional Transport\\nLibraries::UCX"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified UCX from the PRD as an optional integration. It aggregated the entire detailed UCX framework from the GT into a single, high-level component, which is a valid abstraction. The placement in the 'Transport Layer' is semantically equivalent to the GT's dedicated 'UCX' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Drivers and Kernels::RDMA Verbs Driver"
+      ],
+      "predicted_nodes": [
+        "Transport Layer::Embedded Libfabric\\nVerbs Provider",
+        "External Systems Layer::Linux Verbs Stack",
+        "External Systems Layer::Linux Verbs Stack::libibverbs\\n(>=1.1.8",
+        "External Systems Layer::Linux Verbs Stack::librdmacm\\n(>=1.0.16"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly expanded the generic 'RDMA Verbs Driver' from the GT into the specific components (`Embedded Libfabric Provider`, `Linux Verbs Stack`, `libibverbs`, `librdmacm`) that were explicitly detailed in the PRD. The GT's 'Drivers and Kernels' layer is semantically equivalent to the AI's 'Transport Layer' and 'External Systems Layer' for this functionality."
+    },
+    {
+      "gt_nodes": [
+        "Drivers and Kernels::OS Kernel\\nEthernet"
+      ],
+      "predicted_nodes": [
+        "External Systems Layer::Network Device"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the underlying physical network interface. The AI's term 'Network Device' is a functionally equivalent abstraction for the GT's 'OS Kernel Ethernet'. The 'External Systems Layer' boundary is semantically consistent with the GT's 'Drivers and Kernels' layer."
+    },
+    {
+      "gt_nodes": [
+        "Programming Models and Frameworks::MPI\\nMPICH, Open-MPI"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem Layer::CH4 Network Module"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The PRD mentions 'CH4 network-module integration context', and CH4 is the standard communication device interface for MPICH. The AI correctly identified this module as the integration point for MPI programming models. The placement in the 'Communication Subsystem Layer' is appropriate as it's the component that interfaces with the higher-level MPI framework."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Drivers and Kernels::Cray Driver",
+    "Drivers and Kernels::OS Kernel\\nHost Memory",
+    "Drivers and Kernels::OS Kernel\\nMemory Hooks",
+    "Drivers and Kernels::ROCm / CUDA",
+    "Global::Applications\\nHPC, AI, ML, Big Data",
+    "Global::Hardware",
+    "Programming Models and Frameworks::AI / ML Frameworks\\nTensorFlow, Burst Buffer",
+    "Programming Models and Frameworks::PGAS / SHMEM\\nOpenSHMEM, UPC, CAF, X10, Chapel",
+    "Programming Models and Frameworks::Task Runtimes\\nParsec, OCR, Legion"
+  ],
+  "unmatched_predicted_nodes": [
+    "Communication Subsystem Layer::CH4 Network Module::Communication Subsystem",
+    "Communication Subsystem Layer::CH4 Network Module::Communication Subsystem::Connection\\nEstablishment",
+    "Communication Subsystem Layer::CH4 Network Module::Communication Subsystem::Initialization/\\nTermination",
+    "Communication Subsystem Layer::CH4 Network Module::Communication Subsystem::One-to-Many\\nScatter Transfer",
+    "Communication Subsystem Layer::CH4 Network Module::Communication Subsystem::Progress Handling",
+    "Communication Subsystem Layer::CH4 Network Module::Network Interface",
+    "Communication Subsystem Layer::CH4 Network Module::Network Interface::Network Send\\nDescriptors",
+    "Communication Subsystem Layer::CH4 Network Module::Network Interface::Packet Buffers",
+    "Communication Subsystem Layer::CH4 Network Module::Send State Machine",
+    "Communication Subsystem Layer::CH4 Network Module::Send State Machine::Direct Access Send",
+    "Communication Subsystem Layer::CH4 Network Module::Send State Machine::Flow Control\\nChecks",
+    "Communication Subsystem Layer::CH4 Network Module::Send State Machine::Packet Buffer\\nPacking",
+    "Communication Subsystem Layer::CH4 Network Module::Send State Machine::Rendezvous Control\\nField Handling",
+    "External Systems Layer::Build Environment",
+    "Transport Layer::Embedded Libfabric\\nVerbs Provider::Linux Verbs API\\nIntegration",
+    "Transport Layer::Optional Transport\\nLibraries::OFI/libfabric",
+    "User/Developer Layer::Build/Deployment Engineer",
+    "User/Developer Layer::Developer/Tester",
+    "Verification & Build Layer::Build System",
+    "Verification & Build Layer::Build System::autogen.sh",
+    "Verification & Build Layer::Build System::configure",
+    "Verification & Build Layer::Build System::make",
+    "Verification & Build Layer::Embedded hwloc\\nVerification Workflow",
+    "Verification & Build Layer::Embedded hwloc\\nVerification Workflow::Manual Build Workflow",
+    "Verification & Build Layer::Embedded hwloc\\nVerification Workflow::Test Execution\\n(configure, make, check",
+    "Verification & Build Layer::Embedded hwloc\\nVerification Workflow::run-embedded-tests.sh"
+  ]
+}

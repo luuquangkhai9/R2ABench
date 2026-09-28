@@ -1,0 +1,111 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "CGI Portal::Http Test\nClient"
+      ],
+      "predicted_nodes": [
+        "System Context::Test Client",
+        "Test Components::Test Client::Async HTTP Client",
+        "Test Components::Test Client::Response Counter",
+        "Test Components::Test Client::Workload Generator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is the bundled HTTP test client utility, and the AI split it into its main subfunctions correctly. However, the GT places it in the CGI Portal boundary, while the prediction moves it into System Context/Test Components, which is a significant boundary shift rather than a semantically equivalent layer."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Proxy Core"
+      ],
+      "predicted_nodes": [
+        "System Context::HTTP Proxy",
+        "Proxy Component::Forwarding Handler",
+        "Proxy Component::Channel Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "These nodes represent the HTTP proxy forwarding core. The AI decomposed the proxy core into reasonable forwarding/channel-management parts, but the prediction collapses the GT's explicit Proxy Layer / cgi_proxy 1 placement into a generic system-context/proxy-component boundary, which is not a faithful architectural boundary match."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Download"
+      ],
+      "predicted_nodes": [
+        "Test Components::Test Server::File Download Endpoint"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both refer to the file download behavior, but the GT locates it as a proxy plugin, whereas the prediction places it in the test server boundary. This is a functional match but a severe boundary/context mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Upload"
+      ],
+      "predicted_nodes": [
+        "Test Components::Test Server::File Upload Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both refer to file upload handling and returning the filepath map payload, but the GT locates it under the proxy plugin boundary, while the AI assigns it to the test server boundary. That is a boundary-crossing error."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Logging"
+      ],
+      "predicted_nodes": [
+        "Proxy Component::Forwarding Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT logging node is related to proxy diagnostics, but the predicted forwarding handler is not the same component and does not faithfully represent the logging boundary. This is not a valid semantic equivalence."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer\\nKeepalived(VIP::Openresty",
+    "Business Servers::......",
+    "Business Servers::Business Server A",
+    "Business Servers::Business Server B",
+    "Business Servers::Business Server C",
+    "CGI Portal::Appkey\\nManager",
+    "CGI Portal::CGI Manager",
+    "CGI Portal::Case Manager",
+    "CGI Portal::Document\\nGenerate",
+    "CGI Portal::Log & Tree\\ninquire",
+    "CGI Portal::Metrics &\\nReport",
+    "CGI Portal::Service\\nManager",
+    "Clients::APP Client",
+    "Clients::Business Server",
+    "Clients::Developer",
+    "Clients::Web Client",
+    "Global::Log consumer",
+    "Proxy Layer::cgi_proxy 1::Appkey\\nValidate",
+    "Proxy Layer::cgi_proxy 1::Formatter",
+    "Proxy Layer::cgi_proxy 1::Global Limit",
+    "Proxy Layer::cgi_proxy 1::Login &\\nPermission",
+    "Proxy Layer::cgi_proxy 1::Plugin::Agent",
+    "Proxy Layer::cgi_proxy 1::Plugin::Attach Check",
+    "Proxy Layer::cgi_proxy 1::Plugin::Check\\nParameter",
+    "Proxy Layer::cgi_proxy 1::Plugin::Mock",
+    "Proxy Layer::cgi_proxy 2",
+    "Support Platform::Data Bank\\nHDFS/Hbase/Druid",
+    "Support Platform::Msg Center\\nKafka",
+    "Support Platform::Mysql",
+    "Support Platform::Permission\\nCenter",
+    "Support Platform::Redis Cache",
+    "Support Platform::User Center",
+    "Task Scheduler::CGI Case\\nExecutor",
+    "Task Scheduler::CGI Health\\nCheck",
+    "Task Scheduler::Daily Report",
+    "Task Scheduler::Log Analysis",
+    "Task Scheduler::Monitor/Alarm"
+  ],
+  "unmatched_predicted_nodes": [
+    "Data Stores::Local Filesystem",
+    "System Context::Client",
+    "System Context::HTTP Proxy",
+    "System Context::Test Server",
+    "System Context::Upstream Server",
+    "Test Components::Test Server::Grizzly/Jersey Server"
+  ]
+}

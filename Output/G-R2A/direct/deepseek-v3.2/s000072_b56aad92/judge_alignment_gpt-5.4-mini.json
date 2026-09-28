@@ -1,0 +1,176 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Connection establishment"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem::Connection Manager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent connection setup/management responsibilities in the communication layer. The predicted boundary is not identical to UCX, but it is semantically consistent with a communication-subsystem boundary."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Transport Selection"
+      ],
+      "predicted_nodes": [
+        "External Network Modules::OFI/libfabric",
+        "External Network Modules::UCX"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT transport-selection concept is reflected by the predicted external network module choices. The AI decomposed the transport context into specific module options, which is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Software Protocols"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem::Send State Machine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The send state machine is a specific software-protocol behavior within communication design. The boundary is acceptable because it remains within the communication subsystem."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Message Passing API\\nTag Matching, Rendezvous"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem::Send State Machine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node covers rendezvous/tag-matching send behavior, which the predicted send state machine captures. The boundary is sufficiently consistent."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Fragmentation"
+      ],
+      "predicted_nodes": [
+        "Data Handling::Packet Buffer Packer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Packet-buffer packing corresponds to the payload handling/fragmentation aspect in the GT. The boundary is acceptable as a data-handling implementation detail."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::I/O API\\nStream"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem::Network Device"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node is a low-level device component, while the GT node is a high-level I/O protocol/API concept. This is a severe layer mismatch."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCT Hardware Transports\\nLow Level API::RDMA Verbs Transport\\nInfiniBand, ROCE, OPA"
+      ],
+      "predicted_nodes": [
+        "Embedded Libfabric Verbs Provider::Verbs Transport",
+        "Embedded Libfabric Verbs Provider::Linux Verbs API",
+        "Embedded Libfabric Verbs Provider::libibverbs",
+        "Embedded Libfabric Verbs Provider::librdmacm"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT RDMA verbs transport is represented by the predicted verbs provider and its related Linux verbs dependencies. This is a good semantic decomposition."
+    },
+    {
+      "gt_nodes": [
+        "Drivers and Kernels::RDMA Verbs Driver"
+      ],
+      "predicted_nodes": [
+        "Embedded Libfabric Verbs Provider::Verbs Transport",
+        "Embedded Libfabric Verbs Provider::Linux Verbs API",
+        "Embedded Libfabric Verbs Provider::libibverbs",
+        "Embedded Libfabric Verbs Provider::librdmacm"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT driver-side verbs support is captured by the predicted verbs-provider stack and its Linux verbs dependencies. The boundary is acceptable for a provider/driver integration view."
+    },
+    {
+      "gt_nodes": [
+        "Global::Hardware"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem::Network Device"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A network device is a hardware element, so the semantic match is valid even though the prediction places it within a communication subsystem context."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCS Services\\nCommon Utilities::Memory Management"
+      ],
+      "predicted_nodes": [
+        "Data Handling::Pinned User Data",
+        "Data Handling::Direct Access Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Pinned user data and direct-access handling are memory-management-related concerns. The AI split the concept into operational pieces without a severe boundary error."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCS Services\\nCommon Utilities::Data Structures"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem::Network Send Descriptors",
+        "Data Handling::Control Descriptor (OD",
+        "Data Handling::Data Descriptor (DD"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT data-structure concept is represented by the predicted descriptors used in the send path. The boundary remains semantically consistent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Drivers and Kernels::Cray Driver",
+    "Drivers and Kernels::OS Kernel\\nEthernet",
+    "Drivers and Kernels::OS Kernel\\nHost Memory",
+    "Drivers and Kernels::OS Kernel\\nMemory Hooks",
+    "Drivers and Kernels::ROCm / CUDA",
+    "Global::Applications\\nHPC, AI, ML, Big Data",
+    "Programming Models and Frameworks::AI / ML Frameworks\\nTensorFlow, Burst Buffer",
+    "Programming Models and Frameworks::MPI\\nMPICH, Open-MPI",
+    "Programming Models and Frameworks::PGAS / SHMEM\\nOpenSHMEM, UPC, CAF, X10, Chapel",
+    "Programming Models and Frameworks::Task Runtimes\\nParsec, OCR, Legion",
+    "UCX::UCM Memory Services::Memory Hooks",
+    "UCX::UCP Protocols\\nHigh Level API::Cross-Transport Multi-Rail",
+    "UCX::UCP Protocols\\nHigh Level API::PGAS API\\nRMAs, Atomics",
+    "UCX::UCP Protocols\\nHigh Level API::Task Based API\\nActive Messages",
+    "UCX::UCS Services\\nCommon Utilities::Utilities",
+    "UCX::UCT Hardware Transports\\nLow Level API::DCT",
+    "UCX::UCT Hardware Transports\\nLow Level API::Ethernet Transport\\nTCP/IP Sockets",
+    "UCX::UCT Hardware Transports\\nLow Level API::GPU Transport\\nNVIDIA CUDA, AMD ROCm",
+    "UCX::UCT Hardware Transports\\nLow Level API::Gemini / Aries Transport\\nGNI",
+    "UCX::UCT Hardware Transports\\nLow Level API::Intra-node Host Memory\\nSYSV, POSIX, KNEM, CMA, XPMEM",
+    "UCX::UCT Hardware Transports\\nLow Level API::RC",
+    "UCX::UCT Hardware Transports\\nLow Level API::UD"
+  ],
+  "unmatched_predicted_nodes": [
+    "Build & Test Interface::autogen.sh",
+    "Build & Test Interface::configure",
+    "Build & Test Interface::hwloc Tarball",
+    "Build & Test Interface::make",
+    "Build & Test Interface::run-embedded-tests.sh",
+    "Communication Subsystem::Flow Control",
+    "Communication Subsystem::Initialization/Termination",
+    "Communication Subsystem::One-to-Many Transfer",
+    "Communication Subsystem::Progress Engine",
+    "Data Handling::Packet Buffer",
+    "Data Handling::Packet Buffer Packer",
+    "Embedded Libfabric Verbs Provider::Linux Verbs API",
+    "Embedded Libfabric Verbs Provider::Verbs Transport",
+    "Embedded Libfabric Verbs Provider::libibverbs",
+    "Embedded Libfabric Verbs Provider::librdmacm"
+  ]
+}

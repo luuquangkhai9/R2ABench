@@ -1,0 +1,247 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::C#",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node corresponds to the C# runtime/language concept."
+    },
+    {
+      "gt_node": "Global::HTTP",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Logging Producer\\n(Any Language",
+        "Logging Producer\\n(Any Language::HTTP Client",
+        "Hypno Server::Node.js/Express App",
+        "Hypno Server::Node.js/Express App::/logger/in Endpoint",
+        "Hypno Server::Node.js/Express App::/logger/status Endpoint"
+      ],
+      "reasoning": "The predicted nodes cover HTTP-based log submission, HTTP client behavior, Express HTTP routing, and HTTP endpoints."
+    },
+    {
+      "gt_node": "Global::HypnoLog\\nServer",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::HypnoLog Server",
+        "Hypno Server::Node.js/Express App",
+        "Hypno Server::Socket.IO Server",
+        "Hypno Server::Static File Server"
+      ],
+      "reasoning": "The predicted architecture covers the HypnoLog Server system as a Node.js/Express server with Socket.IO and static file serving."
+    },
+    {
+      "gt_node": "Global::In Browser Log",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Browser Client::Schema Validator\\n(Ajv",
+        "Browser Client::Socket.IO Client",
+        "Browser Client::Visualizer Modules",
+        "Browser Client::Window Manager",
+        "Browser Client::Window Manager::Registered Windows",
+        "Browser Client::Window Manager::Visualizer Dispatcher",
+        "Global::Browser Client"
+      ],
+      "reasoning": "The browser-side logging/viewing pipeline is covered by the predicted browser client, schema validation, socket client, visualizer modules, and window manager."
+    },
+    {
+      "gt_node": "Global::Python",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node corresponds to a Python-related concept."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Browser Client::Schema Validator\\n(Ajv",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::In Browser Log"
+      ],
+      "reasoning": "This matches the browser-side Ajv schema validation requirement."
+    },
+    {
+      "predicted_node": "Browser Client::Socket.IO Client",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::In Browser Log"
+      ],
+      "reasoning": "This matches the browser client connection and notification handling via Socket.IO."
+    },
+    {
+      "predicted_node": "Browser Client::Visualizer Modules",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::In Browser Log"
+      ],
+      "reasoning": "This matches the browser-side visualizer loading and display mechanism."
+    },
+    {
+      "predicted_node": "Browser Client::Window Manager",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::In Browser Log"
+      ],
+      "reasoning": "This matches the browser-side window dispatch/display pipeline."
+    },
+    {
+      "predicted_node": "Browser Client::Window Manager::Registered Windows",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::In Browser Log"
+      ],
+      "reasoning": "This is a grounded subcomponent of the window dispatch mechanism."
+    },
+    {
+      "predicted_node": "Browser Client::Window Manager::Visualizer Dispatcher",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::In Browser Log"
+      ],
+      "reasoning": "This matches the visualizer selection and rendering dispatch responsibility."
+    },
+    {
+      "predicted_node": "Global::Browser Client",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::In Browser Log"
+      ],
+      "reasoning": "This corresponds to the browser-based client side of the system."
+    },
+    {
+      "predicted_node": "Global::HypnoLog Server",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HypnoLog\\nServer"
+      ],
+      "reasoning": "This is the same server concept, with slightly different naming."
+    },
+    {
+      "predicted_node": "Global::Logging Producer\\n(Any Language",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HTTP"
+      ],
+      "reasoning": "This corresponds to the language-agnostic HTTP log producer concept."
+    },
+    {
+      "predicted_node": "Hypno Server::Node.js/Express App",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HypnoLog\\nServer"
+      ],
+      "reasoning": "This is the core server application described in the PRD."
+    },
+    {
+      "predicted_node": "Hypno Server::Node.js/Express App::/logger/in Endpoint",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HTTP"
+      ],
+      "reasoning": "This matches the log ingestion HTTP endpoint."
+    },
+    {
+      "predicted_node": "Hypno Server::Node.js/Express App::/logger/status Endpoint",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HTTP"
+      ],
+      "reasoning": "This matches the status-check HTTP endpoint."
+    },
+    {
+      "predicted_node": "Hypno Server::Node.js/Express App::JSON Body Parser",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HTTP"
+      ],
+      "reasoning": "This matches the server-side JSON parsing requirement for incoming HTTP requests."
+    },
+    {
+      "predicted_node": "Hypno Server::Socket.IO Server",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HypnoLog\\nServer",
+        "Global::In Browser Log"
+      ],
+      "reasoning": "This corresponds to server-side Socket.IO delivery to browser clients."
+    },
+    {
+      "predicted_node": "Hypno Server::Static File Server",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HypnoLog\\nServer",
+        "Global::In Browser Log"
+      ],
+      "reasoning": "This matches server hosting of the browser UI and assets."
+    },
+    {
+      "predicted_node": "Hypno Server::Static File Server::Web UI Assets\\n(/client.html",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::In Browser Log"
+      ],
+      "reasoning": "This matches the browser UI page and static asset delivery for /client.html."
+    },
+    {
+      "predicted_node": "Logging Producer\\n(Any Language::HTTP Client",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HTTP"
+      ],
+      "reasoning": "This is the HTTP client side of the language-agnostic logging producer concept."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::HTTP"
+      ],
+      "predicted_nodes": [
+        "Global::Logging Producer\\n(Any Language",
+        "Logging Producer\\n(Any Language::HTTP Client",
+        "Hypno Server::Node.js/Express App::/logger/in Endpoint",
+        "Hypno Server::Node.js/Express App::/logger/status Endpoint",
+        "Hypno Server::Node.js/Express App::JSON Body Parser"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The HTTP responsibility is decomposed into producer, endpoint, and parser nodes, and the boundary attribution remains semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::HypnoLog\\nServer"
+      ],
+      "predicted_nodes": [
+        "Global::HypnoLog Server",
+        "Hypno Server::Node.js/Express App",
+        "Hypno Server::Socket.IO Server",
+        "Hypno Server::Static File Server"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The overall server concept is split into application, Socket.IO, and static-file serving components, all within a consistent server boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::In Browser Log"
+      ],
+      "predicted_nodes": [
+        "Global::Browser Client",
+        "Browser Client::Schema Validator\\n(Ajv",
+        "Browser Client::Socket.IO Client",
+        "Browser Client::Visualizer Modules",
+        "Browser Client::Window Manager",
+        "Browser Client::Window Manager::Registered Windows",
+        "Browser Client::Window Manager::Visualizer Dispatcher",
+        "Hypno Server::Static File Server::Web UI Assets\\n(/client.html"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The browser-side logging and visualization pipeline is represented by several detailed browser client subcomponents, which is semantically consistent with the GT browser logging concept."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::C#",
+    "Global::Python"
+  ],
+  "unmatched_predicted_nodes": []
+}

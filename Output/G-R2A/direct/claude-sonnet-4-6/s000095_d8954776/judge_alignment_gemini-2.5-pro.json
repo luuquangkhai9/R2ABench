@@ -1,0 +1,117 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Event Bus"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator\\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::Event Bus"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match for the Event Bus. The AI's boundary 'Android Application Process' is semantically equivalent to the GT's 'GPSLogger Android Application'."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::User Interface::Main Activity",
+        "GPSLogger Android Application::User Interface::Detailed View",
+        "GPSLogger Android Application::User Interface::Simple View",
+        "GPSLogger Android Application::User Interface::Other Fragments"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator\\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::Main Activity\\n& UI Fragments",
+        "Android Device / Emulator\\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::Main Activity\\n& UI Fragments::Location Display\\nFragment",
+        "Android Device / Emulator\\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::Main Activity\\n& UI Fragments::Settings\\nFragment"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated multiple GT UI components into a single 'Main Activity & UI Fragments' node and its children. The functionality is equivalent. The boundary 'Android Application Process' is a correct, albeit less specific, container compared to GT's 'User Interface' sub-boundary, but it's not an error."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Location Capture::Location Listeners",
+        "GPSLogger Android Application::Location Capture::Google Play Services\\nLocation Provider"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator\\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::GPS Logging Service::Location Listener",
+        "Android Device / Emulator\\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::Google Play\\nServices Client"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the location listening components. It also correctly modeled the in-app 'Google Play Services Client', which corresponds to the GT's 'Provider'. The boundaries are semantically correct, with the AI placing the listener inside a logical 'GPS Logging Service' boundary."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::Loggers",
+        "GPSLogger Android Application::Logging::GPX Logger",
+        "GPSLogger Android Application::Logging::KML Logger",
+        "GPSLogger Android Application::Logging::CSV / URL Loggers"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator\\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::Log Output Manager",
+        "Android Device / Emulator\\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::GPX Logger",
+        "Android Device / Emulator\\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::KML Logger",
+        "Android Device / Emulator\\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::Text File Logger"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified specific loggers (GPX, KML) and matched the concept of a text-based logger ('Text File Logger' vs 'CSV / URL Loggers'). The general 'Loggers' node in GT is matched by the AI's 'Log Output Manager'. All are correctly placed within the application process boundary."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::NMEA / GPRMC Encoder"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator\\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::OpenGTS Uploader::GPRMC Encoder\\n(SerializableLocation → GPRMC string"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the GPRMC encoder. While the GT placed it in a generic 'Logging' boundary, the AI correctly placed it within the 'OpenGTS Uploader' context, which is more specific and functionally accurate as per FR-006."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Upload::Uploaders",
+        "GPSLogger Android Application::Upload::Upload Jobs"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator\\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::Dropbox Uploader",
+        "Android Device / Emulator\\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::OpenGTS Uploader",
+        "Android Device / Emulator\\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::OpenStreetMap\\nUploader"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly split the GT's generic 'Uploaders' and 'Upload Jobs' components into specific, fine-grained uploader services for each external integration (Dropbox, OpenGTS, OpenStreetMap). This is a valid 1:N split. The boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Dropbox",
+        "Global::OpenGTS Endpoint\\nUDP server",
+        "Global::OpenStreetMap"
+      ],
+      "predicted_nodes": [
+        "External Services::Dropbox API",
+        "External Services::OpenGTS Server\\n(UDP endpoint",
+        "External Services::OpenStreetMap\\nOAuth API"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the external services. The 'External Services' boundary used by the AI is semantically more descriptive and accurate than the GT's generic 'Global' boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Android Device / Emulator\\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::GPS Logging Service",
+    "Android Device / Emulator\\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::GPS Logging Service::Session &\\nApp Settings",
+    "Android Device / Emulator\\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::OpenGTS Uploader::OpenGTS Config\\n(server, port, method,\\ndevice ID, [path",
+    "Android Device / Emulator\\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::OpenGTS Uploader::UDP Sender",
+    "Android Device / Emulator\\n(Android 2.2+, API 17+ for Google Play features::Local File Storage",
+    "Android Device / Emulator\\n(Android 2.2+, API 17+ for Google Play features::Local File Storage::GPX Files",
+    "Android Device / Emulator\\n(Android 2.2+, API 17+ for Google Play features::Local File Storage::KML Files",
+    "Android Device / Emulator\\n(Android 2.2+, API 17+ for Google Play features::Local File Storage::Text Log Files",
+    "Build System\\n(Gradle / Android SDK::Android SDK\\nBuild Tools 19.0.3\\n+ Support Libs\\n+ Google Play Services\\n+ Google Repository",
+    "Build System\\n(Gradle / Android SDK::Build Config\\nGenerator",
+    "Build System\\n(Gradle / Android SDK::gradle.properties\\n(~/.gradle/gradle.properties)\\n[GPSLOGGER_OSM_CONSUMERKEY,\\nGPSLOGGER_OSM_CONSUMERSECRET,\\nGPSLOGGER_DROPBOX_APPKEY,\\nGPSLOGGER_DROPBOX_APPSECRET",
+    "Build System\\n(Gradle / Android SDK::local.properties\\n(sdk.dir",
+    "External Services::Google Play\\nServices Framework"
+  ]
+}

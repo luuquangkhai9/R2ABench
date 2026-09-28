@@ -1,0 +1,194 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Browser / Client Layer::Frontend Interface\\n(Bootstrap-Vue"
+      ],
+      "predicted_nodes": [
+        "Presentation (Web UI::Web UI",
+        "Presentation (Web UI::I18n Module"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT frontend client interface is represented by the web UI, and the i18n module is a valid sub-capability of the frontend layer due to multilingual UI requirements."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Blog Data"
+      ],
+      "predicted_nodes": [
+        "External Systems::MySQL",
+        "Data Access::Data Repositories"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT blog database is decomposed into a MySQL external system plus repository access layer, which is semantically consistent with the persistence boundary."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Dataset Data"
+      ],
+      "predicted_nodes": [
+        "External Systems::MySQL",
+        "Data Access::Data Repositories"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT dataset database maps to the predicted MySQL persistence and repository access components, with no boundary conflict."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Following Data"
+      ],
+      "predicted_nodes": [
+        "External Systems::MySQL",
+        "Data Access::Data Repositories"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The following relationship storage is correctly placed in the persistence/database area, even though the AI split it into infrastructure and repository concerns."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Model Data"
+      ],
+      "predicted_nodes": [
+        "External Systems::MySQL",
+        "Data Access::Data Repositories"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The model data storage is functionally equivalent to the predicted database/repository components."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Q&A Community Data"
+      ],
+      "predicted_nodes": [
+        "External Systems::MySQL",
+        "Data Access::Data Repositories"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Q&A community database corresponds to the predicted persistence stack, which is an acceptable boundary refinement."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::User Data"
+      ],
+      "predicted_nodes": [
+        "External Systems::MySQL",
+        "Data Access::Data Repositories"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The user data storage is correctly represented by the MySQL/database access components."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Account Management Module"
+      ],
+      "predicted_nodes": [
+        "Application / API::API Controllers",
+        "Application / API::Auth & Access Control",
+        "Domain Services::Account Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The account management module is split into API, auth/access control, and domain service responsibilities, which is a reasonable layer refinement."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Admin Module"
+      ],
+      "predicted_nodes": [
+        "Application / API::API Controllers",
+        "Application / API::Auth & Access Control",
+        "Domain Services::Admin Governance Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The admin module is correctly decomposed into API/auth and an admin governance domain service."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Blog Sharing Module"
+      ],
+      "predicted_nodes": [
+        "Application / API::API Controllers",
+        "Domain Services::Blog Service",
+        "Domain Services::Comment Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The blog sharing module is split into blog and comment services, which is functionally aligned with the GT module."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Dataset Management Module"
+      ],
+      "predicted_nodes": [
+        "Application / API::API Controllers",
+        "Domain Services::Dataset Management Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The dataset management module maps cleanly to the predicted dataset service and API layer."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Following Management Module"
+      ],
+      "predicted_nodes": [
+        "Application / API::API Controllers",
+        "Domain Services::Follow Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The following management module is semantically equivalent to the follow service and related API layer."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Model Management Module"
+      ],
+      "predicted_nodes": [
+        "Application / API::API Controllers",
+        "Domain Services::Model Management Service",
+        "Domain Services::Online Invocation Service",
+        "Domain Services::Purchase Service",
+        "Domain Services::Recommendation Service",
+        "Integration / Infrastructure::Model Execution Adapter",
+        "External Systems::Model Execution Runtime / Compute Service",
+        "Integration / Infrastructure::Payment Adapter",
+        "External Systems::Payment Gateway"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT model module covers upload, online invocation, purchase, and recommendation. The AI split these concerns into appropriate services and infrastructure/external integrations, which is acceptable and boundary-consistent."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Q&A Community Module"
+      ],
+      "predicted_nodes": [
+        "Application / API::API Controllers",
+        "Domain Services::Q&A Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The Q&A module maps directly to the Q&A service and API layer without boundary confusion."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Data Access::Data Repositories",
+    "External Systems::MySQL",
+    "External Systems::Object Storage / File Server",
+    "External Systems::Payment Gateway",
+    "External Systems::SMTP Email Service",
+    "Integration / Infrastructure::Email Adapter",
+    "Integration / Infrastructure::File Storage Adapter",
+    "Integration / Infrastructure::Model Execution Adapter",
+    "Integration / Infrastructure::Payment Adapter"
+  ]
+}

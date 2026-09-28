@@ -1,0 +1,63 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "High level architecture::Frontend::Docker\\nfrontend container",
+        "High level architecture::Frontend::React"
+      ],
+      "predicted_nodes": [
+        "Docker Application Network::Frontend Container\\n[React",
+        "Docker Application Network::Frontend Container\\n[React::React Web App\\n(Song Mood Lookup UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's frontend concept, represented by the React application and its container, is correctly identified by the AI. The AI provides a more detailed breakdown by nesting the React Web App inside the Frontend Container. The boundary attribution is semantically correct, with GT's 'High level architecture::Frontend' corresponding to AI's 'Docker Application Network::Frontend Container'."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Backend::Docker\\nbackend container",
+        "High level architecture::Backend::FastAPI",
+        "High level architecture::Backend::Genius API\\nintegration"
+      ],
+      "predicted_nodes": [
+        "Docker Application Network::Backend Container\\n[FastAPI",
+        "Docker Application Network::Backend Container\\n[FastAPI::FastAPI Application",
+        "Docker Application Network::Backend Container\\n[FastAPI::Song Lookup\\nWorkflow",
+        "Docker Application Network::Backend Container\\n[FastAPI::Elasticsearch\\nClient",
+        "Docker Application Network::Backend Container\\n[FastAPI::Genius API\\nClient"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's backend components are correctly mapped and split into more granular, accurate components by the AI, such as separating the application logic, workflow, and specific API/DB clients. The boundary attribution is correct, as GT's 'Backend' layer corresponds to the AI's 'Backend Container'."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Analytics and storage::Docker\\nelasticsearch container",
+        "High level architecture::Analytics and storage::Docker\\nkibana container",
+        "High level architecture::Analytics and storage::Elasticsearch",
+        "High level architecture::Analytics and storage::Kibana"
+      ],
+      "predicted_nodes": [
+        "Docker Application Network::Elasticsearch Container",
+        "Docker Application Network::Elasticsearch Container::Elasticsearch\\nIndex",
+        "Docker Application Network::Elasticsearch Container::Elasticsearch\\nIndex::Artist Metadata\\n(name, genres, song count",
+        "Docker Application Network::Elasticsearch Container::Elasticsearch\\nIndex::Mood Associations\\n(song identity + mood value",
+        "Docker Application Network::Elasticsearch Container::Elasticsearch\\nIndex::Song Records\\n(name, SLink, lyrics, language",
+        "Docker Application Network::Kibana Container",
+        "Docker Application Network::Kibana Container::Kibana Data\\nInspection UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'Analytics and storage' components (Elasticsearch, Kibana, and their containers) are correctly matched and significantly detailed by the AI. The AI breaks down Elasticsearch into its index and data schemas as specified in the PRD. The boundary is semantically correct, as the components are grouped within the 'Docker Application Network', which is analogous to the GT's 'High level architecture'."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "High level architecture::Developer/Admin",
+    "High level architecture::user"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Services::Genius API\\n(External Song Search",
+    "Global::Docker Application Network",
+    "Global::External Services"
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Control::DBW Node\\nDrive-by-wire"
+      ],
+      "predicted_nodes": [
+        "Docker Container\\n(ROS Environment::System Nodes (ROS::Control Subsystem::Drive-By-Wire Node"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the drive-by-wire control node responsible for low-level vehicle actuation. The predicted node is placed under a ROS control subsystem inside the Docker/ROS environment, which is semantically consistent with the GT control boundary."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Control::Waypoint Follower\\nController"
+      ],
+      "predicted_nodes": [
+        "Docker Container\\n(ROS Environment::System Nodes (ROS::Control Subsystem::Twist Controller"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The waypoint follower/controller is functionally equivalent to the twist controller that computes vehicle commands from waypoints. The control subsystem boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Perception::Traffic Light\\nDetection Node"
+      ],
+      "predicted_nodes": [
+        "Docker Container\\n(ROS Environment::System Nodes (ROS::Perception Subsystem::Traffic Light Detector",
+        "Docker Container\\n(ROS Environment::System Nodes (ROS::Perception Subsystem::Traffic Light Classifier"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT traffic light detection node has been split into detector and classifier components, which is a reasonable functional decomposition. Both are correctly placed in the perception subsystem."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Perception::Obstacle Detection\\nROS Node"
+      ],
+      "predicted_nodes": [
+        "Docker Container\\n(ROS Environment::System Nodes (ROS::Perception Subsystem::Traffic Waypoint Publisher"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT obstacle detection node appears to correspond to the traffic-waypoint publishing behavior in this project context, since the perception subsystem produces stop-related waypoint output. The placement in perception is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Planning::Waypoint Loader\\nROS Node"
+      ],
+      "predicted_nodes": [
+        "Docker Container\\n(ROS Environment::System Nodes (ROS::Planning Subsystem::Waypoint Loader"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These are the same planning component responsible for loading base waypoints. The planning subsystem attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Planning::Waypoint Updater Node\\nROS Node"
+      ],
+      "predicted_nodes": [
+        "Docker Container\\n(ROS Environment::System Nodes (ROS::Planning Subsystem::Waypoint Updater"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the waypoint updater planning node that produces final waypoints. The planning boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Car / Simulator"
+      ],
+      "predicted_nodes": [
+        "Global::Udacity Simulator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The simulator/car environment in GT matches the Udacity Simulator in the prediction. The global environment placement is acceptable."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Docker Container\\n(ROS Environment",
+    "Global::Launch: site.launch\\n(site mode",
+    "Global::Launch: styx.launch\\n(simulator mode",
+    "Global::Recorded Training Bag\\n(playback",
+    "Global::base_waypoints\\n(twist.twist.linear.x carries target speed",
+    "Global::current_pose",
+    "Global::final_waypoints",
+    "Global::traffic_waypoint",
+    "Global::twist_cmd",
+    "Global::vehicle_cmd"
+  ]
+}

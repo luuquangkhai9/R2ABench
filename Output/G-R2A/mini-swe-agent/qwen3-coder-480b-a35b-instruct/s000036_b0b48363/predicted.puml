@@ -1,0 +1,52 @@
+@startuml
+!theme plain
+title HypnoLog Server Architecture
+
+package "HypnoLog Server" {
+  [HTTP Server] as httpServer
+  [Express App] as expressApp
+  [Logging Route] as loggerRoute
+  [Socket.IO Server] as socketIOServer
+  [Visualizer Manager] as visManager
+  [Window Manager] as winManager
+  [Schema Validator] as schemaValidator
+  [Data Store] as dataStore
+}
+
+package "External Systems" {
+  [Logging Producer] as producer
+  [Browser Client] as browser
+}
+
+producer --> httpServer : HTTP POST /logger/in
+httpServer --> expressApp : Routes requests
+expressApp --> loggerRoute : Handles /logger/in
+loggerRoute --> dataStore : Stores log data
+loggerRoute --> socketIOServer : Broadcasts via Socket.IO
+socketIOServer --> browser : Sends log data
+browser --> schemaValidator : Validates received data
+schemaValidator --> winManager : Passes valid data
+winManager --> visManager : Selects visualizer
+visManager --> winManager : Renders with visualizer
+dataStore : In-memory log storage
+
+note right of loggerRoute
+  Parses JSON body (up to 50mb)
+end note
+
+note right of socketIOServer
+  Attached to HTTP server
+  Broadcasts to all connected clients
+end note
+
+note right of visManager
+  Loads visualizers from config
+  Selects by canDisplay() match
+end note
+
+note right of schemaValidator
+  Uses Ajv for validation
+  Wraps invalid messages as HypnoLog-error
+end note
+
+@enduml

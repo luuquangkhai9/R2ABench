@@ -1,0 +1,127 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Internet"
+      ],
+      "predicted_nodes": [
+        "External Environment::External Users / Systems",
+        "External Environment::Inbound Email Source"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified external actors and split the generic GT 'Internet' node into specific 'External Users / Systems' and the 'Inbound Email Source' mentioned in the PRD. The 'External Environment' boundary is a semantically correct and more descriptive grouping than 'Global'."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Proxy"
+      ],
+      "predicted_nodes": [
+        "PlugIt Proxy Environment::PlugIt Proxy",
+        "PlugIt Proxy Environment::PlugIt Proxy::Proxy API Endpoint",
+        "PlugIt Proxy Environment::PlugIt Proxy::Standalone Mail Workflow",
+        "PlugIt Proxy Environment::PlugIt Proxy::Standalone Mail Workflow::Auto-Response Filter",
+        "PlugIt Proxy Environment::PlugIt Proxy::Standalone Mail Workflow::Mail Handler",
+        "PlugIt Proxy Environment::PlugIt Proxy::Standalone Mail Workflow::Mail Intake",
+        "PlugIt Proxy Environment::PlugIt Proxy::Standalone Mail Workflow::Routing Validator",
+        "PlugIt Proxy Environment::PlugIt Proxy::Standalone Mail Workflow::Text Payload Extractor"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly decomposed the single GT 'PlugIt Proxy' node into its detailed functional components (API, Mail Workflow) as specified in the PRD. The logical boundary 'PlugIt Proxy Environment' is a valid and semantically equivalent alternative to the physical 'Internal Network'."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB_Proxy"
+      ],
+      "predicted_nodes": [
+        "PlugIt Proxy Environment::PlugIt Proxy::Proxy-Side Data Store"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes refer to the same component, the proxy's dedicated database. The AI correctly placed the data store as a child of the proxy, and its 'PlugIt Proxy Environment' boundary is semantically equivalent to the GT's 'Internal Network'."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Service 1"
+      ],
+      "predicted_nodes": [
+        "PlugIt Service Environment::PlugIt Service 1",
+        "PlugIt Service Environment::PlugIt Service 1::PlugIt API Client",
+        "PlugIt Service Environment::PlugIt Service 1::Service Logic"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly split the GT 'PlugIt Service 1' node into its logical sub-components ('API Client', 'Service Logic') derived from the PRD. The 'PlugIt Service Environment' boundary is semantically equivalent to 'Internal Network'."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Service 2"
+      ],
+      "predicted_nodes": [
+        "PlugIt Service Environment::PlugIt Service 2",
+        "PlugIt Service Environment::PlugIt Service 2::PlugIt API Client",
+        "PlugIt Service Environment::PlugIt Service 2::Service Logic"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly split the GT 'PlugIt Service 2' node into its logical sub-components ('API Client', 'Service Logic') derived from the PRD. The 'PlugIt Service Environment' boundary is semantically equivalent to 'Internal Network'."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Service 3"
+      ],
+      "predicted_nodes": [
+        "PlugIt Service Environment::PlugIt Service N",
+        "PlugIt Service Environment::PlugIt Service N::PlugIt API Client",
+        "PlugIt Service Environment::PlugIt Service N::Service Logic"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly interpreted 'PlugIt Service 3' as a generic, repeatable service, labeling it 'Service N' and decomposing it into its logical parts. The boundary attribution is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB 1"
+      ],
+      "predicted_nodes": [
+        "PlugIt Service Environment::Service Database 1"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A correct 1:1 match for the database of the first service. The 'PlugIt Service Environment' boundary is semantically equivalent to 'Internal Network'."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB 2"
+      ],
+      "predicted_nodes": [
+        "PlugIt Service Environment::Service Database 2"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A correct 1:1 match for the database of the second service. The 'PlugIt Service Environment' boundary is semantically equivalent to 'Internal Network'."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB 3"
+      ],
+      "predicted_nodes": [
+        "PlugIt Service Environment::Service Database N"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A correct 1:1 match. The AI correctly interpreted 'DB 3' as the database for the generic Nth service. The 'PlugIt Service Environment' boundary is semantically equivalent to 'Internal Network'."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Configuration & Management::Database Schema Manager",
+    "Configuration & Management::Service Configuration",
+    "Global::Configuration & Management",
+    "Global::External Environment",
+    "Global::PlugIt Proxy Environment",
+    "Global::PlugIt Service Environment",
+    "Global::Proxy Database"
+  ]
+}

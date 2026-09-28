@@ -1,0 +1,173 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::MySQL"
+      ],
+      "predicted_nodes": [
+        "Data and Storage Layer::Relational DB"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the relational database storage component; the boundary naming differs but is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::Prometheus"
+      ],
+      "predicted_nodes": [
+        "Data and Storage Layer::Relational DB"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Prometheus is observability/monitoring, not a relational database."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::RabbitMQ"
+      ],
+      "predicted_nodes": [
+        "Message Queue Layer::RabbitMQ Task Queue"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the RabbitMQ message queue used for task scheduling and reliable message transmission."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::Redis"
+      ],
+      "predicted_nodes": [
+        "Data and Storage Layer::etcd Service Registry"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Redis and etcd are different infrastructure components with different roles; the predicted node does not match Redis semantically."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-auth"
+      ],
+      "predicted_nodes": [
+        "Web Backend Layer::Account Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The auth service corresponds to account registration/login functionality, and placing it in the backend layer is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-discovery"
+      ],
+      "predicted_nodes": [
+        "Data and Storage Layer::etcd Service Registry"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Service discovery is semantically equivalent to a service registry backed by etcd, and the infrastructure boundary is reasonable."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-scheduler"
+      ],
+      "predicted_nodes": [
+        "Scheduled Tasks::Cron Scheduler Daily 02:00"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the scheduling component that triggers daily jobs around 02:00."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-web"
+      ],
+      "predicted_nodes": [
+        "Web Backend Layer::Score Service",
+        "Web Backend Layer::Generation Task Service",
+        "Web Backend Layer::Recommendation Service",
+        "Web Backend Layer::Model Service",
+        "Web Backend Layer::Scheduling Coordinator",
+        "Web Backend Layer::Account Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT web backend service is split into multiple domain services in the prediction. The backend layering is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone::Nginx Cluster"
+      ],
+      "predicted_nodes": [
+        "Gateway Layer::Nginx Reverse Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Nginx cluster and reverse proxy gateway are semantically aligned, with a reasonable security/gateway boundary."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone::Spring Cloud Gateway"
+      ],
+      "predicted_nodes": [
+        "Gateway Layer::Nginx Reverse Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Spring Cloud Gateway is not the same component as Nginx reverse proxy; they belong to different gateway implementations."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone::Static Resource Server"
+      ],
+      "predicted_nodes": [
+        "Web Frontend Layer::Frontend Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "A static resource server is infrastructure for serving assets, while the frontend application is the client-side app; these are not equivalent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Awesome Music System::Infra Layer::Prometheus",
+    "Awesome Music System::Micro Service Layer::service-auth::auth1",
+    "Awesome Music System::Micro Service Layer::service-auth::auth2",
+    "Awesome Music System::Micro Service Layer::service-auth::auth3",
+    "Awesome Music System::Micro Service Layer::service-discovery::discovery1",
+    "Awesome Music System::Micro Service Layer::service-discovery::discovery2",
+    "Awesome Music System::Micro Service Layer::service-discovery::discovery3",
+    "Awesome Music System::Micro Service Layer::service-scheduler::scheduler1",
+    "Awesome Music System::Micro Service Layer::service-scheduler::scheduler2",
+    "Awesome Music System::Micro Service Layer::service-scheduler::scheduler3",
+    "Awesome Music System::Micro Service Layer::service-web::web1",
+    "Awesome Music System::Micro Service Layer::service-web::web2",
+    "Awesome Music System::Micro Service Layer::service-web::web3",
+    "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx1",
+    "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx2",
+    "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx3",
+    "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway1",
+    "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway2",
+    "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway3",
+    "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server1",
+    "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server2",
+    "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server3"
+  ],
+  "unmatched_predicted_nodes": [
+    "Algorithm Service Layer::Classification Service",
+    "Algorithm Service Layer::Offline Training Service",
+    "Algorithm Service Layer::Online Generation Service",
+    "Algorithm Service Layer::Recommendation Engine",
+    "Client Layer::Web Browser",
+    "Data and Storage Layer::Hadoop HDFS",
+    "Data and Storage Layer::etcd Service Registry",
+    "Gateway Layer::Nginx Reverse Proxy",
+    "Message Queue Layer::RabbitMQ Task Queue",
+    "Scheduled Tasks::Cron Scheduler Daily 02:00",
+    "Web Backend Layer::Account Service",
+    "Web Backend Layer::Generation Task Service",
+    "Web Backend Layer::Model Service",
+    "Web Backend Layer::Recommendation Service",
+    "Web Backend Layer::Scheduling Coordinator",
+    "Web Backend Layer::Score Service",
+    "Web Frontend Layer::Frontend Application"
+  ]
+}

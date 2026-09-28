@@ -1,0 +1,181 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Client A1",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Client B1"
+      ],
+      "predicted_nodes": [
+        "Distributed Coordination::Client Host::Distributed Client"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both GT nodes represent distributed client participants in the solver. The AI aggregated multiple client instances into a single distributed client node, which is semantically acceptable. The boundary 'Distributed Coordination::Client Host' is consistent with the GT client-side distributed search grouping."
+    },
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Client A2",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Client B2"
+      ],
+      "predicted_nodes": [
+        "Distributed Coordination::Client Host::Distributed Client"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "These are additional distributed client instances from the GT. Aggregation into one predicted distributed client is acceptable, and the boundary remains semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Client A3",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Client B3"
+      ],
+      "predicted_nodes": [
+        "Distributed Coordination::Client Host::Distributed Client"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT contains multiple client instances; the prediction consolidates them into one client component. Boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Server\n-wsplit",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Server\n-wsplit"
+      ],
+      "predicted_nodes": [
+        "Distributed Coordination::Server Host::Distributed Server"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT server nodes map to a distributed server role. The prediction correctly places this in the server-side distributed coordination boundary."
+    },
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Work files\nHashTable A",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Work files\nHashTable B",
+        "Kangrand Distributed Pollard Kangaroo::Master WorkFile\nHashTable"
+      ],
+      "predicted_nodes": [
+        "Persistence and Workfile Management::Workfile Manager",
+        "In-memory DP/Hash Storage::HashTableStore"
+      ],
+      "match_type": "N:2",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates work file artifacts and hash table artifacts, while the prediction models them as workfile management plus in-memory hash storage. This is a reasonable structural decomposition and the boundaries are semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Kangaroo file A1",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Kangaroo file A2",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Kangaroo file A3",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Kangaroo file B1",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Kangaroo file B2",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Kangaroo file B3"
+      ],
+      "predicted_nodes": [
+        "Persistence and Workfile Management::Workfile Manager"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT kangaroo files are persistence artifacts associated with work-file handling. The prediction abstracts them under workfile management, which is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Result.txt A",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Result.txt B"
+      ],
+      "predicted_nodes": [
+        "Global::File System"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT result files are specific solver outputs, not generic file-system infrastructure. The AI placed them too broadly and lost the architectural meaning of result artifacts."
+    },
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Merger"
+      ],
+      "predicted_nodes": [
+        "Offline Merge/Analysis::Offline Merger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct semantic match for the offline merge component, and the boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Work files\nHashTable A",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Work files\nHashTable B"
+      ],
+      "predicted_nodes": [
+        "Global::File System"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "Although these are file-related artifacts, the GT specifically models solver work files and hash-table artifacts. Mapping them to a generic file-system boundary is too coarse and loses architectural intent."
+    },
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Server\n-wsplit",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Server\n-wsplit"
+      ],
+      "predicted_nodes": [
+        "Global::Operator-managed Network"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT nodes are server processes, not network environment nodes. The AI confused runtime/server components with the operator-managed network context."
+    },
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Client A1",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Client A2",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Client A3",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Client B1",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Client B2",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Client B3"
+      ],
+      "predicted_nodes": [
+        "GPU Acceleration::GPU Executor"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT client nodes are distributed worker processes. GPU acceleration may be an option for clients, but it is not equivalent to the client components themselves. This is a boundary and role mismatch."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Client A1",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Client A2",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Client A3",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Kangaroo file A1",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Kangaroo file A2",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Kangaroo file A3",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Result.txt A",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Server\\n-wsplit",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Work files\\nHashTable A",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Client B1",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Client B2",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Client B3",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Kangaroo file B1",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Kangaroo file B2",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Kangaroo file B3",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Result.txt B",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Server\\n-wsplit",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Work files\\nHashTable B",
+    "Kangrand Distributed Pollard Kangaroo::Master WorkFile\\nHashTable"
+  ],
+  "unmatched_predicted_nodes": [
+    "Command-line Interface::CLI Controller",
+    "Core Kangaroo Solving::Distinguished-Point Criterion",
+    "Core Kangaroo Solving::Kangaroo Engine",
+    "Data Parsing::Input Parser",
+    "Distributed Coordination::Client Host",
+    "Distributed Coordination::Server Host",
+    "Global::File System",
+    "Global::GPU Hardware/Runtime",
+    "Global::Operator-managed Network",
+    "In-memory DP/Hash Storage::HashTableStore",
+    "Offline Merge/Analysis::Offline Merger",
+    "Persistence and Workfile Management::Workfile Manager",
+    "Persistence and Workfile Management::Wsplit Backup Manager"
+  ]
+}

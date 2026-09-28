@@ -1,0 +1,199 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::InfluxDB"
+      ],
+      "predicted_nodes": [
+        "Global::InfluxDB\\n(Time-Series Store",
+        "InfluxDB\\n(Time-Series Store::Coding-Process Records"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT InfluxDB is correctly matched to the predicted global database node and its contained coding-process record node. The boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Global::MySQL",
+        "MySQL::Battle Records & Outcomes",
+        "MySQL::Problems",
+        "MySQL::Projects & Versions",
+        "MySQL::Users"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT MySQL is represented by the predicted global MySQL node and its functional subnodes. The database boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::Redis"
+      ],
+      "predicted_nodes": [
+        "Global::Redis Cache",
+        "Redis Cache::Battle Invitation Cache\\n(Temporary, Watched",
+        "Redis Cache::Battle State Cache",
+        "Redis Cache::Workspace Socket/Version Mappings"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT Redis is correctly mapped to the predicted Redis cache node and its cache subcomponents. Boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Reverse Proxy::Nginx"
+      ],
+      "predicted_nodes": [
+        "Global::Nginx Reverse Proxy",
+        "Nginx Reverse Proxy::Static Asset Serving\\n& Request Routing"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT Nginx reverse proxy is matched to the predicted reverse proxy node and its routing/serving subnode. The architectural boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Backend Repo::CI/CD Workflow",
+        "Frontend Repo::CI/CD Workflow"
+      ],
+      "predicted_nodes": [
+        "Global::Automated Deployment Environment",
+        "Automated Deployment Environment::Deployment Scripts\\n(Frontend / Backend / Services"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separate CI/CD workflow nodes are aggregated into a broader automated deployment environment. This is semantically aligned, and the deployment boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Backend Repo::Deploy Key",
+        "Frontend Repo::Deploy Key"
+      ],
+      "predicted_nodes": [
+        "Automated Deployment Environment::Deployment Scripts\\n(Frontend / Backend / Services"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "Deploy keys are omitted as distinct nodes and incorrectly absorbed into deployment scripts. This loses the repository-level security/credential boundary."
+    },
+    {
+      "gt_nodes": [
+        "Backend Repo::GitHub",
+        "Frontend Repo::GitHub"
+      ],
+      "predicted_nodes": [
+        "Automated Deployment Environment::Deployment Scripts\\n(Frontend / Backend / Services"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT GitHub repository nodes are not faithfully preserved; they are collapsed into deployment scripts, which is a boundary and responsibility mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Backend Repo::Node.js",
+        "Frontend Repo::Vue 3"
+      ],
+      "predicted_nodes": [
+        "Global::Node.js / Express Backend",
+        "Global::Browser (Vue Frontend"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT backend and frontend runtime nodes are correctly represented as separate backend and browser/frontend nodes. The boundary mapping is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Coding Sandbox::Coding Sandbox 1::Docker",
+        "Coding Sandbox::Coding Sandbox 1::Node.js",
+        "Coding Sandbox::Coding Sandbox 1::Exporter",
+        "Coding Sandbox::Coding Sandbox 2::Docker",
+        "Coding Sandbox::Coding Sandbox 2::Node.js",
+        "Coding Sandbox::Coding Sandbox 2::Exporter"
+      ],
+      "predicted_nodes": [
+        "Global::Docker Sandbox",
+        "Docker Sandbox::Code Compiler / Executor\\n(Isolated Process"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The two GT sandbox instances are abstracted into a single Docker sandbox and executor node. This is a valid architectural aggregation with correct boundary semantics."
+    },
+    {
+      "gt_nodes": [
+        "Global::Developer"
+      ],
+      "predicted_nodes": [
+        "Global::Automated Deployment Environment"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "These are not semantically equivalent; a developer actor is incorrectly conflated with deployment infrastructure."
+    },
+    {
+      "gt_nodes": [
+        "Global::End User"
+      ],
+      "predicted_nodes": [
+        "Global::Browser (Vue Frontend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The end user actor is not the same as the browser frontend system component. This is a role/component mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Static Asset Delivery::CDN\\nCloudFront",
+        "Static Asset Delivery::Storage\\nS3 bucket"
+      ],
+      "predicted_nodes": [
+        "Global::CDN / URL Distribution\\n(CloudFront-style",
+        "CDN / URL Distribution\\n(CloudFront-style::Distributable URL Endpoints",
+        "Global::S3-Compatible Object Storage",
+        "S3-Compatible Object Storage::Battle Result Files",
+        "S3-Compatible Object Storage::Code Files",
+        "S3-Compatible Object Storage::Static Assets & Archives",
+        "S3-Compatible Object Storage::User Files"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT CDN and S3 storage are correctly represented by the predicted CDN/distribution and object storage nodes, with detailed file categories beneath them. Boundary attribution is semantically correct."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Browser (Vue Frontend::Battle View",
+    "Browser (Vue Frontend::Coding-Process Playback View",
+    "Browser (Vue Frontend::Login / Registration View",
+    "Browser (Vue Frontend::Project Workspace / Editor View",
+    "Browser (Vue Frontend::REST API Client",
+    "Browser (Vue Frontend::Socket.IO Client",
+    "Node.js / Express Backend::Authentication Module",
+    "Node.js / Express Backend::Authentication Module::JWT Validator\\n(Bearer Token Parser",
+    "Node.js / Express Backend::Authentication Module::Registration & Login Handler",
+    "Node.js / Express Backend::Authentication Module::User Detail Query",
+    "Node.js / Express Backend::Battle Socket Module",
+    "Node.js / Express Backend::Battle Socket Module::Battle Acceptance Handler\\n(Redis Isolated Execution",
+    "Node.js / Express Backend::Battle Socket Module::Battle Invitation Creator\\n& Expiry Manager",
+    "Node.js / Express Backend::Battle Socket Module::Battle State Manager\\n(Readiness / Code Sync /\\nJudge / Outcome / Leave",
+    "Node.js / Express Backend::Code Execution Module",
+    "Node.js / Express Backend::Code Execution Module::Code Submission Handler",
+    "Node.js / Express Backend::Code Execution Module::Sandbox Invoker",
+    "Node.js / Express Backend::Coding-Process Record Module",
+    "Node.js / Express Backend::Coding-Process Record Module::Coding Event Recorder",
+    "Node.js / Express Backend::Coding-Process Record Module::Playback Query Handler\\n(by Project / Version / Time Range",
+    "Node.js / Express Backend::File & Distribution Module",
+    "Node.js / Express Backend::File & Distribution Module::Archive & Asset URL Provider",
+    "Node.js / Express Backend::File & Distribution Module::File Upload Handler\\n(Code / Battle / User Files",
+    "Node.js / Express Backend::Project & Version Module",
+    "Node.js / Express Backend::Project & Version Module::Project CRUD Handler",
+    "Node.js / Express Backend::Project & Version Module::Version & Initial File Handler",
+    "Node.js / Express Backend::REST API Router",
+    "Node.js / Express Backend::Socket.IO Server",
+    "Node.js / Express Backend::Workspace Socket Module",
+    "Node.js / Express Backend::Workspace Socket Module::Edit State & Occupation Coordinator",
+    "Node.js / Express Backend::Workspace Socket Module::Leave & Disconnect Cleanup Handler",
+    "Node.js / Express Backend::Workspace Socket Module::Workspace Auth & Status Emitter\\n(statusChecked event"
+  ]
+}

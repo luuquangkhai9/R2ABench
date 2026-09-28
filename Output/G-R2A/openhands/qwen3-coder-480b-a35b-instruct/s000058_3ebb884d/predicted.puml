@@ -1,0 +1,81 @@
+@startuml
+!define RECTANGLE rectangle linewidth 1
+
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam defaultTextAlignment center
+skinparam noteFontSize 10
+
+title macpro-appian-connector System Architecture
+
+' Actors
+actor "Developer" as dev
+actor "Operator" as op
+actor "Maintainer" as maint
+
+' External Systems
+RECTANGLE "GitHub" as github {
+  [GitHub Actions] as gh_actions
+  [GitHub API] as gh_api
+}
+
+RECTANGLE "AWS" as aws {
+  [EventBridge] as eventbridge
+  [SNS] as sns
+  [EC2/ECS] as ec2
+}
+
+' Main System Components
+package "macpro-appian-connector" {
+  [Stage Listing Service] as stage_service
+  [Connector Manager] as connector_mgr
+  [Event Router] as event_router
+  [Metrics Collector] as metrics_collector
+  [Configuration Handler] as config_handler
+}
+
+' Data Stores
+database "Appian" as appian
+database "BigMAC" as bigmac
+
+' Developer Interactions
+dev --> stage_service : "list running stages"
+dev --> config_handler : "configure connectors"
+dev --> metrics_collector : "collect metrics"
+
+' Operator Interactions
+op --> stage_service : "list running stages"
+op --> sns : "manage subscriptions"
+op --> event_router : "configure event rules"
+
+' Maintainer Interactions
+maint --> connector_mgr : "manage connectors"
+maint --> metrics_collector : "analyze metrics"
+
+' Internal Component Relationships
+stage_service --> ec2 : "query running stages"
+config_handler --> connector_mgr : "apply configurations"
+connector_mgr --> appian : "read data"
+connector_mgr --> bigmac : "write data"
+event_router --> eventbridge : "receive events"
+event_router --> sns : "route events"
+sns --> event_router : "deliver notifications"
+
+' External Integrations
+gh_actions --> metrics_collector : "workflow data"
+gh_api --> metrics_collector : "PR data"
+metrics_collector --> gh_api : "query metrics"
+
+note right of aws
+  AWS Account Scoped Operations
+end note
+
+note bottom of sns
+  Manual Subscription Management
+end note
+
+note right of github
+  CI/CD and Metrics Source
+end note
+
+@enduml

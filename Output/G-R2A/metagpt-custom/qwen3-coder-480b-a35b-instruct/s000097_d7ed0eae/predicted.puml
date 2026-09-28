@@ -1,0 +1,73 @@
+@startuml
+' Deployment nodes representing physical or cloud infrastructure
+node "Client Infrastructure" {
+  node "Web Server" {
+    component "React/TypeScript Website"
+  }
+  node "Browser Environment" {
+    component "Chrome Browser Extension"
+  }
+}
+
+node "API Infrastructure" {
+  node "Node.js Runtime" {
+    component "UserController"
+    component "PingController"
+  }
+}
+
+node "Data Infrastructure" {
+  database "Persistent Storage"
+  component "UserRepository"
+}
+
+' Data Models with specified fields
+component "User Model" as user_model {
+  property id
+  property ip
+  property creationDate
+  property purchaseIds
+  property username
+  property region
+}
+
+component "InventoryItem Model" as inventory_model {
+  property id
+  property name
+  property description
+  property price
+  property quantity
+}
+
+component "PingResponse Model" as ping_model {
+  property greeting
+  property date
+  property url
+  property headers
+}
+
+component "NewUser Schema" as newuser_schema {
+  property ip
+  property purchaseIds
+  property username
+  property region
+}
+
+' Connections and dependencies
+[React/TypeScript Website] --> [UserController] : POST /users\nGET /users/{id}\nPATCH /users/{id}
+[Chrome Browser Extension] --> [UserController] : POST /users\nGET /users/{id}\nPATCH /users/{id}
+[React/TypeScript Website] --> [PingController] : GET /ping
+[Chrome Browser Extension] --> [PingController] : GET /ping
+
+[UserController] --> [UserRepository] : CRUD Operations
+[UserController] --> user_model : Handles
+[UserController] --> newuser_schema : Validates
+[UserRepository] --> [Persistent Storage] : Data Persistence
+[UserRepository] --> user_model : Manages
+
+[PingController] --> ping_model : Constructs
+[PingController] ..> "HTTP Request" : Accesses URL & Headers
+
+inventory_model ..> user_model : Referenced by
+
+@enduml

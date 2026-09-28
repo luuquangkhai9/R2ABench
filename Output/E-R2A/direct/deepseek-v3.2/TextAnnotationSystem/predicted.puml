@@ -1,0 +1,195 @@
+@startuml
+!define RECTANGLE class
+skinparam componentStyle rectangle
+skinparam linetype ortho
+skinparam nodesep 20
+skinparam ranksep 30
+
+title Intelligent Text Annotation System (ITAS) - System Architecture
+
+' ========== External Entities ==========
+rectangle "User" as User <<External Person>>
+rectangle "Third-Party Model API\n(e.g., GPT API)" as GPTAPI <<External System>>
+
+' ========== Frontend Layer ==========
+package "Frontend Layer (Vue.js)" {
+    [Web Browser\n(Vue 3 / Ant Design)] as Frontend
+    note right of Frontend
+        Vue Router, Pinia, Axios
+        UI-001 to UI-005
+    end note
+}
+
+' ========== Gateway & Security Layer ==========
+package "Gateway & Security Layer" {
+    [Nginx\nReverse Proxy & Load Balancer] as Nginx
+    [Spring Cloud Gateway\n+ Spring Security] as Gateway
+    note right of Gateway
+        Authentication & Authorization
+        COM-002, C-003, NFR-005
+    end note
+}
+
+' ========== Backend Service Layer ==========
+package "Backend Service Layer (Spring Boot/Cloud)" {
+    package "Annotation Subsystem" {
+        [Annotation Service] as AnnotationService
+        note right of AnnotationService
+            Manages Projects, Documents,
+            Tags, Tasks, Results
+            FR-006 to FR-016, API-001
+        end note
+    }
+
+    package "Mining Subsystem" {
+        [Mining Service] as MiningService
+        note right of MiningService
+            Document Upload, Model Selection,
+            Information Extraction
+            FR-017 to FR-022, API-002
+        end note
+    }
+
+    [User & Role Service] as UserService
+    note right of UserService
+        User Registration, Authentication,
+        Role Management
+        FR-001 to FR-004
+    end note
+
+    [File Processing Service] as FileService
+    note right of FileService
+        Handles Upload, Conversion,
+        Storage References
+        FR-018, DIF-001
+    end note
+
+    [Model Integration Service] as ModelService
+    note right of ModelService
+        Integrates BERT, GPT, and
+        custom models
+        C-007, API-003
+    end note
+}
+
+' ========== Asynchronous Processing Layer ==========
+package "Asynchronous Processing Layer" {
+    [RabbitMQ\nMessage Queue] as RabbitMQ
+    note right of RabbitMQ
+        Async Task Processing
+        (e.g., File Conversion)
+        AD-004, COM-004, NFR-009
+    end note
+
+    [Async Worker\n(e.g., File Converter)] as AsyncWorker
+}
+
+' ========== Data & Storage Layer ==========
+package "Data & Storage Layer" {
+    database "MySQL\nStructured Storage" as MySQL {
+        folder "Tables" {
+            [Users, Roles]
+            [Projects, Documents]
+            [Tags, Tasks, Results]
+        }
+    }
+    note right of MySQL
+        DR-001 to DR-010
+        DSR-001
+    end note
+
+    rectangle "MinIO\nObject Storage" as MinIO
+    note right of MinIO
+        Stores PDF, HTML, TXT files
+        AD-003, DSR-002
+    end note
+
+    rectangle "Redis\nCache" as Redis
+    note right of Redis
+        Improves response speed
+        API-004, DSR-003, NFR-003
+    end note
+}
+
+' ========== Deployment & Infrastructure ==========
+cloud "Tencent Cloud" as Cloud
+note bottom of Cloud
+    Deployment Environment
+    C-010, NFR-010
+end note
+
+rectangle "Docker Containerization" as Docker
+note right of Docker
+    Environment Consistency
+    C-009, NFR-006
+end note
+
+' ========== Primary Data/Request Flows ==========
+
+User --> Frontend : Accesses UI (HTTP/HTTPS)
+Frontend --> Nginx : HTTP Requests
+Nginx --> Gateway : Proxied Requests
+Gateway --> UserService : Auth/Login Requests
+Gateway --> AnnotationService : Annotation API Calls
+Gateway --> MiningService : Mining API Calls
+Gateway --> FileService : File Upload/Download
+
+AnnotationService --> MiningService : Provides Annotation Results\n(AD-001, DIO-003)
+
+FileService --> RabbitMQ : Queues Conversion Tasks
+RabbitMQ --> AsyncWorker : Consumes Tasks
+AsyncWorker --> FileService : Notifies Completion
+AsyncWorker --> MinIO : Reads/Writes Files
+
+AnnotationService --> MySQL : CRUD Operations\n(MyBatis Plus)
+MiningService --> MySQL : CRUD Operations
+UserService --> MySQL : CRUD Operations
+
+AnnotationService --> Redis : Caches Frequent Data
+MiningService --> Redis : Caches Frequent Data
+UserService --> Redis : Caches Session/User Data
+
+FileService --> MinIO : Stores/Retrieves Files\n(DIF-003)
+MiningService --> MinIO : Retrieves Documents for Processing
+
+ModelService --> GPTAPI : Invokes External Models\n(API-003, AD-002)
+MiningService --> ModelService : Requests Model Processing
+AnnotationService --> ModelService : May use for auto-annotation
+
+' ========== Deployment Relations ==========
+Nginx ..> Cloud : Deployed within
+Gateway ..> Cloud : Deployed within
+Backend Service Layer ..> Cloud : Deployed within
+RabbitMQ ..> Cloud : Deployed within
+MySQL ..> Cloud : Deployed within
+MinIO ..> Cloud : Deployed within
+Redis ..> Cloud : Deployed within
+
+Backend Service Layer ..> Docker : Containerized
+RabbitMQ ..> Docker : Containerized
+MySQL ..> Docker : Containerized (optional)
+MinIO ..> Docker : Containerized (optional)
+Redis ..> Docker : Containerized (optional)
+
+' ========== Technology Stack Notes ==========
+note top of Frontend
+    <b>Tech Stack:</b>
+    Vue.js 3, Ant Design Vue,
+    Vue Router, Pinia, Axios
+    (C-001)
+end note
+
+note top of Backend Service Layer
+    <b>Tech Stack:</b>
+    Spring Boot, Spring Cloud,
+    MyBatis Plus
+    (C-002, C-005)
+end note
+
+note top of RabbitMQ
+    <b>Tech Stack:</b>
+    RabbitMQ for async tasks
+    (C-008)
+end note
+
+@enduml

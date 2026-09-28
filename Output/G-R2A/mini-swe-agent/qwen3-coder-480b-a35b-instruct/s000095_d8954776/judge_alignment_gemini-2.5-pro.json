@@ -1,0 +1,130 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Event Bus"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Event Bus"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the event bus component handling in-app location distribution. Boundaries 'Business Logic Layer' and 'GPSLogger Android Application' are semantically compatible."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Location Capture::Google Play Services\nLocation Provider"
+      ],
+      "predicted_nodes": [
+        "External Systems::Google Play Services",
+        "External Systems::Android Location APIs"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "GT represents the in-app location provider client wrapper within the application's 'Location Capture' boundary, whereas the AI predicted these as 'External Systems' outside the application boundary."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Location Capture::Location Listeners"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Location Listeners"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both identify the location listener components. 'Location Capture' and 'Business Logic Layer' are compatible functional boundaries."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::CSV / URL Loggers",
+        "GPSLogger Android Application::Logging::GPX Logger",
+        "GPSLogger Android Application::Logging::KML Logger",
+        "GPSLogger Android Application::Logging::Loggers"
+      ],
+      "predicted_nodes": [
+        "Data Access Layer::File Loggers"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Multiple specific logger format nodes in the GT are aggregated into a generic 'File Loggers' node by the AI. The boundary 'Data Access Layer' corresponds acceptably to 'Logging'."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::NMEA / GPRMC Encoder"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::GPRMC Encoder"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the GPRMC data encoding logic. 'Business Logic Layer' correctly fits the 'Logging' logic layer."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Upload::Upload Jobs",
+        "GPSLogger Android Application::Upload::Uploaders"
+      ],
+      "predicted_nodes": [
+        "Data Access Layer::Dropbox Uploader",
+        "Data Access Layer::OSM Uploader",
+        "Data Access Layer::OpenGTS Uploader"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The generic upload managers/jobs in GT are split into specific uploaders for each destination service by the AI. 'Data Access Layer' matches the 'Upload' module's structural intent."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::User Interface::Detailed View",
+        "GPSLogger Android Application::User Interface::Main Activity",
+        "GPSLogger Android Application::User Interface::Other Fragments",
+        "GPSLogger Android Application::User Interface::Simple View"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Main Activity/Fragments"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Detailed GT UI components are logically aggregated into a single Presentation Layer component by the AI. The boundary mapping from 'User Interface' to 'Presentation Layer' is fully accurate."
+    },
+    {
+      "gt_nodes": [
+        "Global::Dropbox"
+      ],
+      "predicted_nodes": [
+        "External Systems::Dropbox API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the external Dropbox integration service."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenGTS Endpoint\nUDP server"
+      ],
+      "predicted_nodes": [
+        "External Systems::OpenGTS Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the external OpenGTS server receiving UDP requests."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenStreetMap"
+      ],
+      "predicted_nodes": [
+        "External Systems::OpenStreetMap API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the external OpenStreetMap service."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Business Logic Layer::GPS Logging Service",
+    "Business Logic Layer::Settings Manager",
+    "External Systems::File System"
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::SSO/IDM\\n(Keycloak"
+      ],
+      "predicted_nodes": [
+        "Global::Keycloak\\nIdentity Provider / SSO"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Keycloak identity provider / SSO component, and both are placed in a global/system-level boundary."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Audit\\nService"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Audit Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The same Audit Service is represented, and moving it from the specific Activiti Cloud Application boundary to the Kubernetes/GKE deployment boundary is semantically acceptable in this context."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Query\\nService"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Query Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the Query Service. The predicted deployment boundary is broader but still semantically consistent with the service placement."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Notification\\nService"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Notification Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Notification Service, and the Kubernetes/GKE boundary is acceptable as deployment context."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Config Maps\\n(Kubernetes"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::ConfigMaps / Registry"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT config maps/registry infrastructure is captured by the predicted ConfigMaps / Registry node. The boundary difference is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Registry\\n(Kubernetes"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::ConfigMaps / Registry"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node aggregates registry with config maps, which still covers the GT registry concept without a boundary conflict."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Gateway"
+      ],
+      "predicted_nodes": [
+        "Global::Kubernetes / GKE Cluster",
+        "Global::Public Internet\\n(Public IP"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT Gateway is a distinct platform component, but the prediction decomposes it into infrastructure-level nodes without an explicit gateway component. This is a context/boundary mismatch rather than a clean split."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::BPMN, Form\\nand Rule Defs",
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::Process\\nRuntime"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Example Runtime Bundle\\n(Spring Boot::ProcessRuntime API",
+        "Kubernetes / GKE Cluster::Example Runtime Bundle\\n(Spring Boot::TaskRuntime API",
+        "Kubernetes / GKE Cluster::Example Runtime Bundle\\n(Spring Boot::User Endpoints\\n- Process Definitions\\n- Start SimpleProcess"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT runtime bundle and its process definitions/runtime responsibilities are represented by the predicted Example Runtime Bundle and related API/endpoints. The prediction is a reasonable aggregation with acceptable deployment boundary attribution."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Customer\\nLogic",
+    "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Out of the\\nBox Services",
+    "Global::Client"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Kubernetes / GKE Cluster",
+    "Kubernetes / GKE Cluster::NGINX Ingress Controller",
+    "Kubernetes / GKE Cluster::Example Runtime Bundle\\n(Spring Boot::Spring Security\\n(User/Groups/Roles"
+  ]
+}

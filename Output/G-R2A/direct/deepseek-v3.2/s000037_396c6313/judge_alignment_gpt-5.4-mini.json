@@ -1,0 +1,160 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::plugin"
+      ],
+      "predicted_nodes": [
+        "Plugin & SDK Layer::Plugin Registry"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the plugin-related subsystem. The predicted node is a more specific architectural placement, but it is semantically aligned with the GT plugin node."
+    },
+    {
+      "gt_nodes": [
+        "Global::runner"
+      ],
+      "predicted_nodes": [
+        "Runner & Execution Environment::veinmind-runner Image",
+        "Runner & Execution Environment::Parallel Container\\nExecution"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT runner concept is decomposed into runner image and execution workflow components. This is a valid refinement within the runner/execution boundary."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::containerd"
+      ],
+      "predicted_nodes": [
+        "External Systems::Containerd Runtime"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote containerd as an external/runtime dependency. The boundary naming differs but is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::docker"
+      ],
+      "predicted_nodes": [
+        "External Systems::Docker Runtime"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote Docker as the runtime dependency. The predicted boundary is an acceptable equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::dockerfile"
+      ],
+      "predicted_nodes": [
+        "External Systems::IaC Input Files"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is specifically Dockerfile as an input/backend artifact, while the predicted node generalizes it to IaC input files. This is too broad and loses the specific Dockerfile context."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::kubernetes"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:0",
+      "is_boundary_correct": false,
+      "reasoning": "No semantically equivalent predicted node is present."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::tarball"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:0",
+      "is_boundary_correct": false,
+      "reasoning": "No semantically equivalent predicted node is present."
+    },
+    {
+      "gt_nodes": [
+        "SDK::interact system"
+      ],
+      "predicted_nodes": [
+        "Plugin & SDK Layer::veinmind-sdk / libveinmind"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT SDK interaction system corresponds to the veinmind SDK/library integration layer. This is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "SDK::plugin system"
+      ],
+      "predicted_nodes": [
+        "Plugin & SDK Layer::Plugin Registry"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the plugin system side of the SDK/plugin integration. The predicted node is a reasonable architectural elaboration."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::cluster"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:0",
+      "is_boundary_correct": false,
+      "reasoning": "No equivalent predicted node exists."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::container"
+      ],
+      "predicted_nodes": [
+        "Core Scanning Engine::Container Scanner"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both correspond to container scanning functionality. The predicted node is a more implementation-oriented version of the GT scan target."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::iac"
+      ],
+      "predicted_nodes": [
+        "Core Scanning Engine::IaC Scanner",
+        "External Systems::IaC Input Files"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT IaC scan target is represented by the scanner and its input source. This split is acceptable and remains within the correct functional context."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::image"
+      ],
+      "predicted_nodes": [
+        "Core Scanning Engine::Image Scanner"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both correspond to image scanning functionality. The predicted boundary is acceptable."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Infrastructure and Input Backends::kubernetes",
+    "Infrastructure and Input Backends::tarball",
+    "Scan Targets::cluster"
+  ],
+  "unmatched_predicted_nodes": [
+    "Core Scanning Engine::Report Generator",
+    "Core Scanning Engine::Scan Orchestrator",
+    "Data Layer::IaC Alert Reports",
+    "Data Layer::Malicious File Reports",
+    "Data Layer::Scan Metadata",
+    "Plugin & SDK Layer::Python Example Plugin",
+    "Security & Authorization::Docker Auth Router",
+    "Security & Authorization::Plugin Action Classifier",
+    "User Interface Layer::CLI Interface",
+    "User Interface Layer::Quick-Start Script\\n(run.sh"
+  ]
+}

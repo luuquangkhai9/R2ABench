@@ -1,0 +1,75 @@
+@startuml
+skinparam componentStyle rectangle
+title LabHire Layered Architecture
+
+package Client Layer {
+  [Mobile App (Android/iOS/WeChat)] as Mobile
+  [Web App (Student/Mentor Portal)] as Web
+  [Admin Console (Web)] as AdminUI
+}
+
+package API Layer {
+  [API Gateway / Web Backend] as API
+}
+
+package Application Services {
+  [Auth & User Service
+  (registration/login, profiles, resumes)] as Auth
+  [Project Service
+  (publication, management, favorites)] as Project
+  [Application & Evaluation Service
+  (apply, screening, mutual evaluation)] as ApplyEval
+  [Community Service
+  (posts, comments, favorites, popularity)] as Community
+  [Recommendation & Search Service] as RecoSearch
+  [Notification Service
+  (in-site messages, email push)] as Notify
+  [Administration & Moderation Service
+  (identity review, content review)] as AdminSvc
+  [Chat Service] as Chat
+  [Risk Control & Audit Service
+  (rate limiting, behavior logs, alerts)] as Risk
+}
+
+package Data Layer {
+  database Relational Database as DB
+  [Object Storage
+  (resume files)] as ObjStore
+}
+
+package External Systems {
+  [Email Service Provider] as Email
+  [SMS / Verification Service] as SMS
+}
+
+Mobile --> API
+Web --> API
+AdminUI --> API
+
+API --> Auth
+API --> Project
+API --> ApplyEval
+API --> Community
+API --> RecoSearch
+API --> Notify
+API --> AdminSvc
+API --> Chat
+API ..> Risk : events/metrics
+
+Auth --> DB
+Project --> DB
+ApplyEval --> DB
+Community --> DB
+RecoSearch --> DB
+Notify --> DB
+AdminSvc --> DB
+Chat --> DB
+Risk --> DB
+
+Auth --> ObjStore : resume uploads/downloads
+
+Notify --> Email
+Notify --> SMS
+Auth --> SMS : verification codes
+
+@enduml

@@ -1,0 +1,75 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::React Frontend",
+        "Presentation Layer::React Frontend::Audio Player UI",
+        "Presentation Layer::React Frontend::Follow Interface",
+        "Presentation Layer::React Frontend::Form Validation",
+        "Presentation Layer::React Frontend::Upload Interface",
+        "Presentation Layer::React Frontend::Waveform Navigation",
+        "Presentation Layer::Redux State Management",
+        "Presentation Layer::Redux State Management::Follow State",
+        "Presentation Layer::Redux State Management::Playback State",
+        "Presentation Layer::Redux State Management::Sound State",
+        "Presentation Layer::Redux State Management::User State"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT 'React Frontend' node, which includes Redux, is accurately split by the AI into distinct 'React Frontend' (UI components) and 'Redux State Management' (state slices) groups. The 'Presentation Layer' boundary is a more specific and standard architectural classification for a client-side application compared to the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Express Server\\n- fetches data with Sequelize\\n- serves React frontend\\n- handles backend API requests"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Node/Express Backend",
+        "Application Layer::Node/Express Backend::Feed API",
+        "Application Layer::Node/Express Backend::Follow API",
+        "Application Layer::Node/Express Backend::Sound API",
+        "Application Layer::Node/Express Backend::User/Auth API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'Express Server' is correctly mapped to the 'Node/Express Backend' and semantically decomposed into its specific API functions (Feed, Follow, etc.) as detailed in the PRD. Placing the backend in the 'Application Layer' is architecturally correct and an improvement over the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::PostgreSQL Database\\n- stores users and sounds\\n- stores Cloudinary URL references"
+      ],
+      "predicted_nodes": [
+        "Data Layer::PostgreSQL Database",
+        "Data Layer::PostgreSQL Database::Follow Relationships",
+        "Data Layer::PostgreSQL Database::Media URL References",
+        "Data Layer::PostgreSQL Database::Sound Records",
+        "Data Layer::PostgreSQL Database::User Data"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'PostgreSQL Database' node is correctly identified and expanded into the specific data entities it manages, which are explicitly mentioned in the PRD (DR-001 to DR-006). The 'Data Layer' boundary is the standard and correct classification for the persistence tier."
+    },
+    {
+      "gt_nodes": [
+        "Global::Cloudinary\\n- stores audio files\\n- stores images\\n- returns file URLs"
+      ],
+      "predicted_nodes": [
+        "External Services::Cloudinary Media Storage",
+        "External Services::Cloudinary Media Storage::Audio File Storage",
+        "External Services::Cloudinary Media Storage::Image Storage"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'Cloudinary' node is correctly matched and detailed into its specific storage functions for audio and images. The 'External Services' boundary is a highly appropriate classification for a third-party managed service like Cloudinary, providing more clarity than the GT's 'Global' boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Frontend Configuration::API Base URL",
+    "Frontend Configuration::Cloudinary URL",
+    "Frontend Configuration::Upload Preset",
+    "Global::Frontend Configuration"
+  ]
+}

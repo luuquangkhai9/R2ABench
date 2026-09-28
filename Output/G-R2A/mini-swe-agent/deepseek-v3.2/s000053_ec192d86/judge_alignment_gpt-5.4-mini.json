@@ -1,0 +1,217 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "cadctl::CHGM investigation"
+      ],
+      "predicted_nodes": [
+        "Application Layer::CAD CLI (cadctl::CHGM Workflow Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the CHGM investigation workflow within the cadctl CLI. The predicted node names the handler more specifically, but it is functionally equivalent and correctly placed under the CLI/application boundary."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::CPD investigation"
+      ],
+      "predicted_nodes": [
+        "Application Layer::CAD CLI (cadctl::Anomaly Detection Engine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT CPD investigation node and the predicted anomaly detection engine both refer to the cadctl-driven investigation capability. The predicted boundary is appropriate for application-layer CLI logic."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::Future investigations"
+      ],
+      "predicted_nodes": [
+        "Application Layer::CAD CLI (cadctl"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted top-level cadctl node corresponds to the CLI container in GT that includes multiple investigation commands, including future investigations. The application-layer CLI boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::switch(alerttype"
+      ],
+      "predicted_nodes": [
+        "Application Layer::CAD CLI (cadctl::Mitigation Disposition"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT switch(alerttype) node is a CLI branching/dispatch mechanism tied to handling different investigation or disposition paths. The predicted mitigation/disposition node is a reasonable semantic match within the CLI/application boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton\\nEvent\\nListener"
+      ],
+      "predicted_nodes": [
+        "Execution Layer::Tekton EventListener"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These are the same Tekton EventListener component, and the execution-layer placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?"
+      ],
+      "predicted_nodes": [
+        "Execution Layer::Tekton Trigger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT interceptor/triggering logic maps to the Tekton Trigger in the predicted diagram. The execution-layer attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Update Incident\\nNotes"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Mitigation Disposition"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Updating incident notes is part of mitigation/disposition handling. The predicted node is semantically aligned, and the application-layer placement is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Global::Escalate alert to\\non-call SRE"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Mitigation Disposition"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Escalation to on-call SRE is a mitigation/disposition action. The predicted node captures this behavior and is in the correct application boundary."
+    },
+    {
+      "gt_nodes": [
+        "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster",
+        "PagerDuty Team::app-sre-alertmanager",
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty System",
+        "Application Layer::Integration Library::PagerDuty Integration"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT contains multiple PagerDuty team targets, while the prediction aggregates them into PagerDuty system and integration support. This is a valid merge, and the external-system/integration boundaries are consistent."
+    },
+    {
+      "gt_nodes": [
+        "Alert Source::app-sre\\nalertmanager",
+        "Alert Source::cluster\\nalertmanager",
+        "Alert Source::deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Systems::Alert Webhook Source"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT alert sources are consolidated into a single external alert webhook source. This is a valid abstraction and the external boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Alerts::CHGM",
+        "Alerts::CPD",
+        "Alerts::all cluster\\nalerts"
+      ],
+      "predicted_nodes": [
+        "Application Layer::CAD CLI (cadctl::CHGM Workflow Handler",
+        "Application Layer::CAD CLI (cadctl::Anomaly Detection Engine"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The alert types in GT map to CLI workflow handling and anomaly detection behaviors in the prediction. Although the prediction is more implementation-oriented, the semantics are consistent and remain within the CLI/application boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton\\nEvent\\nListener",
+        "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?"
+      ],
+      "predicted_nodes": [
+        "Execution Layer::Tekton EventListener",
+        "Execution Layer::Tekton Trigger"
+      ],
+      "match_type": "1:2",
+      "is_boundary_correct": true,
+      "reasoning": "The GT event-driven execution path is split into EventListener and Trigger, which the prediction also models. The execution-layer placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Update Incident\\nNotes",
+        "Global::Escalate alert to\\non-call SRE"
+      ],
+      "predicted_nodes": [
+        "Application Layer::CAD CLI (cadctl::Mitigation Disposition"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "These GT nodes are both mitigation/disposition behaviors and are correctly consolidated into one predicted node under the application layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton\\nEvent\\nListener",
+        "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?"
+      ],
+      "predicted_nodes": [
+        "Execution Layer::CAD Checks Pipeline",
+        "Execution Layer::Tekton EventListener",
+        "Execution Layer::Tekton Trigger",
+        "Execution Layer::Tekton PipelineRun"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT depicts the normal Tekton execution chain, and the predicted diagram decomposes it into pipeline, listener, trigger, and PipelineRun nodes. The execution-layer attribution is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Alerts::CHGM",
+    "Alerts::CPD",
+    "Alerts::all cluster\\nalerts",
+    "Alert Source::app-sre\\nalertmanager",
+    "Alert Source::cluster\\nalertmanager",
+    "Alert Source::deadmanssnitch",
+    "Global::Escalate alert to\\non-call SRE",
+    "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?",
+    "Global::Tekton\\nEvent\\nListener",
+    "Global::Update Incident\\nNotes",
+    "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster",
+    "PagerDuty Team::app-sre-alertmanager",
+    "PagerDuty Team::prod-deadmanssnitch",
+    "cadctl::CHGM investigation",
+    "cadctl::CPD investigation",
+    "cadctl::Future investigations",
+    "cadctl::switch(alerttype"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application Layer::CAD CLI (cadctl",
+    "Application Layer::CAD CLI (cadctl::Anomaly Detection Engine",
+    "Application Layer::CAD CLI (cadctl::CHGM Workflow Handler",
+    "Application Layer::CAD CLI (cadctl::Mitigation Disposition",
+    "Application Layer::Integration Library",
+    "Application Layer::Integration Library::AWS Integration",
+    "Application Layer::Integration Library::OCM Integration",
+    "Application Layer::Integration Library::PagerDuty Integration",
+    "Application Layer::Template Update Utility",
+    "Data/Artifacts::Alert Payloads",
+    "Data/Artifacts::Deployment Templates",
+    "Data/Artifacts::PipelineRun Manifests",
+    "Execution Layer::CAD Checks Pipeline",
+    "Execution Layer::Tekton EventListener",
+    "Execution Layer::Tekton PipelineRun",
+    "Execution Layer::Tekton Trigger",
+    "External Systems::AWS Cloud Services",
+    "External Systems::Alert Webhook Source",
+    "External Systems::OpenShift Cluster Manager",
+    "External Systems::PagerDuty System",
+    "User Layer::Deployment Engineer",
+    "User Layer::Developer/Contributor",
+    "User Layer::SRE/Operations User"
+  ]
+}

@@ -1,0 +1,214 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::BFF"
+      ],
+      "predicted_nodes": [
+        "Access Layer::BFF / API Facade"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the BFF/API facade entry component. The predicted placement in Access Layer is semantically aligned with the GT's global BFF node."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Gateway"
+      ],
+      "predicted_nodes": [
+        "Access Layer::MTProto Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the client-facing gateway for MTProto traffic, and the boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Session"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Session Manager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The session management responsibility matches. Moving from Access Layer to Service Layer is still architecturally reasonable for a service-oriented implementation."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Auth Session"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Auth Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both relate to authorization/session establishment. The predicted service-layer placement is acceptable for a backend auth component."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Status"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Future Salts Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "GT 'Status' is an access-layer node with unclear but broader protocol/status responsibility, while the predicted node is a specific future-salts service. The functional overlap is partial, but the semantic scope does not align closely enough to treat as the same node."
+    },
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "Infrastructure & External::Kafka"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both identify the Kafka infrastructure dependency. The boundary change is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Push"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Push Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent push-related asynchronous functionality. The service-layer attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Global::Sync"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Sync Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent sync-related functionality, and the service-layer placement is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Services::Msg"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Messaging Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the messaging service component, with consistent architectural placement."
+    },
+    {
+      "gt_nodes": [
+        "Services::Services"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Registration & Verification",
+        "Service Layer::Auth Service",
+        "Service Layer::Session Manager",
+        "Service Layer::Future Salts Service",
+        "Service Layer::Messaging Service",
+        "Service Layer::Service Message Handler\\n(rpc_drop_answer, destroy_session",
+        "Service Layer::Sync Service",
+        "Service Layer::Push Service",
+        "Service Layer::Media Wrapper"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a coarse aggregate for business/service-layer components, and the predicted diagram decomposes it into multiple specific services. This is a valid split and the service-layer attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Services::DFS"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Media Wrapper"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "DFS likely corresponds to the media-processing/file-distribution related capability. The predicted media wrapper is the closest functional equivalent, and its service-layer placement is reasonable."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MySQL"
+      ],
+      "predicted_nodes": [
+        "Infrastructure & External::MySQL"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the MySQL storage dependency. The boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Storages::Redis"
+      ],
+      "predicted_nodes": [
+        "Infrastructure & External::Redis"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the Redis storage dependency. The boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MinIO"
+      ],
+      "predicted_nodes": [
+        "Infrastructure & External::MinIO"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the MinIO storage dependency. The boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Clients::Android"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding client platform node was predicted."
+    },
+    {
+      "gt_nodes": [
+        "Clients::PC"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding client platform node was predicted."
+    },
+    {
+      "gt_nodes": [
+        "Clients::Web"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding client platform node was predicted."
+    },
+    {
+      "gt_nodes": [
+        "Clients::iOS"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding client platform node was predicted."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Clients::Android",
+    "Clients::PC",
+    "Clients::Web",
+    "Clients::iOS"
+  ],
+  "unmatched_predicted_nodes": [
+    "Infrastructure & External::External Verification Service",
+    "Infrastructure & External::FFmpeg/FFProbe",
+    "Infrastructure & External::etcd",
+    "Service Layer::Service Message Handler\\n(rpc_drop_answer, destroy_session"
+  ]
+}

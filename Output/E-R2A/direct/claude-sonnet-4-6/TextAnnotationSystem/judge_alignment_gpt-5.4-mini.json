@@ -1,0 +1,199 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Annotation Models::Entity Model - ChatGPT/\nLLM"
+      ],
+      "predicted_nodes": [
+        "Tencent Cloud Deployment::ML / Model Tier::GPT / GPT API\n(Entity Recognition,\nFew-Shot Extraction"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the entity-level model/API used for entity recognition and GPT-based extraction. The predicted boundary places it in the ML/model tier, which is semantically equivalent to the GT annotation model boundary."
+    },
+    {
+      "gt_nodes": [
+        "Annotation Models::Paragraph Model - Google\nBERT"
+      ],
+      "predicted_nodes": [
+        "Tencent Cloud Deployment::ML / Model Tier::BERT Model\n(Paragraph Localization"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the paragraph-level BERT model used for paragraph localization. The ML/model boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer-Ant\nDesign / Vue.js::Intelligent Mining"
+      ],
+      "predicted_nodes": [
+        "Tencent Cloud Deployment::Client Tier\n(Browser"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The functional component is the mining front-end page, but the predicted node is only a broad browser/client tier rather than the specific mining application page. This is an overly coarse and partially misplaced boundary attribution."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer-Ant\nDesign / Vue.js::Preset Sharing"
+      ],
+      "predicted_nodes": [
+        "Tencent Cloud Deployment::Client Tier\n(Browser"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT is a specific UI page/function for preset sharing, while the predicted node is only the generic client/browser tier. This loses the concrete application boundary and is too coarse."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer-Ant\nDesign / Vue.js::Text Annotation"
+      ],
+      "predicted_nodes": [
+        "Tencent Cloud Deployment::Client Tier\n(Browser"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT is a specific annotation UI page, but the predicted node is only the generic client/browser tier. The semantic function is partially aligned, but the layer attribution is too broad."
+    },
+    {
+      "gt_nodes": [
+        "Business Service Layer-\nSpring Boot::Annotation Service"
+      ],
+      "predicted_nodes": [
+        "Tencent Cloud Deployment::Microservice Tier::Annotation Subsystem",
+        "Tencent Cloud Deployment::Microservice Tier::Annotation Subsystem::Annotation Mark Service\n(Mark CRUD",
+        "Tencent Cloud Deployment::Microservice Tier::Annotation Subsystem::Document Service\n(Upload, Download, Metadata",
+        "Tencent Cloud Deployment::Microservice Tier::Annotation Subsystem::Project Management Service\n(Project CRUD, Annotator Mgmt",
+        "Tencent Cloud Deployment::Microservice Tier::Annotation Subsystem::Result Export Service\n(Result Return / Export",
+        "Tencent Cloud Deployment::Microservice Tier::Annotation Subsystem::Tag & Label Service\n(Tag / Label CRUD",
+        "Tencent Cloud Deployment::Microservice Tier::Annotation Subsystem::Task Service\n(Assignment, Completion, Stats",
+        "Tencent Cloud Deployment::Microservice Tier::Annotation Subsystem::User & Auth Service\n(Login, Register, Profile"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT annotation service is decomposed into multiple annotation-related microservices in the predicted design. This split is functionally consistent and remains within the backend/microservice boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Service Layer-\nSpring Boot::Management Service"
+      ],
+      "predicted_nodes": [
+        "Tencent Cloud Deployment::Microservice Tier::Annotation Subsystem::Project Management Service\n(Project CRUD, Annotator Mgmt",
+        "Tencent Cloud Deployment::Microservice Tier::Annotation Subsystem::Task Service\n(Assignment, Completion, Stats",
+        "Tencent Cloud Deployment::Microservice Tier::Annotation Subsystem::User & Auth Service\n(Login, Register, Profile"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT management service is split into project, task, and user/auth management services. This is a reasonable microservice refinement within the correct backend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Service Layer-\nSpring Boot::Mining Service"
+      ],
+      "predicted_nodes": [
+        "Tencent Cloud Deployment::Microservice Tier::Mining Subsystem",
+        "Tencent Cloud Deployment::Microservice Tier::Mining Subsystem::Extraction Service\n(Paragraph & Entity Extraction",
+        "Tencent Cloud Deployment::Microservice Tier::Mining Subsystem::Format Conversion Service\n(PDF / HTML / TXT",
+        "Tencent Cloud Deployment::Microservice Tier::Mining Subsystem::Mining Upload Service\n(Document Ingestion",
+        "Tencent Cloud Deployment::Microservice Tier::Mining Subsystem::Model Selection Service\n(Preset / Community / 3rd-party"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT mining service is split into upload, conversion, model selection, and extraction services. This matches the PRD's mining workflow and is correctly placed in the backend microservice tier."
+    },
+    {
+      "gt_nodes": [
+        "Data Storage Layer::MinIO Object Storage"
+      ],
+      "predicted_nodes": [
+        "Tencent Cloud Deployment::Data Tier::Minio\n(Object Storage:\nPDF, HTML, TXT Files"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to MinIO-based object storage for documents and converted formats. The data tier boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Data Storage Layer::MySQL Structured\nDatabase"
+      ],
+      "predicted_nodes": [
+        "Tencent Cloud Deployment::Data Tier::MySQL\n(Structured Storage:\nUsers, Projects, Tasks,\nAnnotations, Tags"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the relational MySQL storage for structured entities. The data tier boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Data Storage Layer::Redis Cache"
+      ],
+      "predicted_nodes": [
+        "Tencent Cloud Deployment::Data Tier::Redis\n(Cache:\nSessions, Hot Data"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to Redis cache usage. The data tier boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Gateway Layer::Nginx Gateway"
+      ],
+      "predicted_nodes": [
+        "Tencent Cloud Deployment::Edge / Proxy Tier::Nginx\n(Reverse Proxy / Load Balancer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to Nginx as reverse proxy/load balancer. The edge/proxy boundary is semantically equivalent to the gateway layer."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure Layer::Docker Containerization"
+      ],
+      "predicted_nodes": [
+        "Tencent Cloud Deployment::Containerization::Docker\n(All Services Containerized"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent Docker-based containerization. The infrastructure/containerization boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure Layer::RabbitMQ Message Queue"
+      ],
+      "predicted_nodes": [
+        "Tencent Cloud Deployment::Messaging Tier::RabbitMQ\n(Async Task Queue:\nFile Conversion etc."
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to RabbitMQ for asynchronous task/message processing. The messaging/infrastructure boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure Layer::Tencent Cloud Server"
+      ],
+      "predicted_nodes": [
+        "Global::Tencent Cloud Deployment"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node captures the cloud deployment environment corresponding to the GT Tencent Cloud server/infrastructure context. The boundary is semantically equivalent, though broader."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Tencent Cloud Deployment::API Gateway & Security Tier",
+    "Tencent Cloud Deployment::API Gateway & Security Tier::Spring Cloud Gateway",
+    "Tencent Cloud Deployment::API Gateway & Security Tier::Spring Security\n(AuthN / AuthZ",
+    "Tencent Cloud Deployment::Client Tier\n(Browser::Ant Design Vue\nUI Components",
+    "Tencent Cloud Deployment::Client Tier\n(Browser::Vue 3.0 SPA\n(vue-router, Pinia, Axios",
+    "Tencent Cloud Deployment::Containerization",
+    "Tencent Cloud Deployment::Data Tier",
+    "Tencent Cloud Deployment::Edge / Proxy Tier",
+    "Tencent Cloud Deployment::ML / Model Tier",
+    "Tencent Cloud Deployment::Messaging Tier",
+    "Tencent Cloud Deployment::Microservice Tier",
+    "Tencent Cloud Deployment::Microservice Tier::Annotation Subsystem",
+    "Tencent Cloud Deployment::Microservice Tier::Mining Subsystem",
+    "Tencent Cloud Deployment::Microservice Tier::Spring Cloud\nService Discovery &\nConfig Management\n(Eureka / Config Server"
+  ]
+}

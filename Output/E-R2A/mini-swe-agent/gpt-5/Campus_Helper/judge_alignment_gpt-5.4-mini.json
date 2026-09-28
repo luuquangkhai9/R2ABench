@@ -1,0 +1,324 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Admin Mgmt Service"
+      ],
+      "predicted_nodes": [
+        "ServerSide::BusinessLayer::Management Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the administrator management business service. The boundary differs in naming but is semantically equivalent to the backend business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Help Goods Service"
+      ],
+      "predicted_nodes": [
+        "ServerSide::BusinessLayer::Product Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the product/help-goods business logic for goods publication and related operations. The layer attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Order Mgmt Service"
+      ],
+      "predicted_nodes": [
+        "ServerSide::BusinessLayer::Order Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the order-related backend business service. Boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Personal Center Service"
+      ],
+      "predicted_nodes": [
+        "ServerSide::BusinessLayer::User & Auth Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT personal center service is user-facing profile/favorites/order-record functionality, while the predicted node emphasizes user and authentication concerns and omits the personal-center functional scope. This is only a partial semantic overlap and is not a clean boundary-equivalent match."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Create Order Module"
+      ],
+      "predicted_nodes": [
+        "ServerSide::BusinessLayer::Order Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The create-order module is functionally covered by the order service. Backend business-layer placement is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Favorites Module"
+      ],
+      "predicted_nodes": [
+        "ServerSide::DataLayer::Favorite Repository"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The functionality matches favorites handling, but the predicted node places it in the data layer repository rather than the functional/business module boundary. This is a layer mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Goods Category Module"
+      ],
+      "predicted_nodes": [
+        "ServerSide::DataLayer::Tag/Category Repository"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Category browsing logic corresponds to a business/functional module, while the predicted node is a data repository. This is a boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Hot Items Module"
+      ],
+      "predicted_nodes": [
+        "ServerSide::BusinessLayer::Product Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Hot items browsing is a product-related function and can be reasonably covered by the product service. The backend business-layer attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Modify User Info Module"
+      ],
+      "predicted_nodes": [
+        "ServerSide::BusinessLayer::User & Auth Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "User information modification belongs to the user/auth service domain. Boundary placement is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Order Record Module"
+      ],
+      "predicted_nodes": [
+        "ServerSide::DataLayer::Order Repository"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Order record viewing/management is a functional module, but the predicted node is only a data repository. This is a layer mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Platform Mgmt Module"
+      ],
+      "predicted_nodes": [
+        "ServerSide::BusinessLayer::Management Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Platform management maps well to the management service. Boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Custom Functions"
+      ],
+      "predicted_nodes": [
+        "ServerSide::DataLayer::Admin Log Repository"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a generic data-layer customization node; the predicted admin log repository is a valid concrete data-layer implementation within the same architectural boundary."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Cache"
+      ],
+      "predicted_nodes": [
+        "Global::Mon"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Caching is a data-layer concern, while the predicted node appears to be monitoring/observability. This is not semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Recovery"
+      ],
+      "predicted_nodes": [
+        "Global::Mon"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Recovery is a data-layer fault-tolerance concern, but the predicted node is monitoring. The functionality does not match."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Read/Write Database"
+      ],
+      "predicted_nodes": [
+        "ServerSide::DataEntityLayer::DB"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the database persistence boundary. The naming differs, but the architectural layer is equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Stored Procedures"
+      ],
+      "predicted_nodes": [
+        "ServerSide::DataEntityLayer::DB"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Stored procedures belong to the database/data-entity layer, and the predicted DB node is an acceptable semantic match."
+    },
+    {
+      "gt_nodes": [
+        "Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "ServerSide::DataEntityLayer::DB"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT explicitly names MySQL, while the predicted node uses a generic DB label. This is semantically equivalent at the database boundary."
+    },
+    {
+      "gt_nodes": [
+        "Display Layer::GET Request"
+      ],
+      "predicted_nodes": [
+        "ServerSide::PresentationLayer::REST API (Controllers"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to HTTP request handling at the presentation/API boundary, despite different granularity and naming."
+    },
+    {
+      "gt_nodes": [
+        "Display Layer::POST Request"
+      ],
+      "predicted_nodes": [
+        "ServerSide::PresentationLayer::REST API (Controllers"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to request handling in the presentation/API layer. The controller boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Display Layer::Template Engine Rendering\\n(pages"
+      ],
+      "predicted_nodes": [
+        "Global::MiniApp"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Template rendering is a presentation-layer rendering concern, while the predicted node is the overall mini-app container. This is too coarse and not boundary-equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Display Layer::wx.request Interaction"
+      ],
+      "predicted_nodes": [
+        "Global::WeChat"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "wx.request is a client-side Mini Program API interaction, not the WeChat platform itself. The predicted boundary is too broad and conflates runtime/platform with UI interaction."
+    },
+    {
+      "gt_nodes": [
+        "Global::Log Recording"
+      ],
+      "predicted_nodes": [
+        "Global::Mon"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Logging and monitoring are related observability concerns, but log recording is not equivalent to monitoring. The predicted node is only partially related."
+    },
+    {
+      "gt_nodes": [
+        "Global::Permission Control"
+      ],
+      "predicted_nodes": [
+        "ServerSide::BusinessLayer::User & Auth Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Permission control is appropriately implemented within the user/auth service domain. The backend boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Mini-program UI::JavaScript"
+      ],
+      "predicted_nodes": [
+        "Global::MiniApp"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "JavaScript is a concrete frontend implementation artifact, whereas MiniApp is a broader platform/container node. The semantic scope does not match well."
+    },
+    {
+      "gt_nodes": [
+        "Mini-program UI::Wxml"
+      ],
+      "predicted_nodes": [
+        "Global::MiniApp"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "WXML is a specific Mini Program view markup technology, not the entire MiniApp boundary. This is an over-aggregation."
+    },
+    {
+      "gt_nodes": [
+        "Mini-program UI::Wxss"
+      ],
+      "predicted_nodes": [
+        "Global::MiniApp"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "WXSS is a specific styling artifact, while the predicted node is the whole MiniApp platform/container. The match is too coarse."
+    },
+    {
+      "gt_nodes": [
+        "Runtime Environment::Tencent Cloud\\nLightweight App Server"
+      ],
+      "predicted_nodes": [
+        "Global::WeChat"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is the server runtime environment, while the predicted node is the WeChat client/platform. This is a severe boundary/context mismatch."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Business Layer::Functional Modules::......",
+    "Data Layer::Data Backup",
+    "Global::Log Recording",
+    "Runtime Environment::MySQL 106.55.224.139\\n2 Cores 4GB"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::MiniApp",
+    "Global::Mon",
+    "Global::WeChat",
+    "ServerSide::BusinessLayer::Management Service",
+    "ServerSide::BusinessLayer::Order Service",
+    "ServerSide::BusinessLayer::Product Service",
+    "ServerSide::BusinessLayer::User & Auth Service",
+    "ServerSide::DataEntityLayer::DB",
+    "ServerSide::DataLayer::Admin Log Repository",
+    "ServerSide::DataLayer::Favorite Repository",
+    "ServerSide::DataLayer::Order Repository",
+    "ServerSide::DataLayer::Product Repository",
+    "ServerSide::DataLayer::Tag/Category Repository",
+    "ServerSide::DataLayer::User Repository",
+    "ServerSide::PresentationLayer::REST API (Controllers"
+  ]
+}

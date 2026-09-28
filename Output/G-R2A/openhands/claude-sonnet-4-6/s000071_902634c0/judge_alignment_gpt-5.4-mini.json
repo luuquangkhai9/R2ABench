@@ -1,0 +1,400 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "ClearML Server::Backend Service API",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "ClearML Agent::Backend Service Client::Service Action Handler"
+      ],
+      "reasoning": "The GT backend API responsibility is covered by the predicted backend service client action handler that implements create/get/get_by_id/get_all/get_all_ex style service interactions."
+    },
+    {
+      "gt_node": "ClearML Server::Experiment Manager::Collaboration",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node covers collaboration functionality such as experiment sharing or teamwork features."
+    },
+    {
+      "gt_node": "ClearML Server::Experiment Manager::Data Tracking",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node represents experiment data tracking or metric/event recording as a server-side collaboration feature."
+    },
+    {
+      "gt_node": "ClearML Server::Experiment Manager::Versioning",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node covers experiment/model versioning responsibilities."
+    },
+    {
+      "gt_node": "ClearML Server::Experiment Manager::Visualization",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node covers visualization/dashboard responsibilities."
+    },
+    {
+      "gt_node": "ClearML Server::ML Ops::Execution Queue",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "ClearML Backend::Execution Queue"
+      ],
+      "reasoning": "The predicted execution queue node matches the GT queue concept used for job retrieval."
+    },
+    {
+      "gt_node": "ClearML Server::ML Ops::Monitoring",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "ClearML Agent::Worker Runtime::Server Ping",
+        "ClearML Agent::Worker Runtime::Telemetry Reporter"
+      ],
+      "reasoning": "The GT monitoring responsibility is covered by the predicted worker telemetry and connectivity monitoring nodes."
+    },
+    {
+      "gt_node": "ClearML Server::ML Ops::Orchestration",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "ClearML Agent::Kubernetes Integration::Kubernetes Glue",
+        "ClearML Agent::Kubernetes Integration::Service Pod Mode",
+        "Kubernetes Cluster::Kubernetes Job"
+      ],
+      "reasoning": "The orchestration role is represented by Kubernetes integration, service-pod operation, and Kubernetes job preparation/execution."
+    },
+    {
+      "gt_node": "Data Scientist Environment::ClearML Snippet",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node represents the user-side ClearML snippet or SDK usage."
+    },
+    {
+      "gt_node": "Data Scientist Environment::Python ML / DL Code",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node covers user-authored Python ML/DL code."
+    },
+    {
+      "gt_node": "GPU / Kubernetes Workers\\nOn Prem or Cloud::ClearML Agent\\nService Pod",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "ClearML Agent::Kubernetes Integration::Service Pod Mode"
+      ],
+      "reasoning": "The service-pod mode predicted node covers the long-running ClearML Agent service pod concept."
+    },
+    {
+      "gt_node": "GPU / Kubernetes Workers\\nOn Prem or Cloud::Kubernetes Glue",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "ClearML Agent::Kubernetes Integration::Kubernetes Glue"
+      ],
+      "reasoning": "This is an exact semantic match for the Kubernetes Glue integration."
+    },
+    {
+      "gt_node": "GPU / Kubernetes Workers\\nOn Prem or Cloud::Kubernetes Job",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kubernetes Cluster::Kubernetes Job"
+      ],
+      "reasoning": "The generated Kubernetes Job node directly matches the GT Kubernetes job concept."
+    },
+    {
+      "gt_node": "GPU / Kubernetes Workers\\nOn Prem or Cloud::Mapped Docker Socket\\nSibling Containers",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kubernetes Cluster::Docker Socket",
+        "Kubernetes Cluster::Sibling Docker Containers"
+      ],
+      "reasoning": "The GT combined socket-and-sibling-container responsibility is covered by the predicted Docker Socket and Sibling Docker Containers nodes."
+    },
+    {
+      "gt_node": "GPU / Kubernetes Workers\\nOn Prem or Cloud::Pod Execution Environment\\nand Docker User Code",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kubernetes Cluster::Experiment Pod::Environment Installer",
+        "Kubernetes Cluster::Experiment Pod::Experiment Process",
+        "Kubernetes Cluster::Experiment Pod::Process Monitor"
+      ],
+      "reasoning": "The predicted experiment pod nodes cover environment setup, user code execution, and monitoring inside the pod."
+    },
+    {
+      "gt_node": "GPU / Kubernetes Workers\\nOn Prem or Cloud::YAML Job Template",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node explicitly represents the YAML job template input artifact."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "ClearML Agent::Backend Service Client::Service Action Handler",
+      "grounded": true,
+      "reference_nodes": [
+        "ClearML Server::Backend Service API"
+      ],
+      "reasoning": "Grounded in the backend service client API actions described in the PRD."
+    },
+    {
+      "predicted_node": "ClearML Agent::Kubernetes Integration::Kubernetes Glue",
+      "grounded": true,
+      "reference_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Kubernetes Glue",
+        "ClearML Server::ML Ops::Orchestration"
+      ],
+      "reasoning": "Matches the Kubernetes Glue execution flow and orchestration responsibility."
+    },
+    {
+      "predicted_node": "ClearML Agent::Kubernetes Integration::Service Pod Mode",
+      "grounded": true,
+      "reference_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::ClearML Agent\\nService Pod"
+      ],
+      "reasoning": "Directly grounded in the long-lasting service-pod mode described in the PRD."
+    },
+    {
+      "predicted_node": "ClearML Agent::Worker Runtime::Server Ping",
+      "grounded": true,
+      "reference_nodes": [
+        "ClearML Server::ML Ops::Monitoring"
+      ],
+      "reasoning": "Grounded in the configurable server connectivity ping requirement."
+    },
+    {
+      "predicted_node": "ClearML Agent::Worker Runtime::Stdout/Stderr Logger",
+      "grounded": true,
+      "reference_nodes": [
+        "ClearML Server::ML Ops::Monitoring"
+      ],
+      "reasoning": "Grounded in the default stdout/stderr logging behavior of the worker runtime."
+    },
+    {
+      "predicted_node": "ClearML Agent::Worker Runtime::Telemetry Reporter",
+      "grounded": true,
+      "reference_nodes": [
+        "ClearML Server::ML Ops::Monitoring"
+      ],
+      "reasoning": "Grounded in periodic worker status reporting and telemetry behavior."
+    },
+    {
+      "predicted_node": "ClearML Backend::ClearML Server",
+      "grounded": true,
+      "reference_nodes": [
+        "ClearML Server::Backend Service API",
+        "ClearML Server::Experiment Manager::Collaboration",
+        "ClearML Server::Experiment Manager::Data Tracking",
+        "ClearML Server::Experiment Manager::Versioning",
+        "ClearML Server::Experiment Manager::Visualization",
+        "ClearML Server::ML Ops::Execution Queue",
+        "ClearML Server::ML Ops::Monitoring",
+        "ClearML Server::ML Ops::Orchestration"
+      ],
+      "reasoning": "This is a broad but valid grounding for the ClearML server side referenced throughout the PRD."
+    },
+    {
+      "predicted_node": "ClearML Backend::Events Service v2.5::Histogram Request Handler",
+      "grounded": true,
+      "reference_nodes": [
+        "ClearML Server::Backend Service API"
+      ],
+      "reasoning": "Grounded in the events service interface and histogram request/response structures."
+    },
+    {
+      "predicted_node": "ClearML Backend::Execution Queue",
+      "grounded": true,
+      "reference_nodes": [
+        "ClearML Server::ML Ops::Execution Queue"
+      ],
+      "reasoning": "Directly grounded in the execution queue used for Kubernetes Glue job retrieval."
+    },
+    {
+      "predicted_node": "ClearML Backend::Models Service v2.4::Model Delete Handler",
+      "grounded": true,
+      "reference_nodes": [
+        "ClearML Server::Backend Service API"
+      ],
+      "reasoning": "Grounded in the models service interface and model delete request structures."
+    },
+    {
+      "predicted_node": "ClearML Backend::Models Service v2.4::Model Metadata Store",
+      "grounded": true,
+      "reference_nodes": [
+        "ClearML Server::Backend Service API"
+      ],
+      "reasoning": "Grounded in the models service v2.4 schema and model object metadata fields."
+    },
+    {
+      "predicted_node": "Kubernetes Cluster::Docker Socket",
+      "grounded": true,
+      "reference_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Mapped Docker Socket\\nSibling Containers"
+      ],
+      "reasoning": "Grounded as part of the mapped Docker socket requirement for sibling container management."
+    },
+    {
+      "predicted_node": "Kubernetes Cluster::Experiment Pod::Environment Installer",
+      "grounded": true,
+      "reference_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Pod Execution Environment\\nand Docker User Code"
+      ],
+      "reasoning": "Grounded in the requirement to install the experiment environment inside the pod."
+    },
+    {
+      "predicted_node": "Kubernetes Cluster::Experiment Pod::Experiment Process",
+      "grounded": true,
+      "reference_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Pod Execution Environment\\nand Docker User Code"
+      ],
+      "reasoning": "Grounded in the in-pod experiment process startup and execution."
+    },
+    {
+      "predicted_node": "Kubernetes Cluster::Experiment Pod::Process Monitor",
+      "grounded": true,
+      "reference_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Pod Execution Environment\\nand Docker User Code"
+      ],
+      "reasoning": "Grounded in the requirement to monitor the experiment process in the pod."
+    },
+    {
+      "predicted_node": "Kubernetes Cluster::Kubernetes Job",
+      "grounded": true,
+      "reference_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Kubernetes Job"
+      ],
+      "reasoning": "Direct semantic match to the Kubernetes job concept."
+    },
+    {
+      "predicted_node": "Kubernetes Cluster::Sibling Docker Containers",
+      "grounded": true,
+      "reference_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Mapped Docker Socket\\nSibling Containers"
+      ],
+      "reasoning": "Grounded in sibling Docker container management in service-pod mode."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "ClearML Server::Backend Service API"
+      ],
+      "predicted_nodes": [
+        "ClearML Agent::Backend Service Client::Service Action Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The backend service API responsibility matches, but the predicted node is placed in the agent/client side rather than the server-side boundary."
+    },
+    {
+      "gt_nodes": [
+        "ClearML Server::ML Ops::Execution Queue"
+      ],
+      "predicted_nodes": [
+        "ClearML Backend::Execution Queue"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The queue concept matches and the backend/server boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "ClearML Server::ML Ops::Monitoring"
+      ],
+      "predicted_nodes": [
+        "ClearML Agent::Worker Runtime::Server Ping",
+        "ClearML Agent::Worker Runtime::Telemetry Reporter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT monitoring responsibility is split into ping and telemetry reporting components, and the boundary remains semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "ClearML Server::ML Ops::Orchestration"
+      ],
+      "predicted_nodes": [
+        "ClearML Agent::Kubernetes Integration::Kubernetes Glue",
+        "ClearML Agent::Kubernetes Integration::Service Pod Mode",
+        "Kubernetes Cluster::Kubernetes Job"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The orchestration responsibility is decomposed across Kubernetes integration and job execution nodes, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::ClearML Agent\\nService Pod"
+      ],
+      "predicted_nodes": [
+        "ClearML Agent::Kubernetes Integration::Service Pod Mode"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct semantic match for the service pod integration."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Kubernetes Glue"
+      ],
+      "predicted_nodes": [
+        "ClearML Agent::Kubernetes Integration::Kubernetes Glue"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact semantic match with consistent boundary attribution."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Kubernetes Job"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Kubernetes Job"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The Kubernetes job concept is preserved, and the cluster boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Mapped Docker Socket\\nSibling Containers"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Docker Socket",
+        "Kubernetes Cluster::Sibling Docker Containers"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT combined responsibility is split into the socket and sibling-container subcomponents, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Pod Execution Environment\\nand Docker User Code"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Experiment Pod::Environment Installer",
+        "Kubernetes Cluster::Experiment Pod::Experiment Process",
+        "Kubernetes Cluster::Experiment Pod::Process Monitor"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The pod execution environment is decomposed into environment installation, process execution, and monitoring, all consistent with the GT responsibility."
+    },
+    {
+      "gt_nodes": [
+        "ClearML Server::Backend Service API"
+      ],
+      "predicted_nodes": [
+        "ClearML Backend::Events Service v2.5::Histogram Request Handler",
+        "ClearML Backend::Models Service v2.4::Model Delete Handler",
+        "ClearML Backend::Models Service v2.4::Model Metadata Store"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These predicted backend service nodes are specific implementations under the broader backend service API and are boundary-consistent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "ClearML Server::Experiment Manager::Collaboration",
+    "ClearML Server::Experiment Manager::Data Tracking",
+    "ClearML Server::Experiment Manager::Versioning",
+    "ClearML Server::Experiment Manager::Visualization",
+    "Data Scientist Environment::ClearML Snippet",
+    "Data Scientist Environment::Python ML / DL Code",
+    "GPU / Kubernetes Workers\\nOn Prem or Cloud::YAML Job Template"
+  ],
+  "unmatched_predicted_nodes": []
+}

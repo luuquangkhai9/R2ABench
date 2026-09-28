@@ -1,0 +1,221 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster\\n(Dockerized Services::API Gateway / Router\\n(Iris",
+        "Kubernetes Cluster\\n(Dockerized Services::Administration System::Review & Moderation Service",
+        "Kubernetes Cluster\\n(Dockerized Services::Administration System::User Governance Service",
+        "Kubernetes Cluster\\n(Dockerized Services::Community System::Comment & Reply Service",
+        "Kubernetes Cluster\\n(Dockerized Services::Community System::Favorites Service",
+        "Kubernetes Cluster\\n(Dockerized Services::Community System::Post Service",
+        "Kubernetes Cluster\\n(Dockerized Services::Community System::Search & Recommendation Service",
+        "Kubernetes Cluster\\n(Dockerized Services::Game System::Game Service\\n(background, choices, progression",
+        "Kubernetes Cluster\\n(Dockerized Services::Game System::LLM Adapter",
+        "Kubernetes Cluster\\n(Dockerized Services::Game System::Save Management",
+        "Kubernetes Cluster\\n(Dockerized Services::Notification System::Notification Service",
+        "Kubernetes Cluster\\n(Dockerized Services::User System::Auth Service",
+        "Kubernetes Cluster\\n(Dockerized Services::User System::Profile Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT shows a single backend application boundary, while the prediction splits it into multiple service components deployed in a Kubernetes/dockerized backend cluster. This is a reasonable semantic decomposition and the backend boundary is preserved."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot::Community Management"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster\\n(Dockerized Services::Community System::Comment & Reply Service",
+        "Kubernetes Cluster\\n(Dockerized Services::Community System::Favorites Service",
+        "Kubernetes Cluster\\n(Dockerized Services::Community System::Post Service",
+        "Kubernetes Cluster\\n(Dockerized Services::Community System::Search & Recommendation Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The community management module is functionally equivalent to the set of community-related services. The package boundary is different but semantically consistent within the backend cluster."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot::Favorites Module"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster\\n(Dockerized Services::Community System::Favorites Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Favorites handling matches directly. The prediction places it under a backend service boundary rather than the GT module boundary, which is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot::Game System"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster\\n(Dockerized Services::Game System::Game Service\\n(background, choices, progression",
+        "Kubernetes Cluster\\n(Dockerized Services::Game System::LLM Adapter",
+        "Kubernetes Cluster\\n(Dockerized Services::Game System::Save Management"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT game system is decomposed into gameplay, save management, and LLM integration services. This is semantically aligned and remains in the correct backend/game boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot::Notification Module"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster\\n(Dockerized Services::Notification System::Notification Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Notification functionality is equivalent. The boundary attribution differs in naming but remains in the correct backend service domain."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot::User Management"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster\\n(Dockerized Services::User System::Auth Service",
+        "Kubernetes Cluster\\n(Dockerized Services::User System::Profile Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "User management is split into authentication and profile services, which is a valid refinement. The backend/user boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Caching"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster\\n(Dockerized Services::MySQL\\n(via Gorm"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "This is not a semantic match: GT is caching, while the prediction is a database persistence component."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Read/Write Database"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster\\n(Dockerized Services::MySQL\\n(via Gorm"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The relational persistence layer matches MySQL via Gorm. The deployment boundary is different, but the data-layer semantics are correct."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Storage"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster\\n(Dockerized Services::MySQL\\n(via Gorm"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Storage in GT is a broader storage concern, while the predicted node is specifically the MySQL database. This is too narrow to be considered equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer::MySQL"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster\\n(Dockerized Services::MySQL\\n(via Gorm"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct semantic match despite the different packaging notation."
+    },
+    {
+      "gt_nodes": [
+        "Frontend UI Layer::TypeScript",
+        "Frontend UI Layer::Vite2",
+        "Frontend UI Layer::Vue3",
+        "Frontend UI Layer::element-plus"
+      ],
+      "predicted_nodes": [
+        "Client Devices::Web App\\n(Vue.js + Nuxt.js"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT frontend stack components are aggregated into a single web app frontend node. The frontend boundary is correctly preserved, and Vue/Nuxt is consistent with the UI layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::Log Recording"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:0",
+      "is_boundary_correct": false,
+      "reasoning": "No explicit logging/recording node is present in the predicted list."
+    },
+    {
+      "gt_nodes": [
+        "Global::Permission Control"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:0",
+      "is_boundary_correct": false,
+      "reasoning": "No explicit permission control node is present in the predicted list."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Ajax Interaction"
+      ],
+      "predicted_nodes": [
+        "Client Devices::Web App\\n(Vue.js + Nuxt.js"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Ajax interaction is a presentation-level interaction mechanism, not the overall web app client boundary."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Ajax Interaction::GET Request"
+      ],
+      "predicted_nodes": [
+        "Client Devices::Web App\\n(Vue.js + Nuxt.js"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "A GET request is a specific interaction primitive, which is not represented by the broader client device/web app node."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Ajax Interaction::POST Request"
+      ],
+      "predicted_nodes": [
+        "Client Devices::Web App\\n(Vue.js + Nuxt.js"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "A POST request is a specific interaction primitive, which is not represented by the broader client device/web app node."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Template Rendering"
+      ],
+      "predicted_nodes": [
+        "Client Devices::Web App\\n(Vue.js + Nuxt.js"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Template rendering is a presentation-layer responsibility, but the predicted node is a client application boundary rather than rendering logic."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Log Recording",
+    "Global::Permission Control",
+    "Presentation Layer::Ajax Interaction",
+    "Presentation Layer::Ajax Interaction::GET Request",
+    "Presentation Layer::Ajax Interaction::POST Request",
+    "Presentation Layer::Template Rendering"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Client Devices",
+    "Global::Kubernetes Cluster\\n(Dockerized Services",
+    "Global::LLM Provider"
+  ]
+}

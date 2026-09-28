@@ -1,0 +1,180 @@
+@startuml
+!define AWSPUML https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v17.0/dist
+!includeurl AWSPUML/AWSCommon.puml
+!includeurl AWSPUML/Compute/EC2.puml
+!includeurl AWSPUML/ApplicationIntegration/EventBridge.puml
+!includeurl AWSPUML/ApplicationIntegration/SimpleNotificationService.puml
+!includeurl AWSPUML/Compute/Lambda.puml
+!includeurl AWSPUML/Compute/EC2ContainerRegistry.puml
+!includeurl AWSPUML/Database/RDS.puml
+!includeurl AWSPUML/ManagementGovernance/CloudWatch.puml
+
+skinparam componentStyle uml2
+title macpro-appian-connector System Architecture
+skinparam handwritten false
+skinparam shadowing false
+skinparam defaultFontSize 13
+skinparam component {
+  BackgroundColor #F5F5F5
+  BorderColor #333333
+  ArrowColor #333333
+}
+
+title macpro-appian-connector System Architecture
+
+' Define external systems
+rectangle "External Systems" {
+  component "Appian Platform" as appian #LightBlue
+  component "CMS BigMAC" as bigmac #LightGreen
+  component "GitHub" as github #LightGray
+}
+
+' Define AWS environment
+cloud "AWS Environment" as aws {
+  package "AWS Account & Region" {
+    component "Running Stages" as stages #LightYellow
+    component "Target Cluster" as cluster #LightYellow
+    component "Target Service" as service #LightYellow
+    
+    rectangle "Connector Management" {
+      component "Connector Definitions" as connectors #LightCyan
+      component "Connector Runtime" as runtime #LightCyan
+    }
+    
+    rectangle "Event Processing" {
+      component "AWS EventBridge" as eventbridge <<EventBridge>> #LightPink
+      component "SNS Topic" as sns <<SimpleNotificationService>> #LightPink
+    }
+    
+    rectangle "Deployment & Monitoring" {
+      component "AWS CLI" as awscli #LightGray
+      component "CloudWatch" as cloudwatch <<CloudWatch>> #LightGray
+    }
+  }
+}
+
+' Define local/user environment
+rectangle "Local/User Environment" as local {
+  component "Terminal/Script Interface" as terminal #White
+  component "Onboarding Process" as onboarding #White
+  component "AWS Credentials" as credentials #White
+  component "nvm + run Scripts" as scripts #White
+}
+
+' Define metrics collection system
+rectangle "Metrics Collection" as metrics {
+  component "Deployment Metrics" as deploy_metrics #LightOrange
+  component "PR Merge Metrics" as pr_metrics #LightOrange
+  component "GitHub API Client" as github_api #LightOrange
+}
+
+' Define manual management area
+rectangle "Manual Management" as manual {
+  component "SNS Subscriptions" as sns_subscriptions #LightPurple
+  component "Subscription Administration" as subscription_admin #LightPurple
+}
+
+' Data flows and interactions
+
+' Appian to BigMAC data transfer
+appian --> connectors : "Data Changes"
+connectors --> bigmac : "Data Transfer"
+connectors --> runtime : "Configuration"
+runtime --> cluster : "Deployment"
+runtime --> service : "Service Integration"
+
+' Stage listing operations
+terminal --> onboarding : "User completes"
+onboarding --> credentials : "Sets AWS CLI"
+credentials --> awscli : "Authentication"
+awscli --> stages : "Query running stages"
+stages --> terminal : "runningStages=<list>"
+
+' Connector configuration flow
+scripts --> connectors : "Configuration Handler"
+connectors --> cluster : "Apply definitions"
+connectors --> service : "Apply definitions"
+connectors --> runtime : "Restart connectors"
+
+' Event routing flow
+service --> eventbridge : "Runtime Events"
+eventbridge --> sns : "Matching Events\n(alerting rules)"
+sns --> sns_subscriptions : "Event Delivery"
+
+' Manual subscription management
+subscription_admin --> sns_subscriptions : "Add/Remove Subscribers"
+
+' Metrics collection flows
+github --> github_api : "API Access"
+github_api --> deploy_metrics : "Workflow runs\ndeploy.yml"
+deploy_metrics --> scripts : "failedRuns, passedRuns"
+github_api --> pr_metrics : "Closed PRs\n(base branch)"
+pr_metrics --> scripts : "averageTimeToMerge"
+
+' Connector operations details
+note right of connectors
+  Consumes:
+  - Connector definitions
+  - cluster value
+  - service value
+  Calls deletion with empty set
+end note
+
+note right of eventbridge
+  Event filtering criteria:
+  - Pattern matching
+  - Rule configuration
+end note
+
+note right of sns
+  Authorization required for
+  event-routing invocation
+end note
+
+note right of deploy_metrics
+  Classification:
+  - failed = conclusion != success
+  - passed = total - failed
+  Pagination: per_page=100
+end note
+
+note right of pr_metrics
+  Calculation:
+  - Keep PRs with created_at, merged_at
+  - Compute whole-hour differences
+  - Average merge time
+  - Default to 0 if no qualifying PRs
+end note
+
+' System boundaries and constraints
+frame "CI/CD Tool" {
+  github
+}
+
+frame "External Manual Management" {
+  manual
+}
+
+frame "Operational Constraints" {
+  note "C-001: Stage listing constrained to current AWS account/region"
+  note "C-002: Requires prior onboarding completion"
+  note "C-003: Requires AWS CLI credentials"
+  note "C-004: Uses GitHub Actions as CI/CD"
+  note "C-005: SNS subscriptions managed manually"
+  note "C-006: Deployment metrics constrained to deploy.yml"
+  note "C-007: PR metrics constrained to closed PRs for base branch"
+}
+
+' Legend
+legend right
+  |Color|Component Type|
+  |<#LightBlue>|External System|
+  |<#LightYellow>|AWS Resource|
+  |<#LightCyan>|Connector Management|
+  |<#LightPink>|Event Processing|
+  |<#LightOrange>|Metrics Collection|
+  |<#LightPurple>|Manual Management|
+  |<#FFFFFF>|User/Local Interface|
+endlegend
+
+@enduml

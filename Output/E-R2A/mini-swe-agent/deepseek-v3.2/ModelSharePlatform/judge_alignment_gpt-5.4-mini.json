@@ -1,0 +1,177 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Browser / Client Layer::Frontend Interface\\n(Bootstrap-Vue"
+      ],
+      "predicted_nodes": [
+        "Global::Web Browser - Vue.js Frontend",
+        "Presentation Layer::Web Browser - Vue.js Frontend"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both predicted nodes refer to the client-side UI/frontend. The GT node is a single frontend interface node, while the predictions split/duplicate it across two semantically equivalent presentation/client boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Blog Data"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL Database::Blog Data"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent blog persistence in MySQL; the package naming differs but is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Dataset Data"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL Database::Dataset Metadata"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent dataset persistence in the database. 'Metadata' is slightly narrower, but still functionally aligned with dataset data storage."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Following Data"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL Database::Follow Relationships"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to follow-relationship storage in MySQL."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Model Data"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL Database::Model Metadata"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent model-related persistence; the predicted node is a reasonable sub-entity of the GT model data."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Q&A Community Data"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL Database::Q&A Data"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to Q&A community data stored in MySQL."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::User Data"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL Database::User Accounts"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent user/account persistence in the database."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Account Management Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::User Service",
+        "Global::User Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT account management module is represented by a user service in the predicted architecture. The additional Global duplication is not a boundary error for the matched semantics, though it is redundant."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Admin Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Admin Service",
+        "Global::Admin Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The administrative backend module is correctly mapped to an admin service. The Global duplicate is redundant but not semantically wrong."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Blog Sharing Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Community Service",
+        "Global::Community Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The blog sharing module is not named explicitly, but the predicted community service covers the blog/community content-management functionality. Boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Dataset Management Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Dataset Service",
+        "Global::Dataset Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The dataset management module matches the predicted dataset service; duplicate Global node is redundant."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Following Management Module"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL Database::Follow Relationships"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a backend service/module, but the predicted node is a database storage entity. This is a severe layer mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Model Management Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Model Service",
+        "Global::Model Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted model service corresponds to the GT model management module. The duplicated Global node is redundant but semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Q&A Community Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Community Service",
+        "Global::Community Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The community service covers the Q&A community backend responsibilities. The duplicate Global node is redundant."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Application Layer::API Gateway - Spring Boot",
+    "Application Layer::Payment Service",
+    "Data Layer::File Storage",
+    "Data Layer::MySQL Database",
+    "Data Layer::MySQL Database::Transaction Records",
+    "External Systems::Email Service - SMTP",
+    "External Systems::Payment Gateway - Third-party",
+    "Global::API Gateway - Spring Boot",
+    "Global::Payment Service"
+  ]
+}

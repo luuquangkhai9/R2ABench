@@ -1,0 +1,100 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Tengine Lite::Convert Tool::Caffe",
+        "Tengine Lite::Convert Tool::Darknet",
+        "Tengine Lite::Convert Tool::MXNet",
+        "Tengine Lite::Convert Tool::MegEngine",
+        "Tengine Lite::Convert Tool::OneFlow",
+        "Tengine Lite::Convert Tool::Others",
+        "Tengine Lite::Convert Tool::PaddlePaddle",
+        "Tengine Lite::Convert Tool::PyTorch / ONNX",
+        "Tengine Lite::Convert Tool::TF Lite",
+        "Tengine Lite::Convert Tool::TensorFlow",
+        "Tengine Lite::Serializer::Caffe Serializer",
+        "Tengine Lite::Serializer::Darknet Serializer",
+        "Tengine Lite::Serializer::MLIR Serializer",
+        "Tengine Lite::Serializer::MXNet Serializer",
+        "Tengine Lite::Serializer::MegEngine Serializer",
+        "Tengine Lite::Serializer::ONNX Serializer",
+        "Tengine Lite::Serializer::OneFlow Serializer",
+        "Tengine Lite::Serializer::Others Serializer",
+        "Tengine Lite::Serializer::PaddlePaddle Serializer",
+        "Tengine Lite::Serializer::TF Lite Serializer",
+        "Tengine Lite::Serializer::TensorFlow Serializer",
+        "Tengine Lite::Serializer::ncnn Serializer"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Linux Model Converter (CLI",
+        "Client Layer::Online Model Converter (WASM"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated numerous low-level converter and source-format serializer components into high-level, user-facing tool nodes. The 'Client Layer' is a semantically correct architectural layer for these tools, which differs from the GT's functional package name ('Convert Tool', 'Serializer') but is a valid architectural interpretation."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Engine::CPU Backend",
+        "Tengine Lite::Engine::GPU Backend",
+        "Tengine Lite::Engine::NPU Backend",
+        "Tengine Lite::Engine::Low Bit Quantize",
+        "Tengine Lite::Runtime Optimize::ARM / X86 / RISCV / MIPS",
+        "Tengine Lite::Runtime Optimize::Amlogic / RK / NXP / JLQ\\nNPU and NVDLA",
+        "Tengine Lite::Runtime Optimize::Assembly",
+        "Tengine Lite::Runtime Optimize::Auto Kernel Plugin",
+        "Tengine Lite::Runtime Optimize::CUDA / Vulkan / OpenCL",
+        "Tengine Lite::Runtime Optimize::Mix Bit Calculation",
+        "Tengine Lite::Runtime Optimize::NVIDIA / Mali / Adreno",
+        "Tengine Lite::Runtime Optimize::SGEMM",
+        "Tengine Lite::Runtime Optimize::SIMD",
+        "Tengine Lite::Runtime Optimize::TIM-VX / OpenDLA Plugin",
+        "Tengine Lite::Runtime Optimize::TensorRT / ACL Plugin",
+        "Tengine Lite::Runtime Optimize::Winograd"
+      ],
+      "predicted_nodes": [
+        "Core Engine Layer::Device Backend"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated various backend implementations ('CPU/GPU/NPU Backend') and their numerous low-level optimizations ('Runtime Optimize') into a single 'Device Backend' component. Placing this in the 'Core Engine Layer' is semantically correct, as the PRD describes the 'device' module as part of the core architecture."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Engine::Exec Scheduler",
+        "Tengine Lite::Engine::Graph Partition",
+        "Tengine Lite::Engine::Device Allocator"
+      ],
+      "predicted_nodes": [
+        "Core Engine Layer::Scheduler"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated detailed scheduling, graph partitioning, and resource allocation functions from the GT's 'Engine' package into a single 'Scheduler' node. This is a correct simplification, and the 'Core Engine Layer' is appropriate as the scheduler is a core module per the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Serializer::tmfile Serializer"
+      ],
+      "predicted_nodes": [
+        "Core Engine Layer::Serializer\\n(tmfile decoder"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the specific runtime 'tmfile' decoder, distinguishing it from conversion-related serializers. Placing it in the 'Core Engine Layer' aligns with the PRD's definition of the serializer as a core module."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "API Layer::C API",
+    "API Layer::C++ API Docs",
+    "API Layer::Python API Docs",
+    "Client Layer::Example Applications\\n(Classification, Detection, Segmentation,\\nPose Estimation, Landmark, OCR",
+    "Core Engine Layer::Operator Module",
+    "Data Layer::Converted Model Artifacts",
+    "Data Layer::Local Image Files",
+    "Data Layer::Local Model Files\\n(tmfile",
+    "Execution & Build Environment::Linux Environment",
+    "Execution & Build Environment::Web Browser\\n(WASM Runtime"
+  ]
+}

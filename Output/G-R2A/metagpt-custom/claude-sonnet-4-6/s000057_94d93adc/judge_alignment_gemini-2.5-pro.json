@@ -1,0 +1,66 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Cloudinary\n- stores audio files\n- stores images\n- returns file URLs"
+      ],
+      "predicted_nodes": [
+        "External Media Layer::Cloudinary Media Storage",
+        "Global::External Media Layer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Cloudinary node is split into a storage component and its encompassing boundary layer in the prediction. The boundary attribution is semantically equivalent and accurate."
+    },
+    {
+      "gt_nodes": [
+        "Global::Express Server\n- fetches data with Sequelize\n- serves React frontend\n- handles backend API requests"
+      ],
+      "predicted_nodes": [
+        "API / Backend Layer\n(Node / Express Server::Backend Controllers::AuthController",
+        "API / Backend Layer\n(Node / Express Server::Backend Controllers::FeedController",
+        "API / Backend Layer\n(Node / Express Server::Backend Controllers::FollowController",
+        "API / Backend Layer\n(Node / Express Server::Backend Controllers::SoundController",
+        "API / Backend Layer\n(Node / Express Server::ExpressServer",
+        "Global::API / Backend Layer\n(Node / Express Server"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT Express Server node is broken down into specific backend controller services and the server application node by the AI. The predicted components are correctly grouped under the API / Backend Layer boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::PostgreSQL Database\n- stores users and sounds\n- stores Cloudinary URL references"
+      ],
+      "predicted_nodes": [
+        "Persistence Layer::PostgreSQLDatabase",
+        "Global::Persistence Layer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT PostgreSQL node is matched perfectly with the predicted PostgreSQLDatabase node and its structural boundary parent. Boundary placement in the 'Persistence Layer' aligns perfectly with standard database architecture."
+    },
+    {
+      "gt_nodes": [
+        "Global::React Frontend\n- Redux state management\n- uploads images and audio\n- controls and visualizes playback"
+      ],
+      "predicted_nodes": [
+        "Browser Client::Presentation Layer::FormValidator",
+        "Browser Client::Presentation Layer::ImageUploadUI",
+        "Browser Client::Presentation Layer::ReactUI",
+        "Browser Client::Presentation Layer::WaveformPlayer",
+        "Browser Client::State Management Layer::ActionThunkLayer",
+        "Browser Client::State Management Layer::CloudinaryUploadClient",
+        "Browser Client::State Management Layer::FrontendConfigProvider",
+        "Browser Client::State Management Layer::PlaybackStateManager",
+        "Browser Client::State Management Layer::ReduxStore",
+        "Global::Browser Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The comprehensive React Frontend GT node is finely decomposed by the AI into multiple UI components (Presentation Layer) and Redux-related components (State Management Layer). All are appropriately mapped to the overarching 'Browser Client' layer."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

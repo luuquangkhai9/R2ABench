@@ -1,0 +1,81 @@
+@startuml
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+skinparam defaultFontName Arial
+
+title Activiti 7 Examples - Architecture (Layered Component/Deployment View)
+
+package "External Users" {
+  actor "Authenticated User" as User
+  actor "Human Participant" as Human
+}
+
+package "Identity Provider" {
+  [Keycloak IdP] as Keycloak
+}
+
+node "Kubernetes/GKE Cluster" as K8s {
+  component "NGINX Ingress Controller" as Ingress
+
+  package "Application Layer (Spring Boot Example)" {
+    component "Example App" as App {
+      [ProcessRuntime Client] as PR
+      [TaskRuntime Client] as TR
+      [Spring Security] as Sec
+    }
+  }
+
+  package "Activiti Services" {
+    [Example Runtime Bundle] as RB
+    [Audit Service] as Audit
+    [Query Service] as Query
+  }
+
+  component "Deployment Descriptors (Config)" as Config
+}
+
+' Authentication and access flow
+User --> Keycloak : Obtain token (OAuth2/JWT)
+User --> Ingress : HTTPS requests with token
+Ingress --> App : Route external requests
+Human --> Ingress : Access human-participant endpoints
+
+' Example App interactions
+App --> RB : Process definitions lookup / start SimpleProcess
+App --> Audit : Fetch audit events for instance
+App --> Query : Read process execution state (optional)
+
+' Security and authorization
+App --> Sec : Token authentication & context
+Sec ..> TR : Enforce role checks\n(ROLE_ACTIVITI_USER)
+
+' Token validation / metadata
+App ..> Keycloak : Validate tokens / JWKS metadata
+
+' Ingress exposure of selected services
+Ingress ..> Audit : Expose selected endpoints
+Ingress ..> Query : Expose selected endpoints
+
+' Deployment and scalability controls
+Config ..> RB : replicaCount, resources
+Config ..> Audit : replicaCount
+Config ..> Query : replicaCount
+
+' Notes
+note over Keycloak
+Time-limited tokens for protected endpoints
+(NFR-001)
+end note
+
+note right of Sec
+Spring Security within Spring Boot context
+(C-001) Role-based access for TaskRuntime
+(FR-005)
+end note
+
+note bottom of Ingress
+NGINX ingress routes public IP traffic
+to selected internal services (FR-007)
+end note
+
+@enduml

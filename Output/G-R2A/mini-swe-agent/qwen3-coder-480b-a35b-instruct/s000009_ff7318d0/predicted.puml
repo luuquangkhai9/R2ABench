@@ -1,0 +1,69 @@
+@startuml
+title Foot365 System Architecture
+
+skinparam componentStyle rectangle
+
+package "Frontend Layer" {
+  [Web Client] as frontend
+}
+
+package "AWS Hosting Layer" {
+  component "Amazon S3" as s3
+  component "Amazon CloudFront" as cloudfront
+}
+
+package "API Layer" {
+  component "API Gateway" as apigateway
+  component "Lambda Functions" as lambda
+}
+
+package "Authentication Layer" {
+  component "Amazon Cognito" as cognito
+  component "IAM" as iam
+}
+
+package "Data Layer" {
+  component "DynamoDB" as dynamodb
+  component "Elasticsearch" as elasticsearch
+}
+
+package "Streaming Layer" {
+  component "EC2" as ec2
+  component "Kafka" as kafka
+  component "Apache Avro" as avro
+}
+
+package "Prediction Layer" {
+  component "SageMaker" as sagemaker
+}
+
+package "Notification Layer" {
+  component "SQS" as sqs
+  component "SNS" as sns
+}
+
+package "External Systems" {
+  component "SMS Provider" as sms
+  component "Football Data Source" as datasource
+}
+
+Connections
+frontend --> cloudfront : serves
+cloudfront --> s3 : hosts
+s3 --> apigateway : routes API
+apigateway --> lambda : invokes
+lambda --> dynamodb : reads/writes
+lambda --> elasticsearch : searches
+lambda --> sagemaker : predicts
+lambda --> sqs : queues reminders
+sqs --> sns : triggers
+sns --> sms : sends
+ec2 --> kafka : processes
+kafka --> avro : serializes
+avro --> lambda : deserializes
+datasource --> dynamodb : feeds data
+sagemaker --> dynamodb : reads training data
+cognito --> apigateway : authenticates
+iam --> apigateway : authorizes
+
+@enduml

@@ -1,0 +1,57 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Cloudinary\\n- stores audio files\\n- stores images\\n- returns file URLs"
+      ],
+      "predicted_nodes": [
+        "Global::Cloudinary (Audio & Image Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the Cloudinary media storage component. The boundary 'Global' matches perfectly."
+    },
+    {
+      "gt_nodes": [
+        "Global::PostgreSQL Database\\n- stores users and sounds\\n- stores Cloudinary URL references"
+      ],
+      "predicted_nodes": [
+        "Global::PostgreSQL"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the PostgreSQL database for application data persistence. The boundary 'Global' matches perfectly."
+    },
+    {
+      "gt_nodes": [
+        "Global::Express Server\\n- fetches data with Sequelize\\n- serves React frontend\\n- handles backend API requests"
+      ],
+      "predicted_nodes": [
+        "Backend Layer (Node/Express::Auth & Users API",
+        "Backend Layer (Node/Express::Data Access (ORM/Queries",
+        "Backend Layer (Node/Express::Express REST API",
+        "Backend Layer (Node/Express::Follow & Feed API",
+        "Backend Layer (Node/Express::Sound API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single Express Server node in the GT is split into multiple finer-grained API and data access components by the AI. The boundary 'Global' in GT is semantically equivalent to 'Backend Layer (Node/Express' for the backend component."
+    },
+    {
+      "gt_nodes": [
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback"
+      ],
+      "predicted_nodes": [
+        "Client Layer (React/Redux SPA::HTTP API Client",
+        "Client Layer (React/Redux SPA::Playback Manager",
+        "Client Layer (React/Redux SPA::Redux Store & Actions",
+        "Client Layer (React/Redux SPA::Web UI: Upload / Playback / Follow"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The monolithic React Frontend node in the GT is correctly detailed into specific frontend subcomponents (UI, Redux, Playback, API Client) by the AI. The GT 'Global' boundary maps semantically to the 'Client Layer (React/Redux SPA' boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

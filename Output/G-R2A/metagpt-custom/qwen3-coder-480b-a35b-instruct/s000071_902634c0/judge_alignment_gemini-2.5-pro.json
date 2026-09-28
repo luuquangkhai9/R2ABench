@@ -1,0 +1,82 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Kubernetes Glue"
+      ],
+      "predicted_nodes": [
+        "Execution Layer::KubernetesGlue",
+        "Integration Layer::QueueManager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT Kubernetes Glue node is split by the AI into the core KubernetesGlue logic and the QueueManager that pulls jobs for it. The boundary mapping from infrastructure context to software execution/integration layers is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::ClearML Agent\\nService Pod"
+      ],
+      "predicted_nodes": [
+        "Execution Layer::LoggingSubsystem",
+        "Execution Layer::ServicePodManager",
+        "Service Layer::BackendServiceClient",
+        "Service Layer::EventsServiceInterface",
+        "Service Layer::ModelsServiceInterface",
+        "Telemetry Layer::ConfigurationManager",
+        "Telemetry Layer::WorkerReporter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The monolithic ClearML Agent Service Pod in the GT is decomposed by the AI into fine-grained functional components covering execution management, backend interfacing, and telemetry. The layers logically correspond to the agent's internal architecture operating within the worker boundary."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Pod Execution Environment\\nand Docker User Code"
+      ],
+      "predicted_nodes": [
+        "Execution Layer::ExperimentRunner"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the dedicated internal execution environment and mechanism for installing, starting, and monitoring the user's experiment process."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Mapped Docker Socket\\nSibling Containers"
+      ],
+      "predicted_nodes": [
+        "Global::Docker Daemon"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes denote the Docker service/socket mechanism used to manage sibling containers. Mapping the worker infrastructure component to a global systemic dependency is boundary-consistent."
+    },
+    {
+      "gt_nodes": [
+        "ClearML Server::Backend Service API",
+        "ClearML Server::Experiment Manager::Collaboration",
+        "ClearML Server::Experiment Manager::Data Tracking",
+        "ClearML Server::Experiment Manager::Versioning",
+        "ClearML Server::Experiment Manager::Visualization",
+        "ClearML Server::ML Ops::Execution Queue",
+        "ClearML Server::ML Ops::Monitoring",
+        "ClearML Server::ML Ops::Orchestration"
+      ],
+      "predicted_nodes": [
+        "Global::ClearML Server/Backend"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT explicitly details multiple subsystems of the ClearML Server, whereas the AI aggregates all server-side components into a single overarching global external backend node. The external server boundary logic is maintained."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Data Scientist Environment::ClearML Snippet",
+    "Data Scientist Environment::Python ML / DL Code",
+    "GPU / Kubernetes Workers\\nOn Prem or Cloud::Kubernetes Job",
+    "GPU / Kubernetes Workers\\nOn Prem or Cloud::YAML Job Template"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Kubernetes Cluster"
+  ]
+}

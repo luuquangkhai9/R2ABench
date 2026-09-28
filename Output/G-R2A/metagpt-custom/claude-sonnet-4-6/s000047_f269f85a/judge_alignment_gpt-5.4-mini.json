@@ -1,0 +1,167 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Archifiltre::Electron"
+      ],
+      "predicted_nodes": [
+        "Global::Electron Runtime",
+        "Electron Runtime::app.getPath(\"userData",
+        "Filesystem / Electron Runtime Layer::HashDebugWriter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Electron platform node corresponds to the predicted Electron runtime and related runtime filesystem usage. The predicted nodes split runtime concerns into more specific components, which is semantically consistent with the GT boundary."
+    },
+    {
+      "gt_nodes": [
+        "Archifiltre::React.js"
+      ],
+      "predicted_nodes": [
+        "Presentation / Controller Layer::CsvExportController",
+        "Presentation / Controller Layer::ExcelExportController",
+        "Presentation / Controller Layer::HashComputationController",
+        "Presentation / Controller Layer::ResipExportController",
+        "Presentation / Controller Layer::TreeCsvExportController"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "These predicted nodes reflect application controllers/workflows, which are not equivalent to the GT React.js frontend framework node. This is a boundary/context mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Archifiltre::Redux"
+      ],
+      "predicted_nodes": [
+        "Settings Layer::SettingsModel\\n(isTrackingEnabled,\\nisMonitoringEnabled,\\nlanguage",
+        "Settings Layer::SettingsSanitizer",
+        "Translation / Localization Layer::TranslationModule"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted nodes relate to settings and translation concerns rather than Redux state management. This is not a semantically correct match and the architectural layer is different."
+    },
+    {
+      "gt_nodes": [
+        "GitHub::Continuous Integration /\\nContinuous Deployment"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node corresponds to CI/CD."
+    },
+    {
+      "gt_nodes": [
+        "GitHub::Issues /\\nPull requests"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node corresponds to issues or pull requests."
+    },
+    {
+      "gt_nodes": [
+        "GitHub::Releases"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node corresponds to releases."
+    },
+    {
+      "gt_nodes": [
+        "Global::Matomo"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node corresponds to Matomo analytics."
+    },
+    {
+      "gt_nodes": [
+        "Global::Sentry"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node corresponds to Sentry."
+    },
+    {
+      "gt_nodes": [
+        "Archifiltre::Electron"
+      ],
+      "predicted_nodes": [
+        "Global::Host Filesystem"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Host filesystem is related to the Electron runtime environment, but it is not the same as the GT Electron application platform node and overstates the boundary as a standalone architecture node."
+    },
+    {
+      "gt_nodes": [
+        "Archifiltre::Electron"
+      ],
+      "predicted_nodes": [
+        "Host Filesystem::hash-error-debug",
+        "Host Filesystem::hash-result-debug"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "These are file artifacts under the filesystem, not equivalent to the GT Electron platform node. They are too low-level and not the same architectural component."
+    },
+    {
+      "gt_nodes": [
+        "Archifiltre::Electron"
+      ],
+      "predicted_nodes": [
+        "Electron Runtime::app.getPath(\"userData\""
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a correct runtime-specific Electron API detail within the Electron boundary, and it aligns with the documented requirement around app.getPath(\"userData\")."
+    },
+    {
+      "gt_nodes": [
+        "Archifiltre::Electron"
+      ],
+      "predicted_nodes": [
+        "Filesystem / Electron Runtime Layer::HashDebugWriter"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The node represents Electron/runtime filesystem behavior, which is consistent with the GT Electron platform boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "GitHub::Continuous Integration /\\nContinuous Deployment",
+    "GitHub::Issues /\\nPull requests",
+    "GitHub::Releases",
+    "Global::Matomo",
+    "Global::Sentry"
+  ],
+  "unmatched_predicted_nodes": [
+    "Background Worker / Batch Processing Layer::CsvExportWorker",
+    "Background Worker / Batch Processing Layer::ExcelExportWorker",
+    "Background Worker / Batch Processing Layer::HashBatchProcessor",
+    "Background Worker / Batch Processing Layer::HashMapAggregator",
+    "Background Worker / Batch Processing Layer::ResipExportWorker",
+    "Background Worker / Batch Processing Layer::TreeCsvExportWorker",
+    "Global::Electron Runtime",
+    "Global::Host Filesystem",
+    "Host Filesystem::hash-error-debug",
+    "Host Filesystem::hash-result-debug",
+    "Input Data Layer::CsvInputData\\n(aliases, comments, files,\\nmetadata, tags, hashes",
+    "Input Data Layer::ExcelInputData\\n(CsvExporterData",
+    "Input Data Layer::HashInputParams\\n(paths, basePath",
+    "Input Data Layer::ResipInputData\\n(files, folders, metadata,\\naliases, comments, tags",
+    "Input Data Layer::TreeCsvInputData\\n(files-and-folders map",
+    "Presentation / Controller Layer::CsvExportController",
+    "Presentation / Controller Layer::ExcelExportController",
+    "Presentation / Controller Layer::HashComputationController",
+    "Presentation / Controller Layer::ResipExportController\\n«filters & maps worker messages»",
+    "Presentation / Controller Layer::TreeCsvExportController",
+    "Settings Layer::SettingsModel\\n(isTrackingEnabled,\\nisMonitoringEnabled,\\nlanguage",
+    "Settings Layer::SettingsSanitizer",
+    "Translation / Localization Layer::TranslationModule"
+  ]
+}

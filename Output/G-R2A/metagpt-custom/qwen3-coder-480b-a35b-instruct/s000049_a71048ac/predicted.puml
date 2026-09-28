@@ -1,0 +1,65 @@
+@startuml
+' NLP4L System Architecture - Component/Deployment Diagram
+
+' Define Nodes for External Systems
+node "Apache Lucene" {
+  database "Lucene Indexes"
+}
+
+node "External ML Tools" {
+  component "Machine Learning Tools" as MLTools [lightblue]
+}
+
+' Define Core Functional Components
+component "LuceneIndexReader" as LIR
+component "DocumentProcessor" as DP
+component "SearchEngine" as SE
+component "VectorGenerator" as VG
+component "SchemaLoader" as SL
+component "SchemaParser" as SP
+component "FieldDefinitionHandler" as FDH
+component "AnalyzerManager" as AM
+component "SchemaModel" as SM
+component "LIBSVMExporter" as LE
+component "ChartDisplay" as CD
+component "ScalaInterpreter" as SI
+
+' Define Data/Config Inputs
+artifact "Schema File" as SchemaFile
+
+' Define Intermediate Outputs
+artifact "LIBSVM File" as LibSVMFile
+
+' Define Dependencies (Arrows)
+LIR --> "Lucene Indexes" : reads data from
+
+DP --> LIR : uses
+SE --> LIR : queries
+VG --> LIR : reads terms/documents
+
+SL --> SchemaFile : loads from
+SL --> SP : provides schema to
+SL --> SM : creates model in
+SP --> SM : populates
+FDH --> SM : processes fields from
+AM --> SM : manages analyzers for
+
+VG --> SM : uses schema from
+SE --> SM : uses schema from
+
+LE --> VG : exports vectors from
+LE --> LibSVMFile : writes to
+LibSVMFile --> MLTools : consumed by
+
+CD --> DP : visualizes output of
+CD --> SE : displays results from
+
+SI --> DP : enables interactive processing
+SI --> SE
+SI --> VG
+SI --> LE
+SI --> CD
+SI --> SL : loads configurations via
+SI --> SP
+
+@enduml

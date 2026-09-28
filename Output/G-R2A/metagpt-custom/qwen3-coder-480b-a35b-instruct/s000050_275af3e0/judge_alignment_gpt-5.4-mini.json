@@ -1,0 +1,98 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::KVM (L0",
+        "KVM (L0::Hyper-V (L1) - Host"
+      ],
+      "predicted_nodes": [
+        "Global::Root Partition VM",
+        "Global::Child Partition VM"
+      ],
+      "match_type": "1:2",
+      "is_boundary_correct": true,
+      "reasoning": "The GT depicts the top-level virtualization environment and Hyper-V host relationship; the predicted nodes split this into VM roles. While not a perfect naming match, they represent the same virtualization context at the correct architectural level."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2",
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2::harness.sys"
+      ],
+      "predicted_nodes": [
+        "Child Partition VM::Guest Environment",
+        "VM Orchestration Layer::Child Partition Harness"
+      ],
+      "match_type": "1:2",
+      "is_boundary_correct": true,
+      "reasoning": "The GT child-partition guest VM and its harness.sys correspond to the predicted child partition guest environment plus harness orchestration. The split is acceptable and remains within the correct child-partition boundary."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2",
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::CrashMonitoring.sys"
+      ],
+      "predicted_nodes": [
+        "Root Partition VM::Host Environment",
+        "Monitoring & Feedback Layer::Root Partition Monitor"
+      ],
+      "match_type": "1:2",
+      "is_boundary_correct": true,
+      "reasoning": "The GT root-partition host OS and crash monitoring driver are semantically matched by the predicted root partition environment and monitoring component. The architectural placement is consistent with the root partition boundary."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::vmswitch.sys"
+      ],
+      "predicted_nodes": [
+        "Global::Hyper-V Virtual Switch (vmswitch.sys",
+        "Global::VMBus/netvsc Channels"
+      ],
+      "match_type": "1:2",
+      "is_boundary_correct": true,
+      "reasoning": "The GT vmswitch.sys component maps directly to the predicted Hyper-V virtual switch, and the associated communication channels are relevant supporting infrastructure. Boundary naming differs, but the semantic layer is correct."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "predicted_nodes": [
+        "Global::kAFL-Fuzzer",
+        "Fuzzing Execution Layer::Standalone Test Runner",
+        "Guest Interaction Layer::Embedded Forkserver"
+      ],
+      "match_type": "1:3",
+      "is_boundary_correct": true,
+      "reasoning": "The GT hAFL2 node is a higher-level fuzzing framework that the prediction decomposes into its main execution runner and guest interaction pieces. The split is reasonable and stays within the fuzzing-framework boundary."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2::harness.sys"
+      ],
+      "predicted_nodes": [
+        "VM Orchestration Layer::Child Partition Harness"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The child partition harness corresponds to the GT harness.sys component. The predicted boundary names the orchestration layer rather than the OS driver, but the placement is still semantically appropriate for the child-partition harness role."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::CrashMonitoring.sys"
+      ],
+      "predicted_nodes": [
+        "Monitoring & Feedback Layer::Root Partition Monitor"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The crash monitoring driver in the GT is correctly represented by the predicted root partition monitoring component. The layer naming differs, but the boundary is semantically correct."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Target Packaging Layer::InitRD Packager",
+    "Target Packaging Layer::Linux Userspace Launcher",
+    "Target Packaging Layer::Shared Library Copier",
+    "Windows Workflow Layer::Loader (loader.exe",
+    "Windows Workflow Layer::Packet Sender (packet_sender.exe"
+  ]
+}

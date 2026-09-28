@@ -1,0 +1,62 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Cloudinary\\n- stores audio files\\n- stores images\\n- returns file URLs"
+      ],
+      "predicted_nodes": [
+        "Global::Cloudinary\\n(Media Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Cloudinary media storage component. The boundary is 'Global' for both, which is perfectly consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::PostgreSQL Database\\n- stores users and sounds\\n- stores Cloudinary URL references"
+      ],
+      "predicted_nodes": [
+        "Global::PostgreSQL\\n(Application Data"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the PostgreSQL database used for storing application records. The boundary is consistently 'Global'."
+    },
+    {
+      "gt_nodes": [
+        "Global::Express Server\\n- fetches data with Sequelize\\n- serves React frontend\\n- handles backend API requests"
+      ],
+      "predicted_nodes": [
+        "Global::Backend Layer (Node/Express",
+        "Backend Layer (Node/Express::Express Server",
+        "Backend Layer (Node/Express::API Routes",
+        "Backend Layer (Node/Express::API Routes::Feed API\\n(/feed, /user sounds",
+        "Backend Layer (Node/Express::API Routes::Follow API\\n(/follow, /unfollow",
+        "Backend Layer (Node/Express::API Routes::Sound API\\n(/sounds: create,\\nretrieve, delete",
+        "Backend Layer (Node/Express::API Routes::User / Auth API\\n(/register, /login,\\n/user info"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single Express Server backend node in the GT is split into multiple specific API routes and server components by the AI. The predicted boundary 'Backend Layer (Node/Express' is semantically consistent with a server application layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback"
+      ],
+      "predicted_nodes": [
+        "Global::Client Layer (Browser",
+        "Client Layer (Browser::React UI\\n(Playback, Upload,\\nFollow, Feed, Forms",
+        "Client Layer (Browser::Redux Store\\n(State Management",
+        "Client Layer (Browser::Waveform\\nPlayer Component"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single React Frontend node in the GT is divided into fine-grained UI, state management (Redux), and waveform components. The 'Client Layer (Browser' boundary successfully aligns with a frontend system layer."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Frontend Configuration",
+    "Frontend Configuration::Environment Config\\n(API Base URL,\\nCloudinary URL,\\nUpload Preset"
+  ]
+}

@@ -1,0 +1,57 @@
+@startuml
+!define RECTANGLE rectangle linewidth 1
+
+title host-scanner Component Architecture
+
+' Layers
+package "Kubernetes Node" {
+    RECTANGLE "Privileged DaemonSet" as daemonset
+}
+
+package "host-scanner Process" {
+    RECTANGLE "HTTP API Service" as httpapi
+    RECTANGLE "CNI Directory Resolver" as cniresolver
+    RECTANGLE "JSON Sanitizer" as jsonsanitizer
+}
+
+package "External Systems" {
+    RECTANGLE "HTTP Client" as httpclient
+    RECTANGLE "Runtime Environment" as runtimeenv
+    RECTANGLE "Configuration Files" as configfiles
+    RECTANGLE "Command-Line Arguments" as cmdlineargs
+}
+
+' Data Stores
+database "Host Filesystem" as hostfs {
+    folder "/etc/cni/" as etccni
+    folder "/var/lib/cni/" as varlibcni
+    folder "Control Plane Data" as cpdata
+}
+
+' Connections
+httpclient --> httpapi : HTTP Requests
+httpapi --> httpclient : HTTP Responses
+daemonset --> httpapi : Contains
+cniresolver --> runtimeenv : Reads Runtime Info
+cniresolver --> configfiles : Parses Configs
+cniresolver --> cmdlineargs : Uses CLI Args
+cniresolver --> hostfs : Resolves CNI Paths
+jsonsanitizer --> cpdata : Processes JSON
+jsonsanitizer --> httpapi : Provides Sanitized Output
+httpapi --> hostfs : May Access Host Data
+
+note right of cniresolver
+    Resolves CNI directory from:
+    - Runtime type
+    - Default configurations
+    - Config files
+    - CLI arguments
+end note
+
+note right of jsonsanitizer
+    Removes encryption provider
+    configuration secrets from
+    control-plane JSON data
+end note
+
+@enduml

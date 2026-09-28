@@ -1,0 +1,60 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Application"
+      ],
+      "predicted_nodes": [
+        "Android Host App::Host Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted `Host Application` node is a direct semantic match for the GT `Application` node. The boundary `Android Host App` is semantically equivalent to `Global` for the top-level application container."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK (In Scope::Apache HttpClient Instrumentation::CountingInputStream",
+        "QAPM SDK (In Scope::Apache HttpClient Instrumentation::ResponseEntityWrapper\\n(CountingEntity",
+        "QAPM SDK (In Scope::Apache HttpClient Instrumentation::ResponseHandlerWrapper",
+        "QAPM SDK (In Scope::Apache HttpClient Instrumentation::TransactionState",
+        "QAPM SDK (In Scope::ConfigManager",
+        "QAPM SDK (In Scope::Logging",
+        "QAPM SDK (In Scope::Sender",
+        "QAPM SDK (In Scope::UploadManager\\n(Scheduling + Upload Processing",
+        "QAPM SDK (In Scope::WorkHandlerManager\\n(HandlerThread + Work Handler + Main Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly decomposed the high-level GT node `QAPM-SDK` into multiple, more detailed components based on the functionalities described in the SRS (e.g., FR-001, FR-005, FR-009). The `QAPM SDK (In Scope::...)` boundary is semantically identical to the GT `QAPM_SDK` boundary."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Collect",
+        "QAPM_SDK::QAPM_Report",
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "predicted_nodes": [
+        "Out of Scope::APM Collection, Storage,\\nReporting Pipeline"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the GT nodes for Collection, Report, and Storage into a single node. It accurately placed them in an `Out of Scope` boundary, which reflects the SRS's explicit statements (sections 1.2, 2.1) that these are outside the specified scope. This is a more precise interpretation than the GT's generic `QAPM_SDK` boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "QAPM_Plugin::Plugin init compile",
+    "QAPM_Plugin::QAPM_Plugin"
+  ],
+  "unmatched_predicted_nodes": [
+    "Android OS / Platform::Connectivity Service",
+    "Android OS / Platform::Context",
+    "Android OS / Platform::HandlerThread/Looper/Handler",
+    "Apache HttpClient (Host App::HttpEntity",
+    "Apache HttpClient (Host App::HttpResponse",
+    "Apache HttpClient (Host App::ResponseHandler",
+    "Global::Network / Remote Endpoint"
+  ]
+}

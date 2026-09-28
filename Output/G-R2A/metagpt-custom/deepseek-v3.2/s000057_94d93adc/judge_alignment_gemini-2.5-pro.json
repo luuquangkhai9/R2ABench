@@ -1,0 +1,62 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Cloudinary\\n- stores audio files\\n- stores images\\n- returns file URLs"
+      ],
+      "predicted_nodes": [
+        "External Systems::Cloudinary"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node correctly identifies the Cloudinary service. The 'External Systems' boundary is a more accurate and specific architectural classification than the generic 'Global' boundary in the GT."
+    },
+    {
+      "gt_nodes": [
+        "Global::PostgreSQL Database\\n- stores users and sounds\\n- stores Cloudinary URL references"
+      ],
+      "predicted_nodes": [
+        "Data Layer::PostgreSQL Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node correctly identifies the PostgreSQL database. Placing it in the 'Data Layer' is standard architectural practice and more accurate than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Express Server\\n- fetches data with Sequelize\\n- serves React frontend\\n- handles backend API requests"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Express Server",
+        "Application Layer::Feed API Service",
+        "Application Layer::Follow Manager",
+        "Application Layer::User/Auth API Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly split the monolithic GT 'Express Server' into more granular services based on APIs mentioned in the PRD (User/Auth, Follow, Feed). All are correctly placed within the 'Application Layer', which is a more precise boundary than the GT's 'Global'."
+    },
+    {
+      "gt_nodes": [
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::API Client",
+        "Presentation Layer::Audio Playback Manager",
+        "Presentation Layer::Cloudinary Client",
+        "Presentation Layer::Config Manager",
+        "Presentation Layer::Form Validation Handler",
+        "Presentation Layer::React UI Components",
+        "Presentation Layer::Redux Store",
+        "Presentation Layer::Waveform Controller"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI accurately decomposed the monolithic 'React Frontend' into its key functional components as described in the PRD (Redux, Cloudinary client, playback management, etc.). All components are correctly placed in the 'Presentation Layer', which is the standard boundary for a client-side application and an improvement over the GT's 'Global' boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::External Systems"
+  ]
+}

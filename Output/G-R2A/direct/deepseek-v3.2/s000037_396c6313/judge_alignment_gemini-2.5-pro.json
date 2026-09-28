@@ -1,0 +1,123 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Scan Targets::container"
+      ],
+      "predicted_nodes": [
+        "Core Scanning Engine::Container Scanner"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents the target of a scan ('container'), while the AI node represents the component that performs the scan ('Container Scanner'), which is a direct functional mapping. The AI's 'Core Scanning Engine' boundary is a more specific and appropriate architectural layer than the GT's 'Scan Targets'."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::iac"
+      ],
+      "predicted_nodes": [
+        "Core Scanning Engine::IaC Scanner"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'iac' scan target directly corresponds to the AI's 'IaC Scanner' component. The 'Core Scanning Engine' boundary is a standard and correct placement for this scanning logic, an improvement over the GT's 'Scan Targets' grouping."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::image"
+      ],
+      "predicted_nodes": [
+        "Core Scanning Engine::Image Scanner"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'image' scan target is functionally realized by the AI's 'Image Scanner' component. The AI's placement within the 'Core Scanning Engine' is a logical and standard architectural choice, superior to the GT's target-based grouping."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::containerd"
+      ],
+      "predicted_nodes": [
+        "External Systems::Containerd Runtime"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the containerd runtime dependency. The boundaries 'Infrastructure and Input Backends' and 'External Systems' are semantically equivalent and correct."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::docker"
+      ],
+      "predicted_nodes": [
+        "External Systems::Docker Runtime"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the Docker runtime dependency. The boundaries 'Infrastructure and Input Backends' and 'External Systems' are semantically equivalent and correct."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::dockerfile",
+        "Infrastructure and Input Backends::kubernetes"
+      ],
+      "predicted_nodes": [
+        "External Systems::IaC Input Files"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated specific IaC input types from the GT into a single, more general 'IaC Input Files' node. The boundaries 'Infrastructure and Input Backends' and 'External Systems' are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::plugin"
+      ],
+      "predicted_nodes": [
+        "Plugin & SDK Layer::Python Example Plugin",
+        "Plugin & SDK Layer::Plugin Registry"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly decomposed the general 'plugin' concept from the GT into a specific example plugin mentioned in the PRD (FR-006) and a logical 'Plugin Registry' component. Placing them in the 'Plugin & SDK Layer' is more architecturally sound than the vague 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::runner"
+      ],
+      "predicted_nodes": [
+        "Runner & Execution Environment::veinmind-runner Image",
+        "Runner & Execution Environment::Parallel Container\\nExecution"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI split the abstract 'runner' node into its constituent parts described in the PRD: the runner image and its parallel execution model. The 'Runner & Execution Environment' boundary is specific and correct, an improvement over the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "SDK::interact system",
+        "SDK::plugin system"
+      ],
+      "predicted_nodes": [
+        "Plugin & SDK Layer::veinmind-sdk / libveinmind"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the detailed aspects of the SDK from the GT into a single, identifiable component 'veinmind-sdk / libveinmind'. The boundaries 'SDK' and 'Plugin & SDK Layer' are semantically equivalent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Infrastructure and Input Backends::tarball",
+    "Scan Targets::cluster"
+  ],
+  "unmatched_predicted_nodes": [
+    "Core Scanning Engine::Report Generator",
+    "Core Scanning Engine::Scan Orchestrator",
+    "Data Layer::IaC Alert Reports",
+    "Data Layer::Malicious File Reports",
+    "Data Layer::Scan Metadata",
+    "External Systems::Container Registry\\n(DockerHub/Registry/Harbor",
+    "Security & Authorization::Docker Auth Router",
+    "Security & Authorization::Plugin Action Classifier",
+    "User Interface Layer::CLI Interface",
+    "User Interface Layer::Quick-Start Script\\n(run.sh"
+  ]
+}

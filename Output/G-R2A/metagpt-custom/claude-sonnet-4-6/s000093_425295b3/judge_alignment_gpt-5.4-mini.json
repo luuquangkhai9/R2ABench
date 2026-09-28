@@ -1,0 +1,62 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::User Application"
+      ],
+      "predicted_nodes": [
+        "External Input Layer::UserApplication\n(External Control App"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the external user application that provides control input to the system. The boundary differs in naming, but it is semantically consistent with an external input layer."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::VMT Manager\nC#"
+      ],
+      "predicted_nodes": [
+        "Management Layer::VmtManager\n(Motion Tracking Coordinator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the VMT Manager responsible for receiving external input and coordinating manager-side processing. The layer attribution is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::VMT Driver\nC++"
+      ],
+      "predicted_nodes": [
+        "Driver Layer::VmtDriver\n(OpenVR-Compatible Driver Artifact"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the VMT Driver artifact that integrates with OpenVR/SteamVR. The driver layer attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenVR\nSteamVR Runtime"
+      ],
+      "predicted_nodes": [
+        "Runtime Integration Layer::SteamVR / OpenVR Runtime\n(OpenVRRuntime"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the SteamVR/OpenVR runtime dependency. The runtime integration layer is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::Legacy Controller Binding\nmycontroller JSON",
+        "Virtual Motion Tracker::OpenVR Path Constants\n/user/body and /client_info"
+      ],
+      "predicted_nodes": [
+        "Configuration / Binding Layer::MyControllerBindingDocument\n(Legacy JSON Binding: mycontroller)\nsend_count | handshake_count | msg_len"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node correctly covers the legacy binding document, but it incorrectly merges unrelated shared-memory synchronization metadata (send_count, handshake_count, msg_len) and path constants into the binding/configuration node. This is a boundary/context confusion."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

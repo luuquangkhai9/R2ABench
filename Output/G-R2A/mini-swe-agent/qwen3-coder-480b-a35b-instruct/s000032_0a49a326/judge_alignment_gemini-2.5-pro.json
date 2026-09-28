@@ -1,0 +1,82 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::BPMN, Form\nand Rule Defs",
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::Process\nRuntime"
+      ],
+      "predicted_nodes": [
+        "Activiti 7 Platform::Activiti Runtime Bundle"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the detailed parts of the Runtime Bundle from the GT into a single, logical component. The predicted boundary 'Activiti 7 Platform' is a high-level abstraction that is semantically equivalent to the GT's more nested 'Activiti Cloud Infrastructure::Activiti Cloud Application' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Audit\nService"
+      ],
+      "predicted_nodes": [
+        "Activiti 7 Platform::Audit Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match in functionality. The predicted boundary 'Activiti 7 Platform' is semantically equivalent to the GT's 'Activiti Cloud Infrastructure::Activiti Cloud Application'."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Query\nService"
+      ],
+      "predicted_nodes": [
+        "Activiti 7 Platform::Query Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match in functionality. The predicted boundary 'Activiti 7 Platform' is semantically equivalent to the GT's 'Activiti Cloud Infrastructure::Activiti Cloud Application'."
+    },
+    {
+      "gt_nodes": [
+        "Global::SSO/IDM\n(Keycloak"
+      ],
+      "predicted_nodes": [
+        "Activiti 7 Platform::Keycloak"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The components match, but a severe boundary error occurred. The GT correctly places Keycloak in 'Global' as an external dependency. The AI incorrectly placed it inside the 'Activiti 7 Platform' boundary, implying it is a component of the core system rather than an external identity provider."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Gateway"
+      ],
+      "predicted_nodes": [
+        "Activiti 7 Platform::NGINX Ingress Controller"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are functionally equivalent, as the PRD mentions using an NGINX ingress controller for gateway functionality. The predicted boundary 'Activiti 7 Platform' is a reasonable semantic equivalent to the GT's 'Activiti Cloud Infrastructure'."
+    },
+    {
+      "gt_nodes": [
+        "Global::Client"
+      ],
+      "predicted_nodes": [
+        "External Systems::Authenticated User",
+        "External Systems::Cluster Operator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly split the generic 'Client' actor from the GT into more specific user roles ('Authenticated User', 'Cluster Operator') that are explicitly defined in the PRD. The predicted boundary 'External Systems' is semantically equivalent to the GT's 'Global' boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Customer\nLogic",
+    "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Out of the\nBox Services",
+    "Activiti Cloud Infrastructure::Activiti Cloud Application::Notification\nService",
+    "Activiti Cloud Infrastructure::Config Maps\n(Kubernetes",
+    "Activiti Cloud Infrastructure::Registry\n(Kubernetes"
+  ],
+  "unmatched_predicted_nodes": [
+    "Activiti 7 Platform::Spring Boot Application"
+  ]
+}

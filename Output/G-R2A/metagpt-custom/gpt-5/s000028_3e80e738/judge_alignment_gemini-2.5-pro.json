@@ -1,0 +1,81 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "API Gateway Account::API Gateway"
+      ],
+      "predicted_nodes": [
+        "API Gateway Account Layer::API Gateway (REST API",
+        "API Gateway Account Layer::API Deployment/Stage",
+        "API Gateway Account Layer::CallbackURL Output"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT API Gateway node is represented by the gateway, deployment stage, and callback output in the predicted nodes within the correct boundary context."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::auth-function"
+      ],
+      "predicted_nodes": [
+        "API Gateway Account Layer::API Gateway Cognito Authorizer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The auth-function in GT semantically corresponds to the Cognito Authorizer function attached to the API Gateway."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::Cognito-authorizer::hello-function"
+      ],
+      "predicted_nodes": [
+        "API Gateway Account Layer::WhoAmI Method",
+        "API Gateway Account Layer::ECS Proxy Method"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The 'hello-function' corresponds to the target endpoints returning user info (WhoAmI) and proxying requests (ECS Proxy) behind the authorizer."
+    },
+    {
+      "gt_nodes": [
+        "Cognito Account::Cognito User Pool"
+      ],
+      "predicted_nodes": [
+        "Cognito Account Layer::Cognito User Pool",
+        "Cognito Account Layer::Cognito User-Pool Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Cognito User Pool is expanded into the User Pool and its specific Client configuration in the predicted nodes, remaining in the correct account layer."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "API Gateway Account::Calls hello/GET with id_token in headers",
+    "API Gateway Account::Returns hello plus user name when authorized",
+    "Cognito Account::Cognito Hosted UI",
+    "Global::User"
+  ],
+  "unmatched_predicted_nodes": [
+    "CloudFormation Provisioning Layer::CloudFormation Templates",
+    "Cognito Account Layer::Cognito Identity Pool",
+    "External Systems (Surrounding/Out of Scope::AWS Cognito (Service",
+    "External Systems (Surrounding/Out of Scope::AWS IAM (Service",
+    "External Systems (Surrounding/Out of Scope::AWS VPC (Service",
+    "External Systems (Surrounding/Out of Scope::Amazon API Gateway (Service",
+    "External Systems (Surrounding/Out of Scope::DNS Delegation & Certificate Services",
+    "External Systems (Surrounding/Out of Scope::Data-Vault Stacks",
+    "External Systems (Surrounding/Out of Scope::SPID Hub",
+    "Installation Interface Layer::AWS CLI & Operator Environment",
+    "Installation Interface Layer::Installation Scripts/Inputs",
+    "Integration Layer::API Gateway VPC Link",
+    "Integration Layer::Network Load Balancer (ECS Backend",
+    "Network Access Layer::Amazon SQS",
+    "Network Access Layer::Endpoint Security Group",
+    "Network Access Layer::Existing VPC",
+    "Network Access Layer::Existing VPC::Existing Subnets",
+    "Network Access Layer::SQS VPC Interface Endpoint",
+    "Security Layer::Authenticated IAM Role",
+    "Security Layer::Identity-Pool Role Attachment",
+    "Security Layer::Unauthenticated IAM Role"
+  ]
+}

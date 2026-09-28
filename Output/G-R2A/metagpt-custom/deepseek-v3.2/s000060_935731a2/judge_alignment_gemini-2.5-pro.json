@@ -1,0 +1,54 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "External Systems::Kafka"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact functional match for the event stream transport. The AI's `External Systems` boundary is semantically equivalent and more descriptive for an external message bus like Kafka than the GT's generic `Global` boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Databases / Filestores\\nElastic, Hadoop, etc."
+      ],
+      "predicted_nodes": [
+        "External Systems::Downstream Event Consumers"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the external systems that consume and persist the audit events, as mentioned in the PRD ('Downstream services may consume the published events and persist them'). The AI's node name is a more accurate description of the role. The `External Systems` boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\\nserver",
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "predicted_nodes": [
+        "Application Interface::Auditing API",
+        "Core Components::AuditEvent Generator",
+        "Core Components::Configuration Handler",
+        "Infrastructure Implementations::Element Filter Implementation",
+        "Infrastructure Implementations::Kafka Event Publisher",
+        "Infrastructure Implementations::Logging Implementation",
+        "Integration Abstractions::AuditEventElementFilter Interface",
+        "Integration Abstractions::EventPublisher Interface",
+        "Integration Abstractions::LogProvider Interface"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT uses multiple high-level nodes to represent the auditor library. The AI correctly interprets these as a single conceptual component and splits it into a detailed, layered architecture (API, Core Components, Abstractions, Implementations) that accurately reflects the PRD. The AI's use of internal boundaries is a correct refinement of the GT's more generic `Global` or application-specific boundaries."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::AuditorEventConfig",
+    "Global::External Systems",
+    "Global::Integrating Application"
+  ]
+}

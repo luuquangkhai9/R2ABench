@@ -1,0 +1,215 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "TokenCard Contracts\\nHigh Level Architecture::Consumer Contract Wallet v3.3.1\\nLibrary Contract\\nwallet.sol",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Ethereum Network::Consumer Contract Wallet\\n\\n  - Holds user ETH\\n  - Holds ERC20 tokens\\n  - Resolves contracts via ENS"
+      ],
+      "reasoning": "The predicted consumer wallet node covers the core wallet responsibilities: holding user ETH/ERC20 assets and resolving supporting contracts via ENS. The boundary is semantically equivalent despite the broader 'Ethereum Network' package."
+    },
+    {
+      "gt_node": "TokenCard Contracts\\nHigh Level Architecture::Gnosis MultiSig\\ncryptofloat.tokencard.eth",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node corresponds to the Gnosis MultiSig / cryptofloat.tokencard.eth component."
+    },
+    {
+      "gt_node": "TokenCard Contracts\\nHigh Level Architecture::Proxy.sol",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node represents the proxy contract."
+    },
+    {
+      "gt_node": "TokenCard Contracts\\nHigh Level Architecture::TKN Holder Contract\\nholder.sol",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Ethereum Network::TKN Holder Contract\\n\\n  - Burns eligible tokens\\n    (per whitelist burnability"
+      ],
+      "reasoning": "The predicted TKN Holder Contract matches the GT holder contract responsibility around token burning based on whitelist burnability."
+    },
+    {
+      "gt_node": "TokenCard Contracts\\nHigh Level Architecture::controller.sol",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Ethereum Network::Controller Contract\\n\\n  - adminCount : uint256\\n  - controllerCount : uint256\\n  - Transact(method, params)\\n  - Transfer"
+      ],
+      "reasoning": "The predicted controller contract covers controller interactions and exposes the same controller counters and transaction/transfer capabilities."
+    },
+    {
+      "gt_node": "TokenCard Contracts\\nHigh Level Architecture::license.sol",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node explicitly corresponds to the licence contract."
+    },
+    {
+      "gt_node": "TokenCard Contracts\\nHigh Level Architecture::oracle.sol",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Ethereum Network::Oracle / Rate Provider\\n\\n  - Exchange-rate data\\n    for wallet token operations"
+      ],
+      "reasoning": "The predicted oracle/rate-provider node covers exchange-rate functionality associated with the GT oracle contract."
+    },
+    {
+      "gt_node": "TokenCard Contracts\\nHigh Level Architecture::tokenWhitelist.sol",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Ethereum Network::Token Whitelist\\n\\n  - Token exchange rates\\n  - Loadability flag\\n  - Burnability flag"
+      ],
+      "reasoning": "The predicted token whitelist node captures the whitelist responsibilities present in the GT node, including exchange rates, loadability, and burnability."
+    },
+    {
+      "gt_node": "TokenCard Contracts\\nHigh Level Architecture::walletCache.sol",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node covers the wallet cache component."
+    },
+    {
+      "gt_node": "TokenCard Contracts\\nHigh Level Architecture::walletDeployer.sol",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node covers the wallet deployer component."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Ethereum Network::Consumer Contract Wallet\\n\\n  - Holds user ETH\\n  - Holds ERC20 tokens\\n  - Resolves contracts via ENS",
+      "grounded": true,
+      "reference_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::Consumer Contract Wallet v3.3.1\\nLibrary Contract\\nwallet.sol"
+      ],
+      "reasoning": "This is grounded in the GT consumer wallet concept and matches its main responsibilities."
+    },
+    {
+      "predicted_node": "Ethereum Network::Controller Contract\\n\\n  - adminCount : uint256\\n  - controllerCount : uint256\\n  - Transact(method, params)\\n  - Transfer",
+      "grounded": true,
+      "reference_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::controller.sol"
+      ],
+      "reasoning": "This corresponds directly to the GT controller contract and adds supported binding behaviors consistent with the PRD."
+    },
+    {
+      "predicted_node": "Ethereum Network::ENS\\n(Ethereum Name Service",
+      "grounded": true,
+      "reference_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::wallet.sol",
+        "TokenCard Contracts\\nHigh Level Architecture::controller.sol",
+        "TokenCard Contracts\\nHigh Level Architecture::license.sol",
+        "TokenCard Contracts\\nHigh Level Architecture::oracle.sol",
+        "TokenCard Contracts\\nHigh Level Architecture::tokenWhitelist.sol"
+      ],
+      "reasoning": "ENS is a required supporting concept in the PRD and is semantically grounded even though there is no standalone GT node named ENS."
+    },
+    {
+      "predicted_node": "Ethereum Network::Gas Tank\\n(Gas-Payment ETH on Owner Address",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The PRD mentions Gas Tank as a data concept and boundary, but there is no corresponding GT architecture node in the provided manual node list."
+    },
+    {
+      "predicted_node": "Ethereum Network::Oracle / Rate Provider\\n\\n  - Exchange-rate data\\n    for wallet token operations",
+      "grounded": true,
+      "reference_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::oracle.sol"
+      ],
+      "reasoning": "This is a grounded semantic match to the GT oracle contract."
+    },
+    {
+      "predicted_node": "Ethereum Network::TKN Holder Contract\\n\\n  - Burns eligible tokens\\n    (per whitelist burnability",
+      "grounded": true,
+      "reference_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::TKN Holder Contract\\nholder.sol"
+      ],
+      "reasoning": "This directly matches the GT TKN Holder Contract."
+    },
+    {
+      "predicted_node": "Ethereum Network::Token Whitelist\\n\\n  - Token exchange rates\\n  - Loadability flag\\n  - Burnability flag",
+      "grounded": true,
+      "reference_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::tokenWhitelist.sol"
+      ],
+      "reasoning": "This is grounded in the GT token whitelist contract."
+    },
+    {
+      "predicted_node": "Global::Ethereum Network",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is a broad contextual boundary rather than a specific GT architecture node, and it does not correspond to a distinct manual component."
+    },
+    {
+      "predicted_node": "Global::Go Contract Bindings\\n\\n  - Call()      [read-only]\\n  - Transact()  [paid]\\n  - Transfer()  [paid default]",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The PRD mentions generated Go bindings, but no GT node in the provided manual architecture list represents a bindings component, so this is an extra generated concept."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::Consumer Contract Wallet v3.3.1\\nLibrary Contract\\nwallet.sol"
+      ],
+      "predicted_nodes": [
+        "Ethereum Network::Consumer Contract Wallet\\n\\n  - Holds user ETH\\n  - Holds ERC20 tokens\\n  - Resolves contracts via ENS"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same wallet component; package naming differs but is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::TKN Holder Contract\\nholder.sol"
+      ],
+      "predicted_nodes": [
+        "Ethereum Network::TKN Holder Contract\\n\\n  - Burns eligible tokens\\n    (per whitelist burnability"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same token holder contract responsibility with consistent boundary placement."
+    },
+    {
+      "gt_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::controller.sol"
+      ],
+      "predicted_nodes": [
+        "Ethereum Network::Controller Contract\\n\\n  - adminCount : uint256\\n  - controllerCount : uint256\\n  - Transact(method, params)\\n  - Transfer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The controller contract maps directly; the predicted boundary is acceptable as a semantic equivalent."
+    },
+    {
+      "gt_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::oracle.sol"
+      ],
+      "predicted_nodes": [
+        "Ethereum Network::Oracle / Rate Provider\\n\\n  - Exchange-rate data\\n    for wallet token operations"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The oracle/rate-provider node preserves the GT oracle role and is correctly placed at an equivalent boundary."
+    },
+    {
+      "gt_nodes": [
+        "TokenCard Contracts\\nHigh Level Architecture::tokenWhitelist.sol"
+      ],
+      "predicted_nodes": [
+        "Ethereum Network::Token Whitelist\\n\\n  - Token exchange rates\\n  - Loadability flag\\n  - Burnability flag"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted whitelist node matches the GT token whitelist component and its attributes."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "TokenCard Contracts\\nHigh Level Architecture::Gnosis MultiSig\\ncryptofloat.tokencard.eth",
+    "TokenCard Contracts\\nHigh Level Architecture::Proxy.sol",
+    "TokenCard Contracts\\nHigh Level Architecture::license.sol",
+    "TokenCard Contracts\\nHigh Level Architecture::walletCache.sol",
+    "TokenCard Contracts\\nHigh Level Architecture::walletDeployer.sol"
+  ],
+  "unmatched_predicted_nodes": [
+    "Ethereum Network::Gas Tank\\n(Gas-Payment ETH on Owner Address",
+    "Global::Ethereum Network",
+    "Global::Go Contract Bindings\\n\\n  - Call()      [read-only]\\n  - Transact()  [paid]\\n  - Transfer()  [paid default]"
+  ]
+}

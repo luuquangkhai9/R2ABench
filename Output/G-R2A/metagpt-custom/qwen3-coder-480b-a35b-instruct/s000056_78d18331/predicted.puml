@@ -1,0 +1,64 @@
+@startuml
+title Host Scanner Component Deployment Diagram
+
+' Define Nodes for Deployment Context
+node "Kubernetes Node" {
+    database "Filesystem" as fs #lightblue [
+        /etc
+        /run
+        /var/lib
+    ]
+
+    node "Container Runtime" as runtime {
+        [containerd]
+        [CRI-O]
+    }
+
+    node "Kubelet" as kubelet
+}
+
+node "Host Scanner System" {
+    package "API Layer" {
+        component "HTTP Server" as http_server
+    }
+
+    package "Business Logic Layer" {
+        component "CNI Directory Resolver" as cni_resolver
+        component "JSON Sanitizer" as json_sanitizer
+    }
+
+    package "Data Access Layer" {
+        component "Runtime Config Reader" as config_reader
+    }
+}
+
+cloud "HTTP Clients" as clients
+
+' Define Interfaces
+interface "HTTP API" as api_interface
+
+' Define Connections
+http_server --> api_interface : exposes
+api_interface --> clients : serves host info
+http_server --> clients : returns 404 for unknown endpoints
+
+http_server --> cni_resolver : requests CNI directory resolution
+cni_resolver --> http_server : returns resolved CNI paths
+
+http_server --> json_sanitizer : sends control-plane JSON input
+json_sanitizer --> http_server : returns sanitized JSON output
+
+cni_resolver --> config_reader : reads runtime config
+json_sanitizer --> config_reader : reads control-plane data
+
+config_reader --> fs : accesses
+cni_resolver --> kubelet : gets process args
+config_reader --> runtime : gets runtime data
+
+note right of http_server
+  Supports conditional compilation
+  via go build tags for provider-specific
+  logic at build time
+end note
+
+@enduml

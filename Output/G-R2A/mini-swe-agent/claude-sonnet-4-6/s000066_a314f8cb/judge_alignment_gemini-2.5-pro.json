@@ -1,0 +1,80 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Browser Clients::Client Browser\\nPlayer 1",
+        "Browser Clients::Client Browser\\nPlayer 2",
+        "Browser Clients::Client Browser\\nPlayer 3"
+      ],
+      "predicted_nodes": [
+        "Browser Client Layer::Three.js Game Client",
+        "Browser Client Layer::Asset Loader",
+        "Browser Client Layer::WebSocket Client",
+        "Browser Client Layer::Message Handler\\n(JSON [action, data?",
+        "Browser Client Layer::Heartbeat Manager\\n(ping/pong, 60s interval",
+        "Browser Client Layer::Reconnect Manager",
+        "Browser Client Layer::Room Manager\\n(room ID, player ID, ship index"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's nodes represent multiple instances of the game client. The AI has correctly identified the client-side and decomposed its functionality into specific modules (Three.js, WebSocket, Reconnect, etc.) as described in the PRD. The boundary 'Browser Clients' and 'Browser Client Layer' are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\\nErlang"
+      ],
+      "predicted_nodes": [
+        "Game Server Layer (Erlang/OTP)::Master Game Server",
+        "Game Server Layer (Erlang/OTP)::Room Session Manager",
+        "Game Server Layer (Erlang/OTP)::Server List Provider",
+        "Game Server Layer (Erlang/OTP)::WebSocket Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the Master Server and further decomposed it into its logical responsibilities (Room Management, WebSocket Handling, etc.) which are explicitly mentioned in the PRD. The boundary 'Erlang / OTP Game Server Cluster' and 'Game Server Layer (Erlang/OTP)' are semantically correct for the master server."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Slave\\nErlang"
+      ],
+      "predicted_nodes": [
+        "Fault Tolerance Layer (Erlang/OTP)::Replica / Slave Node"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the replica/slave server. The AI placed it in a dedicated 'Fault Tolerance Layer'. While the GT grouped it with the master in a 'Cluster', creating a specific layer for fault tolerance is a valid and arguably more descriptive architectural decision. It is not a boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Static Web Tier::Web Server\\nGame assets, HTML, CSS, JS"
+      ],
+      "predicted_nodes": [
+        "Web Server Layer::Static Asset Server\\n(HTML, CSS, JS, Images"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "An exact match for the web server that serves static assets. The boundaries 'Static Web Tier' and 'Web Server Layer' are semantically identical."
+    },
+    {
+      "gt_nodes": [
+        "Global::DNS"
+      ],
+      "predicted_nodes": [
+        "Network Infrastructure::DNS / Load Balancer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the DNS component and accurately enhanced it with 'Load Balancer' as mentioned in the PRD. Placing it in a 'Network Infrastructure' layer is a more refined architectural practice than leaving it in 'Global', and is therefore correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Erlang / OTP Game Server Cluster"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Browser Client Layer",
+    "Global::Fault Tolerance Layer (Erlang/OTP)",
+    "Global::Game Server Layer (Erlang/OTP)",
+    "Global::Network Infrastructure",
+    "Global::Web Server Layer"
+  ]
+}

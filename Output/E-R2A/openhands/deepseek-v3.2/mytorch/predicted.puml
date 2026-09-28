@@ -1,0 +1,213 @@
+@startuml
+!define RECTANGLE rectangle
+!define COMPONENT component
+!define DATABASE database
+!define INTERFACE interface
+!define NODE node
+!define FRAME frame
+!define ARROW ->
+
+title MyTorch System Architecture Diagram
+
+skinparam componentStyle uml2
+skinparam monochrome false
+skinparam backgroundColor #F8F8F8
+skinparam defaultFontSize 14
+skinparam defaultFontName Helvetica
+
+' ========== MAIN SYSTEM COMPONENTS ==========
+frame "MyTorch Deep Learning System" as system {
+
+  ' ========== VISUAL FRONT END ==========
+  package "Visual Front End" as frontend {
+    component "Main Interface" as main_ui
+    component "Configuration Interface" as config_ui
+    component "Training Interface" as training_ui
+    component "Inference Interface" as inference_ui
+    component "Guidance & Help System" as help_ui
+    
+    main_ui -down-> config_ui : "navigates to"
+    main_ui -down-> training_ui : "navigates to"
+    main_ui -down-> inference_ui : "navigates to"
+    help_ui -right-> main_ui : "provides help for"
+    help_ui -right-> config_ui : "provides help for"
+    help_ui -right-> training_ui : "provides help for"
+    help_ui -right-> inference_ui : "provides help for"
+  }
+
+  ' ========== SYSTEM BACK END ==========
+  package "System Back End" as backend {
+    component "Model Initialization Service" as model_init
+    component "Model Training Service" as training_service
+    component "Task Inference Service" as inference_service
+    component "Model Management Service" as model_mgmt
+    
+    training_service -down-> model_init : "uses"
+    inference_service -down-> model_mgmt : "uses"
+  }
+
+  ' ========== MYTORCH/NNE FRAMEWORK EXTENSION ==========
+  package "MyTorch/NNE Framework Extension" as framework {
+    component "GPU Acceleration Module" as gpu_module
+    component "Weight Initialization Module" as weight_init
+    component "Classic Models Library" as classic_models
+    component "Preset Datasets Module" as preset_datasets
+    component "Data Loading Engine" as data_loader
+    component "Model Training Engine" as training_engine
+    component "Model Inference Engine" as inference_engine
+    
+    gpu_module -right-> training_engine : "accelerates"
+    gpu_module -right-> inference_engine : "accelerates"
+    weight_init -down-> training_engine : "initializes"
+    classic_models -down-> model_init : "provides"
+    preset_datasets -down-> data_loader : "provides"
+    data_loader -up-> training_engine : "feeds data to"
+    data_loader -up-> inference_engine : "feeds data to"
+  }
+
+  ' ========== DATABASE LAYER ==========
+  database "SQLite Local Database" as sqlite_db {
+    folder "Models Storage" as models_storage
+    folder "Training Datasets" as training_datasets
+    folder "Training Logs" as training_logs
+    folder "Inference Logs" as inference_logs
+    folder "System Configuration" as system_config
+    
+    models_storage -down-> training_logs
+    models_storage -down-> inference_logs
+  }
+
+  ' ========== BACKUP & RECOVERY ==========
+  component "Backup & Recovery Service" as backup_service {
+    component "Automatic Backup" as auto_backup
+    component "Manual Recovery" as manual_recovery
+    component "Automatic Recovery" as auto_recovery
+  }
+
+  ' ========== MONITORING & FAULT HANDLING ==========
+  package "Monitoring & Fault Handling" as monitoring {
+    component "Fault Monitoring" as fault_monitor
+    component "Resource Monitoring" as resource_monitor
+    component "Error Reporting" as error_reporting
+    
+    fault_monitor -right-> error_reporting : "triggers"
+  }
+}
+
+' ========== EXTERNAL COMPONENTS ==========
+cloud "GPU Hardware" as gpu_hardware
+cloud "Preset Datasets Sources" as dataset_sources [
+  CIFAR
+  ImageNet
+  COCO
+  Fashion-MNIST
+  IMDB
+  Penn Treebank
+  SVHN
+  EMNIST
+]
+
+' ========== USER INTERACTION ==========
+actor "Deep Learning Beginner" as beginner_user
+actor "Developer/Team Member" as developer_user
+actor "Project Participant/Stakeholder" as stakeholder_user
+
+' ========== DATA FLOWS ==========
+beginner_user --> main_ui : "uses"
+developer_user --> config_ui : "configures"
+developer_user --> training_ui : "monitors"
+beginner_user --> inference_ui : "requests inference"
+stakeholder_user --> help_ui : "accesses documentation"
+
+' ========== FRONTEND-BACKEND COMMUNICATION ==========
+config_ui --> model_init : "sends configuration"
+training_ui --> training_service : "starts/stops training"
+training_ui --> training_service : "requests real-time feedback"
+inference_ui --> inference_service : "sends inference requests"
+inference_ui --> inference_service : "receives results"
+
+' ========== BACKEND-FRAMEWORK INTEGRATION ==========
+model_init --> classic_models : "creates from"
+training_service --> training_engine : "executes training"
+inference_service --> inference_engine : "executes inference"
+model_mgmt --> models_storage : "manages"
+
+' ========== FRAMEWORK-DATABASE INTERACTION ==========
+training_engine --> training_logs : "logs training metrics"
+inference_engine --> inference_logs : "logs inference results"
+data_loader --> training_datasets : "loads from"
+classic_models --> models_storage : "saves to"
+
+' ========== GPU INTEGRATION ==========
+gpu_module --> gpu_hardware : "utilizes"
+gpu_hardware --> gpu_module : "provides acceleration"
+
+' ========== DATASET INTEGRATION ==========
+preset_datasets --> dataset_sources : "downloads from"
+dataset_sources --> preset_datasets : "provides datasets"
+
+' ========== DATABASE BACKUP FLOWS ==========
+sqlite_db --> auto_backup : "backed up by"
+auto_backup --> sqlite_db : "recovers to"
+manual_recovery --> sqlite_db : "restores to"
+
+' ========== MONITORING INTEGRATION ==========
+training_engine --> fault_monitor : "reports exceptions to"
+inference_engine --> fault_monitor : "reports exceptions to"
+gpu_module --> resource_monitor : "provides metrics to"
+training_engine --> resource_monitor : "provides metrics to"
+error_reporting --> help_ui : "sends troubleshooting suggestions"
+
+' ========== SECURITY & PRIVACY ==========
+component "Security & Privacy Layer" as security_layer {
+  component "Data Encryption" as encryption
+  component "Access Control" as access_control
+  component "Privacy Compliance" as privacy_compliance
+}
+
+security_layer -up-> sqlite_db : "protects"
+security_layer -up-> models_storage : "protects"
+security_layer -up-> training_datasets : "protects"
+
+' ========== LEGEND ==========
+legend right
+  <b>Component Types:</b>
+  |===
+  |<color:#0000FF>Blue</color>|Front End Interfaces
+  |<color:#00AA00>Green</color>|Back End Services
+  |<color:#FF6600>Orange</color>|Framework Components
+  |<color:#9900CC>Purple</color>|Database & Storage
+  |<color:#FF0000>Red</color>|Supporting Services
+  |===
+endlegend
+
+note right of sqlite_db
+  <b>SQLite Database Stores:</b>
+  • Deep Learning Models
+  • Training Datasets
+  • Training Logs
+  • Inference Logs
+  • System Configuration
+  • User History
+end note
+
+note bottom of framework
+  <b>Framework Extension Capabilities:</b>
+  • GPU Acceleration
+  • Weight Initialization Methods
+  • Classic Models (ResNet, VGG, Transformer)
+  • Preset Datasets
+  • Data Loading & Augmentation
+  • Model Training & Inference
+end note
+
+note top of monitoring
+  <b>Monitoring & Fault Handling:</b>
+  • Gradient Explosion Detection
+  • Memory Overflow Monitoring
+  • GPU Utilization Tracking
+  • Automatic Training Termination
+  • Error Reporting & Troubleshooting
+end note
+
+@enduml

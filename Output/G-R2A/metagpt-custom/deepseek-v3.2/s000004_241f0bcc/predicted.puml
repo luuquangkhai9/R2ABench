@@ -1,0 +1,115 @@
+@startuml
+
+package "Presentation Layer" {
+    component "Web Browser" as browser {
+        component "ClientApp" as clientApp {
+            component "NgRx Store" as ngrxStore
+            component "Service Wrappers" as serviceWrappers {
+                component "Evacuee Service"
+                component "Incident-Task Service"
+                component "Organization Service"
+                component "Referral Service"
+                component "Registration Service"
+                component "Notification Queue Service"
+            }
+            component "Controlled-list Loader" as listLoader
+            component "Notifier Component" as notifier
+            component "Session-Expired Page"
+            component "Login Page"
+            component "Cookie Service"
+            component "Watchdog Timer"
+            component "Redirect Guard"
+            component "Module Import Diagnostic"
+            component "Role-based Routing"
+            component "HTTP Interceptor"
+        }
+    }
+}
+
+package "API Layer" {
+    node "Backend Server" as backendServer {
+        component "Backend API" as backendApi {
+            component "Evacuee Controller"
+            component "Incident-Task Controller"
+            component "Organization Controller"
+            component "Referral Controller"
+            component "Registration Controller"
+            component "Development Back Door"
+            component "Proxy Configuration"
+        }
+    }
+}
+
+package "Domain Layer" {
+    component "Domain Services" as domainServices {
+        component "Evacuee Domain Service"
+        component "Incident-Task Domain Service"
+        component "Organization Domain Service"
+        component "Referral Domain Service"
+        component "Registration Domain Service"
+    }
+}
+
+package "Data Access Layer" {
+    component "DbContext" as dbContext
+}
+
+package "Persistence Layer" {
+    database "MS SQL Database" as sqlDatabase
+    component "Repository SQL Scripts" as sqlScripts
+}
+
+cloud "External Systems" {
+    component "SiteMinder" as siteminder
+}
+
+' User Roles (represented as actors)
+actor "Volunteer" as volunteer
+actor "Local Authority" as localAuthority
+actor "Provincial Admin" as provincialAdmin
+actor "Database Operator" as dbOperator
+
+' Key Dependencies
+clientApp --> backendApi : "HTTP requests"
+HTTP Interceptor --> backendApi : "Intercepts requests"
+serviceWrappers --> ngrxStore : "Updates/reads cached data"
+serviceWrappers --> backendApi : "Calls API endpoints"
+listLoader --> ngrxStore : "Populates store"
+listLoader --> backendApi : "Fetches controlled lists"
+notifier --> Notification Queue Service : "Observes notifications"
+Cookie Service --> browser : "Gets/sets cookies"
+Watchdog Timer --> HTTP Interceptor : "Resets on activity"
+Redirect Guard --> Role-based Routing : "Controls navigation"
+Role-based Routing --> Login Page : "Redirects unauthorized"
+Module Import Diagnostic --> clientApp : "Monitors loading"
+
+backendApi --> domainServices : "Delegates business logic"
+domainServices --> dbContext : "Uses for data operations"
+dbContext --> sqlDatabase : "Persists/retrieves data"
+sqlScripts --> sqlDatabase : "Maintains data"
+Registration Service --> backendApi : "PDF collection"
+
+' External Dependencies
+browser --> clientApp : "Hosts application"
+backendApi --> siteminder : "Authenticates requests (production)"
+backendApi --> Development Back Door : "Bypasses auth (development)"
+Role-based Routing --> siteminder : "Respects authentication"
+Cookie Service --> siteminder : "Manages auth cookies"
+
+' Development token flow
+Development Back Door --> Role-paired Token : "Generates"
+Role-paired Token --> backendApi : "Authenticates (development)"
+
+' User interactions
+volunteer --> clientApp : "Uses"
+localAuthority --> clientApp : "Uses"
+provincialAdmin --> clientApp : "Uses"
+dbOperator --> sqlScripts : "Executes"
+
+' Environment context
+note right of backendServer
+  Production: SiteMinder auth
+  Development: Back door + tokens
+end note
+
+@enduml

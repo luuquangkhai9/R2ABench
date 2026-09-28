@@ -1,0 +1,225 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "LwM2M Blockchain Platform::Blockchain Network\\nEthereum / Web3j",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Blockchain Integration::Web3j Client",
+        "Global::Ethereum Node"
+      ],
+      "reasoning": "The GT node represents the blockchain connectivity layer composed of Web3j and an Ethereum node. The predicted nodes separately cover these responsibilities."
+    },
+    {
+      "gt_node": "LwM2M Blockchain Platform::BootstrapStore\\nSmart Contract",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Blockchain Integration::Smart Contract Interface",
+        "Blockchain Integration::Client Data Converter"
+      ],
+      "reasoning": "The GT smart contract node is covered by the contract interface, while the converter covers the fixed-width client/bootstrap field transformation responsibility associated with contract interactions."
+    },
+    {
+      "gt_node": "LwM2M Blockchain Platform::External Applications\\nusing LwM2M",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node clearly represents the external application actors using LwM2M."
+    },
+    {
+      "gt_node": "LwM2M Blockchain Platform::LwM2M Bootstrap Server",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node explicitly covers the bootstrap server role."
+    },
+    {
+      "gt_node": "LwM2M Blockchain Platform::LwM2M Client\\nDevice 1",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::LwM2M Devices"
+      ],
+      "reasoning": "The predicted devices aggregate the individual LwM2M client/device concepts, including Device 1."
+    },
+    {
+      "gt_node": "LwM2M Blockchain Platform::LwM2M Client\\nDevice 2",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::LwM2M Devices"
+      ],
+      "reasoning": "The predicted devices aggregate the individual LwM2M client/device concepts, including Device 2."
+    },
+    {
+      "gt_node": "LwM2M Blockchain Platform::LwM2M Server\\nLeshan server component",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "LwM2M Processing::Leshan Node Parser"
+      ],
+      "reasoning": "The predicted Leshan-related node covers the LwM2M/Leshan server-side processing concept, though it is narrower than the GT server component."
+    },
+    {
+      "gt_node": "LwM2M Blockchain Platform::Management Web UI",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node represents a management web UI; the predicted architecture is backend-focused."
+    },
+    {
+      "gt_node": "LwM2M Blockchain Platform::Secure API\\nAuthenticated HTTP endpoints",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Spring Backend::JWT Utility",
+        "Spring Backend::User Management Controller",
+        "Spring Backend::User Service"
+      ],
+      "reasoning": "The secure API responsibility is covered by the authenticated controller flow and token validation utility, along with the user service behind the protected endpoints."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Blockchain Integration::Client Data Converter",
+      "grounded": true,
+      "reference_nodes": [
+        "LwM2M Blockchain Platform::BootstrapStore\\nSmart Contract"
+      ],
+      "reasoning": "This corresponds to the contract field encoding/decoding responsibility used for client/bootstrap data exchange."
+    },
+    {
+      "predicted_node": "Blockchain Integration::Smart Contract Interface",
+      "grounded": true,
+      "reference_nodes": [
+        "LwM2M Blockchain Platform::BootstrapStore\\nSmart Contract"
+      ],
+      "reasoning": "This directly matches the smart contract integration concept in the GT."
+    },
+    {
+      "predicted_node": "Blockchain Integration::Web3j Client",
+      "grounded": true,
+      "reference_nodes": [
+        "LwM2M Blockchain Platform::Blockchain Network\\nEthereum / Web3j"
+      ],
+      "reasoning": "This matches the Web3j connectivity portion of the blockchain network node."
+    },
+    {
+      "predicted_node": "Global::Ethereum Node",
+      "grounded": true,
+      "reference_nodes": [
+        "LwM2M Blockchain Platform::Blockchain Network\\nEthereum / Web3j"
+      ],
+      "reasoning": "This matches the Ethereum node portion of the blockchain network concept."
+    },
+    {
+      "predicted_node": "Global::LwM2M Devices",
+      "grounded": true,
+      "reference_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Client\\nDevice 1",
+        "LwM2M Blockchain Platform::LwM2M Client\\nDevice 2"
+      ],
+      "reasoning": "This aggregates the individual LwM2M client/device concepts present in the GT."
+    },
+    {
+      "predicted_node": "LwM2M Processing::JSON Deserializer",
+      "grounded": true,
+      "reference_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Server\\nLeshan server component"
+      ],
+      "reasoning": "This is grounded in the GT's LwM2M server-side processing responsibilities, specifically JSON handling and node parsing."
+    },
+    {
+      "predicted_node": "LwM2M Processing::Leshan Node Parser",
+      "grounded": true,
+      "reference_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Server\\nLeshan server component"
+      ],
+      "reasoning": "This directly reflects the Leshan/LwM2M parsing responsibility in the GT."
+    },
+    {
+      "predicted_node": "Spring Backend::JWT Utility",
+      "grounded": true,
+      "reference_nodes": [
+        "LwM2M Blockchain Platform::Secure API\\nAuthenticated HTTP endpoints"
+      ],
+      "reasoning": "This is grounded in the token-based access control required for secure API endpoints."
+    },
+    {
+      "predicted_node": "Spring Backend::User Management Controller",
+      "grounded": true,
+      "reference_nodes": [
+        "LwM2M Blockchain Platform::Secure API\\nAuthenticated HTTP endpoints"
+      ],
+      "reasoning": "This matches the authenticated HTTP endpoint layer in the GT."
+    },
+    {
+      "predicted_node": "Spring Backend::User Service",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT does not include a corresponding user service node; this appears to be an inferred backend detail not represented in the manual diagram."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Blockchain Network\\nEthereum / Web3j"
+      ],
+      "predicted_nodes": [
+        "Blockchain Integration::Web3j Client",
+        "Global::Ethereum Node"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT blockchain network node is split into two semantically aligned predicted nodes, and the boundary attribution remains within the same blockchain/network context."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::BootstrapStore\\nSmart Contract"
+      ],
+      "predicted_nodes": [
+        "Blockchain Integration::Smart Contract Interface",
+        "Blockchain Integration::Client Data Converter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The smart contract responsibility is represented by the contract interface, while the data converter captures contract field encoding/decoding; both stay within the blockchain integration boundary."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Client\\nDevice 1",
+        "LwM2M Blockchain Platform::LwM2M Client\\nDevice 2"
+      ],
+      "predicted_nodes": [
+        "Global::LwM2M Devices"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Two GT client/device nodes are aggregated into a single generalized devices node, which remains semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Server\\nLeshan server component"
+      ],
+      "predicted_nodes": [
+        "LwM2M Processing::JSON Deserializer",
+        "LwM2M Processing::Leshan Node Parser"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Leshan server component is split into parser/deserializer responsibilities, and the package attribution remains within the LwM2M processing context."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Secure API\\nAuthenticated HTTP endpoints"
+      ],
+      "predicted_nodes": [
+        "Spring Backend::JWT Utility",
+        "Spring Backend::User Management Controller"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The secure API is decomposed into authentication utility and controller responsibilities, both correctly placed in the Spring backend boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "LwM2M Blockchain Platform::External Applications\\nusing LwM2M",
+    "LwM2M Blockchain Platform::LwM2M Bootstrap Server",
+    "LwM2M Blockchain Platform::Management Web UI"
+  ],
+  "unmatched_predicted_nodes": [
+    "Spring Backend::User Service"
+  ]
+}

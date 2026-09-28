@@ -1,0 +1,58 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::C#",
+        "Global::Python"
+      ],
+      "predicted_nodes": [
+        "Global::External Systems",
+        "External Systems::LoggingProducerClients"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The GT nodes specify concrete languages (C#, Python) acting as logging producers. The predicted nodes correctly abstract these into a generic external system client for logging producers, matching the system requirements."
+    },
+    {
+      "gt_nodes": [
+        "Global::HypnoLog\nServer"
+      ],
+      "predicted_nodes": [
+        "Global::Server Environment",
+        "Server Environment::Node.js Runtime",
+        "Server Environment::Node.js Runtime::Server Layer::ClientConnectionManager",
+        "Server Environment::Node.js Runtime::Server Layer::ErrorMessageHandler",
+        "Server Environment::Node.js Runtime::Server Layer::ExpressServer",
+        "Server Environment::Node.js Runtime::Server Layer::JSONBodyParser",
+        "Server Environment::Node.js Runtime::Server Layer::LoggingRouter",
+        "Server Environment::Node.js Runtime::Server Layer::SocketIOServer",
+        "Server Environment::Node.js Runtime::Server Layer::StaticFileServer",
+        "Server Environment::Node.js Runtime::Server Layer::StatusEndpoint"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents the entire backend server. The AI successfully split this into the detailed Node.js runtime and its internal architectural components (Express, Socket.IO, routers). The boundary categorization is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::In Browser Log"
+      ],
+      "predicted_nodes": [
+        "Global::Browser Environment",
+        "External Systems::WebBrowser",
+        "Browser Environment::Browser Client Layer::BrowserClient",
+        "Browser Environment::Browser Client Layer::SchemaValidator",
+        "Browser Environment::Browser Client Layer::VisualizerDispatcher",
+        "Browser Environment::Browser Client Layer::VisualizerModules",
+        "Browser Environment::Browser Client Layer::WindowManager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents the browser-side UI/visualization component. The AI appropriately split it into explicit browser environment modules such as the client, schema validator, window manager, and visualizers. The boundary attributions accurately reflect the browser scope."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::HTTP"
+  ],
+  "unmatched_predicted_nodes": []
+}

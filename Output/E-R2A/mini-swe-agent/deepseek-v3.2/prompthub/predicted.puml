@@ -1,0 +1,58 @@
+@startuml  
+title PromptHub - Layered Architecture  
+  
+package "Presentation Layer" {  
+  component "Web Browser" as Browser  
+  component "Frontend (Vue.js)" as Frontend  
+}  
+  
+package "Application Layer" {  
+  component "Django Backend" as Django  
+  component "User Service" as UserService  
+  component "Artwork Service" as ArtworkService  
+  component "Review Service" as ReviewService  
+  component "Social Service" as SocialService  
+  component "Notification Service" as NotificationService  
+}  
+  
+package "Algorithm Layer" {  
+  component "Recommendation Engine" as Recommendation  
+  component "ML Models" as MLModels  
+}  
+  
+package "Data Layer" {  
+  component "SQLite Database" as Database  
+  component "File Storage" as FileStorage  
+}  
+  
+Browser -- 
+Frontend -- 
+  
+Django -- 
+Django -- 
+Django -- 
+Django -- 
+Django -- 
+  
+UserService -- 
+ArtworkService -- 
+ReviewService -- 
+SocialService -- 
+NotificationService -- 
+  
+ArtworkService -- 
+UserService -- 
+  
+Django -- 
+Recommendation -- 
+Recommendation -- 
+  
+actor "Visitor" as Visitor  
+actor "User" as User  
+actor "Admin" as Admin  
+  
+Visitor -- 
+User -- 
+Admin -- 
+  
+@enduml 

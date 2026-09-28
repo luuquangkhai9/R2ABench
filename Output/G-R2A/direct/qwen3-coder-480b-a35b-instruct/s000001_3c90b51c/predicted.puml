@@ -1,0 +1,108 @@
+@startuml
+!define RECTANGLE class
+
+RECTANGLE "Caller-Facing Allocation API" as CallerAPI {
+  +submit(tallyData, method, config)
+  +receive(result OR error)
+}
+
+RECTANGLE "Allocation Method Contract" as AllocMethodContract {
+  +process(protectedTallyView, config)
+  +return(result OR SeatAllocationException)
+}
+
+RECTANGLE "Tally Filtering API" as TallyFilterAPI {
+  +transform(tallyData)
+  +return(filteredTally)
+}
+
+RECTANGLE "Result Decoration API" as ResultDecoratorAPI {
+  +decorate(result)
+  +return(decoratedResult)
+}
+
+RECTANGLE "Command-Line Launcher" as CLILauncher {
+  +listMethods()
+  +acceptInput(candidateVotes OR file)
+  +selectMethod(methodName)
+  +setProcessorProperties(props)
+  +generateOutput(options)
+}
+
+RECTANGLE "Supported Allocation Methods" as AllocMethods {
+  +Majority Methods
+  +Ranked Methods
+  +Equal Proportions (Huntington-Hill)
+  +Largest Remainder Methods
+  +Highest Averages Methods
+}
+
+RECTANGLE "Configuration Workflow" as ConfigWorkflow {
+  +configure(tallyFilters, tieBreakRules, decorators)
+  +execute(allocationMethod)
+  +produce(finalResult)
+}
+
+RECTANGLE "XML Handling" as XMLHandler {
+  +Tally.fromXML()
+  +loadConfigurationFromXML()
+  +saveResultToXML()
+}
+
+RECTANGLE "Seat Allocation Engine" as AllocEngine {
+  +applyMethod(method, tally, props)
+  +calculateDivisors(variantRules)
+  +computeAbsoluteMajorityThreshold(potentialVotes)
+}
+
+RECTANGLE "Error Handling" as ErrorHandler {
+  +throw(SeatAllocationException)
+}
+
+RECTANGLE "Data Objects" as DataObjects {
+  +Tally
+  +Candidate
+  +Properties
+  +Result
+}
+
+' Relationships
+CallerAPI --> AllocEngine : uses
+AllocEngine --> AllocMethodContract : implements
+AllocEngine --> TallyFilterAPI : uses
+AllocEngine --> ResultDecoratorAPI : uses
+CLILauncher --> AllocEngine : invokes
+CLILauncher --> XMLHandler : uses
+AllocEngine --> AllocMethods : selects
+ConfigWorkflow --> AllocEngine : configures
+AllocEngine --> DataObjects : processes
+ErrorHandler --> AllocEngine : handles errors
+XMLHandler --> DataObjects : loads/saves
+
+note right of CallerAPI
+  Java developers use this API
+  to integrate seat allocation
+end note
+
+note right of CLILauncher
+  Command-line users interact
+  with JSeats through this
+  launcher interface
+end_note
+
+note bottom of AllocMethods
+  Includes all documented
+  electoral method families
+end_note
+
+note top of ConfigWorkflow
+  Supports configurable
+  pre/post processing steps
+end_note
+
+note right of XMLHandler
+  Handles XML-based
+  input/output operations
+end_note
+
+@enduml

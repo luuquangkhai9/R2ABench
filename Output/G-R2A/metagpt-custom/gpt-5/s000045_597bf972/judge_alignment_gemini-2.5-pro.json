@@ -1,0 +1,86 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Application"
+      ],
+      "predicted_nodes": [
+        "Android Device::Host Android App"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The 'Application' node in GT corresponds directly to the 'Host Android App' node in the predicted list. The boundary change from Global to Android Device is semantically compatible."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "predicted_nodes": [
+        "Android Device::Host Android App::APM SDK Component",
+        "Android Device::Host Android App::APM SDK Component::Platform/Environment Adapters Layer::NetworkConnectivityChecker",
+        "Android Device::Host Android App::APM SDK Component::Scheduling Layer::MainThreadHandlerProvider",
+        "Android Device::Host Android App::APM SDK Component::Scheduling Layer::WorkHandlerManager",
+        "Android Device::QAPM Configuration Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The overarching 'QAPM-SDK' node in GT is split into the core SDK component and its general supporting operational layers (scheduling, environment checking, and configuration) in the prediction. Boundaries correctly attribute them to the SDK."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Collect"
+      ],
+      "predicted_nodes": [
+        "Android Device::Host Android App::APM SDK Component::HTTP Instrumentation Layer::ContentBufferingEntityWrapper",
+        "Android Device::Host Android App::APM SDK Component::HTTP Instrumentation Layer::CountingInputStreamCache",
+        "Android Device::Host Android App::APM SDK Component::HTTP Instrumentation Layer::ResponseHandlerInstrumentor",
+        "Android Device::Host Android App::APM SDK Component::HTTP Instrumentation Layer::TransactionStateRegistry"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The 'QAPM_Collect' node in GT (responsible for gathering APM data) is detailed into specific HTTP instrumentation and wrapping nodes in the prediction. Their boundaries accurately place them within the SDK context."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "predicted_nodes": [
+        "Android Device::Configured Sender",
+        "Android Device::Host Android App::APM SDK Component::Sender Integration Layer::SenderAdapter",
+        "Android Device::Host Android App::APM SDK Component::Upload Processing Layer::ContextParamDeriver",
+        "Android Device::Host Android App::APM SDK Component::Upload Processing Layer::FileContentReader",
+        "Android Device::Host Android App::APM SDK Component::Upload Processing Layer::UploadCoordinator",
+        "Android Device::Host Android App::APM SDK Component::Upload Processing Layer::UploadDirectoryAccessor",
+        "Android Device::Host Android App::APM SDK Component::Upload Processing Layer::UploadResultHandler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The 'QAPM_Report' module handles submitting and uploading data. In the prediction, this translates to the detailed Upload Processing Layer and Sender Integration Layer nodes. The boundary matching remains logical and consistent."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "predicted_nodes": [
+        "Android Device::Host Android App::APM SDK Component::Upload Processing Layer::StoragePopper",
+        "Android Device::Local Upload Directory / File System"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT storage module is matched with the StoragePopper (which handles popping stored data) and the local file system representation. These capture the storage abstractions detailed in the PRD."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "QAPM_Plugin::Plugin init compile",
+    "QAPM_Plugin::QAPM_Plugin"
+  ],
+  "unmatched_predicted_nodes": [
+    "Android Device::Android Context",
+    "Android Device::Android Handler/HandlerThread/Looper APIs",
+    "Android Device::Apache HttpClient::HttpEntity",
+    "Android Device::Apache HttpClient::HttpResponse",
+    "Android Device::Apache HttpClient::ResponseHandler",
+    "Android Device::Network Connectivity Environment",
+    "Global::Android Device"
+  ]
+}

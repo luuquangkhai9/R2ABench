@@ -1,0 +1,88 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web Browser Client",
+        "Presentation Layer::Web Browser Client::React Application",
+        "Presentation Layer::Web Browser Client::React Application::Authentication Views",
+        "Presentation Layer::Web Browser Client::React Application::Authentication Views::Sign-in View",
+        "Presentation Layer::Web Browser Client::React Application::Authentication Views::Sign-up View",
+        "Presentation Layer::Web Browser Client::React Application::Content Retrieval Client",
+        "Presentation Layer::Web Browser Client::React Application::Error Display",
+        "Presentation Layer::Web Browser Client::React Application::Scene Renderer",
+        "Presentation Layer::Web Browser Client::React Application::Scene Renderer::A-Frame Components",
+        "Presentation Layer::Web Browser Client::React Application::Scene Renderer::aframe-react Components",
+        "Presentation Layer::Web Browser Client::React Application::Shared Credential Handler",
+        "Presentation Layer::Web Browser Client::React-Router",
+        "Presentation Layer::Web Browser Client::jQuery"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT 'WEB CLIENT' node is correctly identified and expanded by the AI into a detailed set of components based on the PRD. The AI's use of the 'Presentation Layer' boundary is a more accurate and standard architectural classification than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>WEB SERVER</u></b>\\n\\n* Node\\n* Express\\n* DigitalOcean (Deployment"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Node.js Web Server",
+        "Application Layer::Node.js Web Server::Authentication Service",
+        "Application Layer::Node.js Web Server::Authentication Service::bcrypt-nodejs Password Verifier",
+        "Application Layer::Node.js Web Server::Content Service",
+        "Application Layer::Node.js Web Server::Express HTTP Router",
+        "Application Layer::Node.js Web Server::User Controller"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT 'WEB SERVER' node is correctly matched and decomposed by the AI into its logical services as described in the PRD (Authentication, Content, etc.). The 'Application Layer' boundary is a standard and appropriate classification for the backend logic."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>DATABASE</u></b>\\n\\n* MariaDB\\n  * Users\\n  * Likes\\n  * Photos\\n  * Comments"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Database",
+        "Data Layer::Database::MariaDB Database",
+        "Data Layer::Database::MariaDB Database::Comments Table",
+        "Data Layer::Database::MariaDB Database::Likes Table",
+        "Data Layer::Database::MariaDB Database::Photos Table",
+        "Data Layer::Database::MariaDB Database::Users Table",
+        "Data Layer::User Model Interface"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT 'DATABASE' node is correctly expanded by the AI into the specific database technology, its tables, and the data access abstraction ('User Model Interface'). The 'Data Layer' boundary is the correct architectural placement for these components."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b>REDIS CACHE</b>"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Cache Service",
+        "Data Layer::Cache Service::Redis-style Cache"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The 'REDIS CACHE' node from the GT is correctly identified and represented as a 'Cache Service' by the AI. Placing the cache within the 'Data Layer' is a standard and correct architectural decision."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b>AWS S3</b>"
+      ],
+      "predicted_nodes": [
+        "External Systems::Image Storage Service",
+        "External Systems::Image Storage Service::AWS S3-style Storage"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT 'AWS S3' node is correctly identified as an 'Image Storage Service'. The AI's classification under the 'External Systems' boundary is accurate, as S3 is a third-party service external to the core application."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "External Systems::Content Source API"
+  ]
+}

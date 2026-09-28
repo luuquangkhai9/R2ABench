@@ -1,0 +1,80 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::TraceLeft\\nCLI and library tracer"
+      ],
+      "predicted_nodes": [
+        "User Space::TraceLeft CLI",
+        "User Space::Userspace Tracer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT node representing the userspace application is correctly split by the AI into the CLI and the tracer library, as described in the PRD. The 'User Space' boundary is more accurate and descriptive than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Event Handler eBPF Programs::Default Handler Probes",
+        "Event Handler eBPF Programs::Handler Probe\\nhandle_syscall_write",
+        "Event Handler eBPF Programs::Process Specific\\nHandler Probes"
+      ],
+      "predicted_nodes": [
+        "Kernel Space::Handler Programs"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the detailed GT nodes for specific eBPF handler probes into a single, more abstract 'Handler Programs' node. The 'Kernel Space' boundary is semantically equivalent and appropriate for 'Event Handler eBPF Programs'."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Kprobe / Kretprobe\\nother traced calls",
+        "Main eBPF Program::Kprobe\\nentry probe",
+        "Main eBPF Program::Kretprobe\\nreturn probe"
+      ],
+      "predicted_nodes": [
+        "Kernel Space::eBPF Probes"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the specific main eBPF probes from the GT into a single abstract 'eBPF Probes' node. The 'Kernel Space' boundary is a correct placement, as 'Main eBPF Program' also resides in the kernel."
+    },
+    {
+      "gt_nodes": [
+        "Global::Perf Event Map\\nshared event map"
+      ],
+      "predicted_nodes": [
+        "Kernel Space::Perf Event Channel"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are semantically identical, referring to the communication channel from kernel to userspace. The AI's placement in 'Kernel Space' is more precise than GT's 'Global', as the perf event mechanism is a kernel feature."
+    },
+    {
+      "gt_nodes": [
+        "Linux Kernel Functions::inet_csk_accept",
+        "Linux Kernel Functions::sys_open",
+        "Linux Kernel Functions::sys_write"
+      ],
+      "predicted_nodes": [
+        "Global::Linux Kernel"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly abstracted the specific traced kernel functions from the GT into a single 'Linux Kernel' node, which represents the operating environment. The 'Global' boundary is appropriate for this external system."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Prog ID Map\\npid to id",
+    "Main eBPF Program::Prog Map\\npid to fd",
+    "Main eBPF Program::Prog Maps\\nhandler mappings",
+    "Main eBPF Program::Ret Prog Map\\npid to fd"
+  ],
+  "unmatched_predicted_nodes": [
+    "Configuration & Metadata::Event Configuration",
+    "Configuration & Metadata::Handler Generator",
+    "Linux Kernel::Kprobe/Kretprobe",
+    "Linux Kernel::eBPF Support",
+    "User Space::CLI Operator",
+    "User Space::Event Consumer"
+  ]
+}

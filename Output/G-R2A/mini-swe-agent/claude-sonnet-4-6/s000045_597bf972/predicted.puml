@@ -1,0 +1,96 @@
+@startuml
+skinparam componentStyle rectangle
+skinparam rectangleBorderColor #444444
+skinparam backgroundColor #FAFAFA
+
+title QAPM Android SDK - Architecture Diagram
+
+rectangle "Host Android Application" as HostApp #LightYellow {
+    component "[Application Code]" as AppCode
+}
+
+rectangle "QAPM SDK" as QAPMSDK #LightBlue {
+
+    rectangle "Handler & Scheduling Layer" as SchedulingLayer {
+        component "QAPMHandlerThread\n(Default Handlers)" as HandlerThreadComp
+        component "WorkHandlerManager\n(Background HandlerThread\n+ Work Handler)" as WorkHandlerMgr
+        component "MainThreadHandler" as MainHandler
+    }
+
+    rectangle "Upload Processing Layer" as UploadLayer {
+        component "UploadScheduler\n(Async Work Dispatcher)" as UploadScheduler
+        component "NetworkConnectivityGate" as NetworkGate
+        component "UploadFileProcessor\n(File Enumerate & Read)" as FileProcessor
+        component "UploadParameterBuilder\n(bParam / cParam Derivation)" as ParamBuilder
+        component "UploadSenderCallback\n(Success: Delete / Failure: Log)" as SenderCallback
+    }
+
+    rectangle "HTTP Instrumentation Layer" as HTTPLayer {
+        component "ResponseHandlerWrapper\n(Transaction-Aware Delegation)" as ResponseHandlerWrapper
+        component "ResponseEntityWrapper\n(CountingInputStream / writeTo)" as ResponseEntityWrapper
+        component "TransactionState" as TxnState
+    }
+
+    rectangle "Configuration & Storage Layer" as ConfigLayer {
+        component "QAPMConfigManager\n(Sender Configuration)" as ConfigMgr
+        component "LocalUploadStorage\n(Upload File Store)" as LocalStorage
+        component "ForcedSendStorageHandler\n(Storage Pop for Forced Send)" as ForcedSendHandler
+    }
+}
+
+rectangle "Android Platform APIs" as AndroidPlatform #LightGreen {
+    component "Handler / HandlerThread / Looper" as AndroidScheduling
+    component "Android Context API" as AndroidContext
+    component "Network Connectivity API" as AndroidNetwork
+    component "File System API" as AndroidFS
+}
+
+rectangle "Apache HttpClient" as ApacheHttp #LightGray {
+    component "ResponseHandler" as ApacheResponseHandler
+    component "HttpResponse" as ApacheHttpResponse
+    component "HttpEntity" as ApacheHttpEntity
+}
+
+rectangle "Remote Reporting Endpoint" as RemoteEndpoint #LightCoral {
+    component "[Upload / Data Sender]" as DataSender
+}
+
+AppCode --> WorkHandlerMgr : submit runnable / upload request
+AppCode --> UploadScheduler : trigger upload processing
+
+WorkHandlerMgr --> AndroidScheduling : creates HandlerThread\n& binds Looper
+HandlerThreadComp --> AndroidScheduling : main-thread handler (Looper.main)
+MainHandler --> AndroidScheduling : main looper dispatch
+
+UploadScheduler --> WorkHandlerMgr : post async work
+UploadScheduler --> NetworkGate : check connectivity
+NetworkGate --> AndroidNetwork : query network state
+NetworkGate --> FileProcessor : proceed if connected
+NetworkGate --> ForcedSendHandler : pop storage if forced send
+
+ForcedSendHandler --> LocalStorage : pop pending stored data
+
+FileProcessor --> LocalStorage : enumerate upload files
+FileProcessor --> AndroidFS : read file content (bParam)
+FileProcessor --> ParamBuilder : pass bParam
+
+ParamBuilder --> AndroidContext : derive cParam from Context
+ParamBuilder --> SenderCallback : submit (bParam, cParam) to sender
+
+SenderCallback --> ConfigMgr : retrieve configured sender
+SenderCallback --> DataSender : send parameters
+SenderCallback --> LocalStorage : delete file on success
+SenderCallback --> "[Log]" as Logger : log failure on error
+
+ResponseHandlerWrapper --> TxnState : inspect / instrument transaction state
+ResponseHandlerWrapper --> ApacheResponseHandler : delegate handleResponse()
+ResponseHandlerWrapper --> ApacheHttpResponse : process HTTP response
+
+ResponseEntityWrapper --> ApacheHttpEntity : wrap underlying entity
+ResponseEntityWrapper --> ApacheHttpEntity : delegate writeTo(OutputStream)
+
+ConfigMgr ..> UploadLayer : provides sender config
+
+DataSender --> RemoteEndpoint : HTTP upload
+
+@enduml

@@ -1,0 +1,177 @@
+﻿@startuml
+!define RECTANGLE class
+!define DATABASE rectangle
+!define STORAGE rectangle
+!define CACHE rectangle
+!define QUEUE rectangle
+
+skinparam componentStyle rectangle
+skinparam defaultTextAlignment center
+
+title ITAS - Intelligent Text Annotation System Architecture
+
+package "Frontend Layer" {
+  RECTANGLE VueClient [
+    == Vue.js Client
+    ==
+    - Vue 3.0
+    - Ant Design Vue
+    - User Interfaces
+  ]
+}
+
+package "API Gateway Layer" {
+  RECTANGLE Nginx [
+    == Nginx
+    ==
+    - Reverse Proxy
+    - Load Balancing
+  ]
+  
+  RECTANGLE SpringGateway [
+    == Spring Gateway
+    ==
+    - API Routing
+    - Authentication
+    - Authorization
+  ]
+}
+
+package "Application Layer" {
+  package "Annotation Subsystem" {
+    RECTANGLE AnnotationService [
+      == Annotation Service
+      ==
+      - Project Management
+      - Task Assignment
+      - Annotation Processing
+    ]
+  }
+  
+  package "Mining Subsystem" {
+    RECTANGLE MiningService [
+      == Mining Service
+      ==
+      - Document Upload
+      - Format Conversion
+      - Information Extraction
+    ]
+  }
+  
+  RECTANGLE UserService [
+    == User Service
+    ==
+    - User Management
+    - Role Management
+    - Authentication
+  ]
+  
+  RECTANGLE DocumentService [
+    == Document Service
+    ==
+    - Document Management
+    - Metadata Handling
+  ]
+}
+
+package "Integration Layer" {
+  RECTANGLE GPTRest [
+    == GPT API
+    ==
+    - Entity Annotation
+    - Model Invocation
+  ]
+  
+  RECTANGLE BERTRest [
+    == BERT Service
+    ==
+    - Paragraph Modeling
+  ]
+}
+
+package "Data Layer" {
+  DATABASE MySQL [
+    == MySQL Database
+    ==
+    - Structured Records
+    - User Data
+    - Project Data
+    - Task Data
+  ]
+  
+  STORAGE Minio [
+    == Minio Storage
+    ==
+    - Document Storage
+    - Object Storage
+  ]
+  
+  CACHE Redis [
+    == Redis Cache
+    ==
+    - Session Cache
+    - Performance Cache
+  ]
+  
+  QUEUE RabbitMQ [
+    == RabbitMQ
+    ==
+    - Async Processing
+    - Message Queue
+    - File Conversion
+  ]
+}
+
+package "Deployment Layer" {
+  rectangle Docker [
+    == Docker Containers
+    ==
+    - Containerization
+    - Environment Consistency
+  ]
+  
+  rectangle TencentCloud [
+    == Tencent Cloud
+    ==
+    - Cloud Hosting
+    - Public Access
+  ]
+}
+
+VueClient --> Nginx : HTTP/HTTPS
+Nginx --> SpringGateway : Forward Requests
+SpringGateway --> AnnotationService : Route API
+SpringGateway --> MiningService : Route API
+SpringGateway --> UserService : Route API
+SpringGateway --> DocumentService : Route API
+
+AnnotationService --> MySQL : Store/Retrieve Data
+MiningService --> MySQL : Store/Retrieve Data
+UserService --> MySQL : Store/Retrieve Data
+DocumentService --> MySQL : Store/Retrieve Data
+
+AnnotationService --> Minio : Store Documents
+MiningService --> Minio : Access Documents
+DocumentService --> Minio : Manage Objects
+
+AnnotationService --> Redis : Cache Operations
+MiningService --> Redis : Cache Operations
+UserService --> Redis : Cache Operations
+
+AnnotationService --> GPTRest : Entity Models
+MiningService --> GPTRest : Entity Mining
+MiningService --> BERTRest : Paragraph Models
+
+DocumentService --> RabbitMQ : Queue Tasks
+RabbitMQ --> DocumentService : Process Results
+
+Docker --> AnnotationService : Containerize
+Docker --> MiningService : Containerize
+Docker --> UserService : Containerize
+Docker --> DocumentService : Containerize
+Docker --> SpringGateway : Containerize
+
+TencentCloud --> Docker : Host
+
+@enduml
+

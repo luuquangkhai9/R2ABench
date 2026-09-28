@@ -1,0 +1,388 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::Internet",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Internal Network"
+      ],
+      "reasoning": "The predicted global/internal-network node captures the overall external vs internal deployment context, but it is broader and not a precise equivalent of Internet."
+    },
+    {
+      "gt_node": "Internal Network::DB 1",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::PlugIt Service A::Service Database A\n(MySQL / SQLite"
+      ],
+      "reasoning": "A service-specific database node covers the database responsibility represented by one of the GT database nodes."
+    },
+    {
+      "gt_node": "Internal Network::DB 2",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::PlugIt Service B::Service Database B\n(MySQL / SQLite"
+      ],
+      "reasoning": "A service-specific database node covers the database responsibility represented by one of the GT database nodes."
+    },
+    {
+      "gt_node": "Internal Network::DB 3",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "Only two service database nodes are predicted, so one GT database instance is omitted."
+    },
+    {
+      "gt_node": "Internal Network::DB_Proxy",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::PlugIt Proxy::Proxy Data Store"
+      ],
+      "reasoning": "The proxy-side data store corresponds to the proxy database/storage concept in the GT."
+    },
+    {
+      "gt_node": "Internal Network::PlugIt Proxy",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::PlugIt Proxy"
+      ],
+      "reasoning": "Direct match of the proxy component."
+    },
+    {
+      "gt_node": "Internal Network::PlugIt Service 1",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::PlugIt Service A",
+        "Internal Network::PlugIt Service A::Service Logic A"
+      ],
+      "reasoning": "The predicted service A covers a service instance and its logic, matching one GT service node."
+    },
+    {
+      "gt_node": "Internal Network::PlugIt Service 2",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::PlugIt Service B",
+        "Internal Network::PlugIt Service B::Service Logic B"
+      ],
+      "reasoning": "The predicted service B covers a service instance and its logic, matching one GT service node."
+    },
+    {
+      "gt_node": "Internal Network::PlugIt Service 3",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "Only two service instances are predicted, so one GT service is omitted."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Global::Internal Network",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Internet",
+        "Internal Network::DB 1",
+        "Internal Network::DB 2",
+        "Internal Network::DB 3",
+        "Internal Network::DB_Proxy",
+        "Internal Network::PlugIt Proxy",
+        "Internal Network::PlugIt Service 1",
+        "Internal Network::PlugIt Service 2",
+        "Internal Network::PlugIt Service 3"
+      ],
+      "reasoning": "It represents the overall internal deployment boundary, which is present in the GT, though it is broader than any single GT node."
+    },
+    {
+      "predicted_node": "Global::Mail System\n(Inbound Email",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT context includes example mail processing as workflow behavior, but not a standalone mail system node."
+    },
+    {
+      "predicted_node": "Global::PlugIt API Client",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "This is grounded by the PRD's programmatic PlugIt API client capability, even though there is no explicit GT node for it."
+    },
+    {
+      "predicted_node": "Global::Schema Management",
+      "grounded": true,
+      "reference_nodes": [
+        "Internal Network::DB 1",
+        "Internal Network::DB 2",
+        "Internal Network::DB 3"
+      ],
+      "reasoning": "This corresponds to the database schema/versioned upgrade capability that is implied by the GT service/database setup."
+    },
+    {
+      "predicted_node": "Global::Standalone Proxy Mail Workflow\n(Example / Standalone Scope",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "This matches the PRD's standalone/example proxy mail workflow scope, although no GT node names it explicitly."
+    },
+    {
+      "predicted_node": "Internal Network::PlugIt Proxy",
+      "grounded": true,
+      "reference_nodes": [
+        "Internal Network::PlugIt Proxy"
+      ],
+      "reasoning": "Directly grounded in the GT."
+    },
+    {
+      "predicted_node": "Internal Network::PlugIt Proxy::Proxy API Endpoint\n(API_URL",
+      "grounded": true,
+      "reference_nodes": [
+        "Internal Network::PlugIt Proxy"
+      ],
+      "reasoning": "The proxy API endpoint is a legitimate subcomponent of the proxy architecture."
+    },
+    {
+      "predicted_node": "Internal Network::PlugIt Proxy::Proxy Data Store",
+      "grounded": true,
+      "reference_nodes": [
+        "Internal Network::DB_Proxy"
+      ],
+      "reasoning": "This is the proxy-side data store implied by the GT proxy database node."
+    },
+    {
+      "predicted_node": "Internal Network::PlugIt Service A",
+      "grounded": true,
+      "reference_nodes": [
+        "Internal Network::PlugIt Service 1"
+      ],
+      "reasoning": "A service instance corresponding to one GT service."
+    },
+    {
+      "predicted_node": "Internal Network::PlugIt Service A::Local / Private\nConfig A\n(SQLALCHEMY_URL, secrets",
+      "grounded": true,
+      "reference_nodes": [
+        "Internal Network::PlugIt Service 1"
+      ],
+      "reasoning": "Private/local configuration is supported by the PRD, and this is a plausible subcomponent of a service."
+    },
+    {
+      "predicted_node": "Internal Network::PlugIt Service A::Project Config A\n(API_URL, DEBUG,\nPI_BASE_URL,\nPI_ALLOWED_NETWORKS",
+      "grounded": true,
+      "reference_nodes": [
+        "Internal Network::PlugIt Service 1"
+      ],
+      "reasoning": "Deployment-specific service configuration is directly grounded in the PRD."
+    },
+    {
+      "predicted_node": "Internal Network::PlugIt Service A::Service Database A\n(MySQL / SQLite",
+      "grounded": true,
+      "reference_nodes": [
+        "Internal Network::DB 1"
+      ],
+      "reasoning": "A service database using MySQL or SQLite is explicitly grounded in the PRD."
+    },
+    {
+      "predicted_node": "Internal Network::PlugIt Service A::Service Logic A",
+      "grounded": true,
+      "reference_nodes": [
+        "Internal Network::PlugIt Service 1"
+      ],
+      "reasoning": "Service logic is a reasonable decomposition of the GT service node."
+    },
+    {
+      "predicted_node": "Internal Network::PlugIt Service B",
+      "grounded": true,
+      "reference_nodes": [
+        "Internal Network::PlugIt Service 2"
+      ],
+      "reasoning": "A second service instance corresponding to one GT service."
+    },
+    {
+      "predicted_node": "Internal Network::PlugIt Service B::Local / Private\nConfig B",
+      "grounded": true,
+      "reference_nodes": [
+        "Internal Network::PlugIt Service 2"
+      ],
+      "reasoning": "Private/local configuration is grounded by the PRD."
+    },
+    {
+      "predicted_node": "Internal Network::PlugIt Service B::Project Config B",
+      "grounded": true,
+      "reference_nodes": [
+        "Internal Network::PlugIt Service 2"
+      ],
+      "reasoning": "Deployment-specific service configuration is grounded by the PRD."
+    },
+    {
+      "predicted_node": "Internal Network::PlugIt Service B::Service Database B\n(MySQL / SQLite",
+      "grounded": true,
+      "reference_nodes": [
+        "Internal Network::DB 2"
+      ],
+      "reasoning": "A second service database is grounded by the PRD."
+    },
+    {
+      "predicted_node": "Internal Network::PlugIt Service B::Service Logic B",
+      "grounded": true,
+      "reference_nodes": [
+        "Internal Network::PlugIt Service 2"
+      ],
+      "reasoning": "Service logic is a reasonable decomposition of the GT service node."
+    },
+    {
+      "predicted_node": "PlugIt API Client::Client Initializer\n(main endpoint URL",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "This directly reflects the PRD API client initialization behavior, though no GT node explicitly names it."
+    },
+    {
+      "predicted_node": "PlugIt API Client::Email Sending",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "Email sending is listed as one of the supported API capability categories in the PRD."
+    },
+    {
+      "predicted_node": "PlugIt API Client::Forum Topics",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "Forum topics are explicitly listed in the PRD capability categories."
+    },
+    {
+      "predicted_node": "PlugIt API Client::Organization Info",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "Organization information is explicitly listed in the PRD capability categories."
+    },
+    {
+      "predicted_node": "PlugIt API Client::Project Members",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "Project members are explicitly listed in the PRD capability categories."
+    },
+    {
+      "predicted_node": "PlugIt API Client::Subscription Tags",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "Subscription tags are explicitly listed in the PRD capability categories."
+    },
+    {
+      "predicted_node": "PlugIt API Client::User Info",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "User information is explicitly listed in the PRD capability categories."
+    },
+    {
+      "predicted_node": "Schema Management::Alembic Migration\nUpgrade Files\n(versioned",
+      "grounded": true,
+      "reference_nodes": [
+        "Internal Network::DB 1",
+        "Internal Network::DB 2",
+        "Internal Network::DB 3"
+      ],
+      "reasoning": "Versioned upgrade files for schema evolution are explicitly grounded in the PRD."
+    },
+    {
+      "predicted_node": "Standalone Proxy Mail Workflow\n(Example / Standalone Scope::Auto-Response\nFilter\n(x-auto-response-suppress,\nAuto-Submitted, precedence",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "This corresponds to the PRD's mail auto-response suppression logic in standalone/example scope."
+    },
+    {
+      "predicted_node": "Standalone Proxy Mail Workflow\n(Example / Standalone Scope::Inbound Email\nParser",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "Inbound email parsing is explicitly grounded by the PRD."
+    },
+    {
+      "predicted_node": "Standalone Proxy Mail Workflow\n(Example / Standalone Scope::Mail Handler",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "The mail handler is explicitly part of the PRD standalone workflow."
+    },
+    {
+      "predicted_node": "Standalone Proxy Mail Workflow\n(Example / Standalone Scope::Routing Token\nValidator\n(SHA-512 [30:42",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "Routing token validation with SHA-512 slice [30:42] is explicitly grounded in the PRD."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Internet"
+      ],
+      "predicted_nodes": [
+        "Global::Internal Network"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node captures the environment boundary, but it is not equivalent to the Internet node and shifts the scope from external network to internal network."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB 1",
+        "Internal Network::DB 2",
+        "Internal Network::DB 3"
+      ],
+      "predicted_nodes": [
+        "Internal Network::PlugIt Service A::Service Database A\n(MySQL / SQLite",
+        "Internal Network::PlugIt Service B::Service Database B\n(MySQL / SQLite"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has three database instances, while the prediction models two service databases. This is a partial aggregation/split mismatch but the boundary remains within the internal network/database context."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB_Proxy"
+      ],
+      "predicted_nodes": [
+        "Internal Network::PlugIt Proxy::Proxy Data Store"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Proxy data store is semantically equivalent to the proxy database/storage node."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Proxy"
+      ],
+      "predicted_nodes": [
+        "Internal Network::PlugIt Proxy",
+        "Internal Network::PlugIt Proxy::Proxy API Endpoint\n(API_URL",
+        "Internal Network::PlugIt Proxy::Proxy Data Store"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The proxy is decomposed into subcomponents, which is acceptable and remains within the same boundary."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Service 1"
+      ],
+      "predicted_nodes": [
+        "Internal Network::PlugIt Service A",
+        "Internal Network::PlugIt Service A::Local / Private\nConfig A\n(SQLALCHEMY_URL, secrets",
+        "Internal Network::PlugIt Service A::Project Config A\n(API_URL, DEBUG,\nPI_BASE_URL,\nPI_ALLOWED_NETWORKS",
+        "Internal Network::PlugIt Service A::Service Database A\n(MySQL / SQLite",
+        "Internal Network::PlugIt Service A::Service Logic A"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "One GT service is expanded into a more detailed service decomposition, staying within the same internal network service boundary."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Service 2"
+      ],
+      "predicted_nodes": [
+        "Internal Network::PlugIt Service B",
+        "Internal Network::PlugIt Service B::Local / Private\nConfig B",
+        "Internal Network::PlugIt Service B::Project Config B",
+        "Internal Network::PlugIt Service B::Service Database B\n(MySQL / SQLite",
+        "Internal Network::PlugIt Service B::Service Logic B"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "One GT service is expanded into a more detailed service decomposition, staying within the same internal network service boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Internal Network::DB 3",
+    "Internal Network::PlugIt Service 3"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Mail System\n(Inbound Email"
+  ]
+}

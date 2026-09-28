@@ -1,0 +1,138 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Backend Layer::Flask: Backend Framework"
+      ],
+      "predicted_nodes": [
+        "Application / Backend Layer::AuthService\n(Registration · Login · 2FA\n· OAuth 2.0 · Session · Logout\n· Password Modification",
+        "Application / Backend Layer::DatasetService\n(Dataset CRUD · Association\nwith Models & Evolutions",
+        "Application / Backend Layer::EvolutionRelationshipService\n(Create · Delete · Modify\nEvolution & Layer Reuse\nRelationships · Dataset Association",
+        "Application / Backend Layer::ModelService\n(ONNX & PyTorch Storage\n· Online Editing · Profile CRUD\n· Deletion · Approved-Model\nProtection · Metrics Read",
+        "Application / Backend Layer::PermissionService\n(RBAC: Learner · Contributor\n· Administrator · Permission\nChange Review",
+        "Application / Backend Layer::SearchService\n(Query Processing\n· Filtered Model Results",
+        "Application / Backend Layer::TrainedModelService\n(Trained Model Record Creation\n· Dataset · Code · Label\n· Source Model Linkage",
+        "Application / Backend Layer::UserManagementService\n(View · Update · Delete\nUser Accounts"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Flask backend framework is represented by multiple backend application services in the predicted diagram. Although the granularity differs, they remain within the correct backend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Backend Layer::Netron: Model Conversion & Parsing"
+      ],
+      "predicted_nodes": [
+        "Algorithm Support Layer::ModelParser\n(ONNX File Parsing\n· PyTorch Source Parsing\n· Operator Graph Extraction\n· Layer Reuse Analysis"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The parsing/conversion responsibility matches well, and placing it in algorithm support is semantically consistent with the GT backend Netron parsing component."
+    },
+    {
+      "gt_nodes": [
+        "Backend Layer::SQLAlchemy: ORM Framework"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL\n(Relational Store)\n─────────────\nUsers · Roles · Permissions\nModel Attributes · Metrics\nDataset · Trained Model Records"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node captures persistence concerns but confuses an ORM framework with the physical database/storage layer. This is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Data Presentation Layer::Netron: Graph Representation Language"
+      ],
+      "predicted_nodes": [
+        "Algorithm Support Layer::GraphVisualizationEngine\n(Multi-Model Evolution Topology\n· Two-Model Detail Topology\n· Operator / Parameter Diff"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The visual graph representation responsibility is matched functionally, but the predicted node places it in algorithm support rather than the GT data presentation layer."
+    },
+    {
+      "gt_nodes": [
+        "Data Presentation Layer::RESTful API Design"
+      ],
+      "predicted_nodes": [
+        "Global::External Systems"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No specific RESTful API design node exists in the predicted list. 'Global::External Systems' is too generic and does not semantically reproduce the API design component."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::Netron: Node Drawing Features"
+      ],
+      "predicted_nodes": [
+        "Algorithm Support Layer::GraphVisualizationEngine\n(Multi-Model Evolution Topology\n· Two-Model Detail Topology\n· Operator / Parameter Diff"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Node drawing/graph rendering is functionally close, but the predicted node is placed in algorithm support instead of frontend presentation."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::React Framework"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::ModelBrowserUI\n(Search Results · Attribute View\n· Metrics Display\n· Evolution Topology Graph\n· Evolution Detail Graph",
+        "Presentation Layer::ModelContributionUI\n(ONNX Upload · PyTorch Upload\n· Online PyTorch Editor\n· Profile Read · Modify · Delete",
+        "Presentation Layer::AccountUI\n(Registration · Login · Password\n· Permission Application",
+        "Presentation Layer::EvolutionEditorUI\n(Add / Delete / Modify\nEvolution & Reuse Relations",
+        "Presentation Layer::UserManagementUI\n(User Management · Delete Users\n· Review Permission Applications"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The React frontend framework is decomposed into multiple UI screens. This is a reasonable split within the frontend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::React-Router: Page Navigation"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::ModelBrowserUI\n(Search Results · Attribute View\n· Metrics Display\n· Evolution Topology Graph\n· Evolution Detail Graph",
+        "Presentation Layer::ModelContributionUI\n(ONNX Upload · PyTorch Upload\n· Online PyTorch Editor\n· Profile Read · Modify · Delete",
+        "Presentation Layer::AccountUI\n(Registration · Login · Password\n· Permission Application",
+        "Presentation Layer::EvolutionEditorUI\n(Add / Delete / Modify\nEvolution & Reuse Relations",
+        "Presentation Layer::UserManagementUI\n(User Management · Delete Users\n· Review Permission Applications"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Page navigation is represented implicitly by multiple UI pages. Even though no explicit router node exists, the frontend boundary is preserved."
+    },
+    {
+      "gt_nodes": [
+        "Storage / Database Layer::MySQL: Relational Database"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL\n(Relational Store)\n─────────────\nUsers · Roles · Permissions\nModel Attributes · Metrics\nDataset · Trained Model Records"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct semantic match, and the storage/database boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Storage / Database Layer::Neo4j: Graph Database"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Neo4j\n(Graph Store)\n─────────────\nEvolution Relationships\nTopology Graph Data\nEvolution Details"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct semantic match, and the graph database boundary is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::External Systems",
+    "External Systems::Browser Console",
+    "External Systems::OAuth 2.0 Identity Provider",
+    "External Systems::Python Libraries\n(ONNX / PyTorch",
+    "Security / Cross-Cutting Layer::ConcurrencyController\n(Concurrent Write Coordination\n· Conflict Prevention",
+    "Security / Cross-Cutting Layer::EncryptionService\n(AES/DES Model Encryption at Rest\n· PCI DSS Compliance"
+  ]
+}

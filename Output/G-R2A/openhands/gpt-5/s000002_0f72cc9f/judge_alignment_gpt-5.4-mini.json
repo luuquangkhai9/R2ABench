@@ -1,0 +1,98 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::<b><u>DATABASE</u></b>\\n\\n* MariaDB\\n  * Users\\n  * Likes\\n  * Photos\\n  * Comments"
+      ],
+      "predicted_nodes": [
+        "Global::Relational Database\\n(MariaDB"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the relational database layer storing users, likes, photos, and comments. The naming differs but the architectural boundary is equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "predicted_nodes": [
+        "Global::Client (Browser"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the browser-side client tier. The predicted node is broader, but semantically it matches the GT web client boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "predicted_nodes": [
+        "Client (Browser::Web Client (React::Auth Views\\n(Sign-up, Sign-in",
+        "Client (Browser::Web Client (React::Content Retriever\\n(title-based, sequential",
+        "Client (Browser::Web Client (React::Credential Submitter\\n(JSON POST",
+        "Client (Browser::Web Client (React::Error Indicator UI",
+        "Client (Browser::Web Client (React::React-Router",
+        "Client (Browser::Web Client (React::Scene Rendering\\n(A-Frame, aframe-react::Berlin",
+        "Client (Browser::Web Client (React::Scene Rendering\\n(A-Frame, aframe-react::Camera",
+        "Client (Browser::Web Client (React::Scene Rendering\\n(A-Frame, aframe-react::Hack",
+        "Client (Browser::Web Client (React::Scene Rendering\\n(A-Frame, aframe-react::Lobby",
+        "Client (Browser::Web Client (React::Scene Rendering\\n(A-Frame, aframe-react::Louvre",
+        "Client (Browser::Web Client (React::Scene Rendering\\n(A-Frame, aframe-react::Milan",
+        "Client (Browser::Web Client (React::Scene Rendering\\n(A-Frame, aframe-react::Plane",
+        "Client (Browser::Web Client (React::Scene Rendering\\n(A-Frame, aframe-react::Rome",
+        "Client (Browser::Web Client (React::Scene Rendering\\n(A-Frame, aframe-react::SF",
+        "Client (Browser::Web Client (React::Scene Rendering\\n(A-Frame, aframe-react::Sky",
+        "Client (Browser::Web Client (React::Scene Rendering\\n(A-Frame, aframe-react::TextPlane",
+        "Client (Browser::Web Client (React::Shared Credential Handlers",
+        "Client (Browser::Web Client (React::jQuery (aux"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT web client is decomposed into multiple specific client components and dependencies in the prediction. This is a valid split, and all predicted nodes remain within the web client boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>WEB SERVER</u></b>\\n\\n* Node\\n* Express\\n* DigitalOcean (Deployment"
+      ],
+      "predicted_nodes": [
+        "Global::Server (Node.js/Express",
+        "Server (Node.js/Express::HTTP Router\\n(Express-style",
+        "Server (Node.js/Express::User Controller",
+        "Server (Node.js/Express::User Model",
+        "Server (Node.js/Express::bcrypt-nodejs"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT server node is expanded into concrete server-side architectural elements: server runtime, router, controller, model, and password library. This is consistent with the GT web server boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::REDIS CACHE"
+      ],
+      "predicted_nodes": [
+        "Global::Cache\\n(Redis"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Redis cache tier. The boundary attribution is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::AWS S3"
+      ],
+      "predicted_nodes": [
+        "Global::Image Storage\\n(S3-like"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the external image storage service modeled after AWS S3. The predicted label is semantically equivalent."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Image Storage\\n(S3-like",
+    "Global::Relational Database\\n(MariaDB",
+    "Global::Server (Node.js/Express",
+    "Server (Node.js/Express::Content Controller"
+  ]
+}

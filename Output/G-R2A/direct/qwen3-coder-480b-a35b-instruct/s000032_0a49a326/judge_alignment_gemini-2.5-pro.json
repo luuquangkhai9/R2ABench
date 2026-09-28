@@ -1,0 +1,114 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Audit\\nService"
+      ],
+      "predicted_nodes": [
+        "Global::Audit Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The nodes are functionally equivalent. However, the AI incorrectly placed the 'Audit Service' in the 'Global' boundary. The GT correctly places it within the 'Activiti Cloud Application' boundary, indicating it's a core microservice of the application, not an external or global system. This is a significant boundary-crossing error."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Customer\\nLogic",
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Out of the\\nBox Services"
+      ],
+      "predicted_nodes": [
+        "Global::Cloud Connectors"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The AI correctly aggregated the detailed 'Cloud Connectors' components from the GT into a single node. However, it placed this node in the 'Global' boundary instead of the correct 'Activiti Cloud Application' boundary, which is a significant error."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Notification\\nService"
+      ],
+      "predicted_nodes": [
+        "Global::Notification Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The nodes match functionally. The AI, however, made a boundary error by placing the 'Notification Service' in 'Global' instead of within the 'Activiti Cloud Application' boundary as specified in the GT."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Query\\nService"
+      ],
+      "predicted_nodes": [
+        "Global::Query Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The nodes are a functional match. The AI's placement in the 'Global' boundary is incorrect; the GT correctly identifies it as a service within the 'Activiti Cloud Application'."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::BPMN, Form\\nand Rule Defs",
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::Process\\nRuntime"
+      ],
+      "predicted_nodes": [
+        "Global::Example Runtime Bundle"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The AI aggregated the components of the 'Runtime Bundle' from the GT into a single, semantically equivalent node. However, it was placed in the 'Global' boundary, losing the crucial context that it is a core part of the 'Activiti Cloud Application'. This is a severe boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Config Maps\\n(Kubernetes",
+        "Activiti Cloud Infrastructure::Registry\\n(Kubernetes"
+      ],
+      "predicted_nodes": [
+        "Global::Registry/Config Maps"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly merged the related Kubernetes 'Registry' and 'Config Maps' nodes. While the GT groups them under 'Activiti Cloud Infrastructure', placing them in 'Global' is semantically acceptable as they are cross-cutting infrastructure concerns. There is no context confusion."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Gateway"
+      ],
+      "predicted_nodes": [
+        "Global::API Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are a clear match, as 'Gateway' and 'API Gateway' are used interchangeably in the PRD. The GT places it in an 'Infrastructure' boundary, while the AI uses 'Global'. This is a semantically equivalent placement for a system-wide entry point."
+    },
+    {
+      "gt_nodes": [
+        "Global::Client"
+      ],
+      "predicted_nodes": [
+        "Global::Authenticated User"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI's 'Authenticated User' is a more specific and accurate representation of the 'Client' actor described in the PRD. Both are correctly placed in the 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::SSO/IDM\\n(Keycloak"
+      ],
+      "predicted_nodes": [
+        "Global::Keycloak"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are an exact match, with the AI using a cleaner name. Both are correctly located in the 'Global' boundary as an external identity provider."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Deployment Descriptors",
+    "Global::Kubernetes/GKE Cluster",
+    "Global::NGINX Ingress Controller",
+    "Global::ProcessRuntime API",
+    "Global::TaskRuntime API"
+  ]
+}

@@ -1,0 +1,156 @@
+@startuml
+title ReTool System Architecture - Component & Deployment Diagram
+
+' === Presentation Layer ===
+node "Google Chrome Browser" as browser {
+    component "Frontend Client" as frontend #lightblue [
+        Vue.js-based Web Client
+        - User Authentication
+        - Project Management UI
+        - Requirements Management UI
+        - Analysis Visualization
+    ]
+    
+    component "Requirement Analysis Interface" as analysis_ui #lightblue [
+        Structuring Controls
+        Conflict Detection Viewer
+        Common Requirement Identifier
+        Association Analysis Display
+    ]
+}
+
+' === API Gateway Layer ===
+node "API Gateway Node" as apigateway_node {
+    component "API Gateway" as gateway #lightgreen [
+        Centralized Entry Point
+        - Request Routing
+        - Authentication Proxy
+        - Rate Limiting
+    ]
+}
+
+' === Security Layer ===
+node "Security Services" as security_node {
+    component "Authentication Service" as auth_svc #lightgreen [
+        OAuth 2.0/OpenID Connect
+        Token Management
+        Session Handling
+    ]
+    
+    component "Authorization Service" as authz_svc #lightgreen [
+        Role-Based Access Control
+        Permission Validation
+        Policy Enforcement
+    ]
+}
+
+' === Monitoring & Observability Layer ===
+node "Observability Stack" as observability {
+    component "Logging Service" as logging_svc #lightgrey [
+        Structured Log Collection
+        Error Tracking
+        Audit Trail Generation
+    ]
+    
+    component "Monitoring Service" as monitor_svc #lightgrey [
+        Health Checks
+        Performance Metrics
+        Alerting System
+    ]
+}
+
+' === Service Layer ===
+node "Amazon EC2 Infrastructure" as ec2 {
+    node "Core Services Environment" as core_env {
+        component "User Management Service" as user_svc #orange [
+            - User Registration
+            - Profile Management
+        ]
+
+        component "Project Management Service" as project_svc #orange [
+            - Project Creation/Modification
+            - Baseline Management
+            - Member Management
+        ]
+
+        component "Requirements Management Service" as req_svc #orange [
+            - Create/Import/Modify/Delete
+            - Tree Display
+            - Forward Tracing
+        ]
+        
+        component "Analysis Orchestration Service" as analysis_svc #orange [
+            - Analysis Workflow Coordination
+            - Result Aggregation
+            - Progress Tracking
+        ]
+    }
+
+    node "Algorithm Processing Server" as algo_server {
+        component "Algorithm Service" as algo_svc #orange [
+            - NLP & ML-Based Analysis
+            - Conflict Detection
+            - Common Requirement Identification
+            - Association Analysis
+        ]
+    }
+}
+
+' === Data Access Layer ===
+database "MongoDB Database" as db #lightyellow [
+    - Users
+    - Projects
+    - Requirements
+    - Analysis Results
+    - Tracing Information
+]
+
+node "Backup & Recovery" as backup_node {
+    component "Database Backup Service" as backup_svc #lightyellow [
+        Scheduled Backups
+        Point-in-Time Recovery
+        Data Archiving
+    ]
+}
+
+' === Dependencies / Connections ===
+frontend --> gateway : HTTPS/WebSocket\nUI Interactions
+analysis_ui --> gateway : HTTPS\nAnalysis Commands
+
+gateway --> auth_svc : Authentication Flow
+gateway --> authz_svc : Authorization Check
+gateway --> user_svc : User Operations
+gateway --> project_svc : Project Operations
+gateway --> req_svc : Requirement Operations
+gateway --> analysis_svc : Analysis Requests
+
+auth_svc <--> authz_svc : Internal Coordination
+
+user_svc --> db : Read/Write User Data
+project_svc --> db : Read/Write Project Data
+req_svc --> db : Read/Write Requirements Data
+analysis_svc --> algo_svc : Orchestrate Analysis
+algo_svc --> req_svc : Fetch Requirements
+algo_svc --> db : Store Analysis Results
+
+logging_svc --> user_svc : Collect Logs
+logging_svc --> project_svc : Collect Logs
+logging_svc --> req_svc : Collect Logs
+logging_svc --> algo_svc : Collect Logs
+
+monitor_svc --> gateway : Monitor Traffic
+monitor_svc --> db : Monitor Performance
+
+backup_svc --> db : Backup Operations
+
+note right of analysis_svc
+  Coordinates complex analysis workflows
+  between services and algorithms
+end note
+
+note bottom of auth_svc
+  Handles token exchange and
+  session management securely
+end note
+
+@enduml

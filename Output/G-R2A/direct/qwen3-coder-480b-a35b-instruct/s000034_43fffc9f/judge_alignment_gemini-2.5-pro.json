@@ -1,0 +1,91 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "Runtime Environment::MPI Runtime"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are semantically equivalent, referring to the underlying MPI system for multi-process execution. The boundaries 'Global' and 'Runtime Environment' are also semantically equivalent for an external dependency."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process"
+      ],
+      "predicted_nodes": [
+        "torc_py Library::MPI Processes"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The nodes refer to the same concept of MPI processes. However, the AI placed this within the 'torc_py Library' boundary. An MPI process is an OS-level container that *runs* the library, it is not a component *of* the library. This is a boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Worker\nThread"
+      ],
+      "predicted_nodes": [
+        "torc_py Library::Worker Threads"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are semantically equivalent, both referring to the threads that execute tasks. The AI places this within the 'torc_py Library' which is a valid logical grouping, as the library code defines and manages these threads. The GT's placement within 'MPI Process' represents the runtime container, which is also valid. This is not a severe boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Task Queue",
+        "Task Queue (in detail::...",
+        "Task Queue (in detail::A1",
+        "Task Queue (in detail::A2",
+        "Task Queue (in detail::A3",
+        "Task Queue (in detail::B1",
+        "Task Queue (in detail::B2",
+        "Task Queue (in detail::Level 0",
+        "Task Queue (in detail::Level 1",
+        "Task Queue (in detail::Level 2",
+        "Task Queue (in detail::Level 3",
+        "Task Queue (in detail::Level 4",
+        "Task Queue (in detail::Level 5"
+      ],
+      "predicted_nodes": [
+        "torc_py Library::Task Queues"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the GT's 'Task Queue' and its detailed breakdown nodes into a single logical component. The 'torc_py Library' boundary is semantically appropriate, as the task queue is a data structure created and managed by the library."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Compute node::MPI Process::Server\nThread"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Application Developer",
+    "Global::Data Preprocessing User",
+    "Global::HPC Developer",
+    "Global::MPI Developer",
+    "Global::Tester",
+    "Runtime Environment::Environment Variables",
+    "Runtime Environment::Python Runtime",
+    "torc_py Library::Callback Execution",
+    "torc_py Library::Task Descriptor",
+    "torc_py Library::Task Stealing",
+    "torc_py Library::torc.as_completed",
+    "torc_py Library::torc.disable_stealing",
+    "torc_py Library::torc.enable_stealing",
+    "torc_py Library::torc.gettime",
+    "torc_py Library::torc.init",
+    "torc_py Library::torc.launch",
+    "torc_py Library::torc.map",
+    "torc_py Library::torc.node_id",
+    "torc_py Library::torc.num_nodes",
+    "torc_py Library::torc.num_workers",
+    "torc_py Library::torc.shutdown",
+    "torc_py Library::torc.spmd",
+    "torc_py Library::torc.start",
+    "torc_py Library::torc.submit",
+    "torc_py Library::torc.wait",
+    "torc_py Library::torc.worker_id"
+  ]
+}

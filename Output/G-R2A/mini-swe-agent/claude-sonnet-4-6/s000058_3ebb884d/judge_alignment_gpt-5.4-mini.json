@@ -1,0 +1,130 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::AWS EventBridge"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::AWS EventBridge\\n(event routing rules"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the AWS EventBridge event-routing component used for alerting. The boundary naming differs, but the semantic placement within AWS Cloud / event routing is consistent."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::SNS Topic\\nalerts"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::AWS SNS Topic\\n(alert notifications"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the SNS topic used for alert notifications. The predicted node is appropriately placed under AWS Cloud, which is semantically equivalent to the GT AWS Connector Account boundary."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::Chat notification",
+        "AWS Cloud\\nConnector Account::Email notification",
+        "AWS Cloud\\nConnector Account::Slack notification"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::AWS SNS Topic\\n(alert notifications",
+        "AWS Cloud::SNS Subscriptions\\n(manually managed"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT contains multiple notification endpoints around the alerting/SNS distribution flow, while the predicted model aggregates the notification distribution into an SNS topic plus manually managed subscriptions. This is semantically aligned with the alert notification architecture, and the boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::CMS BigMAC"
+      ],
+      "predicted_nodes": [
+        "Global::CMS BigMAC"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both identify the external CMS BigMAC system. The predicted node is simplified to a global external-system boundary, which is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::connector::Private subnet::AWS Fargate\\nKafka Connect Cluster"
+      ],
+      "predicted_nodes": [
+        "macpro-appian-connector Repository::Connector Management Layer",
+        "macpro-appian-connector Repository::Connector Management Layer::Connector Configuration Handler\\n(FR-002: put / delete / restart",
+        "macpro-appian-connector Repository::Connector Management Layer::Connector Management Library"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Kafka Connect Cluster is modeled in the predicted architecture as connector-management logic and its library/handler rather than an infrastructure deployment node. This is a valid split/abstraction change, and the repository-layer placement is consistent with the PRD's connector configuration responsibility."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::topics::Private subnet::AWS Lambda\\ncreate/delete topics"
+      ],
+      "predicted_nodes": [
+        "macpro-appian-connector Repository::Connector Management Layer::Connector Configuration Handler\\n(FR-002: put / delete / restart"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Lambda for topic/connector lifecycle operations is functionally represented by the connector configuration handler. The boundary is shifted from infrastructure implementation to repository logic, which is acceptable for the same responsibility."
+    },
+    {
+      "gt_nodes": [
+        "Global::VPC peering\\nconnection"
+      ],
+      "predicted_nodes": [
+        "Global::AWS Cloud"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node is too generic and does not specifically represent VPC peering. This is not a faithful semantic equivalent of the GT networking connection."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nAppian Source::VPC::Appian\\nOracle DB"
+      ],
+      "predicted_nodes": [
+        "Global::AWS Cloud"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a specific source-system database component, whereas the prediction is only a generic AWS Cloud container. This loses the actual component semantics and crosses boundary specificity too severely."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::Chat notification"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::AWS SNS Topic\\n(alert notifications",
+        "AWS Cloud::SNS Subscriptions\\n(manually managed"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT chat notification channel is represented as part of the SNS-based notification distribution mechanism. The abstraction is acceptable because the PRD emphasizes SNS routing and manually maintained subscription targets."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "AWS Cloud\\nAppian Source::VPC::Appian\\nOracle DB"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::AWS Cloud",
+    "Global::GitHub",
+    "Global::Local Environment",
+    "Global::macpro-appian-connector Repository",
+    "Local Environment::AWS CLI\\n(credentials setup",
+    "Local Environment::Terminal / Script Runner\\n(nvm, run listRunningStages",
+    "macpro-appian-connector Repository::Connector Management Layer",
+    "macpro-appian-connector Repository::Connector Management Layer::Connector Configuration Handler\\n(FR-002: put / delete / restart",
+    "macpro-appian-connector Repository::Connector Management Layer::Connector Management Library",
+    "macpro-appian-connector Repository::Event Alerting Layer",
+    "macpro-appian-connector Repository::Event Alerting Layer::Event Alert Router\\n(FR-003: event filtering",
+    "macpro-appian-connector Repository::Metrics Collection Layer",
+    "macpro-appian-connector Repository::Metrics Collection Layer::Deployment Metrics Service\\n(FR-005: failedRuns / passedRuns",
+    "macpro-appian-connector Repository::Metrics Collection Layer::PR Metrics Service\\n(FR-006: averageTimeToMerge",
+    "macpro-appian-connector Repository::Stage Listing Layer",
+    "macpro-appian-connector Repository::Stage Listing Layer::Stage Listing Service\\n(FR-001"
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Audit\nService"
+      ],
+      "predicted_nodes": [
+        "Monitoring & Query Layer::Audit Service",
+        "Monitoring & Query Layer::Audit Service::Audit Records",
+        "Monitoring & Query Layer::Audit Service::Event Monitoring"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI placed the Audit Service into a Monitoring & Query Layer, which is a semantically sound equivalent to its functional presence inside the Activiti Cloud Application boundary."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Customer\nLogic",
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Out of the\nBox Services"
+      ],
+      "predicted_nodes": [
+        "Background Components::Cloud Connectors",
+        "Background Components::Cloud Connectors::External Integrations",
+        "Global::Cloud Connectors"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "Multiple specific cloud connectors in GT are matched to a grouped set of Cloud Connectors nodes by the AI. The assignment to Background Components is correct based on the architecture background context."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Notification\nService"
+      ],
+      "predicted_nodes": [
+        "Background Components::Notification Service",
+        "Background Components::Notification Service::Event Notifications",
+        "Global::Notification Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The Notification Service in the GT is successfully mapped. Placing it in Background Components is semantically equivalent according to the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Query\nService"
+      ],
+      "predicted_nodes": [
+        "Monitoring & Query Layer::Query Service",
+        "Monitoring & Query Layer::Query Service::Process Execution Info",
+        "Monitoring & Query Layer::Query Service::Read Operations"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Query Service matches exactly. The AI's boundary of Monitoring & Query Layer functionally matches the GT placement."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::BPMN, Form\nand Rule Defs"
+      ],
+      "predicted_nodes": [
+        "Process Runtime Layer::Example Runtime Bundle",
+        "Process Runtime Layer::Example Runtime Bundle::Process Definitions",
+        "Process Runtime Layer::Example Runtime Bundle::Process Instances",
+        "Process Runtime Layer::Example Runtime Bundle::SimpleProcess",
+        "Global::Example Runtime Bundle"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The Runtime Bundle definitions in GT correspond to the AI's detailed breakdown of the Example Runtime Bundle. Process Runtime Layer appropriately reflects the component boundary."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::Process\nRuntime"
+      ],
+      "predicted_nodes": [
+        "Process Runtime Layer::ProcessRuntime API",
+        "Process Runtime Layer::ProcessRuntime API::Process Operations",
+        "Global::ProcessRuntime API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Process Runtime is perfectly matched to the ProcessRuntime API. The Process Runtime Layer boundary effectively replicates the GT's concept."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Config Maps\n(Kubernetes",
+        "Activiti Cloud Infrastructure::Registry\n(Kubernetes"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Layer::Registry/Config Maps",
+        "Infrastructure Layer::Registry/Config Maps::Configuration Data"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The Kubernetes Config Maps and Registry are successfully aggregated by the AI. The placement in the Infrastructure Layer is a correct boundary translation."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Gateway"
+      ],
+      "predicted_nodes": [
+        "API Gateway Layer::API Gateway",
+        "API Gateway Layer::API Gateway::Gateway Services"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Gateway component strictly matches the AI's API Gateway. The boundary assignment is semantically identical."
+    },
+    {
+      "gt_nodes": [
+        "Global::Client"
+      ],
+      "predicted_nodes": [
+        "External Access Layer::External Users",
+        "External Access Layer::External Users::Authenticated Users",
+        "External Access Layer::External Users::Cluster Operators",
+        "External Access Layer::External Users::Human Participants",
+        "External Access Layer::External Users::Task API Users",
+        "Global::Authenticated Users",
+        "Global::Cluster Operators",
+        "Global::Human Participants",
+        "Global::Task API Users"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The general Client node from GT is split by the AI into explicit user types as specified in the PRD, correctly placed in an External Access Layer or Global level."
+    },
+    {
+      "gt_nodes": [
+        "Global::SSO/IDM\n(Keycloak"
+      ],
+      "predicted_nodes": [
+        "Authentication & Security Layer::Keycloak",
+        "Authentication & Security Layer::Keycloak::Identity Provider",
+        "Authentication & Security Layer::Keycloak::Token Issuance",
+        "Global::Keycloak"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Keycloak SSO/IDM maps natively to Keycloak in the prediction. Placing it in Authentication & Security Layer captures the same scope as Global."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Authentication & Security Layer::Spring Boot Application",
+    "Authentication & Security Layer::Spring Boot Application::Application Context",
+    "Authentication & Security Layer::Spring Security",
+    "Authentication & Security Layer::Spring Security::Authorization",
+    "Authentication & Security Layer::Spring Security::Role Management",
+    "Authentication & Security Layer::Spring Security::User Management",
+    "Global::Spring Security",
+    "External Access Layer::NGINX Ingress Controller",
+    "External Access Layer::NGINX Ingress Controller::Ingress Routing",
+    "External Access Layer::Public IP",
+    "External Access Layer::Public IP::External Access Point",
+    "Global::NGINX Ingress Controller",
+    "Global::Public IP",
+    "Global::Kubernetes/GKE",
+    "Infrastructure Layer::Kubernetes/GKE",
+    "Infrastructure Layer::Kubernetes/GKE::Container Orchestration",
+    "Infrastructure Layer::Deployment Descriptors",
+    "Infrastructure Layer::Deployment Descriptors::Input Rate Config",
+    "Infrastructure Layer::Deployment Descriptors::Replica Count Config",
+    "Task Management Layer::TaskRuntime API",
+    "Task Management Layer::TaskRuntime API::Task Operations",
+    "Global::TaskRuntime API",
+    "Task Management Layer::User Endpoints",
+    "Task Management Layer::User Endpoints::Protected Endpoints",
+    "Global::User Endpoints"
+  ]
+}

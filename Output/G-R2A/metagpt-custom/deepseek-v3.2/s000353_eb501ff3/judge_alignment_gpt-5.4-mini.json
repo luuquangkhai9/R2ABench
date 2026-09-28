@@ -1,0 +1,203 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Authorization Service"
+      ],
+      "predicted_nodes": [
+        "API Layer::Authorization Middleware"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the authorization enforcement component for the API. The predicted node places it in an API/middleware layer, which is semantically consistent with the GT's global authorization service."
+    },
+    {
+      "gt_nodes": [
+        "Global::Router Endpoints"
+      ],
+      "predicted_nodes": [
+        "API Layer::HTTP API Handlers"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the HTTP-facing router/endpoint handling surface for the Turing API. The API layer attribution is consistent with an endpoint component."
+    },
+    {
+      "gt_nodes": [
+        "Turing System::Turing API Server\\nHTTP REST API to configure Routers"
+      ],
+      "predicted_nodes": [
+        "API Layer::HTTP API Handlers",
+        "API Layer::OpenAPI Specifications",
+        "API Layer::Validation Middleware",
+        "API Layer::Authorization Middleware"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT API server is decomposed by the AI into its constituent API handlers, OpenAPI contract, and request middleware. This is a reasonable functional split and remains within the correct API/system boundary."
+    },
+    {
+      "gt_nodes": [
+        "Kubernetes Cluster::Knative Controller"
+      ],
+      "predicted_nodes": [
+        "Cluster Integration Layer::Router Deployment Manager",
+        "External Systems::Kubernetes Cluster"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT cluster-side controller/deployment management responsibility is represented by the predicted deployment manager interacting with Kubernetes. While not an exact component name match, the functional role aligns with cluster-facing lifecycle management."
+    },
+    {
+      "gt_nodes": [
+        "Global::Machine Learning Platform\\nMLP API Server"
+      ],
+      "predicted_nodes": [
+        "External Systems::MLflow Model Registry"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The PRD indicates dependency on MLflow model registry for artifact retrieval, and the predicted external system captures that dependency. The GT node is broader (MLP API server), but the MLflow registry is a semantically relevant external source."
+    },
+    {
+      "gt_nodes": [
+        "Global::Monitoring and Alerting Service"
+      ],
+      "predicted_nodes": [
+        "External Systems::Jaeger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Jaeger is the observability/tracing integration referenced in the PRD, which is a subset of monitoring/alerting concerns. The boundary as an external observability system is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Turing System::Database\\nPersistent storage for Router objects"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node directly represents the persistent storage/database for Router objects, so this GT storage component is omitted."
+    },
+    {
+      "gt_nodes": [
+        "Turing System::Turing UI\\nWeb interface to configure Routers"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node corresponds to the Turing UI/web interface, so this GT UI component is omitted."
+    },
+    {
+      "gt_nodes": [
+        "Global::Router Clients"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The client-side actors consuming the router API are not represented as a separate predicted node."
+    },
+    {
+      "gt_nodes": [
+        "Global::Experimentation Service"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "There is no predicted node equivalent to the experimentation service."
+    },
+    {
+      "gt_nodes": [
+        "Global::Secret Store"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The secret store dependency is missing from the predicted architecture."
+    },
+    {
+      "gt_nodes": [
+        "Global::Turing User"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The end user actor is not modeled in the predicted nodes."
+    },
+    {
+      "gt_nodes": [
+        "Kubernetes Cluster::Istio"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The Istio component present in GT is not represented in the prediction."
+    },
+    {
+      "gt_nodes": [
+        "Global::Machine Learning Platform\\nMLP API Server"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Only the MLflow registry dependency is predicted; the broader MLP API Server node itself is omitted."
+    },
+    {
+      "gt_nodes": [
+        "Turing System::Turing API Server\\nHTTP REST API to configure Routers"
+      ],
+      "predicted_nodes": [
+        "API Layer::HTTP API Handlers",
+        "API Layer::OpenAPI Specifications",
+        "API Layer::Validation Middleware",
+        "API Layer::Authorization Middleware"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "This is the main functional match, split across API handlers, contract, and middleware. The predicted layering is consistent with the GT API server boundary."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer::Ensembler Manager"
+      ],
+      "predicted_nodes": [
+        "Runtime Layer::PyFuncEnsembler Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "These are not the same component: the GT refers to ensembler management logic in the Turing service layer, while the predicted node is the runtime service that executes a user-defined ensembler. This is a functional and boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Global::Router Endpoints"
+      ],
+      "predicted_nodes": [
+        "Runtime Layer::Turing Router"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node denotes API endpoints, while the predicted node denotes the router runtime component. These are related but not equivalent, and the layer placement is incorrect for an endpoint node."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Router Clients",
+    "Global::Experimentation Service",
+    "Global::Secret Store",
+    "Global::Turing User",
+    "Kubernetes Cluster::Istio",
+    "Turing System::Database\\nPersistent storage for Router objects",
+    "Turing System::Turing UI\\nWeb interface to configure Routers"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::Kubernetes Cluster",
+    "External Systems::MLflow Model Registry",
+    "Runtime Layer::PyFuncEnsembler Service",
+    "Runtime Layer::Turing Router",
+    "Service Layer::Ensembler Manager",
+    "API Layer::OpenAPI Specifications",
+    "API Layer::Validation Middleware",
+    "API Layer::Authorization Middleware",
+    "API Layer::HTTP API Handlers",
+    "Cluster Integration Layer::Router Deployment Manager"
+  ]
+}

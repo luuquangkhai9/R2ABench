@@ -1,0 +1,350 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Frontend / Client Layer"
+      ],
+      "predicted_nodes": [
+        "Global::Web Front End\n(HTML/CSS/JS, Vue, jQuery"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the overall frontend/client layer of the system. The predicted node uses a technology-oriented label, but it is semantically equivalent to the GT frontend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Service / Backend Layer"
+      ],
+      "predicted_nodes": [
+        "Global::Server Runtime (Docker"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node is more of a deployment/runtime boundary than the GT backend service layer. Functionally related, but the architectural boundary is not equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Infrastructure"
+      ],
+      "predicted_nodes": [
+        "Global::Server Runtime (Docker"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Docker/server runtime is semantically aligned with infrastructure in the GT. The naming is different but the boundary meaning is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure::Docker Deployment"
+      ],
+      "predicted_nodes": [
+        "Global::Server Runtime (Docker"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to Docker-based deployment/runtime infrastructure."
+    },
+    {
+      "gt_nodes": [
+        "Service / Backend Layer::Backend Framework: Django"
+      ],
+      "predicted_nodes": [
+        "Server Runtime (Docker::Back End API (Django, Python::Auth & Account Service",
+        "Server Runtime (Docker::Back End API (Django, Python::Artwork & Review Service",
+        "Server Runtime (Docker::Back End API (Django, Python::Comment & Reply Service",
+        "Server Runtime (Docker::Back End API (Django, Python::Favorites & Categories Service",
+        "Server Runtime (Docker::Back End API (Django, Python::Follow & History Service",
+        "Server Runtime (Docker::Back End API (Django, Python::Notification Service",
+        "Server Runtime (Docker::Back End API (Django, Python::Recommendation Service",
+        "Server Runtime (Docker::Back End API (Django, Python::Search & Query Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has a framework-level backend node, while the prediction splits backend functionality into multiple Django-based services. This is a reasonable refinement and the backend boundary is preserved."
+    },
+    {
+      "gt_nodes": [
+        "Service / Backend Layer::Business Services"
+      ],
+      "predicted_nodes": [
+        "Server Runtime (Docker::Back End API (Django, Python::Auth & Account Service",
+        "Server Runtime (Docker::Back End API (Django, Python::Artwork & Review Service",
+        "Server Runtime (Docker::Back End API (Django, Python::Comment & Reply Service",
+        "Server Runtime (Docker::Back End API (Django, Python::Favorites & Categories Service",
+        "Server Runtime (Docker::Back End API (Django, Python::Follow & History Service",
+        "Server Runtime (Docker::Back End API (Django, Python::Notification Service",
+        "Server Runtime (Docker::Back End API (Django, Python::Recommendation Service",
+        "Server Runtime (Docker::Back End API (Django, Python::Search & Query Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT business services are decomposed into more specific services in the prediction. This is semantically aligned with the backend business layer."
+    },
+    {
+      "gt_nodes": [
+        "Service / Backend Layer::Business Services::Account Service"
+      ],
+      "predicted_nodes": [
+        "Server Runtime (Docker::Back End API (Django, Python::Auth & Account Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Account/authentication responsibilities are combined in the prediction, which is functionally equivalent to the GT account service in the backend layer."
+    },
+    {
+      "gt_nodes": [
+        "Service / Backend Layer::Business Services::Authentication Service"
+      ],
+      "predicted_nodes": [
+        "Server Runtime (Docker::Back End API (Django, Python::Auth & Account Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Authentication is correctly captured, though merged with account service. The boundary remains backend/business service."
+    },
+    {
+      "gt_nodes": [
+        "Service / Backend Layer::Business Services::Resource Service",
+        "Service / Backend Layer::Business Services::Works Service"
+      ],
+      "predicted_nodes": [
+        "Server Runtime (Docker::Back End API (Django, Python::Artwork & Review Service",
+        "Server Runtime (Docker::Back End API (Django, Python::Search & Query Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT resource/works responsibilities are split into artwork review and search/query in the prediction. This is a reasonable functional decomposition within the backend."
+    },
+    {
+      "gt_nodes": [
+        "Service / Backend Layer::Business Services::Audit Service"
+      ],
+      "predicted_nodes": [
+        "Server Runtime (Docker::Back End API (Django, Python::Artwork & Review Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Artwork auditing/review is semantically equivalent to the GT audit service, and remains in the backend business service boundary."
+    },
+    {
+      "gt_nodes": [
+        "Service / Backend Layer::Business Services::Notification Service"
+      ],
+      "predicted_nodes": [
+        "Server Runtime (Docker::Back End API (Django, Python::Notification Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match."
+    },
+    {
+      "gt_nodes": [
+        "Service / Backend Layer::Recommendation Algorithms"
+      ],
+      "predicted_nodes": [
+        "Server Runtime (Docker::Back End API (Django, Python::Recommendation Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT explicitly separates recommendation algorithms from backend business services, while the prediction places recommendation under the backend API/service boundary. This is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Service / Backend Layer::Recommendation Algorithms::Content Heat / Popularity Based",
+        "Service / Backend Layer::Recommendation Algorithms::Social Relation Based",
+        "Service / Backend Layer::Recommendation Algorithms::User Collection / History Based"
+      ],
+      "predicted_nodes": [
+        "Server Runtime (Docker::Back End API (Django, Python::Recommendation Service"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT recommendation algorithms are multiple distinct algorithmic nodes, but the prediction aggregates them into a general backend recommendation service. The functionality overlaps, but the architectural layer assignment is incorrect because algorithm support should be separate from core backend services."
+    },
+    {
+      "gt_nodes": [
+        "Service / Backend Layer::SQLite Database"
+      ],
+      "predicted_nodes": [
+        "Server Runtime (Docker::SQLite\n(users, artworks, reviews,\ncomments, replies, favorites,\ncategories, follows, history,\nnotifications, logs"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match for the database/storage layer, despite the predicted node including stored entities for clarification."
+    },
+    {
+      "gt_nodes": [
+        "Frontend / Client Layer::Admin System",
+        "Frontend / Client Layer::Admin System::Admin Login",
+        "Frontend / Client Layer::Admin System::Audit / Review Works",
+        "Frontend / Client Layer::Admin System::View User List",
+        "Frontend / Client Layer::Admin System::View Works List"
+      ],
+      "predicted_nodes": [
+        "Global::Web Front End\n(HTML/CSS/JS, Vue, jQuery"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These are frontend administrative UI functions, and the prediction only provides the encompassing frontend node rather than separate admin subnodes. This is acceptable as a coarser aggregation within the correct frontend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Frontend / Client Layer::Collection System",
+        "Frontend / Client Layer::Collection System::Add Collection",
+        "Frontend / Client Layer::Collection System::Collection Category",
+        "Frontend / Client Layer::Collection System::Edit Collection",
+        "Frontend / Client Layer::Collection System::Query Collection"
+      ],
+      "predicted_nodes": [
+        "Global::Web Front End\n(HTML/CSS/JS, Vue, jQuery"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Favorite/collection management UI is subsumed under the general frontend node. The boundary is correct, though the predicted model is less detailed."
+    },
+    {
+      "gt_nodes": [
+        "Frontend / Client Layer::Comment System",
+        "Frontend / Client Layer::Comment System::Comment on Works",
+        "Frontend / Client Layer::Comment System::Delete Comment",
+        "Frontend / Client Layer::Comment System::Delete Reply",
+        "Frontend / Client Layer::Comment System::Reply to Comment"
+      ],
+      "predicted_nodes": [
+        "Global::Web Front End\n(HTML/CSS/JS, Vue, jQuery"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Commenting UI functions are part of the frontend and are represented only at a higher level in the prediction."
+    },
+    {
+      "gt_nodes": [
+        "Frontend / Client Layer::Display System",
+        "Frontend / Client Layer::Display System::Query Upload Progress",
+        "Frontend / Client Layer::Display System::Query Works",
+        "Frontend / Client Layer::Display System::Upload Works",
+        "Frontend / Client Layer::Display System::View Works"
+      ],
+      "predicted_nodes": [
+        "Global::Web Front End\n(HTML/CSS/JS, Vue, jQuery"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Artwork display/upload/query UI belongs to the frontend; the prediction keeps it at the top frontend layer."
+    },
+    {
+      "gt_nodes": [
+        "Frontend / Client Layer::Notification System",
+        "Frontend / Client Layer::Notification System::Audit Notification",
+        "Frontend / Client Layer::Notification System::Comment Notification",
+        "Frontend / Client Layer::Notification System::Private Message - TBD",
+        "Frontend / Client Layer::Notification System::Reply Notification"
+      ],
+      "predicted_nodes": [
+        "Global::Web Front End\n(HTML/CSS/JS, Vue, jQuery",
+        "Server Runtime (Docker::Back End API (Django, Python::Notification Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Notification has both frontend presentation and backend processing. The prediction captures the backend notification service and the general frontend boundary, which is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Frontend / Client Layer::Recommendation System",
+        "Frontend / Client Layer::Recommendation System::Close Recommendations",
+        "Frontend / Client Layer::Recommendation System::Hot Recommendations",
+        "Frontend / Client Layer::Recommendation System::Personalized Recommendations"
+      ],
+      "predicted_nodes": [
+        "Global::Web Front End\n(HTML/CSS/JS, Vue, jQuery",
+        "Server Runtime (Docker::Back End API (Django, Python::Recommendation Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The frontend recommendation entry points are present, but the actual recommendation engine is misattributed to the backend API layer instead of a separate algorithm support layer."
+    },
+    {
+      "gt_nodes": [
+        "Frontend / Client Layer::User System",
+        "Frontend / Client Layer::User System::Browse History",
+        "Frontend / Client Layer::User System::Follow Others",
+        "Frontend / Client Layer::User System::User Login",
+        "Frontend / Client Layer::User System::View Home Page"
+      ],
+      "predicted_nodes": [
+        "Global::Web Front End\n(HTML/CSS/JS, Vue, jQuery",
+        "Server Runtime (Docker::Back End API (Django, Python::Auth & Account Service",
+        "Server Runtime (Docker::Back End API (Django, Python::Follow & History Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "User-facing UI functions are under frontend, while backend services for auth and follow/history are also correctly identified. This is a valid split across presentation and service layers."
+    },
+    {
+      "gt_nodes": [
+        "Global::Email Service"
+      ],
+      "predicted_nodes": [
+        "Global::Email Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Frontend / Client Layer::Admin System",
+    "Frontend / Client Layer::Admin System::Admin Login",
+    "Frontend / Client Layer::Admin System::Audit / Review Works",
+    "Frontend / Client Layer::Admin System::View User List",
+    "Frontend / Client Layer::Admin System::View Works List",
+    "Frontend / Client Layer::Collection System",
+    "Frontend / Client Layer::Collection System::Add Collection",
+    "Frontend / Client Layer::Collection System::Collection Category",
+    "Frontend / Client Layer::Collection System::Edit Collection",
+    "Frontend / Client Layer::Collection System::Query Collection",
+    "Frontend / Client Layer::Comment System",
+    "Frontend / Client Layer::Comment System::Comment on Works",
+    "Frontend / Client Layer::Comment System::Delete Comment",
+    "Frontend / Client Layer::Comment System::Delete Reply",
+    "Frontend / Client Layer::Comment System::Reply to Comment",
+    "Frontend / Client Layer::Display System",
+    "Frontend / Client Layer::Display System::Query Upload Progress",
+    "Frontend / Client Layer::Display System::Query Works",
+    "Frontend / Client Layer::Display System::Upload Works",
+    "Frontend / Client Layer::Display System::View Works",
+    "Frontend / Client Layer::Notification System",
+    "Frontend / Client Layer::Notification System::Audit Notification",
+    "Frontend / Client Layer::Notification System::Comment Notification",
+    "Frontend / Client Layer::Notification System::Private Message - TBD",
+    "Frontend / Client Layer::Notification System::Reply Notification",
+    "Frontend / Client Layer::Recommendation System",
+    "Frontend / Client Layer::Recommendation System::Close Recommendations",
+    "Frontend / Client Layer::Recommendation System::Hot Recommendations",
+    "Frontend / Client Layer::Recommendation System::Personalized Recommendations",
+    "Frontend / Client Layer::User System",
+    "Frontend / Client Layer::User System::Browse History",
+    "Frontend / Client Layer::User System::Follow Others",
+    "Frontend / Client Layer::User System::User Login",
+    "Frontend / Client Layer::User System::View Home Page",
+    "Service / Backend Layer::Business Services::Audit Service",
+    "Service / Backend Layer::Business Services::Resource Service",
+    "Service / Backend Layer::Business Services::Works Service",
+    "Service / Backend Layer::Recommendation Algorithms::Content Heat / Popularity Based",
+    "Service / Backend Layer::Recommendation Algorithms::Social Relation Based",
+    "Service / Backend Layer::Recommendation Algorithms::User Collection / History Based"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Server Runtime (Docker",
+    "Server Runtime (Docker::Algorithm Support\n(Python, PyTorch/TensorFlow",
+    "Server Runtime (Docker::Back End API (Django, Python::Artwork & Review Service",
+    "Server Runtime (Docker::Back End API (Django, Python::Auth & Account Service",
+    "Server Runtime (Docker::Back End API (Django, Python::Comment & Reply Service",
+    "Server Runtime (Docker::Back End API (Django, Python::Favorites & Categories Service",
+    "Server Runtime (Docker::Back End API (Django, Python::Follow & History Service",
+    "Server Runtime (Docker::Back End API (Django, Python::Notification Service",
+    "Server Runtime (Docker::Back End API (Django, Python::Recommendation Service",
+    "Server Runtime (Docker::Back End API (Django, Python::Search & Query Service",
+    "Server Runtime (Docker::SQLite\n(users, artworks, reviews,\ncomments, replies, favorites,\ncategories, follows, history,\nnotifications, logs"
+  ]
+}

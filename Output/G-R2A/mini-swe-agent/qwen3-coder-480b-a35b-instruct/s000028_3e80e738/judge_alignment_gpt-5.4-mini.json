@@ -1,0 +1,83 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "API Gateway Account::API Gateway"
+      ],
+      "predicted_nodes": [
+        "AWS Infrastructure::API Gateway Account::API Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the API Gateway component in the API Gateway account; the predicted boundary is a higher-level enclosing boundary but semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::Cognito-authorizer::hello-function"
+      ],
+      "predicted_nodes": [
+        "AWS Infrastructure::API Gateway Account::Cognito Authorizer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Cognito-based authorizer used by API Gateway. The predicted node uses a clearer canonical name, and the boundary remains within the API Gateway account."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::Calls hello/GET with id_token in headers"
+      ],
+      "predicted_nodes": [
+        "AWS Infrastructure::API Gateway Account::WhoAmI Method"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node describes the authorized API method behavior for the hello/WhoAmI endpoint, including header usage. The predicted WhoAmI Method is functionally equivalent and placed in the correct API Gateway account boundary."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::Returns hello plus user name when authorized"
+      ],
+      "predicted_nodes": [
+        "AWS Infrastructure::API Gateway Account::WhoAmI Method"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This GT node captures the same WhoAmI/hello authorized response behavior. The predicted node is the corresponding API method and is in the correct boundary."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::auth-function"
+      ],
+      "predicted_nodes": [
+        "AWS Infrastructure::API Gateway Account::ECS Proxy Method"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT auth-function corresponds to the authenticated API method/proxy integration path. The predicted ECS Proxy Method is a reasonable semantic match and is correctly placed in the API Gateway account."
+    },
+    {
+      "gt_nodes": [
+        "Cognito Account::Cognito User Pool"
+      ],
+      "predicted_nodes": [
+        "AWS Infrastructure::Cognito Account::Cognito User Pool"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct match for the Cognito user pool in the Cognito account, with correct boundary attribution."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Cognito Account::Cognito Hosted UI",
+    "Global::User"
+  ],
+  "unmatched_predicted_nodes": [
+    "AWS Infrastructure::API Gateway Account",
+    "AWS Infrastructure::Cognito Account",
+    "AWS Infrastructure::Cognito Account::Cognito Identity Pool",
+    "AWS Infrastructure::Cognito Account::IAM Roles",
+    "AWS Infrastructure::VPC",
+    "AWS Infrastructure::VPC::SQS VPC Endpoint",
+    "AWS Infrastructure::VPC::Security Group"
+  ]
+}

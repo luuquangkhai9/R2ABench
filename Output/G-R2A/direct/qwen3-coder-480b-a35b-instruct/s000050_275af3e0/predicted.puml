@@ -1,0 +1,129 @@
+@startuml
+!define RECTANGLE class
+
+title hAFL2 System Architecture
+
+skinparam componentStyle rectangle
+
+package "hAFL2 System" {
+    RECTANGLE hAFL2_Fuzzer [
+        hAFL2 Fuzzer
+        --
+        - Executes kAFL test suites
+        - Supports standalone mode
+        - Manages fuzzing workflows
+    ]
+
+    RECTANGLE Linux_Workflow [
+        Linux Userspace Workflow
+        --
+        - Packages binaries into initrd
+        - Copies shared libraries
+        - Uses embedded forkserver
+    ]
+
+    RECTANGLE Windows_Workflow [
+        Windows Hyper-V Workflow
+        --
+        - Manages child/root partitions
+        - Uses helper binaries
+        - Handles Hyper-V vmswitch path
+    ]
+
+    RECTANGLE Forkserver [
+        Embedded Forkserver
+        --
+        - Maps kAFL hypercalls
+        - Translates to AFL-style I/O
+    ]
+
+    RECTANGLE Helper_Binaries [
+        Windows Helper Binaries
+        --
+        - packet_sender.exe
+        - loader.exe
+    ]
+
+    RECTANGLE Harness_Driver [
+        Harness Driver
+        --
+        - Controls fuzzing execution
+        - Manages VM communication
+    ]
+
+    RECTANGLE Crash_Monitor [
+        Crash Monitor
+        --
+        - Detects root partition crashes
+        - Reports results to hAFL2
+    ]
+}
+
+package "External Systems" {
+    RECTANGLE Child_Partition [
+        Child Partition VM
+        --
+        - Runs harness driver
+        - Sends fuzzing payloads
+    ]
+
+    RECTANGLE Root_Partition [
+        Root Partition VM
+        --
+        - Contains VMSwitch
+        - Receives fuzzing payloads
+        - Monitored for crashes
+    ]
+
+    RECTANGLE Host_System [
+        Host System
+        --
+        - Provides target binaries
+        - Supplies shared libraries
+        - Compiles Windows binaries
+    ]
+}
+
+hAFL2_Fuzzer --> Linux_Workflow : manages
+hAFL2_Fuzzer --> Windows_Workflow : manages
+Linux_Workflow --> Forkserver : uses
+Windows_Workflow --> Helper_Binaries : uses
+Windows_Workflow --> Harness_Driver : controls
+Windows_Workflow --> Crash_Monitor : integrates
+Helper_Binaries --> Child_Partition : interacts
+Child_Partition --> Root_Partition : sends payloads
+Root_Partition --> Crash_Monitor : reports crashes
+Crash_Monitor --> hAFL2_Fuzzer : returns results
+Host_System --> Linux_Workflow : provides binaries/libraries
+Host_System --> Windows_Workflow : compiles binaries
+
+note right of hAFL2_Fuzzer
+    Core fuzzer component
+    Supports both Linux and 
+    Windows fuzzing workflows
+end note
+
+note right of Linux_Workflow
+    Packages Linux userspace
+    binaries into initrd and
+    handles library dependencies
+end note
+
+note right of Windows_Workflow
+    Orchestrates Hyper-V
+    fuzzing between child
+    and root partitions
+end note
+
+note right of Child_Partition
+    Sends fuzzing packets
+    to root partition via
+    VMBus/netvsc channels
+end note
+
+note left of Root_Partition
+    Target of fuzzing:
+    Hyper-V vmswitch.sys
+    Crash monitoring enabled
+end note
+@enduml

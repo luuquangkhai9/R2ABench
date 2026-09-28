@@ -1,0 +1,127 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "External Dependencies::MPI (mpi4py"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the MPI runtime/dependency used by the library. The predicted node is placed under external dependencies, which is semantically consistent with the GT's global MPI dependency."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process"
+      ],
+      "predicted_nodes": [
+        "Application Layer::HPC Application",
+        "Application Layer::MPI Application",
+        "Application Layer::Python Application",
+        "Application Layer::Data Preprocessing User"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "These predicted nodes correspond to user/application roles rather than the runtime MPI process node in the GT. This is a boundary and abstraction mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Server\nThread"
+      ],
+      "predicted_nodes": [
+        "Core Execution Layer::Task Manager",
+        "Core Execution Layer::SPMD Executor"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a server thread within an MPI process, while the predicted nodes are higher-level execution components. The functional correspondence is weak and the boundary attribution is incorrect."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Worker\nThread"
+      ],
+      "predicted_nodes": [
+        "Core Execution Layer::Worker Thread Pool",
+        "External Dependencies::Python Threading"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The worker thread in the GT is represented by a worker-thread pool and Python threading support in the prediction. Although split across components, the placement under core execution and external threading is semantically acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Task Queue"
+      ],
+      "predicted_nodes": [
+        "Data Stores::Task Queue",
+        "Communication & Coordination Layer::Task Stealing Coordinator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT task queue is matched by the predicted task queue storage, with task-stealing coordination related to queue access. The boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::..."
+      ],
+      "predicted_nodes": [
+        "Data Stores::Task Queue"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The detailed task queue breakdown in the GT is summarized by the predicted task queue node. The storage-oriented boundary is reasonable."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::A1",
+        "Task Queue (in detail::A2",
+        "Task Queue (in detail::A3",
+        "Task Queue (in detail::B1",
+        "Task Queue (in detail::B2"
+      ],
+      "predicted_nodes": [
+        "Data Stores::Task Queue"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's multiple detailed queue subnodes are aggregated into a single task queue node in the prediction. This is a valid merge and the boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::Level 0",
+        "Task Queue (in detail::Level 1",
+        "Task Queue (in detail::Level 2",
+        "Task Queue (in detail::Level 3",
+        "Task Queue (in detail::Level 4",
+        "Task Queue (in detail::Level 5"
+      ],
+      "predicted_nodes": [
+        "Data Stores::Task Queue"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's hierarchical queue levels are condensed into a single task queue node. This is a valid abstraction with acceptable boundary attribution."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Application Layer::Data Preprocessing User",
+    "Application Layer::HPC Application",
+    "Application Layer::MPI Application",
+    "Application Layer::Python Application",
+    "Communication & Coordination Layer::MPI Communicator",
+    "Communication & Coordination Layer::Task Stealing Coordinator",
+    "Core Execution Layer::Callback Handler",
+    "Core Execution Layer::SPMD Executor",
+    "Core Execution Layer::Task Manager",
+    "Core Execution Layer::Worker Thread Pool",
+    "Data Stores::Result Storage",
+    "Data Stores::Task Queue",
+    "External Dependencies::MPI (mpi4py",
+    "External Dependencies::Python Threading",
+    "Global::Data Stores",
+    "Library Interface Layer::torc API",
+    "Runtime Configuration::Environment Variables"
+  ]
+}

@@ -1,0 +1,151 @@
+@startuml
+!define RECTANGLE class
+
+title PromptHub System Architecture
+
+skinparam componentStyle rectangle
+
+package "Frontend" {
+    RECTANGLE VueJS [
+        Vue.js
+        ----
+        Handles user interaction,
+        artwork display,
+        routing and UI components
+    ]
+
+    RECTANGLE JQuery [
+        jQuery
+        ----
+        DOM manipulation and
+        asynchronous requests
+    ]
+}
+
+package "Backend" {
+    RECTANGLE Django [
+        Django Framework
+        ----
+        Business logic handling:
+        - User management
+        - Artwork management
+        - Favorites & Comments
+        - Review workflow
+        - Notifications
+    ]
+
+    RECTANGLE Python [
+        Python
+        ----
+        Backend language
+    ]
+}
+
+package "Algorithm Support" {
+    RECTANGLE PyTorch [
+        PyTorch
+        ----
+        Machine learning for
+        recommendation algorithms
+    ]
+
+    RECTANGLE TensorFlow [
+        TensorFlow
+        ----
+        Alternative ML framework
+        for recommendations
+    ]
+}
+
+package "Data Persistence" {
+    RECTANGLE SQLite [
+        SQLite Database
+        ----
+        Lightweight storage for:
+        - Users
+        - Artworks
+        - Comments/Replies
+        - Favorites
+        - Follows
+        - Notifications
+    ]
+}
+
+package "Deployment" {
+    RECTANGLE Docker [
+        Docker Container
+        ----
+        Encapsulates entire application
+        ensuring consistent deployment
+    ]
+}
+
+package "External Interfaces" {
+    RECTANGLE WebBrowser [
+        Web Browser
+        ----
+        Chrome, Safari, Firefox
+        Accessing frontend via HTTPS
+    ]
+
+    RECTANGLE AdminInterface [
+        Admin Interface
+        ----
+        Administrative dashboard
+        for content moderation
+    ]
+}
+
+' Relationships
+VueJS --> Django : REST API / AJAX
+JQuery --> Django : REST API / AJAX
+Django --> SQLite : ORM
+Django --> PyTorch : Integration
+Django --> TensorFlow : Integration
+PyTorch --> SQLite : Data access
+TensorFlow --> SQLite : Data access
+Docker --> Django : Deployment
+Docker --> VueJS : Deployment
+Docker --> SQLite : Deployment
+WebBrowser --> VueJS : HTTPS
+AdminInterface --> Django : HTTPS
+
+note right of VueJS
+    Frontend handles:
+    - User interfaces
+    - Artwork browsing
+    - User interactions
+    - Display rendering
+end note
+
+note right of Django
+    Backend handles:
+    - Business logic
+    - Data processing
+    - Authentication
+    - Content management
+end note
+
+note right of PyTorch
+    Algorithm support:
+    - Personalized recommendations
+    - Popular artwork ranking
+    - Content analysis
+end note
+
+note right of SQLite
+    Data persistence:
+    - User accounts
+    - Artwork metadata
+    - Social features
+    - System logs
+end note
+
+note right of Docker
+    Deployment container:
+    - Isolation
+    - Portability
+    - Scalability
+end note
+
+@enduml

@@ -1,0 +1,173 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::plugin"
+      ],
+      "predicted_nodes": [
+        "Authorization Routing Layer::Docker Authorization Router",
+        "Authorization Routing Layer::Authorization Route Configuration"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "GT 'plugin' corresponds to the Docker authorization plugin side. The predicted router and route configuration together represent the same functional area, but the boundary is too specific and shifts the generic plugin node into an authorization-routing implementation layer rather than the broader plugin boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::runner"
+      ],
+      "predicted_nodes": [
+        "Runner/Execution Layer::Runner Image (veinmind-runner)",
+        "Runner/Execution Layer::Parallel-Container Startup Script ./run.sh"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT runner node is decomposed into the runner image and startup script, which is functionally equivalent and placed in an appropriate runner/execution boundary."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::containerd"
+      ],
+      "predicted_nodes": [
+        "External Systems::Containerd"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same external infrastructure dependency, and the boundary attribution is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::docker"
+      ],
+      "predicted_nodes": [
+        "External Systems::Docker"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same Docker dependency, with an equivalent external-system boundary."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::dockerfile"
+      ],
+      "predicted_nodes": [
+        "Packaging/Example Tools Layer::Python Example Container",
+        "Packaging/Example Tools Layer::Dependency Installer (pip install -r requirements.txt",
+        "Packaging/Example Tools Layer::Entrypoint Script /tool/entrypoint.sh"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Dockerfile-related backend node is represented by the example container packaging/build concerns. The predicted nodes cover the same container build/package responsibilities and are reasonably placed in a packaging/example tools boundary."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::kubernetes"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No semantically equivalent predicted node is present."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::tarball"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No semantically equivalent predicted node is present."
+    },
+    {
+      "gt_nodes": [
+        "SDK::interact system"
+      ],
+      "predicted_nodes": [
+        "SDK Integration Layer::SDK Integration Adapter",
+        "External Systems::veinmind-sdk / libveinmind"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The SDK interaction responsibility is split into the actual SDK/library dependency and the integration adapter. The boundary attribution is consistent with SDK integration."
+    },
+    {
+      "gt_nodes": [
+        "SDK::plugin system"
+      ],
+      "predicted_nodes": [
+        "Authorization Routing Layer::Docker Authorization Router",
+        "Authorization Routing Layer::Authorization Route Configuration"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The plugin system in GT is broader than Docker authorization routing. The predicted nodes capture only one plugin-oriented subsystem and place it in a specific routing layer, which is a partial but not fully equivalent match."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::cluster"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node clearly represents cluster scanning targets."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::container"
+      ],
+      "predicted_nodes": [
+        "Scanning Services Layer::Container Scanner",
+        "CLI Layer::scan-container Command Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The container scan target is represented by the container scanner and its CLI handler. The boundary attribution is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::iac"
+      ],
+      "predicted_nodes": [
+        "Scanning Services Layer::IaC Scanner",
+        "CLI Layer::IaC Scan Command Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The IaC scan target is represented by the IaC scanner and command handler, which aligns with the GT target boundary."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::image"
+      ],
+      "predicted_nodes": [
+        "Scanning Services Layer::Image Scanner",
+        "CLI Layer::scan-image Command Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The image scan target is correctly decomposed into scanner and CLI handler within an appropriate scanning/CLI boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Infrastructure and Input Backends::kubernetes",
+    "Infrastructure and Input Backends::tarball",
+    "Scan Targets::cluster"
+  ],
+  "unmatched_predicted_nodes": [
+    "Authorization Routing Layer::Docker Plugin Action Result",
+    "Authorization Routing Layer::NoneDockerPlugin (Fallback",
+    "External Systems::Docker authorization request interface",
+    "External Systems::Docker Registry",
+    "External Systems::DockerHub",
+    "External Systems::Harbor",
+    "External Systems::veinmind/python3.6:1.3.1-stretch",
+    "Packaging/Example Tools Layer::Dependency Installer (pip install -r requirements.txt",
+    "Packaging/Example Tools Layer::Entrypoint Script /tool/entrypoint.sh",
+    "Packaging/Example Tools Layer::Python Example Container",
+    "Packaging/Example Tools Layer::scan.py",
+    "Reporting/Data Model Layer::IaC Report Model",
+    "Reporting/Data Model Layer::Malicious-File Report Model",
+    "Reporting/Data Model Layer::Report Event Client",
+    "Scanning Services Layer::IaC Result Grouper",
+    "Scanning Services Layer::Policy Library Loader"
+  ]
+}

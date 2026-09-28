@@ -1,0 +1,71 @@
+@startuml
+!define RECTANGLE class
+
+title Teamgram Server System Architecture
+
+' Define core system components
+RECTANGLE "Client Access Layer" as client_access {
+    + MTProto Server Interface
+    + Encrypted Session Handler
+}
+
+RECTANGLE "BFF / Access Services" as bff_layer {
+    + Authorization Key Management
+    + Session Management
+    + Salt Handling Services
+}
+
+RECTANGLE "Business Logic Layer" as business_layer {
+    + Registration Service
+    + Phone Verification Service
+    + RPC Message Processing
+    + Future Salts Service
+}
+
+RECTANGLE "Infrastructure Adapters" as infra_adapters {
+    + MySQL Adapter
+    + Redis Adapter
+    + Etcd Adapter
+    + Kafka Adapter
+    + MinIO Adapter
+}
+
+RECTANGLE "Supporting Components" as support_components {
+    + Media Wrapper (FFmpeg/FFprobe)
+    + Async Workers
+    + Push Notification Service
+    + Sync Services
+}
+
+' Define external systems
+database "MySQL" as mysql
+database "Redis" as redis
+database "etcd" as etcd
+queue "Kafka" as kafka
+storage "MinIO" as minio
+node "FFmpeg/FFprobe" as ffmpeg
+
+' Define relationships between internal components
+client_access --> bff_layer : uses
+bff_layer --> business_layer : delegates
+business_layer --> infra_adapters : integrates with
+infra_adapters --> support_components : supports
+
+' Define connections to external infrastructure
+infra_adapters --> mysql : stores data
+infra_adapters --> redis : caches data
+infra_adapters --> etcd : coordination
+infra_adapters --> kafka : messaging
+infra_adapters --> minio : file storage
+support_components --> ffmpeg : media processing
+
+' Group all internal components under one system boundary
+package "Teamgram Server (Go-based)" {
+    client_access
+    bff_layer
+    business_layer
+    infra_adapters
+    support_components
+}
+
+@enduml

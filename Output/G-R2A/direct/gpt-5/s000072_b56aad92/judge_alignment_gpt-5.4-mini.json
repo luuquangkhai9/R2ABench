@@ -1,0 +1,142 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Drivers and Kernels::OS Kernel\\nMemory Hooks",
+        "UCX::UCM Memory Services::Memory Hooks"
+      ],
+      "predicted_nodes": [
+        "Build & Verification Environment::Autotools Workflow\\n(autogen.sh, configure, make",
+        "Build & Verification Environment::hwloc tarball",
+        "Build & Verification Environment::hwloc-tree/",
+        "Build & Verification Environment::run-embedded-tests.sh"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "These predicted nodes collectively represent the manual embedded hwloc build/verification workflow, which has no counterpart in the GT list. They are not equivalent to the memory-hooks nodes in GT, so this is not a valid semantic match."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Message Passing API\\nTag Matching, Rendezvous"
+      ],
+      "predicted_nodes": [
+        "ParaStation/psmpi Repository::Send Path::Send State Machine",
+        "Send Path Data::Envelope",
+        "Send Path Data::LIBA",
+        "Send Path Data::OD",
+        "Send Path Data::Packet Buffer",
+        "Send Path Data::Pinned User Data",
+        "Send Path Data::Data Descriptor (DD",
+        "Send Path Data::Network Send Descriptor (DD",
+        "Send Path Data::Flow-Control State"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a generic UCX tag-matching/rendezvous protocol layer, while the predicted nodes describe a specific PSMPI send state machine and its data/control fields. The functionality is related at a broad messaging level but not semantically equivalent enough for a strict node match, and the boundary/context is different."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Transport Selection"
+      ],
+      "predicted_nodes": [
+        "Transport Layers::OFI/libfabric",
+        "Transport Layers::UCX",
+        "CH4 Integration Context::CH4 Netmod"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted nodes indicate integration/transport options, but the GT node is specifically the UCP transport-selection protocol component. This is only loosely related and the boundary attribution does not match the GT architectural layer."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCT Hardware Transports\\nLow Level API::RDMA Verbs Transport\\nInfiniBand, ROCE, OPA",
+        "Drivers and Kernels::RDMA Verbs Driver"
+      ],
+      "predicted_nodes": [
+        "Global::Linux Verbs Environment",
+        "Linux Verbs Environment::libibverbs",
+        "Linux Verbs Environment::librdmacm",
+        "ParaStation/psmpi Repository::Embedded Libfabric Module::Verbs Provider"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted verbs-provider and Linux verbs dependencies align conceptually with the GT RDMA verbs transport/driver area. The predicted boundary is different, but it is semantically equivalent at a high level and not a severe boundary error."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCS Services\\nCommon Utilities::Data Structures",
+        "UCX::UCS Services\\nCommon Utilities::Memory Management",
+        "UCX::UCS Services\\nCommon Utilities::Utilities"
+      ],
+      "predicted_nodes": [
+        "Send Path Data::Data Descriptor (DD",
+        "Send Path Data::Network Send Descriptor (DD",
+        "Send Path Data::Packet Buffer",
+        "Send Path Data::Pinned User Data",
+        "Send Path Data::Flow-Control State"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT nodes are general UCX utility/service layers, while the predicted nodes are specific send-path data artifacts. They are not the same components, so this is not a valid equivalence."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Drivers and Kernels::Cray Driver",
+    "Drivers and Kernels::OS Kernel\\nEthernet",
+    "Drivers and Kernels::OS Kernel\\nHost Memory",
+    "Drivers and Kernels::OS Kernel\\nMemory Hooks",
+    "Drivers and Kernels::RDMA Verbs Driver",
+    "Drivers and Kernels::ROCm / CUDA",
+    "Global::Applications\\nHPC, AI, ML, Big Data",
+    "Global::Hardware",
+    "Programming Models and Frameworks::AI / ML Frameworks\\nTensorFlow, Burst Buffer",
+    "Programming Models and Frameworks::MPI\\nMPICH, Open-MPI",
+    "Programming Models and Frameworks::PGAS / SHMEM\\nOpenSHMEM, UPC, CAF, X10, Chapel",
+    "Programming Models and Frameworks::Task Runtimes\\nParsec, OCR, Legion",
+    "UCX::UCM Memory Services::Memory Hooks",
+    "UCX::UCP Protocols\\nHigh Level API::Cross-Transport Multi-Rail",
+    "UCX::UCP Protocols\\nHigh Level API::Fragmentation",
+    "UCX::UCP Protocols\\nHigh Level API::I/O API\\nStream",
+    "UCX::UCP Protocols\\nHigh Level API::PGAS API\\nRMAs, Atomics",
+    "UCX::UCP Protocols\\nHigh Level API::Software Protocols",
+    "UCX::UCP Protocols\\nHigh Level API::Task Based API\\nActive Messages",
+    "UCX::UCS Services\\nCommon Utilities::Data Structures",
+    "UCX::UCS Services\\nCommon Utilities::Memory Management",
+    "UCX::UCS Services\\nCommon Utilities::Utilities",
+    "UCX::UCT Hardware Transports\\nLow Level API::DCT",
+    "UCX::UCT Hardware Transports\\nLow Level API::Ethernet Transport\\nTCP/IP Sockets",
+    "UCX::UCT Hardware Transports\\nLow Level API::GPU Transport\\nNVIDIA CUDA, AMD ROCm",
+    "UCX::UCT Hardware Transports\\nLow Level API::Gemini / Aries Transport\\nGNI",
+    "UCX::UCT Hardware Transports\\nLow Level API::Intra-node Host Memory\\nSYSV, POSIX, KNEM, CMA, XPMEM",
+    "UCX::UCT Hardware Transports\\nLow Level API::RC",
+    "UCX::UCT Hardware Transports\\nLow Level API::UD"
+  ],
+  "unmatched_predicted_nodes": [
+    "Build & Verification Environment::Autotools Workflow\\n(autogen.sh, configure, make",
+    "Build & Verification Environment::hwloc tarball",
+    "Build & Verification Environment::hwloc-tree/",
+    "Build & Verification Environment::run-embedded-tests.sh",
+    "CH4 Integration Context::CH4 Netmod",
+    "Global::Build & Verification Environment",
+    "Global::Linux Verbs Environment",
+    "Linux Verbs Environment::Network Device",
+    "Linux Verbs Environment::libibverbs",
+    "Linux Verbs Environment::librdmacm",
+    "ParaStation/psmpi Repository::Communication Subsystem",
+    "ParaStation/psmpi Repository::Connection Manager",
+    "ParaStation/psmpi Repository::Embedded Libfabric Module::Verbs Provider",
+    "ParaStation/psmpi Repository::One-to-Many Scatter",
+    "ParaStation/psmpi Repository::Progress Manager",
+    "ParaStation/psmpi Repository::Send Path::Send State Machine",
+    "Send Path Data::Data Descriptor (DD",
+    "Send Path Data::Envelope",
+    "Send Path Data::Flow-Control State",
+    "Send Path Data::LIBA",
+    "Send Path Data::Network Send Descriptor (DD",
+    "Send Path Data::OD",
+    "Send Path Data::Packet Buffer",
+    "Send Path Data::Pinned User Data",
+    "Transport Layers::OFI/libfabric",
+    "Transport Layers::UCX"
+  ]
+}

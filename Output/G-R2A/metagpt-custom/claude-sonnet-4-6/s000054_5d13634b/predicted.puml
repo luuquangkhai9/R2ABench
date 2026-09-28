@@ -1,0 +1,174 @@
+@startuml
+skinparam backgroundColor #FAFAFA
+skinparam packageBackgroundColor #F0F4FF
+skinparam componentBackgroundColor #DDEEFF
+skinparam databaseBackgroundColor #FFF8DC
+skinparam cloudBackgroundColor #FFE4E1
+skinparam defaultFontName Arial
+skinparam arrowColor #444444
+skinparam componentBorderColor #336699
+skinparam packageBorderColor #5C6BC0
+
+' ─────────────────────────────────────────────
+' EXTERNAL SYSTEMS
+' ─────────────────────────────────────────────
+cloud "Ethereum Network\n(Blockchain Runtime)" as EthNetwork
+cloud "Ethereum Name Service\n(ENS Infrastructure)" as ENSInfra
+
+package "External Contracts" {
+  component [TKN Holder Contract\n(consults whitelist for burnability)] as TKNHolder
+}
+
+' ─────────────────────────────────────────────
+' OFF-CHAIN CALLER LAYER
+' ─────────────────────────────────────────────
+package "Off-Chain Caller Layer" {
+  component [Integrator Applications\n& Developer Scripts] as OffChainCallers
+}
+
+' ─────────────────────────────────────────────
+' NAME RESOLUTION LAYER
+' ─────────────────────────────────────────────
+package "Name Resolution Layer" {
+  component [ENSResolver\n(Resolves: Controller, Whitelist\nOracle, Licence & others)] as ENSResolver
+}
+
+' ─────────────────────────────────────────────
+' INTEGRATION BINDING LAYER
+' ─────────────────────────────────────────────
+package "Integration Binding Layer" {
+  component [ControllerBindings\n(Go — adminCount, controllerCount\nTransact, Transfer)] as ControllerBindings
+  component [GenericBindings\n(Go — Call, Transact, Transfer)] as GenericBindings
+
+  interface "Read-Only Call\nInterface" as iCall
+  interface "Transact / Transfer\nInterface" as iTransact
+}
+
+' ─────────────────────────────────────────────
+' CORE CONTRACT LAYER
+' ─────────────────────────────────────────────
+package "Core Contract Layer" {
+
+  package "Ownership & Gas" {
+    component [OwnerAddress\n(EOA — owns wallet & contracts\nGas-payment ETH held here)] as OwnerAddress
+  }
+
+  package "Wallet Custody" {
+    component [ConsumerContractWallet\n(Holds ETH & ERC20 assets\nEnforces security boundaries)] as Wallet
+  }
+
+  package "Control & Governance" {
+    component [ControllerContract\n(Controller & Admin addresses\nadminCount : uint256\ncontrollerCount : uint256)] as Controller
+  }
+
+  package "Token Policy" {
+    component [TokenWhitelist\n(Per-token: exchange rate\nloadability, burnability)] as TokenWhitelist
+  }
+
+  package "Rate & Oracle" {
+    component [Oracle / RateProvider\n(Exchange-rate data source)] as Oracle
+  }
+
+  package "Licence" {
+    component [LicenceContract\n(ENS-resolved licence contract)] as Licence
+  }
+
+}
+
+' ─────────────────────────────────────────────
+' PERSISTENT STATE
+' ─────────────────────────────────────────────
+database "Ethereum State Storage\n(Contract State, Balances, Logs)" as EthState
+
+' ─────────────────────────────────────────────
+' INTERFACES
+' ─────────────────────────────────────────────
+interface "ENS Resolution\nInterface" as iENS
+interface "Whitelist\nInterface" as iWhitelist
+interface "Oracle\nInterface" as iOracle
+interface "Controller\nInterface" as iController
+interface "Licence\nInterface" as iLicence
+
+' ─────────────────────────────────────────────
+' RELATIONSHIPS — Off-Chain → Binding Layer
+' ─────────────────────────────────────────────
+OffChainCallers --> ControllerBindings : invokes
+OffChainCallers --> GenericBindings    : invokes
+
+' ─────────────────────────────────────────────
+' RELATIONSHIPS — Binding Layer → ENS Resolution (FR-002)
+' ─────────────────────────────────────────────
+ControllerBindings --> ENSResolver : resolves contract\naddresses via ENS\nbefore interaction
+GenericBindings    --> ENSResolver : resolves contract\naddresses via ENS\nbefore interaction
+
+' ─────────────────────────────────────────────
+' RELATIONSHIPS — ENS Resolver → External & Resolved Contracts (FR-002, DE-005)
+' ─────────────────────────────────────────────
+ENSResolver --> ENSInfra       : queries ENS registry
+ENSResolver --> EthNetwork     : on-chain resolution
+ENSResolver --> Controller     : delivers resolved address
+ENSResolver --> TokenWhitelist : delivers resolved address
+ENSResolver --> Oracle         : delivers resolved address
+ENSResolver --> Licence        : delivers resolved address
+
+' ─────────────────────────────────────────────
+' RELATIONSHIPS — Binding Layer distinct read-only vs transact paths (FR-007, FR-008, NFR-003)
+' ─────────────────────────────────────────────
+ControllerBindings -( iCall
+iCall )- Controller
+
+ControllerBindings -( iTransact
+iTransact )- Controller
+
+GenericBindings -( iCall
+GenericBindings -( iTransact
+
+iCall    )- Wallet
+iTransact )- Wallet
+
+ControllerBindings --> EthNetwork : submits signed txns
+GenericBindings    --> EthNetwork : submits signed txns
+
+' ─────────────────────────────────────────────
+' RELATIONSHIPS — Name Resolution (Wallet → ENS)
+' ─────────────────────────────────────────────
+Wallet -( iENS
+iENS )- ENSResolver
+
+' ─────────────────────────────────────────────
+' RELATIONSHIPS — Core Contract Layer (internal)
+' ─────────────────────────────────────────────
+Wallet -( iWhitelist
+iWhitelist )- TokenWhitelist
+
+Wallet -( iOracle
+iOracle )- Oracle
+
+Wallet -( iController
+iController )- Controller
+
+Wallet -( iLicence
+iLicence )- Licence
+
+' Oracle is the source of exchange-rate data provided to TokenWhitelist (FR-001, FR-003)
+Oracle --> TokenWhitelist : provides exchange\nrate data
+
+' ─────────────────────────────────────────────
+' RELATIONSHIPS — Core Contracts → Blockchain State
+' ─────────────────────────────────────────────
+Wallet         --> EthState : persists asset state
+Controller     --> EthState : persists controller state
+TokenWhitelist --> EthState : persists token attributes
+Oracle         --> EthState : persists rate data
+Licence        --> EthState : persists licence data
+OwnerAddress   --> EthNetwork : signs & broadcasts txns
+
+EthNetwork --> EthState : processes txns &\nstores state
+
+' ─────────────────────────────────────────────
+' RELATIONSHIPS — External Contract Consumers
+' ─────────────────────────────────────────────
+' TKN Holder Contract consults the whitelist for burnability data (FR-003, DR-005)
+TKNHolder --> TokenWhitelist : consults for\nburnability data
+
+@enduml

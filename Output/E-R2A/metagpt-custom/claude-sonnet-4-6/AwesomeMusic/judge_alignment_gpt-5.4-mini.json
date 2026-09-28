@@ -1,0 +1,247 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer"
+      ],
+      "predicted_nodes": [
+        "Infrastructure / Data Layer::PersistentDataStore(3-Replica) Users | Scores | Favorites | Follows | Labels | Representations | Task Metadata | Hot Charts | Logs"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "Both represent the system infrastructure/data foundation, but the predicted node incorrectly collapses multiple GT infrastructure sub-bounds (MySQL, Prometheus, RabbitMQ, Redis) into a generic persistent datastore and mixes storage concerns with operational middleware, so the boundary attribution is not faithful."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::MySQL"
+      ],
+      "predicted_nodes": [
+        "Infrastructure / Data Layer::PersistentDataStore(3-Replica) Users | Scores | Favorites | Follows | Labels | Representations | Task Metadata | Hot Charts | Logs"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT MySQL node corresponds to persistent relational storage. The predicted node represents persistent storage for core business data, which is semantically aligned at the data-layer level despite not naming MySQL explicitly."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::RabbitMQ"
+      ],
+      "predicted_nodes": [
+        "Infrastructure / Data Layer::RabbitMQ 3.8.14(Message Broker",
+        "Infrastructure / Data Layer::RabbitMQ 3.8.14(Message Broker::Task Queue(Training / Classification / Recommendation / Generation"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT RabbitMQ is correctly matched to the predicted message broker and task queue nodes. The split into broker plus queue detail is acceptable and remains within the same infrastructure boundary."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::Redis"
+      ],
+      "predicted_nodes": [
+        "Infrastructure / Data Layer::PersistentDataStore(3-Replica) Users | Scores | Favorites | Follows | Labels | Representations | Task Metadata | Hot Charts | Logs"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Redis in GT is an infrastructure datastore/cache component; the predicted persistent data store is not a precise name match, but it is still placed in the correct infrastructure/data boundary without context confusion."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::Prometheus"
+      ],
+      "predicted_nodes": [
+        "Infrastructure / Data Layer::PersistentDataStore(3-Replica) Users | Scores | Favorites | Follows | Labels | Representations | Task Metadata | Hot Charts | Logs"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Prometheus is a monitoring/metrics component, but the predicted node is a generic persistent data store. This is a semantic mismatch and not a valid boundary-equivalent placement."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Backend API Server Cluster(Golang / Gin",
+        "Algorithm Layer::Algorithm Service(ML Orchestrator",
+        "Scheduling Layer::Scheduling Module(Task Coordinator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT microservice layer is correctly decomposed into backend, algorithm, and scheduling service clusters. The naming differs, but the architectural placement is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-web"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Backend API Server Cluster(Golang / Gin::BackendAPIServer(REST Interfaces",
+        "Application Layer::Backend API Server Cluster(Golang / Gin::HotChartUpdater(Attention & Popularity Charts",
+        "Application Layer::Backend API Server Cluster(Golang / Gin::RecommendationManager(Assemble Recommendation Lists",
+        "Application Layer::Backend API Server Cluster(Golang / Gin::ScoreContentManager(Score CRUD / Search / Download",
+        "Application Layer::Backend API Server Cluster(Golang / Gin::UserAccountManager(Registration / Login / Auth"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT service-web is functionally split into several backend API manager components in the prediction. This is a reasonable microservice decomposition within the backend/application layer."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-auth"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Backend API Server Cluster(Golang / Gin::UserAccountManager(Registration / Login / Auth"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted UserAccountManager covers registration, login, and authentication responsibilities corresponding to GT service-auth, and it remains within the backend/application layer."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-discovery"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No explicit service-discovery counterpart exists in the predicted list."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-scheduler"
+      ],
+      "predicted_nodes": [
+        "Scheduling Layer::Scheduling Module(Task Coordinator",
+        "Scheduling Layer::Scheduling Module(Task Coordinator::TaskPoller(Poll Status / Retry / Log Errors",
+        "Scheduling Layer::Scheduling Module(Task Coordinator::TaskSerializer(Serialize Task Metadata",
+        "Scheduling Layer::Scheduling Module(Task Coordinator::TimeTrigger(Daily 02:00 Cron",
+        "Scheduling Layer::Scheduling Module(Task Coordinator::UserTrigger(On-Demand Submission"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The scheduling service is accurately decomposed into trigger, serialization, polling, and retry/logging responsibilities. Boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone"
+      ],
+      "predicted_nodes": [
+        "Gateway Layer::Nginx 1.19.8(Reverse Proxy / Load Balancer",
+        "Gateway Layer::Nginx 1.19.8(Reverse Proxy / Load Balancer::HTTPS Termination & Traffic Distribution"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The security critical zone corresponds to the gateway boundary. Nginx reverse proxy/load balancing and HTTPS termination are semantically aligned with the GT security zone."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone::Nginx Cluster"
+      ],
+      "predicted_nodes": [
+        "Gateway Layer::Nginx 1.19.8(Reverse Proxy / Load Balancer",
+        "Gateway Layer::Nginx 1.19.8(Reverse Proxy / Load Balancer::HTTPS Termination & Traffic Distribution"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted Nginx gateway cluster correctly corresponds to the GT Nginx Cluster, with acceptable detail expansion."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone::Spring Cloud Gateway"
+      ],
+      "predicted_nodes": [
+        "Gateway Layer::Nginx 1.19.8(Reverse Proxy / Load Balancer",
+        "Gateway Layer::Nginx 1.19.8(Reverse Proxy / Load Balancer::HTTPS Termination & Traffic Distribution"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT explicitly contains Spring Cloud Gateway, but the prediction replaces it with Nginx. Although both are gateway-like, this is a concrete component substitution and not a faithful reproduction of the manual design."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone::Static Resource Server"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::WebFrontend(HTML/CSS/JS/Bootstrap",
+        "External Clients::MIDI-Capable Player(External Client-Side"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No dedicated static resource server node is present in the predicted architecture. WebFrontend and external player are not equivalent to a static resource server."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-web::web1",
+        "Awesome Music System::Micro Service Layer::service-web::web2",
+        "Awesome Music System::Micro Service Layer::service-web::web3"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Backend API Server Cluster(Golang / Gin::BackendAPIServer(REST Interfaces",
+        "Application Layer::Backend API Server Cluster(Golang / Gin::HotChartUpdater(Attention & Popularity Charts",
+        "Application Layer::Backend API Server Cluster(Golang / Gin::RecommendationManager(Assemble Recommendation Lists",
+        "Application Layer::Backend API Server Cluster(Golang / Gin::ScoreContentManager(Score CRUD / Search / Download",
+        "Application Layer::Backend API Server Cluster(Golang / Gin::UserAccountManager(Registration / Login / Auth"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The three GT web instances are represented as a clustered backend API server set. This is a valid aggregation/decomposition at the service-instance level."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-auth::auth1",
+        "Awesome Music System::Micro Service Layer::service-auth::auth2",
+        "Awesome Music System::Micro Service Layer::service-auth::auth3"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Backend API Server Cluster(Golang / Gin::UserAccountManager(Registration / Login / Auth"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The three auth instances are consolidated into one auth/account manager component, which is acceptable as an instance-level aggregation."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Awesome Music System::Micro Service Layer::service-discovery::discovery1",
+    "Awesome Music System::Micro Service Layer::service-discovery::discovery2",
+    "Awesome Music System::Micro Service Layer::service-discovery::discovery3",
+    "Awesome Music System::Micro Service Layer::service-scheduler::scheduler1",
+    "Awesome Music System::Micro Service Layer::service-scheduler::scheduler2",
+    "Awesome Music System::Micro Service Layer::service-scheduler::scheduler3",
+    "Awesome Music System::Micro Service Layer::service-web::web1",
+    "Awesome Music System::Micro Service Layer::service-web::web2",
+    "Awesome Music System::Micro Service Layer::service-web::web3",
+    "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx1",
+    "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx2",
+    "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx3",
+    "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway1",
+    "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway2",
+    "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway3",
+    "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server1",
+    "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server2",
+    "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server3"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::External Clients",
+    "Infrastructure / Data Layer::Apache Hadoop 3.2.2(Distributed File Storage",
+    "Infrastructure / Data Layer::Apache Hadoop 3.2.2(Distributed File Storage::ABC Score Files",
+    "Infrastructure / Data Layer::Apache Hadoop 3.2.2(Distributed File Storage::GPT-2 Model Parameters",
+    "Infrastructure / Data Layer::Apache Hadoop 3.2.2(Distributed File Storage::LSTM Score Representations(Binary Vectors",
+    "Infrastructure / Data Layer::Apache Hadoop 3.2.2(Distributed File Storage::MIDI Files(≤4 min",
+    "Application Layer::Backend API Server Cluster(Golang / Gin::BackendAPIServer(REST Interfaces",
+    "Application Layer::Backend API Server Cluster(Golang / Gin::HotChartUpdater(Attention & Popularity Charts",
+    "Application Layer::Backend API Server Cluster(Golang / Gin::RecommendationManager(Assemble Recommendation Lists",
+    "Application Layer::Backend API Server Cluster(Golang / Gin::ScoreContentManager(Score CRUD / Search / Download",
+    "Application Layer::Backend API Server Cluster(Golang / Gin::UserAccountManager(Registration / Login / Auth",
+    "External Clients::MIDI-Capable Player(External Client-Side",
+    "Gateway Layer::Nginx 1.19.8(Reverse Proxy / Load Balancer",
+    "Gateway Layer::Nginx 1.19.8(Reverse Proxy / Load Balancer::HTTPS Termination & Traffic Distribution",
+    "Infrastructure / Data Layer::RabbitMQ 3.8.14(Message Broker",
+    "Infrastructure / Data Layer::RabbitMQ 3.8.14(Message Broker::Task Queue(Training / Classification / Recommendation / Generation",
+    "Infrastructure / Data Layer::etcd 3.4.15(Distributed Coordination",
+    "Infrastructure / Data Layer::etcd 3.4.15(Distributed Coordination::Distributed Lock & Coordination Store",
+    "Presentation Layer::WebFrontend(HTML/CSS/JS/Bootstrap",
+    "Scheduling Layer::Scheduling Module(Task Coordinator",
+    "Scheduling Layer::Scheduling Module(Task Coordinator::TaskPoller(Poll Status / Retry / Log Errors",
+    "Scheduling Layer::Scheduling Module(Task Coordinator::TaskSerializer(Serialize Task Metadata",
+    "Scheduling Layer::Scheduling Module(Task Coordinator::TimeTrigger(Daily 02:00 Cron",
+    "Scheduling Layer::Scheduling Module(Task Coordinator::UserTrigger(On-Demand Submission"
+  ]
+}

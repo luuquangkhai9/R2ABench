@@ -1,0 +1,215 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot::Community Management"
+      ],
+      "predicted_nodes": [
+        "Application Service Layer::Community Service::Post Service",
+        "Application Service Layer::Community Service::Comment & Reply Service",
+        "Application Service Layer::Community Service::Favorites Service",
+        "Application Service Layer::Community Service::Search & Recommendation Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT community management module is split into several community-focused application services with equivalent responsibilities. The layer attribution is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot::Game System"
+      ],
+      "predicted_nodes": [
+        "Application Service Layer::Game Service::Game Logic Orchestrator",
+        "Application Service Layer::Game Service::Game Session Service",
+        "Application Service Layer::Game Service::Game State Service",
+        "Application Service Layer::Game Service::Save Management Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT game system is decomposed into finer game services covering orchestration, session, state, and save management. The boundary/layer mapping is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot::Notification Module"
+      ],
+      "predicted_nodes": [
+        "Application Service Layer::Notification Service::Notification Delivery Service",
+        "Application Service Layer::Notification Service::Notification Engine"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The notification module is split into delivery and processing/engine responsibilities. This is a valid refinement within the application/service layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot::User Management"
+      ],
+      "predicted_nodes": [
+        "Application Service Layer::User Service::User Authentication Service",
+        "Application Service Layer::User Service::User Management Service",
+        "Application Service Layer::User Service::User Profile Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT user management module is decomposed into authentication, user admin/management, and profile handling services. The placement remains within the correct business/application boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot::Favorites Module"
+      ],
+      "predicted_nodes": [
+        "Application Service Layer::Community Service::Favorites Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the favorites functionality, and the application service boundary is semantically aligned with the GT business module."
+    },
+    {
+      "gt_nodes": [
+        "Global::Permission Control"
+      ],
+      "predicted_nodes": [
+        "Application Service Layer::Administration Service::Admin Governance Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The access control concern exists, but the AI placed it inside an admin governance service rather than as a global cross-cutting permission control concern, causing a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Global::Log Recording"
+      ],
+      "predicted_nodes": [
+        "Infrastructure & Operations::Monitoring & Logging",
+        "Data Storage Layer::MySQL Database::System Schema::audit_logs",
+        "Data Storage Layer::MySQL Database::System Schema::system_events"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT global logging concern is represented by infrastructure monitoring/logging plus audit/system event persistence. This is a reasonable semantic decomposition across infrastructure and storage boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Read/Write Database"
+      ],
+      "predicted_nodes": [
+        "Data Access Layer::Data Access Objects",
+        "Data Access Layer::GORM ORM"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT read/write database access layer is decomposed into DAO and ORM responsibilities. The data access boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer::MySQL"
+      ],
+      "predicted_nodes": [
+        "Data Storage Layer::MySQL Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the MySQL database layer; the boundary naming differs but is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Frontend UI Layer::Vue3"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Vue.js / Nuxt.js Frontend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Vue3 is covered by the frontend client node that explicitly includes Vue.js/Nuxt.js. The boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Frontend UI Layer::TypeScript"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Vue.js / Nuxt.js Frontend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "TypeScript is part of the frontend technology stack represented by the frontend client node. The attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Frontend UI Layer::element-plus"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Vue.js / Nuxt.js Frontend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Element Plus is a frontend UI library and is reasonably encompassed by the frontend client node."
+    },
+    {
+      "gt_nodes": [
+        "Frontend UI Layer::Vite2"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Vue.js / Nuxt.js Frontend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Vite2 is part of the frontend build/tooling stack and fits within the frontend client boundary."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Ajax Interaction"
+      ],
+      "predicted_nodes": [
+        "API Gateway / Load Balancer::API Gateway",
+        "API Gateway / Load Balancer::Load Balancer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT presentation-layer AJAX interaction is not equivalent to an API gateway/load balancer layer. This is a severe boundary mismatch from client-side interaction to network infrastructure."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Business Layer::Spring Boot",
+    "Data Layer::Data Caching",
+    "Data Layer::Storage",
+    "Presentation Layer::Ajax Interaction::GET Request",
+    "Presentation Layer::Ajax Interaction::POST Request",
+    "Presentation Layer::Template Rendering"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application Service Layer::AI Integration Service::AIGC Content Service",
+    "Application Service Layer::AI Integration Service::LLM Orchestration Service",
+    "Application Service Layer::Administration Service::Admin Review Service",
+    "Application Service Layer::Administration Service::Report & Feedback Service",
+    "Client Layer::Web Browser / Client App",
+    "Data Storage Layer::MySQL Database::Admin Schema::account_bans",
+    "Data Storage Layer::MySQL Database::Admin Schema::feedback",
+    "Data Storage Layer::MySQL Database::Admin Schema::reports",
+    "Data Storage Layer::MySQL Database::Community Schema::comments",
+    "Data Storage Layer::MySQL Database::Community Schema::favorites",
+    "Data Storage Layer::MySQL Database::Community Schema::post_reviews",
+    "Data Storage Layer::MySQL Database::Community Schema::posts",
+    "Data Storage Layer::MySQL Database::Community Schema::replies",
+    "Data Storage Layer::MySQL Database::Game Schema::achievements",
+    "Data Storage Layer::MySQL Database::Game Schema::background_info",
+    "Data Storage Layer::MySQL Database::Game Schema::currency_items",
+    "Data Storage Layer::MySQL Database::Game Schema::game_saves",
+    "Data Storage Layer::MySQL Database::Game Schema::game_states",
+    "Data Storage Layer::MySQL Database::Notification Schema::notification_settings",
+    "Data Storage Layer::MySQL Database::Notification Schema::notifications",
+    "Data Storage Layer::MySQL Database::System Schema::audit_logs",
+    "Data Storage Layer::MySQL Database::System Schema::system_events",
+    "Data Storage Layer::MySQL Database::User Schema::administrators",
+    "Data Storage Layer::MySQL Database::User Schema::profiles",
+    "Data Storage Layer::MySQL Database::User Schema::users",
+    "External Service Layer::AIGC Media Service",
+    "External Service Layer::Email Service",
+    "External Service Layer::File Storage Service",
+    "External Service Layer::Large Language Model API",
+    "Infrastructure & Operations::All Services",
+    "Infrastructure & Operations::Docker Container Runtime",
+    "Infrastructure & Operations::Kubernetes Orchestration",
+    "Infrastructure & Operations::Monitoring & Logging",
+    "Infrastructure & Operations::Security & Vulnerability Mgmt"
+  ]
+}

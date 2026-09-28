@@ -1,0 +1,91 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::<b><u>DATABASE</u></b>\n\n* MariaDB\n  * Users\n  * Likes\n  * Photos\n  * Comments"
+      ],
+      "predicted_nodes": [
+        "Data Persistence Layer::MariaDB Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT database node accurately maps to the predicted MariaDB Database node. The boundary assignment aligns perfectly with data persistence."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\n\n* A-Frame\n* React\n* React-Router"
+      ],
+      "predicted_nodes": [
+        "Client Rendering Layer::Berlin",
+        "Client Rendering Layer::Camera",
+        "Client Rendering Layer::Hack",
+        "Client Rendering Layer::Lobby",
+        "Client Rendering Layer::Louvre",
+        "Client Rendering Layer::Milan",
+        "Client Rendering Layer::Plane",
+        "Client Rendering Layer::Rome",
+        "Client Rendering Layer::SF",
+        "Client Rendering Layer::Sky",
+        "Client Rendering Layer::TextPlane",
+        "Client UI Layer::ContentRetrievalClient",
+        "Client UI Layer::CredentialSubmissionFunction",
+        "Client UI Layer::ErrorDisplay",
+        "Client UI Layer::ReactRouter",
+        "Client UI Layer::SharedCredentialHandlers",
+        "Client UI Layer::SignInView",
+        "Client UI Layer::SignUpView",
+        "Client UI Layer::WebClientApp",
+        "External Libraries Layer::A-Frame",
+        "External Libraries Layer::React",
+        "External Libraries Layer::aframe-react",
+        "External Libraries Layer::jQuery"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT Web Client node is expanded into finer-grained elements by the AI, including A-Frame components, React UI views, UI logic functions, and specific frontend libraries. They are all correctly maintained within client and external library boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>WEB SERVER</u></b>\n\n* Node\n* Express\n* DigitalOcean (Deployment"
+      ],
+      "predicted_nodes": [
+        "Domain/Model Layer::UserModel",
+        "External Libraries Layer::bcrypt-nodejs",
+        "Server API Layer::AuthenticationRoutes",
+        "Server API Layer::ContentRoutes",
+        "Server API Layer::HTTPRouter",
+        "Server API Layer::UserController",
+        "Server API Layer::WebServer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The monolithic GT Web Server node is decomposed into server-side logic (controllers, routes, WebServer), domain models, and server-specific dependencies (bcrypt-nodejs). The server-side and domain boundaries are semantically appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b>AWS S3</b>"
+      ],
+      "predicted_nodes": [
+        "External Storage Layer::ImageStorageService (S3-style"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the AWS S3 image storage component. The AI correctly places it in the external storage boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b>REDIS CACHE</b>"
+      ],
+      "predicted_nodes": [
+        "Data Persistence Layer::Redis Cache"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Redis Cache. Placing it within the Data Persistence Layer is a valid and correct architectural boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Communication Layer::HTTP/JSON"
+  ]
+}

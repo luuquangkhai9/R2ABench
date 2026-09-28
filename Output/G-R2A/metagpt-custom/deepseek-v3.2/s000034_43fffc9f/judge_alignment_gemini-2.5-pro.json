@@ -1,0 +1,91 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "Global::MPI Runtime",
+        "Global::mpi4py"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node for the global MPI dependency is split into specific runtime and library nodes in the predicted list, both mapped to the Global boundary."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Worker\nThread"
+      ],
+      "predicted_nodes": [
+        "MPI Process (Rank N::Worker Thread Pool"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the worker thread(s) executing tasks within an MPI process. The boundaries are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Task Queue"
+      ],
+      "predicted_nodes": [
+        "MPI Process (Rank N::Worker Queue"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the queue holding tasks for the worker threads. Boundaries correctly denote the MPI Process context."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Server\nThread"
+      ],
+      "predicted_nodes": [
+        "MPI Process (Rank N::Task Stealing Manager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The server thread in the GT is responsible for managing inter-process requests, which primarily involves handling task stealing functionality as predicted by the AI. Boundaries align."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Compute node::MPI Process",
+    "Task Queue (in detail::...",
+    "Task Queue (in detail::A1",
+    "Task Queue (in detail::A2",
+    "Task Queue (in detail::A3",
+    "Task Queue (in detail::B1",
+    "Task Queue (in detail::B2",
+    "Task Queue (in detail::Level 0",
+    "Task Queue (in detail::Level 1",
+    "Task Queue (in detail::Level 2",
+    "Task Queue (in detail::Level 3",
+    "Task Queue (in detail::Level 4",
+    "Task Queue (in detail::Level 5"
+  ],
+  "unmatched_predicted_nodes": [
+    "Data Storage::Task Descriptor Storage",
+    "Data Storage::task.input",
+    "Data Storage::task.result",
+    "Environment Configuration::Environment Variables",
+    "Environment Configuration::TORC_STEALING",
+    "Environment Configuration::TORC_STEALING_CHUNK",
+    "Environment Configuration::TORC_WORKERS",
+    "Execution::HDF5 Output",
+    "Execution::Image Preprocessing",
+    "Execution::SPMD Executor",
+    "Global::Environment Configuration",
+    "Global::termcolor",
+    "MPI Process (Rank 0::Primary Application Task",
+    "MPI Process (Rank 0::torc.disable_stealing",
+    "MPI Process (Rank 0::torc.enable_stealing",
+    "MPI Process (Rank 0::torc.init",
+    "MPI Process (Rank 0::torc.launch",
+    "MPI Process (Rank 0::torc.shutdown",
+    "MPI Process (Rank 0::torc.start",
+    "Task Management::Callback Handler",
+    "Task Management::Task Scheduler",
+    "Task Management::torc.map",
+    "Task Management::torc.query",
+    "Task Management::torc.submit",
+    "Task Management::torc.wait"
+  ]
+}

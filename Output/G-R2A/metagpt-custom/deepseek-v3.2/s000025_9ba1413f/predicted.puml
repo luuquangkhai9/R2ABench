@@ -1,0 +1,65 @@
+@startuml
+
+package "Frontend Layer" {
+    component "Next.js Application" as nextjs
+    component "Session Handler" as session_handler
+    component "Frontend Form" as frontend_form
+}
+
+package "Middleware Layer" {
+    component "Task Request Middleware" as task_middleware {
+        component "Address Processor" as address_processor
+        component "Service Area Checker" as service_checker
+    }
+}
+
+package "Backend Layer" {
+    component "Firebase Functions" as firebase_functions {
+        component "Login API" as login_api
+        component "Logout API" as logout_api
+        component "OnFleet Task Handler" as onfleet_handler
+    }
+}
+
+node "Runtime Configuration" as runtime_config {
+    component "Config Mapper" as config_mapper
+}
+
+cloud "External Systems" {
+    component "External User Channels" as external_channels
+    component "OnFleet" as onfleet
+}
+
+component "Firebase Authentication" as firebase_auth
+
+' Session middleware wraps login API (not separate layer)
+login_api << (S,#ADD1B2) session middleware >>
+
+' Entry points from all channels
+external_channels --> task_middleware : "Task Requests"
+frontend_form --> task_middleware : "Form Submissions"
+nextjs --> task_middleware : "Task Requests"
+
+' Middleware decision logic
+task_middleware --> address_processor : "Process Address"
+address_processor --> service_checker : "Determine Neighborhood"
+service_checker --> onfleet_handler : "If In Service Area"
+service_checker --> nextjs : "If Out of Area\n(Error Response)"
+
+' Authentication flows
+session_handler --> login_api : "POST /api/login"
+session_handler --> logout_api : "POST /api/logout"
+session_handler --> firebase_auth : "Acquire ID Token"
+login_api --> firebase_auth : "Verify ID Token"
+logout_api --> login_api : "Invalidate Session"
+
+' Backend task creation
+onfleet_handler --> onfleet : "Create Tasks"
+
+' Configuration loading and mapping
+nextjs --> config_mapper : "Loads Mapped Config"
+login_api --> config_mapper : "Loads Mapped Config"
+firebase_functions --> config_mapper : "Loads Mapped Config"
+config_mapper --> runtime_config : "Reads & Maps\nEnvironment Variables"
+
+@enduml

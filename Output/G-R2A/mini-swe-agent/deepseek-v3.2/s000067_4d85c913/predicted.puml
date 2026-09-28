@@ -1,0 +1,135 @@
+@startuml
+!define LAYER1 #LightBlue
+!define LAYER2 #LightGreen
+!define LAYER3 #LightYellow
+!define LAYER4 #LightPink
+!define EXTERNAL #LightGray
+
+title TraceLeft Linux Tracing Framework - Architecture Diagram
+
+package "Userspace Layer" {
+  component "TraceLeft CLI" as CLI {
+    [trace command]
+    [Command dispatcher]
+  }
+  
+  component "TraceLeft Library" as LIBRARY {
+    [Probe loader]
+    [Event dispatcher]
+    [Configuration parser]
+  }
+  
+  component "Event Consumers" as CONSUMERS {
+    [Tracing tools]
+    [Auditing tools]
+  }
+  
+  component "Configuration Generator" as GENERATOR {
+    [Event metadata parser]
+    [Handler source generator]
+  }
+  
+  database "Event Configuration" as CONFIG {
+    [Proto/JSON metadata]
+    [Argument definitions]
+  }
+}
+
+package "Kernel-space Layer" {
+  component "Main eBPF Program" as MAIN_EBPF {
+    [kprobe hooks]
+    [kretprobe hooks]
+  }
+  
+  component "Handler Maps" as HANDLER_MAPS {
+    [handle_NAME_progs]
+    [handle_NAME_progs_ret]
+  }
+  
+  component "Handler eBPF Programs" as HANDLERS {
+    [Syscall handlers]
+    [File handlers]
+    [Network handlers]
+  }
+  
+  component "Perf Event Channel" as PERF_CHANNEL
+}
+
+package "External Systems" {
+  component "Linux Kernel" as KERNEL {
+    [eBPF subsystem]
+    [kprobe/kretprobe]
+  }
+  
+  component "Traced Processes" as PROCESSES {
+    [Target applications]
+  }
+  
+  component "gobpf Library" as GOBPF
+}
+
+' Connections
+CLI --> LIBRARY : "invokes"
+LIBRARY --> GENERATOR : "uses for codegen"
+GENERATOR --> CONFIG : "reads metadata"
+LIBRARY --> GOBPF : "depends on"
+LIBRARY --> MAIN_EBPF : "loads/attaches"
+MAIN_EBPF --> HANDLER_MAPS : "selects via"
+HANDLER_MAPS --> HANDLERS : "maps to"
+HANDLERS --> PERF_CHANNEL : "emits events via"
+PERF_CHANNEL --> LIBRARY : "delivers to"
+LIBRARY --> CONSUMERS : "dispatches events to"
+MAIN_EBPF --> KERNEL : "attaches to"
+KERNEL --> PROCESSES : "traces"
+HANDLERS --> PROCESSES : "monitors"
+
+' Layer boundaries
+rectangle "Userspace" {
+  CLI
+  LIBRARY
+  GENERATOR
+  CONFIG
+  CONSUMERS
+}
+
+rectangle "Kernel-space" {
+  MAIN_EBPF
+  HANDLER_MAPS
+  HANDLERS
+  PERF_CHANNEL
+}
+
+rectangle "External Dependencies" {
+  KERNEL
+  PROCESSES
+  GOBPF
+}
+
+note right of CLI
+  Provides trace command
+  for process tracing
+end note
+
+note right of GENERATOR
+  Generates eBPF handler
+  source from configuration
+end note
+
+note right of HANDLER_MAPS
+  Named per convention:
+  handle_NAME_progs
+  handle_NAME_progs_ret
+end note
+
+note right of PERF_CHANNEL
+  perf-based event channel
+  for kernel→userspace
+  event delivery
+end note
+
+note right of HANDLERS
+  Emit events with common
+  header section for dispatch
+end note
+
+@enduml

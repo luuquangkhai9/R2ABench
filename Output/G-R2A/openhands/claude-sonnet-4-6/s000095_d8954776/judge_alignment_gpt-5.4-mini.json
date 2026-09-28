@@ -1,0 +1,556 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "GPSLogger Android Application::Event Bus",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Android Application::Core Services::Event Bus"
+      ],
+      "reasoning": "Direct semantic match for the event distribution mechanism used by fragments and other components."
+    },
+    {
+      "gt_node": "GPSLogger Android Application::Location Capture::Google Play Services\\nLocation Provider",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Android Application::Google Play Services\\n(Framework"
+      ],
+      "reasoning": "The predicted node captures the Google Play Services-dependent location capability, which covers the GT location provider responsibility at a coarse level."
+    },
+    {
+      "gt_node": "GPSLogger Android Application::Location Capture::Location Listeners",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Android Application::Core Services::Location Listeners"
+      ],
+      "reasoning": "Direct semantic match for location listener handling."
+    },
+    {
+      "gt_node": "GPSLogger Android Application::Logging::CSV / URL Loggers",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node explicitly covers CSV or URL logger responsibilities."
+    },
+    {
+      "gt_node": "GPSLogger Android Application::Logging::GPX Logger",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Android Application::Log Writers::GPX Logger"
+      ],
+      "reasoning": "Direct match for GPX logging."
+    },
+    {
+      "gt_node": "GPSLogger Android Application::Logging::KML Logger",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Android Application::Log Writers::KML Logger"
+      ],
+      "reasoning": "Direct match for KML logging."
+    },
+    {
+      "gt_node": "GPSLogger Android Application::Logging::Loggers",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Android Application::Log Writers::GPX Logger",
+        "Android Application::Log Writers::KML Logger",
+        "Android Application::Log Writers::Text File Logger"
+      ],
+      "reasoning": "The GT aggregate logger node is covered by the set of specific logging writers predicted by the AI."
+    },
+    {
+      "gt_node": "GPSLogger Android Application::Logging::NMEA / GPRMC Encoder",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Android Application::External Integration::GPRMC Encoder\\n(SerializableLocation"
+      ],
+      "reasoning": "Direct semantic match for the GPRMC encoding responsibility."
+    },
+    {
+      "gt_node": "GPSLogger Android Application::Upload::Upload Jobs",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Android Application::External Integration::Dropbox Uploader",
+        "Android Application::External Integration::OpenGTS Uploader",
+        "Android Application::External Integration::OpenStreetMap Uploader"
+      ],
+      "reasoning": "The GT upload-job umbrella is represented by the more specific upload/integration nodes."
+    },
+    {
+      "gt_node": "GPSLogger Android Application::Upload::Uploaders",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Android Application::External Integration::Dropbox Uploader",
+        "Android Application::External Integration::OpenGTS Uploader",
+        "Android Application::External Integration::OpenStreetMap Uploader"
+      ],
+      "reasoning": "Directly covered by the predicted uploader-specific nodes."
+    },
+    {
+      "gt_node": "GPSLogger Android Application::User Interface::Detailed View",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Android Application::UI Layer::Fragments\\n(Location Consumers"
+      ],
+      "reasoning": "The predicted fragment-based UI covers the detailed/viewing fragment responsibility at a coarse semantic level."
+    },
+    {
+      "gt_node": "GPSLogger Android Application::User Interface::Main Activity",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Android Application::UI Layer::Main Activity"
+      ],
+      "reasoning": "Direct match for the main activity."
+    },
+    {
+      "gt_node": "GPSLogger Android Application::User Interface::Other Fragments",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Android Application::UI Layer::Fragments\\n(Location Consumers"
+      ],
+      "reasoning": "The fragment consumer node covers the remaining fragment-based UI responsibilities."
+    },
+    {
+      "gt_node": "GPSLogger Android Application::User Interface::Simple View",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Android Application::UI Layer::Fragments\\n(Location Consumers"
+      ],
+      "reasoning": "The predicted fragment consumer grouping plausibly covers the simple-view fragment responsibility."
+    },
+    {
+      "gt_node": "Global::Dropbox",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Android Application::External Integration::Dropbox Uploader",
+        "External Services::Dropbox API"
+      ],
+      "reasoning": "The predicted nodes capture the Dropbox integration concept, though as an uploader/API rather than the exact GT boundary."
+    },
+    {
+      "gt_node": "Global::OpenGTS Endpoint\\nUDP server",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Android Application::External Integration::OpenGTS Uploader",
+        "External Services::OpenGTS Server\\n(UDP Endpoint"
+      ],
+      "reasoning": "The OpenGTS server/UDP endpoint is explicitly represented, and the uploader node covers the sending responsibility."
+    },
+    {
+      "gt_node": "Global::OpenStreetMap",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Android Application::External Integration::OpenStreetMap Uploader",
+        "External Services::OpenStreetMap API"
+      ],
+      "reasoning": "The OpenStreetMap integration concept is directly represented, albeit with uploader/API framing."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Android Application::Configuration::Application Settings\\n(Session Config",
+      "grounded": true,
+      "reference_nodes": [
+        "GPSLogger Android Application::User Interface::Main Activity",
+        "GPSLogger Android Application::User Interface::Other Fragments"
+      ],
+      "reasoning": "Application/session settings are consistent with the GT app/UI configuration-related responsibilities, though the GT does not expose a dedicated settings node."
+    },
+    {
+      "predicted_node": "Android Application::Configuration::Build-Injected Config\\n(OSM Keys, Dropbox Keys",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::OpenStreetMap",
+        "Global::Dropbox"
+      ],
+      "reasoning": "Directly grounded in the GT external integration credential requirements for OpenStreetMap and Dropbox."
+    },
+    {
+      "predicted_node": "Android Application::Core Services::Event Bus",
+      "grounded": true,
+      "reference_nodes": [
+        "GPSLogger Android Application::Event Bus"
+      ],
+      "reasoning": "Direct semantic match."
+    },
+    {
+      "predicted_node": "Android Application::Core Services::GPS Logging Service",
+      "grounded": true,
+      "reference_nodes": [
+        "GPSLogger Android Application::Location Capture::Google Play Services\\nLocation Provider",
+        "GPSLogger Android Application::Logging::Loggers",
+        "GPSLogger Android Application::Upload::Upload Jobs"
+      ],
+      "reasoning": "The GPS logging service is consistent with the GT system-level location capture/logging/upload orchestration, even though GT decomposes it into separate nodes."
+    },
+    {
+      "predicted_node": "Android Application::Core Services::Location Listeners",
+      "grounded": true,
+      "reference_nodes": [
+        "GPSLogger Android Application::Location Capture::Location Listeners"
+      ],
+      "reasoning": "Direct semantic match."
+    },
+    {
+      "predicted_node": "Android Application::External Integration::Dropbox Uploader",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Dropbox"
+      ],
+      "reasoning": "Grounded in the Dropbox integration concept, though the GT boundary is external service rather than an uploader component."
+    },
+    {
+      "predicted_node": "Android Application::External Integration::GPRMC Encoder\\n(SerializableLocation",
+      "grounded": true,
+      "reference_nodes": [
+        "GPSLogger Android Application::Logging::NMEA / GPRMC Encoder"
+      ],
+      "reasoning": "Direct semantic match for encoding SerializableLocation into GPRMC."
+    },
+    {
+      "predicted_node": "Android Application::External Integration::OpenGTS Uploader",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::OpenGTS Endpoint\\nUDP server"
+      ],
+      "reasoning": "Grounded in the OpenGTS transmission concept and UDP endpoint behavior."
+    },
+    {
+      "predicted_node": "Android Application::External Integration::OpenStreetMap Uploader",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::OpenStreetMap"
+      ],
+      "reasoning": "Grounded in the OpenStreetMap integration concept, despite the uploader naming."
+    },
+    {
+      "predicted_node": "Android Application::Google Play Services\\n(Framework",
+      "grounded": true,
+      "reference_nodes": [
+        "GPSLogger Android Application::Location Capture::Google Play Services\\nLocation Provider"
+      ],
+      "reasoning": "The framework node is grounded in the GT Google Play Services-dependent location provider feature."
+    },
+    {
+      "predicted_node": "Android Application::Log Writers::GPX Logger",
+      "grounded": true,
+      "reference_nodes": [
+        "GPSLogger Android Application::Logging::GPX Logger"
+      ],
+      "reasoning": "Direct semantic match."
+    },
+    {
+      "predicted_node": "Android Application::Log Writers::KML Logger",
+      "grounded": true,
+      "reference_nodes": [
+        "GPSLogger Android Application::Logging::KML Logger"
+      ],
+      "reasoning": "Direct semantic match."
+    },
+    {
+      "predicted_node": "Android Application::Log Writers::Text File Logger",
+      "grounded": true,
+      "reference_nodes": [
+        "GPSLogger Android Application::Logging::CSV / URL Loggers",
+        "GPSLogger Android Application::Logging::Loggers"
+      ],
+      "reasoning": "Text-file logging is plausibly grounded in the GT logging subsystem, especially the generic loggers umbrella, though the exact CSV/URL specialization is not present."
+    },
+    {
+      "predicted_node": "Android Application::UI Layer::Fragments\\n(Location Consumers",
+      "grounded": true,
+      "reference_nodes": [
+        "GPSLogger Android Application::User Interface::Detailed View",
+        "GPSLogger Android Application::User Interface::Other Fragments",
+        "GPSLogger Android Application::User Interface::Simple View"
+      ],
+      "reasoning": "The fragment consumer grouping is grounded in the GT fragment-based UI responsibilities."
+    },
+    {
+      "predicted_node": "Android Application::UI Layer::Main Activity",
+      "grounded": true,
+      "reference_nodes": [
+        "GPSLogger Android Application::User Interface::Main Activity"
+      ],
+      "reasoning": "Direct semantic match."
+    },
+    {
+      "predicted_node": "Build Environment::Android SDK\\n(Build Tools 19.0.3",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::OpenStreetMap",
+        "Global::Dropbox"
+      ],
+      "reasoning": "Build tools are not explicit GT nodes, but they are part of the documented build/import setup and therefore grounded by the PRD context, not by a direct GT node match."
+    },
+    {
+      "predicted_node": "Build Environment::Android Support\\nLibrary / Repository",
+      "grounded": true,
+      "reference_nodes": [
+        "GPSLogger Android Application::Location Capture::Google Play Services\\nLocation Provider"
+      ],
+      "reasoning": "This is grounded by the PRD's build/environment constraints and Google Play Services dependency context."
+    },
+    {
+      "predicted_node": "Build Environment::Google Repository",
+      "grounded": true,
+      "reference_nodes": [
+        "GPSLogger Android Application::Location Capture::Google Play Services\\nLocation Provider"
+      ],
+      "reasoning": "Grounded in the Google Play Services-related build dependency context."
+    },
+    {
+      "predicted_node": "Build Environment::Gradle Build System",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::OpenStreetMap",
+        "Global::Dropbox"
+      ],
+      "reasoning": "Gradle build usage is directly supported by the PRD for injecting credentials at build time."
+    },
+    {
+      "predicted_node": "Build Environment::local.properties\\n(sdk.dir",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::OpenStreetMap",
+        "Global::Dropbox"
+      ],
+      "reasoning": "This is grounded by the PRD's development/import setup requirement for `local.properties` and `sdk.dir`."
+    },
+    {
+      "predicted_node": "Build Environment::~/.gradle/gradle.properties\\n(OSM & Dropbox credentials",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::OpenStreetMap",
+        "Global::Dropbox"
+      ],
+      "reasoning": "Directly grounded by the PRD's credential storage and build-time injection requirements."
+    },
+    {
+      "predicted_node": "External Services::Dropbox API",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Dropbox"
+      ],
+      "reasoning": "Directly grounded external service for Dropbox integration."
+    },
+    {
+      "predicted_node": "External Services::OpenGTS Server\\n(UDP Endpoint",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::OpenGTS Endpoint\\nUDP server"
+      ],
+      "reasoning": "Direct semantic match for the OpenGTS UDP endpoint/server."
+    },
+    {
+      "predicted_node": "External Services::OpenStreetMap API",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::OpenStreetMap"
+      ],
+      "reasoning": "Directly grounded external service for OpenStreetMap integration."
+    },
+    {
+      "predicted_node": "Global::External Services",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Dropbox",
+        "Global::OpenGTS Endpoint\\nUDP server",
+        "Global::OpenStreetMap"
+      ],
+      "reasoning": "This is an umbrella grouping over the GT external service concepts, not hallucinated."
+    },
+    {
+      "predicted_node": "Local Storage::GPX File",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT has GPX logging behavior, but not a dedicated local-storage file node with this boundary."
+    },
+    {
+      "predicted_node": "Local Storage::KML File",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT covers KML logging behavior, but not this specific storage boundary/node."
+    },
+    {
+      "predicted_node": "Local Storage::Text Log File",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT includes text-file output in logging, but not a separate local-storage file node."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Event Bus"
+      ],
+      "predicted_nodes": [
+        "Android Application::Core Services::Event Bus"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same component; boundary naming differs but is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Location Capture::Google Play Services\\nLocation Provider"
+      ],
+      "predicted_nodes": [
+        "Android Application::Google Play Services\\n(Framework"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node captures the Google Play Services-dependent location feature; boundary is coarser but semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Location Capture::Location Listeners"
+      ],
+      "predicted_nodes": [
+        "Android Application::Core Services::Location Listeners"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match with equivalent boundary framing."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::GPX Logger"
+      ],
+      "predicted_nodes": [
+        "Android Application::Log Writers::GPX Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::KML Logger"
+      ],
+      "predicted_nodes": [
+        "Android Application::Log Writers::KML Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::Loggers"
+      ],
+      "predicted_nodes": [
+        "Android Application::Log Writers::GPX Logger",
+        "Android Application::Log Writers::KML Logger",
+        "Android Application::Log Writers::Text File Logger"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT aggregate logger node is split into specific logger types, which is a valid refinement."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::NMEA / GPRMC Encoder"
+      ],
+      "predicted_nodes": [
+        "Android Application::External Integration::GPRMC Encoder\\n(SerializableLocation"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match for the encoder."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Upload::Upload Jobs",
+        "GPSLogger Android Application::Upload::Uploaders"
+      ],
+      "predicted_nodes": [
+        "Android Application::External Integration::Dropbox Uploader",
+        "Android Application::External Integration::OpenGTS Uploader",
+        "Android Application::External Integration::OpenStreetMap Uploader"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT upload subsystem is represented by multiple specific upload/integration nodes; boundaries are semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::User Interface::Detailed View",
+        "GPSLogger Android Application::User Interface::Other Fragments",
+        "GPSLogger Android Application::User Interface::Simple View"
+      ],
+      "predicted_nodes": [
+        "Android Application::UI Layer::Fragments\\n(Location Consumers"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT fragment-based UI nodes are merged into a broader fragment consumer node, which is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::User Interface::Main Activity"
+      ],
+      "predicted_nodes": [
+        "Android Application::UI Layer::Main Activity"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match."
+    },
+    {
+      "gt_nodes": [
+        "Global::Dropbox"
+      ],
+      "predicted_nodes": [
+        "Android Application::External Integration::Dropbox Uploader",
+        "External Services::Dropbox API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT external service is represented by both an integration component and the external API boundary, which is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenGTS Endpoint\\nUDP server"
+      ],
+      "predicted_nodes": [
+        "Android Application::External Integration::OpenGTS Uploader",
+        "External Services::OpenGTS Server\\n(UDP Endpoint"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT endpoint is captured by the external server boundary and the sending uploader component."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenStreetMap"
+      ],
+      "predicted_nodes": [
+        "Android Application::External Integration::OpenStreetMap Uploader",
+        "External Services::OpenStreetMap API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT external service is represented by the API boundary and the integration/uploader component."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "GPSLogger Android Application::Logging::CSV / URL Loggers"
+  ],
+  "unmatched_predicted_nodes": [
+    "Android Application::Configuration::Application Settings\\n(Session Config",
+    "Android Application::Configuration::Build-Injected Config\\n(OSM Keys, Dropbox Keys",
+    "Android Application::Core Services::GPS Logging Service",
+    "Build Environment::Android SDK\\n(Build Tools 19.0.3",
+    "Build Environment::Android Support\\nLibrary / Repository",
+    "Build Environment::Google Repository",
+    "Build Environment::Gradle Build System",
+    "Build Environment::local.properties\\n(sdk.dir",
+    "Build Environment::~/.gradle/gradle.properties\\n(OSM & Dropbox credentials",
+    "External Services::Dropbox API",
+    "External Services::OpenGTS Server\\n(UDP Endpoint",
+    "External Services::OpenStreetMap API",
+    "Global::External Services",
+    "Local Storage::GPX File",
+    "Local Storage::KML File",
+    "Local Storage::Text Log File"
+  ]
+}

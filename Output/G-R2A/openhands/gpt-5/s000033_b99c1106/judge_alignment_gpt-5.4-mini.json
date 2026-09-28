@@ -1,0 +1,88 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver"
+      ],
+      "predicted_nodes": [
+        "Docker Compose 3.7 Environment::Airflow Webserver + Scheduler\\n(LocalExecutor)\\nHTTP 8282\\nPySpark installed"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Airflow container responsible for scheduling and Spark job submission. The predicted node adds deployment details but stays within the same Docker Compose environment boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Cluster Manager\\n(Spark Standalone"
+      ],
+      "predicted_nodes": [
+        "Docker Compose 3.7 Environment::Spark Standalone Cluster\\n(Spark 2.4.5 / Hadoop 2.6::Spark Master\\ncluster: 7077\\nUI: 8181\\nhostname: spark"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT cluster manager corresponds to the Spark master/standalone cluster. The boundary attribution remains consistent within the Docker Compose Spark cluster context."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark"
+      ],
+      "predicted_nodes": [
+        "Docker Compose 3.7 Environment::Jupyter / PySpark Notebook\\nHTTP 8888\\nSpark App UIs 4040-4080"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Jupyter/PySpark notebook service. The additional exposed ports are consistent with the same service boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Postgres"
+      ],
+      "predicted_nodes": [
+        "Docker Compose 3.7 Environment::Postgres\\n(port 5432)\\nAirflow metadata"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These are the same Postgres persistence component. The predicted node correctly stays within the Docker Compose environment boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 1"
+      ],
+      "predicted_nodes": [
+        "Docker Compose 3.7 Environment::Spark Standalone Cluster\\n(Spark 2.4.5 / Hadoop 2.6::Spark Worker 1"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote Spark Worker 1 in the standalone cluster. The predicted boundary is semantically equivalent to the GT Spark Workers package."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 2"
+      ],
+      "predicted_nodes": [
+        "Docker Compose 3.7 Environment::Spark Standalone Cluster\\n(Spark 2.4.5 / Hadoop 2.6::Spark Worker 2"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote Spark Worker 2 and remain within the correct Spark worker cluster boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 3"
+      ],
+      "predicted_nodes": [
+        "Docker Compose 3.7 Environment::Spark Standalone Cluster\\n(Spark 2.4.5 / Hadoop 2.6::Spark Worker 3"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote Spark Worker 3 and the boundary attribution is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Docker Compose Environment::Spark Workers::Worker N",
+    "Global::Data Engineer"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Docker Compose 3.7 Environment"
+  ]
+}

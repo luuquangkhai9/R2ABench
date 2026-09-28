@@ -1,0 +1,110 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Result"
+      ],
+      "predicted_nodes": [
+        "JSeats Library::Data Model::Result Model"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The 'Result' data object from the GT is correctly identified as the 'Result Model' by the AI. Placing it within a 'Data Model' package inside the main 'JSeats Library' is a more specific and accurate architectural refinement compared to the generic 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tally"
+      ],
+      "predicted_nodes": [
+        "JSeats Library::Data Model::Tally Model\\\\n(Candidates + Vote Counts"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The 'Tally' data object from the GT is correctly identified as the 'Tally Model'. Placing it within a 'Data Model' package is a standard and correct architectural practice, improving on the GT's 'Global' placement."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::Parameters",
+        "Seat Allocation Configuration::ResultDecorators",
+        "Seat Allocation Configuration::TallyFilters"
+      ],
+      "predicted_nodes": [
+        "JSeats Library::Data Model::Processor Configuration\\\\n(Properties / Method / Filters / Decorators"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated several individual configuration items from the GT into a single 'Processor Configuration' object, which aligns with PRD FR-011 and DR-007. Placing this configuration object in the 'Data Model' is a valid architectural choice, semantically consistent with the GT's 'Seat Allocation Configuration' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::Seat Allocation\\nMethod"
+      ],
+      "predicted_nodes": [
+        "JSeats Library::Allocation Methods Registry::Equal Proportions\\\\n(Huntington-Hill",
+        "JSeats Library::Allocation Methods Registry::Highest Averages Methods\\\\n(D Hondt / Sainte-Lague / Imperiali / Danish",
+        "JSeats Library::Allocation Methods Registry::Largest Remainder Methods\\\\n(Hare / Droop / Imperiali",
+        "JSeats Library::Allocation Methods Registry::Majority Methods\\\\n(Simple / Qualified / Absolute",
+        "JSeats Library::Allocation Methods Registry::Ranked Methods\\\\n(By Votes"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly expanded the single abstract 'Seat Allocation Method' from the GT into a detailed list of method families as specified in PRD FR-003. Grouping them under an 'Allocation Methods Registry' is an excellent and accurate architectural refinement of the GT's 'Seat Allocation Configuration' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::TieBreaker"
+      ],
+      "predicted_nodes": [
+        "JSeats Library::Processing Layer::Tie-Breaking Rules"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are semantically equivalent. The GT places 'TieBreaker' in 'Configuration' (as it is a configurable item per the PRD), while the AI places 'Tie-Breaking Rules' in the 'Processing Layer' (where the logic is executed). Both are reasonable architectural viewpoints, and this difference does not constitute a severe boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Processor::Decorate"
+      ],
+      "predicted_nodes": [
+        "JSeats Library::Processing Layer::Result Decorator Chain"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The 'Decorate' process step in the GT is correctly mapped to the 'Result Decorator Chain'. The AI's boundary 'JSeats Library::Processing Layer' is a perfect semantic equivalent to the GT's 'Seat Allocation Processor' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Processor::Filter"
+      ],
+      "predicted_nodes": [
+        "JSeats Library::Processing Layer::Tally Filter Chain"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The 'Filter' process step in the GT is correctly mapped to the 'Tally Filter Chain'. The AI's boundary 'JSeats Library::Processing Layer' is semantically equivalent to the GT's 'Seat Allocation Processor' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Processor::Process"
+      ],
+      "predicted_nodes": [
+        "JSeats Library::Processing Layer::Allocation Engine / Processor"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The main 'Process' node from the GT is accurately identified as the 'Allocation Engine / Processor'. The AI's 'Processing Layer' boundary is a standard and semantically equivalent term for the GT's 'Seat Allocation Processor' boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "File System::Configuration Files",
+    "File System::Result Output Files",
+    "File System::Tally Input Files\\\\n(XML / CSV",
+    "Global::File System",
+    "Global::JSeats Library",
+    "JSeats Library::Entry Points::CLI Launcher",
+    "JSeats Library::Entry Points::Caller-Facing Allocation API",
+    "JSeats Library::XML I/O::XML Config / Result Writer",
+    "JSeats Library::XML I/O::XML Tally Loader\\\\n(Tally.fromXML"
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Application"
+      ],
+      "predicted_nodes": [
+        "Android Host Application::Application Code",
+        "Global::Android Host Application"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both predicted nodes represent the host application context corresponding to the GT application node. The boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_Plugin::Plugin init compile",
+        "QAPM_Plugin::QAPM_Plugin"
+      ],
+      "predicted_nodes": [
+        "Android Host Application::QAPM SDK Integrator\\n(Initialization / Config"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node captures plugin/integration initialization behavior, but it collapses two distinct GT plugin nodes and places them under the Android host application boundary rather than the plugin boundary. This is a boundary/context mismatch."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK Core::Background Scheduling Layer::QAPM Handler Manager\\n(FR-010, DR-001, DR-002",
+        "QAPM SDK Core::Configuration Management::QAPM Config Manager\\n(AD-003",
+        "QAPM SDK Core::Upload Processing Layer::Upload Scheduler\\n(FR-002, FR-003"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These predicted nodes are all subcomponents within the QAPM SDK and collectively represent the GT SDK boundary. The boundary attribution is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Collect"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK Core::Upload Processing Layer::Upload File Processor\\n(FR-005, FR-006, FR-007\\nDR-003..DR-008, NFR-005",
+        "QAPM SDK Core::Upload Processing Layer::Network Connectivity\\nGate\\n(FR-003, NFR-002, C-003",
+        "QAPM SDK Core::Background Scheduling Layer::Work Handler Init\\n(FR-001, FR-002"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT collection-related SDK node is represented by upload processing, connectivity gating, and work scheduling components in the prediction. The boundary is within the SDK core and is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK Core::Configuration Management::Configured Data Sender\\n(FR-006, DR-007",
+        "QAPM SDK Core::Upload Processing Layer::Upload Success / Failure\\nCallback Handler\\n(FR-007, DR-008",
+        "QAPM SDK Core::Apache HttpClient Instrumentation Layer::Instrumented Response\\nHandler Wrapper\\n(FR-008, DR-009"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The reporting-related GT SDK node is reflected by sender, callback handling, and response instrumentation. These remain within the SDK boundary and are semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "predicted_nodes": [
+        "Local File Storage::Pending Stored Data\\n(FR-004",
+        "Local File Storage::Upload Directory\\n/ Upload Files\\n(DR-003, DR-004, AD-002"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT storage node is split into local storage subareas used by upload processing. The boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Global::Application"
+      ],
+      "predicted_nodes": [
+        "Android Host Application::QAPM SDK Integrator\\n(Initialization / Config"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted integrator node is part of the host application context and semantically overlaps with the global application context in the GT."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM-Collect"
+      ],
+      "predicted_nodes": [
+        "Android Platform Services::Android Context\\n(FR-006, DR-006, C-001",
+        "Android Platform Services::Handler / HandlerThread\\n/ Looper\\n(C-001, NFR-004",
+        "Android Platform Services::Network Connectivity\\nService\\n(FR-003, AD-001"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "These are platform dependencies used by the SDK collection/upload behavior. They are correctly attributed to Android platform services."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "predicted_nodes": [
+        "Apache HttpClient\\nAbstractions\\n(C-002, NFR-004::HttpEntity",
+        "Apache HttpClient\\nAbstractions\\n(C-002, NFR-004::HttpResponse",
+        "Apache HttpClient\\nAbstractions\\n(C-002, NFR-004::ResponseHandler<T>",
+        "Global::Apache HttpClient\\nAbstractions\\n(C-002, NFR-004"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "These predicted nodes correctly represent the Apache HttpClient dependency area relevant to GT reporting/instrumentation behavior."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "predicted_nodes": [
+        "Local File Storage::Pending Stored Data\\n(FR-004",
+        "Local File Storage::Upload Directory\\n/ Upload Files\\n(DR-003, DR-004, AD-002"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "These predicted nodes are the concrete storage parts corresponding to the GT storage boundary."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK Core::Apache HttpClient Instrumentation Layer::Counting Input Stream\\n(DR-010, FR-009",
+        "QAPM SDK Core::Apache HttpClient Instrumentation Layer::Instrumented Response\\nEntity Wrapper\\n(FR-009, DR-010, DR-011\\nNFR-003",
+        "QAPM SDK Core::Apache HttpClient Instrumentation Layer::Instrumented Response\\nHandler Wrapper\\n(FR-008, DR-009",
+        "QAPM SDK Core::Apache HttpClient Instrumentation Layer::Transaction State\\nInspector / Instrumentor\\n(FR-008, DR-009"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These predicted nodes collectively represent the HTTP response handling/reporting instrumentation in the SDK. The boundary attribution is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK Core::Upload Processing Layer::Forced-Send / Storage\\nPop Handler\\n(FR-004"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Forced-send storage pop behavior is a storage-related subfunction and fits the GT storage boundary."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Collect"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK Core::Background Scheduling Layer::QAPM Handler Manager\\n(FR-010, DR-001, DR-002::Default Background\\nHandlerThread + Handler\\n(FR-001, FR-002, NFR-001",
+        "QAPM SDK Core::Background Scheduling Layer::QAPM Handler Manager\\n(FR-010, DR-001, DR-002::Main-Thread Handler\\n(Looper.getMainLooper)\\n(FR-010, DR-002",
+        "QAPM SDK Core::Background Scheduling Layer::Work Handler Init\\n(FR-001, FR-002"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These predicted nodes correspond to SDK background handling/scheduling components, which are within the GT SDK scope."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Collect"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK Core::Upload Processing Layer::Upload File Processor\\n(FR-005, FR-006, FR-007\\nDR-003..DR-008, NFR-005",
+        "QAPM SDK Core::Upload Processing Layer::Upload Scheduler\\n(FR-002, FR-003",
+        "QAPM SDK Core::Upload Processing Layer::Network Connectivity\\nGate\\n(FR-003, NFR-002, C-003"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Upload scheduling and processing are consistent with the GT collection-side SDK behavior and are placed within the SDK core boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Remote Upload Endpoint\\n(AD-005, outside SRS scope"
+  ]
+}

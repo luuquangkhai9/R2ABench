@@ -1,0 +1,66 @@
+@startuml
+title QAPM SDK Architecture - Component/Deployment Diagram
+
+' Define Nodes for External Systems
+node "Android Platform Services" {
+    component "Handler/Looper/Context APIs"
+}
+
+node "Apache HttpClient" {
+    component "ResponseHandler"
+    component "HttpEntity"
+    component "HttpResponse"
+}
+
+node "Network Connectivity Service" {
+    component "Network State Provider"
+}
+
+node "Local File System" {
+    component "Upload Directory & Files"
+}
+
+node "QAPM Configuration Manager" {
+    component "Configured Sender"
+}
+
+' Scheduling Layer
+package "Scheduling Layer" {
+    component "WorkHandlerManager"
+    component "QAPMHandlers"
+    component "Background HandlerThread"
+    component "Main-thread Handler"
+}
+
+' Upload Processing Layer
+package "Upload Processing Layer" {
+    component "UploadProcessor"
+    component "Storage Pop Behavior"
+}
+
+' Instrumentation Layer
+package "Instrumentation Layer" {
+    component "ResponseHandlerWrapper"
+    component "HttpEntityWrapper"
+    component "Transaction State Object"
+    component "Counting InputStream"
+}
+
+' Dependencies
+WorkHandlerManager --> "Handler/Looper/Context APIs" : uses
+WorkHandlerManager --> Background HandlerThread : initializes
+WorkHandlerManager --> "Main-thread Handler" : manages
+QAPMHandlers --> "Main-thread Handler" : maintains default
+QAPMHandlers --> Background HandlerThread : maintains default
+UploadProcessor --> QAPMHandlers : accesses handlers
+UploadProcessor --> "Network State Provider" : checks connectivity
+UploadProcessor --> "Upload Directory & Files" : accesses
+UploadProcessor --> "Configured Sender" : uses for transmission
+UploadProcessor --> Storage Pop Behavior : triggers on force send
+ResponseHandlerWrapper --> "ResponseHandler" : wraps
+ResponseHandlerWrapper --> Transaction State Object : maintains state
+HttpEntityWrapper --> "HttpEntity" : wraps
+HttpEntityWrapper --> Counting InputStream : uses for tracking
+HttpEntityWrapper --> Transaction State Object : updates with bytes read
+
+@enduml

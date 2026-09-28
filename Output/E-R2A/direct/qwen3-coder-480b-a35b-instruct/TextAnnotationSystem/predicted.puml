@@ -1,0 +1,221 @@
+@startuml
+!define RECTANGLE class
+
+title Intelligent Text Annotation System (ITAS) - System Architecture
+
+skinparam componentStyle rectangle
+
+' High-Level Components
+package "Frontend Layer" {
+    RECTANGLE VueFrontend [
+        <<Vue.js 3.0>>
+        --User Interfaces--
+        Login/Registration
+        Profile Management
+        Mining Interface
+        Upload Interface
+        Results Display
+        Project Creation/Management
+        Task Execution
+    ]
+}
+
+package "Gateway & Load Balancing" {
+    RECTANGLE Nginx [
+        <<Nginx>>
+        Reverse Proxy
+        Request Forwarding
+        Load Balancing
+    ]
+}
+
+package "Backend Layer" {
+    package "API Gateway" {
+        RECTANGLE SpringGateway [
+            <<Spring Gateway>>
+            Authentication
+            Authorization
+            Service Routing
+        ]
+    }
+
+    package "Microservices" {
+        RECTANGLE AnnotationService [
+            <<Spring Boot>>
+            --Annotation Subsystem--
+            Project Management
+            Document Management
+            Tag Management
+            Task Assignment
+            Annotation Marking
+            Result Export
+        ]
+
+        RECTANGLE MiningService [
+            <<Spring Boot>>
+            --Mining Subsystem--
+            Document Upload
+            Format Conversion
+            Model Selection
+            Information Extraction
+        ]
+
+        RECTANGLE UserService [
+            <<Spring Boot>>
+            User Registration
+            Authentication
+            Role Management
+            Profile Management
+        ]
+    }
+
+    package "Service Discovery & Configuration" {
+        RECTANGLE SpringCloud [
+            <<Spring Cloud>>
+            Service Discovery
+            Configuration Management
+            Inter-service Communication
+        ]
+    }
+}
+
+package "Asynchronous Processing" {
+    RECTANGLE RabbitMQ [
+        <<RabbitMQ>>
+        Message Queue
+        File Conversion
+        Workflow Processing
+    ]
+}
+
+package "AI/ML Models" {
+    RECTANGLE BERTModel [
+        <<BERT>>
+        Paragraph Localization
+        Entity Recognition
+    ]
+
+    RECTANGLE GPTInterface [
+        <<GPT API>>
+        Entity Annotation
+        Mining Model Invocation
+    ]
+}
+
+package "Data Layer" {
+    package "Structured Storage" {
+        RECTANGLE MySQL [
+            <<MySQL>>
+            Users
+            Projects
+            Documents
+            Tags
+            Tasks
+            Annotation Results
+        ]
+    }
+
+    package "Object Storage" {
+        RECTANGLE Minio [
+            <<Minio>>
+            Document Files
+            PDF/HTML/TXT Representations
+        ]
+    }
+
+    package "Caching" {
+        RECTANGLE Redis [
+            <<Redis>>
+            Session Cache
+            Data Cache
+        ]
+    }
+}
+
+package "Deployment" {
+    RECTANGLE Docker [
+        <<Docker>>
+        Containerization
+        Environment Consistency
+    ]
+
+    RECTANGLE TencentCloud [
+        <<Tencent Cloud>>
+        Hosting Platform
+        Runtime Environment
+    ]
+}
+
+' Relationships
+VueFrontend --> Nginx : HTTP Requests
+Nginx --> SpringGateway : Forward Requests
+SpringGateway --> AnnotationService : Route API Calls
+SpringGateway --> MiningService : Route API Calls
+SpringGateway --> UserService : Route API Calls
+
+AnnotationService --> SpringCloud : Service Discovery
+MiningService --> SpringCloud : Service Discovery
+UserService --> SpringCloud : Service Discovery
+
+AnnotationService --> MySQL : CRUD Operations
+MiningService --> MySQL : CRUD Operations
+UserService --> MySQL : CRUD Operations
+
+AnnotationService --> Minio : Store/Retrieve Documents
+MiningService --> Minio : Store/Retrieve Documents
+
+AnnotationService --> Redis : Cache Access
+MiningService --> Redis : Cache Access
+UserService --> Redis : Cache Access
+
+AnnotationService --> RabbitMQ : Async Tasks
+MiningService --> RabbitMQ : Async Tasks
+
+MiningService --> BERTModel : Paragraph Processing
+MiningService --> GPTInterface : Entity Extraction
+AnnotationService --> GPTInterface : Annotation Support
+
+RabbitMQ --> MiningService : Process Results
+RabbitMQ --> AnnotationService : Process Results
+
+Docker --> VueFrontend : Containerize
+Docker --> AnnotationService : Containerize
+Docker --> MiningService : Containerize
+Docker --> UserService : Containerize
+Docker --> SpringGateway : Containerize
+Docker --> MySQL : Containerize
+Docker --> Minio : Containerize
+Docker --> Redis : Containerize
+Docker --> RabbitMQ : Containerize
+
+TencentCloud --> Docker : Host Containers
+
+note right of AnnotationService
+    Core Functions:
+    - Project Management
+    - Document Management
+    - Tag Management
+    - Task Assignment
+    - Annotation Marking
+    - Result Export
+end note
+
+note right of MiningService
+    Core Functions:
+    - Document Upload
+    - Format Conversion
+    - Model Selection
+    - Information Extraction
+end note
+
+note top of BERTModel
+    Paragraph Localization
+    Entity Recognition
+end note
+
+note bottom of GPTInterface
+    Entity Annotation
+    Mining Model Invocation
+end note
+
+@enduml

@@ -1,0 +1,102 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Jenkins\\nController"
+      ],
+      "predicted_nodes": [
+        "Jenkins Provisioning Layer::Jenkins Master Module"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI's 'Jenkins Master Module' represents the logical code component responsible for provisioning the physical 'Jenkins Controller' instance from the GT. The 'Jenkins Provisioning Layer' is a semantically correct logical boundary for this function, distinguishing it from configuration or access concerns."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\\n(Private/Regional::Agent Node\\n(Fault Domain X",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\\n(Private/Regional::Agent Node\\n(Fault Domain Y"
+      ],
+      "predicted_nodes": [
+        "Jenkins Provisioning Layer::Jenkins Agent Module"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the multiple physical 'Agent Node' instances into a single logical 'Jenkins Agent Module' that manages their provisioning. The 'Jenkins Provisioning Layer' boundary is appropriate for this provisioning logic."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Load Balancer\\n(primary",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Load Balancer\\n(standby",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Healthcheck"
+      ],
+      "predicted_nodes": [
+        "External Systems::Load Balancer (Public Access to Jenkins"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI has logically grouped the GT's primary/standby Load Balancers and their associated Healthcheck component into a single functional node. Classifying this as an 'External System' is acceptable because the PRD (FR-012, CON-003) describes the load balancer arrangement as a prepared prerequisite for private network deployments, making it external from the workflow's perspective."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\\n(Public/Regional::Bastion\\nHost"
+      ],
+      "predicted_nodes": [
+        "External Systems::Bastion Host"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match between the physical Bastion Host and the AI's representation. The 'External Systems' boundary is correct as the PRD (FR-011, CON-003) specifies that the Bastion Host is a prepared prerequisite for which the workflow simply consumes access details."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::NAT\\nGateway"
+      ],
+      "predicted_nodes": [
+        "External Systems::NAT Connectivity for Private Subnets"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI's 'NAT Connectivity' node is the functional equivalent of the GT's 'NAT Gateway'. The 'External Systems' boundary is appropriate, as the PRD (FR-010, CON-003) defines NAT connectivity as a prepared prerequisite for private subnets, not something the workflow necessarily creates."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Internet\\nGateway",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\\n(Public/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\\n(Public/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\\n(Private/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\\n(Private/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\\n(Private/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\\n(Private/Regional::Security List"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Integration Layer::Network Attachment Manager"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly abstracted the multiple low-level OCI networking components (gateways, route tables, security lists) into a single logical 'Network Attachment Manager' function. The 'Infrastructure Integration Layer' is a semantically accurate boundary for a component that handles the interface between compute resources and network infrastructure."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Internet"
+  ],
+  "unmatched_predicted_nodes": [
+    "Access and Communication Layer::Bastion Access Handler",
+    "Access and Communication Layer::Jenkins Communication Configurator",
+    "Access and Communication Layer::SSH Key Configurator",
+    "Configuration Input Layer::JSON Input Interface",
+    "Configuration Input Layer::Variable File Interface",
+    "Encoding and Data Handling Layer::Cloud-Init Validator",
+    "External Systems::Cloud-Init",
+    "External Systems::Oracle Cloud Infrastructure (OCI",
+    "External Systems::Terraform CLI",
+    "Infrastructure Integration Layer::Existing-Infrastructure Targeting",
+    "Infrastructure Integration Layer::OCI Credential Mapper",
+    "Jenkins Provisioning Layer::Jenkins Cluster Configuration Handler",
+    "Orchestration Layer::Terraform Runner",
+    "Prerequisites and External Connectivity Layer::Private-Network Prerequisite Recorder"
+  ]
+}

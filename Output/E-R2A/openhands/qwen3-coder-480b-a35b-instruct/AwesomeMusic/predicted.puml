@@ -1,0 +1,122 @@
+@startuml
+!define RECTANGLE class
+!define DATABASE rectangle
+!define QUEUE rectangle
+!define COMPONENT rectangle
+
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam defaultTextAlignment center
+skinparam wrapWidth 200
+
+' Define styles
+skinparam rectangle {
+    borderColor black
+    borderWidth 1
+}
+
+' System boundary
+rectangle "AwesomeMusic System" as system {
+    
+    ' Web Frontend
+    RECTANGLE "Web Frontend" as frontend #LightBlue [
+        HTML, CSS, JavaScript
+        Bootstrap Framework
+        ----
+        - User registration/login
+        - Music generation interface
+        - Score upload/download
+        - Search and recommendation
+        - User profile management
+    ]
+    
+    ' Web Backend
+    RECTANGLE "Web Backend" as backend #LightGreen [
+        Golang, Gin Framework
+        ----
+        - RESTful API services
+        - Data validation and processing
+        - User session management
+        - Business logic implementation
+        - Service coordination
+    ]
+    
+    ' Database
+    DATABASE "Database" as database #LightYellow [
+        PostgreSQL/MySQL
+        ----
+        - User account data
+        - Score metadata
+        - User preferences
+        - Favorites and follows
+        - Model parameters
+    ]
+    
+    ' Algorithm Service
+    RECTANGLE "Algorithm Service" as algorithm #LightPink [
+        Python/TensorFlow/PyTorch
+        ----
+        - AI music generation
+        - MIDI to ABC conversion
+        - Track seed extraction
+        - Model training and inference
+        - Score classification
+    ]
+    
+    ' Message Queue
+    QUEUE "Message Queue" as mq #LightGray [
+        RabbitMQ
+        ----
+        - Task queuing
+        - Asynchronous processing
+        - Inter-service communication
+    ]
+    
+    ' Scheduler
+    RECTANGLE "Scheduler" as scheduler #LightCoral [
+        Cron-based Scheduler
+        ----
+        - Daily training jobs
+        - Classification tasks
+        - Recommendation updates
+        - Periodic maintenance
+    ]
+    
+    ' Storage
+    DATABASE "Storage" as storage #LightSalmon [
+        File System/HDFS
+        ----
+        - MIDI files
+        - ABC scores
+        - Model checkpoints
+        - Generated music
+    ]
+    
+    ' External Services
+    COMPONENT "External Services" as external #LightSteelBlue [
+        Hadoop, etcd, Nginx
+        ----
+        - Distributed computing
+        - Configuration management
+        - Load balancing
+    ]
+}
+
+' Define relationships
+frontend --> backend : HTTPS/TCP/IP
+backend --> database : Data access
+backend --> mq : Task queuing
+backend --> storage : File storage
+algorithm --> mq : Poll tasks
+algorithm --> storage : Read/write files
+algorithm --> database : Metadata access
+scheduler --> mq : Schedule tasks
+mq --> algorithm : Trigger processing
+external --> backend : Support services
+external --> algorithm : Support services
+
+' User actor
+actor "User" as user
+user --> frontend : Interacts with
+
+@enduml

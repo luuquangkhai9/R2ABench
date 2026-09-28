@@ -1,0 +1,73 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::TraceLeft\nCLI and library tracer"
+      ],
+      "predicted_nodes": [
+        "Kernel_Interface_Layer::event_handler_loader",
+        "Kernel_Interface_Layer::probe_manager",
+        "Library_Core_Layer::handler_code_generator",
+        "User_Interface_Layer::cli_entry_point",
+        "User_Interface_Layer::trace_command_handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT abstracts the entire userspace CLI and library into a single node, while the Predicted nodes split it into specific functional components representing the CLI entry, command handling, handler generation, and probe management."
+    },
+    {
+      "gt_nodes": [
+        "Global::Perf Event Map\nshared event map"
+      ],
+      "predicted_nodes": [
+        "Global::Perf_Event_Queue"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the perf-based event channel used to transfer emitted events from kernel space to userspace."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Prog Maps\nhandler mappings"
+      ],
+      "predicted_nodes": [
+        "Global::handle_name_progs",
+        "Global::handle_name_progs_ret"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents generic handler mapping maps, which the AI correctly identifies and splits into the specific documented handler map naming schemes described in the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Kprobe / Kretprobe\nother traced calls",
+        "Main eBPF Program::Kprobe\nentry probe",
+        "Main eBPF Program::Kretprobe\nreturn probe"
+      ],
+      "predicted_nodes": [
+        "Linux_Kernel::kprobe_kretprobe"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT specifies multiple specific kprobe and kretprobe hook points, which are aggregated by the AI into a single conceptual kprobe/kretprobe node."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Event Handler eBPF Programs::Default Handler Probes",
+    "Event Handler eBPF Programs::Handler Probe\nhandle_syscall_write",
+    "Event Handler eBPF Programs::Process Specific\nHandler Probes",
+    "Global::Prog ID Map\npid to id",
+    "Linux Kernel Functions::inet_csk_accept",
+    "Linux Kernel Functions::sys_open",
+    "Linux Kernel Functions::sys_write",
+    "Main eBPF Program::Prog Map\npid to fd",
+    "Main eBPF Program::Ret Prog Map\npid to fd"
+  ],
+  "unmatched_predicted_nodes": [
+    "External_Libraries::gobpf_library",
+    "Global::Event_Configuration_Metadata",
+    "Global::External_Libraries",
+    "Global::Linux_Kernel",
+    "Linux_Kernel::ebpf_runtime"
+  ]
+}

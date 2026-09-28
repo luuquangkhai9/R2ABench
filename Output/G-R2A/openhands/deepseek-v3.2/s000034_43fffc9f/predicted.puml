@@ -1,0 +1,186 @@
+@startuml
+skinparam componentStyle rectangle
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+
+title System Architecture: torc_py Task-Based Parallelism Library
+
+package "Python Application Layer" {
+  component "Application Code" as App
+  component "Examples" as Examples [
+Image Preprocessing
+Numerical Optimization
+Master-Worker Patterns
+SPMD Switching
+Callback Usage
+Task Stealing Demo
+  ]
+}
+
+package "torc API Layer" {
+  component "torc Python Module" as TorcAPI [
+submit(f, *args, qid=-1, callback=None, **kwargs)
+wait(tasks=None)
+map(f, *seq, chunksize=1)
+as_completed(tasks=None)
+start(f)
+init()
+launch(f)
+shutdown()
+spmd(f, *args)
+enable_stealing() / disable_stealing()
+gettime()
+worker_id() / num_workers()
+node_id() / num_nodes()
+  ]
+  
+  component "Task Descriptor" as TaskDesc [
+input()
+result()
+  ]
+}
+
+package "Task Management System" {
+  component "Task Submission Handler" as SubmitHandler [
+Cyclic Distribution (qid=-1)
+Directed Submission (qid=N)
+Callback Registration
+  ]
+  
+  component "Task Queue Manager" as QueueManager [
+Worker Queue Assignment
+Task Queue per Worker
+Queue Monitoring
+  ]
+  
+  component "Task Result Collector" as ResultCollector [
+Result Storage
+Result Retrieval
+Callback Execution
+  ]
+  
+  component "Map Executor" as MapExecutor [
+Chunk Size Configuration
+Parallel Iteration
+Result Ordering
+  ]
+}
+
+package "Parallel Execution Layer" {
+  component "Worker Thread Manager" as WorkerManager [
+Worker Creation
+Thread Pool Management
+Task Execution Dispatch
+Worker ID Assignment
+  ]
+  
+  component "MPI Process Manager" as MPIManager [
+Rank Assignment
+Process Communication
+SPMD Coordination
+Inter-process Sync
+  ]
+  
+  component "Task Stealing Engine" as StealingEngine [
+Idle Worker Detection
+Steal Request Generation
+Task Transfer
+Load Balancing
+  ]
+  
+  component "Execution Mode Switch" as ModeSwitch [
+Task-Parallel Mode
+SPMD Mode
+Mode Transition
+MPI Routine Support
+  ]
+}
+
+package "Runtime Configuration" {
+  component "Environment Variables" as EnvVars [
+TORC_WORKERS
+TORC_STEALING
+TORC_SERVER_YIELDTIME
+TORC_WORKER_YIELDTIME
+  ]
+  
+  component "Runtime Initializer" as RuntimeInit [
+Library Setup
+Worker Configuration
+MPI Initialization
+Shutdown Control
+  ]
+}
+
+package "External Dependencies" {
+  component "MPI Runtime" as MPIRuntime [
+mpi4py Integration
+Process Communication
+Collective Operations
+  ]
+  
+  component "Python Runtime" as PythonRuntime [
+Multithreading Support
+GIL Considerations
+Memory Management
+  ]
+  
+  component "Optional Packages" as OptionalPackages [
+numpy
+cma (CMA-ES)
+h5py
+Pillow (PIL)
+  ]
+}
+
+' Connections between components
+App --> TorcAPI : "API Calls"
+Examples --> TorcAPI : "Utilizes"
+TorcAPI --> SubmitHandler : "Task Submission"
+SubmitHandler --> QueueManager : "Queue Assignment"
+QueueManager --> WorkerManager : "Task Dispatch"
+WorkerManager --> MPIManager : "Process Coordination"
+WorkerManager --> StealingEngine : "Idle Status / Steal Requests"
+StealingEngine --> QueueManager : "Task Retrieval"
+QueueManager --> ResultCollector : "Completed Tasks"
+ResultCollector --> TaskDesc : "Result Storage"
+TaskDesc --> App : "Input/Result Access"
+TorcAPI --> MapExecutor : "Map Operations"
+MapExecutor --> SubmitHandler : "Chunked Tasks"
+ModeSwitch --> MPIManager : "SPMD Coordination"
+TorcAPI --> ModeSwitch : "spmd() Calls"
+RuntimeInit --> EnvVars : "Configuration Reading"
+RuntimeInit --> WorkerManager : "Worker Setup"
+RuntimeInit --> MPIManager : "MPI Initialization"
+MPIManager --> MPIRuntime : "MPI Operations"
+WorkerManager --> PythonRuntime : "Thread Management"
+Examples --> OptionalPackages : "Optional Usage"
+
+' Styling and layout improvements
+note top of MPIRuntime
+  MPI and mpi4py are required
+  for MPI-based execution
+end note
+
+note top of PythonRuntime
+  Python multithreading
+  used for worker execution
+end note
+
+note right of EnvVars
+  Default Values:
+  TORC_WORKERS = 1
+  TORC_STEALING = False
+end note
+
+note bottom of StealingEngine
+  Adaptive load balancing
+  through task stealing
+end note
+
+note right of ModeSwitch
+  Supports switching between
+  task-parallel and SPMD modes
+end note
+
+@enduml

@@ -1,0 +1,91 @@
+@startuml
+title Smart Recipe System - Layered Architecture
+
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+skinparam wrapWidth 220
+skinparam maxMessageSize 200
+
+actor General User as GeneralUser
+actor Administrator as AdminUser
+
+package Presentation Layer {
+  [Mobile App (Android/iOS)] as MobileApp
+}
+
+package Backend Layer (Spring Boot) {
+  package Control Layer {
+    [REST Controllers] as Controllers
+  }
+  package Service Layer {
+    [Auth Service] as AuthService
+    [User Service] as UserService
+    [Recipe Service] as RecipeService
+    [Search Service] as SearchService
+    [Health Analysis Service] as HealthService
+    [Recommendation Service] as RecoService
+    [Community Service] as CommunityService
+    [Admin Management Service] as AdminService
+  }
+  package Data Access Layer {
+    [Repositories / DAOs] as DAOs
+  }
+}
+
+package Inference Layer (Flask) {
+  [Model Inference API] as InferenceAPI
+  [Deep Learning Models] as DLModels
+}
+
+package Data Layer {
+  database MySQL as MySQL
+  component Redis Cache as Redis
+}
+
+package External Services {
+  [Maps/Geolocation API] as MapsAPI
+}
+
+GeneralUser --> MobileApp : Use features
+AdminUser --> MobileApp : Admin operations
+MobileApp --> Controllers : HTTPS/JSON (Ajax)
+
+Controllers --> AuthService
+Controllers --> UserService
+Controllers --> RecipeService
+Controllers --> SearchService
+Controllers --> HealthService
+Controllers --> RecoService
+Controllers --> CommunityService
+Controllers --> AdminService
+
+RecipeService --> InferenceAPI : Image/feature request
+InferenceAPI --> DLModels : Model inference
+
+UserService --> DAOs
+RecipeService --> DAOs
+HealthService --> DAOs
+RecoService --> DAOs
+CommunityService --> DAOs
+AdminService --> DAOs
+SearchService --> DAOs
+AuthService --> DAOs
+
+DAOs --> MySQL : CRUD (structured data)
+
+RecoService --> Redis : Cache profiles/history
+SearchService --> Redis : Cache queries/results
+RecipeService --> Redis : Cache hot recipes
+AuthService --> Redis : Tokens/sessions
+
+MobileApp --> MapsAPI : Merchant location display
+CommunityService --> MapsAPI : Merchant geodata
+
+Controllers ..> InferenceAPI : Internal REST
+
+note right of InferenceAPI
+Flask microservice for
+photo recognition inference
+end note
+
+@enduml

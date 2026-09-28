@@ -1,0 +1,133 @@
+@startuml
+!define RECTANGLE class
+
+title System Architecture for psmpi Communication and Verification
+
+skinparam componentStyle rectangle
+
+package "User Environment" {
+    RECTANGLE User [
+        <<actor>>
+        - Developer/tester
+        - Integrator
+        - Maintainer
+    ]
+
+    RECTANGLE CommandLineInterface [
+        CLI Tools
+        --
+        ./run-embedded-tests.sh
+        ./autogen.sh
+        ./configure
+        make
+    ]
+}
+
+package "Core System" {
+    package "Embedded hwloc Verification" {
+        RECTANGLE HwlocVerification [
+            Manual Workflow
+            --
+            + Execute tests via script
+            + Manual build & test
+            + Not part of 'make check'
+        ]
+    }
+
+    package "Communication Subsystem" {
+        RECTANGLE CommDesign [
+            Design Notes
+            --
+            + Initialization/Termination
+            + Progress Advancement
+            + Connection Establishment
+            + One-to-Many Transfer
+        ]
+
+        RECTANGLE SendStateMachine [
+            Send Path Logic
+            --
+            + Flow Control Checks
+            + Direct Access Sends
+            + Packet Buffer Packing
+            + Rendezvous Handling
+        ]
+    }
+
+    package "Libfabric Integration" {
+        RECTANGLE LibfabricModule [
+            Embedded Verbs Provider
+            --
+            + Conditional Build
+            + Dependency Constraints
+            + Linux Verbs API
+        ]
+
+        RECTANGLE VerbsDependencies [
+            Required Libraries
+            --
+            libibverbs >= 1.1.8
+            librdmacm >= 1.0.16
+        ]
+    }
+
+    package "CH4 Network Layer" {
+        RECTANGLE CH4Integration [
+            Network Module Context
+            --
+            + OFI/libfabric Support
+            + UCX Support
+        ]
+    }
+}
+
+package "External Systems" {
+    RECTANGLE LinuxVerbs [
+        Linux Verbs Stack
+        --
+        libibverbs
+        librdmacm
+    ]
+
+    RECTANGLE NetworkHardware [
+        Network Devices
+        --
+        RDMA Capable Hardware
+    ]
+}
+
+User --> CommandLineInterface : uses
+CommandLineInterface --> HwlocVerification : triggers
+CommandLineInterface --> LibfabricModule : configures/builds
+
+CommDesign --> SendStateMachine : describes
+SendStateMachine --> NetworkHardware : interacts with
+
+LibfabricModule --> VerbsDependencies : requires
+LibfabricModule --> LinuxVerbs : interfaces with
+CH4Integration --> LibfabricModule : integrates with
+
+note right of HwlocVerification
+    Manual verification workflows
+    Executed via shell scripts
+end note
+
+note right of SendStateMachine
+    Documented send path behavior:
+    - Flow control checks
+    - Direct access vs buffering
+    - Rendezvous protocol fields
+end note
+
+note right of LibfabricModule
+    Conditional build dependencies
+    Version constraints applied
+    Only active when enabled
+end note
+
+note bottom of VerbsDependencies
+    Minimum version requirements
+    Headers must match libraries
+end note
+
+@enduml

@@ -1,0 +1,172 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::User"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Mobile Users",
+        "Presentation Layer::Mobile Users::Chatbot Users",
+        "Presentation Layer::Mobile Users::Football Enthusiasts",
+        "Presentation Layer::Mobile Users::Reminder Requesters"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the user roles from the PRD's 'User Classes' section. Although it incorrectly named the parent node 'Mobile Users' for a web application, the functional role and boundary ('Presentation Layer' as the entry point) are semantically correct. It's a successful match with a minor naming inaccuracy."
+    },
+    {
+      "gt_nodes": [
+        "Global::S3"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web Frontend",
+        "Presentation Layer::Web Frontend::HTML/CSS/Bootstrap/jQuery",
+        "Presentation Layer::Web Frontend::S3 Hosted"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly expanded the 'S3' node, which the PRD specifies for hosting the frontend, into a more descriptive 'Web Frontend' component. It accurately placed it in the 'Presentation Layer' and detailed its technologies as per PRD constraints (C-001, C-003)."
+    },
+    {
+      "gt_nodes": [
+        "Global::API Gateway"
+      ],
+      "predicted_nodes": [
+        "API Gateway Layer::API Gateway",
+        "API Gateway Layer::API Gateway::Authentication",
+        "API Gateway Layer::API Gateway::JSON Payloads",
+        "API Gateway Layer::API Gateway::REST APIs"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the API Gateway and logically placed it into its own 'API Gateway Layer'. This is a semantically equivalent boundary to the GT's 'Global' and represents a good architectural refinement."
+    },
+    {
+      "gt_nodes": [
+        "Global::Cognito"
+      ],
+      "predicted_nodes": [
+        "Security Layer::Cognito",
+        "Security Layer::Cognito::Authentication",
+        "Security Layer::Cognito::User Management"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified Cognito and correctly moved it from a generic 'Global' boundary to a more specific and appropriate 'Security Layer', which aligns with its function described in NFR-001."
+    },
+    {
+      "gt_nodes": [
+        "Fixtures Service::fixtures\\nLambda",
+        "Live Score Pipeline::live_score\\nLambda",
+        "Prediction Service::prediction\\nLambda",
+        "Recommendation Service::recommendation\\nLambda",
+        "Standing Service::standing\\nLambda"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Lambda Functions",
+        "Application Layer::Lambda Functions::Backend Logic",
+        "Application Layer::Lambda Functions::Python/Node.js"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated the various specific Lambda functions from the GT's service-oriented boundaries into a single logical 'Lambda Functions' component. Placing this within a general 'Application Layer' is a valid and common architectural pattern."
+    },
+    {
+      "gt_nodes": [
+        "Notification Service::SNS",
+        "Notification Service::SQS"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Notification Service",
+        "Application Layer::Notification Service::SMS Delivery",
+        "Application Layer::Notification Service::SQS Queue"
+      ],
+      "match_type": "2:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the notification components (SQS, and SNS for SMS) from the PRD (C-006). It correctly grouped them and placed them within the 'Application Layer', which is a reasonable boundary decision, as the GT's 'Notification Service' is also a logical service boundary."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::SageMaker"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Prediction Service",
+        "Application Layer::Prediction Service::ML Predictions",
+        "Application Layer::Prediction Service::SageMaker Integration"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI successfully identified the SageMaker component for predictions (C-007). Grouping it under a 'Prediction Service' within the 'Application Layer' is a logical architectural choice, equivalent to the GT's dedicated 'Prediction Service' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Recommendation Service::Lex"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Chatbot Handler",
+        "Application Layer::Chatbot Handler::Conversation Logic",
+        "Application Layer::Chatbot Handler::Intent Processing"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the chatbot functionality (FR-009). While the GT specified AWS Lex, the AI's use of a more generic 'Chatbot Handler' is a valid interpretation of the PRD. The boundary mapping from 'Recommendation Service' to 'Application Layer' is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2",
+        "Live Score Pipeline::EC2::Kafka"
+      ],
+      "predicted_nodes": [
+        "Streaming Layer::Live Score Pipeline",
+        "Streaming Layer::Live Score Pipeline::Apache Avro",
+        "Streaming Layer::Live Score Pipeline::Kafka on EC2"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI accurately identified the 'Kafka on EC2' pipeline from the PRD (C-009) and correctly created a dedicated 'Streaming Layer'. This is semantically equivalent to the GT's 'Live Score Pipeline' boundary. The AI also correctly included 'Apache Avro', a detail from the PRD that the GT missed."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::DynamoDB\\nLive Scores",
+        "Prediction Service::DynamoDB\\nPredictions",
+        "Standing Service::DynamoDB\\nStandings"
+      ],
+      "predicted_nodes": [
+        "Data Layer::DynamoDB",
+        "Data Layer::DynamoDB::Fixtures/Results",
+        "Data Layer::DynamoDB::Match Data"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the distributed DynamoDB instances from the GT into a single component within a centralized 'Data Layer'. This is a very common and valid architectural pattern that contrasts with the GT's service-siloed data approach. The boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::Elasticsearch",
+        "Prediction Service::Elasticsearch",
+        "Standing Service::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Elasticsearch",
+        "Data Layer::Elasticsearch::Data Retrieval",
+        "Data Layer::Elasticsearch::Search Index"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Similar to DynamoDB, the AI correctly aggregated the distributed Elasticsearch instances from the GT into a single component within a centralized 'Data Layer'. This is a valid architectural choice, and the boundary is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Fixtures Service::SQS",
+    "Live Score Pipeline::EC2::M4",
+    "Live Score Pipeline::EC2::foot app"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Data Sources::Live Score Feeds",
+    "External Data Sources::Match Statistics",
+    "Global::External Data Sources",
+    "Security Layer::IAM",
+    "Security Layer::IAM::Access Control",
+    "Security Layer::IAM::Permissions"
+  ]
+}

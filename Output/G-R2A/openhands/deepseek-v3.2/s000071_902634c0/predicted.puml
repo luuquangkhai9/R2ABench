@@ -1,0 +1,139 @@
+@startuml
+
+title ClearML Agent System Architecture
+
+package "Kubernetes Cluster" {
+  package "Service Pod Mode" {
+    node "ClearML Agent Pod" as service_pod {
+      component "ClearML Agent Service" as agent_service
+      component "Docker Socket Proxy" as docker_socket
+      database "Logs" as logs
+    }
+    
+    node "Sibling Container" as sibling_container
+  }
+  
+  package "Kubernetes Glue Mode" {
+    component "Kubernetes Glue Controller" as glue_controller
+    queue "ClearML Execution Queue" as job_queue
+    
+    node "Kubernetes Job Pod" as job_pod {
+      component "Experiment Runner" as experiment_runner
+      component "Environment Installer" as env_installer
+      component "Process Monitor" as process_monitor
+    }
+  }
+}
+
+node "ClearML Server" as clearml_server {
+  component "Backend Services" as backend_services {
+    component "Events Service v2.5" as events_service
+    component "Models Service v2.4" as models_service
+  }
+  
+  component "Telemetry Receiver" as telemetry_receiver
+}
+
+cloud "External Systems" {
+  component "User Code" as user_code
+  component "GPU/Worker Machines" as worker_machines
+}
+
+' Service Pod Mode connections
+agent_service -- docker_socket : "mapped socket"
+docker_socket --> sibling_container : "manages"
+agent_service --> logs : "stdout/stderr"
+service_pod --> clearml_server : "reports & pings"
+
+' Kubernetes Glue Mode connections
+job_queue --> glue_controller : "pulls jobs"
+glue_controller --> job_pod : "creates\n(K8s job)"
+glue_controller --> clearml_server : "backend requests"
+experiment_runner --> clearml_server : "service requests"
+env_installer --> experiment_runner : "installs env"
+process_monitor --> experiment_runner : "monitors"
+
+' ClearML Server interactions
+user_code --> clearml_server : "experiment management"
+worker_machines --> clearml_server : "MLOps monitoring"
+agent_service --> backend_services : "client actions\n(create/get/get_by_id/get_all/get_all_ex)"
+experiment_runner --> backend_services : "service requests"
+
+' Telemetry connections
+agent_service --> telemetry_receiver : "periodic status reports\n(default: 2s)"
+agent_service --> telemetry_receiver : "connectivity pings\n(default: 30s)"
+
+' Data structures
+package "Data Structures" {
+  class "Worker Configuration" as worker_config {
+    + report_period_sec : int
+    + ping_period_sec : int
+    + log_stdout : boolean
+    + report_global_mem_used : boolean
+  }
+  
+  class "Histogram Request" as histogram_request {
+    + task : string
+    + samples : int
+    + key : string (iter|iso_time|timestamp)
+  }
+  
+  class "Model Delete Request" as model_delete_request {
+    + model : string
+    + force : boolean
+  }
+  
+  class "Model Object" as model_object {
+    + id : string
+    + name : string
+    + user : string
+    + company : string
+    + created : datetime
+    + task : string
+  }
+  
+  class "TableResponse" as table_response {
+    + data : List[Dict]
+  }
+}
+
+' Relationships between components and data
+backend_services --> histogram_request : "processes"
+backend_services --> model_delete_request : "processes"
+backend_services --> model_object : "returns"
+backend_services --> table_response : "returns\n(get_all/get_all_ex)"
+
+' External interfaces
+glue_controller --> "YAML Template" as yaml_template : "uses"
+job_pod --> "Experiment Environment" as experiment_env : "installs"
+
+legend right
+**Memory Reporting Scopes:**
+- Process/subprocess (default)
+- Machine-wide (when report_global_mem_used=true)
+endlegend
+
+note right of service_pod
+Long-lasting service pod
+using clearml-agent Docker image
+end note
+
+note right of glue_controller
+Converts queued jobs into
+Kubernetes jobs using YAML template
+end note
+
+note right of job_pod
+Installs environment,
+starts and monitors
+experiment process
+end note
+
+note right of backend_services
+Supports:
+- create → returns entity with response ID
+- get / get_by_id → returns mapped entity
+- get_all / get_all_ex → returns TableResponse
+end note
+
+@enduml

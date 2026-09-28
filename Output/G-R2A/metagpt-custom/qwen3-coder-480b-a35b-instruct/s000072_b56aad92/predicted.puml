@@ -1,0 +1,66 @@
+@startuml
+' Deployment & Component Diagram for psmpi Architecture
+
+' Define Nodes for Deployment Context
+node "Build Environment" {
+    package "Build Layer" {
+        component [BuildSystem] as buildsys
+    }
+}
+
+node "Test Environment" {
+    package "Test Layer" {
+        component [HwlocVerifier] as hwlocverifier
+        component [EmbeddedHwlocTests] as embeddedtests
+    }
+}
+
+node "Runtime Environment" {
+    package "Communication Layer" {
+        component [CommunicationSubsystem] as commsubsys
+        component [SendStateMachine] as sendstatemachine
+        component [FlowControlState] as flowcontrolstate
+        component [RendezvousController] as rendezvousctrl
+    }
+
+    package "Transport Layer" {
+        component [LibfabricVerbsProvider] as libfabricprovider
+    }
+
+    package "Documentation Layer" {
+        component [DesignNotes] as designnotes
+    }
+
+    cloud "External Systems" {
+        component [Linux Verbs API] as linuxverbs
+        component [[libibverbs\n(>= 1.1.8)]] as libibv
+        component [[librdmacm\n(>= 1.0.16)]] as librdmacm
+        component [OFI/libfabric] as ofilibfabric
+    }
+}
+
+' Define Dependencies and Interfaces
+hwlocverifier --> buildsys : depends on\nsuccessful build
+sendstatemachine --> commsubsys : implements\ncommunication logic
+libfabricprovider --> buildsys : integrates via\nbuild configuration
+
+libfabricprovider --> linuxverbs : uses
+libfabricprovider --> libibv : links
+libfabricprovider --> librdmacm : links
+libfabricprovider --> ofilibfabric : uses
+
+flowcontrolstate --> sendstatemachine : controls message rate
+rendezvousctrl --> sendstatemachine : manages\nLIBA, OD, envelopes
+sendstatemachine ..> commsubsys : direct access path
+sendstatemachine ..> commsubsys : buffer packing path
+sendstatemachine --> commsubsys : supports one-to-many transfers
+
+embeddedtests --> hwlocverifier : executes\nruntime verification
+hwlocverifier --> libfabricprovider : validates topology awareness
+buildsys --> libibv : requires
+buildsys --> librdmacm : requires
+
+designnotes --> commsubsys : documents behavior
+designnotes --> sendstatemachine : describes logic
+
+@enduml

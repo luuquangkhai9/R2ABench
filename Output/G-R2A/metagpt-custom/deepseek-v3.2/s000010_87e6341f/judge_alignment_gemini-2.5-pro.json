@@ -1,0 +1,120 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Flutter-based app::Android"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Flutter/Dart Client::Android"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the Android client. The boundaries 'Flutter-based app' and 'Client Layer::Flutter/Dart Client' are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Flutter-based app::iOS"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Flutter/Dart Client::iOS"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the iOS client. The boundaries are semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Flutter-based app::Web"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Flutter/Dart Client::Web"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the Web client with semantically matching boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Flutter-based app::MacOS"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Flutter/Dart Client::macOS"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the macOS client with semantically matching boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Flutter-based app::Dart"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Flutter/Dart Client",
+        "Client Layer::Dart Generated Client Code"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's generalized Dart component is split by the AI into the base Dart Client and Generated Client Code components. The boundaries remain semantically accurate."
+    },
+    {
+      "gt_nodes": [
+        "Global::gRPC Gateway\n(HTTP-gRPC Proxy)\nGolang"
+      ],
+      "predicted_nodes": [
+        "API Gateway Layer::gRPC-Gateway Middleware",
+        "API Gateway Layer::gRPC-Gateway Middleware::CreateRecipe",
+        "API Gateway Layer::gRPC-Gateway Middleware::GetRecipe",
+        "API Gateway Layer::gRPC-Gateway Middleware::ListAllRecipes",
+        "API Gateway Layer::gRPC-Gateway Middleware::UpdateRecipe"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT API Gateway node is expanded into the main middleware node and its endpoint operations. 'Global' mapping to 'API Gateway Layer' is a valid functional boundary."
+    },
+    {
+      "gt_nodes": [
+        "Hosted in Azure Kubernetes Service::Docker container::Recipes Server\n(gRPC Server)\nGolang"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Go gRPC Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "While functionally identical, the GT places the backend strictly in a deployment/infrastructure boundary (Azure Kubernetes Service/Docker container), whereas the AI places it in an abstract logical layer (Service Layer), losing the infrastructural deployment context."
+    },
+    {
+      "gt_nodes": [
+        "Global::Hosted in Azure Kubernetes Service"
+      ],
+      "predicted_nodes": [
+        "Global::Azure Kubernetes Service (AKS"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Azure Kubernetes Service infrastructure at the global boundary."
+    },
+    {
+      "gt_nodes": [
+        "Hosted in Azure Kubernetes Service::Docker container"
+      ],
+      "predicted_nodes": [
+        "Azure Kubernetes Service (AKS::AKS Deployment"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The Docker container within AKS from the GT functionally corresponds to the AKS Deployment in the predicted node. The AKS parent boundaries are semantically equivalent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Postman",
+    "Global::Test Client 1\nNodeJS",
+    "Global::Test Client 2\nGolang"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Local Kubernetes",
+    "Local Kubernetes::Kubernetes Deployment",
+    "Global::Protocol Buffers Contract",
+    "Global::Recipe Data",
+    "Global::Ingredient Data"
+  ]
+}

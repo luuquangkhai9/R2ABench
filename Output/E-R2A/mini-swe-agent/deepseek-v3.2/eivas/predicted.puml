@@ -1,0 +1,67 @@
+@startuml  
+title EIVAS - Epidemiological Investigation Visualization and Analysis System  
+Layered Architecture Diagram  
+  
+package "Presentation Layer" {  
+"  [Web Frontend Application]"  
+}  
+  
+package "Application Layer" {  
+"  [Case Management Service]"  
+"  [Analysis Service]"  
+"  [Reporting Service]"  
+} 
+  
+package "Business Logic Layer" {  
+"  [Algorithm Module]"  
+"  [Data Processing Engine]"  
+}  
+  
+package "Data Layer" {  
+"  database [Case Database]"  
+"  [External Data Sources]"  
+}  
+  
+actor "Epidemiological Form Filler" as FILLER  
+actor "Epidemiological Analyst" as ANALYST 
+  
+FILLER -- Frontend Application] : "Submits case data"  
+ANALYST -- Frontend Application] : "Requests analysis"  
+  
+[Web Frontend Application] -- Management Service] : "Manages cases"  
+[Web Frontend Application] -- Service] : "Requests analysis"  
+[Web Frontend Application] -- Service] : "Generates reports"  
+  
+[Case Management Service] -- Module] : "Requests calculations"  
+[Analysis Service] -- Module] : "Uses algorithms"  
+[Reporting Service] -- Processing Engine] : "Processes data"  
+  
+[Algorithm Module] -- Database] : "Reads/Writes analysis data"  
+[Data Processing Engine] -- Database] : "Reads/Writes processed data"  
+[Algorithm Module] -- Data Sources] : "Fetches external data" 
+  
+note right of [Web Frontend Application]  
+"  Provides interfaces for:"  
+"  - Case reporting"  
+"  - Case management"  
+"  - Map visualization"  
+"  - Statistical charts"  
+end note  
+  
+note right of [Algorithm Module]  
+"  Core algorithms:"  
+"  - Regional flow maps"  
+"  - Case clustering"  
+"  - Heat map generation"  
+"  - Statistical analysis"  
+end note  
+  
+note right of [Case Database]  
+"  Stores:"  
+"  - Case information"  
+"  - Itinerary data"  
+"  - Association data"  
+"  - Analysis results"  
+end note  
+  
+@enduml 

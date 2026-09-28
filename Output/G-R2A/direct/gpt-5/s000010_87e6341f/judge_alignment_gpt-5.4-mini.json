@@ -1,0 +1,112 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Flutter-based app::Android",
+        "Flutter-based app::iOS",
+        "Flutter-based app::Web",
+        "Flutter-based app::MacOS"
+      ],
+      "predicted_nodes": [
+        "Client Application::Flutter/Dart Client\n(Android, iOS, Web, macOS"
+      ],
+      "match_type": "4:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has separate platform nodes for the same Flutter client surface, while the prediction aggregates them into one client application node. The functional component matches and the client boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Flutter-based app::Dart"
+      ],
+      "predicted_nodes": [
+        "Shared Contract and Code Generation::Dart protoc plugin",
+        "Shared Contract and Code Generation::Generated Dart Client Stubs"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Dart node represents the Dart-side client code/tooling, which the prediction splits into the Dart protoc plugin and generated Dart client stubs. This is a reasonable decomposition within the shared contract/code generation boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::gRPC Gateway\n(HTTP-gRPC Proxy)\nGolang"
+      ],
+      "predicted_nodes": [
+        "Backend Server Stack::gRPC-Gateway\n(HTTP to gRPC"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the gRPC-Gateway middleware implemented in Go. The boundary name differs but remains semantically equivalent as a backend server-stack component."
+    },
+    {
+      "gt_nodes": [
+        "Hosted in Azure Kubernetes Service::Docker container",
+        "Hosted in Azure Kubernetes Service::Docker container::Recipes Server\n(gRPC Server)\nGolang"
+      ],
+      "predicted_nodes": [
+        "Deployment Targets::Docker Runtime",
+        "Deployment Targets::Azure Kubernetes Service (AKS",
+        "Deployment Targets::Kubernetes (Local Cluster",
+        "Deployment Targets::Local Execution",
+        "Backend Server Stack::Go gRPC Server\n(Recipe & Ingredient Services"
+      ],
+      "match_type": "2:5",
+      "is_boundary_correct": true,
+      "reasoning": "The GT groups the server container and the gRPC server under the AKS-hosted deployment hierarchy. The prediction separates deployment targets from the server component and includes Docker/Kubernetes/local execution targets, which aligns with the deployment-related architecture even though it is more decomposed."
+    },
+    {
+      "gt_nodes": [
+        "Global::Postman",
+        "Global::Test Client 1\nNodeJS",
+        "Global::Test Client 2\nGolang"
+      ],
+      "predicted_nodes": [],
+      "match_type": "3:0",
+      "is_boundary_correct": false,
+      "reasoning": "These GT test/client nodes have no corresponding predicted nodes. The prediction omits the external/testing clients entirely."
+    },
+    {
+      "gt_nodes": [
+        "Global::Hosted in Azure Kubernetes Service"
+      ],
+      "predicted_nodes": [
+        "Deployment Targets::Azure Kubernetes Service (AKS"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the AKS deployment target. The package naming differs but the architectural boundary is equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::GET /recipes\n(ListAllRecipes)\n(streaming where applicable",
+        "Global::POST /home-ingredients\n(ListAllIngredientsAtHome",
+        "Global::POST /recipe-ingredients\n(GetAllIngredientsForRecipe",
+        "Global::POST /recipes\n(addRecipe"
+      ],
+      "predicted_nodes": [],
+      "match_type": "4:0",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted list does not contain the specific HTTP endpoint nodes as separate architecture elements; these API endpoints are omitted from the diagram."
+    },
+    {
+      "gt_nodes": [
+        "Shared Contract and Code Generation::protoc",
+        "Shared Contract and Code Generation::protoc-gen-go\n+ go-grpc plugin",
+        "Shared Contract and Code Generation::protoc-gen-grpc-gateway",
+        "Shared Contract and Code Generation::Generated Go Server Stubs",
+        "Shared Contract and Code Generation::Generated Gateway Reverse-Proxy"
+      ],
+      "predicted_nodes": [
+        "Shared Contract and Code Generation::protoc",
+        "Shared Contract and Code Generation::protoc-gen-go\n+ go-grpc plugin",
+        "Shared Contract and Code Generation::protoc-gen-grpc-gateway",
+        "Shared Contract and Code Generation::Generated Go Server Stubs",
+        "Shared Contract and Code Generation::Generated Gateway Reverse-Proxy"
+      ],
+      "match_type": "5:5",
+      "is_boundary_correct": true,
+      "reasoning": "The prediction captures the same protocol buffer toolchain and generated artifacts as the GT. The boundary attribution is aligned with shared contract and code generation."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

@@ -1,0 +1,395 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Infrastructure & Support::Data Exchange"
+      ],
+      "predicted_nodes": [
+        "Mobile Device::Integration & API Layer::Inter-Module Interface Contracts"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the modular data exchange/interface contract layer within the application architecture. The predicted boundary is more specific but semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure & Support::Performance Optimization"
+      ],
+      "predicted_nodes": [
+        "Mobile Device::On-Device Sensing & Evaluation Layer::Pose Estimation Engine",
+        "Mobile Device::On-Device Sensing & Evaluation Layer::Posture Evaluation Engine",
+        "Server Infrastructure::Server-side Application Layer::Recommendation Service",
+        "Server Infrastructure::Server-side Application Layer::Report Generation Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a coarse performance/optimization concern, while the predicted nodes split it into concrete performance-sensitive processing components. This is a reasonable refinement and the boundaries remain architecture-consistent."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure & Support::Stability Construction"
+      ],
+      "predicted_nodes": [
+        "Mobile Device::Security & Access Control::Data Leakage Protection Controls",
+        "Server Infrastructure::Security & Access Control::Authentication & Authorization Service",
+        "Server Infrastructure::Security & Access Control::SQL Injection Protection Module"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a broad stability/security-support concern, and the predicted nodes map to concrete reliability/security controls. The boundary attribution is still appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Native Modules::Camera Call"
+      ],
+      "predicted_nodes": [
+        "Mobile Device::On-Device Sensing & Evaluation Layer::Camera Capture Module",
+        "Mobile Device::On-Device Sensing & Evaluation Layer::Camera Capability Checker",
+        "Mobile Device::Mobile Presentation Layer::Exercise Interface Module"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The core capability is camera invocation/capture. The AI split it into capture plus capability checking and the exercising UI entry point, which is acceptable and still within the mobile device boundary."
+    },
+    {
+      "gt_nodes": [
+        "Native Modules::Data Processing"
+      ],
+      "predicted_nodes": [
+        "Mobile Device::On-Device Sensing & Evaluation Layer::Exercise State Monitor",
+        "Mobile Device::On-Device Sensing & Evaluation Layer::Pose Estimation Engine",
+        "Mobile Device::On-Device Sensing & Evaluation Layer::Posture Evaluation Engine",
+        "Server Infrastructure::Server-side Application Layer::Progress Tracking Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These predicted nodes represent the concrete data-processing responsibilities of exercise monitoring, pose estimation, evaluation, and progress tracking. The split is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Native Modules::GPU Computing"
+      ],
+      "predicted_nodes": [
+        "Mobile Device::On-Device Sensing & Evaluation Layer::Pose Estimation Engine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "GPU computing is an implementation capability commonly associated with pose estimation acceleration. The predicted placement under on-device sensing/evaluation is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Native Modules::Linear Algebra Library"
+      ],
+      "predicted_nodes": [
+        "Mobile Device::On-Device Sensing & Evaluation Layer::Pose Estimation Engine",
+        "Mobile Device::On-Device Sensing & Evaluation Layer::Posture Evaluation Engine"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a supporting mathematical computation capability, and the predicted engines likely depend on it. This is a reasonable functional mapping, though indirect."
+    },
+    {
+      "gt_nodes": [
+        "Native Modules::Model Loading / TensorFlow"
+      ],
+      "predicted_nodes": [
+        "Mobile Device::On-Device Sensing & Evaluation Layer::Pose Estimation Engine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Pose estimation engine typically encapsulates model loading/inference. The semantic match is strong."
+    },
+    {
+      "gt_nodes": [
+        "Native Modules::Permission Requests"
+      ],
+      "predicted_nodes": [
+        "Server Infrastructure::Security & Access Control::Authentication & Authorization Service",
+        "Mobile Device::Security & Access Control::Data Leakage Protection Controls"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is about mobile platform permission requests, while the predicted nodes are broader auth/security controls. This is not a faithful boundary match because user/system permission prompts on the device are not the same as backend authentication/authorization or data leakage controls."
+    },
+    {
+      "gt_nodes": [
+        "Native Modules::Screen Recording"
+      ],
+      "predicted_nodes": [
+        "Mobile Device::On-Device Sensing & Evaluation Layer::Camera Capture Module",
+        "Mobile Device::Mobile Screen Capture API",
+        "Mobile Device::Casting Subsystem::Screen Capture & Encoder"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node corresponds to screen/video capture functionality, and the predicted nodes decompose it into capture API and casting-side encoding. This is boundary-consistent for the mobile device."
+    },
+    {
+      "gt_nodes": [
+        "Native Modules::Socket Communication"
+      ],
+      "predicted_nodes": [
+        "Mobile Device::Casting Subsystem::Casting Command Channel",
+        "Mobile Device::Casting Subsystem::Casting Discovery & Connection Module",
+        "Mobile Device::Casting Subsystem::Casting Streaming Module",
+        "Server Infrastructure::Integration & API Layer::Server API Endpoints"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Socket communication is functionally represented by discovery/connection, command channel, streaming, and related API endpoints. The predicted split is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Native Modules::Voice Library Call"
+      ],
+      "predicted_nodes": [
+        "Mobile Device::On-Device Sensing & Evaluation Layer::Audio Prompt & Voice Feedback",
+        "Mobile Device::Mobile Presentation Layer::Exercise Interface Module"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node refers to voice/audio library usage, which is reflected by voice feedback and audio prompt functionality. The placement is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "React Native Framework::Data Caching"
+      ],
+      "predicted_nodes": [
+        "Mobile Device::On-Device Data Cache::Local Standard Movement Cache"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent local/on-device caching. The boundary is more specific but semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "React Native Framework::Data Interception"
+      ],
+      "predicted_nodes": [
+        "Mobile Device::Integration & API Layer::Inter-Module Interface Contracts",
+        "Mobile Device::Mobile Presentation Layer::Main Interface Module",
+        "Mobile Device::Mobile Presentation Layer::Exercise Interface Module"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Data interception in a framework context maps reasonably to interface/contracts and presentation-level interception of data flows. No severe boundary error is present."
+    },
+    {
+      "gt_nodes": [
+        "React Native Framework::End-to-End Communication"
+      ],
+      "predicted_nodes": [
+        "Mobile Device::Integration & API Layer::App–Server Communication Client",
+        "Mobile Device::Casting Subsystem::Casting Command Channel",
+        "Mobile Device::Casting Subsystem::Casting Streaming Module",
+        "Server Infrastructure::Integration & API Layer::Server API Endpoints"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "End-to-end communication is decomposed into app-server and casting communication paths. The architecture placement is coherent."
+    },
+    {
+      "gt_nodes": [
+        "React Native Framework::Interface Packaging"
+      ],
+      "predicted_nodes": [
+        "Mobile Device::Mobile Presentation Layer::Main Interface Module",
+        "Mobile Device::Mobile Presentation Layer::Exercise Interface Module",
+        "Mobile Device::Mobile Presentation Layer::Casting Control UI",
+        "Mobile Device::Mobile Presentation Layer::Plan Builder UI",
+        "Mobile Device::Mobile Presentation Layer::Report Viewer Module",
+        "Mobile Device::Mobile Presentation Layer::Personal Profile Module",
+        "Mobile Device::Mobile Presentation Layer::Exercise History Module",
+        "Mobile Device::Mobile Presentation Layer::Login & Registration Module"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Interface packaging corresponds to presentation/UI packaging. The predicted UI modules are a valid decomposition."
+    },
+    {
+      "gt_nodes": [
+        "React Native Framework::Native Module Bridge"
+      ],
+      "predicted_nodes": [
+        "Mobile Device::Integration & API Layer::App–Server Communication Client",
+        "Mobile Device::On-Device Sensing & Evaluation Layer::Camera Capture Module",
+        "Mobile Device::Casting Subsystem::Casting Discovery & Connection Module"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node specifically refers to the framework bridge between React Native and native modules on the device. Mapping it to app-server communication is a boundary confusion, and only some native-facing modules partially align. This is not a clean or correct boundary reproduction."
+    },
+    {
+      "gt_nodes": [
+        "React Native Framework::Redux State Management"
+      ],
+      "predicted_nodes": [
+        "Mobile Device::Mobile Presentation Layer::Main Interface Module",
+        "Mobile Device::Mobile Presentation Layer::Exercise Interface Module",
+        "Mobile Device::Mobile Presentation Layer::Plan Builder UI",
+        "Mobile Device::Mobile Presentation Layer::Report Viewer Module",
+        "Mobile Device::Mobile Presentation Layer::Personal Profile Module",
+        "Mobile Device::Mobile Presentation Layer::Exercise History Module"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Redux state management under the React Native framework is appropriately reflected by stateful presentation modules in the mobile client."
+    },
+    {
+      "gt_nodes": [
+        "React Native Framework::Server Access"
+      ],
+      "predicted_nodes": [
+        "Mobile Device::Integration & API Layer::App–Server Communication Client",
+        "Server Infrastructure::Integration & API Layer::Server API Endpoints"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Server access is correctly represented by the client-side API layer and server-side endpoints. The boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Client / Platforms::Android OS"
+      ],
+      "predicted_nodes": [
+        "Mobile Device::Android/iOS OS"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node generalizes the client OS layer to Android/iOS OS. This is semantically compatible with the GT Android platform node."
+    },
+    {
+      "gt_nodes": [
+        "Client / Platforms::Desktop PC"
+      ],
+      "predicted_nodes": [
+        "Global::Mobile Device",
+        "Global::Server Infrastructure"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is explicitly desktop PC, but the predicted nodes do not represent a desktop platform. This is a missed match, not a valid semantic equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Client / Platforms::Mobile Device"
+      ],
+      "predicted_nodes": [
+        "Global::Mobile Device"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the mobile client device boundary."
+    },
+    {
+      "gt_nodes": [
+        "Client / Platforms::Smart Watch / Wearables"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:0",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node represents wearables or smart watch support."
+    },
+    {
+      "gt_nodes": [
+        "Client / Platforms::Web Browser"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:0",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node represents a web browser platform."
+    },
+    {
+      "gt_nodes": [
+        "Client / Platforms::iOS / Apple"
+      ],
+      "predicted_nodes": [
+        "Mobile Device::Android/iOS OS"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node includes iOS support, which semantically matches the GT iOS/Apple client platform."
+    },
+    {
+      "gt_nodes": [
+        "Global::Data Exchange"
+      ],
+      "predicted_nodes": [
+        "Database System::Data Management Layer::Evaluation Data Store",
+        "Database System::Data Management Layer::Historical Records Repository",
+        "Database System::Data Management Layer::Standard Movement Repository",
+        "Database System::Data Management Layer::Training Plan Repository",
+        "Database System::Data Management Layer::User Identity & Profile Repository"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT data exchange concern is decomposed into concrete persisted data repositories. This is a reasonable structural refinement."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Client / Platforms::Desktop PC",
+    "Client / Platforms::Smart Watch / Wearables",
+    "Client / Platforms::Web Browser",
+    "Infrastructure & Support::Performance Optimization",
+    "Infrastructure & Support::Stability Construction",
+    "Native Modules::GPU Computing",
+    "Native Modules::Linear Algebra Library",
+    "Native Modules::Permission Requests",
+    "Native Modules::Screen Recording",
+    "Native Modules::Voice Library Call",
+    "React Native Framework::Data Caching",
+    "React Native Framework::Data Interception",
+    "React Native Framework::End-to-End Communication",
+    "React Native Framework::Interface Packaging",
+    "React Native Framework::Native Module Bridge",
+    "React Native Framework::Redux State Management",
+    "React Native Framework::Server Access"
+  ],
+  "unmatched_predicted_nodes": [
+    "Database System::Data Management Layer::Evaluation Data Store",
+    "Database System::Data Management Layer::Historical Records Repository",
+    "Database System::Data Management Layer::Standard Movement Repository",
+    "Database System::Data Management Layer::Training Plan Repository",
+    "Database System::Data Management Layer::User Identity & Profile Repository",
+    "Global::Database System",
+    "Global::Network (Internet",
+    "Global::Same-LAN Network",
+    "Global::Server Infrastructure",
+    "Global::Target Android Casting Device",
+    "Mobile Device::Android/iOS OS::Mobile Audio API",
+    "Mobile Device::Android/iOS OS::Mobile Camera API",
+    "Mobile Device::Android/iOS OS::Mobile Screen Capture API",
+    "Mobile Device::Casting Subsystem::Casting Command Channel",
+    "Mobile Device::Casting Subsystem::Casting Discovery & Connection Module",
+    "Mobile Device::Casting Subsystem::Casting Streaming Module",
+    "Mobile Device::Casting Subsystem::Screen Capture & Encoder",
+    "Mobile Device::Integration & API Layer::App–Server Communication Client",
+    "Mobile Device::Integration & API Layer::Inter-Module Interface Contracts",
+    "Mobile Device::Mobile Presentation Layer::Casting Control UI",
+    "Mobile Device::Mobile Presentation Layer::Exercise History Module",
+    "Mobile Device::Mobile Presentation Layer::Exercise Interface Module",
+    "Mobile Device::Mobile Presentation Layer::Login & Registration Module",
+    "Mobile Device::Mobile Presentation Layer::Main Interface Module",
+    "Mobile Device::Mobile Presentation Layer::Personal Profile Module",
+    "Mobile Device::Mobile Presentation Layer::Plan Builder UI",
+    "Mobile Device::Mobile Presentation Layer::Report Viewer Module",
+    "Mobile Device::On-Device Data Cache::Local Standard Movement Cache",
+    "Mobile Device::On-Device Sensing & Evaluation Layer::Audio Prompt & Voice Feedback",
+    "Mobile Device::On-Device Sensing & Evaluation Layer::Camera Capability Checker",
+    "Mobile Device::On-Device Sensing & Evaluation Layer::Camera Capture Module",
+    "Mobile Device::On-Device Sensing & Evaluation Layer::Exercise State Monitor",
+    "Mobile Device::On-Device Sensing & Evaluation Layer::Pose Estimation Engine",
+    "Mobile Device::On-Device Sensing & Evaluation Layer::Posture Evaluation Engine",
+    "Mobile Device::Security & Access Control::Data Leakage Protection Controls",
+    "Server Infrastructure::Integration & API Layer::Server API Endpoints",
+    "Server Infrastructure::Security & Access Control::Authentication & Authorization Service",
+    "Server Infrastructure::Security & Access Control::SQL Injection Protection Module",
+    "Server Infrastructure::Server-side Application Layer::Poster Generation Service",
+    "Server Infrastructure::Server-side Application Layer::Progress Tracking Service",
+    "Server Infrastructure::Server-side Application Layer::Recommendation Service",
+    "Server Infrastructure::Server-side Application Layer::Report Generation Service",
+    "Server Infrastructure::Server-side Application Layer::Standard Content & Plan Management Service",
+    "Target Android Casting Device::Casting Receiver",
+    "Target Android Casting Device::Command Listener"
+  ]
+}

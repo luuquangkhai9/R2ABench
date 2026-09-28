@@ -1,0 +1,58 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Web2 application stack::IceFireDB",
+        "Web3 application stack::IceFireDB"
+      ],
+      "predicted_nodes": [
+        "IceFireDB - PubSub::Site A (Private/NAT::PubSub Node A",
+        "IceFireDB - PubSub::Site B (Private/NAT::PubSub Node B",
+        "IceFireDB - Redis Proxy::Redis Proxy Agent A",
+        "IceFireDB - Redis Proxy::Redis Proxy Agent B",
+        "IceFireDB - SQLite (internal::SQL/MySQL Result Parser\\n- Fields & metadata\\n- Rows\\n- Warnings & status"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The two abstract `IceFireDB` nodes in the GT are correctly decomposed by the AI into their specific functional sub-components (PubSub Nodes, Redis Proxy Agents, internal SQLite Parser) as detailed in the SRS. The AI's boundaries (`IceFireDB - PubSub`, `IceFireDB - Redis Proxy`) accurately reflect the project structure described in the PRD, which is more precise than the GT's generic 'stack' placement."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::Applications",
+        "Web3 application stack::Applications"
+      ],
+      "predicted_nodes": [
+        "Global::Redis-based Application\\n(Client uses Redis protocol",
+        "Global::Pub/Sub App (Publisher",
+        "Global::Pub/Sub App (Subscriber"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The generic 'Applications' nodes from the GT are correctly interpreted and specified by the AI as the different types of client applications (Redis-based App, Pub/Sub Publisher/Subscriber) that interact with the system, as described in the SRS. Placing these external actors in the 'Global' boundary is a valid architectural choice."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::Platform",
+        "Web3 application stack::Platform"
+      ],
+      "predicted_nodes": [
+        "Global::P2P Pub/Sub Network\\nKademlia DHT + libp2p/IPFS-style\\nPeer discovery & routing",
+        "Global::Redis Agent Sync Network\\n(Instruction synchronization across agents"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The vague 'Platform' nodes from the GT are reasonably interpreted by the AI as the specific underlying communication networks (P2P Pub/Sub Network, Redis Agent Sync Network) that are explicitly required by the system's components according to the SRS. The 'Global' boundary is appropriate for this underlying infrastructure."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Web2 application stack::BlockChain Database\\nTransactions, Contracts,\\nCertificates and Receipts",
+    "Web2 application stack::File System\\nLarge Files and Media",
+    "Web2 application stack::Processing\\nBusiness Logic",
+    "Web3 application stack::BlockChain Database\\nTransactions, Contracts,\\nCertificates and Receipts",
+    "Web3 application stack::Decentralized File System\\nLarge Files and Media",
+    "Web3 application stack::Decentralized Processing\\nBusiness Logic"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Redis Storage\\n(Standalone or Cluster"
+  ]
+}

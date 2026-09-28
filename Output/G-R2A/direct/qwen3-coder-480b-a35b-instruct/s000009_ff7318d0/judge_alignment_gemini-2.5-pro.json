@@ -1,0 +1,133 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::API Gateway"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::API Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the API Gateway. The GT node uses a 'Global' boundary, while the AI correctly groups it under the 'AWS Cloud' infrastructure boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Cognito"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Cognito"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent AWS Cognito for authentication. The boundary mapping from 'Global' to 'AWS Cloud' is semantically valid."
+    },
+    {
+      "gt_nodes": [
+        "Global::S3"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::S3\n(Static Website Hosting"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to Amazon S3 for frontend hosting. The AI adds descriptive details but accurately identifies the service."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::DynamoDB\nLive Scores",
+        "Prediction Service::DynamoDB\nPredictions",
+        "Standing Service::DynamoDB\nStandings"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::DynamoDB"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT explicitly splits DynamoDB usage by logical microservices, whereas the AI merges them into a single infrastructural DynamoDB node in the AWS Cloud. The boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2",
+        "Live Score Pipeline::EC2::Kafka",
+        "Live Score Pipeline::EC2::M4",
+        "Live Score Pipeline::EC2::foot app"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::EC2\n(Kafka + Avro"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has granular nodes for the EC2 instance, Kafka installation, instance type, and application app. The AI consolidates these into one comprehensive EC2/Kafka node under the AWS Cloud."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::Elasticsearch",
+        "Prediction Service::Elasticsearch",
+        "Standing Service::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Elasticsearch"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "GT splits Elasticsearch across three different logical services, while AI merges it into a single infrastructure node. The boundary is semantically sound."
+    },
+    {
+      "gt_nodes": [
+        "Fixtures Service::fixtures\nLambda",
+        "Live Score Pipeline::live_score\nLambda",
+        "Prediction Service::prediction\nLambda",
+        "Recommendation Service::recommendation\nLambda",
+        "Standing Service::standing\nLambda"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Lambda"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "GT models individual Lambda functions per logical service. AI abstracts them into a single Lambda compute layer node. The grouping is valid."
+    },
+    {
+      "gt_nodes": [
+        "Notification Service::SNS"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::SNS"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes denote the SNS notification service. Transitioning from the logical 'Notification Service' to the physical 'AWS Cloud' boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Fixtures Service::SQS",
+        "Notification Service::SQS"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::SQS"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "GT details SQS queues for different logical domains; AI consolidates them into a single AWS Cloud SQS node."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::SageMaker"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::SageMaker"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both capture Amazon SageMaker for prediction services. Boundary translation is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::User",
+    "Recommendation Service::Lex"
+  ],
+  "unmatched_predicted_nodes": [
+    "AWS Cloud::IAM"
+  ]
+}

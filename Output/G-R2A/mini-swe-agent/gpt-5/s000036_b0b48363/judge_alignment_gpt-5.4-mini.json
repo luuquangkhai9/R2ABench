@@ -1,0 +1,87 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::HTTP"
+      ],
+      "predicted_nodes": [
+        "Global::Express App",
+        "Server (Node.js/Express::Express App",
+        "Global::HTTP Server (port 7000, CLI override",
+        "Server (Node.js/Express::HTTP Server (port 7000, CLI override",
+        "Server (Node.js/Express::JSON Body Parser (50mb",
+        "Server (Node.js/Express::Logging Router (/logger",
+        "Server (Node.js/Express::Socket.IO Server",
+        "Server (Node.js/Express::Static Web Server (public dir"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These predicted nodes collectively represent the GT HTTP/server-side web stack: Express app, HTTP server, body parser, logger router, Socket.IO attachment, and static file hosting. The boundary assignment to Server (Node.js/Express) is semantically correct, and the extra Global variants are redundant but not boundary-conflicting."
+    },
+    {
+      "gt_nodes": [
+        "Global::HypnoLog\\nServer"
+      ],
+      "predicted_nodes": [
+        "Global::Startup Script (bin/www",
+        "Server (Node.js/Express::Startup Script (bin/www",
+        "Global::HTTP Server (port 7000, CLI override",
+        "Server (Node.js/Express::HTTP Server (port 7000, CLI override",
+        "Global::Express App",
+        "Server (Node.js/Express::Express App"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT server application is decomposed into startup script, Express app, and HTTP server components. These are consistent with the HypnoLog Server boundary. The prediction adds both Global and Server-scoped versions, which is redundant but not a semantic boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Global::In Browser Log"
+      ],
+      "predicted_nodes": [
+        "Browser Client (UI::Ajv Validator",
+        "Browser Client (UI::Browser UI (client.html",
+        "Browser Client (UI::Received Data List (in-memory",
+        "Browser Client (UI::Socket.IO Client",
+        "Browser Client (UI::Visualizer Dispatcher",
+        "Browser Client (UI::Visualizers (canDisplay/display",
+        "Browser Client (UI::Window Dispatcher",
+        "Browser Client (UI::Windows",
+        "Global::Browser UI (client.html",
+        "Global::Socket.IO Client",
+        "Global::Ajv Validator",
+        "Global::Visualizer Dispatcher",
+        "Global::Window Dispatcher"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "This GT node corresponds to the browser-side logging/visualization client. The predicted decomposition into UI, Socket.IO client, Ajv validator, received-data list, window dispatcher, visualizer dispatcher, windows, and visualizers matches the intended browser boundary. The duplicate Global nodes are redundant, but the core boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::C#"
+      ],
+      "predicted_nodes": [
+        "External Logging Producers::Logging Producer",
+        "Global::Logging Producer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT C# node is acting as an external logging producer/client. The predicted Logging Producer node(s) represent the same external client role. The boundary is acceptable even though the exact implementation language is generalized away."
+    },
+    {
+      "gt_nodes": [
+        "Global::Python"
+      ],
+      "predicted_nodes": [
+        "External Logging Producers::Logging Producer",
+        "Global::Logging Producer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Python node is also an external logging producer/client. The predicted Logging Producer node(s) capture the same role. This is a semantically correct generalization."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

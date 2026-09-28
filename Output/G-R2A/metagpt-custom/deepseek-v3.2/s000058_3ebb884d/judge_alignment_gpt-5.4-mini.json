@@ -1,0 +1,127 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::AWS EventBridge"
+      ],
+      "predicted_nodes": [
+        "Global::AWS EventBridge",
+        "Global::Event Router",
+        "Global::Event Filter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT EventBridge node is decomposed into routing/filtering responsibilities in the prediction. Placing them in Global is semantically acceptable because the PRD describes AWS event routing and filtering as integration concerns rather than an internal bounded subsystem."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::SNS Topic\\nalerts"
+      ],
+      "predicted_nodes": [
+        "Global::SNS Topic"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted SNS Topic corresponds to the GT alerts topic. The boundary name is generalized, but still semantically equivalent to the AWS connector-account SNS topic."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::Chat notification",
+        "AWS Cloud\\nConnector Account::Email notification",
+        "AWS Cloud\\nConnector Account::Slack notification"
+      ],
+      "predicted_nodes": [
+        "Manual Operations::SNS Subscription Manager"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT nodes represent notification subscription targets, and the prediction aggregates manual subscription handling into one manager node. This aligns with the PRD requirement that SNS subscription membership is managed manually outside deployment automation."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::CMS BigMAC"
+      ],
+      "predicted_nodes": [
+        "Global::CMS BigMAC"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The same external CMS BigMAC system is identified. The predicted boundary is simplified but not semantically wrong."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nAppian Source::VPC::Appian\\nOracle DB"
+      ],
+      "predicted_nodes": [
+        "Global::Appian"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT source system is Appian with Oracle DB. The prediction captures the Appian source at a higher level, which is functionally equivalent for this architecture evaluation."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::connector::Private subnet::AWS Fargate\\nKafka Connect Cluster"
+      ],
+      "predicted_nodes": [
+        "Global::Connector Manager",
+        "Global::Connector Definitions",
+        "Global::Environment Values"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT connector runtime cluster is represented in the prediction as connector management, definitions, and environment configuration responsibilities. This is a reasonable decomposition of the connector subsystem and remains within the correct architectural area."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::topics::Private subnet::AWS Lambda\\ncreate/delete topics"
+      ],
+      "predicted_nodes": [
+        "Global::Connector Manager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The Lambda responsible for topic create/delete operations is part of connector/topic management. The predicted Connector Manager captures this operational role."
+    },
+    {
+      "gt_nodes": [
+        "Global::VPC peering\\nconnection"
+      ],
+      "predicted_nodes": [
+        "Global::AWS Services"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a broad infrastructure-related prediction that can encompass AWS networking relationships such as VPC peering. The match is loose but acceptable at the high abstraction level."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::Chat notification",
+        "AWS Cloud\\nConnector Account::Email notification",
+        "AWS Cloud\\nConnector Account::Slack notification"
+      ],
+      "predicted_nodes": [
+        "Global::SNS Topic"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "These notification endpoints are all downstream consumers of the SNS topic. The prediction focuses on the central topic rather than each target, which is acceptable given the PRD's emphasis on manually maintained subscription targets."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::AWS CLI",
+    "Global::Actions API",
+    "Global::AWS Services",
+    "Global::Deployment Metrics Collector",
+    "Global::GitHub",
+    "Global::Metrics Output",
+    "Global::PR Metrics Collector",
+    "Global::Pull Requests API",
+    "Global::Stage Lister",
+    "Manual Operations::SNS Subscription Manager",
+    "Metrics Output::Avg Time to Merge",
+    "Metrics Output::Failed Runs",
+    "Metrics Output::Passed Runs"
+  ]
+}

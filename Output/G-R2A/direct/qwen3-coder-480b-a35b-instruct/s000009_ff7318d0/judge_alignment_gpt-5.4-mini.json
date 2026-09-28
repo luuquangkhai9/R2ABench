@@ -1,0 +1,141 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::API Gateway"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::API Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same component; the AWS Cloud boundary is semantically equivalent to the GT global deployment boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Cognito"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Cognito"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same authentication service with an equivalent AWS boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::S3"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::S3\n(Static Website Hosting"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same hosting/storage service; the predicted node includes the static website hosting role, which is consistent with the GT S3 placement."
+    },
+    {
+      "gt_nodes": [
+        "Notification Service::SNS"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::SNS"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same notification service; AWS Cloud boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Notification Service::SQS",
+        "Fixtures Service::SQS"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::SQS"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT contains two SQS usages in different services, while the prediction aggregates them into one SQS node. This is a valid merge because the underlying component is the same and the boundary is still consistent."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::SageMaker"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::SageMaker"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same ML prediction platform with an equivalent AWS boundary."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::Elasticsearch",
+        "Standing Service::Elasticsearch",
+        "Live Score Pipeline::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Elasticsearch"
+      ],
+      "match_type": "3:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT uses Elasticsearch in multiple functional contexts, while the prediction aggregates it into a single infrastructure node. This is acceptable as a merged storage/search component with no boundary confusion."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::DynamoDB\\nPredictions",
+        "Standing Service::DynamoDB\\nStandings",
+        "Live Score Pipeline::DynamoDB\\nLive Scores"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::DynamoDB"
+      ],
+      "match_type": "3:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has multiple DynamoDB-backed domain stores, and the predicted diagram merges them into a single DynamoDB node. This is semantically consistent at the infrastructure layer."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2",
+        "Live Score Pipeline::EC2::Kafka",
+        "Live Score Pipeline::EC2::M4",
+        "Live Score Pipeline::EC2::foot app"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::EC2\n(Kafka + Avro"
+      ],
+      "match_type": "4:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node represents the EC2-hosted live score pipeline, including Kafka/Avro. Although it collapses subcomponents, it still correctly corresponds to the GT EC2 boundary and is not a severe context error."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::live_score\\nLambda",
+        "Prediction Service::prediction\\nLambda",
+        "Standing Service::standing\\nLambda",
+        "Fixtures Service::fixtures\\nLambda",
+        "Recommendation Service::recommendation\\nLambda"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Lambda"
+      ],
+      "match_type": "5:1",
+      "is_boundary_correct": true,
+      "reasoning": "The prediction aggregates multiple Lambda functions into one Lambda infrastructure node. This is a valid merge at the platform layer, with no incorrect frontend/backend boundary crossing."
+    },
+    {
+      "gt_nodes": [
+        "Global::User"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "No corresponding architectural component is predicted for the user actor node."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Recommendation Service::Lex"
+  ],
+  "unmatched_predicted_nodes": [
+    "AWS Cloud::IAM"
+  ]
+}

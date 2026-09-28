@@ -1,0 +1,154 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Browser Clients::Client Browser\\nPlayer 1",
+        "Browser Clients::Client Browser\\nPlayer 2",
+        "Browser Clients::Client Browser\\nPlayer 3"
+      ],
+      "predicted_nodes": [
+        "Global::Browser Client\\n(Three.js",
+        "Browser Client\\n(Three.js::3D Game Renderer\\n(Three.js",
+        "Browser Client\\n(Three.js::Heartbeat Manager\\n(ping/pong, 60s",
+        "Browser Client\\n(Three.js::Inbound Message Handler",
+        "Browser Client\\n(Three.js::Message Serializer\\n([event, data] JSON",
+        "Browser Client\\n(Three.js::Reconnect Manager",
+        "Browser Client\\n(Three.js::Room Player Count Display",
+        "Browser Client\\n(Three.js::Room/Player Context Store\\n(roomId, playerId, shipIndex",
+        "Browser Client\\n(Three.js::Server List Store",
+        "Browser Client\\n(Three.js::WebSocket Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT models multiple browser client instances; the AI split the browser client into functional subnodes inside the browser client boundary, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\\nErlang",
+        "Erlang / OTP Game Server Cluster::Server Slave\\nErlang"
+      ],
+      "predicted_nodes": [
+        "Global::Erlang/OTP Game Server\\n(Master Node",
+        "Erlang/OTP Game Server\\n(Master Node::Game Session Handler",
+        "Erlang/OTP Game Server\\n(Master Node::Heartbeat Responder\\n(pong",
+        "Erlang/OTP Game Server\\n(Master Node::Reconnect Handler",
+        "Erlang/OTP Game Server\\n(Master Node::Room Manager",
+        "Erlang/OTP Game Server\\n(Master Node::Server List Provider",
+        "Erlang/OTP Game Server\\n(Master Node::WebSocket Endpoint",
+        "Global::Erlang/OTP Replica Server\\n(Slave / Replica Node",
+        "Erlang/OTP Replica Server\\n(Slave / Replica Node::Game Session Handler (Replica",
+        "Erlang/OTP Replica Server\\n(Slave / Replica Node::Room Manager (Replica",
+        "Erlang/OTP Replica Server\\n(Slave / Replica Node::WebSocket Endpoint (Replica"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT master/slave cluster is expanded into master and replica runtime components. The layer placement is consistent with the server-side cluster boundary, and the split into finer handlers/endpoints is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Global::DNS"
+      ],
+      "predicted_nodes": [
+        "Global::DNS / Load Balancer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node combines DNS with load balancing, which is semantically aligned with the GT DNS infrastructure at the global boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Erlang / OTP Game Server Cluster"
+      ],
+      "predicted_nodes": [
+        "Global::Erlang/OTP Game Server\\n(Master Node",
+        "Global::Erlang/OTP Replica Server\\n(Slave / Replica Node"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT cluster is represented by separate master and replica nodes, which is a reasonable decomposition at the same global/system boundary."
+    },
+    {
+      "gt_nodes": [
+        "Static Web Tier::Web Server\\nGame assets, HTML, CSS, JS"
+      ],
+      "predicted_nodes": [
+        "Global::Web Server\\n(Static Asset Server",
+        "Web Server\\n(Static Asset Server::HTML / CSS / JS Assets",
+        "Web Server\\n(Static Asset Server::Images / Game Assets"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The static web tier server is split into the web server plus asset categories. This preserves the web/static asset role and boundary semantically."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\\nErlang"
+      ],
+      "predicted_nodes": [
+        "Erlang/OTP Game Server\\n(Master Node::Game Session Handler",
+        "Erlang/OTP Game Server\\n(Master Node::Heartbeat Responder\\n(pong",
+        "Erlang/OTP Game Server\\n(Master Node::Reconnect Handler",
+        "Erlang/OTP Game Server\\n(Master Node::Room Manager",
+        "Erlang/OTP Game Server\\n(Master Node::Server List Provider",
+        "Erlang/OTP Game Server\\n(Master Node::WebSocket Endpoint"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These are functional decompositions of the GT server master. No severe context shift is present."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Slave\\nErlang"
+      ],
+      "predicted_nodes": [
+        "Erlang/OTP Replica Server\\n(Slave / Replica Node::Game Session Handler (Replica",
+        "Erlang/OTP Replica Server\\n(Slave / Replica Node::Room Manager (Replica",
+        "Erlang/OTP Replica Server\\n(Slave / Replica Node::WebSocket Endpoint (Replica"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The replica/slave role is preserved and decomposed into replica-side responsibilities, which is compatible with the GT."
+    },
+    {
+      "gt_nodes": [
+        "Browser Clients::Client Browser\\nPlayer 1"
+      ],
+      "predicted_nodes": [
+        "Browser Client\\n(Three.js::3D Game Renderer\\n(Three.js",
+        "Browser Client\\n(Three.js::WebSocket Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT player browser client is represented by client-side renderer and networking subcomponents. This is a valid split within the browser client boundary."
+    },
+    {
+      "gt_nodes": [
+        "Browser Clients::Client Browser\\nPlayer 2"
+      ],
+      "predicted_nodes": [
+        "Browser Client\\n(Three.js::Inbound Message Handler",
+        "Browser Client\\n(Three.js::Message Serializer\\n([event, data] JSON",
+        "Browser Client\\n(Three.js::Heartbeat Manager\\n(ping/pong, 60s"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These predicted nodes belong to the browser client and correspond to client-side runtime behavior described in the GT."
+    },
+    {
+      "gt_nodes": [
+        "Browser Clients::Client Browser\\nPlayer 3"
+      ],
+      "predicted_nodes": [
+        "Browser Client\\n(Three.js::Reconnect Manager",
+        "Browser Client\\n(Three.js::Room Player Count Display",
+        "Browser Client\\n(Three.js::Room/Player Context Store\\n(roomId, playerId, shipIndex",
+        "Browser Client\\n(Three.js::Server List Store"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These client-side nodes align with reconnect, room/player state, and server list handling in the browser client boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

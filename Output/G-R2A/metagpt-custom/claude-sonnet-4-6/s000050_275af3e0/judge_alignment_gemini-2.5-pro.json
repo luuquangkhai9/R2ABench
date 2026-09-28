@@ -1,0 +1,115 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::KVM (L0"
+      ],
+      "predicted_nodes": [
+        "Global::Linux Host OS"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "KVM (L0) acts as the base hypervisor environment in this setup, which is functionally equivalent to the Linux Host OS."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host"
+      ],
+      "predicted_nodes": [
+        "Global::Hyper-V Hypervisor\n(External Hypervisor Stack"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT correctly places Hyper-V inside KVM (L0) to depict nested virtualization, but the AI placed it at the Global level, missing the nested relationship."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\nGuest VM (L2"
+      ],
+      "predicted_nodes": [
+        "Global::Windows Guest OS / Child Partition VM"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The AI placed the child partition VM globally rather than properly nesting it under Hyper-V (L1)."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\nHost OS (L2"
+      ],
+      "predicted_nodes": [
+        "Global::Windows Root Partition VM"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The AI placed the root partition VM globally instead of maintaining the nested virtualization boundary under Hyper-V (L1)."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\nGuest VM (L2::harness.sys"
+      ],
+      "predicted_nodes": [
+        "Windows Guest OS / Child Partition VM::Windows Helper & Harness Layer::HarnessDriver\n(Kernel Driver – Child Partition"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the harness driver and are correctly attributed to the Child Partition VM layer, despite the AI's parent boundary being elevated globally."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\nHost OS (L2::CrashMonitoring.sys"
+      ],
+      "predicted_nodes": [
+        "Windows Root Partition VM::Hyper-V Target & Crash Monitoring Layer::CrashMonitorDriver\n(Kernel Driver – Root Partition"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the crash monitoring driver and are accurately mapped to the Root Partition VM context."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\nHost OS (L2::vmswitch.sys"
+      ],
+      "predicted_nodes": [
+        "Windows Root Partition VM::Hyper-V Target & Crash Monitoring Layer::VMSwitchTarget\n(vmswitch.sys"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the vmswitch component and are properly assigned to the Root Partition VM boundary."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "predicted_nodes": [
+        "Test & Orchestration Layer::StandaloneTestRunner\n(test.py",
+        "Test & Orchestration Layer::DeterministicMutator\n(Deterministic Test Suite",
+        "Test & Orchestration Layer::HavocMutator\n(Havoc Test Suite",
+        "Test & Orchestration Layer::RandomMutator\n(Random Test Suite"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT explicitly places hAFL2 inside the KVM (L0) boundary to show its execution context on the host, whereas the AI placed the corresponding test/orchestration components in a generic logical layer, missing the host OS context attribution."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Data & Configuration Layer::Effector Maps\n(Boolean Arrays",
+    "Data & Configuration Layer::Mutation Payloads\n(Byte Arrays",
+    "Data & Configuration Layer::OffsetConfiguration\n(Build-time Constants",
+    "Data & Configuration Layer::initrd Artifact\n(Packaged Target",
+    "Global::Fuzzing Results\n(Crash Reports / Coverage",
+    "Global::Guest VM (kAFL Guest Context",
+    "Global::VMBus / netvsc\n(Inter-Partition Channel",
+    "Global::Visual Studio\n(Build Toolchain",
+    "Global::kAFL-Fuzzer\n(External Framework",
+    "Global::pytest\n(Test Execution Framework",
+    "Guest VM (kAFL Guest Context::Guest Forkserver Layer::EmbeddedForkserver\n(Hypercall Translator",
+    "Linux Host OS::Linux Userspace Fuzzing Layer::InitrdBuilder\n(Bash Script Workflow",
+    "Linux Host OS::Linux Userspace Fuzzing Layer::LaunchScript\n(Bash kAFL Launcher",
+    "Linux Host OS::Linux Userspace Fuzzing Layer::SharedLibraryCopier\n(Host Lib Packager",
+    "Windows Guest OS / Child Partition VM::Windows Helper & Harness Layer::CompileScript\n(compile.sh – Bash Build",
+    "Windows Guest OS / Child Partition VM::Windows Helper & Harness Layer::LoaderExe\n(loader.exe",
+    "Windows Guest OS / Child Partition VM::Windows Helper & Harness Layer::PacketSenderExe\n(packet_sender.exe"
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Internet"
+      ],
+      "predicted_nodes": [
+        "Global::External Users/Systems"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent external entities or networks connecting to the proxy from the outside."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Proxy"
+      ],
+      "predicted_nodes": [
+        "Proxy Layer::PlugIt Proxy",
+        "Proxy Layer::Main API Endpoint",
+        "Proxy Layer::Example Mail Processing Layer::Auto-Response Filter",
+        "Proxy Layer::Example Mail Processing Layer::Mail Handler Invoker",
+        "Proxy Layer::Example Mail Processing Layer::Mail Intake Parser",
+        "Proxy Layer::Example Mail Processing Layer::Mail Routing Validator",
+        "Proxy Layer::Example Mail Processing Layer::Message Acknowledger"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT proxy node was split by the AI into the main proxy component, its API endpoint, and the specific mail processing sub-components detailed in the PRD for the standalone proxy workflow."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB_Proxy"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Proxy Data Store"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the dedicated data store for the PlugIt Proxy. 'Internal Network' and 'Data Layer' are semantically compatible boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Service 1"
+      ],
+      "predicted_nodes": [
+        "Service Layer::PlugIt Service A"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match for the first generic PlugIt service instance."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Service 2"
+      ],
+      "predicted_nodes": [
+        "Service Layer::PlugIt Service B"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match for the second generic PlugIt service instance."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB 1"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Service Data Store A"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match for the database backend of the first service."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB 2"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Service Data Store B"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match for the database backend of the second service."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Internal Network::PlugIt Service 3",
+    "Internal Network::DB 3"
+  ],
+  "unmatched_predicted_nodes": [
+    "Client SDK Layer::API Client SDK",
+    "Configuration Layer::Allowed Networks Control",
+    "Configuration Layer::Configuration Files",
+    "Configuration Layer::Local/Private Configuration",
+    "Data Layer::Alembic Migration Engine",
+    "Global::Alembic Migration Tool",
+    "Global::Database Technology",
+    "Global::Inbound Email Server/Mailbox",
+    "Proxy Layer::PlugIt Protocol"
+  ]
+}

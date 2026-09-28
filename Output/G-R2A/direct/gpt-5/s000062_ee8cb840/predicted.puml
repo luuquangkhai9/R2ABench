@@ -1,0 +1,96 @@
+@startuml
+skinparam componentStyle rectangle
+hide stereotype
+
+actor Evaluator
+actor "Developer/Operator" as Dev
+
+node "Docker Container" as Docker {
+  node "ROS Environment" as ROS {
+    node "ROS Master" as ROSMaster
+
+    package "Perception Subsystem" as Perception {
+      component "Traffic Light Detector\n(tl_detector)" as TLDet
+    }
+
+    package "Planning Subsystem" as Planning {
+      component "Waypoint Loader\n(waypoint_loader)" as WPLoader
+      component "Waypoint Updater\n(waypoint_updater)" as WPUpdater
+    }
+
+    package "Control Subsystem" as Control {
+      component "Twist Controller\n(twist_controller)" as TwistCtrl
+      component "Drive-By-Wire Node\n(dbw_node)" as DBW
+    }
+
+    interface "/current_pose" as T_current_pose
+    interface "/base_waypoints" as T_base_waypoints
+    interface "/traffic_waypoint" as T_traffic_waypoint
+    interface "/final_waypoints" as T_final_waypoints
+    interface "/twist_cmd" as T_twist_cmd
+    interface "/vehicle_cmd" as T_vehicle_cmd
+
+    artifact "launch/styx.launch" as StyxLaunch
+    artifact "launch/site.launch" as SiteLaunch
+  }
+}
+
+cloud "Udacity Simulator" as Simulator
+artifact "Recorded Training Bag\n(rosbag play)" as Bag
+
+frame "Simulator Mode" as SimFrame {
+  Simulator
+  StyxLaunch
+}
+frame "Site Mode" as SiteFrame {
+  Bag
+  SiteLaunch
+}
+
+Dev --> StyxLaunch : start simulator mode
+Dev --> SiteLaunch : start site mode
+Evaluator --> Simulator : observe simulator session
+Evaluator --> Bag : observe site-mode playback
+
+StyxLaunch --> ROSMaster : start nodes/config
+SiteLaunch --> ROSMaster : start nodes/config
+
+Simulator --> T_current_pose
+Bag --> T_current_pose
+
+WPLoader --> T_base_waypoints
+
+TLDet --> T_traffic_waypoint
+
+T_current_pose --> WPUpdater
+T_base_waypoints --> WPUpdater
+T_traffic_waypoint --> WPUpdater
+WPUpdater --> T_final_waypoints
+
+T_final_waypoints --> TwistCtrl
+T_current_pose --> TwistCtrl
+TwistCtrl --> T_twist_cmd
+DBW --> T_vehicle_cmd
+T_twist_cmd --> DBW
+
+T_vehicle_cmd --> Simulator
+
+note right of T_base_waypoints
+twist.twist.linear.x carries target top speed.
+Control must not exceed this upper bound.
+end note
+
+note right of TLDet
+Detect and classify traffic lights on real images during site-mode playback.
+Publish stop-related waypoint when red/yellow requires stopping.
+end note
+
+note bottom of Docker
+Environment prerequisites:
+- Docker installed
+- ROS launched inside container
+Launch entry points:
+- launch/styx.launch
+- launch/site.launch
+end note
+@enduml

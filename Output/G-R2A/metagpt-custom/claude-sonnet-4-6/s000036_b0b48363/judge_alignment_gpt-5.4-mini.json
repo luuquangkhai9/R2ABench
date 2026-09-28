@@ -1,0 +1,67 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::HTTP"
+      ],
+      "predicted_nodes": [
+        "Global::HTTP Logging Producers"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the HTTP-based client submission side of the system; the predicted node is more specific but semantically aligned with the GT HTTP boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::HypnoLog\\nServer"
+      ],
+      "predicted_nodes": [
+        "Global::Server Runtime Layer",
+        "Global::Browser Runtime"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT server node is split into server-side runtime and browser-side runtime responsibilities in the prediction. This is semantically consistent with the PRD's client/server split."
+    },
+    {
+      "gt_nodes": [
+        "Global::In Browser Log"
+      ],
+      "predicted_nodes": [
+        "Browser Runtime::Browser Client Layer::ReceivedDataStore\\n(In-Memory Array",
+        "Browser Runtime::Browser Client Layer::UIStateUpdater\\n(last-update timestamp",
+        "Browser Runtime::Window Dispatch Layer::WindowDispatcher",
+        "Browser Runtime::Window Dispatch Layer::DefaultWindow",
+        "Browser Runtime::Browser Client Layer::ErrorWrapper\\n(HypnoLog-error"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT browser logging/display responsibility is decomposed into client-side storage, UI state update, window dispatch, and invalid-message wrapping. These are functionally equivalent and correctly placed in browser runtime layers."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::C#",
+    "Global::Python"
+  ],
+  "unmatched_predicted_nodes": [
+    "Browser Runtime::Browser Client Layer::AjvLibrary\\n(Ajv npm bundle",
+    "Browser Runtime::Browser Client Layer::BrowserSocketClient\\n(Socket.IO Client",
+    "Browser Runtime::Browser Client Layer::SchemaValidator\\n(Ajv-compiled",
+    "Browser Runtime::Tag and Name UI Layer::NameRenderer\\n(variable-name\\nprefix element",
+    "Browser Runtime::Tag and Name UI Layer::TagFilter\\n(CSS class / filter\\nby tags",
+    "Browser Runtime::Visualizer Layer::UserConfig\\n(User Override Config",
+    "Browser Runtime::Visualizer Layer::VisualizerConfig\\n(Default Config",
+    "Browser Runtime::Visualizer Layer::VisualizerDispatcher\\n(Ordered first-match:\\ncanDisplay then display",
+    "Browser Runtime::Visualizer Layer::VisualizerLoader\\n(Loads ordered list\\nfrom config",
+    "Browser Runtime::Visualizer Layer::VisualizerPlugins\\n(Ordered Plugin Modules",
+    "Global::Browser Runtime",
+    "Server Runtime Layer::ExpressApp\\n(Express",
+    "Server Runtime Layer::HttpServer\\n(Node.js HTTP",
+    "Server Runtime Layer::Ingestion Layer::LoggingRouter\\n(POST /logger/in\\nGET /logger/status",
+    "Server Runtime Layer::Middleware Layer::JsonBodyParser\\n(express.json 50 mb limit",
+    "Server Runtime Layer::Middleware Layer::StaticFileServer\\n(express.static /public",
+    "Server Runtime Layer::StartupScript\\n(bin/www",
+    "Server Runtime Layer::Transport Layer::ClientRegistry\\n(Connected Client List",
+    "Server Runtime Layer::Transport Layer::SocketIOServer\\n(Socket.IO Server"
+  ]
+}

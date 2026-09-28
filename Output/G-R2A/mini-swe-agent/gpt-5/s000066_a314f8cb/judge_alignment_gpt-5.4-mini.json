@@ -1,0 +1,71 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::DNS"
+      ],
+      "predicted_nodes": [
+        "Delivery Layer::DNS / Load Balancer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the DNS/load-balancing entry point used to route clients to the system. The boundary name differs, but the architectural role is equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Static Web Tier::Web Server\nGame assets, HTML, CSS, JS"
+      ],
+      "predicted_nodes": [
+        "Delivery Layer::Web Server\n(Static Assets"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the web server that serves static game assets to the browser client. The package naming differs, but the function and layer are consistent."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\nErlang",
+        "Erlang / OTP Game Server Cluster::Server Slave\nErlang"
+      ],
+      "predicted_nodes": [
+        "Server Layer::Game Server Master\n(Erlang/OTP",
+        "Server Layer::Replica Node\n(Erlang/OTP"
+      ],
+      "match_type": "1:2",
+      "is_boundary_correct": true,
+      "reasoning": "The GT cluster contains a master and a slave/replica node, and the AI split them into master and replica nodes. This preserves the intended topology and boundary semantics."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\nErlang"
+      ],
+      "predicted_nodes": [
+        "Server Layer::Game Server Master\n(Erlang/OTP",
+        "Server Layer::Game Server Master\n(Erlang/OTP::Room Manager\n(Create/Join Rooms",
+        "Server Layer::Game Server Master\n(Erlang/OTP::Server List Service\n(servers_list, redirect",
+        "Server Layer::Game Server Master\n(Erlang/OTP::WS Endpoint\n(Session/Conn Handling"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT master server is decomposed into concrete responsibilities: room management, server-list handling, and WebSocket session handling. This is a valid refinement of the same server boundary."
+    },
+    {
+      "gt_nodes": [
+        "Browser Clients::Client Browser\nPlayer 1",
+        "Browser Clients::Client Browser\nPlayer 2",
+        "Browser Clients::Client Browser\nPlayer 3"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Browser Client\n(Three.js",
+        "Client Layer::Browser Client\n(Three.js::Game UI\n3D Renderer",
+        "Client Layer::Browser Client\n(Three.js::Reconnect Handler\n(ping/pong, game_reconnect",
+        "Client Layer::Browser Client\n(Three.js::WebSocket Client\n(JSON [event,data"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT lists multiple browser client instances for different players, while the AI models a single browser client architecture with internal UI, reconnect, and WebSocket subcomponents. This is an acceptable aggregation/refinement of the same client-side boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

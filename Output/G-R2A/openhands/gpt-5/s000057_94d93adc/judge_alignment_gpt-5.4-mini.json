@@ -1,0 +1,61 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Cloudinary\n- stores audio files\n- stores images\n- returns file URLs"
+      ],
+      "predicted_nodes": [
+        "Global::Cloudinary\n(Media Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Cloudinary media storage service responsible for storing audio/images and returning hosted URLs. The boundary attribution is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Express Server\n- fetches data with Sequelize\n- serves React frontend\n- handles backend API requests"
+      ],
+      "predicted_nodes": [
+        "Backend (Node/Express::Express Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The core component is the same Express backend server. The predicted boundary explicitly places it in the backend/Node-Express layer, which is consistent with the GT global server node."
+    },
+    {
+      "gt_nodes": [
+        "Global::PostgreSQL Database\n- stores users and sounds\n- stores Cloudinary URL references"
+      ],
+      "predicted_nodes": [
+        "Global::PostgreSQL"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the PostgreSQL persistence layer used for users, sounds, and Cloudinary URL references. The boundary is preserved semantically."
+    },
+    {
+      "gt_nodes": [
+        "Global::React Frontend\n- Redux state management\n- uploads images and audio\n- controls and visualizes playback"
+      ],
+      "predicted_nodes": [
+        "Frontend (Browser::React App",
+        "Frontend (Browser::Redux Store\n& Actions",
+        "Frontend (Browser::Audio Player",
+        "Frontend (Browser::Waveform UI",
+        "Frontend (Browser::Forms & Validation",
+        "Frontend (Browser::Playback Manager",
+        "Frontend (Browser::Config\n(API base URL,\nCloudinary URL,\nUpload Preset"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT frontend node is decomposed into multiple more specific frontend components in the prediction: React app shell, Redux store/actions, playback/audio controls, waveform UI, form handling, playback manager, and configuration. This is a valid split and remains within the correct frontend/browser boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Backend (Node/Express::Auth API",
+    "Backend (Node/Express::Feed API",
+    "Backend (Node/Express::Follow API",
+    "Backend (Node/Express::Sound API"
+  ]
+}

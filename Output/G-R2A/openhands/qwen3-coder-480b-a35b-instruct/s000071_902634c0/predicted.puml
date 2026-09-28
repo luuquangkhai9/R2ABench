@@ -1,0 +1,134 @@
+@startuml
+!define RECTANGLE rectangle
+!define COMPONENT component
+!define DATABASE database
+!define QUEUE queue
+
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam defaultTextAlignment center
+skinparam wrapWidth 200
+
+title ClearML Agent System Architecture
+
+' Main system boundary
+rectangle "ClearML Agent System" as system {
+    COMPONENT "Kubernetes Glue Mode" as kubeGlue [
+        Kubernetes Glue
+        ==
+        Converts queued jobs 
+        to Kubernetes jobs
+        using YAML templates
+    ]
+    
+    COMPONENT "Service Pod Mode" as servicePod [
+        Service Pod
+        ==
+        Long-lasting pod
+        Manages sibling containers
+        via Docker socket
+    ]
+    
+    COMPONENT "Worker Runtime" as worker [
+        Worker Runtime
+        ==
+        Installs experiment environment
+        Starts and monitors experiments
+        Reports status periodically
+        Pings server connectivity
+    ]
+    
+    COMPONENT "Backend Client" as backend [
+        Backend Client
+        ==
+        create()
+        get(), get_by_id()
+        get_all(), get_all_ex()
+    ]
+    
+    COMPONENT "Configuration Manager" as config [
+        Configuration Manager
+        ==
+        report_period_sec = 2s
+        ping_period_sec = 30s
+        log_stdout = true
+        report_global_mem_used
+    ]
+}
+
+' External systems
+DATABASE "ClearML Server" as server [
+    ClearML Server
+    ==
+    Experiment management
+    Visualization
+    Collaboration
+    Data tracking
+    MLOps monitoring
+]
+
+QUEUE "Execution Queue" as queue [
+    Execution Queue
+    ==
+    Queued ClearML jobs
+]
+
+RECTANGLE "Kubernetes Cluster" as k8s {
+    RECTANGLE "Kubernetes Jobs" as k8sJobs [
+        Kubernetes Jobs
+        ==
+        Prepared from YAML templates
+    ]
+    
+    RECTANGLE "Service Pods" as k8sPods [
+        Service Pods
+        ==
+        Using clearml-agent image
+        Docker socket mapping
+    ]
+}
+
+RECTANGLE "Docker Engine" as docker [
+    Docker Engine
+    ==
+    Sibling container management
+]
+
+' Relationships
+kubeGlue --> queue : Pulls jobs from
+kubeGlue --> k8sJobs : Prepares
+servicePod --> k8sPods : Deploys as
+servicePod --> docker : Manages via socket
+worker --> server : Reports status\n(ping_period_sec)
+worker --> server : Pings connectivity\n(report_period_sec)
+worker --> config : Uses configuration
+worker --> backend : Uses for service access
+backend --> server : Communicates with
+config --> worker : Provides defaults
+kubeGlue --> worker : Uses for job execution
+servicePod --> worker : Uses for job execution
+
+note right of kubeGlue
+    FR-001: Kubernetes Glue job preparation
+    Converts queued jobs to Kubernetes jobs
+end note
+
+note right of servicePod
+    FR-003: Long-lasting service-pod mode
+    Uses clearml-agent Docker image
+    Manages sibling containers via Docker socket
+end note
+
+note right of worker
+    FR-002: In-pod experiment startup and monitoring
+    FR-004: Worker status reporting (2s default)
+    FR-005: Server connectivity ping (30s default)
+    FR-006: Default stdout/stderr logging enabled
+end note
+
+note right of backend
+    FR-007: Backend service client actions
+    create, get, get_by_id, get_all, get_all_ex
+end note
+
+@enduml

@@ -1,0 +1,101 @@
+@startuml
+skinparam rectangle {
+  BackgroundColor #FAFAFA
+  BorderColor #888888
+  FontSize 13
+}
+skinparam component {
+  BackgroundColor #E8F4FD
+  BorderColor #2980B9
+}
+skinparam database {
+  BackgroundColor #FEF9E7
+  BorderColor #F39C12
+}
+skinparam actor {
+  BorderColor #27AE60
+}
+skinparam package {
+  BackgroundColor #F4F6F7
+  BorderColor #7F8C8D
+}
+skinparam arrow {
+  Color #555555
+}
+
+title Requirements Review Checklist and Review Reporting System
+
+actor Reviewer as REV
+actor "Requirements Owner" as RO
+actor "Project Stakeholder" as PS
+
+package "External Inputs" {
+  rectangle "Requirements Document\n(under review)" as REQDOC
+  rectangle "Industry Standards /\nProduct Specifications /\nBusiness & Documentation Norms" as STANDARDS
+}
+
+package "Review Artifact System" {
+
+  package "Review Initialization" {
+    component "Review Purpose\n& Objectives\n[FR-001]" as RPURPOSE
+    component "Standards-Based\nReview Basis\n[FR-002]" as RBASIS
+  }
+
+  package "Checklist Inspection Engine" {
+    component "Completeness Review\n- Core/basic functions vs goals\n- Alignment with user needs\n[FR-003, NFR-001]" as COMP
+    component "Exception & Auxiliary\nFunction Review\n- Special cases\n- Exception handling\n- Auxiliary functions\n[FR-004]" as EXCEP
+    component "Understandability Review\n- Clarity, specificity,\n  detail, refinement\n[FR-005, NFR-002]" as UNDER
+    component "Model Accuracy Review\n- Normative, reasonable,\n  rigorous, accurate\n[FR-006, NFR-003]" as MODEL
+    component "Extension & Improvement\nReview\n- Feasibility, clarity,\n  concreteness, demonstrability\n[FR-007]" as EXTENS
+  }
+
+  package "Review Reporting" {
+    component "Problem Report Module\n- Requirement problems\n- Overall evaluation\n- Improvement suggestions\n[FR-008]" as PROBLEMS
+    component "Scoring Module\n- Completeness (10 pts)\n- Understandability (10 pts)\n- Model Accuracy (10 pts)\n- Extension/Improvement (10 pts)\n- Total Score (40 pts)\n[FR-009, NFR-004]" as SCORING
+    component "Review Metadata\n- Reviewer identity\n- Review date\n[FR-010]" as META
+  }
+
+  package "Data Store" {
+    database "Review Purpose\n[DR-001]" as DR001
+    database "Checklist Items\n[DR-002]" as DR002
+    database "Problem Report\n[DR-003]" as DR003
+    database "Score Record\n[DR-004]" as DR004
+    database "Review Metadata\n[DR-005]" as DR005
+  }
+
+}
+
+REV --> RPURPOSE : initiates review
+REV --> RBASIS : consults basis
+REV --> COMP : inspects completeness
+REV --> EXCEP : inspects coverage
+REV --> UNDER : inspects wording
+REV --> MODEL : inspects models
+REV --> EXTENS : inspects extension goals
+REV --> PROBLEMS : records findings
+REV --> SCORING : assigns scores
+REV --> META : signs off
+
+STANDARDS --> RBASIS : informs
+REQDOC --> COMP : subject of review
+REQDOC --> EXCEP : subject of review
+REQDOC --> UNDER : subject of review
+REQDOC --> MODEL : subject of review
+REQDOC --> EXTENS : subject of review
+
+RPURPOSE --> DR001 : stores
+RBASIS --> DR001 : stores
+COMP --> DR002 : stores checklist items
+EXCEP --> DR002 : stores checklist items
+UNDER --> DR002 : stores checklist items
+MODEL --> DR002 : stores checklist items
+EXTENS --> DR002 : stores checklist items
+PROBLEMS --> DR003 : stores
+SCORING --> DR004 : stores
+META --> DR005 : stores
+
+PROBLEMS --> RO : delivers findings\n& suggestions
+SCORING --> PS : delivers quality result
+META --> PS : delivers signed review
+
+@enduml

@@ -1,0 +1,161 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "安全::API Access"
+      ],
+      "predicted_nodes": [
+        "API Layer (Python REST Service::MyEMS REST API Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the REST API access/service capability. Although the GT frames it as a security-related concern and the prediction places it under the API service layer, this is semantically aligned with the API service boundary."
+    },
+    {
+      "gt_nodes": [
+        "安全::用户权限"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer (Browser Admin::MyEMS Admin SPA"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "User permission concerns are a security concern, not the Admin SPA itself. The predicted node is too broad and places the concern in the wrong architectural boundary."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::Docker Engine"
+      ],
+      "predicted_nodes": [
+        "Deployment & Ops Support::Docker-based Installation/Setup"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is the Docker runtime environment, while the prediction captures Docker-based deployment/setup support. These are semantically aligned at the deployment/infrastructure level."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::Web Server"
+      ],
+      "predicted_nodes": [
+        "Edge/Proxy Layer::Reverse Proxy (e.g., Nginx"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A web server / reverse proxy is the same architectural concern in this PRD context, since `/api/` routing may be handled by Nginx or equivalent. The boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::数据库集群"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a generic database cluster, while the prediction specifies MySQL. This is a valid refinement and remains within the correct data/storage boundary."
+    },
+    {
+      "gt_nodes": [
+        "第三方应用::AR",
+        "第三方应用::BMS",
+        "第三方应用::ERP"
+      ],
+      "predicted_nodes": [
+        "Integration Clients::Third-Party Applications"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT lists specific third-party application examples, while the prediction aggregates them into a generic third-party client node. This is semantically equivalent and correctly placed as an integration client boundary."
+    },
+    {
+      "gt_nodes": [
+        "第三方应用::AR",
+        "第三方应用::BMS",
+        "第三方应用::ERP"
+      ],
+      "predicted_nodes": [
+        "Integration Clients::MyEMS Components"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "MyEMS Components are not the same as the GT's third-party applications. This is a context mismatch even though both are API consumers."
+    },
+    {
+      "gt_nodes": [
+        "数据分析服务::API"
+      ],
+      "predicted_nodes": [
+        "API Layer (Python REST Service::MyEMS REST API Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a data analysis service API, and the prediction captures the REST API service. Given the PRD scope focuses on a RESTful API service, this is an acceptable semantic match at the service boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "其它数据源::BMS",
+    "其它数据源::ERP",
+    "其它数据源::MES",
+    "其它数据源::天气",
+    "其它数据源::手工录入",
+    "安全::HTTPS",
+    "容器化服务器集群::...",
+    "容器化服务器集群::Kafka Broker",
+    "容器化服务器集群::MQTT Broker",
+    "容器化服务器集群::云端Kubernetes集群",
+    "容器化服务器集群::本地Kubernetes集群",
+    "容器化服务器集群::虚拟机",
+    "容器化服务器集群::裸金属服务器",
+    "数据分析服务::...",
+    "数据分析服务::Excel导出",
+    "数据分析服务::FDD规则引擎",
+    "数据分析服务::邮件/短信/微信",
+    "数据分析服务::高级报表引擎",
+    "数据可视化::...",
+    "数据可视化::BI",
+    "数据可视化::Web UI",
+    "数据可视化::大屏",
+    "数据可视化::小程序",
+    "数据可视化::手机应用",
+    "数据计算服务::...",
+    "数据计算服务::成本数据",
+    "数据计算服务::数据清洗",
+    "数据计算服务::数据规范化",
+    "数据计算服务::碳排放数据",
+    "数据计算服务::租户数据",
+    "数据计算服务::空间数据",
+    "数据计算服务::组合设备数据",
+    "数据计算服务::计量表数据",
+    "数据计算服务::设备数据",
+    "数据计算服务::车间数据",
+    "数据计算服务::门店数据",
+    "数据采集服务::...",
+    "数据采集服务::BACnet",
+    "数据采集服务::EtherNet/IP",
+    "数据采集服务::Kafka",
+    "数据采集服务::MQTT",
+    "数据采集服务::Modbus",
+    "数据采集服务::OPC UA",
+    "数据采集服务::S7",
+    "硬件网关::数据采集",
+    "硬件网关::设备控制",
+    "第三方应用::...",
+    "第三方应用::AR"
+  ],
+  "unmatched_predicted_nodes": [
+    "API Layer (Python REST Service::REST Framework & CORS",
+    "API Layer (Python REST Service::WSGI Server",
+    "Deployment & Ops Support::Dev Quick-Run\\n(Linux & Windows",
+    "Deployment & Ops Support::Python Dependencies\\n(REST, CORS, WSGI, Spreadsheet/Image, MySQL Connector",
+    "Integration Clients::MyEMS Components",
+    "Presentation Layer (Browser Admin::/contact Route Module",
+    "Presentation Layer (Browser Admin::/user Route Module",
+    "Presentation Layer (Browser Admin::API Base Path Resolver\\n(same-origin + /api/",
+    "Presentation Layer (Browser Admin::Category Settings Module",
+    "Presentation Layer (Browser Admin::HTTP Client",
+    "Presentation Layer (Browser Admin::MyEMS Admin SPA",
+    "Presentation Layer (Browser Admin::Routing & Lazy Loader",
+    "Presentation Layer (Browser Admin::Tariff Settings Module"
+  ]
+}

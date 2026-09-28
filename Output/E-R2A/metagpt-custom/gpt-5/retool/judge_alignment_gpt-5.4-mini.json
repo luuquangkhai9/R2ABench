@@ -1,0 +1,85 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Frontend (Vue.js 2.0::Browser / Client"
+      ],
+      "predicted_nodes": [
+        "Client Layer (Vue.js SPA::Google Chrome",
+        "Client Layer (Vue.js SPA::Google Chrome::Vue.js Web Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT frontend browser/client node is represented by the predicted client/browser and Vue web client nodes. The boundary shift from 'Frontend' to 'Client Layer' is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Internal HTTP",
+        "Backend (Flask Microservices::Microservices",
+        "Backend (Flask Microservices::Microservices::Algorithm Service",
+        "Backend (Flask Microservices::Microservices::Project Management Service",
+        "Backend (Flask Microservices::Microservices::Requirement Management Service",
+        "Backend (Flask Microservices::Microservices::User Management Service"
+      ],
+      "predicted_nodes": [
+        "Global::High-Performance Server",
+        "Global::Local Computer",
+        "High-Performance Server::Algorithm Service",
+        "Local Computer::API Gateway",
+        "Local Computer::Project Management Service",
+        "Local Computer::Requirements Management Service",
+        "Local Computer::User Management Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT backend/microservice architecture is split into deployment-context nodes in the prediction. The algorithm service on a high-performance server and the core management services on a local computer are consistent with the PRD. The omission of an explicit HTTP/internal protocol node is absorbed into deployment/context representation rather than a functional boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Global::Backend (Flask Microservices",
+        "Global::Frontend (Vue.js 2.0",
+        "Global::Network & Gateway Layer",
+        "Global::Storage Layer (MongoDB"
+      ],
+      "predicted_nodes": [
+        "Global::High-Performance Server",
+        "Global::Local Computer",
+        "Data Layer::MongoDB Database"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These are coarse-grained system boundary/deployment nodes. The prediction preserves the overall system split via global deployment nodes and a database layer, though it does not explicitly enumerate all GT global boundaries. This is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Network & Gateway Layer::API Gateway",
+        "Network & Gateway Layer::API Gateway::Identity Verification",
+        "Network & Gateway Layer::API Gateway::Request Forwarding",
+        "Network & Gateway Layer::API Gateway::Return Response"
+      ],
+      "predicted_nodes": [
+        "Local Computer::API Gateway"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The API Gateway is correctly identified, but the predicted model aggregates its subfunctions (identity verification, forwarding, response return) into one node. The deployment boundary differs but remains semantically acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Storage Layer (MongoDB::Project Collection",
+        "Storage Layer (MongoDB::Requirement Collection",
+        "Storage Layer (MongoDB::User Collection"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MongoDB Database"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT explicitly lists collections, while the prediction aggregates them into a single MongoDB database node. This is a valid merge at a higher abstraction level and the database boundary is consistent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Network & Gateway Layer::HTTP Protocol"
+  ],
+  "unmatched_predicted_nodes": []
+}

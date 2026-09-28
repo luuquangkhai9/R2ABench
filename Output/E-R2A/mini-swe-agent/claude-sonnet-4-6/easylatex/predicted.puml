@@ -1,0 +1,126 @@
+@startuml
+skinparam componentStyle rectangle
+skinparam backgroundColor #FAFAFA
+skinparam defaultFontName Arial
+
+title EasyLaTex - System Architecture
+
+actor ''General User'' as User
+actor ''Registered User'' as RegUser
+actor ''Collaborator'' as Collab
+actor ''Project Owner'' as Owner
+
+package ''Client Layer'' {
+  [Browser UI
+(Chrome/Firefox/Safari/Edge)] as BrowserUI
+  [WebSocket Client] as WSClient
+}
+
+package ''Presentation Layer'' {
+  [Web Server
+(Apache/Nginx)] as WebServer
+}
+
+package ''Application Layer'' {
+  package ''User Management'' {
+    [Auth & Identity Service
+(Register/Login/Recovery)] as AuthService
+    [Permission Control Service] as PermService
+  }
+
+  package ''File Processing'' {
+    [File Upload Service
+(Drag-Drop / Manual)] as UploadService
+    [OCR / AI Recognition Engine
+(Formulas & Tables)] as OCREngine
+    [LaTeX Generator] as LaTeXGen
+    [CSV/Excel Processor] as SpreadsheetProc
+    [PDF Parser] as PDFParser
+  }
+
+  package ''Rendering & Export'' {
+    [Real-Time Rendering Service
+(LaTeX Engine)] as RenderService
+    [Export Service
+(PDF / LaTeX / PNG / JPEG)] as ExportService
+  }
+
+  package ''Collaboration & Version Control'' {
+    [Project & Workspace Manager] as ProjectMgr
+    [Group & Sharing Manager] as GroupMgr
+    [Version Control Service
+(Tree / Branch / Restore)] as VersionSvc
+    [Comment Service] as CommentSvc
+  }
+
+  [REST API Gateway] as APIGateway
+  [WebSocket Server
+(Real-Time Preview)] as WSServer
+}
+
+package ''Data Layer'' {
+  database ''Relational Database
+(MySQL 8+ / PostgreSQL 12+)'' as RDBMS {
+    [Users & Auth Store] as UserDB
+    [Projects & Versions Store] as ProjectDB
+    [Comments Store] as CommentDB
+  }
+  [File Storage
+(Images / PDFs / CSV / XLSX)] as FileStore
+  [Rendered Artifacts Store
+(Preview / Export)] as ArtifactStore
+}
+
+package ''External / Infrastructure'' {
+  [LaTeX Engine
+(TeX Live / MiKTeX)] as LaTeXEngine
+  [Deep Learning / AI Model] as AIModel
+}
+
+User --> BrowserUI
+RegUser --> BrowserUI
+Collab --> BrowserUI
+Owner --> BrowserUI
+
+BrowserUI --> WebServer : HTTPS
+BrowserUI --> WSClient
+WSClient --> WSServer : WebSocket
+
+WebServer --> APIGateway : HTTP/REST
+
+APIGateway --> AuthService
+APIGateway --> PermService
+APIGateway --> UploadService
+APIGateway --> ProjectMgr
+APIGateway --> GroupMgr
+APIGateway --> VersionSvc
+APIGateway --> CommentSvc
+APIGateway --> ExportService
+APIGateway --> RenderService
+
+UploadService --> OCREngine : images / handwritten
+UploadService --> SpreadsheetProc : CSV / XLSX
+UploadService --> PDFParser : PDF
+UploadService --> FileStore : persist raw files
+
+OCREngine --> AIModel : inference
+OCREngine --> LaTeXGen : recognized content
+SpreadsheetProc --> LaTeXGen
+PDFParser --> LaTeXGen
+
+LaTeXGen --> RenderService : LaTeX code
+RenderService --> LaTeXEngine : compile
+RenderService --> ArtifactStore : rendered preview
+WSServer --> BrowserUI : push preview update
+
+ExportService --> LaTeXEngine : PDF compile
+ExportService --> ArtifactStore : export artifacts
+
+AuthService --> UserDB : CRUD
+PermService --> UserDB
+ProjectMgr --> ProjectDB : CRUD
+GroupMgr --> ProjectDB
+VersionSvc --> ProjectDB : versions / branches
+CommentSvc --> CommentDB : CRUD
+
+@enduml

@@ -1,0 +1,239 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Flutter-based app::Android",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Client Tier::Flutter/Dart\nClient Application"
+      ],
+      "reasoning": "The predicted Flutter/Dart client application covers the Android client runtime responsibility."
+    },
+    {
+      "gt_node": "Flutter-based app::Dart",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Protocol Layer::Protocol Buffers\nContract (.proto",
+        "Client Tier::Flutter/Dart\nClient Application"
+      ],
+      "reasoning": "The Dart-related client responsibility is covered by the Flutter/Dart client application and its dependency on the shared Protocol Buffers contract."
+    },
+    {
+      "gt_node": "Flutter-based app::MacOS",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Client Tier::Flutter/Dart\nClient Application"
+      ],
+      "reasoning": "The predicted client application covers the macOS Flutter client runtime responsibility."
+    },
+    {
+      "gt_node": "Flutter-based app::Web",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Client Tier::Flutter/Dart\nClient Application"
+      ],
+      "reasoning": "The predicted Flutter/Dart client application covers the web client runtime responsibility."
+    },
+    {
+      "gt_node": "Flutter-based app::iOS",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Client Tier::Flutter/Dart\nClient Application"
+      ],
+      "reasoning": "The predicted Flutter/Dart client application covers the iOS client runtime responsibility."
+    },
+    {
+      "gt_node": "Global::Hosted in Azure Kubernetes Service",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Deployment Options::Azure Kubernetes\nService (AKS"
+      ],
+      "reasoning": "The predicted AKS deployment node covers the hosted-in-Azure-Kubernetes-Service deployment responsibility."
+    },
+    {
+      "gt_node": "Global::Postman",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node specifically covers the Postman/API consumer test client concept."
+    },
+    {
+      "gt_node": "Global::Test Client 1\nNodeJS",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node covers the NodeJS-based test client concept."
+    },
+    {
+      "gt_node": "Global::Test Client 2\nGolang",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node covers the Golang-based test client concept."
+    },
+    {
+      "gt_node": "Global::gRPC Gateway\n(HTTP-gRPC Proxy)\nGolang",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Service Tier::gRPC-Gateway\nMiddleware"
+      ],
+      "reasoning": "The predicted gRPC-Gateway middleware covers the HTTP-to-gRPC proxy responsibility."
+    },
+    {
+      "gt_node": "Hosted in Azure Kubernetes Service::Docker container",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Deployment Options::Docker Container"
+      ],
+      "reasoning": "The predicted Docker container node covers the containerization responsibility, even though the GT locates it under the AKS-hosted subtree."
+    },
+    {
+      "gt_node": "Hosted in Azure Kubernetes Service::Docker container::Recipes Server\n(gRPC Server)\nGolang",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Service Tier::Go gRPC Server"
+      ],
+      "reasoning": "The predicted Go gRPC server covers the recipes server runtime responsibility."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Client Tier::Flutter/Dart\nClient Application",
+      "grounded": true,
+      "reference_nodes": [
+        "Flutter-based app::Android",
+        "Flutter-based app::Dart",
+        "Flutter-based app::MacOS",
+        "Flutter-based app::Web",
+        "Flutter-based app::iOS"
+      ],
+      "reasoning": "This node grounds the Flutter client application concepts spanning the supported platforms."
+    },
+    {
+      "predicted_node": "Deployment Options::Azure Kubernetes\nService (AKS",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Hosted in Azure Kubernetes Service"
+      ],
+      "reasoning": "This corresponds to the AKS deployment concept in the reference."
+    },
+    {
+      "predicted_node": "Deployment Options::Docker Container",
+      "grounded": true,
+      "reference_nodes": [
+        "Hosted in Azure Kubernetes Service::Docker container"
+      ],
+      "reasoning": "This corresponds to the Docker container deployment concept in the reference, though the GT places it within the AKS-hosted subtree."
+    },
+    {
+      "predicted_node": "Deployment Options::Kubernetes Cluster",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The reference includes Kubernetes deployment, but not as a standalone generic Kubernetes cluster node in this form."
+    },
+    {
+      "predicted_node": "Protocol Layer::Protocol Buffers\nContract (.proto",
+      "grounded": true,
+      "reference_nodes": [
+        "Flutter-based app::Dart",
+        "Global::gRPC Gateway\n(HTTP-gRPC Proxy)\nGolang",
+        "Hosted in Azure Kubernetes Service::Docker container::Recipes Server\n(gRPC Server)\nGolang"
+      ],
+      "reasoning": "This matches the shared .proto contract used by client, server, and gateway generation."
+    },
+    {
+      "predicted_node": "Service Tier::Go gRPC Server",
+      "grounded": true,
+      "reference_nodes": [
+        "Hosted in Azure Kubernetes Service::Docker container::Recipes Server\n(gRPC Server)\nGolang",
+        "Global::Test Client 2\nGolang"
+      ],
+      "reasoning": "This corresponds to the Go gRPC server concept. The Test Client 2 relation is only semantic context for Go, not the primary grounding."
+    },
+    {
+      "predicted_node": "Service Tier::gRPC-Gateway\nMiddleware",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::gRPC Gateway\n(HTTP-gRPC Proxy)\nGolang",
+        "Global::Postman"
+      ],
+      "reasoning": "This matches the HTTP gRPC gateway middleware. Postman is related as an API consumer context, though not a direct implementation match."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Flutter-based app::Android",
+        "Flutter-based app::Dart",
+        "Flutter-based app::MacOS",
+        "Flutter-based app::Web",
+        "Flutter-based app::iOS"
+      ],
+      "predicted_nodes": [
+        "Client Tier::Flutter/Dart\nClient Application"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Multiple platform/client GT nodes are aggregated into one Flutter/Dart client node, and the client-tier boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Hosted in Azure Kubernetes Service"
+      ],
+      "predicted_nodes": [
+        "Deployment Options::Azure Kubernetes\nService (AKS"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AKS deployment concept is preserved with equivalent semantics."
+    },
+    {
+      "gt_nodes": [
+        "Hosted in Azure Kubernetes Service::Docker container"
+      ],
+      "predicted_nodes": [
+        "Deployment Options::Docker Container"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The Docker container concept is preserved, though the package naming differs."
+    },
+    {
+      "gt_nodes": [
+        "Global::gRPC Gateway\n(HTTP-gRPC Proxy)\nGolang"
+      ],
+      "predicted_nodes": [
+        "Service Tier::gRPC-Gateway\nMiddleware"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The gRPC-Gateway middleware semantics match, and the service-tier boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Hosted in Azure Kubernetes Service::Docker container::Recipes Server\n(gRPC Server)\nGolang"
+      ],
+      "predicted_nodes": [
+        "Service Tier::Go gRPC Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The server concept matches, but the GT places it under a Docker container under AKS, while the prediction abstracts it into a service tier and loses the deployment/container boundary context."
+    },
+    {
+      "gt_nodes": [
+        "Global::Test Client 1\nNodeJS",
+        "Global::Test Client 2\nGolang",
+        "Global::Postman"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched_gt",
+      "is_boundary_correct": false,
+      "reasoning": "These test client concepts have no corresponding predicted nodes."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Postman",
+    "Global::Test Client 1\nNodeJS",
+    "Global::Test Client 2\nGolang"
+  ],
+  "unmatched_predicted_nodes": [
+    "Deployment Options::Kubernetes Cluster"
+  ]
+}

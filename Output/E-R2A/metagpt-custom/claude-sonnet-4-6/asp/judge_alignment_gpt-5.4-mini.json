@@ -1,0 +1,71 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Service / Backend Layer"
+      ],
+      "predicted_nodes": [
+        "Markdown-Capable Environment::Artifact Structure Layer::ReviewPurposeBlock\n(Goal, Review & Verification\nMethods, Report Purpose,\nStandards Basis)\nFR-001, FR-002, DR-001, C-001",
+        "Markdown-Capable Environment::Data Capture Layer::ProblemReportArea\n(Issue Records, Overall\nEvaluation, Suggestions)\nFR-008, DR-003",
+        "Markdown-Capable Environment::Data Capture Layer::ReviewMetadataBlock\n(Reviewer Identity,\nReview Date)\nFR-010, DR-005",
+        "Markdown-Capable Environment::Data Capture Layer::ScoringBlock\n(4 x 10-pt Dimension Scores\n+ 40-pt Total Score)\nFR-009, DR-004, NFR-004, C-003",
+        "Markdown-Capable Environment::Review Content Layer::CompletenessChecklist\n(Core / Basic Functions)\nFR-003, DR-002, NFR-001",
+        "Markdown-Capable Environment::Review Content Layer::ExceptionAuxiliaryChecklist\n(Exception Cases,\nAuxiliary Functions)\nFR-004, DR-002, NFR-001",
+        "Markdown-Capable Environment::Review Content Layer::ExtensionImprovementChecklist\n(Clarity, Feasibility,\nConcreteness, Demonstrability)\nFR-007, DR-002",
+        "Markdown-Capable Environment::Review Content Layer::ModelAccuracyChecklist\n(Normative, Reasonable,\nRigorous, Accurate)\nFR-006, DR-002, NFR-003",
+        "Markdown-Capable Environment::Review Content Layer::UnderstandabilityChecklist\n(Clarity, Specificity,\nDetail, Refinement)\nFR-005, DR-002, NFR-002"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT backend layer is semantically represented by the checklist artifact components, but the AI placed them under a Markdown-capable environment and internal artifact/content/capture layers rather than a backend service layer. This is a significant boundary mismatch relative to the GT architecture."
+    },
+    {
+      "gt_nodes": [
+        "Global::Storage / Database Layer"
+      ],
+      "predicted_nodes": [
+        "External Systems::Business Specifications",
+        "External Systems::Documentation Specifications",
+        "External Systems::External Requirements\\nDocument\\n(Zhiyan Tongjie",
+        "External Systems::Industry Standards",
+        "External Systems::Product Specifications"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT storage/database layer is not actually reproduced by these external reference documents. These are input/reference sources for the checklist, not database/storage components, so the boundary attribution is incorrect and the GT database layer is effectively omitted."
+    },
+    {
+      "gt_nodes": [
+        "Global::Client Layer"
+      ],
+      "predicted_nodes": [
+        "Global::Markdown-Capable Environment"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the user-facing environment for interacting with the artifact, and the AI's boundary is a reasonable semantic equivalent of the GT client layer."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Client Layer::Client Terminal",
+    "Client Layer::Cloud DNS",
+    "Network / Gateway Layer::Machine 01",
+    "Network / Gateway Layer::Machine 01::LVS - Linux Virtual Server",
+    "Network / Gateway Layer::Machine 01::Nginx",
+    "Network / Gateway Layer::Machine 02",
+    "Network / Gateway Layer::Machine 02::LVS - Linux Virtual Server",
+    "Network / Gateway Layer::Machine 02::Nginx",
+    "Network / Gateway Layer::Machine 03",
+    "Network / Gateway Layer::Machine 03::LVS - Linux Virtual Server",
+    "Network / Gateway Layer::Machine 03::Nginx",
+    "Service / Backend Layer::Back-office Management",
+    "Service / Backend Layer::Django Service Clusters",
+    "Service / Backend Layer::Literature Service",
+    "Service / Backend Layer::Socializing Service",
+    "Service / Backend Layer::User Information Service",
+    "Storage / Database Layer::Elasticsearch",
+    "Storage / Database Layer::MySQL Database",
+    "Storage / Database Layer::Redis Cache"
+  ],
+  "unmatched_predicted_nodes": []
+}

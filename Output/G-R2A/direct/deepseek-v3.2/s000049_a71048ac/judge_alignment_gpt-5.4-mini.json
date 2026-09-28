@@ -1,0 +1,123 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Scala Driver for Lucene\nAnalyzer, Word-counter, FST dictionary"
+      ],
+      "predicted_nodes": [
+        "NLP4L Core System::Index Processor",
+        "NLP4L Core System::Document Vector Generator",
+        "NLP4L Core System::Term Data Access",
+        "NLP4L Core System::Search Engine",
+        "NLP4L Core System::Schema Loader & Validator",
+        "NLP4L Core System::Schema Model",
+        "NLP4L Core System::Chart Display (Experimental"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents a broad Scala driver covering Lucene-based processing, analyzer/term operations, word counting, and related utilities. The predicted nodes decompose this into several concrete NLP4L core capabilities, which is a reasonable functional split. The boundary attribution remains within the application/core system context and does not indicate a severe cross-boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Global::Scala High Level API\nfor convenience in text mining and stats"
+      ],
+      "predicted_nodes": [
+        "NLP4L Core System::Index Processor",
+        "NLP4L Core System::Document Vector Generator",
+        "NLP4L Core System::Term Data Access",
+        "NLP4L Core System::Search Engine",
+        "NLP4L Core System::Schema Loader & Validator",
+        "NLP4L Core System::Schema Model",
+        "NLP4L Core System::Chart Display (Experimental"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a convenience/high-level API for text mining and statistics, and the predicted core services are the concrete functional implementations behind that API. Although the split is coarse, the boundary stays in the application/core layer and is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Lucene Layer::Apache Lucene API"
+      ],
+      "predicted_nodes": [
+        "External Systems::Apache Lucene Index"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node denotes the Lucene dependency/API layer, while the predicted node captures the Lucene-backed external system/index. These are semantically aligned around Lucene integration, and the boundary attribution is acceptable as an external dependency/interface."
+    },
+    {
+      "gt_nodes": [
+        "Lucene Layer::Index"
+      ],
+      "predicted_nodes": [
+        "External Systems::Apache Lucene Index"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Lucene index as the data source/storage concept. The package naming differs, but the functional meaning is equivalent and the boundary placement as an external Lucene-related system is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "NLP4L User Interfaces and Integrations::Applications"
+      ],
+      "predicted_nodes": [
+        "External Systems::External ML Tools"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT application integration node broadly covers external application/tool usage, and the predicted external ML tools node is a plausible concrete realization of one integration target. The boundary remains external/integration-oriented."
+    },
+    {
+      "gt_nodes": [
+        "NLP4L User Interfaces and Integrations::File based\nMahout/Spark\nconnector"
+      ],
+      "predicted_nodes": [
+        "Data Formats::LIBSVM Format Writer",
+        "External Systems::External ML Tools"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT connector for Mahout/Spark file-based interoperability is functionally represented by LIBSVM export plus external ML tool integration. This is a valid decomposition, and the boundaries are consistent with data-format/output and external consumer roles."
+    },
+    {
+      "gt_nodes": [
+        "NLP4L User Interfaces and Integrations::Index Schema\nBrowser (GUI/CUI"
+      ],
+      "predicted_nodes": [
+        "NLP4L Core System::Schema Loader & Validator",
+        "NLP4L Core System::Schema Model",
+        "External Systems::Schema Configuration File/Resource"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a schema browser UI, but the predicted nodes describe schema loading, validation, and storage sources rather than the browsing interface itself. This is a context shift from UI/browser functionality to backend schema processing, which is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "NLP4L User Interfaces and Integrations::Interactive Shell\nfor NLP4L (REPL"
+      ],
+      "predicted_nodes": [
+        "External Systems::Scala Interactive Environment"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT REPL shell corresponds to interactive Scala use, and the predicted Scala interactive environment captures that usage context. The external boundary is acceptable because it represents the interactive runtime environment."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Data Formats::LIBSVM Format Writer",
+    "Data Formats::Word Count Data",
+    "External Systems::Apache Lucene Index",
+    "External Systems::External ML Tools",
+    "External Systems::Scala Interactive Environment",
+    "External Systems::Schema Configuration File/Resource",
+    "NLP4L Core System::Chart Display (Experimental",
+    "NLP4L Core System::Document Vector Generator",
+    "NLP4L Core System::Index Processor",
+    "NLP4L Core System::Schema Loader & Validator",
+    "NLP4L Core System::Schema Model",
+    "NLP4L Core System::Search Engine",
+    "NLP4L Core System::Term Data Access"
+  ]
+}

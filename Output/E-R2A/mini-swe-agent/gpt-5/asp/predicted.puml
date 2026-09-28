@@ -1,0 +1,54 @@
+@startuml
+title Requirements_Review_Checklist_Artifact
+
+skinparam componentStyle rectangle
+skinparam shadowing false
+
+actor Reviewer
+actor Requirements_Owner as Owner
+actor Project_Stakeholder as Stakeholder
+
+package Presentation_Layer {
+  [Markdown_UI] as UI
+}
+
+package Review_Process_Layer {
+  [Review_Checklist_Orchestrator] as Orchestrator
+  [Checklist_Inspection] as Inspection
+  [Problem_Reporting] as Reporting
+  [Scoring_and_Signoff] as Scoring
+}
+
+package Data_Layer {
+  [Review_Artifact_Markdown_Checklist] as Artifact
+  [Review_Data_Purpose_Items_Problems_Scores_Metadata] as ReviewData
+}
+
+package External_References {
+  [Industry_Standards] as IndStd
+  [Product_Specifications] as ProdSpec
+  [Business_Rules] as BizRules
+  [Documentation_Specifications] as DocSpec
+}
+
+Reviewer --> UI
+Owner --> UI
+Stakeholder --> UI
+
+UI --> Orchestrator
+
+Orchestrator --> Inspection
+Orchestrator --> Reporting
+Orchestrator --> Scoring
+
+Inspection --> Artifact
+Reporting --> Artifact
+Scoring --> Artifact
+Artifact -- ReviewData
+
+Orchestrator ..> IndStd
+Orchestrator ..> ProdSpec
+Orchestrator ..> BizRules
+Orchestrator ..> DocSpec
+
+@enduml

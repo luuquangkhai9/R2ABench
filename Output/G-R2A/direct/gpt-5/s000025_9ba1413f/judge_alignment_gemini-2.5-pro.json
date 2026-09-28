@@ -1,0 +1,74 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Backend::Create\\nTask"
+      ],
+      "predicted_nodes": [
+        "Backend (Firebase Functions::Task Handler\\n(OnFleet Task Creation"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the backend handler responsible for creating tasks in OnFleet. The boundary maps semantically from generic Backend to Firebase Functions Backend."
+    },
+    {
+      "gt_nodes": [
+        "Backend::OnFleet"
+      ],
+      "predicted_nodes": [
+        "Global::OnFleet API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the external OnFleet task handling system. While GT places it in the backend boundary and AI places it globally as an external API, this is a semantically acceptable boundary variation for third-party services."
+    },
+    {
+      "gt_nodes": [
+        "End user::Twilio Studio\\nText + Call"
+      ],
+      "predicted_nodes": [
+        "Global::External User Channel\\n(Text/Call"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent external entry channels via text or call. Placing an end-user channel in 'Global' is functionally acceptable compared to 'End user'."
+    },
+    {
+      "gt_nodes": [
+        "End user::Next.js\\nFrontend form"
+      ],
+      "predicted_nodes": [
+        "Frontend (Next.js::Frontend Form"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both identify the frontend form used for task entry. Placing the form inside the 'Frontend' boundary is technically more accurate to the architecture than 'End user', maintaining semantic equivalence."
+    },
+    {
+      "gt_nodes": [
+        "Middleware::Address-to-neighborhood\\nsystem",
+        "Middleware::Service-area\\nEligibility Check"
+      ],
+      "predicted_nodes": [
+        "Middleware::Task Middleware\\n- Address -> Neighborhood\\n- Service-area decision"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated the two distinct middleware decision steps (address processing and eligibility check) into a single consolidated task middleware node. The boundaries match perfectly."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Frontend::Create task request"
+  ],
+  "unmatched_predicted_nodes": [
+    "Frontend (Next.js::Frontend App",
+    "Frontend (Next.js::Next.js API Routes::/api/login [POST",
+    "Frontend (Next.js::Next.js API Routes::/api/logout [POST",
+    "Frontend (Next.js::Runtime Config",
+    "Frontend (Next.js::Session Handler",
+    "Global::Environment",
+    "Global::Firebase Admin Token Verification",
+    "Global::Firebase Auth (Client SDK",
+    "Middleware::Session Middleware\\n(server-side session support"
+  ]
+}

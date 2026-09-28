@@ -1,0 +1,111 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "predicted_nodes": [
+        "Host Environment::GitHub Actions Runner::Repository::Source Code",
+        "Host Environment::GitHub Actions Runner::Repository::Git Submodules",
+        "Host Environment::GitHub Actions Runner::Repository::Make Assets",
+        "Host Environment::GitHub Actions Runner::CI Workflows::Build & Test Workflow",
+        "Host Environment::GitHub Actions Runner::CI Workflows::Changelog Generation",
+        "Host Environment::GitHub Actions Runner::CI Workflows::Format Checker",
+        "Host Environment::GitHub Actions Runner::CI Workflows::Reusable Workflows",
+        "Host Environment::GitHub Actions Runner::Build System",
+        "Host Environment::GitHub Actions Runner::Host Utilities",
+        "Host Environment::GitHub Actions Runner::Host Utilities::cmdUtil",
+        "Target System::cFS Target Execution",
+        "Target System::cFS Target Execution::core-cpu1 Executable",
+        "Target System::cFS Target Execution::Command Interface",
+        "Target System::cFS Target Execution::Telemetry Interface",
+        "Outputs & Artifacts::Build Artifacts",
+        "Outputs & Artifacts::Changelog Artifact",
+        "Outputs & Artifacts::Telemetry Data",
+        "Outputs & Artifacts::Test Results"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT bundle node is decomposed into repository, workflow, build, target execution, host utility, and artifact-related subnodes. This is a semantically consistent expansion of the same cFS bundle scope, and the boundaries remain within the same overall system context."
+    },
+    {
+      "gt_nodes": [
+        "Reuse Workflows::Submodule Reuse"
+      ],
+      "predicted_nodes": [
+        "Host Environment::GitHub Actions Runner::CI Workflows::Reusable Workflows"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to reusable workflow support for submodules and workflow composition. The predicted package is broader but still correctly places the node in the reusable workflow boundary."
+    },
+    {
+      "gt_nodes": [
+        "Reuse Workflows::cFS Reuse"
+      ],
+      "predicted_nodes": [
+        "Host Environment::GitHub Actions Runner::CI Workflows::Reusable Workflows"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent reusable workflow composition at the cFS level. The predicted boundary is acceptable even though it is generalized."
+    },
+    {
+      "gt_nodes": [
+        "Static and Quality Checks::CodeQL Analysis"
+      ],
+      "predicted_nodes": [
+        "Host Environment::GitHub Actions Runner::CI Workflows::Build & Test Workflow"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "CodeQL analysis is a static/security analysis concern, not a general build and test workflow node. The predicted boundary is too broad and places the node in the wrong workflow category."
+    },
+    {
+      "gt_nodes": [
+        "Static and Quality Checks::Format Check"
+      ],
+      "predicted_nodes": [
+        "Host Environment::GitHub Actions Runner::CI Workflows::Format Checker"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The functionality matches directly. The predicted boundary correctly places it under CI workflow quality checks."
+    },
+    {
+      "gt_nodes": [
+        "Static and Quality Checks::Static Analysis"
+      ],
+      "predicted_nodes": [
+        "Host Environment::GitHub Actions Runner::CI Workflows::Build & Test Workflow"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Static analysis is not equivalent to a generic build/test workflow. The predicted placement confuses analysis with build execution."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Network",
+    "Host Environment::GitHub Actions Runner",
+    "Host Environment::GitHub Actions Runner::Build System",
+    "Host Environment::GitHub Actions Runner::CI Workflows::Build & Test Workflow",
+    "Host Environment::GitHub Actions Runner::CI Workflows::Changelog Generation",
+    "Host Environment::GitHub Actions Runner::CI Workflows::Format Checker",
+    "Host Environment::GitHub Actions Runner::CI Workflows::Reusable Workflows",
+    "Host Environment::GitHub Actions Runner::Host Utilities",
+    "Host Environment::GitHub Actions Runner::Host Utilities::cmdUtil",
+    "Host Environment::GitHub Actions Runner::Repository",
+    "Host Environment::GitHub Actions Runner::Repository::Git Submodules",
+    "Host Environment::GitHub Actions Runner::Repository::Make Assets",
+    "Host Environment::GitHub Actions Runner::Repository::Source Code",
+    "Outputs & Artifacts::Build Artifacts",
+    "Outputs & Artifacts::Changelog Artifact",
+    "Outputs & Artifacts::Telemetry Data",
+    "Outputs & Artifacts::Test Results",
+    "Target System::cFS Target Execution",
+    "Target System::cFS Target Execution::Command Interface",
+    "Target System::cFS Target Execution::Telemetry Interface",
+    "Target System::cFS Target Execution::core-cpu1 Executable"
+  ]
+}

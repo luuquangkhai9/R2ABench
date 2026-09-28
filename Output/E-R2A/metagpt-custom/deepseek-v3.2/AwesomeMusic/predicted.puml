@@ -1,0 +1,150 @@
+@startuml
+
+' Define colors and styles for clarity
+skinparam packageBackgroundColor #F5F5F5
+skinparam packageBorderColor #333333
+skinparam componentBackgroundColor #FFFFFF
+skinparam componentBorderColor #333333
+skinparam nodeBackgroundColor #E8EAF6
+skinparam nodeBorderColor #333333
+skinparam databaseBackgroundColor #E8F5E8
+skinparam databaseBorderColor #333333
+skinparam cloudBackgroundColor #F3E5F5
+skinparam cloudBorderColor #333333
+
+' Legend/Key
+legend top center
+    | Color/Shape | Meaning |
+    | <#F3E5F5>Cloud | External/Infrastructure Service |
+    | <#E8EAF6>Node | Infrastructure Layer |
+    | <#F5F5F5>Package | Logical Layer |
+    | <#E8F5E8>Database | Persistent Data Store |
+endlegend
+
+' Infrastructure Layer
+cloud "Gateway/Load Balancer" as gateway {
+    component "Nginx" as nginx [
+        HTTPS Termination
+        Load Balancing
+        Static Asset Serving
+        API Routing
+    ]
+}
+
+node "Infrastructure Layer" as infra {
+    component "RabbitMQ\n(Task Queue)" as rabbitmq
+    component "etcd" as etcd
+    component "Hadoop" as hadoop
+}
+
+' Web Frontend Layer
+package "Web Frontend Layer" as frontend_layer {
+    component "Web Frontend" as frontend [
+        HTML/CSS/JS/Bootstrap
+        -
+        Registration/Login
+        Music Generation UI
+        Upload/Search UI
+        Favorites/Follows UI
+        Browsing Interface
+    ]
+}
+
+' Web Backend Layer
+package "Web Backend Layer" as backend_layer {
+    component "Web Backend" as backend [
+        Golang/Gin Framework
+        -
+        Data Interfaces
+        Business Logic
+        Data Coordination
+        Service Scheduling
+        Hot Chart Updates
+    ]
+    
+    component "Scheduling Module" as scheduler [
+        Daily Task Trigger (cron/time-based)
+        Generation Task Queueing
+        Task Status Polling
+    ]
+}
+
+' Algorithm Layer
+package "Algorithm Layer" as algorithm_layer {
+    component "Algorithm Service" as algo_service [
+        Music Generation
+        Model Training (GPT-2)
+        Score Classification (LSTM)
+        Song Recommendations
+    ]
+}
+
+' Data Layer
+database "Data Layer" as data_layer {
+    database "User & Relationship Store" as user_store [
+        User Accounts
+        Follow Relationships
+        Model Favorites
+    ]
+    
+    database "Score Repository" as score_repo [
+        AI-Generated Scores
+        User-Uploaded Scores
+        (abc/midi formats)
+        Favorite Records
+        Metadata
+    ]
+    
+    database "Model Repository" as model_repo [
+        User-Specific
+        GPT-2 Models
+        Model Parameters
+    ]
+    
+    database "Task Status & Log Store" as task_store [
+        Task Metadata
+        Execution Status
+        Logs
+    ]
+}
+
+' External traffic flow
+[External User] --> nginx : "HTTPS requests"
+nginx --> frontend : "Static assets"
+frontend --> nginx : "API calls"
+nginx --> backend : "API routing (Load Balanced)"
+
+' Frontend to Backend communication
+frontend --> backend : "REST API calls\n(All data operations)"
+
+' Backend core data operations
+backend --> user_store : "Manages users &\nrelationships"
+backend --> score_repo : "Stores/retrieves\nscores & metadata"
+backend --> model_repo : "Manages model\nreferences"
+backend --> task_store : "Stores task\nstatus & logs"
+
+' Backend to Algorithm coordination
+backend --> algo_service : "Coordinates\nmusic generation,\ntraining, recommendations"
+
+' Task flow: Backend submits tasks to queue
+backend --> rabbitmq : "Submits user\ngeneration tasks"
+
+' Scheduling module consumes from queue and coordinates
+scheduler --> rabbitmq : "Consumes tasks\nfrom queue"
+scheduler --> task_store : "Updates task\nstatus & logs"
+
+' Algorithm service processes tasks
+algo_service --> rabbitmq : "Consumes tasks\nfrom queue"
+algo_service --> model_repo : "Reads/updates\nmodel parameters"
+algo_service --> score_repo : "Reads playlists &\nscores for training"
+algo_service --> user_store : "Reads user data\nfor recommendations & training"
+
+' Hot chart update flow
+backend --> score_repo : "Reads score attention\nfor hot chart updates"
+backend --> user_store : "Reads user popularity\nfor hot chart updates"
+
+' Infrastructure dependencies (optional/contextual)
+backend --> etcd : "Service discovery &\nconfiguration (optional)"
+algo_service --> hadoop : "Data processing\n(optional)"
+
+@enduml

@@ -1,0 +1,101 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Frontend"
+      ],
+      "predicted_nodes": [
+        "Global::User Frontend (React",
+        "User Frontend (React::Aeternity Wallet Client\\n+ SDK",
+        "User Frontend (React::Prediction API\\n(Provider/Context",
+        "User Frontend (React::Prediction UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT frontend node is decomposed into the React frontend container plus its internal wallet/SDK integration, provider/context API, and UI subnodes. This is semantically consistent with the frontend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::IPFS"
+      ],
+      "predicted_nodes": [
+        "Global::Prediction Media Storage\\n(IPFS-compatible"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent external prediction media storage, and IPFS-compatible storage is a correct semantic match for the GT IPFS node."
+    },
+    {
+      "gt_nodes": [
+        "Global::User"
+      ],
+      "predicted_nodes": [
+        "Global::User Frontend (React"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node groups the user-facing frontend side of the system, which aligns with the GT user-facing boundary. No severe context confusion is present."
+    },
+    {
+      "gt_nodes": [
+        "Global::oracle-service"
+      ],
+      "predicted_nodes": [
+        "Backend Services::Oracle Service (Quarkus",
+        "Global::Backend Services",
+        "Aeternity Blockchain::Oracle Registry\\n& Oracle Queries",
+        "Global::External Price Provider"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT oracle service is split into its runtime/service container and related concerns: backend services, oracle registry/query handling, and external price provider dependency. This is a reasonable decomposition within the backend/oracle domain."
+    },
+    {
+      "gt_nodes": [
+        "Global::process-prediction-\\nservice"
+      ],
+      "predicted_nodes": [
+        "Backend Services::Prediction-Processing Service",
+        "Global::Backend Services"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The prediction-processing service is correctly identified and placed under backend services. The decomposition is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "aeternity blockchain::PredictionCards\\nSmart Contract"
+      ],
+      "predicted_nodes": [
+        "Aeternity Blockchain::PredictionCards\\nSmart Contract"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is an exact semantic and boundary match for the on-chain contract."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Aeternity Blockchain::AENS Name Service"
+      ],
+      "match_type": "hallucinated",
+      "is_boundary_correct": true,
+      "reasoning": "The PRD mentions the AENS contract-location mechanism/name, but GT nodes do not contain a separate AENS service node. This is an extra predicted node not present in the GT node list."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Local Contract Integration-Test Stack::AE Node",
+        "Local Contract Integration-Test Stack::Compiler Service",
+        "Local Contract Integration-Test Stack::Debug Endpoint",
+        "Local Contract Integration-Test Stack::Index Service",
+        "Local Contract Integration-Test Stack::Test Proxy\\n(CORS Enabled"
+      ],
+      "match_type": "hallucinated",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node list does not include the local integration-test stack as a separate node group. These are additional predicted infrastructure nodes absent from the GT list."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

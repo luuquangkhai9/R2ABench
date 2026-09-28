@@ -1,0 +1,278 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::API Gateway"
+      ],
+      "predicted_nodes": [
+        "API & Auth Layer::Amazon API Gateway\\n(execute-api"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the API Gateway entry point for frontend/backend communication; the boundary differs in naming but is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Cognito"
+      ],
+      "predicted_nodes": [
+        "API & Auth Layer::Amazon Cognito\\n(Authentication"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote Cognito authentication/security services, and the package placement is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::S3"
+      ],
+      "predicted_nodes": [
+        "Frontend Layer::Amazon S3\\n(Static Hosting"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "S3 is used for static frontend hosting in the PRD and GT, so the predicted frontend placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Notification Service::SQS"
+      ],
+      "predicted_nodes": [
+        "Notification Layer::Amazon SQS\\n(Reminder Queue"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the reminder queuing component for notifications; boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Notification Service::SNS"
+      ],
+      "predicted_nodes": [
+        "Notification Layer::Amazon SNS\\n(SMS Delivery"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent SMS delivery via SNS, which aligns with the notification workflow."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::SageMaker"
+      ],
+      "predicted_nodes": [
+        "ML / Prediction Layer::Amazon SageMaker\\n(Match Outcome Prediction"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the machine-learning prediction platform; the layer attribution is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::DynamoDB\\nPredictions"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Amazon DynamoDB\\n(Match Data Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT prediction storage maps to the predicted DynamoDB data store; the exact label is broader, but the data-layer placement is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Amazon Elasticsearch\\n(Match Data Search"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent Elasticsearch used for retrieval/search, and the data-layer attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::prediction\\nLambda"
+      ],
+      "predicted_nodes": [
+        "Backend / Business Logic Layer::Prediction Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Lambda implementation is represented by the predicted prediction service abstraction; this is a valid functional match."
+    },
+    {
+      "gt_nodes": [
+        "Standing Service::DynamoDB\\nStandings"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Amazon DynamoDB\\n(Match Data Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The standings data store is subsumed under the predicted match data storage layer, which is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Standing Service::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Amazon Elasticsearch\\n(Match Data Search"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both indicate Elasticsearch for match-data retrieval/search; boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Standing Service::standing\\nLambda"
+      ],
+      "predicted_nodes": [
+        "Backend / Business Logic Layer::Match Info Service\\n(Fixtures, Standings, Scores, Results"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT standing Lambda is part of match information logic, and the broader match info service correctly encompasses standings."
+    },
+    {
+      "gt_nodes": [
+        "Fixtures Service::fixtures\\nLambda"
+      ],
+      "predicted_nodes": [
+        "Backend / Business Logic Layer::Match Info Service\\n(Fixtures, Standings, Scores, Results"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT fixtures Lambda is functionally contained within the broader match information service; the boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Fixtures Service::SQS"
+      ],
+      "predicted_nodes": [
+        "Notification Layer::Amazon SQS\\n(Reminder Queue"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both use SQS, but the GT fixtures service SQS is not the same as the reminder queue in the notification layer; this is a functional/context mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2"
+      ],
+      "predicted_nodes": [
+        "Streaming / Live Score Layer::Amazon EC2"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the EC2 runtime for the live score streaming pipeline."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2::Kafka"
+      ],
+      "predicted_nodes": [
+        "Streaming / Live Score Layer::Amazon EC2::Apache Kafka\\n(Live Score Streaming"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Kafka on EC2 for live score streaming matches directly, and the layer placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2::M4"
+      ],
+      "predicted_nodes": [
+        "Streaming / Live Score Layer::Amazon EC2"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The instance type M4 is a detail omitted in the predicted node, but the EC2 component is still semantically matched."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2::foot app"
+      ],
+      "predicted_nodes": [
+        "Streaming / Live Score Layer::Amazon EC2"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The application running on the EC2 host is represented at a higher abstraction level by the predicted EC2 node; acceptable functional match."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::live_score\\nLambda"
+      ],
+      "predicted_nodes": [
+        "Streaming / Live Score Layer::Amazon EC2::Apache Kafka\\n(Live Score Streaming"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT live_score Lambda is not equivalent to Kafka itself; the predicted node conflates compute/streaming infrastructure with the Lambda processing component."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::DynamoDB\\nLive Scores"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Amazon DynamoDB\\n(Match Data Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The live score data store is a subtype of the broader match data storage layer, so the match is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Amazon Elasticsearch\\n(Match Data Search"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote Elasticsearch in the data/search layer; boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Recommendation Service::Lex"
+      ],
+      "predicted_nodes": [
+        "Backend / Business Logic Layer::Screening Recommendation Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT uses Lex for the recommendation/chatbot interaction, while the predicted node is a generic screening recommendation service; this misses the specific conversational component and changes the architectural meaning."
+    },
+    {
+      "gt_nodes": [
+        "Recommendation Service::recommendation\\nLambda"
+      ],
+      "predicted_nodes": [
+        "Backend / Business Logic Layer::Screening Recommendation Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The recommendation Lambda is appropriately abstracted as the screening recommendation backend service."
+    },
+    {
+      "gt_nodes": [
+        "Global::User"
+      ],
+      "predicted_nodes": [
+        "Frontend Layer::Web Frontend\\n(HTML/CSS/Bootstrap/jQuery"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "A user actor is not equivalent to the frontend implementation node; this is a clear model/entity mismatch."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "API & Auth Layer::AWS IAM\\n(Security Management",
+    "Backend / Business Logic Layer::Chatbot Service",
+    "Backend / Business Logic Layer::Reminder Service",
+    "Data Layer::Amazon DynamoDB\\n(Match Data Storage",
+    "External Systems::Football Data\\nExternal API",
+    "Frontend Layer::Web Frontend\\n(HTML/CSS/Bootstrap/jQuery",
+    "Streaming / Live Score Layer::Amazon EC2::Apache Avro\\n(Payload Serialization"
+  ]
+}

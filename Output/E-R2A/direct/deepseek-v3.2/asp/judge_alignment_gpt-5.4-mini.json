@@ -1,0 +1,145 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Client Layer"
+      ],
+      "predicted_nodes": [
+        "Global::Review Artifact\n(Markdown Checklist",
+        "Global::Review Process",
+        "Global::Reviewer",
+        "Global::Requirements Owner",
+        "Global::Project Stakeholder",
+        "Global::Constraints",
+        "Global::External Inputs",
+        "Global::Quality Attributes"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT is a high-level presentation/client boundary, while the predicted nodes decompose the checklist review artifact and its human/analytical surrounding concepts. This is a reasonable abstraction shift for a document-centric system, and the boundary placement remains within the global level rather than crossing into an incorrect architectural layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::Service / Backend Layer"
+      ],
+      "predicted_nodes": [
+        "Review Artifact\n(Markdown Checklist::Checklist Items",
+        "Review Artifact\n(Markdown Checklist::Problem Report &\nSuggestions",
+        "Review Artifact\n(Markdown Checklist::Review Metadata",
+        "Review Artifact\n(Markdown Checklist::Review Purpose &\nBasis",
+        "Review Artifact\n(Markdown Checklist::Score Record",
+        "Review Process::Completeness\nReview",
+        "Review Process::Define Review\nObjectives",
+        "Review Process::Exception & Auxiliary\nReview",
+        "Review Process::Extension &\nImprovement Review",
+        "Review Process::Finalize & Sign\nReview",
+        "Review Process::Model Accuracy\nReview",
+        "Review Process::Record Problems &\nSuggestions",
+        "Review Process::Score Assignment",
+        "Review Process::Standards-Based\nReview",
+        "Review Process::Understandability\nReview"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT backend layer is broadly represented by the review process logic and checklist artifact structure in the prediction. Although the predicted nodes are more domain-specific than a generic backend layer, they still remain in the correct logical service/back-end role for this PRD."
+    },
+    {
+      "gt_nodes": [
+        "Global::Storage / Database Layer"
+      ],
+      "predicted_nodes": [
+        "External Inputs::Applicable Standards &\nSpecifications",
+        "External Inputs::Product Business\nRequirements",
+        "External Inputs::Requirements Document\n(Under Review"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "These predicted nodes are conceptually inputs/documents rather than storage/database infrastructure. They match the GT only at a very abstract 'persisted artifacts' level, but the boundary attribution is not correct because the GT node is a storage layer and the prediction places them under an external-input/document boundary."
+    },
+    {
+      "gt_nodes": [
+        "Storage / Database Layer::MySQL Database",
+        "Storage / Database Layer::Redis Cache",
+        "Storage / Database Layer::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "Review Artifact\n(Markdown Checklist::Checklist Items",
+        "Review Artifact\n(Markdown Checklist::Problem Report &\nSuggestions",
+        "Review Artifact\n(Markdown Checklist::Review Metadata",
+        "Review Artifact\n(Markdown Checklist::Review Purpose &\nBasis",
+        "Review Artifact\n(Markdown Checklist::Score Record"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT explicitly models concrete storage technologies, while the prediction models logical sections of a markdown checklist. These are not semantically equivalent storage-layer nodes, so this is a severe boundary/category mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Client Layer::Client Terminal",
+        "Client Layer::Cloud DNS"
+      ],
+      "predicted_nodes": [
+        "Global::Review Artifact\n(Markdown Checklist",
+        "Global::Review Process",
+        "Global::Reviewer",
+        "Global::Requirements Owner",
+        "Global::Project Stakeholder"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT client layer contains concrete access endpoints/infrastructure, whereas the prediction contains roles and artifact/process abstractions. This is not an equivalent client-layer mapping and reflects a layer confusion."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Network / Gateway Layer::Machine 01",
+    "Network / Gateway Layer::Machine 01::LVS - Linux Virtual Server",
+    "Network / Gateway Layer::Machine 01::Nginx",
+    "Network / Gateway Layer::Machine 02",
+    "Network / Gateway Layer::Machine 02::LVS - Linux Virtual Server",
+    "Network / Gateway Layer::Machine 02::Nginx",
+    "Network / Gateway Layer::Machine 03",
+    "Network / Gateway Layer::Machine 03::LVS - Linux Virtual Server",
+    "Network / Gateway Layer::Machine 03::Nginx",
+    "Service / Backend Layer::Back-office Management",
+    "Service / Backend Layer::Django Service Clusters",
+    "Service / Backend Layer::Literature Service",
+    "Service / Backend Layer::Socializing Service",
+    "Service / Backend Layer::User Information Service"
+  ],
+  "unmatched_predicted_nodes": [
+    "Constraints::C-001: Use Review/\\nVerification Methods",
+    "Constraints::C-002: Consider\\nStandards",
+    "Constraints::C-003: 4x10 Scoring\\nModel",
+    "Constraints::C-004: Business Reqs\\nExternal",
+    "External Inputs::Applicable Standards &\\nSpecifications",
+    "External Inputs::Product Business\\nRequirements",
+    "External Inputs::Requirements Document\\n(Under Review",
+    "Global::Constraints",
+    "Global::External Inputs",
+    "Global::Project Stakeholder",
+    "Global::Quality Attributes",
+    "Global::Requirements Owner",
+    "Global::Review Artifact\\n(Markdown Checklist",
+    "Global::Review Process",
+    "Global::Reviewer",
+    "Quality Attributes::Completeness\\n(NFR-001",
+    "Quality Attributes::Correctness\\n(NFR-003",
+    "Quality Attributes::Measurability\\n(NFR-004",
+    "Quality Attributes::Usability/Clarity\\n(NFR-002",
+    "Review Artifact\\n(Markdown Checklist::Checklist Items",
+    "Review Artifact\\n(Markdown Checklist::Problem Report &\\nSuggestions",
+    "Review Artifact\\n(Markdown Checklist::Review Metadata",
+    "Review Artifact\\n(Markdown Checklist::Review Purpose &\\nBasis",
+    "Review Artifact\\n(Markdown Checklist::Score Record",
+    "Review Process::Completeness\\nReview",
+    "Review Process::Define Review\\nObjectives",
+    "Review Process::Exception & Auxiliary\\nReview",
+    "Review Process::Extension &\\nImprovement Review",
+    "Review Process::Finalize & Sign\\nReview",
+    "Review Process::Model Accuracy\\nReview",
+    "Review Process::Record Problems &\\nSuggestions",
+    "Review Process::Score Assignment",
+    "Review Process::Standards-Based\\nReview",
+    "Review Process::Understandability\\nReview"
+  ]
+}

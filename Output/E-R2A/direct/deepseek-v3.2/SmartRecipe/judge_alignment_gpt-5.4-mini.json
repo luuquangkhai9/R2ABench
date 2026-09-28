@@ -1,0 +1,178 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Admin Audit"
+      ],
+      "predicted_nodes": [
+        "Backend Service Tier (Spring Boot::Admin Management Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent administrator-side review/management functions. The predicted node is a reasonable refinement of the GT admin audit module and stays within the backend Spring Boot boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Community Sharing"
+      ],
+      "predicted_nodes": [
+        "Backend Service Tier (Spring Boot::Community Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both capture community sharing and interaction capabilities. The boundary remains in the backend Spring Boot service layer, which is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Health Management"
+      ],
+      "predicted_nodes": [
+        "Backend Service Tier (Spring Boot::Health Analysis Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT health management module corresponds to nutrition/health analysis functionality. Predicted placement in backend Spring Boot is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Recipe Search"
+      ],
+      "predicted_nodes": [
+        "Backend Service Tier (Spring Boot::Recipe Management Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node is broader and can include recipe CRUD/management, but the GT node is specifically recipe search. The backend boundary is correct, but the functional mapping is not precise enough."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Smart Recommendation"
+      ],
+      "predicted_nodes": [
+        "Backend Service Tier (Spring Boot::Recommendation Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both indicate recommendation functionality, and the backend Spring Boot boundary matches the GT business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::User Information"
+      ],
+      "predicted_nodes": [
+        "Backend Service Tier (Spring Boot::User Profile Service",
+        "Backend Service Tier (Spring Boot::Authentication Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT user information management is split into profile management and authentication. This is a valid refinement, and both remain within the backend Spring Boot boundary."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Cleaning",
+        "Data Layer::Dataset"
+      ],
+      "predicted_nodes": [
+        "AI/ML Inference Service (Flask::Image Preprocessing"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted preprocessing service is related to the GT data preparation assets, but the GT nodes are data-layer assets/components, while the predicted node is placed inside the Flask inference service. This is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Read/Write Database"
+      ],
+      "predicted_nodes": [
+        "Data Tier::MySQL Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the relational database access/storage function. The naming differs, but the database boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Data Tier::MySQL Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct semantic match for MySQL storage. The data-tier/database boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Database::Redis"
+      ],
+      "predicted_nodes": [
+        "Data Tier::Redis Cache"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent Redis caching. The predicted cache boundary is consistent with the GT database/cache layer."
+    },
+    {
+      "gt_nodes": [
+        "Frontend UI::Recipe App"
+      ],
+      "predicted_nodes": [
+        "Mobile Client Tier::Android App",
+        "Mobile Client Tier::iOS App"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT frontend app is split into Android and iOS clients, which is consistent with the PRD's cross-platform foreground requirement. The frontend/mobile client boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Runtime Environment::Flask Service"
+      ],
+      "predicted_nodes": [
+        "AI/ML Inference Service (Flask",
+        "AI/ML Inference Service (Flask::Food Recognition Model",
+        "AI/ML Inference Service (Flask::Recipe Generator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Flask runtime is refined into a Flask-based inference service and its model responsibilities. Although more detailed, it stays within the Flask runtime/inference boundary."
+    },
+    {
+      "gt_nodes": [
+        "Runtime Environment::Springboot Service"
+      ],
+      "predicted_nodes": [
+        "Backend Service Tier (Spring Boot::Admin Management Service",
+        "Backend Service Tier (Spring Boot::Authentication Service",
+        "Backend Service Tier (Spring Boot::Community Service",
+        "Backend Service Tier (Spring Boot::Health Analysis Service",
+        "Backend Service Tier (Spring Boot::Recipe Management Service",
+        "Backend Service Tier (Spring Boot::Recommendation Service",
+        "Backend Service Tier (Spring Boot::User Profile Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Spring Boot runtime is decomposed into multiple backend services. This is a reasonable architectural refinement and remains within the Spring Boot backend boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Data Tier::MySQL Database::Structured Data::Community Posts",
+    "Data Tier::MySQL Database::Structured Data::Food Taboos",
+    "Data Tier::MySQL Database::Structured Data::Health Profiles",
+    "Data Tier::MySQL Database::Structured Data::Merchant Info",
+    "Data Tier::MySQL Database::Structured Data::Nutrition Data",
+    "Data Tier::MySQL Database::Structured Data::Recipes & Ingredients",
+    "Data Tier::MySQL Database::Structured Data::User Accounts",
+    "Data Tier::MySQL Database::Structured Data::User History",
+    "Data Tier::Redis Cache::Cached Data::API Responses",
+    "Data Tier::Redis Cache::Cached Data::Hot Recipes",
+    "Data Tier::Redis Cache::Cached Data::Recommendation Features",
+    "Data Tier::Redis Cache::Cached Data::Session Tokens",
+    "Global::AI/ML Inference Service (Flask",
+    "Global::API Gateway / Load Balancer",
+    "Global::Catering Company",
+    "Global::Mobile User",
+    "Global::System Administrator"
+  ]
+}

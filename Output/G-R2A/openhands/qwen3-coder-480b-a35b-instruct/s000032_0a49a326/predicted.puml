@@ -1,0 +1,93 @@
+@startuml
+!define RECTANGLE class
+
+' Title and Theme
+title Activiti 7 Guide-Documented Platform Architecture
+
+' External Actor
+actor "Authenticated User" as user
+
+' External Systems
+RECTANGLE "Keycloak (Identity Provider)" as keycloak
+RECTANGLE "NGINX Ingress Controller" as nginx
+
+' Core Platform Components
+RECTANGLE "Activiti Runtime Bundle" as runtime_bundle {
+  RECTANGLE "ProcessRuntime API" as process_api
+  RECTANGLE "TaskRuntime API" as task_api
+}
+
+RECTANGLE "Audit Service" as audit_service
+RECTANGLE "Query Service" as query_service
+
+' Kubernetes Infrastructure
+rectangle "Kubernetes/GKE Cluster" as k8s {
+  rectangle "Example Runtime Bundle Pod" as runtime_pod
+  rectangle "Audit Service Pod" as audit_pod
+  rectangle "Query Service Pod" as query_pod
+}
+
+' Background Components (as noted in SRS)
+rectangle "Notification Service" as notification_svc
+rectangle "Cloud Connectors" as cloud_connectors
+rectangle "Registry/Config Maps" as registry
+
+' Relationships
+user --> nginx : "1. Access via public IP"
+nginx --> runtime_bundle : "2. Route requests"
+nginx --> audit_service : "2. Route requests"
+nginx --> query_service : "2. Route requests"
+
+user --> keycloak : "3. Obtain auth token"
+keycloak --> user : "4. Return JWT token"
+
+user --> runtime_bundle : "5. Authenticated requests\n(with token)"
+runtime_bundle --> keycloak : "6. Validate token"
+
+process_api --> runtime_pod : "Hosted in"
+task_api --> runtime_pod : "Hosted in"
+audit_service --> audit_pod : "Hosted in"
+query_service --> query_pod : "Hosted in"
+
+runtime_bundle --> audit_service : "7. Emit audit events"
+runtime_bundle --> query_service : "8. Update query data"
+
+' Authorization Flow
+user --> task_api : "9. Task operations\n(requires ACTIVITI_USER role)"
+task_api --> runtime_bundle : "Check user role"
+
+' Background Component Relationships
+runtime_bundle ..> notification_svc : "Notify on events"
+runtime_bundle ..> cloud_connectors : "Connect to external systems"
+runtime_bundle ..> registry : "Read configs"
+audit_service ..> registry : "Read configs"
+query_service ..> registry : "Read configs"
+
+' Notes
+note right of keycloak
+  Provides authentication tokens
+  Required for protected endpoint access
+end note
+
+note right of runtime_bundle
+  Hosts process definitions
+  Executes process instances
+  Exposes ProcessRuntime and TaskRuntime APIs
+end note
+
+note right of task_api
+  Requires ACTIVITI_USER/ROLE_ACTIVITI_USER
+  for access control
+end note
+
+note bottom of audit_service
+  Displays audit events for
+  process instances
+end note
+
+note bottom of nginx
+  Routes external requests to
+  internal services
+end note
+
+@enduml

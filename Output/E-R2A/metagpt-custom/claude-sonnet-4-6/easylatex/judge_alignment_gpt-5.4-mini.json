@@ -1,0 +1,304 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::AI Module"
+      ],
+      "predicted_nodes": [
+        "AI / Processing Layer::RecognitionOrchestrator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the top-level orchestration of AI-based recognition and conversion workflow, and the AI processing layer is semantically consistent with the GT backend AI module."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::AI Module::Image Pre-processing Module"
+      ],
+      "predicted_nodes": [
+        "AI / Processing Layer::ImageRecognitionModel"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both are related to image-based recognition preprocessing for formula/table extraction. The boundary is still within the AI processing area, which is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::AI Module::LaTeX Generation Module"
+      ],
+      "predicted_nodes": [
+        "AI / Processing Layer::RecognitionOrchestrator",
+        "Business Logic Layer::LaTeXGenerationService"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT's LaTeX generation functionality is split between orchestration and explicit generation service in the prediction. The functional decomposition is reasonable and remains within backend processing responsibilities."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::AI Module::Result Processing Module"
+      ],
+      "predicted_nodes": [
+        "Rendering Layer::RenderingService"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Although both handle output processing, the GT node is about AI result post-processing before/around LaTeX generation, while the predicted node is specifically rendering. This is a functional mismatch and boundary confusion."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::File Processing Service"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::FileUploadService",
+        "AI / Processing Layer::PDFExtractor",
+        "AI / Processing Layer::SpreadsheetParser"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT file processing service is split into upload, PDF extraction, and spreadsheet parsing responsibilities. This is a valid functional decomposition across backend layers."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::Project Management Service"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::ProjectService",
+        "Business Logic Layer::VersionControlService",
+        "Business Logic Layer::GroupService"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT project management service is decomposed into project, version control, and group collaboration services, which is functionally aligned with the PRD and appropriate for backend layering."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::Project Management Service::Collaboration & Permissions Service"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::CollaborationService"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent collaboration/permission handling within project management. The boundary is slightly renamed but semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::Project Management Service::Project Basic Services"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::ProjectService"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to core project CRUD/basic management functionality, and the boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::User Management Service"
+      ],
+      "predicted_nodes": [
+        "API Gateway / Application Layer::AuthService",
+        "API Gateway / Application Layer::PasswordRecoveryService"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT user management service includes registration, login, and account handling, but the predicted nodes only cover auth and password recovery and place them in an API gateway layer, which is an incorrect architectural boundary for core user management."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer / Storage::Project & Article Info"
+      ],
+      "predicted_nodes": [
+        "Data Persistence Layer::ProjectRepository"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both indicate persistent storage for project-related metadata. The storage/repository boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer / Storage::Team Learning Data"
+      ],
+      "predicted_nodes": [
+        "Data Persistence Layer::GroupRepository"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Team/group collaboration data maps well to group persistence. The boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer / Storage::User Information"
+      ],
+      "predicted_nodes": [
+        "Data Persistence Layer::UserRepository"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "User information storage matches the user repository, and the persistence boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Application Layer / Backend Services"
+      ],
+      "predicted_nodes": [
+        "API Gateway / Application Layer::AuthService",
+        "API Gateway / Application Layer::PasswordRecoveryService",
+        "Business Logic Layer::CollaborationService",
+        "Business Logic Layer::CommentService",
+        "Business Logic Layer::ExportService",
+        "Business Logic Layer::FileUploadService",
+        "Business Logic Layer::GroupService",
+        "Business Logic Layer::LaTeXGenerationService",
+        "Business Logic Layer::ProjectService",
+        "Business Logic Layer::VersionControlService",
+        "AI / Processing Layer::HandwritingRecognitionModel",
+        "AI / Processing Layer::ImageRecognitionModel",
+        "AI / Processing Layer::PDFExtractor",
+        "AI / Processing Layer::RecognitionOrchestrator",
+        "AI / Processing Layer::SpreadsheetParser"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT global backend grouping is distributed into multiple backend/application/AI services in the prediction. This is an acceptable decomposition of the backend layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::Data Layer / Storage"
+      ],
+      "predicted_nodes": [
+        "Data Persistence Layer::FileRepository",
+        "Data Persistence Layer::GroupRepository",
+        "Data Persistence Layer::ProjectRepository",
+        "Data Persistence Layer::RecognitionResultRepository",
+        "Data Persistence Layer::UserRepository",
+        "File Storage Layer::FileStorageAdapter",
+        "Relational Database Runtime::MySQL 8.0+",
+        "Relational Database Runtime::PostgreSQL 12+"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The global data layer is expanded into repositories, file storage, and concrete database runtime nodes. This is semantically aligned, though the runtime nodes are more infrastructure-oriented than the GT abstraction."
+    },
+    {
+      "gt_nodes": [
+        "Global::Presentation Layer / Frontend"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::WebUI / Frontend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the frontend/presentation tier. The naming differs but the boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::User Layer / Client Layer"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Layer::Web Server",
+        "Infrastructure Layer::Application Runtime - Node.js 14.x+",
+        "Infrastructure Layer::Application Runtime - Python 3.8+",
+        "Relational Database Runtime::MySQL 8.0+",
+        "Relational Database Runtime::PostgreSQL 12+",
+        "LaTeX Engine Runtime::MiKTeX",
+        "LaTeX Engine Runtime::TeX Live"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT client layer is about browser clients (PC/mobile browser), but the prediction places server runtimes and database/engine runtimes here instead of client browsers. This is a severe boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer / Frontend::File Upload Interface"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::WebUI / Frontend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The upload interface is part of the web UI/frontend, so this is a correct higher-level match despite being less specific."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer / Frontend::LaTeX Rendering Interface"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::WebUI / Frontend",
+        "Rendering Layer::RenderingService"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The rendering interface in the frontend is represented jointly by the web UI and rendering service. This split is reasonable and remains within presentation/rendering responsibilities."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer / Frontend::Registration & Login Interface"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::WebUI / Frontend",
+        "API Gateway / Application Layer::AuthService"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The login/registration UI plus authentication backend together cover the GT interface. The decomposition is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer / Frontend::Workspace Interface"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::WebUI / Frontend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The workspace interface is a frontend UI concern and matches the generic web UI node."
+    },
+    {
+      "gt_nodes": [
+        "User Layer / Client Layer::Mobile Browser"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node represents the mobile browser client explicitly."
+    },
+    {
+      "gt_nodes": [
+        "User Layer / Client Layer::PC Browser"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node represents the PC browser client explicitly."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "User Layer / Client Layer::Mobile Browser",
+    "User Layer / Client Layer::PC Browser"
+  ],
+  "unmatched_predicted_nodes": [
+    "Business Logic Layer::CommentService",
+    "Business Logic Layer::ExportService",
+    "Data Persistence Layer::FileRepository",
+    "Data Persistence Layer::RecognitionResultRepository",
+    "External Email / SMTP::SMTP Relay",
+    "File Storage Layer::FileStorageAdapter",
+    "Global::External Email / SMTP",
+    "Global::LaTeX Engine Runtime",
+    "Global::Relational Database Runtime",
+    "Infrastructure Layer::Application Runtime - Node.js 14.x+",
+    "Infrastructure Layer::Application Runtime - Node.js 14.x+::Node.js 14.x+ Runtime",
+    "Infrastructure Layer::Application Runtime - Python 3.8+",
+    "Infrastructure Layer::Application Runtime - Python 3.8+::Python 3.8+ Runtime",
+    "Infrastructure Layer::Web Server",
+    "Infrastructure Layer::Web Server::Apache 2.4+ / Nginx 1.18+",
+    "LaTeX Engine Runtime::MiKTeX",
+    "LaTeX Engine Runtime::TeX Live",
+    "Presentation Layer::WebUI / Frontend",
+    "Relational Database Runtime::MySQL 8.0+",
+    "Relational Database Runtime::PostgreSQL 12+",
+    "Rendering Layer::RenderingService"
+  ]
+}

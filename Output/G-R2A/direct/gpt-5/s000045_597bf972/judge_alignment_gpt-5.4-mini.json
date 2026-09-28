@@ -1,0 +1,113 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Application"
+      ],
+      "predicted_nodes": [
+        "Android Host App::Host Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the host application that integrates the SDK. The Android Host App boundary is semantically consistent with Global for a system-level application node."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_Plugin::Plugin init compile",
+        "QAPM_Plugin::QAPM_Plugin"
+      ],
+      "predicted_nodes": [
+        "Out of Scope::APM Collection, Storage,\nReporting Pipeline"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT plugin-related nodes represent build/init plugin behavior, while the predicted node is a broad out-of-scope pipeline boundary. This is not a faithful semantic match and the boundary attribution is incorrect."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK (In Scope::UploadManager\n(Scheduling + Upload Processing",
+        "QAPM SDK (In Scope::WorkHandlerManager\n(HandlerThread + Work Handler + Main Handler)",
+        "QAPM SDK (In Scope::Sender",
+        "QAPM SDK (In Scope::ConfigManager",
+        "QAPM SDK (In Scope::Logging",
+        "QAPM SDK (In Scope::Apache HttpClient Instrumentation::ResponseHandlerWrapper",
+        "QAPM SDK (In Scope::Apache HttpClient Instrumentation::ResponseEntityWrapper\n(CountingEntity",
+        "QAPM SDK (In Scope::Apache HttpClient Instrumentation::CountingInputStream",
+        "QAPM SDK (In Scope::Apache HttpClient Instrumentation::TransactionState"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT SDK root is decomposed into detailed in-scope SDK subcomponents. This split is semantically consistent with the overall SDK boundary, so the attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Collect"
+      ],
+      "predicted_nodes": [
+        "Out of Scope::APM Collection, Storage,\nReporting Pipeline"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT collection module is part of the SDK, but the predicted node places it into an out-of-scope bucket. That is a boundary error and also loses the explicit module identity."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "predicted_nodes": [
+        "Out of Scope::APM Collection, Storage,\nReporting Pipeline"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT reporting module is part of the SDK, but the predicted node aggregates it into an out-of-scope pipeline. That is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "predicted_nodes": [
+        "Out of Scope::APM Collection, Storage,\nReporting Pipeline"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT storage module is part of the SDK, but the predicted node places it in an out-of-scope pipeline boundary. This is a boundary-crossing error."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_Plugin::Plugin init compile"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK (In Scope::WorkHandlerManager\n(HandlerThread + Work Handler + Main Handler)"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node faithfully represents the plugin compile/init behavior."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_Plugin::QAPM_Plugin"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK (In Scope::ConfigManager",
+        "QAPM SDK (In Scope::UploadManager\n(Scheduling + Upload Processing",
+        "QAPM SDK (In Scope::WorkHandlerManager\n(HandlerThread + Work Handler + Main Handler)"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node faithfully represents the plugin component itself."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Android OS / Platform::Connectivity Service",
+    "Android OS / Platform::Context",
+    "Android OS / Platform::HandlerThread/Looper/Handler",
+    "Apache HttpClient (Host App::HttpEntity",
+    "Apache HttpClient (Host App::HttpResponse",
+    "Apache HttpClient (Host App::ResponseHandler",
+    "Global::Network / Remote Endpoint"
+  ]
+}

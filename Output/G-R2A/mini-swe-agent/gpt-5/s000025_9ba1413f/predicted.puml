@@ -1,0 +1,54 @@
+@startuml
+skinparam componentStyle rectangle
+
+actor EndUser as endUser
+actor "External User Channel\n(Text/Call)" as extChannel
+
+cloud "Firebase Authentication" as firebaseAuth
+cloud "OnFleet API" as onfleet
+rectangle "Environment Variables" as envVars
+
+deployment "Frontend (Next.js)" as frontend {
+  [UI / Frontend App] as ui
+  component "Session Handler" as sessionHandler
+  component "Frontend Form" as form
+  component "Firebase Client Auth" as firebaseClient
+}
+
+package "APIs & Middleware" as apis {
+  component "Session Middleware" as sessionMW
+  component "Login API (/api/login)" as loginAPI
+  component "Logout API (/api/logout)" as logoutAPI
+  component "Task Processing Middleware\n(Address & Service-Area Decision)" as taskMW
+  database "Session Store" as sessionStore
+}
+
+node "Backend (Firebase Functions)" as backend {
+  component "Task Handler\n(OnFleet Integration)" as taskHandler
+}
+
+' Relationships '
+endUser --> form
+endUser --> sessionHandler
+extChannel --> taskMW
+
+envVars --> firebaseClient : Firebase config
+
+sessionHandler --> firebaseClient : getIdToken()
+firebaseClient --> firebaseAuth
+
+sessionHandler --> loginAPI : POST { token }
+sessionHandler --> logoutAPI : POST
+
+sessionMW ..> loginAPI : wraps & provides session
+sessionMW ..> logoutAPI : wraps & provides session
+
+loginAPI --> firebaseAuth : verifyIdToken(token)
+loginAPI --> sessionMW : update session
+sessionMW --> sessionStore : store decoded token + token
+
+form --> taskMW : help-task request
+taskMW --> taskHandler : eligible request
+taskHandler --> onfleet : create task
+
+@enduml

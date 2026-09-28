@@ -1,0 +1,66 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Browser"
+      ],
+      "predicted_nodes": [
+        "Google Cloud Platform::External Web Clients"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the web client/browser side that connects to the exposed WebSocket endpoint. The predicted boundary is broader but semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine",
+        "Your GCP project::Compute Engine::pulltop",
+        "Your GCP project::Compute Engine::websocketd"
+      ],
+      "predicted_nodes": [
+        "Google Cloud Platform::Google Kubernetes Engine",
+        "Google Cloud Platform::Google Kubernetes Engine::Kubernetes Cluster",
+        "Google Cloud Platform::Google Kubernetes Engine::Kubernetes Cluster::Kubernetes Namespace",
+        "Google Cloud Platform::Google Kubernetes Engine::Kubernetes Cluster::Kubernetes Namespace::Deployment Instance::Deployment",
+        "Google Cloud Platform::Google Kubernetes Engine::Kubernetes Cluster::Kubernetes Namespace::Deployment Instance::Deployment::Adapter Pod",
+        "Google Cloud Platform::Google Kubernetes Engine::Kubernetes Cluster::Kubernetes Namespace::Deployment Instance::Deployment::Adapter Pod::Adapter Container",
+        "Google Cloud Platform::Google Kubernetes Engine::Kubernetes Cluster::Kubernetes Namespace::Deployment Instance::Deployment::Adapter Pod::Adapter Container::Entrypoint Script\nexec.sh",
+        "Google Cloud Platform::Google Kubernetes Engine::Kubernetes Cluster::Kubernetes Namespace::Deployment Instance::Deployment::Adapter Pod::Adapter Container::Node.js Process\npulltop",
+        "Google Cloud Platform::Google Kubernetes Engine::Kubernetes Cluster::Kubernetes Namespace::Deployment Instance::Deployment::Adapter Pod::Adapter Container::WebSocket Daemon\nwebsocketd",
+        "Google Cloud Platform::Google Kubernetes Engine::Kubernetes Cluster::Kubernetes Namespace::Deployment Instance::Deployment::Adapter Pod::Adapter Container::Environment Variable\nSYMBOL",
+        "Google Cloud Platform::Google Kubernetes Engine::Kubernetes Cluster::Kubernetes Namespace::Deployment Instance::ConfigMap",
+        "Google Cloud Platform::Google Kubernetes Engine::Kubernetes Cluster::Kubernetes Namespace::Deployment Instance::Service",
+        "Google Cloud Platform::Google Kubernetes Engine::Kubernetes Cluster::Kubernetes Namespace::Deployment Instance::HorizontalPodAutoscaler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT runtime components pulltop and websocketd are correctly recognized, but they are placed inside a GKE/Kubernetes deployment boundary rather than the GT's Compute Engine context. The overall functionality matches, but the system boundary attribution is materially different from the manual design."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "pubsub-public-data project::Cloud Pub/Sub\\ntopic"
+  ],
+  "unmatched_predicted_nodes": [
+    "GCP Prerequisites::Billing Enabled",
+    "GCP Prerequisites::Subscription Creation\\nPermission",
+    "GCP Prerequisites::Topic Read Access",
+    "Global::GCP Prerequisites",
+    "Global::Google Cloud Platform",
+    "Google Cloud Platform::GCP Project",
+    "Google Cloud Platform::GCP Project::Pub/Sub Subscription",
+    "Google Cloud Platform::GCP Project::Pub/Sub Topic",
+    "Google Cloud Platform::Google Kubernetes Engine",
+    "Google Cloud Platform::Google Kubernetes Engine::Kubernetes Cluster",
+    "Google Cloud Platform::Google Kubernetes Engine::Kubernetes Cluster::Kubernetes Namespace",
+    "Google Cloud Platform::Google Kubernetes Engine::Kubernetes Cluster::Kubernetes Namespace::Deployment Instance::ConfigMap",
+    "Google Cloud Platform::Google Kubernetes Engine::Kubernetes Cluster::Kubernetes Namespace::Deployment Instance::Deployment",
+    "Google Cloud Platform::Google Kubernetes Engine::Kubernetes Cluster::Kubernetes Namespace::Deployment Instance::Deployment::Adapter Pod",
+    "Google Cloud Platform::Google Kubernetes Engine::Kubernetes Cluster::Kubernetes Namespace::Deployment Instance::Deployment::Adapter Pod::Adapter Container",
+    "Google Cloud Platform::Google Kubernetes Engine::Kubernetes Cluster::Kubernetes Namespace::Deployment Instance::Deployment::Adapter Pod::Adapter Container::Entrypoint Script\\nexec.sh",
+    "Google Cloud Platform::Google Kubernetes Engine::Kubernetes Cluster::Kubernetes Namespace::Deployment Instance::Deployment::Adapter Pod::Adapter Container::Environment Variable\\nSYMBOL",
+    "Google Cloud Platform::Google Kubernetes Engine::Kubernetes Cluster::Kubernetes Namespace::Deployment Instance::Deployment::Adapter Pod::Adapter Container::Node.js Process\\npulltop",
+    "Google Cloud Platform::Google Kubernetes Engine::Kubernetes Cluster::Kubernetes Namespace::Deployment Instance::Deployment::Adapter Pod::Adapter Container::WebSocket Daemon\\nwebsocketd",
+    "Google Cloud Platform::Google Kubernetes Engine::Kubernetes Cluster::Kubernetes Namespace::Deployment Instance::HorizontalPodAutoscaler",
+    "Google Cloud Platform::Google Kubernetes Engine::Kubernetes Cluster::Kubernetes Namespace::Deployment Instance::Service"
+  ]
+}

@@ -1,0 +1,198 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Simulator"
+      ],
+      "predicted_nodes": [
+        "Simulation Core::Gym-compatible Simulator Package"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the produced standalone simulator artifact. The predicted node places it under the simulation core/package boundary, which is semantically consistent with the GT simulator node."
+    },
+    {
+      "gt_nodes": [
+        "Biomechanical Model::BaseBMModel",
+        "Biomechanical Model::DerivedClass",
+        "Biomechanical Model::MoblArmsIndex"
+      ],
+      "predicted_nodes": [
+        "Simulation Core::Biomechanical Model Modules"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has multiple biomechanical model nodes, while the AI aggregated them into a single biomechanical model modules node. The boundary is correct because both represent the biomechanical model component area."
+    },
+    {
+      "gt_nodes": [
+        "Interaction Task::BaseTask",
+        "Interaction Task::DerivedClass",
+        "Interaction Task::Pointing",
+        "Interaction Task::Tracking"
+      ],
+      "predicted_nodes": [
+        "Simulation Core::Interaction Task Modules"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT interaction task hierarchy and concrete tasks are aggregated into the predicted interaction task modules node. This is semantically equivalent and remains in the correct architectural area."
+    },
+    {
+      "gt_nodes": [
+        "Perception::BaseModule",
+        "Perception::BasicWithEEPos",
+        "Perception::DerivedClass",
+        "Perception::FixedEye",
+        "Perception::Modalities::Modality",
+        "Perception::Modalities::Proprioception",
+        "Perception::Modalities::Vision",
+        "Perception::Perception"
+      ],
+      "predicted_nodes": [
+        "Simulation Core::Perception Modules\\n(vision, proprioception"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT perception framework, modality base class, and modality-specific modules are collapsed into a single perception modules node. Despite the formatting issue in the predicted label, the semantics align and the boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Perception::Modalities::Vision"
+      ],
+      "predicted_nodes": [
+        "Simulation Core::Perception Modules\\n(vision, proprioception"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Vision is one of the listed modalities covered by the predicted perception modules node. The boundary is appropriate for a perception subsystem grouping."
+    },
+    {
+      "gt_nodes": [
+        "Perception::Modalities::Proprioception"
+      ],
+      "predicted_nodes": [
+        "Simulation Core::Perception Modules\\n(vision, proprioception"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Proprioception is one of the listed modalities covered by the predicted perception modules node. The boundary is appropriate for a perception subsystem grouping."
+    },
+    {
+      "gt_nodes": [
+        "Biomechanical Model::BaseBMModel",
+        "Biomechanical Model::DerivedClass",
+        "Biomechanical Model::MoblArmsIndex",
+        "Interaction Task::BaseTask",
+        "Interaction Task::DerivedClass",
+        "Interaction Task::Pointing",
+        "Interaction Task::Tracking",
+        "Perception::BaseModule",
+        "Perception::BasicWithEEPos",
+        "Perception::DerivedClass",
+        "Perception::FixedEye",
+        "Perception::Modalities::Modality",
+        "Perception::Modalities::Proprioception",
+        "Perception::Modalities::Vision",
+        "Perception::Perception",
+        "Global::Simulator"
+      ],
+      "predicted_nodes": [
+        "Build & Composition Layer::Simulator Builder"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The simulator builder corresponds to the overall assembly process that composes biomechanical, task, and perception components into a simulator. The GT includes the constituent domain nodes rather than the builder node itself, so this is a higher-level semantic match and the boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Biomechanical Model::BaseBMModel",
+        "Biomechanical Model::DerivedClass",
+        "Biomechanical Model::MoblArmsIndex",
+        "Interaction Task::BaseTask",
+        "Interaction Task::DerivedClass",
+        "Interaction Task::Pointing",
+        "Interaction Task::Tracking",
+        "Perception::BaseModule",
+        "Perception::BasicWithEEPos",
+        "Perception::DerivedClass",
+        "Perception::FixedEye",
+        "Perception::Modalities::Modality",
+        "Perception::Modalities::Proprioception",
+        "Perception::Modalities::Vision",
+        "Perception::Perception"
+      ],
+      "predicted_nodes": [
+        "Build & Composition Layer::MuJoCo XML Integration"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT component set participates in simulator build-time integration, especially MuJoCo XML composition. The predicted node captures that integration concern correctly within the build/composition boundary."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Configuration Layer::YAML Configuration Files"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The PRD requires YAML-based simulator configuration, but there is no explicit GT node for configuration files. This is a reasonable predicted architecture node, but it has no direct GT counterpart."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Configuration Layer::MuJoCo XML Definitions"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The PRD requires MuJoCo XML integration and definitions, but there is no explicit GT node for this configuration artifact. It is a plausible predicted node with no direct GT counterpart."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Evaluation Workflow::Evaluation Runner"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The PRD includes an evaluation runner, but the GT node list does not contain an evaluation-specific component. This is a plausible predicted node without a direct GT counterpart."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Simulation Core::MuJoCo Engine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The PRD implies MuJoCo as the simulation backend, but the GT list does not include an engine node. This is a reasonable inferred architectural element with no direct GT counterpart."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Simulation Core::OpenAI Gym Interface"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The PRD explicitly requires Gym compatibility, but the GT list does not have a dedicated interface node. This is a valid predicted architecture element with no direct GT counterpart."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Storage & Artifacts::Action Log"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The PRD includes action logging during evaluation, but the GT list does not include storage/artifact nodes. This is a valid predicted node with no direct GT counterpart."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Training Workflow::RL Training Workflow"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The PRD includes reinforcement-learning training, but the GT node list does not have a training workflow node. This is a valid predicted node with no direct GT counterpart."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

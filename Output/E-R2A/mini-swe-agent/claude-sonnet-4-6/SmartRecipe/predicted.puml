@@ -1,0 +1,98 @@
+@startuml
+skinparam componentStyle rectangle
+skinparam backgroundColor #FAFAFA
+skinparam defaultFontSize 13
+
+title SmartRecipe System - Layered Architecture
+
+actor "General User" as User
+actor "Administrator" as Admin
+actor "Catering Company" as Catering
+
+package "Client Layer" {
+    [Mobile App
+(Android / iOS)] as MobileApp
+}
+
+package "API Gateway / Control Layer" {
+    [Spring Boot
+Controller Layer] as Controller
+}
+
+package "Business Service Layer" {
+    [User & Auth Service] as UserSvc
+    [Photo Recognition Service] as PhotoSvc
+    [Recipe Search Service] as RecipeSvc
+    [Health Analysis Service] as HealthSvc
+    [Community Sharing Service] as CommunitySvc
+    [Recommendation Service] as RecommendSvc
+    [Admin Management Service] as AdminSvc
+}
+
+package "Model Inference Layer" {
+    [Flask
+Model Inference Service] as FlaskInfer
+    [Deep Learning
+Food Recognition Model] as DLModel
+}
+
+package "Data Access Layer" {
+    [MySQL
+Data Access Objects] as MYSQLDAO
+    [Redis
+Cache Access] as RedisDAO
+}
+
+package "Data Storage Layer" {
+    database "MySQL
+Structured Data Store" as MySQL {
+        [User & Login Data]
+        [Recipe & Ingredient Data]
+        [Health & Nutrition Data]
+        [Community & Comment Data]
+        [Merchant & Location Data]
+        [Recommendation History]
+    }
+    database "Redis
+Cache Store" as Redis
+}
+
+cloud "External Services" {
+    [Map / Location Service] as MapSvc
+}
+
+User --> MobileApp
+Admin --> MobileApp
+Catering --> MobileApp
+
+MobileApp --> Controller : Ajax / HTTP
+
+Controller --> UserSvc
+Controller --> PhotoSvc
+Controller --> RecipeSvc
+Controller --> HealthSvc
+Controller --> CommunitySvc
+Controller --> RecommendSvc
+Controller --> AdminSvc
+
+PhotoSvc --> FlaskInfer : REST / HTTP
+FlaskInfer --> DLModel
+
+UserSvc --> MYSQLDAO
+PhotoSvc --> MYSQLDAO
+RecipeSvc --> MYSQLDAO
+HealthSvc --> MYSQLDAO
+CommunitySvc --> MYSQLDAO
+RecommendSvc --> MYSQLDAO
+AdminSvc --> MYSQLDAO
+
+UserSvc --> RedisDAO
+RecipeSvc --> RedisDAO
+RecommendSvc --> RedisDAO
+
+MYSQLDAO --> MySQL
+RedisDAO --> Redis
+
+CommunitySvc --> MapSvc : Merchant Location Lookup
+
+@enduml

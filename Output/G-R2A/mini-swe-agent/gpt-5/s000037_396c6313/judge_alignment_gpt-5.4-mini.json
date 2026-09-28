@@ -1,0 +1,165 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::runner"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Runner Controller",
+        "Infrastructure / External Systems::veinmind-runner Image"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT runner concept is split into an application-side controller and an external runner image. The functional intent is related, but the runner itself is not correctly confined to the GT's Global boundary; the predicted decomposition mixes orchestration logic with an external dependency."
+    },
+    {
+      "gt_nodes": [
+        "Global::plugin"
+      ],
+      "predicted_nodes": [
+        "Domain / Services::Authorization Router\\n(Docker AuthZ Plugin",
+        "Domain / Services::Plugin Packaging Example\\n(Python tool"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "GT plugin is a broad concept covering plugin-oriented functionality. The predicted nodes capture two plugin-related concerns, but they are placed under domain/services and split into authorization routing plus packaging example. This is only a partial semantic match and the boundary attribution does not align with the GT's Global grouping."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::containerd"
+      ],
+      "predicted_nodes": [
+        "Infrastructure / External Systems::Containerd"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same external infrastructure component, with a semantically equivalent boundary/package naming."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::docker"
+      ],
+      "predicted_nodes": [
+        "Infrastructure / External Systems::Docker Engine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to Docker as the external runtime/backend dependency; the boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::dockerfile"
+      ],
+      "predicted_nodes": [
+        "Infrastructure / External Systems::Policy Libraries"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No semantic equivalence: GT dockerfile is an input/backend artifact, while the predicted node is policy libraries for IaC scanning. This is a functional mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::kubernetes"
+      ],
+      "predicted_nodes": [
+        "Infrastructure / External Systems::Policy Libraries"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No semantic equivalence: GT kubernetes is a scan target/input backend, while the predicted node is policy libraries. This is a mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::tarball"
+      ],
+      "predicted_nodes": [
+        "Infrastructure / External Systems::Policy Libraries"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No semantic equivalence: GT tarball is an input backend/scan target source, while the predicted node is policy libraries. This is a mismatch."
+    },
+    {
+      "gt_nodes": [
+        "SDK::interact system"
+      ],
+      "predicted_nodes": [
+        "Infrastructure / External Systems::veinmind-sdk / libveinmind"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the SDK/library integration layer used by the tools. The naming differs but the boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "SDK::plugin system"
+      ],
+      "predicted_nodes": [
+        "Infrastructure / External Systems::veinmind-sdk / libveinmind"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The plugin system is implemented via the SDK/library family; the predicted boundary is semantically consistent with the GT SDK boundary."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::cluster"
+      ],
+      "predicted_nodes": [
+        "Domain / Services::Container Scanner",
+        "Domain / Services::IaC Scanner",
+        "Domain / Services::Image Scanner"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT cluster scan target was not faithfully reproduced. The predicted nodes are scan services for image/container/IaC, which do not correspond to a cluster target and indicate a functional mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::container"
+      ],
+      "predicted_nodes": [
+        "Domain / Services::Container Scanner"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Container scanning functionality matches the GT scan target, and the boundary is reasonably aligned as a service/domain scanner."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::iac"
+      ],
+      "predicted_nodes": [
+        "Domain / Services::IaC Scanner"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "IaC scanning functionality matches the GT target, with an acceptable semantic boundary placement."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::image"
+      ],
+      "predicted_nodes": [
+        "Domain / Services::Image Scanner"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Image scanning functionality matches the GT target, and the boundary attribution is acceptable."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Infrastructure and Input Backends::dockerfile",
+    "Infrastructure and Input Backends::kubernetes",
+    "Infrastructure and Input Backends::tarball",
+    "Scan Targets::cluster"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application Layer::Scan Orchestrator",
+    "Data Layer::Scan Report Data\\n(Structured objects",
+    "Infrastructure / External Systems::Image Registries\\n- DockerHub\\n- Docker Registry\\n- Harbor",
+    "Infrastructure / External Systems::Startup Script\\nparallel-container",
+    "Presentation / CLI Layer::CLI Commands\\n- scan-image\\n- scan-container\\n- scan-iac",
+    "Presentation / CLI Layer::Quick-Start Script\\n./run.sh scan-host image"
+  ]
+}

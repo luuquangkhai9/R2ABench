@@ -1,0 +1,90 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "ClearML Server::Backend Service API"
+      ],
+      "predicted_nodes": [
+        "ClearML Agent::Backend Service Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the backend service interaction layer between agent and server. The names differ (API vs Client), but the function is equivalent and the boundary placement is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::ClearML Agent\\nService Pod"
+      ],
+      "predicted_nodes": [
+        "ClearML Agent::Service Pod"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the long-running agent service pod mode. The predicted boundary is simplified but semantically aligned with the worker-side service pod."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Kubernetes Glue"
+      ],
+      "predicted_nodes": [
+        "ClearML Agent::Kubernetes Glue"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the Kubernetes Glue integration that converts queued jobs into Kubernetes jobs. The boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Pod Execution Environment\\nand Docker User Code"
+      ],
+      "predicted_nodes": [
+        "ClearML Agent::Experiment Executor"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node captures the pod runtime where the experiment environment is installed and user code is executed. The predicted node is a reasonable functional equivalent."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Mapped Docker Socket\\nSibling Containers"
+      ],
+      "predicted_nodes": [
+        "External Systems::Docker Daemon"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is an internal deployment/runtime dependency inside the worker pod boundary, while the prediction places it as an external system. This is a boundary-crossing attribution error."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::ClearML Agent\\nService Pod",
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Kubernetes Job"
+      ],
+      "predicted_nodes": [
+        "ClearML Agent::Service Pod",
+        "ClearML Agent::Kubernetes Glue"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates service-pod runtime and Kubernetes job handling into distinct nodes, while the prediction keeps them as separate but simplified agent-side components. The semantic mapping is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "ClearML Server::Experiment Manager::Collaboration",
+    "ClearML Server::Experiment Manager::Data Tracking",
+    "ClearML Server::Experiment Manager::Versioning",
+    "ClearML Server::Experiment Manager::Visualization",
+    "ClearML Server::ML Ops::Execution Queue",
+    "ClearML Server::ML Ops::Monitoring",
+    "ClearML Server::ML Ops::Orchestration",
+    "Data Scientist Environment::ClearML Snippet",
+    "Data Scientist Environment::Python ML / DL Code",
+    "GPU / Kubernetes Workers\\nOn Prem or Cloud::Kubernetes Job",
+    "GPU / Kubernetes Workers\\nOn Prem or Cloud::YAML Job Template"
+  ],
+  "unmatched_predicted_nodes": [
+    "ClearML Agent::Worker Telemetry",
+    "External Systems::ClearML Server",
+    "External Systems::Kubernetes Cluster"
+  ]
+}

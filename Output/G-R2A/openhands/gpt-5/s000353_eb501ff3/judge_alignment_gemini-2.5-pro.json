@@ -1,0 +1,76 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Turing System::Turing API Server\\nHTTP REST API to configure Routers"
+      ],
+      "predicted_nodes": [
+        "Turing API Service::Authorization Middleware",
+        "Turing API Service::Cluster Lifecycle Manager",
+        "Turing API Service::OpenAPI Handlers",
+        "Turing API Service::OpenAPI Request Validation",
+        "Turing API Service::Router & Ensembler Endpoints\\n(HTTP/JSON"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly decomposed the GT's single 'Turing API Server' node into its multiple constituent functional components as described in the PRD (e.g., middleware, handlers, cluster manager). The GT boundary 'Turing System' and the AI boundary 'Turing API Service' are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Router Endpoints"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Turing Router Deployment\\n(user container :8080 by default"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI's 'Turing Router Deployment' is a more precise and contextually accurate representation of the deployed router component mentioned in FR-007, compared to the GT's abstract 'Router Endpoints'. The AI's boundary 'Kubernetes Cluster' is more specific and correct than the GT's 'Global' boundary, as the PRD states deployments are managed in Kubernetes."
+    },
+    {
+      "gt_nodes": [
+        "Kubernetes Cluster::Istio",
+        "Kubernetes Cluster::Knative Controller"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Kubernetes API"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the essential 'Kubernetes API' interface, which is the direct interaction point mentioned in the PRD (FR-007, C-002). The GT nodes represent plausible but not explicitly mentioned components within the same Kubernetes environment. This aggregation is reasonable, and the boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Monitoring and Alerting Service"
+      ],
+      "predicted_nodes": [
+        "Global::Jaeger Tracing"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI node 'Jaeger Tracing' is a specific implementation of the GT's generic 'Monitoring and Alerting Service'. This specificity is directly supported by the PRD (NFR-002). The boundary 'Global' is consistent for this external dependency."
+    },
+    {
+      "gt_nodes": [
+        "Global::Machine Learning Platform\\nMLP API Server"
+      ],
+      "predicted_nodes": [
+        "Global::MLflow Model Registry"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the specific 'MLflow Model Registry' dependency mentioned in the PRD (C-003, Operating Environment). This is a more accurate representation than the GT's generic 'Machine Learning Platform'. The 'Global' boundary is correct for an external system."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Authorization Service",
+    "Global::Experimentation Service",
+    "Global::Router Clients",
+    "Global::Secret Store",
+    "Global::Turing User",
+    "Turing System::Database\\nPersistent storage for Router objects",
+    "Turing System::Turing UI\\nWeb interface to configure Routers"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::PyFuncEnsembler Service\\n(webservice runtime"
+  ]
+}

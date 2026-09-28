@@ -1,0 +1,168 @@
+@startuml
+title torc_py Task-Based Parallelism Library - System Architecture
+
+left to right direction
+
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+
+legend left
+Abbreviations: MPI = Message Passing Interface, SPMD = Single Program Multiple Data
+legend
+
+package "Application" {
+  [Python Application] as App
+  [Example Suite\n(map, callbacks, SPMD, image preprocessing)] as Examples
+  database "Image Dataset\n(folders by label)" as ImageData
+  database "HDF5 Output" as HDF5
+}
+
+package "torc (Python package)" {
+  [API Facade] as API
+  [Runtime Controller] as Runtime
+  [Worker Scheduler] as Scheduler
+  [Task Queues\n(one per worker)] as Queues
+  [Worker Thread] as Worker1
+  [Worker Thread] as Worker2
+  [Task Descriptor\n(Future)] as Future
+  [Callback Manager] as CallbackMgr
+  [Map Executor] as MapExec
+  [SPMD Executor] as SpmdExec
+  [Stealing Manager] as StealMgr
+  [Timer (gettime)] as Timer
+  [Query Service\n(worker_id,num_workers,node_id,num_nodes)] as QuerySvc
+  [Config Reader\n(TORC_WORKERS, TORC_STEALING,\nTORC_SERVER_YIELDTIME, TORC_WORKER_YIELDTIME)] as Config
+}
+
+package "MPI Layer" {
+  [mpi4py] as MpiPy
+  [MPI Communicator] as MpiComm
+}
+
+node "Cluster / Nodes" {
+  node "Rank 0 (Primary)" as Rank0 {
+    [MPI Process 0] as P0
+    frame "Workers (TORC_WORKERS)" {
+      [Worker Threads 0..N-1] as W0N
+    }
+  }
+  node "Other Ranks 1..R-1" as OtherRanks {
+    [MPI Process 1..R-1] as PRest
+    frame "Workers (per process)" {
+      [Worker Threads 0..N-1] as WRest
+    }
+  }
+}
+
+' Application to torc
+App --> API : uses torc APIs\nsubmit, wait, map, as_completed,\nstart/init/launch/shutdown,\nspmd, enable/disable_stealing,\ngettime, worker/node queries
+Examples --> API
+Examples --> ImageData
+Examples --> HDF5
+
+' API to runtime and executors
+API --> Runtime
+API --> MapExec
+API --> SpmdExec
+API --> QuerySvc
+API --> Timer
+API --> CallbackMgr
+API --> StealMgr
+
+' Runtime wiring
+Runtime --> Scheduler
+Runtime --> Config
+Runtime --> MpiPy
+
+' Scheduling and execution
+Scheduler --> Queues
+Scheduler --> W0N
+Scheduler --> WRest
+W0N --> Future : produce input()/result()
+WRest --> Future
+
+' Callbacks
+Future --> CallbackMgr : on completion\n(pass descriptor)
+
+' Map executor uses scheduler
+MapExec --> Scheduler
+
+' SPMD executor over MPI
+SpmdExec --> MpiPy
+MpiPy --> MpiComm
+MpiComm -[#blue]-> P0
+MpiComm -[#blue]-> PRest
+
+' Stealing across processes
+StealMgr --> Scheduler : request/offer tasks
+StealMgr --> MpiPy : inter-process steal messages
+
+' Queries
+QuerySvc --> Scheduler : worker_id,num_workers
+QuerySvc --> MpiPy : node_id,num_nodes
+
+' Timer
+Timer --> Runtime : time source
+
+' Processes and workers
+Runtime -down-> P0 : launch/activate
+Runtime -down-> PRest : activate workers
+P0 -down-> W0N
+PRest -down-> WRest
+Queues -down-> W0N
+Queues -down-> WRest
+
+' Config influences runtime behavior
+Config -[dashed]-> Scheduler : TORC_WORKERS
+Config -[dashed]-> StealMgr : TORC_STEALING
+Config -[dashed]-> Runtime : yield times
+
+' Data paths for example workflow
+App --> Future : retrieve inputs/results
+Examples --> MapExec : map-style tasks
+Examples ..> HDF5 : write results
+
+' Constraints and notes
+note right of API
+Exposed APIs:
+- submit(f,*args,qid,callback)
+- wait(tasks)
+- as_completed(tasks)
+- map(f,*seq,chunksize)
+- start/init/launch/shutdown
+- spmd(f,*args)
+- enable_stealing/disable_stealing
+- gettime()
+- worker_id()/num_workers()
+- node_id()/num_nodes()
+end note
+
+note bottom of StealMgr
+Optional, enabled by TORC_STEALING.
+Idle workers steal from other queues.
+end note
+
+note bottom of SpmdExec
+Runs f on all ranks to support
+application-level MPI routines.
+end note
+
+note bottom of Future
+Holds submitted input and computed result.
+Provides input() and result() accessors.
+end note
+
+note top of P0
+Primary application task runs on rank 0.
+end note
+
+' Technology constraints
+note as N1
+Constraints:
+- Imported as Python module "torc"
+- Depends on mpi4py and MPI runtime
+- Worker execution via Python threads
+end note
+N1 .. API
+
+@enduml

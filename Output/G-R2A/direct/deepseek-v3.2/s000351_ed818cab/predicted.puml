@@ -1,0 +1,150 @@
+@startuml
+!define RECTANGLE class
+skinparam componentStyle rectangle
+skinparam backgroundColor #F0F0F0
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam classFontSize 12
+skinparam classBackgroundColor #FFFFFF
+skinparam classBorderColor #000000
+skinparam arrowColor #000000
+skinparam arrowThickness 1.5
+
+title Kangrand System Architecture
+
+package "External Environment" {
+    actor "Local Operator" as LocalOp
+    actor "Distributed Operator" as DistOp
+    actor "Offline Analyst" as OfflineAnalyst
+    file "Input ASCII File" as InputFile
+    file "Server Config File" as ConfigFile
+    file "Result File" as ResultFile
+}
+
+package "Core Solver System" {
+    component "Command-Line Interface" as CLI {
+        RECTANGLE "Option Parser" as Parser
+        RECTANGLE "Parameter Validator" as Validator
+    }
+
+    component "Problem Loader" as Loader {
+        RECTANGLE "Hex Parser" as HexParser
+        RECTANGLE "Public Key Decoder" as KeyDecoder
+    }
+
+    component "Kangaroo Engine" as Engine {
+        RECTANGLE "Pollard's Kangaroo Algorithm" as Algorithm
+        RECTANGLE "Tame/Wild Herd Manager" as HerdManager
+        RECTANGLE "Distinguished Point Filter" as DPointFilter
+        RECTANGLE "Collision Detector" as CollisionDetector
+    }
+
+    component "Work File Manager" as WorkManager {
+        RECTANGLE "Periodic Saver" as PeriodicSaver
+        RECTANGLE "State Resumer" as StateResumer
+        RECTANGLE "Kangaroo State Serializer" as StateSerializer
+        RECTANGLE "Work File Inspector" as Inspector
+    }
+
+    component "Memory Manager" as MemoryManager {
+        RECTANGLE "Hash Table" as HashTable
+        RECTANGLE "WSplit Backup Controller" as WSplitController
+    }
+
+    database "Work Files" as WorkFiles {
+        file "Kangaroo State File" as StateFile
+        file "WSplit Backup Files" as BackupFiles
+        file "Merged Work File" as MergedFile
+    }
+}
+
+package "Distributed Execution" {
+    component "Distributed Server" as Server {
+        RECTANGLE "Client Connection Handler" as ConnectionHandler
+        RECTANGLE "Work Distribution Manager" as DistributionManager
+        RECTANGLE "Server-side Hash Table" as ServerHashTable
+        RECTANGLE "Backup Interval Controller" as BackupController
+    }
+
+    component "Distributed Client" as Client {
+        RECTANGLE "Server Connector" as ServerConnector
+        RECTANGLE "GPU Computation Engine" as GPUEngine
+        RECTANGLE "Local Kangaroo Processor" as LocalProcessor
+    }
+
+    component "Offline Merger" as Merger {
+        RECTANGLE "Work File Collector" as Collector
+        RECTANGLE "Merge Processor" as MergeProcessor
+        RECTANGLE "Result Detector" as ResultDetector
+    }
+}
+
+' External connections
+LocalOp --> CLI : "Runs with\ninput files & options"
+DistOp --> Server : "Starts server\nwith config"
+DistOp --> Client : "Starts client\nwith server address"
+OfflineAnalyst --> Merger : "Provides work files\nfor merge"
+InputFile --> Loader : "Provides hex values\n& public keys"
+ConfigFile --> Server : "Configures server\nparameters"
+Merger --> ResultFile : "Writes solved key"
+Server --> ResultFile : "Writes intermediate\n& final results"
+
+' Core system flows
+CLI --> Loader : "Passes parsed\ninput file path"
+Loader --> Engine : "Provides parsed\nproblem instance"
+Engine --> MemoryManager : "Stores distinguished\npoints in hash table"
+Engine --> WorkManager : "Provides kangaroo state\nfor saving"
+WorkManager --> WorkFiles : "Reads/Writes\nwork files"
+MemoryManager --> WorkManager : "Provides hash table data\nfor WSplit backups"
+
+' Distributed system flows
+Server --> Client : "Distributes work\n& collects results"
+Client --> Engine : "Executes kangaroo\ncomputations"
+Client --> Server : "Submits distinguished\npoints"
+Server --> WorkManager : "Saves server-side\nwork files"
+Server --> Merger : "Produces work files\nfor offline merge"
+Client --> GPUEngine : "Optional GPU\nacceleration"
+
+' Merge workflow
+WorkFiles --> Merger : "Provides multiple\nwork files for merge"
+Merger --> Engine : "Uses collision detection\nduring merge"
+Merger --> WorkFiles : "Writes merged\nmaster file"
+
+' Internal component relationships
+Parser --> Validator : "Validates\ncommand options"
+HexParser --> KeyDecoder : "Passes key data\nfor decoding"
+Algorithm --> HerdManager : "Manages tame\n& wild herds"
+HerdManager --> DPointFilter : "Filters points using\ndistinguished criterion"
+DPointFilter --> CollisionDetector : "Checks for\ncollisions"
+PeriodicSaver --> StateSerializer : "Serializes state\nat intervals"
+StateResumer --> Engine : "Restores previous\nsearch state"
+WSplitController --> HashTable : "Resets after\neach backup"
+ConnectionHandler --> DistributionManager : "Handles client\nwork assignment"
+DistributionManager --> ServerHashTable : "Updates with\nclient submissions"
+BackupController --> WorkManager : "Triggers periodic\nserver backups"
+ServerConnector --> LocalProcessor : "Receives work\nfrom server"
+LocalProcessor --> GPUEngine : "Offloads computation\nto GPU if enabled"
+Collector --> MergeProcessor : "Combines multiple\nwork files"
+MergeProcessor --> ResultDetector : "Checks for collisions\nduring merge"
+
+note right of Engine
+    SECP256K1-specific
+    Interval ECDLP solver
+    Uses distinguished points
+    to reduce memory
+end note
+
+note right of Server
+    No authentication
+    mechanism
+    Operator-controlled
+    network exposure
+end note
+
+note right of WorkFiles
+    Supports resume across
+    hardware & DP settings
+    Same key & range required
+end note
+
+@enduml

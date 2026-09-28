@@ -1,0 +1,243 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "LwM2M Blockchain Platform::Blockchain Network\\nEthereum / Web3j",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Blockchain Integration Layer::Web3j HTTP Transport",
+        "Global::Ethereum-Compatible Node\\n(HTTP endpoint"
+      ],
+      "reasoning": "The GT node’s blockchain network responsibility is covered by the predicted Web3j transport and Ethereum-compatible node endpoint, which together represent the same blockchain connectivity stack."
+    },
+    {
+      "gt_node": "LwM2M Blockchain Platform::BootstrapStore\\nSmart Contract",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Blockchain Integration Layer::Smart Contract Wrapper\\n(Client/Bootstrap Contract"
+      ],
+      "reasoning": "The smart contract wrapper directly covers the bootstrap store contract responsibility."
+    },
+    {
+      "gt_node": "LwM2M Blockchain Platform::External Applications\\nusing LwM2M",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node represents the external application actor/category that uses LwM2M."
+    },
+    {
+      "gt_node": "LwM2M Blockchain Platform::LwM2M Bootstrap Server",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "LwM2M / Leshan Layer::Bootstrap Config Service"
+      ],
+      "reasoning": "The bootstrap config service is the closest functional equivalent to the bootstrap server-side handling responsibility."
+    },
+    {
+      "gt_node": "LwM2M Blockchain Platform::LwM2M Client\\nDevice 1",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node models a specific LwM2M client device instance."
+    },
+    {
+      "gt_node": "LwM2M Blockchain Platform::LwM2M Client\\nDevice 2",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node models a second specific LwM2M client device instance."
+    },
+    {
+      "gt_node": "LwM2M Blockchain Platform::LwM2M Server\\nLeshan server component",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "LwM2M / Leshan Layer::Leshan / LwM2M\\nModel Types",
+        "LwM2M / Leshan Layer::LwM2M Node Deserializer\\n(JSON -> Typed Nodes"
+      ],
+      "reasoning": "The predicted Leshan/LwM2M model and deserialization nodes cover the server-side LwM2M handling responsibility, though at a more implementation-oriented granularity."
+    },
+    {
+      "gt_node": "LwM2M Blockchain Platform::Management Web UI",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "The PRD explicitly states no human-facing GUI behavior, and no predicted node corresponds to a web UI."
+    },
+    {
+      "gt_node": "LwM2M Blockchain Platform::Secure API\\nAuthenticated HTTP endpoints",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Spring Backend::JWT Utility\\n(JwtUtility.isValidToken",
+        "Spring Backend::User HTTP Controller",
+        "Spring Backend::User Service"
+      ],
+      "reasoning": "The authenticated HTTP endpoint responsibility is covered by the JWT validation utility and user HTTP controller/service chain."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Blockchain Integration Layer::32-byte ASCII\\nEncoder/Decoder",
+      "grounded": true,
+      "reference_nodes": [
+        "LwM2M Blockchain Platform::BootstrapStore\\nSmart Contract",
+        "LwM2M Blockchain Platform::Secure API\\nAuthenticated HTTP endpoints"
+      ],
+      "reasoning": "This is grounded in the GT contract string encoding/decoding behavior even though it is not an explicit standalone GT node."
+    },
+    {
+      "predicted_node": "Blockchain Integration Layer::Blockchain Client Service",
+      "grounded": true,
+      "reference_nodes": [
+        "LwM2M Blockchain Platform::BootstrapStore\\nSmart Contract"
+      ],
+      "reasoning": "This corresponds to blockchain-backed client/bootstrap service behavior present in the GT."
+    },
+    {
+      "predicted_node": "Blockchain Integration Layer::Smart Contract Wrapper\\n(Client/Bootstrap Contract",
+      "grounded": true,
+      "reference_nodes": [
+        "LwM2M Blockchain Platform::BootstrapStore\\nSmart Contract"
+      ],
+      "reasoning": "This directly maps to the bootstrap smart contract concept in the GT."
+    },
+    {
+      "predicted_node": "Blockchain Integration Layer::Web3j HTTP Transport",
+      "grounded": true,
+      "reference_nodes": [
+        "LwM2M Blockchain Platform::Blockchain Network\\nEthereum / Web3j"
+      ],
+      "reasoning": "This is grounded in the GT blockchain network and Web3j transport responsibility."
+    },
+    {
+      "predicted_node": "Global::Ethereum-Compatible Node\\n(HTTP endpoint",
+      "grounded": true,
+      "reference_nodes": [
+        "LwM2M Blockchain Platform::Blockchain Network\\nEthereum / Web3j"
+      ],
+      "reasoning": "This is the deployment endpoint counterpart of the GT blockchain network node."
+    },
+    {
+      "predicted_node": "Global::User Data Store",
+      "grounded": true,
+      "reference_nodes": [
+        "LwM2M Blockchain Platform::Secure API\\nAuthenticated HTTP endpoints"
+      ],
+      "reasoning": "The GT includes protected user operations and user retrieval/creation; a user data store is a reasonable supporting concept, though not explicitly named in the GT."
+    },
+    {
+      "predicted_node": "LwM2M / Leshan Layer::Bootstrap Config Service",
+      "grounded": true,
+      "reference_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Bootstrap Server"
+      ],
+      "reasoning": "This corresponds to bootstrap configuration handling in the GT."
+    },
+    {
+      "predicted_node": "LwM2M / Leshan Layer::Leshan / LwM2M\\nModel Types",
+      "grounded": true,
+      "reference_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Server\\nLeshan server component",
+        "LwM2M Blockchain Platform::External Applications\\nusing LwM2M"
+      ],
+      "reasoning": "The predicted model types are grounded in the GT Leshan/LwM2M server-side and external LwM2M handling concepts."
+    },
+    {
+      "predicted_node": "LwM2M / Leshan Layer::LwM2M Node Deserializer\\n(JSON -> Typed Nodes",
+      "grounded": true,
+      "reference_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Server\\nLeshan server component",
+        "LwM2M Blockchain Platform::External Applications\\nusing LwM2M"
+      ],
+      "reasoning": "This directly matches the GT requirement for JSON-to-typed LwM2M node deserialization."
+    },
+    {
+      "predicted_node": "Spring Backend::JWT Utility\\n(JwtUtility.isValidToken",
+      "grounded": true,
+      "reference_nodes": [
+        "LwM2M Blockchain Platform::Secure API\\nAuthenticated HTTP endpoints"
+      ],
+      "reasoning": "This is grounded in the GT authenticated API responsibility and token validation behavior."
+    },
+    {
+      "predicted_node": "Spring Backend::User HTTP Controller",
+      "grounded": true,
+      "reference_nodes": [
+        "LwM2M Blockchain Platform::Secure API\\nAuthenticated HTTP endpoints"
+      ],
+      "reasoning": "This directly represents the protected HTTP endpoint layer in the GT."
+    },
+    {
+      "predicted_node": "Spring Backend::User Service",
+      "grounded": true,
+      "reference_nodes": [
+        "LwM2M Blockchain Platform::Secure API\\nAuthenticated HTTP endpoints"
+      ],
+      "reasoning": "This is grounded as the service invoked by authenticated user creation/retrieval logic."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Blockchain Network\\nEthereum / Web3j"
+      ],
+      "predicted_nodes": [
+        "Blockchain Integration Layer::Web3j HTTP Transport",
+        "Global::Ethereum-Compatible Node\\n(HTTP endpoint"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT blockchain network node is split into transport and endpoint nodes; the boundary shift is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::BootstrapStore\\nSmart Contract"
+      ],
+      "predicted_nodes": [
+        "Blockchain Integration Layer::Smart Contract Wrapper\\n(Client/Bootstrap Contract"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same contract responsibility with semantically equivalent boundary naming."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Bootstrap Server"
+      ],
+      "predicted_nodes": [
+        "LwM2M / Leshan Layer::Bootstrap Config Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted bootstrap config service is the same functional area as the GT bootstrap server concept."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Server\\nLeshan server component"
+      ],
+      "predicted_nodes": [
+        "LwM2M / Leshan Layer::Leshan / LwM2M\\nModel Types",
+        "LwM2M / Leshan Layer::LwM2M Node Deserializer\\n(JSON -> Typed Nodes"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Leshan server component is decomposed into model and deserialization responsibilities; boundary attribution remains consistent."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Secure API\\nAuthenticated HTTP endpoints"
+      ],
+      "predicted_nodes": [
+        "Spring Backend::JWT Utility\\n(JwtUtility.isValidToken",
+        "Spring Backend::User HTTP Controller",
+        "Spring Backend::User Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The secure API responsibility is split into auth validation, controller, and service layers; the Spring Backend boundary is acceptable."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "LwM2M Blockchain Platform::External Applications\\nusing LwM2M",
+    "LwM2M Blockchain Platform::LwM2M Client\\nDevice 1",
+    "LwM2M Blockchain Platform::LwM2M Client\\nDevice 2",
+    "LwM2M Blockchain Platform::Management Web UI"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::User Data Store"
+  ]
+}

@@ -1,0 +1,666 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Awesome Music System::Infra Layer",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::Database\\n(3-Replica Storage",
+        "Internal Network::RabbitMQ\\n(Task Queue / MQ",
+        "Internal Network::etcd\\n(Service Coordination &\\nDistributed Configuration",
+        "External Network::Nginx\\n(Gateway / Load Balancer"
+      ],
+      "reasoning": "The GT infrastructure layer is covered by the predicted infra components for database, message queue, service coordination, and gateway/load balancing."
+    },
+    {
+      "gt_node": "Awesome Music System::Infra Layer::MySQL",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::Database\\n(3-Replica Storage"
+      ],
+      "reasoning": "The predicted database node covers the MySQL storage responsibility, even though the name is generalized."
+    },
+    {
+      "gt_node": "Awesome Music System::Infra Layer::Prometheus",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node corresponds to monitoring/metrics collection."
+    },
+    {
+      "gt_node": "Awesome Music System::Infra Layer::RabbitMQ",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::RabbitMQ\\n(Task Queue / MQ"
+      ],
+      "reasoning": "The predicted MQ node directly covers RabbitMQ."
+    },
+    {
+      "gt_node": "Awesome Music System::Infra Layer::Redis",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node corresponds to Redis as a cache/data store."
+    },
+    {
+      "gt_node": "Awesome Music System::Micro Service Layer",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::Web Backend\\n(Golang / Gin::Account Service\\n(Register / Login",
+        "Internal Network::Web Backend\\n(Golang / Gin::Favorite & Follow Service",
+        "Internal Network::Web Backend\\n(Golang / Gin::Recommendation & Hot Chart Service",
+        "Internal Network::Web Backend\\n(Golang / Gin::Scheduling Module",
+        "Internal Network::Web Backend\\n(Golang / Gin::Score Service\\n(Upload / Download / Search",
+        "Internal Network::Algorithm Service"
+      ],
+      "reasoning": "The GT microservice layer is covered by the predicted backend services and algorithm service, which represent the same service decomposition."
+    },
+    {
+      "gt_node": "Awesome Music System::Micro Service Layer::service-auth",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::Web Backend\\n(Golang / Gin::Account Service\\n(Register / Login"
+      ],
+      "reasoning": "The account service covers the authentication service responsibility."
+    },
+    {
+      "gt_node": "Awesome Music System::Micro Service Layer::service-auth::auth1",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::Web Backend\\n(Golang / Gin::Account Service\\n(Register / Login"
+      ],
+      "reasoning": "Auth1 is one replica/instance of the auth service, covered by the predicted account service concept."
+    },
+    {
+      "gt_node": "Awesome Music System::Micro Service Layer::service-auth::auth2",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::Web Backend\\n(Golang / Gin::Account Service\\n(Register / Login"
+      ],
+      "reasoning": "Auth2 is one replica/instance of the auth service, covered by the predicted account service concept."
+    },
+    {
+      "gt_node": "Awesome Music System::Micro Service Layer::service-auth::auth3",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::Web Backend\\n(Golang / Gin::Account Service\\n(Register / Login"
+      ],
+      "reasoning": "Auth3 is one replica/instance of the auth service, covered by the predicted account service concept."
+    },
+    {
+      "gt_node": "Awesome Music System::Micro Service Layer::service-discovery",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::etcd\\n(Service Coordination &\\nDistributed Configuration"
+      ],
+      "reasoning": "The service discovery responsibility is covered by etcd-based service coordination/distributed configuration."
+    },
+    {
+      "gt_node": "Awesome Music System::Micro Service Layer::service-discovery::discovery1",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::etcd\\n(Service Coordination &\\nDistributed Configuration"
+      ],
+      "reasoning": "Discovery1 is one instance of service discovery, covered by the etcd service coordination node."
+    },
+    {
+      "gt_node": "Awesome Music System::Micro Service Layer::service-discovery::discovery2",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::etcd\\n(Service Coordination &\\nDistributed Configuration"
+      ],
+      "reasoning": "Discovery2 is one instance of service discovery, covered by the etcd service coordination node."
+    },
+    {
+      "gt_node": "Awesome Music System::Micro Service Layer::service-discovery::discovery3",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::etcd\\n(Service Coordination &\\nDistributed Configuration"
+      ],
+      "reasoning": "Discovery3 is one instance of service discovery, covered by the etcd service coordination node."
+    },
+    {
+      "gt_node": "Awesome Music System::Micro Service Layer::service-scheduler",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::Web Backend\\n(Golang / Gin::Scheduling Module"
+      ],
+      "reasoning": "The scheduling module directly covers the scheduler service responsibility."
+    },
+    {
+      "gt_node": "Awesome Music System::Micro Service Layer::service-scheduler::scheduler1",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::Web Backend\\n(Golang / Gin::Scheduling Module"
+      ],
+      "reasoning": "Scheduler1 is one replica/instance of the scheduler service, covered by the predicted scheduling module."
+    },
+    {
+      "gt_node": "Awesome Music System::Micro Service Layer::service-scheduler::scheduler2",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::Web Backend\\n(Golang / Gin::Scheduling Module"
+      ],
+      "reasoning": "Scheduler2 is one replica/instance of the scheduler service, covered by the predicted scheduling module."
+    },
+    {
+      "gt_node": "Awesome Music System::Micro Service Layer::service-scheduler::scheduler3",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::Web Backend\\n(Golang / Gin::Scheduling Module"
+      ],
+      "reasoning": "Scheduler3 is one replica/instance of the scheduler service, covered by the predicted scheduling module."
+    },
+    {
+      "gt_node": "Awesome Music System::Micro Service Layer::service-web",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::Web Backend\\n(Golang / Gin",
+        "Internal Network::Web Frontend\\n(HTML / CSS / JavaScript / Bootstrap"
+      ],
+      "reasoning": "The GT web service is split into frontend and backend in the predicted architecture, both covering the web system responsibility."
+    },
+    {
+      "gt_node": "Awesome Music System::Micro Service Layer::service-web::web1",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::Web Backend\\n(Golang / Gin",
+        "Internal Network::Web Frontend\\n(HTML / CSS / JavaScript / Bootstrap"
+      ],
+      "reasoning": "Web1 is an instance of the web service and is covered by the frontend/backend web components."
+    },
+    {
+      "gt_node": "Awesome Music System::Micro Service Layer::service-web::web2",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::Web Backend\\n(Golang / Gin",
+        "Internal Network::Web Frontend\\n(HTML / CSS / JavaScript / Bootstrap"
+      ],
+      "reasoning": "Web2 is an instance of the web service and is covered by the frontend/backend web components."
+    },
+    {
+      "gt_node": "Awesome Music System::Micro Service Layer::service-web::web3",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::Web Backend\\n(Golang / Gin",
+        "Internal Network::Web Frontend\\n(HTML / CSS / JavaScript / Bootstrap"
+      ],
+      "reasoning": "Web3 is an instance of the web service and is covered by the frontend/backend web components."
+    },
+    {
+      "gt_node": "Awesome Music System::Security Critical Zone",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Network::Nginx\\n(Gateway / Load Balancer",
+        "Global::External Network",
+        "Global::Internal Network"
+      ],
+      "reasoning": "The security boundary is represented by the external/internal network split and the Nginx gateway/load balancer."
+    },
+    {
+      "gt_node": "Awesome Music System::Security Critical Zone::Nginx Cluster",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Network::Nginx\\n(Gateway / Load Balancer"
+      ],
+      "reasoning": "The Nginx cluster is covered by the predicted Nginx gateway/load balancer node."
+    },
+    {
+      "gt_node": "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx1",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Network::Nginx\\n(Gateway / Load Balancer"
+      ],
+      "reasoning": "Nginx1 is one instance of the cluster and is covered by the predicted Nginx gateway/load balancer node."
+    },
+    {
+      "gt_node": "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx2",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Network::Nginx\\n(Gateway / Load Balancer"
+      ],
+      "reasoning": "Nginx2 is one instance of the cluster and is covered by the predicted Nginx gateway/load balancer node."
+    },
+    {
+      "gt_node": "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx3",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Network::Nginx\\n(Gateway / Load Balancer"
+      ],
+      "reasoning": "Nginx3 is one instance of the cluster and is covered by the predicted Nginx gateway/load balancer node."
+    },
+    {
+      "gt_node": "Awesome Music System::Security Critical Zone::Spring Cloud Gateway",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Network::Nginx\\n(Gateway / Load Balancer"
+      ],
+      "reasoning": "The gateway responsibility is captured by the predicted Nginx gateway/load balancer node, though the technology differs."
+    },
+    {
+      "gt_node": "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway1",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Network::Nginx\\n(Gateway / Load Balancer"
+      ],
+      "reasoning": "gateway1 is an instance of the gateway and is covered by the predicted Nginx gateway/load balancer node."
+    },
+    {
+      "gt_node": "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway2",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Network::Nginx\\n(Gateway / Load Balancer"
+      ],
+      "reasoning": "gateway2 is an instance of the gateway and is covered by the predicted Nginx gateway/load balancer node."
+    },
+    {
+      "gt_node": "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway3",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Network::Nginx\\n(Gateway / Load Balancer"
+      ],
+      "reasoning": "gateway3 is an instance of the gateway and is covered by the predicted Nginx gateway/load balancer node."
+    },
+    {
+      "gt_node": "Awesome Music System::Security Critical Zone::Static Resource Server",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::Web Frontend\\n(HTML / CSS / JavaScript / Bootstrap"
+      ],
+      "reasoning": "Static resources are represented by the frontend/static-serving concept in the predicted architecture."
+    },
+    {
+      "gt_node": "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server1",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::Web Frontend\\n(HTML / CSS / JavaScript / Bootstrap"
+      ],
+      "reasoning": "Static Server1 is covered by the predicted frontend/static-serving concept."
+    },
+    {
+      "gt_node": "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server2",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::Web Frontend\\n(HTML / CSS / JavaScript / Bootstrap"
+      ],
+      "reasoning": "Static Server2 is covered by the predicted frontend/static-serving concept."
+    },
+    {
+      "gt_node": "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server3",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Internal Network::Web Frontend\\n(HTML / CSS / JavaScript / Bootstrap"
+      ],
+      "reasoning": "Static Server3 is covered by the predicted frontend/static-serving concept."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "External Network::Nginx\\n(Gateway / Load Balancer",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Security Critical Zone::Nginx Cluster",
+        "Awesome Music System::Security Critical Zone::Spring Cloud Gateway"
+      ],
+      "reasoning": "This node grounds to the GT gateway/edge cluster responsibilities, though it collapses Nginx and Spring Cloud Gateway into one component."
+    },
+    {
+      "predicted_node": "Global::External Network",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Security Critical Zone",
+        "Awesome Music System::Security Critical Zone::Nginx Cluster",
+        "Awesome Music System::Security Critical Zone::Spring Cloud Gateway",
+        "Awesome Music System::Security Critical Zone::Static Resource Server"
+      ],
+      "reasoning": "The external network boundary is grounded in the GT security critical zone and its edge-facing components."
+    },
+    {
+      "predicted_node": "Global::Internal Network",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Infra Layer",
+        "Awesome Music System::Micro Service Layer"
+      ],
+      "reasoning": "The internal network boundary is grounded in the GT internal infrastructure and microservice layers."
+    },
+    {
+      "predicted_node": "Internal Network::Algorithm Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Micro Service Layer"
+      ],
+      "reasoning": "The algorithm service is explicitly part of the system context and is grounded by the PRD, even though it is not separately enumerated in the GT node list."
+    },
+    {
+      "predicted_node": "Internal Network::Algorithm Service::Offline Model Training\\n(midi→abc→GPT-2 fine-tuning",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Micro Service Layer"
+      ],
+      "reasoning": "This is a detailed decomposition of the algorithm service aligned with the PRD training functionality."
+    },
+    {
+      "predicted_node": "Internal Network::Algorithm Service::Online Score Generation\\n(midi→abc→5 seeds→GPT-2→abc→midi",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Micro Service Layer"
+      ],
+      "reasoning": "This directly grounds to the PRD score generation algorithm."
+    },
+    {
+      "predicted_node": "Internal Network::Algorithm Service::Score Classification\\n(midi→abc→LSTM representation→labels",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Micro Service Layer"
+      ],
+      "reasoning": "This directly grounds to the PRD classification algorithm."
+    },
+    {
+      "predicted_node": "Internal Network::Algorithm Service::Song Recommendation\\n(Cosine similarity / User similarity",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Micro Service Layer"
+      ],
+      "reasoning": "This directly grounds to the PRD recommendation algorithm."
+    },
+    {
+      "predicted_node": "Internal Network::Database\\n(3-Replica Storage",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Infra Layer::MySQL",
+        "Awesome Music System::Infra Layer::Redis"
+      ],
+      "reasoning": "The generalized database/storage node is grounded by the GT storage systems, although it does not distinguish MySQL and Redis."
+    },
+    {
+      "predicted_node": "Internal Network::Database\\n(3-Replica Storage::Favorite & Follow Records",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Infra Layer::MySQL",
+        "Awesome Music System::Infra Layer::Redis"
+      ],
+      "reasoning": "This storage subnode is grounded in the GT persistence needs for favorites and follows."
+    },
+    {
+      "predicted_node": "Internal Network::Database\\n(3-Replica Storage::Hot Chart Data\\n(score & user popularity",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Infra Layer::MySQL",
+        "Awesome Music System::Infra Layer::Redis"
+      ],
+      "reasoning": "This subnode is grounded by the GT hot-chart data requirement."
+    },
+    {
+      "predicted_node": "Internal Network::Database\\n(3-Replica Storage::Model Parameters\\n(per-user GPT-2 params",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Infra Layer::MySQL"
+      ],
+      "reasoning": "This subnode is grounded by the GT per-user model parameter storage concept."
+    },
+    {
+      "predicted_node": "Internal Network::Database\\n(3-Replica Storage::Score Records\\n(score data / labels / attention",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Infra Layer::MySQL",
+        "Awesome Music System::Infra Layer::Redis"
+      ],
+      "reasoning": "This subnode is grounded by GT score data, labels, and attention-level persistence."
+    },
+    {
+      "predicted_node": "Internal Network::Database\\n(3-Replica Storage::Task Metadata & Logs\\n(status / errors / retries",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Infra Layer::MySQL",
+        "Awesome Music System::Infra Layer::Prometheus"
+      ],
+      "reasoning": "This subnode is grounded by GT task metadata and logs needs, though Prometheus is not the exact storage target."
+    },
+    {
+      "predicted_node": "Internal Network::Database\\n(3-Replica Storage::User Accounts\\n(username / password / email",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Infra Layer::MySQL"
+      ],
+      "reasoning": "This subnode is grounded by GT user account persistence."
+    },
+    {
+      "predicted_node": "Internal Network::RabbitMQ\\n(Task Queue / MQ",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Infra Layer::RabbitMQ"
+      ],
+      "reasoning": "This is a direct grounding of the RabbitMQ infrastructure node."
+    },
+    {
+      "predicted_node": "Internal Network::Web Backend\\n(Golang / Gin",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Micro Service Layer::service-auth",
+        "Awesome Music System::Micro Service Layer::service-discovery",
+        "Awesome Music System::Micro Service Layer::service-scheduler",
+        "Awesome Music System::Micro Service Layer::service-web"
+      ],
+      "reasoning": "The backend node grounds to the GT microservice layer and backend-related services."
+    },
+    {
+      "predicted_node": "Internal Network::Web Backend\\n(Golang / Gin::Account Service\\n(Register / Login",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Micro Service Layer::service-auth"
+      ],
+      "reasoning": "This directly grounds the authentication service."
+    },
+    {
+      "predicted_node": "Internal Network::Web Backend\\n(Golang / Gin::Favorite & Follow Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Micro Service Layer::service-web"
+      ],
+      "reasoning": "This grounds to the GT web service functionality for user relationship operations."
+    },
+    {
+      "predicted_node": "Internal Network::Web Backend\\n(Golang / Gin::Recommendation & Hot Chart Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Micro Service Layer::service-web"
+      ],
+      "reasoning": "This grounds to the GT web service functionality for recommendations and hot charts."
+    },
+    {
+      "predicted_node": "Internal Network::Web Backend\\n(Golang / Gin::Scheduling Module",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Micro Service Layer::service-scheduler"
+      ],
+      "reasoning": "This directly grounds the scheduler service."
+    },
+    {
+      "predicted_node": "Internal Network::Web Backend\\n(Golang / Gin::Score Service\\n(Upload / Download / Search",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Micro Service Layer::service-web"
+      ],
+      "reasoning": "This grounds to the GT web service functionality for score operations."
+    },
+    {
+      "predicted_node": "Internal Network::Web Frontend\\n(HTML / CSS / JavaScript / Bootstrap",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Security Critical Zone::Static Resource Server"
+      ],
+      "reasoning": "The frontend stack is grounded by the GT static resource server and overall web system presentation layer."
+    },
+    {
+      "predicted_node": "Internal Network::Web Frontend\\n(HTML / CSS / JavaScript / Bootstrap::Homepage UI\\n(Recommendations & Hot Charts",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Security Critical Zone::Static Resource Server"
+      ],
+      "reasoning": "The homepage UI is grounded by the GT frontend/static resource server."
+    },
+    {
+      "predicted_node": "Internal Network::Web Frontend\\n(HTML / CSS / JavaScript / Bootstrap::Personal Center UI\\n(Favorites / Follows / Models",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Security Critical Zone::Static Resource Server"
+      ],
+      "reasoning": "The personal center UI is grounded by the GT frontend/static resource server."
+    },
+    {
+      "predicted_node": "Internal Network::Web Frontend\\n(HTML / CSS / JavaScript / Bootstrap::Registration & Login UI",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Security Critical Zone::Static Resource Server"
+      ],
+      "reasoning": "The registration and login UI is grounded by the GT frontend/static resource server."
+    },
+    {
+      "predicted_node": "Internal Network::Web Frontend\\n(HTML / CSS / JavaScript / Bootstrap::Score Generation UI",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Security Critical Zone::Static Resource Server"
+      ],
+      "reasoning": "The score generation UI is grounded by the GT frontend/static resource server."
+    },
+    {
+      "predicted_node": "Internal Network::Web Frontend\\n(HTML / CSS / JavaScript / Bootstrap::Search & List UI",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Security Critical Zone::Static Resource Server"
+      ],
+      "reasoning": "The search and list UI is grounded by the GT frontend/static resource server."
+    },
+    {
+      "predicted_node": "Internal Network::Web Frontend\\n(HTML / CSS / JavaScript / Bootstrap::Song Detail UI\\n(Favorite / Download",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Security Critical Zone::Static Resource Server"
+      ],
+      "reasoning": "The song detail UI is grounded by the GT frontend/static resource server."
+    },
+    {
+      "predicted_node": "Internal Network::etcd\\n(Service Coordination &\\nDistributed Configuration",
+      "grounded": true,
+      "reference_nodes": [
+        "Awesome Music System::Micro Service Layer::service-discovery"
+      ],
+      "reasoning": "This directly grounds the service discovery responsibility through etcd."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::RabbitMQ"
+      ],
+      "predicted_nodes": [
+        "Internal Network::RabbitMQ\\n(Task Queue / MQ"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same middleware component; boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-auth"
+      ],
+      "predicted_nodes": [
+        "Internal Network::Web Backend\\n(Golang / Gin::Account Service\\n(Register / Login"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Authentication/account service responsibility matches; backend placement is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-discovery"
+      ],
+      "predicted_nodes": [
+        "Internal Network::etcd\\n(Service Coordination &\\nDistributed Configuration"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Service discovery is implemented via etcd-based service coordination; boundary is equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-scheduler"
+      ],
+      "predicted_nodes": [
+        "Internal Network::Web Backend\\n(Golang / Gin::Scheduling Module"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Scheduler responsibility matches; backend placement is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-web"
+      ],
+      "predicted_nodes": [
+        "Internal Network::Web Backend\\n(Golang / Gin",
+        "Internal Network::Web Frontend\\n(HTML / CSS / JavaScript / Bootstrap"
+      ],
+      "match_type": "1:2",
+      "is_boundary_correct": true,
+      "reasoning": "The GT web service is split into frontend and backend in the AI diagram; this is a semantically valid decomposition."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone::Nginx Cluster"
+      ],
+      "predicted_nodes": [
+        "External Network::Nginx\\n(Gateway / Load Balancer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The Nginx cluster is represented by the gateway/load balancer node; boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone::Spring Cloud Gateway"
+      ],
+      "predicted_nodes": [
+        "External Network::Nginx\\n(Gateway / Load Balancer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Functionally this is an edge gateway, but the predicted technology/boundary conflates Spring Cloud Gateway with Nginx, which is a boundary/technology mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone::Static Resource Server"
+      ],
+      "predicted_nodes": [
+        "Internal Network::Web Frontend\\n(HTML / CSS / JavaScript / Bootstrap"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Static resource serving is reasonably covered by the frontend/static-serving component."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::MySQL",
+        "Awesome Music System::Infra Layer::Redis"
+      ],
+      "predicted_nodes": [
+        "Internal Network::Database\\n(3-Replica Storage"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated distinct data stores into a generalized database/storage node; storage boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::Prometheus"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding monitoring/metrics node was generated."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Awesome Music System::Infra Layer::Prometheus",
+    "Awesome Music System::Infra Layer::Redis"
+  ],
+  "unmatched_predicted_nodes": []
+}

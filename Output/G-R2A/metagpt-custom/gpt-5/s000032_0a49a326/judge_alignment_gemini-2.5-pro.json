@@ -1,0 +1,98 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Audit\\nService"
+      ],
+      "predicted_nodes": [
+        "Kubernetes/GKE::Observability::Audit Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Audit Service. The boundary attribution ('Activiti Cloud Application' vs 'Kubernetes/GKE::Observability') is semantically consistent as they both represent the cloud monitoring/observability domain."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Query\\nService"
+      ],
+      "predicted_nodes": [
+        "Kubernetes/GKE::Observability::Query Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Query Service. The boundaries are semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Gateway"
+      ],
+      "predicted_nodes": [
+        "Kubernetes/GKE::NGINX Ingress Controller"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "NGINX Ingress Controller acts as the API Gateway routing external traffic to internal services, fulfilling the exact same functional role described in the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Global::SSO/IDM\\n(Keycloak"
+      ],
+      "predicted_nodes": [
+        "Global::Identity & Access",
+        "Identity & Access::Keycloak",
+        "Identity & Access::Keycloak::Token Endpoint"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Keycloak node for SSO/IDM is split by the AI into an Identity & Access module and specific Keycloak token endpoints, matching perfectly in semantics and boundary."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::BPMN, Form\\nand Rule Defs"
+      ],
+      "predicted_nodes": [
+        "Kubernetes/GKE::Process Execution::Example Runtime Bundle"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The 'BPMN, Form and Rule Defs' node resides within the Runtime Bundle in GT, which aligns with the predicted 'Example Runtime Bundle' responsible for hosting deployed process definitions."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::Process\\nRuntime"
+      ],
+      "predicted_nodes": [
+        "Kubernetes/GKE::Process Execution::ProcessRuntime API",
+        "Kubernetes/GKE::Process Execution::TaskRuntime API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT general Process Runtime component is accurately split by the AI into its specific constituent API nodes (ProcessRuntime and TaskRuntime APIs) described in the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Global::Client"
+      ],
+      "predicted_nodes": [
+        "Global::Human Participant"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The generic Client node in GT aligns with the Human Participant node in the AI prediction representing the user interface/actor."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Customer\\nLogic",
+    "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Out of the\\nBox Services",
+    "Activiti Cloud Infrastructure::Activiti Cloud Application::Notification\\nService",
+    "Activiti Cloud Infrastructure::Config Maps\\n(Kubernetes",
+    "Activiti Cloud Infrastructure::Registry\\n(Kubernetes"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Deployment Descriptors",
+    "Global::Kubernetes/GKE",
+    "Kubernetes/GKE::Application Runtime::Spring Boot Application",
+    "Kubernetes/GKE::Application Runtime::Spring Boot Application::Spring Security",
+    "Kubernetes/GKE::Application Runtime::Spring Boot Application::User Endpoints"
+  ]
+}

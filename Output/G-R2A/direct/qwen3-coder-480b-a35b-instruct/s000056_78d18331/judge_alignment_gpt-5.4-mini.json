@@ -1,0 +1,78 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Go build tags"
+      ],
+      "predicted_nodes": [
+        "Global::Specific Test Support",
+        "Global::Supports Provider-Specific Testing",
+        "Global::Uses //go",
+        "Global::+ Provider"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents provider-specific test selection via Go build tags. The predicted nodes split this concept into several test/tag-related nodes, which are semantically equivalent overall and remain in the global/test-support boundary."
+    },
+    {
+      "gt_nodes": [
+        "Host Scanner Endpoint Tests::endpoint_platform1_test.go\\nplatform-specific expected data"
+      ],
+      "predicted_nodes": [
+        "Global::Specific Test Support",
+        "Global::Supports Provider-Specific Testing",
+        "Global::Uses //go",
+        "Global::+ Provider"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a provider-specific endpoint test file with platform-specific expected data. The predicted nodes capture the provider-specific test mechanism, which is functionally aligned, though aggregated rather than file-specific."
+    },
+    {
+      "gt_nodes": [
+        "Host Scanner Endpoint Tests::endpoint_platform2_test.go\\nplatform-specific expected data"
+      ],
+      "predicted_nodes": [
+        "Global::Specific Test Support",
+        "Global::Supports Provider-Specific Testing",
+        "Global::Uses //go",
+        "Global::+ Provider"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is another provider-specific endpoint test file. The AI aggregated it into the same provider-specific test support concept, which is semantically correct and not a boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Host Scanner Endpoint Tests::endpoint_test.go\\ncommon endpoint tests"
+      ],
+      "predicted_nodes": [
+        "Global::Exposes HTTP Endpoints",
+        "Global::host-scanner Service",
+        "Global::Verifies 404 for unknown endpoints",
+        "Global::to-End Tests"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node refers to common endpoint tests. The predicted nodes collectively represent the HTTP endpoint/service test area, including 404 verification. This is a reasonable aggregation within the same global testing boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::",
+    "Global::+ Container Runtimes (containerd, CRI",
+    "Global::+ End",
+    "Global::Checks secret removal in JSON",
+    "Global::HTTP Client",
+    "Global::Host-level directories",
+    "Global::Kubelet/containerd/cri-o processes",
+    "Global::Kubernetes Node",
+    "Global::O",
+    "Global::Provides runtime config files",
+    "Global::Resolves CNI Dir from Runtime Inputs",
+    "Global::Runs as Privileged DaemonSet",
+    "Global::Sanitizes Control-Plane JSON",
+    "Global::Test Environment",
+    "Global::Validates CNI dir resolution"
+  ]
+}

@@ -1,0 +1,95 @@
+@startuml
+title statlord System Architecture
+
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam wrapWidth 240
+skinparam maxMessageSize 240
+
+actor "API Client" as ApiClient
+
+node "User Browser" as Browser {
+  component "Editor SPA\n(TypeScript/React)" as Editor
+  component "Viewer Page" as ViewerClient
+  component "Redux Store" as Redux
+  Editor -- Redux : State mgmt
+}
+
+device "Display Device\n(OLED / e-paper / LCD)" as DisplayDevice
+node "Headless Renderer\n(optional)" as Headless
+
+node "Dev Container (development-grade)\n- Python 3.7 base\n- Node.js + npm\n- Django runserver" as DevContainer {
+  node "Django Server" as Django {
+    component "Static Assets Server" as Static
+    component "REST API" as API
+    component "Gauges Service" as Gauges
+    component "Displays Service" as Displays
+    component "Layouts Service" as Layouts
+    component "Viewer Renderer\n(Black & White pixels\nat display resolution)" as ViewerSrv
+  }
+  component "Node.js Build Tooling" as NodeBuild
+  artifact "Built Client Assets\n(HTML/CSS/JS)" as Assets
+}
+
+database "PostgreSQL" as PG
+
+' Static asset serving
+Editor -down-> Static : GET static assets\n(HTML/CSS/JS)
+Static -down-> Assets : serves
+
+' Editor interactions with API
+Editor --> API : JSON over HTTP(S)\nCRUD Gauges/Displays/Layouts
+
+' Viewer route consumption
+ViewerClient --> ViewerSrv : GET /viewer/{displayKey}
+DisplayDevice --> ViewerSrv : HTTP(S) GET viewer path\n(render at device resolution)
+Headless --> ViewerSrv : Automated rendering\n(headless browser)
+
+' External API clients
+ApiClient --> API : POST/GET data\n(gauges, displays, layouts)
+
+' Server-side composition and persistence
+API -[hidden]down- Gauges
+API -[hidden]down- Displays
+API -[hidden]down- Layouts
+API --> PG : Persist/query entities
+ViewerSrv --> PG : Read display data/layouts
+
+' Build chain within container
+NodeBuild ..> Assets : npm install\nnpm run build
+Assets ..> Static : deployed as server-served\nstatic content
+
+' Notes describing data contracts and client state
+note right of API
+Resources (structured JSON):
+- Gauge { key, value }
+- Display (server) { key, available, resolution_x, resolution_y, current_layout, display_data, rotation }
+- Layout { key, data (binary), display_positions (text) }
+Persistence:
+- PostgreSQL stores Gauge, Display, Layout
+Relationships:
+- Display.current_layout -> Layout (nullable on deletion)
+end note
+
+note right of Redux
+Redux-managed state slices:
+- controls
+- elements
+- layouts
+- gauges
+- displays (client-side Display: { key, available, resolution_x, resolution_y, display_data, rotation })
+end note
+
+note right of ViewerSrv
+Viewer path:
+- Reads Display + Layout
+- Produces B/W pixel view at display resolution
+end note
+
+note bottom of DevContainer
+Supplied containerized deployment:
+- Development-grade; not production-ready
+- Starts Django with ./manage.py runserver
+end note
+
+@enduml

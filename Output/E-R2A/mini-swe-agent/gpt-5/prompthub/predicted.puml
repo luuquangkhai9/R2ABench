@@ -1,0 +1,67 @@
+@startuml
+title PromptHub Layered Architecture
+
+skinparam componentStyle rectangle
+skinparam defaultFontName Arial
+skinparam shadowing false
+
+package Client Layer {
+  actor Visitor / User / Admin as User
+  component Web Browser as Browser
+}
+
+package Presentation Layer {
+  component Front-End SPA (Vue / jQuery) as Frontend
+}
+
+package Application Layer (Backend) {
+  component Django Web API as Backend
+  component Business Services\n(Users, Artworks, Favorites, Comments, Review, Notifications) as Services
+  component Auth and Rate Limiting as Auth
+}
+
+package Algorithm Support Layer {
+  component Recommendation Engine\n(PyTorch / TensorFlow) as Reco
+}
+
+package Data Layer {
+  database SQLite Database as DB
+  component Image File Storage (Local) as ImgStore
+  component Log Storage as Logs
+  component Offsite Backup (DR) as Backup
+}
+
+package Infrastructure / External {
+  node Server OS (Ubuntu 22.04) as OS
+  node Docker Runtime 20.10.17 as Docker
+  component Secure HTTP (TLS) as TLS
+  component Security Controls\n(Firewall, CORS, XSS, SQLi Protection) as Sec
+  component Email Alert Service as Email
+}
+
+User --> Browser
+Browser --> Frontend
+Frontend --> Backend
+Backend --> Services
+Backend --> Auth
+Auth --> Services
+Services --> DB
+Services --> ImgStore
+Backend <--> Reco
+Services --> Logs
+Logs --> Backup
+DB --> Backup
+Backend --> Email
+
+TLS --> Browser
+TLS --> Backend
+Sec --> Backend
+
+OS --> Docker
+Docker --> Backend
+Docker --> Reco
+Docker --> DB
+Docker --> ImgStore
+Docker --> Logs
+
+@enduml

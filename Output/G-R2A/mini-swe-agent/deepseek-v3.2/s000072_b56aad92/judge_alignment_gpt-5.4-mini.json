@@ -1,0 +1,223 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Connection\\nManagement"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem Layer::CH4 Network Module::Communication Subsystem::Connection\\nEstablishment"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both describe connection establishment/management in the communication subsystem, but the predicted node is placed in a CH4 network-module context rather than the GT UCX UCP protocol layer."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Initialization\\nTermination"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem Layer::CH4 Network Module::Communication Subsystem::Initialization/\\nTermination"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Semantically equivalent lifecycle responsibility, but the predicted boundary is CH4 network module communication subsystem instead of GT UCX UCP high-level API."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Progress\\n/ Blocking Progress"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem Layer::CH4 Network Module::Communication Subsystem::Progress Handling"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The core concept matches progress handling, but the predicted node is mapped into a different architectural context than the GT UCX UCP protocol layer."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::One-to-Many\\nTransfer"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem Layer::CH4 Network Module::Communication Subsystem::One-to-Many\\nScatter Transfer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Functionally equivalent one-to-many/scatter transfer behavior, but the predicted boundary is CH4 communication subsystem instead of GT UCX UCP high-level API."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Message Passing API\\nTag Matching, Rendezvous"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem Layer::CH4 Network Module::Send State Machine::Rendezvous Control\\nField Handling"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The rendezvous-related send-path behavior corresponds to the GT message-passing/rendezvous area, but the predicted node is nested under a CH4 send state machine rather than UCX UCP message passing API."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCT Hardware Transports\\nLow Level API::RDMA Verbs Transport\\nInfiniBand, ROCE, OPA"
+      ],
+      "predicted_nodes": [
+        "Transport Layer::Embedded Libfabric\\nVerbs Provider",
+        "Transport Layer::Embedded Libfabric\\nVerbs Provider::Linux Verbs API\\nIntegration"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "These all relate to verbs-based transport integration, but the GT is a UCX UCT RDMA Verbs transport while the prediction places it in an embedded Libfabric verbs provider layer, which is a different architectural boundary."
+    },
+    {
+      "gt_nodes": [
+        "Drivers and Kernels::RDMA Verbs Driver"
+      ],
+      "predicted_nodes": [
+        "External Systems Layer::Linux Verbs Stack",
+        "External Systems Layer::Linux Verbs Stack::libibverbs\\n(>=1.1.8",
+        "External Systems Layer::Linux Verbs Stack::librdmacm\\n(>=1.0.16"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT driver-level RDMA verbs dependency is expanded into its external Linux Verbs stack components, and the boundary attribution is semantically consistent for an external verbs dependency."
+    },
+    {
+      "gt_nodes": [
+        "Global::Hardware"
+      ],
+      "predicted_nodes": [
+        "External Systems Layer::Network Device"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A network device is a concrete hardware element, so the semantic match is valid and the external-system placement is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Global::Applications\\nHPC, AI, ML, Big Data"
+      ],
+      "predicted_nodes": [
+        "User/Developer Layer::Developer/Tester"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node is a human actor role, not an application/runtime component, so this is not semantically equivalent to the GT application domain node."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Transport Selection"
+      ],
+      "predicted_nodes": [
+        "Transport Layer::Optional Transport\\nLibraries::OFI/libfabric",
+        "Transport Layer::Optional Transport\\nLibraries::UCX"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Transport selection is represented through optional transport library choices, and the transport-layer placement is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Software Protocols"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem Layer::CH4 Network Module::Send State Machine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The send state machine is a specific software-protocol realization, but the predicted CH4 send-state-machine context is not the same boundary as the GT UCX software-protocol layer."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCS Services\\nCommon Utilities::Memory Management",
+        "UCX::UCS Services\\nCommon Utilities::Data Structures"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem Layer::CH4 Network Module::Network Interface::Network Send\\nDescriptors",
+        "Communication Subsystem Layer::CH4 Network Module::Network Interface::Packet Buffers"
+      ],
+      "match_type": "2:2",
+      "is_boundary_correct": false,
+      "reasoning": "There is partial semantic overlap with low-level data structures and buffer management, but the predicted nodes are specific network interface artifacts rather than the generic UCX common-utility layer; boundary attribution is too different."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCT Hardware Transports\\nLow Level API::Ethernet Transport\\nTCP/IP Sockets"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem Layer::CH4 Network Module::Network Interface",
+        "External Systems Layer::Network Device"
+      ],
+      "match_type": "1:2",
+      "is_boundary_correct": false,
+      "reasoning": "The prediction points to generic network interface/device concepts, but the GT node is specifically an Ethernet/TCP/IP transport; this is only a loose functional resemblance and not a faithful match."
+    },
+    {
+      "gt_nodes": [
+        "Drivers and Kernels::OS Kernel\\nMemory Hooks",
+        "UCX::UCM Memory Services::Memory Hooks"
+      ],
+      "predicted_nodes": [
+        "Verification & Build Layer::Embedded hwloc\\nVerification Workflow::Manual Build Workflow"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": false,
+      "reasoning": "Manual build workflow for hwloc is unrelated to memory hooks; this is a clear semantic mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Programming Models and Frameworks::MPI\\nMPICH, Open-MPI"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem Layer::CH4 Network Module"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "CH4 is an MPI network module, so the predicted architectural layer is semantically consistent with the MPI framework boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Drivers and Kernels::Cray Driver",
+    "Drivers and Kernels::OS Kernel\\nEthernet",
+    "Drivers and Kernels::OS Kernel\\nHost Memory",
+    "Drivers and Kernels::OS Kernel\\nMemory Hooks",
+    "Drivers and Kernels::ROCm / CUDA",
+    "Global::Applications\\nHPC, AI, ML, Big Data",
+    "Programming Models and Frameworks::AI / ML Frameworks\\nTensorFlow, Burst Buffer",
+    "Programming Models and Frameworks::PGAS / SHMEM\\nOpenSHMEM, UPC, CAF, X10, Chapel",
+    "Programming Models and Frameworks::Task Runtimes\\nParsec, OCR, Legion",
+    "UCX::UCM Memory Services::Memory Hooks",
+    "UCX::UCP Protocols\\nHigh Level API::Cross-Transport Multi-Rail",
+    "UCX::UCP Protocols\\nHigh Level API::Fragmentation",
+    "UCX::UCP Protocols\\nHigh Level API::I/O API\\nStream",
+    "UCX::UCP Protocols\\nHigh Level API::PGAS API\\nRMAs, Atomics",
+    "UCX::UCP Protocols\\nHigh Level API::Task Based API\\nActive Messages",
+    "UCX::UCS Services\\nCommon Utilities::Data Structures",
+    "UCX::UCS Services\\nCommon Utilities::Memory Management",
+    "UCX::UCS Services\\nCommon Utilities::Utilities",
+    "UCX::UCT Hardware Transports\\nLow Level API::DCT",
+    "UCX::UCT Hardware Transports\\nLow Level API::GPU Transport\\nNVIDIA CUDA, AMD ROCm",
+    "UCX::UCT Hardware Transports\\nLow Level API::Gemini / Aries Transport\\nGNI",
+    "UCX::UCT Hardware Transports\\nLow Level API::Intra-node Host Memory\\nSYSV, POSIX, KNEM, CMA, XPMEM",
+    "UCX::UCT Hardware Transports\\nLow Level API::RC",
+    "UCX::UCT Hardware Transports\\nLow Level API::UD"
+  ],
+  "unmatched_predicted_nodes": [
+    "Communication Subsystem Layer::CH4 Network Module::Communication Subsystem::Flow Control\\nChecks",
+    "Communication Subsystem Layer::CH4 Network Module::Network Interface",
+    "Communication Subsystem Layer::CH4 Network Module::Network Interface::Network Send\\nDescriptors",
+    "Communication Subsystem Layer::CH4 Network Module::Network Interface::Packet Buffers",
+    "Communication Subsystem Layer::CH4 Network Module::Send State Machine::Direct Access Send",
+    "Communication Subsystem Layer::CH4 Network Module::Send State Machine::Packet Buffer\\nPacking",
+    "External Systems Layer::Build Environment",
+    "Transport Layer::Optional Transport\\nLibraries::OFI/libfabric",
+    "Transport Layer::Optional Transport\\nLibraries::UCX",
+    "User/Developer Layer::Build/Deployment Engineer",
+    "Verification & Build Layer::Build System",
+    "Verification & Build Layer::Build System::autogen.sh",
+    "Verification & Build Layer::Build System::configure",
+    "Verification & Build Layer::Build System::make",
+    "Verification & Build Layer::Embedded hwloc\\nVerification Workflow",
+    "Verification & Build Layer::Embedded hwloc\\nVerification Workflow::Manual Build Workflow",
+    "Verification & Build Layer::Embedded hwloc\\nVerification Workflow::Test Execution\\n(configure, make, check",
+    "Verification & Build Layer::Embedded hwloc\\nVerification Workflow::run-embedded-tests.sh"
+  ]
+}

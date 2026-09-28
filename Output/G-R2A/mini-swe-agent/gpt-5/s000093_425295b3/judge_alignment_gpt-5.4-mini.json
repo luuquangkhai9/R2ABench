@@ -1,0 +1,67 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::User Application"
+      ],
+      "predicted_nodes": [
+        "External Control Layer::User Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the same external control application that provides input to the system. The predicted boundary places it in an external control layer, which is semantically consistent with the GT global external node."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::VMT Manager\\nC#"
+      ],
+      "predicted_nodes": [
+        "Management Layer::VMT Manager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These describe the same manager component responsible for receiving external control input and coordinating IPC. The boundary attribution is aligned with the GT system component."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::VMT Driver\\nC++"
+      ],
+      "predicted_nodes": [
+        "Driver Integration Layer::VMT Driver"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the VMT Driver component that integrates with SteamVR/OpenVR. The predicted layer is an appropriate architectural boundary for this driver component."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenVR\\nSteamVR Runtime"
+      ],
+      "predicted_nodes": [
+        "Runtime Layer::SteamVR / OpenVR Runtime"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These are semantically equivalent runtime dependency nodes. The predicted runtime layer matches the GT external runtime boundary."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::Legacy Controller Binding\\nmycontroller JSON"
+      ],
+      "predicted_nodes": [
+        "External Control Layer::OSC"
+      ],
+      "match_type": "none",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node corresponds to the legacy controller binding artifact. OSC is an external control input interface, not the controller binding JSON."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Virtual Motion Tracker::Legacy Controller Binding\\nmycontroller JSON",
+    "Virtual Motion Tracker::OpenVR Path Constants\\n/user/body and /client_info"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Control Layer::OSC",
+    "IPC Layer::Shared Memory\\n(JSON, bidirectional"
+  ]
+}

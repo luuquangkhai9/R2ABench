@@ -1,0 +1,352 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Business Layer::Interceptor"
+      ],
+      "predicted_nodes": [
+        "Backend::Proxy_Layer::Interceptors / Rate Limiter"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent request interception / filtering concerns in the backend request path. The predicted node adds rate limiting detail, but the architectural layer remains semantically aligned with the GT business-layer interceptor."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::JWT Authentication"
+      ],
+      "predicted_nodes": [
+        "Backend::Presentation_Layer::JWT Authentication Filter"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The authentication function matches, but the GT places it in the business layer while the prediction places it in the presentation layer. This is a layer misattribution because JWT authentication is expected as backend filter/pipeline logic, not a presentation concern in the GT decomposition."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::LomBok"
+      ],
+      "predicted_nodes": [
+        "Backend::Business_Layer::User Service"
+      ],
+      "match_type": "unmatched semantic",
+      "is_boundary_correct": false,
+      "reasoning": "No semantic equivalence. Lombok is a code-generation/developer convenience library, while User Service is an application service."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Mybatis Plus"
+      ],
+      "predicted_nodes": [
+        "Backend::Access_Layer::MyBatis-Plus Repositories"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to MyBatis-Plus persistence/repository usage. The predicted node refines it as repositories, which is consistent with the GT's backend stack attribution."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::SMTP Service"
+      ],
+      "predicted_nodes": [
+        "Backend::Proxy_Layer::SMTP Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote email sending integration. The predicted node uses 'Client' wording, but it is semantically the same SMTP integration component and remains in the backend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot"
+      ],
+      "predicted_nodes": [
+        "Backend::Business_Layer::Forum Service"
+      ],
+      "match_type": "unmatched semantic",
+      "is_boundary_correct": false,
+      "reasoning": "No semantic equivalence. Spring Boot is the framework, not a domain service."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Swagger API"
+      ],
+      "predicted_nodes": [
+        "Backend::Presentation_Layer::REST Controllers"
+      ],
+      "match_type": "unmatched semantic",
+      "is_boundary_correct": false,
+      "reasoning": "Swagger API documentation is not equivalent to REST controllers."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Global::MySQL_5_7"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the MySQL database. The predicted node is at global infrastructure level instead of the GT data-layer package, but semantically the boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Database::Redis"
+      ],
+      "predicted_nodes": [
+        "Global::Redis_7_4"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Redis datastore. The predicted node is expressed as global infrastructure, which is semantically compatible with the GT data-layer storage attribution."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Distributed Storage::Object Storage Service OSS"
+      ],
+      "predicted_nodes": [
+        "Backend::Access_Layer::Object Storage Adapter (MinIO SDK",
+        "Global::MinIO_Object_Storage"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT object storage concept is split into an access-layer adapter and the actual MinIO storage node. This is a reasonable decomposition and remains semantically consistent with the GT distributed storage boundary."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::ESLint"
+      ],
+      "predicted_nodes": [
+        "Frontend::UI Views"
+      ],
+      "match_type": "unmatched semantic",
+      "is_boundary_correct": false,
+      "reasoning": "No semantic equivalence. ESLint is a frontend linting tool, not a UI view component."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::TypeScript"
+      ],
+      "predicted_nodes": [
+        "Frontend::UI Views"
+      ],
+      "match_type": "unmatched semantic",
+      "is_boundary_correct": false,
+      "reasoning": "No semantic equivalence."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::Vue3"
+      ],
+      "predicted_nodes": [
+        "Frontend::UI Views"
+      ],
+      "match_type": "unmatched semantic",
+      "is_boundary_correct": false,
+      "reasoning": "No semantic equivalence."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::Vuex"
+      ],
+      "predicted_nodes": [
+        "Frontend::UI Views"
+      ],
+      "match_type": "unmatched semantic",
+      "is_boundary_correct": false,
+      "reasoning": "No semantic equivalence."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::Webpack"
+      ],
+      "predicted_nodes": [
+        "Frontend::UI Views"
+      ],
+      "match_type": "unmatched semantic",
+      "is_boundary_correct": false,
+      "reasoning": "No semantic equivalence."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::antd-vue"
+      ],
+      "predicted_nodes": [
+        "Frontend::UI Views"
+      ],
+      "match_type": "unmatched semantic",
+      "is_boundary_correct": false,
+      "reasoning": "No semantic equivalence."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::axios"
+      ],
+      "predicted_nodes": [
+        "Frontend::Axios API Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the frontend HTTP client used for API calls. The boundary is correct as a frontend component."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::vue-router"
+      ],
+      "predicted_nodes": [
+        "Frontend::UI Views"
+      ],
+      "match_type": "unmatched semantic",
+      "is_boundary_correct": false,
+      "reasoning": "No semantic equivalence. vue-router is routing control, not generic UI views."
+    },
+    {
+      "gt_nodes": [
+        "Global::Logging / Log Record"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "No explicit equivalent predicted node was provided, but the predicted set does not contain a distinct logging component. This GT node is therefore unmatched."
+    },
+    {
+      "gt_nodes": [
+        "Global::Permission / Access Control"
+      ],
+      "predicted_nodes": [
+        "Backend::Presentation_Layer::JWT Authentication Filter",
+        "Backend::Proxy_Layer::Interceptors / Rate Limiter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT global access-control concern is decomposed into authentication filtering and request interception/rate limiting. This is a reasonable architectural split and remains semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Network / Proxy Layer::Nginx Reverse Proxy"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "No corresponding predicted node exists. This GT node is unmatched."
+    },
+    {
+      "gt_nodes": [
+        "Persistence Layer::Concurrency Control"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "No corresponding predicted node exists. This GT node is unmatched."
+    },
+    {
+      "gt_nodes": [
+        "Persistence Layer::Data Caching"
+      ],
+      "predicted_nodes": [
+        "Backend::Access_Layer::Redis Cache Access"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to caching using Redis. The predicted node is a concrete implementation of the GT persistence concern."
+    },
+    {
+      "gt_nodes": [
+        "Persistence Layer::Optimistic Locking"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "No corresponding predicted node exists. This GT node is unmatched."
+    },
+    {
+      "gt_nodes": [
+        "Persistence Layer::Transaction Control"
+      ],
+      "predicted_nodes": [
+        "Backend::Access_Layer::MyBatis-Plus Repositories"
+      ],
+      "match_type": "unmatched semantic",
+      "is_boundary_correct": false,
+      "reasoning": "Transaction control is a persistence concern, but MyBatis-Plus repositories alone do not explicitly represent transaction management."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Ajax Interaction: GET POST PUT DELETE"
+      ],
+      "predicted_nodes": [
+        "Frontend::Axios API Client",
+        "Backend::Presentation_Layer::REST Controllers"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT AJAX interaction layer is reasonably split into frontend HTTP client and backend REST controllers. The semantic match is correct."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Routing Control"
+      ],
+      "predicted_nodes": [
+        "Frontend::UI Views"
+      ],
+      "match_type": "unmatched semantic",
+      "is_boundary_correct": false,
+      "reasoning": "UI views do not specifically denote routing control."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Vue Template Rendering Engine"
+      ],
+      "predicted_nodes": [
+        "Frontend::UI Views"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "UI views are a reasonable concrete representation of Vue template rendering/rendered pages."
+    },
+    {
+      "gt_nodes": [
+        "Security Sandbox::Docker Singleton Mode::Seccomp: Restrict System Calls::uLimit: Restrict Process Resources::Execute User Code"
+      ],
+      "predicted_nodes": [
+        "Judging_Service::JudgeCore",
+        "Judging_Service::JudgeHost"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT sandboxed code execution node is decomposed into JudgeHost and JudgeCore, which is semantically correct and consistent with the judging-service architecture, including resource isolation and execution control."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Business Layer::LomBok",
+    "Business Layer::Spring Boot",
+    "Business Layer::Swagger API",
+    "Frontend Layer::ESLint",
+    "Frontend Layer::TypeScript",
+    "Frontend Layer::Vue3",
+    "Frontend Layer::Vuex",
+    "Frontend Layer::Webpack",
+    "Frontend Layer::antd-vue",
+    "Global::Logging / Log Record",
+    "Network / Proxy Layer::Nginx Reverse Proxy",
+    "Persistence Layer::Concurrency Control",
+    "Persistence Layer::Optimistic Locking",
+    "Persistence Layer::Transaction Control",
+    "Presentation Layer::Routing Control"
+  ],
+  "unmatched_predicted_nodes": [
+    "Backend::Business_Layer::AI Assistance Service",
+    "Backend::Business_Layer::Forum Service",
+    "Backend::Business_Layer::Problem Service",
+    "Backend::Business_Layer::Solution Service",
+    "Backend::Business_Layer::Submission/Judging Orchestrator",
+    "Backend::Business_Layer::User Service",
+    "Backend::Presentation_Layer::REST Controllers",
+    "Backend::Proxy_Layer::Judge HTTP Client",
+    "Backend::Proxy_Layer::LangChain4j Client",
+    "Backend::Proxy_Layer::SMTP Client",
+    "Frontend::UI Views",
+    "Global::External_LLM_Provider",
+    "Global::Judging_Service",
+    "Global::SMTP_Server"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Flutter-based app::Android",
+        "Flutter-based app::Dart",
+        "Flutter-based app::MacOS",
+        "Flutter-based app::Web",
+        "Flutter-based app::iOS"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Flutter/Dart\\nHome Recipes Client"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated multiple GT nodes, which represent the various platforms and the technology of the client application, into a single logical 'Home Recipes Client' node. The predicted 'Client Layer' boundary is semantically equivalent to the GT's 'Flutter-based app' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::gRPC Gateway\\n(HTTP-gRPC Proxy)\\nGolang"
+      ],
+      "predicted_nodes": [
+        "API Gateway Layer::gRPC-Gateway\\n(HTTP <-> gRPC"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct 1:1 match for the gRPC Gateway component described in the PRD. The AI's 'API Gateway Layer' boundary is more architecturally specific than the GT's 'Global' boundary, but it is a semantically correct and improved classification."
+    },
+    {
+      "gt_nodes": [
+        "Hosted in Azure Kubernetes Service::Docker container::Recipes Server\\n(gRPC Server)\\nGolang"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Go gRPC Server",
+        "Service Layer::IngredientService",
+        "Service Layer::RecipeService"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the main gRPC server but also split it into its logical sub-services (RecipeService, IngredientService) which are explicitly mentioned in the PRD's functional requirements. The GT's boundary 'Hosted in Azure Kubernetes Service::Docker container' describes a deployment environment, whereas the AI's 'Service Layer' describes a logical architectural layer. This is a valid and non-conflicting representation."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Hosted in Azure Kubernetes Service",
+    "Global::Postman",
+    "Global::Test Client 1\\nNodeJS",
+    "Global::Test Client 2\\nGolang",
+    "Hosted in Azure Kubernetes Service::Docker container"
+  ],
+  "unmatched_predicted_nodes": []
+}

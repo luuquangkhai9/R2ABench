@@ -1,0 +1,337 @@
+@startuml
+!define RECTANGLE rectangle
+!define COMPONENT component
+!define DATABASE database
+!define CLOUD cloud
+!define QUEUE queue
+!define STORAGE storage
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam node {
+    borderColor Black
+    backgroundColor White
+    fontColor Black
+}
+skinparam rectangle {
+    borderColor Black
+    backgroundColor White
+    fontColor Black
+}
+skinparam component {
+    borderColor Black
+    backgroundColor White
+    fontColor Black
+}
+skinparam database {
+    borderColor Black
+    backgroundColor White
+    fontColor Black
+}
+
+title EasyLaTex System Architecture
+
+' ========== EXTERNAL SYSTEMS ==========
+cloud "User Browser" as browser #LightBlue [
+    Modern Web Browser
+    ---
+    Supports WebSocket
+    Chrome/Firefox/Safari/Edge
+    Windows/macOS/Linux
+]
+
+cloud "External LaTeX Editors" as latex_editors #LightGreen [
+    Overleaf
+    TeXstudio
+    Other LaTeX Editors
+]
+
+cloud "External File Sources" as file_sources #LightYellow [
+    User Uploads
+    Handwritten Input
+    Images/PDFs
+    CSV/Excel Files
+]
+
+' ========== FRONTEND LAYER ==========
+rectangle "Frontend Application" as frontend #LightCyan {
+    component "User Interface" as ui [
+        Registration/Login Forms
+        Project/Group Management
+        File Upload Interface
+        LaTeX Editor & Preview
+        Version Tree Navigation
+        Collaboration Interface
+    ]
+    
+    component "Real-time Preview" as preview [
+        LaTeX Rendering Engine
+        Live Preview Updates
+        Browser-based Display
+    ]
+    
+    component "WebSocket Client" as ws_client [
+        Real-time Communication
+        Collaboration Updates
+        Live Preview Updates
+    ]
+}
+
+' ========== BACKEND API LAYER ==========
+rectangle "Backend API Layer" as backend #LightPink {
+    component "REST API Gateway" as api_gateway [
+        HTTP/REST API Endpoints
+        Request Routing
+        Authentication Middleware
+        Rate Limiting
+    ]
+    
+    component "Authentication Service" as auth_service [
+        User Registration
+        Login/Logout
+        Password Recovery
+        Session Management
+        JWT Token Handling
+    ]
+    
+    component "User Management Service" as user_service [
+        User CRUD Operations
+        Profile Management
+        Account Settings
+    ]
+    
+    component "Project Management Service" as project_service [
+        Project CRUD Operations
+        Project Metadata
+        Access Control
+    ]
+    
+    component "Group/Collaboration Service" as group_service [
+        Group Creation/Joining
+        Member Management
+        Resource Sharing
+        Permission Control
+    ]
+    
+    component "File Upload Service" as upload_service [
+        File Validation
+        Storage Management
+        Drag & Drop Support
+        File Type Detection
+    ]
+    
+    component "Version Control Service" as version_service [
+        Version Tree Management
+        Branch Creation
+        File History
+        Version Restoration
+        Comment System
+    ]
+    
+    component "Export Service" as export_service [
+        PDF Generation
+        LaTeX Source Export
+        Image Export (PNG/JPEG)
+        Format Conversion
+    ]
+}
+
+' ========== PROCESSING LAYER ==========
+rectangle "Processing Layer" as processing #LightSalmon {
+    component "OCR Engine" as ocr [
+        Handwriting Recognition
+        Image Text Extraction
+        Formula Detection
+        Table Structure Analysis
+    ]
+    
+    component "AI Recognition Models" as ai_models [
+        Deep Learning Models
+        Formula Recognition
+        Table Recognition
+        Content Classification
+    ]
+    
+    component "LaTeX Generation Engine" as latex_gen [
+        Formula to LaTeX Conversion
+        Table to LaTeX Conversion
+        Structure Optimization
+        Code Formatting
+    ]
+    
+    component "LaTeX Rendering Service" as latex_render [
+        LaTeX Compilation
+        PDF Generation
+        Image Rendering
+        Real-time Preview
+    ]
+    
+    component "File Parser" as file_parser [
+        CSV/Excel Parsing
+        PDF Content Extraction
+        Image Processing
+        Format Conversion
+    ]
+}
+
+' ========== DATA LAYER ==========
+rectangle "Data Layer" as data #LightGray {
+    database "User Database" as user_db [
+        User Accounts
+        Authentication Data
+        Profile Information
+        Team Memberships
+    ]
+    
+    database "Project Database" as project_db [
+        Projects Metadata
+        Version History
+        File References
+        Collaboration Data
+    ]
+    
+    database "File Storage" as file_storage [
+        Uploaded Files
+        Generated LaTeX
+        Rendered Outputs
+        Export Artifacts
+    ]
+    
+    database "Version Control Database" as version_db [
+        Version Trees
+        Branch Information
+        Change History
+        Comments
+    ]
+}
+
+' ========== EXTERNAL DEPENDENCIES ==========
+rectangle "External Dependencies" as deps #LightYellow {
+    component "LaTeX Engine" as latex_engine [
+        TeX Live
+        MiKTeX
+        PDFLaTeX
+        XeLaTeX
+    ]
+    
+    component "Web Server" as webserver [
+        Apache HTTP Server
+        Nginx
+        Reverse Proxy
+        Load Balancer
+    ]
+    
+    component "Relational Database" as rdbms [
+        MySQL 8.0+
+        PostgreSQL 12+
+        Data Persistence
+    ]
+}
+
+' ========== CONNECTIONS ==========
+' User interactions
+browser --> frontend : HTTP/HTTPS Requests
+browser --> frontend : WebSocket Connections
+file_sources --> frontend : File Uploads
+
+' Frontend to Backend
+frontend --> backend : API Calls (REST)
+frontend --> backend : Real-time Updates (WebSocket)
+
+' Backend internal communication
+api_gateway --> auth_service : Authentication Requests
+api_gateway --> user_service : User Operations
+api_gateway --> project_service : Project Operations
+api_gateway --> group_service : Collaboration
+api_gateway --> upload_service : File Uploads
+api_gateway --> version_service : Version Control
+api_gateway --> export_service : Export Requests
+
+' Backend to Processing
+upload_service --> processing : File Processing
+project_service --> processing : Content Conversion
+version_service --> processing : Version Rendering
+
+' Processing internal flow
+file_parser --> ocr : Content Extraction
+ocr --> ai_models : Recognition Tasks
+ai_models --> latex_gen : Structured Data
+latex_gen --> latex_render : LaTeX Code
+latex_render --> export_service : Rendered Outputs
+
+' Backend to Data Layer
+auth_service --> user_db : User Data
+user_service --> user_db : User Operations
+project_service --> project_db : Project Data
+group_service --> project_db : Collaboration Data
+upload_service --> file_storage : File Storage
+version_service --> version_db : Version History
+export_service --> file_storage : Export Files
+
+' Processing to Data Layer
+processing --> file_storage : Processed Files
+processing --> project_db : Conversion Results
+
+' Backend to External Dependencies
+backend --> webserver : Hosting
+backend --> rdbms : Database Operations
+processing --> latex_engine : LaTeX Compilation
+
+' Export to External
+export_service --> latex_editors : LaTeX Source Files
+export_service --> browser : Download Files
+
+' ========== SECURITY COMPONENTS ==========
+cloud "Security Layer" as security #LightCoral [
+    HTTPS/TLS Encryption
+    Input Validation
+    SQL Injection Protection
+    XSS/CSRF Protection
+    Authentication/Authorization
+]
+
+security --> backend : Security Enforcement
+security --> frontend : Client-side Security
+
+' ========== PERFORMANCE & SCALABILITY ==========
+queue "Message Queue" as mq [
+    Async Processing
+    Load Balancing
+    Concurrent Request Handling
+]
+
+backend --> mq : Async Operations
+processing --> mq : Processing Jobs
+
+' ========== NOTES ==========
+note right of backend
+  <b>API Endpoints:</b>
+  - User Registration/Login
+  - Project/Group Management
+  - File Upload/Download
+  - Version Control
+  - Collaboration
+  - Real-time Preview
+  - Export Services
+end note
+
+note left of processing
+  <b>Processing Capabilities:</b>
+  - Handwriting Recognition
+  - Image/PDF/CSV/Excel Parsing
+  - AI Model Recognition (≥90% accuracy)
+  - LaTeX Generation
+  - Real-time Rendering (<2s latency)
+end note
+
+note bottom of data
+  <b>Data Requirements:</b>
+  - User Accounts (DR-001)
+  - Groups (DR-002)
+  - Projects & Versions (DR-003)
+  - Uploaded Files (DR-004)
+  - Recognition Results (DR-005)
+  - Authentication Data (DR-006)
+end note
+
+@enduml

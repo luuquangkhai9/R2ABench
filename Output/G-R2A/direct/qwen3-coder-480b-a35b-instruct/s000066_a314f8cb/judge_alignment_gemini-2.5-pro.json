@@ -1,0 +1,70 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Browser Clients::Client Browser\nPlayer 1",
+        "Browser Clients::Client Browser\nPlayer 2",
+        "Browser Clients::Client Browser\nPlayer 3"
+      ],
+      "predicted_nodes": [
+        "Global::Browser Client\n(Three.js"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "AI aggregated multiple client browser instances into a single node, but placed it in the global scope rather than a specific 'Browser Clients' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\nErlang"
+      ],
+      "predicted_nodes": [
+        "Global::Erlang Game Server\n(Master Node"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both represent the master node of the game server, but AI placed it in the global scope instead of the cluster boundary."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Slave\nErlang"
+      ],
+      "predicted_nodes": [
+        "Global::Erlang Game Server\n(Replica Node"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both represent the replica/slave node of the game server, but AI placed it in the global scope instead of the cluster boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::DNS"
+      ],
+      "predicted_nodes": [
+        "Global::DNS/Load Balancer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the DNS/Load Balancer component, correctly matched and placed in the global scope."
+    },
+    {
+      "gt_nodes": [
+        "Static Web Tier::Web Server\nGame assets, HTML, CSS, JS"
+      ],
+      "predicted_nodes": [
+        "Global::Web Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both represent the web server providing static assets, but AI placed it in the global scope instead of a specific 'Static Web Tier' boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Erlang / OTP Game Server Cluster"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::Player",
+    "Global::External Systems",
+    "Global::action, data?",
+    "Global::event, data"
+  ]
+}

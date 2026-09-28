@@ -1,0 +1,53 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "Global::Kafka"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both correctly identify the Kafka message broker for event publication at the global boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Databases / Filestores\nElastic, Hadoop, etc."
+      ],
+      "predicted_nodes": [
+        "Global::Downstream Event Consumers"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the downstream entities responsible for consuming and persisting the published audit events."
+    },
+    {
+      "gt_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "predicted_nodes": [
+        "Kotlin Auditing Client Library::Auditing Core Layer::AuditEvent Builder",
+        "Kotlin Auditing Client Library::Auditing Core Layer::Change Comparator",
+        "Kotlin Auditing Client Library::Domain Model Layer::AuditEvent",
+        "Kotlin Auditing Client Library::Domain Model Layer::AuditorEventConfig",
+        "Kotlin Auditing Client Library::Domain Model Layer::Event Element",
+        "Kotlin Auditing Client Library::Filtering Integration Layer::AuditEventElementFilter",
+        "Kotlin Auditing Client Library::Logging Integration Layer::LogProvider",
+        "Kotlin Auditing Client Library::Public API Layer::Auditing API",
+        "Kotlin Auditing Client Library::Publishing Integration Layer::Default Kafka-based EventPublisher",
+        "Kotlin Auditing Client Library::Publishing Integration Layer::EventPublisher",
+        "Kotlin Auditing Client Library::Serialization Layer::JSON Serializer"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The GT diagram depicts the client library instantiated across multiple consuming applications. The AI predicted the detailed internal layer components of this exact client library. The boundary assignment is logically correct as the predicted package boundaries reflect the internal structure of the library embedded within these applications."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::auditor-v1 app\nserver"
+  ],
+  "unmatched_predicted_nodes": []
+}

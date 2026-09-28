@@ -1,0 +1,176 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Event Handler eBPF Programs::Default Handler Probes",
+        "Event Handler eBPF Programs::Process Specific\nHandler Probes"
+      ],
+      "predicted_nodes": [
+        "Linux Kernel (eBPF::Handler eBPF Programs\n(default + process-specific"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates default and process-specific handler probes, while the predicted diagram aggregates them into one handler-program node. The consolidation is semantically correct and remains within the Linux kernel/eBPF boundary."
+    },
+    {
+      "gt_nodes": [
+        "Event Handler eBPF Programs::Handler Probe\nhandle_syscall_write"
+      ],
+      "predicted_nodes": [
+        "Linux Kernel (eBPF::Handler eBPF Programs\n(default + process-specific"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The specific handler probe is subsumed by the broader handler eBPF programs node in the prediction. This is an acceptable abstraction and stays in the correct kernel/eBPF boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Perf Event Map\nshared event map"
+      ],
+      "predicted_nodes": [
+        "Linux Kernel (eBPF::Perf Event Channel"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT perf event map and the predicted perf event channel both represent the same event-delivery mechanism. The boundary is still kernel/eBPF-side and is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Prog ID Map\npid to id"
+      ],
+      "predicted_nodes": [
+        "Linux Kernel (eBPF::Main E BPF Program"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a distinct supporting map, but the prediction collapses it into the main program node rather than a map/registry component. This loses the architectural separation of a program-ID mapping structure."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Kprobe / Kretprobe\nother traced calls",
+        "Main eBPF Program::Kprobe\nentry probe",
+        "Main eBPF Program::Kretprobe\nreturn probe"
+      ],
+      "predicted_nodes": [
+        "Linux Kernel (E BPF::Main E BPF Program"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The prediction aggregates the main eBPF program and its kprobe/kretprobe attachments into one node. This is a valid higher-level representation and remains in the correct kernel/eBPF boundary."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Prog Map\npid to fd",
+        "Main eBPF Program::Ret Prog Map\npid to fd",
+        "Main eBPF Program::Prog Maps\nhandler mappings"
+      ],
+      "predicted_nodes": [
+        "Linux Kernel (E BPF::Main E BPF Program"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted main program node subsumes the GT program maps and return-program maps. Although detail is lost, the placement in the kernel/eBPF area is architecturally consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::TraceLeft\nCLI and library tracer"
+      ],
+      "predicted_nodes": [
+        "Userspace::TraceLeft CLI",
+        "Userspace::TraceLeft Library"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT combines the CLI and library tracer into one node, while the prediction splits them into separate userspace components. This split is accurate and boundary placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::TraceLeft\nCLI and library tracer"
+      ],
+      "predicted_nodes": [
+        "Userspace::Trace Command",
+        "Userspace::Userspace Tracer/Dispatcher"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The TraceLeft CLI/tracer in GT corresponds to the trace command flow and the userspace dispatching side in the prediction. The split is semantically appropriate and correctly placed in userspace."
+    },
+    {
+      "gt_nodes": [
+        "Linux Kernel Functions::inet_csk_accept",
+        "Linux Kernel Functions::sys_open",
+        "Linux Kernel Functions::sys_write"
+      ],
+      "predicted_nodes": [
+        "Linux Kernel (E BPF::Main E BPF Program"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT lists representative traced kernel functions, while the prediction abstracts them under the main eBPF program that attaches to traced calls. This is a reasonable abstraction and not a boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Global::Userspace Tracer/Dispatcher"
+      ],
+      "predicted_nodes": [
+        "Userspace::Userspace Tracer/Dispatcher"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the userspace event dispatching component. The predicted boundary is more specific but semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Userspace"
+      ],
+      "predicted_nodes": [
+        "Global::Userspace"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct boundary match for the userspace environment/context."
+    },
+    {
+      "gt_nodes": [
+        "Global::Perf Event Map\nshared event map"
+      ],
+      "predicted_nodes": [
+        "Linux Kernel (E BPF::Perf Event Channel"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node captures the same perf-based communication path, with a slightly different abstraction level."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Prog ID Map\npid to id",
+    "Global::TraceLeft\nCLI and library tracer",
+    "Linux Kernel Functions::inet_csk_accept",
+    "Linux Kernel Functions::sys_open",
+    "Linux Kernel Functions::sys_write",
+    "Main eBPF Program::Kprobe / Kretprobe\nother traced calls",
+    "Main eBPF Program::Kprobe\nentry probe",
+    "Main eBPF Program::Kretprobe\nreturn probe",
+    "Main eBPF Program::Prog Map\npid to fd",
+    "Main eBPF Program::Prog Maps\nhandler mappings",
+    "Main eBPF Program::Ret Prog Map\npid to fd",
+    "Event Handler eBPF Programs::Default Handler Probes",
+    "Event Handler eBPF Programs::Handler Probe\nhandle_syscall_write",
+    "Event Handler eBPF Programs::Process Specific\nHandler Probes"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Linux Kernel (eBPF",
+    "Global::Userspace",
+    "Linux Kernel (eBPF::Common Event Header",
+    "Linux Kernel (eBPF::Perf Event Channel",
+    "Userspace::Event Config Metadata\n(Proto/JSON",
+    "Userspace::Event Registration Parser",
+    "Userspace::Generator Subsystem",
+    "Userspace::Probe Loader",
+    "Userspace::Trace Command",
+    "Userspace::TraceLeft CLI",
+    "Userspace::TraceLeft Library",
+    "Userspace::Userspace Tracer/Dispatcher",
+    "Userspace::gobpf Integration"
+  ]
+}

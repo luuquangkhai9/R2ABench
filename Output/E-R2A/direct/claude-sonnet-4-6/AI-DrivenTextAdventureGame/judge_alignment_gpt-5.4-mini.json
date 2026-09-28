@@ -1,0 +1,188 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot",
+        "Presentation Layer::Ajax Interaction",
+        "Presentation Layer::Template Rendering"
+      ],
+      "predicted_nodes": [
+        "Global::Application Tier\\n(Iris Go Web Framework — Kubernetes Pods",
+        "Global::API Gateway / Load Balancer"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates backend application, presentation interaction, and rendering concerns, while the prediction aggregates them into a broader application tier and gateway-level architecture. Functionally this covers the same system-level application/runtime responsibility, and the boundary difference is a higher-level aggregation rather than a severe context error."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot::Community Management"
+      ],
+      "predicted_nodes": [
+        "Application Tier\\n(Iris Go Web Framework — Kubernetes Pods::Community Service::Post Controller\\n(Publish, Edit, Delete,\\nDetails, Search,\\nRecommendations",
+        "Application Tier\\n(Iris Go Web Framework — Kubernetes Pods::Community Service::Comment Controller\\n(Comment, Delete",
+        "Application Tier\\n(Iris Go Web Framework — Kubernetes Pods::Community Service::Reply Controller\\n(Reply, Delete",
+        "Application Tier\\n(Iris Go Web Framework — Kubernetes Pods::Community Service::Review Status\\nController",
+        "Application Tier\\n(Iris Go Web Framework — Kubernetes Pods::Search Service::Search Controller\\n(Topics, Users,\\nPost Content"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT community management module is split into several concrete community subservices/controllers in the prediction. This is a valid refinement, and all predicted nodes remain within the same backend community boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot::Favorites Module"
+      ],
+      "predicted_nodes": [
+        "Application Tier\\n(Iris Go Web Framework — Kubernetes Pods::Favorites Service::Favorites Controller\\n(Add, View, Remove"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the favorites feature module, with the predicted node placed in an equivalent backend application boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot::Game System"
+      ],
+      "predicted_nodes": [
+        "Application Tier\\n(Iris Go Web Framework — Kubernetes Pods::Game Service::Save Manager\\n(Create, View, Delete,\\nContinue, Share",
+        "Application Tier\\n(Iris Go Web Framework — Kubernetes Pods::Game Service::Game Engine\\nController\\n(Background Setup,\\nChoice Progression",
+        "Application Tier\\n(Iris Go Web Framework — Kubernetes Pods::Game Service::Save Integrity\\nVerifier",
+        "Application Tier\\n(Iris Go Web Framework — Kubernetes Pods::Game Service::Achievement &\\nReward Controller\\n(Currency, Items",
+        "External AI / LLM Provider::Large Language Model\\nReasoning API\\n(Plot, Random Events,\\nDecision Effects"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT game system is decomposed into multiple game-related controllers plus the external LLM dependency. This is a semantically correct split of the overall game subsystem."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot::Notification Module"
+      ],
+      "predicted_nodes": [
+        "Application Tier\\n(Iris Go Web Framework — Kubernetes Pods::Notification Service::Notification Controller\\n(Create, View,\\nMark Read, Delete",
+        "Application Tier\\n(Iris Go Web Framework — Kubernetes Pods::Notification Service::Notification Event\\nListener"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The notification module is split into notification management and event listening, which is a reasonable decomposition and remains in the correct backend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot::User Management"
+      ],
+      "predicted_nodes": [
+        "Application Tier\\n(Iris Go Web Framework — Kubernetes Pods::User & Auth Service::Registration & Login\\nController",
+        "Application Tier\\n(Iris Go Web Framework — Kubernetes Pods::User & Auth Service::Password Recovery\\nController",
+        "Application Tier\\n(Iris Go Web Framework — Kubernetes Pods::User & Auth Service::Profile Controller\\n(Avatar, Username,\\nBrowsing History",
+        "Application Tier\\n(Iris Go Web Framework — Kubernetes Pods::User & Auth Service::Notification Settings\\nController",
+        "Application Tier\\n(Iris Go Web Framework — Kubernetes Pods::Admin Service::Admin Auth Controller"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT user management module is split into authentication, recovery, profile, and settings controllers. The admin auth controller is also aligned with user/account management. Boundary placement is still within the backend application layer."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Caching",
+        "Data Layer::Read/Write Database",
+        "Data Layer::Storage"
+      ],
+      "predicted_nodes": [
+        "Data Tier\\n(MySQL via GORM::User & Auth DB\\n(Accounts, Profiles,\\nSessions, Browsing History,\\nNotification Settings",
+        "Data Tier\\n(MySQL via GORM::Community DB\\n(Posts, Comments,\\nReplies, Review Records,\\nSearch Index",
+        "Data Tier\\n(MySQL via GORM::Favorites DB\\n(Favorites Folders,\\nPost Links",
+        "Data Tier\\n(MySQL via GORM::Game DB\\n(Saves, Background Info,\\nGame State, Choices,\\nRandom Events",
+        "Data Tier\\n(MySQL via GORM::Notification DB\\n(Notifications,\\nRead/Unread Status",
+        "Data Tier\\n(MySQL via GORM::Admin & Governance DB\\n(Admin Accounts,\\nReport Feedback,\\nBan/Restore Status,\\nAudit Logs",
+        "Data Tier\\n(MySQL via GORM::Achievement DB\\n(Achievements, Currency,\\nItems, Rewards",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Persistent Volume\\n(Save Files,\\nAIGC Media Assets,\\nLocal Temp Saves"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT data layer is expanded into multiple domain databases plus persistent storage. This is a valid finer-grained decomposition and the boundaries remain data/storage related."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer::MySQL"
+      ],
+      "predicted_nodes": [
+        "Data Tier\\n(MySQL via GORM::User & Auth DB\\n(Accounts, Profiles,\\nSessions, Browsing History,\\nNotification Settings",
+        "Data Tier\\n(MySQL via GORM::Community DB\\n(Posts, Comments,\\nReplies, Review Records,\\nSearch Index",
+        "Data Tier\\n(MySQL via GORM::Favorites DB\\n(Favorites Folders,\\nPost Links",
+        "Data Tier\\n(MySQL via GORM::Game DB\\n(Saves, Background Info,\\nGame State, Choices,\\nRandom Events",
+        "Data Tier\\n(MySQL via GORM::Notification DB\\n(Notifications,\\nRead/Unread Status",
+        "Data Tier\\n(MySQL via GORM::Admin & Governance DB\\n(Admin Accounts,\\nReport Feedback,\\nBan/Restore Status,\\nAudit Logs",
+        "Data Tier\\n(MySQL via GORM::Achievement DB\\n(Achievements, Currency,\\nItems, Rewards"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT single MySQL database node is split into multiple MySQL-backed logical databases/tables. This is semantically consistent and correctly stays within the database boundary."
+    },
+    {
+      "gt_nodes": [
+        "Frontend UI Layer::TypeScript",
+        "Frontend UI Layer::Vite2",
+        "Frontend UI Layer::Vue3",
+        "Frontend UI Layer::element-plus"
+      ],
+      "predicted_nodes": [
+        "Client Tier\\n(Browser / Device::Nuxt.js / Vue.js\\nFrontend Application",
+        "Client Tier\\n(Browser / Device::Nuxt.js / Vue.js\\nFrontend Application::Admin UI\\n(User List, Post List,\\nReview, Ban/Restore",
+        "Client Tier\\n(Browser / Device::Nuxt.js / Vue.js\\nFrontend Application::Community UI\\n(Posts, Comments,\\nSearch, Recommendations",
+        "Client Tier\\n(Browser / Device::Nuxt.js / Vue.js\\nFrontend Application::Favorites UI\\n(Add, View, Remove",
+        "Client Tier\\n(Browser / Device::Nuxt.js / Vue.js\\nFrontend Application::Game UI\\n(New Game, Save, Choice,\\nBackground Setup, Tutorial",
+        "Client Tier\\n(Browser / Device::Nuxt.js / Vue.js\\nFrontend Application::Notification UI\\n(Unread, Read, Delete",
+        "Client Tier\\n(Browser / Device\\n::Nuxt.js / Vue.js\\nFrontend Application::User Profile UI\\n(Registration, Login,\\nProfile, Browsing History"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT frontend stack is represented as a Nuxt/Vue client tier with several UI slices. The prediction is a reasonable higher-level aggregation of the same frontend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Log Recording",
+        "Global::Permission Control"
+      ],
+      "predicted_nodes": [
+        "Application Tier\\n(Iris Go Web Framework — Kubernetes Pods::Observability & Security::Audit Logger\\n(Sensitive Operations\\n& System Events",
+        "Application Tier\\n(Iris Go Web Framework — Kubernetes Pods::Observability & Security::Encryption\\nService",
+        "Application Tier\\n(Iris Go Web Framework — Kubernetes Pods::Observability & Security::Health Monitor\\n& Fault Detector",
+        "API Gateway / Load Balancer::Auth Middleware\\n(Session / Token",
+        "API Gateway / Load Balancer::Rate Limiter\\n& Security Filter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Logging corresponds to audit logging/observability, and permission control corresponds to authentication/security middleware. The prediction refines the concern into implementation components without a severe boundary violation."
+    },
+    {
+      "gt_nodes": [
+        "Global::Permission Control"
+      ],
+      "predicted_nodes": [
+        "API Gateway / Load Balancer::Auth Middleware\\n(Session / Token",
+        "API Gateway / Load Balancer::Rate Limiter\\n& Security Filter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Permission control is implemented via gateway auth middleware and security filters, which is an acceptable placement in the request entry boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Presentation Layer::Ajax Interaction::GET Request",
+    "Presentation Layer::Ajax Interaction::POST Request"
+  ],
+  "unmatched_predicted_nodes": [
+    "API Gateway / Load Balancer::Reverse Proxy\\n& Load Balancer",
+    "Cloud / Data Center\\nProvider::CDN\\n(Static Assets",
+    "Cloud / Data Center\\nProvider::Email Service\\n(Verification Codes,\\nPassword Recovery",
+    "Cloud / Data Center\\nProvider::Object Storage\\n(Avatars, Game Screenshots,\\nAIGC Images, Sound Effects",
+    "Global::API Gateway / Load Balancer",
+    "Global::Application Tier\\n(Iris Go Web Framework — Kubernetes Pods",
+    "Global::Client Tier\\n(Browser / Device",
+    "Global::Cloud / Data Center\\nProvider",
+    "Global::Data Tier\\n(MySQL via GORM",
+    "Global::Deployment Infrastructure\\n(Docker + Kubernetes",
+    "Global::External AI / LLM Provider"
+  ]
+}

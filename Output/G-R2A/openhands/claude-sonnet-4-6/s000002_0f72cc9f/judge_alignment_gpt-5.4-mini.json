@@ -1,0 +1,306 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::<b><u>DATABASE</u></b>\\n\\n* MariaDB\\n  * Users\\n  * Likes\\n  * Photos\\n  * Comments",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Database\\n(MariaDB)\\nusers, likes,\\nphotos, comments"
+      ],
+      "reasoning": "The predicted database node captures the same persistent relational data responsibility, including MariaDB and the listed entities."
+    },
+    {
+      "gt_node": "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Web Client (Browser::React Application::App\\n(Shared Credential State\\n& Submission Handler",
+        "Web Client (Browser::React Application::Authentication Views::SignIn View\\n(Escape Signin",
+        "Web Client (Browser::React Application::Authentication Views::SignUp View\\n(Escape Signup",
+        "Web Client (Browser::React Application::Content Retrieval\\n(jQuery async / title-based",
+        "Web Client (Browser::React Application::Error Display",
+        "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Scene Components::Berlin",
+        "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Scene Components::Hack",
+        "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Scene Components::Lobby",
+        "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Scene Components::Louvre",
+        "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Scene Components::Milan",
+        "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Scene Components::Rome",
+        "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Scene Components::SF",
+        "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Support Components::Camera",
+        "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Support Components::Plane",
+        "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Support Components::Sky",
+        "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Support Components::TextPlane",
+        "Web Client (Browser::React-Router"
+      ],
+      "reasoning": "The predicted nodes decompose the web client into its authentication UI, shared client logic, content retrieval, error display, scene rendering, and routing responsibilities, matching the GT web client boundary and scope."
+    },
+    {
+      "gt_node": "Global::<b><u>WEB SERVER</u></b>\\n\\n* Node\\n* Express\\n* DigitalOcean (Deployment",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Web Server (Node.js / Express::Express Router\\n(Auth & Content Routes",
+        "Web Server (Node.js / Express::User Controller",
+        "Web Server (Node.js / Express::User Model",
+        "Web Server (Node.js / Express::bcrypt-nodejs\\n(Password Verification"
+      ],
+      "reasoning": "The predicted server-side nodes cover the Node/Express web server responsibilities, including routing, user handling, persistence access, and password verification. The deployment detail is partially represented by the server boundary but not explicitly by DigitalOcean."
+    },
+    {
+      "gt_node": "Global::<b>AWS S3</b>",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node explicitly represents the image storage service."
+    },
+    {
+      "gt_node": "Global::<b>REDIS CACHE</b>",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Cache\\n(Redis"
+      ],
+      "reasoning": "The predicted cache node directly corresponds to the Redis cache concept."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Global::Cache\\n(Redis",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b>REDIS CACHE</b>"
+      ],
+      "reasoning": "This is directly grounded in the GT Redis cache node."
+    },
+    {
+      "predicted_node": "Global::Database\\n(MariaDB)\\nusers, likes,\\nphotos, comments",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>DATABASE</u></b>\\n\\n* MariaDB\\n  * Users\\n  * Likes\\n  * Photos\\n  * Comments"
+      ],
+      "reasoning": "This corresponds to the GT database node and preserves the same MariaDB-backed entities."
+    },
+    {
+      "predicted_node": "Web Client (Browser::React Application::App\\n(Shared Credential State\\n& Submission Handler",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "reasoning": "The shared credential state and submission handler are core web client responsibilities implied by the GT client architecture and PRD."
+    },
+    {
+      "predicted_node": "Web Client (Browser::React Application::Authentication Views::SignIn View\\n(Escape Signin",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "reasoning": "This is a specific part of the GT web client covering the sign-in UI."
+    },
+    {
+      "predicted_node": "Web Client (Browser::React Application::Authentication Views::SignUp View\\n(Escape Signup",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "reasoning": "This is a specific part of the GT web client covering the sign-up UI."
+    },
+    {
+      "predicted_node": "Web Client (Browser::React Application::Content Retrieval\\n(jQuery async / title-based",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "reasoning": "Content retrieval is a documented client-side responsibility in the PRD and belongs within the web client."
+    },
+    {
+      "predicted_node": "Web Client (Browser::React Application::Error Display",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "reasoning": "Visible error indication for failed content retrieval is a client responsibility."
+    },
+    {
+      "predicted_node": "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Scene Components::Berlin",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "reasoning": "Berlin is one of the scene components explicitly required by the PRD."
+    },
+    {
+      "predicted_node": "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Scene Components::Hack",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "reasoning": "Hack is one of the scene components explicitly required by the PRD."
+    },
+    {
+      "predicted_node": "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Scene Components::Lobby",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "reasoning": "Lobby is one of the scene components explicitly required by the PRD."
+    },
+    {
+      "predicted_node": "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Scene Components::Louvre",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "reasoning": "Louvre is one of the scene components explicitly required by the PRD."
+    },
+    {
+      "predicted_node": "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Scene Components::Milan",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "reasoning": "Milan is one of the scene components explicitly required by the PRD."
+    },
+    {
+      "predicted_node": "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Scene Components::Rome",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "reasoning": "Rome is one of the scene components explicitly required by the PRD."
+    },
+    {
+      "predicted_node": "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Scene Components::SF",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "reasoning": "SF is one of the scene components explicitly required by the PRD."
+    },
+    {
+      "predicted_node": "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Support Components::Camera",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "reasoning": "Camera is one of the support components explicitly required by the PRD."
+    },
+    {
+      "predicted_node": "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Support Components::Plane",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "reasoning": "Plane is one of the support components explicitly required by the PRD."
+    },
+    {
+      "predicted_node": "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Support Components::Sky",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "reasoning": "Sky is one of the support components explicitly required by the PRD."
+    },
+    {
+      "predicted_node": "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Support Components::TextPlane",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "reasoning": "TextPlane is one of the support components explicitly required by the PRD."
+    },
+    {
+      "predicted_node": "Web Client (Browser::React-Router",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "reasoning": "React-Router is explicitly part of the GT web client stack."
+    },
+    {
+      "predicted_node": "Web Server (Node.js / Express::Express Router\\n(Auth & Content Routes",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB SERVER</u></b>\\n\\n* Node\\n* Express\\n* DigitalOcean (Deployment"
+      ],
+      "reasoning": "This is a direct grounding of the Express-style routing portion of the GT web server."
+    },
+    {
+      "predicted_node": "Web Server (Node.js / Express::User Controller",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB SERVER</u></b>\\n\\n* Node\\n* Express\\n* DigitalOcean (Deployment"
+      ],
+      "reasoning": "The user controller is a server-side concept aligned with the GT web server."
+    },
+    {
+      "predicted_node": "Web Server (Node.js / Express::User Model",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB SERVER</u></b>\\n\\n* Node\\n* Express\\n* DigitalOcean (Deployment",
+        "Global::<b><u>DATABASE</u></b>\\n\\n* MariaDB\\n  * Users\\n  * Likes\\n  * Photos\\n  * Comments"
+      ],
+      "reasoning": "The user model is grounded in the GT server/persistence architecture, though it is also tightly coupled to the database concept."
+    },
+    {
+      "predicted_node": "Web Server (Node.js / Express::bcrypt-nodejs\\n(Password Verification",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB SERVER</u></b>\\n\\n* Node\\n* Express\\n* DigitalOcean (Deployment"
+      ],
+      "reasoning": "Password verification using bcrypt-nodejs is explicitly required by the PRD and belongs in the server-side authentication flow."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::<b><u>DATABASE</u></b>\\n\\n* MariaDB\\n  * Users\\n  * Likes\\n  * Photos\\n  * Comments"
+      ],
+      "predicted_nodes": [
+        "Global::Database\\n(MariaDB)\\nusers, likes,\\nphotos, comments"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node preserves the same database boundary and entity set."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "predicted_nodes": [
+        "Web Client (Browser::React Application::App\\n(Shared Credential State\\n& Submission Handler",
+        "Web Client (Browser::React Application::Authentication Views::SignIn View\\n(Escape Signin",
+        "Web Client (Browser::React Application::Authentication Views::SignUp View\\n(Escape Signup",
+        "Web Client (Browser::React Application::Content Retrieval\\n(jQuery async / title-based",
+        "Web Client (Browser::React Application::Error Display",
+        "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Scene Components::Berlin",
+        "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Scene Components::Hack",
+        "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Scene Components::Lobby",
+        "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Scene Components::Louvre",
+        "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Scene Components::Milan",
+        "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Scene Components::Rome",
+        "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Scene Components::SF",
+        "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Support Components::Camera",
+        "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Support Components::Plane",
+        "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Support Components::Sky",
+        "Web Client (Browser::React Application::Scene Client (A-Frame / aframe-react::Support Components::TextPlane",
+        "Web Client (Browser::React-Router"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT web client node is decomposed into multiple client subcomponents, but they remain within the correct client/browser boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>WEB SERVER</u></b>\\n\\n* Node\\n* Express\\n* DigitalOcean (Deployment"
+      ],
+      "predicted_nodes": [
+        "Web Server (Node.js / Express::Express Router\\n(Auth & Content Routes",
+        "Web Server (Node.js / Express::User Controller",
+        "Web Server (Node.js / Express::User Model",
+        "Web Server (Node.js / Express::bcrypt-nodejs\\n(Password Verification"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT server node is split into server/router/controller/model/authentication subnodes, which are semantically aligned with the same backend boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::<b>AWS S3</b>"
+  ],
+  "unmatched_predicted_nodes": []
+}

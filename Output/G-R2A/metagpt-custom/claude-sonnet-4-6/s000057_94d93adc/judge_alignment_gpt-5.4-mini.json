@@ -1,0 +1,68 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Cloudinary\n- stores audio files\n- stores images\n- returns file URLs"
+      ],
+      "predicted_nodes": [
+        "External Media Layer::Cloudinary Media Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Cloudinary media storage integration responsible for storing audio/images and returning hosted URLs. The predicted boundary is semantically equivalent to the GT global Cloudinary node."
+    },
+    {
+      "gt_nodes": [
+        "Global::Express Server\n- fetches data with Sequelize\n- serves React frontend\n- handles backend API requests"
+      ],
+      "predicted_nodes": [
+        "API / Backend Layer\n(Node / Express Server::ExpressServer",
+        "API / Backend Layer\n(Node / Express Server::Backend Controllers::AuthController",
+        "API / Backend Layer\n(Node / Express Server::Backend Controllers::FeedController",
+        "API / Backend Layer\n(Node / Express Server::Backend Controllers::FollowController",
+        "API / Backend Layer\n(Node / Express Server::Backend Controllers::SoundController"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a coarse backend server node, while the predicted diagram splits it into server and controller subnodes. This is a valid decomposition of the same backend Express responsibility, and the boundary attribution remains consistent with the backend layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::PostgreSQL Database\n- stores users and sounds\n- stores Cloudinary URL references"
+      ],
+      "predicted_nodes": [
+        "Persistence Layer::PostgreSQLDatabase"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the PostgreSQL persistence layer that stores user/sound records and Cloudinary URL references. The predicted boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::React Frontend\n- Redux state management\n- uploads images and audio\n- controls and visualizes playback"
+      ],
+      "predicted_nodes": [
+        "Global::Browser Client",
+        "Browser Client::Presentation Layer::FormValidator",
+        "Browser Client::Presentation Layer::ImageUploadUI",
+        "Browser Client::Presentation Layer::ReactUI",
+        "Browser Client::Presentation Layer::WaveformPlayer",
+        "Browser Client::State Management Layer::ActionThunkLayer",
+        "Browser Client::State Management Layer::CloudinaryUploadClient",
+        "Browser Client::State Management Layer::FrontendConfigProvider",
+        "Browser Client::State Management Layer::PlaybackStateManager",
+        "Browser Client::State Management Layer::ReduxStore"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT frontend node is a high-level React frontend aggregate, while the predicted nodes correctly decompose it into presentation and state-management concerns. This aligns with the GT's React/Redux frontend boundary and does not indicate a boundary-crossing error."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::API / Backend Layer\n(Node / Express Server",
+    "Global::Browser Client",
+    "Global::External Media Layer",
+    "Global::Persistence Layer"
+  ]
+}

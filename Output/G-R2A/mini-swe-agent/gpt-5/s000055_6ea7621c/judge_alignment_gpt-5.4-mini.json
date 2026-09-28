@@ -1,0 +1,92 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "BACKEND::algorithm"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Autocomplete Service\\n(prefix match, limit 10"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the autocomplete/prefix-matching algorithm with result limiting. The AI uses a more descriptive application-layer label, which is semantically consistent with the backend algorithm boundary."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::handlers"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Home Page Handler\\n(GET /",
+        "Application Layer::Not Found Handler\\n(404 HTML",
+        "Application Layer::Static Asset Handler\\n(public assets, sets Content-Type"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT handler module is split into multiple handler responsibilities by the AI. This is a valid decomposition, and the application-layer attribution is consistent with the original backend handler role."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::data.json"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Laureate Data (JSON",
+        "Data Layer::Local Data Access\\n(JSON reader"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT local JSON data node is represented as data plus local data access components. This is semantically aligned with the backend data role and the data-layer boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::public assets\\nhtml\\ncss\\njs"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Static Asset Handler\\n(public assets, sets Content-Type"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node represents the public assets themselves, while the predicted node is a request handler for serving them. This is a boundary/function mismatch, not the same architectural component."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::XMLHttpRequest",
+        "FRONTEND::userInput"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Browser UI\\n(HTML/CSS/JS)\\n- Search Input\\n- Suggestions List"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT frontend input and browser-side request initiation are aggregated into a broader browser UI node. This is semantically consistent and correctly placed in the client/frontend boundary."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::index.html",
+        "FRONTEND::main.css"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Browser UI\\n(HTML/CSS/JS)\\n- Search Input\\n- Suggestions List"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT frontend presentation assets are merged into a single browser UI node. This is a reasonable aggregation within the client layer."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::Router"
+      ],
+      "predicted_nodes": [
+        "Web/HTTP Layer::HTTP Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT router is a distinct routing concern, while the predicted node is the broader HTTP server. This is too generic and conflates routing with the server boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Heroku (PaaS",
+    "Web/HTTP Layer::HTTP Server",
+    "Application Layer::Value Extraction Utility\\n(field values from objects"
+  ]
+}

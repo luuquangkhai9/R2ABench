@@ -1,0 +1,340 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Admin Mgmt Service"
+      ],
+      "predicted_nodes": [
+        "Application Server::Business Layer::AdminUserManagementService",
+        "Application Server::Business Layer::AdminOrderManagementService",
+        "Application Server::Business Layer::AdminProductManagementService",
+        "Application Server::Business Layer::AdminLogManagementService"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT's single admin management service is split into several admin-domain services in the prediction. The business-layer placement is consistent with the GT functional layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Help Goods Service"
+      ],
+      "predicted_nodes": [
+        "Application Server::Business Layer::ProductBrowsingService",
+        "Application Server::Business Layer::PopularityRankingModule"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT help goods service corresponds to product browsing/hot items functionality. The predicted components are a reasonable decomposition and remain in the business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Order Mgmt Service"
+      ],
+      "predicted_nodes": [
+        "Application Server::Business Layer::OrderService",
+        "Application Server::Business Layer::AdminOrderManagementService"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT order management service is represented by user order handling and admin order management services. Both are correctly placed in the business layer, though split more specifically."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Personal Center Service"
+      ],
+      "predicted_nodes": [
+        "Application Server::Business Layer::FavoritesService"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The prediction covers only one part of personal center functionality (favorites) and omits order records and other personal-center responsibilities. It is not a full semantic match."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Create Order Module"
+      ],
+      "predicted_nodes": [
+        "Application Server::Business Layer::OrderService"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The order creation module is semantically captured by the OrderService, and the business-layer attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Favorites Module"
+      ],
+      "predicted_nodes": [
+        "Application Server::Business Layer::FavoritesService"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct semantic match and the business-layer placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Goods Category Module"
+      ],
+      "predicted_nodes": [
+        "Application Server::Business Layer::ProductBrowsingService"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Category browsing is a product browsing concern; the business-layer placement is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Hot Items Module"
+      ],
+      "predicted_nodes": [
+        "Application Server::Business Layer::PopularityRankingModule"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Hot items corresponds to popularity ranking, and the business-layer placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Modify User Info Module"
+      ],
+      "predicted_nodes": [
+        "Application Server::Business Layer::AdminUserManagementService"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "User information modification is covered by admin user management functionality, and it is correctly placed in the business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Order Record Module"
+      ],
+      "predicted_nodes": [
+        "Application Server::Business Layer::OrderService"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Order record viewing is part of order-related business capability; the business-layer attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Platform Mgmt Module"
+      ],
+      "predicted_nodes": [
+        "Application Server::Business Layer::AdminProductManagementService",
+        "Application Server::Business Layer::AdminOrderManagementService",
+        "Application Server::Business Layer::AdminUserManagementService",
+        "Application Server::Business Layer::AdminLogManagementService"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Platform management is decomposed into admin product/order/user/log management services. This is a valid split within the business layer."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Custom Functions"
+      ],
+      "predicted_nodes": [
+        "Application Server::Data Layer::MonitoringMetricsStore"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT data-layer custom functions are generic database-side utilities, while the predicted monitoring store is a specific metrics persistence component. The semantic correspondence is weak and not reliable."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Backup"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No explicit backup component appears in the prediction."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Cache"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No explicit cache component appears in the prediction."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Recovery"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No explicit recovery component appears in the prediction."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Read/Write Database"
+      ],
+      "predicted_nodes": [
+        "Application Server::Data Layer::AdminLogRepository",
+        "Application Server::Data Layer::FavoritesRepository",
+        "Application Server::Data Layer::OrderRepository",
+        "Application Server::Data Layer::ProductRepository",
+        "Application Server::Data Layer::UserRepository"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The generic read/write database layer is decomposed into domain repositories. This is a reasonable and boundary-consistent split."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Stored Procedures"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No stored procedure equivalent is present in the prediction."
+    },
+    {
+      "gt_nodes": [
+        "Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Data Entity Layer::Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A generic database node reasonably corresponds to the GT MySQL database, and the data-entity layer attribution is consistent with the GT database boundary."
+    },
+    {
+      "gt_nodes": [
+        "Display Layer::GET Request"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No explicit GET request node is present."
+    },
+    {
+      "gt_nodes": [
+        "Display Layer::POST Request"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No explicit POST request node is present."
+    },
+    {
+      "gt_nodes": [
+        "Display Layer::Template Engine Rendering\\n(pages"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No template rendering node is present."
+    },
+    {
+      "gt_nodes": [
+        "Display Layer::wx.request Interaction"
+      ],
+      "predicted_nodes": [
+        "WeChat Mini Program Platform (WeChat 8.0+::Presentation Layer::WeChatMiniProgramUI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The UI interaction in the WeChat Mini Program presentation layer is the closest equivalent to wx.request-based client interaction, and the boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Log Recording"
+      ],
+      "predicted_nodes": [
+        "Application Server::Business Layer::MonitoringAndLogging",
+        "Application Server::Data Layer::AdminLogRepository"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Log recording is split into logging/monitoring behavior and log persistence. This split is semantically acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Global::Permission Control"
+      ],
+      "predicted_nodes": [
+        "Application Server::Business Layer::AuthenticationAuthorization"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Permission control matches authentication/authorization and is correctly placed in the business layer."
+    },
+    {
+      "gt_nodes": [
+        "Mini-program UI::JavaScript"
+      ],
+      "predicted_nodes": [
+        "WeChat Mini Program Platform (WeChat 8.0+::Presentation Layer::WeChatMiniProgramUI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted mini program UI maps to the front-end presentation layer, which is consistent with the GT mini-program UI boundary, though it does not separate JS specifically."
+    },
+    {
+      "gt_nodes": [
+        "Mini-program UI::Wxml"
+      ],
+      "predicted_nodes": [
+        "WeChat Mini Program Platform (WeChat 8.0+::Presentation Layer::WeChatMiniProgramUI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "WXML is part of the mini-program UI presentation stack, so the boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Mini-program UI::Wxss"
+      ],
+      "predicted_nodes": [
+        "WeChat Mini Program Platform (WeChat 8.0+::Presentation Layer::WeChatMiniProgramUI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "WXSS is part of the mini-program presentation/UI layer, so the boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Runtime Environment::MySQL 106.55.224.139\\n2 Cores 4GB"
+      ],
+      "predicted_nodes": [
+        "Data Entity Layer::Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a runtime/deployment environment specification, while the prediction is only a logical database entity layer. This is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Runtime Environment::Tencent Cloud\\nLightweight App Server"
+      ],
+      "predicted_nodes": [
+        "Global::Application Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node specifies a runtime environment/deployment target, but the prediction is a generic application server node. This loses the environment/deployment boundary and is not equivalent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Data Layer::Data Backup",
+    "Data Layer::Data Cache",
+    "Data Layer::Data Recovery",
+    "Data Layer::Stored Procedures",
+    "Display Layer::GET Request",
+    "Display Layer::POST Request",
+    "Display Layer::Template Engine Rendering\\n(pages"
+  ],
+  "unmatched_predicted_nodes": [
+    "Admin Web Browser::Presentation Layer::AdminBackendUI",
+    "Global::Admin Web Browser",
+    "Global::Monitoring/Logging Infrastructure",
+    "Global::WeChat Mini Program Platform (WeChat 8.0+",
+    "Application Server::Business Layer::DataReviewPrivacyControl",
+    "Application Server::Business Layer::SecurityBotDetection",
+    "Application Server::Data Layer::MonitoringMetricsStore"
+  ]
+}

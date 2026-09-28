@@ -1,0 +1,72 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "BACKEND::Router"
+      ],
+      "predicted_nodes": [
+        "Server Runtime (Node.js::Router Module::Request Router"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the request routing logic. The predicted node's boundary 'Server Runtime (Node.js::Router Module)' is a more specific but semantically equivalent version of the GT's 'BACKEND' boundary."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::algorithm"
+      ],
+      "predicted_nodes": [
+        "Server Runtime (Node.js::Search Algorithm::Autocomplete Module",
+        "Server Runtime (Node.js::Data Access::Laureate Data Module"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's general 'algorithm' node, which handles search and data extraction, is correctly split by the AI into a specific 'Autocomplete Module' (for FR-009) and a 'Laureate Data Module' (for FR-008). The boundaries are more detailed but correct sub-layers of the 'BACKEND'."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::data.json"
+      ],
+      "predicted_nodes": [
+        "Server Runtime (Node.js::Data Access::Local JSON Data"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the local JSON data source. The predicted node's boundary 'Server Runtime (Node.js::Data Access)' is a correct and semantically equivalent layer for the GT's 'BACKEND' boundary."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::handlers"
+      ],
+      "predicted_nodes": [
+        "Server Runtime (Node.js::Handler Module::Home Page Handler",
+        "Server Runtime (Node.js::Handler Module::Not-Found Handler",
+        "Server Runtime (Node.js::Handler Module::Static Asset Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly decomposed the single 'handlers' node from the GT into three specific handlers for home, not-found, and static assets, as described in the PRD. The 'Handler Module' boundary is a correct sub-layer within the 'BACKEND'."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::XMLHttpRequest",
+        "FRONTEND::index.html",
+        "FRONTEND::main.css",
+        "FRONTEND::userInput"
+      ],
+      "predicted_nodes": [
+        "Client Environment::Web Browser"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated all individual frontend components (UI, user interaction, and client-side requests) into a single logical entity, the 'Web Browser'. The 'Client Environment' boundary is semantically identical to the 'FRONTEND' boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "BACKEND::public assets\\nhtml\\ncss\\njs"
+  ],
+  "unmatched_predicted_nodes": [
+    "Deployment Environment::Heroku Platform",
+    "Server Runtime (Node.js::HTTP Server::HTTP Listener"
+  ]
+}

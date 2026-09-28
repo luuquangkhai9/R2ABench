@@ -1,0 +1,110 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::<b><u>DATABASE</u></b>\\n\\n* MariaDB\\n  * Users\\n  * Likes\\n  * Photos\\n  * Comments"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Database",
+        "Data Layer::Database::MariaDB Database",
+        "Data Layer::Database::MariaDB Database::Comments Table",
+        "Data Layer::Database::MariaDB Database::Likes Table",
+        "Data Layer::Database::MariaDB Database::Photos Table",
+        "Data Layer::Database::MariaDB Database::Users Table"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT database node is represented as a more detailed database subtree in the prediction. MariaDB and its tables Users/Likes/Photos/Comments are semantically equivalent to the GT database contents, and the Data Layer placement is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web Browser Client",
+        "Presentation Layer::Web Browser Client::React Application",
+        "Presentation Layer::Web Browser Client::React Application::Scene Renderer",
+        "Presentation Layer::Web Browser Client::React Application::Scene Renderer::A-Frame Components",
+        "Presentation Layer::Web Browser Client::React Application::Scene Renderer::aframe-react Components",
+        "Presentation Layer::Web Browser Client::React-Router",
+        "Presentation Layer::Web Browser Client::jQuery"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT web client corresponds to the predicted browser client subtree. React, React-Router, and A-Frame/aframe-react are all correctly placed under the presentation/client boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>WEB SERVER</u></b>\\n\\n* Node\\n* Express\\n* DigitalOcean (Deployment"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Node.js Web Server",
+        "Application Layer::Node.js Web Server::Authentication Service",
+        "Application Layer::Node.js Web Server::Authentication Service::bcrypt-nodejs Password Verifier",
+        "Application Layer::Node.js Web Server::Content Service",
+        "Application Layer::Node.js Web Server::Express HTTP Router",
+        "Application Layer::Node.js Web Server::User Controller"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The Node/Express web server concept is correctly identified, but the prediction shifts deployment infrastructure and server-side responsibilities into an application-layer hierarchy. While the web server part is semantically aligned, the boundary attribution is imperfect because the GT includes deployment context and the prediction omits it."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b>REDIS CACHE</b>"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Cache Service",
+        "Data Layer::Cache Service::Redis-style Cache"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Redis cache is correctly matched to a cache service in the data layer; the naming is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b>AWS S3</b>"
+      ],
+      "predicted_nodes": [
+        "External Systems::Image Storage Service",
+        "External Systems::Image Storage Service::AWS S3-style Storage"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "AWS S3 is correctly represented as an external image storage service, which matches the GT external storage boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Application Layer::Node.js Web Server::Authentication Service",
+    "Application Layer::Node.js Web Server::Authentication Service::bcrypt-nodejs Password Verifier",
+    "Application Layer::Node.js Web Server::Content Service",
+    "Application Layer::Node.js Web Server::Express HTTP Router",
+    "Application Layer::Node.js Web Server::User Controller",
+    "Data Layer::Cache Service",
+    "Data Layer::Cache Service::Redis-style Cache",
+    "Data Layer::Database",
+    "Data Layer::Database::MariaDB Database",
+    "Data Layer::Database::MariaDB Database::Comments Table",
+    "Data Layer::Database::MariaDB Database::Likes Table",
+    "Data Layer::Database::MariaDB Database::Photos Table",
+    "Data Layer::Database::MariaDB Database::Users Table",
+    "Data Layer::User Model Interface",
+    "External Systems::Content Source API",
+    "External Systems::Image Storage Service",
+    "External Systems::Image Storage Service::AWS S3-style Storage",
+    "Presentation Layer::Web Browser Client",
+    "Presentation Layer::Web Browser Client::React Application",
+    "Presentation Layer::Web Browser Client::React Application::Authentication Views",
+    "Presentation Layer::Web Browser Client::React Application::Authentication Views::Sign-in View",
+    "Presentation Layer::Web Browser Client::React Application::Authentication Views::Sign-up View",
+    "Presentation Layer::Web Browser Client::React Application::Content Retrieval Client",
+    "Presentation Layer::Web Browser Client::React Application::Error Display",
+    "Presentation Layer::Web Browser Client::React Application::Scene Renderer",
+    "Presentation Layer::Web Browser Client::React Application::Scene Renderer::A-Frame Components",
+    "Presentation Layer::Web Browser Client::React Application::Scene Renderer::aframe-react Components",
+    "Presentation Layer::Web Browser Client::React Application::Shared Credential Handler",
+    "Presentation Layer::Web Browser Client::React-Router",
+    "Presentation Layer::Web Browser Client::jQuery"
+  ]
+}

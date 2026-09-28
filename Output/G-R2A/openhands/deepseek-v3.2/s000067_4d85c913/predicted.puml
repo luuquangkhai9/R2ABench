@@ -1,0 +1,169 @@
+@startuml
+' TraceLeft System Architecture Diagram
+' Generated from SRS: Linux tracing framework with eBPF probes
+
+skinparam componentStyle rectangle
+skinparam backgroundColor #FFFFFF
+skinparam component {
+  BackgroundColor #F5F5F5
+  BorderColor #333333
+  FontSize 12
+}
+skinparam arrow {
+  Color #333333
+  FontColor #333333
+  FontSize, 11
+}
+skinparam node {
+  BackgroundColor #E8F4FD
+  BorderColor #0066CC
+  FontSize 11
+}
+
+title TraceLeft System Architecture
+
+' ===== Userspace Components =====
+package "Userspace" {
+  component "CLI Entry Point" as CLI {
+    - trace command
+    - command dispatcher
+  }
+  
+  component "Library" as LIB {
+    - eBPF probe installer
+    - handler loader
+    - event dispatcher
+  }
+  
+  component "Userspace Tracer" as UTRACER {
+    - perf event consumer
+    - event dispatcher
+    - common section parser
+  }
+  
+  component "Handler Generator" as GEN {
+    - configuration reader
+    - source code generator
+    - Proto/JSON parser
+  }
+  
+  database "Event Configuration\nMetadata" as CONFIG {
+    - position, type, name
+    - suffix, hash_func
+  }
+}
+
+' ===== Kernelspace Components =====
+package "Kernelspace" {
+  component "Main eBPF Program" as MAIN {
+    - kprobe hooks
+    - kretprobe hooks
+  }
+  
+  database "Handler Maps" as MAPS {
+    - handle_NAME_progs
+    - handle_NAME_progs_ret
+    - process context keys
+  }
+  
+  component "Handler eBPF Programs" as HANDLERS {
+    - syscall handlers
+    - file handlers
+    - network handlers
+    - default handlers
+    - process-specific handlers
+  }
+  
+  component "Perf-Based\nEvent Channel" as PERF {
+    - kernel-to-userspace
+    - event transport
+  }
+}
+
+' ===== External Systems =====
+node "Linux Kernel" as KERNEL {
+  - eBPF facilities
+  - kprobe/kretprobe
+  - traced processes
+}
+
+node "Traced Processes" as PROC {
+  - syscall activity
+  - file activity
+  - network activity
+}
+
+' ===== Relationships =====
+CLI --> LIB : "invokes trace\ncommand"
+LIB --> MAIN : "loads/attaches\nprobes"
+MAIN --> MAPS : "selects handlers\nvia process context"
+MAPS --> HANDLERS : "lookup by\nfunction name"
+HANDLERS --> PERF : "emits events\nwith common header"
+PERF --> UTRACER : "delivers events"
+UTRACER --> LIB : "dispatches events"
+KERNEL --> MAIN : "provides\nhook points"
+PROC --> KERNEL : "executes in\nkernel context"
+
+CONFIG --> GEN : "provides event\nmetadata"
+GEN --> HANDLERS : "generates\nsource code"
+
+' ===== Notes =====
+note top of CLI
+  FR-001: CLI entry point
+  FR-002: trace command
+end note
+
+note right of LIB
+  FR-003: Probe installation
+  FR-006: Handler loading
+end note
+
+note right of MAIN
+  FR-009: Handler naming scheme
+  Uses: handle_NAME_progs,
+  handle_NAME_progs_ret
+end note
+
+note bottom of HANDLERS
+  FR-007: No-op for missing handler
+  FR-008: Event delivery format
+  NFR-002: Event interoperability
+end note
+
+note left of UTRACER
+  DR-001: Common event section
+  DR-002: Perf event channel
+end note
+
+note right of GEN
+  FR-005: Configuration-driven generation
+  NFR-004: Configurability
+  DR-003: Event argument metadata
+end note
+
+note top of KERNEL
+  NFR-001: Linux kernel v4.11+
+  with eBPF, kprobe, kretprobe
+  C-001: Platform constraint
+  C-002: Kernel capability constraint
+end note
+
+note bottom of MAPS
+  Keyed by process context
+  Contains program references
+  Follows naming rules
+end note
+
+' ===== Legend =====
+legend right
+  | Component Type | Description |
+  | :--- | :--- |
+  | Component | Functional unit |
+  | Database/Persistent storage | |
+  | Node | External system |
+  | Package | Logical grouping |
+  | Arrow | Relationship/direction |
+  | Note | Requirement reference |
+end legend
+
+@enduml

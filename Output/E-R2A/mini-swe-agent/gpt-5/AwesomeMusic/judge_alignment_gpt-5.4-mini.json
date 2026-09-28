@@ -1,0 +1,152 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone::Nginx Cluster",
+        "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx1",
+        "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx2",
+        "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx3"
+      ],
+      "predicted_nodes": [
+        "Gateway_Layer::Nginx Reverse Proxy"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT explicitly models the Nginx cluster as multiple instances in the security boundary, while the prediction aggregates them into a single Nginx reverse proxy node. This is a reasonable semantic match, and the gateway/security placement is consistent with the GT security zone."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone::Spring Cloud Gateway",
+        "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway1",
+        "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway2",
+        "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway3"
+      ],
+      "predicted_nodes": [
+        "Gateway_Layer::Nginx Reverse Proxy"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node collapses the gateway/security boundary into a generic Nginx reverse proxy. While both are edge/gateway-related, Spring Cloud Gateway is a distinct application-layer gateway component in the GT, not the same as Nginx. This is a boundary/component confusion."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-web",
+        "Awesome Music System::Micro Service Layer::service-web::web1",
+        "Awesome Music System::Micro Service Layer::service-web::web2",
+        "Awesome Music System::Micro Service Layer::service-web::web3"
+      ],
+      "predicted_nodes": [
+        "Application_Layer_Golang_Gin::Web Backend API"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT web backend service is matched by the predicted web backend API. The prediction does not preserve the microservice instance granularity, but the functional component and backend application boundary are aligned."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-scheduler",
+        "Awesome Music System::Micro Service Layer::service-scheduler::scheduler1",
+        "Awesome Music System::Micro Service Layer::service-scheduler::scheduler2",
+        "Awesome Music System::Micro Service Layer::service-scheduler::scheduler3"
+      ],
+      "predicted_nodes": [
+        "Application_Layer_Golang_Gin::Scheduler and Task Orchestrator"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted scheduler/orchestrator corresponds to the GT scheduler microservice cluster. The aggregation is acceptable and the application-layer placement is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-auth",
+        "Awesome Music System::Micro Service Layer::service-auth::auth1",
+        "Awesome Music System::Micro Service Layer::service-auth::auth2",
+        "Awesome Music System::Micro Service Layer::service-auth::auth3"
+      ],
+      "predicted_nodes": [
+        "Application_Layer_Golang_Gin::Web Backend API"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "Authentication is a distinct backend microservice in the GT, but the prediction merges it into a generic web backend API node. This loses the service boundary and creates a context-level mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-discovery",
+        "Awesome Music System::Micro Service Layer::service-discovery::discovery1",
+        "Awesome Music System::Micro Service Layer::service-discovery::discovery2",
+        "Awesome Music System::Micro Service Layer::service-discovery::discovery3"
+      ],
+      "predicted_nodes": [
+        "Data_and_Infrastructure_Layer::etcd"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT service discovery cluster is semantically matched by etcd as the discovery/registry infrastructure. The naming differs, but the infrastructure boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::RabbitMQ"
+      ],
+      "predicted_nodes": [
+        "Data_and_Infrastructure_Layer::RabbitMQ"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "RabbitMQ is the same message queue component, and the infrastructure/data layer attribution is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::MySQL"
+      ],
+      "predicted_nodes": [
+        "Data_and_Infrastructure_Layer::Relational Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted relational database refers to the GT MySQL storage component. The naming is generalized, but the database/infrastructure boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::Redis"
+      ],
+      "predicted_nodes": [
+        "Data_and_Infrastructure_Layer::Relational Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Redis is an in-memory key-value store, not a relational database. Even though both are infrastructure/data components, the predicted type is materially incorrect."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::Prometheus"
+      ],
+      "predicted_nodes": [
+        "Data_and_Infrastructure_Layer::Hadoop HDFS"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Prometheus is monitoring/metrics infrastructure, while HDFS is distributed storage. These are not semantically equivalent and indicate an incorrect infrastructure mapping."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Awesome Music System::Infra Layer",
+    "Awesome Music System::Micro Service Layer",
+    "Awesome Music System::Security Critical Zone",
+    "Awesome Music System::Infra Layer::Prometheus",
+    "Awesome Music System::Security Critical Zone::Static Resource Server",
+    "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server1",
+    "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server2",
+    "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server3"
+  ],
+  "unmatched_predicted_nodes": [
+    "Algorithm_Layer::AI Music Generation Service\\n(midi-abc conversion, seed extraction, GPT-2 inference",
+    "Algorithm_Layer::Recommendation and Classification Service",
+    "Data_and_Infrastructure_Layer::Hadoop HDFS",
+    "Data_and_Infrastructure_Layer::RabbitMQ",
+    "Data_and_Infrastructure_Layer::Relational Database",
+    "Data_and_Infrastructure_Layer::etcd",
+    "Gateway_Layer::Nginx Reverse Proxy",
+    "Presentation_Layer::Web Frontend (SPA)\\nHTML/CSS/JS/Bootstrap"
+  ]
+}

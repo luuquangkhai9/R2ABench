@@ -1,0 +1,68 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::HTTP"
+      ],
+      "predicted_nodes": [
+        "Server Environment::Node.js Runtime::Server Layer::ExpressServer",
+        "Server Environment::Node.js Runtime::Server Layer::JSONBodyParser",
+        "Server Environment::Node.js Runtime::Server Layer::LoggingRouter",
+        "Server Environment::Node.js Runtime::Server Layer::StatusEndpoint",
+        "Server Environment::Node.js Runtime::Server Layer::StaticFileServer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT HTTP node represents the server-side HTTP handling surface, which is decomposed by the AI into Express, routing, parsing, static serving, and status handling components. The boundary attribution stays within the server environment and is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::HypnoLog\\nServer"
+      ],
+      "predicted_nodes": [
+        "Server Environment::Node.js Runtime",
+        "Global::Server Environment"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node denotes the overall HypnoLog server system, which the AI represented as the Node.js runtime/server environment. This is a coarse system-level match and the boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::In Browser Log"
+      ],
+      "predicted_nodes": [
+        "Browser Environment::Browser Client Layer::BrowserClient",
+        "Browser Environment::Browser Client Layer::SchemaValidator",
+        "Browser Environment::Browser Client Layer::VisualizerDispatcher",
+        "Browser Environment::Browser Client Layer::VisualizerModules",
+        "Browser Environment::Browser Client Layer::WindowManager",
+        "External Systems::WebBrowser",
+        "Global::Browser Environment"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node corresponds to browser-side log viewing/rendering behavior. The AI split it into browser client, validation, visualizer dispatch, window management, and visualizer modules, which is a reasonable functional decomposition. The browser environment boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::C#"
+      ],
+      "predicted_nodes": [
+        "External Systems::LoggingProducerClients"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node likely represents an external logging client language/environment. The predicted logging producer clients capture the same external producer role, and placing it under external systems is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Python"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::External Systems",
+    "Server Environment::Node.js Runtime::Server Layer::ClientConnectionManager",
+    "Server Environment::Node.js Runtime::Server Layer::ErrorMessageHandler",
+    "Server Environment::Node.js Runtime::Server Layer::SocketIOServer"
+  ]
+}

@@ -1,0 +1,179 @@
+@startuml
+!define RECTANGLE class
+skinparam componentStyle rectangle
+skinparam nodesep 10
+skinparam ranksep 20
+skinparam backgroundColor #FEFEFE
+skinparam classBackgroundColor #F5F5F5
+skinparam classBorderColor #333333
+skinparam arrowColor #333333
+
+title EasyLaTex System Architecture
+
+package "Client Layer" {
+  [Web Browser] as Browser
+  Browser : Modern Browser (Chrome, Firefox, Safari, Edge)
+  Browser : Supports WebSocket
+  Browser : Upload via Drag & Drop / File Select
+  Browser : Real-time Preview
+  Browser : Project/Group UI
+  Browser : Version Tree UI
+}
+
+package "API Gateway / Load Balancer" {
+  [API Gateway] as Gateway
+  Gateway : HTTP/REST API Endpoints
+  Gateway : Request Routing
+  Gateway : Authentication Filter
+  Gateway : Security (CSRF, XSS)
+  Gateway : Concurrent Request Handling
+}
+
+package "Application Service Layer" {
+  [User Service] as UserService
+  UserService : Registration (FR-005)
+  UserService : Authentication (FR-006)
+  UserService : Password Recovery (FR-007)
+  UserService : Account Management
+
+  [Project & Group Service] as ProjectService
+  ProjectService : Project CRUD (FR-008)
+  ProjectService : Group Management (FR-009)
+  ProjectService : Collaboration & Permissions (NFR-009)
+
+  [File Upload Service] as UploadService
+  UploadService : File Acceptance (FR-011)
+  UploadService : Type Validation (NFR-006)
+  UploadService : Storage Routing
+
+  [Version Control Service] as VersionService
+  VersionService : Version Tree (FR-010)
+  VersionService : Branching/Restoration
+  VersionService : Comments & Metadata
+
+  [LaTex Editing Service] as EditService
+  EditService : Code Editing (FR-012)
+  EditService : Real-time Sync
+
+  [Export Service] as ExportService
+  ExportService : PDF Generation (FR-014)
+  ExportService : LaTex Source Export
+  ExportService : Image Export (PNG/JPEG)
+}
+
+package "Core Processing Layer" {
+  [Recognition Orchestrator] as Recognizer
+  Recognizer : Input Format Router
+  Recognizer : Accuracy Management (NFR-001)
+
+  [Handwriting Recognition] as HWRecognizer
+  HWRecognizer : OCR & Deep Learning Models
+  HWRecognizer : Handwritten Formulas/Tables (FR-001)
+
+  [Image Recognition] as ImgRecognizer
+  ImgRecognizer : PNG, JPG, BMP (FR-002)
+  ImgRecognizer : Formula/Table Detection
+
+  [Document Parser] as DocParser
+  DocParser : PDF Parsing (FR-004)
+  DocParser : Content Extraction
+
+  [Structured Data Parser] as DataParser
+  DataParser : CSV/Excel Parsing (FR-003)
+  DataParser : Worksheet Handling
+
+  [LaTex Generator] as LatexGen
+  LatexGen : Code Synthesis
+  LatexGen : Structure Normalization
+
+  [LaTex Rendering Engine] as RenderEngine
+  RenderEngine : Real-time Preview (FR-013)
+  RenderEngine : Latency <2s (NFR-002)
+  RenderEngine : TeX Live / MiKTeX
+}
+
+package "Data Layer" {
+  database "Relational Database" as DB {
+    [User Accounts] as Users
+    Users : DR-001 (ID, Email, Encrypted PW)
+    [Groups] as Groups
+    Groups : DR-002 (ID, Name, Members)
+    [Projects & Versions] as Projects
+    Projects : DR-003 (ID, Files, Metadata)
+    [Version Comments] as Comments
+  }
+
+  [Object / File Storage] as FileStore
+  FileStore : Uploaded Files (DR-004)
+  FileStore : Images, PDFs, CSVs, Excel
+  FileStore : Generated Artifacts (DR-005)
+  FileStore : Exported PDFs/Images
+}
+
+package "External Systems / Dependencies" {
+  [AI/ML Model Server] as AIModel
+  AIModel : Recognition Models
+  AIModel : Accuracy >=90% (C-002)
+
+  [Email Service] as EmailService
+  EmailService : Password Recovery
+  EmailService : Notifications
+}
+
+' --- Connections ---
+
+Browser --> Gateway : HTTP/WebSocket (UI Requests, Real-time Updates)
+Gateway --> UserService : Auth & User API Calls
+Gateway --> ProjectService : Project/Group API Calls
+Gateway --> UploadService : File Uploads
+Gateway --> VersionService : Version Operations
+Gateway --> EditService : Edit Requests
+Gateway --> ExportService : Export Requests
+
+UploadService --> Recognizer : For Processing
+Recognizer --> HWRecognizer : Handwritten Input
+Recognizer --> ImgRecognizer : Image Input
+Recognizer --> DocParser : PDF Input
+Recognizer --> DataParser : CSV/Excel Input
+
+HWRecognizer --> LatexGen : Extracted Content
+ImgRecognizer --> LatexGen : Extracted Content
+DocParser --> LatexGen : Extracted Content
+DataParser --> LatexGen : Extracted Content
+
+LatexGen --> RenderEngine : LaTex Code for Preview
+EditService --> RenderEngine : Edited Code for Preview
+RenderEngine --> Browser : Rendered Preview Output
+ExportService --> RenderEngine : Code for Final Export
+
+UserService --> DB : CRUD Users
+ProjectService --> DB : CRUD Projects/Groups
+VersionService --> DB : CRUD Versions/Comments
+UploadService --> FileStore : Store Uploads
+ExportService --> FileStore : Store Exports
+Recognizer --> AIModel : Model Inference (Optional External)
+
+UserService --> EmailService : Trigger Recovery Email
+
+' --- Security & Non-Functional ---
+note top of Gateway
+  Security: Encryption (NFR-008),
+  SQL Injection/XSS/CSRF defenses (NFR-010)
+end note
+
+note right of RenderEngine
+  Performance: Render <2s (NFR-002),
+  Operation <2s (NFR-003)
+end note
+
+note left of DB
+  Data: GDPR/Privacy (C-012),
+  Encrypted Storage
+end note
+
+note bottom of Recognizer
+  Compatibility: Input Formats (NFR-006),
+  Output compatible with Overleaf/TeXstudio (NFR-007)
+end note
+
+@enduml

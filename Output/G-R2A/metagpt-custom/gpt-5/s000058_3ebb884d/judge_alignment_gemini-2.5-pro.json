@@ -1,0 +1,79 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::AWS EventBridge"
+      ],
+      "predicted_nodes": [
+        "Integration Layer::AWS::AWS EventBridge",
+        "Integration Layer::Event Routing Ruleset",
+        "Integration Layer::AWS::Project Runtime Service (Event Producer)"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly decomposed the single EventBridge infrastructure node from the GT into the service itself, the filtering rules that govern it, and the service that produces the events, all described in the PRD (FR-003, DR-003). Placing these components in the 'Integration Layer' is a semantically correct architectural abstraction."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::SNS Topic\\nalerts"
+      ],
+      "predicted_nodes": [
+        "Integration Layer::AWS::AWS SNS",
+        "Integration Layer::AWS::SNS Notification Topic"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the specific SNS topic for alerts and also included its parent service, AWS SNS. The GT's boundary 'AWS Cloud\\nConnector Account::SNS Topic' is semantically equivalent to the AI's 'Integration Layer::AWS' for this external service interaction."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::Chat notification",
+        "AWS Cloud\\nConnector Account::Email notification",
+        "AWS Cloud\\nConnector Account::Slack notification"
+      ],
+      "predicted_nodes": [
+        "Integration Layer::Email Subscriber Endpoint",
+        "Integration Layer::Webhook Subscriber Endpoint"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly generalized the specific notification channels from the GT into abstract subscriber endpoints (Email and Webhook, the latter covering chat/Slack). Placing these in the 'Integration Layer' is appropriate as they represent external system interfaces."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::connector::Private subnet::AWS Fargate\\nKafka Connect Cluster"
+      ],
+      "predicted_nodes": [
+        "Application Services Layer::ConnectorConfig Handler",
+        "Integration Layer::Connector Management Adapter",
+        "Integration Layer::Connector Management Library (External)"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI abstracted the physical deployment node from the GT (Fargate/Kafka Cluster) into its logical functions described in the PRD (FR-002): a handler in the application layer and adapters in the integration layer. This is a valid and standard architectural transformation from a physical to a logical view."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "AWS Cloud\\nAppian Source::VPC::Appian\\nOracle DB",
+    "AWS Cloud\\nConnector Account::VPC::CMS BigMAC",
+    "AWS Cloud\\nConnector Account::VPC::topics::Private subnet::AWS Lambda\\ncreate/delete topics",
+    "Global::VPC peering\\nconnection"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application Services Layer::DeploymentMetrics Collector",
+    "Application Services Layer::PRMergeMetrics Collector",
+    "Application Services Layer::StageListing Procedure",
+    "Configuration/Environment Layer::AWS Account/Region Context",
+    "Configuration/Environment Layer::Connector Configuration Inputs (Env/Files",
+    "Integration Layer::AWS CLI",
+    "Integration Layer::Connector Management Library (External",
+    "Integration Layer::GitHub API Pagination Aggregator",
+    "Integration Layer::GitHub::GitHub Actions",
+    "Integration Layer::GitHub::GitHub Actions API",
+    "Integration Layer::GitHub::GitHub Pull Requests API",
+    "Interface Layer::GitHub Actions Workflows (deploy.yml",
+    "Interface Layer::Manual Subscription Administration Surface",
+    "Interface Layer::Onboarding and Credential Setup",
+    "Interface Layer::Terminal/Script Interface"
+  ]
+}

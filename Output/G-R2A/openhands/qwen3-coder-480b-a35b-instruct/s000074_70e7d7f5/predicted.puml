@@ -1,0 +1,91 @@
+@startuml
+!define RECTANGLE class
+
+'RECTANGLE TengineLite {
+'  - Inference engine for neural networks
+'  - Cross-platform support
+'  - Lightweight design
+'}
+
+RECTANGLE CoreModules {
+  RECTANGLE DeviceModule {
+    - NN Operators backend
+  }
+  
+  RECTANGLE SchedulerModule {
+    - Scheduling NNIR execution
+    - Managing computation graphs
+    - Hardware resource allocation
+    - Model serializer coordination
+  }
+  
+  RECTANGLE OperatorModule {
+    - Registering NN Operators
+    - Initializing NN Operators
+  }
+  
+  RECTANGLE SerializerModule {
+    - Decoding binary tmfile models
+    - Producing serialized model parameters
+  }
+}
+
+RECTANGLE APILayer {
+  RECTANGLE CAPI {
+    - Original Tengine-compatible interface
+    - Primary integration path
+  }
+  
+  RECTANGLE CppAPI {
+    - C++ documentation entry points
+  }
+  
+  RECTANGLE PythonAPI {
+    - Python documentation entry points
+  }
+}
+
+RECTANGLE ExampleApplications {
+  - Classification (MobileNet v1)
+  - Facial Landmark Detection
+  - SSD Object Detection
+  - RetinaFace Face Detection
+  - Yolact Instance Segmentation
+  - U-Net Image Segmentation
+  - YoloV3/YoloV4-tiny/YoloV5s
+  - NanoDet
+  - EfficientDet
+  - OpenPose
+  - HRNet
+  - CRNN Chinese Character Recognition
+}
+
+RECTANGLE ModelConversion {
+  RECTANGLE LinuxConverter {
+    - Pre-compiled tool
+    - Linux-only execution
+  }
+  
+  RECTANGLE BrowserConverter {
+    - WebAssembly-based
+    - Local execution in browser
+    - No data upload guarantee
+  }
+}
+
+CoreModules --> APILayer : Exposes functionality
+APILayer --> ExampleApplications : Enables examples
+SerializerModule --> ModelConversion : Supports conversion
+ModelConversion --> ExampleApplications : Supplies models
+
+note top of CoreModules : Four core architectural modules\nform the foundation
+
+note right of APILayer : Three API surfaces provide\nintegration paths
+
+note right of ModelConversion : Dual conversion approaches\nensure broad compatibility
+
+note bottom of ExampleApplications : Comprehensive example set\ndemonstrates capabilities
+
+title Tengine Lite System Architecture
+
+@enduml

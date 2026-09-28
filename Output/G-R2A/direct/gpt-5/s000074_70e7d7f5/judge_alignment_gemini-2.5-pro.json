@@ -1,0 +1,110 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Tengine Lite::Convert Tool::Caffe",
+        "Tengine Lite::Convert Tool::Darknet",
+        "Tengine Lite::Convert Tool::MXNet",
+        "Tengine Lite::Convert Tool::MegEngine",
+        "Tengine Lite::Convert Tool::OneFlow",
+        "Tengine Lite::Convert Tool::Others",
+        "Tengine Lite::Convert Tool::PaddlePaddle",
+        "Tengine Lite::Convert Tool::PyTorch / ONNX",
+        "Tengine Lite::Convert Tool::TF Lite",
+        "Tengine Lite::Convert Tool::TensorFlow"
+      ],
+      "predicted_nodes": [
+        "Linux Environment::Model Converter (CLI",
+        "Web Browser (WebAssembly::Online Converter (WASM"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": false,
+      "reasoning": "The GT details conversion tools by framework under the Tengine Lite component boundary, while the AI aggregates them into environment-specific converters and crosses the boundary by placing them under environment boundaries instead of the system component."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Engine::CPU Backend",
+        "Tengine Lite::Engine::GPU Backend",
+        "Tengine Lite::Engine::NPU Backend"
+      ],
+      "predicted_nodes": [
+        "Tengine Lite Library::Core Modules::Device Backend"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregates the specific hardware backends into a single Device Backend node. The boundary 'Tengine Lite Library::Core Modules' is semantically consistent with 'Tengine Lite::Engine'."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Engine::Exec Scheduler",
+        "Tengine Lite::Engine::Graph Partition"
+      ],
+      "predicted_nodes": [
+        "Tengine Lite Library::Core Modules::Scheduler"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI groups execution scheduling and graph partitioning into the Scheduler core module, matching the PRD description. Boundaries are semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Serializer::Caffe Serializer",
+        "Tengine Lite::Serializer::Darknet Serializer",
+        "Tengine Lite::Serializer::MLIR Serializer",
+        "Tengine Lite::Serializer::MXNet Serializer",
+        "Tengine Lite::Serializer::MegEngine Serializer",
+        "Tengine Lite::Serializer::ONNX Serializer",
+        "Tengine Lite::Serializer::OneFlow Serializer",
+        "Tengine Lite::Serializer::Others Serializer",
+        "Tengine Lite::Serializer::PaddlePaddle Serializer",
+        "Tengine Lite::Serializer::TF Lite Serializer",
+        "Tengine Lite::Serializer::TensorFlow Serializer",
+        "Tengine Lite::Serializer::ncnn Serializer",
+        "Tengine Lite::Serializer::tmfile Serializer"
+      ],
+      "predicted_nodes": [
+        "Tengine Lite Library::Core Modules::Serializer (tmfile"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "GT specifies individual serializers for multiple frameworks, while AI provides a single aggregated serializer node focusing on tmfile. The boundary attribution is consistent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Tengine Lite::Engine::Device Allocator",
+    "Tengine Lite::Engine::Low Bit Quantize",
+    "Tengine Lite::Runtime Optimize::ARM / X86 / RISCV / MIPS",
+    "Tengine Lite::Runtime Optimize::Amlogic / RK / NXP / JLQ\nNPU and NVDLA",
+    "Tengine Lite::Runtime Optimize::Assembly",
+    "Tengine Lite::Runtime Optimize::Auto Kernel Plugin",
+    "Tengine Lite::Runtime Optimize::CUDA / Vulkan / OpenCL",
+    "Tengine Lite::Runtime Optimize::Mix Bit Calculation",
+    "Tengine Lite::Runtime Optimize::NVIDIA / Mali / Adreno",
+    "Tengine Lite::Runtime Optimize::SGEMM",
+    "Tengine Lite::Runtime Optimize::SIMD",
+    "Tengine Lite::Runtime Optimize::TIM-VX / OpenDLA Plugin",
+    "Tengine Lite::Runtime Optimize::TensorRT / ACL Plugin",
+    "Tengine Lite::Runtime Optimize::Winograd"
+  ],
+  "unmatched_predicted_nodes": [
+    "Example Applications::Classification (MobileNet v1 via C API",
+    "Example Applications::Detections (SSD, RetinaFace, YoloV3/V4-tiny/V5s,\nNanoDet, EfficientDet",
+    "Example Applications::OCR (CRNN - Chinese",
+    "Example Applications::Pose (OpenPose, HRNet",
+    "Example Applications::Segmentations (Yolact, U-Net",
+    "Global::C API Integrators",
+    "Global::C++ API Users",
+    "Global::CMake-based Build System",
+    "Global::Example Users",
+    "Global::Linux Environment",
+    "Global::Local Image Files (project root",
+    "Global::Local Model Files (project root",
+    "Global::Python API Users",
+    "Global::Tool Users",
+    "Global::Web Browser (WebAssembly",
+    "Tengine Lite Library::C API",
+    "Tengine Lite Library::C++ API Docs Entry",
+    "Tengine Lite Library::Core Modules::Operator Module",
+    "Tengine Lite Library::Python API Docs Entry"
+  ]
+}

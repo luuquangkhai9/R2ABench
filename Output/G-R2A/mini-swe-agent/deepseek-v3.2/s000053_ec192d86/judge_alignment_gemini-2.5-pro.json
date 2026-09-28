@@ -1,0 +1,102 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "cadctl::CHGM investigation",
+        "cadctl::CPD investigation",
+        "cadctl::Future investigations",
+        "cadctl::switch(alerttype"
+      ],
+      "predicted_nodes": [
+        "Application Layer::CAD CLI (cadctl",
+        "Application Layer::CAD CLI (cadctl::Anomaly Detection Engine",
+        "Application Layer::CAD CLI (cadctl::CHGM Workflow Handler",
+        "Application Layer::CAD CLI (cadctl::Mitigation Disposition"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The GT nodes represent specific internal workflows of the `cadctl` tool. The AI has correctly aggregated these into a parent `cadctl` component and its primary functional sub-modules (CHGM, Anomaly Detection, Mitigation). The boundary 'Application Layer' is a more formal and appropriate architectural layer than the component-as-boundary 'cadctl' used in the GT."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton\nEvent\nListener"
+      ],
+      "predicted_nodes": [
+        "Execution Layer::Tekton EventListener"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct 1:1 match for a key component mentioned in the PRD. The AI correctly places it in an 'Execution Layer', which is more specific and semantically correct than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Alert Source::app-sre\\nalertmanager",
+        "Alert Source::cluster\\nalertmanager",
+        "Alert Source::deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Systems::Alert Webhook Source"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregates the specific alert source examples from the GT into a single, generalized 'Alert Webhook Source' node. The 'External Systems' boundary is semantically equivalent to the GT's 'Alert Source' boundary."
+    },
+    {
+      "gt_nodes": [
+        "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster",
+        "PagerDuty Team::app-sre-alertmanager",
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty System"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT nodes list specific recipients or configurations within PagerDuty. The AI correctly abstracts this to represent the entire 'PagerDuty System' as a single external entity. The 'External Systems' boundary is a correct generalization of the GT's 'PagerDuty Team' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Escalate alert to\\non-call SRE"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Integration Library::PagerDuty Integration"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node describes a specific action ('Escalate alert'), which is a function of the system. The AI has correctly mapped this function to the component that implements it, the 'PagerDuty Integration' library, as specified in the PRD. The 'Application Layer' is the correct location for this integration component."
+    },
+    {
+      "gt_nodes": [
+        "Alerts::CHGM",
+        "Alerts::CPD",
+        "Alerts::all cluster\\nalerts"
+      ],
+      "predicted_nodes": [
+        "Data/Artifacts::Alert Payloads"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT nodes represent conceptual alert types or events. The AI maps these to the concrete data artifact, the 'Alert Payloads', that would represent them in the system. The 'Data/Artifacts' boundary is a reasonable and semantically valid grouping for this kind of entity, similar to the GT's 'Alerts' boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?",
+    "Global::Update Incident\\nNotes"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application Layer::Integration Library",
+    "Application Layer::Integration Library::AWS Integration",
+    "Application Layer::Integration Library::OCM Integration",
+    "Application Layer::Template Update Utility",
+    "Data/Artifacts::Deployment Templates",
+    "Data/Artifacts::PipelineRun Manifests",
+    "Execution Layer::CAD Checks Pipeline",
+    "Execution Layer::Tekton PipelineRun",
+    "Execution Layer::Tekton Trigger",
+    "External Systems::AWS Cloud Services",
+    "External Systems::OpenShift Cluster Manager",
+    "User Layer::Deployment Engineer",
+    "User Layer::Developer/Contributor",
+    "User Layer::SRE/Operations User"
+  ]
+}

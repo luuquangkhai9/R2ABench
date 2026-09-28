@@ -1,0 +1,107 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Scala Driver for Lucene\\nAnalyzer, Word-counter, FST dictionary"
+      ],
+      "predicted_nodes": [
+        "Global::NLP4L System\\n(Scala / Apache Lucene Ecosystem"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the overall Scala-based NLP4L system entrypoint/driver layer that orchestrates Lucene-based NLP functions, including analyzer access and word-count related processing. The predicted node is broader, but semantically aligns with the GT global driver."
+    },
+    {
+      "gt_nodes": [
+        "Global::Scala High Level API\\nfor convenience in text mining and stats"
+      ],
+      "predicted_nodes": [
+        "Global::NLP4L System\\n(Scala / Apache Lucene Ecosystem"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node is a broad system boundary that subsumes the GT high-level convenience API for text mining and statistics. This is semantically consistent at the global level."
+    },
+    {
+      "gt_nodes": [
+        "Lucene Layer::Apache Lucene API"
+      ],
+      "predicted_nodes": [
+        "Apache Lucene 5.2.0\\n(External Ecosystem::Lucene Analyzers",
+        "Apache Lucene 5.2.0\\n(External Ecosystem::Lucene Index Store",
+        "Apache Lucene 5.2.0\\n(External Ecosystem::Lucene Query Engine"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT abstract Lucene API node has been split into more specific Lucene ecosystem components: analyzers, index storage, and query engine. This is a valid refinement and the external ecosystem boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Lucene Layer::Index"
+      ],
+      "predicted_nodes": [
+        "Apache Lucene 5.2.0\\n(External Ecosystem::Lucene Index Store",
+        "NLP4L System\\n(Scala / Apache Lucene Ecosystem::Lucene Integration Layer::LuceneIndexReader"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Lucene index node is represented by the external index store plus the reader component that accesses it. This split is semantically consistent and the boundary attribution remains within Lucene/system integration context."
+    },
+    {
+      "gt_nodes": [
+        "NLP4L User Interfaces and Integrations::Applications"
+      ],
+      "predicted_nodes": [
+        "Global::NLP4L System\\n(Scala / Apache Lucene Ecosystem"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node refers to application-level integrations, whereas the predicted node collapses it into the whole system boundary, losing the specific integration/application boundary. This is too coarse and crosses the intended architectural boundary."
+    },
+    {
+      "gt_nodes": [
+        "NLP4L User Interfaces and Integrations::File based\\nMahout/Spark\\nconnector"
+      ],
+      "predicted_nodes": [
+        "LIBSVM-Compatible ML Tool Ecosystem\\n(External Consumers::LIBSVM-Compatible\\nML Tools",
+        "NLP4L System\\n(Scala / Apache Lucene Ecosystem::Export Layer::LIBSVMWriter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT file-based Mahout/Spark connector is functionally represented by the export writer plus the external ML tool consumers. Although terminology differs, the ML interchange/export role is preserved and the boundary split is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "NLP4L User Interfaces and Integrations::Index Schema\\nBrowser (GUI/CUI"
+      ],
+      "predicted_nodes": [
+        "NLP4L System\\n(Scala / Apache Lucene Ecosystem::Schema Configuration Layer::SchemaLoader\\n<<classpath resource | file path>>",
+        "NLP4L System\\n(Scala / Apache Lucene Ecosystem::Schema Configuration Layer::SchemaModel\\n(In-Memory Representation)\\n+ Custom Analyzer Definitions",
+        "NLP4L System\\n(Scala / Apache Lucene Ecosystem::Schema Configuration Layer::SchemaParser",
+        "NLP4L System\\n(Scala / Apache Lucene Ecosystem::Schema Configuration Layer::SchemaValidator\\n<<error reporting>>"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT schema browser/interface node is represented by the schema loading, parsing, modeling, and validation components. This is a detailed decomposition of the same schema-related capability and remains within the correct schema configuration boundary."
+    },
+    {
+      "gt_nodes": [
+        "NLP4L User Interfaces and Integrations::Interactive Shell\\nfor NLP4L (REPL"
+      ],
+      "predicted_nodes": [
+        "NLP4L System\\n(Scala / Apache Lucene Ecosystem::Interactive Interface Layer::ScalaInteractiveShell\\n<<interaction context>>"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes describe the interactive Scala REPL/shell used for ad hoc NLP4L processing. The boundary attribution is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::LIBSVM Output File\\n<<file artifact>>",
+    "NLP4L System\\n(Scala / Apache Lucene Ecosystem::NLP Processing Layer::DocumentVectorBuilder",
+    "NLP4L System\\n(Scala / Apache Lucene Ecosystem::NLP Processing Layer::SearchResultCollector",
+    "NLP4L System\\n(Scala / Apache Lucene Ecosystem::Presentation Layer\\n[experimental::ChartDisplay\\n<<experimental>>",
+    "NLP4L System\\n(Scala / Apache Lucene Ecosystem::Presentation Layer\\n[experimental::WordCountDataInput\\n<<user-supplied input>>"
+  ]
+}

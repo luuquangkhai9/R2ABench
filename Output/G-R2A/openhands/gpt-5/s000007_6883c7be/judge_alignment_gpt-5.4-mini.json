@@ -1,0 +1,138 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "CGI Portal::Http Test\nClient"
+      ],
+      "predicted_nodes": [
+        "Test Utilities::Test Client\n(Async HTTP Client,\nFixed Thread Pool"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the bundled asynchronous HTTP test client workload used for request generation and success counting. The predicted boundary is a reasonable semantic equivalent of the GT CGI portal area for test tooling."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Download"
+      ],
+      "predicted_nodes": [
+        "Test Utilities::Test Server (Grizzly/Jersey::Download Handler\nGET /download"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both represent download-file handling for GET /download, but the GT places this capability inside the proxy plugin layer while the prediction moves it to the test server boundary. That is a significant architectural boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Upload"
+      ],
+      "predicted_nodes": [
+        "Test Utilities::Test Server (Grizzly/Jersey::Upload Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both are about file upload handling / returning a filepath map payload, but the GT places it in the proxy plugin layer and the prediction assigns it to the test server boundary. This is a boundary placement error."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Proxy Core"
+      ],
+      "predicted_nodes": [
+        "Proxy Path::HTTP Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These are semantically the same core proxy forwarding component. The predicted boundary 'Proxy Path' is an acceptable equivalent to the GT proxy layer."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Logging"
+      ],
+      "predicted_nodes": [
+        "Proxy Path::HTTP Proxy"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted HTTP Proxy node appears to aggregate proxy behavior, but there is no distinct logging node in the prediction. Logging functionality is omitted rather than faithfully represented as a separate node."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Mock"
+      ],
+      "predicted_nodes": [
+        "Proxy Path::Upstream Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "A mock plugin in the GT is not equivalent to an upstream server node. The prediction shifts from a test/mock utility into a real upstream server boundary, which is a functional mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Agent"
+      ],
+      "predicted_nodes": [
+        "Proxy Path::HTTP Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The agent plugin is plausibly represented by an HTTP client-facing component used to initiate or drive requests. The boundary shift from plugin to proxy path is acceptable at this abstraction level."
+    },
+    {
+      "gt_nodes": [
+        "CGI Portal::Service\nManager"
+      ],
+      "predicted_nodes": [
+        "Test Utilities::Test Server (Grizzly/Jersey::Response API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT service manager is a general portal management component, while the predicted response API is a structured response data endpoint. These are not semantically equivalent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer\\nKeepalived(VIP::Openresty",
+    "Business Servers::......",
+    "Business Servers::Business Server A",
+    "Business Servers::Business Server B",
+    "Business Servers::Business Server C",
+    "CGI Portal::Appkey\\nManager",
+    "CGI Portal::CGI Manager",
+    "CGI Portal::Case Manager",
+    "CGI Portal::Document\\nGenerate",
+    "CGI Portal::Log & Tree\\ninquire",
+    "CGI Portal::Metrics &\\nReport",
+    "Clients::APP Client",
+    "Clients::Business Server",
+    "Clients::Developer",
+    "Clients::Web Client",
+    "Global::Log consumer",
+    "Proxy Layer::cgi_proxy 1::Appkey\\nValidate",
+    "Proxy Layer::cgi_proxy 1::Formatter",
+    "Proxy Layer::cgi_proxy 1::Global Limit",
+    "Proxy Layer::cgi_proxy 1::Login &\\nPermission",
+    "Proxy Layer::cgi_proxy 1::Plugin::Attach Check",
+    "Proxy Layer::cgi_proxy 1::Plugin::Check\\nParameter",
+    "Proxy Layer::cgi_proxy 1::Plugin::Download",
+    "Proxy Layer::cgi_proxy 1::Plugin::Mock",
+    "Proxy Layer::cgi_proxy 1::Plugin::Upload",
+    "Proxy Layer::cgi_proxy 2",
+    "Support Platform::Data Bank\\nHDFS/Hbase/Druid",
+    "Support Platform::Msg Center\\nKafka",
+    "Support Platform::Mysql",
+    "Support Platform::Permission\\nCenter",
+    "Support Platform::Redis Cache",
+    "Support Platform::User Center",
+    "Task Scheduler::CGI Case\\nExecutor",
+    "Task Scheduler::CGI Health\\nCheck",
+    "Task Scheduler::Daily Report",
+    "Task Scheduler::Log Analysis",
+    "Task Scheduler::Monitor/Alarm"
+  ],
+  "unmatched_predicted_nodes": [
+    "Proxy Path::HTTP Client",
+    "Proxy Path::Upstream Server",
+    "Test Utilities::Test Server (Grizzly/Jersey::Download Handler\\nGET /download",
+    "Test Utilities::Test Server (Grizzly/Jersey::Response API",
+    "Test Utilities::Test Server (Grizzly/Jersey::Upload Handler"
+  ]
+}

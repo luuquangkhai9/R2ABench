@@ -1,0 +1,110 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Message Passing API\\nTag Matching, Rendezvous"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem::Send State Machine",
+        "Communication Subsystem::Flow Control"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node for Rendezvous protocol in UCX is functionally equivalent to the AI's more detailed breakdown of the 'Send State Machine' and its 'Flow Control' mechanism, which the PRD specifies as handling rendezvous packets. The boundaries ('UCX::UCP...' vs. 'Communication Subsystem') represent different systems but are analogous architectural layers."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCS Services\\nCommon Utilities::Data Structures",
+        "UCX::UCS Services\\nCommon Utilities::Memory Management",
+        "Drivers and Kernels::OS Kernel\\nHost Memory"
+      ],
+      "predicted_nodes": [
+        "Data Handling::Packet Buffer",
+        "Data Handling::Pinned User Data",
+        "Data Handling::Data Descriptor (DD",
+        "Data Handling::Direct Access Handler",
+        "Data Handling::Packet Buffer Packer"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT nodes for generic memory and data structure services are a good match for the specific data handling components the AI extracted from the PRD. The AI correctly identified and grouped the concrete data entities like 'Packet Buffer' and 'Pinned User Data' which are managed by such services. The 'Data Handling' boundary is semantically equivalent to the group of GT boundaries."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCT Hardware Transports\\nLow Level API::RDMA Verbs Transport\\nInfiniBand, ROCE, OPA"
+      ],
+      "predicted_nodes": [
+        "Embedded Libfabric Verbs Provider::Verbs Transport",
+        "External Network Modules::OFI/libfabric"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's RDMA Verbs Transport within the UCX context is functionally equivalent to the Libfabric-based verbs transport described in the PRD, which the AI correctly identified. The AI's nodes represent the specific framework ('OFI/libfabric') and the transport implementation ('Verbs Transport') mentioned. The boundaries are different but logically consistent with the systems they model."
+    },
+    {
+      "gt_nodes": [
+        "Drivers and Kernels::RDMA Verbs Driver"
+      ],
+      "predicted_nodes": [
+        "Embedded Libfabric Verbs Provider::Linux Verbs API",
+        "Embedded Libfabric Verbs Provider::libibverbs",
+        "Embedded Libfabric Verbs Provider::librdmacm"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents the low-level kernel driver. The AI correctly mapped this to the user-space components ('libibverbs', 'librdmacm') and the 'Linux Verbs API' that are used to interact with this driver, as explicitly detailed in the PRD. The AI's boundary 'Embedded Libfabric Verbs Provider' correctly groups these related components as a single feature."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCM Memory Services::Memory Hooks",
+        "UCX::UCP Protocols\\nHigh Level API::Cross-Transport Multi-Rail",
+        "UCX::UCP Protocols\\nHigh Level API::Fragmentation",
+        "UCX::UCP Protocols\\nHigh Level API::I/O API\\nStream",
+        "UCX::UCP Protocols\\nHigh Level API::PGAS API\\nRMAs, Atomics",
+        "UCX::UCP Protocols\\nHigh Level API::Software Protocols",
+        "UCX::UCP Protocols\\nHigh Level API::Task Based API\\nActive Messages",
+        "UCX::UCP Protocols\\nHigh Level API::Transport Selection",
+        "UCX::UCS Services\\nCommon Utilities::Utilities",
+        "UCX::UCT Hardware Transports\\nLow Level API::DCT",
+        "UCX::UCT Hardware Transports\\nLow Level API::Ethernet Transport\\nTCP/IP Sockets",
+        "UCX::UCT Hardware Transports\\nLow Level API::GPU Transport\\nNVIDIA CUDA, AMD ROCm",
+        "UCX::UCT Hardware Transports\\nLow Level API::Gemini / Aries Transport\\nGNI",
+        "UCX::UCT Hardware Transports\\nLow Level API::Intra-node Host Memory\\nSYSV, POSIX, KNEM, CMA, XPMEM",
+        "UCX::UCT Hardware Transports\\nLow Level API::RC",
+        "UCX::UCT Hardware Transports\\nLow Level API::UD"
+      ],
+      "predicted_nodes": [
+        "External Network Modules::UCX"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified 'UCX' as an external module from the PRD and abstracted it into a single node. This node is a valid aggregation of the numerous detailed internal components of the UCX framework present in the GT list. The AI's boundary 'External Network Modules' is semantically equivalent to the GT's top-level 'UCX' grouping."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Drivers and Kernels::Cray Driver",
+    "Drivers and Kernels::OS Kernel\\nEthernet",
+    "Drivers and Kernels::OS Kernel\\nMemory Hooks",
+    "Drivers and Kernels::ROCm / CUDA",
+    "Global::Applications\\nHPC, AI, ML, Big Data",
+    "Global::Hardware",
+    "Programming Models and Frameworks::AI / ML Frameworks\\nTensorFlow, Burst Buffer",
+    "Programming Models and Frameworks::MPI\\nMPICH, Open-MPI",
+    "Programming Models and Frameworks::PGAS / SHMEM\\nOpenSHMEM, UPC, CAF, X10, Chapel",
+    "Programming Models and Frameworks::Task Runtimes\\nParsec, OCR, Legion"
+  ],
+  "unmatched_predicted_nodes": [
+    "Build & Test Interface::autogen.sh",
+    "Build & Test Interface::configure",
+    "Build & Test Interface::hwloc Tarball",
+    "Build & Test Interface::make",
+    "Build & Test Interface::run-embedded-tests.sh",
+    "Communication Subsystem::Connection Manager",
+    "Communication Subsystem::Initialization/Termination",
+    "Communication Subsystem::Network Device",
+    "Communication Subsystem::Network Send Descriptors",
+    "Communication Subsystem::One-to-Many Transfer",
+    "Communication Subsystem::Progress Engine",
+    "Data Handling::Control Descriptor (OD"
+  ]
+}

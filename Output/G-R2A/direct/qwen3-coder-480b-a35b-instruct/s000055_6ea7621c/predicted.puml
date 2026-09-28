@@ -1,0 +1,66 @@
+@startuml
+!define RECTANGLE class
+
+RECTANGLE "Client Browser" as client {
+  [User Interface]
+  [Search Input Field]
+  [Suggestions List]
+}
+
+RECTANGLE "Web Server (Node.js)" as server {
+  [HTTP Request/Response]
+  [Router]
+  [Home Page Handler]
+  [Static Asset Handler]
+  [Search Handler]
+  [Not Found Handler]
+}
+
+RECTANGLE "Modules" as modules {
+  [Frontend Helpers]
+  [Autocomplete Algorithm]
+  [Data Access Layer]
+}
+
+RECTANGLE "Data Sources" as data {
+  [Laureate JSON Data]
+  [Public Assets Directory]
+}
+
+client --> server : HTTP Requests
+server --> client : HTTP Responses
+
+server --> modules : Delegates Processing
+modules --> data : Reads/Writes
+
+[Router] --> [Home Page Handler] : Routes "/"
+[Router] --> [Search Handler] : Routes URLs with "search"
+[Router] --> [Static Asset Handler] : Routes other URLs
+[Search Handler] --> [Autocomplete Algorithm] : Processes Search
+[Autocomplete Algorithm] --> [Data Access Layer] : Gets Laureate Names
+[Data Access Layer] --> [Laureate JSON Data] : Reads Data
+[Static Asset Handler] --> [Public Assets Directory] : Serves Files
+[Home Page Handler] --> [Public Assets Directory] : Serves Home Page
+
+note right of server
+  System Constraints:
+  - JavaScript/CommonJS environment
+  - Filesystem reads from public directory
+  - URL substring matching for search routing
+  - Heroku deployment compatible
+end note
+
+note right of modules
+  Non-Functional Requirements:
+  - Modular separation of concerns
+  - Automated testing coverage
+  - Explicit media type mapping
+end note
+
+note right of data
+  Data Requirements:
+  - Laureate names as search domain
+  - Local JSON data source
+  - Static assets: HTML, CSS, JS, JPG, ICO
+end note
+@enduml

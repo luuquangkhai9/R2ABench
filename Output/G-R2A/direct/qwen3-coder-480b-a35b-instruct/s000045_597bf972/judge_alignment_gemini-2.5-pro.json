@@ -1,0 +1,82 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Application"
+      ],
+      "predicted_nodes": [
+        "Global::Android Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node 'Android Application' is a direct semantic match for the GT node 'Application', representing the host application. The 'Global' boundary is correct for an external entity interacting with the SDK."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "predicted_nodes": [
+        "Global::QAPM SDK"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The nodes are a direct name match. However, the AI incorrectly placed the SDK in the 'Global' boundary instead of creating and using the specified 'QAPM_SDK' boundary, which is a significant architectural layering error."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "predicted_nodes": [
+        "Global::Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted 'Storage' node corresponds to the 'QAPM_Storage' component mentioned in the PRD. The AI failed to place this component within the 'QAPM_SDK' boundary, assigning it to 'Global' instead."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "predicted_nodes": [
+        "Global::Upload Processing",
+        "Global::Upload scheduling",
+        "Global::Background Handler Thread",
+        "Global::Background work dispatch",
+        "Global::Data Sender",
+        "Global::File enumeration",
+        "Global::File processing",
+        "Global::Network-gated processing",
+        "Global::Parameter derivation",
+        "Global::Success/failure callbacks",
+        "Global::thread handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The AI deconstructed the high-level 'QAPM_Report' component into its detailed functional parts as described in the PRD (upload, scheduling, file handling). This is a valid functional split. However, all these sub-components were incorrectly placed in the 'Global' boundary instead of within the 'QAPM_SDK' boundary."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Collect"
+      ],
+      "predicted_nodes": [
+        "Global::HTTP instrumentation",
+        "Global::Apache HttpClient Wrapper",
+        "Global::HttpEntity content counting",
+        "Global::ResponseHandler wrapping",
+        "Global::Transaction state tracking"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The AI identified the detailed aspects of network data collection (HTTP instrumentation) described in the PRD, which functionally belong to the 'QAPM_Collect' component. This 1:N match is functionally correct, but the boundary is wrong as all predicted nodes were placed in 'Global' instead of 'QAPM_SDK'."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "QAPM_Plugin::Plugin init compile",
+    "QAPM_Plugin::QAPM_Plugin"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::",
+    "Global::+ Main",
+    "Global::Android Platform"
+  ]
+}

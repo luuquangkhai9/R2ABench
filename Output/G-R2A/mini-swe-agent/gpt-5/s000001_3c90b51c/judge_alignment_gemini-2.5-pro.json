@@ -1,0 +1,101 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Result"
+      ],
+      "predicted_nodes": [
+        "Data & IO Layer::Result Model"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the output data model for the allocation. The AI's placement in a 'Data & IO Layer' is a reasonable and more specific architectural layer for a data model than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tally"
+      ],
+      "predicted_nodes": [
+        "Data & IO Layer::Tally Model"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the input data model for the allocation. The AI's placement in a 'Data & IO Layer' is a reasonable and more specific architectural layer for a data model than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::Parameters"
+      ],
+      "predicted_nodes": [
+        "Data & IO Layer::Processor Configuration\\n(Properties"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the configuration properties for the process. The AI places the configuration object in the 'Data & IO Layer', which is semantically equivalent to a data model, and thus does not conflict with the GT's logical 'Seat Allocation Configuration' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Processor::Process"
+      ],
+      "predicted_nodes": [
+        "Processing Layer::Processor Orchestrator\\n(Filtering, Allocation, Decoration"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the central component that orchestrates the entire allocation workflow. The GT 'Seat Allocation Processor' boundary is semantically equivalent to the AI's 'Processing Layer'."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::Seat Allocation\\nMethod"
+      ],
+      "predicted_nodes": [
+        "Processing Layer::Allocation Methods\\n(Contract + Implementations"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The nodes are semantically matched, but their boundary attribution is different. The GT treats the method as a setting within the 'Seat Allocation Configuration' boundary, whereas the AI models the implementation and contract within the 'Processing Layer'. This represents a boundary-crossing error where a configuration item is moved to the processing layer."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::TieBreaker"
+      ],
+      "predicted_nodes": [
+        "Processing Layer::Tie-breaking Rules"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The nodes are semantically matched, but their boundary attribution is different. The GT treats the tie-breaker as a setting within the 'Seat Allocation Configuration' boundary, whereas the AI models the implementation logic in the 'Processing Layer'. This is a boundary-crossing error."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Processor::Filter",
+        "Seat Allocation Configuration::TallyFilters"
+      ],
+      "predicted_nodes": [
+        "Processing Layer::Tally Filter Pipeline"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": false,
+      "reasoning": "The AI has merged two GT concepts: the processing step 'Filter' and the configuration item 'TallyFilters' into a single 'Pipeline' node. This is a valid merge, but it incorrectly moves the 'TallyFilters' component from the GT's 'Seat Allocation Configuration' boundary into the 'Processing Layer'."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Processor::Decorate",
+        "Seat Allocation Configuration::ResultDecorators"
+      ],
+      "predicted_nodes": [
+        "Processing Layer::Result Decorator Pipeline"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": false,
+      "reasoning": "The AI has merged two GT concepts: the processing step 'Decorate' and the configuration item 'ResultDecorators' into a single 'Pipeline' node. This is a valid merge, but it incorrectly moves the 'ResultDecorators' component from the GT's 'Seat Allocation Configuration' boundary into the 'Processing Layer'."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Data & IO Layer::XML IO (Tally.fromXML,\\nConfig/Result IO",
+    "Global::File System",
+    "Interface Layer::CLI Launcher",
+    "Interface Layer::Java Allocation API"
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Biomechanical Model::BaseBMModel"
+      ],
+      "predicted_nodes": [
+        "User-in-the-box Framework::Biomechanical Model Modules::Biomechanical Model\\nBase / Interface\\n(action [-1,1] → control [0,1]"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's base model class maps directly to the AI's base model interface. The AI's boundary 'User-in-the-box Framework::Biomechanical Model Modules' is a semantically correct and more detailed version of the GT's 'Biomechanical Model' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Biomechanical Model::DerivedClass",
+        "Biomechanical Model::MoblArmsIndex"
+      ],
+      "predicted_nodes": [
+        "User-in-the-box Framework::Biomechanical Model Modules::Motor Actuator\\nModel",
+        "User-in-the-box Framework::Biomechanical Model Modules::Muscle-Actuated\\nModel"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's generic 'DerivedClass' and specific example 'MoblArmsIndex' represent the concept of model implementations. The AI correctly maps this to specific implementation types ('Motor Actuator', 'Muscle-Actuated') mentioned in the PRD. The boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Interaction Task::BaseTask"
+      ],
+      "predicted_nodes": [
+        "User-in-the-box Framework::Interaction Task Modules::Interaction Task\\nBase / Interface"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's base task class maps directly to the AI's base task interface. The AI's boundary is a semantically correct and more detailed version of the GT's."
+    },
+    {
+      "gt_nodes": [
+        "Interaction Task::DerivedClass",
+        "Interaction Task::Pointing",
+        "Interaction Task::Tracking"
+      ],
+      "predicted_nodes": [
+        "User-in-the-box Framework::Interaction Task Modules::HCI Task\\nImplementations"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's multiple specific examples of task implementations are correctly aggregated by the AI into a single generic 'Implementations' node. The boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Perception::BaseModule"
+      ],
+      "predicted_nodes": [
+        "User-in-the-box Framework::Perception Modules::Perception Base\\nModule / Interface"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's base perception module class maps directly to the AI's base perception module interface. The AI's boundary is a semantically correct and more detailed version of the GT's."
+    },
+    {
+      "gt_nodes": [
+        "Perception::Modalities::Vision",
+        "Perception::FixedEye"
+      ],
+      "predicted_nodes": [
+        "User-in-the-box Framework::Perception Modules::Egocentric\\nVision Module"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'Vision' modality and a specific implementation example ('FixedEye') are correctly aggregated into the more descriptive 'Egocentric Vision Module' from the PRD. The boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Perception::Modalities::Proprioception",
+        "Perception::BasicWithEEPos"
+      ],
+      "predicted_nodes": [
+        "User-in-the-box Framework::Perception Modules::Proprioception\\nModule"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'Proprioception' modality and a related example 'BasicWithEEPos' (which implies position sensing) are correctly aggregated into the AI's 'Proprioception Module'. The boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Simulator"
+      ],
+      "predicted_nodes": [
+        "User-in-the-box Framework::Standalone Simulator\\nPackage\\n(OpenAI Gym Interface"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The nodes match semantically as the final product. However, the AI placed the 'Standalone Simulator Package' inside the 'User-in-the-box Framework' boundary. This is incorrect, as it's an output artifact produced by the framework, not a component of the framework itself. It should be in the 'Global' boundary, like other external artifacts."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Perception::Perception",
+    "Perception::Modalities::Modality",
+    "Perception::DerivedClass"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Action Log File",
+    "Global::MuJoCo XML\\nBiomechanical Model\\nDefinition",
+    "Global::MuJoCo XML\\nInteraction Task\\nEnvironment Definition",
+    "Global::OpenAI Gym\\nCompatible Runtime / Consumer",
+    "Global::Run Folder (File System",
+    "Global::YAML Simulator\\nConfiguration File",
+    "Run Folder (File System::checkpoints/\\n(model checkpoint artifacts",
+    "Run Folder (File System::evaluate/\\n(evaluation output directory",
+    "Run Folder (File System::training run\\nartifacts",
+    "User-in-the-box Framework::Evaluation Runner::Action Logger",
+    "User-in-the-box Framework::Evaluation Runner::Checkpoint\\nLoader",
+    "User-in-the-box Framework::Evaluation Runner::Evaluation\\nOrchestrator",
+    "User-in-the-box Framework::Reinforcement Learning\\nTraining Workflow::RL Training\\nRunner",
+    "User-in-the-box Framework::Reinforcement Learning\\nTraining Workflow::Training Configuration\\n(from YAML",
+    "User-in-the-box Framework::Simulator Builder::Component\\nInitializer",
+    "User-in-the-box Framework::Simulator Builder::MuJoCo XML\\nIntegration Layer",
+    "User-in-the-box Framework::Simulator Builder::YAML Configuration\\nParser"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "High level architecture::Frontend::Docker\\nfrontend container",
+        "High level architecture::Frontend::React"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Frontend Container\\nReact"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the React frontend and its container, merging them into a single node. The 'Docker Host' boundary is semantically equivalent to the GT's logical 'Frontend' layer in the context of a fully containerized application as described in the PRD (NFR-001)."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Backend::Docker\\nbackend container",
+        "High level architecture::Backend::FastAPI"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Backend Container\\nFastAPI"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the FastAPI backend and its container, merging them into a single node. The 'Docker Host' boundary is a valid, physically-oriented grouping that is semantically consistent with the GT's logical 'Backend' layer for a containerized service."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Analytics and storage::Docker\\nelasticsearch container",
+        "High level architecture::Analytics and storage::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Elasticsearch Container"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the Elasticsearch component and its container, merging them into one node. Placing it within the 'Docker Host' boundary is correct, as it is a containerized service. This is semantically equivalent to the GT's 'Analytics and storage' layer in this deployment model."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Analytics and storage::Docker\\nkibana container",
+        "High level architecture::Analytics and storage::Kibana"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Kibana Container"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the Kibana component and its container, merging them into a single node. The 'Docker Host' boundary is appropriate, as it is a containerized service, and is semantically equivalent to the GT's 'Analytics and storage' grouping."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Backend::Genius API\\nintegration"
+      ],
+      "predicted_nodes": [
+        "Global::Genius API (External"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the Genius API. While the GT models it as an 'integration' component within the backend, the AI models it as an external service in the 'Global' scope. The AI's representation is more aligned with the PRD (C-007), which states it's an external dependency. Both are valid modeling choices, and the AI's boundary is not an error."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "High level architecture::Developer/Admin",
+    "High level architecture::user"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Docker Host"
+  ]
+}

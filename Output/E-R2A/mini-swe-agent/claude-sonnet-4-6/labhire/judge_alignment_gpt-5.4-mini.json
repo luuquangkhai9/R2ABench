@@ -1,0 +1,271 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Business Logic Layer - Django::Management Module::Post/Comment Audit"
+      ],
+      "predicted_nodes": [
+        "AppServicesLayer::Admin Review Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent administrator review/audit functionality for posts and comments. The architectural layer differs in naming, but the semantic boundary is equivalent as a backend application/service layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Logic Layer - Django::Management Module::User Qualification Audit"
+      ],
+      "predicted_nodes": [
+        "AppServicesLayer::Admin Review Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both cover administrator review of user qualifications/certification. The predicted service is broader, but it still semantically contains this GT function and stays within the backend service boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Logic Layer - Django::Management Module::Admin Info Maintenance"
+      ],
+      "predicted_nodes": [
+        "AppServicesLayer::Admin Review Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "GT is about administrator information maintenance, while the predicted node is about review workflow. They are different responsibilities, so this is not a valid functional match."
+    },
+    {
+      "gt_nodes": [
+        "Business Logic Layer - Django::Community Module::Like/Favorite",
+        "Business Logic Layer - Django::Community Module::Publish Post/Comment",
+        "Business Logic Layer - Django::Community Module::Post/Comment Display"
+      ],
+      "predicted_nodes": [
+        "AppServicesLayer::Community Service"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates community display, publishing, and liking/favoriting into multiple nodes, while the prediction aggregates them into one community service. This is a valid functional aggregation and the backend service boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Business Logic Layer - Django::Project Module::Project Info View",
+        "Business Logic Layer - Django::Project Module::Publish Project",
+        "Business Logic Layer - Django::Project Module::Project Management",
+        "Business Logic Layer - Django::Project Module::Project Search",
+        "Business Logic Layer - Django::Project Module::Project Recommendation",
+        "Business Logic Layer - Django::Project Module::Favorite Project",
+        "Business Logic Layer - Django::Project Module::Project Message Reminder",
+        "Business Logic Layer - Django::Project Module::Teacher-Student Interaction",
+        "Business Logic Layer - Django::Project Module::Project Enrollment"
+      ],
+      "predicted_nodes": [
+        "AppServicesLayer::Project Service"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT decomposes project-related functions into several modules, while the AI aggregates them into a single project service. This is an acceptable high-level consolidation and remains within the correct backend layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Logic Layer - Django::Project Module::Project Recommendation"
+      ],
+      "predicted_nodes": [
+        "AppServicesLayer::Recommendation Engine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the project recommendation capability driven by rules/algorithms. The service naming differs, but the functional component is equivalent and correctly placed in the backend service layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Logic Layer - Django::Project Module::Project Search"
+      ],
+      "predicted_nodes": [
+        "AppServicesLayer::Project Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Project search is part of the broader project service in the prediction. The functionality matches and the boundary is still a correct backend service boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Logic Layer - Django::User Module::Login/Registration",
+        "Business Logic Layer - Django::User Module::Student/Enterprise Verification"
+      ],
+      "predicted_nodes": [
+        "AppServicesLayer::User Identity Service"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Login, registration, and verification are all identity-related functions. The AI aggregates them into a single identity service, which is semantically correct and placed in an appropriate backend layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Logic Layer - Django::User Module::Personal Info Maintenance",
+        "Business Logic Layer - Django::User Module::Resume Maintenance"
+      ],
+      "predicted_nodes": [
+        "AppServicesLayer::Resume and Profile Service"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates profile maintenance and resume maintenance, while the AI combines them into one resume/profile service. This is a reasonable aggregation within the backend service layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Logic Layer - Django::User Module::User Search & Favorite"
+      ],
+      "predicted_nodes": [
+        "AppServicesLayer::User Identity Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "User search and favorite operations are not identity functions. The prediction places unrelated functionality into the wrong service boundary, indicating a semantic mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Data Access Layer - PyMySQL::Database Connection"
+      ],
+      "predicted_nodes": [
+        "DataLayer::MainDatabase"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a data access/connection component, while the prediction is a storage/database node. They are different architectural roles, so the boundary is not correct."
+    },
+    {
+      "gt_nodes": [
+        "Data Access Layer - PyMySQL::File Data Parsing"
+      ],
+      "predicted_nodes": [
+        "DataLayer::FileStorage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "File parsing is a data access/processing responsibility, whereas file storage is a persistence responsibility. The function and boundary do not match."
+    },
+    {
+      "gt_nodes": [
+        "Storage Layer - MySQL::Community Data DB",
+        "Storage Layer - MySQL::Other Data DB",
+        "Storage Layer - MySQL::Project Data DB",
+        "Storage Layer - MySQL::User Info DB"
+      ],
+      "predicted_nodes": [
+        "DataLayer::MainDatabase"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT splits persistence into multiple domain databases, while the AI merges them into one main database. This is a valid simplification at the storage layer and the boundary remains semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "User Interface Layer - WeChat Mini Program / Vue.js::File Transfer"
+      ],
+      "predicted_nodes": [
+        "Presentation::Mobile Client",
+        "Presentation::Web Browser Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT UI node is split across mobile and web presentation clients in the prediction. This is a reasonable decomposition and remains within the presentation layer."
+    },
+    {
+      "gt_nodes": [
+        "User Interface Layer - WeChat Mini Program / Vue.js::Message Notification"
+      ],
+      "predicted_nodes": [
+        "AppServicesLayer::Notification Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a user interface layer element for displaying notifications, while the prediction places it in backend application services. This is a severe boundary crossing."
+    },
+    {
+      "gt_nodes": [
+        "User Interface Layer - WeChat Mini Program / Vue.js::Personal Info",
+        "User Interface Layer - WeChat Mini Program / Vue.js::Post Information",
+        "User Interface Layer - WeChat Mini Program / Vue.js::Project Info",
+        "User Interface Layer - WeChat Mini Program / Vue.js::Project Registration"
+      ],
+      "predicted_nodes": [
+        "Presentation::Mobile Client",
+        "Presentation::Web Browser Client"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates specific UI pages, while the prediction aggregates them into generic presentation clients. This is an acceptable higher-level UI consolidation with correct presentation-layer placement."
+    },
+    {
+      "gt_nodes": [
+        "Business Logic Layer - Django::Project Module::Project Enrollment"
+      ],
+      "predicted_nodes": [
+        "AppServicesLayer::Application and Evaluation Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Project enrollment/application is functionally part of the application process, and the predicted service reasonably covers it. The backend service boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Business Logic Layer - Django::Project Module::Teacher-Student Interaction"
+      ],
+      "predicted_nodes": [
+        "AppServicesLayer::Application and Evaluation Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Teacher-student interaction in the GT refers to application screening, chat, and mutual evaluation interactions. The predicted service is broader but still captures the relevant backend interaction/evaluation capability."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Business Logic Layer - Django::Management Module::Admin Info Maintenance",
+    "Business Logic Layer - Django::Project Module::Project Info View",
+    "Business Logic Layer - Django::Project Module::Project Management",
+    "Business Logic Layer - Django::Project Module::Project Message Reminder",
+    "Business Logic Layer - Django::Project Module::Project Recommendation",
+    "Business Logic Layer - Django::Project Module::Project Search",
+    "Business Logic Layer - Django::Project Module::Publish Project",
+    "Business Logic Layer - Django::Project Module::Teacher-Student Interaction",
+    "Business Logic Layer - Django::User Module::Login/Registration",
+    "Business Logic Layer - Django::User Module::Personal Info Maintenance",
+    "Business Logic Layer - Django::User Module::Resume Maintenance",
+    "Business Logic Layer - Django::User Module::Student/Enterprise Verification",
+    "Business Logic Layer - Django::User Module::User Search & Favorite",
+    "Data Access Layer - PyMySQL::Database Connection",
+    "Data Access Layer - PyMySQL::File Data Parsing",
+    "Storage Layer - MySQL::Community Data DB",
+    "Storage Layer - MySQL::Other Data DB",
+    "Storage Layer - MySQL::Project Data DB",
+    "Storage Layer - MySQL::User Info DB",
+    "User Interface Layer - WeChat Mini Program / Vue.js::File Transfer",
+    "User Interface Layer - WeChat Mini Program / Vue.js::Message Notification",
+    "User Interface Layer - WeChat Mini Program / Vue.js::Personal Info",
+    "User Interface Layer - WeChat Mini Program / Vue.js::Post Information",
+    "User Interface Layer - WeChat Mini Program / Vue.js::Project Info",
+    "User Interface Layer - WeChat Mini Program / Vue.js::Project Registration"
+  ],
+  "unmatched_predicted_nodes": [
+    "AppServicesLayer::Application and Evaluation Service",
+    "AppServicesLayer::Audit and Logging Service",
+    "AppServicesLayer::Notification Service",
+    "AppServicesLayer::Project Service",
+    "AppServicesLayer::Recommendation Engine",
+    "AppServicesLayer::Resume and Profile Service",
+    "AppServicesLayer::User Identity Service",
+    "DataLayer::AuditLogStore",
+    "DataLayer::CacheStore",
+    "DataLayer::FileStorage",
+    "DataLayer::MainDatabase",
+    "ExternalServices::Campus Email Service",
+    "ExternalServices::Enterprise Email Service",
+    "ExternalServices::Push Notification Service",
+    "ExternalServices::Verification Code Provider",
+    "GatewayLayer::API Gateway",
+    "GatewayLayer::Auth and Encryption Module",
+    "GatewayLayer::Rate Limiter and Risk Control",
+    "Presentation::Mobile Client",
+    "Presentation::Web Browser Client"
+  ]
+}

@@ -1,0 +1,398 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Access Layer::Thread Pool"
+      ],
+      "predicted_nodes": [
+        "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Access Layer::HTTP Client (Judge"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both relate to access-layer concurrency/communication support, but the predicted node is specifically an HTTP client for judging rather than a thread pool, so the semantic match is weak and the boundary is not equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::WebFlux"
+      ],
+      "predicted_nodes": [
+        "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "WebFlux is a back-end access-layer framework detail, while the prediction only places it under the broader Spring Boot application boundary without preserving the specific layer attribution."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Interceptor"
+      ],
+      "predicted_nodes": [
+        "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Proxy Layer::Filters / Interceptors\nAuth (JWT / OAuth2"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Interceptor is semantically aligned with filters/interceptors in the proxy layer, and the boundary attribution matches the intended cross-cutting authentication concern."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::JWT Authentication"
+      ],
+      "predicted_nodes": [
+        "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Proxy Layer::Filters / Interceptors\nAuth (JWT / OAuth2"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted auth filter/interceptor node correctly captures JWT-based authentication and places it in an appropriate proxy/filter layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::LomBok"
+      ],
+      "predicted_nodes": [
+        "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Lombok is a build-time code generation dependency, not a runtime Spring Boot application component; the prediction is too coarse and not an equivalent architectural node."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Mybatis Plus"
+      ],
+      "predicted_nodes": [
+        "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Access Layer::MyBatis-Plus Repositories"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted repository/access-layer placement is semantically correct for MyBatis-Plus persistence access."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::SMTP Service"
+      ],
+      "predicted_nodes": [
+        "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Access Layer::SMTP Client",
+        "Intranet (VPC / Firewall-restricted::SMTP Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT SMTP service is realized in the prediction as client-side application integration plus the external SMTP server dependency; the boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Sandbox Management"
+      ],
+      "predicted_nodes": [
+        "Intranet (VPC / Firewall-restricted::Judging Service",
+        "Intranet (VPC / Firewall-restricted::Judging Service::JudgeHost",
+        "Intranet (VPC / Firewall-restricted::Judging Service::JudgeCore"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT sandbox management node is split into the judging service, JudgeHost, and JudgeCore components, which together implement sandboxed code execution and resource control."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot"
+      ],
+      "predicted_nodes": [
+        "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The prediction preserves the Spring Boot application boundary appropriately."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Swagger API"
+      ],
+      "predicted_nodes": [
+        "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Presentation Layer::REST Controllers\nSwagger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Swagger is correctly associated with the application presentation/API documentation layer."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Intranet (VPC / Firewall-restricted::MySQL 5.7.44"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "MySQL is correctly matched as a database-layer component."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Database::Redis"
+      ],
+      "predicted_nodes": [
+        "Intranet (VPC / Firewall-restricted::Redis 7.4.6"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Redis is correctly matched as a cache/data-layer component."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Distributed Storage::Object Storage Service OSS"
+      ],
+      "predicted_nodes": [
+        "Intranet (VPC / Firewall-restricted::MinIO (Object Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "MinIO correctly corresponds to the object storage service, with acceptable boundary naming variation."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::ESLint"
+      ],
+      "predicted_nodes": [
+        "Global::Browser (HTML5"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "ESLint is a front-end development tool, but the prediction instead models the browser client, which is a different concept and boundary."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::TypeScript"
+      ],
+      "predicted_nodes": [
+        "Global::Browser (HTML5"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "TypeScript is a front-end implementation technology, while the prediction represents the browser environment rather than the front-end stack."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::Vue3"
+      ],
+      "predicted_nodes": [
+        "Global::Browser (HTML5"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Vue 3 is a front-end framework, not the browser itself; this is a layer mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::Vuex"
+      ],
+      "predicted_nodes": [
+        "Global::Browser (HTML5"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Vuex is a front-end state management library and is not represented by the browser node."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::Webpack"
+      ],
+      "predicted_nodes": [
+        "Global::Browser (HTML5"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Webpack is a build tool, not a browser-facing component; the prediction is not equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::antd-vue"
+      ],
+      "predicted_nodes": [
+        "Global::Browser (HTML5"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Ant Design Vue is a front-end UI library, and the browser node does not preserve this component meaning."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::axios"
+      ],
+      "predicted_nodes": [
+        "Global::Browser (HTML5"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Axios is a front-end HTTP client library, not the browser environment."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::vue-router"
+      ],
+      "predicted_nodes": [
+        "Global::Browser (HTML5"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Vue-router is a front-end routing library, not equivalent to the browser node."
+    },
+    {
+      "gt_nodes": [
+        "Global::Logging / Log Record"
+      ],
+      "predicted_nodes": [
+        "Intranet (VPC / Firewall-restricted::Grafana",
+        "Intranet (VPC / Firewall-restricted::Prometheus"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT logging node is split into monitoring tools, but Prometheus/Grafana are observability components rather than the same as logging/log records; the semantic mapping is not correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Permission / Access Control"
+      ],
+      "predicted_nodes": [
+        "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Proxy Layer::Filters / Interceptors\nAuth (JWT / OAuth2"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted authentication/filter node correctly implements permission and access-control concerns."
+    },
+    {
+      "gt_nodes": [
+        "Network / Proxy Layer::Nginx Reverse Proxy"
+      ],
+      "predicted_nodes": [
+        "Global::Nginx Reverse Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Nginx reverse proxy is correctly matched, with only a naming boundary normalization."
+    },
+    {
+      "gt_nodes": [
+        "Persistence Layer::Concurrency Control"
+      ],
+      "predicted_nodes": [
+        "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Access Layer::MyBatis-Plus Repositories"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Concurrency control is a persistence concern, but the prediction places only repository access infrastructure, which is not equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Persistence Layer::Data Caching"
+      ],
+      "predicted_nodes": [
+        "Intranet (VPC / Firewall-restricted::Redis 7.4.6",
+        "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Access Layer::Redis Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The cache-related persistence node is reasonably split into Redis and the application Redis client, with correct semantic placement."
+    },
+    {
+      "gt_nodes": [
+        "Persistence Layer::Optimistic Locking"
+      ],
+      "predicted_nodes": [
+        "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Access Layer::MyBatis-Plus Repositories"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Optimistic locking is not represented explicitly; repository access alone does not capture the locking mechanism."
+    },
+    {
+      "gt_nodes": [
+        "Persistence Layer::Transaction Control"
+      ],
+      "predicted_nodes": [
+        "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Transaction control is a persistence-layer concern, but the prediction is only the broad application boundary and does not preserve the specific transaction management node."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Ajax Interaction: GET POST PUT DELETE"
+      ],
+      "predicted_nodes": [
+        "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Presentation Layer::REST Controllers\nSwagger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "REST controllers and API exposure are a reasonable equivalent of AJAX-based GET/POST/PUT/DELETE interaction."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Routing Control"
+      ],
+      "predicted_nodes": [
+        "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Presentation Layer::REST Controllers\nSwagger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Routing control is a front-end presentation concern, while the predicted node is back-end REST controllers; this is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Vue Template Rendering Engine"
+      ],
+      "predicted_nodes": [
+        "Global::Browser (HTML5"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Template rendering engine refers to the front-end Vue rendering layer, but the prediction only models the browser environment."
+    },
+    {
+      "gt_nodes": [
+        "Security Sandbox::Docker Singleton Mode::Seccomp: Restrict System Calls::uLimit: Restrict Process Resources::Execute User Code"
+      ],
+      "predicted_nodes": [
+        "Intranet (VPC / Firewall-restricted::Judging Service::JudgeCore"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "JudgeCore is the closest equivalent to the sandboxed user-code execution environment, and the boundary is appropriate even though the GT node is more detailed."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Frontend Layer::ESLint",
+    "Frontend Layer::TypeScript",
+    "Frontend Layer::Vue3",
+    "Frontend Layer::Vuex",
+    "Frontend Layer::Webpack",
+    "Frontend Layer::antd-vue",
+    "Frontend Layer::axios",
+    "Frontend Layer::vue-router",
+    "Persistence Layer::Optimistic Locking"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::CDN",
+    "Global::DNS",
+    "Global::Intranet (VPC / Firewall-restricted",
+    "Intranet (VPC / Firewall-restricted::Alerting\\n(PagerDuty / DingTalk",
+    "Intranet (VPC / Firewall-restricted::CI/CD & Deployment",
+    "Intranet (VPC / Firewall-restricted::CI/CD & Deployment::Docker Registry",
+    "Intranet (VPC / Firewall-restricted::CI/CD & Deployment::GitLab CI/CD",
+    "Intranet (VPC / Firewall-restricted::CI/CD & Deployment::Kubernetes Cluster",
+    "Intranet (VPC / Firewall-restricted::Grafana",
+    "Intranet (VPC / Firewall-restricted::LLM Provider",
+    "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Access Layer::HTTP Client (Judge",
+    "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Access Layer::LangChain4j Client",
+    "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Access Layer::MinIO SDK",
+    "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Access Layer::MyBatis-Plus Repositories",
+    "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Access Layer::Redis Client",
+    "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Access Layer::SMTP Client",
+    "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Business Layer::AI Orchestrator",
+    "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Business Layer::Forum Service",
+    "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Business Layer::Problem Service",
+    "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Business Layer::Record Service",
+    "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Business Layer::Solution Service",
+    "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Business Layer::User Service",
+    "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Presentation Layer::REST Controllers\nSwagger",
+    "Intranet (VPC / Firewall-restricted::Spring Boot 3 Application::Proxy Layer::Filters / Interceptors\nAuth (JWT / OAuth2"
+  ]
+}

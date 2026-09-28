@@ -1,0 +1,73 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "BACKEND::Router"
+      ],
+      "predicted_nodes": [
+        "Server Runtime (Node.js::Router Module::Request Router"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the request routing component that directs incoming URLs to the appropriate backend handling path. The predicted node is more specific but semantically equivalent and placed in an appropriate backend/server boundary."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::algorithm"
+      ],
+      "predicted_nodes": [
+        "Server Runtime (Node.js::Search Algorithm::Autocomplete Module"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the autocomplete/search-hint algorithm responsible for prefix matching and result limiting. The predicted layer is a reasonable refinement of the backend algorithm boundary."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::data.json"
+      ],
+      "predicted_nodes": [
+        "Server Runtime (Node.js::Data Access::Local JSON Data"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the local JSON-based laureate data source used by backend autocomplete. The predicted boundary is semantically consistent with the GT data node."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::handlers"
+      ],
+      "predicted_nodes": [
+        "Server Runtime (Node.js::Handler Module::Home Page Handler",
+        "Server Runtime (Node.js::Handler Module::Not-Found Handler",
+        "Server Runtime (Node.js::Handler Module::Static Asset Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has a single handler node covering request handling responsibilities, while the prediction splits it into its functional sub-handlers. This is an acceptable refinement within the same backend/server boundary."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::public assets\\nhtml\\ncss\\njs"
+      ],
+      "predicted_nodes": [
+        "Server Runtime (Node.js::HTTP Server::HTTP Listener"
+      ],
+      "match_type": "none",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted HTTP listener is not equivalent to the GT public-assets node. Public assets belong to static file content, not to the request listener/server endpoint."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "FRONTEND::XMLHttpRequest",
+    "FRONTEND::index.html",
+    "FRONTEND::main.css",
+    "FRONTEND::userInput"
+  ],
+  "unmatched_predicted_nodes": [
+    "Client Environment::Web Browser",
+    "Deployment Environment::Heroku Platform",
+    "Server Runtime (Node.js::Data Access::Laureate Data Module",
+    "Server Runtime (Node.js::HTTP Server::HTTP Listener"
+  ]
+}

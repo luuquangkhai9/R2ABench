@@ -1,0 +1,127 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Application"
+      ],
+      "predicted_nodes": [
+        "Android Host Application::Android Application Integrator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the host application context that integrates the QAPM SDK. The predicted node is more specific but semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_Plugin::QAPM_Plugin"
+      ],
+      "predicted_nodes": [
+        "Global::Android Application Integrator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The functionality relates to application integration, but placing it in a Global boundary loses the explicit plugin/package context from GT and confuses a plugin component with a generic integrator role."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_Plugin::Plugin init compile"
+      ],
+      "predicted_nodes": [
+        "Global::Network Instrumentation Integrator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node does not represent plugin initialization/compile behavior. It is a different concern focused on network instrumentation integration."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK::Background Scheduling::Upload Processor"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is the top-level SDK container, while the predicted node is only a specific upload-processing subcomponent. This is not an equivalent architectural node."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Collect"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK::Background Scheduling::Background HandlerThread",
+        "QAPM SDK::Background Scheduling::Main Thread Handler",
+        "QAPM SDK::Background Scheduling::Work Handler",
+        "QAPM SDK::Background Scheduling::Work Handler Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT collection module is not the same as background scheduling infrastructure. The predicted nodes are specific scheduling internals and do not reproduce the collection boundary."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK::Data Sender::Configured Sender",
+        "QAPM SDK::Data Sender::QAPM Configuration Manager",
+        "QAPM SDK::Upload Processing::Upload Processor"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT reporting module is only loosely related to sender/upload processing. The predicted nodes split reporting-adjacent behavior into upload/data-sender pieces rather than matching the report boundary."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK::Local Storage::Upload Directory",
+        "QAPM SDK::Local Storage::Upload Files",
+        "QAPM SDK::Upload Processing::Storage Pop Module",
+        "QAPM SDK::Upload Processing::File Enumerator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT storage module is decomposed into local storage and upload-processing storage operations. This is semantically consistent with the storage responsibility, even though the predicted design is more granular."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK::HTTP Instrumentation::Response Handler Wrapper",
+        "QAPM SDK::HTTP Instrumentation::Response Entity Wrapper",
+        "QAPM SDK::HTTP Instrumentation::Transaction State",
+        "QAPM SDK::HTTP Instrumentation::Counting InputStream"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "These are HTTP instrumentation components, not the general report module from GT. The boundary attribution is incorrect and represents a different subsystem."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Android Host Application::Network Instrumentation Integrator",
+    "QAPM SDK::Background Scheduling::Background HandlerThread",
+    "QAPM SDK::Background Scheduling::Main Thread Handler",
+    "QAPM SDK::Background Scheduling::Work Handler",
+    "QAPM SDK::Background Scheduling::Work Handler Manager",
+    "QAPM SDK::Data Sender::Configured Sender",
+    "QAPM SDK::Data Sender::QAPM Configuration Manager",
+    "QAPM SDK::External Dependencies::Android Context",
+    "QAPM SDK::External Dependencies::Apache HttpClient",
+    "QAPM SDK::External Dependencies::Network State",
+    "QAPM SDK::HTTP Instrumentation::Counting InputStream",
+    "QAPM SDK::HTTP Instrumentation::Response Entity Wrapper",
+    "QAPM SDK::HTTP Instrumentation::Response Handler Wrapper",
+    "QAPM SDK::HTTP Instrumentation::Transaction State",
+    "QAPM SDK::Local Storage::Upload Directory",
+    "QAPM SDK::Local Storage::Upload Files",
+    "QAPM SDK::Upload Processing::File Enumerator",
+    "QAPM SDK::Upload Processing::Network Connectivity Gate",
+    "QAPM SDK::Upload Processing::Parameter Deriver",
+    "QAPM SDK::Upload Processing::Storage Pop Module",
+    "QAPM SDK::Upload Processing::Upload Processor"
+  ]
+}

@@ -1,0 +1,323 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Backend::Create\\nTask",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "System Boundary::Backend::OnFleet Task Handler"
+      ],
+      "reasoning": "The GT task-creation responsibility is covered by the predicted backend OnFleet task handler, which performs task creation in the backend."
+    },
+    {
+      "gt_node": "Backend::OnFleet",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::OnFleet System",
+        "System Boundary::Backend::OnFleet Task Handler"
+      ],
+      "reasoning": "The GT OnFleet backend concept is represented by the predicted OnFleet system node and its backend task handler."
+    },
+    {
+      "gt_node": "End user::Next.js\\nFrontend form",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "System Boundary::Frontend::Help Request Form",
+        "System Boundary::Frontend::Next.js Application"
+      ],
+      "reasoning": "The frontend form entry path and its Next.js frontend context are both represented in the predictions."
+    },
+    {
+      "gt_node": "End user::Twilio Studio\\nText + Call",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::End User Channels\\n(Text/Call"
+      ],
+      "reasoning": "The predicted end-user channels node captures the text/call-based external entry concept, matching the GT channel-based entry responsibility."
+    },
+    {
+      "gt_node": "Frontend::Create task request",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "System Boundary::Frontend::Help Request Form",
+        "System Boundary::Frontend::Firebase Session Handler",
+        "System Boundary::Frontend::Next.js Application"
+      ],
+      "reasoning": "The predicted frontend form and session handler together cover the frontend-originated task request initiation and submission behavior."
+    },
+    {
+      "gt_node": "Middleware::Address-to-neighborhood\\nsystem",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "System Boundary::Middleware Layer::Address Processing"
+      ],
+      "reasoning": "The predicted address processing node covers the GT middleware responsibility of deriving neighborhood/routing information from addresses."
+    },
+    {
+      "gt_node": "Middleware::Service-area\\nEligibility Check",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "System Boundary::Middleware Layer::Service Area Check"
+      ],
+      "reasoning": "The predicted service area check node directly covers the GT service-area eligibility decision responsibility."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Global::Authenticated User",
+      "grounded": true,
+      "reference_nodes": [
+        "End user::Twilio Studio\\nText + Call",
+        "End user::Next.js\\nFrontend form",
+        "Frontend::Create task request"
+      ],
+      "reasoning": "Although abstract, it is grounded in the user-initiated flows described in the GT, especially end-user and frontend-originated request initiation."
+    },
+    {
+      "predicted_node": "Global::End User Channels\\n(Text/Call",
+      "grounded": true,
+      "reference_nodes": [
+        "End user::Twilio Studio\\nText + Call"
+      ],
+      "reasoning": "This directly corresponds to the GT external user channel entry concept."
+    },
+    {
+      "predicted_node": "Global::Environment Variables",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend::Create task request"
+      ],
+      "reasoning": "The GT explicitly includes Firebase configuration mapped from environment variables, so this node is grounded even though it is broader than the specific frontend function nodes."
+    },
+    {
+      "predicted_node": "Global::Firebase Authentication",
+      "grounded": true,
+      "reference_nodes": [
+        "End user::Next.js\\nFrontend form"
+      ],
+      "reasoning": "The GT contains Firebase-authenticated session flow and token verification; this node is grounded in that authentication responsibility."
+    },
+    {
+      "predicted_node": "Global::OnFleet System",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::OnFleet",
+        "Backend::Create\\nTask"
+      ],
+      "reasoning": "This is a direct abstraction of the GT OnFleet backend/task creation concepts."
+    },
+    {
+      "predicted_node": "Global::System Boundary",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::Create\\nTask",
+        "Backend::OnFleet",
+        "End user::Next.js\\nFrontend form",
+        "End user::Twilio Studio\\nText + Call",
+        "Frontend::Create task request",
+        "Middleware::Address-to-neighborhood\\nsystem",
+        "Middleware::Service-area\\nEligibility Check"
+      ],
+      "reasoning": "This is a structural container rather than a business concept, but it is grounded by the overall architecture described in the GT."
+    },
+    {
+      "predicted_node": "System Boundary::Backend",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::Create\\nTask",
+        "Backend::OnFleet"
+      ],
+      "reasoning": "The GT has backend responsibilities around task creation and OnFleet, so this backend boundary is grounded."
+    },
+    {
+      "predicted_node": "System Boundary::Backend::Firebase Functions",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::Create\\nTask",
+        "Backend::OnFleet"
+      ],
+      "reasoning": "The GT explicitly mentions backend run mode and Firebase functions for custom APIs, so this backend Firebase functions node is grounded."
+    },
+    {
+      "predicted_node": "System Boundary::Backend::Login API\\n(POST /api/login",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The provided GT node list does not include login API architecture nodes, so this is not grounded in the supplied GT nodes."
+    },
+    {
+      "predicted_node": "System Boundary::Backend::Logout API\\n(POST /api/logout",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT node list does not include logout API architecture nodes."
+    },
+    {
+      "predicted_node": "System Boundary::Backend::OnFleet Task Handler",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend::Create\\nTask",
+        "Backend::OnFleet"
+      ],
+      "reasoning": "This matches the backend task handling and OnFleet task creation responsibilities in the GT."
+    },
+    {
+      "predicted_node": "System Boundary::Frontend",
+      "grounded": true,
+      "reference_nodes": [
+        "End user::Next.js\\nFrontend form",
+        "Frontend::Create task request"
+      ],
+      "reasoning": "The GT includes frontend responsibilities and a Next.js frontend form, so this boundary is grounded."
+    },
+    {
+      "predicted_node": "System Boundary::Frontend::Firebase Session Handler",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT node list provided here does not include session handler as a standalone architecture node."
+    },
+    {
+      "predicted_node": "System Boundary::Frontend::Help Request Form",
+      "grounded": true,
+      "reference_nodes": [
+        "End user::Next.js\\nFrontend form",
+        "Frontend::Create task request"
+      ],
+      "reasoning": "This corresponds to the GT frontend form entry path for help-task requests."
+    },
+    {
+      "predicted_node": "System Boundary::Frontend::Next.js Application",
+      "grounded": true,
+      "reference_nodes": [
+        "End user::Next.js\\nFrontend form"
+      ],
+      "reasoning": "This directly matches the GT Next.js frontend context."
+    },
+    {
+      "predicted_node": "System Boundary::Middleware Layer",
+      "grounded": true,
+      "reference_nodes": [
+        "Middleware::Address-to-neighborhood\\nsystem",
+        "Middleware::Service-area\\nEligibility Check"
+      ],
+      "reasoning": "The GT clearly includes middleware-layer responsibilities."
+    },
+    {
+      "predicted_node": "System Boundary::Middleware Layer::Address Processing",
+      "grounded": true,
+      "reference_nodes": [
+        "Middleware::Address-to-neighborhood\\nsystem"
+      ],
+      "reasoning": "This is the same middleware address-processing concept as the GT node."
+    },
+    {
+      "predicted_node": "System Boundary::Middleware Layer::Service Area Check",
+      "grounded": true,
+      "reference_nodes": [
+        "Middleware::Service-area\\nEligibility Check"
+      ],
+      "reasoning": "This directly corresponds to the GT service-area eligibility check."
+    },
+    {
+      "predicted_node": "System Boundary::Middleware Layer::Session Middleware",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "Session middleware is mentioned in the PRD, but it is not represented as a GT node in the supplied manual list."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Backend::Create\\nTask"
+      ],
+      "predicted_nodes": [
+        "System Boundary::Backend::OnFleet Task Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent backend task creation/handling through OnFleet."
+    },
+    {
+      "gt_nodes": [
+        "Backend::OnFleet"
+      ],
+      "predicted_nodes": [
+        "Global::OnFleet System",
+        "System Boundary::Backend::OnFleet Task Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT OnFleet concept is split into a system-level node and a backend handler node, with semantically consistent boundaries."
+    },
+    {
+      "gt_nodes": [
+        "End user::Next.js\\nFrontend form"
+      ],
+      "predicted_nodes": [
+        "System Boundary::Frontend::Help Request Form",
+        "System Boundary::Frontend::Next.js Application"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT frontend form is decomposed into the specific form and its Next.js application boundary."
+    },
+    {
+      "gt_nodes": [
+        "End user::Twilio Studio\\nText + Call"
+      ],
+      "predicted_nodes": [
+        "Global::End User Channels\\n(Text/Call"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted end-user channels node matches the GT text/call entry channel concept."
+    },
+    {
+      "gt_nodes": [
+        "Frontend::Create task request"
+      ],
+      "predicted_nodes": [
+        "System Boundary::Frontend::Help Request Form",
+        "System Boundary::Frontend::Firebase Session Handler",
+        "System Boundary::Frontend::Next.js Application"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT frontend task-request creation responsibility is split across the form, session handling, and Next.js frontend context."
+    },
+    {
+      "gt_nodes": [
+        "Middleware::Address-to-neighborhood\\nsystem"
+      ],
+      "predicted_nodes": [
+        "System Boundary::Middleware Layer::Address Processing"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The address-to-neighborhood middleware concept is preserved with equivalent semantics."
+    },
+    {
+      "gt_nodes": [
+        "Middleware::Service-area\\nEligibility Check"
+      ],
+      "predicted_nodes": [
+        "System Boundary::Middleware Layer::Service Area Check"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The service-area eligibility check is represented with the same responsibility and an equivalent middleware boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Authenticated User",
+    "Global::Environment Variables",
+    "Global::Firebase Authentication",
+    "Global::System Boundary",
+    "System Boundary::Backend",
+    "System Boundary::Backend::Firebase Functions",
+    "System Boundary::Backend::Login API\\n(POST /api/login",
+    "System Boundary::Backend::Logout API\\n(POST /api/logout",
+    "System Boundary::Frontend",
+    "System Boundary::Frontend::Firebase Session Handler",
+    "System Boundary::Middleware Layer",
+    "System Boundary::Middleware Layer::Session Middleware"
+  ]
+}

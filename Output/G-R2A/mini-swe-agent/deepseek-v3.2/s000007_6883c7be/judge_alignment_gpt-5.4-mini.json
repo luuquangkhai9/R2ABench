@@ -1,0 +1,173 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "CGI Portal::Http Test\nClient"
+      ],
+      "predicted_nodes": [
+        "Test Client Layer::Test Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the bundled HTTP test client utility. The predicted boundary is a semantically appropriate relabeling of the GT CGI portal area into a dedicated test client layer."
+    },
+    {
+      "gt_nodes": [
+        "CGI Portal::Http Test\nClient"
+      ],
+      "predicted_nodes": [
+        "Test Client Layer::Test Client::Async HTTP Client",
+        "Test Client Layer::Test Client::Response Counter",
+        "Test Client Layer::Test Client::Workload Generator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT test client node is decomposed into its functional subcomponents. The split is semantically consistent with the requirements for async requests, success counting, and workload generation."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Proxy Core"
+      ],
+      "predicted_nodes": [
+        "HTTP Proxy Layer::HTTP Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the core HTTP proxy component responsible for request forwarding. The boundary/layer naming is consistent at a higher level."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Proxy Core"
+      ],
+      "predicted_nodes": [
+        "HTTP Proxy Layer::HTTP Proxy::Channel Manager",
+        "HTTP Proxy Layer::HTTP Proxy::Request Forwarder",
+        "HTTP Proxy Layer::HTTP Proxy::Debug Logger"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT proxy core is split into concrete internal responsibilities. These subnodes align with forwarding, channel activation, and diagnostic logging described in the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Logging"
+      ],
+      "predicted_nodes": [
+        "HTTP Proxy Layer::HTTP Proxy::Debug Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to proxy-side logging/diagnostic behavior. The predicted layer is an acceptable refinement."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Download"
+      ],
+      "predicted_nodes": [
+        "Test Server Layer::Test Server::File Download Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both correspond to the file download behavior for GET /download. Although named as a handler rather than a plugin, the functional component is the same and boundary placement within the test server is correct."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Upload"
+      ],
+      "predicted_nodes": [
+        "Test Server Layer::Test Server::File Upload Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the file upload handling workflow that returns a filepath map payload. The test server boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Task Scheduler::CGI Health\nCheck"
+      ],
+      "predicted_nodes": [
+        "Test Client Layer::Test Client::Workload Generator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "There is partial functional overlap in that both involve automated request execution, but the GT is a scheduled health-check task while the predicted node is a client workload generator. These are not semantically equivalent enough to count as a correct match."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Attach Check"
+      ],
+      "predicted_nodes": [
+        "External Systems::File System"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a proxy-side attachment checking plugin, while the predicted node is an external filesystem dependency. This is a boundary and functional mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Mock"
+      ],
+      "predicted_nodes": [
+        "Test Server Layer::Test Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "A mock plugin is not equivalent to the test server itself. This is an over-broad and incorrect boundary assignment."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer\\nKeepalived(VIP::Openresty",
+    "Business Servers::......",
+    "Business Servers::Business Server A",
+    "Business Servers::Business Server B",
+    "Business Servers::Business Server C",
+    "CGI Portal::Appkey\\nManager",
+    "CGI Portal::CGI Manager",
+    "CGI Portal::Case Manager",
+    "CGI Portal::Document\\nGenerate",
+    "CGI Portal::Log & Tree\\ninquire",
+    "CGI Portal::Metrics &\\nReport",
+    "CGI Portal::Service\\nManager",
+    "Clients::APP Client",
+    "Clients::Business Server",
+    "Clients::Developer",
+    "Clients::Web Client",
+    "Global::Log consumer",
+    "Proxy Layer::cgi_proxy 1::Appkey\\nValidate",
+    "Proxy Layer::cgi_proxy 1::Formatter",
+    "Proxy Layer::cgi_proxy 1::Global Limit",
+    "Proxy Layer::cgi_proxy 1::Login &\\nPermission",
+    "Proxy Layer::cgi_proxy 1::Plugin::Agent",
+    "Proxy Layer::cgi_proxy 1::Plugin::Check\\nParameter",
+    "Proxy Layer::cgi_proxy 2",
+    "Support Platform::Data Bank\\nHDFS/Hbase/Druid",
+    "Support Platform::Msg Center\\nKafka",
+    "Support Platform::Mysql",
+    "Support Platform::Permission\\nCenter",
+    "Support Platform::Redis Cache",
+    "Support Platform::User Center",
+    "Task Scheduler::CGI Case\\nExecutor",
+    "Task Scheduler::Daily Report",
+    "Task Scheduler::Log Analysis",
+    "Task Scheduler::Monitor/Alarm"
+  ],
+  "unmatched_predicted_nodes": [
+    "Data Layer::Request Cache",
+    "Data Layer::Response Data",
+    "External Systems::File System",
+    "External Systems::HTTP Client",
+    "External Systems::Upstream Server",
+    "HTTP Proxy Layer::HTTP Proxy",
+    "HTTP Proxy Layer::HTTP Proxy::Channel Manager",
+    "HTTP Proxy Layer::HTTP Proxy::Debug Logger",
+    "HTTP Proxy Layer::HTTP Proxy::Request Forwarder",
+    "Test Client Layer::Test Client",
+    "Test Client Layer::Test Client::Async HTTP Client",
+    "Test Client Layer::Test Client::Response Counter",
+    "Test Client Layer::Test Client::Workload Generator",
+    "Test Server Layer::Test Server",
+    "Test Server Layer::Test Server::File Download Handler",
+    "Test Server Layer::Test Server::File Upload Handler",
+    "Test Server Layer::Test Server::Grizzly/Jersey Server"
+  ]
+}

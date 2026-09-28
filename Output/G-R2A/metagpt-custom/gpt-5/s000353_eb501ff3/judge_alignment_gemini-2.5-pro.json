@@ -1,0 +1,74 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Turing System::Turing API Server\\nHTTP REST API to configure Routers"
+      ],
+      "predicted_nodes": [
+        "API Layer::HTTP API Service",
+        "API Layer::OpenAPI Router and Handlers",
+        "Cluster Integration Layer::Kubernetes Adapter/Client",
+        "Management/Controller Layer::Ensembler CRUD Controller",
+        "Management/Controller Layer::Router Lifecycle Manager",
+        "Management/Controller Layer::Router Listing Controller",
+        "Middleware Layer::OpenAPI Request Validation Middleware"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's single, high-level 'Turing API Server' is correctly decomposed by the AI into multiple, specific microservices and layers based on functions described in the PRD (API handling, business logic controllers, cluster integration). The AI's boundaries ('API Layer', 'Management/Controller Layer', etc.) are logical subdivisions within the GT's 'Turing System' boundary, making them semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Authorization Service"
+      ],
+      "predicted_nodes": [
+        "Middleware Layer::Authorization Middleware"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The functionality (Authorization) is a match. However, the GT models this as an external 'Global' service, while the AI models it as an internal 'Middleware Layer' component, which aligns with the PRD's description of 'HTTP middleware layer'. This represents a significant boundary difference where the AI places an external dependency inside the system boundary, which is incorrect according to the GT."
+    },
+    {
+      "gt_nodes": [
+        "Global::Monitoring and Alerting Service"
+      ],
+      "predicted_nodes": [
+        "Global::Jaeger",
+        "Observability Layer::Jaeger Tracing Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's generic 'Monitoring and Alerting Service' is correctly interpreted by the AI as the specific 'Jaeger' service mentioned in the PRD. The AI also correctly decomposes this into the external 'Global' Jaeger service and the internal 'Jaeger Tracing Client'. The boundary for the external service matches the GT's 'Global' attribution."
+    },
+    {
+      "gt_nodes": [
+        "Global::Router Endpoints"
+      ],
+      "predicted_nodes": [
+        "Kubernetes cluster::Router Deployment"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the deployed Turing router, which is the functional output of the system. The GT's 'Global' boundary emphasizes its external accessibility, while the AI's 'Kubernetes cluster' boundary specifies its deployment location. These are different but semantically compatible and correct perspectives."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Experimentation Service",
+    "Global::Machine Learning Platform\\nMLP API Server",
+    "Global::Secret Store",
+    "Global::Router Clients",
+    "Global::Turing User",
+    "Kubernetes Cluster::Istio",
+    "Kubernetes Cluster::Knative Controller",
+    "Turing System::Database\\nPersistent storage for Router objects",
+    "Turing System::Turing UI\\nWeb interface to configure Routers"
+  ],
+  "unmatched_predicted_nodes": [
+    "Ensembler Runtime Layer::Docker Image Builder",
+    "Ensembler Runtime Layer::MLflow Artifact Fetcher",
+    "Ensembler Runtime Layer::PyFuncEnsembler Service",
+    "Global::Docker Engine",
+    "Global::Kubernetes cluster",
+    "Global::MLflow model registry"
+  ]
+}

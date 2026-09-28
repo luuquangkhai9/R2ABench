@@ -1,0 +1,115 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "Python Runtime::External Systems::mpi4py"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the MPI dependency/runtime used by the library for inter-process communication. The boundary differs, but semantically it is the same external MPI layer."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process"
+      ],
+      "predicted_nodes": [
+        "Python Runtime::MPI Process 1",
+        "Python Runtime::MPI Process 2"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT single MPI process node is represented by multiple concrete MPI process instances in the prediction. This is a reasonable split of the same concept, and the boundary remains consistent at the MPI process/runtime level."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Server\nThread"
+      ],
+      "predicted_nodes": [
+        "Python Runtime::MPI Process 1::Task Execution Layer::WorkerScheduler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT server thread is an execution-side service thread, but the predicted node is a scheduler component rather than the server/yielding thread itself. This is not semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Worker\nThread"
+      ],
+      "predicted_nodes": [
+        "Python Runtime::MPI Process 1::Task Execution Layer::WorkerThread",
+        "Python Runtime::MPI Process 2::Task Execution Layer::WorkerThread"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT worker thread is split into per-process worker thread instances. This matches the library’s per-MPI-process worker-thread model and the layer attribution is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Task Queue"
+      ],
+      "predicted_nodes": [
+        "Python Runtime::MPI Process 1::Worker Management Layer::TaskQueueManager",
+        "Python Runtime::MPI Process 2::Worker Management Layer::TaskQueueManager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT task queue is represented by queue management components in each MPI process. This is a valid functional decomposition and boundary placement is consistent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Task Queue (in detail::...",
+    "Task Queue (in detail::A1",
+    "Task Queue (in detail::A2",
+    "Task Queue (in detail::A3",
+    "Task Queue (in detail::B1",
+    "Task Queue (in detail::B2",
+    "Task Queue (in detail::Level 0",
+    "Task Queue (in detail::Level 1",
+    "Task Queue (in detail::Level 2",
+    "Task Queue (in detail::Level 3",
+    "Task Queue (in detail::Level 4",
+    "Task Queue (in detail::Level 5"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Python Runtime",
+    "Python Runtime::External Systems",
+    "Python Runtime::External Systems::Optional Packages",
+    "Python Runtime::External Systems::Optional Packages::cma",
+    "Python Runtime::External Systems::Optional Packages::h5py",
+    "Python Runtime::External Systems::Optional Packages::numpy",
+    "Python Runtime::External Systems::Optional Packages::pillow",
+    "Python Runtime::External Systems::mpi4py",
+    "Python Runtime::External Systems::termcolor",
+    "Python Runtime::MPI Process 1::API Layer::AsCompletedAPI",
+    "Python Runtime::MPI Process 1::API Layer::MapAPI",
+    "Python Runtime::MPI Process 1::API Layer::TaskDescriptor",
+    "Python Runtime::MPI Process 1::API Layer::TaskSubmitter",
+    "Python Runtime::MPI Process 1::API Layer::TaskWaiter",
+    "Python Runtime::MPI Process 1::Communication Layer::MPICommunicator",
+    "Python Runtime::MPI Process 1::Communication Layer::TaskStealer",
+    "Python Runtime::MPI Process 1::Configuration Layer::EnvironmentConfig",
+    "Python Runtime::MPI Process 1::Runtime Management Layer::RuntimeController",
+    "Python Runtime::MPI Process 1::Task Execution Layer::CallbackExecutor",
+    "Python Runtime::MPI Process 1::Task Execution Layer::WorkerScheduler",
+    "Python Runtime::MPI Process 1::Task Execution Layer::WorkerThread",
+    "Python Runtime::MPI Process 1::Worker Management Layer::TaskQueueManager",
+    "Python Runtime::MPI Process 1::Worker Management Layer::WorkerPool",
+    "Python Runtime::MPI Process 2::API Layer::AsCompletedAPI",
+    "Python Runtime::MPI Process 2::API Layer::MapAPI",
+    "Python Runtime::MPI Process 2::API Layer::TaskDescriptor",
+    "Python Runtime::MPI Process 2::API Layer::TaskSubmitter",
+    "Python Runtime::MPI Process 2::API Layer::TaskWaiter",
+    "Python Runtime::MPI Process 2::Communication Layer::MPICommunicator",
+    "Python Runtime::MPI Process 2::Communication Layer::TaskStealer",
+    "Python Runtime::MPI Process 2::Configuration Layer::EnvironmentConfig",
+    "Python Runtime::MPI Process 2::Runtime Management Layer::RuntimeController",
+    "Python Runtime::MPI Process 2::Task Execution Layer::CallbackExecutor",
+    "Python Runtime::MPI Process 2::Task Execution Layer::WorkerScheduler",
+    "Python Runtime::MPI Process 2::Task Execution Layer::WorkerThread",
+    "Python Runtime::MPI Process 2::Worker Management Layer::TaskQueueManager",
+    "Python Runtime::MPI Process 2::Worker Management Layer::WorkerPool"
+  ]
+}

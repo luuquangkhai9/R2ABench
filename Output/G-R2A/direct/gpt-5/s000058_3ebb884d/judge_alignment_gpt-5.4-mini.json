@@ -1,0 +1,265 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS Cloud\nConnector Account::AWS EventBridge"
+      ],
+      "predicted_nodes": [
+        "AWS Account (current region::AWS Event Routing\n(EventBridge Rule"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the EventBridge/event-routing component used to route matching service events. The predicted boundary is phrased differently but is semantically equivalent to the GT AWS connector-account EventBridge boundary."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\nConnector Account::SNS Topic\nalerts"
+      ],
+      "predicted_nodes": [
+        "AWS Account (current region::SNS Topic\n(Notifications"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes denote the SNS notification topic used for alert/event delivery. The boundary naming differs, but it remains within the same AWS account/runtime context and is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\nConnector Account::VPC::CMS BigMAC",
+        "AWS Cloud\nConnector Account::VPC::connector::Private subnet::AWS Fargate\nKafka Connect Cluster"
+      ],
+      "predicted_nodes": [
+        "AWS Account (current region::Target Cluster & Service\n(BigMAC Connectors"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT splits the target environment into the CMS BigMAC VPC and the Kafka Connect cluster running in a private subnet; the prediction aggregates these into the target cluster/service for connector operations. This is a valid functional merge."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\nConnector Account::VPC::topics::Private subnet::AWS Lambda\ncreate/delete topics"
+      ],
+      "predicted_nodes": [
+        "AWS Account (current region::Target Cluster & Service\n(BigMAC Connectors"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is specifically an AWS Lambda used for topic create/delete operations, but the predicted node collapses it into the target cluster/service connector node. This loses the distinct operational responsibility and crosses component boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Global::VPC peering\nconnection"
+      ],
+      "predicted_nodes": [
+        "Global::AWS Account (current region"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a VPC peering connection, while the predicted node is an AWS account context container. These are not equivalent components, and the boundary attribution is incorrect."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\nAppian Source::VPC::Appian\nOracle DB"
+      ],
+      "predicted_nodes": [
+        "Global::AWS Account (current region"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is an Appian-side Oracle database in the source VPC, but the prediction only provides a generic AWS account boundary. This is not a functional match and is placed at the wrong architectural level."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\nConnector Account::Chat notification"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding predicted node for chat notification exists."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\nConnector Account::Email notification"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding predicted node for email notification exists."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\nConnector Account::Slack notification"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding predicted node for Slack notification exists."
+    },
+    {
+      "gt_nodes": [
+        "Global::VPC peering\nconnection"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No proper predicted equivalent exists; the closest AWS account container is not a match."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "GitHub::GitHub API"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "The GT does not include a generic GitHub API node."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "GitHub::GitHub API::Pull Requests Endpoint"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding GT node exists."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "GitHub::GitHub API::Workflow Runs Endpoint"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding GT node exists."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "GitHub::GitHub Actions"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding GT node exists."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "GitHub::GitHub Actions::deploy.yml Workflow"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding GT node exists."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Global::Developer"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "GT does not model a separate developer actor node."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Global::GitHub"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding GT node exists."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Global::Local Environment\n(Terminal & Scripts"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding GT node exists as a standalone local environment boundary."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Global::Operator/DevOps"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "GT does not include this actor node."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Global::Repository Maintainer"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "GT does not include this actor node."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Local Environment\n(Terminal & Scripts::Connector Config Handler"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding GT node exists."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Local Environment\n(Terminal & Scripts::Connector Mgmt Library"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding GT node exists."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Local Environment\n(Terminal & Scripts::Metrics Collectors::Deploy Metrics Collector"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding GT node exists."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Local Environment\n(Terminal & Scripts::Metrics Collectors::PR Merge Metrics Collector"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding GT node exists."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Local Environment\n(Terminal & Scripts::Stage Listing Script\n(run listRunningStages"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding GT node exists."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "AWS Cloud\nAppian Source::VPC::Appian\nOracle DB",
+    "AWS Cloud\nConnector Account::Chat notification",
+    "AWS Cloud\nConnector Account::Email notification",
+    "AWS Cloud\nConnector Account::Slack notification"
+  ],
+  "unmatched_predicted_nodes": [
+    "GitHub::GitHub API",
+    "GitHub::GitHub API::Pull Requests Endpoint",
+    "GitHub::GitHub API::Workflow Runs Endpoint",
+    "GitHub::GitHub Actions",
+    "GitHub::GitHub Actions::deploy.yml Workflow",
+    "Global::Developer",
+    "Global::GitHub",
+    "Global::Local Environment\n(Terminal & Scripts",
+    "Global::Operator/DevOps",
+    "Global::Repository Maintainer",
+    "Local Environment\n(Terminal & Scripts::Connector Config Handler",
+    "Local Environment\n(Terminal & Scripts::Connector Mgmt Library",
+    "Local Environment\n(Terminal & Scripts::Metrics Collectors::Deploy Metrics Collector",
+    "Local Environment\n(Terminal & Scripts::Metrics Collectors::PR Merge Metrics Collector",
+    "Local Environment\n(Terminal & Scripts::Stage Listing Script\n(run listRunningStages"
+  ]
+}

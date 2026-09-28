@@ -1,0 +1,163 @@
+@startuml
+'
+    'title EIVAS - Epidemiological Investigation and Visual Analysis System
+'
+    '
+'
+    'skinparam componentStyle rectangle
+'
+    '
+'
+    'package "Presentation Layer" #D6EAF8 {
+'
+    '  [Epidemiological Reporting Form] as EpiForm
+'
+    '  [Case Management List UI] as CaseMgmtUI
+'
+    '  [Map Display Interface] as MapUI
+'
+    '  [Association Information Display] as AssocUI
+'
+    '  [Graph Relationship Display] as GraphUI
+'
+    '  [Statistical Charts Dashboard] as ChartUI
+'
+    '}
+'
+    '
+'
+    'package "Application Layer" #D5F5E3 {
+'
+    '  [Reporting Service] as ReportSvc
+'
+    '  [Case Management Service] as CaseSvc
+'
+    '  [Individual Case Analysis Service] as IndivSvc
+'
+    '  [Overall Analysis Service] as OverallSvc
+'
+    '  [Outbreak Overview Service] as OutbreakSvc
+'
+    '  [Security and Rate-Limit Service] as SecSvc
+'
+    '}
+'
+    '
+'
+    'package "Algorithm Module" #FEF9E7 {
+'
+    '  [Regional Flow Map Generator] as FlowGen
+'
+    '  [Case Clustering Engine] as ClusterEngine
+'
+    '  [Association Threshold Analyzer] as AssocEngine
+'
+    '  [Relationship Graph Builder] as GraphBuilder
+'
+    '}
+'
+    '
+'
+    'package "Data Layer" #F9EBEA {
+'
+    '  database "Case Investigation DB" as CaseDB
+'
+    '  database "Environmental Data Store" as EnvDB
+'
+    '}
+'
+    '
+'
+    'package "External Systems" #F0E6FF {
+'
+    '  [Map Geographic Visualization Service] as MapSvc
+'
+    '}
+'
+    '
+'
+    'actor "Epidemiological Form Filler" as Filler
+'
+    'actor "Epidemiological Analyst" as Analyst
+'
+    '
+'
+    'Filler --> EpiForm
+'
+    'Filler --> CaseMgmtUI
+'
+    'Analyst --> CaseMgmtUI
+'
+    'Analyst --> AssocUI
+'
+    'Analyst --> GraphUI
+'
+    'Analyst --> ChartUI
+'
+    'Analyst --> MapUI
+'
+    '
+'
+    'EpiForm --> ReportSvc
+'
+    'CaseMgmtUI --> CaseSvc
+'
+    'MapUI --> IndivSvc
+'
+    'AssocUI --> IndivSvc
+'
+    'GraphUI --> IndivSvc
+'
+    'ChartUI --> OverallSvc
+'
+    'ChartUI --> OutbreakSvc
+'
+    '
+'
+    'ReportSvc --> SecSvc
+'
+    'CaseSvc --> SecSvc
+'
+    'IndivSvc --> SecSvc
+'
+    '
+'
+    'ReportSvc --> CaseDB
+'
+    'CaseSvc --> CaseDB
+'
+    'IndivSvc --> CaseDB
+'
+    'OverallSvc --> CaseDB
+'
+    'OutbreakSvc --> CaseDB
+'
+    'OutbreakSvc --> EnvDB
+'
+    '
+'
+    'IndivSvc --> AssocEngine
+'
+    'IndivSvc --> GraphBuilder
+'
+    'OverallSvc --> FlowGen
+'
+    'OverallSvc --> ClusterEngine
+'
+    '
+'
+    'AssocEngine --> CaseDB
+'
+    'GraphBuilder --> CaseDB
+'
+    'FlowGen --> CaseDB
+'
+    'ClusterEngine --> CaseDB
+'
+    '
+'
+    'MapUI --> MapSvc
+'
+    'IndivSvc --> MapSvc
+'
+@enduml

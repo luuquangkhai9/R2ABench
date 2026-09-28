@@ -1,0 +1,75 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Server\\n-wsplit",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Server\\n-wsplit"
+      ],
+      "predicted_nodes": [
+        "Distributed Server (wsplit-enabled::Server Coordinator",
+        "Distributed Server (wsplit-enabled::Backup/Workfile Writer\\n(backup interval -wi",
+        "Distributed Server (wsplit-enabled::In-Memory Hash Table\\n(reset each backup",
+        "Distributed Server (wsplit-enabled::Result Emitter"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The two GT server instances are conceptually matched to the AI's detailed breakdown of the server's functional components. The AI correctly decomposes the single 'Server' concept into its sub-functions like coordination, file writing, and managing the hash table, as described in the PRD. The 'Distributed Server (wsplit-enabled)' boundary is semantically equivalent to the GT's logical 'Distributed Search Group'."
+    },
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Client A1",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Client A2",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Client A3",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Client B1",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Client B2",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Client B3"
+      ],
+      "predicted_nodes": [
+        "Distributed Clients (xN::Client Host::Kangrand Client",
+        "Distributed Clients (xN::Client Host::Kangaroo Engine",
+        "Distributed Clients (xN::Client Host::DP Selector",
+        "Distributed Clients (xN::Client Host::GPU Device (optional"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The multiple GT client instances are mapped to the AI's decomposition of a generic client's internal components. The AI correctly identifies the core client application, its kangaroo computation engine, and optional GPU usage. The 'Distributed Clients (xN::Client Host)' boundary is a correct, more specific representation of the client's execution environment compared to the GT's logical grouping."
+    },
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Merger"
+      ],
+      "predicted_nodes": [
+        "Offline Merge Host::Workfile Merger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct 1:1 match for the offline merging functionality. The AI correctly places this component within an 'Offline Merge Host' boundary, which accurately reflects its operational context as described in the PRD."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Kangaroo file A1",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Kangaroo file A2",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Kangaroo file A3",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Result.txt A",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Work files\\nHashTable A",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Kangaroo file B1",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Kangaroo file B2",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Kangaroo file B3",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Result.txt B",
+    "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Work files\\nHashTable B",
+    "Kangrand Distributed Pollard Kangaroo::Master WorkFile\\nHashTable"
+  ],
+  "unmatched_predicted_nodes": [
+    "Distributed Clients (xN::Client Host",
+    "Global::Distributed Server (wsplit-enabled",
+    "Global::Local Host (Standalone",
+    "Global::Offline Merge Host",
+    "Global::Operator-Controlled Network",
+    "Local Host (Standalone::Distinguished-Point Selector\\n(-d sets DP bits",
+    "Local Host (Standalone::GPU Device (optional",
+    "Local Host (Standalone::In-Memory Hash Table\\n(distinguished points",
+    "Local Host (Standalone::Kangaroo Engine\\n(tame & wild herds",
+    "Local Host (Standalone::Kangrand CLI (Standalone",
+    "Local Host (Standalone::Workfile Manager\\n(-w save, -wi interval, -i resume, -ws include state"
+  ]
+}

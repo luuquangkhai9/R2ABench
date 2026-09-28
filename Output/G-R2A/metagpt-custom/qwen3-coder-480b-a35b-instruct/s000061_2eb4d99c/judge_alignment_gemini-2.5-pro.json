@@ -1,0 +1,107 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS CloudFormation\\nCustom resources"
+      ],
+      "predicted_nodes": [
+        "Compute::Custom Resource Lambda",
+        "Global::CloudFormation"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI split the custom resource processing into the Compute Lambda component and the CloudFormation service."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS IoT Core"
+      ],
+      "predicted_nodes": [
+        "AWS Services::AWS IoT Core",
+        "Global::Message Publisher"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI split AWS IoT Core into its specific service node and the logical message publisher node."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon API Gateway\\nREST API"
+      ],
+      "predicted_nodes": [
+        "API Gateway::API Gateway REST",
+        "API Gateway::Access Logger",
+        "API Gateway::CORS Configuration",
+        "API Gateway::Method Logging",
+        "API Gateway::Request Validator",
+        "API Gateway::Tracing Config",
+        "Global::API Gateway"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI decomposed the API Gateway into multiple configuration-specific nodes such as CORS, Request Validator, Logging, and Tracing."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS Lambda\\nSimulator API"
+      ],
+      "predicted_nodes": [
+        "Compute::Route Management Lambda",
+        "Compute::Simulation Control Lambda",
+        "Global::Route Loader",
+        "Global::Compute"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single Simulator API Lambda node in GT was detailed by the AI into distinct functional lambdas and global abstraction nodes."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS Step Functions\\nSimulation workflow"
+      ],
+      "predicted_nodes": [
+        "AWS Environment::Step Functions"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the AWS Step Functions responsible for the simulation workflow."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon S3\\nRoute data bucket",
+        "AWS IoT Device Simulator::Amazon S3\\nWeb UI bucket"
+      ],
+      "predicted_nodes": [
+        "Storage::Amazon S3"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI merged the two specific S3 bucket nodes from GT into a single general Amazon S3 storage node."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Browser Web UI\\nstatic app client"
+      ],
+      "predicted_nodes": [
+        "Frontend::Web Console",
+        "Global::Frontend"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI extracted the browser static app into specific Web Console and generic Frontend nodes."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "AWS IoT Device Simulator::Amazon CloudFront",
+    "AWS IoT Device Simulator::Amazon Cognito",
+    "AWS IoT Device Simulator::Amazon DynamoDB\\nSimulator state",
+    "AWS IoT Device Simulator::Users"
+  ],
+  "unmatched_predicted_nodes": [
+    "Storage::CloudWatch Logs",
+    "Global::AWS Environment",
+    "Global::AWS Services",
+    "Global::Device Simulator",
+    "Global::Storage"
+  ]
+}

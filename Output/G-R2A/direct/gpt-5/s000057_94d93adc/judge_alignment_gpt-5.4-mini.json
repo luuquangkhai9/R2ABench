@@ -1,0 +1,68 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::React Frontend"
+      ],
+      "predicted_nodes": [
+        "Browser (Client::React App",
+        "Browser (Client::Redux Store\\n(state/actions",
+        "Browser (Client::Upload UI",
+        "Browser (Client::Waveform UI",
+        "Browser (Client::Playback Manager\\n(single current playback",
+        "Browser (Client::Form Validation\\n& Error Handling",
+        "Browser (Client::Frontend Config\\nAPI_BASE_URL, CLOUDINARY_URL,\\nUPLOAD_PRESET",
+        "Browser (Client::HTTP Client (fetch",
+        "Browser (Client::Audio Player",
+        "Browser (Client::Follow/Feed UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT React frontend is decomposed into multiple frontend client nodes covering the same responsibilities: React app, Redux state management, upload UI, waveform UI, playback control, validation, config, fetch client, and follow/feed UI. Despite naming/format issues, the boundary remains the frontend/browser client and is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Express Server"
+      ],
+      "predicted_nodes": [
+        "Global::Server (Node/Express",
+        "Server (Node/Express::Express Backend API",
+        "Server (Node/Express::Feed API",
+        "Server (Node/Express::Follow API",
+        "Server (Node/Express::Sound API",
+        "Server (Node/Express::User/Auth API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Express server is split into a server boundary plus several backend API subnodes. This matches the backend responsibilities in the PRD and preserves the correct server-side boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::PostgreSQL Database"
+      ],
+      "predicted_nodes": [
+        "Global::PostgreSQL"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the PostgreSQL persistence layer. The predicted node omits the explicit 'Database' suffix but is semantically equivalent and correctly placed."
+    },
+    {
+      "gt_nodes": [
+        "Global::Cloudinary"
+      ],
+      "predicted_nodes": [
+        "Global::Cloudinary (Media Platform",
+        "Cloudinary (Media Platform::Hosted Assets\\n(Audio/Image URLs",
+        "Cloudinary (Media Platform::Upload API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Cloudinary node is split into the media platform boundary with hosted assets and upload API subnodes. This is semantically equivalent and correctly attributed to the media/storage boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Browser (Client"
+  ]
+}

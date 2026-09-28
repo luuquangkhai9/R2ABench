@@ -1,0 +1,79 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Website::React UI\\nBeeGreen site",
+        "Website::TypeScript\\nWebsite code"
+      ],
+      "predicted_nodes": [
+        "Client Layer::WebsiteClient\\n(React / TypeScript"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's two nodes describing the website's technology and UI are correctly aggregated into a single WebsiteClient node by the AI. The 'Website' boundary is semantically equivalent to the 'Client Layer'."
+    },
+    {
+      "gt_nodes": [
+        "Browser Extension::React UI\\nExtension",
+        "Browser Extension::TypeScript\\nExtension code"
+      ],
+      "predicted_nodes": [
+        "Client Layer::BrowserExtensionClient\\n(Chrome Extension"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's two nodes describing the browser extension's implementation are correctly aggregated into a single BrowserExtensionClient node. The 'Browser Extension' boundary is semantically equivalent to the 'Client Layer'."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Express App",
+        "IBM Cloud::LoopBack Generated Code",
+        "IBM Cloud::Node.js Runtime"
+      ],
+      "predicted_nodes": [
+        "Backend API Layer\\n(Node.js / LoopBack::HTTPRequestContext",
+        "Backend API Layer\\n(Node.js / LoopBack::InventoryItemModel\\n(Entity Schema",
+        "Backend API Layer\\n(Node.js / LoopBack::NewUserModel\\n(Input Schema — User minus id",
+        "Backend API Layer\\n(Node.js / LoopBack::PingController",
+        "Backend API Layer\\n(Node.js / LoopBack::PingResponseModel\\n(greeting, date, url, headers",
+        "Backend API Layer\\n(Node.js / LoopBack::REST /ping",
+        "Backend API Layer\\n(Node.js / LoopBack::REST /users",
+        "Backend API Layer\\n(Node.js / LoopBack::UserController",
+        "Backend API Layer\\n(Node.js / LoopBack::UserModel\\n(Entity Schema",
+        "Backend API Layer\\n(Node.js / LoopBack::UserRepository\\n(LoopBack Repository"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT nodes represent the backend's technology stack. The AI correctly interprets this as a single logical backend component and splits it into numerous fine-grained functional components (Controllers, Models, Repositories, etc.) that are explicitly described or implied by the PRD. The 'IBM Cloud' boundary is a specific implementation, while 'Backend API Layer' is the abstract architectural layer; they are semantically equivalent in this context."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Cloudant\\nUser and API data"
+      ],
+      "predicted_nodes": [
+        "Data / Persistence Layer::PersistentDataStore\\n(Users & InventoryItems"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's specific database implementation (Cloudant) is matched to the AI's more generic 'PersistentDataStore' node, which serves the same function. The 'IBM Cloud' boundary and the 'Data / Persistence Layer' are semantically equivalent for a data store."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::CSV File\\nExport / training data",
+        "IBM Cloud::Object Storage",
+        "IBM Cloud::Watson Studio"
+      ],
+      "predicted_nodes": [
+        "Data-Processing Layer::ScoringAndRecommendationService"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT nodes describe the infrastructure and tools for data processing. The AI correctly aggregates these into a single functional service node that matches the PRD's description of 'scoring and recommendation workflows'. The 'IBM Cloud' boundary is semantically equivalent to the 'Data-Processing Layer'."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::User\\nShopping at online stores",
+    "Global::User\\nVisiting BeeGreen site"
+  ],
+  "unmatched_predicted_nodes": []
+}

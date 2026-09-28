@@ -1,0 +1,66 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Web2 application stack::Applications",
+        "Web3 application stack::Applications"
+      ],
+      "predicted_nodes": [
+        "External Systems::Redis Clients",
+        "External Systems::Pub/Sub Clients"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT 'Applications' nodes correspond to external client applications interacting with IceFireDB. The predicted client nodes semantically match this role, but placing them under 'External Systems' is acceptable; however, the GT distinguishes Web2/Web3 application stacks rather than protocol-specific client types, so this is only a coarse functional match and not a precise boundary reproduction."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::IceFireDB",
+        "Web3 application stack::IceFireDB"
+      ],
+      "predicted_nodes": [
+        "Proxy Layer::Redis Proxy",
+        "Decentralized Network Layer::PubSub"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT 'IceFireDB' nodes represent the product/system itself at the application-stack level. The predicted diagram decomposes the product into specific runtime components, which is functionally related but not boundary-equivalent to the GT node placement."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::Platform",
+        "Web3 application stack::Platform"
+      ],
+      "predicted_nodes": [
+        "Storage Layer::Redis Cluster",
+        "Storage Layer::Redis Standalone",
+        "Decentralized Network Layer::Networked Redis Agents",
+        "Decentralized Network Layer::Peer Discovery Module"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": false,
+      "reasoning": "GT 'Platform' is a broad infrastructure/platform layer. The predicted nodes identify specific subsystems, but they do not reproduce the same abstract platform boundary; they are more detailed internal components rather than an equivalent platform node."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Web2 application stack::BlockChain Database\\nTransactions, Contracts,\\nCertificates and Receipts",
+    "Web2 application stack::File System\\nLarge Files and Media",
+    "Web2 application stack::Processing\\nBusiness Logic",
+    "Web3 application stack::BlockChain Database\\nTransactions, Contracts,\\nCertificates and Receipts",
+    "Web3 application stack::Decentralized File System\\nLarge Files and Media",
+    "Web3 application stack::Decentralized Processing\\nBusiness Logic"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::External Systems",
+    "Internal Data Handling Layer::SQL Result Parser",
+    "Proxy Layer::Command Processor",
+    "Proxy Layer::Redis Proxy",
+    "Storage Layer::Redis Cluster",
+    "Storage Layer::Redis Standalone",
+    "Decentralized Network Layer::Networked Redis Agents",
+    "Decentralized Network Layer::Peer Discovery Module",
+    "Decentralized Network Layer::PubSub",
+    "External Systems::Pub/Sub Clients",
+    "External Systems::Redis Clients"
+  ]
+}

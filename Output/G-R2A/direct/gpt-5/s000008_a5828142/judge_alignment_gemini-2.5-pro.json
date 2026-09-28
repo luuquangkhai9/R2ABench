@@ -1,0 +1,140 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::InfluxDB"
+      ],
+      "predicted_nodes": [
+        "Global::InfluxDB\n(Time-series: coding-process records"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the InfluxDB time-series database. The boundary difference (Application Runtime vs Global) is semantically acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Global::MySQL\n(Relational: users, projects,\nversions, battles, ..."
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the MySQL relational database."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::Redis"
+      ],
+      "predicted_nodes": [
+        "Global::Redis\n(Cache: workspace map,\ninvitation & battle state"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Redis cache component."
+    },
+    {
+      "gt_nodes": [
+        "Static Asset Delivery::CDN\nCloudFront"
+      ],
+      "predicted_nodes": [
+        "Global::CDN Distribution\n(CloudFront-style"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the CDN / CloudFront distribution component."
+    },
+    {
+      "gt_nodes": [
+        "Static Asset Delivery::Storage\nS3 bucket"
+      ],
+      "predicted_nodes": [
+        "Global::Object Storage\n(S3-compatible"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Object Storage (S3 bucket)."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Reverse Proxy::Nginx"
+      ],
+      "predicted_nodes": [
+        "Global::Nginx Reverse Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes denote the Nginx reverse proxy."
+    },
+    {
+      "gt_nodes": [
+        "Backend Repo::CI/CD Workflow",
+        "Frontend Repo::CI/CD Workflow"
+      ],
+      "predicted_nodes": [
+        "Global::CI/CD & Automated Deployment"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated the separate backend and frontend CI/CD workflows into a single global CI/CD deployment node."
+    },
+    {
+      "gt_nodes": [
+        "Coding Sandbox::Coding Sandbox 1::Docker",
+        "Coding Sandbox::Coding Sandbox 1::Exporter",
+        "Coding Sandbox::Coding Sandbox 1::Node.js",
+        "Coding Sandbox::Coding Sandbox 2::Docker",
+        "Coding Sandbox::Coding Sandbox 2::Exporter",
+        "Coding Sandbox::Coding Sandbox 2::Node.js"
+      ],
+      "predicted_nodes": [
+        "Global::Docker Sandbox\n(Compile/Execute Code"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT explicitly details the internal processes (Docker, Exporter, Node.js) across multiple sandbox instances. The AI correctly abstracted these into a single generalized Docker Sandbox node."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Reverse Proxy::Express",
+        "Backend Repo::Node.js"
+      ],
+      "predicted_nodes": [
+        "Global::Backend\nNode.js/Express + Socket.IO",
+        "Backend\nNode.js/Express + Socket.IO::REST APIs::Authentication API\n(JWT issue/validate",
+        "Backend\nNode.js/Express + Socket.IO::REST APIs::Code Execution API",
+        "Backend\nNode.js/Express + Socket.IO::REST APIs::File Upload API",
+        "Backend\nNode.js/Express + Socket.IO::REST APIs::Playback API",
+        "Backend\nNode.js/Express + Socket.IO::REST APIs::Project API",
+        "Backend\nNode.js/Express + Socket.IO::REST APIs::Version API\n(Initial Files",
+        "Backend\nNode.js/Express + Socket.IO::Real-time Sockets::Battle Namespace\n- Invite & accept (atomic)\n- Readiness & code sync\n- Compile/Judge\n- Outcome & leave",
+        "Backend\nNode.js/Express + Socket.IO::Real-time Sockets::Workspace Namespace\n- Authorization statusChecked\n- Edit state & occupation\n- Leave & disconnect cleanup"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The GT defines the backend framework (Express) and runtime (Node.js) generically. The AI expanded this backend definition into specific REST APIs and socket namespaces, maintaining correct functional alignment and backend attribution."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Repo::Vue 3"
+      ],
+      "predicted_nodes": [
+        "Browser::Vue Frontend App\n- Login & JWT\n- Projects & Versions\n- Workspace Editor\n- Playback View\n- Battle View"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Vue frontend application. The boundary mapping from 'Frontend Repo' to 'Browser' is semantically valid as it signifies the execution environment."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Backend Repo::Deploy Key",
+    "Backend Repo::GitHub",
+    "Frontend Repo::Deploy Key",
+    "Frontend Repo::GitHub",
+    "Global::Developer",
+    "Global::End User"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Browser"
+  ]
+}

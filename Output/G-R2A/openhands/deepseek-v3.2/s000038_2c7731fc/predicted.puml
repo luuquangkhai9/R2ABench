@@ -1,0 +1,116 @@
+@startuml
+
+!define COMPONENT #DDDDDD
+!define EXTERNAL #FFE6CC
+!define NETWORK #CCE6FF
+!define STORAGE #D5E8D4
+
+skinparam component {
+  BackgroundColor<<Component>> COMPONENT
+  BackgroundColor<<External>> EXTERNAL
+  BackgroundColor<<Network>> NETWORK
+  BackgroundColor<<Storage>> STORAGE
+  BorderColor #666666
+  FontSize 12
+  ArrowColor #666666
+}
+
+title IceFireDB Decentralized Database Infrastructure Architecture
+
+package "IceFireDB System" {
+  
+  component "Redis Proxy" <<Component>> {
+    component "Redis Command\nProcessor" as RCP
+    component "Instruction\nSynchronizer" as IS
+    component "Cluster-Aware\nRouter" as CAR
+    component "Command Category\nSupport" as CCS
+  }
+  
+  component "PubSub System" <<Component>> {
+    component "Redis Protocol\nAdapter" as RPA
+    component "Message Router" as MR
+    component "Peer Discovery\n(Kademlia DHT)" as PD
+    component "NAT Traversal\nHandler" as NAT
+  }
+  
+  component "Internal SQL\nResult Handler" <<Component>> {
+    component "MySQL Protocol\nParser" as MPP
+    component "Result Field\nProcessor" as RFP
+    component "Row Data\nExtractor" as RDE
+    component "Warning/Status\nHandler" as WSH
+  }
+  
+  RCP -[hidden]down- IS
+  IS -[hidden]down- CAR
+  CAR -[hidden]down- CCS
+  
+  RPA -[hidden]down- MR
+  MR -[hidden]down- PD
+  PD -[hidden]down- NAT
+  
+  MPP -[hidden]down- RFP
+  RFP -[hidden]down- RDE
+  RDE -[hidden]down- WSH
+}
+
+package "External Systems" {
+  component "Redis Applications" <<External>> as RA
+  component "Redis Storage" <<Storage>> {
+    database "Redis Standalone" as RS
+    database "Redis Cluster" as RC
+  }
+  
+  component "Networked\nRedis Agents" <<Network>> as NRA
+  component "PubSub Nodes" <<Network>> as PN
+  component "SQL Protocol\nClients" <<External>> as SPC
+}
+
+' Component Relationships
+RA -- "Redis commands" --> "Redis Proxy"
+"Redis Proxy" -- "writes data" --> "Redis Storage"
+"Redis Proxy" -- "synchronizes instructions" --> "Networked\nRedis Agents"
+
+PN -- "publish/subscribe" --> "PubSub System"
+"PubSub System" -- "peer discovery/routing" --> "PubSub Nodes"
+
+SPC -- "SQL/MySQL packets" --> "Internal SQL\nResult Handler"
+
+' Internal connections within Redis Proxy
+RCP -- "processes" --> IS
+IS -- "synchronizes" --> "Networked\nRedis Agents"
+CAR -- "routes to" --> "Redis Storage"
+CCS -- "validates" --> RCP
+
+' Internal connections within PubSub System
+RPA -- "adapts protocol" --> MR
+MR -- "routes messages" --> "PubSub Nodes"
+PD -- "discovers peers" --> "PubSub Nodes"
+NAT -- "handles connectivity" --> "PubSub Nodes"
+
+' Internal connections within SQL Result Handler
+MPP -- "parses packets" --> RFP
+RFP -- "extracts metadata" --> RDE
+RDE -- "processes rows" --> WSH
+
+' Data flow annotations
+note on link
+  Supports String, Set, List,\nHash, Sorted Set, Stream,\nand basic control commands
+end note
+
+note on link
+  Uses Kademlia DHT with\nlibp2p/IPFS-style peer\ndiscovery and routing
+end note
+
+note on link
+  Processes field metadata,\nrows, warning counts,\nand status values
+end note
+
+legend right
+  | Color Legend |
+  Component | Internal IceFireDB component
+  External | External system or client
+  Network | Networked peer or agent
+  Storage | Data storage backend
+endlegend
+
+@enduml

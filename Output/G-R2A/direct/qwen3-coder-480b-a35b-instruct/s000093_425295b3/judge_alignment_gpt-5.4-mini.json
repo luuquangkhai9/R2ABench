@@ -1,0 +1,85 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::OpenVR\nSteamVR Runtime"
+      ],
+      "predicted_nodes": [
+        "Global::SteamVR / OpenVR Runtime"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the same external SteamVR/OpenVR runtime dependency, and the global boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::User Application"
+      ],
+      "predicted_nodes": [
+        "Global::User Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact semantic match with the same boundary."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::VMT Driver\nC++"
+      ],
+      "predicted_nodes": [
+        "Global::VMT Driver"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The component matches functionally, but the GT places it inside the Virtual Motion Tracker boundary while the prediction moves it to Global, losing the system boundary attribution."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::VMT Manager\nC#"
+      ],
+      "predicted_nodes": [
+        "Global::VMT Manager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The component matches functionally, but the GT places it inside the Virtual Motion Tracker boundary while the prediction moves it to Global, which is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::Legacy Controller Binding\nmycontroller JSON"
+      ],
+      "predicted_nodes": [
+        "Global::Legacy Binding File\n(mycontroller"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both represent the legacy mycontroller binding artifact, but the GT keeps it within Virtual Motion Tracker while the prediction places it in Global. The prediction is also less specific about the JSON artifact."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::OpenVR Path Constants\n/user/body and /client_info"
+      ],
+      "predicted_nodes": [
+        "Global::+ Defines button modes and sub",
+        "Global::+ Maps right",
+        "Global::Button mode with complex sub",
+        "Global::hand inputs",
+        "Global::mode",
+        "Global::modes"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node about OpenVR path constants was not correctly reproduced. The predicted nodes instead fragment and partially describe legacy binding semantics such as button modes and hand inputs, which belong to the binding file rather than OpenVR path constants. This is a semantic boundary confusion."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Shared Memory",
+    "Global::+ Defines button modes and sub",
+    "Global::+ Maps right",
+    "Global::Button mode with complex sub",
+    "Global::hand inputs",
+    "Global::mode",
+    "Global::modes"
+  ]
+}

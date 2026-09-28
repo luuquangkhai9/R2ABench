@@ -1,0 +1,89 @@
+@startuml
+!define RECTANGLE rectangle linewidth 1
+
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam defaultTextAlignment center
+skinparam noteFontSize 10
+
+title MyEMS REST API and Admin System Architecture
+
+package "Browser Environment" {
+  [Admin Application] as admin #lightblue [
+    MyEMS Admin
+    Web Application
+    ----
+    - User Settings (/user)
+    - Contact Settings (/contact)
+    - Lazy-loaded Modules
+    - API Path Resolution
+  ]
+}
+
+package "Server Environment" {
+  [REST API Service] as api #lightgreen [
+    MyEMS REST API
+    ----
+    - RESTful Endpoints
+    - Python Runtime
+    - Dependency Management
+    - Database Connectivity
+  ]
+  
+  folder "Deployment Options" {
+    [Docker Container] as docker #lightyellow [
+      Docker-based
+      Deployment
+    ]
+    
+    [Development Server] as dev #lightyellow [
+      Quick-run Mode
+      (Linux/Windows)
+    ]
+  }
+}
+
+package "External Systems" {
+  [Database] as db #lightgray [
+    Data Storage
+    ----
+    MySQL Compatible
+  ]
+  
+  [Third-party Applications] as thirdparty #lightgray [
+    External Integrations
+  ]
+  
+  [MyEMS Components] as myems #lightgray [
+    Internal Components
+  ]
+}
+
+' Relationships
+admin --> api : HTTP/HTTPS Requests
+api --> db : Database Access
+thirdparty --> api : API Integration
+myems --> api : Component Communication
+
+api --> docker : Docker Deployment
+api --> dev : Development Mode
+
+note right of admin
+  Routes:
+  /user - User Settings
+  /contact - Contact Settings
+  Lazy-loading modules
+end note
+
+note right of api
+  Base Path Calculation:
+  {protocol}//{host}:{port}/api/
+end note
+
+note bottom of db
+  MySQL-compatible
+  database required for
+  persistent storage
+end note
+
+@enduml

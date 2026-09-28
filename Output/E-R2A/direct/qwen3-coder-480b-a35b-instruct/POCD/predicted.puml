@@ -1,0 +1,111 @@
+@startuml
+!define RECTANGLE class
+!define DATABASE rectangle
+
+package "User Interface Layer" {
+    RECTANGLE "Registration & Login UI" as regLoginUI
+    RECTANGLE "File Management UI" as fileMgmtUI
+    RECTANGLE "Detection Configuration UI" as detConfigUI
+    RECTANGLE "Detection Record UI" as detRecordUI
+    RECTANGLE "Report Export UI" as reportExportUI
+    RECTANGLE "Detection Result UI" as detResultUI
+    RECTANGLE "Help & Case UI" as helpCaseUI
+}
+
+package "Business Logic Layer" {
+    RECTANGLE "Account Service" as accountService
+    RECTANGLE "File Service" as fileService
+    RECTANGLE "Detection Configuration Service" as detConfigService
+    RECTANGLE "Detection Record Service" as detRecordService
+    RECTANGLE "Report Service" as reportService
+    RECTANGLE "Help Service" as helpService
+    RECTANGLE "Parsing Engine" as parsingEngine
+    RECTANGLE "Matching Engine" as matchingEngine
+    RECTANGLE "Detection Engine" as detectionEngine
+    RECTANGLE "Repair Engine" as repairEngine
+    RECTANGLE "API Gateway" as apiGateway
+}
+
+package "Data Access Layer" {
+    DATABASE "User Database" as userDB
+    DATABASE "File Storage" as fileStorage
+    DATABASE "Configuration Storage" as configStorage
+    DATABASE "Detection Record Storage" as detRecordStorage
+    DATABASE "Report Storage" as reportStorage
+    DATABASE "Help Document Storage" as helpDocStorage
+    DATABASE "Parsed Model Storage" as parsedModelStorage
+    DATABASE "Matching Result Storage" as matchResultStorage
+    DATABASE "Inconsistency Report Storage" as incReportStorage
+    DATABASE "Repair Suggestion Storage" as repairStorage
+    DATABASE "MySQL Database" as mysqlDB
+}
+
+regLoginUI --> accountService : uses
+fileMgmtUI --> fileService : uses
+detConfigUI --> detConfigService : uses
+detRecordUI --> detRecordService : uses
+reportExportUI --> reportService : uses
+detResultUI --> detectionEngine : uses
+helpCaseUI --> helpService : uses
+
+accountService --> userDB : reads/writes
+fileService --> fileStorage : reads/writes
+detConfigService --> configStorage : reads/writes
+detRecordService --> detRecordStorage : reads/writes
+reportService --> reportStorage : reads/writes
+helpService --> helpDocStorage : reads
+
+parsingEngine --> fileService : gets files
+parsingEngine --> mysqlDB : connects via JDBC
+parsingEngine --> parsedModelStorage : stores parsed models
+
+matchingEngine --> parsedModelStorage : reads models
+matchingEngine --> matchResultStorage : stores results
+
+detectionEngine --> matchResultStorage : reads matches
+detectionEngine --> parsedModelStorage : reads models
+detectionEngine --> incReportStorage : stores reports
+
+repairEngine --> incReportStorage : reads reports
+repairEngine --> repairStorage : stores suggestions
+repairEngine --> fileService : updates files
+repairEngine --> mysqlDB : executes repairs
+
+apiGateway --> accountService : routes requests
+apiGateway --> fileService : routes requests
+apiGateway --> detConfigService : routes requests
+apiGateway --> detRecordService : routes requests
+apiGateway --> reportService : routes requests
+apiGateway --> helpService : routes requests
+apiGateway --> parsingEngine : routes requests
+apiGateway --> matchingEngine : routes requests
+apiGateway --> detectionEngine : routes requests
+apiGateway --> repairEngine : routes requests
+
+note right of parsingEngine
+    Parses .mdj files and 
+    MySQL database schemas
+end note
+
+note right of matchingEngine
+    Matches entities, 
+    attributes and relationships
+end note
+
+note right of detectionEngine
+    Detects inconsistencies in:
+    - Fields and types
+    - Attributes/Columns
+    - Classes/Tables
+    - Relationship multiplicities
+    - Relationship types
+    - Missing/Extra relationships
+end note
+
+note right of repairEngine
+    Generates and executes
+    repair suggestions for
+    class diagrams and databases
+end note
+
+@enduml

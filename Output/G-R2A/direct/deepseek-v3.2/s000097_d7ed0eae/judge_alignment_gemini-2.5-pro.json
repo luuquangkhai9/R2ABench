@@ -1,0 +1,73 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Website::React UI\\nBeeGreen site",
+        "Website::TypeScript\\nWebsite code"
+      ],
+      "predicted_nodes": [
+        "Client Tier::React/TypeScript Website"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the GT's separate UI and logic nodes for the website into a single, logical component. The 'Client Tier' boundary is a semantically correct architectural layer for the specific 'Website' component."
+    },
+    {
+      "gt_nodes": [
+        "Browser Extension::React UI\\nExtension",
+        "Browser Extension::TypeScript\\nExtension code"
+      ],
+      "predicted_nodes": [
+        "Client Tier::Chrome Browser Extension"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the GT's separate UI and logic nodes for the browser extension into a single, logical component. The 'Client Tier' boundary is a semantically correct architectural layer for the specific 'Browser Extension' component."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Express App",
+        "IBM Cloud::LoopBack Generated Code",
+        "IBM Cloud::Node.js Runtime"
+      ],
+      "predicted_nodes": [
+        "API Tier::LoopBack Node.js Server"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated the GT's detailed backend technology stack (runtime, framework) into a single logical server node, which is a valid abstraction. The predicted 'API Tier' is a logical layer mentioned in the PRD and is semantically equivalent to the GT's physical hosting boundary 'IBM Cloud' for this component."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Cloudant\\nUser and API data",
+        "IBM Cloud::Object Storage"
+      ],
+      "predicted_nodes": [
+        "Data Tier::Persistent Storage",
+        "Data Tier::Persistent Storage::User Repository",
+        "Data Tier::Persistent Storage::InventoryItem Data"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The AI's nodes represent a logical data view based on PRD entities ('User Repository', 'InventoryItem Data'), while the GT nodes represent a physical storage view ('Cloudant', 'Object Storage'). This is a valid mapping between different abstraction levels. The 'Data Tier' boundary is a correct logical layer for components hosted on 'IBM Cloud'."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Watson Studio",
+        "IBM Cloud::CSV File\\nExport / training data"
+      ],
+      "predicted_nodes": [
+        "Supporting Services::Recommendation Workflow Engine",
+        "Supporting Services::Sustainability Scoring Service"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly inferred the logical functions ('Recommendation Workflow', 'Scoring Service') described in the PRD, which correspond to the GT's representation of the tool ('Watson Studio') and data asset ('CSV File') used to implement them. The 'Supporting Services' boundary is a good logical abstraction."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::User\\nShopping at online stores",
+    "Global::User\\nVisiting BeeGreen site"
+  ],
+  "unmatched_predicted_nodes": []
+}

@@ -1,0 +1,134 @@
+@startuml
+!define RECTANGLE class
+
+title Gran-Book Backend System Architecture
+
+' === Actors ===
+actor "End Users" as end_users
+actor "Administrators" as admins
+actor "Operations Engineers" as ops_eng
+actor "External Services" as ext_services
+
+' === Frontend Clients ===
+RECTANGLE "Native Mobile Applications" as mobile_app
+RECTANGLE "Administrative Web Application" as admin_web
+
+' === Gateway / BFF Layer ===
+RECTANGLE "Gateway / BFF Layer" as gateway {
+  RECTANGLE "Node.js-style Directory Structure" as nodejs_bff
+}
+
+' === Internal APIs ===
+package "Internal Backend Services" {
+  RECTANGLE "Authentication API" as auth_api {
+    RECTANGLE "Firebase Authentication" as firebase_auth
+  }
+  RECTANGLE "User Management API" as user_api
+  RECTANGLE "Book Management API" as book_api
+  RECTANGLE "EC Site API" as ec_api
+  RECTANGLE "Support API" as support_api
+  RECTANGLE "Notification Service" as notification_svc
+}
+
+' === External Integrations ===
+package "External Integrations" {
+  RECTANGLE "Book Search API" as book_search_ext
+  RECTANGLE "Stripe Payment Service" as stripe_payment
+  RECTANGLE "Push Notification Provider" as push_provider
+  RECTANGLE "Email Notification Provider" as email_provider
+}
+
+' === Data Stores ===
+package "Data Storage" {
+  RECTANGLE "MySQL" as mysql_db
+  RECTANGLE "NoSQL Storage" as nosql_db
+  RECTANGLE "Object Storage" as obj_storage
+}
+
+' === GCP Infrastructure ===
+package "GCP Infrastructure" {
+  RECTANGLE "Load Balancer" as lb
+  RECTANGLE "GKE Cluster" as gke
+  RECTANGLE "GCE VMs" as vms {
+    RECTANGLE "TLS Certificate Tooling" as tls_tooling
+  }
+}
+
+' === Connections ===
+' Clients to Gateway
+end_users --> mobile_app
+admins --> admin_web
+mobile_app --> gateway
+admin_web --> gateway
+
+' Gateway to Internal APIs
+gateway --> auth_api
+gateway --> user_api
+gateway --> book_api
+gateway --> ec_api
+gateway --> support_api
+
+' Internal APIs to Data Stores
+auth_api --> firebase_auth
+user_api --> mysql_db
+book_api --> mysql_db
+ec_api --> mysql_db
+support_api --> nosql_db
+notification_svc --> push_provider
+notification_svc --> email_provider
+
+' APIs to External Services
+book_api --> book_search_ext : FR-005
+ec_api --> stripe_payment : FR-006
+
+' Data Store Details
+firebase_auth ..> "Authentication Data" : DR-001
+mysql_db ..> "User Data" : DR-002
+mysql_db ..> "Book Data" : DR-003
+mysql_db ..> "EC Site Data" : DR-004
+nosql_db ..> "Message Data" : DR-005
+obj_storage ..> "Thumbnail/Object Data" : DR-006
+
+' GCP Infrastructure
+lb --> gateway
+gateway --> gke
+gke --> vms
+ops_eng --> vms : VM Admin
+ops_eng --> gke : Cluster Access
+
+' External Services Interactions
+ext_services --> firebase_auth
+ext_services --> book_search_ext
+ext_services --> stripe_payment
+ext_services --> push_provider
+ext_services --> email_provider
+
+' Deployment & Constraints
+note right of gke
+  NFR-001: Container-based deployment
+  C-002: GCP Target Environment
+end note
+
+note right of vms
+  NFR-002: TLS via Let's Encrypt
+  C-002: GCE VM Setup
+end note
+
+note right of gateway
+  NFR-005: Access Architecture
+  C-006: Node.js-style BFF
+end note
+
+note right of user_api
+  C-001: Golang Implementation
+end note
+
+note right of book_search_ext
+  C-007: Provider Name Unresolved
+end note
+
+note right of stripe_payment
+  C-004: Stripe Integration
+end note
+
+@enduml

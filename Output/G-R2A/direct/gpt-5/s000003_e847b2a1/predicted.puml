@@ -1,0 +1,133 @@
+@startuml
+title Prediction Cards - System Architecture
+
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam linetype ortho
+skinparam wrapWidth 240
+skinparam defaultTextAlignment left
+
+' Users
+rectangle "Prediction Participant\n(User)" as User <<User>>
+
+' Frontend and wallet
+package "User Frontend" {
+  component "Frontend (React)\n- Prediction creation & viewing\n- Outcome NFT operations\n- Media display\n- Provider/Context API" as Frontend <<Web>>
+  component "Aeternity Wallet Client + SDK" as Wallet <<Wallet>>
+  note right of Frontend
+    - Uses connected wallet for contract interactions
+    - Converts local time inputs to ms timestamps
+    - Provides prediction operations via context to child components
+    - Loads outcome NFT media from storage
+    [FR-005, FR-006, FR-007, FR-011, FR-012]
+    [NFR-001, NFR-007]
+  end note
+}
+
+' Backend services
+package "Backend Services" {
+  component "Prediction-Processing Service\n- Initiate oracle query for closed predictions\n- Drive result processing on-chain" as PPS <<Service>>
+  note right of PPS
+    - Scheduled processing for closed predictions
+    [FR-010]
+    [NFR-005]
+  end note
+
+  component "Oracle Service (Quarkus)\n- Oracle registration/validity\n- Check pending oracle queries\n- Fetch price, compare & respond" as OracleSvc <<Quarkus>>
+  note right of OracleSvc
+    - Requires complete runtime configuration before start
+    - Runs periodically, maintains oracle validity
+    - Submits price-comparison result: higher | lower_or_equal
+    [FR-001, FR-002, FR-003, FR-004]
+    [NFR-002, NFR-003, NFR-005, NFR-006]
+  end note
+
+  folder "Runtime Configuration\n(keys, node/compiler, network, scheduling,\nfees, validity thresholds)" as Config
+}
+
+' Blockchain and on-chain components
+node "Aeternity Blockchain" as Chain {
+  component "PredictionCards Smart Contract\n(Sophia)\n- Prediction & outcome state\n- Reward claiming" as Contract <<SmartContract>>
+  component "AENS Registry\n- Contract name resolution" as AENS <<Registry>>
+  component "Aeternity Oracle (on-chain)\n- Oracle queries/responses" as AEOracle <<Oracle>>
+}
+
+' External dependencies
+cloud "Prediction Media Storage\n(IPFS-compatible)" as Media <<Storage>>
+cloud "External Price Provider" as Price <<API>>
+
+' Local integration-test stack
+package "Local Integration-Test Stack (dev only)" #DDDDDD {
+  node "Local Aeternity Node" as LocalNode
+  component "Compiler Service" as LocalCompiler
+  component "Index / Debug Endpoint" as LocalIndexDebug
+  component "Test Proxy / CORS\n- Methods: GET, POST, OPTIONS\n- Headers: Content-Type, Cache-Control,\n  Content-Range, Range" as TestProxy
+  note right of TestProxy
+    Local browser-compatible CORS/proxy for tests
+    [FR-008, FR-009]
+    [NFR-004]
+  end note
+}
+
+' User to frontend
+User -down-> Frontend : UI interactions\n(create/view, fund/rent,\nwithdraw, claim)
+
+' Frontend to wallet and media
+Frontend -right-> Wallet : Connect, sign, SDK-backed calls\n[wallet-mediated]
+Frontend -down-> Media : Load outcome NFT media\n(display references)
+
+' Contract interactions via wallet
+Wallet -right-> Chain : Contract calls / transactions\n(create prediction; fund/rent;\nwithdraw; claim rewards)
+
+' Services to blockchain
+PPS -right-> Contract : - Initiate oracle query for\n  closed predictions\n- Process outcome after response
+OracleSvc -right-> Chain : - Register/extend oracle\n- Read pending oracle queries\n- Submit responses (higher | lower_or_equal)
+OracleSvc -down-> Price : Fetch price data for asset/end time\nand compare with target price
+
+' AENS name resolution
+Frontend ..> AENS : Resolve contract by AENS name
+PPS ..> AENS : Resolve contract by AENS name
+OracleSvc ..> AENS : Resolve contract by AENS name
+
+' Services configuration
+OracleSvc -down-> Config : Mandatory runtime configuration
+
+' On-chain relationships (visual)
+Contract .. AEOracle : Oracle query/response\nworkflow (on-chain)
+
+' Local dev/test connectivity (dashed)
+Frontend ..> TestProxy : Browser test calls (CORS/proxy)
+TestProxy ..> LocalNode : Proxied RPC / contract calls
+LocalNode ..> LocalCompiler : Contract compilation (dev)
+LocalNode ..> LocalIndexDebug : Indexing / debug (dev)
+OracleSvc ..> LocalNode : Dev-mode blockchain connectivity
+PPS ..> LocalNode : Dev-mode blockchain connectivity
+
+' Notes on blockchain constraints
+note bottom of Chain
+  Constraints:
+  - Aeternity blockchain & Sophia runtime
+  - AENS-based contract location
+  Responsibility split:
+  - Contract: state & reward rules
+  - Services: oracle query & response workflow
+  [C-002]
+end note
+
+' Media reference note
+note on link Frontend--Media
+  Contract stores references; frontend retrieves media
+end note
+
+' Legend for primary lifecycle
+legend right
+  Primary lifecycle (high level):
+  1) User connects wallet and creates prediction
+  2) Frontend submits creation via wallet to contract
+  3) Users view and operate outcome NFTs
+  4) After close, Prediction-Processing initiates oracle query
+  5) Oracle Service checks queries, fetches price, submits response
+  6) Prediction-Processing completes on-chain result processing
+  7) Contract determines winning outcome; rewards claimable
+endlegend
+@enduml

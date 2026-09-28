@@ -1,0 +1,77 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Website::React UI\\nBeeGreen site",
+        "Website::TypeScript\\nWebsite code"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Website (React/TypeScript"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the GT's detailed UI and code nodes for the website into a single, functionally equivalent component. The 'Client Layer' boundary is semantically equivalent to the 'Website' boundary in this context."
+    },
+    {
+      "gt_nodes": [
+        "Browser Extension::React UI\\nExtension",
+        "Browser Extension::TypeScript\\nExtension code"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Browser Extension (Chrome"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the GT's detailed UI and code nodes for the browser extension into a single component. The 'Client Layer' boundary is a valid and semantically equivalent abstraction for the 'Browser Extension' boundary."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Express App",
+        "IBM Cloud::LoopBack Generated Code",
+        "IBM Cloud::Node.js Runtime"
+      ],
+      "predicted_nodes": [
+        "API Layer (Node.js / LoopBack::Backend API Server (LoopBack",
+        "API Layer (Node.js / LoopBack::PingController\\n(Diagnostics",
+        "API Layer (Node.js / LoopBack::UserController\\n(Users API",
+        "Repository / Service Layer::UserRepository"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The GT nodes describe the backend's technology stack (runtime, frameworks), while the AI nodes describe the backend's logical components (server, controllers, repository), as detailed in the PRD. This is a valid N:M mapping representing the same backend system. The AI's logical boundaries ('API Layer', 'Repository / Service Layer') are semantically correct abstractions for the GT's physical boundary ('IBM Cloud')."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Cloudant\\nUser and API data"
+      ],
+      "predicted_nodes": [
+        "Data Store Layer::Persistent Storage\\n(Users, InventoryItems"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the persistent data storage for the system. The GT node specifies the technology (Cloudant), while the AI node uses a generic but accurate functional description. The AI's 'Data Store Layer' boundary is a correct logical equivalent to the GT's physical 'IBM Cloud' boundary for a database component."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::CSV File\\nExport / training data",
+        "IBM Cloud::Object Storage",
+        "IBM Cloud::Watson Studio"
+      ],
+      "predicted_nodes": [
+        "Supporting Data Processing::Sustainability Scoring &\\nRecommendation Processing"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated multiple GT nodes related to data processing infrastructure and artifacts into a single functional component. The 'Supporting Data Processing' boundary is a valid and semantically equivalent description for the role these components play within the 'IBM Cloud' environment."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::User\\nShopping at online stores",
+    "Global::User\\nVisiting BeeGreen site"
+  ],
+  "unmatched_predicted_nodes": [
+    "Domain Models::InventoryItem Model",
+    "Domain Models::PingResponse Schema",
+    "Domain Models::User Model"
+  ]
+}

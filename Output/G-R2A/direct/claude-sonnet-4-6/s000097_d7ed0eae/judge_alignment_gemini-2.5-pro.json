@@ -1,0 +1,93 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Website::React UI\\nBeeGreen site",
+        "Website::TypeScript\\nWebsite code"
+      ],
+      "predicted_nodes": [
+        "Client Tier::React/TypeScript\\nWebsite",
+        "Client Tier::React/TypeScript\\nWebsite::Shopping UI",
+        "Client Tier::React/TypeScript\\nWebsite::Sustainability\\nDashboard"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the Website component, represented by two GT nodes, and split it into more granular functional parts. The 'Client Tier' boundary is a semantically correct architectural layer for the GT's 'Website' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Browser Extension::React UI\\nExtension",
+        "Browser Extension::TypeScript\\nExtension code"
+      ],
+      "predicted_nodes": [
+        "Client Tier::Chrome Browser\\nExtension",
+        "Client Tier::Chrome Browser\\nExtension::Overlay UI",
+        "Client Tier::Chrome Browser\\nExtension::Page Scanner"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the Browser Extension component, represented by two GT nodes, and split it into more granular functional parts. The 'Client Tier' boundary is a semantically correct architectural layer for the GT's 'Browser Extension' boundary."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Express App",
+        "IBM Cloud::LoopBack Generated Code",
+        "IBM Cloud::Node.js Runtime"
+      ],
+      "predicted_nodes": [
+        "Backend API Tier\\n(Node.js / LoopBack::Domain Models",
+        "Backend API Tier\\n(Node.js / LoopBack::Domain Models::InventoryItem Model\\n(id, stats, totalScore, category,\\ndetails, comments, name,\\nassociatedStores",
+        "Backend API Tier\\n(Node.js / LoopBack::Domain Models::PingResponse\\n(greeting, date, url, headers",
+        "Backend API Tier\\n(Node.js / LoopBack::Domain Models::User Model\\n(id, ip, creationDate,\\npurchaseIds, username, region",
+        "Backend API Tier\\n(Node.js / LoopBack::REST API Layer",
+        "Backend API Tier\\n(Node.js / LoopBack::REST API Layer::PingController",
+        "Backend API Tier\\n(Node.js / LoopBack::REST API Layer::PingController::GET /ping\\n(FR-005",
+        "Backend API Tier\\n(Node.js / LoopBack::REST API Layer::UserController",
+        "Backend API Tier\\n(Node.js / LoopBack::REST API Layer::UserController::GET /users/{id}\\n(FR-004",
+        "Backend API Tier\\n(Node.js / LoopBack::REST API Layer::UserController::GET /users\\n(FR-002",
+        "Backend API Tier\\n(Node.js / LoopBack::REST API Layer::UserController::PATCH /users\\n(FR-003",
+        "Backend API Tier\\n(Node.js / LoopBack::REST API Layer::UserController::POST /users\\n(FR-001",
+        "Backend API Tier\\n(Node.js / LoopBack::Repository Layer",
+        "Backend API Tier\\n(Node.js / LoopBack::Repository Layer::UserRepository",
+        "Global::Backend API Tier\\n(Node.js / LoopBack"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the backend service concept from the GT's runtime/framework nodes and split it into a detailed, layered architecture (Models, Controllers, Repositories) based on the PRD. The logical 'Backend API Tier' boundary is more descriptive and semantically correct than the GT's physical 'IBM Cloud' hosting boundary."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Cloudant\\nUser and API data",
+        "IBM Cloud::Object Storage"
+      ],
+      "predicted_nodes": [
+        "Global::Persistent Storage",
+        "Persistent Storage::InventoryItem Records",
+        "Persistent Storage::User Records"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the GT's specific storage technologies into a single logical 'Persistent Storage' layer, as described in the PRD. The AI then correctly identified the main data entities stored. The logical boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::CSV File\\nExport / training data",
+        "IBM Cloud::Watson Studio"
+      ],
+      "predicted_nodes": [
+        "Global::Data & Scoring Services",
+        "Data & Scoring Services::Product Data\\nProcessor",
+        "Data & Scoring Services::Product\\nRecommendation\\nWorkflow",
+        "Data & Scoring Services::Sustainability\\nScoring Engine"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly inferred the function of the GT's data processing components and split this single concept into a logical 'Data & Scoring Services' layer containing specific functional services, aligning with the PRD's description of 'scoring and recommendation workflows'. The boundary is semantically correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::User\\nShopping at online stores",
+    "Global::User\\nVisiting BeeGreen site"
+  ],
+  "unmatched_predicted_nodes": []
+}

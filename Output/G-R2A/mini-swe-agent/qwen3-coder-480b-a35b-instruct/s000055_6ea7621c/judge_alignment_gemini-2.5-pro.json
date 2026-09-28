@@ -1,0 +1,80 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "BACKEND::Router"
+      ],
+      "predicted_nodes": [
+        "Node.js Server (Backend::Router"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The router components are a direct match. The AI's boundary 'Node.js Server (Backend' is semantically equivalent to the GT's 'BACKEND'."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::algorithm"
+      ],
+      "predicted_nodes": [
+        "Node.js Server (Backend::Autocomplete Algorithm",
+        "Node.js Server (Backend::Data Store"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI split the GT's 'algorithm' node into a specific 'Autocomplete Algorithm' for search logic (FR-009) and a 'Data Store' representing data access/extraction logic (FR-008). This is a valid refinement, and the boundaries are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::data.json"
+      ],
+      "predicted_nodes": [
+        "Local File System::Laureate Data JSON"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The laureate data file is correctly identified. While the GT places it within the 'BACKEND' boundary and the AI creates a 'Local File System' boundary, this is a reasonable alternative architectural view for a data-at-rest resource and not a severe error."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::handlers"
+      ],
+      "predicted_nodes": [
+        "Node.js Server (Backend::Request Handler",
+        "Node.js Server (Backend::Static Asset Server"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly split the GT's generic 'handlers' node, which serves multiple purposes, into a more specific 'Request Handler' (for home page/404) and a 'Static Asset Server'. This is a valid refinement, and the boundaries are semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::public assets\\nhtml\\ncss\\njs"
+      ],
+      "predicted_nodes": [
+        "Local File System::Public Assets"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The static assets folder is correctly identified. The AI's 'Local File System' boundary is a reasonable alternative to the GT's 'BACKEND' boundary for data-at-rest resources, and not a severe error."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::index.html",
+        "FRONTEND::main.css",
+        "FRONTEND::userInput"
+      ],
+      "predicted_nodes": [
+        "Web Browser (Client::User Interface"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated several specific frontend GT nodes (HTML, CSS, user input element) into a single high-level 'User Interface' component. This is a valid aggregation. The 'Web Browser (Client' boundary is semantically equivalent to 'FRONTEND'."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "FRONTEND::XMLHttpRequest"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Local File System"
+  ]
+}

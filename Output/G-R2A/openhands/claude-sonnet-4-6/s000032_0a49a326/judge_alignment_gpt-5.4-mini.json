@@ -1,0 +1,304 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Activiti Cloud Infrastructure::Activiti Cloud Application::Audit\nService",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kubernetes / GKE Cluster::Audit Service\n(Audit Events"
+      ],
+      "reasoning": "The predicted node represents the same audit-service responsibility, including audit events for process instances. The surrounding cluster boundary is different but semantically compatible."
+    },
+    {
+      "gt_node": "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Customer\nLogic",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kubernetes / GKE Cluster::Cloud Connectors"
+      ],
+      "reasoning": "The predicted node covers the Cloud Connectors concept, which includes customer logic as a sub-responsibility in the GT."
+    },
+    {
+      "gt_node": "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Out of the\nBox Services",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kubernetes / GKE Cluster::Cloud Connectors"
+      ],
+      "reasoning": "The predicted Cloud Connectors node is broad enough to cover the GT's out-of-the-box services under the same connector family."
+    },
+    {
+      "gt_node": "Activiti Cloud Infrastructure::Activiti Cloud Application::Notification\nService",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kubernetes / GKE Cluster::Notification Service"
+      ],
+      "reasoning": "This is a direct semantic match for Notification Service."
+    },
+    {
+      "gt_node": "Activiti Cloud Infrastructure::Activiti Cloud Application::Query\nService",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kubernetes / GKE Cluster::Query Service\n(Process Execution Info"
+      ],
+      "reasoning": "The predicted node directly matches Query Service and includes the same process-execution-information responsibility."
+    },
+    {
+      "gt_node": "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::BPMN, Form\nand Rule Defs",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kubernetes / GKE Cluster::Example Runtime Bundle\n(Process Definitions &\nProcess Instances"
+      ],
+      "reasoning": "The predicted Example Runtime Bundle captures deployed process definitions and runtime instances, which subsumes the GT's runtime bundle definition content."
+    },
+    {
+      "gt_node": "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::Process\nRuntime",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kubernetes / GKE Cluster::Spring Boot Application::ProcessRuntime API"
+      ],
+      "reasoning": "The predicted ProcessRuntime API node matches the GT Process Runtime concept, even though it is placed under a Spring Boot application boundary."
+    },
+    {
+      "gt_node": "Activiti Cloud Infrastructure::Config Maps\n(Kubernetes",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kubernetes / GKE Cluster::Config Maps /\nRegistry"
+      ],
+      "reasoning": "The predicted node covers config maps and registry concerns, which semantically includes the GT config maps boundary."
+    },
+    {
+      "gt_node": "Activiti Cloud Infrastructure::Gateway",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node explicitly represents the Gateway/API gateway architecture background component."
+    },
+    {
+      "gt_node": "Activiti Cloud Infrastructure::Registry\n(Kubernetes",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kubernetes / GKE Cluster::Config Maps /\nRegistry"
+      ],
+      "reasoning": "The predicted config maps/registry node covers the registry concept in the GT."
+    },
+    {
+      "gt_node": "Global::Client",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node explicitly models the client actor."
+    },
+    {
+      "gt_node": "Global::SSO/IDM\n(Keycloak",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Keycloak\n(Identity Provider / SSO"
+      ],
+      "reasoning": "This is a direct semantic match for the identity provider / SSO component."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Global::Keycloak\n(Identity Provider / SSO",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::SSO/IDM\n(Keycloak"
+      ],
+      "reasoning": "Direct match to the GT identity provider/SSO node."
+    },
+    {
+      "predicted_node": "Global::Kubernetes / GKE Cluster",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT does mention Kubernetes/GKE as context, but not as a standalone node at this level; this appears to be an added umbrella boundary rather than a direct GT concept node."
+    },
+    {
+      "predicted_node": "Kubernetes / GKE Cluster::Audit Service\n(Audit Events",
+      "grounded": true,
+      "reference_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Audit\nService"
+      ],
+      "reasoning": "Grounded in the GT Audit Service concept."
+    },
+    {
+      "predicted_node": "Kubernetes / GKE Cluster::Cloud Connectors",
+      "grounded": true,
+      "reference_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Customer\nLogic",
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Out of the\nBox Services"
+      ],
+      "reasoning": "Grounded in the GT Cloud Connectors concept, which includes the listed subcomponents."
+    },
+    {
+      "predicted_node": "Kubernetes / GKE Cluster::Config Maps /\nRegistry",
+      "grounded": true,
+      "reference_nodes": [
+        "Activiti Cloud Infrastructure::Config Maps\n(Kubernetes",
+        "Activiti Cloud Infrastructure::Registry\n(Kubernetes"
+      ],
+      "reasoning": "Grounded in the GT config maps and registry background components."
+    },
+    {
+      "predicted_node": "Kubernetes / GKE Cluster::Deployment Descriptors\n(Input Rate · Replica Counts",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "Deployment descriptors are in the PRD requirements, but there is no corresponding GT node provided for this concept."
+    },
+    {
+      "predicted_node": "Kubernetes / GKE Cluster::Example Runtime Bundle\n(Process Definitions &\nProcess Instances",
+      "grounded": true,
+      "reference_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::BPMN, Form\nand Rule Defs"
+      ],
+      "reasoning": "The GT runtime bundle concept is represented by the example runtime bundle with process definitions/instances."
+    },
+    {
+      "predicted_node": "Kubernetes / GKE Cluster::NGINX Ingress Controller\n(Public IP Exposure",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "Ingress/public IP routing is in the PRD, but no GT node for ingress exists in the provided manual node list."
+    },
+    {
+      "predicted_node": "Kubernetes / GKE Cluster::Notification Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Notification\nService"
+      ],
+      "reasoning": "Direct semantic match."
+    },
+    {
+      "predicted_node": "Kubernetes / GKE Cluster::Query Service\n(Process Execution Info",
+      "grounded": true,
+      "reference_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Query\nService"
+      ],
+      "reasoning": "Direct semantic match with the query service concept."
+    },
+    {
+      "predicted_node": "Kubernetes / GKE Cluster::Spring Boot Application",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "Spring Boot application is contextual background in the PRD, but no corresponding GT node is provided."
+    },
+    {
+      "predicted_node": "Kubernetes / GKE Cluster::Spring Boot Application::ProcessRuntime API",
+      "grounded": true,
+      "reference_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::Process\nRuntime"
+      ],
+      "reasoning": "Grounded in the GT Process Runtime concept, though boundary placement is more specific and shifted into the Spring Boot application."
+    },
+    {
+      "predicted_node": "Kubernetes / GKE Cluster::Spring Boot Application::Spring Security\n(User · Group · Role",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "Spring Security is described in the PRD, but no GT node explicitly represents it."
+    },
+    {
+      "predicted_node": "Kubernetes / GKE Cluster::Spring Boot Application::TaskRuntime API\n[requires ROLE_ACTIVITI_USER",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "TaskRuntime is present in the PRD, but no GT node for TaskRuntime exists in the provided manual node list."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Audit\nService"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Audit Service\n(Audit Events"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same service concept; Kubernetes/GKE placement is semantically acceptable for the architecture context."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Customer\nLogic",
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Out of the\nBox Services"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Cloud Connectors"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT splits Cloud Connectors into subnodes, while the prediction aggregates them."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Notification\nService"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Notification Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Query\nService"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Query Service\n(Process Execution Info"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match with equivalent query-service responsibility."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::BPMN, Form\nand Rule Defs"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Example Runtime Bundle\n(Process Definitions &\nProcess Instances"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Equivalent runtime bundle concept; the prediction emphasizes example runtime contents."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::Process\nRuntime"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Spring Boot Application::ProcessRuntime API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same process runtime API concept, with boundary shifted to the hosting application layer."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Config Maps\n(Kubernetes",
+        "Activiti Cloud Infrastructure::Registry\n(Kubernetes"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Config Maps /\nRegistry"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node merges the two GT infrastructure configuration concepts."
+    },
+    {
+      "gt_nodes": [
+        "Global::SSO/IDM\n(Keycloak"
+      ],
+      "predicted_nodes": [
+        "Global::Keycloak\n(Identity Provider / SSO"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Activiti Cloud Infrastructure::Gateway",
+    "Global::Client"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Kubernetes / GKE Cluster",
+    "Kubernetes / GKE Cluster::Deployment Descriptors\n(Input Rate · Replica Counts",
+    "Kubernetes / GKE Cluster::NGINX Ingress Controller\n(Public IP Exposure",
+    "Kubernetes / GKE Cluster::Spring Boot Application",
+    "Kubernetes / GKE Cluster::Spring Boot Application::Spring Security\n(User · Group · Role",
+    "Kubernetes / GKE Cluster::Spring Boot Application::TaskRuntime API\n[requires ROLE_ACTIVITI_USER"
+  ]
+}

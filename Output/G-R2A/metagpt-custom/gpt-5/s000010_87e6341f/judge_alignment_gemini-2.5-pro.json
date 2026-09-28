@@ -1,0 +1,105 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Flutter-based app::Android",
+        "Flutter-based app::MacOS",
+        "Flutter-based app::Web",
+        "Flutter-based app::iOS"
+      ],
+      "predicted_nodes": [
+        "External Systems::Flutter/Dart Client Runtimes (Android, iOS, Web, macOS"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT places the platform-specific runtimes under the 'Flutter-based app' boundary (part of the system), whereas the AI incorrectly classifies them under 'External Systems'."
+    },
+    {
+      "gt_nodes": [
+        "Flutter-based app::Dart"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Home Recipes Flutter/Dart Client",
+        "Client Layer::Dart Generated Client Code"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's cross-platform Dart codebase is split into the client and its generated code by AI. The boundaries ('Flutter-based app' vs 'Client Layer') are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Hosted in Azure Kubernetes Service"
+      ],
+      "predicted_nodes": [
+        "External Systems::Azure Kubernetes Service (AKS"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Azure Kubernetes Service environment. While AI puts it in 'External Systems', this is a reasonable classification for a managed cloud environment."
+    },
+    {
+      "gt_nodes": [
+        "Hosted in Azure Kubernetes Service::Docker container"
+      ],
+      "predicted_nodes": [
+        "Deployment Layer::Docker Image / Runtime"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "GT explicitly nests the Docker container within the 'Hosted in Azure Kubernetes Service' boundary, denoting a hierarchical deployment topology. AI places it in a generic 'Deployment Layer', losing the specific deployment context."
+    },
+    {
+      "gt_nodes": [
+        "Hosted in Azure Kubernetes Service::Docker container::Recipes Server\n(gRPC Server)\nGolang"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Go gRPC Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "GT places the server explicitly inside physical/deployment boundaries (Docker container within AKS). AI places it purely in a logical 'Service Layer', completely ignoring the deployment containment."
+    },
+    {
+      "gt_nodes": [
+        "Global::gRPC Gateway\n(HTTP-gRPC Proxy)\nGolang"
+      ],
+      "predicted_nodes": [
+        "API Gateway Layer::gRPC-Gateway Middleware"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the gRPC gateway proxy. AI correctly classifies it under the API Gateway Layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::Postman",
+        "Global::Test Client 1\nNodeJS",
+        "Global::Test Client 2\nGolang"
+      ],
+      "predicted_nodes": [
+        "External Systems::Standard HTTP Clients (curl, etc."
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The various specific test clients from GT are grouped into standard HTTP clients by AI. They are correctly considered external tools."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "API Gateway Layer::HTTP API::GetAllIngredientsForRecipe (API-008",
+    "API Gateway Layer::HTTP API::HTTP API",
+    "API Gateway Layer::HTTP API::ListAllIngredientsAtHome (API-007",
+    "API Gateway Layer::HTTP API::ListAllRecipes (API-006",
+    "API Gateway Layer::HTTP API::addRecipe (API-005",
+    "Build / Code Generation Layer::Protocol Buffers Compiler & Plugins",
+    "Build / Code Generation Layer::gRPC-Gateway Generation Deps & Annotations",
+    "Contract Layer::Protocol Buffers Definitions (.proto",
+    "Deployment Layer::AKS Deployment Config",
+    "Deployment Layer::Kubernetes Manifests / Config",
+    "External Systems::Dart Toolchain (with Protobuf support",
+    "External Systems::Go Runtime & gRPC Tooling",
+    "External Systems::Local Kubernetes Cluster",
+    "External Systems::gRPC-Gateway Runtime Dependencies",
+    "Service Layer::gRPC API"
+  ]
+}

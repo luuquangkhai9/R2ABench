@@ -1,0 +1,97 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::HTTP"
+      ],
+      "predicted_nodes": [
+        "HypnoLog Server (Node.js/Express::Endpoint: GET /logger/status",
+        "HypnoLog Server (Node.js/Express::Endpoint: POST /logger/in",
+        "HypnoLog Server (Node.js/Express::HTTP Server (Node",
+        "HypnoLog Server (Node.js/Express::JSON Body Parser\\n(limit: 50mb",
+        "HypnoLog Server (Node.js/Express::Logging Router (/logger"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT HTTP node corresponds to the server-side HTTP interface and request handling pieces. The AI split it into endpoint, router, server, and body-parser subnodes, which is semantically consistent with the same boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::HypnoLog\\nServer"
+      ],
+      "predicted_nodes": [
+        "HypnoLog Server (Node.js/Express::Express App",
+        "HypnoLog Server (Node.js/Express::HTTP Server (Node",
+        "HypnoLog Server (Node.js/Express::Logging Router (/logger",
+        "HypnoLog Server (Node.js/Express::Socket.IO Server",
+        "HypnoLog Server (Node.js/Express::Static Web: /client.html & assets",
+        "HypnoLog Server (Node.js/Express::JSON Body Parser\\n(limit: 50mb",
+        "HypnoLog Server (Node.js/Express::Endpoint: GET /logger/status",
+        "HypnoLog Server (Node.js/Express::Endpoint: POST /logger/in"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT server node is expanded into its concrete runtime and Express components. This is a valid decomposition within the same HypnoLog Server boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::In Browser Log"
+      ],
+      "predicted_nodes": [
+        "Browser Client (UI::Ajv Validator",
+        "Browser Client (UI::Client Page & Scripts",
+        "Browser Client (UI::Default Window",
+        "Browser Client (UI::Received-data List",
+        "Browser Client (UI::Socket.IO Client",
+        "Browser Client (UI::Tag & Name Display Handling",
+        "Browser Client (UI::Visualizer Config\\n(default or user",
+        "Browser Client (UI::Visualizer Dispatcher",
+        "Browser Client (UI::Visualizers\\n(canDisplay / display",
+        "Browser Client (UI::Window Dispatcher",
+        "Data Model::HypnoLog Data Object\\n{ data, type, [tags], [name] ",
+        "Data Model::HypnoLog-error\\n(wrapped invalid message"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT browser logging/viewing node is decomposed into UI, validation, dispatch, and data-model subcomponents. These are all part of the browser-side log display architecture, so the boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Global::Python"
+      ],
+      "predicted_nodes": [
+        "Global::Logging Producer\\n(any language"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node suggests a Python-specific producer, while the predicted node generalizes it to any-language logging producer. This is not semantically equivalent as a specific component, so it should not be considered a correct match."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::C#",
+    "Global::Python"
+  ],
+  "unmatched_predicted_nodes": [
+    "Browser Client (UI::Ajv Validator",
+    "Browser Client (UI::Client Page & Scripts",
+    "Browser Client (UI::Default Window",
+    "Browser Client (UI::Received-data List",
+    "Browser Client (UI::Socket.IO Client",
+    "Browser Client (UI::Tag & Name Display Handling",
+    "Browser Client (UI::Visualizer Config\\n(default or user",
+    "Browser Client (UI::Visualizer Dispatcher",
+    "Browser Client (UI::Visualizers\\n(canDisplay / display",
+    "Browser Client (UI::Window Dispatcher",
+    "Data Model::HypnoLog Data Object\\n{ data, type, [tags], [name] ",
+    "Data Model::HypnoLog-error\\n(wrapped invalid message",
+    "Global::Logging Producer\\n(any language",
+    "HypnoLog Server (Node.js/Express::Endpoint: GET /logger/status",
+    "HypnoLog Server (Node.js/Express::Endpoint: POST /logger/in",
+    "HypnoLog Server (Node.js/Express::Express App",
+    "HypnoLog Server (Node.js/Express::HTTP Server (Node",
+    "HypnoLog Server (Node.js/Express::JSON Body Parser\\n(limit: 50mb",
+    "HypnoLog Server (Node.js/Express::Logging Router (/logger",
+    "HypnoLog Server (Node.js/Express::Socket.IO Server",
+    "HypnoLog Server (Node.js/Express::Static Web: /client.html & assets"
+  ]
+}

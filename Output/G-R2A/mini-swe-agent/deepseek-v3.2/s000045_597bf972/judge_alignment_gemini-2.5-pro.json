@@ -1,0 +1,80 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Application"
+      ],
+      "predicted_nodes": [
+        "Android Host Application::Android Application",
+        "Android Host Application::Android Context",
+        "Android Host Application::Network Connectivity"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's global application node is split into specific host application context, application instance, and network state components in the predicted nodes. The boundary represents the host environment, which aligns functionally and semantically."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK::Background Scheduling Layer::Background Handler Thread",
+        "QAPM SDK::Background Scheduling Layer::Main Thread Handler",
+        "QAPM SDK::Background Scheduling Layer::Work Handler Manager",
+        "QAPM SDK::Configuration Management::QAPM Configuration Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node representing the core SDK features is split by the AI into specific background scheduling and configuration management components. The boundary 'QAPM SDK' perfectly matches 'QAPM_SDK'."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Collect"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK::HTTP Instrumentation Layer::Content Buffering Entity",
+        "QAPM SDK::HTTP Instrumentation Layer::Response Handler Wrapper",
+        "QAPM SDK::HTTP Instrumentation Layer::Transaction State Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT data collection module corresponds to the HTTP instrumentation logic that collects transaction and entity data from network responses. The boundary attribution correctly places them within the QAPM SDK."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK::Data Sending Layer::Data Sender",
+        "QAPM SDK::Data Sending Layer::Sender Callback Handler",
+        "QAPM SDK::Upload Processing Layer::Network Gate",
+        "QAPM SDK::Upload Processing Layer::Parameter Deriver",
+        "QAPM SDK::Upload Processing Layer::Upload File Processor",
+        "QAPM SDK::Upload Processing Layer::Upload Scheduler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT reporting node is broken down into specific upload processing layers, schedulers, and data senders. The boundary correctly places all these reporting mechanisms inside the QAPM SDK."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "predicted_nodes": [
+        "Data Storage::Local Storage",
+        "Data Storage::Upload Directory"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT storage module is split into explicit local storage and upload directory mechanisms. Although the AI placed them in a 'Data Storage' boundary instead of directly under 'QAPM_SDK', it is a functionally acceptable and semantically equivalent layer."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "QAPM_Plugin::Plugin init compile",
+    "QAPM_Plugin::QAPM_Plugin"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::Apache HttpClient",
+    "External Systems::Remote Reporting Server"
+  ]
+}

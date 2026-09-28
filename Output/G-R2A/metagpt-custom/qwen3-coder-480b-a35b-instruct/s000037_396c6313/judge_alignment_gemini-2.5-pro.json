@@ -1,0 +1,103 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::runner"
+      ],
+      "predicted_nodes": [
+        "Global::veinmind-runner",
+        "Execution Layer::RunnerExecutor"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's generic 'runner' node is correctly identified as the specific 'veinmind-runner' tool and split into its functional implementation 'RunnerExecutor'. The AI's 'Execution Layer' is a reasonable and semantically correct architectural refinement."
+    },
+    {
+      "gt_nodes": [
+        "Global::plugin"
+      ],
+      "predicted_nodes": [
+        "Plugin Layer::PluginManager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly interprets the abstract 'plugin' concept from GT as a 'PluginManager' component. Placing it in a dedicated 'Plugin Layer' is a valid and semantically correct architectural decision."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::docker"
+      ],
+      "predicted_nodes": [
+        "Global::Docker"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are functionally identical. The AI's 'Global' boundary is semantically equivalent to GT's 'Infrastructure and Input Backends' for an external dependency."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::containerd"
+      ],
+      "predicted_nodes": [
+        "Global::Containerd"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are functionally identical. The AI's 'Global' boundary is semantically equivalent to GT's 'Infrastructure and Input Backends' for an external dependency."
+    },
+    {
+      "gt_nodes": [
+        "SDK::interact system",
+        "SDK::plugin system"
+      ],
+      "predicted_nodes": [
+        "Global::veinmind-sdk/libveinmind"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregates GT's detailed SDK components into the single, explicitly named 'veinmind-sdk/libveinmind' library from the PRD. The 'Global' boundary is acceptable for a foundational library, making it semantically equivalent to the 'SDK' layer."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::image"
+      ],
+      "predicted_nodes": [
+        "CLI Layer::ScanImageCommand"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI interprets the GT's 'image' scan target as the corresponding action, 'ScanImageCommand', which is explicitly defined in the PRD. Placing this command in the 'CLI Layer' is architecturally correct and a valid perspective."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::iac"
+      ],
+      "predicted_nodes": [
+        "CLI Layer::ScanIacCommand",
+        "Plugin Layer::IaCPolicyLoader",
+        "Plugin Layer::IaCDuplicateMerger",
+        "Plugin Layer::AlertBuilder"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI expands the single 'iac' scan target from GT into the specific command ('ScanIacCommand') and its detailed implementation steps ('IaCPolicyLoader', 'IaCDuplicateMerger', 'AlertBuilder') derived from the PRD. The 'CLI Layer' and 'Plugin Layer' boundaries are correct for these components."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Infrastructure and Input Backends::dockerfile",
+    "Infrastructure and Input Backends::kubernetes",
+    "Infrastructure and Input Backends::tarball",
+    "Scan Targets::cluster",
+    "Scan Targets::container"
+  ],
+  "unmatched_predicted_nodes": [
+    "Authorization Layer::DockerAuthRouter",
+    "Example Packages::PythonEntrypoint",
+    "Execution Layer::QuickStartWorkflow",
+    "Execution Layer::StartupScript",
+    "Global::Docker Registry",
+    "Global::DockerHub",
+    "Global::Harbor",
+    "Reporting Layer::ReportGenerator"
+  ]
+}

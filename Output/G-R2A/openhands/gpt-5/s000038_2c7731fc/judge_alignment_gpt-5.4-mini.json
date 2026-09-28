@@ -1,0 +1,127 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Web2 application stack::Applications",
+        "Web3 application stack::Applications"
+      ],
+      "predicted_nodes": [
+        "Global::Redis-backed Application",
+        "Global::Redis Pub/Sub Application"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These all represent application-side clients using IceFireDB capabilities. The predicted nodes split application usage into Redis-backed and Redis Pub/Sub applications, which is semantically consistent with the GT 'Applications' nodes."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::BlockChain Database\\nTransactions, Contracts,\\nCertificates and Receipts",
+        "Web3 application stack::BlockChain Database\\nTransactions, Contracts,\\nCertificates and Receipts"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node corresponds to blockchain database transaction/contract/certificate/receipt storage."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::File System\\nLarge Files and Media",
+        "Web3 application stack::Decentralized File System\\nLarge Files and Media"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node represents file system or decentralized file system storage for large files/media."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::IceFireDB",
+        "Web3 application stack::IceFireDB"
+      ],
+      "predicted_nodes": [
+        "IceFireDB::PubSub::Pub/Sub API",
+        "IceFireDB::PubSub::Message Router",
+        "IceFireDB::PubSub::P2P Transport",
+        "IceFireDB::Redis Proxy::Cluster Router",
+        "IceFireDB::Redis Proxy::Command Processor",
+        "IceFireDB::Redis Proxy::Command Support Catalog\\n(String/Set/List/Hash/ZSet/Stream + control",
+        "IceFireDB::Redis Proxy::Redis Agent",
+        "IceFireDB::Redis Proxy::Storage Forwarder",
+        "IceFireDB::Redis Proxy::Sync Coordinator",
+        "IceFireDB::Internal SQL Result Handling\\n(SQLite-related path::MySQL-protocol Result Parser\\n(fields/rows/warnings/status"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT IceFireDB nodes are high-level product/system nodes. The AI decomposed them into the expected Redis Proxy, PubSub, and internal SQL handling components. The boundary attribution under IceFireDB is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::Platform",
+        "Web3 application stack::Platform"
+      ],
+      "predicted_nodes": [
+        "Global::P2P Network",
+        "Global::Redis Cluster",
+        "Global::Redis Standalone",
+        "Global::Kademlia DHT",
+        "Global::libp2p/IPFS-style Routing",
+        "Global::NAT / Private Network"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT platform nodes are generic infrastructure/platform concerns. The predicted nodes capture the underlying network, routing, storage, and connectivity platform elements. Boundary attribution as Global is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::Processing\\nBusiness Logic",
+        "Web3 application stack::Decentralized Processing\\nBusiness Logic"
+      ],
+      "predicted_nodes": [
+        "IceFireDB::Redis Proxy::Command Processor",
+        "IceFireDB::Redis Proxy::Sync Coordinator",
+        "IceFireDB::Redis Proxy::Storage Forwarder",
+        "IceFireDB::PubSub::Message Router"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These predicted nodes represent the core processing/business logic of IceFireDB. The decomposition is consistent with the GT processing nodes and the IceFireDB boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::BlockChain Database\\nTransactions, Contracts,\\nCertificates and Receipts"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No equivalent predicted node exists."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Web2 application stack::BlockChain Database\\nTransactions, Contracts,\\nCertificates and Receipts",
+    "Web2 application stack::File System\\nLarge Files and Media",
+    "Web3 application stack::BlockChain Database\\nTransactions, Contracts,\\nCertificates and Receipts",
+    "Web3 application stack::Decentralized File System\\nLarge Files and Media"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Kademlia DHT",
+    "Global::NAT / Private Network",
+    "Global::P2P Network",
+    "Global::Redis Cluster",
+    "Global::Redis Pub/Sub Application",
+    "Global::Redis Standalone",
+    "Global::Redis-backed Application",
+    "Global::libp2p/IPFS-style Routing",
+    "IceFireDB::Internal SQL Result Handling\\n(SQLite-related path::MySQL-protocol Result Parser\\n(fields/rows/warnings/status",
+    "IceFireDB::PubSub::Message Router",
+    "IceFireDB::PubSub::P2P Transport",
+    "IceFireDB::PubSub::Pub/Sub API",
+    "IceFireDB::Redis Proxy::Cluster Router",
+    "IceFireDB::Redis Proxy::Command Processor",
+    "IceFireDB::Redis Proxy::Command Support Catalog\\n(String/Set/List/Hash/ZSet/Stream + control",
+    "IceFireDB::Redis Proxy::Redis Agent",
+    "IceFireDB::Redis Proxy::Storage Forwarder",
+    "IceFireDB::Redis Proxy::Sync Coordinator",
+    "NAT / Private Network::PubSub Node A",
+    "NAT / Private Network::PubSub Node B"
+  ]
+}

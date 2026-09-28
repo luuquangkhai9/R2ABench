@@ -1,0 +1,79 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Browser Clients::Client Browser\nPlayer 1",
+        "Browser Clients::Client Browser\nPlayer 2",
+        "Browser Clients::Client Browser\nPlayer 3"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Web Browser",
+        "Client Layer::Web Browser::Browser Client (Three.js",
+        "Client Layer::Web Browser::Client Scene/Ship Manager",
+        "Client Layer::Web Browser::Three.js"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "GT explicitly lists multiple player clients, while AI models a generalized Web Browser client with its internal functional components. Boundary semantics match."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\nErlang"
+      ],
+      "predicted_nodes": [
+        "Game Server Layer::Erlang/OTP Game Server\nMaster Node",
+        "Game Server Layer::Erlang/OTP Game Server\nMaster Node::Room Manager",
+        "Game Server Layer::Erlang/OTP Game Server\nMaster Node::Server Directory /\nRedirect Service",
+        "Game Server Layer::Erlang/OTP Game Server\nMaster Node::WebSocket Server Endpoint"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT's server master is split by AI into the main Master Node and its detailed internal services. The Game Server Layer aligns with the Game Server Cluster boundary."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Slave\nErlang"
+      ],
+      "predicted_nodes": [
+        "Game Server Layer::Erlang/OTP Game Server\nReplica Node",
+        "Game Server Layer::Erlang/OTP Game Server\nReplica Node::WebSocket Server Endpoint"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT's Server Slave node is mapped to the AI's Replica Node and its endpoints. Boundary attribution is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::DNS"
+      ],
+      "predicted_nodes": [
+        "Deployment/Infrastructure Layer::DNS / Load Balancer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the DNS/Load Balancing infrastructure. GT places it globally, while AI assigns it to the Infrastructure Layer."
+    },
+    {
+      "gt_nodes": [
+        "Static Web Tier::Web Server\nGame assets, HTML, CSS, JS"
+      ],
+      "predicted_nodes": [
+        "Web Delivery Layer::Web Delivery Server",
+        "Web Delivery Layer::Web Delivery Server::Static Asset Web Server"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single static web server in GT is detailed by AI as a Web Delivery Server and Static Asset Web Server. The boundaries are semantically consistent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Erlang / OTP Game Server Cluster"
+  ],
+  "unmatched_predicted_nodes": [
+    "Deployment/Infrastructure Layer::HTTP/WebSocket Network",
+    "Messaging/Session Protocol Layer::Heartbeat Manager\n(ping/pong",
+    "Messaging/Session Protocol Layer::Messaging Protocol Handler\n(JSON [event,data]/[action,data",
+    "Messaging/Session Protocol Layer::Reconnect Manager\n(reconnect context",
+    "Transport Layer::WebSocket Client"
+  ]
+}

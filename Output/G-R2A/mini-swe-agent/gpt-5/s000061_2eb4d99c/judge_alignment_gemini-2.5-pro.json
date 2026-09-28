@@ -1,0 +1,116 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS CloudFormation\\nCustom resources"
+      ],
+      "predicted_nodes": [
+        "Deployment & Ops::AWS CloudFormation\\n(Custom Resources",
+        "Service Layer (Lambda::Custom Resource Handler (Lambda"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's single CloudFormation custom resources node is accurately split by the AI into the CloudFormation configuration and its backing Lambda handler, with correct functional boundary attributions."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS IoT Core"
+      ],
+      "predicted_nodes": [
+        "Messaging/IoT::AWS IoT Core\\n- Publish simulated messages"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct functional match. The AI's placement of IoT Core in a Messaging/IoT boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS Lambda\\nSimulator API"
+      ],
+      "predicted_nodes": [
+        "Service Layer (Lambda::Device Type Management Service (Lambda",
+        "Service Layer (Lambda::Route Loader Service (Lambda",
+        "Service Layer (Lambda::Simulation Management Service (Lambda",
+        "Service Layer (Lambda::Simulation Orchestrator (Lambda/Step Functions Task"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT groups all API functions into a single Lambda node, while the AI splits them into discrete functional microservices. The Service Layer boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS Step Functions\\nSimulation workflow"
+      ],
+      "predicted_nodes": [
+        "Orchestration::AWS Step Functions - Simulation Workflow"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct exact match. Placing Step Functions in an Orchestration layer is functionally appropriate."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon API Gateway\\nREST API"
+      ],
+      "predicted_nodes": [
+        "API Layer::Amazon API Gateway (REGIONAL)\\n- REST API\\n- CORS, Validation\\n- Access Logs (JSON)\\n- Tracing"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact functional match representing the API Gateway. The API Layer boundary matches the component's purpose perfectly."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon Cognito"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Identity Service (e.g., Amazon Cognito"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Functionality matches perfectly, but the boundary is incorrect. Amazon Cognito is an identity and access management service, placing it in the 'Presentation Layer' (which corresponds to front-end UI) is a severe architectural boundary crossing."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon DynamoDB\\nSimulator state"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Amazon DynamoDB\\n- Simulations\\n- Device Types\\n- State"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact match for DynamoDB storage. The Data Layer boundary is highly accurate."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Browser Web UI\\nstatic app client"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web Management Console"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the web front-end application. The Presentation Layer boundary accurately describes this client component."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Users"
+      ],
+      "predicted_nodes": [
+        "Global::Users & Clients"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Matches the end-user actors of the system. A Global boundary is appropriate for actors operating outside the immediate system architecture."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "AWS IoT Device Simulator::Amazon CloudFront",
+    "AWS IoT Device Simulator::Amazon S3\\nRoute data bucket",
+    "AWS IoT Device Simulator::Amazon S3\\nWeb UI bucket"
+  ],
+  "unmatched_predicted_nodes": [
+    "Deployment & Ops::AWS X-Ray (Tracing",
+    "Deployment & Ops::Amazon CloudWatch Logs"
+  ]
+}

@@ -1,0 +1,71 @@
+@startuml
+!define LAYER_COLOR #E6F3FF
+!define COMPONENT_COLOR #F0F8FF
+!define EXTERNAL_COLOR #FFF0F0
+!define DATA_COLOR #F0FFF0
+
+skinparam component {
+  BackgroundColor COMPONENT_COLOR
+  BorderColor #333333
+  ArrowColor #333333
+  FontSize 13
+}
+
+skinparam rectangle {
+  BackgroundColor LAYER_COLOR
+  BorderColor #333333
+}
+
+skinparam database {
+  BackgroundColor DATA_COLOR
+  BorderColor #333333
+}
+
+title GKE Pub/Sub WebSocket Adapter Architecture
+
+rectangle "External Systems" as external <<Layer>> {
+  component "Web Clients\n(Browsers)" as web_clients <<External>> #EXTERNAL_COLOR
+  component "GCP Pub/Sub Topic" as pubsub_topic <<External>> #EXTERNAL_COLOR
+}
+
+rectangle "Kubernetes Infrastructure" as k8s <<Layer>> {
+  component "LoadBalancer Service\n(TCP:80 → 8080)" as loadbalancer_service
+  component "Horizontal Pod Autoscaler\n(HPA)\nmin:1, max:2, CPU:80%" as hpa
+  component "ConfigMap\n(topic identifier)" as configmap
+  component "Deployment" as deployment
+}
+
+rectangle "Adapter Container Runtime" as runtime <<Layer>> {
+  component "exec.sh\nEntrypoint" as exec_sh
+  component "Node.js pulltop\n(Pub/Sub Consumer)" as pulltop
+  component "websocketd\n(WebSocket Server)" as websocketd
+  database "Message Cache\n(Last 10 messages)" as message_cache
+}
+
+' External connections
+web_clients --> loadbalancer_service : "WebSocket\nconnections"
+pubsub_topic --> pulltop : "Pub/Sub messages"
+
+' Kubernetes layer connections
+loadbalancer_service --> deployment : "routes traffic"
+hpa --> deployment : "scales pods"
+configmap --> deployment : "topic config\n(SYMBOL env var)"
+
+' Runtime layer connections
+deployment --> exec_sh : "container"
+exec_sh --> pulltop : "invokes with\ntopic parameter"
+pulltop --> websocketd : "streams output"
+pulltop --> message_cache : "stores messages"
+websocketd --> message_cache : "reads cached\nmessages"
+
+' Internal runtime flow
+exec_sh --> websocketd : "starts server"
+
+' Note for subscription efficiency
+note right of pulltop
+  One Pub/Sub subscription
+  per running instance
+  (N instances, M clients)
+end note
+
+@enduml

@@ -1,0 +1,116 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Alert Source::app-sre\\nalertmanager",
+        "Alert Source::cluster\\nalertmanager",
+        "Alert Source::deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Systems::Alert Source\\n(External Webhook"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated multiple specific alert sources from the GT into a single, abstract 'Alert Source' node representing an external webhook trigger. The 'External Systems' boundary is semantically equivalent to 'Alert Source'."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton\\nEvent\\nListener"
+      ],
+      "predicted_nodes": [
+        "Tekton Execution Environment\\n(configuration-anomaly-detection namespace::EventListener"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match for the Tekton EventListener. The AI correctly placed it in a more specific and accurate boundary 'Tekton Execution Environment' as described in the PRD, which is an improvement over the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?"
+      ],
+      "predicted_nodes": [
+        "Tekton Execution Environment\\n(configuration-anomaly-detection namespace::Trigger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node describes the function of a Tekton Trigger, which the AI correctly identified and named as the specific component. The AI's boundary 'Tekton Execution Environment' is more precise than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::CHGM investigation"
+      ],
+      "predicted_nodes": [
+        "CAD Container Image\\n(UBI Minimal Runtime::CHGM Workflow Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct functional match. The AI correctly maps the CHGM investigation workflow to a specific handler component. The 'CAD Container Image' boundary is a more descriptive and physically accurate representation of the containerized CLI than the GT's logical 'cadctl' boundary."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::CPD investigation",
+        "cadctl::Future investigations"
+      ],
+      "predicted_nodes": [
+        "CAD Container Image\\n(UBI Minimal Runtime::Anomaly Detection &\\nCommunication Module"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated specific and future investigation types from the GT into a single, general-purpose anomaly detection and communication module. The boundary is correct and more descriptive."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::switch(alerttype"
+      ],
+      "predicted_nodes": [
+        "CAD Container Image\\n(UBI Minimal Runtime::cadctl CLI\\n(/bin/cadctl"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents the initial alert routing logic within the tool. The AI correctly maps this function to the main 'cadctl CLI' binary/entrypoint component. The boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Escalate alert to\\non-call SRE",
+        "Global::Update Incident\\nNotes"
+      ],
+      "predicted_nodes": [
+        "CAD Container Image\\n(UBI Minimal Runtime::Integration Package Library::PagerDuty Integration"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly recognized that the GT's action-oriented nodes ('Escalate alert', 'Update Incident Notes') correspond to the PagerDuty integration logic. It correctly placed this logic within the 'Integration Package Library' inside the main application container, which is more architecturally precise than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster",
+        "PagerDuty Team::app-sre-alertmanager",
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated multiple specific PagerDuty teams/endpoints from the GT into a single node representing the external PagerDuty system. The 'External Systems' boundary is semantically equivalent to 'PagerDuty Team'."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Alerts::CHGM",
+    "Alerts::CPD",
+    "Alerts::all cluster\\nalerts"
+  ],
+  "unmatched_predicted_nodes": [
+    "Build Environment\\n(Go 1.17 Builder Image::Container Build Process",
+    "CAD Container Image\\n(UBI Minimal Runtime::Integration Package Library::AWS Integration",
+    "CAD Container Image\\n(UBI Minimal Runtime::Integration Package Library::OCM Integration",
+    "CAD Container Image\\n(UBI Minimal Runtime::Mitigation & Disposition\\nHandler",
+    "Deployment & Maintenance Assets::Deployment Template\\nArtifacts",
+    "Deployment & Maintenance Assets::Template Update Utility",
+    "External Systems::AWS",
+    "External Systems::OCM\\n(OpenShift Cluster Manager",
+    "Global::External Systems",
+    "Tekton Execution Environment\\n(configuration-anomaly-detection namespace::Deployment YAML\\nManifests",
+    "Tekton Execution Environment\\n(configuration-anomaly-detection namespace::PipelineRun\\n(cad-checks-pipeline"
+  ]
+}

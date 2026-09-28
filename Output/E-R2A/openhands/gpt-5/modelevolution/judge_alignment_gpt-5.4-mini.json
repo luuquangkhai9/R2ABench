@@ -1,0 +1,139 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Backend Layer::Flask: Backend Framework"
+      ],
+      "predicted_nodes": [
+        "Back End (Web API::Account Mgmt",
+        "Back End (Web API::Auth & Session\n(OAuth2 + 2FA",
+        "Back End (Web API::Evolution Service\n(Relationships & Details",
+        "Back End (Web API::Model Registry\n(Upload/Edit/Delete",
+        "Back End (Web API::Search Service",
+        "Back End (Web API::User Mgmt"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has a single backend framework node, while the prediction expands backend responsibilities into multiple backend web API services. Although Flask as a framework is not explicitly named, the predicted nodes are all correctly placed in the backend layer and collectively cover the backend-side system functions."
+    },
+    {
+      "gt_nodes": [
+        "Backend Layer::Netron: Model Conversion & Parsing"
+      ],
+      "predicted_nodes": [
+        "Algorithm Support\n(Python libraries::Evolution Diff Engine",
+        "Algorithm Support\n(Python libraries::ONNX Handler",
+        "Algorithm Support\n(Python libraries::PyTorch Source Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "These predicted nodes are related to model parsing/conversion and source handling, but the GT node is a backend-layer Netron component. The AI moved this functionality into an algorithm-support boundary, which is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Backend Layer::SQLAlchemy: ORM Framework"
+      ],
+      "predicted_nodes": [
+        "Global::MySQL\n(Users, Model Meta,\nEncrypted Models, Datasets,\nTrained Models"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "SQLAlchemy is an ORM framework in the backend, while the predicted node is the physical MySQL database. They are functionally related but not the same component, and the boundary is also incorrect because a framework was replaced by a storage node."
+    },
+    {
+      "gt_nodes": [
+        "Data Presentation Layer::Netron: Graph Representation Language"
+      ],
+      "predicted_nodes": [
+        "Global::Neo4j\n(Evolution graphs",
+        "Front End (SPA / UI::Evolution Graph Viewer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node represents Netron's graph presentation/representation capability, while the prediction splits graph-related concerns into Neo4j storage and a frontend viewer. The general visualization intent matches, but the semantic component is split across storage and UI, so the boundary attribution is not correct."
+    },
+    {
+      "gt_nodes": [
+        "Data Presentation Layer::RESTful API Design"
+      ],
+      "predicted_nodes": [
+        "Back End (Web API::Account Mgmt",
+        "Back End (Web API::Auth & Session\n(OAuth2 + 2FA",
+        "Back End (Web API::Evolution Service\n(Relationships & Details",
+        "Back End (Web API::Model Registry\n(Upload/Edit/Delete",
+        "Back End (Web API::Search Service",
+        "Back End (Web API::User Mgmt"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT RESTful API design node is functionally represented by the set of backend web API services. The predicted nodes are appropriately placed in the backend/web API boundary."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::Netron: Node Drawing Features"
+      ],
+      "predicted_nodes": [
+        "Front End (SPA / UI::Evolution Graph Viewer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to frontend graph drawing/visualization functionality. The AI used a more specific frontend UI label, but it remains within the correct frontend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::React Framework"
+      ],
+      "predicted_nodes": [
+        "Front End (SPA / UI::Account UI",
+        "Front End (SPA / UI::Admin Console",
+        "Front End (SPA / UI::Contributor Editor\n(PyTorch / ONNX",
+        "Front End (SPA / UI::Evolution Graph Viewer",
+        "Front End (SPA / UI::Models & Search UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT frontend framework is reflected through multiple frontend application UIs. While React is not explicitly named, the predicted nodes are correctly attributed to the frontend layer."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::React-Router: Page Navigation"
+      ],
+      "predicted_nodes": [
+        "Front End (SPA / UI::Account UI",
+        "Front End (SPA / UI::Admin Console",
+        "Front End (SPA / UI::Contributor Editor\n(PyTorch / ONNX",
+        "Front End (SPA / UI::Evolution Graph Viewer",
+        "Front End (SPA / UI::Models & Search UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The routing/navigation responsibility is functionally covered by multiple frontend pages/views. The boundary remains correct since these are frontend UI elements."
+    },
+    {
+      "gt_nodes": [
+        "Storage / Database Layer::MySQL: Relational Database"
+      ],
+      "predicted_nodes": [
+        "Global::MySQL\n(Users, Model Meta,\nEncrypted Models, Datasets,\nTrained Models"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct semantic match. The predicted node preserves the database boundary and even adds data scope details consistent with the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Storage / Database Layer::Neo4j: Graph Database"
+      ],
+      "predicted_nodes": [
+        "Global::Neo4j\n(Evolution graphs"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct semantic match for the graph database used to store evolution relationships. The boundary is correct despite the simplified Global package naming."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Auth Provider\\n(OAuth 2.0 / 2FA"
+  ]
+}

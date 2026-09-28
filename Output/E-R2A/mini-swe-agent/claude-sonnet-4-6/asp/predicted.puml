@@ -1,0 +1,80 @@
+@startuml
+skinparam componentStyle rectangle
+skinparam linetype ortho
+
+title Zhiyan Tongjie - Requirements Review Checklist System
+
+actor Reviewer
+actor RequirementsOwner as "Requirements Owner"
+actor ProjectStakeholder as "Project Stakeholder"
+
+package "Review Artifact Interface" {
+    component [Checklist Viewer and Editor] as UI
+}
+
+package "Review Inspection Services" {
+    component [Completeness Review Module] as CompReview
+    component [Understandability Review Module] as UndReview
+    component [Model Accuracy Review Module] as ModReview
+    component [Extension Improvement Review Module] as ExtReview
+}
+
+package "Review Recording Services" {
+    component [Problem Report Recorder] as ProbRecorder
+    component [Scoring Engine] as ScoreEngine
+    component [Review Metadata Recorder] as MetaRecorder
+}
+
+package "Data Storage" {
+    database [Review Purpose Store] as PurposeDB
+    database [Checklist Items Store] as ChecklistDB
+    database [Problem Report Store] as ProbDB
+    database [Score Record Store] as ScoreDB
+    database [Review Metadata Store] as MetaDB
+}
+
+package "External Standards and References" {
+    component [Industry Standards] as IndStd
+    component [Product Specifications] as ProdSpec
+    component [Business Specifications] as BizSpec
+    component [Documentation Norms] as DocNorm
+}
+
+component [Source Requirements Document] as SRD
+
+Reviewer --> UI : performs review
+RequirementsOwner --> UI : reads findings
+ProjectStakeholder --> UI : reads result summary
+
+SRD --> UI : input to review
+
+UI --> CompReview
+UI --> UndReview
+UI --> ModReview
+UI --> ExtReview
+UI --> ProbRecorder
+UI --> ScoreEngine
+UI --> MetaRecorder
+
+CompReview --> ChecklistDB : completeness items
+UndReview --> ChecklistDB : understandability items
+ModReview --> ChecklistDB : model accuracy items
+ExtReview --> ChecklistDB : extension items
+
+CompReview ..> IndStd : references
+UndReview ..> DocNorm : references
+ModReview ..> ProdSpec : references
+ExtReview ..> BizSpec : references
+
+ProbRecorder --> ProbDB : stores problems and suggestions
+ScoreEngine --> ScoreDB : stores dimension scores and total
+MetaRecorder --> MetaDB : stores reviewer identity and date
+
+UI --> PurposeDB : reads and stores review purpose
+
+note bottom of ScoreEngine
+  4 dimensions x 10 pts each
+  Total: 40 pts max
+end note
+
+@enduml

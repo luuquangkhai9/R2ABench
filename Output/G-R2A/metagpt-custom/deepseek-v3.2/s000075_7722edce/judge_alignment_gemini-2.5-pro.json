@@ -1,0 +1,75 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Statlord::Browser Editor\\nLayout authoring"
+      ],
+      "predicted_nodes": [
+        "Client/Editor Layer::Browser Editor",
+        "Client/Editor Layer::Canvas Operations",
+        "Client/Editor Layer::Redux Store"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's general 'Browser Editor' node is correctly identified and expanded by the AI into more specific sub-components ('Redux Store', 'Canvas Operations') that are explicitly mentioned in the PRD. The 'Client/Editor Layer' is a semantically correct and standard architectural boundary for these components."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Python / Django API"
+      ],
+      "predicted_nodes": [
+        "API/Server Layer::Django Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct 1:1 match for the backend application server. The AI's 'API/Server Layer' boundary is semantically equivalent to the GT's 'Statlord::Server' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::PostgreSQL\\npersistent models"
+      ],
+      "predicted_nodes": [
+        "Data Persistence Layer::PostgreSQL"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the database. The AI correctly places it in a dedicated 'Data Persistence Layer', which is a common and valid architectural choice. This is semantically equivalent to the GT's approach of nesting it under the server."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Display Resource\\nresolution and state",
+        "Statlord::Server::Gauge Resource\\nkey, value",
+        "Statlord::Server::Layout Resource\\ndata and display positions"
+      ],
+      "predicted_nodes": [
+        "API/Server Layer::Display Resource",
+        "API/Server Layer::Gauge Resource",
+        "API/Server Layer::Layout Resource",
+        "API/Server Layer::Data Models"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The AI successfully identifies the three specific API resources from the GT and adds a 'Data Models' node, which logically aggregates the concept of data entities described in the PRD. All predicted nodes are correctly placed within the 'API/Server Layer', which corresponds to the GT's 'Statlord::Server' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Viewer Instances\\nheadless browsers"
+      ],
+      "predicted_nodes": [
+        "Viewer/Render Layer::Viewer Component"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the rendering component. The AI's naming is a good functional abstraction based on the PRD. The 'Viewer/Render Layer' is a logical and semantically correct boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Statlord::Displays\\nOLED, e-paper, LCD, browser"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Development Server",
+    "Global::Node.js/npm",
+    "Global::Python 3.7",
+    "Global::Web Browser"
+  ]
+}

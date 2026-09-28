@@ -1,0 +1,236 @@
+@startuml
+!define RECTANGLE rectangle
+!define DATABASE database
+!define CLOUD cloud
+!define COMPONENT component
+!define NODE node
+!define QUEUE queue
+!define STORAGE storage
+!define AGENT agent
+!define BOUNDARY boundary
+!define CONTROL control
+!define ENTITY entity
+!define COLLECTIONS collections
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam arrowColor #000000
+skinparam actorBorderColor #000000
+skinparam componentBorderColor #000000
+skinparam rectangleBorderColor #000000
+skinparam databaseBorderColor #000000
+skinparam queueBorderColor #000000
+skinparam storageBorderColor #000000
+skinparam cloudBorderColor #000000
+skinparam nodeBorderColor #000000
+skinparam agentBorderColor #000000
+skinparam boundaryBorderColor #000000
+skinparam controlBorderColor #000000
+skinparam entityBorderColor #000000
+skinparam collectionsBorderColor #000000
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName Helvetica
+skinparam defaultFontSize 12
+skinparam defaultTextAlignment center
+
+title Prediction Cards System Architecture
+
+' ========== EXTERNAL SYSTEMS ==========
+cloud "External Price Provider" as PriceProvider #F5F5F5 {
+}
+
+cloud "Prediction Media Storage" as MediaStorage #F5F5F5 {
+  note right
+    IPFS-compatible storage
+    for outcome NFT images/animations
+  end note
+}
+
+cloud "Aeternity Blockchain" as Blockchain #F5F5F5 {
+  database "PredictionCards Smart Contract" as SmartContract
+  database "AENS Registry" as AENS
+  note right
+    Deployed contract located
+    through AENS name
+  end note
+}
+
+cloud "Aeternity Wallet" as Wallet #F5F5F5 {
+  component "Wallet SDK" as WalletSDK
+}
+
+' ========== USER INTERFACE ==========
+rectangle "User Frontend Application" as Frontend #E3F2FD {
+  component "Wallet Connection" as WalletConn
+  component "Prediction Creation UI" as CreateUI
+  component "Prediction Viewing UI" as ViewUI
+  component "Outcome NFT Operations UI" as OperationsUI
+  component "Frontend Context Provider" as ContextProvider
+  component "Prediction API" as FrontendAPI
+}
+
+' ========== BACKEND SERVICES ==========
+rectangle "Oracle Service (Quarkus)" as OracleService #FFF3E0 {
+  component "Oracle Registration Manager" as OracleReg
+  component "Pending Query Checker" as QueryChecker
+  component "Price Comparator" as PriceComparator
+  component "Oracle Response Handler" as ResponseHandler
+  component "Configuration Manager" as ConfigManager
+  note right
+    Scheduled periodic execution
+    Complete runtime configuration required
+  end note
+}
+
+rectangle "Prediction Processing Service" as ProcessingService #E8F5E8 {
+  component "Closed Prediction Detector" as ClosedDetector
+  component "Oracle Query Initiator" as QueryInitiator
+  component "Result Processor" as ResultProcessor
+  note right
+    Drives closed predictions
+    into outcome determination workflow
+  end note
+}
+
+' ========== TEST ENVIRONMENT ==========
+rectangle "Local Contract Integration Test" as TestEnv #F5F5F5 {
+  component "Aeternity Node" as TestNode
+  component "Compiler Service" as TestCompiler
+  component "Index Service" as TestIndex
+  component "Debug Endpoint" as TestDebug
+  component "CORS/Proxy Configuration" as CORSProxy
+  note right
+    Browser-style contract testing
+    with CORS support
+  end note
+}
+
+' ========== USER ACTORS ==========
+actor "Prediction Participant" as Participant
+actor "Service Operator" as Operator
+actor "Integration/Test Operator" as Tester
+
+' ========== DATA FLOWS ==========
+
+' User interactions
+Participant --> Frontend : "Connects wallet\nCreates predictions\nViews predictions\nPerforms NFT operations"
+
+' Frontend to blockchain
+FrontendAPI --> WalletConn : "Uses wallet context"
+WalletConn --> WalletSDK : "Wallet-mediated calls"
+WalletSDK --> SmartContract : "Contract interactions"
+FrontendAPI --> SmartContract : "Reads prediction state"
+
+' Contract location
+FrontendAPI --> AENS : "Resolves contract address"
+OracleService --> AENS : "Resolves contract address"
+ProcessingService --> AENS : "Resolves contract address"
+
+' Prediction lifecycle
+ProcessingService --> SmartContract : "Initiates oracle queries\nfor closed predictions"
+SmartContract --> OracleService : "Generates pending oracle queries"
+OracleService --> PriceProvider : "Obtains external price data"
+OracleService --> SmartContract : "Submits oracle responses\nwith price comparison results"
+ProcessingService --> SmartContract : "Drives result processing\nafter oracle responses"
+
+' Media access
+Frontend --> MediaStorage : "Loads outcome NFT media\nfor display"
+
+' Service operations
+Operator --> OracleService : "Configures and runs service"
+Operator --> ProcessingService : "Configures and runs service"
+
+' Test environment
+Tester --> TestEnv : "Validates contract interactions"
+TestEnv --> SmartContract : "Test interactions"
+TestEnv --> CORSProxy : "Browser CORS testing\n(GET, POST, OPTIONS methods)\n(Content-Type, Cache-Control,\nContent-Range, Range headers)"
+
+' ========== DATA ENTITIES ==========
+
+database "Prediction Data" as PredictionData [
+  Asset identifier
+  Target price
+  Start time
+  End time
+  Outcome media references
+  Lifecycle state
+  Outcome information
+]
+
+database "Outcome NFT Data" as NFTData [
+  Higher outcome
+  Lower/equal outcome
+  Fund/rental data
+  Reward claiming state
+]
+
+database "Oracle Configuration" as OracleConfig [
+  Keys
+  Node connection
+  Compiler connection
+  Network environment
+  Scheduling periods
+  Oracle fees
+  Validity management
+]
+
+' ========== DATA STORAGE ==========
+SmartContract --> PredictionData : "Maintains on-chain state"
+SmartContract --> NFTData : "Maintains outcome NFT state"
+OracleService --> OracleConfig : "Requires complete\nruntime configuration"
+
+' ========== KEY INTERFACES ==========
+
+interface "Wallet Interface" as WalletInterface
+interface "Contract Interface" as ContractInterface
+interface "Oracle Interface" as OracleInterface
+interface "Price Provider Interface" as PriceInterface
+interface "Media Storage Interface" as MediaInterface
+interface "CORS/Proxy Interface" as CORSInterface
+
+WalletConn ..> WalletInterface : "implements"
+FrontendAPI ..> ContractInterface : "implements"
+OracleService ..> OracleInterface : "implements"
+OracleService ..> PriceInterface : "implements"
+Frontend ..> MediaInterface : "implements"
+TestEnv ..> CORSInterface : "implements"
+
+' ========== SCHEDULED PROCESSES ==========
+
+cloud "Scheduled Execution" as Scheduler #F5F5F5 {
+  component "Periodic Timer" as Timer
+}
+
+Timer --> QueryChecker : "Triggers pending query checks"
+Timer --> OracleReg : "Triggers validity checks"
+Timer --> ClosedDetector : "Triggers closed prediction detection"
+
+' ========== ARCHITECTURE NOTES ==========
+
+note top of Frontend
+  React-based application
+  Wallet-connected prediction operations
+  Context provider for child components
+end note
+
+note top of OracleService
+  Quarkus-based implementation
+  Maintains Aeternity oracle registration
+  Compares target vs actual prices
+  Submits result enumeration responses
+end note
+
+note top of ProcessingService
+  Drives closed predictions
+  into outcome determination workflow
+  Completes result processing
+  after oracle responses available
+end note
+
+note top of Blockchain
+  Aeternity blockchain runtime
+  Sophia smart-contract language
+  AENS naming mechanism
+end note
+
+@enduml

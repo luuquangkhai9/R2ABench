@@ -1,0 +1,57 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "External Systems::Kafka Topic\n(Audit Event Stream"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Kafka message broker used for transmitting the generated audit events. The boundary 'External Systems' correctly reflects its nature as an external infrastructure component."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\nserver"
+      ],
+      "predicted_nodes": [
+        "External Systems::Downstream Consumer\n(deserializes AuditEvent JSON"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the downstream application/service responsible for consuming and processing the emitted audit events from the event stream."
+    },
+    {
+      "gt_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "predicted_nodes": [
+        "JVM Application Layer::Integrating Application",
+        "Global::JVM Application Layer",
+        "Global::Auditor Client Library (Kotlin / JVM 11",
+        "Auditor Client Library (Kotlin / JVM 11::Auditing API\n(accept oldObject, newObject,\nAuditorEventConfig",
+        "Auditor Client Library (Kotlin / JVM 11::Audit Engine\n(Object Diff / Change Detection",
+        "Auditor Client Library (Kotlin / JVM 11::AuditEvent Builder\n(CREATED / UPDATED / DELETED",
+        "Auditor Client Library (Kotlin / JVM 11::Element Filter\n(AuditEventElementFilter",
+        "Auditor Client Library (Kotlin / JVM 11::Event Publisher Abstraction\n(EventPublisher interface",
+        "Auditor Client Library (Kotlin / JVM 11::Log Provider Abstraction\n(LogProvider interface",
+        "Global::Infrastructure / Plugin Layer",
+        "Infrastructure / Plugin Layer::Kafka Event Publisher\n(Default EventPublisher impl",
+        "Infrastructure / Plugin Layer::Logger Implementation\n(LogProvider impl",
+        "Infrastructure / Plugin Layer::Custom Element Filter\n(AuditEventElementFilter impl"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The GT explicitly depicts three distinct application instances embedding the 'auditor-v1 client'. The AI prediction generalized the host applications into 'Integrating Application' and split the monolithic client library into its granular internal architecture (API, Engine, Builder, Infrastructure implementations). Semantically, they represent the same application-embedded client integration."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Databases / Filestores\nElastic, Hadoop, etc."
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::External Systems"
+  ]
+}

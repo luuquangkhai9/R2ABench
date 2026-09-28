@@ -1,0 +1,167 @@
+@startuml
+!define RECTANGLE class
+skinparam componentStyle rectangle
+skinparam backgroundColor #F0F0F0
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam component {
+    BackgroundColor #FFFFFF
+    BorderColor #333333
+    FontColor #000000
+    ArrowColor #333333
+}
+title EIVAS System Architecture
+
+package "Client Layer" {
+    [Web Browser] as Browser
+    Browser : HTML/CSS/JS
+    Browser : Map Visualization
+    Browser : Chart Rendering
+}
+
+package "Presentation Layer" {
+    component "Epidemiological Reporting Form" as Form
+    component "Case Management List" as CaseList
+    component "Map Display Interface" as MapUI
+    component "Association Display" as AssocUI
+    component "Graph Relationship Display" as GraphUI
+    component "Statistical Charts Display" as ChartsUI
+}
+
+package "Application Layer" {
+    component "Reporting Controller" as ReportCtrl
+    component "Case Management Controller" as CaseCtrl
+    component "Analysis Controller" as AnalysisCtrl
+    component "Visualization Controller" as VisualCtrl
+}
+
+package "Business Logic Layer" {
+    component "Case Information Service" as CaseService
+    component "Itinerary Analysis Service" as ItineraryService
+    component "Association Analysis Service" as AssocService
+    component "Statistical Analysis Service" as StatsService
+    component "Data Quality Service" as QualityService
+}
+
+package "Algorithm Module" {
+    component "Regional Flow Map Generator" as FlowAlgo
+    component "Case Clustering Generator" as ClusterAlgo
+    component "Risk Calculator" as RiskAlgo
+    component "Threshold Filter" as FilterAlgo
+}
+
+package "Data Access Layer" {
+    component "Case Repository" as CaseRepo
+    component "Itinerary Repository" as ItineraryRepo
+    component "Association Repository" as AssocRepo
+    component "Statistical Data Repository" as StatsRepo
+}
+
+database "Backend Database" as DB {
+    folder "Case Data" {
+        (Basic Information)
+        (Disease Information)
+        (Itinerary Information)
+        (Imported-case Information)
+    }
+    folder "Analysis Data" {
+        (Associated Case Entries)
+        (Statistical Chart Data)
+        (Data Quality States)
+    }
+}
+
+package "External Services" {
+    component "Map Service Provider" as MapService
+    component "Encryption Service" as EncryptService
+}
+
+' Client to Presentation Layer connections
+Browser --> Form : HTTP/HTTPS Requests
+Browser --> CaseList : HTTP/HTTPS Requests
+Browser --> MapUI : HTTP/HTTPS Requests
+Browser --> AssocUI : HTTP/HTTPS Requests
+Browser --> GraphUI : HTTP/HTTPS Requests
+Browser --> ChartsUI : HTTP/HTTPS Requests
+
+' Presentation to Application Layer connections
+Form --> ReportCtrl : Submit Case Data
+CaseList --> CaseCtrl : Query/Sort/Filter
+MapUI --> VisualCtrl : Location/Path Requests
+AssocUI --> AnalysisCtrl : Threshold Queries
+GraphUI --> AnalysisCtrl : Relationship Queries
+ChartsUI --> VisualCtrl : Chart Data Requests
+
+' Application to Business Logic Layer connections
+ReportCtrl --> CaseService : Store/Update Case
+CaseCtrl --> CaseService : Manage Case Records
+AnalysisCtrl --> AssocService : Analyze Associations
+AnalysisCtrl --> ItineraryService : Analyze Itineraries
+VisualCtrl --> StatsService : Generate Statistics
+ReportCtrl --> QualityService : Validate Data
+AnalysisCtrl --> QualityService : Check Data Quality
+
+' Business Logic to Algorithm Module connections
+AssocService --> FilterAlgo : Apply Thresholds
+StatsService --> FlowAlgo : Generate Flow Maps
+StatsService --> ClusterAlgo : Generate Clusters
+StatsService --> RiskAlgo : Calculate Risks
+ItineraryService --> FilterAlgo : Filter Locations
+
+' Business Logic to Data Access Layer connections
+CaseService --> CaseRepo : CRUD Operations
+ItineraryService --> ItineraryRepo : CRUD Operations
+AssocService --> AssocRepo : CRUD Operations
+StatsService --> StatsRepo : CRUD Operations
+QualityService --> CaseRepo : Read Operations
+QualityService --> ItineraryRepo : Read Operations
+
+' Data Access to Database connections
+CaseRepo --> DB : SQL/NoSQL Queries
+ItineraryRepo --> DB : SQL/NoSQL Queries
+AssocRepo --> DB : SQL/NoSQL Queries
+StatsRepo --> DB : SQL/NoSQL Queries
+
+' External Services connections
+MapUI --> MapService : Geocoding/Map Tiles
+CaseCtrl --> EncryptService : Encrypt Queries
+AnalysisCtrl --> EncryptService : Encrypt Queries
+
+' Algorithm to Data Access connections
+FlowAlgo --> ItineraryRepo : Read Itineraries
+ClusterAlgo --> CaseRepo : Read Case Data
+RiskAlgo --> ItineraryRepo : Read Locations
+FilterAlgo --> AssocRepo : Read Associations
+
+note top of Browser
+  Supports various OS/browsers
+  Concurrent user access
+  Encrypted personal data queries
+end note
+
+note right of Algorithm Module
+  Generates:
+  - Regional flow maps
+  - Case clustering graphs
+  - Risk calculations
+  - Threshold filtering
+end note
+
+note left of DB
+  Stores:
+  - Basic case information
+  - Disease-related data
+  - Itinerary trajectories
+  - Imported-case info
+  - Association entries
+  - Statistical data
+end note
+
+note bottom of External Services
+  Dependencies:
+  - Map visualization capability
+  - Encryption for personal data
+  - No specific providers specified
+end note
+
+@enduml

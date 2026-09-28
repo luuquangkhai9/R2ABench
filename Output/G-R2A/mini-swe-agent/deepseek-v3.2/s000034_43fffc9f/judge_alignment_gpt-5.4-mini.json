@@ -1,0 +1,142 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "External Dependencies::MPI Runtime",
+        "External Dependencies::mpi4py Library"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT's global MPI concept is decomposed into the concrete runtime and Python binding dependencies. This is a semantically consistent split and the boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process"
+      ],
+      "predicted_nodes": [
+        "Runtime & Configuration::Runtime Manager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node represents the execution unit (MPI process), while the predicted node is a lifecycle/configuration manager. This is a severe semantic and boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Server\\nThread"
+      ],
+      "predicted_nodes": [
+        "Task Management Layer::Task Execution Engine::Thread Manager",
+        "Communication Layer::Shared Memory Communication::Thread Synchronization"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a server thread inside an MPI process; the prediction splits it into generic thread management and synchronization components, which do not faithfully represent the specific server-thread boundary."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Task Queue"
+      ],
+      "predicted_nodes": [
+        "Data Storage::Worker Queues",
+        "Data Storage::Worker Queues::Local Queues",
+        "Data Storage::Worker Queues::Remote Queues",
+        "Task Management Layer::Task Scheduler::Task Queue Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT task queue is represented by worker queues and queue manager components. Although more detailed, the semantics align with task storage and scheduling queues."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Worker\\nThread"
+      ],
+      "predicted_nodes": [
+        "Task Management Layer::Task Execution Engine::Worker Pool",
+        "Task Management Layer::Task Execution Engine::Thread Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT worker thread is split into worker pool and thread management responsibilities. This is a reasonable decomposition of the same execution-layer concept."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::...",
+        "Task Queue (in detail::A1",
+        "Task Queue (in detail::A2",
+        "Task Queue (in detail::A3",
+        "Task Queue (in detail::B1",
+        "Task Queue (in detail::B2",
+        "Task Queue (in detail::Level 0",
+        "Task Queue (in detail::Level 1",
+        "Task Queue (in detail::Level 2",
+        "Task Queue (in detail::Level 3",
+        "Task Queue (in detail::Level 4",
+        "Task Queue (in detail::Level 5"
+      ],
+      "predicted_nodes": [
+        "Data Storage::Worker Queues",
+        "Data Storage::Worker Queues::Local Queues",
+        "Data Storage::Worker Queues::Remote Queues",
+        "Task Management Layer::Task Scheduler::Task Queue Manager",
+        "Task Management Layer::Task Scheduler::Task Stealing",
+        "Task Management Layer::Task Scheduler::Load Balancer"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The many detailed GT queue nodes appear to model queue hierarchy/levels and variants. The prediction aggregates them into queue storage, queue management, stealing, and balancing, which is semantically consistent at a higher abstraction level."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Application Layer::Python Application",
+    "Application Layer::Python Application::User Code",
+    "Application Layer::Python Application::torc API Calls",
+    "Communication Layer::MPI Communication",
+    "Communication Layer::MPI Communication::Inter-process Messaging",
+    "Communication Layer::MPI Communication::Result Collection",
+    "Communication Layer::MPI Communication::Task Distribution",
+    "Communication Layer::Shared Memory Communication",
+    "Communication Layer::Shared Memory Communication::Queue Access",
+    "Communication Layer::Shared Memory Communication::Thread Synchronization",
+    "Data Storage::HDF5 Files",
+    "Data Storage::Image Files",
+    "Data Storage::Task Descriptors",
+    "Data Storage::Task Descriptors::Input Values",
+    "Data Storage::Task Descriptors::Result Values",
+    "Data Storage::Worker Queues",
+    "Data Storage::Worker Queues::Local Queues",
+    "Data Storage::Worker Queues::Remote Queues",
+    "External Dependencies::MPI Runtime",
+    "External Dependencies::Optional Libraries",
+    "External Dependencies::Optional Libraries::cma",
+    "External Dependencies::Optional Libraries::h5py",
+    "External Dependencies::Optional Libraries::numpy",
+    "External Dependencies::Optional Libraries::pillow",
+    "External Dependencies::Python Runtime",
+    "External Dependencies::mpi4py Library",
+    "Runtime & Configuration::Configuration Manager",
+    "Runtime & Configuration::Configuration Manager::Environment Variables",
+    "Runtime & Configuration::Configuration Manager::Runtime Settings",
+    "Runtime & Configuration::Runtime Manager",
+    "Runtime & Configuration::Runtime Manager::Initialization",
+    "Runtime & Configuration::Runtime Manager::Lifecycle Control",
+    "Runtime & Configuration::Runtime Manager::Shutdown",
+    "Task Management Layer::Task Execution Engine",
+    "Task Management Layer::Task Execution Engine::Callback Handler",
+    "Task Management Layer::Task Execution Engine::Thread Manager",
+    "Task Management Layer::Task Execution Engine::Worker Pool",
+    "Task Management Layer::Task Scheduler",
+    "Task Management Layer::Task Scheduler::Load Balancer",
+    "Task Management Layer::Task Scheduler::Task Queue Manager",
+    "Task Management Layer::Task Scheduler::Task Stealing",
+    "torc API Layer::torc Module",
+    "torc API Layer::torc Module::Configuration API",
+    "torc API Layer::torc Module::Query API",
+    "torc API Layer::torc Module::SPMD API",
+    "torc API Layer::torc Module::Task Control API",
+    "torc API Layer::torc Module::Task Submission API"
+  ]
+}

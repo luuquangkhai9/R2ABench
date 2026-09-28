@@ -1,0 +1,583 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Backend (Flask Microservices::Internal HTTP",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Local Computer::API Gateway"
+      ],
+      "reasoning": "The GT internal HTTP between backend components is represented by the gateway-based request handling and forwarding path in the predicted architecture."
+    },
+    {
+      "gt_node": "Backend (Flask Microservices::Microservices",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Local Computer::Project Management Service\\n(Flask",
+        "Local Computer::Requirements Management Service\\n(Flask",
+        "Local Computer::User Management Service\\n(Flask",
+        "Server\\n(EC2 t2.xlarge, Amazon Linux 2::Algorithm Service\\n(Flask + NLP + PyTorch + Word2vec"
+      ],
+      "reasoning": "The GT microservices layer is covered by the predicted decomposition into the corresponding project, requirements, user, and algorithm services."
+    },
+    {
+      "gt_node": "Backend (Flask Microservices::Microservices::Algorithm Service",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Server\\n(EC2 t2.xlarge, Amazon Linux 2::Algorithm Service\\n(Flask + NLP + PyTorch + Word2vec"
+      ],
+      "reasoning": "The predicted algorithm service directly corresponds to the GT algorithm service responsibility."
+    },
+    {
+      "gt_node": "Backend (Flask Microservices::Microservices::Project Management Service",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Local Computer::Project Management Service\\n(Flask"
+      ],
+      "reasoning": "The predicted project management service matches the GT project management service concept."
+    },
+    {
+      "gt_node": "Backend (Flask Microservices::Microservices::Requirement Management Service",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Local Computer::Requirements Management Service\\n(Flask"
+      ],
+      "reasoning": "The predicted requirements management service covers the GT requirement management service responsibility."
+    },
+    {
+      "gt_node": "Backend (Flask Microservices::Microservices::User Management Service",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Local Computer::User Management Service\\n(Flask"
+      ],
+      "reasoning": "The predicted user management service corresponds to the GT user management service."
+    },
+    {
+      "gt_node": "Frontend (Vue.js 2.0::Browser / Client",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Client\\n(Windows 10 64-bit, Chrome 81+::Vue.js Frontend"
+      ],
+      "reasoning": "The predicted Vue frontend on the client side covers the GT browser/client frontend responsibility."
+    },
+    {
+      "gt_node": "Global::Backend (Flask Microservices",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Local Computer",
+        "Global::Server\\n(EC2 t2.xlarge, Amazon Linux 2"
+      ],
+      "reasoning": "The GT backend global boundary is represented by the predicted split into local-computer backend deployment and server-hosted algorithm deployment."
+    },
+    {
+      "gt_node": "Global::Frontend (Vue.js 2.0",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Client\\n(Windows 10 64-bit, Chrome 81+",
+        "Client\\n(Windows 10 64-bit, Chrome 81+::Vue.js Frontend"
+      ],
+      "reasoning": "The GT frontend global boundary is covered by the predicted client boundary and Vue frontend node."
+    },
+    {
+      "gt_node": "Global::Network & Gateway Layer",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Local Computer::API Gateway"
+      ],
+      "reasoning": "The gateway layer is directly represented by the predicted API Gateway node."
+    },
+    {
+      "gt_node": "Global::Storage Layer (MongoDB",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Local Computer::MongoDB"
+      ],
+      "reasoning": "The predicted MongoDB node covers the GT storage layer."
+    },
+    {
+      "gt_node": "Network & Gateway Layer::API Gateway",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Local Computer::API Gateway"
+      ],
+      "reasoning": "The predicted API Gateway node matches the GT gateway component."
+    },
+    {
+      "gt_node": "Network & Gateway Layer::API Gateway::Identity Verification",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Local Computer::API Gateway"
+      ],
+      "reasoning": "The predicted API Gateway implies identity verification/authentication responsibility, though not split as a separate subnode."
+    },
+    {
+      "gt_node": "Network & Gateway Layer::API Gateway::Request Forwarding",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Local Computer::API Gateway"
+      ],
+      "reasoning": "The predicted API Gateway covers request forwarding semantics."
+    },
+    {
+      "gt_node": "Network & Gateway Layer::API Gateway::Return Response",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Local Computer::API Gateway"
+      ],
+      "reasoning": "The predicted API Gateway also covers response returning behavior."
+    },
+    {
+      "gt_node": "Network & Gateway Layer::HTTP Protocol",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Local Computer::API Gateway"
+      ],
+      "reasoning": "The HTTP-based communication implied by the gateway is sufficiently represented by the predicted API gateway node."
+    },
+    {
+      "gt_node": "Storage Layer (MongoDB::Project Collection",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Local Computer::MongoDB::Projects & Members"
+      ],
+      "reasoning": "The predicted projects-and-members storage node covers the project collection responsibility."
+    },
+    {
+      "gt_node": "Storage Layer (MongoDB::Requirement Collection",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Local Computer::MongoDB::Requirement Items & Tree"
+      ],
+      "reasoning": "The predicted requirement items and tree storage node covers the requirement collection responsibility."
+    },
+    {
+      "gt_node": "Storage Layer (MongoDB::User Collection",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Local Computer::MongoDB::Users & Roles"
+      ],
+      "reasoning": "The predicted users and roles storage node covers the user collection responsibility."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Client\\n(Windows 10 64-bit, Chrome 81+::Vue.js Frontend",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend (Vue.js 2.0::Browser / Client",
+        "Global::Frontend (Vue.js 2.0"
+      ],
+      "reasoning": "This is grounded in the GT frontend/browser client concept, with added platform details."
+    },
+    {
+      "predicted_node": "Global::Client\\n(Windows 10 64-bit, Chrome 81+",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend (Vue.js 2.0::Browser / Client",
+        "Global::Frontend (Vue.js 2.0"
+      ],
+      "reasoning": "This matches the GT client/frontend boundary concept."
+    },
+    {
+      "predicted_node": "Global::Local Computer",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Backend (Flask Microservices",
+        "Global::Network & Gateway Layer",
+        "Global::Storage Layer (MongoDB"
+      ],
+      "reasoning": "The GT places several backend and storage components on a local computer; this is a reasonable deployment boundary aggregation."
+    },
+    {
+      "predicted_node": "Global::Server\\n(EC2 t2.xlarge, Amazon Linux 2",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend (Flask Microservices::Microservices::Algorithm Service",
+        "Global::Backend (Flask Microservices"
+      ],
+      "reasoning": "This corresponds to the GT server-hosted algorithm service deployment."
+    },
+    {
+      "predicted_node": "Local Computer::API Gateway",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Network & Gateway Layer",
+        "Network & Gateway Layer::API Gateway",
+        "Network & Gateway Layer::API Gateway::Identity Verification",
+        "Network & Gateway Layer::API Gateway::Request Forwarding",
+        "Network & Gateway Layer::API Gateway::Return Response",
+        "Network & Gateway Layer::HTTP Protocol"
+      ],
+      "reasoning": "This is grounded in the GT gateway layer and its subfunctions."
+    },
+    {
+      "predicted_node": "Local Computer::MongoDB",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Storage Layer (MongoDB",
+        "Storage Layer (MongoDB::Project Collection",
+        "Storage Layer (MongoDB::Requirement Collection",
+        "Storage Layer (MongoDB::User Collection"
+      ],
+      "reasoning": "This matches the GT MongoDB storage layer, though the predicted node is more deployment-oriented."
+    },
+    {
+      "predicted_node": "Local Computer::MongoDB::Analysis Results",
+      "grounded": true,
+      "reference_nodes": [
+        "Storage Layer (MongoDB::Requirement Collection"
+      ],
+      "reasoning": "The GT does not name an analysis-results collection, but requirement analysis outputs are persisted in the storage layer and this is a plausible refinement rather than hallucination."
+    },
+    {
+      "predicted_node": "Local Computer::MongoDB::Baselines & Tracing",
+      "grounded": true,
+      "reference_nodes": [
+        "Storage Layer (MongoDB::Project Collection",
+        "Storage Layer (MongoDB::Requirement Collection"
+      ],
+      "reasoning": "This aggregates baseline-node data and forward tracing information, both grounded in GT project/requirement storage concepts."
+    },
+    {
+      "predicted_node": "Local Computer::MongoDB::Logs",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Storage Layer (MongoDB"
+      ],
+      "reasoning": "Logs are a documented data requirement and fit within the GT MongoDB storage layer."
+    },
+    {
+      "predicted_node": "Local Computer::MongoDB::Projects & Members",
+      "grounded": true,
+      "reference_nodes": [
+        "Storage Layer (MongoDB::Project Collection"
+      ],
+      "reasoning": "This is a grounded refinement of project-related storage."
+    },
+    {
+      "predicted_node": "Local Computer::MongoDB::Requirement Items & Tree",
+      "grounded": true,
+      "reference_nodes": [
+        "Storage Layer (MongoDB::Requirement Collection"
+      ],
+      "reasoning": "This is a grounded refinement of requirement storage and hierarchy."
+    },
+    {
+      "predicted_node": "Local Computer::MongoDB::Users & Roles",
+      "grounded": true,
+      "reference_nodes": [
+        "Storage Layer (MongoDB::User Collection"
+      ],
+      "reasoning": "This is a grounded refinement of user storage, including roles."
+    },
+    {
+      "predicted_node": "Local Computer::Project Management Service\\n(Flask",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend (Flask Microservices::Microservices::Project Management Service"
+      ],
+      "reasoning": "Directly grounded in the GT project management service."
+    },
+    {
+      "predicted_node": "Local Computer::Project Management Service\\n(Flask::Baseline Node Management",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend (Flask Microservices::Microservices::Project Management Service"
+      ],
+      "reasoning": "Baseline node management is a plausible subresponsibility of project management and is consistent with GT baseline requirements."
+    },
+    {
+      "predicted_node": "Local Computer::Project Management Service\\n(Flask::Project CRUD",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend (Flask Microservices::Microservices::Project Management Service"
+      ],
+      "reasoning": "Directly grounded in project creation, deletion, modification, and viewing."
+    },
+    {
+      "predicted_node": "Local Computer::Project Management Service\\n(Flask::Project Member Management",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend (Flask Microservices::Microservices::Project Management Service"
+      ],
+      "reasoning": "Grounded in project member operations in the GT."
+    },
+    {
+      "predicted_node": "Local Computer::Project Management Service\\n(Flask::Project Role Management",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend (Flask Microservices::Microservices::Project Management Service"
+      ],
+      "reasoning": "Grounded in GT project role management responsibilities."
+    },
+    {
+      "predicted_node": "Local Computer::Requirements Management Service\\n(Flask",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend (Flask Microservices::Microservices::Requirement Management Service"
+      ],
+      "reasoning": "Directly grounded in the GT requirements management service."
+    },
+    {
+      "predicted_node": "Local Computer::Requirements Management Service\\n(Flask::Forward Tracing",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend (Flask Microservices::Microservices::Requirement Management Service"
+      ],
+      "reasoning": "Grounded in GT forward tracing requirements."
+    },
+    {
+      "predicted_node": "Local Computer::Requirements Management Service\\n(Flask::Requirement Analysis Entry",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend (Flask Microservices::Microservices::Requirement Management Service"
+      ],
+      "reasoning": "Grounded in the GT requirement analysis entry/function."
+    },
+    {
+      "predicted_node": "Local Computer::Requirements Management Service\\n(Flask::Requirement Item CRUD",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend (Flask Microservices::Microservices::Requirement Management Service"
+      ],
+      "reasoning": "Grounded in GT create/delete/modify/view/move requirement item capabilities."
+    },
+    {
+      "predicted_node": "Local Computer::Requirements Management Service\\n(Flask::Requirement Item Tree",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend (Flask Microservices::Microservices::Requirement Management Service"
+      ],
+      "reasoning": "Grounded in GT requirement tree display and hierarchy handling."
+    },
+    {
+      "predicted_node": "Local Computer::Requirements Management Service\\n(Flask::Word Document Import",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend (Flask Microservices::Microservices::Requirement Management Service"
+      ],
+      "reasoning": "Grounded in GT Word import for requirement items."
+    },
+    {
+      "predicted_node": "Local Computer::User Management Service\\n(Flask",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend (Flask Microservices::Microservices::User Management Service"
+      ],
+      "reasoning": "Directly grounded in GT user management service."
+    },
+    {
+      "predicted_node": "Local Computer::User Management Service\\n(Flask::Password Management",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend (Flask Microservices::Microservices::User Management Service"
+      ],
+      "reasoning": "Grounded in GT password modification and reset functionality."
+    },
+    {
+      "predicted_node": "Local Computer::User Management Service\\n(Flask::User List & Admin Functions",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend (Flask Microservices::Microservices::User Management Service"
+      ],
+      "reasoning": "Grounded in GT user list, add/delete, and admin operations."
+    },
+    {
+      "predicted_node": "Local Computer::User Management Service\\n(Flask::User Registration & Login",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend (Flask Microservices::Microservices::User Management Service"
+      ],
+      "reasoning": "Grounded in GT registration and login functionality."
+    },
+    {
+      "predicted_node": "Local Computer::User Management Service\\n(Flask::User Role Management",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend (Flask Microservices::Microservices::User Management Service"
+      ],
+      "reasoning": "Grounded in GT user role modification."
+    },
+    {
+      "predicted_node": "Server\\n(EC2 t2.xlarge, Amazon Linux 2::Algorithm Service\\n(Flask + NLP + PyTorch + Word2vec",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend (Flask Microservices::Microservices::Algorithm Service",
+        "Global::Backend (Flask Microservices"
+      ],
+      "reasoning": "Directly grounded in the GT algorithm service and its ML/NLP technology stack."
+    },
+    {
+      "predicted_node": "Server\\n(EC2 t2.xlarge, Amazon Linux 2::Algorithm Service\\n(Flask + NLP + PyTorch + Word2vec::Association Analysis",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend (Flask Microservices::Microservices::Algorithm Service"
+      ],
+      "reasoning": "Grounded in GT requirement association analysis."
+    },
+    {
+      "predicted_node": "Server\\n(EC2 t2.xlarge, Amazon Linux 2::Algorithm Service\\n(Flask + NLP + PyTorch + Word2vec::Common Requirement Identification",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend (Flask Microservices::Microservices::Algorithm Service"
+      ],
+      "reasoning": "Grounded in GT common requirement identification."
+    },
+    {
+      "predicted_node": "Server\\n(EC2 t2.xlarge, Amazon Linux 2::Algorithm Service\\n(Flask + NLP + PyTorch + Word2vec::Conflict Detection",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend (Flask Microservices::Microservices::Algorithm Service"
+      ],
+      "reasoning": "Grounded in GT requirement conflict detection."
+    },
+    {
+      "predicted_node": "Server\\n(EC2 t2.xlarge, Amazon Linux 2::Algorithm Service\\n(Flask + NLP + PyTorch + Word2vec::Requirement Itemization",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend (Flask Microservices::Microservices::Algorithm Service"
+      ],
+      "reasoning": "Grounded in GT requirement itemization."
+    },
+    {
+      "predicted_node": "Server\\n(EC2 t2.xlarge, Amazon Linux 2::Algorithm Service\\n(Flask + NLP + PyTorch + Word2vec::Requirement Structuring",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend (Flask Microservices::Microservices::Algorithm Service"
+      ],
+      "reasoning": "Grounded in GT requirement structuring."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices"
+      ],
+      "predicted_nodes": [
+        "Local Computer::Project Management Service\\n(Flask",
+        "Local Computer::Requirements Management Service\\n(Flask",
+        "Local Computer::User Management Service\\n(Flask",
+        "Server\\n(EC2 t2.xlarge, Amazon Linux 2::Algorithm Service\\n(Flask + NLP + PyTorch + Word2vec"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT microservices container is split into the corresponding predicted services with semantically consistent deployment boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (Vue.js 2.0::Browser / Client"
+      ],
+      "predicted_nodes": [
+        "Client\\n(Windows 10 64-bit, Chrome 81+::Vue.js Frontend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The frontend/browser client component matches, and the client-side boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Backend (Flask Microservices"
+      ],
+      "predicted_nodes": [
+        "Global::Local Computer",
+        "Global::Server\\n(EC2 t2.xlarge, Amazon Linux 2"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The backend global boundary is represented by deployment boundaries that are consistent with the GT local-computer/server split."
+    },
+    {
+      "gt_nodes": [
+        "Global::Frontend (Vue.js 2.0"
+      ],
+      "predicted_nodes": [
+        "Global::Client\\n(Windows 10 64-bit, Chrome 81+",
+        "Client\\n(Windows 10 64-bit, Chrome 81+::Vue.js Frontend"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The frontend global boundary is preserved with a semantically equivalent client/frontend split."
+    },
+    {
+      "gt_nodes": [
+        "Global::Network & Gateway Layer"
+      ],
+      "predicted_nodes": [
+        "Local Computer::API Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The gateway layer is matched by the predicted API gateway deployment."
+    },
+    {
+      "gt_nodes": [
+        "Global::Storage Layer (MongoDB"
+      ],
+      "predicted_nodes": [
+        "Local Computer::MongoDB"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The MongoDB storage layer is preserved, with only deployment detail added."
+    },
+    {
+      "gt_nodes": [
+        "Network & Gateway Layer::API Gateway"
+      ],
+      "predicted_nodes": [
+        "Local Computer::API Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match."
+    },
+    {
+      "gt_nodes": [
+        "Network & Gateway Layer::API Gateway::Identity Verification",
+        "Network & Gateway Layer::API Gateway::Request Forwarding",
+        "Network & Gateway Layer::API Gateway::Return Response",
+        "Network & Gateway Layer::HTTP Protocol"
+      ],
+      "predicted_nodes": [
+        "Local Computer::API Gateway"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted API Gateway aggregates the GT gateway subfunctions and protocol responsibility without a boundary conflict."
+    },
+    {
+      "gt_nodes": [
+        "Storage Layer (MongoDB::Project Collection"
+      ],
+      "predicted_nodes": [
+        "Local Computer::MongoDB::Projects & Members"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Project storage is grounded in the predicted project/member MongoDB partition."
+    },
+    {
+      "gt_nodes": [
+        "Storage Layer (MongoDB::Requirement Collection"
+      ],
+      "predicted_nodes": [
+        "Local Computer::MongoDB::Requirement Items & Tree"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Requirement storage is grounded in the predicted requirement items/tree MongoDB partition."
+    },
+    {
+      "gt_nodes": [
+        "Storage Layer (MongoDB::User Collection"
+      ],
+      "predicted_nodes": [
+        "Local Computer::MongoDB::Users & Roles"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "User storage is grounded in the predicted users/roles MongoDB partition."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

@@ -1,0 +1,178 @@
+@startuml
+skinparam componentStyle rectangle
+skinparam linetype ortho
+skinparam backgroundColor #FAFAFA
+skinparam node {
+  BackgroundColor #E8F4FD
+  BorderColor #2980B9
+}
+skinparam component {
+  BackgroundColor #EBF5FB
+  BorderColor #2471A3
+}
+skinparam database {
+  BackgroundColor #FEF9E7
+  BorderColor #D4AC0D
+}
+skinparam rectangle {
+  BackgroundColor #F9EBEA
+  BorderColor #C0392B
+}
+
+title DeepCode - Layered Architecture Diagram
+
+' ─────────────────────────────────────────
+' CLIENT LAYER
+' ─────────────────────────────────────────
+package "Client Layer" as CL {
+  [Web Browser
+(HTML5 / Edge / Chrome / Firefox)] as Browser
+}
+
+' ─────────────────────────────────────────
+' FRONT-END LAYER
+' ─────────────────────────────────────────
+package "Front-End Layer (Vue 3)" as FEL {
+  [Vue 3 SPA
+(TypeScript / Vuex / vue-router)] as VueSPA
+  [UI Components
+(Ant Design Vue / CodeMirror / wangEditor / ECharts)] as UI
+  [HTTP Client
+(Axios)] as Axios
+  [Build & Lint
+(Webpack / Vue CLI / ESLint)] as Build
+}
+
+' ─────────────────────────────────────────
+' PROXY / GATEWAY LAYER
+' ─────────────────────────────────────────
+package "Proxy / Gateway Layer" as PGL {
+  [Nginx Reverse Proxy
++ CDN / DNS] as Nginx
+}
+
+' ─────────────────────────────────────────
+' PRESENTATION / API LAYER
+' ─────────────────────────────────────────
+package "Presentation / API Layer (Spring Boot 3)" as PAL {
+  [REST API Controllers
+(Swagger / JWT Interceptor)] as APIC
+}
+
+' ─────────────────────────────────────────
+' BUSINESS LAYER
+' ─────────────────────────────────────────
+package "Business Layer" as BL {
+  [User Service
+(Registration / Login / Profile / Permissions)] as UserSvc
+  [Problem Service
+(Browse / Upload / Review / Tags)] as ProblemSvc
+  [Solution Service
+(Publish / Edit / Likes / Comments)] as SolutionSvc
+  [Forum Service
+(Posts / Comments / Likes / Reports)] as ForumSvc
+  [Submission Service
+(Submit / Record / Results)] as SubmitSvc
+  [AI Service Facade
+(LangChain4j / Recommendation / Analysis / Review)] as AISvc
+  [Notification Service
+(SMTP Email)] as NotifSvc
+}
+
+' ─────────────────────────────────────────
+' ACCESS / INTEGRATION LAYER
+' ─────────────────────────────────────────
+package "Access / Integration Layer" as AIL {
+  [MyBatis-Plus ORM] as ORM
+  [Redis Cache Client] as RedisClient
+  [MinIO Client
+(Object Storage)] as MinIOClient
+  [HTTP Judge Client
+(WebFlux / Thread Pool)] as JudgeClient
+}
+
+' ─────────────────────────────────────────
+' DATA STORE LAYER
+' ─────────────────────────────────────────
+package "Data Store Layer" as DSL {
+  database "MySQL 5.7
+(Users / Problems / Solutions
+Forum / Records / Tags)" as MySQL
+  database "Redis 7.4
+(Session / Cache / Queue)" as Redis
+  database "MinIO
+(Images / Test Cases / Files)" as MinIO
+}
+
+' ─────────────────────────────────────────
+' EXTERNAL SERVICES
+' ─────────────────────────────────────────
+package "External Services" as EXT {
+  [JudgeHost
+(Judge Scheduler)] as JudgeHost
+  [JudgeCore
+(Sandbox Code Executor)] as JudgeCore
+  [LLM Provider
+(Large Language Model API)] as LLM
+  [SMTP Mail Server] as SMTP
+}
+
+' ─────────────────────────────────────────
+' DEVOPS / INFRASTRUCTURE
+' ─────────────────────────────────────────
+package "DevOps / Infrastructure" as DEVOPS {
+  [GitLab CI/CD
+(Build / Test / Push)] as CICD
+  [Docker + Private Registry] as Docker
+  [Kubernetes
+(Deploy / Scale / Rollback)] as K8s
+  [Monitoring & Alerting
+(Infrastructure / App / DB Metrics)] as Monitor
+}
+
+' ─────────────────────────────────────────
+' CONNECTIONS
+' ─────────────────────────────────────────
+
+Browser --> VueSPA : renders
+
+VueSPA --> UI
+VueSPA --> Axios : HTTP calls
+Axios --> Nginx : HTTPS / REST
+
+Nginx --> APIC : forward REST API
+
+APIC --> UserSvc
+APIC --> ProblemSvc
+APIC --> SolutionSvc
+APIC --> ForumSvc
+APIC --> SubmitSvc
+APIC --> AISvc
+APIC --> NotifSvc
+
+UserSvc --> ORM
+ProblemSvc --> ORM
+SolutionSvc --> ORM
+ForumSvc --> ORM
+SubmitSvc --> ORM
+SubmitSvc --> RedisClient
+AISvc --> RedisClient
+UserSvc --> RedisClient
+ProblemSvc --> MinIOClient
+AISvc --> ORM
+
+ORM --> MySQL
+RedisClient --> Redis
+MinIOClient --> MinIO
+JudgeClient --> JudgeHost
+
+SubmitSvc --> JudgeClient
+JudgeHost --> JudgeCore : delegates sandbox execution
+AISvc --> LLM : LLM API calls
+NotifSvc --> SMTP : send email
+
+CICD --> Docker
+Docker --> K8s
+K8s --> Monitor
+
+@enduml

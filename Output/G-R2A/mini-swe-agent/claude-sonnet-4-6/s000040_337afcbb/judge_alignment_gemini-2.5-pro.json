@@ -1,0 +1,108 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Internet"
+      ],
+      "predicted_nodes": [
+        "Global::External Systems"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the external access point (users/systems) for the system, correctly mapped to the global scope."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Proxy"
+      ],
+      "predicted_nodes": [
+        "Internal Network::PlugIt Proxy Layer",
+        "Internal Network::PlugIt Proxy Layer::PlugIt Proxy",
+        "Internal Network::PlugIt Proxy Layer::PlugIt Proxy::Proxy API Endpoint",
+        "Internal Network::PlugIt Proxy Layer::PlugIt Proxy::Standalone Mail Workflow\n(Example Scope",
+        "Internal Network::PlugIt Proxy Layer::PlugIt Proxy::Standalone Mail Workflow\n(Example Scope::Mail Handler",
+        "Internal Network::PlugIt Proxy Layer::PlugIt Proxy::Standalone Mail Workflow\n(Example Scope::Mail Payload Extractor",
+        "Internal Network::PlugIt Proxy Layer::PlugIt Proxy::Standalone Mail Workflow\n(Example Scope::Mail Validator\n(Hash & Auto-response",
+        "Internal Network::PlugIt Proxy Layer::Proxy Configuration\n(API_URL, PI_ALLOWED_NETWORKS"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT proxy node is split into finer architectural components (API endpoint, mail workflow, configuration) by the AI, all correctly placed within the internal network boundary."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB_Proxy"
+      ],
+      "predicted_nodes": [
+        "Internal Network::PlugIt Proxy Layer::Proxy-Side Data Store"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the data store used by the proxy, correctly placed in the internal network and proxy layer."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Service 1"
+      ],
+      "predicted_nodes": [
+        "Internal Network::PlugIt Service Layer",
+        "Internal Network::PlugIt Service Layer::PlugIt Service A",
+        "Internal Network::PlugIt Service Layer::PlugIt Service A::Local / Private Config A\n(Excluded from VCS",
+        "Internal Network::PlugIt Service Layer::PlugIt Service A::PlugIt API Client A",
+        "Internal Network::PlugIt Service Layer::PlugIt Service A::Schema Migration\n(Versioned Upgrade Files",
+        "Internal Network::PlugIt Service Layer::PlugIt Service A::Service Config A\n(API_URL, SQLALCHEMY_URL,\nDEBUG, PI_BASE_URL",
+        "Internal Network::PlugIt Service Layer::PlugIt Service A::Service Logic A"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Service 1 node is split into detailed service components for Service A, maintaining the correct internal network boundary."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB 1"
+      ],
+      "predicted_nodes": [
+        "Internal Network::PlugIt Service Layer::PlugIt Service A::Service Data Store A"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the database for the first service, placed in the appropriate internal network boundary."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Service 2"
+      ],
+      "predicted_nodes": [
+        "Internal Network::PlugIt Service Layer::PlugIt Service B",
+        "Internal Network::PlugIt Service Layer::PlugIt Service B::Local / Private Config B",
+        "Internal Network::PlugIt Service Layer::PlugIt Service B::PlugIt API Client B",
+        "Internal Network::PlugIt Service Layer::PlugIt Service B::Schema Migration B",
+        "Internal Network::PlugIt Service Layer::PlugIt Service B::Service Config B",
+        "Internal Network::PlugIt Service Layer::PlugIt Service B::Service Logic B"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Service 2 node is mapped to Service B and its detailed components by the AI, with correct internal network boundary attribution."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB 2"
+      ],
+      "predicted_nodes": [
+        "Internal Network::PlugIt Service Layer::PlugIt Service B::Service Data Store B"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the database for the second service, correctly placed in the internal network boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Internal Network::PlugIt Service 3",
+    "Internal Network::DB 3"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::Inbound Mail Server",
+    "External Systems::MySQL / SQLite\n(External DB",
+    "Global::Internal Network"
+  ]
+}

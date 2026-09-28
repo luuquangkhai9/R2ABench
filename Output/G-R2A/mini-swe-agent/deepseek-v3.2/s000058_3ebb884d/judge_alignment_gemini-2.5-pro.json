@@ -1,0 +1,80 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nAppian Source::VPC::Appian\\nOracle DB"
+      ],
+      "predicted_nodes": [
+        "External Systems::Appian"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identifies Appian as an external data source. While the GT node is more specific about its hosting (AWS VPC, Oracle DB), the AI's classification under the 'External Systems' boundary is a valid and semantically correct architectural abstraction."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::CMS BigMAC"
+      ],
+      "predicted_nodes": [
+        "External Systems::CMS BigMAC"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identifies CMS BigMAC as an external system, which is the destination for the data transfer. The 'External Systems' boundary is appropriate from the perspective of the core connector application."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::AWS EventBridge"
+      ],
+      "predicted_nodes": [
+        "AWS Services::EventBridge"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct functional match. The GT boundary 'AWS Cloud\\nConnector Account' and the AI's boundary 'AWS Services' are semantically equivalent, as EventBridge is a managed service within the AWS account."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::SNS Topic\\nalerts"
+      ],
+      "predicted_nodes": [
+        "AWS Services::SNS"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identifies the SNS service. This is a slightly higher-level abstraction of the specific 'alerts' topic shown in the GT. The 'AWS Services' boundary is semantically equivalent to the GT's 'AWS Cloud\\nConnector Account'."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::connector::Private subnet::AWS Fargate\\nKafka Connect Cluster",
+        "AWS Cloud\\nConnector Account::VPC::topics::Private subnet::AWS Lambda\\ncreate/delete topics"
+      ],
+      "predicted_nodes": [
+        "Core System::Connector Management Service"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI has aggregated the detailed implementation components from the GT (the Fargate cluster for running connectors and the Lambda for managing topics) into a single logical service. This service accurately represents the connector management and data transfer functions (FR-002). The 'Core System' boundary is a correct logical grouping for these central application components."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "AWS Cloud\\nConnector Account::Chat notification",
+    "AWS Cloud\\nConnector Account::Email notification",
+    "AWS Cloud\\nConnector Account::Slack notification",
+    "Global::VPC peering\\nconnection"
+  ],
+  "unmatched_predicted_nodes": [
+    "AWS Services::AWS Account/Region",
+    "AWS Services::Connector Configuration",
+    "Core System::Event Routing Service",
+    "Core System::GitHub Actions CI/CD",
+    "Core System::Metrics Collection Service",
+    "Core System::Stage Listing Service",
+    "Core System::Terminal Interface",
+    "Data Stores::Deployment Metrics",
+    "Data Stores::PR Merge Metrics",
+    "Data Stores::Running Stages Cache",
+    "External Systems::AWS CLI",
+    "External Systems::GitHub"
+  ]
+}

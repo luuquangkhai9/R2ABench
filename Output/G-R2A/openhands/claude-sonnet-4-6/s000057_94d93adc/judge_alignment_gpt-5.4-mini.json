@@ -1,0 +1,360 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::Cloudinary\\n- stores audio files\\n- stores images\\n- returns file URLs",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Cloudinary::Audio Asset Storage",
+        "Cloudinary::Image Asset Storage",
+        "Global::Cloudinary"
+      ],
+      "reasoning": "The GT node's Cloudinary responsibilities are covered by the two storage-specific predicted nodes, and the global Cloudinary boundary reflects the external service context."
+    },
+    {
+      "gt_node": "Global::Express Server\\n- fetches data with Sequelize\\n- serves React frontend\\n- handles backend API requests",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Node / Express Backend",
+        "Node / Express Backend::Feed API\\n(follow feed, user sounds",
+        "Node / Express Backend::Follow API\\n(follow, unfollow",
+        "Node / Express Backend::Sound API\\n(create, retrieve, delete",
+        "Node / Express Backend::User / Auth API\\n(register, login, user info"
+      ],
+      "reasoning": "The predicted backend node and its API subnodes cover the server-side request handling and backend API responsibilities. The Sequelize detail is not explicit but is consistent with backend data access responsibility."
+    },
+    {
+      "gt_node": "Global::PostgreSQL Database\\n- stores users and sounds\\n- stores Cloudinary URL references",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::PostgreSQL",
+        "PostgreSQL::Users",
+        "PostgreSQL::Sounds\\n(incl. Cloudinary URL refs",
+        "PostgreSQL::Follow Relationships"
+      ],
+      "reasoning": "The predicted PostgreSQL boundary and its user/sound/follow entities cover the GT database persistence responsibilities, including URL references for sounds."
+    },
+    {
+      "gt_node": "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Browser / React Frontend",
+        "Browser / React Frontend::Redux State Layer",
+        "Browser / React Frontend::Redux State Layer::Auth Actions & State",
+        "Browser / React Frontend::Redux State Layer::Follow Actions & State",
+        "Browser / React Frontend::Redux State Layer::Playback State\\n(centralized",
+        "Browser / React Frontend::Redux State Layer::Sound Actions & State",
+        "Browser / React Frontend::UI Components",
+        "Browser / React Frontend::UI Components::Audio Playback UI",
+        "Browser / React Frontend::UI Components::Upload UI\\n(Audio & Image",
+        "Browser / React Frontend::UI Components::Waveform Navigation UI",
+        "Browser / React Frontend::UI Components::Feed / Sound List UI",
+        "Browser / React Frontend::UI Components::Form UI\\n(Validation & Errors",
+        "Browser / React Frontend::UI Components::Follow UI"
+      ],
+      "reasoning": "The predicted frontend boundary is decomposed into Redux state and UI components that together cover state management, media upload, playback control, and visualization responsibilities."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Browser / React Frontend::Frontend Configuration",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback"
+      ],
+      "reasoning": "Frontend configuration is grounded in the React frontend architecture and the PRD's runtime configuration requirements."
+    },
+    {
+      "predicted_node": "Browser / React Frontend::Frontend Configuration::API Base URL",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback"
+      ],
+      "reasoning": "The API base URL is a concrete frontend configuration value supported by the PRD."
+    },
+    {
+      "predicted_node": "Browser / React Frontend::Frontend Configuration::Cloudinary URL &\\nUpload Preset",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Cloudinary\\n- stores audio files\\n- stores images\\n- returns file URLs",
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback"
+      ],
+      "reasoning": "This configuration corresponds to the Cloudinary integration values required by the frontend."
+    },
+    {
+      "predicted_node": "Browser / React Frontend::Redux State Layer",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback"
+      ],
+      "reasoning": "Redux state management is explicitly part of the GT frontend node."
+    },
+    {
+      "predicted_node": "Browser / React Frontend::Redux State Layer::Auth Actions & State",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback",
+        "Global::Express Server\\n- fetches data with Sequelize\\n- serves React frontend\\n- handles backend API requests"
+      ],
+      "reasoning": "Auth actions and state are a plausible frontend Redux concern grounded in the authentication-related backend and frontend responsibilities."
+    },
+    {
+      "predicted_node": "Browser / React Frontend::Redux State Layer::Follow Actions & State",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback",
+        "Global::Express Server\\n- fetches data with Sequelize\\n- serves React frontend\\n- handles backend API requests"
+      ],
+      "reasoning": "Follow state and actions are grounded by the follow feature in the PRD."
+    },
+    {
+      "predicted_node": "Browser / React Frontend::Redux State Layer::Playback State\\n(centralized",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback"
+      ],
+      "reasoning": "Centralized playback state directly matches the PRD requirement for playback continuity and single current playback management."
+    },
+    {
+      "predicted_node": "Browser / React Frontend::Redux State Layer::Sound Actions & State",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback",
+        "Global::Express Server\\n- fetches data with Sequelize\\n- serves React frontend\\n- handles backend API requests"
+      ],
+      "reasoning": "Sound-related Redux state and actions are grounded by sound upload, playback, and retrieval workflows."
+    },
+    {
+      "predicted_node": "Browser / React Frontend::UI Components",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback"
+      ],
+      "reasoning": "UI components are part of the React frontend node."
+    },
+    {
+      "predicted_node": "Browser / React Frontend::UI Components::Audio Playback UI",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback"
+      ],
+      "reasoning": "Audio playback UI is explicitly supported by the PRD."
+    },
+    {
+      "predicted_node": "Browser / React Frontend::UI Components::Feed / Sound List UI",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback",
+        "Global::Express Server\\n- fetches data with Sequelize\\n- serves React frontend\\n- handles backend API requests",
+        "Global::PostgreSQL Database\\n- stores users and sounds\\n- stores Cloudinary URL references"
+      ],
+      "reasoning": "Feed and sound list UI are grounded in the follow feed and sound browsing requirements."
+    },
+    {
+      "predicted_node": "Browser / React Frontend::UI Components::Follow UI",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback"
+      ],
+      "reasoning": "Follow UI is directly grounded in the follow feature."
+    },
+    {
+      "predicted_node": "Browser / React Frontend::UI Components::Form UI\\n(Validation & Errors",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback"
+      ],
+      "reasoning": "Validation and error handling in forms are explicitly required."
+    },
+    {
+      "predicted_node": "Browser / React Frontend::UI Components::Upload UI\\n(Audio & Image",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback",
+        "Global::Cloudinary\\n- stores audio files\\n- stores images\\n- returns file URLs"
+      ],
+      "reasoning": "Upload UI for audio and image flows is directly grounded in the PRD."
+    },
+    {
+      "predicted_node": "Browser / React Frontend::UI Components::Waveform Navigation UI",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback"
+      ],
+      "reasoning": "Waveform navigation UI is explicitly required for scrubbing playback."
+    },
+    {
+      "predicted_node": "Cloudinary::Audio Asset Storage",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Cloudinary\\n- stores audio files\\n- stores images\\n- returns file URLs"
+      ],
+      "reasoning": "Audio asset storage is directly supported by the Cloudinary GT node."
+    },
+    {
+      "predicted_node": "Cloudinary::Image Asset Storage",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Cloudinary\\n- stores audio files\\n- stores images\\n- returns file URLs"
+      ],
+      "reasoning": "Image asset storage is directly supported by the Cloudinary GT node."
+    },
+    {
+      "predicted_node": "Global::Browser / React Frontend",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback"
+      ],
+      "reasoning": "This is a semantically equivalent naming of the React frontend boundary."
+    },
+    {
+      "predicted_node": "Global::Cloudinary",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Cloudinary\\n- stores audio files\\n- stores images\\n- returns file URLs"
+      ],
+      "reasoning": "This is the same external service concept as the GT Cloudinary node."
+    },
+    {
+      "predicted_node": "Global::Node / Express Backend",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Express Server\\n- fetches data with Sequelize\\n- serves React frontend\\n- handles backend API requests"
+      ],
+      "reasoning": "This is a semantically equivalent backend boundary name."
+    },
+    {
+      "predicted_node": "Global::PostgreSQL",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::PostgreSQL Database\\n- stores users and sounds\\n- stores Cloudinary URL references"
+      ],
+      "reasoning": "This is a semantically equivalent database boundary name."
+    },
+    {
+      "predicted_node": "Node / Express Backend::Feed API\\n(follow feed, user sounds",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Express Server\\n- fetches data with Sequelize\\n- serves React frontend\\n- handles backend API requests"
+      ],
+      "reasoning": "Feed API is grounded in the server's API responsibilities and the PRD's feed retrieval requirement."
+    },
+    {
+      "predicted_node": "Node / Express Backend::Follow API\\n(follow, unfollow",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Express Server\\n- fetches data with Sequelize\\n- serves React frontend\\n- handles backend API requests"
+      ],
+      "reasoning": "Follow API is grounded in the server API responsibilities and the follow feature."
+    },
+    {
+      "predicted_node": "Node / Express Backend::Sound API\\n(create, retrieve, delete",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Express Server\\n- fetches data with Sequelize\\n- serves React frontend\\n- handles backend API requests"
+      ],
+      "reasoning": "Sound API matches the GT server responsibilities and the PRD sound create/retrieve/delete flows."
+    },
+    {
+      "predicted_node": "Node / Express Backend::User / Auth API\\n(register, login, user info",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Express Server\\n- fetches data with Sequelize\\n- serves React frontend\\n- handles backend API requests"
+      ],
+      "reasoning": "User/auth API is grounded in the backend's API responsibilities and the PRD's auth-related flows."
+    },
+    {
+      "predicted_node": "PostgreSQL::Follow Relationships",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::PostgreSQL Database\\n- stores users and sounds\\n- stores Cloudinary URL references"
+      ],
+      "reasoning": "Follow relationship storage is a valid decomposition of the PostgreSQL persistence responsibilities."
+    },
+    {
+      "predicted_node": "PostgreSQL::Sounds\\n(incl. Cloudinary URL refs",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::PostgreSQL Database\\n- stores users and sounds\\n- stores Cloudinary URL references"
+      ],
+      "reasoning": "Sound storage including Cloudinary URL references directly matches the GT database node."
+    },
+    {
+      "predicted_node": "PostgreSQL::Users",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::PostgreSQL Database\\n- stores users and sounds\\n- stores Cloudinary URL references"
+      ],
+      "reasoning": "User storage is grounded in the GT database responsibility."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Cloudinary\\n- stores audio files\\n- stores images\\n- returns file URLs"
+      ],
+      "predicted_nodes": [
+        "Cloudinary::Audio Asset Storage",
+        "Cloudinary::Image Asset Storage",
+        "Global::Cloudinary"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Cloudinary node is split into storage-specific predicted nodes, and the boundary remains semantically consistent with an external Cloudinary service."
+    },
+    {
+      "gt_nodes": [
+        "Global::Express Server\\n- fetches data with Sequelize\\n- serves React frontend\\n- handles backend API requests"
+      ],
+      "predicted_nodes": [
+        "Global::Node / Express Backend",
+        "Node / Express Backend::Feed API\\n(follow feed, user sounds",
+        "Node / Express Backend::Follow API\\n(follow, unfollow",
+        "Node / Express Backend::Sound API\\n(create, retrieve, delete",
+        "Node / Express Backend::User / Auth API\\n(register, login, user info"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT server node is decomposed into the backend boundary and specific API subcomponents, which is semantically aligned with the original backend scope."
+    },
+    {
+      "gt_nodes": [
+        "Global::PostgreSQL Database\\n- stores users and sounds\\n- stores Cloudinary URL references"
+      ],
+      "predicted_nodes": [
+        "Global::PostgreSQL",
+        "PostgreSQL::Users",
+        "PostgreSQL::Sounds\\n(incl. Cloudinary URL refs",
+        "PostgreSQL::Follow Relationships"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT database node is split into the database boundary and entity-focused tables/collections, which preserves the correct storage boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback"
+      ],
+      "predicted_nodes": [
+        "Global::Browser / React Frontend",
+        "Browser / React Frontend::Frontend Configuration",
+        "Browser / React Frontend::Redux State Layer",
+        "Browser / React Frontend::Redux State Layer::Auth Actions & State",
+        "Browser / React Frontend::Redux State Layer::Follow Actions & State",
+        "Browser / React Frontend::Redux State Layer::Playback State\\n(centralized",
+        "Browser / React Frontend::Redux State Layer::Sound Actions & State",
+        "Browser / React Frontend::UI Components",
+        "Browser / React Frontend::UI Components::Audio Playback UI",
+        "Browser / React Frontend::UI Components::Feed / Sound List UI",
+        "Browser / React Frontend::UI Components::Follow UI",
+        "Browser / React Frontend::UI Components::Form UI\\n(Validation & Errors",
+        "Browser / React Frontend::UI Components::Upload UI\\n(Audio & Image",
+        "Browser / React Frontend::UI Components::Waveform Navigation UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT frontend node is decomposed into a browser-scoped frontend boundary, Redux layer, and UI components, which are semantically aligned with the React frontend architecture."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

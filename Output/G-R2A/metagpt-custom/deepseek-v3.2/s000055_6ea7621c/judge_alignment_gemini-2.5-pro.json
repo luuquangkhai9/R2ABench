@@ -1,0 +1,82 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "BACKEND::Router"
+      ],
+      "predicted_nodes": [
+        "Request Routing Layer::Router"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Functionality matches. The predicted boundary 'Request Routing Layer' is a more specific but semantically correct sub-layer of the GT's 'BACKEND'."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::algorithm"
+      ],
+      "predicted_nodes": [
+        "Business Logic::autocomplete/search-hint algorithm"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Functionality matches. The predicted boundary 'Business Logic' is a standard architectural layer and semantically correct within the GT's 'BACKEND'."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::handlers"
+      ],
+      "predicted_nodes": [
+        "Request Handlers::Home Page Handler",
+        "Request Handlers::Not-Found Handler",
+        "Request Handlers::Static Asset Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly split the generic GT 'handlers' node into specific functional handlers for home, not-found, and static assets as described in the PRD. The 'Request Handlers' boundary is a correct backend layer."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::userInput"
+      ],
+      "predicted_nodes": [
+        "Frontend (Browser::Search Input Field"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is an exact functional match for the UI input element. The 'Frontend (Browser' boundary is semantically identical to 'FRONTEND'."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::XMLHttpRequest"
+      ],
+      "predicted_nodes": [
+        "Frontend (Browser::Frontend Helper Module"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly abstracted the GT's low-level `XMLHttpRequest` into a logical `Frontend Helper Module` that manages client-side requests. The 'Frontend (Browser' boundary is semantically identical to 'FRONTEND'."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::public assets\\nhtml\\ncss\\njs",
+        "FRONTEND::index.html",
+        "FRONTEND::main.css"
+      ],
+      "predicted_nodes": [
+        "Global::Client Browser"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated multiple GT nodes representing static files and UI components into a single high-level node for the client's runtime environment. The 'Global' boundary is appropriate for the client browser, which is external to the system's own boundaries."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "BACKEND::data.json"
+  ],
+  "unmatched_predicted_nodes": [
+    "Business Logic::Content-Type Mapper",
+    "Frontend (Browser::Suggestions Output",
+    "Request Handlers::Search Request Handler"
+  ]
+}

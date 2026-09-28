@@ -1,0 +1,102 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Statlord::Browser Editor\nLayout authoring"
+      ],
+      "predicted_nodes": [
+        "Container Runtime\n(Docker / Python 3.7 base::Client / Editor Layer::EditorSPA\n(TypeScript / React SPA",
+        "Container Runtime\n(Docker / Python 3.7 base::Client / Editor Layer::Redux Store::ControlsSlice",
+        "Container Runtime\n(Docker / Python 3.7 base::Client / Editor Layer::Redux Store::DisplaysSlice\n(key, available, resolution_x,\nresolution_y, display_data,\nrotation",
+        "Container Runtime\n(Docker / Python 3.7 base::Client / Editor Layer::Redux Store::ElementsSlice",
+        "Container Runtime\n(Docker / Python 3.7 base::Client / Editor Layer::Redux Store::GaugesSlice",
+        "Container Runtime\n(Docker / Python 3.7 base::Client / Editor Layer::Redux Store::LayoutsSlice",
+        "Container Runtime\n(Docker / Python 3.7 base::Client / Editor Layer::ReduxMiddleware\n(thunks / HTTP dispatch",
+        "Container Image\n(baked static assets::Built SPA Assets\n(HTML / JS / CSS"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Browser Editor is split into its detailed client-side components (SPA, Redux slices, Middleware, and the built static assets) by the AI. The boundaries fall cleanly within the expected system space and editor functionality layer."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Display Resource\nresolution and state"
+      ],
+      "predicted_nodes": [
+        "Container Runtime\n(Docker / Python 3.7 base::Server / API Layer::REST API Resources::DisplayAPI\n(key, available, resolution,\ncurrent_layout, display_data,\nrotation"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Display Resource API entity. The AI correctly places it within the API Resources layer."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Gauge Resource\nkey, value"
+      ],
+      "predicted_nodes": [
+        "Container Runtime\n(Docker / Python 3.7 base::Server / API Layer::REST API Resources::GaugeAPI\n(key, value"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Gauge Resource API entity. Boundary mapping is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Layout Resource\ndata and display positions"
+      ],
+      "predicted_nodes": [
+        "Container Runtime\n(Docker / Python 3.7 base::Server / API Layer::REST API Resources::LayoutAPI\n(key, data, display_positions"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Layout Resource API entity. Boundary mapping is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::PostgreSQL\npersistent models"
+      ],
+      "predicted_nodes": [
+        "Container Runtime\n(Docker / Python 3.7 base::Persistence Layer::PostgreSQLDatabase\n(Gauge | Display | Layout)\n<<database>>"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the PostgreSQL database for models. Database layer boundaries are correctly matched."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Python / Django API"
+      ],
+      "predicted_nodes": [
+        "Container Runtime\n(Docker / Python 3.7 base::Server / API Layer::DjangoServer\n(manage.py runserver",
+        "Container Runtime\n(Docker / Python 3.7 base::Server / API Layer::StaticAssetHost\n(Django static file serving\ncapability"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT generic Django API node is detailed into the Django server process and its capability to serve static assets. Boundaries are correct as they both reside within the Server/API Layer."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Viewer Instances\nheadless browsers"
+      ],
+      "predicted_nodes": [
+        "Container Runtime\n(Docker / Python 3.7 base::Viewer / Rendering Layer::ViewerRenderer\n(B&W pixel output\nat display resolution",
+        "External Systems::HeadlessBrowser\n(automated rendering"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "Functionally mapped to rendering mechanisms; however, the AI placed the 'Headless Browser' in an 'External Systems' boundary whereas the GT considers Viewer Instances an internal part of the 'Statlord' system boundary, resulting in a severe boundary crossing error."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Statlord::Displays\nOLED, e-paper, LCD, browser"
+  ],
+  "unmatched_predicted_nodes": [
+    "Build Toolchain\n(Node.js / npm)\n[image-build-time only::npm install + npm run build\n→ produces /static/ assets",
+    "External Systems::API Clients",
+    "External Systems::Human User\n(Browser",
+    "Global::Build Toolchain\n(Node.js / npm)\n[image-build-time only",
+    "Global::Container Image\n(baked static assets",
+    "Global::Container Runtime\n(Docker / Python 3.7 base",
+    "Global::External Systems"
+  ]
+}

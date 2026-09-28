@@ -1,0 +1,61 @@
+@startuml
+!define RECTANGLE class
+
+RECTANGLE Frontend {
+  RECTANGLE "Next.js App" as nextjs
+  RECTANGLE "Session Handler" as sessionHandler
+  RECTANGLE "Frontend Form" as frontendForm
+}
+
+RECTANGLE Middleware {
+  RECTANGLE "Task Request Middleware" as taskMiddleware
+  RECTANGLE "Authentication Middleware" as authMiddleware
+}
+
+RECTANGLE Backend {
+  RECTANGLE "Firebase Functions (Custom APIs)" as firebaseFunctions
+  RECTANGLE "OnFleet Task Handler" as onfleetHandler
+}
+
+RECTANGLE ExternalSystems {
+  RECTANGLE "Firebase Authentication" as firebaseAuth
+  RECTANGLE "OnFleet API" as onfleetAPI
+  RECTANGLE "Environment Variables" as envVars
+}
+
+RECTANGLE DataStores {
+  RECTANGLE "Server-Side Session Store" as sessionStore
+}
+
+nextjs --> sessionHandler : uses
+sessionHandler --> firebaseAuth : gets ID token
+sessionHandler --> authMiddleware : sends login/logout requests
+frontendForm --> taskMiddleware : submits task requests
+taskMiddleware --> firebaseFunctions : routes eligible tasks
+authMiddleware --> firebaseFunctions : validates tokens
+firebaseFunctions --> sessionStore : reads/writes session data
+firebaseFunctions --> onfleetHandler : forwards tasks
+onfleetHandler --> onfleetAPI : creates tasks
+firebaseFunctions --> envVars : loads config
+nextjs --> envVars : loads config
+
+note right of Frontend
+  Includes Next.js app and session handling
+end note
+
+note right of Middleware
+  Processes task requests and authentication
+end_note
+
+note right of Backend
+  Custom APIs and task handling via Firebase and OnFleet
+end_note
+
+note right of ExternalSystems
+  Firebase auth, OnFleet API, and environment configuration
+end_note
+
+note right of DataStores
+  Stores session data server-side
+end_note
+@enduml

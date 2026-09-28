@@ -1,0 +1,196 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::MySQL"
+      ],
+      "predicted_nodes": [
+        "Data & State::Data Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to persistent data storage/database infrastructure. The predicted node is more generic, but the layer placement is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::Prometheus"
+      ],
+      "predicted_nodes": [
+        "Data & State::Data Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Prometheus is an infrastructure monitoring component. The predicted diagram does not name it explicitly, but 'Data & State::Data Storage' is the closest generic infra/storage grouping and does not indicate a clear boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::RabbitMQ"
+      ],
+      "predicted_nodes": [
+        "Messaging::RabbitMQ"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "RabbitMQ is correctly identified as a messaging component, and the boundary attribution is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::Redis"
+      ],
+      "predicted_nodes": [
+        "Data & State::Data Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Redis is an infra data store/cache. The predicted node is generic, but still within a semantically correct data/state boundary."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-auth",
+        "Awesome Music System::Micro Service Layer::service-auth::auth1",
+        "Awesome Music System::Micro Service Layer::service-auth::auth2",
+        "Awesome Music System::Micro Service Layer::service-auth::auth3"
+      ],
+      "predicted_nodes": [
+        "Backend API (Golang/Gin::Account Service",
+        "Global::Account Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT auth service cluster is represented by a single account-related backend service. This is a reasonable aggregation, and the backend placement is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-discovery",
+        "Awesome Music System::Micro Service Layer::service-discovery::discovery1",
+        "Awesome Music System::Micro Service Layer::service-discovery::discovery2",
+        "Awesome Music System::Micro Service Layer::service-discovery::discovery3"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No semantically equivalent predicted node was provided for the service discovery cluster."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-scheduler",
+        "Awesome Music System::Micro Service Layer::service-scheduler::scheduler1",
+        "Awesome Music System::Micro Service Layer::service-scheduler::scheduler2",
+        "Awesome Music System::Micro Service Layer::service-scheduler::scheduler3"
+      ],
+      "predicted_nodes": [
+        "Scheduler::Cron Scheduler",
+        "Global::Cron Scheduler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT scheduler service cluster is correctly recognized as a cron scheduler, and the scheduling boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-web",
+        "Awesome Music System::Micro Service Layer::service-web::web1",
+        "Awesome Music System::Micro Service Layer::service-web::web2",
+        "Awesome Music System::Micro Service Layer::service-web::web3"
+      ],
+      "predicted_nodes": [
+        "Backend API (Golang/Gin::Score Service",
+        "Backend API (Golang/Gin::Model Management",
+        "Backend API (Golang/Gin::Recommendation Service",
+        "Backend API (Golang/Gin::Task API",
+        "Global::Score Service",
+        "Global::Model Management",
+        "Global::Recommendation Service",
+        "Global::Task API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT web service is split into multiple backend APIs, but the predicted boundary attribution is incorrect because these are backend services rather than a unified web service node. The aggregation does not preserve the original service boundary."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone::Nginx Cluster",
+        "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx1",
+        "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx2",
+        "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx3"
+      ],
+      "predicted_nodes": [
+        "Gateway & Delivery::Nginx",
+        "Global::Nginx"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Nginx cluster is represented by a single Nginx gateway/delivery node. This is a valid simplification and the boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone::Spring Cloud Gateway",
+        "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway1",
+        "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway2",
+        "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway3"
+      ],
+      "predicted_nodes": [
+        "Gateway & Delivery::Nginx",
+        "Gateway & Delivery::Web Frontend (HTML/CSS/JS/Bootstrap",
+        "Global::Nginx",
+        "Global::Web Frontend (HTML/CSS/JS/Bootstrap"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT gateway is a security boundary component for internal/external isolation, but the prediction mixes it with Nginx and frontend delivery nodes. That is a boundary confusion: gateway and frontend are distinct from the GT security-critical gateway layer."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone::Static Resource Server",
+        "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server1",
+        "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server2",
+        "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server3"
+      ],
+      "predicted_nodes": [
+        "Gateway & Delivery::Web Frontend (HTML/CSS/JS/Bootstrap",
+        "Global::Web Frontend (HTML/CSS/JS/Bootstrap"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The static resource server is reasonably reflected by the frontend delivery/web frontend component. While not explicit, the boundary is still semantically aligned with static content serving."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Awesome Music System::Micro Service Layer::service-discovery",
+    "Awesome Music System::Micro Service Layer::service-discovery::discovery1",
+    "Awesome Music System::Micro Service Layer::service-discovery::discovery2",
+    "Awesome Music System::Micro Service Layer::service-discovery::discovery3"
+  ],
+  "unmatched_predicted_nodes": [
+    "Algorithm Service::Classification Module",
+    "Algorithm Service::Generation Module",
+    "Algorithm Service::Recommendation Engine",
+    "Algorithm Service::Training Module",
+    "Backend API (Golang/Gin::Account Service",
+    "Backend API (Golang/Gin::Model Management",
+    "Backend API (Golang/Gin::Recommendation Service",
+    "Backend API (Golang/Gin::Score Service",
+    "Backend API (Golang/Gin::Task API",
+    "Client::Browser",
+    "Data & State::Data Storage",
+    "Data & State::Hadoop HDFS",
+    "Data & State::etcd",
+    "Gateway & Delivery::Nginx",
+    "Gateway & Delivery::Web Frontend (HTML/CSS/JS/Bootstrap",
+    "Global::Account Service",
+    "Global::Browser",
+    "Global::Classification Module",
+    "Global::Cron Scheduler",
+    "Global::Generation Module",
+    "Global::Model Management",
+    "Global::Nginx",
+    "Global::Recommendation Engine",
+    "Global::Recommendation Service",
+    "Global::Score Service",
+    "Global::Task API",
+    "Global::Training Module",
+    "Global::Web Frontend (HTML/CSS/JS/Bootstrap",
+    "Messaging::RabbitMQ",
+    "Scheduler::Cron Scheduler"
+  ]
+}

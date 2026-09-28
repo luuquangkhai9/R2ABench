@@ -1,0 +1,111 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "High level architecture::Frontend::Docker\nfrontend container"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Frontend Container"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Docker container for the frontend. The boundary shift from functional tier to Docker Host is semantically consistent with the PRD deployment architecture."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Frontend::React"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Frontend Container::React Frontend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the React frontend component, correctly placed within the frontend container boundary."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Backend::Docker\nbackend container"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Backend Container"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Docker container for the backend, accurately reflecting the deployment unit."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Backend::FastAPI"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Backend Container::FastAPI Backend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the FastAPI backend component, properly attributed to the backend container."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Analytics and storage::Docker\nelasticsearch container"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Elasticsearch Container"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Docker container for Elasticsearch."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Analytics and storage::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Elasticsearch Container::Elasticsearch"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the Elasticsearch data storage component."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Analytics and storage::Docker\nkibana container"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Kibana Container"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Docker container used to deploy the Kibana service."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Analytics and storage::Kibana"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Kibana Container::Kibana"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes describe the Kibana auxiliary UI component."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Backend::Genius API\nintegration"
+      ],
+      "predicted_nodes": [
+        "Docker Host::External Services Layer::Genius API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both represent the Genius API integration. However, the AI placed the Genius API inside the 'Docker Host' boundary, directly violating PRD constraints (C-007) which dictate that the Genius API must be modeled as an external dependency and not as an internal component or container."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "High level architecture::Developer/Admin",
+    "High level architecture::user"
+  ],
+  "unmatched_predicted_nodes": [
+    "Docker Host::External Services Layer",
+    "Global::Docker Host"
+  ]
+}

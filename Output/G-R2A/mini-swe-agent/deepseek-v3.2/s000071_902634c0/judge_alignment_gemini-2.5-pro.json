@@ -1,0 +1,106 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "ClearML Server::Backend Service API"
+      ],
+      "predicted_nodes": [
+        "External Systems::ClearML Server",
+        "External Systems::ClearML Server::Backend Services",
+        "External Systems::ClearML Server::Backend Services::Events Service v2.5",
+        "External Systems::ClearML Server::Backend Services::Models Service v2.4"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT provides a single node for the Backend Service API, while the AI prediction splits it into the main ClearML Server and specific backend services (Events and Models), maintaining semantic consistency within the External Systems boundary."
+    },
+    {
+      "gt_nodes": [
+        "ClearML Server::ML Ops::Execution Queue"
+      ],
+      "predicted_nodes": [
+        "External Systems::ClearML Server::Execution Queue"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the ClearML execution queue. The boundary difference reflects physical vs. logical grouping, which is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\nOn Prem or Cloud::ClearML Agent\nService Pod"
+      ],
+      "predicted_nodes": [
+        "ClearML Agent Core::ClearML Agent",
+        "ClearML Agent Core::ClearML Agent::Backend Client",
+        "ClearML Agent Core::ClearML Agent::Backend Client::Service Interface",
+        "ClearML Agent Core::ClearML Agent::Backend Client::Session Handler",
+        "ClearML Agent Core::ClearML Agent::Configuration Manager",
+        "ClearML Agent Core::ClearML Agent::Telemetry Service",
+        "ClearML Agent Core::ClearML Agent::Telemetry Service::Connectivity Pinger",
+        "ClearML Agent Core::ClearML Agent::Telemetry Service::Status Reporter",
+        "Data & Monitoring::Configuration Store",
+        "Data & Monitoring::Logging Service",
+        "Data & Monitoring::Metrics Collector",
+        "Execution Modes::Service-Pod Mode",
+        "Execution Modes::Service-Pod Mode::Experiment Runner"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT groups the ClearML Agent Service Pod into a single operational node on the workers. The AI splits it comprehensively into core components (telemetry, client, config), data monitoring, and the specific Service-Pod execution mode runner. Boundaries map appropriately from physical infrastructure to software layers."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\nOn Prem or Cloud::Kubernetes Glue"
+      ],
+      "predicted_nodes": [
+        "Execution Modes::Kubernetes Glue Mode",
+        "Execution Modes::Kubernetes Glue Mode::Job Converter",
+        "Execution Modes::Kubernetes Glue Mode::Queue Monitor",
+        "Execution Modes::Kubernetes Glue Mode::Template Processor"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's Kubernetes Glue component is broken down by the AI into its specific operational classes (Job Converter, Queue Monitor, Template Processor) logically placed under the Execution Modes boundary."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\nOn Prem or Cloud::Mapped Docker Socket\nSibling Containers"
+      ],
+      "predicted_nodes": [
+        "Execution Modes::Service-Pod Mode::Docker Socket Manager",
+        "Execution Modes::Service-Pod Mode::Sibling Container Manager",
+        "External Systems::Kubernetes Cluster::Docker Runtime"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's Docker Socket / Sibling Containers operational requirement is split by the AI into logical managers within the agent and the external Docker runtime dependency."
+    },
+    {
+      "gt_nodes": [
+        "Data Scientist Environment::Python ML / DL Code",
+        "GPU / Kubernetes Workers\nOn Prem or Cloud::Pod Execution Environment\nand Docker User Code"
+      ],
+      "predicted_nodes": [
+        "External Systems::User Code/Experiments"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT details distinct environments for user code (data scientist environment vs pod execution environment), which the AI generalized into a single external User Code/Experiments node."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "ClearML Server::Experiment Manager::Collaboration",
+    "ClearML Server::Experiment Manager::Data Tracking",
+    "ClearML Server::Experiment Manager::Versioning",
+    "ClearML Server::Experiment Manager::Visualization",
+    "ClearML Server::ML Ops::Monitoring",
+    "ClearML Server::ML Ops::Orchestration",
+    "Data Scientist Environment::ClearML Snippet",
+    "GPU / Kubernetes Workers\nOn Prem or Cloud::Kubernetes Job",
+    "GPU / Kubernetes Workers\nOn Prem or Cloud::YAML Job Template"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::Kubernetes Cluster",
+    "External Systems::Kubernetes Cluster::Kubernetes API"
+  ]
+}

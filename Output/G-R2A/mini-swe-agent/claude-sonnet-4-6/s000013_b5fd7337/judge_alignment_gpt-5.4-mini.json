@@ -1,0 +1,81 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "High level architecture::Analytics and storage::Docker\\nelasticsearch container",
+        "High level architecture::Analytics and storage::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "Docker Application Stack::Elasticsearch\\n(Container: elasticsearch"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates the Elasticsearch container and the Elasticsearch storage node, while the prediction aggregates them into one Elasticsearch container node. The boundary is semantically consistent with the storage/analytics area."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Analytics and storage::Docker\\nkibana container",
+        "High level architecture::Analytics and storage::Kibana"
+      ],
+      "predicted_nodes": [
+        "Docker Application Stack::Kibana\\n(Container: kibana"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates the Kibana container and Kibana UI node, while the prediction aggregates them into one Kibana container node. The boundary is semantically consistent with the analytics/storage area."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Backend::Docker\\nbackend container",
+        "High level architecture::Backend::FastAPI"
+      ],
+      "predicted_nodes": [
+        "Docker Application Stack::FastAPI Backend\\n(Container: backend"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates the backend container and FastAPI service node, while the prediction combines them into one backend node. The boundary is correct because FastAPI is placed in the backend application stack."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Backend::Genius API\\nintegration"
+      ],
+      "predicted_nodes": [
+        "External Services::Genius API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the backend integration to the external Genius API, and the external-services boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Frontend::Docker\\nfrontend container",
+        "High level architecture::Frontend::React"
+      ],
+      "predicted_nodes": [
+        "Web Browser::React Frontend\\n(Container: frontend"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": false,
+      "reasoning": "The functionality matches the React frontend and its container, but the predicted boundary places it under Web Browser rather than the frontend/application boundary. This is a boundary-crossing/context error."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::user"
+      ],
+      "predicted_nodes": [
+        "Global::Web Browser"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT user actor is represented by a browser-accessing global node in the prediction. This is semantically aligned, and the global boundary is acceptable for an external user/browser actor."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "High level architecture::Developer/Admin"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Docker Application Stack",
+    "Global::External Services"
+  ]
+}

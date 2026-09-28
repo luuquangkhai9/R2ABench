@@ -1,0 +1,115 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::OpenVR\\nSteamVR Runtime"
+      ],
+      "predicted_nodes": [
+        "Global::SteamVR / OpenVR Runtime\\n\\n- Loads and hosts VMT Driver\\n- OpenVR driver interface\\n- Provides runtime environment"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the SteamVR/OpenVR runtime dependency and driver-hosting environment. The boundary remains Global in both cases, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::User Application"
+      ],
+      "predicted_nodes": [
+        "Global::User Application Environment"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the external user application that provides control input. The Global boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::Legacy Controller Binding\\nmycontroller JSON"
+      ],
+      "predicted_nodes": [
+        "VMT Driver Process (SteamVR Plugin::Legacy Controller Binding\\n(mycontroller)\\n\\n- controller_type: mycontroller\\n- /user/hand/right/input/a\\n  → /actions/legacy/in/right_axis1_press\\n- /user/hand/right/input/c\\n  → /actions/legacy/in/right_a_press\\n- /user/hand/right/input/b\\n  → /actions/legacy/in/right_grip_press\\n- mode: button, sub_mode: complex"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The legacy binding artifact for mycontroller is correctly identified, and placing it under the VMT Driver process is acceptable because the binding is part of the driver-facing OpenVR integration scope."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::VMT Driver\\nC++"
+      ],
+      "predicted_nodes": [
+        "VMT Driver Process (SteamVR Plugin::VMT Driver\\n\\n- Exposes virtual motion tracking capability\\n- Integrates with OpenVR driver interface\\n- Loadable by SteamVR/OpenVR runtime"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The component functionality matches the GT VMT Driver, but the predicted boundary is materially shifted into a process/plugin-specific packaging and not the original Virtual Motion Tracker system boundary. This is a boundary attribution mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::VMT Manager\\nC#"
+      ],
+      "predicted_nodes": [
+        "VMT Management Process::VMT Manager\\n\\n- Receives external control input\\n- Manages shared-memory communication\\n- Drives virtual motion tracking state updates"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The component functionality matches the GT VMT Manager, but the predicted boundary is renamed to a process boundary rather than the original Virtual Motion Tracker system boundary. This is a boundary mismatch, though not a context error."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::OpenVR Path Constants\\n/user/body and /client_info"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding node was predicted. The GT OpenVR path constants are omitted."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Global::Shared Memory IPC Layer"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "This is a hallucinated high-level node not present in the GT node list."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Shared Memory IPC Layer::Shared Memory Channel\\n(Driver → Manager)\\n\\nPayload: JSON string\\nMetadata: send_count,\\nhandshake_count, message_length",
+        "Shared Memory IPC Layer::Shared Memory Channel\\n(Manager → Driver)\\n\\nPayload: JSON string\\nMetadata: send_count,\\nhandshake_count, message_length"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "These are hallucinated detailed IPC channel nodes. The general shared-memory IPC concept exists in the PRD, but there is no corresponding GT node for a shared memory layer, and the boundary attribution is not grounded in the GT list."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Global::VMT Management Process"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "This is a hallucinated process boundary not present in the GT list."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Global::User Application Environment"
+      ],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "This is a hallucinated boundary distinct from the GT's simpler User Application node."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Virtual Motion Tracker::OpenVR Path Constants\\n/user/body and /client_info"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Shared Memory IPC Layer",
+    "Shared Memory IPC Layer::Shared Memory Channel\\n(Driver → Manager)\\n\\nPayload: JSON string\\nMetadata: send_count,\\nhandshake_count, message_length",
+    "Shared Memory IPC Layer::Shared Memory Channel\\n(Manager → Driver)\\n\\nPayload: JSON string\\nMetadata: send_count,\\nhandshake_count, message_length",
+    "Global::VMT Management Process",
+    "Global::User Application Environment"
+  ]
+}

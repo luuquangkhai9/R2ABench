@@ -1,0 +1,217 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Web2 application stack::Applications",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "IceFireDB System::Redis Application",
+        "IceFireDB System::PubSub Service"
+      ],
+      "reasoning": "The GT applications layer is broadly covered by the predicted application-facing Redis client and PubSub service components, which represent the user-facing workloads interacting with IceFireDB."
+    },
+    {
+      "gt_node": "Web2 application stack::BlockChain Database\\nTransactions, Contracts,\\nCertificates and Receipts",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node represents blockchain database storage or transaction/contract/certificate handling."
+    },
+    {
+      "gt_node": "Web2 application stack::File System\\nLarge Files and Media",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node covers generic file system or large media storage responsibilities."
+    },
+    {
+      "gt_node": "Web2 application stack::IceFireDB",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "IceFireDB System::Redis Proxy\\n(Middleware",
+        "IceFireDB System::PubSub Service",
+        "IceFireDB System::SQL Result Handler"
+      ],
+      "reasoning": "The GT IceFireDB node is covered by the predicted IceFireDB subcomponents implementing proxy, PubSub, and internal SQL result handling responsibilities."
+    },
+    {
+      "gt_node": "Web2 application stack::Platform",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node corresponds to the generic platform/runtime layer in the Web2 stack."
+    },
+    {
+      "gt_node": "Web2 application stack::Processing\\nBusiness Logic",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "IceFireDB System::Redis Proxy\\n(Middleware",
+        "IceFireDB System::PubSub Service",
+        "IceFireDB System::SQL Result Handler"
+      ],
+      "reasoning": "The GT business logic layer is broadly represented by the predicted processing components that implement synchronization, publish/subscribe behavior, and internal result handling."
+    },
+    {
+      "gt_node": "Web3 application stack::Applications",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "IceFireDB System::Redis Application",
+        "IceFireDB System::PubSub Service"
+      ],
+      "reasoning": "The Web3 applications layer is covered in the same way as the Web2 application layer, via the predicted application-facing Redis and PubSub components."
+    },
+    {
+      "gt_node": "Web3 application stack::BlockChain Database\\nTransactions, Contracts,\\nCertificates and Receipts",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node covers blockchain database transaction or contract storage responsibilities."
+    },
+    {
+      "gt_node": "Web3 application stack::Decentralized File System\\nLarge Files and Media",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node covers decentralized file system or large file/media storage responsibilities."
+    },
+    {
+      "gt_node": "Web3 application stack::Decentralized Processing\\nBusiness Logic",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "IceFireDB System::PubSub Service",
+        "IceFireDB System::Redis Proxy\\n(Middleware"
+      ],
+      "reasoning": "The decentralized processing/business logic layer is partially covered by the predicted decentralized PubSub and Redis proxy middleware components, which implement distributed coordination and processing behavior."
+    },
+    {
+      "gt_node": "Web3 application stack::IceFireDB",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "IceFireDB System::Redis Proxy\\n(Middleware",
+        "IceFireDB System::PubSub Service",
+        "IceFireDB System::SQL Result Handler"
+      ],
+      "reasoning": "The GT IceFireDB node is covered by the predicted IceFireDB subcomponents."
+    },
+    {
+      "gt_node": "Web3 application stack::Platform",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node corresponds to the generic platform/runtime layer in the Web3 stack."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "IceFireDB System::Internal Components::SQL Result Handler",
+      "grounded": true,
+      "reference_nodes": [
+        "Web2 application stack::IceFireDB",
+        "Web2 application stack::Processing\\nBusiness Logic",
+        "Web3 application stack::IceFireDB",
+        "Web3 application stack::Decentralized Processing\\nBusiness Logic"
+      ],
+      "reasoning": "The SQL Result Handler is grounded in the GT IceFireDB/business-logic concepts as an internal component, though the GT does not explicitly decompose it."
+    },
+    {
+      "predicted_node": "IceFireDB System::Network Layer::Peer Discovery\\n(Kademlia DHT",
+      "grounded": false,
+      "reference_nodes": [
+        "Web2 application stack::IceFireDB",
+        "Web3 application stack::IceFireDB"
+      ],
+      "reasoning": "Peer discovery is in the PRD, but the GT diagram nodes are high-level application stack nodes and do not include a separate network-layer component; this is a finer-grained decomposition not present in the GT."
+    },
+    {
+      "predicted_node": "IceFireDB System::Network Layer::libp2p/IPFS Routing",
+      "grounded": false,
+      "reference_nodes": [
+        "Web2 application stack::IceFireDB",
+        "Web3 application stack::IceFireDB"
+      ],
+      "reasoning": "Routing is relevant to the PRD, but the GT diagram does not contain this explicit network-layer node, so it is not grounded at the node level."
+    },
+    {
+      "predicted_node": "IceFireDB System::PubSub Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Web2 application stack::IceFireDB",
+        "Web2 application stack::Applications",
+        "Web2 application stack::Processing\\nBusiness Logic",
+        "Web3 application stack::IceFireDB",
+        "Web3 application stack::Applications",
+        "Web3 application stack::Decentralized Processing\\nBusiness Logic"
+      ],
+      "reasoning": "This is well grounded in the GT IceFireDB and application/processing nodes, matching the PubSub functionality described in the PRD."
+    },
+    {
+      "predicted_node": "IceFireDB System::Redis Application",
+      "grounded": true,
+      "reference_nodes": [
+        "Web2 application stack::Applications",
+        "Web3 application stack::Applications"
+      ],
+      "reasoning": "The Redis application-facing role is grounded in the GT Applications nodes, although the GT does not explicitly name Redis as a separate component."
+    },
+    {
+      "predicted_node": "IceFireDB System::Redis Proxy\\n(Middleware",
+      "grounded": true,
+      "reference_nodes": [
+        "Web2 application stack::IceFireDB",
+        "Web2 application stack::Processing\\nBusiness Logic",
+        "Web3 application stack::IceFireDB",
+        "Web3 application stack::Decentralized Processing\\nBusiness Logic"
+      ],
+      "reasoning": "The Redis Proxy middleware is grounded in the GT IceFireDB and business-logic/decentralized-processing concepts."
+    },
+    {
+      "predicted_node": "IceFireDB System::Storage Layer::Redis Cluster",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT diagram does not contain an explicit Redis cluster storage node; it only has high-level stack nodes and does not model storage backends."
+    },
+    {
+      "predicted_node": "IceFireDB System::Storage Layer::Redis Standalone",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT diagram does not contain an explicit Redis standalone storage node; this is not represented in the manual diagram."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Web2 application stack::Applications",
+        "Web3 application stack::Applications"
+      ],
+      "predicted_nodes": [
+        "IceFireDB System::Redis Application"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted Redis Application aggregates the application-facing responsibilities shown as separate Applications nodes in the GT, and the boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::IceFireDB",
+        "Web2 application stack::Processing\\nBusiness Logic",
+        "Web3 application stack::IceFireDB",
+        "Web3 application stack::Decentralized Processing\\nBusiness Logic"
+      ],
+      "predicted_nodes": [
+        "IceFireDB System::PubSub Service",
+        "IceFireDB System::Redis Proxy\\n(Middleware",
+        "IceFireDB System::Internal Components::SQL Result Handler"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT’s high-level IceFireDB and processing layers are split into more concrete service components by the AI; the boundary attribution remains semantically aligned with the product scope."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Web2 application stack::BlockChain Database\\nTransactions, Contracts,\\nCertificates and Receipts",
+    "Web2 application stack::File System\\nLarge Files and Media",
+    "Web2 application stack::Platform",
+    "Web3 application stack::BlockChain Database\\nTransactions, Contracts,\\nCertificates and Receipts",
+    "Web3 application stack::Decentralized File System\\nLarge Files and Media",
+    "Web3 application stack::Platform"
+  ],
+  "unmatched_predicted_nodes": [
+    "IceFireDB System::Network Layer::Peer Discovery\\n(Kademlia DHT",
+    "IceFireDB System::Network Layer::libp2p/IPFS Routing",
+    "IceFireDB System::Storage Layer::Redis Cluster",
+    "IceFireDB System::Storage Layer::Redis Standalone"
+  ]
+}

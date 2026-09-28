@@ -1,0 +1,71 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine"
+      ],
+      "predicted_nodes": [
+        "Application/Business Logic Layer::Adapter Container",
+        "Application/Business Logic Layer::Adapter Container::exec.sh",
+        "Application/Business Logic Layer::Adapter Container::pulltop process",
+        "Presentation Layer::websocketd"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "These predicted nodes collectively represent the GT runtime container on Compute Engine, including exec.sh, pulltop, and websocketd. However, the AI placed them across application and presentation layers instead of the GT Compute Engine/runtime boundary, which is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine::pulltop"
+      ],
+      "predicted_nodes": [
+        "Application/Business Logic Layer::Adapter Container::pulltop process"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The pulltop process is semantically equivalent, but it is placed under an application/business logic boundary rather than the GT Compute Engine runtime boundary."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine::websocketd"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::websocketd"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The websocketd component matches functionally, but the predicted presentation-layer attribution is not equivalent to the GT Compute Engine/runtime placement."
+    },
+    {
+      "gt_nodes": [
+        "pubsub-public-data project::Cloud Pub/Sub\\ntopic"
+      ],
+      "predicted_nodes": [
+        "Global::Google Cloud Pub/Sub"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node captures the same external Pub/Sub system context as the GT topic source. Although the GT is more specific to a topic and project, the boundary placement as an external/global dependency is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Global::Browser"
+      ],
+      "predicted_nodes": [
+        "Global::Web Clients",
+        "Presentation Layer::WebSocket Endpoint"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The browser/client side is represented more generally as web clients and the websocket endpoint. This is a reasonable semantic decomposition, and the global/client-facing boundary is acceptable."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Infrastructure/Platform Layer::GKE Cluster",
+    "Infrastructure/Platform Layer::GKE Cluster::Horizontal Pod Autoscaler (HPA",
+    "Infrastructure/Platform Layer::GKE Cluster::Kubernetes ConfigMap",
+    "Infrastructure/Platform Layer::GKE Cluster::Kubernetes Deployment",
+    "Infrastructure/Platform Layer::GKE Cluster::Kubernetes Service\\n(LoadBalancer"
+  ]
+}

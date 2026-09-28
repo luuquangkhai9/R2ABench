@@ -1,0 +1,150 @@
+@startuml
+!define RECTANGLE class
+skinparam componentStyle rectangle
+skinparam rectangle {
+    BackgroundColor White
+    BorderColor Black
+    ArrowColor Black
+    FontColor Black
+}
+skinparam node {
+    BackgroundColor White
+    BorderColor Black
+    FontColor Black
+}
+skinparam database {
+    BackgroundColor White
+    BorderColor Black
+    FontColor Black
+}
+skinparam cloud {
+    BackgroundColor White
+    BorderColor Black
+    FontColor Black
+}
+skinparam queue {
+    BackgroundColor White
+    BorderColor Black
+    FontColor Black
+}
+skinparam folder {
+    BackgroundColor White
+    BorderColor Black
+    FontColor Black
+}
+
+title ClearML Agent System Architecture
+
+cloud "Kubernetes Cluster" as k8s {
+    folder "ClearML Agent Runtime" as agent_runtime {
+        node "Long-Lasting Service Pod" as service_pod {
+            database "clearml-agent\nDocker Image" as agent_image
+            component "Sibling Container\nManager" as sibling_mgr
+            component "Docker Socket\n(Mapped)" as docker_socket
+        }
+
+        node "Kubernetes Glue" as k8s_glue {
+            component "Job Puller" as job_puller
+            component "Job Preparer" as job_preparer
+            database "YAML Template" as yaml_template
+        }
+
+        node "Worker Pod" as worker_pod {
+            component "Environment Installer" as env_installer
+            component "Process Monitor" as process_monitor
+            component "Experiment Process" as experiment
+        }
+
+        component "Worker Telemetry" as telemetry {
+            component "Status Reporter" as status_reporter
+            component "Connectivity Pinger" as pinger
+        }
+
+        component "Logging Manager" as logging_mgr
+
+        component "Backend Service Client" as backend_client {
+            component "Session Handler" as session_handler
+            component "Actions: create, get,\nget_by_id, get_all,\nget_all_ex" as actions
+        }
+    }
+
+    queue "ClearML Execution Queue" as exec_queue
+    database "Kubernetes Job" as k8s_job
+}
+
+cloud "ClearML Server / Backend" as clearml_backend {
+    component "Events Service v2.5" as events_service
+    component "Models Service v2.4" as models_service
+    component "Other Backend Services" as other_services
+}
+
+database "Worker Configuration" as worker_config {
+    field "report_period_sec (2s)"
+    field "ping_period_sec (30s)"
+    field "log_stdout (true)"
+    field "report_global_mem_used"
+}
+
+' Data Entities
+database "Data Entities" as data_entities {
+    folder "Histogram Request" as hist_req {
+        field "task"
+        field "samples"
+        field "key (iter, iso_time, timestamp)"
+    }
+    folder "Model Delete Request" as model_del_req {
+        field "model"
+        field "force"
+    }
+    folder "Model Object" as model_obj {
+        field "id, name, user,\ncompany, created, task\n(nullable)"
+    }
+}
+
+' Connections
+agent_image -- service_pod : "runs as"
+docker_socket -- sibling_mgr : "enables management"
+service_pod ..> k8s : "deployed in"
+
+exec_queue <-- job_puller : "pulls jobs from"
+yaml_template --> job_preparer : "input"
+job_puller --> job_preparer : "job input"
+job_preparer --> k8s_job : "prepares"
+k8s_job ..> k8s : "submits to"
+k8s_job ..> worker_pod : "creates"
+
+env_installer --> experiment : "installs env & starts"
+process_monitor --> experiment : "monitors"
+
+worker_config --> telemetry : "configures"
+worker_config --> logging_mgr : "configures"
+status_reporter --> clearml_backend : "periodic reports"
+pinger --> clearml_backend : "periodic pings"
+
+logging_mgr --> experiment : "captures stdout/stderr"
+
+backend_client --> clearml_backend : "service requests"
+session_handler --> actions : "handles session"
+actions --> other_services : "create/get/etc."
+actions --> events_service : "histogram queries"
+actions --> models_service : "model operations"
+
+data_entities --> backend_client : "uses structures"
+hist_req --> events_service : "query input"
+model_del_req --> models_service : "delete input"
+model_obj --> models_service : "metadata"
+
+' Styling
+agent_runtime {
+    BackgroundColor #E1F5FE
+}
+clearml_backend {
+    BackgroundColor #F3E5F5
+}
+worker_config {
+    BackgroundColor #FFF3E0
+}
+data_entities {
+    BackgroundColor #E8F5E8
+}
+@enduml

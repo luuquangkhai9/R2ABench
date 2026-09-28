@@ -1,0 +1,409 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::KVM (L0",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Root Partition VM (Windows",
+        "Global::Child Partition VM (Windows",
+        "Global::Host System (Linux",
+        "Global::Windows Build Environment"
+      ],
+      "reasoning": "The GT root KVM/host context is broadly represented by the predicted VM and host/build environment nodes, though split into more explicit runtime and build components."
+    },
+    {
+      "gt_node": "KVM (L0::Hyper-V (L1) - Host",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Root Partition VM (Windows",
+        "Global::Child Partition VM (Windows",
+        "Global::Host System (Linux)"
+      ],
+      "reasoning": "The Hyper-V host layer is captured by the Windows VM and Linux host representations, even though the exact naming differs."
+    },
+    {
+      "gt_node": "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Child Partition VM (Windows",
+        "Child Partition VM (Windows::Harness\\n(Fuzzing Payload Sender",
+        "Child Partition VM (Windows::loader.exe Instance",
+        "Child Partition VM (Windows::packet_sender.exe Instance",
+        "Child Partition VM (Windows::DSE Disabled"
+      ],
+      "reasoning": "The child partition guest VM concept is clearly represented, with additional split-out nodes for helper binaries and configuration state."
+    },
+    {
+      "gt_node": "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2::harness.sys",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Child Partition VM (Windows::Harness\\n(Fuzzing Payload Sender",
+        "Windows Build Environment::Windows Drivers::Harness Driver"
+      ],
+      "reasoning": "The harness driver/payload-sender role is covered by the predicted harness-related nodes, though split between runtime and build artifacts."
+    },
+    {
+      "gt_node": "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Root Partition VM (Windows",
+        "Root Partition VM (Windows::Crash Monitor\\n(Root Partition",
+        "Root Partition VM (Windows::Hyper-V Network Stack\\n(netvsc / VMBus",
+        "Root Partition VM (Windows::VMSwitch\\n(vmswitch.sys"
+      ],
+      "reasoning": "The root partition host OS role is represented through the root partition VM and its monitoring/network stack subcomponents."
+    },
+    {
+      "gt_node": "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::CrashMonitoring.sys",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Root Partition VM (Windows::Crash Monitor\\n(Root Partition",
+        "Windows Build Environment::Windows Drivers::Crash Monitor Driver"
+      ],
+      "reasoning": "The crash monitoring driver/component is preserved, albeit split into a runtime monitor and a build artifact."
+    },
+    {
+      "gt_node": "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::vmswitch.sys",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Root Partition VM (Windows::VMSwitch\\n(vmswitch.sys",
+        "Root Partition VM (Windows::Hyper-V Network Stack\\n(netvsc / VMBus"
+      ],
+      "reasoning": "The vmswitch target is explicitly present in the predicted nodes, with associated network-channel context."
+    },
+    {
+      "gt_node": "KVM (L0::hAFL2",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Host System (Linux::hAFL2 / kAFL-Fuzzer::Launch Scripts\\n(bash",
+        "Host System (Linux::hAFL2 / kAFL-Fuzzer::Mutation Engine\\n(Bitflip / Deterministic / Havoc",
+        "Host System (Linux::hAFL2 / kAFL-Fuzzer::kAFL-Fuzzer Core\\n(pytest / Random / Deterministic / Havoc",
+        "Host System (Linux::hAFL2 / kAFL-Fuzzer::test.py\\n(Standalone Test Runner"
+      ],
+      "reasoning": "The hAFL2 controller/fuzzer functionality is represented, split into launch, mutation, core test execution, and standalone runner nodes."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Child Partition VM (Windows::DSE Disabled",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2"
+      ],
+      "reasoning": "This is grounded as an operational attribute of the child partition VM in the Windows Hyper-V workflow."
+    },
+    {
+      "predicted_node": "Child Partition VM (Windows::Harness\\n(Fuzzing Payload Sender",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2::harness.sys"
+      ],
+      "reasoning": "This matches the child-partition harness concept from the GT."
+    },
+    {
+      "predicted_node": "Child Partition VM (Windows::loader.exe Instance",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2"
+      ],
+      "reasoning": "The loader helper binary is part of the documented Windows fuzzing workflow and is grounded in the child partition context."
+    },
+    {
+      "predicted_node": "Child Partition VM (Windows::packet_sender.exe Instance",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2"
+      ],
+      "reasoning": "The packet sender helper binary is explicitly described in the PRD and fits the child partition workflow."
+    },
+    {
+      "predicted_node": "Global::Child Partition VM (Windows",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2",
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2::harness.sys"
+      ],
+      "reasoning": "This is a grounded coarse-grained representation of the child partition VM and its harness-related contents."
+    },
+    {
+      "predicted_node": "Global::Host System (Linux",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "reasoning": "The Linux host system is a grounded environment for hAFL2 test runners, launch scripts, and mutation workflows."
+    },
+    {
+      "predicted_node": "Global::Root Partition VM (Windows",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2",
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::CrashMonitoring.sys",
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::vmswitch.sys"
+      ],
+      "reasoning": "This is a grounded coarse-grained representation of the root partition VM."
+    },
+    {
+      "predicted_node": "Global::Windows Build Environment",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::hAFL2",
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2::harness.sys",
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::CrashMonitoring.sys"
+      ],
+      "reasoning": "The Windows build environment is grounded by the PRD's Windows helper binaries, drivers, and build-toolchain constraints."
+    },
+    {
+      "predicted_node": "Global::initrd Archive",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "reasoning": "The initrd artifact is explicitly required by the Linux userspace workflow."
+    },
+    {
+      "predicted_node": "Host System (Linux::Linux Userspace Fuzzing Workflow::Embedded Forkserver\\n(kAFL hypercall → AFL I/O",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "reasoning": "The embedded forkserver is a real component of the Linux fuzzing workflow."
+    },
+    {
+      "predicted_node": "Host System (Linux::Linux Userspace Fuzzing Workflow::Shared Libraries\\n(host copy",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "reasoning": "Copying shared libraries into the initrd is explicitly required by the PRD."
+    },
+    {
+      "predicted_node": "Host System (Linux::Linux Userspace Fuzzing Workflow::Target Binary",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "reasoning": "The target binary packaging responsibility is grounded in the Linux userspace workflow."
+    },
+    {
+      "predicted_node": "Host System (Linux::Linux Userspace Fuzzing Workflow::initrd Builder",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "reasoning": "This is a grounded implementation detail of building the launch artifact."
+    },
+    {
+      "predicted_node": "Host System (Linux::Linux Userspace Fuzzing Workflow::initrd Image",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "reasoning": "The initrd image is a grounded artifact from the Linux launch workflow."
+    },
+    {
+      "predicted_node": "Host System (Linux::hAFL2 / kAFL-Fuzzer::Launch Scripts\\n(bash",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "reasoning": "Launch scripts are part of the documented hAFL2 workflow."
+    },
+    {
+      "predicted_node": "Host System (Linux::hAFL2 / kAFL-Fuzzer::Mutation Engine\\n(Bitflip / Deterministic / Havoc",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "reasoning": "The mutation engine corresponds to the fuzzing test and mutation responsibilities in hAFL2."
+    },
+    {
+      "predicted_node": "Host System (Linux::hAFL2 / kAFL-Fuzzer::kAFL-Fuzzer Core\\n(pytest / Random / Deterministic / Havoc",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "reasoning": "This is grounded by the standalone and pytest-based kAFL-Fuzzer test execution."
+    },
+    {
+      "predicted_node": "Host System (Linux::hAFL2 / kAFL-Fuzzer::test.py\\n(Standalone Test Runner",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "reasoning": "The standalone test runner is explicitly required by FR-001 and NFR-001."
+    },
+    {
+      "predicted_node": "Root Partition VM (Windows::Crash Monitor\\n(Root Partition",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::CrashMonitoring.sys"
+      ],
+      "reasoning": "This is a grounded representation of the crash-monitoring component."
+    },
+    {
+      "predicted_node": "Root Partition VM (Windows::Hyper-V Network Stack\\n(netvsc / VMBus",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::vmswitch.sys"
+      ],
+      "reasoning": "The network stack/channel supporting the root partition communication path is grounded by the PRD."
+    },
+    {
+      "predicted_node": "Root Partition VM (Windows::VMSwitch\\n(vmswitch.sys",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::vmswitch.sys"
+      ],
+      "reasoning": "This directly matches the GT vmswitch concept."
+    },
+    {
+      "predicted_node": "Windows Build Environment::Build Toolchain::Visual Studio\\nCompiler",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2::harness.sys",
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::CrashMonitoring.sys"
+      ],
+      "reasoning": "Visual Studio compilation is explicitly required for the Windows drivers."
+    },
+    {
+      "predicted_node": "Windows Build Environment::Build Toolchain::compile.sh\\n(bash",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "reasoning": "The documented compile script is explicitly part of the Windows build workflow."
+    },
+    {
+      "predicted_node": "Windows Build Environment::Windows Drivers::Crash Monitor Driver",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::CrashMonitoring.sys"
+      ],
+      "reasoning": "This is grounded by the crash monitoring driver concept."
+    },
+    {
+      "predicted_node": "Windows Build Environment::Windows Drivers::Harness Driver",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2::harness.sys"
+      ],
+      "reasoning": "This is grounded by the harness driver concept."
+    },
+    {
+      "predicted_node": "Windows Build Environment::Windows Helper Binaries::loader.exe\\n(Snapshot + Load/Execute",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2"
+      ],
+      "reasoning": "The loader helper binary is explicitly required by the PRD."
+    },
+    {
+      "predicted_node": "Windows Build Environment::Windows Helper Binaries::packet_sender.exe\\n(IOCTL Trigger",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2"
+      ],
+      "reasoning": "The packet sender helper binary is explicitly required by the PRD."
+    },
+    {
+      "predicted_node": "initrd Archive::Packaged Binary + Libs",
+      "grounded": true,
+      "reference_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "reasoning": "This is a grounded artifact corresponding to the packaged binary and libraries in initrd."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2::harness.sys"
+      ],
+      "predicted_nodes": [
+        "Child Partition VM (Windows::Harness\\n(Fuzzing Payload Sender",
+        "Windows Build Environment::Windows Drivers::Harness Driver"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT harness driver concept is split into runtime payload-sender and build-time driver representations, with semantically consistent boundaries."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::CrashMonitoring.sys"
+      ],
+      "predicted_nodes": [
+        "Root Partition VM (Windows::Crash Monitor\\n(Root Partition",
+        "Windows Build Environment::Windows Drivers::Crash Monitor Driver"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The crash-monitoring driver is split into runtime monitoring and build artifact nodes, which remains semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::vmswitch.sys"
+      ],
+      "predicted_nodes": [
+        "Root Partition VM (Windows::VMSwitch\\n(vmswitch.sys",
+        "Root Partition VM (Windows::Hyper-V Network Stack\\n(netvsc / VMBus"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT vmswitch target is represented along with its communication-channel context; this is a reasonable semantic split."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "predicted_nodes": [
+        "Host System (Linux::hAFL2 / kAFL-Fuzzer::Launch Scripts\\n(bash",
+        "Host System (Linux::hAFL2 / kAFL-Fuzzer::Mutation Engine\\n(Bitflip / Deterministic / Havoc",
+        "Host System (Linux::hAFL2 / kAFL-Fuzzer::kAFL-Fuzzer Core\\n(pytest / Random / Deterministic / Havoc",
+        "Host System (Linux::hAFL2 / kAFL-Fuzzer::test.py\\n(Standalone Test Runner"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The hAFL2 fuzzer/controller is decomposed into its concrete subfunctions, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host"
+      ],
+      "predicted_nodes": [
+        "Global::Root Partition VM (Windows",
+        "Global::Child Partition VM (Windows",
+        "Global::Host System (Linux)"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The host Hyper-V environment is represented by the combined runtime environment nodes, without a clear boundary violation."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2"
+      ],
+      "predicted_nodes": [
+        "Global::Child Partition VM (Windows",
+        "Child Partition VM (Windows::DSE Disabled",
+        "Child Partition VM (Windows::Harness\\n(Fuzzing Payload Sender",
+        "Child Partition VM (Windows::loader.exe Instance",
+        "Child Partition VM (Windows::packet_sender.exe Instance"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The child partition VM is preserved, with additional operational and helper-binary subnodes."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::KVM (L0"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "No explicit predicted node corresponds to the exact KVM root label; this is not a meaningful standalone architecture component in the predicted set."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

@@ -1,0 +1,83 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Frontend"
+      ],
+      "predicted_nodes": [
+        "User Frontend::Frontend Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the user-facing frontend application; the boundary naming differs but is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::IPFS"
+      ],
+      "predicted_nodes": [
+        "Storage Layer::IPFS / Media Storage",
+        "Storage Layer::IPFS / Media Storage::NFT Media Files",
+        "Storage Layer::Prediction Media Storage"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT IPFS corresponds to media storage; the AI split it into storage boundary and media/file subnodes, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::User"
+      ],
+      "predicted_nodes": [
+        "User Frontend::Wallet Connector"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The wallet connector is not equivalent to the user actor itself; it is a frontend integration component, so this is a boundary/role confusion."
+    },
+    {
+      "gt_nodes": [
+        "Global::oracle-service"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Oracle Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The service name and function match, and the service-layer boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::process-prediction-\nservice"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Prediction-Processing Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes represent the same prediction-processing service, and the service-layer attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "aeternity blockchain::PredictionCards\nSmart Contract"
+      ],
+      "predicted_nodes": [
+        "Blockchain Layer::PredictionCards smart contract",
+        "Blockchain Layer::Aeternity Blockchain::Smart Contract State"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT smart contract is represented by the AI as the contract plus an additional state node; this is a valid split and the blockchain boundary is appropriate."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Blockchain Layer::AENS Name Resolution",
+    "Blockchain Layer::Aeternity Blockchain",
+    "External Price Provider::Price Data API",
+    "Global::Compiler Service",
+    "Global::External Price Provider",
+    "Integration Layer::Aeternity Node",
+    "Integration Layer::Local contract integration-test environment"
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Event Bus"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::GPSLogger App::Event Bus"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the in-app event bus used to publish and consume location events. The predicted boundary adds device/runtime context, but the component placement is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Location Capture::Location Listeners"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::GPSLogger App::Location Listeners\n(Android Location API / Fused"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the location listener layer responsible for receiving location updates. The predicted node is slightly more specific, but it remains within the correct application boundary."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::GPX Logger"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::GPSLogger App::Loggers::GPX Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same logging component for GPX output. Boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::KML Logger"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::GPSLogger App::Loggers::KML Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same logging component for KML output. Boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::Loggers"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::GPSLogger App::Loggers::GPX Logger",
+        "Android Device / Emulator::GPSLogger App::Loggers::KML Logger",
+        "Android Device / Emulator::GPSLogger App::Loggers::Text Logger"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT contains an aggregate logger node, while the AI split it into specific logger implementations. This is a valid decomposition and remains within the correct application boundary."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::NMEA / GPRMC Encoder"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::GPSLogger App::GPRMC Encoder"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the encoder that produces GPRMC/NMEA-formatted output. The predicted boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::User Interface::Main Activity"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::GPSLogger App::Main Activity /\nFragments"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The main activity is included in the predicted UI node. Although fragments are merged into the same node, the UI boundary remains correct."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::User Interface::Other Fragments"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::GPSLogger App::Main Activity /\nFragments"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node groups the fragments with the activity, but it still semantically covers the fragment UI layer. No severe boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Global::Dropbox"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::GPSLogger App::Dropbox\nUploader",
+        "External Services::Dropbox API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a single external Dropbox integration, while the AI split it into an application-side uploader and the external API. This crosses boundary semantics because the GT node corresponds to the integration as a whole, not just a client-side uploader, and one of the predicted nodes is placed under an application boundary instead of the external service boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenGTS Endpoint\nUDP server"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::GPSLogger App::OpenGTS Transmission\nConfiguration",
+        "Android Device / Emulator::GPSLogger App::OpenGTS Uploader\n(UDP",
+        "External Services::OpenGTS Server\n(UDP Endpoint"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node represents the OpenGTS UDP endpoint/server, while the AI split related concerns into configuration, uploader, and external endpoint. The external server portion matches conceptually, but the presence of application-side transmission/configuration nodes means the mapping is not cleanly equivalent to the GT node and includes boundary mixing."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenStreetMap"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator::GPSLogger App::OpenStreetMap\nIntegration",
+        "External Services::OpenStreetMap API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is the OpenStreetMap integration as a whole. The AI split it into app-side integration and external API, but the predicted placement suggests boundary confusion between application integration code and the external service itself."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "GPSLogger Android Application::Location Capture::Google Play Services\\nLocation Provider",
+    "GPSLogger Android Application::Logging::CSV / URL Loggers",
+    "GPSLogger Android Application::Upload::Upload Jobs",
+    "GPSLogger Android Application::Upload::Uploaders",
+    "GPSLogger Android Application::User Interface::Detailed View",
+    "GPSLogger Android Application::User Interface::Simple View"
+  ],
+  "unmatched_predicted_nodes": [
+    "Android Device / Emulator::GPSLogger App::GPS Logging Service",
+    "Android Device / Emulator::GPSLogger App::Settings /\\nSession",
+    "Android Device / Emulator::Google Play Services\\n(Runtime",
+    "Build Environment::Google Play Services\\n(dependency",
+    "Build Environment::Gradle Build",
+    "Global::Android Device / Emulator",
+    "Global::Build Environment",
+    "Global::External Services"
+  ]
+}

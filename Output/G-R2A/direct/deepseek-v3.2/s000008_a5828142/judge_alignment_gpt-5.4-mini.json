@@ -1,0 +1,142 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::InfluxDB"
+      ],
+      "predicted_nodes": [
+        "Data Storage::InfluxDB\\n(Time-Series",
+        "Data Storage::InfluxDB\\n(Time-Series::Coding Process Records"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT InfluxDB node is split into a storage boundary and a specific time-series data subnode. This is semantically consistent with the GT database layer."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Data Storage::MySQL\\n(Relational Data",
+        "Data Storage::MySQL\\n(Relational Data::Battles",
+        "Data Storage::MySQL\\n(Relational Data::Projects",
+        "Data Storage::MySQL\\n(Relational Data::Users",
+        "Data Storage::MySQL\\n(Relational Data::Versions"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT MySQL node is represented as a more detailed relational-data grouping with entity subnodes. This is a valid refinement and remains within the correct database boundary."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::Redis"
+      ],
+      "predicted_nodes": [
+        "Data Storage::Redis\\n(Cache & Coordination",
+        "Data Storage::Redis\\n(Cache & Coordination::Battle Invitations",
+        "Data Storage::Redis\\n(Cache & Coordination::Battle State",
+        "Data Storage::Redis\\n(Cache & Coordination::Workspace Mappings"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Redis node is split into cache/coordination plus specific cached domains. This matches the intended Redis usage and boundary."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Reverse Proxy::Nginx"
+      ],
+      "predicted_nodes": [
+        "Load Balancer / Reverse Proxy::Nginx"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is the same Nginx reverse proxy component with a semantically equivalent boundary label."
+    },
+    {
+      "gt_nodes": [
+        "Backend Repo::Node.js"
+      ],
+      "predicted_nodes": [
+        "Application Backend::Node.js/Express Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The backend runtime corresponds to Node.js/Express. The boundary label is different but semantically equivalent to the backend repository/runtime context."
+    },
+    {
+      "gt_nodes": [
+        "Coding Sandbox::Coding Sandbox 1::Docker",
+        "Coding Sandbox::Coding Sandbox 1::Node.js",
+        "Coding Sandbox::Coding Sandbox 1::Exporter",
+        "Coding Sandbox::Coding Sandbox 2::Docker",
+        "Coding Sandbox::Coding Sandbox 2::Node.js",
+        "Coding Sandbox::Coding Sandbox 2::Exporter"
+      ],
+      "predicted_nodes": [
+        "Execution & File Services::Docker Sandbox\\n(Code Execution",
+        "Execution & File Services::S3-Compatible\\nObject Storage"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The Docker sandbox concept is captured, but the AI merged sandbox execution with unrelated file/storage services and omitted the duplicated sandbox instances and exporter structure. This is only a partial functional match and the boundary attribution is not faithful to the GT architecture."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Repo::Vue 3"
+      ],
+      "predicted_nodes": [
+        "External User::Web Browser (Vue Frontend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The frontend technology is represented, but it is incorrectly placed under an External User boundary rather than a frontend/application boundary. This is a boundary confusion."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Reverse Proxy::Express"
+      ],
+      "predicted_nodes": [
+        "Application Backend::Node.js/Express Server",
+        "Application Backend::Socket.IO Server"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The backend server and Socket.IO server are functionally related to the GT Express backend role, but the AI split them into separate backend nodes and did not preserve the reverse-proxy/backend layering of the GT. The boundary attribution is therefore not accurate."
+    },
+    {
+      "gt_nodes": [
+        "Static Asset Delivery::CDN\\nCloudFront"
+      ],
+      "predicted_nodes": [
+        "Execution & File Services::CDN / Distribution"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The CDN/distribution function matches CloudFront-style delivery. The boundary label is different but semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Static Asset Delivery::Storage\\nS3 bucket"
+      ],
+      "predicted_nodes": [
+        "Execution & File Services::S3-Compatible\\nObject Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The object storage component is semantically equivalent to the GT S3 bucket storage boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Backend Repo::CI/CD Workflow",
+    "Backend Repo::Deploy Key",
+    "Backend Repo::GitHub",
+    "Frontend Repo::CI/CD Workflow",
+    "Frontend Repo::Deploy Key",
+    "Frontend Repo::GitHub",
+    "Global::Developer",
+    "Global::End User"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application Backend::Socket.IO Server"
+  ]
+}

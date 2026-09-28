@@ -1,0 +1,111 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Applications\\nHPC, AI, ML, Big Data"
+      ],
+      "predicted_nodes": [
+        "Build & Verification Layer::Autogen (./autogen.sh",
+        "Build & Verification Layer::Autotools build steps\\n(./configure, make",
+        "Build & Verification Layer::Autotools test/cleanup steps\\n(make check/clean/distclean",
+        "Build & Verification Layer::Expand distribution tarball",
+        "Build & Verification Layer::Manual embedded hwloc workflow",
+        "Build & Verification Layer::hwloc-tree/ directory rename",
+        "Build & Verification Layer::run-embedded-tests.sh",
+        "Build/Deploy Configuration Layer::Build/deploy configuration interface",
+        "Build/Deploy Configuration Layer::CFLAGS",
+        "Build/Deploy Configuration Layer::LDFLAGS",
+        "Build/Deploy Configuration Layer::LD_LIBRARY_PATH",
+        "Build/Deploy Configuration Layer::libibverbs headers",
+        "Build/Deploy Configuration Layer::librdmacm headers",
+        "Communication Design Layer::Communication lifecycle responsibilities documentation",
+        "Communication Design Layer::One-to-many scatter transfer responsibility documentation",
+        "Data Path / Send Path Layer::Data Descriptor (non-direct-access payload",
+        "Data Path / Send Path Layer::Flow-control state",
+        "Data Path / Send Path Layer::Network send descriptor preparation",
+        "Data Path / Send Path Layer::Packet buffer",
+        "Data Path / Send Path Layer::Packet control fields\\n(envelope, LIBA(OD), one LIBA, two LIBAs",
+        "Data Path / Send Path Layer::Pinned User Data",
+        "Data Path / Send Path Layer::Rendezvous packet preparation logic",
+        "Data Path / Send Path Layer::Send state machine"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The generic 'Applications' node in the GT is correctly expanded by the AI into a detailed set of specific processes, design artifacts, and components related to the system described in the PRD. The AI's self-created layers (Build & Verification, Data Path, etc.) are a logical and accurate breakdown of the application's internal structure and are semantically valid."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCM Memory Services::Memory Hooks",
+        "UCX::UCP Protocols\\nHigh Level API::Cross-Transport Multi-Rail",
+        "UCX::UCP Protocols\\nHigh Level API::Fragmentation",
+        "UCX::UCP Protocols\\nHigh Level API::I/O API\\nStream",
+        "UCX::UCP Protocols\\nHigh Level API::Message Passing API\\nTag Matching, Rendezvous",
+        "UCX::UCP Protocols\\nHigh Level API::PGAS API\\nRMAs, Atomics",
+        "UCX::UCP Protocols\\nHigh Level API::Software Protocols",
+        "UCX::UCP Protocols\\nHigh Level API::Task Based API\\nActive Messages",
+        "UCX::UCP Protocols\\nHigh Level API::Transport Selection",
+        "UCX::UCS Services\\nCommon Utilities::Data Structures",
+        "UCX::UCS Services\\nCommon Utilities::Memory Management",
+        "UCX::UCS Services\\nCommon Utilities::Utilities",
+        "UCX::UCT Hardware Transports\\nLow Level API::DCT",
+        "UCX::UCT Hardware Transports\\nLow Level API::Ethernet Transport\\nTCP/IP Sockets",
+        "UCX::UCT Hardware Transports\\nLow Level API::GPU Transport\\nNVIDIA CUDA, AMD ROCm",
+        "UCX::UCT Hardware Transports\\nLow Level API::Gemini / Aries Transport\\nGNI",
+        "UCX::UCT Hardware Transports\\nLow Level API::Intra-node Host Memory\\nSYSV, POSIX, KNEM, CMA, XPMEM",
+        "UCX::UCT Hardware Transports\\nLow Level API::RC",
+        "UCX::UCT Hardware Transports\\nLow Level API::RDMA Verbs Transport\\nInfiniBand, ROCE, OPA",
+        "UCX::UCT Hardware Transports\\nLow Level API::UD"
+      ],
+      "predicted_nodes": [
+        "Global::UCX"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified UCX from the PRD and aggregated all its detailed internal components from the GT into a single high-level node. Placing this node in the 'Global' boundary to represent it as an external dependency is a valid architectural decision and not a boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Drivers and Kernels::RDMA Verbs Driver",
+        "UCX::UCT Hardware Transports\\nLow Level API::RDMA Verbs Transport\\nInfiniBand, ROCE, OPA"
+      ],
+      "predicted_nodes": [
+        "Global::Linux Verbs API",
+        "Global::OFI/libfabric",
+        "Global::libibverbs",
+        "Global::librdmacm",
+        "Transport Integration Layer::Embedded Libfabric verbs provider",
+        "Transport Integration Layer::Verbs communication management via librdmacm",
+        "Transport Integration Layer::Verbs control/data transfer via libibverbs"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly extracted the specific components related to the Libfabric Verbs provider, which are the focus of the PRD. This group of predicted nodes represents a specific implementation of the more generic 'RDMA Verbs' concept in the GT. The AI's creation of a 'Transport Integration Layer' for the provider and placement of its dependencies in 'Global' is a semantically correct and detailed representation."
+    },
+    {
+      "gt_nodes": [
+        "Global::Hardware"
+      ],
+      "predicted_nodes": [
+        "Global::Network Device"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI's 'Network Device' is a more specific and contextually appropriate instance of the GT's generic 'Hardware' node. The 'Global' boundary is consistent for both."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Drivers and Kernels::Cray Driver",
+    "Drivers and Kernels::OS Kernel\\nEthernet",
+    "Drivers and Kernels::OS Kernel\\nHost Memory",
+    "Drivers and Kernels::OS Kernel\\nMemory Hooks",
+    "Drivers and Kernels::ROCm / CUDA",
+    "Programming Models and Frameworks::AI / ML Frameworks\\nTensorFlow, Burst Buffer",
+    "Programming Models and Frameworks::MPI\\nMPICH, Open-MPI",
+    "Programming Models and Frameworks::PGAS / SHMEM\\nOpenSHMEM, UPC, CAF, X10, Chapel",
+    "Programming Models and Frameworks::Task Runtimes\\nParsec, OCR, Legion"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::hwloc distribution tarball",
+    "Transport Integration Layer::CH4 network-module integration context"
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Internet"
+      ],
+      "predicted_nodes": [
+        "Global::External Systems"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the external/public network outside the internal system boundary."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB 1",
+        "Internal Network::DB 2",
+        "Internal Network::DB 3"
+      ],
+      "predicted_nodes": [
+        "External Systems::MySQL / SQLite\\n(External DB",
+        "Internal Network::PlugIt Service Layer::PlugIt Service A::Service Data Store A",
+        "Internal Network::PlugIt Service Layer::PlugIt Service B::Service Data Store B"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT shows multiple databases, and the prediction splits them into service-specific data stores plus an external DB technology node. This is semantically aligned with database-backed service storage, and the internal/external placement is acceptable given the abstract nature of the GT."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB_Proxy"
+      ],
+      "predicted_nodes": [
+        "Internal Network::PlugIt Proxy Layer::Proxy-Side Data Store"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the proxy-side datastore."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Proxy"
+      ],
+      "predicted_nodes": [
+        "Internal Network::PlugIt Proxy Layer::PlugIt Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same proxy component, with the predicted node adding a more detailed layer boundary."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Service 1",
+        "Internal Network::PlugIt Service 2",
+        "Internal Network::PlugIt Service 3"
+      ],
+      "predicted_nodes": [
+        "Internal Network::PlugIt Service Layer::PlugIt Service A",
+        "Internal Network::PlugIt Service Layer::PlugIt Service B"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT contains multiple PlugIt services, and the prediction aggregates them into fewer representative service nodes. This is acceptable as a split/merge abstraction match."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Internal Network::PlugIt Proxy Layer",
+    "Internal Network::PlugIt Proxy Layer::PlugIt Proxy::Proxy API Endpoint",
+    "Internal Network::PlugIt Proxy Layer::PlugIt Proxy::Standalone Mail Workflow\\n(Example Scope",
+    "Internal Network::PlugIt Proxy Layer::PlugIt Proxy::Standalone Mail Workflow\\n(Example Scope::Mail Handler",
+    "Internal Network::PlugIt Proxy Layer::PlugIt Proxy::Standalone Mail Workflow\\n(Example Scope::Mail Payload Extractor",
+    "Internal Network::PlugIt Proxy Layer::PlugIt Proxy::Standalone Mail Workflow\\n(Example Scope::Mail Validator\\n(Hash & Auto-response",
+    "Internal Network::PlugIt Proxy Layer::Proxy Configuration\\n(API_URL, PI_ALLOWED_NETWORKS",
+    "Internal Network::PlugIt Service Layer",
+    "Internal Network::PlugIt Service Layer::PlugIt Service A::Local / Private Config A\\n(Excluded from VCS",
+    "Internal Network::PlugIt Service Layer::PlugIt Service A::PlugIt API Client A",
+    "Internal Network::PlugIt Service Layer::PlugIt Service A::Schema Migration\\n(Versioned Upgrade Files",
+    "Internal Network::PlugIt Service Layer::PlugIt Service A::Service Config A\\n(API_URL, SQLALCHEMY_URL,\\nDEBUG, PI_BASE_URL",
+    "Internal Network::PlugIt Service Layer::PlugIt Service A::Service Logic A",
+    "Internal Network::PlugIt Service Layer::PlugIt Service B::Local / Private Config B",
+    "Internal Network::PlugIt Service Layer::PlugIt Service B::PlugIt API Client B",
+    "Internal Network::PlugIt Service Layer::PlugIt Service B::Schema Migration B",
+    "Internal Network::PlugIt Service Layer::PlugIt Service B::Service Config B",
+    "Internal Network::PlugIt Service Layer::PlugIt Service B::Service Logic B",
+    "External Systems::Inbound Mail Server"
+  ]
+}

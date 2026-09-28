@@ -1,0 +1,72 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Browser Clients::Client Browser\nPlayer 1",
+        "Browser Clients::Client Browser\nPlayer 2",
+        "Browser Clients::Client Browser\nPlayer 3"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Browser Client\n(Three.js",
+        "Client Layer::Browser Client\n(Three.js::Game UI\n3D Renderer",
+        "Client Layer::Browser Client\n(Three.js::Reconnect Handler\n(ping/pong, game_reconnect",
+        "Client Layer::Browser Client\n(Three.js::WebSocket Client\n(JSON [event,data"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "Multiple player client instances in the GT are grouped and split into specific functional modules of the browser client by the AI. The boundaries 'Browser Clients' and 'Client Layer' are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\nErlang"
+      ],
+      "predicted_nodes": [
+        "Server Layer::Game Server Master\n(Erlang/OTP",
+        "Server Layer::Game Server Master\n(Erlang/OTP::Room Manager\n(Create/Join Rooms",
+        "Server Layer::Game Server Master\n(Erlang/OTP::Server List Service\n(servers_list, redirect",
+        "Server Layer::Game Server Master\n(Erlang/OTP::WS Endpoint\n(Session/Conn Handling"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The Server Master node in GT is expanded into the main Game Server Master node and its internal specific handler modules by the AI. The 'Game Server Cluster' and 'Server Layer' boundaries align correctly."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Slave\nErlang"
+      ],
+      "predicted_nodes": [
+        "Server Layer::Replica Node\n(Erlang/OTP",
+        "Server Layer::Replica Node\n(Erlang/OTP::Failover / Replica"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The Server Slave node in GT is mapped to the Replica Node and its failover component in the AI prediction. The boundaries are semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::DNS"
+      ],
+      "predicted_nodes": [
+        "Delivery Layer::DNS / Load Balancer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The DNS node in GT matches the DNS / Load Balancer in the prediction. Placing DNS in a 'Delivery Layer' instead of 'Global' is architecturally acceptable and functionally consistent."
+    },
+    {
+      "gt_nodes": [
+        "Static Web Tier::Web Server\nGame assets, HTML, CSS, JS"
+      ],
+      "predicted_nodes": [
+        "Delivery Layer::Web Server\n(Static Assets"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The Web Server for static assets is accurately matched. The boundaries 'Static Web Tier' and 'Delivery Layer' serve the same architectural purpose."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Erlang / OTP Game Server Cluster"
+  ],
+  "unmatched_predicted_nodes": []
+}

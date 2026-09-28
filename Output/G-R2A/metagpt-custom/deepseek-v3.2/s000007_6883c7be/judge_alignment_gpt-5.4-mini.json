@@ -1,0 +1,195 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "CGI Portal::Http Test\nClient"
+      ],
+      "predicted_nodes": [
+        "Test Client Layer::Asynchronous HTTP Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the bundled HTTP test client used for asynchronous request generation and response counting. The predicted placement under a dedicated test client layer is semantically consistent with the GT CGI Portal test client node."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Logging"
+      ],
+      "predicted_nodes": [
+        "Proxy Layer::HTTP Proxy::Debug Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote proxy-side debug logging for forwarded request details. The boundary remains within the proxy layer and is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Proxy Core"
+      ],
+      "predicted_nodes": [
+        "Proxy Layer::HTTP Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node captures the core proxy component that forwards requests. It is a reasonable abstraction of the GT proxy core within the same architectural boundary."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Download"
+      ],
+      "predicted_nodes": [
+        "Test Server Layer::Local Test Server::File Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both relate to file download behavior, but the GT places this as a proxy plugin while the prediction relocates it into the test server's file handler. This is a boundary/context mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Upload"
+      ],
+      "predicted_nodes": [
+        "Test Server Layer::Local Test Server::File Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both involve file-handling/upload response behavior, but the GT assigns it to a proxy plugin whereas the prediction assigns it to the test server file handler. This crosses architectural boundaries incorrectly."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Check\nParameter"
+      ],
+      "predicted_nodes": [
+        "Proxy Layer::HTTP Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted proxy node is a higher-level abstraction that can encompass request validation/check-parameter behavior. The placement within the proxy layer is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Formatter"
+      ],
+      "predicted_nodes": [
+        "Proxy Layer::HTTP Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The formatter is a proxy-side concern and can be represented within the broader proxy component. The layer attribution remains correct."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Global Limit"
+      ],
+      "predicted_nodes": [
+        "Proxy Layer::HTTP Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This looks like a proxy-level control function and is reasonably absorbed into the generalized HTTP proxy node without boundary violation."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Login &\nPermission"
+      ],
+      "predicted_nodes": [
+        "Proxy Layer::HTTP Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Although the GT names a specific subfunction, it is still within proxy responsibilities. The prediction keeps it in the proxy layer and does not violate boundary semantics."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Agent"
+      ],
+      "predicted_nodes": [
+        "Proxy Layer::HTTP Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The agent plugin is a proxy-side extension point. Mapping it into the generalized proxy node is acceptable at this abstraction level."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Attach Check"
+      ],
+      "predicted_nodes": [
+        "Proxy Layer::HTTP Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a proxy plugin concern and the prediction keeps it within the proxy layer, which is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Mock"
+      ],
+      "predicted_nodes": [
+        "Proxy Layer::HTTP Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Mocking support is a proxy-related test/plugin concern. The broader proxy node is an acceptable abstraction."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 2"
+      ],
+      "predicted_nodes": [
+        "Proxy Layer::HTTP Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This appears to be a second proxy implementation or module variant. The prediction collapses proxy functionality into one node, which is semantically reasonable and remains in the correct layer."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer\\nKeepalived(VIP::Openresty",
+    "Business Servers::......",
+    "Business Servers::Business Server A",
+    "Business Servers::Business Server B",
+    "Business Servers::Business Server C",
+    "CGI Portal::Appkey\\nManager",
+    "CGI Portal::CGI Manager",
+    "CGI Portal::Case Manager",
+    "CGI Portal::Document\\nGenerate",
+    "CGI Portal::Log & Tree\\ninquire",
+    "CGI Portal::Metrics &\\nReport",
+    "CGI Portal::Service\\nManager",
+    "Clients::APP Client",
+    "Clients::Business Server",
+    "Clients::Developer",
+    "Clients::Web Client",
+    "Global::Log consumer",
+    "Proxy Layer::cgi_proxy 1::Appkey\\nValidate",
+    "Proxy Layer::cgi_proxy 1::Plugin::Check\\nParameter",
+    "Proxy Layer::cgi_proxy 1::Plugin::Download",
+    "Proxy Layer::cgi_proxy 1::Plugin::Mock",
+    "Proxy Layer::cgi_proxy 1::Plugin::Upload",
+    "Support Platform::Data Bank\\nHDFS/Hbase/Druid",
+    "Support Platform::Msg Center\\nKafka",
+    "Support Platform::Mysql",
+    "Support Platform::Permission\\nCenter",
+    "Support Platform::Redis Cache",
+    "Support Platform::User Center",
+    "Task Scheduler::CGI Case\\nExecutor",
+    "Task Scheduler::CGI Health\\nCheck",
+    "Task Scheduler::Daily Report",
+    "Task Scheduler::Log Analysis",
+    "Task Scheduler::Monitor/Alarm"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::HTTP Client",
+    "External Systems::Java Runtime Environment",
+    "External Systems::Local Filesystem",
+    "External Systems::Maven Build Environment",
+    "External Systems::Upstream Server",
+    "Proxy Layer::HTTP Proxy::Debug Logger",
+    "Test Client Layer::Asynchronous HTTP Client::Executor Service",
+    "Test Client Layer::Asynchronous HTTP Client::Success Counter",
+    "Test Client Layer::Asynchronous HTTP Client::Workload Generator",
+    "Test Server Layer::Local Test Server",
+    "Test Server Layer::Local Test Server::File Handler"
+  ]
+}

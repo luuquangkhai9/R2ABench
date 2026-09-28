@@ -1,0 +1,92 @@
+@startuml  
+title Indoor Fitness App - Layered Architecture Diagram  
+  
+skinparam componentStyle rectangle  
+skinparam backgroundColor #F5F5F5  
+  
+package "User Layer" {  
+  [Mobile User] as User  
+  [Administrator] as Admin  
+  [Android Casting Device] as CastDevice  
+} 
+  
+package "Client Layer" {  
+  component "Mobile App" as MobileApp {  
+    component "Camera Interface" as Camera  
+    component "UI Layer" as UI  
+    component "Local Processing" as LocalProc  
+    component "Casting Module" as Casting  
+  }  
+} 
+  
+package "Application Layer" {  
+  component "Authentication Service" as AuthService  
+  component "Posture Evaluation Service" as PostureService  
+  component "Training Plan Service" as PlanService  
+  component "Report Generation Service" as ReportService  
+  component "Casting Service" as CastService  
+  component "User Profile Service" as ProfileService  
+} 
+  
+package "Data Layer" {  
+  database "User Database" as UserDB  
+  database "Content Database" as ContentDB  
+  database "Analytics Database" as AnalyticsDB  
+}  
+  
+cloud "LAN Network" as LAN  
+node "Application Server" as AppServer  
+node "AI Model Server" as AIServer  
+  
+component "Mobile Camera" as MobileCamera  
+component "Pose Estimation Model" as PoseModel 
+  
+User -- : Uses  
+Admin -- : Manages  
+User -- : Casts to  
+  
+MobileApp -- : Captures video  
+Camera -- : Accesses  
+MobileApp -- : Handles casting  
+Casting -- : Discovers devices  
+LAN -- : Connects to  
+  
+MobileApp -- : Authenticates  
+MobileApp -- : Evaluates posture  
+MobileApp -- : Gets plans  
+MobileApp -- : Generates reports  
+MobileApp -- : Manages casting  
+MobileApp -- : Updates profile 
+  
+PostureService -- : Uses AI model  
+PostureService -- : Runs on  
+AuthService -- : Runs on  
+PlanService -- : Runs on  
+ReportService -- : Runs on  
+CastService -- : Runs on  
+ProfileService -- : Runs on  
+  
+AuthService -- : Reads/Writes users  
+ProfileService -- : Manages profiles  
+PlanService -- : Accesses exercises  
+ReportService -- : Uses content  
+PostureService -- : Logs metrics  
+PlanService -- : Stores analytics 
+  
+note right of MobileApp  
+  Supports Android 8.0+  
+  and iOS 11.0+  
+end note  
+  
+note right of PostureService  
+  Real-time skeleton extraction  
+  Compares with standard movements  
+  Accuracy > 95%%  
+end note  
+  
+note right of CastService  
+  Same-LAN device discovery  
+  Video latency < 100ms  
+end note  
+  
+@enduml 

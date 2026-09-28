@@ -1,0 +1,143 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Access Layer::Gateway"
+      ],
+      "predicted_nodes": [
+        "Access Layer::MTProto Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Nodes are functionally equivalent, and the AI's name is more specific based on the PRD. The 'Access Layer' boundary is identical and correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::BFF"
+      ],
+      "predicted_nodes": [
+        "Access Layer::BFF / API Facade"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Nodes are functionally equivalent. Placing the BFF in the 'Access Layer' is a valid and more specific architectural choice than the 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Services::Msg"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Messaging Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Nodes are functionally equivalent. The 'Services' and 'Service Layer' boundaries are semantically identical."
+    },
+    {
+      "gt_nodes": [
+        "Global::Push"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Push Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Nodes are functionally equivalent. Placing the service in the 'Service Layer' is a more precise architectural placement than the generic 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Sync"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Sync Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Nodes are functionally equivalent. Placing the service in the 'Service Layer' is a more precise architectural placement than the generic 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MySQL"
+      ],
+      "predicted_nodes": [
+        "Infrastructure & External::MySQL"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Nodes refer to the same database. The AI's 'Infrastructure & External' boundary is semantically equivalent to the GT's 'Storages' boundary for this component."
+    },
+    {
+      "gt_nodes": [
+        "Storages::Redis"
+      ],
+      "predicted_nodes": [
+        "Infrastructure & External::Redis"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Nodes refer to the same in-memory store. The AI's 'Infrastructure & External' boundary is semantically equivalent to the GT's 'Storages' boundary for this component."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MinIO"
+      ],
+      "predicted_nodes": [
+        "Infrastructure & External::MinIO"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Nodes refer to the same object storage. The AI's 'Infrastructure & External' boundary is semantically equivalent to the GT's 'Storages' boundary for this component."
+    },
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "Infrastructure & External::Kafka"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Nodes refer to the same message queue. The AI's 'Infrastructure & External' boundary is a more specific and appropriate classification than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Auth Session"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Auth Service",
+        "Service Layer::Registration & Verification",
+        "Service Layer::Future Salts Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's generic auth node is correctly split into more granular services based on PRD functions. The AI also correctly moved this business logic from the 'Access Layer' to the 'Service Layer', which is a sound architectural refinement."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Session"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Session Manager",
+        "Service Layer::Service Message Handler\\n(rpc_drop_answer, destroy_session"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's generic session node is correctly split into a session manager and a specific handler for session-related messages from the PRD. The AI also correctly moved this business logic from the 'Access Layer' to the 'Service Layer'."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer::Status",
+    "Clients::Android",
+    "Clients::PC",
+    "Clients::Web",
+    "Clients::iOS",
+    "Services::DFS",
+    "Services::Services"
+  ],
+  "unmatched_predicted_nodes": [
+    "Infrastructure & External::External Verification Service",
+    "Infrastructure & External::FFmpeg/FFProbe",
+    "Infrastructure & External::etcd",
+    "Service Layer::Media Wrapper"
+  ]
+}

@@ -1,0 +1,69 @@
+@startuml
+title Airflow Spark Docker Integration Architecture
+
+' Layers
+package "Docker Host" {
+    package "Docker Compose Network" {
+        [Airflow Service] as airflow
+        [Postgres Service] as postgres
+        [Spark Master Service] as spark_master
+        [Spark Worker Service 1] as spark_worker1
+        [Spark Worker Service 2] as spark_worker2
+        [Jupyter/PySpark Service] as jupyter
+    }
+}
+
+' External Users
+actor "Data Engineer" as data_eng
+actor "Platform Engineer" as platform_eng
+actor "Spark Developer" as spark_dev
+actor "Notebook User" as notebook_user
+actor "Tester" as tester
+
+' Component Descriptions
+airflow -down-> postgres : Stores metadata
+airflow -down-> spark_master : Submits Spark jobs
+via spark://spark:7077
+spark_master -down-> spark_worker1 : Coordinates tasks
+spark_master -down-> spark_worker2 : Coordinates tasks
+data_eng -right-> airflow : Schedule & monitor
+Spark jobs via DAGs
+platform_eng -right-> airflow : Configure & deploy
+environment
+spark_dev -right-> airflow : Develop & test
+Spark applications
+notebook_user -right-> jupyter : Interactive
+PySpark work
+tester -right-> jupyter : Validate
+environment
+tester -down-> spark_master : Inspect
+job execution
+tester -down-> postgres : Verify
+metadata storage
+
+' Shared Volumes
+cloud "Shared Volumes" {
+    [DAG Files] as dags
+    [Spark Apps] as spark_apps
+    [Notebooks] as notebooks
+    [Input Data] as input_data
+}
+
+dags -down-> airflow : Mounts /opt/airflow/dags
+spark_apps -down-> airflow : Mounts /opt/airflow/spark-apps
+notebooks -down-> jupyter : Mounts /home/jovyan/work
+input_data -down-> jupyter : Mounts /home/jovyan/data
+spark_apps -down-> spark_master : Mounts /opt/spark-apps
+input_data -down-> spark_worker1 : Mounts /opt/spark-data
+input_data -down-> spark_worker2 : Mounts /opt/spark-data
+
+note "Port Mappings" as ports {
+    airflow : 8282 -> 8080
+    spark_master : 8181 -> 8080
+    spark_master : 7077 -> 7077
+    jupyter : 8888 -> 8888
+    jupyter : 4040-4080 -> 4040-4080
+    postgres : 5432 -> 5432
+}
+
+@enduml

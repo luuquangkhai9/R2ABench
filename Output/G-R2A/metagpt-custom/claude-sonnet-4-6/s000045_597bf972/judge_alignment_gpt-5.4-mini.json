@@ -1,0 +1,102 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Application"
+      ],
+      "predicted_nodes": [
+        "Global::Host Android Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the host application that integrates the SDK; the global boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_Plugin::Plugin init compile",
+        "QAPM_Plugin::QAPM_Plugin"
+      ],
+      "predicted_nodes": [
+        "Configuration Layer::QAPMConfigurationManager"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "These GT nodes represent plugin/build-time initialization behavior, while the predicted node is a configuration manager. This is not semantically equivalent and crosses into a different architectural responsibility."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "predicted_nodes": [
+        "Scheduling & Dispatch Layer::QAPMHandlerThreadManager\\n(Background Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The SDK root is broader than a specific handler-thread manager. The predicted node captures only one subsystem and is incorrectly attributed as the SDK-level boundary."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Collect"
+      ],
+      "predicted_nodes": [
+        "Upload Processing Layer::UploadProcessor",
+        "Upload Processing Layer::NetworkConnectivityChecker",
+        "Upload Processing Layer::ForcedSendStoragePopper"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT collect module is an SDK collection component, but the predicted nodes are upload-processing internals. This is a functional mismatch and not a valid boundary-equivalent split."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "predicted_nodes": [
+        "Upload Processing Layer::UploadProcessor"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The report module is broader than upload processing and likely includes reporting pipeline behavior beyond the reviewed upload handler. The predicted placement narrows it incorrectly to upload processing."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "predicted_nodes": [
+        "Local Storage Layer::Pending Data Store\\n(Forced-Send Queue",
+        "Local Storage Layer::Upload Directory\\n& Upload Files"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT storage node is reasonably split into pending data storage and upload-file storage. The local storage boundary is semantically consistent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "QAPM_Plugin::Plugin init compile",
+    "QAPM_Plugin::QAPM_Plugin",
+    "QAPM_SDK::QAPM-SDK",
+    "QAPM_SDK::QAPM_Collect",
+    "QAPM_SDK::QAPM_Report",
+    "QAPM_SDK::QAPM_Storage"
+  ],
+  "unmatched_predicted_nodes": [
+    "Android Platform Runtime::Context / ConnectivityManager",
+    "Android Platform Runtime::Handler / HandlerThread / Looper",
+    "Apache HttpClient Library::HttpEntity",
+    "Apache HttpClient Library::ResponseHandler / HttpResponse",
+    "Global::Android Platform Runtime",
+    "Global::Apache HttpClient Library",
+    "HTTP Instrumentation Layer::CountingInputStream",
+    "HTTP Instrumentation Layer::InstrumentedHttpEntity",
+    "HTTP Instrumentation Layer::InstrumentedResponseHandler",
+    "HTTP Instrumentation Layer::TransactionState",
+    "Local Storage Layer::Pending Data Store\\n(Forced-Send Queue",
+    "Local Storage Layer::Upload Directory\\n& Upload Files",
+    "Scheduling & Dispatch Layer::MainThreadHandler\\n(Main Looper",
+    "Scheduling & Dispatch Layer::QAPMHandlerThreadManager\\n(Background Handler",
+    "Upload Processing Layer::FailureLogger",
+    "Upload Processing Layer::ForcedSendStoragePopper",
+    "Upload Processing Layer::NetworkConnectivityChecker",
+    "Upload Processing Layer::UploadProcessor"
+  ]
+}

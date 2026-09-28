@@ -1,0 +1,112 @@
+@startuml
+!define RECTANGLE class
+
+title Model Evolution Version Management Visualization Tool - System Architecture
+
+skinparam componentStyle rectangle
+
+' Define major components
+RECTANGLE "Frontend" as frontend {
+    [Browser Interface]
+    [User Interface Components]
+    [Navigation Interface]
+    [Model Visualization Components]
+}
+
+RECTANGLE "Backend" as backend {
+    [API Layer]
+    [Business Logic Layer]
+    [Authentication Service]
+    [Model Management Service]
+    [User Management Service]
+    [Evolution Relationship Service]
+    [Data Access Layer]
+}
+
+RECTANGLE "Algorithm Support" as algorithm {
+    [Model Parsing Engine]
+    [Graph Generation Engine]
+    [Evolution Analysis Engine]
+    [Performance Metrics Calculator]
+}
+
+' Define databases
+database "Neo4j Database" as neo4j {
+    [Model Graph Storage]
+    [Evolution Relationships]
+}
+
+database "MySQL Database" as mysql {
+    [User Data]
+    [Model Metadata]
+    [Permission Data]
+    [Application Records]
+}
+
+' Define external interfaces
+rectangle "External Interfaces" as external {
+    [Python Libraries]
+    [Browser Console]
+    [Communication Protocols\n(HTTP/HTTPS/TCP/IP/etc.)]
+}
+
+' Define users
+actor "Learner" as learner
+actor "Model Contributor" as contributor
+actor "Administrator" as admin
+
+' Component relationships
+frontend --> backend : API Calls
+backend --> neo4j : Graph Data Operations
+backend --> mysql : Relational Data Operations
+backend --> algorithm : Algorithm Requests
+algorithm --> neo4j : Graph Analysis
+algorithm --> mysql : Data Processing
+
+' External interface connections
+backend --> external : Uses
+algorithm --> external : Uses
+
+' User interactions
+learner --> frontend : Browse/Search Models
+contributor --> frontend : Upload/Edit Models
+admin --> frontend : Manage Users
+
+' Data flow labels
+neo4j ..> backend : Model & Evolution Data
+mysql ..> backend : User & Metadata
+algorithm ..> backend : Analysis Results
+
+note right of frontend
+  Browser-based access
+  Responsive UI
+  Model visualization
+end note
+
+note right of backend
+  RESTful APIs
+  Authentication (OAuth 2.0)
+  Business logic processing
+  Data access coordination
+end note
+
+note right of algorithm
+  ONNX/PyTorch parsing
+  Graph topology generation
+  Evolution analysis
+  Performance calculation
+end note
+
+note top of neo4j
+  Graph database for
+  model relationships
+  and evolution tracking
+end note
+
+note top of mysql
+  Relational database for
+  user accounts, permissions,
+  and model metadata
+end note
+
+@enduml

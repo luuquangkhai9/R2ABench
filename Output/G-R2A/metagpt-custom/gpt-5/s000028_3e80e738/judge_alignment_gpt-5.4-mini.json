@@ -1,0 +1,137 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "API Gateway Account::API Gateway"
+      ],
+      "predicted_nodes": [
+        "API Gateway Account Layer::API Gateway (REST API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the core API Gateway component; the predicted boundary is semantically equivalent despite the more specific REST API wording."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::Cognito-authorizer::hello-function"
+      ],
+      "predicted_nodes": [
+        "API Gateway Account Layer::API Gateway Cognito Authorizer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Cognito authorizer used by the API Gateway. The layer attribution is consistent with the GT context."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::Calls hello/GET with id_token in headers"
+      ],
+      "predicted_nodes": [
+        "API Gateway Account Layer::WhoAmI Method"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node describes the authenticated hello/GET endpoint behavior, which corresponds to the WhoAmI method handling authorized request headers."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::Returns hello plus user name when authorized"
+      ],
+      "predicted_nodes": [
+        "API Gateway Account Layer::WhoAmI Method"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is the response behavior of the WhoAmI endpoint. The predicted node is the correct functional equivalent and boundary."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::auth-function"
+      ],
+      "predicted_nodes": [
+        "API Gateway Account Layer::ECS Proxy Method"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT auth-function corresponds to the authenticated proxy/integration method, which aligns with the ECS proxy method in the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Cognito Account::Cognito User Pool"
+      ],
+      "predicted_nodes": [
+        "Cognito Account Layer::Cognito User Pool"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact semantic match and correct account boundary."
+    },
+    {
+      "gt_nodes": [
+        "Cognito Account::Cognito Hosted UI"
+      ],
+      "predicted_nodes": [
+        "Cognito Account Layer::Cognito User-Pool Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both are Cognito-related, but Hosted UI is not the same as the user-pool client. This is a component confusion within the Cognito boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::User"
+      ],
+      "predicted_nodes": [
+        "Security Layer::Authenticated IAM Role",
+        "Security Layer::Unauthenticated IAM Role"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT 'User' is an abstract identity concept, while the predicted nodes are concrete IAM roles. This is not a semantically equivalent architectural mapping."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::API Gateway"
+      ],
+      "predicted_nodes": [
+        "API Gateway Account Layer::API Deployment/Stage"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT API Gateway node encompasses the deployed API and its stage; the predicted node captures the deployment/stage aspect of the same system boundary."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::API Gateway"
+      ],
+      "predicted_nodes": [
+        "API Gateway Account Layer::CallbackURL Output"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The callback output is a direct artifact of the API Gateway deployment and belongs to the same account boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "CloudFormation Provisioning Layer::CloudFormation Templates",
+    "Cognito Account Layer::Cognito Identity Pool",
+    "External Systems (Surrounding/Out of Scope::AWS Cognito (Service",
+    "External Systems (Surrounding/Out of Scope::AWS IAM (Service",
+    "External Systems (Surrounding/Out of Scope::AWS VPC (Service",
+    "External Systems (Surrounding/Out of Scope::Amazon API Gateway (Service",
+    "External Systems (Surrounding/Out of Scope::DNS Delegation & Certificate Services",
+    "External Systems (Surrounding/Out of Scope::Data-Vault Stacks",
+    "External Systems (Surrounding/Out of Scope::SPID Hub",
+    "Installation Interface Layer::AWS CLI & Operator Environment",
+    "Installation Interface Layer::Installation Scripts/Inputs",
+    "Integration Layer::API Gateway VPC Link",
+    "Integration Layer::Network Load Balancer (ECS Backend",
+    "Network Access Layer::Amazon SQS",
+    "Network Access Layer::Endpoint Security Group",
+    "Network Access Layer::Existing VPC",
+    "Network Access Layer::Existing VPC::Existing Subnets",
+    "Network Access Layer::SQS VPC Interface Endpoint",
+    "Security Layer::Identity-Pool Role Attachment"
+  ]
+}

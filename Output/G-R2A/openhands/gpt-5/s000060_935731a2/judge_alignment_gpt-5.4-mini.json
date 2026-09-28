@@ -1,0 +1,48 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "Default Implementation::KafkaEventPublisher",
+        "Event Stream::Kafka Topic"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT explicitly contains Kafka as the transport/infrastructure node, while the prediction splits it into a Kafka publisher and Kafka topic. This is a semantically consistent refinement of the same Kafka-based default delivery mechanism."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\nserver"
+      ],
+      "predicted_nodes": [
+        "Auditor Client Library (Kotlin/JVM::Auditor API",
+        "Auditor Client Library (Kotlin/JVM::AuditEvent Builder",
+        "Auditor Client Library (Kotlin/JVM::Diff Engine",
+        "Auditor Client Library (Kotlin/JVM::Filter Engine",
+        "Auditor Client Library (Kotlin/JVM::Logger Adapter",
+        "Auditor Client Library (Kotlin/JVM::Publisher Adapter",
+        "Abstractions::AuditEventElementFilter",
+        "Abstractions::EventPublisher",
+        "Abstractions::LogProvider",
+        "Global::AuditorEventConfig",
+        "Global::newObject",
+        "Global::oldObject"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT app/server node corresponds to the audited client library implementation and its integration points. The predicted nodes decompose that library into API, builder, diffing, filtering, logging, publishing, config, and input objects, which are functionally consistent with the GT system boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Databases / Filestores\\nElastic, Hadoop, etc.",
+    "application 1::auditor-v1 client",
+    "application 2::auditor-v1 client",
+    "application 3::auditor-v1 client"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Event Stream",
+    "Global::Integrating JVM Application"
+  ]
+}

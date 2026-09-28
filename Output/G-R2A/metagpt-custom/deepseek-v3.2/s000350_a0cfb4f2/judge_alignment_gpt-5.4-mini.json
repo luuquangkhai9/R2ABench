@@ -1,0 +1,89 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::GoDaddy API\\nDomain availability"
+      ],
+      "predicted_nodes": [
+        "External Systems::GoDaddy API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the optional GoDaddy integration for domain availability checks. The boundary name differs, but the external-system attribution is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::HTTP API\\nSession and attack requests"
+      ],
+      "predicted_nodes": [
+        "Application Layer::HTTP API",
+        "Application Layer::Job Producer",
+        "Application Layer::Error Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT HTTP API node encompasses request handling, job submission, and HTTP error handling. The AI split this into appropriate subcomponents, and the application-layer placement is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Redis\\nCommand and reporting queues"
+      ],
+      "predicted_nodes": [
+        "Global::Redis",
+        "Global::Job Channel",
+        "Global::Report Channel"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Redis node covers both job and reporting queues. The AI decomposed it into Redis plus explicit job/report channels, which is semantically consistent and not a boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Global::Socket.io\\nWebSocket result channel"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::WebSocket Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the asynchronous client update channel over WebSocket/Socket.IO. The presentation-layer placement is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Global::Squatm3\\nDomain generation engine"
+      ],
+      "predicted_nodes": [
+        "External Systems::squatm3 CLI Engine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the wrapped squatm3 domain-generation subprocess. External-systems attribution is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::Web UI\\nindex.html"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web UI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the rendered web entry page/index.html. Presentation-layer placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Workers\\nCommand consumers"
+      ],
+      "predicted_nodes": [
+        "Integration Layer::Background Consumer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT worker/consumer corresponds to the background consumer thread that listens for jobs and triggers execution. Integration-layer placement is acceptable."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::External Systems"
+  ]
+}

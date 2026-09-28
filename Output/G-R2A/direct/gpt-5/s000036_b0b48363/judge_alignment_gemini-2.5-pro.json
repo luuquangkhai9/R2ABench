@@ -1,0 +1,60 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::C#",
+        "Global::Python"
+      ],
+      "predicted_nodes": [
+        "External Logging Producers::Any Language/Env\\nHTTP Client"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the specific examples of logging producers (C#, Python) from the GT into a single, generalized node as described in the PRD (FR-002: 'language-agnostic log producers'). The 'External Logging Producers' boundary is more descriptive and semantically correct than 'Global'."
+    },
+    {
+      "gt_nodes": [
+        "Global::HypnoLog\\nServer"
+      ],
+      "predicted_nodes": [
+        "Server Host::Node.js Runtime::Express App",
+        "Server Host::Node.js Runtime::JSON Body Parser\\n(limit 50mb",
+        "Server Host::Node.js Runtime::Logging Router\\nmounted at /logger",
+        "Server Host::Node.js Runtime::Node HTTP Server\\nPort 7000 (default)\\n(override via CLI arg",
+        "Server Host::Node.js Runtime::Static File Server\\n(public/, /client.html"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly decomposed the single 'HypnoLog Server' GT node into its constituent components (Express, HTTP Server, Routers, etc.) as detailed in the PRD (Sections 2.4, RT-001 to RT-010). The 'Server Host' boundary is semantically equivalent to the server context and is a correct attribution."
+    },
+    {
+      "gt_nodes": [
+        "Global::In Browser Log"
+      ],
+      "predicted_nodes": [
+        "Browser Client::Ajv Validator",
+        "Browser Client::Client UI\\n(client.html",
+        "Browser Client::Default Window",
+        "Browser Client::Message Processor",
+        "Browser Client::Received-Data List",
+        "Browser Client::Socket.IO Client",
+        "Browser Client::Visualizer Dispatcher\\n(first canDisplay match",
+        "Browser Client::Visualizers[]\\n(canDisplay(obj), display(obj, cb",
+        "Browser Client::Window Dispatcher"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly expanded the generic 'In Browser Log' GT node into a detailed set of browser-side components described in the PRD (FR-005 to FR-011). The 'Browser Client' boundary accurately reflects the execution environment of these components."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::HTTP"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Browser Client",
+    "Global::External Logging Producers",
+    "Global::HypnoLog Data Object",
+    "Global::Server Host",
+    "Server Host::Node.js Runtime"
+  ]
+}

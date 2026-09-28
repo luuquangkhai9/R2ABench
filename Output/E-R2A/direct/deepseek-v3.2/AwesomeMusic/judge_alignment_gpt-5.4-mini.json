@@ -1,0 +1,155 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone::Nginx Cluster"
+      ],
+      "predicted_nodes": [
+        "Global::Load Balancer\\n(Nginx 1.19.8"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Nginx-based edge/load-balancing tier. The predicted naming is simplified, but the architectural boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-discovery"
+      ],
+      "predicted_nodes": [
+        "Global::Service Discovery\\n(etcd 3.4.15"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the service discovery component, and etcd is consistent with the GT discovery service boundary."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::RabbitMQ"
+      ],
+      "predicted_nodes": [
+        "Scheduling & Messaging::Message Queue\\n(RabbitMQ 3.8.14"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to RabbitMQ as the messaging infrastructure. The boundary label differs, but the placement is architecturally consistent."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-scheduler"
+      ],
+      "predicted_nodes": [
+        "Scheduling & Messaging::Scheduler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The scheduling module matches the GT scheduler service, and the boundary attribution is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone::Spring Cloud Gateway"
+      ],
+      "predicted_nodes": [
+        "Web Backend::API Gateway\\n(Golang, Gin"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the API gateway layer that separates external and internal network boundaries. The technology labeling differs, but the architectural role is equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Security Critical Zone::Static Resource Server"
+      ],
+      "predicted_nodes": [
+        "Web Frontend::User Interface\\n(HTML/CSS/JS, Bootstrap"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a static resource serving component in the security zone, while the predicted node is the frontend UI. This is a frontend/static-serving boundary confusion."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Micro Service Layer::service-web"
+      ],
+      "predicted_nodes": [
+        "Web Backend::Hot Chart Service",
+        "Web Backend::Model Service",
+        "Web Backend::Recommendation Service",
+        "Web Backend::Score Service",
+        "Web Backend::Task Service",
+        "Web Backend::User Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT web service is aggregated in the prediction into several backend business services. This is a reasonable functional decomposition, and the boundary remains within the backend/microservice tier."
+    },
+    {
+      "gt_nodes": [
+        "Awesome Music System::Infra Layer::MySQL",
+        "Awesome Music System::Infra Layer::Redis",
+        "Awesome Music System::Infra Layer::Prometheus"
+      ],
+      "predicted_nodes": [
+        "Data Storage::Score Database",
+        "Data Storage::User Database",
+        "Data Storage::Model Database",
+        "Data Storage::Task Database",
+        "Data Storage::Hot Chart Database"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT infra storage/monitoring nodes are split into specific databases in the prediction. Although Prometheus is not represented, the storage-related decomposition is semantically consistent for the database portion."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Awesome Music System::Infra Layer",
+    "Awesome Music System::Micro Service Layer",
+    "Awesome Music System::Micro Service Layer::service-auth",
+    "Awesome Music System::Micro Service Layer::service-auth::auth1",
+    "Awesome Music System::Micro Service Layer::service-auth::auth2",
+    "Awesome Music System::Micro Service Layer::service-auth::auth3",
+    "Awesome Music System::Micro Service Layer::service-discovery::discovery1",
+    "Awesome Music System::Micro Service Layer::service-discovery::discovery2",
+    "Awesome Music System::Micro Service Layer::service-discovery::discovery3",
+    "Awesome Music System::Micro Service Layer::service-scheduler::scheduler1",
+    "Awesome Music System::Micro Service Layer::service-scheduler::scheduler2",
+    "Awesome Music System::Micro Service Layer::service-scheduler::scheduler3",
+    "Awesome Music System::Micro Service Layer::service-web::web1",
+    "Awesome Music System::Micro Service Layer::service-web::web2",
+    "Awesome Music System::Micro Service Layer::service-web::web3",
+    "Awesome Music System::Security Critical Zone",
+    "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx1",
+    "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx2",
+    "Awesome Music System::Security Critical Zone::Nginx Cluster::Nginx3",
+    "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway1",
+    "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway2",
+    "Awesome Music System::Security Critical Zone::Spring Cloud Gateway::gateway3",
+    "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server1",
+    "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server2",
+    "Awesome Music System::Security Critical Zone::Static Resource Server::Static Server3",
+    "Awesome Music System::Infra Layer::Prometheus",
+    "Awesome Music System::Infra Layer::Redis"
+  ],
+  "unmatched_predicted_nodes": [
+    "Algorithm Service::Model Training Service",
+    "Algorithm Service::Music Processing Engine",
+    "Algorithm Service::Score Classification Service",
+    "Algorithm Service::Score Generation Service",
+    "Algorithm Service::Song Recommendation Service",
+    "Data Storage::Distributed Storage\\n(Hadoop 3.2.2",
+    "Data Storage::File Storage\\n(MIDI, ABC, Seeds",
+    "Data Storage::Hot Chart Database",
+    "Data Storage::Model Database",
+    "Data Storage::Score Database",
+    "Data Storage::Task Database",
+    "Data Storage::User Database",
+    "Global::External User",
+    "Scheduling & Messaging::Message Queue\\n(RabbitMQ 3.8.14",
+    "Web Backend::Hot Chart Service",
+    "Web Backend::Model Service",
+    "Web Backend::Recommendation Service",
+    "Web Backend::Score Service",
+    "Web Backend::Task Service",
+    "Web Backend::User Service",
+    "Web Frontend::User Interface\\n(HTML/CSS/JS, Bootstrap"
+  ]
+}

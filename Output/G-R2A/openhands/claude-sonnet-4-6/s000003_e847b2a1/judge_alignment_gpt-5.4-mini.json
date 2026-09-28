@@ -1,0 +1,347 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::Frontend",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Browser Frontend::Prediction API Context\\n(prediction operation entry point",
+        "Browser Frontend::Wallet Provider / Context\\n(wallet-backed API for child components",
+        "Browser Frontend::Prediction Creation UI\\n(asset, target price, time range, NFT media",
+        "Browser Frontend::Prediction Viewing UI\\n(ongoing and processed predictions",
+        "Browser Frontend::Outcome NFT Operations UI\\n(fund / rent / withdraw / claim reward",
+        "Browser Frontend::Aeternity SDK",
+        "Browser Frontend::Aeternity Wallet Client"
+      ],
+      "reasoning": "The GT frontend responsibility is covered by the generated browser frontend components, including context/provider, wallet integration, creation/viewing, and outcome NFT operations."
+    },
+    {
+      "gt_node": "Global::IPFS",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Systems::Prediction Media Storage\\n(IPFS-compatible)\\n\\noutcome NFT images / animations"
+      ],
+      "reasoning": "The GT IPFS storage responsibility is covered by the predicted external prediction media storage, explicitly described as IPFS-compatible."
+    },
+    {
+      "gt_node": "Global::User",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node models the end user as a system architecture node; the user is only implied as the consumer of frontend UI components."
+    },
+    {
+      "gt_node": "Global::oracle-service",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Backend Services::Oracle Service\\n(Quarkus)\\n\\n- register / maintain oracle validity\\n- check pending oracle queries\\n- compare target price vs actual price\\n- submit oracle result responses",
+        "Aeternity Blockchain::Aeternity Oracle"
+      ],
+      "reasoning": "The predicted backend oracle service covers the GT oracle-service responsibilities, and the oracle runtime concept is also grounded by the Aeternity oracle node."
+    },
+    {
+      "gt_node": "Global::process-prediction-\\nservice",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Backend Services::Prediction-Processing Service\\n\\n- detect closed predictions\\n- initiate oracle queries\\n- drive on-chain result processing"
+      ],
+      "reasoning": "The predicted prediction-processing service directly matches the GT service responsibility for closed-prediction handling and result processing."
+    },
+    {
+      "gt_node": "aeternity blockchain::PredictionCards\\nSmart Contract",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Aeternity Blockchain::PredictionCards Smart Contract\\n(Sophia smart contract"
+      ],
+      "reasoning": "The predicted smart contract node is the same contract concept as the GT PredictionCards smart contract, with an equivalent blockchain boundary."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Aeternity Blockchain::AENS Name Resolution",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::oracle-service",
+        "Global::process-prediction-\\nservice",
+        "aeternity blockchain::PredictionCards\\nSmart Contract"
+      ],
+      "reasoning": "AENS name resolution is grounded in the PRD as the contract-location mechanism used by the frontend and services."
+    },
+    {
+      "predicted_node": "Aeternity Blockchain::Aeternity Oracle",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::oracle-service"
+      ],
+      "reasoning": "This is a grounded blockchain-side concept related to the oracle service and oracle registration/validity responsibilities."
+    },
+    {
+      "predicted_node": "Aeternity Blockchain::PredictionCards Smart Contract\\n(Sophia smart contract",
+      "grounded": true,
+      "reference_nodes": [
+        "aeternity blockchain::PredictionCards\\nSmart Contract"
+      ],
+      "reasoning": "This directly corresponds to the GT smart contract node, despite minor naming and formatting differences."
+    },
+    {
+      "predicted_node": "Backend Services::Oracle Service\\n(Quarkus)\\n\\n- register / maintain oracle validity\\n- check pending oracle queries\\n- compare target price vs actual price\\n- submit oracle result responses",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::oracle-service"
+      ],
+      "reasoning": "This matches the oracle service described in the PRD, including Quarkus implementation and oracle workflow responsibilities."
+    },
+    {
+      "predicted_node": "Backend Services::Prediction-Processing Service\\n\\n- detect closed predictions\\n- initiate oracle queries\\n- drive on-chain result processing",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::process-prediction-\\nservice"
+      ],
+      "reasoning": "This is directly grounded in the prediction-processing service concept from the PRD."
+    },
+    {
+      "predicted_node": "Browser Frontend::Aeternity SDK",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Frontend"
+      ],
+      "reasoning": "The frontend is specified to use Aeternity SDK-based contract interaction components, so this is a grounded frontend dependency."
+    },
+    {
+      "predicted_node": "Browser Frontend::Aeternity Wallet Client",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Frontend"
+      ],
+      "reasoning": "Wallet integration is explicitly required for the frontend and is part of the grounded frontend architecture."
+    },
+    {
+      "predicted_node": "Browser Frontend::Outcome NFT Operations UI\\n(fund / rent / withdraw / claim reward",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Frontend",
+        "Global::User"
+      ],
+      "reasoning": "Outcome NFT fund, rent, withdrawal, and reward-claiming operations are explicit frontend responsibilities."
+    },
+    {
+      "predicted_node": "Browser Frontend::Prediction API Context\\n(prediction operation entry point",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Frontend"
+      ],
+      "reasoning": "The PRD explicitly defines a frontend context/provider mechanism for prediction operations."
+    },
+    {
+      "predicted_node": "Browser Frontend::Prediction Creation UI\\n(asset, target price, time range, NFT media",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Frontend",
+        "Global::User"
+      ],
+      "reasoning": "Prediction creation UI is directly grounded by the frontend prediction creation requirements."
+    },
+    {
+      "predicted_node": "Browser Frontend::Prediction Viewing UI\\n(ongoing and processed predictions",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Frontend",
+        "Global::User"
+      ],
+      "reasoning": "Viewing ongoing and processed predictions is an explicit frontend function."
+    },
+    {
+      "predicted_node": "Browser Frontend::Wallet Provider / Context\\n(wallet-backed API for child components",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Frontend"
+      ],
+      "reasoning": "This corresponds to the wallet-backed provider/context mechanism required by the frontend."
+    },
+    {
+      "predicted_node": "External Systems::External Price Provider",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::oracle-service",
+        "Global::process-prediction-\\nservice"
+      ],
+      "reasoning": "The external price provider is explicitly described as part of oracle outcome determination."
+    },
+    {
+      "predicted_node": "External Systems::Prediction Media Storage\\n(IPFS-compatible)\\n\\noutcome NFT images / animations",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::IPFS",
+        "Global::Frontend"
+      ],
+      "reasoning": "Prediction media storage is a grounded external system, and its IPFS-compatible nature matches the PRD."
+    },
+    {
+      "predicted_node": "Local Contract Integration-Test Environment::Aeternity Node",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::oracle-service",
+        "Global::process-prediction-\\nservice"
+      ],
+      "reasoning": "The local integration-test stack explicitly includes an Aeternity node."
+    },
+    {
+      "predicted_node": "Local Contract Integration-Test Environment::Compiler Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::oracle-service",
+        "Global::process-prediction-\\nservice"
+      ],
+      "reasoning": "The local integration-test stack explicitly includes a compiler service."
+    },
+    {
+      "predicted_node": "Local Contract Integration-Test Environment::Debug Endpoint",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::oracle-service",
+        "Global::process-prediction-\\nservice"
+      ],
+      "reasoning": "The PRD explicitly includes a debug endpoint in the local integration-test environment."
+    },
+    {
+      "predicted_node": "Local Contract Integration-Test Environment::Index Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::oracle-service",
+        "Global::process-prediction-\\nservice"
+      ],
+      "reasoning": "The local integration-test environment explicitly includes an index service."
+    },
+    {
+      "predicted_node": "Local Contract Integration-Test Environment::Test Proxy\\n(CORS: GET, POST, OPTIONS;\\nContent-Type, Cache-Control,\\nContent-Range, Range",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Frontend"
+      ],
+      "reasoning": "The local test proxy with the listed CORS methods and headers is explicitly grounded in the PRD."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Frontend"
+      ],
+      "predicted_nodes": [
+        "Browser Frontend::Prediction API Context\\n(prediction operation entry point",
+        "Browser Frontend::Wallet Provider / Context\\n(wallet-backed API for child components",
+        "Browser Frontend::Prediction Creation UI\\n(asset, target price, time range, NFT media",
+        "Browser Frontend::Prediction Viewing UI\\n(ongoing and processed predictions",
+        "Browser Frontend::Outcome NFT Operations UI\\n(fund / rent / withdraw / claim reward",
+        "Browser Frontend::Aeternity SDK",
+        "Browser Frontend::Aeternity Wallet Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT frontend node is decomposed into several browser frontend responsibilities and dependencies, which remain within the frontend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::IPFS"
+      ],
+      "predicted_nodes": [
+        "External Systems::Prediction Media Storage\\n(IPFS-compatible)\\n\\noutcome NFT images / animations"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted external media storage node is semantically equivalent to the GT IPFS storage boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::oracle-service"
+      ],
+      "predicted_nodes": [
+        "Backend Services::Oracle Service\\n(Quarkus)\\n\\n- register / maintain oracle validity\\n- check pending oracle queries\\n- compare target price vs actual price\\n- submit oracle result responses",
+        "Aeternity Blockchain::Aeternity Oracle"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The oracle-service responsibility is split into the backend service implementation and the blockchain oracle concept, both semantically aligned with the GT service boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::process-prediction-\\nservice"
+      ],
+      "predicted_nodes": [
+        "Backend Services::Prediction-Processing Service\\n\\n- detect closed predictions\\n- initiate oracle queries\\n- drive on-chain result processing"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node directly matches the GT prediction-processing service."
+    },
+    {
+      "gt_nodes": [
+        "aeternity blockchain::PredictionCards\\nSmart Contract"
+      ],
+      "predicted_nodes": [
+        "Aeternity Blockchain::PredictionCards Smart Contract\\n(Sophia smart contract"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The contract node is an exact semantic match and remains in the correct blockchain boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Frontend"
+      ],
+      "predicted_nodes": [
+        "Browser Frontend::Aeternity SDK",
+        "Browser Frontend::Aeternity Wallet Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These are frontend dependencies/components that fit within the frontend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::User"
+      ],
+      "predicted_nodes": [
+        "Browser Frontend::Outcome NFT Operations UI\\n(fund / rent / withdraw / claim reward",
+        "Browser Frontend::Prediction Creation UI\\n(asset, target price, time range, NFT media",
+        "Browser Frontend::Prediction Viewing UI\\n(ongoing and processed predictions"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The user role is operationally represented by user-facing frontend UI nodes rather than as a standalone architectural component."
+    },
+    {
+      "gt_nodes": [
+        "Global::Frontend"
+      ],
+      "predicted_nodes": [
+        "Browser Frontend::Prediction API Context\\n(prediction operation entry point",
+        "Browser Frontend::Wallet Provider / Context\\n(wallet-backed API for child components"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These predicted nodes capture the frontend context/provider mechanism described in the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Global::Frontend"
+      ],
+      "predicted_nodes": [
+        "External Systems::Prediction Media Storage\\n(IPFS-compatible)\\n\\noutcome NFT images / animations"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The frontend references media storage externally; the predicted node semantically matches the GT IPFS-related media storage."
+    },
+    {
+      "gt_nodes": [
+        "Global::Frontend"
+      ],
+      "predicted_nodes": [
+        "Local Contract Integration-Test Environment::Test Proxy\\n(CORS: GET, POST, OPTIONS;\\nContent-Type, Cache-Control,\\nContent-Range, Range"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The local test proxy is a frontend-adjacent integration component explicitly required by the PRD."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

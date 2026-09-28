@@ -1,0 +1,107 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "predicted_nodes": [
+        "Global::Build Layer",
+        "Global::CI / Automation Layer",
+        "Global::External Systems",
+        "Global::Host-Side Tools Layer",
+        "Global::Related Libraries & Tools",
+        "Global::Telemetry Data Stream",
+        "Global::cFS Runtime Target Layer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a broad umbrella for the overall cFS repository bundle, and the predicted diagram decomposes it into major architectural areas rather than introducing conflicting semantics. This is an acceptable split at a more detailed granularity."
+    },
+    {
+      "gt_nodes": [
+        "Reuse Workflows::Submodule Reuse"
+      ],
+      "predicted_nodes": [
+        "CI / Automation Layer::Reusable Workflows\\n(workflow_call)"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe reusable workflow composition for submodules/workflows via workflow_call. The boundary is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Reuse Workflows::cFS Reuse"
+      ],
+      "predicted_nodes": [
+        "CI / Automation Layer::Reusable Workflows\\n(workflow_call)"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent cFS-level reusable workflow support. The predicted placement under CI / Automation is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Static and Quality Checks::CodeQL Analysis"
+      ],
+      "predicted_nodes": [
+        "CI / Automation Layer::Static Analysis /\\nCodeQL Workflow"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node directly corresponds to CodeQL/static analysis in the same CI quality-checks concept."
+    },
+    {
+      "gt_nodes": [
+        "Static and Quality Checks::Format Check"
+      ],
+      "predicted_nodes": [
+        "CI / Automation Layer::Format Check Workflow\\n(ubuntu-18.04"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is the same format-check capability, and its CI workflow boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Static and Quality Checks::Static Analysis"
+      ],
+      "predicted_nodes": [
+        "CI / Automation Layer::Static Analysis /\\nCodeQL Workflow"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Static analysis is represented by the predicted static analysis/CodeQL workflow node. The boundary is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Build Layer::Build Variants\\n(debug / release",
+    "Build Layer::Git Submodules\\n(cFE, OSAL, PSP,\\nFramework Apps",
+    "Build Layer::Makefile.sample /\\nsample_defs Assets",
+    "Build Layer::make prep /\\nmake install",
+    "CI / Automation Layer::Build & Test Workflow\\n(ubuntu-18.04",
+    "CI / Automation Layer::Changelog Workflow\\n(ubuntu-latest",
+    "CI / Automation Layer::Format Check Workflow\\n(ubuntu-18.04",
+    "External Systems::GitHub Actions\\nCI Platform",
+    "External Systems::GitHub Repository\\n(nasa/cFS",
+    "Global::Build Artifacts",
+    "Global::Build Layer",
+    "Global::CI / Automation Layer",
+    "Global::Changelog Artifact",
+    "Global::External Systems",
+    "Global::Host-Side Tools Layer",
+    "Global::Related Libraries & Tools",
+    "Global::Telemetry Data Stream",
+    "Global::cFS Runtime Target Layer",
+    "Host-Side Tools Layer::Telemetry Observer\\n(Operator UI / Terminal",
+    "Host-Side Tools Layer::cmdUtil\\n(Command Utility",
+    "Related Libraries & Tools::CCDD /\\nPerfutils-java /\\ngen_sch_tbl",
+    "Related Libraries & Tools::SIL / ECI",
+    "Related Libraries & Tools::cFS_LIB /\\ncFS_IO_LIB",
+    "cFS Runtime Target Layer::Framework Applications",
+    "cFS Runtime Target Layer::OSAL\\n(OS Abstraction Layer",
+    "cFS Runtime Target Layer::PSP\\n(Platform Support Package",
+    "cFS Runtime Target Layer::cFE\\n(Core Flight Executive",
+    "cFS Runtime Target Layer::core-cpu1\\n(cFS Executable"
+  ]
+}

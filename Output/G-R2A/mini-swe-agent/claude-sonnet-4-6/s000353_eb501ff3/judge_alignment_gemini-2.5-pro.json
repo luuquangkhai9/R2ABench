@@ -1,0 +1,79 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Turing System::Turing API Server\nHTTP REST API to configure Routers"
+      ],
+      "predicted_nodes": [
+        "Global::Turing API Server",
+        "Turing API Server::Cluster Management Layer",
+        "Turing API Server::Cluster Management Layer::Router Deployment Controller",
+        "Turing API Server::HTTP API Layer",
+        "Turing API Server::HTTP API Layer::Ensembler API Handler",
+        "Turing API Server::HTTP API Layer::Router API Handler",
+        "Turing API Server::Middleware Layer",
+        "Turing API Server::Middleware Layer::OpenAPI Validation Middleware",
+        "Turing API Server::Service Layer",
+        "Turing API Server::Service Layer::Ensembler Service",
+        "Turing API Server::Service Layer::Router Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single Turing API Server node in the Ground Truth is accurately decomposed by the AI into logical internal layers (HTTP, Middleware, Service, Cluster Management). The boundary attribution is semantically consistent as the core system component."
+    },
+    {
+      "gt_nodes": [
+        "Turing System::Database\nPersistent storage for Router objects"
+      ],
+      "predicted_nodes": [
+        "Global::Data Store",
+        "Data Store::Ensembler Data",
+        "Data Store::Router Data"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT defines a single Database node, which the AI expands into a general Data Store and specific data entities for Ensemblers and Routers. The boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Kubernetes Cluster::Istio",
+        "Kubernetes Cluster::Knative Controller"
+      ],
+      "predicted_nodes": [
+        "External Systems::Kubernetes Cluster"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The specific Kubernetes cluster components (Istio, Knative) in GT are aggregated into a single Kubernetes Cluster node by the AI. The external system / cluster boundary attribution remains semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Authorization Service"
+      ],
+      "predicted_nodes": [
+        "Turing API Server::Middleware Layer::Authorization Middleware"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both nodes represent the authorization functionality. However, GT defines it as an external/global service, while the AI places it as an internal middleware component within the Turing API Server, resulting in a boundary mismatch."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Experimentation Service",
+    "Global::Machine Learning Platform\nMLP API Server",
+    "Global::Monitoring and Alerting Service",
+    "Global::Router Clients",
+    "Global::Router Endpoints",
+    "Global::Secret Store",
+    "Global::Turing User",
+    "Turing System::Turing UI\nWeb interface to configure Routers"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::Jaeger Tracing",
+    "External Systems::MLflow Model Registry",
+    "Global::External Systems",
+    "Global::PyFuncEnsembler Runtime",
+    "PyFuncEnsembler Runtime::Image Build Pipeline",
+    "PyFuncEnsembler Runtime::PyFuncEnsembler Webservice"
+  ]
+}

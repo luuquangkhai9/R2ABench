@@ -1,0 +1,82 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "ClearML Server::Backend Service API",
+        "ClearML Server::ML Ops::Execution Queue"
+      ],
+      "predicted_nodes": [
+        "ClearML Server / Backend::API Endpoint",
+        "ClearML Server / Backend::Events Service v2.5",
+        "ClearML Server / Backend::Execution Queue",
+        "ClearML Server / Backend::Models Service v2.4"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the backend services and execution queue. It successfully expanded the generic 'Backend Service API' into specific services ('Events Service', 'Models Service') mentioned in the PRD. The boundary 'ClearML Server / Backend' is semantically equivalent to the GT's 'ClearML Server'."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::ClearML Agent\\nService Pod"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Agent Service Pod\\n(clearml-agent image",
+        "Kubernetes Cluster::Agent Service Pod\\n(clearml-agent image::Agent Runtime",
+        "Kubernetes Cluster::Agent Service Pod\\n(clearml-agent image::Backend Client",
+        "Kubernetes Cluster::Agent Service Pod\\n(clearml-agent image::Worker Telemetry"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the agent's service pod and decomposed this single GT node into a parent container and its logical internal components (Runtime, Backend Client, Telemetry) derived from the PRD. The boundary 'Kubernetes Cluster' is appropriate and the components are correctly nested within the agent pod."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Kubernetes Glue"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Agent Service Pod\\n(clearml-agent image::Kubernetes Glue"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The AI correctly identified the 'Kubernetes Glue' functionality but made a severe boundary error by placing it as a sub-component of the 'Agent Service Pod'. The PRD describes these as two distinct, mutually exclusive operational modes, not a nested relationship."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Kubernetes Job"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Kubernetes Job Pods"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are semantically equivalent, representing the user jobs executed in Kubernetes. The predicted node name is more specific and accurate. The boundary 'Kubernetes Cluster' is a correct and more modern representation than the GT's."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Mapped Docker Socket\\nSibling Containers"
+      ],
+      "predicted_nodes": [
+        "Node Host::Docker Engine\\n(mapped Docker socket"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the Docker integration for managing sibling containers. The AI's representation of a 'Docker Engine' on a 'Node Host' is a more precise architectural depiction of how a mapped socket functions. The boundary is semantically correct in the context of a Kubernetes worker node."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "ClearML Server::Experiment Manager::Collaboration",
+    "ClearML Server::Experiment Manager::Data Tracking",
+    "ClearML Server::Experiment Manager::Versioning",
+    "ClearML Server::Experiment Manager::Visualization",
+    "ClearML Server::ML Ops::Monitoring",
+    "ClearML Server::ML Ops::Orchestration",
+    "Data Scientist Environment::ClearML Snippet",
+    "Data Scientist Environment::Python ML / DL Code",
+    "GPU / Kubernetes Workers\\nOn Prem or Cloud::Pod Execution Environment\\nand Docker User Code",
+    "GPU / Kubernetes Workers\\nOn Prem or Cloud::YAML Job Template"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Node Host",
+    "Kubernetes Cluster::Kubernetes API Server"
+  ]
+}

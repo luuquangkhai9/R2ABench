@@ -1,0 +1,185 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "Runtime Layer::MPI Communicator (mpi4py)"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the internal MPI communication/runtime integration layer. The predicted node is a more specific architectural label, but it is semantically equivalent to the GT global MPI node."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process"
+      ],
+      "predicted_nodes": [
+        "External & Platform::MPI Runtime / mpirun"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node is about the external execution/runtime launcher environment, while the GT node is the actual compute-process boundary. This is related context, but not the same architectural node and the boundary attribution is incorrect."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Server\nThread"
+      ],
+      "predicted_nodes": [
+        "Runtime Layer::Scheduler & Worker Pool"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a specific server thread inside each MPI process, whereas the predicted node is a broader scheduling/worker-pool component. The functional area overlaps, but the granularity and boundary placement do not match."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Worker\nThread"
+      ],
+      "predicted_nodes": [
+        "External & Platform::OS Threads"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Worker threads in the GT are correctly represented as OS-level threads. The predicted boundary is semantically equivalent for the thread execution layer."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Task Queue"
+      ],
+      "predicted_nodes": [
+        "Runtime Layer::Worker Queues"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The task queue in each MPI process corresponds to worker queues in the predicted architecture. The boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::...",
+        "Task Queue (in detail::A1",
+        "Task Queue (in detail::A2",
+        "Task Queue (in detail::A3",
+        "Task Queue (in detail::B1",
+        "Task Queue (in detail::B2",
+        "Task Queue (in detail::Level 0",
+        "Task Queue (in detail::Level 1",
+        "Task Queue (in detail::Level 2",
+        "Task Queue (in detail::Level 3",
+        "Task Queue (in detail::Level 4",
+        "Task Queue (in detail::Level 5"
+      ],
+      "predicted_nodes": [
+        "Runtime Layer::Stealing Coordinator"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT detailed queue nodes depict queue internals and multi-level queue structure, while the predicted model aggregates the task-stealing and queue-management behavior into a single coordinator. This is a reasonable functional aggregation at the runtime layer."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::..."
+      ],
+      "predicted_nodes": [
+        "Runtime Layer::Scheduler & Worker Pool"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The detailed task queue internals are part of scheduling/dispatching mechanics. The predicted scheduler/worker-pool component is a semantically acceptable abstraction of the GT queue detail."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::A1",
+        "Task Queue (in detail::A2",
+        "Task Queue (in detail::A3"
+      ],
+      "predicted_nodes": [
+        "Runtime Layer::Worker Queues"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT shows multiple queue entries/variants as detailed queue structure; the predicted node consolidates them into worker queues. This is a valid merge at the runtime layer."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::B1",
+        "Task Queue (in detail::B2"
+      ],
+      "predicted_nodes": [
+        "Runtime Layer::Stealing Coordinator"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "These GT queue detail nodes are consistent with the stealing-related queue organization represented by the predicted coordinator. The abstraction is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::Level 0",
+        "Task Queue (in detail::Level 1",
+        "Task Queue (in detail::Level 2",
+        "Task Queue (in detail::Level 3",
+        "Task Queue (in detail::Level 4",
+        "Task Queue (in detail::Level 5"
+      ],
+      "predicted_nodes": [
+        "Runtime Layer::Scheduler & Worker Pool"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The multiple queue levels in GT indicate a multi-level scheduling structure. The predicted scheduler/worker pool is a correct higher-level abstraction."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::Level 0",
+        "Task Queue (in detail::Level 1",
+        "Task Queue (in detail::Level 2",
+        "Task Queue (in detail::Level 3",
+        "Task Queue (in detail::Level 4",
+        "Task Queue (in detail::Level 5"
+      ],
+      "predicted_nodes": [
+        "Runtime Layer::Worker Queues"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The queue levels map naturally to the concept of worker queues. The predicted boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Server\nThread",
+        "Compute node::MPI Process::Worker\nThread",
+        "Compute node::MPI Process::Task Queue"
+      ],
+      "predicted_nodes": [
+        "Runtime Layer::Scheduler & Worker Pool",
+        "Runtime Layer::Worker Queues"
+      ],
+      "match_type": "N:2",
+      "is_boundary_correct": true,
+      "reasoning": "The GT process-internal server thread, worker thread, and task queue are collectively represented by the predicted scheduler/worker pool plus worker queues. This is a valid decomposition/aggregation across equivalent runtime responsibilities."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Compute node::MPI Process"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application Layer::App-level MPI code (optional",
+    "Application Layer::Python Application",
+    "External & Platform::Environment Variables\nTORC_WORKERS | TORC_STEALING |\nTORC_SERVER_YIELDTIME | TORC_WORKER_YIELDTIME",
+    "External & Platform::HDF5 Storage (examples",
+    "External & Platform::OS Threads",
+    "External & Platform::Optional libs:\nNumPy / CMA / Pillow / h5py",
+    "Runtime Layer::Callback Dispatcher",
+    "Runtime Layer::Environment Config Reader",
+    "Runtime Layer::Map Executor",
+    "Runtime Layer::SPMD Controller",
+    "Runtime Layer::Stealing Coordinator",
+    "Runtime Layer::Task & Future Manager",
+    "Runtime Layer::Timing / Monitoring",
+    "torc_py API Layer::Callback API",
+    "torc_py API Layer::SPMD API",
+    "torc_py API Layer::Task API\nsubmit | wait | map | future",
+    "torc_py API Layer::torc Python Module"
+  ]
+}

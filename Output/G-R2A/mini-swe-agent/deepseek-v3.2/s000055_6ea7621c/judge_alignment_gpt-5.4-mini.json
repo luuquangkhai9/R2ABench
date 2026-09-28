@@ -1,0 +1,129 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "BACKEND::Router"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Router",
+        "Global::Router"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both predicted nodes represent the same routing responsibility as the GT router. The boundary names differ, but they remain semantically consistent with a backend/application routing component."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::algorithm"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Autocomplete Module",
+        "Application Layer::Autocomplete Module::Search Algorithm"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT algorithm node corresponds to the autocomplete/search logic. The predicted model splits it into a module and a specific search algorithm component, which is a valid refinement within the same backend/application responsibility."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::data.json"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Laureate Data Store",
+        "Data Layer::Laureate Data Store::Local JSON Data"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT local JSON data source is semantically equivalent to the predicted data store and its JSON data child node. The data-layer attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::handlers"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Home Page Handler",
+        "Application Layer::Not-Found Handler",
+        "Application Layer::Static Asset Handler",
+        "Global::Home Page Handler",
+        "Global::Not-Found Handler",
+        "Global::Static Asset Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT handlers node is an aggregated backend request-handling component. The predicted nodes correctly split it into specific handlers for home page, not-found, and static assets. The boundary attribution remains consistent with backend/application handling."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::public assets\\nhtml\\ncss\\njs"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Static Asset Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node represents the public assets/static files themselves, while the predicted node is a handler/service for serving them. This is a component-type mismatch, and the boundary is also not equivalent."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::XMLHttpRequest"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web Browser"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "XMLHttpRequest is a frontend communication mechanism, but the predicted node is only the browser container. This is too generic and does not accurately capture the specific frontend component from GT."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::index.html"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web Browser::Search Input Field"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is the home page HTML document, while the predicted node is only a specific UI input control. These are not functionally equivalent."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::main.css"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web Browser::Suggestions Display"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a CSS asset, while the predicted node is a UI display element. This is a clear semantic mismatch."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::userInput"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web Browser::Search Input Field"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the user entering text into the search input field. The presentation-layer attribution is appropriate."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Application Layer::Autocomplete Module::Value Extractor",
+    "Data Layer::Laureate Data Store",
+    "Global::Autocomplete Module",
+    "Global::HTTP Server",
+    "Global::Home Page Handler",
+    "Global::Not-Found Handler",
+    "Global::Router",
+    "Global::Static Asset Handler",
+    "Global::Web Browser",
+    "HTTP Layer::HTTP Server",
+    "HTTP Layer::HTTP Server::Request Handler",
+    "Infrastructure Layer::Heroku Platform",
+    "Infrastructure Layer::Heroku Platform::Node.js Runtime",
+    "Presentation Layer::Web Browser",
+    "Presentation Layer::Web Browser::Suggestions Display"
+  ]
+}

@@ -1,0 +1,46 @@
+@startuml
+!define RECTANGLE rectangle linewidth 2
+
+title Containerized Song Mood Application Architecture
+
+skinparam componentStyle rectangle
+skinparam defaultTextAlignment center
+
+package "Dockerized Environment" {
+  [React Frontend] as frontend
+  [FastAPI Backend] as backend
+  [Elasticsearch] as elasticsearch
+  [Kibana] as kibana
+}
+
+actor "End User" as user
+actor "Data Inspector" as inspector
+
+user --> frontend : UI-001
+inspector --> kibana : UI-002
+
+frontend --> backend : API-001
+backend --> elasticsearch : API-002
+backend --> GeniusAPI : API-003
+
+elasticsearch <-- backend : FR-004
+kibana --> elasticsearch : Data Inspection
+
+cloud "External Systems" {
+  [Genius API] as GeniusAPI
+}
+
+note right of GeniusAPI
+  External Dependency (C-007)
+end note
+
+note bottom of elasticsearch
+  Authoritative Storage (NFR-004)
+end note
+
+note top of backend
+  Depends on Elasticsearch (C-006)
+Depends on Genius API (C-005)
+end note
+
+@enduml

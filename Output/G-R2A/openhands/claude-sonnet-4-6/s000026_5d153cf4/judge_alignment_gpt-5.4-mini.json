@@ -1,0 +1,231 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::Browser",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Google Cloud Platform (GCP"
+      ],
+      "reasoning": "The predicted diagram includes the external client-side environment, but it is named more broadly as a malformed GCP global boundary; this still partially covers the browser/client endpoint responsibility."
+    },
+    {
+      "gt_node": "Your GCP project::Compute Engine",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Google Cloud Platform (GCP::Google Kubernetes Engine (GKE Cluster",
+        "Google Cloud Platform (GCP::Kubernetes Resources"
+      ],
+      "reasoning": "The GT compute/runtime hosting responsibility is covered by the predicted GKE deployment/runtime and Kubernetes resource boundaries, although the exact Compute Engine node is not reproduced."
+    },
+    {
+      "gt_node": "Your GCP project::Compute Engine::pulltop",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Google Cloud Platform (GCP::Google Kubernetes Engine (GKE Cluster::Adapter Deployment::Adapter Pod (Instance N::pulltop\\n(Node.js process"
+      ],
+      "reasoning": "The predicted node explicitly contains the pulltop Node.js process, matching the GT runtime component."
+    },
+    {
+      "gt_node": "Your GCP project::Compute Engine::websocketd",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Google Cloud Platform (GCP::Google Kubernetes Engine (GKE Cluster::Adapter Deployment::Adapter Pod (Instance N::websocketd\\n(port 8080"
+      ],
+      "reasoning": "The predicted node explicitly contains websocketd on port 8080, matching the GT runtime component."
+    },
+    {
+      "gt_node": "pubsub-public-data project::Cloud Pub/Sub\\ntopic",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Google Cloud Platform (GCP::Google Pub/Sub::Pub/Sub Topic\\n(projects/<id>/topics/<name>",
+        "Google Cloud Platform (GCP::Google Pub/Sub::Pub/Sub Subscription\\n(1 per running instance"
+      ],
+      "reasoning": "The GT Pub/Sub topic responsibility is covered by the predicted Pub/Sub topic node, and the subscription node supports the same overall Pub/Sub messaging domain."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Global::Google Cloud Platform (GCP",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Browser",
+        "Your GCP project::Compute Engine",
+        "pubsub-public-data project::Cloud Pub/Sub\\ntopic"
+      ],
+      "reasoning": "This is a broad cloud boundary wrapping the system context; despite malformed naming, it is grounded in the GCP-based deployment context."
+    },
+    {
+      "predicted_node": "Google Cloud Platform (GCP::Google Cloud Pub/Sub",
+      "grounded": true,
+      "reference_nodes": [
+        "pubsub-public-data project::Cloud Pub/Sub\\ntopic"
+      ],
+      "reasoning": "This matches the Pub/Sub subsystem present in the GT."
+    },
+    {
+      "predicted_node": "Google Cloud Platform (GCP::Google Cloud Pub/Sub::Pub/Sub Subscription\\n(1 per running instance",
+      "grounded": true,
+      "reference_nodes": [
+        "pubsub-public-data project::Cloud Pub/Sub\\ntopic"
+      ],
+      "reasoning": "The subscription-per-instance concept is grounded by the GT Pub/Sub topic/runtime design and the requirements describing one subscription per running instance."
+    },
+    {
+      "predicted_node": "Google Cloud Platform (GCP::Google Cloud/Sub::Pub/Sub Topic\\n(projects/<id>/topics/<name>",
+      "grounded": true,
+      "reference_nodes": [
+        "pubsub-public-data project::Cloud Pub/Sub\\ntopic"
+      ],
+      "reasoning": "This directly corresponds to the GT Pub/Sub topic concept."
+    },
+    {
+      "predicted_node": "Google Cloud Platform (GCP::Google Kubernetes Engine (GKE Cluster",
+      "grounded": true,
+      "reference_nodes": [
+        "Your GCP project::Compute Engine",
+        "Your GCP project::Compute Engine::pulltop",
+        "Your GCP project::Compute Engine::websocketd"
+      ],
+      "reasoning": "The system is deployed in GKE in the reference requirements, so this boundary is grounded."
+    },
+    {
+      "predicted_node": "Google Cloud Platform (GCP::Google Kubernetes Engine (GKE Cluster::Adapter Deployment",
+      "grounded": true,
+      "reference_nodes": [
+        "Your GCP project::Compute Engine::pulltop",
+        "Your GCP project::Compute Engine::websocketd"
+      ],
+      "reasoning": "The adapter deployment aggregates the runtime components represented in the GT."
+    },
+    {
+      "predicted_node": "Google Cloud Platform (GCP::Google Kubernetes Engine (GKE Cluster::Adapter Deployment::Adapter Pod (Instance N",
+      "grounded": true,
+      "reference_nodes": [
+        "Your GCP project::Compute Engine::pulltop",
+        "Your GCP project::Compute Engine::websocketd"
+      ],
+      "reasoning": "This pod instance node corresponds to the GT runtime instance hosting pulltop and websocketd."
+    },
+    {
+      "predicted_node": "Google Cloud Platform (GCP::Google Kubernetes Engine (GKE Cluster::Adapter Deployment::Adapter Pod (Instance N::Message Cache\\n(last 10 messages",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "No explicit GT node names the cache, but the SRS requires a last-10-message cache, so this is grounded in the specification context."
+    },
+    {
+      "predicted_node": "Google Cloud Platform (GCP::Google Kubernetes Engine (GKE Cluster::Adapter Deployment::Adapter Pod (Instance N::SYMBOL\\nenv variable",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "No explicit GT node names the environment variable, but it is clearly grounded in the runtime composition requirements."
+    },
+    {
+      "predicted_node": "Google Cloud Platform (GCP::Google Kubernetes Engine (GKE Cluster::Adapter Deployment::Adapter Pod (Instance N::exec.sh\\n(entrypoint",
+      "grounded": true,
+      "reference_nodes": [
+        "Your GCP project::Compute Engine::pulltop",
+        "Your GCP project::Compute Engine::websocketd"
+      ],
+      "reasoning": "The entrypoint is a required runtime element in the PRD and is grounded as part of the adapter runtime chain."
+    },
+    {
+      "predicted_node": "Google Cloud Platform (GCP::Google Kubernetes Engine (GKE Cluster::Adapter Deployment::Adapter Pod (Instance N::pulltop\\n(Node.js process",
+      "grounded": true,
+      "reference_nodes": [
+        "Your GCP project::Compute Engine::pulltop"
+      ],
+      "reasoning": "Direct match to the GT pulltop runtime component."
+    },
+    {
+      "predicted_node": "Google Cloud Platform (GCP::Google Kubernetes Engine (GKE Cluster::Adapter Deployment::Adapter Pod (Instance N::websocketd\\n(port 8080",
+      "grounded": true,
+      "reference_nodes": [
+        "Your GCP project::Compute Engine::websocketd"
+      ],
+      "reasoning": "Direct match to the GT websocketd runtime component."
+    },
+    {
+      "predicted_node": "Google Cloud Platform (GCP::Google Kubernetes Engine (GKE Cluster::Kubernetes Resources",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "This is a valid infrastructure boundary grounded in the Kubernetes deployment requirements, though it is broader than any specific GT node."
+    },
+    {
+      "predicted_node": "Google Cloud Platform (GCP::Google Kubernetes Engine (GKE Cluster::Kubernetes Resources::ConfigMap\\n[topic: <topic-identifier>",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "The ConfigMap topic value is required by the SRS, so this is grounded even though GT does not list it as a node."
+    },
+    {
+      "predicted_node": "Google Cloud Platform (GCP::Google Kubernetes Engine (GKE Cluster::Kubernetes Resources::HPA\\n(min:1 / max:2 / CPU:80%",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "The HPA is explicitly required by the SRS and therefore grounded."
+    },
+    {
+      "predicted_node": "Google Cloud Platform (GCP::Google Kubernetes Engine (GKE Cluster::LoadBalancer Service\\n(TCP :80 → :8080",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "The LoadBalancer service and port mapping are explicitly required by the SRS and grounded."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Browser"
+      ],
+      "predicted_nodes": [
+        "Global::Google Cloud Platform (GCP"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The browser/client concept is only loosely represented and placed under an incorrect/malformed global cloud boundary."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine"
+      ],
+      "predicted_nodes": [
+        "Google Cloud Platform (GCP::Google Kubernetes Engine (GKE Cluster",
+        "Google Cloud Platform (GCP::Kubernetes Resources"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT compute/runtime hosting responsibility is split into GKE cluster and Kubernetes resources in the prediction, which is semantically consistent for deployment architecture."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine::pulltop"
+      ],
+      "predicted_nodes": [
+        "Google Cloud Platform (GCP::Google Kubernetes Engine (GKE Cluster::Adapter Deployment::Adapter Pod (Instance N::pulltop\\n(Node.js process"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match and correct runtime placement."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine::websocketd"
+      ],
+      "predicted_nodes": [
+        "Google Cloud Platform (GCP::Google Kubernetes Engine (GKE Cluster::Adapter Deployment::Adapter Pod (Instance N::websocketd\\n(port 8080"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match and correct runtime placement."
+    },
+    {
+      "gt_nodes": [
+        "pubsub-public-data project::Cloud Pub/Sub\\ntopic"
+      ],
+      "predicted_nodes": [
+        "Google Cloud Platform (GCP::Google Cloud Pub/Sub::Pub/Sub Topic\\n(projects/<id>/topics/<name>"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match to the Pub/Sub topic concept, with an equivalent cloud boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

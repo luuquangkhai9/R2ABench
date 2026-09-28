@@ -1,0 +1,110 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Flutter-based app::Android"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Flutter/Dart Client::Android"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Android client platform node. The predicted node places it under the client layer, which is semantically consistent with the GT app boundary."
+    },
+    {
+      "gt_nodes": [
+        "Flutter-based app::Dart"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Dart Generated Client Code"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Dart-side client implementation/code generation component. The client-layer placement matches the GT client boundary."
+    },
+    {
+      "gt_nodes": [
+        "Flutter-based app::MacOS"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Flutter/Dart Client::macOS"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the macOS client platform node, and the client-layer attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Flutter-based app::Web"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Flutter/Dart Client::Web"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the web client platform node, with correct client-side boundary attribution."
+    },
+    {
+      "gt_nodes": [
+        "Flutter-based app::iOS"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Flutter/Dart Client::iOS"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the iOS client platform node, and the predicted client layer is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::Hosted in Azure Kubernetes Service"
+      ],
+      "predicted_nodes": [
+        "Global::Azure Kubernetes Service (AKS)",
+        "Azure Kubernetes Service (AKS::AKS Deployment"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node denotes the AKS hosting/deployment environment, which is represented by the predicted AKS global/deployment nodes. The boundary is semantically consistent even though the predicted names are more implementation-specific."
+    },
+    {
+      "gt_nodes": [
+        "Global::gRPC Gateway\n(HTTP-gRPC Proxy)\nGolang"
+      ],
+      "predicted_nodes": [
+        "API Gateway Layer::gRPC-Gateway Middleware",
+        "API Gateway Layer::gRPC-Gateway Middleware::CreateRecipe",
+        "API Gateway Layer::gRPC-Gateway Middleware::GetRecipe",
+        "API Gateway Layer::gRPC-Gateway Middleware::ListAllRecipes",
+        "API Gateway Layer::gRPC-Gateway Middleware::UpdateRecipe"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT gateway proxy is split into a middleware node plus its exposed operations. This is a valid refinement, and placing it in an API Gateway layer is correct."
+    },
+    {
+      "gt_nodes": [
+        "Hosted in Azure Kubernetes Service::Docker container"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Go gRPC Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is specifically the Docker container boundary, while the predicted node is the Go gRPC server itself. These are related but not semantically equivalent as architectural nodes, and the deployment/container boundary is lost."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Postman",
+    "Global::Test Client 1\nNodeJS",
+    "Global::Test Client 2\nGolang",
+    "Hosted in Azure Kubernetes Service::Docker container::Recipes Server\n(gRPC Server)\nGolang"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Ingredient Data",
+    "Global::Local Kubernetes",
+    "Global::Protocol Buffers Contract",
+    "Global::Recipe Data",
+    "Local Kubernetes::Kubernetes Deployment"
+  ]
+}

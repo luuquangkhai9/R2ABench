@@ -1,0 +1,106 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Browser Web UI\\nstatic app client"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web Management Console"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are semantically equivalent, representing the user-facing web interface. The AI's placement in a 'Presentation Layer' is a standard and correct architectural practice for a UI component."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon API Gateway\\nREST API"
+      ],
+      "predicted_nodes": [
+        "API Gateway Layer::API Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are a direct match for the system's API endpoint. The AI correctly identified it and placed it in a specific 'API Gateway Layer', which is an accurate architectural representation."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS Lambda\\nSimulator API"
+      ],
+      "predicted_nodes": [
+        "Application Layer::API Service Lambdas",
+        "Application Layer::Device Simulator",
+        "Application Layer::Route Loader"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly decomposed the single, general 'Simulator API' Lambda from the GT into more granular, function-specific components (API handlers, simulation logic, route loading logic) as described in the PRD. All are correctly placed within the 'Application Layer'."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS CloudFormation\\nCustom resources"
+      ],
+      "predicted_nodes": [
+        "Global::AWS CloudFormation",
+        "Application Layer::Custom-Resource Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI accurately split the ambiguous GT node into two distinct components: the AWS CloudFormation service itself (correctly placed in 'Global') and the specific Lambda function that handles the custom resource logic (correctly placed in the 'Application Layer')."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS Step Functions\\nSimulation workflow"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Step Functions"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are a direct match for the simulation orchestration component. Placing the Step Functions workflow in the 'Application Layer' is correct as it orchestrates business logic."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon DynamoDB\\nSimulator state"
+      ],
+      "predicted_nodes": [
+        "Data Layer::DynamoDB Tables"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are a direct match for the system's state persistence. The AI correctly placed the database in the 'Data Layer'."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon S3\\nRoute data bucket"
+      ],
+      "predicted_nodes": [
+        "Data Layer::S3 Bucket (Route Data"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are a direct match for the S3 bucket storing route information. The AI correctly placed this data storage component in the 'Data Layer'."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS IoT Core"
+      ],
+      "predicted_nodes": [
+        "Global::AWS IoT"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are semantically equivalent, representing the IoT message broker. Placing this foundational AWS service in a 'Global' boundary is a valid and common architectural decision."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "AWS IoT Device Simulator::Amazon CloudFront",
+    "AWS IoT Device Simulator::Amazon Cognito",
+    "AWS IoT Device Simulator::Amazon S3\\nWeb UI bucket",
+    "AWS IoT Device Simulator::Users"
+  ],
+  "unmatched_predicted_nodes": [
+    "API Gateway Layer::CloudWatch Logs",
+    "Data Layer::S3 Bucket (Configuration",
+    "Global::X-Ray"
+  ]
+}

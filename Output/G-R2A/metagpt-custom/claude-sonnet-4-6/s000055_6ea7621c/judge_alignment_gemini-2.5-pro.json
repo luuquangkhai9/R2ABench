@@ -1,0 +1,74 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "BACKEND::Router"
+      ],
+      "predicted_nodes": [
+        "Heroku Cloud Platform::Node.js Runtime::HTTP Routing Layer::Router"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are a direct functional match for the routing component. The predicted node's boundary 'Heroku Cloud Platform::Node.js Runtime::HTTP Routing Layer' is a more detailed but semantically correct representation of the 'BACKEND' boundary in the GT."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::algorithm"
+      ],
+      "predicted_nodes": [
+        "Heroku Cloud Platform::Node.js Runtime::Search / Autocomplete Algorithm Layer::AutocompleteAlgorithm"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are a direct functional match for the search algorithm. The predicted node's boundary 'Heroku Cloud Platform::Node.js Runtime::Search / Autocomplete Algorithm Layer' is a more specific yet semantically correct representation of the 'BACKEND' boundary."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::handlers"
+      ],
+      "predicted_nodes": [
+        "Heroku Cloud Platform::Node.js Runtime::Request Handling Layer::HomePageHandler",
+        "Heroku Cloud Platform::Node.js Runtime::Request Handling Layer::MIMETypeMapper\\n(html, css, js, jpg, ico",
+        "Heroku Cloud Platform::Node.js Runtime::Request Handling Layer::NotFoundHandler",
+        "Heroku Cloud Platform::Node.js Runtime::Request Handling Layer::StaticAssetHandler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT 'handlers' node is correctly split by the AI into multiple specific handlers (HomePage, StaticAsset, NotFound) and related logic (MIMETypeMapper), all of which are described in the PRD. The 'Request Handling Layer' is an appropriate sub-boundary within the backend."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::userInput"
+      ],
+      "predicted_nodes": [
+        "Web Browser::SearchInputUI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the user input field for the search functionality. The 'Web Browser' boundary is semantically equivalent to the 'FRONTEND' boundary in this context."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::data.json",
+        "BACKEND::public assets\\nhtml\\ncss\\njs"
+      ],
+      "predicted_nodes": [
+        "Global::Local Filesystem"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the backend's data file ('data.json') and static asset files ('public assets') into a single node representing their physical storage, the 'Local Filesystem'. While the GT places these within the 'BACKEND' boundary, placing the filesystem in a 'Global' context is a valid architectural perspective, as it's an external resource to the running application process."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "FRONTEND::XMLHttpRequest",
+    "FRONTEND::index.html",
+    "FRONTEND::main.css"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Heroku Cloud Platform",
+    "Global::Web Browser",
+    "Heroku Cloud Platform::Node.js Runtime",
+    "Heroku Cloud Platform::Node.js Runtime::Test Layer::FrontendTestSuite\\n(NFR-001"
+  ]
+}

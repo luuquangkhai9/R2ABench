@@ -1,0 +1,77 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Browser Clients::Client Browser\\nPlayer 1",
+        "Browser Clients::Client Browser\\nPlayer 2",
+        "Browser Clients::Client Browser\\nPlayer 3"
+      ],
+      "predicted_nodes": [
+        "Client Environment::Browser Client\\n(Three.js"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT contains three separate browser client instances, while the prediction aggregates them into one generic browser client node. This is a valid functional merge, and the client-side boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Static Web Tier::Web Server\\nGame assets, HTML, CSS, JS"
+      ],
+      "predicted_nodes": [
+        "Client Environment::Web Server\\n(Static Assets"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the web server that serves static assets such as HTML, CSS, and JavaScript. The boundary naming differs, but the placement remains semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::DNS"
+      ],
+      "predicted_nodes": [
+        "Network & Protocols::DNS/Load Balancer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node expands DNS into DNS/load balancing, which is compatible with the GT's DNS role. The boundary is still network/infrastructure-related and therefore acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\\nErlang"
+      ],
+      "predicted_nodes": [
+        "Server Environment::Game Server\\n(Erlang/OTP"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted game server corresponds to the master server role in the GT cluster. The boundary is consistent with the server-side environment."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Slave\\nErlang"
+      ],
+      "predicted_nodes": [
+        "Server Environment::Replica Server\\n(Erlang/OTP"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The replica server is semantically equivalent to the GT slave server. The boundary is correctly placed in the server environment."
+    },
+    {
+      "gt_nodes": [
+        "Global::Erlang / OTP Game Server Cluster"
+      ],
+      "predicted_nodes": [
+        "Server Environment::Game Server\\n(Erlang/OTP",
+        "Server Environment::Replica Server\\n(Erlang/OTP"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT models the server cluster as a single global concept, while the AI split it into master/game server and replica server nodes. This is a reasonable decomposition and remains within the correct server-side boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Network & Protocols::HTTP/WebSocket"
+  ]
+}

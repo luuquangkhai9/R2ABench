@@ -1,0 +1,230 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Admin Mgmt Service"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Admin Management Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the administrator management business service; the boundary remains within the business layer and is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Order Mgmt Service"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Order Management Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to order management business logic, with correct placement in the business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Personal Center Service"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Product Browsing Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is personal center related, while the predicted node is product browsing. These are different functional components, so this is not a valid semantic match."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Help Goods Service"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Product Browsing Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Help goods service in the GT corresponds more to product/service publishing or support for errand goods, not general product browsing. The predicted node changes the function meaning."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Create Order Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Order Management Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated order creation into a broader order management service. This is semantically acceptable and remains in the business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Order Record Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Order Management Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Order record viewing is part of the overall order management scope. The broader service placement is acceptable within the same business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Favorites Module"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::WeChat Mini Program Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Favorites is a business functional module, not a presentation-layer client node. This is a boundary mismatch and also not a precise semantic match."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Goods Category Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Product Browsing Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Category browsing is a subset of product browsing. The AI merged it into a broader browsing service, which is acceptable and within the business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Hot Items Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Product Browsing Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Hot items listing is part of product browsing. The broader business-service aggregation is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Modify User Info Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::User Management Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "User information modification is a subset of user management. The boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Platform Mgmt Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Admin Management Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Platform management maps naturally to administrator/platform management functions and remains in the business layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::Permission Control"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Authentication & Authorization"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Permission control is functionally equivalent to authentication/authorization. Moving it into the business layer is acceptable because it is still a backend business/security concern."
+    },
+    {
+      "gt_nodes": [
+        "Global::Log Recording"
+      ],
+      "predicted_nodes": [
+        "Data Entity Layer::Admin Logs Table"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a logging function/capability, while the predicted node is only the storage table for admin logs. This is a function-to-data entity mismatch and not an equivalent architectural node."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Read/Write Database"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Data Access Objects",
+        "Data Layer::Database Interface"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT database read/write responsibility has been split into DAO and database interface components. This is a reasonable decomposition within the data layer."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Stored Procedures"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Data Access Objects"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both are data-access implementation mechanisms. While not identical, DAO can subsume stored-procedure-based access in the data layer."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Cache"
+      ],
+      "predicted_nodes": [
+        "Data Entity Layer::Monitoring Metrics Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Cache and monitoring-metrics storage are different concerns. This is not a semantic match."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Recovery",
+        "Data Layer::Data Backup"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Database Interface"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "Backup and recovery are data protection functions, not a database interface. The predicted node does not preserve the GT semantics."
+    },
+    {
+      "gt_nodes": [
+        "Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Data Entity Layer::Orders Table",
+        "Data Entity Layer::Products Table",
+        "Data Entity Layer::Users Table",
+        "Data Entity Layer::Favorites Table",
+        "Data Entity Layer::Tags/Categories Table",
+        "Data Entity Layer::Admin Logs Table"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT database node is decomposed into multiple tables in the data entity layer. This is semantically consistent and the boundary attribution is acceptable."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Business Layer::Core Services::Personal Center Service",
+    "Business Layer::Functional Modules::......",
+    "Data Layer::Custom Functions",
+    "Display Layer::GET Request",
+    "Display Layer::POST Request",
+    "Display Layer::Template Engine Rendering\\n(pages",
+    "Display Layer::wx.request Interaction",
+    "Mini-program UI::JavaScript",
+    "Mini-program UI::Wxml",
+    "Mini-program UI::Wxss",
+    "Runtime Environment::MySQL 106.55.224.139\\n2 Cores 4GB",
+    "Runtime Environment::Tencent Cloud\\nLightweight App Server"
+  ],
+  "unmatched_predicted_nodes": [
+    "Business Layer::Input Validation & Security",
+    "Data Entity Layer::Monitoring Metrics Storage",
+    "Data Layer::Data Access Objects",
+    "Data Layer::Database Interface",
+    "Presentation Layer::WeChat Mini Program Client"
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Internet"
+      ],
+      "predicted_nodes": [
+        "Global::Oracle Cloud Infrastructure (OCI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the external internet boundary. The predicted node is broader in naming but semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::NAT\\nGateway"
+      ],
+      "predicted_nodes": [
+        "Oracle Cloud Infrastructure (OCI::Tenancy / Region::Compartment::VCN::NAT Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the OCI NAT Gateway component, with equivalent network boundary placement."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\\n(Public/Regional::Bastion\\nHost"
+      ],
+      "predicted_nodes": [
+        "Oracle Cloud Infrastructure (OCI::Tenancy / Region::Compartment::VCN::Public Subnet::Bastion Host\\n[Compute Instance"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the bastion host in a public subnet. The boundary attribution is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Jenkins\\nController"
+      ],
+      "predicted_nodes": [
+        "Oracle Cloud Infrastructure (OCI::Tenancy / Region::Compartment::VCN::Public Subnet::Jenkins Master\\n[Compute Instance"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "These are functionally the Jenkins controller/master, but the GT places it in a private subnet while the prediction places it in a public subnet, which is a severe boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\\n(Private/Regional::Agent Node\\n(Fault Domain X",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\\n(Private/Regional::Agent Node\\n(Fault Domain Y"
+      ],
+      "predicted_nodes": [
+        "Oracle Cloud Infrastructure (OCI::Tenancy / Region::Compartment::VCN::Private Subnet::Jenkins Agents (xN)\\n[Compute Instances"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has multiple agent nodes split across fault domains, while the prediction aggregates them into a single Jenkins Agents group. The private-subnet boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Load Balancer\\n(primary",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Load Balancer\\n(standby"
+      ],
+      "predicted_nodes": [
+        "Oracle Cloud Infrastructure (OCI::Tenancy / Region::Compartment::VCN::Public Subnet::Load Balancer\\n(optional"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT models primary and standby load balancer nodes separately, while the prediction aggregates them into one optional load balancer. The public subnet boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\\n(Public/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\\n(Private/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\\n(Private/Regional::Route Table"
+      ],
+      "predicted_nodes": [
+        "Oracle Cloud Infrastructure (OCI::Tenancy / Region::Compartment::VCN::Public Subnet",
+        "Oracle Cloud Infrastructure (OCI::Tenancy / Region::Compartment::VCN::Private Subnet"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT explicitly models separate route tables per subnet, while the prediction collapses them into public and private subnet groupings. This is a coarse but semantically aligned aggregation."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\\n(Public/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\\n(Private/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\\n(Private/Regional::Security List"
+      ],
+      "predicted_nodes": [
+        "Oracle Cloud Infrastructure (OCI::Tenancy / Region::Compartment::VCN::Public Subnet",
+        "Oracle Cloud Infrastructure (OCI::Tenancy / Region::Compartment::VCN::Private Subnet"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Security lists are not explicitly modeled in the prediction, but the subnet-level aggregation is still semantically consistent enough for boundary attribution at this abstraction level."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Load Balancer\\n(primary",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Load Balancer\\n(standby",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Route Table",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Security List",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\\n(Public/Regional::Route Table",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\\n(Public/Regional::Security List",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Healthcheck",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Route Table",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Security List",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\\n(Private/Regional::Route Table",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\\n(Private/Regional::Security List",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\\n(Private/Regional::Route Table",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\\n(Private/Regional::Security List"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Terraform CLI\\n(init • plan • apply",
+    "Global::Variable Files\\n(terraform.tfvars, JSON",
+    "Oracle Cloud Infrastructure (OCI::Tenancy / Region::Compartment::VCN::Public Subnet",
+    "Oracle Cloud Infrastructure (OCI::Tenancy / Region::Compartment::VCN::Private Subnet"
+  ]
+}

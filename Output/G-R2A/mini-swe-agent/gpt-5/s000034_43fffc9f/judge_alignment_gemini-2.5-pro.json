@@ -1,0 +1,82 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "External & Platform::MPI Runtime / mpirun"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's global MPI component, which represents the underlying technology, is correctly identified by the AI as the external MPI Runtime. The 'Global' and 'External & Platform' boundaries are semantically equivalent for an external dependency."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Worker\\nThread"
+      ],
+      "predicted_nodes": [
+        "Runtime Layer::Scheduler & Worker Pool"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'Worker Thread' (the execution unit for tasks) corresponds to the AI's 'Scheduler & Worker Pool' which manages these threads. The GT's boundary 'Compute node::MPI Process' represents a physical container, while the AI's 'Runtime Layer' is a logical layer. Since the worker pool logic runs within the MPI process, this attribution is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Server\\nThread"
+      ],
+      "predicted_nodes": [
+        "Runtime Layer::MPI Communicator (mpi4py)",
+        "Runtime Layer::Stealing Coordinator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'Server Thread', implied to handle coordination and communication, is correctly decomposed by the AI into more specific functional components: an 'MPI Communicator' and a 'Stealing Coordinator', both of which are described in the PRD. These components are correctly placed in the 'Runtime Layer', which represents the internal logic of the library running within an MPI process."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Task Queue",
+        "Task Queue (in detail::...",
+        "Task Queue (in detail::A1",
+        "Task Queue (in detail::A2",
+        "Task Queue (in detail::A3",
+        "Task Queue (in detail::B1",
+        "Task Queue (in detail::B2",
+        "Task Queue (in detail::Level 0",
+        "Task Queue (in detail::Level 1",
+        "Task Queue (in detail::Level 2",
+        "Task Queue (in detail::Level 3",
+        "Task Queue (in detail::Level 4",
+        "Task Queue (in detail::Level 5"
+      ],
+      "predicted_nodes": [
+        "Runtime Layer::Worker Queues"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregates the GT's general 'Task Queue' node and its numerous detail-view nodes into a single, concise 'Worker Queues' component. This component is correctly placed in the 'Runtime Layer' as it is a core data structure for the library's internal operation."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Compute node::MPI Process"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application Layer::App-level MPI code (optional",
+    "Application Layer::Python Application",
+    "External & Platform::Environment Variables\\nTORC_WORKERS | TORC_STEALING |\\nTORC_SERVER_YIELDTIME | TORC_WORKER_YIELDTIME",
+    "External & Platform::HDF5 Storage (examples",
+    "External & Platform::OS Threads",
+    "External & Platform::Optional libs:\\nNumPy / CMA / Pillow / h5py",
+    "Runtime Layer::Callback Dispatcher",
+    "Runtime Layer::Environment Config Reader",
+    "Runtime Layer::Map Executor",
+    "Runtime Layer::SPMD Controller",
+    "Runtime Layer::Task & Future Manager",
+    "Runtime Layer::Timing / Monitoring",
+    "torc_py API Layer::Callback API",
+    "torc_py API Layer::SPMD API",
+    "torc_py API Layer::Task API\\nsubmit | wait | map | future",
+    "torc_py API Layer::torc Python Module"
+  ]
+}

@@ -1,0 +1,88 @@
+@startuml
+!define RECTANGLE class
+
+title System Architecture - PN Infra Cognito, API Gateway, and VPC Endpoint
+
+' High-Level Components
+RECTANGLE "AWS Account: Cognito" {
+    RECTANGLE "CloudFormation Stack: Cognito" {
+        RECTANGLE "Cognito User Pool"
+        RECTANGLE "Cognito Identity Pool"
+        RECTANGLE "User Pool Client"
+        RECTANGLE "IAM Roles\n(Authenticated/Unauthenticated)"
+    }
+}
+
+RECTANGLE "AWS Account: API Gateway" {
+    RECTANGLE "CloudFormation Stack: API Gateway" {
+        RECTANGLE "API Gateway"
+        RECTANGLE "Cognito Authorizer"
+        RECTANGLE "WhoAmI Method"
+        RECTANGLE "ECS Proxy Method"
+        RECTANGLE "VPC Link"
+        RECTANGLE "Deployment & Stage"
+    }
+}
+
+RECTANGLE "VPC Environment" {
+    RECTANGLE "VPC"
+    RECTANGLE "Subnets"
+    RECTANGLE "Security Group"
+    RECTANGLE "SQS VPC Endpoint"
+}
+
+' External Interfaces
+RECTANGLE "External Systems" {
+    RECTANGLE "Amazon SQS"
+    RECTANGLE "Network Load Balancer"
+    RECTANGLE "DNS / Certificate Services"
+}
+
+' Relationships
+Cognito_User_Pool --> Cognito_Authorizer : Provides ARN
+Cognito_Authorizer --> WhoAmI_Method : Protects
+Cognito_Authorizer --> ECS_Proxy_Method : Protects
+User_Pool_Client --> Identity_Pool : Binds
+Identity_Pool --> IAM_Roles : Attaches
+API_Gateway --> Deployment_&_Stage : Deploys
+WhoAmI_Method --> Deployment_&_Stage : Depends
+ECS_Proxy_Method --> Deployment_&_Stage : Depends
+ECS_Proxy_Method --> VPC_Link : Integrates via
+VPC_Link --> Network_Load_Balancer : Connects to
+SQS_VPC_Endpoint --> Amazon_SQS : Privately accesses
+VPC --> SQS_VPC_Endpoint : Hosts
+Subnets --> SQS_VPC_Endpoint : Associates
+Security_Group --> SQS_VPC_Endpoint : Controls access
+VPC --> Security_Group : Contains
+
+note right of Cognito_User_Pool
+  Configures:
+  - Token validity units
+  - Custom attributes (Role, email)
+end note
+
+note right of Identity_Pool
+  Supports:
+  - Unauthenticated identities
+  - Cognito provider binding
+end note
+
+note right of WhoAmI_Method
+  Handles:
+  - x-pagopa-pn-cx-role header
+  - Maps from authorizer claims
+end note
+
+note right of ECS_Proxy_Method
+  Forwards:
+  - Role claim to integration
+  - Via x-pagopa-pn-cx-role
+end note
+
+note right of SQS_VPC_Endpoint
+  Enforces:
+  - Private DNS enabled
+  - VPC-bound access control
+end note
+
+@enduml

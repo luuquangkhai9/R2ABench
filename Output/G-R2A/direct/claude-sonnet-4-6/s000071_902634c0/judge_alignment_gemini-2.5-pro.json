@@ -1,0 +1,147 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "ClearML Server::ML Ops::Execution Queue"
+      ],
+      "predicted_nodes": [
+        "ClearML Server / Backend::Execution Queue",
+        "Global::ClearML Execution\\nQueue Jobs\\n(DR-005"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's single queue node is split by the AI into the queue system itself and the job data objects that flow from it. This is a valid and more detailed representation. The boundaries ('ClearML Server / Backend' for the system and 'Global' for the data artifact) are semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Kubernetes Glue"
+      ],
+      "predicted_nodes": [
+        "ClearML Agent Runtime\\n(clearml-agent Docker Image::Execution Modes::Kubernetes Glue Mode::Queue Job\\nPoller",
+        "ClearML Agent Runtime\\n(clearml-agent Docker Image::Execution Modes::Kubernetes Glue Mode::YAML Template\\nProcessor",
+        "ClearML Agent Runtime\\n(clearml-agent Docker Image::Execution Modes::Kubernetes Glue Mode::Kubernetes Job\\nBuilder\\n(FR-001"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly decomposed the 'Kubernetes Glue' mode into its constituent functional parts (polling, processing, building) and placed them inside the 'ClearML Agent Runtime', which is correct as this is a mode of the agent."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::ClearML Agent\\nService Pod"
+      ],
+      "predicted_nodes": [
+        "ClearML Agent Runtime\\n(clearml-agent Docker Image::Execution Modes::Long-lasting Service-Pod Mode::Service Pod\\nController\\n(FR-003"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the long-lasting service pod controller as the specific implementation of the GT node and placed it within the agent's execution modes, which is a more detailed and accurate location."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Mapped Docker Socket\\nSibling Containers"
+      ],
+      "predicted_nodes": [
+        "ClearML Agent Runtime\\n(clearml-agent Docker Image::Execution Modes::Long-lasting Service-Pod Mode::Docker Socket\\nManager\\n[/var/run/docker.sock",
+        "ClearML Agent Runtime\\n(clearml-agent Docker Image::Execution Modes::Long-lasting Service-Pod Mode::Sibling Container\\nManager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly split the GT node into the Docker socket interface and the sibling container management logic, placing them correctly within the service-pod mode of the agent, which is accurate according to the PRD."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Pod Execution Environment\\nand Docker User Code"
+      ],
+      "predicted_nodes": [
+        "ClearML Agent Runtime\\n(clearml-agent Docker Image::Execution Modes::In-Pod Experiment Execution::Environment\\nInstaller\\n(FR-002",
+        "ClearML Agent Runtime\\n(clearml-agent Docker Image::Execution Modes::In-Pod Experiment Execution::Experiment\\nProcess Launcher",
+        "ClearML Agent Runtime\\n(clearml-agent Docker Image::Execution Modes::In-Pod Experiment Execution::Process Monitor",
+        "Kubernetes Cluster::Experiment Pod",
+        "ClearML Agent Runtime\\n(clearml-agent Docker Image::Execution Modes::In-Pod Experiment Execution::Stdout/Stderr\\nLogger\\n[log_stdout=true\\nby default"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI detailed the agent's responsibilities for creating the execution environment (install, launch, monitor, log) and also modeled the resulting pod artifact. The boundaries (agent's logic inside Agent Runtime, pod inside Kubernetes Cluster) are correct."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Kubernetes Job"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Kubernetes Job\\n(prepared from YAML template"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct functional match. The predicted boundary 'Kubernetes Cluster' is semantically equivalent to the GT boundary 'GPU / Kubernetes Workers...' in the context of the PRD."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::YAML Job Template"
+      ],
+      "predicted_nodes": [
+        "Global::YAML Job\\nTemplate\\n(DR-006"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match. The predicted boundary 'Global' is more appropriate for an external input artifact than the GT's 'GPU / Kubernetes Workers...' boundary, as the template is an input to the system, not part of the worker infrastructure itself."
+    },
+    {
+      "gt_nodes": [
+        "ClearML Server::Backend Service API"
+      ],
+      "predicted_nodes": [
+        "ClearML Server / Backend::Events Service\\n(v2.5",
+        "ClearML Server / Backend::Models Service\\n(v2.4",
+        "ClearML Server / Backend::Server Ping\\nEndpoint"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI split the generic GT API node into specific, versioned service endpoints mentioned in the PRD. The boundary 'ClearML Server / Backend' is semantically equivalent to 'ClearML Server'."
+    },
+    {
+      "gt_nodes": [
+        "ClearML Server::ML Ops::Monitoring"
+      ],
+      "predicted_nodes": [
+        "ClearML Server / Backend::Worker Status\\nEndpoint"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the worker status endpoint as the specific component that fulfills the monitoring function described in the PRD. The boundary is correct and semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::ClearML Agent\\nService Pod",
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Kubernetes Glue"
+      ],
+      "predicted_nodes": [
+        "Global::ClearML Agent Runtime\\n(clearml-agent Docker Image"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI created a single container node for the entire agent runtime, which logically aggregates the different modes of operation (Service Pod, Kubernetes Glue) described as separate nodes in the GT. Placing this top-level component in 'Global' is acceptable for a system context diagram."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "ClearML Server::Experiment Manager::Collaboration",
+    "ClearML Server::Experiment Manager::Data Tracking",
+    "ClearML Server::Experiment Manager::Versioning",
+    "ClearML Server::Experiment Manager::Visualization",
+    "ClearML Server::ML Ops::Orchestration",
+    "Data Scientist Environment::ClearML Snippet",
+    "Data Scientist Environment::Python ML / DL Code"
+  ],
+  "unmatched_predicted_nodes": [
+    "ClearML Agent Runtime\\n(clearml-agent Docker Image::Backend Service Client::Response Mapper\\n[Entity / TableResponse",
+    "ClearML Agent Runtime\\n(clearml-agent Docker Image::Backend Service Client::Service Action\\nDispatcher\\n[create, get,\\nget_by_id,\\nget_all, get_all_ex",
+    "ClearML Agent Runtime\\n(clearml-agent Docker Image::Backend Service Client::Service Interfaces::Events Service\\nClient\\n[Histogram Request:\\ntask, samples, key\\n(iter/iso_time/timestamp",
+    "ClearML Agent Runtime\\n(clearml-agent Docker Image::Backend Service Client::Service Interfaces::Models Service\\nClient\\n[Delete Request:\\nmodel, force\\nModel: id, name,\\nuser, company,\\ncreated, task",
+    "ClearML Agent Runtime\\n(clearml-agent Docker Image::Backend Service Client::Session Request\\nHandler",
+    "ClearML Agent Runtime\\n(clearml-agent Docker Image::Worker Telemetry::Connectivity\\nPing\\n[default: 30s period\\nping_period_sec",
+    "ClearML Agent Runtime\\n(clearml-agent Docker Image::Worker Telemetry::Memory\\nReporter\\n[process/machine scope",
+    "ClearML Agent Runtime\\n(clearml-agent Docker Image::Worker Telemetry::Status Reporter\\n[default: 2s period\\nreport_period_sec",
+    "ClearML Agent Runtime\\n(clearml-agent Docker Image::Worker Telemetry::Worker\\nConfiguration\\n[report_period_sec\\nping_period_sec\\nlog_stdout\\nreport_global_mem_used",
+    "Global::ClearML Server / Backend",
+    "Global::Kubernetes Cluster"
+  ]
+}

@@ -1,0 +1,243 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Backend::Base Algorithm Layer::Bipartite Matching",
+        "Backend::Base Algorithm Layer::Strict Matching",
+        "Backend::Base Algorithm Layer::String Similarity",
+        "Backend::Base Algorithm Layer::Type Similarity",
+        "Backend::Base Algorithm Layer::Weighted Graph Construction"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer\\n(Back-End Application Server::Matching Engine\\n(Entity-Entity, Attribute-Attribute,\\nRelationship-Relationship\\nBipartite Graph + Similarity)\\n[FR-016"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates the matching algorithms into multiple base algorithm nodes, while the prediction aggregates them into one matching engine. The functionality is equivalent and the placement under backend business logic is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::Build Topology",
+        "Backend::Business Logic Layer::Class Diagram Modification",
+        "Backend::Business Logic Layer::Generate Modification Command"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer\\n(Back-End Application Server::Repair Service\\n[FR-024 ~ FR-027::Class Diagram\\nRepair Suggestion &\\nAuto-Repair\\n(FR-024, FR-025"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "These GT nodes together represent class diagram repair suggestion, repair ordering/topology, and modification command generation. The predicted node aggregates them into the class diagram repair subservice, which is semantically consistent and correctly placed in backend business logic."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::Class Attr vs DB Field Inconsistency Detection",
+        "Backend::Business Logic Layer::Class vs DB Table Inconsistency Detection"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer\\n(Back-End Application Server::Inconsistency Detection Engine\\n[FR-017 ~ FR-023::Attribute/Column &\\nClass/Table Detector\\n(FR-019, FR-020"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node groups the field/column and class/table inconsistency checks that are separate in GT. This is a valid aggregation within the backend detection engine."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::Relationship Inconsistency Detection"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer\\n(Back-End Application Server::Inconsistency Detection Engine\\n[FR-017 ~ FR-023::Relationship Detector\\n(Multiplicity, Type,\\nMissing/Extra)\\n(FR-021, FR-022, FR-023"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The relationship inconsistency detection functionality matches directly, and the backend business logic placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::User Input Acquisition"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer\\n(Back-End Application Server::Account & Auth Service\\n(Registration, Login,\\nRole-Based Access Control)\\n[NFR-008",
+        "Business Logic Layer\\n(Back-End Application Server::Detection Config Service\\n(Detection Rules,\\nException Config",
+        "Business Logic Layer\\n(Back-End Application Server::File Management Service\\n(Upload, Download,\\nModify, Delete",
+        "Business Logic Layer\\n(Back-End Application Server::Help & Case Service\\n(Manuals, FAQs,\\nSample Files)\\n[FR-011, FR-012",
+        "Business Logic Layer\\n(Back-End Application Server::Report & History Service\\n(Export, Historical Records)\\n[FR-009, FR-010"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT uses a single generic input acquisition node, while the prediction distributes input handling across functional backend services. This is a reasonable refinement and boundary placement is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Data Access Layer::Class Diagram Parser",
+        "Backend::Data Access Layer::Database Parser"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer\\n(Back-End Application Server::Parsing Module::MDJ Class Diagram Parser\\n(Classes, Interfaces,\\nEnums, Attributes,\\nRelationships)\\n[FR-013, C-003",
+        "Business Logic Layer\\n(Back-End Application Server::Parsing Module::Database Parser\\n(Tables, Fields, PKs,\\nFKs, Triggers, Types)\\n[FR-014, FR-015, C-004"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The parsing functionality matches, but the GT places parsers in the data access layer, while the prediction places them in the business logic layer. This is a boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Unified Abstraction Layer::Comparable Entity Construction"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer\\n(Back-End Application Server::Parsing Module::JSON Converter\\n(Jackson / JSON)\\n[C-006, C-007"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted JSON converter is only part of the abstraction/conversion pipeline, not the same as comparable entity construction. It is related but not semantically equivalent enough to count as a correct match."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Unified Abstraction Layer::Data Type Mapping"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer\\n(Back-End Application Server::Parsing Module::JSON Converter\\n(Jackson / JSON)\\n[C-006, C-007"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "JSON conversion is not equivalent to data type mapping. The GT node is not faithfully reproduced."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Unified Abstraction Layer::Database Relationship Identification"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer\\n(Back-End Application Server::Parsing Module::Database Parser\\n(Tables, Fields, PKs,\\nFKs, Triggers, Types)\\n[FR-014, FR-015, C-004"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Relationship identification is only a sub-capability of the broader database parser in the prediction. The semantic match is too weak for a correct equivalence."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (User Interface Layer::Detection Settings"
+      ],
+      "predicted_nodes": [
+        "User Interface Layer\\n(Front-End – Browser SPA::Detection Config UI\\n(FR-007, FR-008"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The detection settings UI matches the detection configuration UI, and both are correctly placed in the front-end/user interface layer."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (User Interface Layer::Display Modification Results"
+      ],
+      "predicted_nodes": [
+        "User Interface Layer\\n(Front-End – Browser SPA::Repair Suggestion &\\nRepair Result UI\\n(FR-024 ~ FR-027",
+        "User Interface Layer\\n(Front-End – Browser SPA::Detection Result UI\\n(FR-017 ~ FR-023"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT display modification results node is split across result/repair result UIs in the prediction. This is acceptable and correctly placed in the UI layer."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (User Interface Layer::File Management"
+      ],
+      "predicted_nodes": [
+        "User Interface Layer\\n(Front-End – Browser SPA::File Management UI\\n(FR-003, FR-004,\\nFR-005, FR-006"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The file management functionality matches directly and is correctly placed in the front-end UI layer."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (User Interface Layer::Generate Modification Suggestions"
+      ],
+      "predicted_nodes": [
+        "User Interface Layer\\n(Front-End – Browser SPA::Repair Suggestion &\\nRepair Result UI\\n(FR-024 ~ FR-027"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The repair suggestion UI covers generation of modification suggestions, and its UI-layer placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (User Interface Layer::New User Tutorial"
+      ],
+      "predicted_nodes": [
+        "User Interface Layer\\n(Front-End – Browser SPA::Help & Case UI\\n(FR-011, FR-012"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "New user tutorial is semantically part of the help/case interface, and the predicted front-end placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Frontend (User Interface Layer::User Login",
+        "Frontend (User Interface Layer::User Registration"
+      ],
+      "predicted_nodes": [
+        "User Interface Layer\\n(Front-End – Browser SPA::Account & Auth UI\\n(FR-001, FR-002"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT login and registration nodes are aggregated into a single account/auth UI node. This is semantically correct and the front-end boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Business Logic Layer::DB & Class Diagram Format Conversion"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer\\n(Back-End Application Server::Parsing Module::JSON Converter\\n(Jackson / JSON)\\n[C-006, C-007"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The JSON converter corresponds to format conversion in the backend, and although the prediction nests it under parsing module, this is a semantically acceptable boundary placement."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Backend::Base Algorithm Layer::Strict Matching",
+    "Backend::Business Logic Layer::Class Diagram Modification",
+    "Backend::Business Logic Layer::Generate Modification Command",
+    "Backend::Unified Abstraction Layer::Comparable Entity Construction",
+    "Backend::Unified Abstraction Layer::Data Type Mapping",
+    "Backend::Unified Abstraction Layer::Database Relationship Identification",
+    "Frontend (User Interface Layer::Detection Settings",
+    "Frontend (User Interface Layer::Display Modification Results",
+    "Frontend (User Interface Layer::File Management",
+    "Frontend (User Interface Layer::Generate Modification Suggestions",
+    "Frontend (User Interface Layer::New User Tutorial",
+    "Frontend (User Interface Layer::User Login",
+    "Frontend (User Interface Layer::User Registration"
+  ],
+  "unmatched_predicted_nodes": [
+    "Business Logic Layer\\n(Back-End Application Server::Account & Auth Service\\n(Registration, Login,\\nRole-Based Access Control)\\n[NFR-008",
+    "Business Logic Layer\\n(Back-End Application Server::Async Task Manager\\n(Background Detection Jobs)\\n[NFR-004",
+    "Business Logic Layer\\n(Back-End Application Server::Detection Config Service\\n(Detection Rules,\\nException Config",
+    "Business Logic Layer\\n(Back-End Application Server::File Management Service\\n(Upload, Download,\\nModify, Delete",
+    "Business Logic Layer\\n(Back-End Application Server::Help & Case Service\\n(Manuals, FAQs,\\nSample Files)\\n[FR-011, FR-012",
+    "Business Logic Layer\\n(Back-End Application Server::Inconsistency Detection Engine\\n[FR-017 ~ FR-023",
+    "Business Logic Layer\\n(Back-End Application Server::Inconsistency Detection Engine\\n[FR-017 ~ FR-023::Attribute/Column &\\nClass/Table Detector\\n(FR-019, FR-020",
+    "Business Logic Layer\\n(Back-End Application Server::Inconsistency Detection Engine\\n[FR-017 ~ FR-023::Field & Type Detector\\n(FR-017, FR-018",
+    "Business Logic Layer\\n(Back-End Application Server::Inconsistency Detection Engine\\n[FR-017 ~ FR-023::Relationship Detector\\n(Multiplicity, Type,\\nMissing/Extra)\\n(FR-021, FR-022, FR-023",
+    "Business Logic Layer\\n(Back-End Application Server::Matching Engine\\n(Entity-Entity, Attribute-Attribute,\\nRelationship-Relationship\\nBipartite Graph + Similarity)\\n[FR-016",
+    "Business Logic Layer\\n(Back-End Application Server::Open API Gateway\\n[NFR-012, FR-012",
+    "Business Logic Layer\\n(Back-End Application Server::Operation Log Service\\n[NFR-010, DR-013",
+    "Business Logic Layer\\n(Back-End Application Server::Parsing Module",
+    "Business Logic Layer\\n(Back-End Application Server::Repair Service\\n[FR-024 ~ FR-027",
+    "Business Logic Layer\\n(Back-End Application Server::Report & History Service\\n(Export, Historical Records)\\n[FR-009, FR-010",
+    "Data Access Layer::Detection Config Store\\n(Rules, Exceptions)\\n[DR-006, DR-007",
+    "Data Access Layer::File Store\\n(MDJ Files, DB Design Files)\\n[DR-002, DR-003",
+    "Data Access Layer::Help & Case Store\\n(Manuals, FAQs,\\nSample Files)\\n[DR-012",
+    "Data Access Layer::History & Logs Store\\n(Detection Records,\\nModification Records,\\nOperation Logs)\\n[DR-011, DR-013",
+    "Data Access Layer::Matching & Detection\\nResults Store\\n[DR-008, DR-009",
+    "Data Access Layer::Parsing Model Store\\n(CD Model, DB Model)\\n[DR-004, DR-005",
+    "Data Access Layer::Repair Data Store\\n(Suggestions, Results)\\n[DR-010",
+    "Data Access Layer::User Account Store\\n[DR-001",
+    "External Connectors::JDBC Database Connector\\n[C-005",
+    "Global::Business Logic Layer\\n(Back-End Application Server",
+    "Global::Data Access Layer",
+    "Global::External Connectors",
+    "Global::MySQL Database\\n(Design File / Script /\\nJDBC Connection",
+    "Global::SSL/TLS Encryption Boundary\\n[NFR-007, C-008",
+    "Global::StarUML\\n(.mdj files",
+    "Global::User Interface Layer\\n(Front-End – Browser SPA"
+  ]
+}

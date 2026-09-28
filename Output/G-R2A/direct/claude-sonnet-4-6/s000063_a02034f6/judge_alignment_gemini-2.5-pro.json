@@ -1,0 +1,119 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Clients::Android",
+        "Clients::PC",
+        "Clients::Web",
+        "Clients::iOS"
+      ],
+      "predicted_nodes": [
+        "Telegram-Compatible Clients::Mobile / Desktop Clients"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated multiple specific client types from the GT into a single generic node as described in the PRD ('Telegram-compatible clients'). The boundary 'Clients' is semantically equivalent to 'Telegram-Compatible Clients'."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Gateway",
+        "Access Layer::Auth Session",
+        "Access Layer::Session"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go Runtime::Client Access Layer::MTProto Gateway\\n(FR-001, NFR-002",
+        "Teamgram Server (Go Runtime::Client Access Layer::Authorization Key Handler\\n(FR-002, DR-001",
+        "Teamgram Server (Go Runtime::Client Access Layer::Encrypted Session Manager\\n(FR-003, DR-003",
+        "Teamgram Server (Go Runtime::Client Access Layer::Server Salt / Future Salt Handler\\n(FR-002, FR-008, DR-002",
+        "Teamgram Server (Go Runtime::Client Access Layer::Service Message Processor\\nrpc_drop_answer | destroy_session\\n(FR-006, FR-007, DR-005"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the components of the access layer. It split the GT's generic 'Auth Session' and 'Session' nodes into more specific, function-oriented handlers (Auth Key, Encrypted Session, Salt, Service Message) as detailed in the PRD. The GT's 'Access Layer' boundary is semantically equivalent to the AI's 'Client Access Layer'."
+    },
+    {
+      "gt_nodes": [
+        "Global::BFF"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go Runtime::BFF / Access-Facing Service Layer",
+        "Teamgram Server (Go Runtime::BFF / Access-Facing Service Layer::RPC Dispatcher",
+        "Teamgram Server (Go Runtime::BFF / Access-Facing Service Layer::Registration & Phone\\nVerification Handler\\n(FR-004, DR-004",
+        "Teamgram Server (Go Runtime::BFF / Access-Facing Service Layer::Session ID Manager\\n(FR-005, DR-003"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the BFF and split it into more detailed functional components mentioned in the PRD. The AI correctly placed the BFF within the main server boundary, which is more accurate than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Services::Msg",
+        "Services::Services"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go Runtime::Business / Service Layer::Messaging Service",
+        "Teamgram Server (Go Runtime::Business / Service Layer::Account & Auth Service",
+        "Teamgram Server (Go Runtime::Business / Service Layer::Channel & Group Service",
+        "Teamgram Server (Go Runtime::Business / Service Layer::User & Contact Service"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly mapped 'Services::Msg' to 'Messaging Service' and expanded the generic 'Services::Services' node into specific business domains (Account, User, Channel), which is a logical decomposition. The 'Services' boundary is semantically equivalent to 'Business / Service Layer'."
+    },
+    {
+      "gt_nodes": [
+        "Global::Push",
+        "Global::Sync"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go Runtime::Storage-Facing & Async Components::Push & Sync Service"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly merged the separate Push and Sync nodes from the GT into a single functional service. It also correctly placed this service within the server's 'Storage-Facing & Async Components' boundary, which is more accurate than the GT's 'Global' placement."
+    },
+    {
+      "gt_nodes": [
+        "Services::DFS"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go Runtime::Storage-Facing & Async Components::Object Store Client\\n(MinIO Adapter"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node 'DFS' (Distributed File System) represents the service logic for file storage, which the AI correctly identified as an 'Object Store Client (MinIO Adapter)'. The AI's boundary attribution to 'Storage-Facing & Async Components' is more precise than the GT's generic 'Services' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MinIO",
+        "Storages::MySQL",
+        "Storages::Redis",
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Services::MinIO\\n(Object Storage",
+        "Infrastructure Services::MySQL\\n(Persistent Storage",
+        "Infrastructure Services::Redis\\n(Cache / Session Store",
+        "Infrastructure Services::Kafka\\n(Message Broker"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "This is a set of 1:1 matches for external infrastructure dependencies. The AI correctly grouped all of them under a logical 'Infrastructure Services' boundary, which is semantically equivalent to the GT's 'Storages' and 'Global' boundaries for these components."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer::Status"
+  ],
+  "unmatched_predicted_nodes": [
+    "Deployment Infrastructure\\n(NFR-003, C-003::Docker-Based Startup",
+    "Deployment Infrastructure\\n(NFR-003, C-003::Manual Build / Install",
+    "External Services::External Verification\\nCode Service\\n(FR-009, C-004",
+    "Infrastructure Services::etcd\\n(Service Discovery",
+    "Teamgram Server (Go Runtime::Business / Service Layer::Verification Code Service\\n(FR-009",
+    "Teamgram Server (Go Runtime::Optional Media Processing::FFmpeg/FFProbe Wrapper\\n(NFR-004, C-005",
+    "Teamgram Server (Go Runtime::Storage-Facing & Async Components::Cache Manager\\n(Redis Adapter",
+    "Teamgram Server (Go Runtime::Storage-Facing & Async Components::Data Access Layer\\n(MySQL Adapter",
+    "Teamgram Server (Go Runtime::Storage-Facing & Async Components::Message Queue Producer/Consumer\\n(Kafka Adapter",
+    "Teamgram Server (Go Runtime::Storage-Facing & Async Components::Service Registry\\n(etcd Client"
+  ]
+}

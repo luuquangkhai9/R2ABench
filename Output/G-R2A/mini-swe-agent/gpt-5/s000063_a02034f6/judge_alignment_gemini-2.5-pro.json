@@ -1,0 +1,121 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Access Layer::Gateway",
+        "Global::BFF"
+      ],
+      "predicted_nodes": [
+        "Client Access Layer::MTProto Gateway\n(Access/BFF"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated Gateway and BFF into a single access layer component. The boundary attribution 'Client Access Layer' is semantically consistent with the GT's 'Access Layer'."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Auth Session"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Auth Service\n(Authorization Keys, Server/Future Salts"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The core authentication functionality matches, but the GT placed it in the 'Access Layer' while the AI placed it in the 'Service Layer', which is an architectural layer shift."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Session"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Session Service\n(Encrypted Sessions, session_id,\nDestroy/Drop Answer Handling"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The session management functionality matches, but the GT specifies it in the 'Access Layer' whereas the AI placed it in the 'Service Layer'."
+    },
+    {
+      "gt_nodes": [
+        "Services::Msg"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Message Service\n(Service Messages"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the messaging service, and 'Services' maps straightforwardly to 'Service Layer'."
+    },
+    {
+      "gt_nodes": [
+        "Global::Push",
+        "Global::Sync"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Push/Sync Service"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": false,
+      "reasoning": "The AI grouped Push and Sync into a single service and placed it in the 'Service Layer'. However, the GT specifically separated them into the 'Global' layer, making this a boundary deviation."
+    },
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "Integration & Infrastructure Layer::Kafka"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Kafka infrastructure. The AI's placement in the infrastructure layer is semantically equivalent to the GT's 'Global' classification for infrastructure components."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MySQL"
+      ],
+      "predicted_nodes": [
+        "Integration & Infrastructure Layer::MySQL"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "MySQL database match. 'Storages' and 'Integration & Infrastructure Layer' are semantically compatible boundaries for databases."
+    },
+    {
+      "gt_nodes": [
+        "Storages::Redis"
+      ],
+      "predicted_nodes": [
+        "Integration & Infrastructure Layer::Redis"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Redis match. 'Storages' maps well to 'Integration & Infrastructure Layer'."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MinIO"
+      ],
+      "predicted_nodes": [
+        "Integration & Infrastructure Layer::MinIO (Object Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "MinIO object storage match. Boundary mapping is semantically consistent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer::Status",
+    "Clients::Android",
+    "Clients::PC",
+    "Clients::Web",
+    "Clients::iOS",
+    "Services::DFS",
+    "Services::Services"
+  ],
+  "unmatched_predicted_nodes": [
+    "Integration & Infrastructure Layer::External Verification Service\n(optional",
+    "Integration & Infrastructure Layer::FFmpeg/FFProbe\n(optional tools",
+    "Integration & Infrastructure Layer::etcd",
+    "Service Layer::Media Service (optional",
+    "Service Layer::Registration & Verification Service"
+  ]
+}

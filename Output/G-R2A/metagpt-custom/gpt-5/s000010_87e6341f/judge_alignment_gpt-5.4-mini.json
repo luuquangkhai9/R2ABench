@@ -1,0 +1,96 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Flutter-based app::Android",
+        "Flutter-based app::iOS",
+        "Flutter-based app::Web",
+        "Flutter-based app::MacOS"
+      ],
+      "predicted_nodes": [
+        "External Systems::Flutter/Dart Client Runtimes (Android, iOS, Web, macOS)"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates supported client runtime platforms into individual nodes, while the prediction aggregates them into one runtime node. This is a valid semantic merge and the boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Flutter-based app::Dart"
+      ],
+      "predicted_nodes": [
+        "External Systems::Dart Toolchain (with Protobuf support)"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Dart-side client development/runtime ecosystem used for generated client code. The boundary is acceptable as an external tooling/runtime package."
+    },
+    {
+      "gt_nodes": [
+        "Global::Hosted in Azure Kubernetes Service"
+      ],
+      "predicted_nodes": [
+        "External Systems::Azure Kubernetes Service (AKS)",
+        "Deployment Layer::AKS Deployment Config"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT deployment target is represented by the AKS platform plus its deployment configuration in the prediction. This is a reasonable split of the deployment concern and the boundary attribution is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Postman",
+        "Global::Test Client 1\nNodeJS",
+        "Global::Test Client 2\nGolang",
+        "Global::gRPC Gateway\n(HTTP-gRPC Proxy)\nGolang"
+      ],
+      "predicted_nodes": [
+        "External Systems::Standard HTTP Clients (curl, etc.)",
+        "API Gateway Layer::gRPC-Gateway Middleware"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT includes multiple external clients and the gRPC gateway proxy; the prediction captures these as a generic HTTP client class plus the gateway middleware. This is a valid semantic aggregation, and the boundaries are broadly correct."
+    },
+    {
+      "gt_nodes": [
+        "Hosted in Azure Kubernetes Service::Docker container"
+      ],
+      "predicted_nodes": [
+        "Deployment Layer::Docker Image / Runtime"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the containerization/runtime concern for the server. The naming differs, but the architectural role and boundary are equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Hosted in Azure Kubernetes Service::Docker container::Recipes Server\n(gRPC Server)\nGolang"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Go gRPC Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is the same backend server component. The prediction correctly places it in a service layer, which is semantically aligned with the GT container-hosted Go gRPC server."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "API Gateway Layer::HTTP API::GetAllIngredientsForRecipe (API-008",
+    "API Gateway Layer::HTTP API::HTTP API",
+    "API Gateway Layer::HTTP API::ListAllIngredientsAtHome (API-007",
+    "API Gateway Layer::HTTP API::ListAllRecipes (API-006",
+    "API Gateway Layer::HTTP API::addRecipe (API-005",
+    "Build / Code Generation Layer::Protocol Buffers Compiler & Plugins",
+    "Build / Code Generation Layer::gRPC-Gateway Generation Deps & Annotations",
+    "Client Layer::Dart Generated Client Code",
+    "Client Layer::Home Recipes Flutter/Dart Client",
+    "Contract Layer::Protocol Buffers Definitions (.proto",
+    "Deployment Layer::Kubernetes Manifests / Config",
+    "External Systems::Go Runtime & gRPC Tooling",
+    "External Systems::Local Kubernetes Cluster",
+    "External Systems::gRPC-Gateway Runtime Dependencies",
+    "Service Layer::gRPC API"
+  ]
+}

@@ -1,0 +1,55 @@
+@startuml
+
+' Define actors for user classes
+actor "Reviewer" as reviewer
+actor "Requirements Owner" as owner
+actor "Project Stakeholder" as stakeholder
+
+' Main artifact - the Markdown checklist
+component "Review Checklist Artifact" as checklist {
+    component "Review Objectives & Basis" as objectives
+    component "Checklist Items" as items {
+        component "Completeness" as completeness
+        component "Understandability" as understandability
+        component "Model Accuracy" as accuracy
+        component "Extension/Improvement" as extension
+    }
+    component "Problem Report" as problem
+    component "Score Record" as scores
+    component "Review Metadata" as metadata
+}
+
+' External documents referenced by the checklist
+cloud "Requirements Document\nUnder Review" as reqdoc
+cloud "Industry Standards" as standards
+cloud "Product Specifications" as productspec
+cloud "Business Specifications" as businessspec
+cloud "Documentation\nSpecifications/Norms" as docspec
+
+' Tool for viewing/editing the artifact
+node "Markdown-capable\nEditor/Viewer" as editor
+
+' Relationships between checklist components
+objectives --> items : defines scope for
+items --> scores : provides criteria for
+problem --> items : references criteria from
+metadata --> items : describes context of
+
+' Checklist references to external documents
+checklist --> standards : references
+checklist --> productspec : references
+checklist --> businessspec : references
+checklist --> docspec : references
+
+' User interactions with the artifact
+reviewer --> checklist : uses to review
+owner --> checklist : provides input to
+stakeholder --> checklist : consumes results from
+
+' Artifact interaction with requirements document
+checklist --> reqdoc : applied to review
+
+' Tool interaction
+editor --> checklist : displays/edits
+
+@enduml

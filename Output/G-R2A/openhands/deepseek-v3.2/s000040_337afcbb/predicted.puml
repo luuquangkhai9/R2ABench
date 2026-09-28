@@ -1,0 +1,73 @@
+@startuml
+title PlugIt Framework - System Architecture
+
+' External actors
+actor "External Users" as users
+actor "External Systems" as systems
+actor "Service Developers" as devs
+actor "Operators/Admins" as ops
+
+' Main components
+rectangle "PlugIt Proxy" as proxy {
+  component "Proxy API Endpoint" as api_endpoint
+  database "Proxy Data Store" as proxy_db
+  component "Mail Processing\n(Example/Standalone)" as mail_processing
+}
+
+rectangle "PlugIt Services" as services {
+  component "PlugIt Service 1" as service1
+  component "PlugIt Service 2" as service2
+  component "PlugIt Service N" as serviceN
+  
+  service1 -down-> "Service 1\nData Store" as db1 : uses
+  service2 -down-> "Service 2\nData Store" as db2 : uses
+  serviceN -down-> "Service N\nData Store" as dbN : uses
+}
+
+' Configuration system
+rectangle "Configuration System" as config {
+  file "Project Config" as proj_config
+  file "Local Config\n(Private)" as local_config
+}
+
+' API Client
+component "PlugIt API Client" as api_client
+
+' Relationships
+users --> api_endpoint : "access through"
+systems --> api_endpoint : "access through"
+
+api_endpoint --> service1 : "PlugIt protocol"
+api_endpoint --> service2 : "PlugIt protocol"
+api_endpoint --> serviceN : "PlugIt protocol"
+
+api_client --> api_endpoint : "API requests"
+
+config --> service1 : "provides settings"
+config --> service2 : "provides settings"
+config --> serviceN : "provides settings"
+
+devs --> config : "creates/manages"
+ops --> config : "manages private settings"
+
+mail_processing --> api_endpoint : "example workflow"
+
+' Notes
+note right of proxy
+  Mediates multiple micro-services
+  through shared user experience
+end note
+
+note right of services
+  Mutually isolated services
+  each with own data boundaries
+end note
+
+note right of config
+  Service-specific and
+  deployment-specific settings
+  Private settings excluded
+  from source control
+end note
+
+@enduml

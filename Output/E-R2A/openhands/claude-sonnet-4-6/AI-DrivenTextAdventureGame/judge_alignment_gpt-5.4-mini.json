@@ -1,0 +1,852 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Business Layer::Spring Boot",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Deployment Infrastructure\\n(Docker + Kubernetes::API & Middleware Layer\\n(Iris Go Framework::API Gateway / Router\\n(routing, middleware,\\nauthentication, session",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Achievement & Item Service\\n(achievements, currency,\\nhealth packs, items",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Admin Service\\n(admin login/logout,\\nuser & post governance,\\nban / restore accounts",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Community Service\\n(posts, comments, replies,\\nsearch, review workflow,\\nhomepage recommendations",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Favorites Service\\n(add, view, remove favorites",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Game Service\\n(new game, load save,\\nchoices, background,\\nsave CRUD, share save",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Notification Service\\n(create, view, mark read,\\ndelete notifications",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::User Service\\n(registration, login, logout,\\npassword, profile, history"
+      ],
+      "reasoning": "The GT business layer is represented by the predicted backend application and middleware services that implement the system's business functions, although the naming and decomposition differ."
+    },
+    {
+      "gt_node": "Business Layer::Spring Boot::Community Management",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Community Service\\n(posts, comments, replies,\\nsearch, review workflow,\\nhomepage recommendations",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Admin Service\\n(admin login/logout,\\nuser & post governance,\\nban / restore accounts"
+      ],
+      "reasoning": "Community management responsibilities are covered by the community and admin services."
+    },
+    {
+      "gt_node": "Business Layer::Spring Boot::Favorites Module",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Favorites Service\\n(add, view, remove favorites"
+      ],
+      "reasoning": "The favorites module is directly represented by the predicted favorites service."
+    },
+    {
+      "gt_node": "Business Layer::Spring Boot::Game System",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Game Service\\n(new game, load save,\\nchoices, background,\\nsave CRUD, share save",
+        "External Services::Large Language Model\\n(plot generation, random events,\\ndecision effects, state updates"
+      ],
+      "reasoning": "The game system is covered by the game service, with LLM-based gameplay functions grounded by the external LLM service."
+    },
+    {
+      "gt_node": "Business Layer::Spring Boot::Notification Module",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Notification Service\\n(create, view, mark read,\\ndelete notifications"
+      ],
+      "reasoning": "Notification responsibilities are covered by the predicted notification service."
+    },
+    {
+      "gt_node": "Business Layer::Spring Boot::User Management",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::User Service\\n(registration, login, logout,\\npassword, profile, history",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Admin Service\\n(admin login/logout,\\nuser & post governance,\\nban / restore accounts"
+      ],
+      "reasoning": "User management is represented by the user service, and administrator-facing user governance is covered by the admin service."
+    },
+    {
+      "gt_node": "Data Layer::Data Caching",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node explicitly covers a caching/data-cache layer."
+    },
+    {
+      "gt_node": "Data Layer::Read/Write Database",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Data Access Layer\\n(Gorm ORM::Achievement Repository\\n(achievements, currency,\\nitems",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Data Access Layer\\n(Gorm ORM::Admin Repository\\n(admin accounts,\\npermissions, reports",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Data Access Layer\\n(Gorm ORM::Community Repository\\n(posts, comments, replies,\\nreview records, search",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Data Access Layer\\n(Gorm ORM::Favorites Repository\\n(favorites folders,\\npost links",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Data Access Layer\\n(Gorm ORM::Game Repository\\n(saves, background,\\ngame state, choices",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Data Access Layer\\n(Gorm ORM::Notification Repository\\n(messages, read status",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Data Access Layer\\n(Gorm ORM::User Repository\\n(accounts, profiles,\\nbrowsing history"
+      ],
+      "reasoning": "The GT read/write database responsibility is covered by the predicted repository/data access layer."
+    },
+    {
+      "gt_node": "Data Layer::Storage",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Services::Cloud Provider /\\nData Center\\n(compute, storage, scaling",
+        "Global::MySQL\\nRelational Database"
+      ],
+      "reasoning": "General storage concerns are represented by the cloud/data center and database storage nodes."
+    },
+    {
+      "gt_node": "Database Layer::MySQL",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::MySQL\\nRelational Database",
+        "MySQL\\nRelational Database::achievements\\ncurrency\\nitems",
+        "MySQL\\nRelational Database::admin_accounts\\npermissions\\nreport_feedback\\naccount_status",
+        "MySQL\\nRelational Database::favorites",
+        "MySQL\\nRelational Database::game_saves\\ngame_background\\ngame_state\\nplayer_choices",
+        "MySQL\\nRelational Database::notifications",
+        "MySQL\\nRelational Database::posts\\ncomments\\nreplies\\npost_review_records\\nsearch_data",
+        "MySQL\\nRelational Database::sensitive_logs",
+        "MySQL\\nRelational Database::user_accounts\\nuser_profiles\\nbrowing_history"
+      ],
+      "reasoning": "The predicted architecture explicitly includes a MySQL relational database and its related tables."
+    },
+    {
+      "gt_node": "Frontend UI Layer::TypeScript",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Admin UI\\n(user list, post list,\\nreview, ban/restore",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Community UI\\n(posts, comments, replies,\\nsearch, recommendations",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Favorites UI\\n(add, view, remove",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Game UI\\n(new game, saves, choices,\\nbackground setup, tutorial",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Notification UI\\n(unread, read, delete",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::User UI\\n(registration, login, logout,\\nprofile, browsing history"
+      ],
+      "reasoning": "TypeScript is not named explicitly, but the frontend application nodes grounded in the Vue/Nuxt client layer cover the UI implementation responsibility."
+    },
+    {
+      "gt_node": "Frontend UI Layer::Vite2",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node covers the specific Vite2 build-tooling boundary."
+    },
+    {
+      "gt_node": "Frontend UI Layer::Vue3",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Admin UI\\n(user list, post list,\\nreview, ban/restore",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Community UI\\n(posts, comments, replies,\\nsearch, recommendations",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Favorites UI\\n(add, view, remove",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Game UI\\n(new game, saves, choices,\\nbackground setup, tutorial",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Notification UI\\n(unread, read, delete",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::User UI\\n(registration, login, logout,\\nprofile, browsing history"
+      ],
+      "reasoning": "The predicted frontend application is built on Vue.js, which semantically covers the Vue3 UI layer even though the version is not explicit."
+    },
+    {
+      "gt_node": "Frontend UI Layer::element-plus",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "The predicted nodes do not explicitly capture the UI component library layer."
+    },
+    {
+      "gt_node": "Global::Log Recording",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "MySQL\\nRelational Database::sensitive_logs"
+      ],
+      "reasoning": "Log recording is grounded by the sensitive logs storage concept."
+    },
+    {
+      "gt_node": "Global::Permission Control",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Deployment Infrastructure\\n(Docker + Kubernetes::API & Middleware Layer\\n(Iris Go Framework::API Gateway / Router\\n(routing, middleware,\\nauthentication, session",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Admin Service\\n(admin login/logout,\\nuser & post governance,\\nban / restore accounts",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Data Access Layer\\n(Gorm ORM::Admin Repository\\n(admin accounts,\\npermissions, reports"
+      ],
+      "reasoning": "Permission control is covered by authentication/session middleware, admin governance, and admin permissions data."
+    },
+    {
+      "gt_node": "Presentation Layer::Ajax Interaction",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Deployment Infrastructure\\n(Docker + Kubernetes::API & Middleware Layer\\n(Iris Go Framework::API Gateway / Router\\n(routing, middleware,\\nauthentication, session"
+      ],
+      "reasoning": "Ajax interaction is reasonably grounded by the API/router layer that handles client-server request/response traffic."
+    },
+    {
+      "gt_node": "Presentation Layer::Ajax Interaction::GET Request",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Deployment Infrastructure\\n(Docker + Kubernetes::API & Middleware Layer\\n(Iris Go Framework::API Gateway / Router\\n(routing, middleware,\\nauthentication, session"
+      ],
+      "reasoning": "Although GET is not named explicitly, the API/router layer semantically covers request handling including GET-like retrievals."
+    },
+    {
+      "gt_node": "Presentation Layer::Ajax Interaction::POST Request",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Deployment Infrastructure\\n(Docker + Kubernetes::API & Middleware Layer\\n(Iris Go Framework::API Gateway / Router\\n(routing, middleware,\\nauthentication, session"
+      ],
+      "reasoning": "Although POST is not named explicitly, the API/router layer semantically covers request handling including POST-like submissions."
+    },
+    {
+      "gt_node": "Presentation Layer::Template Rendering",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Admin UI\\n(user list, post list,\\nreview, ban/restore",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Community UI\\n(posts, comments, replies,\\nsearch, recommendations",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Favorites UI\\n(add, view, remove",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Game UI\\n(new game, saves, choices,\\nbackground setup, tutorial",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Notification UI\\n(unread, read, delete",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::User UI\\n(registration, login, logout,\\nprofile, browsing history"
+      ],
+      "reasoning": "Template rendering is grounded by the Nuxt SSR frontend application and its UI submodules."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Admin UI\\n(user list, post list,\\nreview, ban/restore",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot::Community Management",
+        "Business Layer::Spring Boot::User Management",
+        "Global::Permission Control",
+        "Frontend UI Layer::Vue3",
+        "Frontend UI Layer::TypeScript",
+        "Frontend UI Layer::element-plus",
+        "Presentation Layer::Template Rendering"
+      ],
+      "reasoning": "This admin UI maps to the administrator-facing functions and frontend presentation concerns in the GT."
+    },
+    {
+      "predicted_node": "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Community UI\\n(posts, comments, replies,\\nsearch, recommendations",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot::Community Management",
+        "Frontend UI Layer::Vue3",
+        "Frontend UI Layer::TypeScript",
+        "Frontend UI Layer::element-plus",
+        "Presentation Layer::Template Rendering",
+        "Presentation Layer::Ajax Interaction"
+      ],
+      "reasoning": "This community UI corresponds to the GT community management and presentation layer responsibilities."
+    },
+    {
+      "predicted_node": "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Favorites UI\\n(add, view, remove",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot::Favorites Module",
+        "Frontend UI Layer::Vue3",
+        "Frontend UI Layer::TypeScript",
+        "Frontend UI Layer::element-plus",
+        "Presentation Layer::Template Rendering"
+      ],
+      "reasoning": "Favorites functionality is grounded in the GT favorites module and frontend UI."
+    },
+    {
+      "predicted_node": "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Game UI\\n(new game, saves, choices,\\nbackground setup, tutorial",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot::Game System",
+        "Frontend UI Layer::Vue3",
+        "Frontend UI Layer::TypeScript",
+        "Frontend UI Layer::element-plus",
+        "Presentation Layer::Template Rendering",
+        "Presentation Layer::Ajax Interaction"
+      ],
+      "reasoning": "This game UI maps to the GT game system and frontend presentation responsibilities."
+    },
+    {
+      "predicted_node": "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Notification UI\\n(unread, read, delete",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot::Notification Module",
+        "Frontend UI Layer::Vue3",
+        "Frontend UI Layer::TypeScript",
+        "Frontend UI Layer::element-plus",
+        "Presentation Layer::Template Rendering"
+      ],
+      "reasoning": "Notification UI is grounded by the GT notification module and presentation layer."
+    },
+    {
+      "predicted_node": "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::User UI\\n(registration, login, logout,\\nprofile, browsing history",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot::User Management",
+        "Global::Permission Control",
+        "Frontend UI Layer::Vue3",
+        "Frontend UI Layer::TypeScript",
+        "Frontend UI Layer::element-plus",
+        "Presentation Layer::Template Rendering",
+        "Presentation Layer::Ajax Interaction"
+      ],
+      "reasoning": "This user UI covers the GT user management and authentication-related presentation concerns."
+    },
+    {
+      "predicted_node": "Deployment Infrastructure\\n(Docker + Kubernetes::API & Middleware Layer\\n(Iris Go Framework::API Gateway / Router\\n(routing, middleware,\\nauthentication, session",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot",
+        "Global::Permission Control",
+        "Presentation Layer::Ajax Interaction",
+        "Presentation Layer::Ajax Interaction::GET Request",
+        "Presentation Layer::Ajax Interaction::POST Request"
+      ],
+      "reasoning": "This middleware/API gateway node is grounded by the GT business and Ajax interaction layers, although the stack differs."
+    },
+    {
+      "predicted_node": "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Achievement & Item Service\\n(achievements, currency,\\nhealth packs, items",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Log Recording"
+      ],
+      "reasoning": "The GT includes achievement/currency/item data requirements, so this service is grounded, though the GT does not show a dedicated business node for it."
+    },
+    {
+      "predicted_node": "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Admin Service\\n(admin login/logout,\\nuser & post governance,\\nban / restore accounts",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot::Community Management",
+        "Business Layer::Spring Boot::User Management",
+        "Global::Permission Control",
+        "Frontend UI Layer::Vue3",
+        "Presentation Layer::Ajax Interaction"
+      ],
+      "reasoning": "The admin service is directly grounded by administrator governance and permission control requirements."
+    },
+    {
+      "predicted_node": "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Community Service\\n(posts, comments, replies,\\nsearch, review workflow,\\nhomepage recommendations",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot::Community Management",
+        "Business Layer::Spring Boot",
+        "Presentation Layer::Ajax Interaction",
+        "Presentation Layer::Template Rendering"
+      ],
+      "reasoning": "This service corresponds to the community management functionality in the GT."
+    },
+    {
+      "predicted_node": "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Favorites Service\\n(add, view, remove favorites",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot::Favorites Module",
+        "Presentation Layer::Ajax Interaction"
+      ],
+      "reasoning": "The favorites service is directly grounded by the GT favorites module."
+    },
+    {
+      "predicted_node": "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Game Service\\n(new game, load save,\\nchoices, background,\\nsave CRUD, share save",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot::Game System",
+        "Presentation Layer::Ajax Interaction",
+        "Presentation Layer::Template Rendering"
+      ],
+      "reasoning": "The game service matches the GT game system responsibilities."
+    },
+    {
+      "predicted_node": "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Notification Service\\n(create, view, mark read,\\ndelete notifications",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot::Notification Module"
+      ],
+      "reasoning": "The notification service is directly grounded by the GT notification module."
+    },
+    {
+      "predicted_node": "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::User Service\\n(registration, login, logout,\\npassword, profile, history",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot::User Management",
+        "Global::Permission Control",
+        "Presentation Layer::Ajax Interaction"
+      ],
+      "reasoning": "The user service directly corresponds to GT user management and authentication functions."
+    },
+    {
+      "predicted_node": "Deployment Infrastructure\\n(Docker + Kubernetes::Data Access Layer\\n(Gorm ORM::Achievement Repository\\n(achievements, currency,\\nitems",
+      "grounded": true,
+      "reference_nodes": [
+        "Data Layer::Read/Write Database",
+        "Data Layer::Storage",
+        "Business Layer::Spring Boot::Game System"
+      ],
+      "reasoning": "This repository is grounded by the GT data and game-related persistence requirements."
+    },
+    {
+      "predicted_node": "Deployment Infrastructure\\n(Docker + Kubernetes::Data Access Layer\\n(Gorm ORM::Admin Repository\\n(admin accounts,\\npermissions, reports",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Permission Control",
+        "Business Layer::Spring Boot::User Management",
+        "Business Layer::Spring Boot::Community Management",
+        "Data Layer::Read/Write Database"
+      ],
+      "reasoning": "Admin account, permissions, and report handling are grounded by GT governance requirements."
+    },
+    {
+      "predicted_node": "Deployment Infrastructure\\n(Docker + Kubernetes::Data Access Layer\\n(Gorm ORM::Community Repository\\n(posts, comments, replies,\\nreview records, search",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot::Community Management",
+        "Data Layer::Read/Write Database",
+        "Data Layer::Storage"
+      ],
+      "reasoning": "The community repository is grounded by GT community data requirements."
+    },
+    {
+      "predicted_node": "Deployment Infrastructure\\n(Docker + Kubernetes::Data Access Layer\\n(Gorm ORM::Favorites Repository\\n(favorites folders,\\npost links",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot::Favorites Module",
+        "Data Layer::Read/Write Database"
+      ],
+      "reasoning": "The favorites repository is grounded by GT favorites data requirements."
+    },
+    {
+      "predicted_node": "Deployment Infrastructure\\n(Docker + Kubernetes::Data Access Layer\\n(Gorm ORM::Game Repository\\n(saves, background,\\ngame state, choices",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot::Game System",
+        "Data Layer::Read/Write Database",
+        "Data Layer::Storage"
+      ],
+      "reasoning": "The game repository is grounded by GT game save, background, and state data requirements."
+    },
+    {
+      "predicted_node": "Deployment Infrastructure\\n(Docker + Kubernetes::Data Access Layer\\n(Gorm ORM::Notification Repository\\n(messages, read status",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot::Notification Module",
+        "Data Layer::Read/Write Database"
+      ],
+      "reasoning": "The notification repository is grounded by GT notification data requirements."
+    },
+    {
+      "predicted_node": "Deployment Infrastructure\\n(Docker + Kubernetes::Data Access Layer\\n(Gorm ORM::User Repository\\n(accounts, profiles,\\nbrowsing history",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot::User Management",
+        "Data Layer::Read/Write Database",
+        "Global::Permission Control"
+      ],
+      "reasoning": "The user repository is grounded by GT account and profile data requirements."
+    },
+    {
+      "predicted_node": "External Services::AIGC Service\\n(image generation,\\nmusic & sound effects",
+      "grounded": true,
+      "reference_nodes": [
+        "Data Layer::Storage",
+        "Business Layer::Spring Boot::Game System"
+      ],
+      "reasoning": "AIGC feedback is explicitly present in the PRD data and non-functional requirements."
+    },
+    {
+      "predicted_node": "External Services::Cloud Provider /\\nData Center\\n(compute, storage, scaling",
+      "grounded": true,
+      "reference_nodes": [
+        "Data Layer::Storage",
+        "Business Layer::Spring Boot",
+        "Global::Log Recording"
+      ],
+      "reasoning": "Cloud/data center infrastructure is grounded by the deployment/environment constraints."
+    },
+    {
+      "predicted_node": "External Services::Email Service\\n(verification codes,\\npassword recovery",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot::User Management",
+        "Global::Permission Control"
+      ],
+      "reasoning": "Email verification and password recovery are explicitly required in the PRD."
+    },
+    {
+      "predicted_node": "External Services::Large Language Model\\n(plot generation, random events,\\ndecision effects, state updates",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot::Game System",
+        "Data Layer::Read/Write Database",
+        "Data Layer::Storage"
+      ],
+      "reasoning": "The LLM service is directly grounded by the game requirements and model-generated plot behavior."
+    },
+    {
+      "predicted_node": "Global::Client Layer\\n(Browser / Device",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend UI Layer::TypeScript",
+        "Frontend UI Layer::Vue3",
+        "Frontend UI Layer::Vite2",
+        "Frontend UI Layer::element-plus",
+        "Presentation Layer::Template Rendering"
+      ],
+      "reasoning": "This is a coarse client boundary that corresponds to the frontend UI layer."
+    },
+    {
+      "predicted_node": "Global::Deployment Infrastructure\\n(Docker + Kubernetes",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot",
+        "Data Layer::Read/Write Database",
+        "Data Layer::Storage",
+        "Database Layer::MySQL"
+      ],
+      "reasoning": "The deployment infrastructure is grounded by the PRD's Docker and Kubernetes technology terms."
+    },
+    {
+      "predicted_node": "Global::External Services",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Permission Control",
+        "Business Layer::Spring Boot::Game System",
+        "Business Layer::Spring Boot::User Management",
+        "Data Layer::Storage"
+      ],
+      "reasoning": "External services are explicitly required by the PRD (LLM, email, cloud provider, AIGC)."
+    },
+    {
+      "predicted_node": "Global::MySQL\\nRelational Database",
+      "grounded": true,
+      "reference_nodes": [
+        "Database Layer::MySQL",
+        "Data Layer::Read/Write Database",
+        "Data Layer::Storage"
+      ],
+      "reasoning": "This is a direct database grounding for the GT MySQL layer."
+    },
+    {
+      "predicted_node": "MySQL\\nRelational Database::achievements\\ncurrency\\nitems",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot::Game System",
+        "Data Layer::Read/Write Database"
+      ],
+      "reasoning": "Achievement, currency, and item data are explicitly present in the PRD."
+    },
+    {
+      "predicted_node": "MySQL\\nRelational Database::admin_accounts\\npermissions\\nreport_feedback\\naccount_status",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Permission Control",
+        "Business Layer::Spring Boot::User Management",
+        "Business Layer::Spring Boot::Community Management",
+        "Data Layer::Read/Write Database"
+      ],
+      "reasoning": "Administrative accounts, permissions, reports, and account status are all grounded by the PRD."
+    },
+    {
+      "predicted_node": "MySQL\\nRelational Database::favorites",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot::Favorites Module",
+        "Data Layer::Read/Write Database"
+      ],
+      "reasoning": "Favorites storage is directly grounded by the PRD."
+    },
+    {
+      "predicted_node": "MySQL\\nRelational Database::game_saves\\ngame_background\\ngame_state\\nplayer_choices",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot::Game System",
+        "Data Layer::Read/Write Database",
+        "Data Layer::Storage"
+      ],
+      "reasoning": "Game save, background, state, and choice data are directly grounded by the PRD."
+    },
+    {
+      "predicted_node": "MySQL\\nRelational Database::notifications",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot::Notification Module",
+        "Data Layer::Read/Write Database"
+      ],
+      "reasoning": "Notification message storage is directly grounded by the PRD."
+    },
+    {
+      "predicted_node": "MySQL\\nRelational Database::posts\\ncomments\\nreplies\\npost_review_records\\nsearch_data",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot::Community Management",
+        "Data Layer::Read/Write Database",
+        "Data Layer::Storage"
+      ],
+      "reasoning": "Community content, review records, and search data are all grounded by the PRD."
+    },
+    {
+      "predicted_node": "MySQL\\nRelational Database::sensitive_logs",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Log Recording",
+        "Data Layer::Storage"
+      ],
+      "reasoning": "Sensitive logs are directly grounded by the log recording requirement."
+    },
+    {
+      "predicted_node": "MySQL\\nRelational Database::user_accounts\\nuser_profiles\\nbrowing_history",
+      "grounded": true,
+      "reference_nodes": [
+        "Business Layer::Spring Boot::User Management",
+        "Data Layer::Read/Write Database",
+        "Global::Permission Control"
+      ],
+      "reasoning": "User account, profile, and browsing history data are directly grounded by the PRD, despite the minor spelling issue in browsing history."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot"
+      ],
+      "predicted_nodes": [
+        "Deployment Infrastructure\\n(Docker + Kubernetes::API & Middleware Layer\\n(Iris Go Framework::API Gateway / Router\\n(routing, middleware,\\nauthentication, session",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Achievement & Item Service\\n(achievements, currency,\\nhealth packs, items",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Admin Service\\n(admin login/logout,\\nuser & post governance,\\nban / restore accounts",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Community Service\\n(posts, comments, replies,\\nsearch, review workflow,\\nhomepage recommendations",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Favorites Service\\n(add, view, remove favorites",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Game Service\\n(new game, load save,\\nchoices, background,\\nsave CRUD, share save",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Notification Service\\n(create, view, mark read,\\ndelete notifications",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::User Service\\n(registration, login, logout,\\npassword, profile, history"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The business functionality is well covered, but the predicted nodes are decomposed into a deployment-infrastructure/service-layer boundary rather than the GT business-layer boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot::Community Management"
+      ],
+      "predicted_nodes": [
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Community Service\\n(posts, comments, replies,\\nsearch, review workflow,\\nhomepage recommendations",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Admin Service\\n(admin login/logout,\\nuser & post governance,\\nban / restore accounts"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "Responsibilities match, but the layer/boundary is shifted to application services under deployment infrastructure."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot::Favorites Module"
+      ],
+      "predicted_nodes": [
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Favorites Service\\n(add, view, remove favorites"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The component matches semantically, but the boundary attribution is to deployment/application services rather than the GT business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot::Game System"
+      ],
+      "predicted_nodes": [
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Game Service\\n(new game, load save,\\nchoices, background,\\nsave CRUD, share save",
+        "External Services::Large Language Model\\n(plot generation, random events,\\ndecision effects, state updates"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The game system is split across a game service and external LLM service; the responsibilities are grounded, but the GT boundary is not preserved."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot::Notification Module"
+      ],
+      "predicted_nodes": [
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Notification Service\\n(create, view, mark read,\\ndelete notifications"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Functionally aligned, but the boundary is shifted from GT business layer to a deployed application service."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot::User Management"
+      ],
+      "predicted_nodes": [
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::User Service\\n(registration, login, logout,\\npassword, profile, history",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Admin Service\\n(admin login/logout,\\nuser & post governance,\\nban / restore accounts"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "User management is covered, but split into user and admin services with a different boundary structure than the GT."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Caching"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding caching layer is present in the predicted nodes."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Read/Write Database"
+      ],
+      "predicted_nodes": [
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Data Access Layer\\n(Gorm ORM::Achievement Repository\\n(achievements, currency,\\nitems",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Data Access Layer\\n(Gorm ORM::Admin Repository\\n(admin accounts,\\npermissions, reports",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Data Access Layer\\n(Gorm ORM::Community Repository\\n(posts, comments, replies,\\nreview records, search",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Data Access Layer\\n(Gorm ORM::Favorites Repository\\n(favorites folders,\\npost links",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Data Access Layer\\n(Gorm ORM::Game Repository\\n(saves, background,\\ngame state, choices",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Data Access Layer\\n(Gorm ORM::Notification Repository\\n(messages, read status",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Data Access Layer\\n(Gorm ORM::User Repository\\n(accounts, profiles,\\nbrowsing history"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The database access responsibility is split into multiple repositories, which is semantically consistent with the GT data layer."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Storage"
+      ],
+      "predicted_nodes": [
+        "External Services::Cloud Provider /\\nData Center\\n(compute, storage, scaling",
+        "Global::MySQL\\nRelational Database"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "General storage is covered by cloud/storage infrastructure and the database boundary, which are semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer::MySQL"
+      ],
+      "predicted_nodes": [
+        "Global::MySQL\\nRelational Database",
+        "MySQL\\nRelational Database::achievements\\ncurrency\\nitems",
+        "MySQL\\nRelational Database::admin_accounts\\npermissions\\nreport_feedback\\naccount_status",
+        "MySQL\\nRelational Database::favorites",
+        "MySQL\\nRelational Database::game_saves\\ngame_background\\ngame_state\\nplayer_choices",
+        "MySQL\\nRelational Database::notifications",
+        "MySQL\\nRelational Database::posts\\ncomments\\nreplies\\npost_review_records\\nsearch_data",
+        "MySQL\\nRelational Database::sensitive_logs",
+        "MySQL\\nRelational Database::user_accounts\\nuser_profiles\\nbrowing_history"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT MySQL database is represented explicitly and further decomposed into table-oriented subnodes, which is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Frontend UI Layer::TypeScript"
+      ],
+      "predicted_nodes": [
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Admin UI\\n(user list, post list,\\nreview, ban/restore",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Community UI\\n(posts, comments, replies,\\nsearch, recommendations",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Favorites UI\\n(add, view, remove",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Game UI\\n(new game, saves, choices,\\nbackground setup, tutorial",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Notification UI\\n(unread, read, delete",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::User UI\\n(registration, login, logout,\\nprofile, browsing history"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Although TypeScript is not named, the Vue/Nuxt frontend application subsumes the frontend implementation stack."
+    },
+    {
+      "gt_nodes": [
+        "Frontend UI Layer::Vite2"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node corresponds to the Vite2 build tooling boundary."
+    },
+    {
+      "gt_nodes": [
+        "Frontend UI Layer::Vue3"
+      ],
+      "predicted_nodes": [
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Admin UI\\n(user list, post list,\\nreview, ban/restore",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Community UI\\n(posts, comments, replies,\\nsearch, recommendations",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Favorites UI\\n(add, view, remove",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Game UI\\n(new game, saves, choices,\\nbackground setup, tutorial",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Notification UI\\n(unread, read, delete",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::User UI\\n(registration, login, logout,\\nprofile, browsing history"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted frontend application is Vue-based and therefore semantically matches the Vue3 UI layer."
+    },
+    {
+      "gt_nodes": [
+        "Frontend UI Layer::element-plus"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No explicit UI component library boundary is present in the predicted architecture."
+    },
+    {
+      "gt_nodes": [
+        "Global::Log Recording"
+      ],
+      "predicted_nodes": [
+        "MySQL\\nRelational Database::sensitive_logs"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Sensitive logs are a correct semantic realization of log recording."
+    },
+    {
+      "gt_nodes": [
+        "Global::Permission Control"
+      ],
+      "predicted_nodes": [
+        "Deployment Infrastructure\\n(Docker + Kubernetes::API & Middleware Layer\\n(Iris Go Framework::API Gateway / Router\\n(routing, middleware,\\nauthentication, session",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Application Services::Admin Service\\n(admin login/logout,\\nuser & post governance,\\nban / restore accounts",
+        "Deployment Infrastructure\\n(Docker + Kubernetes::Data Access Layer\\n(Gorm ORM::Admin Repository\\n(admin accounts,\\npermissions, reports"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Permission control is grounded through authentication middleware, admin service behavior, and permission storage."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Ajax Interaction"
+      ],
+      "predicted_nodes": [
+        "Deployment Infrastructure\\n(Docker + Kubernetes::API & Middleware Layer\\n(Iris Go Framework::API Gateway / Router\\n(routing, middleware,\\nauthentication, session"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The API/router layer appropriately realizes client-server AJAX interaction."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Ajax Interaction::GET Request"
+      ],
+      "predicted_nodes": [
+        "Deployment Infrastructure\\n(Docker + Kubernetes::API & Middleware Layer\\n(Iris Go Framework::API Gateway / Router\\n(routing, middleware,\\nauthentication, session"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "GET request handling is a normal subset of the API/router layer."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Ajax Interaction::POST Request"
+      ],
+      "predicted_nodes": [
+        "Deployment Infrastructure\\n(Docker + Kubernetes::API & Middleware Layer\\n(Iris Go Framework::API Gateway / Router\\n(routing, middleware,\\nauthentication, session"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "POST request handling is a normal subset of the API/router layer."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Template Rendering"
+      ],
+      "predicted_nodes": [
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Admin UI\\n(user list, post list,\\nreview, ban/restore",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Community UI\\n(posts, comments, replies,\\nsearch, recommendations",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Favorites UI\\n(add, view, remove",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Game UI\\n(new game, saves, choices,\\nbackground setup, tutorial",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::Notification UI\\n(unread, read, delete",
+        "Client Layer\\n(Browser / Device::Frontend Application\\n(Vue.js + Nuxt.js SSR::User UI\\n(registration, login, logout,\\nprofile, browsing history"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Nuxt SSR frontend rendering semantically matches template rendering."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Data Layer::Data Caching",
+    "Frontend UI Layer::Vite2",
+    "Frontend UI Layer::element-plus"
+  ],
+  "unmatched_predicted_nodes": []
+}

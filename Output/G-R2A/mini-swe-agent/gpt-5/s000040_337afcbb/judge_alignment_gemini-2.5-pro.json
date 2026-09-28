@@ -1,0 +1,91 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Internet"
+      ],
+      "predicted_nodes": [
+        "Global::External"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the concept of external users or systems accessing the architecture. The 'Global' boundary is identical and correct."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Proxy"
+      ],
+      "predicted_nodes": [
+        "Internal Network::Proxy Layer::PlugIt Proxy",
+        "Internal Network::Proxy Layer::Mail Handler",
+        "Internal Network::Proxy Layer::Mail Processing (Example/Standalone"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's single 'PlugIt Proxy' node is correctly split by the AI into its core proxy function and the mail processing components described as part of the 'standalone proxy example scope' in the PRD. This is an accurate functional decomposition."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB_Proxy"
+      ],
+      "predicted_nodes": [
+        "Internal Network::Proxy Layer::Proxy Data Store"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the 'proxy-side data store' mentioned in the PRD. The AI's boundary 'Internal Network::Proxy Layer' is a more specific but semantically correct version of the GT's 'Internal Network' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Service 1"
+      ],
+      "predicted_nodes": [
+        "Internal Network::Service Layer::PlugIt Service A"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct match for one of the generic PlugIt services. The AI introduced a 'Service Layer' sub-boundary, which is a logical and correct refinement of the GT's 'Internal Network' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Service 2"
+      ],
+      "predicted_nodes": [
+        "Internal Network::Service Layer::PlugIt Service B"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct match for a second generic PlugIt service. The boundary attribution is consistent and correct."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB 1"
+      ],
+      "predicted_nodes": [
+        "Internal Network::Service Layer::Service A DB (MySQL/SQLite"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This matches the database for the first service. Placing it in the 'Service Layer' alongside its service is a correct architectural grouping and a valid refinement of the GT's boundary."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB 2"
+      ],
+      "predicted_nodes": [
+        "Internal Network::Service Layer::Service B DB (MySQL/SQLite"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This matches the database for the second service. The boundary attribution is consistent with its corresponding service and is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Internal Network::DB 3",
+    "Internal Network::PlugIt Service 3"
+  ],
+  "unmatched_predicted_nodes": [
+    "External::Mail Server",
+    "External::PlugIt API Client"
+  ]
+}

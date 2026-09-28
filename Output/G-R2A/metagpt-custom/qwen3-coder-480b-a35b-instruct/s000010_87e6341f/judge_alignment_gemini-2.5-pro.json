@@ -1,0 +1,80 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Flutter-based app::Android",
+        "Flutter-based app::Dart",
+        "Flutter-based app::MacOS",
+        "Flutter-based app::Web",
+        "Flutter-based app::iOS"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Flutter Client"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated multiple GT nodes representing the multi-platform client and its underlying technology into a single conceptual 'Flutter Client' node. The 'Client Layer' boundary is semantically equivalent to 'Flutter-based app'."
+    },
+    {
+      "gt_nodes": [
+        "Global::gRPC Gateway\\n(HTTP-gRPC Proxy)\\nGolang"
+      ],
+      "predicted_nodes": [
+        "API Layer::gRPC-Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "An exact match for the gateway component. The AI's 'API Layer' boundary is more descriptive and architecturally appropriate than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Hosted in Azure Kubernetes Service::Docker container::Recipes Server\\n(gRPC Server)\\nGolang"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Go gRPC Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "An exact match for the backend gRPC server. The AI's 'Service Layer' is a standard architectural layer and is semantically correct, even though the GT used a more specific, nested deployment path as the boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Hosted in Azure Kubernetes Service"
+      ],
+      "predicted_nodes": [
+        "Infrastructure::Azure Kubernetes Service",
+        "Deployment Layer::Kubernetes Deployment",
+        "Infrastructure::Kubernetes Cluster"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the hosting environment and split the single GT node into more granular components: the specific managed service (AKS), the underlying technology (Kubernetes), and the deployment artifact. The 'Infrastructure' and 'Deployment Layer' boundaries are semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Hosted in Azure Kubernetes Service::Docker container"
+      ],
+      "predicted_nodes": [
+        "Deployment Layer::Docker Container"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the Docker container concept. The 'Deployment Layer' boundary is a valid, abstract classification for this component and is semantically correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Postman",
+    "Global::Test Client 1\\nNodeJS",
+    "Global::Test Client 2\\nGolang"
+  ],
+  "unmatched_predicted_nodes": [
+    "Contract Layer::Protocol Buffers Contract",
+    "Global::Infrastructure",
+    "Global::Platforms",
+    "Infrastructure::Docker Runtime",
+    "Platforms::Android Platform",
+    "Platforms::Web Platform",
+    "Platforms::iOS Platform",
+    "Platforms::macOS Platform"
+  ]
+}

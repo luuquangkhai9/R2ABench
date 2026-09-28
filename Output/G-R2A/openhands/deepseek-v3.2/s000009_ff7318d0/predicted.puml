@@ -1,0 +1,135 @@
+@startuml
+skinparam componentStyle rectangle
+skinparam nodesep 20
+skinparam ranksep (−)
+title Foot365 AWS Architecture Diagram
+
+package "Frontend Layer" {
+  [Web Application\nHTML/CSS/Bootstrap/jQuery] as Frontend
+  [Chatbot UI] as ChatbotUI
+  [Reminder Request UI] as ReminderUI
+}
+
+package "API Gateway Layer" {
+  [API Gateway] as APIGateway
+}
+
+package "Backend Services Layer" {
+  [Lambda Functions\nPython/Node.js] as LambdaBackend
+  [Chatbot Handler] as ChatbotHandler
+  [Prediction Service] as PredictionService
+  [Reminder Service] as ReminderService
+  [Live Score Processor] as LiveScoreProcessor
+}
+
+package "Authentication Layer" {
+  [Amazon Cognito] as Cognito
+  [IAM] as IAM
+}
+
+package "Data Storage Layer" {
+  [DynamoDB\nMatch Data] as DynamoDB
+  [Elasticsearch\nSearch Index] as Elasticsearch
+}
+
+package "Machine Learning Layer" {
+  [Amazon SageMaker\nPrediction Models] as SageMaker
+}
+
+package "Notification Layer" {
+  [SQS\nQueue] as SQS
+  [SNS\nSMS Delivery] as SNS
+}
+
+package "Streaming Layer" {
+  [EC2 Instance\nKafka Cluster] as EC2Kafka
+  [Apache Avro\nSchema Registry] as Avro
+}
+
+package "External Sources" {
+  [Live Score Feeds] as LiveScoreFeeds
+  [SMS Gateway] as SMSGateway
+}
+
+' Frontend connections
+Frontend --> APIGateway : API Requests\n(HTTP/JSON)
+ChatbotUI --> APIGateway : Chatbot Messages
+ReminderUI --> APIGateway : Reminder Requests
+
+' API Gateway connections
+APIGateway --> LambdaBackend : Routes Requests
+APIGateway --> Cognito : Authentication
+APIGateway --> IAM : Authorization
+
+' Backend service connections
+LambdaBackend --> DynamoDB : Store/Retrieve\nMatch Data
+LambdaBackend --> Elasticsearch : Search Match Data
+LambdaBackend --> SageMaker : Get Predictions
+LambdaBackend --> SQS : Queue Reminders
+
+' Chatbot flow
+ChatbotHandler --> LambdaBackend : Intent Processing
+ChatbotHandler --> DynamoDB : Get Fixture/Result Data
+ChatbotHandler --> Elasticsearch : Search Recommendations
+
+' Prediction flow
+PredictionService --> SageMaker : ML Inference
+PredictionService --> DynamoDB : Training Data
+
+' Reminder flow
+ReminderService --> SQS : Enqueue Requests
+SQS --> SNS : Process Queue
+SNS --> SMSGateway : Send SMS
+
+' Live score streaming flow
+LiveScoreFeeds --> EC2Kafka : Live Score Events
+EC2Kafka --> Avro : Avro Encoding
+Avro --> LiveScoreProcessor : Process Updates
+LiveScoreProcessor --> DynamoDB : Update Live Scores
+
+' Data flow connections
+DynamoDB --> Elasticsearch : Index Updates
+SageMaker --> DynamoDB : Store Predictions
+
+' Deployment boundaries
+cloud AWS {
+  APIGateway
+  LambdaBackend
+  Cognito
+  IAM
+  DynamoDB
+  Elasticsearch
+  SageMaker
+  SQS
+  SNS
+  EC2Kafka
+  Avro
+}
+
+' Frontend hosting
+cloud FrontendHosting {
+  Frontend
+  ChatbotUI
+  ReminderUI
+}
+
+note top of FrontendHosting
+  Hosted on Amazon S3
+end note
+
+note bottom of EC2Kafka
+  Kafka with Apache Avro
+  for live score updates
+end note
+
+note right of SageMaker
+  Match prediction ML models
+  Final-week season predictions
+end note
+
+note left of SNS
+  SMS reminder delivery
+  Request-based notifications
+end note
+
+@enduml

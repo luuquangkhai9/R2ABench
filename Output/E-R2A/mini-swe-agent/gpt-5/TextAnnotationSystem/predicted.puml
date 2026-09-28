@@ -1,0 +1,64 @@
+@startuml
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+
+title Intelligent Text Annotation System (ITAS) - Layered Architecture
+
+actor System Annotation Administrator as Admin
+actor Data Annotator as Annotator
+actor Researcher as Researcher
+
+node Tencent Cloud as Cloud {
+  node Nginx Reverse Proxy as Nginx
+
+  package Presentation Layer {
+    component Vue.js Frontend\n(Vue 3, Ant Design Vue, Axios) as Frontend
+  }
+
+  package Gateway/Security Layer {
+    component Spring Cloud Gateway as Gateway
+    component Spring Security (AuthN/Z) as Security
+  }
+
+  package Application Layer {
+    component Annotation Service\n(Spring Boot) as AnnSvc
+    component Mining Service\n(Spring Boot) as MineSvc
+  }
+
+  package Data and Infrastructure Layer {
+    database MySQL as MySQL
+    component Redis (Cache) as Redis
+    component RabbitMQ (Message Queue) as MQ
+    cloud MinIO Object Storage as MinIO
+  }
+
+  package Model and External AI {
+    component BERT Model Serving as BERT
+    cloud GPT API / ChatGPT-like Service as GPT
+  }
+}
+
+Admin --> Frontend
+Annotator --> Frontend
+Researcher --> Frontend
+
+Frontend --> Nginx : HTTPS
+Nginx --> Gateway : Reverse proxy
+Gateway --> Security : AuthN/Z
+Gateway --> AnnSvc : REST
+Gateway --> MineSvc : REST
+
+AnnSvc --> MySQL
+AnnSvc --> Redis
+AnnSvc --> MinIO
+AnnSvc --> MQ : async tasks (file conversion)
+AnnSvc --> GPT : entity annotation (optional)
+
+MineSvc --> BERT : paragraph model
+MineSvc --> GPT : entity extraction / LLM
+MineSvc --> MySQL
+MineSvc --> Redis
+MineSvc --> MinIO
+MineSvc --> MQ : async processing
+
+@enduml

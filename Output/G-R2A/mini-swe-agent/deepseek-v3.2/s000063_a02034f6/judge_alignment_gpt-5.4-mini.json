@@ -1,0 +1,285 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Access Layer::Auth Session"
+      ],
+      "predicted_nodes": [
+        "Access Layer::Session Management",
+        "Access Layer::Session Management::Authorization Handler",
+        "Access Layer::Session Management::Salt Manager",
+        "Access Layer::Session Management::Session Controller"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT's auth/session-related access layer concept is split into more explicit session management components. The boundary remains within the access layer and is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Gateway"
+      ],
+      "predicted_nodes": [
+        "Access Layer::MTProto Server Interface",
+        "Access Layer::MTProto Server Interface::Client Connection Handler",
+        "Access Layer::MTProto Server Interface::Protocol Message Parser"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The gateway in GT corresponds to the MTProto-facing ingress/interface in the prediction. The boundary attribution is consistent as an access-layer entry point."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Session"
+      ],
+      "predicted_nodes": [
+        "Access Layer::Session Management",
+        "Access Layer::Session Management::Session Controller",
+        "Access Layer::Session Management::Authorization Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The session node is decomposed into more detailed session management responsibilities. This remains correctly placed in the access layer."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Status"
+      ],
+      "predicted_nodes": [
+        "Access Layer::MTProto Server Interface",
+        "Access Layer::MTProto Server Interface::Protocol Message Parser"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Status in the GT appears to represent protocol-facing connection/state handling. The predicted MTProto interface/parser is a reasonable semantic equivalent and stays in the access layer."
+    },
+    {
+      "gt_nodes": [
+        "Clients::Android",
+        "Clients::PC",
+        "Clients::Web",
+        "Clients::iOS"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Telegram-Compatible Clients"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT enumerates concrete client platforms, while the prediction aggregates them into a generic Telegram-compatible client group. This is semantically equivalent and correctly placed as client-side."
+    },
+    {
+      "gt_nodes": [
+        "Global::BFF"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Business Services"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The BFF in GT maps to the service/business-facing layer in the prediction. The higher-level service boundary is acceptable and not a context error."
+    },
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "External Systems::Kafka",
+        "External Systems::Kafka::Event Stream",
+        "External Systems::Kafka::Message Queue"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The external Kafka dependency is correctly identified, and the subnodes are a reasonable decomposition of its messaging roles. Boundary attribution as external systems is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Push"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Async Processing::Push Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The push component is represented as an async processing service. The placement is consistent with an internal supporting/asynchronous layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::Sync"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Async Processing::Sync Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The sync component is represented as a sync service under async processing, which is semantically consistent with the GT supporting component."
+    },
+    {
+      "gt_nodes": [
+        "Services::Msg"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Business Services::Messaging Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The messaging service directly matches the GT message service. The service-layer placement is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Services::Services"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Business Services"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's generic services node corresponds to the broader business services grouping in the prediction."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MinIO"
+      ],
+      "predicted_nodes": [
+        "External Systems::MinIO",
+        "External Systems::MinIO::File Storage",
+        "External Systems::MinIO::Media Storage"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "MinIO is correctly recognized as an external storage dependency, and the subnodes are a valid semantic decomposition."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MySQL"
+      ],
+      "predicted_nodes": [
+        "External Systems::MySQL",
+        "External Systems::MySQL::Message Data",
+        "External Systems::MySQL::Session Data",
+        "External Systems::MySQL::User Data"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "MySQL is correctly mapped to an external database boundary. The detailed table/data subnodes are a valid refinement."
+    },
+    {
+      "gt_nodes": [
+        "Storages::Redis"
+      ],
+      "predicted_nodes": [
+        "External Systems::Redis",
+        "External Systems::Redis::Cache Store",
+        "External Systems::Redis::Session Cache"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Redis is correctly mapped to an external system boundary, with reasonable cache/session refinements."
+    },
+    {
+      "gt_nodes": [
+        "Global::Kafka",
+        "Global::Push",
+        "Global::Sync"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Async Processing",
+        "Data Layer::Async Processing::Kafka Consumer",
+        "Data Layer::Async Processing::Push Service",
+        "Data Layer::Async Processing::Sync Service"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "These GT supporting components are aggregated into an internal async-processing layer, but Kafka itself is an external dependency in the GT context. The boundary mixes external infrastructure with internal processing, so the attribution is not strictly correct for Kafka."
+    },
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Async Processing::Kafka Consumer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "A Kafka consumer is an internal component, not equivalent to the Kafka infrastructure node in the GT. This is a boundary/context mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Gateway",
+        "Access Layer::Status"
+      ],
+      "predicted_nodes": [
+        "Access Layer::MTProto Server Interface",
+        "Access Layer::MTProto Server Interface::Client Connection Handler",
+        "Access Layer::MTProto Server Interface::Protocol Message Parser"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The prediction merges gateway/status-like ingress responsibilities into a single MTProto server interface layer. The access-layer boundary is preserved."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Session"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Data Access Components::Session Repository",
+        "External Systems::Redis::Session Cache"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "Session concerns in GT are access-layer/session-management responsibilities, but the prediction shifts them into data access and cache layers. This is a significant layer mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Auth Session"
+      ],
+      "predicted_nodes": [
+        "Access Layer::Session Management::Authorization Handler",
+        "Access Layer::Session Management::Salt Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Authorization and salt handling are core auth-session responsibilities and remain in the access layer."
+    },
+    {
+      "gt_nodes": [
+        "Services::Msg"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Service Message Handler",
+        "Service Layer::Service Message Handler::destroy_session Handler",
+        "Service Layer::Service Message Handler::rpc_drop_answer Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The service message handler and its specific handlers are a precise decomposition of the GT message service. The service boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Services::Services"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Business Services::Phone Verification Service",
+        "Service Layer::Business Services::Registration Service",
+        "Service Layer::Verification Service",
+        "Service Layer::Verification Service::Default Verifier (12345",
+        "Service Layer::Verification Service::External Verifier Adapter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These are valid refinements of generic business services into registration and verification concerns. The service-layer boundary is consistent."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Data Layer::Data Access Components",
+    "Data Layer::Data Access Components::Message Repository",
+    "Data Layer::Data Access Components::Session Repository",
+    "Data Layer::Data Access Components::User Repository",
+    "Data Layer::Media Wrapper",
+    "Data Layer::Media Wrapper::FFProbe Interface",
+    "Data Layer::Media Wrapper::FFmpeg Interface",
+    "External Systems::etcd",
+    "External Systems::etcd::Configuration Store",
+    "External Systems::etcd::Service Discovery",
+    "External Systems::External Verification Service"
+  ]
+}

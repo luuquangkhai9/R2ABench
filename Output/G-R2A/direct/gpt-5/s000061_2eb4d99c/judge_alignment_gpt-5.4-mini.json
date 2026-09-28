@@ -1,0 +1,144 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS CloudFormation\nCustom resources"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::AWS Lambda\nCustom Resource Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the deployment-time CloudFormation custom-resource handling implemented by Lambda. The boundary/package naming differs, but it is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS IoT Core"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::AWS IoT Core\nIoT Topics"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to AWS IoT Core as the message publication target. The added 'IoT Topics' detail is consistent with the same component."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS Lambda\nSimulator API"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::AWS Lambda\nAPI Backend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the Lambda-backed API service. The naming differs, but the functional role is equivalent."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS Step Functions\nSimulation workflow"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::AWS Step Functions\nSimulation Orchestrator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Step Functions workflow coordinating simulation. The labels are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon API Gateway\nREST API"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::Amazon API Gateway\nREST API (Stage: prod, Type: REGIONAL"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the deployed API Gateway REST API. The predicted node includes correct deployment attributes from the PRD."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon DynamoDB\nSimulator state"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::Amazon DynamoDB\nTables: Simulations, DeviceTypes"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe DynamoDB-backed simulator state storage. The predicted node expands the storage detail but remains within the same boundary."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon S3\nRoute data bucket"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::AWS Lambda\nRoute Loader"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The functional relation exists, but this is not the same component: the GT node is the S3 route data bucket, while the predicted node is a Lambda route loader. This is a boundary/component confusion."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon S3\nWeb UI bucket"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::Web Management Console\n(Hosted & Distributed"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the web UI hosting/distribution side of the system. The predicted node expresses the console instead of the bucket, but this is semantically aligned as the web UI delivery component."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Browser Web UI\nstatic app client"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::Web Management Console\n(Hosted & Distributed"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the browser-based management UI. The predicted node uses a higher-level label, but it is functionally equivalent."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon CloudFront"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::Web Management Console\n(Hosted & Distributed"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "CloudFront is a distribution layer component, not the management console itself. The prediction conflates delivery infrastructure with the UI application."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon Cognito"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::Identity & Auth Service\n(e.g., Cognito / OIDC"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node is a generic identity/auth service that semantically corresponds to Cognito used by the GT."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Users"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::Identity & Auth Service\n(e.g., Cognito / OIDC"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Users are actors, not an identity/auth service component. The predicted node incorrectly models the user boundary as an authentication service."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "AWS Account / Region::AWS Lambda\nDevice Simulator Worker",
+    "AWS Account / Region::AWS Lambda\nRoute Loader",
+    "AWS Account / Region::AWS X-Ray\nTracing Enabled",
+    "AWS Account / Region::Amazon CloudWatch Logs\nAPI Access Logs (JSON",
+    "Global::AWS Account / Region"
+  ]
+}

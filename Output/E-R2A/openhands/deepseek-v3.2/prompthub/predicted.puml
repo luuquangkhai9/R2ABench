@@ -1,0 +1,320 @@
+@startuml
+!define RECTANGLE class
+skinparam componentStyle rectangle
+skinparam nodesep 10
+skinparam ranksep 30
+skinparam shadowing false
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontSize 12
+
+title PromptHub System Architecture Diagram
+
+' ========== EXTERNAL USERS/ACTORS ==========
+actor "Visitor" as visitor
+actor "Registered User" as reguser
+actor "Administrator" as admin
+actor "AI Artwork Creator" as creator
+actor "AI Artwork Viewer" as viewer
+
+' ========== CLIENT LAYER ==========
+package "Client Layer" {
+  component "Web Browser" as browser #lightblue [
+    Chrome 110+
+    Firefox 119+
+    Safari 15.3+
+    
+    HTML/CSS/JavaScript
+    Vue.js / JQuery
+  ]
+  
+  browser -up-> visitor : "Browses"
+  browser -up-> reguser : "Registered Account"
+  browser -up-> admin : "Administrator Access"
+  browser -up-> creator : "Uploads Artworks"
+  browser -up-> viewer : "Views & Learns"
+}
+
+' ========== NETWORK LAYER ==========
+cloud "Internet" as internet #lightgray [
+  Secure HTTP/HTTPS
+  Firewall Enabled
+  CORS Configuration
+]
+
+browser --> internet : "Web Requests"
+internet --> browser : "Responses"
+
+' ========== LOAD BALANCER & SECURITY ==========
+node "Load Balancer" as lb #pink [
+  Distributes Traffic
+  Concurrent Access Limit
+]
+
+node "Web Application Firewall" as waf #lightcoral [
+  XSS Protection
+  SQL Injection Prevention
+  Illegal Link Blocking
+]
+
+internet --> lb : "Incoming Requests"
+lb --> waf : "Filtered Traffic"
+
+' ========== FRONTEND MODULE ==========
+package "Frontend Module" {
+  component "Vue.js Application" as vueapp #lightgreen [
+    Single Page Application
+    Responsive UI Design
+    Obfuscated & Compressed
+  ]
+  
+  component "User Interface Components" as uicomponents #lightgreen [
+    Home Page & Artwork List
+    Registration/Login Forms
+    Artwork Detail View
+    Upload/Edit Interface
+    Favorite Management
+    Admin Dashboard
+    Notification Center
+  ]
+  
+  vueapp --> uicomponents : "Renders"
+}
+
+waf --> vueapp : "Authenticated Requests"
+
+' ========== BACKEND MODULE ==========
+package "Backend Module" {
+  component "Django Web Framework" as django #lightyellow [
+    Python/Java
+    REST API Endpoints
+    Authentication Service
+    Session Management
+  ]
+  
+  component "Business Services" as services #lightyellow [
+    User Management Service
+    Artwork Service
+    Favorite Service
+    Comment/Reply Service
+    Review Service
+    Notification Service
+    Recommendation Service
+  ]
+  
+  component "Data Validation Layer" as validation #lightyellow [
+    Input Sanitization
+    Data Re-validation
+    Secure Data Processing
+  ]
+  
+  django --> services : "Orchestrates"
+  services --> validation : "Validates"
+}
+
+vueapp --> django : "API Calls (HTTPS)"
+
+' ========== ALGORITHM SUPPORT MODULE ==========
+package "Algorithm Support Module" {
+  component "Recommendation Engine" as recengine #lightpurple [
+    Python with PyTorch/TensorFlow
+    Popular Recommendation
+    Personalized Recommendation
+  ]
+  
+  component "Signal Processing" as signalproc #lightpurple [
+    User Behavior Analysis
+    Browsing History Processing
+    Preference Learning
+  ]
+  
+  component "Model Training" as modeltraining #lightpurple [
+    AI Model Training
+    Performance Optimization
+  ]
+  
+  recengine --> signalproc : "Processes Signals"
+  signalproc --> modeltraining : "Updates Models"
+}
+
+services --> recengine : "Requests Recommendations"
+
+' ========== DATA LAYER ==========
+package "Data Layer" {
+  database "SQLite Database" as sqlite #lightcyan [
+    SQLite (v3.x)
+    Local Persistent Storage
+    Future Migration to MySQL
+  ]
+  
+  component "Data Models" as datamodels #lightcyan [
+    User Account
+    AI Artwork
+    Review Record
+    Comment/Reply
+    Favorite/Favorite Category
+    Follow Relationship
+    Browsing History
+    Notification Message
+  ]
+  
+  component "Data Encryption" as encryption #lightcyan [
+    End-to-End Encryption
+    Sensitive Data Protection
+  ]
+  
+  sqlite --> datamodels : "Stores"
+  datamodels --> encryption : "Secures"
+}
+
+services --> sqlite : "CRUD Operations"
+validation --> sqlite : "Validated Data"
+
+' ========== EXTERNAL SERVICES ==========
+package "External Services" {
+  component "Email Service" as email #lightorange [
+    Verification Code Delivery
+    Password Recovery
+    System Alerts
+  ]
+  
+  component "File Storage" as filestorage #lightorange [
+    AI-Generated Images
+    User Avatars
+    Artwork Media
+  ]
+  
+  component "Log Management" as logmgmt #lightorange [
+    System Logs Backup
+    Error Tracking
+    Performance Monitoring
+  ]
+}
+
+django --> email : "Sends Email"
+services --> filestorage : "Stores Files"
+django --> logmgmt : "Logs Events"
+
+' ========== DEPLOYMENT & INFRASTRUCTURE ==========
+node "Docker Runtime" as docker #lightgray [
+  Docker 20.10.17
+  Ubuntu 22.0.4
+  Automatic Restart
+]
+
+cloud "Server Infrastructure" as server #lightgray [
+  CPU: Intel Core i5-10600K+
+  GPU: NVIDIA GeForce GTX 2060+
+  RAM: 32GB+
+  Disk Usage < 80%
+]
+
+docker --> server : "Runs On"
+
+' ========== KEY DATA FLOWS ==========
+' User Management Flow
+visitor --> browser : "Access"
+browser --> vueapp : "Loads UI"
+vueapp --> django : "Register/Login"
+django --> services : "User Service"
+services --> sqlite : "Store Account"
+sqlite --> encryption : "Encrypt Sensitive"
+
+' Artwork Upload Flow
+creator --> browser : "Upload Artwork"
+browser --> vueapp : "Upload Form"
+vueapp --> django : "Submit Artwork"
+django --> services : "Artwork Service"
+services --> filestorage : "Store Image"
+services --> sqlite : "Store Metadata"
+services --> recengine : "Update Signals"
+
+' Artwork Review Flow
+admin --> browser : "Access Admin"
+browser --> vueapp : "Admin Dashboard"
+vueapp --> django : "Get Pending Reviews"
+django --> services : "Review Service"
+services --> sqlite : "Update Review Status"
+services --> email : "Notify User"
+
+' Recommendation Flow
+viewer --> browser : "Browse Artworks"
+browser --> vueapp : "Request Recommendations"
+vueapp --> django : "Get Recommendations"
+django --> recengine : "Calculate"
+recengine --> signalproc : "Analyze Behavior"
+signalproc --> sqlite : "Read History/Prefs"
+recengine --> services : "Return Results"
+
+' Notification Flow
+services --> sqlite : "Create Notification"
+sqlite --> services : "Retrieve Notifications"
+services --> vueapp : "Push Updates"
+vueapp --> browser : "Display Notifications"
+
+' ========== SECURITY COMPONENTS ==========
+frame "Security Layer" {
+  component "Authentication" as auth #pink [
+    User Authentication
+    Session Management
+    Password Encryption
+  ]
+  
+  component "Authorization" as authz #pink [
+    Role-Based Access
+    Permission Checks
+    Admin Privileges
+  ]
+  
+  component "Input Validation" as inputval #pink [
+    XSS Prevention
+    SQL Injection Protection
+    Data Sanitization
+  ]
+}
+
+django --> auth : "Handles Login"
+django --> authz : "Checks Permissions"
+validation --> inputval : "Validates Input"
+
+' ========== RELATIONSHIPS ==========
+' Main flow relationships
+vueapp --> django : "API Requests"
+django --> vueapp : "API Responses"
+
+' Database relationships
+services --> sqlite : "Data Operations"
+sqlite --> services : "Query Results"
+
+' Algorithm integration
+services --> recengine : "Request Recommendations"
+recengine --> services : "Recommendation Results"
+
+' Security integration
+waf --> django : "Filtered Requests"
+django --> waf : "Security Logs"
+
+' Deployment relationships
+docker ..> vueapp : "Hosts"
+docker ..> django : "Hosts"
+docker ..> recengine : "Hosts"
+docker ..> sqlite : "Hosts"
+
+' External service relationships
+email ..> visitor : "Sends Verification"
+email ..> reguser : "Sends Notifications"
+logmgmt ..> admin : "Provides Logs"
+
+' ========== LEGEND ==========
+legend right
+  | Color | Component Type |
+  | #lightblue | Client Components |
+  | #lightgreen | Frontend Components |
+  | #lightyellow | Backend Components |
+  | #lightpurple | Algorithm Components |
+  | #lightcyan | Data Components |
+  | #lightorange | External Services |
+  | #pink | Security Components |
+  | #lightgray | Infrastructure |
+endlegend
+
+@enduml

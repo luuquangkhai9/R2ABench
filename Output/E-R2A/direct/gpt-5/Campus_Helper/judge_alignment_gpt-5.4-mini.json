@@ -1,0 +1,383 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Admin Mgmt Service"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Admin Product Mgmt Service\n[FR-009..FR-012",
+        "Business Layer::Admin Order Mgmt Service\n[FR-013..FR-015",
+        "Business Layer::Admin User Mgmt Service\n[FR-016..FR-018"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT admin management service is split into dedicated admin product, order, and user management services in the prediction. The business-layer attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Help Goods Service"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Product Catalog Service\n[FR-001, FR-002",
+        "Business Layer::Search & Category Service\n[FR-002",
+        "Business Layer::Popularity Rules Engine\n[AD-002"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT helper goods service corresponds to product browsing/search/category/popularity functions, which the prediction decomposes into related services. These remain in the correct business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Order Mgmt Service"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Order Service\n(Create/Modify Remark/\nConfirm/Cancel)\n[FR-003..FR-006, FR-008"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted order service covers the GT order management responsibilities and stays within the business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Personal Center Service"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Favorites Service\n[FR-007",
+        "Business Layer::Order Service\n(Create/Modify Remark/\nConfirm/Cancel)\n[FR-003..FR-006, FR-008",
+        "Business Layer::User Profile Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The personal center service is decomposed into favorites, order records/order-related functions, and user profile functions, which is a reasonable business-layer split."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Create Order Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Order Service\n(Create/Modify Remark/\nConfirm/Cancel)\n[FR-003..FR-006, FR-008"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The create order module is functionally included in the broader order service."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Favorites Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Favorites Service\n[FR-007"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Favorites module and favorites service are semantically equivalent and correctly placed in the business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Goods Category Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Search & Category Service\n[FR-002",
+        "Business Layer::Product Catalog Service\n[FR-001, FR-002"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Category browsing is split into catalog browsing and search/category handling, which is consistent with the GT business module."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Hot Items Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Product Catalog Service\n[FR-001, FR-002",
+        "Business Layer::Popularity Rules Engine\n[AD-002"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Hot items functionality is represented by product browsing plus a popularity rules engine, both in the correct business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Modify User Info Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Admin User Mgmt Service\n[FR-016..FR-018",
+        "Business Layer::User Profile Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "User information modification appears in both admin user management and user profile handling; the business-layer placement is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Order Record Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Order Service\n(Create/Modify Remark/\nConfirm/Cancel)\n[FR-003..FR-006, FR-008"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Order records are part of the broader order service in the prediction."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Platform Mgmt Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Admin Product Mgmt Service\n[FR-009..FR-012",
+        "Business Layer::Admin Order Mgmt Service\n[FR-013..FR-015",
+        "Business Layer::Admin User Mgmt Service\n[FR-016..FR-018",
+        "Business Layer::Admin Logging Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Platform management is decomposed into admin product, order, user, and logging services, all correctly within business layer scope."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Custom Functions"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Data Review & Privacy Guard\n[NFR-004",
+        "Data Layer::Monitoring Metrics Collector\n[DR-007",
+        "Data Layer::Admin Log Repository\n[DR-006"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Custom data-layer functions are represented by data review/privacy, monitoring, and admin log related data-layer components."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Backup"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Data Review & Privacy Guard\n[NFR-004",
+        "Data Entity Layer (Database::Relational Database\nCampusHelperDB\n- Users, RolesPermissions [DR-001]\n- Products [DR-002]\n- Categories, Tags [DR-003]\n- Orders [DR-004]\n- Favorites [DR-005]\n- AdminLogs [DR-006]\n- ReviewStatus [DR-008"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The prediction does not explicitly model backup functionality; the mapped nodes are only loosely related and the boundary attribution is not a faithful reproduction of backup concerns."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Cache"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Observability\n(Metrics, Tracing, QPS)\n[NFR-019, NFR-020",
+        "Data Layer::Monitoring Metrics Collector\n[DR-007"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "A cache layer is not actually represented. The predicted monitoring/observability components are not semantically equivalent to caching."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Recovery"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Data Review & Privacy Guard\n[NFR-004",
+        "Data Entity Layer (Database::Relational Database\nCampusHelperDB\n- Users, RolesPermissions [DR-001]\n- Products [DR-002]\n- Categories, Tags [DR-003]\n- Orders [DR-004]\n- Favorites [DR-005]\n- AdminLogs [DR-006]\n- ReviewStatus [DR-008"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The prediction does not provide a real recovery component; these nodes are not functionally equivalent to data recovery."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Read/Write Database"
+      ],
+      "predicted_nodes": [
+        "Data Layer::User Repository\n[DR-001",
+        "Data Layer::Product Repository\n[DR-002",
+        "Data Layer::Tag/Category Repository\n[DR-003",
+        "Data Layer::Order Repository\n[DR-004",
+        "Data Layer::Favorites Repository\n[DR-005",
+        "Data Layer::Admin Log Repository\n[DR-006",
+        "Data Entity Layer (Database::Relational Database\nCampusHelperDB\n- Users, RolesPermissions [DR-001]\n- Products [DR-002]\n- Categories, Tags [DR-003]\n- Orders [DR-004]\n- Favorites [DR-005]\n- AdminLogs [DR-006]\n- ReviewStatus [DR-008"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT read/write database capability is split into repositories plus the relational database entity layer, which is consistent overall."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Stored Procedures"
+      ],
+      "predicted_nodes": [
+        "Data Layer::User Repository\n[DR-001",
+        "Data Layer::Product Repository\n[DR-002",
+        "Data Layer::Order Repository\n[DR-004"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "Repositories are not semantically equivalent to stored procedures; this is a boundary and component-type mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Data Entity Layer (Database::Relational Database\nCampusHelperDB\n- Users, RolesPermissions [DR-001]\n- Products [DR-002]\n- Categories, Tags [DR-003]\n- Orders [DR-004]\n- Favorites [DR-005]\n- AdminLogs [DR-006]\n- ReviewStatus [DR-008"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The relational database in the prediction is semantically equivalent to MySQL and remains in the database/data-entity boundary."
+    },
+    {
+      "gt_nodes": [
+        "Display Layer::GET Request"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Application API\n(Facade"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "An application API facade is not semantically equivalent to a GET request display-layer node; this is a protocol/layer mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Display Layer::POST Request"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Application API\n(Facade"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "A facade API is not a POST request node, and it is placed in the wrong architectural layer."
+    },
+    {
+      "gt_nodes": [
+        "Display Layer::Template Engine Rendering\\n(pages"
+      ],
+      "predicted_nodes": [
+        "Administration Backend (Web UI::Presentation Layer::Admin Console UI\\n- Product Mgmt\\n- Order Mgmt\\n- User Mgmt"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Admin console UI is not equivalent to template engine rendering, and the boundary is incorrect relative to the GT display layer."
+    },
+    {
+      "gt_nodes": [
+        "Display Layer::wx.request Interaction"
+      ],
+      "predicted_nodes": [
+        "WeChat Mini Program Runtime\\n(WeChat >= 8.0)\\n[AD-001][C-001][C-003::Presentation Layer::Mini Program UI\\n- Home / Popular\\n- Category Browse\\n- Product Detail\\n- Order UI\\n- Personal Center"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "wx.request interaction is a client-side request mechanism, but the prediction collapses it into a UI node inside the runtime boundary, which is not a faithful layer match."
+    },
+    {
+      "gt_nodes": [
+        "Global::Log Recording"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Admin Logging Service",
+        "Data Layer::Admin Log Repository\n[DR-006",
+        "Business Layer::Observability\n(Metrics, Tracing, QPS)\n[NFR-019, NFR-020"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Log recording is represented by logging service/repository and observability functions, which are plausible equivalent decompositions."
+    },
+    {
+      "gt_nodes": [
+        "Global::Permission Control"
+      ],
+      "predicted_nodes": [
+        "Business Layer::AuthN/Z Service\n(RBAC, Session/JWT)\n[NFR-003",
+        "Business Layer::Anti-Abuse / Bot Detection\n[NFR-001"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Permission control maps to authentication/authorization, and the business-layer placement is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Mini-program UI::JavaScript"
+      ],
+      "predicted_nodes": [
+        "WeChat Mini Program Runtime\\n(WeChat >= 8.0)\\n[AD-001][C-001][C-003::Presentation Layer::Mini Program UI\\n- Home / Popular\\n- Category Browse\\n- Product Detail\\n- Order UI\\n- Personal Center"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "JavaScript is a client implementation language/artifact, not the same as the UI presentation node; boundary attribution is not equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Mini-program UI::Wxml"
+      ],
+      "predicted_nodes": [
+        "WeChat Mini Program Runtime\\n(WeChat >= 8.0)\\n[AD-001][C-001][C-003::Presentation Layer::Mini Program UI\\n- Home / Popular\\n- Category Browse\\n- Product Detail\\n- Order UI\\n- Personal Center"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "WXML is a view markup artifact, not semantically equivalent to the generalized mini-program UI node."
+    },
+    {
+      "gt_nodes": [
+        "Mini-program UI::Wxss"
+      ],
+      "predicted_nodes": [
+        "WeChat Mini Program Runtime\\n(WeChat >= 8.0)\\n[AD-001][C-001][C-003::Presentation Layer::Mini Program UI\\n- Home / Popular\\n- Category Browse\\n- Product Detail\\n- Order UI\\n- Personal Center"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "WXSS is a style artifact, not semantically equivalent to the UI presentation node."
+    },
+    {
+      "gt_nodes": [
+        "Runtime Environment::MySQL 106.55.224.139\\n2 Cores 4GB"
+      ],
+      "predicted_nodes": [
+        "Data Entity Layer (Database::Relational Database\nCampusHelperDB\n- Users, RolesPermissions [DR-001]\n- Products [DR-002]\n- Categories, Tags [DR-003]\n- Orders [DR-004]\n- Favorites [DR-005]\n- AdminLogs [DR-006]\n- ReviewStatus [DR-008"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The prediction includes a database entity but omits the runtime host/environment specification, so it is not an accurate environment match."
+    },
+    {
+      "gt_nodes": [
+        "Runtime Environment::Tencent Cloud\\nLightweight App Server"
+      ],
+      "predicted_nodes": [
+        "Global::WeChat Mini Program Runtime\\n(WeChat >= 8.0)\\n[AD-001][C-001][C-003"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The app server runtime environment is not equivalent to the WeChat mini program client runtime."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Administration Backend (Web UI::Presentation Layer::Admin Console UI\\n- Product Mgmt\\n- Order Mgmt\\n- User Mgmt",
+    "Business Layer::Admin Logging Service",
+    "Business Layer::Admin Order Mgmt Service\\n[FR-013..FR-015",
+    "Business Layer::Admin Product Mgmt Service\\n[FR-009..FR-012",
+    "Business Layer::Admin User Mgmt Service\\n[FR-016..FR-018",
+    "Business Layer::Anti-Abuse / Bot Detection\\n[NFR-001",
+    "Business Layer::Application API\\n(Facade",
+    "Business Layer::AuthN/Z Service\\n(RBAC, Session/JWT)\\n[NFR-003",
+    "Business Layer::Favorites Service\\n[FR-007",
+    "Business Layer::Input Validation & SQLi Guard\\n[NFR-002",
+    "Business Layer::Observability\\n(Metrics, Tracing, QPS)\\n[NFR-019, NFR-020",
+    "Business Layer::Order Service\\n(Create/Modify Remark/\\nConfirm/Cancel)\\n[FR-003..FR-006, FR-008",
+    "Business Layer::Popularity Rules Engine\\n[AD-002",
+    "Business Layer::Product Catalog Service\\n[FR-001, FR-002",
+    "Business Layer::Search & Category Service\\n[FR-002",
+    "Business Layer::User Profile Service",
+    "Data Entity Layer (Database::Logs & Metrics Store\\n(Service Logs, QPS, RT, CPU/Mem, DB load)\\n[DR-007",
+    "Data Entity Layer (Database::Relational Database\\nCampusHelperDB\\n- Users, RolesPermissions [DR-001]\\n- Products [DR-002]\\n- Categories, Tags [DR-003]\\n- Orders [DR-004]\\n- Favorites [DR-005]\\n- AdminLogs [DR-006]\\n- ReviewStatus [DR-008",
+    "Data Layer::Admin Log Repository\\n[DR-006",
+    "Data Layer::Data Review & Privacy Guard\\n[NFR-004",
+    "Data Layer::Favorites Repository\\n[DR-005",
+    "Data Layer::Monitoring Metrics Collector\\n[DR-007",
+    "Data Layer::Order Repository\\n[DR-004",
+    "Data Layer::Product Repository\\n[DR-002",
+    "Data Layer::Tag/Category Repository\\n[DR-003",
+    "Data Layer::User Repository\\n[DR-001",
+    "Global::Administration Backend (Web UI",
+    "Global::WeChat Mini Program Runtime\\n(WeChat >= 8.0)\\n[AD-001][C-001][C-003",
+    "WeChat Mini Program Runtime\\n(WeChat >= 8.0)\\n[AD-001][C-001][C-003::Presentation Layer::Mini Program UI\\n- Home / Popular\\n- Category Browse\\n- Product Detail\\n- Order UI\\n- Personal Center"
+  ]
+}

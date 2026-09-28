@@ -1,0 +1,102 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::AWS EventBridge"
+      ],
+      "predicted_nodes": [
+        "AWS::AWS EventBridge"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent AWS EventBridge used for event routing/alerting. The boundary label is simplified but semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::SNS Topic\\nalerts"
+      ],
+      "predicted_nodes": [
+        "AWS::AWS SNS Topic"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the SNS notification topic used for alerts. The predicted boundary is generic, but it matches the GT component semantically."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::CMS BigMAC"
+      ],
+      "predicted_nodes": [
+        "Global::CMS BigMAC"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The external CMS BigMAC system is preserved semantically, though the predicted node places it at a global boundary rather than within the AWS VPC context."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::connector::Private subnet::AWS Fargate\\nKafka Connect Cluster"
+      ],
+      "predicted_nodes": [
+        "macpro-appian-connector::Connector Configuration Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is the runtime Kafka Connect cluster in a private subnet, while the predicted node is application logic for connector configuration. These are related but not the same architectural component."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::topics::Private subnet::AWS Lambda\\ncreate/delete topics"
+      ],
+      "predicted_nodes": [
+        "macpro-appian-connector::Event Routing & Alerting"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a Lambda component for topic creation/deletion, while the predicted node is a higher-level alerting function. This is not an accurate component match."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nAppian Source::VPC::Appian\\nOracle DB"
+      ],
+      "predicted_nodes": [
+        "Global::AWS"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a specific source-side Oracle database in Appian's VPC, but the predicted node is an overly broad AWS placeholder. This is not a valid semantic match."
+    },
+    {
+      "gt_nodes": [
+        "Global::VPC peering\\nconnection"
+      ],
+      "predicted_nodes": [
+        "Global::AWS"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "VPC peering is a specific network boundary component, while the predicted node is an overly generic AWS grouping. The match is too coarse to be considered correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "AWS Cloud\\nConnector Account::Email notification",
+    "AWS Cloud\\nConnector Account::Chat notification",
+    "AWS Cloud\\nConnector Account::Slack notification"
+  ],
+  "unmatched_predicted_nodes": [
+    "AWS::AWS Account/Region",
+    "AWS::AWS CLI",
+    "AWS::AWS Connector Management",
+    "Global::GitHub",
+    "Global::Manual SNS Subscriptions",
+    "Global::macpro-appian-connector",
+    "macpro-appian-connector::Connector Configuration Handler",
+    "macpro-appian-connector::Deployment Metrics Collector",
+    "macpro-appian-connector::Event Routing & Alerting",
+    "macpro-appian-connector::Onboarding & Script Execution",
+    "macpro-appian-connector::PR Metrics Collector",
+    "macpro-appian-connector::Stage Listing Module",
+    "GitHub::GitHub Actions API",
+    "GitHub::GitHub Pull Requests API"
+  ]
+}

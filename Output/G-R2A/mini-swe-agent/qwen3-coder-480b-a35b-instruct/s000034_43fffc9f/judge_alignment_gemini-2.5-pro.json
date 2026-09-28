@@ -1,0 +1,77 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "Communication & Coordination Layer::MPI Communicator",
+        "External Dependencies::MPI (mpi4py"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly split the abstract 'MPI' concept from the GT into its two roles: the external library dependency ('mpi4py') and its internal usage for inter-process communication ('MPI Communicator'). The boundary attribution to 'External Dependencies' and 'Communication & Coordination Layer' is a valid and more detailed refinement."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Worker\\nThread"
+      ],
+      "predicted_nodes": [
+        "Core Execution Layer::Worker Thread Pool"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct semantic match. A 'Worker Thread' is a member of a 'Worker Thread Pool'. The AI's 'Core Execution Layer' is a logical boundary that is semantically equivalent to the GT's physical/runtime boundary 'Compute node::MPI Process', as this is where the execution logic resides."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Task Queue",
+        "Task Queue (in detail::...",
+        "Task Queue (in detail::A1",
+        "Task Queue (in detail::A2",
+        "Task Queue (in detail::A3",
+        "Task Queue (in detail::B1",
+        "Task Queue (in detail::B2",
+        "Task Queue (in detail::Level 0",
+        "Task Queue (in detail::Level 1",
+        "Task Queue (in detail::Level 2",
+        "Task Queue (in detail::Level 3",
+        "Task Queue (in detail::Level 4",
+        "Task Queue (in detail::Level 5"
+      ],
+      "predicted_nodes": [
+        "Data Stores::Task Queue"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the 'Task Queue' as a central component and aggregated the multiple detail/example nodes from the GT into a single logical node. Categorizing it under a 'Data Stores' boundary is a valid architectural decision, as the queue is a form of in-memory data storage for pending tasks."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Server\\nThread"
+      ],
+      "predicted_nodes": [
+        "Core Execution Layer::Task Manager",
+        "Communication & Coordination Layer::Task Stealing Coordinator",
+        "Core Execution Layer::Callback Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'Server Thread' is a coordination entity within an MPI process. The AI correctly decomposed its responsibilities (task management, stealing, callbacks) into more fine-grained components. This is a valid refinement. The logical layers assigned by the AI are appropriate for these functions which run inside the MPI process."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Compute node::MPI Process"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application Layer::Data Preprocessing User",
+    "Application Layer::HPC Application",
+    "Application Layer::MPI Application",
+    "Application Layer::Python Application",
+    "Core Execution Layer::SPMD Executor",
+    "Data Stores::Result Storage",
+    "External Dependencies::Python Threading",
+    "Library Interface Layer::torc API",
+    "Runtime Configuration::Environment Variables"
+  ]
+}

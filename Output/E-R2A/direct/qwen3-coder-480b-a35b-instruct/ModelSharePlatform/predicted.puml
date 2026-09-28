@@ -1,0 +1,137 @@
+@startuml
+!define RECTANGLE class
+
+title Deep Learning Model Sharing Platform - System Architecture
+
+skinparam componentStyle rectangle
+
+package "Frontend Layer" {
+    RECTANGLE VueUI [
+        <<Vue.js>>
+        User Interface
+        ----
+        - Account Interface
+        - Q&A Community Interface
+        - Blog Interface
+        - Model Interface
+        - Dataset Interface
+        - Follow Interface
+        - Admin Interface
+        - Multilingual Support
+    ]
+
+    RECTANGLE TypeScriptClient [
+        <<TypeScript>>
+        Client Logic
+        ----
+        - API Communication
+        - State Management
+        - Validation
+    ]
+}
+
+package "Backend Layer" {
+    RECTANGLE SpringBootAPI [
+        <<Spring Boot>>
+        RESTful API
+        ----
+        - Authentication Service
+        - User Management
+        - Content Management
+        - Model Services
+        - Dataset Services
+        - Payment Integration
+        - Admin Governance
+    ]
+
+    RECTANGLE BusinessLogic [
+        Business Logic
+        ----
+        - Account Management
+        - Q&A Processing
+        - Blog Management
+        - Model Operations
+        - Dataset Handling
+        - Follow System
+        - Recommendation Engine
+        - Admin Controls
+    ]
+}
+
+package "Data Layer" {
+    RECTANGLE MySQLDB [
+        <<MySQL>>
+        Database
+        ----
+        - User Accounts
+        - Questions & Answers
+        - Blogs & Comments
+        - Models & Datasets
+        - Follow Relationships
+        - Transaction Records
+    ]
+
+    RECTANGLE StorageSystem [
+        File Storage
+        ----
+        - Model Files
+        - Dataset Files
+        - User Assets
+    ]
+}
+
+package "External Systems" {
+    RECTANGLE EmailService [
+        Email Service
+        ----
+        - Registration Emails
+        - Password Recovery
+    ]
+
+    RECTANGLE PaymentGateway [
+        Payment Gateway
+        ----
+        - Model Purchases
+        - Transaction Processing
+    ]
+}
+
+VueUI --> TypeScriptClient : uses
+TypeScriptClient --> SpringBootAPI : HTTP/HTTPS
+SpringBootAPI --> BusinessLogic : delegates
+BusinessLogic --> MySQLDB : CRUD operations
+BusinessLogic --> StorageSystem : file I/O
+SpringBootAPI --> EmailService : SMTP
+SpringBootAPI --> PaymentGateway : API calls
+
+note right of VueUI
+  Modern browser support
+  Responsive design
+  Multi-language UI
+end note
+
+note right of SpringBootAPI
+  RESTful endpoints
+  Authentication & Authorization
+  Request validation
+  Error handling
+end note
+
+note right of MySQLDB
+  ACID compliance
+  Data persistence
+  Relationship mapping
+end note
+
+note bottom of StorageSystem
+  Scalable storage solution
+  Secure file management
+  Version control support
+end note
+
+cloud "Internet" {
+  [User] --> VueUI
+  VueUI --> [User]
+}
+
+@enduml

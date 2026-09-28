@@ -1,0 +1,269 @@
+@startuml
+!define RECTANGLE rectangle
+!define ARROW -->
+!define DASHED_ARROW ..>
+!define COMPONENT component
+!define DATABASE database
+!define CLOUD cloud
+!define NODE node
+!define RECT rect
+!define PACKAGE package
+
+skinparam {
+  BackgroundColor #FFFFFF
+  ArrowColor #333333
+  RectangleBorderColor #333333
+  ComponentBorderColor #333333
+  DatabaseBorderColor #333333
+  NoteBackgroundColor #FFFFCC
+  NoteBorderColor #333333
+  DefaultFontName Arial
+  DefaultFontSize 12
+  TitleFontSize 14
+  TitleFontStyle bold
+}
+
+title Campus Helper Platform - System Architecture Diagram
+
+' ========== EXTERNAL SYSTEMS ==========
+cloud "WeChat Platform" as wechat {
+  component "WeChat Mini Program Runtime" as wx_runtime
+  component "WeChat Authentication" as wx_auth
+}
+
+cloud "Client Devices" as clients {
+  database "Android 5.0+" as android
+  database "WeChat 8.0+" as wechat_version
+}
+
+' ========== PRESENTATION LAYER ==========
+package "Presentation Layer" as presentation {
+  component "WeChat Mini Program Client" as miniprogram {
+    component "Homepage / Popular Products" as homepage
+    component "Product Category Interface" as category_ui
+    component "Product Detail Interface" as product_detail_ui
+    component "Order Interface" as order_ui
+    component "Personal Center Interface" as personal_center_ui
+    
+    package "Administrator Interfaces" as admin_ui {
+      component "Product Management Interface" as product_mgmt_ui
+      component "Order Management Interface" as order_mgmt_ui
+      component "User Management Interface" as user_mgmt_ui
+    }
+  }
+}
+
+' ========== BUSINESS LAYER ==========
+package "Business Layer" as business {
+  component "Product Browsing Service" as product_service {
+    component "Popular Products Sorting" as popularity_sorting
+    component "Category Browsing" as category_browsing
+    component "Product Search" as product_search
+  }
+  
+  component "Order Management Service" as order_service {
+    component "Order Creation" as order_creation
+    component "Order Modification" as order_modification
+    component "Order Confirmation" as order_confirmation
+    component "Order Cancellation" as order_cancellation
+  }
+  
+  component "User Management Service" as user_service {
+    component "Authentication Service" as auth_service
+    component "Permission Control" as permission_control
+    component "User Profile Management" as profile_mgmt
+  }
+  
+  component "Administration Service" as admin_service {
+    component "Product Management" as product_mgmt
+    component "Order Management" as admin_order_mgmt
+    component "User Management" as admin_user_mgmt
+    component "Log Management" as log_mgmt
+  }
+  
+  component "Security Service" as security_service {
+    component "Input Validation" as input_validation
+    component "SQL Injection Prevention" as sql_injection_prevention
+    component "Human-Machine Recognition" as bot_detection
+  }
+  
+  component "Monitoring & Observability" as monitoring_service {
+    component "Metrics Collection" as metrics_collection
+    component "Log Aggregation" as log_aggregation
+    component "Fault Detection" as fault_detection
+  }
+}
+
+' ========== DATA LAYER ==========
+package "Data Layer" as data {
+  component "Data Access Layer" as dal {
+    component "User Repository" as user_repo
+    component "Product Repository" as product_repo
+    component "Order Repository" as order_repo
+    component "Favorite Repository" as favorite_repo
+    component "Tag Repository" as tag_repo
+    component "Log Repository" as log_repo
+  }
+  
+  component "Cache Layer" as cache {
+    component "Popular Products Cache" as popular_cache
+    component "User Session Cache" as session_cache
+    component "Product Catalog Cache" as catalog_cache
+  }
+}
+
+' ========== DATA ENTITY LAYER ==========
+package "Data Entity Layer (Database)" as data_entity {
+  database "Main Database" as main_db {
+    table "Users" as users_table
+    table "Products" as products_table
+    table "Orders" as orders_table
+    table "Favorites" as favorites_table
+    table "Tags" as tags_table
+    table "Categories" as categories_table
+    table "Administration Logs" as admin_logs_table
+    table "System Metrics" as metrics_table
+  }
+}
+
+' ========== EXTERNAL INTERFACES ==========
+component "External APIs" as external_apis {
+  component "WeChat Mini Program API" as wx_api
+  component "Payment Gateway (Future)" as payment_gateway
+  component "Notification Service" as notification_service
+}
+
+' ========== CONNECTIONS ==========
+' External connections
+clients --> wechat : "Runs on"
+wechat --> presentation : "Hosts"
+wx_runtime --> miniprogram : "Executes"
+wx_auth --> auth_service : "Authentication"
+
+' Presentation to Business layer connections
+homepage --> product_service : "View popular products"
+category_ui --> product_service : "Browse by category"
+product_detail_ui --> product_service : "View product details"
+order_ui --> order_service : "Create/modify/confirm/cancel orders"
+personal_center_ui --> user_service : "View favorites & orders"
+product_mgmt_ui --> admin_service : "Manage products"
+order_mgmt_ui --> admin_service : "Manage orders"
+user_mgmt_ui --> admin_service : "Manage users"
+
+' Business layer internal connections
+product_service --> security_service : "Input validation"
+order_service --> security_service : "Input validation"
+user_service --> security_service : "Authentication & authorization"
+admin_service --> security_service : "Permission control"
+
+' Business to Data layer connections
+product_service --> dal : "CRUD operations"
+order_service --> dal : "CRUD operations"
+user_service --> dal : "CRUD operations"
+admin_service --> dal : "CRUD operations"
+security_service --> dal : "Access control"
+monitoring_service --> dal : "Log storage"
+
+' Data layer to Database connections
+dal --> main_db : "Persistence"
+user_repo --> users_table : "↔"
+product_repo --> products_table : "↔"
+order_repo --> orders_table : "↔"
+favorite_repo --> favorites_table : "↔"
+tag_repo --> tags_table : "↔"
+
+' Cache connections
+popular_cache --> product_service : "Popular products"
+session_cache --> user_service : "User sessions"
+catalog_cache --> product_service : "Product catalog"
+
+' Monitoring connections
+monitoring_service --> main_db : "Store metrics"
+monitoring_service --> external_apis : "Send alerts"
+
+' External API connections
+miniprogram --> wx_api : "WeChat APIs"
+order_service --> payment_gateway : "Future payment"
+user_service --> notification_service : "Notifications"
+
+' ========== USER CLASSES ==========
+actor "Guest" as guest
+actor "Registered User" as registered_user
+actor "Customer" as customer
+actor "Seller" as seller
+actor "Administrator" as admin
+
+guest --> homepage : "Browse products"
+guest --> category_ui : "Browse categories"
+registered_user --> personal_center_ui : "Access account"
+customer --> order_ui : "Place orders"
+seller --> product_detail_ui : "Publish products"
+admin --> admin_ui : "Manage platform"
+
+' ========== DATA FLOWS ==========
+note right of guest
+  Can view products
+  Cannot favorite or order
+end note
+
+note right of registered_user
+  Can browse, publish,
+  favorite products
+  Can participate in
+  transactions
+end note
+
+note right of admin
+  Supervises violations
+  Manages products,
+  orders, users
+  Views/modifies
+  platform data
+end note
+
+' ========== NON-FUNCTIONAL REQUIREMENTS ==========
+cloud "Non-Functional Requirements" as nfr {
+  component "Security" as security_nfr
+  component "Performance" as performance_nfr
+  component "Scalability" as scalability_nfr
+  component "Reliability" as reliability_nfr
+  component "Maintainability" as maintainability_nfr
+  component "Observability" as observability_nfr
+}
+
+security_nfr ..> security_service : "Implements"
+performance_nfr ..> cache : "Supports"
+performance_nfr ..> monitoring_service : "Monitors"
+scalability_nfr ..> business : "Upgrade interfaces"
+reliability_nfr ..> monitoring_service : "Fault detection"
+maintainability_nfr ..> business : "Decoupled modules"
+observability_nfr ..> monitoring_service : "Metrics & logs"
+
+' ========== CONSTRAINTS ==========
+note top of wechat
+  **Constraint C-001:**
+  WeChat Mini Program
+  development framework
+end note
+
+note top of clients
+  **Constraint C-002, C-003:**
+  Android 5.0+, 4GB+ RAM,
+  64GB+ disk, WeChat 8.0+
+end note
+
+note right of presentation
+  **Constraint C-004:**
+  Four-layer architecture:
+  Presentation, Business,
+  Data, Data Entity
+end note
+
+note bottom of data_entity
+  **Constraint C-005:**
+  Service objects limited to
+  students, teachers,
+  family members
+end note
+
+@enduml

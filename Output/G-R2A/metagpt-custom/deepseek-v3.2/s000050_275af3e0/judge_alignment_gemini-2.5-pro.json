@@ -1,0 +1,89 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "predicted_nodes": [
+        "Host Control Layer::hAFL2 Controller"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the main hAFL2 fuzzer component. The Host Control Layer in the prediction conceptually matches the KVM (L0) host boundary in the GT."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\nGuest VM (L2"
+      ],
+      "predicted_nodes": [
+        "Guest Execution Layer::Child Partition VM"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Child Partition VM environment."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\nGuest VM (L2::harness.sys"
+      ],
+      "predicted_nodes": [
+        "Guest Execution Layer::Child Partition VM::Child Partition Harness",
+        "Guest Execution Layer::Child Partition VM::harness-driver"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted harness components are functionally equivalent to harness.sys in the GT, and both are correctly placed within the Child Partition boundary."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\nHost OS (L2"
+      ],
+      "predicted_nodes": [
+        "Guest Execution Layer::Root Partition VM"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Root Partition environment."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\nHost OS (L2::CrashMonitoring.sys"
+      ],
+      "predicted_nodes": [
+        "Guest Execution Layer::Root Partition VM::Crash-Monitoring Workflow"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the crash monitoring component running inside the Root Partition."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\nHost OS (L2::vmswitch.sys"
+      ],
+      "predicted_nodes": [
+        "Communication Layer::Hyper-V Virtual Switch"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Functionally equivalent as they both target the VMSwitch component. However, the AI incorrectly placed it in a generic 'Communication Layer' instead of structurally nesting it inside the 'Root Partition' boundary like the GT does."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::KVM (L0",
+    "KVM (L0::Hyper-V (L1) - Host"
+  ],
+  "unmatched_predicted_nodes": [
+    "Communication Layer::Hypercall/IOCTL Translation",
+    "Communication Layer::VMBus/netvsc Channel",
+    "Guest Execution Layer::Child Partition VM::Windows Offset Config",
+    "Guest Execution Layer::Child Partition VM::loader.exe",
+    "Guest Execution Layer::Child Partition VM::packet_sender.exe",
+    "Guest Execution Layer::Linux Guest VM",
+    "Guest Execution Layer::Linux Guest VM::Embedded Forkserver",
+    "Guest Execution Layer::Linux Guest VM::initrd",
+    "Host Control Layer::Launch Scripts",
+    "Host Control Layer::Linux Host System",
+    "Host Control Layer::initrd Builder",
+    "Host Control Layer::pytest Integration"
+  ]
+}

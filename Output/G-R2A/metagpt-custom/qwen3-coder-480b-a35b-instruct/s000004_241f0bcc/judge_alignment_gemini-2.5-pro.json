@@ -1,0 +1,93 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Client-side::Logic::UI Components",
+        "Client-side::Logic::UI Components::Component\\nClass",
+        "Client-side::Logic::UI Components::HTML\\nTemplates",
+        "Client-side::Technology::Angular 7"
+      ],
+      "predicted_nodes": [
+        "WebBrowser::ClientApp"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated multiple specific GT nodes related to the Angular frontend UI and technology into a single 'ClientApp' component. The 'WebBrowser' boundary is semantically equivalent to 'Client-side' as it is the runtime environment for the client application."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Logic::Angular\\nServices"
+      ],
+      "predicted_nodes": [
+        "FrontendLayer::ControlledListLoader",
+        "FrontendLayer::CookieService",
+        "FrontendLayer::NotificationQueue"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly split the generic 'Angular Services' GT node into specific, fine-grained services that are explicitly mentioned in the PRD (Controlled-list loader, Cookie service, Notification queue service). The 'FrontendLayer' boundary is a valid semantic equivalent for 'Client-side::Logic'."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::WebAPI\\nControllers",
+        "Server-side::Technology::.NET Core\\nWebAPI"
+      ],
+      "predicted_nodes": [
+        "ApiLayer::BackendApi",
+        "BackendLayer::NetCoreWebApi"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly matched the GT's 'WebAPI Controllers' and '.NET Core WebAPI' technology to a logical 'BackendApi' interface and the 'NetCoreWebApi' server implementation. The boundaries 'ApiLayer' and 'BackendLayer' are a good refinement of the GT's general 'Server-side' boundary and are semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::Domain Services",
+        "Server-side::Logic::Domain Services::PDF"
+      ],
+      "predicted_nodes": [
+        "BackendLayer::DomainServices"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated the general 'Domain Services' and the specific 'PDF' service from the GT into a single 'DomainServices' component. The 'BackendLayer' boundary is semantically equivalent to the GT's 'Server-side::Logic'."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::DbContext",
+        "Server-side::Technology::Entity\\nFramework\\n(ORM"
+      ],
+      "predicted_nodes": [
+        "DataAccessLayer::EntityFrameworkDbContext"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly combined the GT's data access implementation ('DbContext') and technology ('Entity Framework') into a single 'EntityFrameworkDbContext' component. The 'DataAccessLayer' boundary is a precise and semantically correct name for this layer."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Data::DB Entities\\n(Registration, Community, etc."
+      ],
+      "predicted_nodes": [
+        "ExternalSystems::MsSqlDatabase"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'DB Entities' node represents the data schema, while the AI's 'MsSqlDatabase' represents the database system itself. These are functionally equivalent components in an architecture diagram. Classifying the database as an 'ExternalSystem' is a valid architectural choice, making the boundary semantically acceptable despite being different from the GT's 'Server-side::Data'."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Client-side::Data::View-Models\\n(JSON",
+    "Client-side::Data::ngRX state store",
+    "Server-side::Data::View-Models\\n(C#",
+    "Server-side::Logic::Domain Services::CAPTCHA",
+    "Server-side::Logic::Domain Services::Email",
+    "Server-side::Technology::Standard\\nC# Classes"
+  ],
+  "unmatched_predicted_nodes": [
+    "BackendLayer::DevelopmentBackDoor",
+    "ExternalSystems::SiteMinder",
+    "Global::ExternalSystems",
+    "Global::WebBrowser"
+  ]
+}

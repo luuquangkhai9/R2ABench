@@ -1,0 +1,101 @@
+@startuml
+!define RECTANGLE class
+
+RECTANGLE "Security Operator" as security_operator
+RECTANGLE "Plugin Developer" as plugin_developer
+RECTANGLE "Deployment Operator" as deployment_operator
+RECTANGLE "Integrator" as integrator
+
+RECTANGLE "veinmind-tools" as veinmind_tools {
+    RECTANGLE "CLI Commands" as cli_commands {
+        RECTANGLE "scan-image" as scan_image
+        RECTANGLE "scan-container" as scan_container
+        RECTANGLE "scan-iac" as scan_iac
+        RECTANGLE "./run.sh scan-host image" as run_sh_scan_host_image
+    }
+
+    RECTANGLE "Runner Execution" as runner_execution {
+        RECTANGLE "veinmind-runner" as veinmind_runner
+        RECTANGLE "Parallel Container Startup Script" as startup_script
+    }
+
+    RECTANGLE "Authorization Routing" as auth_routing {
+        RECTANGLE "Docker Authorization Request" as docker_auth_request
+        RECTANGLE "Docker Plugin Action" as docker_plugin_action
+        RECTANGLE "NoneDockerPlugin" as none_docker_plugin
+    }
+
+    RECTANGLE "Plugin Packaging" as plugin_packaging {
+        RECTANGLE "Python Example Package" as python_example_package
+    }
+
+    RECTANGLE "Reporting Data" as reporting_data {
+        RECTANGLE "Malicious File Reports" as malicious_file_reports
+        RECTANGLE "IaC Alert Details" as iac_alert_details
+    }
+}
+
+RECTANGLE "veinmind-sdk / libveinmind" as veinmind_sdk
+RECTANGLE "Docker" as docker
+RECTANGLE "Container Runtime" as container_runtime
+RECTANGLE "Policy Libraries" as policy_libraries
+RECTANGLE "Report Event Client" as report_event_client
+
+security_operator --> cli_commands : Uses
+plugin_developer --> plugin_packaging : Develops
+deployment_operator --> runner_execution : Prepares
+integrator --> auth_routing : Integrates
+
+cli_commands --> runner_execution : Triggers
+runner_execution --> veinmind_sdk : Depends on
+auth_routing --> docker_auth_request : Consumes
+auth_routing --> docker_plugin_action : Produces
+auth_routing --> none_docker_plugin : Fallback
+plugin_packaging --> python_example_package : Packages
+reporting_data --> malicious_file_reports : Includes
+reporting_data --> iac_alert_details : Includes
+
+veinmind_tools --> veinmind_sdk : Uses
+veinmind_tools --> docker : Requires
+veinmind_tools --> container_runtime : Supports
+scan_iac --> policy_libraries : Loads
+scan_iac --> report_event_client : Publishes to
+
+note right of veinmind_tools
+    System Boundary:
+    - CLI interface for scanning
+    - Runner-based execution
+    - Docker authorization routing
+    - Plugin packaging examples
+    - Structured reporting
+end note
+
+note right of veinmind_sdk
+    Core dependency for:
+    - Tool implementations
+    - Plugin examples
+    - Scan command integration
+end note
+
+note right of docker
+    Required for:
+    - Quick-start workflow
+    - Container operations
+end note
+
+note right of container_runtime
+    Supported runtimes:
+    - Docker
+    - Containerd
+end note
+
+note right of policy_libraries
+    Used by IaC scanning
+    to evaluate risks
+end note
+
+note right of report_event_client
+    Publishes structured
+    alert details for IaC
+end note
+@enduml

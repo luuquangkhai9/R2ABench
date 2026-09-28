@@ -1,0 +1,116 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Proxy Core"
+      ],
+      "predicted_nodes": [
+        "JVM Environment::Proxy Layer::HTTP Proxy",
+        "JVM Environment::Proxy Layer::Channel Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both GT and predicted nodes represent the core HTTP proxy and channel forwarding capabilities, and both correctly place it within the Proxy Layer."
+    },
+    {
+      "gt_nodes": [
+        "CGI Portal::Http Test\nClient"
+      ],
+      "predicted_nodes": [
+        "JVM Environment::Test Client Layer::Test Client",
+        "External Systems::Asynchronous HTTP Client Environment::Async HTTP Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "Both represent the HTTP test client used for generating test workloads. However, the GT places it inside the 'CGI Portal' context, whereas the AI categorizes it under 'Test Client Layer' and 'External Systems', reflecting a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Download"
+      ],
+      "predicted_nodes": [
+        "JVM Environment::Test Server Layer::Download Endpoint"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both represent the file download functionality. The boundary is incorrect because GT models it as a plugin within the proxy layer, while the AI strictly follows the PRD and places it in the Test Server layer."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Upload"
+      ],
+      "predicted_nodes": [
+        "JVM Environment::Test Server Layer::Upload Endpoint",
+        "JVM Environment::Test Server Layer::File Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "Both describe the file upload/handling functionality. GT places it in the Proxy Layer as a plugin, whereas the AI aligns with the PRD by placing it inside the Test Server Layer, making the boundary attribution inconsistent between the two."
+    },
+    {
+      "gt_nodes": [
+        "Business Servers::Business Server A",
+        "Business Servers::Business Server B",
+        "Business Servers::Business Server C",
+        "Business Servers::......",
+        "Clients::Business Server"
+      ],
+      "predicted_nodes": [
+        "External Systems::Upstream Server"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The multiple specific business servers in GT act as the upstream targets for the proxy. The AI consolidates them into a single 'Upstream Server' node under 'External Systems', which is semantically consistent as an external boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer\nKeepalived(VIP::Openresty",
+    "CGI Portal::Appkey\nManager",
+    "CGI Portal::CGI Manager",
+    "CGI Portal::Case Manager",
+    "CGI Portal::Document\nGenerate",
+    "CGI Portal::Log & Tree\ninquire",
+    "CGI Portal::Metrics &\nReport",
+    "CGI Portal::Service\nManager",
+    "Clients::APP Client",
+    "Clients::Developer",
+    "Clients::Web Client",
+    "Global::Log consumer",
+    "Proxy Layer::cgi_proxy 1::Appkey\nValidate",
+    "Proxy Layer::cgi_proxy 1::Formatter",
+    "Proxy Layer::cgi_proxy 1::Global Limit",
+    "Proxy Layer::cgi_proxy 1::Logging",
+    "Proxy Layer::cgi_proxy 1::Login &\nPermission",
+    "Proxy Layer::cgi_proxy 1::Plugin::Agent",
+    "Proxy Layer::cgi_proxy 1::Plugin::Attach Check",
+    "Proxy Layer::cgi_proxy 1::Plugin::Check\nParameter",
+    "Proxy Layer::cgi_proxy 1::Plugin::Mock",
+    "Proxy Layer::cgi_proxy 2",
+    "Support Platform::Data Bank\nHDFS/Hbase/Druid",
+    "Support Platform::Msg Center\nKafka",
+    "Support Platform::Mysql",
+    "Support Platform::Permission\nCenter",
+    "Support Platform::Redis Cache",
+    "Support Platform::User Center",
+    "Task Scheduler::CGI Case\nExecutor",
+    "Task Scheduler::CGI Health\nCheck",
+    "Task Scheduler::Daily Report",
+    "Task Scheduler::Log Analysis",
+    "Task Scheduler::Monitor/Alarm"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::Asynchronous HTTP Client Environment",
+    "External Systems::Grizzly/Jersey HTTP Server Environment",
+    "External Systems::Grizzly/Jersey HTTP Server Environment::Grizzly/Jersey HTTP Server",
+    "External Systems::Local Filesystem",
+    "Global::External Systems",
+    "Global::JVM Environment",
+    "JVM Environment::Data Layer",
+    "JVM Environment::Data Layer::Structured Response Builder",
+    "JVM Environment::Proxy Layer",
+    "JVM Environment::Test Client Layer",
+    "JVM Environment::Test Server Layer",
+    "JVM Environment::Test Server Layer::Request Queue",
+    "JVM Environment::Test Server Layer::Test Server"
+  ]
+}

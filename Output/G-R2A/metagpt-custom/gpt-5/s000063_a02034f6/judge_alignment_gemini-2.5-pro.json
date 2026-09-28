@@ -1,0 +1,149 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Clients::Android",
+        "Clients::PC",
+        "Clients::Web",
+        "Clients::iOS"
+      ],
+      "predicted_nodes": [
+        "Global::Telegram-compatible Clients"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The specific client platforms in GT are generalized into a single Telegram-compatible clients node in the prediction. The boundary shift to Global is semantically acceptable for external clients."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Gateway"
+      ],
+      "predicted_nodes": [
+        "Docker Deployment Environment::Go Multi-Service Server (Go-based::Client Access Layer::MTProto Frontend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The Gateway correctly maps to the MTProto Frontend, and 'Access Layer' semantically aligns with 'Client Access Layer'."
+    },
+    {
+      "gt_nodes": [
+        "Global::BFF"
+      ],
+      "predicted_nodes": [
+        "Docker Deployment Environment::Go Multi-Service Server (Go-based::Access-Facing (BFF) Layer::Access/BFF Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Backend for Frontend (BFF) layer."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Auth Session"
+      ],
+      "predicted_nodes": [
+        "Docker Deployment Environment::Go Multi-Service Server (Go-based::Business/Service Layer::Authorization & Salt Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The functionality matches authorization and salt management, but GT places it in the 'Access Layer', while the AI placed it in the 'Business/Service Layer', which is a significant boundary crossing."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Session"
+      ],
+      "predicted_nodes": [
+        "Docker Deployment Environment::Go Multi-Service Server (Go-based::Business/Service Layer::Session Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The functionality matches session management, but GT explicitly defines it under the 'Access Layer', whereas the prediction moved it to the 'Business/Service Layer'."
+    },
+    {
+      "gt_nodes": [
+        "Services::Msg"
+      ],
+      "predicted_nodes": [
+        "Docker Deployment Environment::Go Multi-Service Server (Go-based::Business/Service Layer::Service Message Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes handle messaging services. 'Services' and 'Business/Service Layer' are semantically equivalent boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Global::Push",
+        "Global::Sync"
+      ],
+      "predicted_nodes": [
+        "Docker Deployment Environment::Go Multi-Service Server (Go-based::Asynchronous/Supporting Components Layer::Push/Sync Dispatcher"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The separate Push and Sync components in GT are aggregated into a single dispatcher node by the AI. Moving them from Global to an Asynchronous Components Layer is semantically valid."
+    },
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "Global::Kafka Cluster"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the external Kafka infrastructure and are placed in the Global scope."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MySQL"
+      ],
+      "predicted_nodes": [
+        "Global::MySQL",
+        "Docker Deployment Environment::Go Multi-Service Server (Go-based::Storage/Infrastructure Integration Layer::MySQL Adapter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT MySQL storage node is correctly split into the external database and its internal integration adapter. The boundary attributions align with storage integrations."
+    },
+    {
+      "gt_nodes": [
+        "Storages::Redis"
+      ],
+      "predicted_nodes": [
+        "Global::Redis",
+        "Docker Deployment Environment::Go Multi-Service Server (Go-based::Storage/Infrastructure Integration Layer::Redis Adapter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Redis storage node is correctly split into the external database and its internal integration adapter."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MinIO"
+      ],
+      "predicted_nodes": [
+        "Global::MinIO Object Storage",
+        "Docker Deployment Environment::Go Multi-Service Server (Go-based::Storage/Infrastructure Integration Layer::MinIO Adapter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT MinIO storage node is correctly split into the external storage component and its internal integration adapter."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer::Status",
+    "Services::DFS",
+    "Services::Services"
+  ],
+  "unmatched_predicted_nodes": [
+    "Docker Deployment Environment::Go Multi-Service Server (Go-based",
+    "Docker Deployment Environment::Go Multi-Service Server (Go-based::Asynchronous/Supporting Components Layer::Async Event Hub",
+    "Docker Deployment Environment::Go Multi-Service Server (Go-based::Asynchronous/Supporting Components Layer::Media Wrapper",
+    "Docker Deployment Environment::Go Multi-Service Server (Go-based::Business/Service Layer::Registration & Verification Service",
+    "Docker Deployment Environment::Go Multi-Service Server (Go-based::Storage/Infrastructure Integration Layer::etcd Adapter",
+    "Global::Docker Deployment Environment",
+    "Global::External Verification Code Service (optional",
+    "Global::FFProbe (optional",
+    "Global::FFmpeg (optional",
+    "Global::etcd Cluster"
+  ]
+}

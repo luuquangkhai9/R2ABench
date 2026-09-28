@@ -1,0 +1,48 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Go build tags"
+      ],
+      "predicted_nodes": [
+        "Global::E2E Test Suite (Go)\\nProvider-specific selection via\\n//go:build <provider>"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Go build-tag mechanism used for provider-specific test selection. The predicted node adds the enclosing test suite context, which is semantically equivalent and correctly remains in the global/test tooling boundary."
+    },
+    {
+      "gt_nodes": [
+        "Host Scanner Endpoint Tests::endpoint_platform1_test.go\\nplatform-specific expected data",
+        "Host Scanner Endpoint Tests::endpoint_platform2_test.go\\nplatform-specific expected data",
+        "Host Scanner Endpoint Tests::endpoint_test.go\\ncommon endpoint tests"
+      ],
+      "predicted_nodes": [
+        "Global::E2E Test Suite (Go)\\nProvider-specific selection via\\n//go:build <provider>"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT contains concrete test files and shared endpoint tests, while the predicted node aggregates them into a generic e2e test suite. Functionally related, but it loses the explicit Host Scanner Endpoint Tests boundary and over-generalizes the structure, so the boundary attribution is not strictly correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Host Scanner Endpoint Tests::endpoint_platform1_test.go\\nplatform-specific expected data",
+    "Host Scanner Endpoint Tests::endpoint_platform2_test.go\\nplatform-specific expected data",
+    "Host Scanner Endpoint Tests::endpoint_test.go\\ncommon endpoint tests"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::HTTP Client",
+    "Global::Kubernetes Cluster",
+    "Global::Operator",
+    "Kubernetes Cluster::Worker Node",
+    "Kubernetes Cluster::Worker Node::Container Runtime\\n(containerd / CRI-O",
+    "Kubernetes Cluster::Worker Node::Host Filesystem\\n(/etc, /run, /var/lib",
+    "Kubernetes Cluster::Worker Node::Pod: host-scanner (DaemonSet)\\n[privileged",
+    "Kubernetes Cluster::Worker Node::Pod: host-scanner (DaemonSet)\\n[privileged::CNI Resolver",
+    "Kubernetes Cluster::Worker Node::Pod: host-scanner (DaemonSet)\\n[privileged::HTTP API",
+    "Kubernetes Cluster::Worker Node::Pod: host-scanner (DaemonSet)\\n[privileged::Host Info Collector",
+    "Kubernetes Cluster::Worker Node::Pod: host-scanner (DaemonSet)\\n[privileged::JSON Sanitizer",
+    "Kubernetes Cluster::Worker Node::Pod: host-scanner (DaemonSet)\\n[privileged::host-scanner Service",
+    "Kubernetes Cluster::Worker Node::kubelet"
+  ]
+}

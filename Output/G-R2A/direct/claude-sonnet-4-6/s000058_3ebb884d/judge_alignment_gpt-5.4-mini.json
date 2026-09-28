@@ -1,0 +1,112 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::AWS EventBridge"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::Event Alerting Service::AWS EventBridge\\n(event routing rule\\nwith filter criteria"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent AWS EventBridge used for event routing/filtering in the alerting flow. The predicted boundary is more service-oriented but remains semantically consistent with the GT connector-account placement."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::SNS Topic\\nalerts"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::Event Alerting Service::AWS SNS Topic\\n(notification topic"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the SNS notification topic used for alerts. The boundary naming differs, but the architectural role matches."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nAppian Source::VPC::Appian\\nOracle DB"
+      ],
+      "predicted_nodes": [
+        "Appian::Appian Data Source\\n(data change events",
+        "CMS BigMAC::BigMAC Data Receiver"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a coarse source-to-database integration endpoint, while the predicted diagram splits the integration into source and receiver components. This is a reasonable decomposition and stays within the correct external-system boundaries."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::connector::Private subnet::AWS Fargate\\nKafka Connect Cluster"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::Connector Management Service::Connector Configuration Handler\\n(put, delete[empty set], restart",
+        "AWS Account / Region::Connector Management Service::Connector Definitions\\n(cluster, service, connectors",
+        "AWS Account / Region::Connector Management Service::Connector Management Library"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT represents the connector runtime/configuration subsystem as a single deployed cluster. The predicted nodes split this into handler, definitions, and library, which is an acceptable functional decomposition within the connector management domain."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::topics::Private subnet::AWS Lambda\\ncreate/delete topics"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::Connector Management Service::Connector Configuration Handler\\n(put, delete[empty set], restart",
+        "AWS Account / Region::Connector Management Service::Connector Definitions\\n(cluster, service, connectors",
+        "AWS Account / Region::Connector Management Service::Connector Management Library"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Lambda for topic create/delete operations corresponds to connector/topic management logic. The predicted model decomposes that operational behavior into management-service components, which is acceptable and not a boundary violation."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::Chat notification",
+        "AWS Cloud\\nConnector Account::Email notification",
+        "AWS Cloud\\nConnector Account::Slack notification"
+      ],
+      "predicted_nodes": [
+        "AWS Account / Region::Event Alerting Service::SNS Subscription Management\\n[manual, outside deployment"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT shows multiple notification targets, while the predicted diagram aggregates subscription targets into a manually managed SNS subscription concept. This is semantically aligned with the requirement that notification distribution targets are manually maintained."
+    },
+    {
+      "gt_nodes": [
+        "Global::VPC peering\\nconnection"
+      ],
+      "predicted_nodes": [
+        "Global::AWS Account / Region"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a specific network connectivity construct (VPC peering), but the prediction only states a generic AWS account/region global boundary. This is not semantically equivalent and loses the actual architectural element."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "AWS Cloud\\nConnector Account::VPC::CMS BigMAC"
+  ],
+  "unmatched_predicted_nodes": [
+    "AWS Account / Region::Connector Management Service",
+    "AWS Account / Region::Connector Management Service::Connector Configuration Handler\\n(put, delete[empty set], restart",
+    "AWS Account / Region::Connector Management Service::Connector Definitions\\n(cluster, service, connectors",
+    "AWS Account / Region::Connector Management Service::Connector Management Library",
+    "AWS Account / Region::Event Alerting Service",
+    "AWS Account / Region::Event Alerting Service::AWS EventBridge\\n(event routing rule\\nwith filter criteria",
+    "AWS Account / Region::Event Alerting Service::AWS SNS Topic\\n(notification topic",
+    "AWS Account / Region::Event Alerting Service::SNS Subscription Management\\n[manual, outside deployment",
+    "AWS Account / Region::Stage Listing Service",
+    "AWS Account / Region::Stage Listing Service::listRunningStages Handler\\noutput: runningStages=<csv>",
+    "Global::Appian",
+    "Global::CMS BigMAC",
+    "Global::GitHub",
+    "Global::Local Environment",
+    "Global::Metrics Collection Module",
+    "Local Environment::AWS CLI\\n(credentials configured",
+    "Local Environment::Terminal / Script Interface\\n(nvm use, run listRunningStages",
+    "Metrics Collection Module::Deployment Metrics Collector\\n(failedRuns, passedRuns)\\n[paginated, per_page=100",
+    "Metrics Collection Module::PR Merge Time Collector\\n(averageTimeToMerge)\\n[whole-hour diff, default 0"
+  ]
+}

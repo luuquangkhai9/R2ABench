@@ -1,0 +1,113 @@
+@startuml
+!define AWSPUML https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v17.0/dist
+!includeurl AWSPUML/AWSCommon.puml
+!includeurl AWSPUML/Compute/Lambda.puml
+!includeurl AWSPUML/ApplicationIntegration/APIGateway.puml
+!includeurl AWSPUML/Storage/SimpleStorageServiceS3.puml
+!includeurl AWSPUML/InternetOfThings/IoTCore.puml
+!includeurl AWSPUML/Database/DynamoDB.puml
+!includeurl AWSPUML/ManagementGovernance/CloudFormation.puml
+!includeurl AWSPUML/ApplicationIntegration/StepFunctions.puml
+
+title IoT Device Simulator - Architecture Diagram
+
+skinparam componentStyle rectangle
+skinparam backgroundColor #F5F5F5
+skinparam component {
+  BackgroundColor #FFFFFF
+  BorderColor #333333
+  ArrowColor #333333
+}
+
+package "Presentation Layer" {
+  component "Web Management Console" as WebConsole
+  component "API Gateway" as APIGateway <<APIGateway>> {
+    component "REST API" as RESTAPI
+    component "Request Validation" as RequestValidation
+    component "CORS Configuration" as CORSConfig
+  }
+}
+
+package "Application Layer" {
+  component "Simulation Management API" as SimManagementAPI <<Lambda>>
+  component "Device Type Management API" as DeviceTypeAPI <<Lambda>>
+  component "Route Loading Service" as RouteLoader <<Lambda>>
+  component "Device Simulation Engine" as SimEngine <<Lambda>>
+  component "Custom Resource Handler" as CustomResource <<Lambda>>
+}
+
+package "Orchestration Layer" {
+  component "Simulation Orchestrator" as SimOrchestrator <<StepFunctions>>
+}
+
+package "Data Layer" {
+  component "Route Data Storage" as RouteStorage <<S3>>
+  component "Simulation State Storage" as SimStateStorage <<DynamoDB>>
+  component "Device Type Registry" as DeviceTypeRegistry <<DynamoDB>>
+}
+
+package "External Systems" {
+  component "AWS IoT Core" as IoTCore <<IoTCore>>
+  component "AWS CloudFormation" as CloudFormation <<CloudFormation>>
+}
+
+package "Clients" {
+  component "Administrators" as Admin
+  component "API Clients" as APIClients
+  component "Deployment Workflows" as Deployment
+}
+
+' Connections
+Admin --> WebConsole : "Manages simulations"
+WebConsole --> APIGateway : "HTTP requests"
+APIClients --> APIGateway : "API calls"
+APIGateway --> SimManagementAPI : "REST API calls"
+APIGateway --> DeviceTypeAPI : "REST API calls"
+
+SimManagementAPI --> SimOrchestrator : "Triggers simulations"
+SimManagementAPI --> SimStateStorage : "CRUD operations"
+DeviceTypeAPI --> DeviceTypeRegistry : "CRUD operations"
+
+SimOrchestrator --> RouteLoader : "Loads route data"
+SimOrchestrator --> SimEngine : "Executes simulations"
+RouteLoader --> RouteStorage : "Retrieves route JSON"
+SimEngine --> IoTCore : "Publishes messages"
+
+Deployment --> CloudFormation : "Deployment events"
+CloudFormation --> CustomResource : "Custom resource events"
+CustomResource --> SimStateStorage : "Initialization"
+CustomResource --> DeviceTypeRegistry : "Initialization"
+
+' Data flow annotations
+note on link
+  HTTP methods: GET, POST, PUT, DELETE, OPTIONS
+  CORS headers: Authorization, Content-Type, X-Amz-Date, etc.
+end note
+
+note on link
+  Route data format: JSON with stage, start, end, km fields
+  Route key resolution: from routeName or generated default
+end note
+
+note on link
+  Custom resource processing:
+  - CloudFormation event data
+  - Lambda context
+  - Solution configuration
+end note
+
+note on link
+  Simulation messages:
+  - Published to AWS IoT topics
+  - Generated from simulated device behavior
+end note
+
+' Non-functional requirements
+note top of APIGateway
+  NFR-001: Access logging (JSON)
+  NFR-002: Logging level INFO
+  NFR-003: Tracing enabled
+  NFR-004: REGIONAL endpoint
+end note
+
+@enduml

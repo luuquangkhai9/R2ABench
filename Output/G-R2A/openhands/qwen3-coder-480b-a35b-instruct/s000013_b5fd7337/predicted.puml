@@ -1,0 +1,18 @@
+@startuml
+!define RECTANGLE rectangle filled #ffffff
+
+title System Architecture - Song Mood Storage and Retrieval Application
+
+' Define components
+RECTANGLE "React Frontend" as frontend #lightblue
+RECTANGLE "FastAPI Backend" as backend #lightgreen
+RECTANGLE "Elasticsearch" as elasticsearch #lightyellow
+RECTANGLE "Kibana" as kibana #lightpink
+cloud "Genius API" as genius #lightgray
+
+' Define relationships
+frontend --> backend : HTTP/REST
+backend --> elasticsearch : Query/Store Data
+backend --> genius : Search Songs
+kibana --> elasticsearch : Data Inspection
+@enduml

@@ -1,0 +1,72 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Cloudinary\n- stores audio files\n- stores images\n- returns file URLs"
+      ],
+      "predicted_nodes": [
+        "Global::Cloudinary\n(Media Storage",
+        "Cloudinary\n(Media Storage::Audio Asset Storage",
+        "Cloudinary\n(Media Storage::Image Asset Storage\n(avatars, sound covers"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Cloudinary node is split into a global media storage node plus specific audio/image storage subnodes. This is a semantically correct decomposition, and the Cloudinary boundary is preserved."
+    },
+    {
+      "gt_nodes": [
+        "Global::Express Server\n- fetches data with Sequelize\n- serves React frontend\n- handles backend API requests"
+      ],
+      "predicted_nodes": [
+        "Global::Node / Express Backend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node corresponds to the GT Express backend/server. It preserves the backend/server boundary, although it omits the detailed responsibilities shown in GT."
+    },
+    {
+      "gt_nodes": [
+        "Global::PostgreSQL Database\n- stores users and sounds\n- stores Cloudinary URL references"
+      ],
+      "predicted_nodes": [
+        "Global::PostgreSQL",
+        "PostgreSQL::Users",
+        "PostgreSQL::Sounds\n(+ Cloudinary URL refs",
+        "PostgreSQL::Media URL References\n(audio & image URLs"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT PostgreSQL database node is split into data-domain subnodes in the prediction. This is a valid refinement of the same database boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::React Frontend\n- Redux state management\n- uploads images and audio\n- controls and visualizes playback"
+      ],
+      "predicted_nodes": [
+        "Global::Browser Client",
+        "Browser Client::React Frontend",
+        "Browser Client::Redux State Layer",
+        "Browser Client::Redux State Layer::Playback State\n(single current item,\ncontinuity across navigation",
+        "Browser Client::Redux State Layer::Sound State",
+        "Browser Client::Redux State Layer::Feed State",
+        "Browser Client::Redux State Layer::Follow State",
+        "Browser Client::Redux State Layer::Form / Error State",
+        "Browser Client::Redux State Layer::Auth / User State",
+        "Browser Client::React Frontend::Audio Playback UI",
+        "Browser Client::React Frontend::Waveform Navigation UI",
+        "Browser Client::React Frontend::Upload UI\n(Sound & Image",
+        "Browser Client::React Frontend::Follow UI",
+        "Browser Client::React Frontend::Feed / Follow Views",
+        "Browser Client::React Frontend::Form UI\n(Validation & Error Handling",
+        "Browser Client::React Frontend::Registration / Profile UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT React frontend node is decomposed into browser client, React UI subcomponents, and Redux state layers. This aligns with the GT frontend boundary and is semantically consistent."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Browser Client::Frontend Config\n(API Base URL,\nCloudinary URL,\nUpload Preset"
+  ]
+}

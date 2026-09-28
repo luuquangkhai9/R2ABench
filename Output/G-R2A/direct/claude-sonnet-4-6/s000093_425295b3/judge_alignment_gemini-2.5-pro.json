@@ -1,0 +1,70 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::VMT Manager\\nC#"
+      ],
+      "predicted_nodes": [
+        "VMT Management Process::VMT Manager\\n\\n- Receives external control input\\n- Manages shared-memory communication\\n- Drives virtual motion tracking state updates"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are a direct functional match. The AI created a new boundary 'VMT Management Process' which is a reasonable and semantically correct grouping for the VMT Manager component, differing from the GT's broader 'Virtual Motion Tracker' boundary but not incorrectly."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::VMT Driver\\nC++"
+      ],
+      "predicted_nodes": [
+        "VMT Driver Process (SteamVR Plugin::VMT Driver\\n\\n- Exposes virtual motion tracking capability\\n- Integrates with OpenVR driver interface\\n- Loadable by SteamVR/OpenVR runtime"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are a direct functional match. The AI's boundary 'VMT Driver Process (SteamVR Plugin' is a logical and semantically correct grouping for the VMT Driver. This is a valid refinement of the GT's general 'Virtual Motion Tracker' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenVR\\nSteamVR Runtime"
+      ],
+      "predicted_nodes": [
+        "Global::SteamVR / OpenVR Runtime\\n\\n- Loads and hosts VMT Driver\\n- OpenVR driver interface\\n- Provides runtime environment"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are an exact match in both name and functionality. The 'Global' boundary is identical."
+    },
+    {
+      "gt_nodes": [
+        "Global::User Application"
+      ],
+      "predicted_nodes": [
+        "User Application Environment::User Application\\n(External Control Input Provider"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are a direct functional match. The AI refined the GT's 'Global' boundary by creating a specific 'User Application Environment' for the external application. This is a valid architectural grouping and not a boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::Legacy Controller Binding\\nmycontroller JSON"
+      ],
+      "predicted_nodes": [
+        "VMT Driver Process (SteamVR Plugin::Legacy Controller Binding\\n(mycontroller)\\n\\n- controller_type: mycontroller\\n- /user/hand/right/input/a\\n  → /actions/legacy/in/right_axis1_press\\n- /user/hand/right/input/c\\n  → /actions/legacy/in/right_a_press\\n- /user/hand/right/input/b\\n  → /actions/legacy/in/right_grip_press\\n- mode: button, sub_mode: complex"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are a direct functional match. The AI correctly placed the binding file within the 'VMT Driver Process' boundary, which is logical as the driver/runtime consumes this file. This is semantically consistent with the GT's placement within the overall 'Virtual Motion Tracker' system."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Virtual Motion Tracker::OpenVR Path Constants\\n/user/body and /client_info"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Shared Memory IPC Layer",
+    "Global::User Application Environment",
+    "Global::VMT Driver Process (SteamVR Plugin",
+    "Global::VMT Management Process",
+    "Shared Memory IPC Layer::Shared Memory Channel\\n(Driver → Manager)\\n\\nPayload: JSON string\\nMetadata: send_count,\\nhandshake_count, message_length",
+    "Shared Memory IPC Layer::Shared Memory Channel\\n(Manager → Driver)\\n\\nPayload: JSON string\\nMetadata: send_count,\\nhandshake_count, message_length"
+  ]
+}

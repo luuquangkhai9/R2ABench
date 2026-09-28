@@ -1,0 +1,103 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "ClearML Server::ML Ops::Execution Queue"
+      ],
+      "predicted_nodes": [
+        "ClearML Server::ClearML Execution Queue"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the ClearML Execution Queue. The boundary attribution 'ML Ops' vs base 'ClearML Server' is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\nOn Prem or Cloud::Kubernetes Glue"
+      ],
+      "predicted_nodes": [
+        "Global::Kubernetes Glue"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both represent the Kubernetes Glue component, but the AI failed to place it within the worker/Kubernetes cluster boundary, leaving it Global."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\nOn Prem or Cloud::YAML Job Template"
+      ],
+      "predicted_nodes": [
+        "Global::YAML Template"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both represent the YAML template input, but the AI incorrectly placed it in the Global scope instead of the worker environment context."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\nOn Prem or Cloud::Mapped Docker Socket\nSibling Containers"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Docker Socket"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Docker socket mapped for sibling container management. The boundary 'Kubernetes Cluster' semantically maps to the GT's 'GPU / Kubernetes Workers'."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\nOn Prem or Cloud::Pod Execution Environment\nand Docker User Code"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Pod Environment"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the in-pod execution environment for the experiment process. Boundaries are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "ClearML Server::Backend Service API"
+      ],
+      "predicted_nodes": [
+        "ClearML Server::Events Service (v2.5",
+        "ClearML Server::Models Service (v2.4",
+        "ClearML Server::Backend Session"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's generalized Backend Service API is broken down by the AI into specific backend services and sessions as described in the PRD. The server boundaries match perfectly."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\nOn Prem or Cloud::ClearML Agent\nService Pod"
+      ],
+      "predicted_nodes": [
+        "Execution Layer::Experiment Runner",
+        "Execution Layer::Worker Configuration",
+        "Execution Layer::Worker Telemetry",
+        "Service Interface Layer::Backend Service Client",
+        "Service Interface Layer::Events Service Interface",
+        "Service Interface Layer::Models Service Interface"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The AI split the ClearML Agent Service Pod into detailed logical agent components (Runner, Telemetry, Config, Clients). However, the AI incorrectly placed them in logical software layers ('Execution Layer', 'Service Interface Layer') instead of preserving the required infrastructure boundary ('Kubernetes Workers')."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "ClearML Server::Experiment Manager::Collaboration",
+    "ClearML Server::Experiment Manager::Data Tracking",
+    "ClearML Server::Experiment Manager::Versioning",
+    "ClearML Server::Experiment Manager::Visualization",
+    "ClearML Server::ML Ops::Monitoring",
+    "ClearML Server::ML Ops::Orchestration",
+    "Data Scientist Environment::ClearML Snippet",
+    "Data Scientist Environment::Python ML / DL Code",
+    "GPU / Kubernetes Workers\nOn Prem or Cloud::Kubernetes Job"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::ClearML Server",
+    "Global::Kubernetes Cluster"
+  ]
+}

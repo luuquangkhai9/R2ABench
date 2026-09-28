@@ -1,0 +1,50 @@
+@startuml
+!define RECTANGLE class
+
+' Title and Theme
+title HTTP Proxy System Architecture
+
+' Components
+RECTANGLE "HTTP Client" as client #lightblue
+RECTANGLE "HTTP Proxy" as proxy #lightgreen
+RECTANGLE "Upstream Server" as upstream #lightyellow
+RECTANGLE "Test Server\n(Grizzly/Jersey)" as testServer #lightpink
+RECTANGLE "Test Client\n(Async HTTP Client)" as testClient #lightpink
+RECTANGLE "File System" as fileSystem #lightgray
+
+' Relationships
+client --> proxy : Sends HTTP requests
+proxy --> upstream : Forwards requests\n(after channel activation)
+testClient --> testServer : Sends HTTP requests
+testServer --> fileSystem : Reads/Writes files
+testClient <-- testServer : Returns responses
+proxy --> fileSystem : Diagnostic logging\n(debug mode)
+
+' Notes
+note right of proxy
+  Forwards FullHttpRequest
+  without modification
+  Requires active upstream channel
+end note
+
+note right of testServer
+  Provides /download endpoint
+  Handles file uploads
+  Returns structured responses
+end note
+
+note right of testClient
+  Async HTTP requests
+  Counts successful responses
+  (HTTP 200)
+end note
+
+' Boundary
+rectangle "System Boundary" as boundary {
+  proxy
+  upstream
+  testServer
+  testClient
+}
+
+@enduml

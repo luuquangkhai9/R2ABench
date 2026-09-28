@@ -1,0 +1,125 @@
+@startuml
+
+package "hAFL2 Hypervisor Fuzzing System" {
+  
+  package "Test Execution Layer" {
+    [kAFL-Fuzzer Test Runner]
+    [pytest Integration]
+    [Standalone Test Script]
+    
+    [kAFL-Fuzzer Test Runner] --> [pytest Integration]
+    [Standalone Test Script] --> [kAFL-Fuzzer Test Runner]
+  }
+  
+  package "Linux Userspace Workflow" {
+    node "Linux Host System" {
+      [Build Scripts]
+      [Shared Library Copier]
+      [initrd Builder]
+    }
+    
+    package "Target Packaging" {
+      [Linux Target Binary]
+      [Required Shared Libraries]
+    }
+    
+    package "Guest Execution" {
+      [kAFL Hypervisor]
+      [Embedded Forkserver]
+      [Linux Guest VM]
+    }
+    
+    [Build Scripts] --> [initrd Builder]
+    [Shared Library Copier] --> [initrd Builder]
+    [Linux Target Binary] --> [initrd Builder]
+    [Required Shared Libraries] --> [initrd Builder]
+    
+    [initrd Builder] --> [Linux Guest VM]
+    [kAFL Hypervisor] --> [Embedded Forkserver]
+    [Embedded Forkserver] --> [Linux Guest VM]
+    
+    note right of [Embedded Forkserver]
+      Maps kAFL hypercalls
+      to AFL-style guest I/O
+    end note
+  }
+  
+  package "Windows Hyper-V Workflow" {
+    package "Child Partition" {
+      [Child Partition VM]
+      [Windows Helper Binaries]
+      [Harness Driver]
+      
+      component "packet_sender.exe" as PacketSender
+      component "loader.exe" as Loader
+    }
+    
+    package "Root Partition" {
+      [Root Partition VM]
+      [VMSwitch Driver\n(vmswitch.sys)]
+      [Crash Monitor]
+    }
+    
+    [Windows Helper Binaries] --> PacketSender
+    [Windows Helper Binaries] --> Loader
+    [Loader] --> PacketSender
+    
+    [Harness Driver] --> [Child Partition VM]
+    [Child Partition VM] -- "Fuzzing Payloads" --> [Root Partition VM]
+    [Root Partition VM] -- "Crash Monitoring Results" --> [Child Partition VM]
+    
+    [Root Partition VM] --> [VMSwitch Driver\n(vmswitch.sys)]
+    [Crash Monitor] --> [Root Partition VM]
+    
+    note bottom of [Child Partition VM]
+      DSE disabled
+      Elevated command prompt
+    end note
+    
+    note bottom of [Root Partition VM]
+      Hyper-V virtualization stack
+      Network channel via VMBus/netvsc
+    end note
+  }
+  
+  package "Data Management" {
+    database "Mutation Payloads" {
+      [Mutable Byte Arrays]
+      [Effector Maps]
+    }
+    
+    database "Configuration Data" {
+      [Windows Build Offsets]
+      [VM Configuration]
+    }
+    
+    [Mutable Byte Arrays] --> [kAFL-Fuzzer Test Runner]
+    [Effector Maps] --> [kAFL-Fuzzer Test Runner]
+    [Windows Build Offsets] --> [Windows Helper Binaries]
+  }
+  
+  package "External Interfaces" {
+    actor "Fuzzing Operator" as Operator
+    [Command Line Interface]
+    
+    Operator --> [Command Line Interface]
+    [Command Line Interface] --> [kAFL-Fuzzer Test Runner]
+    [Command Line Interface] --> [Build Scripts]
+    [Command Line Interface] --> [Windows Helper Binaries]
+  }
+  
+  [Test Execution Layer] --> [Linux Userspace Workflow]
+  [Test Execution Layer] --> [Windows Hyper-V Workflow]
+  
+  [Linux Userspace Workflow] -- "Coverage Feedback" --> [Test Execution Layer]
+  [Windows Hyper-V Workflow] -- "Crash Results" --> [Test Execution Layer]
+}
+
+note as LicenseNote
+  BSD 3-Clause License
+  AGPL-3.0-or-later for kAFL-derived files
+end note
+
+LicenseNote ..> "hAFL2 Hypervisor Fuzzing System"
+
+@enduml

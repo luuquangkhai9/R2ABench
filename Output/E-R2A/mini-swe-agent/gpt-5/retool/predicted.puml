@@ -1,0 +1,48 @@
+@startuml
+title ReTool - Deployment Architecture (C-R2A-17 / retool)
+
+skinparam componentStyle rectangle
+skinparam wrapWidth 200
+skinparam maxMessageSize 200
+
+node Client Device (Windows 10)\nChrome Client (Vue.js SPA) as web
+}
+
+node Local Computer as local {
+  component API Gateway as gateway
+  component User Management Service as ums
+  component Project Management Service as pms
+  component Requirements Management Service as rms
+  database MongoDB as db
+}
+
+node Server (Amazon Linux 2) as server {
+  component Algorithm Service (NLP/PyTorch) as algo
+}
+
+web --> gateway : HTTPS
+gateway --> ums : REST
+gateway --> pms : REST
+gateway --> rms : REST
+
+ums --> db : CRUD
+pms --> db : CRUD
+rms --> db : CRUD
+
+rms --> algo : Analysis requests\n(itemization, structuring, commonality,\nconflict detection, association)
+
+note right of gateway
+Deployed locally with core services.
+end note
+
+note right of algo
+Deployed on remote server due to performance.
+end note
+
+note bottom of db
+Stores users, projects, requirements,
+analysis results, and tracing info.
+Periodic backups and offsite copies.
+end note
+
+@enduml

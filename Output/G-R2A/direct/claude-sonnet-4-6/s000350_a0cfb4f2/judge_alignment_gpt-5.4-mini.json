@@ -1,0 +1,102 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::GoDaddy API\nDomain availability"
+      ],
+      "predicted_nodes": [
+        "Global::GoDaddy API\n[C-002, DR-005"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the optional GoDaddy integration for domain availability checks. The predicted node keeps the same global boundary, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::HTTP API\nSession and attack requests"
+      ],
+      "predicted_nodes": [
+        "Squatm3gator API Process::HTTP API Layer",
+        "Squatm3gator API Process::HTTP API Layer::Domain Job Request\nHandler\n[FR-003, FR-004",
+        "Squatm3gator API Process::HTTP API Layer::GET / Handler\n(Main Page + Session Init)\n[FR-001",
+        "Squatm3gator API Process::HTTP API Layer::GET Homoglyph-Complete\nEndpoint\n[FR-006",
+        "Squatm3gator API Process::HTTP API Layer::HTTP Error Handler\n(400/404/500)\n[FR-007, FR-008"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT HTTP API node is decomposed into several specific HTTP-layer handlers in the prediction. This is a valid split, and the boundary/layer attribution is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::Redis\nCommand and reporting queues"
+      ],
+      "predicted_nodes": [
+        "Global::Redis\nMessage Queue\n[C-001",
+        "Redis\nMessage Queue\n[C-001::Job Channel",
+        "Redis\nMessage Queue\n[C-001::Reporting Channel",
+        "Squatm3gator API Process::Redis Producer\n[FR-004"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Redis queues are represented by a Redis message-queue node plus separate job/reporting channels and a producer. This is semantically consistent with the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Global::Socket.io\nWebSocket result channel"
+      ],
+      "predicted_nodes": [
+        "Squatm3gator API Process::WebSocket / Socket.IO\nChannel\n[FR-005"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the asynchronous client result channel via Socket.IO/WebSocket. Boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Squatm3\nDomain generation engine"
+      ],
+      "predicted_nodes": [
+        "Squatm3gator API Process::squatm3 Subprocess Wrapper\n[C-003, C-004"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node is a wrapped subprocess interface to the same squatm3 domain-generation engine described in the GT. The process boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Global::Web UI\nindex.html"
+      ],
+      "predicted_nodes": [
+        "Global::index.html\nTemplate\n[FR-001"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the main web UI template rendered from index.html. The global/template boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Workers\nCommand consumers"
+      ],
+      "predicted_nodes": [
+        "Squatm3gator API Process::Background Consumer Thread\n[FR-002, C-003",
+        "Squatm3gator API Process::Background Consumer Thread\n[FR-002, C-003::Redis Job Listener\n[FR-002",
+        "Squatm3gator API Process::Background Consumer Thread\n[FR-002, C-003::Session Correlator\n[NFR-002, DR-001",
+        "Squatm3gator API Process::Background Consumer Thread\n[FR-002, C-003::Worker Report Reader\n[FR-005, DR-002"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT worker/consumer concept is correctly split into a background consumer thread and its internal responsibilities. This matches the PRD description of an in-process background consumer."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Global::Socket.io\\nWebSocket result channel"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::DR-002",
+    "Squatm3gator API Process",
+    "Squatm3gator API Process::Attack Option Parser\\n[FR-003, DR-003, DR-004",
+    "Squatm3gator API Process::HTTP API Layer",
+    "Squatm3gator API Process::Session Manager\\n[DR-001",
+    "Squatm3gator API Process::Redis Producer\\n[FR-004"
+  ]
+}

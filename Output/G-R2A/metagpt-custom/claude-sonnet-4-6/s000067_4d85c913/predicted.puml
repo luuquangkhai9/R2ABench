@@ -1,0 +1,144 @@
+@startuml TraceLeft Architecture
+
+skinparam backgroundColor #FAFAFA
+skinparam package {
+  BackgroundColor #EEF3FB
+  BorderColor #4A6FA5
+  FontColor #2C3E50
+  FontStyle bold
+}
+skinparam component {
+  BackgroundColor #DDEEFF
+  BorderColor #3A5A8A
+  FontColor #1A2B3C
+}
+skinparam database {
+  BackgroundColor #E8F5E9
+  BorderColor #2E7D32
+  FontColor #1B5E20
+}
+skinparam arrow {
+  Color #2C3E50
+  FontColor #4A4A4A
+  FontSize 10
+}
+
+' ─────────────────────────────────────────────
+' EXTERNAL SYSTEMS
+' ─────────────────────────────────────────────
+
+package "Linux Kernel Facilities" as LinuxKernel {
+  component [eBPF Subsystem\n(load / verify / exec)] as eBPFSubsystem
+  component [kprobe / kretprobe\nFacilities] as KprobeFacilities
+  component [perf Subsystem] as PerfSubsystem
+}
+
+package "External Artifacts" as ExternalArtifacts {
+  component [Proto/JSON Event\nConfiguration Source\n(fields: position · type ·\nname · suffix · hash_func)] as EventConfigSource
+}
+
+component [gobpf\n(third-party Go library)] as gobpf
+
+' ─────────────────────────────────────────────
+' CODE GENERATION LAYER
+' ─────────────────────────────────────────────
+
+package "Code Generation Layer" as CodeGenLayer {
+  component [HandlerCodeGenerator] as HandlerCodeGenerator
+}
+
+' ─────────────────────────────────────────────
+' CLI LAYER
+' ─────────────────────────────────────────────
+
+package "CLI Layer" as CLILayer {
+  component [CLI EntryPoint] as CLIEntryPoint
+  component [TraceCommand] as TraceCommand
+}
+
+' ─────────────────────────────────────────────
+' LIBRARY / USERSPACE TRACER LAYER
+' ─────────────────────────────────────────────
+
+package "Library / Userspace Tracer Layer" as LibraryLayer {
+  component [UserspaceTracer] as UserspaceTracer
+  component [ProbeLoader\n(loads default handlers\n& process-specific handlers)] as ProbeLoader
+}
+
+' ─────────────────────────────────────────────
+' EVENT CHANNEL LAYER
+' ─────────────────────────────────────────────
+
+package "Event Channel Layer" as EventChannelLayer {
+  component [PerfEventChannel\n(perf ring buffer;\nevery record begins with\nCommonEventHeader section)] as PerfEventChannel
+}
+
+' ─────────────────────────────────────────────
+' KERNEL / eBPF LAYER
+' ─────────────────────────────────────────────
+
+package "Kernel / eBPF Layer\n(kernel space)" as KernelLayer {
+  component [MaineBPFProgram\n(kprobe · kretprobe entry)\n[returns 0 if no handler found]] as MaineBPFProgram
+  component [EntryHandlerMap\n(handle_NAME_progs)\nkeyed by process context] as EntryHandlerMap
+  component [ReturnHandlerMap\n(handle_NAME_progs_ret)\nkeyed by process context] as ReturnHandlerMap
+  component [DefaultHandlereBPFPrograms\n(kprobe/handle_NAME\nkretprobe/handle_NAME)] as DefaultHandlereBPFPrograms
+  component [ProcessSpecificHandlereBPFPrograms\n(kprobe/handle_NAME\nkretprobe/handle_NAME\nper-pid overrides)] as ProcessSpecificHandlereBPFPrograms
+}
+
+' ─────────────────────────────────────────────
+' RELATIONSHIPS — CLI LAYER
+' ─────────────────────────────────────────────
+
+CLIEntryPoint      --> TraceCommand          : registers & dispatches
+
+TraceCommand       --> ProbeLoader           : passes scope config\n(ProgramID · Pids · ELFPath)
+TraceCommand       --> UserspaceTracer       : starts tracing session
+
+' ─────────────────────────────────────────────
+' RELATIONSHIPS — LIBRARY LAYER (coordination)
+' ─────────────────────────────────────────────
+
+UserspaceTracer    --> ProbeLoader           : coordinates probe\nload before polling
+
+ProbeLoader        --> EntryHandlerMap       : populates entry\nhandler program refs
+ProbeLoader        --> ReturnHandlerMap      : populates return\nhandler program refs
+ProbeLoader        --> DefaultHandlereBPFPrograms        : loads & attaches\ndefault handler probes
+ProbeLoader        --> ProcessSpecificHandlereBPFPrograms : loads & attaches\nprocess-specific handler probes
+ProbeLoader        --> gobpf                 : eBPF load / map ops
+ProbeLoader        --> KprobeFacilities      : installs kprobe /\nkretprobe hooks
+
+UserspaceTracer    --> PerfEventChannel      : polls for event records
+
+' ─────────────────────────────────────────────
+' RELATIONSHIPS — KERNEL / eBPF LAYER
+' ─────────────────────────────────────────────
+
+MaineBPFProgram    --> EntryHandlerMap       : map lookup (entry path)\nby process context;\nreturns 0 if no entry found
+MaineBPFProgram    --> ReturnHandlerMap      : map lookup (return path)\nby process context;\nreturns 0 if no entry found
+MaineBPFProgram    --> DefaultHandlereBPFPrograms        : tail-call selected\nentry handler
+MaineBPFProgram    --> ProcessSpecificHandlereBPFPrograms : tail-call selected\nprocess-specific handler
+
+DefaultHandlereBPFPrograms        --> PerfEventChannel   : writes structured event records\n(CommonEventHeader section prepended)
+ProcessSpecificHandlereBPFPrograms --> PerfEventChannel  : writes structured event records\n(CommonEventHeader section prepended)
+
+' ─────────────────────────────────────────────
+' RELATIONSHIPS — CODE GENERATION LAYER
+' ─────────────────────────────────────────────
+
+EventConfigSource  --> HandlerCodeGenerator  : provides Proto/JSON metadata\n(position · type · name · suffix · hash_func)
+HandlerCodeGenerator ..> DefaultHandlereBPFPrograms        : generates eBPF handler\nsource (offline/build-time)
+HandlerCodeGenerator ..> ProcessSpecificHandlereBPFPrograms : generates eBPF handler\nsource (offline/build-time)
+
+' ─────────────────────────────────────────────
+' RELATIONSHIPS — EXTERNAL KERNEL SYSTEMS
+' ─────────────────────────────────────────────
+
+MaineBPFProgram    --> KprobeFacilities      : attaches kprobe /\nkretprobe hooks
+MaineBPFProgram    --> eBPFSubsystem         : loaded & verified by
+DefaultHandlereBPFPrograms        --> eBPFSubsystem : loaded & verified by
+ProcessSpecificHandlereBPFPrograms --> eBPFSubsystem : loaded & verified by
+PerfEventChannel   --> PerfSubsystem         : backed by kernel\nperf infrastructure
+gobpf              --> eBPFSubsystem         : userspace API into
+gobpf              --> KprobeFacilities      : userspace probe\nattachment via gobpf
+
+@enduml

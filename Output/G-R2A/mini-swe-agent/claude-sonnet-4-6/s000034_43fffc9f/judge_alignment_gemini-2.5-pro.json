@@ -1,0 +1,108 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process"
+      ],
+      "predicted_nodes": [
+        "torc_py Library (Python Package::Execution Layer (per MPI Process"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'MPI Process' node serves as a container for runtime components like threads and queues. The AI's 'Execution Layer (per MPI Process)' represents the same logical grouping of components that run within a single MPI process. The boundary is semantically correct, as this layer is part of the 'torc_py Library'."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Server\\nThread"
+      ],
+      "predicted_nodes": [
+        "torc_py Library (Python Package::Execution Layer (per MPI Process::Server Thread\\n(yield: TORC_SERVER_YIELDTIME"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match in functionality and name. The AI correctly places the Server Thread within the 'Execution Layer (per MPI Process)', which is semantically equivalent to the GT's 'Compute node::MPI Process' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Worker\\nThread"
+      ],
+      "predicted_nodes": [
+        "torc_py Library (Python Package::Execution Layer (per MPI Process::Worker Thread Pool\\n(TORC_WORKERS threads)\\n(yield: TORC_WORKER_YIELDTIME"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identifies the Worker Thread concept and accurately elaborates it into a 'Worker Thread Pool' based on the 'TORC_WORKERS' environment variable mentioned in the PRD. The boundary is correct and consistent with other matched components."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Task Queue",
+        "Task Queue (in detail::...",
+        "Task Queue (in detail::A1",
+        "Task Queue (in detail::A2",
+        "Task Queue (in detail::A3",
+        "Task Queue (in detail::B1",
+        "Task Queue (in detail::B2",
+        "Task Queue (in detail::Level 0",
+        "Task Queue (in detail::Level 1",
+        "Task Queue (in detail::Level 2",
+        "Task Queue (in detail::Level 3",
+        "Task Queue (in detail::Level 4",
+        "Task Queue (in detail::Level 5"
+      ],
+      "predicted_nodes": [
+        "torc_py Library (Python Package::Execution Layer (per MPI Process::Worker Queue\\n(per worker"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregates the GT's general 'Task Queue' component and its multiple detail/example nodes into a single, correctly named 'Worker Queue'. The placement within the 'Execution Layer' is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "External Dependencies::mpi4py / MPI Runtime\\n(mpirun",
+        "Inter-Process Communication Layer::MPI Communication\\n(internal"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI accurately splits the general 'MPI' concept into two distinct architectural roles: the external dependency/runtime and the internal communication mechanism. This is a more refined representation than the GT's single global node. The boundaries 'External Dependencies' and 'Inter-Process Communication Layer' are appropriate and semantically correct."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Application Layer::Image Preprocessing\\nApplication",
+    "Application Layer::Numerical Optimization\\nApplication\\n(CMA / Pi4U",
+    "Application Layer::Python Application\\n(import torc",
+    "External Data Stores::HDF5 Output File\\n(preprocessed images",
+    "External Data Stores::Image Input Files\\n(label-named subfolders",
+    "External Dependencies::Python Multithreading\\n(threading",
+    "External Dependencies::termcolor",
+    "Global::Application Layer",
+    "Global::External Data Stores",
+    "Global::External Dependencies",
+    "Global::Inter-Process Communication Layer",
+    "Global::Optional Dependencies\\n(for examples",
+    "Global::torc_py Library (Python Package",
+    "Optional Dependencies\\n(for examples::cma",
+    "Optional Dependencies\\n(for examples::h5py",
+    "Optional Dependencies\\n(for examples::numpy",
+    "Optional Dependencies\\n(for examples::pillow",
+    "torc_py Library (Python Package::Configuration Layer",
+    "torc_py Library (Python Package::Configuration Layer::Environment Variable\\nConfiguration\\nTORC_WORKERS\\nTORC_STEALING\\nTORC_SERVER_YIELDTIME\\nTORC_WORKER_YIELDTIME",
+    "torc_py Library (Python Package::Core Runtime Layer",
+    "torc_py Library (Python Package::Core Runtime Layer::Callback Manager",
+    "torc_py Library (Python Package::Core Runtime Layer::Load Balancer /\\nTask Stealing Engine",
+    "torc_py Library (Python Package::Core Runtime Layer::Runtime Lifecycle\\nManager",
+    "torc_py Library (Python Package::Core Runtime Layer::SPMD Coordinator",
+    "torc_py Library (Python Package::Core Runtime Layer::Task Descriptor\\n(Future)\\n.input() / .result",
+    "torc_py Library (Python Package::Core Runtime Layer::Task Scheduler /\\nDistributor\\n(cyclic / directed qid",
+    "torc_py Library (Python Package::Public API Layer",
+    "torc_py Library (Python Package::Public API Layer::Lifecycle API\\ntorc.start()\\ntorc.init()\\ntorc.launch()\\ntorc.shutdown",
+    "torc_py Library (Python Package::Public API Layer::Map API\\ntorc.map",
+    "torc_py Library (Python Package::Public API Layer::Query API\\ntorc.worker_id()\\ntorc.num_workers()\\ntorc.node_id()\\ntorc.num_nodes()\\ntorc.gettime",
+    "torc_py Library (Python Package::Public API Layer::SPMD API\\ntorc.spmd",
+    "torc_py Library (Python Package::Public API Layer::Stealing Control API\\ntorc.enable_stealing()\\ntorc.disable_stealing",
+    "torc_py Library (Python Package::Public API Layer::Task Submission API\\ntorc.submit()\\ntorc.wait()\\ntorc.as_completed"
+  ]
+}

@@ -1,0 +1,118 @@
+@startuml
+!define RECTANGLE class
+skinparam componentStyle rectangle
+skinparam backgroundColor #FEFEFE
+skinparam defaultFontName Helvetica
+skinparam defaultFontSize 12
+skinparam component {
+    BackgroundColor #FFFFFF
+    BorderColor #333333
+    FontColor #333333
+    ArrowColor #333333
+}
+
+title System Architecture: TokenCard Consumer Contract Wallet
+
+package "Ethereum Network" {
+    [Ethereum Blockchain] as ETH
+    [ENS Registry] as ENS
+}
+
+package "External Services" {
+    [Oracle/Rate Provider] as ORACLE
+}
+
+package "Core System" {
+    [Owner Address] as OWNER <<External Address>>
+    [Gas Tank] as GASTANK <<Data>>
+    [Consumer Contract Wallet] as WALLET <<Contract>>
+    [Controller Contracts] as CONTROLLER <<Contract>>
+    [Token Whitelist Contract] as WHITELIST <<Contract>>
+    [Licence/Oracle Contract] as LICENCE <<Contract>>
+    [TKN Holder Contract] as TKN <<Contract>>
+}
+
+package "Integration Layer" {
+    [Go Bindings] as BINDINGS <<Library>>
+    [Integrator/Developer] as INTEGRATOR <<External>>
+}
+
+' Data/Entity Definitions
+RECTANGLE "ETH/ERC20 Assets" as ASSETS <<Data>>
+RECTANGLE "Exchange Rate Data" as RATES <<Data>>
+RECTANGLE "Token Attributes" as ATTRIBUTES <<Data>>
+RECTANGLE "Resolved Addresses" as ADDRESSES <<Data>>
+RECTANGLE "Controller Counts" as COUNTS <<Data>>
+
+' Core Relationships
+OWNER --> GASTANK : holds
+OWNER --> WALLET : owns
+WALLET --> ASSETS : holds
+GASTANK ..> ETH : pays gas on\n
+WALLET ..> ETH : deployed on\n
+
+' ENS Resolution Flow
+WALLET --> ENS : resolves
+ENS --> ADDRESSES : provides
+ADDRESSES --> CONTROLLER : address of
+ADDRESSES --> WHITELIST : address of
+ADDRESSES --> LICENCE : address of
+
+' Data Consumption
+WHITELIST --> ATTRIBUTES : contains
+ATTRIBUTES --> RATES : includes
+LICENCE --> ORACLE : obtains from
+ORACLE --> RATES : provides
+WALLET --> WHITELIST : queries for\ntoken rules
+WALLET --> LICENCE : queries for\nexchange rates
+CONTROLLER --> COUNTS : exposes
+
+' Integration & Binding Usage
+INTEGRATOR --> BINDINGS : uses
+BINDINGS --> CONTROLLER : interacts with
+BINDINGS --> WALLET : interacts with
+BINDINGS --> WHITELIST : interacts with
+BINDINGS --> LICENCE : interacts with
+BINDINGS --> ETH : submits tx to
+
+' Binding Patterns
+note right of BINDINGS
+  Call: read-only
+  Transact: paid
+  Transfer: paid (if supported)
+end note
+
+' Key Data Flows for Requirements
+WALLET --> RATES : uses for\nconversions (FR-001)
+WALLET --> ATTRIBUTES : uses for\neligibility (FR-003)
+CONTROLLER --> COUNTS : provides\nadminCount (FR-007)\ncontrollerCount (FR-008)
+
+' Constraints & Boundaries
+note top of GASTANK
+  Constraint C-004:
+  Separate from Wallet
+  & security protections
+end note
+
+note top of OWNER
+  Constraint C-005:
+  Externally Owned Address
+end note
+
+note bottom of ETH
+  Constraint C-001:
+  Ethereum-based operation
+end note
+
+note right of ENS
+  Constraint C-002:
+  ENS-based resolution
+end note
+
+note left of WHITELIST
+  Constraint C-003:
+  Token use constrained
+  by whitelist data
+end note
+
+@enduml

@@ -1,0 +1,79 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Browser Clients::Client Browser\nPlayer 1",
+        "Browser Clients::Client Browser\nPlayer 2",
+        "Browser Clients::Client Browser\nPlayer 3"
+      ],
+      "predicted_nodes": [
+        "Browser Client::3D Renderer (Three.js",
+        "Browser Client::Game Reconnect Handler",
+        "Browser Client::Heartbeat Timer",
+        "Browser Client::Input Handler",
+        "Browser Client::Message Serializer/Deserializer",
+        "Browser Client::Page Reload Handler",
+        "Browser Client::Reconnection Handler",
+        "Browser Client::Room Player Count Display",
+        "Browser Client::Server List Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has three separate browser client instances, while the AI split client behavior into several functional subnodes. Despite the finer granularity, these are all correctly placed in the browser client boundary."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\nErlang",
+        "Erlang / OTP Game Server Cluster::Server Slave\nErlang"
+      ],
+      "predicted_nodes": [
+        "Game Server (Master::Connection Manager",
+        "Game Server (Master::Game Logic Engine",
+        "Game Server (Master::Ping/Pong Handler",
+        "Game Server (Master::Room Manager",
+        "Global::Game Server (Master",
+        "Global::Replica Server (Slave"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT server cluster is represented by master/slave nodes, and the AI decomposed the server into functional components plus master/replica deployment nodes. The placement is semantically aligned with the server cluster boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::DNS"
+      ],
+      "predicted_nodes": [
+        "Global::DNS/Load Balancer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "DNS is accurately captured, with load balancer added as a reasonable adjacent infrastructure concern within the same global boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Erlang / OTP Game Server Cluster"
+      ],
+      "predicted_nodes": [
+        "Global::Game Server (Master",
+        "Global::Replica Server (Slave"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI split the overall cluster into master and replica deployment nodes, which matches the GT's cluster-level abstraction and deployment topology."
+    },
+    {
+      "gt_nodes": [
+        "Static Web Tier::Web Server\nGame assets, HTML, CSS, JS"
+      ],
+      "predicted_nodes": [
+        "Global::Web Server",
+        "Web Server::Static Asset Server"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT static web tier is split into a web server and static asset serving responsibility. This is a valid decomposition and remains within the correct web tier boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

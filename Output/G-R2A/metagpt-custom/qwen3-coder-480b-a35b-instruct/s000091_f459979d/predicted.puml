@@ -1,0 +1,63 @@
+@startuml
+title Device Management System - Component & Deployment Diagram
+
+' ======================
+' === DEPLOYMENT NODES ==
+' ======================
+node "API Layer" {
+    component "UserController"
+    component "BootstrapController"
+}
+
+node "Service Layer" {
+    component "UserService"
+    component "BlockchainService"
+    component "LwM2MNodeParser"
+    component "JwtUtility"
+    component "ClientInfoRetriever"
+    component "BootstrapConfigHandler"
+}
+
+node "Integration Layer" {
+    component "Web3jClient"
+    component "SmartContractInterface"
+    component "LeshanModelHandler"
+}
+
+node "Data Layer" {
+    database "Ethereum Blockchain"
+}
+
+node "External Systems" {
+    node "Ethereum Node"
+}
+
+' ========================
+' === COMPONENT LINKS ====
+' ========================
+UserController --> JwtUtility : authenticates request
+UserController --> UserService : requests user operations
+UserService --> ClientInfoRetriever : fetches client data
+ClientInfoRetriever --> BlockchainService : retrieves client info
+BlockchainService --> Web3jClient : invokes smart contract
+Web3jClient --> Ethereum Node : communicates
+
+BootstrapController --> JwtUtility : authenticates request
+BootstrapController --> BootstrapConfigHandler : submits bootstrap config
+BootstrapConfigHandler --> BlockchainService : stores bootstrap data
+
+UserController --> LwM2MNodeParser : sends device data (JSON)
+LwM2MNodeParser --> LeshanModelHandler : parses and validates
+LeshanModelHandler --> LwM2MNodeParser : returns parsed model
+
+UserService --> BlockchainService : requests user creation
+BlockchainService --> SmartContractInterface : executes user add
+SmartContractInterface --> Web3jClient : uses web3j methods
+
+' ==========================
+' === ERROR HANDLING =======
+' ==========================
+BlockchainService --> UserService : returns error on failure
+UserService --> UserController : propagates error response
+
+@enduml

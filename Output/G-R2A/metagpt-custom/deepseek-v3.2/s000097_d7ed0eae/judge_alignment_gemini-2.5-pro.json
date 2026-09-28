@@ -1,0 +1,82 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Website::React UI\\nBeeGreen site",
+        "Website::TypeScript\\nWebsite code"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Website Client"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's separate nodes for the website's UI and codebase are correctly aggregated into a single logical client node by the AI. The 'Website' boundary is semantically equivalent to the 'Client Layer'."
+    },
+    {
+      "gt_nodes": [
+        "Browser Extension::React UI\\nExtension",
+        "Browser Extension::TypeScript\\nExtension code"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Browser Extension Client"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's separate nodes for the browser extension's UI and codebase are correctly aggregated into a single logical client node. The 'Browser Extension' boundary is semantically equivalent to the 'Client Layer'."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Express App",
+        "IBM Cloud::LoopBack Generated Code",
+        "IBM Cloud::Node.js Runtime"
+      ],
+      "predicted_nodes": [
+        "API Layer::Backend Server"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT nodes represent the backend's technology stack, which the AI correctly aggregates into a single 'Backend Server' node. The AI's 'API Layer' is a more appropriate architectural boundary than the GT's deployment-focused 'IBM Cloud' boundary."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Cloudant\\nUser and API data"
+      ],
+      "predicted_nodes": [
+        "Persistence Layer::Persistent Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's specific database technology (Cloudant) is correctly represented as a generic 'Persistent Storage' node. The 'Persistence Layer' boundary is semantically correct and an improvement over the GT's deployment-specific 'IBM Cloud' boundary."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Watson Studio"
+      ],
+      "predicted_nodes": [
+        "Data/Service Layer::Recommendation Workflow",
+        "Data/Service Layer::Sustainability Scoring Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's node for the data science platform (Watson Studio) is correctly interpreted and split into the two specific data processing workflows it enables, as described in the PRD. The 'Data/Service Layer' boundary is semantically correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::User\\nShopping at online stores",
+    "Global::User\\nVisiting BeeGreen site",
+    "IBM Cloud::CSV File\\nExport / training data",
+    "IBM Cloud::Object Storage"
+  ],
+  "unmatched_predicted_nodes": [
+    "API Layer::Ping Controller",
+    "API Layer::User Controller",
+    "Data Access Layer::InventoryItemRepository",
+    "Data Access Layer::UserRepository",
+    "Data Model Layer::InventoryItem Model",
+    "Data Model Layer::PingResponse Model",
+    "Data Model Layer::User Model",
+    "Global::API Layer",
+    "Global::Data/Service Layer",
+    "Global::Persistence Layer"
+  ]
+}

@@ -1,0 +1,217 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Frontend (Vue.js 2.0::Browser / Client"
+      ],
+      "predicted_nodes": [
+        "Client Environment::Web Browser\\n(Google Chrome 81.0+"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the client-side browser environment. The predicted node is a semantically equivalent and acceptable boundary attribution for the GT frontend/browser node."
+    },
+    {
+      "gt_nodes": [
+        "Global::Frontend (Vue.js 2.0"
+      ],
+      "predicted_nodes": [
+        "Global::Client Environment"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both are top-level client-side grouping nodes. The predicted node corresponds to the same frontend/client boundary at a coarse architectural level."
+    },
+    {
+      "gt_nodes": [
+        "Global::Backend (Flask Microservices"
+      ],
+      "predicted_nodes": [
+        "Global::Local Deployment"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a backend system grouping, while the predicted node is a deployment-location grouping. This is a boundary/context mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Global::Network & Gateway Layer"
+      ],
+      "predicted_nodes": [
+        "Local Deployment::API Gateway\\n(Load Balancer / Router"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The API gateway is the functional equivalent of the gateway layer. Although the boundary name differs, it remains semantically consistent with the network/gateway architectural layer."
+    },
+    {
+      "gt_nodes": [
+        "Network & Gateway Layer::API Gateway"
+      ],
+      "predicted_nodes": [
+        "Local Deployment::API Gateway\\n(Load Balancer / Router"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the API gateway component. The predicted boundary emphasizes deployment, but the component attribution is still correct."
+    },
+    {
+      "gt_nodes": [
+        "Network & Gateway Layer::API Gateway::Identity Verification"
+      ],
+      "predicted_nodes": [
+        "Local Deployment::API Gateway\\n(Load Balancer / Router"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node captures the gateway broadly, but not the specific identity verification sub-function. This is an under-specified match at a different granularity and cannot be considered boundary-correct for this subnode."
+    },
+    {
+      "gt_nodes": [
+        "Network & Gateway Layer::API Gateway::Request Forwarding"
+      ],
+      "predicted_nodes": [
+        "Local Deployment::API Gateway\\n(Load Balancer / Router"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The gateway concept matches, but the specific request-forwarding responsibility is not explicitly preserved as a distinct subnode. Granularity loss makes this boundary attribution incorrect for the GT subnode."
+    },
+    {
+      "gt_nodes": [
+        "Network & Gateway Layer::API Gateway::Return Response"
+      ],
+      "predicted_nodes": [
+        "Local Deployment::API Gateway\\n(Load Balancer / Router"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted gateway node does not explicitly represent the response-returning sub-function. The match is too coarse to be boundary-correct for this GT node."
+    },
+    {
+      "gt_nodes": [
+        "Network & Gateway Layer::HTTP Protocol"
+      ],
+      "predicted_nodes": [
+        "Local Deployment::API Gateway\\n(Load Balancer / Router"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "HTTP protocol is a communication layer/protocol node, not the API gateway itself. This is a functional mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices"
+      ],
+      "predicted_nodes": [
+        "Local Deployment::Project Management Service\\n(Flask Microservice",
+        "Local Deployment::Requirements Management Service\\n(Flask Microservice",
+        "Local Deployment::User Management Service\\n(Flask Microservice",
+        "Server Deployment::Algorithm Service\\n(Flask Microservice"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT microservices container is split into individual services, which is acceptable, but the predicted placement incorrectly separates the algorithm service into a different deployment boundary and introduces deployment-focused boundaries instead of the GT architectural grouping."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices::Algorithm Service"
+      ],
+      "predicted_nodes": [
+        "Server Deployment::Algorithm Service\\n(Flask Microservice",
+        "Server Deployment::NLP & PyTorch Engine\\n(Word2vec, Heuristics"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT algorithm service is represented by the dedicated algorithm microservice, and the additional NLP/PyTorch engine is a plausible internal decomposition of that service. The server deployment boundary is also consistent with the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices::Project Management Service"
+      ],
+      "predicted_nodes": [
+        "Local Deployment::Project Management Service\\n(Flask Microservice"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct semantic match for the project management microservice, and the deployment/boundary attribution is compatible with the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices::Requirement Management Service"
+      ],
+      "predicted_nodes": [
+        "Local Deployment::Requirements Management Service\\n(Flask Microservice"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The requirement management microservice is correctly identified. The singular/plural wording difference is not material."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices::User Management Service"
+      ],
+      "predicted_nodes": [
+        "Local Deployment::User Management Service\\n(Flask Microservice"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The user management microservice is correctly matched, and the boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Global::Storage Layer (MongoDB"
+      ],
+      "predicted_nodes": [
+        "Global::MongoDB Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the system data storage layer based on MongoDB. The boundary naming differs but is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Storage Layer (MongoDB::Project Collection",
+        "Storage Layer (MongoDB::Requirement Collection"
+      ],
+      "predicted_nodes": [
+        "MongoDB Database::Projects\\nMembers & Baselines",
+        "MongoDB Database::Requirement Items\\nTree & Analysis Data"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has separate project and requirement collections, while the predicted model aggregates related project/member/baseline data and requirement/tree/analysis data into broader MongoDB entities. This is a reasonable merged match with consistent storage-layer attribution."
+    },
+    {
+      "gt_nodes": [
+        "Storage Layer (MongoDB::User Collection"
+      ],
+      "predicted_nodes": [
+        "MongoDB Database::User Accounts\\nRoles & Permissions"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the user account storage. The predicted node enriches it with roles and permissions, which aligns with the PRD."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Backend (Flask Microservices::Internal HTTP",
+    "Network & Gateway Layer::API Gateway::Identity Verification",
+    "Network & Gateway Layer::API Gateway::Request Forwarding",
+    "Network & Gateway Layer::API Gateway::Return Response",
+    "Network & Gateway Layer::HTTP Protocol"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Local Deployment",
+    "Local Deployment::API Gateway\\n(Load Balancer / Router",
+    "Local Deployment::Project Management Service\\n(Flask Microservice",
+    "Local Deployment::Requirements Management Service\\n(Flask Microservice",
+    "Local Deployment::User Management Service\\n(Flask Microservice",
+    "MongoDB Database::Logs & Audit Trails",
+    "MongoDB Database::Projects\\nMembers & Baselines",
+    "MongoDB Database::Requirement Items\\nTree & Analysis Data",
+    "MongoDB Database::User Accounts\\nRoles & Permissions",
+    "Server Deployment::Algorithm Service\\n(Flask Microservice",
+    "Server Deployment::NLP & PyTorch Engine\\n(Word2vec, Heuristics"
+  ]
+}

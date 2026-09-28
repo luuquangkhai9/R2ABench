@@ -1,0 +1,87 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Orchestration Layer::Airflow Container\\n(docker-airflow-spark:latest",
+        "Host Machine::Orchestration Layer::Airflow Container\\n(docker-airflow-spark:latest::AirflowScheduler\\n(LocalExecutor Mode",
+        "Host Machine::Orchestration Layer::Airflow Container\\n(docker-airflow-spark:latest::AirflowWebserver\\nWeb UI - port 8282",
+        "Host Machine::Orchestration Layer::Airflow Container\\n(docker-airflow-spark:latest::PySpark Runtime\\n(pyspark package)\\nenables spark-submit",
+        "Host Machine::Orchestration Layer::Airflow Container\\n(docker-airflow-spark:latest::SparkDefaultConnection\\nspark://spark:7077",
+        "Host Machine::Orchestration Layer::Airflow Container\\n(docker-airflow-spark:latest::SparkSubmitOperator\\n(within DAGs"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT Airflow node is correctly split by the AI into a container and its key internal components/functions as described in the PRD. The AI's boundary 'Host Machine::Orchestration Layer' is semantically equivalent and more descriptive than the GT's 'Docker Compose Environment'."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Cluster Manager\\n(Spark Standalone"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Compute Layer::Spark Master Container\\n(bitnami/spark:latest",
+        "Host Machine::Compute Layer::Spark Master Container\\n(bitnami/spark:latest::SparkMaster\\nhostname: spark\\nsubmit port: 7077\\nWeb UI: 8181\\nSPARK_MODE=master"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's Spark cluster manager node is correctly mapped to the AI's more detailed representation of a Spark Master container and the service running within it. The AI's boundary 'Host Machine::Compute Layer' is a suitable and semantically correct classification."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Interactive Development Layer::Jupyter Container\\n(jupyter/pyspark-notebook",
+        "Host Machine::Interactive Development Layer::Jupyter Container\\n(jupyter/pyspark-notebook::JupyterPySpark\\nNotebook UI - port 8888\\nSpark App UI - ports 4040-4080\\ninteractive PySpark sessions"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT Jupyter node is correctly expanded by the AI into a container and the service it provides. The AI's boundary 'Host Machine::Interactive Development Layer' is semantically equivalent and more descriptive than the GT's generic environment boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Postgres"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Metadata Persistence Layer::PostgresDB\\npostgres:9.6\\nport 5432"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are a direct match. The AI's boundary 'Host Machine::Metadata Persistence Layer' is a more specific and semantically correct classification for the database's role compared to the GT's general 'Docker Compose Environment'."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 1",
+        "Docker Compose Environment::Spark Workers::Worker 2",
+        "Docker Compose Environment::Spark Workers::Worker 3",
+        "Docker Compose Environment::Spark Workers::Worker N"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Compute Layer::Spark Worker-1 Container\\n(bitnami/spark:latest",
+        "Host Machine::Compute Layer::Spark Worker-1 Container\\n(bitnami/spark:latest::SparkWorker-1\\nSPARK_MODE=worker\\nmaster: spark://spark:7077",
+        "Host Machine::Compute Layer::Spark Worker-2 Container\\n(bitnami/spark:latest",
+        "Host Machine::Compute Layer::Spark Worker-2 Container\\n(bitnami/spark:latest::SparkWorker-2\\nSPARK_MODE=worker\\nmaster: spark://spark:7077",
+        "Host Machine::Compute Layer::Spark Worker-3 Container\\n(bitnami/spark:latest",
+        "Host Machine::Compute Layer::Spark Worker-3 Container\\n(bitnami/spark:latest::SparkWorker-3\\nSPARK_MODE=worker\\nmaster: spark://spark:7077"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's set of three specific workers and one conceptual worker is matched to the AI's set of three specific workers, each detailed as a container and an inner service. The AI's 'Host Machine::Compute Layer' boundary is correct and consistent with the Spark Master's placement."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Data Engineer"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::Docker Compose v3.7",
+    "External Systems::Dockerfile + Requirements\\n(docker-airflow-spark build context",
+    "External Systems::bitnami/spark:latest Image (Docker Hub",
+    "External Systems::jupyter/pyspark-notebook Image (Docker Hub",
+    "External Systems::postgres:9.6 Image (Docker Hub",
+    "Host Machine::Host Port Mapping\\n5432, 8282, 8181, 7077\\n8888, 4040-4080",
+    "Host Machine::Networking Layer::ComposeNetwork\\n(Docker Compose Bridge Network)\\nDNS: service-name resolution",
+    "Host Machine::Shared Storage Layer::SharedMountVolumes\\n/dags  (DAG definitions)\\n/spark-apps  (Spark application files)\\n/notebooks  (Jupyter notebooks)\\n/data  (input datasets"
+  ]
+}

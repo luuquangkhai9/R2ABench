@@ -1,0 +1,126 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Proxy Core",
+        "Proxy Layer::cgi_proxy 2"
+      ],
+      "predicted_nodes": [
+        "Proxy Layer::HTTP Proxy"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the core HTTP proxy component. The AI merges multiple GT proxy core/instances into one general node, and the Proxy Layer boundary matches perfectly."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Logging"
+      ],
+      "predicted_nodes": [
+        "Proxy Layer::HTTP Proxy::Debug Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both handle proxy logging functionality. The boundary assignment within the proxy context aligns well."
+    },
+    {
+      "gt_nodes": [
+        "CGI Portal::Http Test\nClient"
+      ],
+      "predicted_nodes": [
+        "Test Client Layer::Asynchronous HTTP Client",
+        "Test Client Layer::Asynchronous HTTP Client::Executor Service",
+        "Test Client Layer::Asynchronous HTTP Client::Success Counter",
+        "Test Client Layer::Asynchronous HTTP Client::Workload Generator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The AI correctly splits the test client functionality into finer components, but places them in a specific 'Test Client Layer' instead of the GT's 'CGI Portal' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Servers::......",
+        "Business Servers::Business Server A",
+        "Business Servers::Business Server B",
+        "Business Servers::Business Server C"
+      ],
+      "predicted_nodes": [
+        "External Systems::Upstream Server"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI simplifies the multiple upstream business servers into a single Upstream Server node. 'Business Servers' and 'External Systems' are semantically compatible boundaries for upstream dependencies."
+    },
+    {
+      "gt_nodes": [
+        "Clients::APP Client",
+        "Clients::Business Server",
+        "Clients::Web Client"
+      ],
+      "predicted_nodes": [
+        "External Systems::HTTP Client"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "GT's multiple client applications are aggregated into one HTTP Client by AI. The boundaries 'Clients' and 'External Systems' share consistent semantics for external initiators."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Download",
+        "Proxy Layer::cgi_proxy 1::Plugin::Upload"
+      ],
+      "predicted_nodes": [
+        "Test Server Layer::Local Test Server::File Handler"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both represent the download and upload endpoints/handlers. However, GT associates these plugins with the Proxy Layer, whereas the AI correctly follows the PRD placing them in the Test Server Layer, resulting in a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Mock"
+      ],
+      "predicted_nodes": [
+        "Test Server Layer::Local Test Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT implements test server behavior as a 'Mock' plugin inside the proxy layer, while AI isolates it into a dedicated 'Test Server Layer'. The functionality matches but the boundaries cross."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer\nKeepalived(VIP::Openresty",
+    "CGI Portal::Appkey\nManager",
+    "CGI Portal::CGI Manager",
+    "CGI Portal::Case Manager",
+    "CGI Portal::Document\nGenerate",
+    "CGI Portal::Log & Tree\ninquire",
+    "CGI Portal::Metrics &\nReport",
+    "CGI Portal::Service\nManager",
+    "Clients::Developer",
+    "Global::Log consumer",
+    "Proxy Layer::cgi_proxy 1::Appkey\nValidate",
+    "Proxy Layer::cgi_proxy 1::Formatter",
+    "Proxy Layer::cgi_proxy 1::Global Limit",
+    "Proxy Layer::cgi_proxy 1::Login &\nPermission",
+    "Proxy Layer::cgi_proxy 1::Plugin::Agent",
+    "Proxy Layer::cgi_proxy 1::Plugin::Attach Check",
+    "Proxy Layer::cgi_proxy 1::Plugin::Check\nParameter",
+    "Support Platform::Data Bank\nHDFS/Hbase/Druid",
+    "Support Platform::Msg Center\nKafka",
+    "Support Platform::Mysql",
+    "Support Platform::Permission\nCenter",
+    "Support Platform::Redis Cache",
+    "Support Platform::User Center",
+    "Task Scheduler::CGI Case\nExecutor",
+    "Task Scheduler::CGI Health\nCheck",
+    "Task Scheduler::Daily Report",
+    "Task Scheduler::Log Analysis",
+    "Task Scheduler::Monitor/Alarm"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::Java Runtime Environment",
+    "External Systems::Local Filesystem",
+    "External Systems::Maven Build Environment"
+  ]
+}

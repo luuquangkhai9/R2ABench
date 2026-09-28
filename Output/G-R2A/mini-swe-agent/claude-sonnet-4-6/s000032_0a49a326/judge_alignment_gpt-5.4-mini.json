@@ -1,0 +1,116 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Audit\nService"
+      ],
+      "predicted_nodes": [
+        "Activiti Cloud Runtime Layer::Audit Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same component and same architectural placement at the Activiti cloud runtime/application layer."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Query\nService"
+      ],
+      "predicted_nodes": [
+        "Activiti Cloud Runtime Layer::Query Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same component; the layer name differs but is semantically equivalent to the cloud runtime/application boundary."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::Process\nRuntime"
+      ],
+      "predicted_nodes": [
+        "Activiti Cloud Runtime Layer::Example Runtime Bundle\n(ProcessRuntime API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT process runtime bundle/component is represented by the predicted example runtime bundle with ProcessRuntime API emphasis; boundary is consistent with the runtime bundle layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::SSO/IDM\n(Keycloak"
+      ],
+      "predicted_nodes": [
+        "Identity & Security Layer::Keycloak\n(Identity Provider"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same identity provider component; predicted boundary correctly places it in identity/security."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Config Maps\n(Kubernetes"
+      ],
+      "predicted_nodes": [
+        "Deployment & Infrastructure Layer::Deployment Descriptors\n(replica count, input rate"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Kubernetes config-map/deployment configuration concept is represented by deployment descriptors controlling replica count and input rate; boundary is appropriate for deployment/infrastructure configuration."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Gateway"
+      ],
+      "predicted_nodes": [
+        "Global::Activiti Cloud Runtime Layer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The gateway is an architecture background component, but the prediction collapses it into a generic global runtime-layer node rather than a concrete gateway boundary; this is a boundary/context mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Notification\nService"
+      ],
+      "predicted_nodes": [
+        "Global::Activiti Cloud Runtime Layer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The notification service is an architecture background component, not a generic runtime-layer global node; the predicted attribution loses the component and misplaces it."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Customer\nLogic",
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Out of the\nBox Services"
+      ],
+      "predicted_nodes": [
+        "Global::Activiti Cloud Runtime Layer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "These GT cloud-connector subcomponents are merged into an overly generic global runtime-layer node, which is a semantic and boundary mismatch."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Customer\nLogic",
+    "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Out of the\nBox Services",
+    "Activiti Cloud Infrastructure::Activiti Cloud Application::Notification\nService",
+    "Activiti Cloud Infrastructure::Gateway",
+    "Activiti Cloud Infrastructure::Registry\n(Kubernetes",
+    "Global::Client"
+  ],
+  "unmatched_predicted_nodes": [
+    "Activiti Cloud Runtime Layer::TaskRuntime API\n(ROLE_ACTIVITI_USER required",
+    "Application Layer::Spring Boot Application\n(Application Context",
+    "Deployment & Infrastructure Layer::Kubernetes / GKE Cluster",
+    "External Access Layer::NGINX Ingress Controller",
+    "External Access Layer::Public IP",
+    "Global::Application Layer",
+    "Global::Audit Event Records",
+    "Global::Deployment & Infrastructure Layer",
+    "Global::External Access Layer",
+    "Global::Identity & Security Layer",
+    "Global::Process Definitions\n& Process Instances",
+    "Global::Process Execution State",
+    "Identity & Security Layer::Spring Security\n(User/Role/Group Context"
+  ]
+}

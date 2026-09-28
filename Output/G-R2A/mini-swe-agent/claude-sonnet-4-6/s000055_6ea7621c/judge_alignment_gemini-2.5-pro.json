@@ -1,0 +1,72 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "BACKEND::Router"
+      ],
+      "predicted_nodes": [
+        "Heroku Deployment Platform::Node.js Server Runtime::Routing Layer::HTTP Router"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the HTTP routing mechanism. The predicted node's boundary (Node.js Server Runtime) aligns perfectly with the GT backend boundary."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::algorithm"
+      ],
+      "predicted_nodes": [
+        "Heroku Deployment Platform::Node.js Server Runtime::Search/Autocomplete Layer::Search-Hint / Autocomplete Module",
+        "Heroku Deployment Platform::Node.js Server Runtime::Search/Autocomplete Layer::Value Extraction Module"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT algorithm node is logically split into specific autocomplete and value extraction modules by the AI, and both are correctly placed within the backend server runtime boundary."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::data.json"
+      ],
+      "predicted_nodes": [
+        "Heroku Deployment Platform::Node.js Server Runtime::Data Access Layer::Local Laureate JSON Data"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the local JSON laureate data source. The predicted boundary accurately maps to the backend context."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::handlers"
+      ],
+      "predicted_nodes": [
+        "Heroku Deployment Platform::Node.js Server Runtime::Handler Layer::Home Page Handler",
+        "Heroku Deployment Platform::Node.js Server Runtime::Handler Layer::Not-Found Handler",
+        "Heroku Deployment Platform::Node.js Server Runtime::Handler Layer::Static File Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT handlers node is split into specific request handler micro-components by the AI, all of which maintain a correct backend server boundary."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::index.html",
+        "FRONTEND::main.css",
+        "FRONTEND::userInput",
+        "FRONTEND::XMLHttpRequest"
+      ],
+      "predicted_nodes": [
+        "Heroku Deployment Platform::Node.js Server Runtime::Frontend Layer::HTML/CSS/JS Client\n(Browser"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The detailed frontend components in the GT are aggregated into a single browser client node by the AI. However, the AI incorrectly placed this client (Browser) inside the 'Node.js Server Runtime', which is a severe boundary-crossing/context-confusion error."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "BACKEND::public assets\nhtml\ncss\njs"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Heroku Deployment Platform",
+    "Heroku Deployment Platform::Node.js Server Runtime"
+  ]
+}

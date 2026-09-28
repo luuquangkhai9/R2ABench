@@ -1,0 +1,215 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::<b><u>DATABASE</u></b>\\n\\n* MariaDB\\n  * Users\\n  * Likes\\n  * Photos\\n  * Comments",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Persistence Layer::Database\\n(MariaDB",
+        "Persistence Layer::User Model"
+      ],
+      "reasoning": "The GT database node is covered by the predicted relational database and persistent user model concepts. The extra listed entities (users, likes, photos, comments) align with the database/storage responsibility."
+    },
+    {
+      "gt_node": "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Web Client::A-Frame Renderer",
+        "Web Client::Authentication Views",
+        "Web Client::React Application",
+        "Web Client::React Router",
+        "Web Client::Shared Credential Handlers"
+      ],
+      "reasoning": "The predicted client nodes collectively cover the GT web client responsibilities: React app structure, routing, A-Frame rendering, authentication views, and shared input handling."
+    },
+    {
+      "gt_node": "Global::<b><u>WEB SERVER</u></b>\\n\\n* Node\\n* Express\\n* DigitalOcean (Deployment",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Web Server::Express Router",
+        "Web Server::Node.js Server",
+        "Web Server::User Controller"
+      ],
+      "reasoning": "The predicted server nodes cover the Node/Express server-side responsibilities and controller layer. The deployment mention is not explicitly modeled, but the core web server is covered."
+    },
+    {
+      "gt_node": "Global::<b>AWS S3</b>",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Services::Image Storage\\n(AWS S3"
+      ],
+      "reasoning": "The predicted external image storage node corresponds directly to AWS S3."
+    },
+    {
+      "gt_node": "Global::<b>REDIS CACHE</b>",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Services::Cache\\n(Redis"
+      ],
+      "reasoning": "The predicted cache node corresponds directly to Redis cache."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "External Services::Cache\\n(Redis",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b>REDIS CACHE</b>"
+      ],
+      "reasoning": "Directly grounded in the GT Redis cache concept."
+    },
+    {
+      "predicted_node": "External Services::Image Storage\\n(AWS S3",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b>AWS S3</b>"
+      ],
+      "reasoning": "Directly grounded in the GT AWS S3 storage concept."
+    },
+    {
+      "predicted_node": "Persistence Layer::Database\\n(MariaDB",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>DATABASE</u></b>\\n\\n* MariaDB\\n  * Users\\n  * Likes\\n  * Photos\\n  * Comments"
+      ],
+      "reasoning": "Matches the GT database layer and MariaDB responsibility."
+    },
+    {
+      "predicted_node": "Persistence Layer::User Model",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>DATABASE</u></b>\\n\\n* MariaDB\\n  * Users\\n  * Likes\\n  * Photos\\n  * Comments"
+      ],
+      "reasoning": "The user model is explicitly described in the PRD and is part of the persistence responsibility represented by the GT database node."
+    },
+    {
+      "predicted_node": "Web Client::A-Frame Renderer",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "reasoning": "Grounded in the GT web client A-Frame responsibility."
+    },
+    {
+      "predicted_node": "Web Client::Authentication Views",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "reasoning": "Grounded in the GT web client UI responsibilities, especially authentication screens."
+    },
+    {
+      "predicted_node": "Web Client::React Application",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "reasoning": "Directly grounded in the GT React-based client."
+    },
+    {
+      "predicted_node": "Web Client::React Router",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "reasoning": "Directly grounded in the GT React-Router client dependency."
+    },
+    {
+      "predicted_node": "Web Client::Shared Credential Handlers",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "reasoning": "Grounded by the PRD requirement for shared credential input handling within the client."
+    },
+    {
+      "predicted_node": "Web Server::Express Router",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB SERVER</u></b>\\n\\n* Node\\n* Express\\n* DigitalOcean (Deployment"
+      ],
+      "reasoning": "Directly grounded in the GT web server Express responsibility."
+    },
+    {
+      "predicted_node": "Web Server::Node.js Server",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB SERVER</u></b>\\n\\n* Node\\n* Express\\n* DigitalOcean (Deployment"
+      ],
+      "reasoning": "Directly grounded in the GT Node server responsibility."
+    },
+    {
+      "predicted_node": "Web Server::User Controller",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::<b><u>WEB SERVER</u></b>\\n\\n* Node\\n* Express\\n* DigitalOcean (Deployment"
+      ],
+      "reasoning": "Grounded in the PRD's user controller layer on the server side."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::<b><u>DATABASE</u></b>\\n\\n* MariaDB\\n  * Users\\n  * Likes\\n  * Photos\\n  * Comments"
+      ],
+      "predicted_nodes": [
+        "Persistence Layer::Database\\n(MariaDB",
+        "Persistence Layer::User Model"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT database node is split into database and user model concepts, both still within persistence/database semantics."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "predicted_nodes": [
+        "Web Client::A-Frame Renderer",
+        "Web Client::Authentication Views",
+        "Web Client::React Application",
+        "Web Client::React Router",
+        "Web Client::Shared Credential Handlers"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT web client is decomposed into multiple client-side subcomponents, all staying within the web client boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>WEB SERVER</u></b>\\n\\n* Node\\n* Express\\n* DigitalOcean (Deployment"
+      ],
+      "predicted_nodes": [
+        "Web Server::Express Router",
+        "Web Server::Node.js Server",
+        "Web Server::User Controller"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT web server is split into server runtime, routing, and controller layers, which are semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b>AWS S3</b>"
+      ],
+      "predicted_nodes": [
+        "External Services::Image Storage\\n(AWS S3"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted external image storage node is the same service as the GT AWS S3 node, with a semantically equivalent external-services boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b>REDIS CACHE</b>"
+      ],
+      "predicted_nodes": [
+        "External Services::Cache\\n(Redis"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted cache node corresponds directly to the GT Redis cache node, with semantically equivalent boundary attribution."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

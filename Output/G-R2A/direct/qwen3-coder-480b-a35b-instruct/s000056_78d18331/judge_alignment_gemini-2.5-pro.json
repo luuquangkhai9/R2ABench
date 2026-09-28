@@ -1,0 +1,52 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Go build tags"
+      ],
+      "predicted_nodes": [
+        "Global::Uses //go",
+        "Global::Supports Provider-Specific Testing",
+        "Global::Specific Test Support",
+        "Global::+ Provider"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT node 'Go build tags' corresponds to the AI's multiple nodes describing the function and syntax of provider-specific testing. The nodes are semantically equivalent, and the 'Global' boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Host Scanner Endpoint Tests::endpoint_platform1_test.go\\nplatform-specific expected data",
+        "Host Scanner Endpoint Tests::endpoint_platform2_test.go\\nplatform-specific expected data",
+        "Host Scanner Endpoint Tests::endpoint_test.go\\ncommon endpoint tests"
+      ],
+      "predicted_nodes": [
+        "Global::to-End Tests",
+        "Global::Validates CNI dir resolution",
+        "Global::Verifies 404 for unknown endpoints",
+        "Global::Checks secret removal in JSON",
+        "Global::+ End"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT nodes, which represent specific test files, are conceptually matched with the AI's nodes, which represent the overall end-to-end tests and the specific functionalities they verify. The functional mapping is correct. However, the boundary is incorrect as the AI placed all test-related nodes in the generic 'Global' boundary instead of a specific 'Host Scanner Endpoint Tests' boundary as done in the GT."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::",
+    "Global::+ Container Runtimes (containerd, CRI",
+    "Global::Exposes HTTP Endpoints",
+    "Global::HTTP Client",
+    "Global::Host-level directories",
+    "Global::Kubelet/containerd/cri-o processes",
+    "Global::Kubernetes Node",
+    "Global::O",
+    "Global::Provides runtime config files",
+    "Global::Resolves CNI Dir from Runtime Inputs",
+    "Global::Runs as Privileged DaemonSet",
+    "Global::Sanitizes Control-Plane JSON",
+    "Global::Test Environment",
+    "Global::host-scanner Service"
+  ]
+}

@@ -1,0 +1,534 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Alert Source::app-sre\\nalertmanager",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Alert Sources::Alert Webhook Sender",
+        "Global::External Alert Sources"
+      ],
+      "reasoning": "The GT alert source is represented by the predicted external alert source/webhook sender concepts, although the exact source name is not preserved."
+    },
+    {
+      "gt_node": "Alert Source::cluster\\nalertmanager",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Alert Sources::Alert Webhook Sender",
+        "Global::External Alert Sources"
+      ],
+      "reasoning": "The predicted alert source nodes cover the responsibility of receiving cluster alert webhooks."
+    },
+    {
+      "gt_node": "Alert Source::deadmanssnitch",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Alert Sources::Alert Webhook Sender",
+        "Global::External Alert Sources"
+      ],
+      "reasoning": "The predicted external alert source abstraction covers Dead Man's Snitch as an alert sender."
+    },
+    {
+      "gt_node": "Alerts::CHGM",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "CAD Container Image\\n(UBI Minimal Runtime::CAD Workflows::CHGM Workflow\\n(Cluster Has Gone Missing"
+      ],
+      "reasoning": "The CHGM alert/workflow responsibility is explicitly present in the predicted CAD workflow node."
+    },
+    {
+      "gt_node": "Alerts::CPD",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node clearly represents CPD as a distinct alert concept."
+    },
+    {
+      "gt_node": "Alerts::all cluster\\nalerts",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "CAD Container Image\\n(UBI Minimal Runtime::CAD Workflows",
+        "CAD Container Image\\n(UBI Minimal Runtime::CAD Workflows::Anomaly Detection\\n& Communication"
+      ],
+      "reasoning": "The predicted workflow and anomaly handling nodes cover the general cluster-alert handling responsibility."
+    },
+    {
+      "gt_node": "Global::Escalate alert to\\non-call SRE",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "CAD Container Image\\n(UBI Minimal Runtime::CAD Workflows::Mitigation &\\nDisposition Handling"
+      ],
+      "reasoning": "Escalation is part of the predicted mitigation/disposition handling responsibility."
+    },
+    {
+      "gt_node": "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Tekton Execution Environment\\n(namespace: configuration-anomaly-detection::Normal Event-Driven Path::EventListener",
+        "Tekton Execution Environment\\n(namespace: configuration-anomaly-detection::Normal Event-Driven Path::Trigger"
+      ],
+      "reasoning": "The interceptor/query concern maps to the predicted Tekton event-driven execution path components."
+    },
+    {
+      "gt_node": "Global::Tekton\\nEvent\\nListener",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Tekton Execution Environment\\n(namespace: configuration-anomaly-detection::Normal Event-Driven Path::EventListener",
+        "Global::Tekton Execution Environment\\n(namespace: configuration-anomaly-detection"
+      ],
+      "reasoning": "The predicted EventListener node directly covers the GT Tekton Event Listener."
+    },
+    {
+      "gt_node": "Global::Update Incident\\nNotes",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "CAD Container Image\\n(UBI Minimal Runtime::CAD Workflows::Mitigation &\\nDisposition Handling"
+      ],
+      "reasoning": "Updating incident notes is a follow-up disposition action and is covered by the mitigation/disposition workflow."
+    },
+    {
+      "gt_node": "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Integrations::PagerDuty",
+        "CAD Container Image\\n(UBI Minimal Runtime::Integration Library\\n(Package Library::PagerDuty\\nIntegration"
+      ],
+      "reasoning": "The exact team name is not preserved, but the PagerDuty integration responsibility is covered."
+    },
+    {
+      "gt_node": "PagerDuty Team::app-sre-alertmanager",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Integrations::PagerDuty",
+        "CAD Container Image\\n(UBI Minimal Runtime::Integration Library\\n(Package Library::PagerDuty\\nIntegration"
+      ],
+      "reasoning": "The predicted PagerDuty integration covers this team-level target concept."
+    },
+    {
+      "gt_node": "PagerDuty Team::prod-deadmanssnitch",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Integrations::PagerDuty",
+        "CAD Container Image\\n(UBI Minimal Runtime::Integration Library\\n(Package Library::PagerDuty\\nIntegration"
+      ],
+      "reasoning": "The predicted PagerDuty integration covers this notification target concept."
+    },
+    {
+      "gt_node": "cadctl::CHGM investigation",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "CAD Container Image\\n(UBI Minimal Runtime::/bin/cadctl\\n(CLI Entry Point",
+        "CAD Container Image\\n(UBI Minimal Runtime::CAD Workflows::CHGM Workflow\\n(Cluster Has Gone Missing"
+      ],
+      "reasoning": "The CLI entry point and CHGM workflow together cover the CHGM investigation command responsibility."
+    },
+    {
+      "gt_node": "cadctl::CPD investigation",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No specific CPD investigation workflow is represented in the predicted nodes."
+    },
+    {
+      "gt_node": "cadctl::Future investigations",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "CAD Container Image\\n(UBI Minimal Runtime::CAD Workflows"
+      ],
+      "reasoning": "The generic CAD workflows node plausibly covers additional/future investigations."
+    },
+    {
+      "gt_node": "cadctl::switch(alerttype",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "CAD Container Image\\n(UBI Minimal Runtime::CAD Workflows"
+      ],
+      "reasoning": "The generic workflows node covers CLI switching among alert types, though not explicitly named."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Build Environment::Go 1.17\\nBuilder Image",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "This is grounded by the PRD build-environment requirement even though no GT node explicitly names it."
+    },
+    {
+      "predicted_node": "CAD Container Image\\n(UBI Minimal Runtime::/bin/cadctl\\n(CLI Entry Point",
+      "grounded": true,
+      "reference_nodes": [
+        "cadctl::CHGM investigation",
+        "cadctl::CPD investigation",
+        "cadctl::Future investigations",
+        "cadctl::switch(alerttype"
+      ],
+      "reasoning": "The CLI binary/entry point is directly grounded in the cadctl GT concepts."
+    },
+    {
+      "predicted_node": "CAD Container Image\\n(UBI Minimal Runtime::CAD Workflows",
+      "grounded": true,
+      "reference_nodes": [
+        "cadctl::CHGM investigation",
+        "cadctl::CPD investigation",
+        "cadctl::Future investigations",
+        "cadctl::switch(alerttype",
+        "Alerts::all cluster\\nalerts"
+      ],
+      "reasoning": "This aggregates the CAD workflow responsibilities present in the GT."
+    },
+    {
+      "predicted_node": "CAD Container Image\\n(UBI Minimal Runtime::CAD Workflows::Anomaly Detection\\n& Communication",
+      "grounded": true,
+      "reference_nodes": [
+        "Alerts::all cluster\\nalerts",
+        "Global::Update Incident\\nNotes"
+      ],
+      "reasoning": "Anomaly detection and communications are grounded in the GT alert handling and follow-up communication responsibilities."
+    },
+    {
+      "predicted_node": "CAD Container Image\\n(UBI Minimal Runtime::CAD Workflows::CHGM Workflow\\n(Cluster Has Gone Missing",
+      "grounded": true,
+      "reference_nodes": [
+        "Alerts::CHGM",
+        "cadctl::CHGM investigation"
+      ],
+      "reasoning": "This is a direct grounding of the CHGM workflow concept."
+    },
+    {
+      "predicted_node": "CAD Container Image\\n(UBI Minimal Runtime::CAD Workflows::Mitigation &\\nDisposition Handling",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Escalate alert to\\non-call SRE",
+        "Global::Update Incident\\nNotes"
+      ],
+      "reasoning": "Mitigation/disposition handling is grounded in escalation and incident update responsibilities."
+    },
+    {
+      "predicted_node": "CAD Container Image\\n(UBI Minimal Runtime::Integration Library\\n(Package Library",
+      "grounded": true,
+      "reference_nodes": [
+        "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster",
+        "PagerDuty Team::app-sre-alertmanager",
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "reasoning": "The integration library is grounded by the GT's integration-related PagerDuty concepts and CLI integration needs."
+    },
+    {
+      "predicted_node": "CAD Container Image\\n(UBI Minimal Runtime::Integration Library\\n(Package Library::AWS\\nIntegration",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "Grounded by the PRD's required AWS integration support, though no GT node names AWS explicitly."
+    },
+    {
+      "predicted_node": "CAD Container Image\\n(UBI Minimal Runtime::Integration Library\\n(Package Library::OCM\\nIntegration",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "Grounded by the PRD's required OCM integration support, though no GT node names OCM explicitly."
+    },
+    {
+      "predicted_node": "CAD Container Image\\n(UBI Minimal Runtime::Integration Library\\n(Package Library::PagerDuty\\nIntegration",
+      "grounded": true,
+      "reference_nodes": [
+        "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster",
+        "PagerDuty Team::app-sre-alertmanager",
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "reasoning": "This directly corresponds to the PagerDuty-related GT nodes."
+    },
+    {
+      "predicted_node": "External Alert Sources::Alert Webhook Sender",
+      "grounded": true,
+      "reference_nodes": [
+        "Alert Source::app-sre\\nalertmanager",
+        "Alert Source::cluster\\nalertmanager",
+        "Alert Source::deadmanssnitch"
+      ],
+      "reasoning": "This is a generic grounding of the alert source concepts."
+    },
+    {
+      "predicted_node": "External Integrations::AWS",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "Grounded by PRD external integration requirements, although not explicit in GT nodes."
+    },
+    {
+      "predicted_node": "External Integrations::OCM",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "Grounded by PRD external integration requirements, although not explicit in GT nodes."
+    },
+    {
+      "predicted_node": "External Integrations::PagerDuty",
+      "grounded": true,
+      "reference_nodes": [
+        "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster",
+        "PagerDuty Team::app-sre-alertmanager",
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "reasoning": "This corresponds to the GT PagerDuty team concepts."
+    },
+    {
+      "predicted_node": "Global::Alert Webhook Sender",
+      "grounded": true,
+      "reference_nodes": [
+        "Alert Source::app-sre\\nalertmanager",
+        "Alert Source::cluster\\nalertmanager",
+        "Alert Source::deadmanssnitch"
+      ],
+      "reasoning": "This is a generic alert-source/webhook concept grounded in the GT."
+    },
+    {
+      "predicted_node": "Global::Build Environment",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "Grounded by the PRD build environment, even though no GT node explicitly captures it."
+    },
+    {
+      "predicted_node": "Global::CAD Container Image\\n(UBI Minimal Runtime",
+      "grounded": true,
+      "reference_nodes": [
+        "cadctl::CHGM investigation",
+        "cadctl::CPD investigation",
+        "cadctl::Future investigations",
+        "cadctl::switch(alerttype"
+      ],
+      "reasoning": "The containerized CLI runtime is grounded in the GT cadctl nodes and PRD runtime constraints."
+    },
+    {
+      "predicted_node": "Global::External Alert Sources",
+      "grounded": true,
+      "reference_nodes": [
+        "Alert Source::app-sre\\nalertmanager",
+        "Alert Source::cluster\\nalertmanager",
+        "Alert Source::deadmanssnitch"
+      ],
+      "reasoning": "This is an appropriate abstraction over the GT alert sources."
+    },
+    {
+      "predicted_node": "Global::External Integrations",
+      "grounded": true,
+      "reference_nodes": [
+        "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster",
+        "PagerDuty Team::app-sre-alertmanager",
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "reasoning": "This abstractions grounds the GT external integration concepts."
+    },
+    {
+      "predicted_node": "Global::Skip-Webhook Path",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "Grounded by the PRD direct skip-webhook execution requirement, though not explicitly represented in GT nodes."
+    },
+    {
+      "predicted_node": "Global::Tekton Execution Environment\\n(namespace: configuration-anomaly-detection",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Tekton\\nEvent\\nListener",
+        "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?"
+      ],
+      "reasoning": "This is grounded by the GT Tekton-related nodes and the documented namespace context."
+    },
+    {
+      "predicted_node": "Global::Template Update Utility",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT node list does not include a template update utility concept."
+    },
+    {
+      "predicted_node": "Skip-Webhook Path::Direct PipelineRun\\nManifest (YAML / JSON payload",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is a PRD-grounded capability, but no GT node corresponds to the direct PipelineRun manifest path."
+    },
+    {
+      "predicted_node": "Tekton Execution Environment\\n(namespace: configuration-anomaly-detection::Normal Event-Driven Path",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Tekton\\nEvent\\nListener",
+        "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?"
+      ],
+      "reasoning": "This matches the GT event-driven Tekton execution concept."
+    },
+    {
+      "predicted_node": "Tekton Execution Environment\\n(namespace: configuration-anomaly-detection::Normal Event-Driven Path::EventListener",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Tekton\\nEvent\\nListener"
+      ],
+      "reasoning": "Direct grounding of the GT EventListener."
+    },
+    {
+      "predicted_node": "Tekton Execution Environment\\n(namespace: configuration-anomaly-detection::Normal Event-Driven Path::Trigger",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?"
+      ],
+      "reasoning": "The Trigger node is grounded in the GT Tekton orchestration path."
+    },
+    {
+      "predicted_node": "Tekton Execution Environment\\n(namespace: configuration-anomaly-detection::PipelineRun\\n(cad-checks-pipeline",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT nodes do not explicitly include a PipelineRun node, so this is PRD-grounded but GT-unsupported."
+    },
+    {
+      "predicted_node": "Template Update Utility::Deployment Template\\nArtifacts",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node corresponds to template artifact maintenance."
+    },
+    {
+      "predicted_node": "Template Update Utility::Template Update\\nWorkflow",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node corresponds to a template update workflow."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Alert Source::app-sre\\nalertmanager",
+        "Alert Source::cluster\\nalertmanager",
+        "Alert Source::deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Alert Sources::Alert Webhook Sender",
+        "Global::External Alert Sources"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Multiple GT alert sources are aggregated into a generic external alert source abstraction with semantically consistent boundary placement."
+    },
+    {
+      "gt_nodes": [
+        "Alerts::CHGM"
+      ],
+      "predicted_nodes": [
+        "CAD Container Image\\n(UBI Minimal Runtime::CAD Workflows::CHGM Workflow\\n(Cluster Has Gone Missing"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The CHGM workflow is directly represented and placed within the CAD workflow boundary."
+    },
+    {
+      "gt_nodes": [
+        "Alerts::all cluster\\nalerts"
+      ],
+      "predicted_nodes": [
+        "CAD Container Image\\n(UBI Minimal Runtime::CAD Workflows",
+        "CAD Container Image\\n(UBI Minimal Runtime::CAD Workflows::Anomaly Detection\\n& Communication"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT broad cluster-alert concept is split into generic workflow and anomaly/communication subnodes with a consistent internal boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Escalate alert to\\non-call SRE",
+        "Global::Update Incident\\nNotes"
+      ],
+      "predicted_nodes": [
+        "CAD Container Image\\n(UBI Minimal Runtime::CAD Workflows::Mitigation &\\nDisposition Handling"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT follow-up actions are merged into a mitigation/disposition workflow, which is semantically appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton\\nEvent\\nListener",
+        "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?"
+      ],
+      "predicted_nodes": [
+        "Tekton Execution Environment\\n(namespace: configuration-anomaly-detection::Normal Event-Driven Path::EventListener",
+        "Tekton Execution Environment\\n(namespace: configuration-anomaly-detection::Normal Event-Driven Path::Trigger"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Tekton orchestration concepts are represented by EventListener and Trigger under the Tekton execution boundary, which is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster",
+        "PagerDuty Team::app-sre-alertmanager",
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Integrations::PagerDuty",
+        "CAD Container Image\\n(UBI Minimal Runtime::Integration Library\\n(Package Library::PagerDuty\\nIntegration"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT PagerDuty teams are abstracted into PagerDuty integration concepts with a reasonable boundary placement."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::CHGM investigation",
+        "cadctl::CPD investigation",
+        "cadctl::Future investigations",
+        "cadctl::switch(alerttype"
+      ],
+      "predicted_nodes": [
+        "CAD Container Image\\n(UBI Minimal Runtime::/bin/cadctl\\n(CLI Entry Point",
+        "CAD Container Image\\n(UBI Minimal Runtime::CAD Workflows"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The CLI command group is aggregated under the cadctl entry point and workflow boundary, which is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Alert Source::app-sre\\nalertmanager"
+      ],
+      "predicted_nodes": [
+        "External Alert Sources::Alert Webhook Sender"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The source is represented by an external alert sender abstraction with a compatible boundary."
+    },
+    {
+      "gt_nodes": [
+        "Alert Source::cluster\\nalertmanager"
+      ],
+      "predicted_nodes": [
+        "External Alert Sources::Alert Webhook Sender"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The source is represented by an external alert sender abstraction with a compatible boundary."
+    },
+    {
+      "gt_nodes": [
+        "Alert Source::deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Alert Sources::Alert Webhook Sender"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The source is represented by an external alert sender abstraction with a compatible boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Alerts::CPD",
+    "cadctl::CPD investigation"
+  ],
+  "unmatched_predicted_nodes": [
+    "Build Environment::Go 1.17\\nBuilder Image",
+    "CAD Container Image\\n(UBI Minimal Runtime::CAD Workflows::Anomaly Detection\\n& Communication",
+    "CAD Container Image\\n(UBI Minimal Runtime::Integration Library\\n(Package Library::AWS\\nIntegration",
+    "CAD Container Image\\n(UBI Minimal Runtime::Integration Library\\n(Package Library::OCM\\nIntegration",
+    "Global::Alert Webhook Sender",
+    "Global::Build Environment",
+    "Global::CAD Container Image\\n(UBI Minimal Runtime",
+    "Global::Skip-Webhook Path",
+    "Global::Tekton Execution Environment\\n(namespace: configuration-anomaly-detection",
+    "Global::Template Update Utility",
+    "Skip-Webhook Path::Direct PipelineRun\\nManifest (YAML / JSON payload",
+    "Tekton Execution Environment\\n(namespace: configuration-anomaly-detection::Normal Event-Driven Path",
+    "Tekton Execution Environment\\n(namespace: configuration-anomaly-detection::Normal Event-Driven Path::EventListener",
+    "Tekton Execution Environment\\n(namespace: configuration-anomaly-detection::Normal Event-Driven Path::Trigger",
+    "Tekton Execution Environment\\n(namespace: configuration-anomaly-detection::PipelineRun\\n(cad-checks-pipeline",
+    "Template Update Utility::Deployment Template\\nArtifacts",
+    "Template Update Utility::Template Update\\nWorkflow"
+  ]
+}

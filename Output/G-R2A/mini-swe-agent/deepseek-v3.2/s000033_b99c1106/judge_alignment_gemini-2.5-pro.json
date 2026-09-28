@@ -1,0 +1,83 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Data Engineer"
+      ],
+      "predicted_nodes": [
+        "Global::Data Engineer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact match for the primary user actor. The 'Global' boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Postgres"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Environment::PostgreSQL"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Nodes are semantically equivalent, as 'PostgreSQL' is the formal name for 'Postgres'. The boundary is identical and correct."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\n(Spark"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Environment::Jupyter/PySpark"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Nodes are semantically equivalent, both referring to the Jupyter service with PySpark capabilities as described in the PRD. The boundary is identical and correct."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Cluster Manager\n(Spark Standalone"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Environment::Spark Master"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Nodes are semantically equivalent. The PRD refers to this component as both 'Spark standalone cluster manager' and 'Spark master'. The boundary is identical and correct."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Airflow\n(Spark Driver"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Environment::Airflow Webserver",
+        "Docker Compose Environment::Airflow Webserver::Airflow Scheduler",
+        "Docker Compose Environment::Airflow Webserver::Airflow Web UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the Airflow service and split it into its logical sub-components (webserver, scheduler, UI) as mentioned in the PRD. The hierarchical boundary attribution is a valid and more detailed representation."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 1",
+        "Docker Compose Environment::Spark Workers::Worker 2"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Environment::Spark Worker 1",
+        "Docker Compose Environment::Spark Worker 2"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted worker nodes match the corresponding GT nodes. The AI did not use the 'Spark Workers' sub-boundary present in the GT, but placing the workers directly within the 'Docker Compose Environment' is still architecturally correct and does not constitute a boundary error."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Docker Compose Environment::Spark Workers::Worker 3",
+    "Docker Compose Environment::Spark Workers::Worker N"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Host System",
+    "Global::Notebook User",
+    "Global::Spark Developer"
+  ]
+}

@@ -1,0 +1,189 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Tengine Lite::Convert Tool::Caffe",
+        "Tengine Lite::Convert Tool::Darknet",
+        "Tengine Lite::Convert Tool::MXNet",
+        "Tengine Lite::Convert Tool::MegEngine",
+        "Tengine Lite::Convert Tool::OneFlow",
+        "Tengine Lite::Convert Tool::Others",
+        "Tengine Lite::Convert Tool::PaddlePaddle",
+        "Tengine Lite::Convert Tool::PyTorch / ONNX",
+        "Tengine Lite::Convert Tool::TF Lite",
+        "Tengine Lite::Convert Tool::TensorFlow"
+      ],
+      "predicted_nodes": [
+        "Global::Model Conversion Tooling"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT contains multiple concrete converter targets, while the AI aggregated them into a single higher-level model conversion tooling node. This is semantically consistent with the PRD's model conversion tooling scope."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Engine::CPU Backend",
+        "Tengine Lite::Engine::Device Allocator",
+        "Tengine Lite::Engine::Exec Scheduler",
+        "Tengine Lite::Engine::GPU Backend",
+        "Tengine Lite::Engine::Graph Partition",
+        "Tengine Lite::Engine::Low Bit Quantize",
+        "Tengine Lite::Engine::NPU Backend"
+      ],
+      "predicted_nodes": [
+        "Global::Tengine Lite Core Library",
+        "Tengine Lite Core Library::Core Modules::Device Module\n- NN Operators Backend\n- Hardware Abstraction",
+        "Tengine Lite Core Library::Core Modules::Operator Module\n- NN Operator Registration\n- NN Operator Initialization",
+        "Tengine Lite Core Library::Core Modules::Scheduler Module\n- Schedule & Execute NNIR\n- Computation Graph Management\n- Hardware Resource Scheduling\n- Model Serializer Coordination",
+        "Tengine Lite Core Library::Core Modules::Serializer Module\n- Binary tmfile Decoding\n- Serialized Model Parameter Output"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "These GT engine-related nodes are represented in the AI output as core library modules, especially device and scheduler responsibilities. The AI does not preserve the exact subnode granularity, but the placement within the core library is architecturally consistent with the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Runtime Optimize::ARM / X86 / RISCV / MIPS",
+        "Tengine Lite::Runtime Optimize::Amlogic / RK / NXP / JLQ\\nNPU and NVDLA",
+        "Tengine Lite::Runtime Optimize::Assembly",
+        "Tengine Lite::Runtime Optimize::Auto Kernel Plugin",
+        "Tengine Lite::Runtime Optimize::CUDA / Vulkan / OpenCL",
+        "Tengine Lite::Runtime Optimize::Mix Bit Calculation",
+        "Tengine Lite::Runtime Optimize::NVIDIA / Mali / Adreno",
+        "Tengine Lite::Runtime Optimize::SGEMM",
+        "Tengine Lite::Runtime Optimize::SIMD",
+        "Tengine Lite::Runtime Optimize::TIM-VX / OpenDLA Plugin",
+        "Tengine Lite::Runtime Optimize::TensorRT / ACL Plugin",
+        "Tengine Lite::Runtime Optimize::Winograd"
+      ],
+      "predicted_nodes": [
+        "Global::Tengine Lite Core Library"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT runtime optimization implementations are all subsumed under the broader core library in the AI output. This is an acceptable aggregation at a higher architectural boundary, though the detailed runtime-optimize layer is omitted."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Serializer::Caffe Serializer",
+        "Tengine Lite::Serializer::Darknet Serializer",
+        "Tengine Lite::Serializer::MLIR Serializer",
+        "Tengine Lite::Serializer::MXNet Serializer",
+        "Tengine Lite::Serializer::MegEngine Serializer",
+        "Tengine Lite::Serializer::ONNX Serializer",
+        "Tengine Lite::Serializer::OneFlow Serializer",
+        "Tengine Lite::Serializer::Others Serializer",
+        "Tengine Lite::Serializer::PaddlePaddle Serializer",
+        "Tengine Lite::Serializer::TF Lite Serializer",
+        "Tengine Lite::Serializer::TensorFlow Serializer",
+        "Tengine Lite::Serializer::ncnn Serializer",
+        "Tengine Lite::Serializer::tmfile Serializer"
+      ],
+      "predicted_nodes": [
+        "Tengine Lite Core Library::Core Modules::Serializer Module\n- Binary tmfile Decoding\n- Serialized Model Parameter Output"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI captured the serializer capability at the module level, especially tmfile decoding and serialized parameter output. It omits the individual format-specific serializers, but the architectural placement is correct in the core library."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Engine::Exec Scheduler",
+        "Tengine Lite::Engine::Graph Partition",
+        "Tengine Lite::Engine::Device Allocator"
+      ],
+      "predicted_nodes": [
+        "Tengine Lite Core Library::Core Modules::Scheduler Module\n- Schedule & Execute NNIR\n- Computation Graph Management\n- Hardware Resource Scheduling\n- Model Serializer Coordination"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The scheduler module in the AI output semantically matches the GT execution, graph partitioning, and resource scheduling responsibilities. The boundary is correct as a core module."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Engine::CPU Backend",
+        "Tengine Lite::Engine::GPU Backend",
+        "Tengine Lite::Engine::NPU Backend"
+      ],
+      "predicted_nodes": [
+        "Tengine Lite Core Library::Core Modules::Device Module\n- NN Operators Backend\n- Hardware Abstraction"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The device module is the correct architectural home for backend execution across CPU/GPU/NPU. The AI aggregated the specific backends into a more general device backend module."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Convert Tool::Caffe",
+        "Tengine Lite::Convert Tool::Darknet",
+        "Tengine Lite::Convert Tool::MXNet",
+        "Tengine Lite::Convert Tool::MegEngine",
+        "Tengine Lite::Convert Tool::OneFlow",
+        "Tengine Lite::Convert Tool::Others",
+        "Tengine Lite::Convert Tool::PaddlePaddle",
+        "Tengine Lite::Convert Tool::PyTorch / ONNX",
+        "Tengine Lite::Convert Tool::TF Lite",
+        "Tengine Lite::Convert Tool::TensorFlow"
+      ],
+      "predicted_nodes": [
+        "Model Conversion Tooling::Linux Pre-compiled\nConversion Tool\n[Linux Only",
+        "Model Conversion Tooling::Web Browser\n(WebAssembly Support Required",
+        "Model Conversion Tooling::Web Browser\n(WebAssembly Support Required::Online Converter\n(WebAssembly-based)\n[Local Browser Execution,\nNo Data Uploaded"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT lists specific conversion formats, while the AI models the converter system as Linux and browser-based tooling. This is a correct higher-level abstraction aligned with the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Serializer::tmfile Serializer"
+      ],
+      "predicted_nodes": [
+        "Tengine Lite Core Library::Core Modules::Serializer Module\n- Binary tmfile Decoding\n- Serialized Model Parameter Output"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the tmfile decoding serializer. The AI placed it in the correct core serializer module boundary."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Runtime Optimize::SIMD",
+        "Tengine Lite::Runtime Optimize::Assembly",
+        "Tengine Lite::Runtime Optimize::Winograd"
+      ],
+      "predicted_nodes": [
+        "Tengine Lite Core Library::Core Modules::Device Module\n- NN Operators Backend\n- Hardware Abstraction"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "These are optimization techniques within the execution backend area. The AI does not preserve them explicitly, but placing them under the core device/backend area is acceptable."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Build System",
+    "Global::Local Asset Store\n(Project Root Folder",
+    "Global::User / Developer Environment",
+    "Local Asset Store\n(Project Root Folder::Converted Model Artifacts",
+    "Local Asset Store\n(Project Root Folder::Image Files\n(Input for Examples",
+    "Local Asset Store\n(Project Root Folder::Model Files\n(.tmfile binary / other formats",
+    "Tengine Lite Core Library::API Surface Layer::C API\n(Original Tengine-Compatible",
+    "Tengine Lite Core Library::API Surface Layer::C++ API\nDocumentation Entry Point",
+    "Tengine Lite Core Library::API Surface Layer::Python API\nDocumentation Entry Point",
+    "Tengine Lite Core Library::Core Modules::Device Module\n- NN Operators Backend\n- Hardware Abstraction",
+    "Tengine Lite Core Library::Core Modules::Operator Module\n- NN Operator Registration\n- NN Operator Initialization",
+    "Tengine Lite Core Library::Core Modules::Scheduler Module\n- Schedule & Execute NNIR\n- Computation Graph Management\n- Hardware Resource Scheduling\n- Model Serializer Coordination",
+    "Tengine Lite Core Library::Core Modules::Serializer Module\n- Binary tmfile Decoding\n- Serialized Model Parameter Output",
+    "Tengine Lite Core Library::Example Applications::Character Recognition\n(CRNN Chinese OCR",
+    "Tengine Lite Core Library::Example Applications::Classification\n(MobileNet v1",
+    "Tengine Lite Core Library::Example Applications::Landmark Detection\n(Facial Landmark",
+    "Tengine Lite Core Library::Example Applications::Object Detection\n(SSD, YoloV3, YoloV4-tiny,\nYoloV5s, NanoDet, EfficientDet,\nRetinaFace",
+    "Tengine Lite Core Library::Example Applications::Pose Estimation\n(OpenPose, HRNet",
+    "Tengine Lite Core Library::Example Applications::Segmentation\n(Yolact, U-Net",
+    "User / Developer Environment::C API Integrator\n(Native Application",
+    "User / Developer Environment::C++ API User\n(C++ Application",
+    "User / Developer Environment::Example User\n(Classification, Detection,\nSegmentation, Pose, OCR, etc.",
+    "User / Developer Environment::Python API User\n(Python Application",
+    "User / Developer Environment::Tool User\n(Model Conversion"
+  ]
+}

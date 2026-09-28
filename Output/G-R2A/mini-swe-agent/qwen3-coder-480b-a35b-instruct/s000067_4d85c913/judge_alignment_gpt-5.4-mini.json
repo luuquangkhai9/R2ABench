@@ -1,0 +1,80 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Event Handler eBPF Programs::Default Handler Probes",
+        "Event Handler eBPF Programs::Process Specific\nHandler Probes"
+      ],
+      "predicted_nodes": [
+        "Kernel Space::Handler Programs"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates default and process-specific handler probes, while the AI aggregates them into a broader kernel-space handler program node. This is semantically equivalent and the boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Global::Perf Event Map\nshared event map"
+      ],
+      "predicted_nodes": [
+        "Kernel Space::Perf Event Channel"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the kernel/userspace event transport mechanism. The naming differs (map vs channel), but functionally they correspond to the same event delivery path."
+    },
+    {
+      "gt_nodes": [
+        "Global::Prog ID Map\npid to id",
+        "Main eBPF Program::Prog Map\npid to fd",
+        "Main eBPF Program::Ret Prog Map\npid to fd",
+        "Main eBPF Program::Prog Maps\nhandler mappings"
+      ],
+      "predicted_nodes": [
+        "Kernel Space::eBPF Probes",
+        "Linux Kernel::Kprobe/Kretprobe"
+      ],
+      "match_type": "N:2",
+      "is_boundary_correct": true,
+      "reasoning": "The GT contains several maps used by the main eBPF program for handler/program selection and probe attachment. The AI collapses these into probe-related kernel-space nodes. This is a coarse aggregation but remains within the correct kernel/eBPF boundary."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Kprobe / Kretprobe\nother traced calls",
+        "Main eBPF Program::Kprobe\nentry probe",
+        "Main eBPF Program::Kretprobe\nreturn probe"
+      ],
+      "predicted_nodes": [
+        "Linux Kernel::Kprobe/Kretprobe",
+        "Linux Kernel::eBPF Support"
+      ],
+      "match_type": "N:2",
+      "is_boundary_correct": true,
+      "reasoning": "The GT’s main eBPF program hooks are represented by the AI as kernel kprobe/kretprobe and eBPF support concepts. This is a reasonable semantic aggregation, and the boundary remains kernel-side."
+    },
+    {
+      "gt_nodes": [
+        "Global::TraceLeft\nCLI and library tracer"
+      ],
+      "predicted_nodes": [
+        "User Space::TraceLeft CLI",
+        "User Space::Userspace Tracer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT’s combined CLI/library tracer is split by the AI into CLI and userspace tracer components. This is a valid decomposition within the user-space boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Linux Kernel Functions::inet_csk_accept",
+    "Linux Kernel Functions::sys_open",
+    "Linux Kernel Functions::sys_write"
+  ],
+  "unmatched_predicted_nodes": [
+    "Configuration & Metadata::Event Configuration",
+    "Configuration & Metadata::Handler Generator",
+    "Global::Linux Kernel",
+    "User Space::CLI Operator",
+    "User Space::Event Consumer"
+  ]
+}

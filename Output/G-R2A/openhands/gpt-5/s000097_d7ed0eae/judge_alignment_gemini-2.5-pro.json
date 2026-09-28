@@ -1,0 +1,87 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Website::React UI\\nBeeGreen site",
+        "Website::TypeScript\\nWebsite code"
+      ],
+      "predicted_nodes": [
+        "Client Applications::Website\\n(React/TypeScript"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the website component and aggregated the detailed GT nodes (UI and code) into a single logical node. The 'Client Applications' boundary is semantically equivalent to the 'Website' boundary in this context."
+    },
+    {
+      "gt_nodes": [
+        "Browser Extension::React UI\\nExtension",
+        "Browser Extension::TypeScript\\nExtension code"
+      ],
+      "predicted_nodes": [
+        "Client Applications::Browser Extension\\n(Chrome"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the browser extension and aggregated the detailed GT nodes into a single logical node. The 'Client Applications' boundary is a semantically equivalent grouping for the 'Browser Extension' boundary."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Express App",
+        "IBM Cloud::LoopBack Generated Code",
+        "IBM Cloud::Node.js Runtime"
+      ],
+      "predicted_nodes": [
+        "Global::Backend API Tier\\n(Node.js + LoopBack"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated the specific backend technology components (Node.js runtime, Express app, LoopBack code) from the GT into a single high-level node representing the backend tier, as described in the PRD. The 'Global' boundary is acceptable for this high-level logical block, versus GT's specific 'IBM Cloud' hosting boundary."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::LoopBack Generated Code"
+      ],
+      "predicted_nodes": [
+        "Backend API Tier\\n(Node.js + LoopBack::Ping Controller",
+        "Backend API Tier\\n(Node.js + LoopBack::UserRepository",
+        "Backend API Tier\\n(Node.js + LoopBack::Users Controller"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly analyzed the functional requirements and split the generic 'LoopBack Generated Code' from the GT into specific, meaningful components (Controllers and Repository) that implement the user and ping functionalities. The AI's boundary 'Backend API Tier' is a logical container, which is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Cloudant\\nUser and API data"
+      ],
+      "predicted_nodes": [
+        "Global::Persistent Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the need for data persistence but abstracted the specific technology 'Cloudant' into a generic 'Persistent Storage' node. This is a valid high-level abstraction. The 'Global' boundary is acceptable compared to GT's specific hosting 'IBM Cloud'."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Watson Studio",
+        "IBM Cloud::CSV File\\nExport / training data",
+        "IBM Cloud::Object Storage"
+      ],
+      "predicted_nodes": [
+        "Global::Scoring & Recommendation\\nData Processing"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated multiple specific data processing and storage components from the GT into a single logical node that accurately describes their collective function as per the PRD's mention of 'scoring and recommendation workflows'."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::User\\nShopping at online stores",
+    "Global::User\\nVisiting BeeGreen site"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Client Applications",
+    "Global::Diagnostics API\\n/ ping\\n- GET ping",
+    "Global::Users API\\n/ users\\n- POST create\\n- GET list [filter]\\n- PATCH bulk update [where]\\n- GET /{id"
+  ]
+}

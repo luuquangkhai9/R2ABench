@@ -1,0 +1,196 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Tengine Lite::Serializer::tmfile Serializer"
+      ],
+      "predicted_nodes": [
+        "Core Engine Modules::Serializer module"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the serializer responsible for tmfile decoding. The predicted node is broader than the GT node but remains within the correct architectural boundary."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Engine::Device Allocator",
+        "Tengine Lite::Engine::Exec Scheduler",
+        "Tengine Lite::Engine::Graph Partition"
+      ],
+      "predicted_nodes": [
+        "Core Engine Modules::Scheduler module"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT engine responsibilities are consolidated into a single scheduler module in the predicted diagram. This aggregation is semantically consistent and stays within core engine boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Engine::CPU Backend",
+        "Tengine Lite::Engine::GPU Backend",
+        "Tengine Lite::Engine::NPU Backend"
+      ],
+      "predicted_nodes": [
+        "Core Engine Modules::Device module"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT backend components map to the device module described in the PRD as the NN operators backend. This is a correct higher-level aggregation within the core engine."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Engine::Low Bit Quantize"
+      ],
+      "predicted_nodes": [
+        "Core Engine Modules::Scheduler module"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted diagram does not expose a dedicated quantization node, but this engine responsibility is plausibly absorbed into core execution/scheduling logic. Boundary attribution remains within the core engine area."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Runtime Optimize::ARM / X86 / RISCV / MIPS",
+        "Tengine Lite::Runtime Optimize::Amlogic / RK / NXP / JLQ\\nNPU and NVDLA",
+        "Tengine Lite::Runtime Optimize::Assembly",
+        "Tengine Lite::Runtime Optimize::Auto Kernel Plugin",
+        "Tengine Lite::Runtime Optimize::CUDA / Vulkan / OpenCL",
+        "Tengine Lite::Runtime Optimize::Mix Bit Calculation",
+        "Tengine Lite::Runtime Optimize::NVIDIA / Mali / Adreno",
+        "Tengine Lite::Runtime Optimize::SGEMM",
+        "Tengine Lite::Runtime Optimize::SIMD",
+        "Tengine Lite::Runtime Optimize::TIM-VX / OpenDLA Plugin",
+        "Tengine Lite::Runtime Optimize::TensorRT / ACL Plugin",
+        "Tengine Lite::Runtime Optimize::Winograd"
+      ],
+      "predicted_nodes": [
+        "Core Engine Modules::Device module",
+        "Core Engine Modules::Scheduler module"
+      ],
+      "match_type": "N:2",
+      "is_boundary_correct": true,
+      "reasoning": "The GT runtime optimization nodes are not represented explicitly, but they are implementation-level optimizations that can reasonably be subsumed into core engine modules. No severe boundary conflict is introduced."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Serializer::Caffe Serializer",
+        "Tengine Lite::Serializer::Darknet Serializer",
+        "Tengine Lite::Serializer::MLIR Serializer",
+        "Tengine Lite::Serializer::MXNet Serializer",
+        "Tengine Lite::Serializer::MegEngine Serializer",
+        "Tengine Lite::Serializer::ONNX Serializer",
+        "Tengine Lite::Serializer::OneFlow Serializer",
+        "Tengine Lite::Serializer::Others Serializer",
+        "Tengine Lite::Serializer::PaddlePaddle Serializer",
+        "Tengine Lite::Serializer::TF Lite Serializer",
+        "Tengine Lite::Serializer::TensorFlow Serializer",
+        "Tengine Lite::Serializer::ncnn Serializer"
+      ],
+      "predicted_nodes": [
+        "Model Conversion Tooling::Linux pre-compiled conversion tool",
+        "Model Conversion Tooling::Browser WebAssembly online converter"
+      ],
+      "match_type": "N:2",
+      "is_boundary_correct": false,
+      "reasoning": "These GT serializer nodes are model-format importers/decoders within the serializer boundary, while the predicted nodes are user-facing conversion tools. They are related to model transformation but are not semantically equivalent, and the boundary attribution is incorrect."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Convert Tool::Caffe",
+        "Tengine Lite::Convert Tool::Darknet",
+        "Tengine Lite::Convert Tool::MXNet",
+        "Tengine Lite::Convert Tool::MegEngine",
+        "Tengine Lite::Convert Tool::OneFlow",
+        "Tengine Lite::Convert Tool::Others",
+        "Tengine Lite::Convert Tool::PaddlePaddle",
+        "Tengine Lite::Convert Tool::PyTorch / ONNX",
+        "Tengine Lite::Convert Tool::TF Lite",
+        "Tengine Lite::Convert Tool::TensorFlow"
+      ],
+      "predicted_nodes": [
+        "Model Conversion Tooling::Linux pre-compiled conversion tool",
+        "Model Conversion Tooling::Browser WebAssembly online converter"
+      ],
+      "match_type": "N:2",
+      "is_boundary_correct": true,
+      "reasoning": "The GT convert-tool nodes are specific conversion frontends/formats, and the predicted diagram captures the converter functionality at a higher level. This is a valid aggregation within the model conversion tooling boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::N/A"
+      ],
+      "predicted_nodes": [
+        "API Surface::C API",
+        "API Surface::C++ API documentation entry point",
+        "API Surface::Python API documentation entry point"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The PRD includes API surfaces, but the GT list does not explicitly show equivalent nodes. The predicted nodes align with the documented API entry points and are correctly placed under an API surface boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Tengine Lite::Convert Tool::Caffe",
+    "Tengine Lite::Convert Tool::Darknet",
+    "Tengine Lite::Convert Tool::MXNet",
+    "Tengine Lite::Convert Tool::MegEngine",
+    "Tengine Lite::Convert Tool::OneFlow",
+    "Tengine Lite::Convert Tool::Others",
+    "Tengine Lite::Convert Tool::PaddlePaddle",
+    "Tengine Lite::Convert Tool::PyTorch / ONNX",
+    "Tengine Lite::Convert Tool::TF Lite",
+    "Tengine Lite::Convert Tool::TensorFlow",
+    "Tengine Lite::Engine::CPU Backend",
+    "Tengine Lite::Engine::Device Allocator",
+    "Tengine Lite::Engine::Exec Scheduler",
+    "Tengine Lite::Engine::GPU Backend",
+    "Tengine Lite::Engine::Graph Partition",
+    "Tengine Lite::Engine::Low Bit Quantize",
+    "Tengine Lite::Engine::NPU Backend",
+    "Tengine Lite::Runtime Optimize::ARM / X86 / RISCV / MIPS",
+    "Tengine Lite::Runtime Optimize::Amlogic / RK / NXP / JLQ\\nNPU and NVDLA",
+    "Tengine Lite::Runtime Optimize::Assembly",
+    "Tengine Lite::Runtime Optimize::Auto Kernel Plugin",
+    "Tengine Lite::Runtime Optimize::CUDA / Vulkan / OpenCL",
+    "Tengine Lite::Runtime Optimize::Mix Bit Calculation",
+    "Tengine Lite::Runtime Optimize::NVIDIA / Mali / Adreno",
+    "Tengine Lite::Runtime Optimize::SGEMM",
+    "Tengine Lite::Runtime Optimize::SIMD",
+    "Tengine Lite::Runtime Optimize::TIM-VX / OpenDLA Plugin",
+    "Tengine Lite::Runtime Optimize::TensorRT / ACL Plugin",
+    "Tengine Lite::Runtime Optimize::Winograd",
+    "Tengine Lite::Serializer::Caffe Serializer",
+    "Tengine Lite::Serializer::Darknet Serializer",
+    "Tengine Lite::Serializer::MLIR Serializer",
+    "Tengine Lite::Serializer::MXNet Serializer",
+    "Tengine Lite::Serializer::MegEngine Serializer",
+    "Tengine Lite::Serializer::ONNX Serializer",
+    "Tengine Lite::Serializer::OneFlow Serializer",
+    "Tengine Lite::Serializer::Others Serializer",
+    "Tengine Lite::Serializer::PaddlePaddle Serializer",
+    "Tengine Lite::Serializer::TF Lite Serializer",
+    "Tengine Lite::Serializer::TensorFlow Serializer",
+    "Tengine Lite::Serializer::ncnn Serializer",
+    "Tengine Lite::Serializer::tmfile Serializer"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application Examples::Classification Example",
+    "Application Examples::Detection Example",
+    "Application Examples::Example Applications Suite",
+    "Application Examples::Landmark Detection Example",
+    "Application Examples::OCR Example",
+    "Application Examples::Pose Estimation Example",
+    "Application Examples::Segmentation Example",
+    "Build and Packaging::Cross-platform CMake build",
+    "Core Engine Modules::Device module",
+    "Core Engine Modules::Operator module",
+    "Core Engine Modules::Scheduler module",
+    "Core Engine Modules::Serializer module",
+    "Global::CMake build environment",
+    "Global::Linux operating system",
+    "Global::Local filesystem assets (models, images",
+    "Global::Web browser with WebAssembly support",
+    "Model Conversion Tooling::Browser WebAssembly online converter",
+    "Model Conversion Tooling::Linux pre-compiled conversion tool"
+  ]
+}

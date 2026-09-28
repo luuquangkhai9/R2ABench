@@ -1,0 +1,46 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Go build tags"
+      ],
+      "predicted_nodes": [
+        "Global::Kubernetes Cluster"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node refers to a build-tag mechanism for provider-specific test selection, while the predicted node is an infrastructure boundary. They are not semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Host Scanner Endpoint Tests::endpoint_platform1_test.go\nplatform-specific expected data",
+        "Host Scanner Endpoint Tests::endpoint_platform2_test.go\nplatform-specific expected data",
+        "Host Scanner Endpoint Tests::endpoint_test.go\ncommon endpoint tests"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Worker Node::host-scanner Pod\n(DaemonSet, privileged::host-scanner Container::HTTP API Service"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT nodes describe test files and common vs platform-specific expected data for endpoint tests, while the predicted node describes the runtime HTTP API service in a pod/container hierarchy. This is a severe context mismatch."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Go build tags",
+    "Host Scanner Endpoint Tests::endpoint_platform1_test.go\nplatform-specific expected data",
+    "Host Scanner Endpoint Tests::endpoint_platform2_test.go\nplatform-specific expected data",
+    "Host Scanner Endpoint Tests::endpoint_test.go\ncommon endpoint tests"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Kubernetes Cluster",
+    "Kubernetes Cluster::Worker Node",
+    "Kubernetes Cluster::Worker Node::Container Runtime\n(containerd / CRI-O",
+    "Kubernetes Cluster::Worker Node::Kubelet",
+    "Kubernetes Cluster::Worker Node::host-scanner Pod\n(DaemonSet, privileged",
+    "Kubernetes Cluster::Worker Node::host-scanner Pod\n(DaemonSet, privileged::host-scanner Container",
+    "Kubernetes Cluster::Worker Node::host-scanner Pod\n(DaemonSet, privileged::host-scanner Container::CNI Directory Resolver",
+    "Kubernetes Cluster::Worker Node::host-scanner Pod\n(DaemonSet, privileged::host-scanner Container::HTTP API Service",
+    "Kubernetes Cluster::Worker Node::host-scanner Pod\n(DaemonSet, privileged::host-scanner Container::Host Info Collector",
+    "Kubernetes Cluster::Worker Node::host-scanner Pod\n(DaemonSet, privileged::host-scanner Container::JSON Sanitizer"
+  ]
+}

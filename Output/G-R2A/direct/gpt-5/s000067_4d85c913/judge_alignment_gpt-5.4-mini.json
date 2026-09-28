@@ -1,0 +1,151 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::TraceLeft\nCLI and library tracer"
+      ],
+      "predicted_nodes": [
+        "Linux Host (Target::User Space::TraceLeft CLI",
+        "Linux Host (Target::User Space::TraceLeft Library::Userspace Tracer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node combines the user-space CLI and tracing runtime, while the AI split it into CLI and userspace tracer components. This is functionally equivalent and placed in the correct user-space boundary."
+    },
+    {
+      "gt_nodes": [
+        "Event Handler eBPF Programs::Default Handler Probes"
+      ],
+      "predicted_nodes": [
+        "Linux Host (Target::Kernel Space (Linux Kernel >= 4.11::Handler eBPF Programs"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node represents the kernel-space handler eBPF programs that include default handler probes. The boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Event Handler eBPF Programs::Process Specific\nHandler Probes"
+      ],
+      "predicted_nodes": [
+        "Linux Host (Target::Kernel Space (Linux Kernel >= 4.11::Handler eBPF Programs"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Process-specific handler probes are part of the kernel-space handler eBPF programs. The AI correctly located them in kernel space."
+    },
+    {
+      "gt_nodes": [
+        "Event Handler eBPF Programs::Handler Probe\nhandle_syscall_write"
+      ],
+      "predicted_nodes": [
+        "Linux Host (Target::Kernel Space (Linux Kernel >= 4.11::Handler eBPF Programs"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The specific handler probe is correctly abstracted under kernel-space handler eBPF programs."
+    },
+    {
+      "gt_nodes": [
+        "Global::Perf Event Map\nshared event map"
+      ],
+      "predicted_nodes": [
+        "Linux Host (Target::Kernel Space (Linux Kernel >= 4.11::perf event channel"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT perf event map and the predicted perf event channel refer to the same event-delivery mechanism in kernel space. Boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Kprobe / Kretprobe\nother traced calls"
+      ],
+      "predicted_nodes": [
+        "Linux Host (Target::Kernel Space (Linux Kernel >= 4.11::kprobe/kretprobe hooks",
+        "Linux Host (Target::Kernel Space (Linux Kernel >= 4.11::eBPF Main Program"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node describes the main eBPF program attaching to kprobe/kretprobe hooks for traced calls. The AI split the concept into the main program and the hook layer, which is semantically correct and remains within kernel space."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Kprobe\nentry probe"
+      ],
+      "predicted_nodes": [
+        "Linux Host (Target::Kernel Space (Linux Kernel >= 4.11::eBPF Main Program",
+        "Linux Host (Target::Kernel Space (Linux Kernel >= 4.11::kprobe/kretprobe hooks"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The entry probe is part of the main eBPF program's kprobe logic. The AI's decomposition is acceptable and boundary-correct."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Kretprobe\nreturn probe"
+      ],
+      "predicted_nodes": [
+        "Linux Host (Target::Kernel Space (Linux Kernel >= 4.11::eBPF Main Program",
+        "Linux Host (Target::Kernel Space (Linux Kernel >= 4.11::kprobe/kretprobe hooks"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The return probe maps to the main eBPF program's kretprobe logic. The predicted placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Prog Map\npid to fd"
+      ],
+      "predicted_nodes": [
+        "Linux Host (Target::Kernel Space (Linux Kernel >= 4.11::eBPF Main Program"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The program map keyed by process context belongs with the main eBPF program in kernel space. The AI did not over-specify it, but the boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Prog Maps\nhandler mappings"
+      ],
+      "predicted_nodes": [
+        "Linux Host (Target::User Space::TraceLeft Library::Handler Map Manager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The handler mappings are part of the eBPF/main-program-side map structure, not a user-space library manager. This is a boundary crossing error."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Ret Prog Map\npid to fd"
+      ],
+      "predicted_nodes": [
+        "Linux Host (Target::Kernel Space (Linux Kernel >= 4.11::eBPF Main Program"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The return program map belongs to the main eBPF program in kernel space. The AI's boundary attribution is acceptable."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Prog ID Map\npid to id",
+    "Linux Kernel Functions::inet_csk_accept",
+    "Linux Kernel Functions::sys_open",
+    "Linux Kernel Functions::sys_write"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Linux Host (Target",
+    "Linux Host (Target::Kernel Space (Linux Kernel >= 4.11",
+    "Linux Host (Target::Kernel Space (Linux Kernel >= 4.11::Handler eBPF Programs",
+    "Linux Host (Target::Kernel Space (Linux Kernel >= 4.11::eBPF Main Program",
+    "Linux Host (Target::Kernel Space (Linux Kernel >= 4.11::kprobe/kretprobe hooks",
+    "Linux Host (Target::Kernel Space (Linux Kernel >= 4.11::perf event channel",
+    "Linux Host (Target::User Space",
+    "Linux Host (Target::User Space::TraceLeft CLI",
+    "Linux Host (Target::User Space::TraceLeft Library::Config Parser",
+    "Linux Host (Target::User Space::TraceLeft Library::Event Dispatcher",
+    "Linux Host (Target::User Space::TraceLeft Library::Generator",
+    "Linux Host (Target::User Space::TraceLeft Library::Probe Loader",
+    "Linux Host (Target::User Space::TraceLeft Library::Userspace Tracer",
+    "Linux Host (Target::User Space::TraceLeft Library::gobpf Integration"
+  ]
+}

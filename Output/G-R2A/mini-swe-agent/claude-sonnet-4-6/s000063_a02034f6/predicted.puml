@@ -1,0 +1,110 @@
+@startuml
+!define RECTANGLE class
+
+skinparam componentStyle rectangle
+skinparam backgroundColor #FEFEFE
+skinparam component {
+  BackgroundColor #E8F4FD
+  BorderColor #2980B9
+  FontSize 13
+}
+skinparam database {
+  BackgroundColor #FEF9E7
+  BorderColor #F39C12
+}
+skinparam node {
+  BackgroundColor #EAF9EA
+  BorderColor #27AE60
+}
+skinparam cloud {
+  BackgroundColor #FDEDEC
+  BorderColor #E74C3C
+}
+
+title teamgram-server Architecture (MTProto-compatible Telegram Server)
+
+actor "Telegram-compatible\nClient" as Client
+
+package "Deployment Environment" {
+
+  package "Client Access Layer" {
+    component [MTProto Gateway\n(Connection Handler)] as MTProtoGW
+    component [Authorization Key\nHandler] as AuthKeyHandler
+    component [Session Manager\n(session_id, destroy_session)] as SessionMgr
+    component [Server Salt\n/ Future Salts Handler] as SaltHandler
+    component [Service Message\nProcessor\n(rpc_drop_answer)] as SvcMsgProc
+  }
+
+  package "BFF / Access Service Layer" {
+    component [BFF / Access Service] as BFF
+    component [Verification Code\nService\n(default: 12345)] as VerifSvc
+    component [Registration\n& Auth Flow] as RegAuth
+  }
+
+  package "Business / Service Layer" {
+    component [Messaging Service] as MsgSvc
+    component [Session & Encrypted\nCommunication Service] as EncSession
+    component [Push / Notification\nService] as PushSvc
+    component [Sync Service] as SyncSvc
+    component [Media Wrapper\n(optional)] as MediaWrapper
+  }
+
+  package "Storage & Integration Layer" {
+    database "MySQL\n(Persistent Store)" as MySQL
+    database "Redis\n(Cache / Session)" as Redis
+    component [etcd\n(Service Discovery /\nConfig)] as Etcd
+    component [Kafka\n(Async Messaging Bus)" as Kafka
+    database "MinIO\n(Object / Media Store)" as MinIO
+  }
+}
+
+cloud "External Services" {
+  component [External Verification\nCode Service\n(optional)] as ExtVerifSvc
+  component [FFmpeg / FFProbe\n(optional media tools)] as FFmpeg
+}
+
+' Client connections
+Client --> MTProtoGW : MTProto protocol\n(TCP/UDP/WebSocket)
+
+' Client Access Layer internal
+MTProtoGW --> AuthKeyHandler : auth-key creation\n& encrypted session
+MTProtoGW --> SessionMgr : session management
+MTProtoGW --> SaltHandler : server salt /\nfuture salts
+MTProtoGW --> SvcMsgProc : rpc_drop_answer,\ndestroy_session
+
+' Access Layer to BFF
+MTProtoGW --> BFF : forwarded requests
+AuthKeyHandler --> BFF : authorization flows
+SessionMgr --> BFF : session events
+
+' BFF to Business Services
+BFF --> RegAuth : registration &\nverification flows
+BFF --> MsgSvc : messaging operations
+BFF --> EncSession : encrypted session ops
+
+RegAuth --> VerifSvc : verify code
+VerifSvc --> ExtVerifSvc : external code\nvalidation (optional)
+
+' Business Layer async flows
+MsgSvc --> Kafka : async message events
+PushSvc --> Kafka : consume push events
+SyncSvc --> Kafka : consume sync events
+PushSvc --> Redis : push state
+
+' Business to Storage
+MsgSvc --> MySQL : persist messages\n& user data
+RegAuth --> MySQL : user registration\n& auth data
+EncSession --> Redis : session cache\n& auth keys
+SaltHandler --> Redis : salt cache
+SessionMgr --> Redis : session state
+
+' Service Discovery
+BFF --> Etcd : service registry
+MsgSvc --> Etcd : service registry
+
+' Media
+MediaWrapper --> MinIO : media file storage
+MediaWrapper --> FFmpeg : media processing
+BFF --> MediaWrapper : media upload/download
+
+@enduml

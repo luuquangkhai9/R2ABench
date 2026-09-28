@@ -1,0 +1,74 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "predicted_nodes": [
+        "Flight Target Layer\n(core-cpu1 Runtime::cFS Framework::OSAL\n(OS Abstraction Layer",
+        "Flight Target Layer\n(core-cpu1 Runtime::cFS Framework::PSP\n(Platform Support Package",
+        "Flight Target Layer\n(core-cpu1 Runtime::cFS Framework::cFE\n(Core Flight Executive",
+        "Flight Target Layer\n(core-cpu1 Runtime::Framework Applications"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single 'cFS Bundle' node in GT is correctly split by the AI into its constituent submodules (OSAL, PSP, cFE, Framework Applications) according to the PRD. The boundary attribution 'Flight Target Layer' vs 'Global' is semantically acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Reuse Workflows::Submodule Reuse",
+        "Reuse Workflows::cFS Reuse"
+      ],
+      "predicted_nodes": [
+        "CI/CD Automation Layer\n(GitHub Actions Workflows::cFS Bundle Reusable Workflows\n(cFS & Submodule workflow_call\nFormat Check | Static Analysis | CodeQL"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The specific reusable workflow paths for submodules and cFS in the GT are aggregated into a single 'cFS Bundle Reusable Workflows' node by the AI. The CI/CD Automation boundary maps accurately to 'Reuse Workflows'."
+    },
+    {
+      "gt_nodes": [
+        "Static and Quality Checks::Format Check"
+      ],
+      "predicted_nodes": [
+        "CI/CD Automation Layer\n(GitHub Actions Workflows::Format Check Workflow\n(push | pull_request | workflow_call\nubuntu-18.04"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact functional match for the Format Check. The boundary 'CI/CD Automation Layer' is correct for 'Static and Quality Checks'."
+    },
+    {
+      "gt_nodes": [
+        "Static and Quality Checks::CodeQL Analysis",
+        "Static and Quality Checks::Static Analysis"
+      ],
+      "predicted_nodes": [
+        "CI/CD Automation Layer\n(GitHub Actions Workflows::Reusable Workflows\n(workflow_call triggers\nFormat Check | Static Analysis | CodeQL"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT lists specific quality check workflows, which the AI consolidates under a general 'Reusable Workflows' node covering Format Check, Static Analysis, and CodeQL. Boundary definitions align conceptually."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Artifact Storage::Changelog Artifact\n(uploaded output",
+    "Build System Layer::Makefile / Makefile.sample\n(make prep | make install",
+    "Build System Layer::sample_defs\n(Mission Configuration Assets",
+    "CI/CD Automation Layer\n(GitHub Actions Workflows::CI Build & Test Workflow\n(debug + release variants\nubuntu-18.04 / 15-min timeout",
+    "CI/CD Automation Layer\n(GitHub Actions Workflows::Changelog Generation Workflow\n(manual trigger / ubuntu-latest\nClosed issues, Breaking changes,\nFixed bugs, Enhancements, etc.",
+    "CI/CD Automation Layer\n(GitHub Actions Workflows::Duplicate-Check Job\n(ubuntu-latest",
+    "External Libraries & Tools Layer::CCDD\n(Command & Data Dictionary",
+    "External Libraries & Tools Layer::ECI\n(External Coding Interface",
+    "External Libraries & Tools Layer::Perfutils-java",
+    "External Libraries & Tools Layer::SIL\n(Simulation Interface Layer",
+    "External Libraries & Tools Layer::cFS_IO_LIB",
+    "External Libraries & Tools Layer::cFS_LIB",
+    "External Libraries & Tools Layer::gen_sch_tbl",
+    "Flight Target Layer\n(core-cpu1 Runtime::core-cpu1\n(cFS Target Executable",
+    "Git Submodules\n(Source Checkout::Submodule Sources",
+    "Global::GitHub Actions\n(CI/CD Execution Platform\nubuntu-latest | ubuntu-18.04",
+    "Host Tooling Layer::Telemetry Interface\n(Operator Network Endpoint\n127.0.0.1 / configured IP",
+    "Host Tooling Layer::cmdUtil\n(--pktid, --cmdcode,\n--endian, --uint32"
+  ]
+}

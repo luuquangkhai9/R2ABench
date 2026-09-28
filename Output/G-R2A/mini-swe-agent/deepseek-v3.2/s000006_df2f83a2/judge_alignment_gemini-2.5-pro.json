@@ -1,0 +1,101 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Biomechanical Model::BaseBMModel",
+        "Biomechanical Model::DerivedClass",
+        "Biomechanical Model::MoblArmsIndex"
+      ],
+      "predicted_nodes": [
+        "Component Layer::Biomechanical Models"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the GT's detailed biomechanical model classes into a single high-level architectural component. The 'Component Layer' boundary is a semantically correct and appropriate architectural layer for these modules."
+    },
+    {
+      "gt_nodes": [
+        "Interaction Task::BaseTask",
+        "Interaction Task::DerivedClass",
+        "Interaction Task::Pointing",
+        "Interaction Task::Tracking"
+      ],
+      "predicted_nodes": [
+        "Component Layer::Interaction Tasks"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the GT's detailed interaction task classes into a single high-level architectural component. The 'Component Layer' boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Perception::BaseModule",
+        "Perception::BasicWithEEPos",
+        "Perception::DerivedClass",
+        "Perception::FixedEye",
+        "Perception::Perception",
+        "Perception::Modalities::Modality"
+      ],
+      "predicted_nodes": [
+        "Component Layer::Perception Modules"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated the GT's various base classes and generic examples for the perception system into a single high-level 'Perception Modules' component. The placement in the 'Component Layer' is correct."
+    },
+    {
+      "gt_nodes": [
+        "Perception::Modalities::Proprioception"
+      ],
+      "predicted_nodes": [
+        "Component Layer::Perception Modules::Proprioception"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the proprioception modality. The AI correctly placed it as a sub-component within the 'Perception Modules' boundary, which is semantically equivalent to the GT's 'Perception::Modalities' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Perception::Modalities::Vision"
+      ],
+      "predicted_nodes": [
+        "Component Layer::Perception Modules::Egocentric Vision"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the vision modality. The AI's term 'Egocentric Vision' is a more specific and accurate interpretation from the SRS text. The boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Simulator"
+      ],
+      "predicted_nodes": [
+        "Runtime Layer::OpenAI Gym Interface"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'Simulator' represents the final product. The AI correctly identified its most crucial characteristic, the OpenAI Gym interface (per NFR-001, C-003), as the representative node. Placing this interface in a 'Runtime Layer' is a more precise and architecturally sound decision than 'Global'."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Component Layer::Biomechanical Models::Muscle-Actuated Models",
+    "Core Framework Layer::Component Registry",
+    "Core Framework Layer::MuJoCo XML Integration",
+    "Core Framework Layer::Simulator Construction Engine",
+    "Data Storage Layer::MuJoCo XML Files",
+    "Data Storage Layer::Run Folders",
+    "Data Storage Layer::Run Folders::Checkpoint Directory",
+    "Data Storage Layer::Run Folders::Evaluation Output Directory",
+    "Data Storage Layer::YAML Configuration Files",
+    "External Systems Layer::MuJoCo Simulation Engine",
+    "External Systems Layer::OpenAI Gym Runtime",
+    "External Systems Layer::Reinforcement Learning Libraries",
+    "Runtime Layer::Evaluation Runner",
+    "Runtime Layer::Reinforcement Learning Training",
+    "User Interface Layer::Evaluator",
+    "User Interface Layer::Module Developer",
+    "User Interface Layer::Simulator Builder",
+    "User Interface Layer::Training User"
+  ]
+}

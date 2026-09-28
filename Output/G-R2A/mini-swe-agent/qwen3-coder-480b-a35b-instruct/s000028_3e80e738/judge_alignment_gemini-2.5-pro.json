@@ -1,0 +1,65 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Cognito Account::Cognito User Pool"
+      ],
+      "predicted_nodes": [
+        "AWS Infrastructure::Cognito Account::Cognito User Pool"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Cognito User Pool component. The boundary 'Cognito Account' and 'AWS Infrastructure::Cognito Account' are semantically identical."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::API Gateway"
+      ],
+      "predicted_nodes": [
+        "AWS Infrastructure::API Gateway Account::API Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the core API Gateway component. Boundaries are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::auth-function"
+      ],
+      "predicted_nodes": [
+        "AWS Infrastructure::API Gateway Account::Cognito Authorizer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT 'auth-function' maps functionally to the 'Cognito Authorizer' predicted by the AI, which handles the authentication for the API Gateway in the same boundary."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::Cognito-authorizer::hello-function"
+      ],
+      "predicted_nodes": [
+        "AWS Infrastructure::API Gateway Account::WhoAmI Method",
+        "AWS Infrastructure::API Gateway Account::ECS Proxy Method"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT generalizes the API functionality into a single 'hello-function' node, whereas the AI accurately splits it into the specific 'WhoAmI Method' and 'ECS Proxy Method' endpoints defined in the PRD. The overarching API Gateway Account boundaries align."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "API Gateway Account::Calls hello/GET with id_token in headers",
+    "API Gateway Account::Returns hello plus user name when authorized",
+    "Cognito Account::Cognito Hosted UI",
+    "Global::User"
+  ],
+  "unmatched_predicted_nodes": [
+    "AWS Infrastructure::API Gateway Account",
+    "AWS Infrastructure::API Gateway Account::VPC Link",
+    "AWS Infrastructure::Cognito Account",
+    "AWS Infrastructure::Cognito Account::Cognito Identity Pool",
+    "AWS Infrastructure::Cognito Account::IAM Roles",
+    "AWS Infrastructure::VPC",
+    "AWS Infrastructure::VPC::SQS VPC Endpoint",
+    "AWS Infrastructure::VPC::Security Group"
+  ]
+}

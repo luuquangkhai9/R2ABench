@@ -1,0 +1,94 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Cloudinary\n- stores audio files\n- stores images\n- returns file URLs"
+      ],
+      "predicted_nodes": [
+        "Global::Cloudinary\n(Media Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Cloudinary external media storage component responsible for storing audio/images and returning URLs. The boundary attribution is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Express Server\n- fetches data with Sequelize\n- serves React frontend\n- handles backend API requests"
+      ],
+      "predicted_nodes": [
+        "Backend Layer (Node/Express::Express Server",
+        "Global::Backend Layer (Node/Express"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Express Server is split into a more explicit backend layer plus the Express Server node. This is semantically aligned with the backend server boundary and does not indicate a context error."
+    },
+    {
+      "gt_nodes": [
+        "Global::PostgreSQL Database\n- stores users and sounds\n- stores Cloudinary URL references"
+      ],
+      "predicted_nodes": [
+        "Global::PostgreSQL\n(Application Data"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the PostgreSQL persistence layer storing application data and media URL references. The boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::React Frontend\n- Redux state management\n- uploads images and audio\n- controls and visualizes playback"
+      ],
+      "predicted_nodes": [
+        "Client Layer (Browser::React UI\n(Playback, Upload,\nFollow, Feed, Forms",
+        "Client Layer (Browser::Redux Store\n(State Management",
+        "Client Layer (Browser::Waveform\nPlayer Component",
+        "Global::Client Layer (Browser",
+        "Global::Frontend Configuration"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT frontend node is decomposed into React UI, Redux store, and waveform player component, which matches the product architecture. All are correctly placed in the client/browser frontend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::React Frontend\n- Redux state management\n- uploads images and audio\n- controls and visualizes playback"
+      ],
+      "predicted_nodes": [
+        "Frontend Configuration::Environment Config\n(API Base URL,\nCloudinary URL,\nUpload Preset"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The PRD explicitly states the frontend depends on runtime configuration values. Although not drawn as a separate GT node, this predicted node is consistent with the frontend architecture and boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Express Server\n- fetches data with Sequelize\n- serves React frontend\n- handles backend API requests"
+      ],
+      "predicted_nodes": [
+        "Backend Layer (Node/Express::API Routes"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The API routes are part of the Express backend server. This is a reasonable decomposition of the GT Express Server node."
+    },
+    {
+      "gt_nodes": [
+        "Global::Express Server\n- fetches data with Sequelize\n- serves React frontend\n- handles backend API requests"
+      ],
+      "predicted_nodes": [
+        "Backend Layer (Node/Express::API Routes::Feed API\n(/feed, /user sounds",
+        "Backend Layer (Node/Express::API Routes::Follow API\n(/follow, /unfollow",
+        "Backend Layer (Node/Express::API Routes::Sound API\n(/sounds: create,\nretrieve, delete",
+        "Backend Layer (Node/Express::API Routes::User / Auth API\n(/register, /login,\n/user info"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These are finer-grained backend API slices under the Express server. They correspond to the GT backend API handling responsibility and remain in the correct backend boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Backend Layer (Node/Express",
+    "Global::Client Layer (Browser"
+  ]
+}

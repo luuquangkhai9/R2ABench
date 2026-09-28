@@ -1,0 +1,102 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Tengine Lite::Convert Tool::Caffe",
+        "Tengine Lite::Convert Tool::Darknet",
+        "Tengine Lite::Convert Tool::MXNet",
+        "Tengine Lite::Convert Tool::MegEngine",
+        "Tengine Lite::Convert Tool::OneFlow",
+        "Tengine Lite::Convert Tool::Others",
+        "Tengine Lite::Convert Tool::PaddlePaddle",
+        "Tengine Lite::Convert Tool::PyTorch / ONNX",
+        "Tengine Lite::Convert Tool::TF Lite",
+        "Tengine Lite::Convert Tool::TensorFlow"
+      ],
+      "predicted_nodes": [
+        "Model Conversion & Tooling Layer::Linux Pre-compiled Converter",
+        "Model Conversion & Tooling Layer::WebAssembly Online Converter\n<<local-only execution\nno private data uploaded>>"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "GT specifies model conversion tools by supported framework, whereas AI specifies them by deployment platform (Linux/WASM) as per the PRD. Both refer to the system's model conversion tooling."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Engine::CPU Backend",
+        "Tengine Lite::Engine::GPU Backend",
+        "Tengine Lite::Engine::NPU Backend"
+      ],
+      "predicted_nodes": [
+        "Core Inference Engine Layer::Device Module\n(NN Operator Backend /\nHardware Dispatch"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "GT details specific backend device components, which the AI aggregates into a single unified Device Module (NN Operator Backend) based on the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Engine::Exec Scheduler"
+      ],
+      "predicted_nodes": [
+        "Core Inference Engine Layer::Scheduler Module\n(Graph Orchestration &\nHardware Coordination"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the scheduler module responsible for graph orchestration and execution."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Serializer::tmfile Serializer"
+      ],
+      "predicted_nodes": [
+        "Core Inference Engine Layer::Serializer Module\n(tmfile Binary Decoder"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the serializer component specifically designed for decoding tmfile binary models. The boundary attribution 'Serializer' vs 'Core Inference Engine Layer' is semantically consistent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Tengine Lite::Engine::Device Allocator",
+    "Tengine Lite::Engine::Graph Partition",
+    "Tengine Lite::Engine::Low Bit Quantize",
+    "Tengine Lite::Runtime Optimize::ARM / X86 / RISCV / MIPS",
+    "Tengine Lite::Runtime Optimize::Amlogic / RK / NXP / JLQ\nNPU and NVDLA",
+    "Tengine Lite::Runtime Optimize::Assembly",
+    "Tengine Lite::Runtime Optimize::Auto Kernel Plugin",
+    "Tengine Lite::Runtime Optimize::CUDA / Vulkan / OpenCL",
+    "Tengine Lite::Runtime Optimize::Mix Bit Calculation",
+    "Tengine Lite::Runtime Optimize::NVIDIA / Mali / Adreno",
+    "Tengine Lite::Runtime Optimize::SGEMM",
+    "Tengine Lite::Runtime Optimize::SIMD",
+    "Tengine Lite::Runtime Optimize::TIM-VX / OpenDLA Plugin",
+    "Tengine Lite::Runtime Optimize::TensorRT / ACL Plugin",
+    "Tengine Lite::Runtime Optimize::Winograd",
+    "Tengine Lite::Serializer::Caffe Serializer",
+    "Tengine Lite::Serializer::Darknet Serializer",
+    "Tengine Lite::Serializer::MLIR Serializer",
+    "Tengine Lite::Serializer::MXNet Serializer",
+    "Tengine Lite::Serializer::MegEngine Serializer",
+    "Tengine Lite::Serializer::ONNX Serializer",
+    "Tengine Lite::Serializer::OneFlow Serializer",
+    "Tengine Lite::Serializer::Others Serializer",
+    "Tengine Lite::Serializer::PaddlePaddle Serializer",
+    "Tengine Lite::Serializer::TF Lite Serializer",
+    "Tengine Lite::Serializer::TensorFlow Serializer",
+    "Tengine Lite::Serializer::ncnn Serializer"
+  ],
+  "unmatched_predicted_nodes": [
+    "API Surface Layer::C API Module\n<<compatible with original\nTengine C API (NFR-002)>>",
+    "API Surface Layer::C++ API Module",
+    "API Surface Layer::Python API Module",
+    "Build & Deployment Layer::CMake Build System",
+    "Core Inference Engine Layer::Operator Module\n(NN Operator Registry &\nInitialization",
+    "Example Application Layer::Example Programs\n(Classification / Detection /\nSegmentation / Pose /\nLandmark / OCR",
+    "Global::Serialized Model Parameters\n(Decoded tmfile Output",
+    "Global::WebAssembly-capable\nWeb Browser",
+    "Local Filesystem\n(Model & Image Assets::Image Assets",
+    "Local Filesystem\n(Model & Image Assets::tmfile Binaries",
+    "WebAssembly-capable\nWeb Browser::Browser WASM Runtime"
+  ]
+}

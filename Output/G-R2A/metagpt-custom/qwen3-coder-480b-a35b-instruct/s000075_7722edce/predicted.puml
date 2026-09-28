@@ -1,0 +1,68 @@
+@startuml
+' Deployment nodes representing infrastructure
+node "Web Browsers" {
+    component "Browser Editor" as editor
+    component "Redux Store" as redux
+}
+
+node "Application Server" {
+    component "API Server" as api
+    component "Layout Resource" as layoutResource
+    component "Gauge Resource" as gaugeResource
+    component "Display Resource" as displayResource
+}
+
+node "Database Server" {
+    database "PostgreSQL" as db
+}
+
+node "Display Devices" {
+    component "Viewer Renderer" as viewer
+}
+
+' Packaging by architectural layers
+package "Client Layer" {
+    editor
+    redux
+}
+
+package "Server Layer" {
+    api
+    layoutResource
+    gaugeResource
+    displayResource
+}
+
+package "Data Layer" {
+    db
+}
+
+package "Viewer Layer" {
+    viewer
+}
+
+' Runtime Dependencies
+editor --> redux : Uses
+redux --> api : Sync State
+editor --> api : Layout/Data/Registration
+api --> db : Entity Storage
+viewer --> api : Retrieve Display Data
+viewer --> api : Load Assets
+api --> layoutResource : Manage Layouts
+api --> gaugeResource : Manage Gauges
+api --> displayResource : Manage Displays
+
+' Build-time and technology dependencies
+node "Build Environment" {
+    component "Node.js/npm" as nodejs
+}
+node "Development Environment" {
+    component "Python 3.7+" as python
+    component "Django Dev Server" as django
+}
+
+nodejs ..> editor : Builds Client
+python ..> api : Runtime Environment
+django ..> api : Development Server
+
+@enduml

@@ -1,0 +1,66 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Databases / Filestores\\nElastic, Hadoop, etc."
+      ],
+      "predicted_nodes": [
+        "Downstream Systems::Kafka Topic"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both refer to external storage/transport infrastructure, but the GT node is a generic databases/filestores bucket while the predicted node is specifically a Kafka topic. This is not a clean semantic equivalence and the boundary attribution shifts from generic storage to downstream transport."
+    },
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "Default Implementations::Kafka Publisher"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT indicates Kafka as the transport infrastructure, and the prediction places the Kafka-based implementation under default implementations, which is semantically consistent for the library's default publisher."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "predicted_nodes": [
+        "Auditor Client Library::Auditor Core",
+        "Auditor Client Library::Auditing API",
+        "Auditor Client Library::AuditEvent Generator",
+        "Auditor Client Library::Configuration Handler",
+        "Auditor Client Library::Element Filter Engine"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node represents the auditor-v1 application/server as a whole, while the predicted nodes decompose it into internal library components. This is a plausible decomposition, but the GT boundary is not a client-library boundary and the prediction does not preserve the same architectural scope."
+    },
+    {
+      "gt_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "predicted_nodes": [
+        "Integrating Application::Application Code",
+        "Integrating Application::Domain Objects"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT shows multiple application clients consuming the auditor component, and the prediction aggregates these into a generic integrating application boundary. This is semantically aligned with the library being used by host applications."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Default Implementations::Inclusion Filter",
+    "Default Implementations::SLF4J Logger",
+    "Downstream Systems::Event Consumers",
+    "Infrastructure Abstractions::AuditEventElementFilter",
+    "Infrastructure Abstractions::EventPublisher",
+    "Infrastructure Abstractions::LogProvider",
+    "Integrating Application::Application Code",
+    "Integrating Application::Domain Objects"
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "predicted_nodes": [
+        "Global::External Tools",
+        "Global::GitHub Actions",
+        "Global::System Constraints"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node represents the overall cFS repository/bundle scope. The predicted nodes fragment this top-level scope into unrelated concern buckets rather than preserving the same architectural boundary, so this is not a valid semantic equivalence at the node level."
+    },
+    {
+      "gt_nodes": [
+        "Reuse Workflows::Submodule Reuse",
+        "Reuse Workflows::cFS Reuse"
+      ],
+      "predicted_nodes": [
+        "CI/Workflow::Reusable Workflows"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The two GT nodes both represent reusable workflow composition/reuse. The AI aggregated them into a single reusable-workflows node, which is semantically equivalent. The CI/Workflow boundary is acceptable because this is still within workflow architecture."
+    },
+    {
+      "gt_nodes": [
+        "Static and Quality Checks::CodeQL Analysis",
+        "Static and Quality Checks::Format Check",
+        "Static and Quality Checks::Static Analysis"
+      ],
+      "predicted_nodes": [
+        "CI/Workflow::Format Checker"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "Only one of the GT quality-check nodes is partially reflected, and CodeQL Analysis plus Static Analysis are omitted. More importantly, collapsing the whole static/quality-check area into a single format-check node loses distinct components and is not an accurate reproduction of the GT architecture."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Build & Deployment::Build Preparation",
+    "Build & Deployment::Compilation",
+    "Build & Deployment::Compilation::debug variant",
+    "Build & Deployment::Compilation::release variant",
+    "Build & Deployment::Installation",
+    "Build & Deployment::Make Assets",
+    "Build & Deployment::Make Assets::Makefile.sample",
+    "Build & Deployment::Make Assets::sample_defs",
+    "CI/Workflow::Changelog Generator",
+    "CI/Workflow::Format Checker",
+    "External Tools::CCDD",
+    "External Tools::ECI",
+    "External Tools::Git",
+    "External Tools::Perfutils-java",
+    "External Tools::SIL",
+    "External Tools::cFS_IO_LIB",
+    "External Tools::cFS_LIB",
+    "External Tools::gen_sch_tbl",
+    "GitHub Actions::ubuntu-18.04 runner",
+    "GitHub Actions::ubuntu-latest runner",
+    "Host Interface::cmdUtil",
+    "Runtime::Functional Test Execution",
+    "Runtime::Telemetry Production",
+    "Runtime::core-cpu1",
+    "System Constraints::C-001: Submodules",
+    "System Constraints::C-002: SIL/ECI",
+    "System Constraints::C-003: cFS Libraries",
+    "System Constraints::C-004: CCDD",
+    "System Constraints::C-005: Deprecated Workflows"
+  ]
+}

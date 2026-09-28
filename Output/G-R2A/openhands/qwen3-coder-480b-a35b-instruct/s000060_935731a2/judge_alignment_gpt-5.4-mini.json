@@ -1,0 +1,191 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::Databases / Filestores\\nElastic, Hadoop, etc.",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "The predicted nodes do not include any database, filestore, or similar persistence/storage infrastructure component."
+    },
+    {
+      "gt_node": "Global::Kafka",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Kafka\\n(Default Event Stream"
+      ],
+      "reasoning": "The predicted Kafka node clearly covers the GT Kafka event-stream responsibility, despite the boundary label being more explicit."
+    },
+    {
+      "gt_node": "Global::auditor-v1 app\\nserver",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Auditor\\nLibrary",
+        "Auditor\\nLibrary::Audit Engine",
+        "Auditor\\nLibrary::Auditing API",
+        "Auditor\\nLibrary::Configuration Handler",
+        "Auditor\\nLibrary::Element Filter",
+        "Auditor\\nLibrary::Event Publisher",
+        "Auditor\\nLibrary::Logging Provider"
+      ],
+      "reasoning": "The GT application/server node is represented in the AI diagram as the auditor library and its internal functional parts. Although the naming differs, the predicted set covers the same application-side auditing system responsibility."
+    },
+    {
+      "gt_node": "application 1::auditor-v1 client",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Application\\n(Integrating Service"
+      ],
+      "reasoning": "The integrating application client role is represented by the predicted application/integrating service node."
+    },
+    {
+      "gt_node": "application 2::auditor-v1 client",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Application\\n(Integrating Service"
+      ],
+      "reasoning": "The predicted integrating service node covers another client integration instance of the auditor library."
+    },
+    {
+      "gt_node": "application 3::auditor-v1 client",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Application\\n(Integrating Service"
+      ],
+      "reasoning": "The predicted integrating service node covers the third client integration instance of the auditor library."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Auditor\\nLibrary::Audit Engine",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "reasoning": "This is a grounded internal component of the auditor library, corresponding to the audit computation and event generation responsibility in the GT system."
+    },
+    {
+      "predicted_node": "Auditor\\nLibrary::Auditing API",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::auditor-v1 app\\nserver",
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "This matches the external API used by integrating applications to invoke auditing."
+    },
+    {
+      "predicted_node": "Auditor\\nLibrary::Configuration Handler",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "reasoning": "The configuration handler is grounded in the auditor library's support for event configuration and filter settings."
+    },
+    {
+      "predicted_node": "Auditor\\nLibrary::Element Filter",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "reasoning": "This directly corresponds to the documented element filtering capability."
+    },
+    {
+      "predicted_node": "Auditor\\nLibrary::Event Publisher",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::auditor-v1 app\\nserver",
+        "Global::Kafka"
+      ],
+      "reasoning": "This is grounded in the event publishing abstraction and Kafka-based default transport."
+    },
+    {
+      "predicted_node": "Auditor\\nLibrary::Logging Provider",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "reasoning": "This matches the logging integration dependency described in the PRD."
+    },
+    {
+      "predicted_node": "Global::Application\\n(Integrating Service",
+      "grounded": true,
+      "reference_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "This node represents the integrating application(s) that consume the auditor API."
+    },
+    {
+      "predicted_node": "Global::Auditor\\nLibrary",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "reasoning": "This is a direct higher-level representation of the auditor component."
+    },
+    {
+      "predicted_node": "Global::Downstream\\nConsumers",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Kafka"
+      ],
+      "reasoning": "Downstream consumers are not a GT node per se, but they are explicitly mentioned in the PRD as consumers of Kafka-published audit events, so the node is semantically grounded."
+    },
+    {
+      "predicted_node": "Global::Kafka\\n(Default Event Stream",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Kafka"
+      ],
+      "reasoning": "This is a direct match to the Kafka default event stream responsibility."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "Global::Kafka\\n(Default Event Stream"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same Kafka transport responsibility; boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "predicted_nodes": [
+        "Global::Auditor\\nLibrary",
+        "Auditor\\nLibrary::Audit Engine",
+        "Auditor\\nLibrary::Auditing API",
+        "Auditor\\nLibrary::Configuration Handler",
+        "Auditor\\nLibrary::Element Filter",
+        "Auditor\\nLibrary::Event Publisher",
+        "Auditor\\nLibrary::Logging Provider"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT application/server node is decomposed into the auditor library and its internal functional components, which is a semantically consistent split."
+    },
+    {
+      "gt_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "predicted_nodes": [
+        "Global::Application\\n(Integrating Service"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Multiple client application instances are aggregated into a single integrating service node. The boundary is semantically consistent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Databases / Filestores\\nElastic, Hadoop, etc."
+  ],
+  "unmatched_predicted_nodes": []
+}

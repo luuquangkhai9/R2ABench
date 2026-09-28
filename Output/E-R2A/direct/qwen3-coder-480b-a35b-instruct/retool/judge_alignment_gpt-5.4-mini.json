@@ -1,0 +1,166 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Frontend (Vue.js 2.0::Browser / Client"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Vue.js Frontend",
+        "Network::Client Browser"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT frontend/browser client is split into a frontend implementation node and a browser/client execution node. Both remain within the correct frontend/client side boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Frontend (Vue.js 2.0"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Vue.js Frontend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Vue.js frontend layer, and the predicted client-layer attribution is semantically consistent with the GT global frontend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Network & Gateway Layer",
+        "Backend (Flask Microservices::Internal HTTP",
+        "Network & Gateway Layer::HTTP Protocol"
+      ],
+      "predicted_nodes": [
+        "Global::Network",
+        "Server Layer::Microservices (Local Computer::API Gateway"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT network/gateway and internal HTTP concepts are partially consolidated in the prediction as network plus API gateway. This is semantically aligned and does not indicate a severe layer crossing."
+    },
+    {
+      "gt_nodes": [
+        "Network & Gateway Layer::API Gateway"
+      ],
+      "predicted_nodes": [
+        "Server Layer::Microservices (Local Computer::API Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The API Gateway component matches directly; the local-computer microservices boundary is consistent with the GT gateway layer."
+    },
+    {
+      "gt_nodes": [
+        "Network & Gateway Layer::API Gateway::Identity Verification"
+      ],
+      "predicted_nodes": [
+        "Server Layer::Microservices (Local Computer::API Gateway"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Identity verification is a subfunction of the gateway in GT and is absorbed into the predicted API Gateway node. This is acceptable aggregation within the same boundary."
+    },
+    {
+      "gt_nodes": [
+        "Network & Gateway Layer::API Gateway::Request Forwarding"
+      ],
+      "predicted_nodes": [
+        "Server Layer::Microservices (Local Computer::API Gateway"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Request forwarding is part of the gateway behavior and is correctly aggregated into the predicted API Gateway boundary."
+    },
+    {
+      "gt_nodes": [
+        "Network & Gateway Layer::API Gateway::Return Response"
+      ],
+      "predicted_nodes": [
+        "Server Layer::Microservices (Local Computer::API Gateway"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Returning responses is a gateway responsibility and is appropriately represented by the predicted API Gateway node."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices"
+      ],
+      "predicted_nodes": [
+        "Server Layer::Microservices (Local Computer::API Gateway",
+        "Server Layer::Microservices (Local Computer::Project Management Service",
+        "Server Layer::Microservices (Local Computer::Requirements Management Service",
+        "Server Layer::Microservices (Local Computer::User Management Service",
+        "Server Layer::Algorithm Service (High-Performance Server::NLP & PyTorch Algorithms"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT generic microservices backend is split into concrete microservices plus the algorithm service. This is a correct refinement of the backend layer."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices::User Management Service"
+      ],
+      "predicted_nodes": [
+        "Server Layer::Microservices (Local Computer::User Management Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The user management service matches exactly in function and is placed within the correct local microservices boundary."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices::Project Management Service"
+      ],
+      "predicted_nodes": [
+        "Server Layer::Microservices (Local Computer::Project Management Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The project management service matches exactly and is correctly attributed to the backend microservices layer."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices::Requirement Management Service"
+      ],
+      "predicted_nodes": [
+        "Server Layer::Microservices (Local Computer::Requirements Management Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The requirement management service matches the predicted requirements management service, and the boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Backend (Flask Microservices::Microservices::Algorithm Service"
+      ],
+      "predicted_nodes": [
+        "Server Layer::Algorithm Service (High-Performance Server::NLP & PyTorch Algorithms"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The algorithm service matches semantically, and placing it in a dedicated high-performance server boundary is consistent with the GT."
+    },
+    {
+      "gt_nodes": [
+        "Global::Storage Layer (MongoDB",
+        "Storage Layer (MongoDB::User Collection",
+        "Storage Layer (MongoDB::Project Collection",
+        "Storage Layer (MongoDB::Requirement Collection"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MongoDB"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT storage layer and its collections are aggregated into a single MongoDB data layer node. This is a valid merge and the database boundary is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Backend (Flask Microservices::Internal HTTP",
+    "Network & Gateway Layer::HTTP Protocol"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Network",
+    "Network::Client Browser"
+  ]
+}

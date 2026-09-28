@@ -1,0 +1,115 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::<b>AWS S3</b>"
+      ],
+      "predicted_nodes": [
+        "External Services::AWS S3\n(Image Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the external image storage service AWS S3. The predicted boundary 'External Services' is semantically consistent with the GT global placement for this external dependency."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b>DATABASE</b>\\n\\n* MariaDB\\n  * Users\\n  * Likes\\n  * Photos\\n  * Comments"
+      ],
+      "predicted_nodes": [
+        "External Services::MariaDB\\n(Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the relational database layer using MariaDB and associated application data. The predicted external-services/database placement is semantically consistent with the GT database node."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b>REDIS CACHE</b>"
+      ],
+      "predicted_nodes": [
+        "External Services::Redis\\n(Cache"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Redis cache component. The predicted boundary is a reasonable semantic equivalent of the GT global cache node."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b>WEB CLIENT</b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "predicted_nodes": [
+        "Web Client (Browser::React App"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted React App corresponds to the GT web client stack. Although simplified, it stays within the correct client/browser boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b>WEB SERVER</b>\\n\\n* Node\\n* Express\\n* DigitalOcean (Deployment"
+      ],
+      "predicted_nodes": [
+        "Web Server (Node.js::Express Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both indicate the Node/Express web server. The predicted layer is consistent with the GT server boundary, despite omitting deployment detail."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b>WEB SERVER</b>\\n\\n* Node\\n* Express\\n* DigitalOcean (Deployment"
+      ],
+      "predicted_nodes": [
+        "Global::Authentication Views\\n(Sign-up/Sign-in",
+        "Global::Shared Credential Handlers",
+        "Global::Credential Submission\\n(JSON POST",
+        "Global::Content Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT server-side/web-server area is decomposed into functional client/server interaction nodes in the prediction. These are functionally related to the web application/server flow and do not show a severe boundary violation in the provided context."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b>WEB CLIENT</b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "predicted_nodes": [
+        "Global::Authentication Views\\n(Sign-up/Sign-in",
+        "Global::Shared Credential Handlers",
+        "Web Client (Browser::React App"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT client node is split into more detailed UI and shared-handler nodes. These predicted nodes belong to the client-side presentation and interaction layer, which is semantically aligned with the GT web client boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b>DATABASE</b>\\n\\n* MariaDB\\n  * Users\\n  * Likes\\n  * Photos\\n  * Comments"
+      ],
+      "predicted_nodes": [
+        "Global::Database Access Layer",
+        "Global::User Model",
+        "Global::User Controller",
+        "External Services::MariaDB\\n(Database"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT database node is split across data-access, model, controller, and the actual MariaDB storage. This is a reasonable decomposition, and the storage-related placement remains consistent with the GT database boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Content Service",
+    "Global::Credential Submission\\n(JSON POST",
+    "Global::Database Access Layer",
+    "Global::Shared Credential Handlers",
+    "Global::User Controller",
+    "Global::User Model",
+    "Global::Authentication Views\\n(Sign-up/Sign-in",
+    "Web Client (Browser::React App",
+    "Web Server (Node.js::Express Server",
+    "External Services::AWS S3\\n(Image Storage",
+    "External Services::MariaDB\\n(Database",
+    "External Services::Redis\\n(Cache"
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::plugin"
+      ],
+      "predicted_nodes": [
+        "veinmind-tools Suite::Plugin Examples",
+        "veinmind-tools Suite::Plugin Examples::Python Example Package\n(FR-006, NFR-003",
+        "veinmind-tools Suite::Plugin Examples::Python Example Package\n(FR-006, NFR-003::entrypoint.sh\n/tool/entrypoint.sh\n(CON-006",
+        "veinmind-tools Suite::Plugin Examples::Python Example Package\n(FR-006, NFR-003::requirements.txt\nDependencies\n(CON-005",
+        "veinmind-tools Suite::Plugin Examples::Python Example Package\n(FR-006, NFR-003::scan.py\n(FR-006"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT 'plugin' node represents the plugin examples capability, which the AI split into detailed files and components within the 'veinmind-tools Suite::Plugin Examples' boundary. Boundary attribution is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::runner"
+      ],
+      "predicted_nodes": [
+        "Infrastructure & Runtime::veinmind-runner",
+        "Infrastructure & Runtime::veinmind-runner::Runner Image\n(CON-002, DEP-002"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT 'runner' global node corresponds to the AI's detailed veinmind-runner nodes mapped into 'Infrastructure & Runtime'. The boundary placement accurately reflects the runner's infrastructure role."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::containerd"
+      ],
+      "predicted_nodes": [
+        "Infrastructure & Runtime::Container Runtime::Containerd\n(NFR-002"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the containerd backend. The AI's 'Infrastructure & Runtime' aligns perfectly with GT's 'Infrastructure and Input Backends'."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::docker"
+      ],
+      "predicted_nodes": [
+        "Infrastructure & Runtime::Container Runtime::Docker\n(CON-001"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes denote the Docker backend. The boundaries are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "SDK::interact system",
+        "SDK::plugin system"
+      ],
+      "predicted_nodes": [
+        "SDK / Library Layer::veinmind-sdk /\nlibveinmind\n(API-001, CON-004"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI condensed the SDK subsystems into a single comprehensive SDK/library layer node. The 'SDK / Library Layer' boundary precisely matches GT's 'SDK' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::container"
+      ],
+      "predicted_nodes": [
+        "veinmind-tools Suite::CLI Layer::scan-container\n(FR-002, CLI-002"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT lists container as a 'Scan Target' (the entity), whereas the AI predicted it as a CLI execution command 'scan-container' within the CLI layer. While functionally mapping to the container scanning feature, the conceptual boundary and architectural layer differ."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::iac"
+      ],
+      "predicted_nodes": [
+        "veinmind-tools Suite::CLI Layer::scan-iac\n(FR-007, CLI-003",
+        "veinmind-tools Suite::IaC Scanning Engine",
+        "veinmind-tools Suite::IaC Scanning Engine::Alert Detail\nBuilder\n(FR-007",
+        "veinmind-tools Suite::IaC Scanning Engine::IaC Scanner\n(FR-007",
+        "veinmind-tools Suite::IaC Scanning Engine::Policy Library\nLoader\n(FR-007",
+        "veinmind-tools Suite::IaC Scanning Engine::Report Event\nPublisher\n(API-003",
+        "veinmind-tools Suite::IaC Scanning Engine::Result Deduplicator\n(FR-007"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT identifies IaC strictly as an input target. The AI captured this as the IaC scanning engine and CLI commands. The functionality matches, but crossing from 'Scan Targets' to 'Scanning Engine / CLI Layer' is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::image"
+      ],
+      "predicted_nodes": [
+        "veinmind-tools Suite::CLI Layer::scan-image\n(FR-001, CLI-001"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Similar to container and IaC, GT defines image as an input target while the AI maps it to the CLI execution command layer."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Infrastructure and Input Backends::dockerfile",
+    "Infrastructure and Input Backends::kubernetes",
+    "Infrastructure and Input Backends::tarball",
+    "Scan Targets::cluster"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::External Users & Integrators",
+    "Global::Infrastructure & Runtime",
+    "Global::SDK / Library Layer",
+    "Global::veinmind-tools Suite",
+    "Infrastructure & Runtime::Container Runtime",
+    "Infrastructure & Runtime::Image Registries",
+    "Infrastructure & Runtime::Image Registries::Docker Registry",
+    "Infrastructure & Runtime::Image Registries::DockerHub",
+    "Infrastructure & Runtime::Image Registries::Harbor",
+    "Infrastructure & Runtime::Python Base Image",
+    "Infrastructure & Runtime::Python Base Image::veinmind/python3.6:\n1.3.1-stretch\n(NFR-003, CON-005",
+    "veinmind-tools Suite::Authorization Routing",
+    "veinmind-tools Suite::Authorization Routing::Docker Auth\nRouting Component\n(FR-004, FR-005",
+    "veinmind-tools Suite::Authorization Routing::NoneDockerPlugin\nFallback\n(FR-005, DAT-IF-003",
+    "veinmind-tools Suite::Authorization Routing::Route Pattern\nMatcher",
+    "veinmind-tools Suite::CLI Layer",
+    "veinmind-tools Suite::Quick-Start Workflow",
+    "veinmind-tools Suite::Quick-Start Workflow::run.sh\nParallel-Container\nStartup Script\n(FR-003, CLI-004",
+    "veinmind-tools Suite::Reporting Data Layer",
+    "veinmind-tools Suite::Reporting Data Layer::IaC Alert Detail\n(DR-007",
+    "veinmind-tools Suite::Reporting Data Layer::IaC File-Location\nDetail\n(DR-006",
+    "veinmind-tools Suite::Reporting Data Layer::IaC Rule Metadata\n(DR-005",
+    "veinmind-tools Suite::Reporting Data Layer::MaliciousFileInfo\n(DR-001",
+    "veinmind-tools Suite::Reporting Data Layer::ReportData\n(DR-002",
+    "veinmind-tools Suite::Reporting Data Layer::ReportImage\n(DR-003",
+    "veinmind-tools Suite::Reporting Data Layer::ReportLayer\n(DR-004"
+  ]
+}

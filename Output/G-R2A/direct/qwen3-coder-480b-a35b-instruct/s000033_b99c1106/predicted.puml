@@ -1,0 +1,125 @@
+@startuml
+!define RECTANGLE class
+
+RECTANGLE "Data Engineer" as data_engineer
+
+package "Docker Compose Environment" {
+    RECTANGLE "Airflow Webserver" as airflow_webserver {
+        - Loads DAGs from mounted directory
+        - Submits Spark jobs via SparkSubmitOperator
+        - Uses spark_default connection
+        - Includes pyspark dependency
+    }
+
+    RECTANGLE "PostgreSQL" as postgres {
+        - Stores Airflow metadata
+        - Port: 5432
+    }
+
+    RECTANGLE "Spark Master" as spark_master {
+        - Manages Spark cluster
+        - Accepts job submissions
+        - Port: 7077
+        - Web UI: 8181
+    }
+
+    RECTANGLE "Spark Worker 1" as spark_worker_1 {
+        - Executes Spark tasks
+        - Connects to spark://spark:7077
+    }
+
+    RECTANGLE "Spark Worker 2" as spark_worker_2 {
+        - Executes Spark tasks
+        - Connects to spark://spark:7077
+    }
+
+    RECTANGLE "Spark Worker 3" as spark_worker_3 {
+        - Executes Spark tasks
+        - Connects to spark://spark:7077
+    }
+
+    RECTANGLE "Jupyter/PySpark" as jupyter {
+        - Interactive PySpark notebooks
+        - Port: 8888
+        - Spark app UI ports: 4040-4080
+    }
+
+    note right of jupyter
+        Mounts:
+        - Notebooks
+        - Input data
+    end note
+
+    note right of airflow_webserver
+        Mounts:
+        - DAGs
+        - Spark applications
+        - Input data
+    end note
+
+    note right of spark_master
+        Mounts:
+        - Spark applications
+        - Input data
+    end note
+
+    note right of spark_worker_1
+        Mounts:
+        - Spark applications
+        - Input data
+    end note
+
+    note right of spark_worker_2
+        Mounts:
+        - Spark applications
+        - Input data
+    end note
+
+    note right of spark_worker_3
+        Mounts:
+        - Spark applications
+        - Input data
+    end note
+}
+
+data_engineer --> airflow_webserver : Access Airflow UI\n(port 8282)
+data_engineer --> spark_master : Access Spark UI\n(port 8181)
+data_engineer --> jupyter : Access Jupyter\n(port 8888)
+
+airflow_webserver --> postgres : Metadata storage
+airflow_webserver --> spark_master : Submit Spark jobs\n(spark://spark:7077)
+spark_master --> spark_worker_1 : Coordinate work
+spark_master --> spark_worker_2 : Coordinate work
+spark_master --> spark_worker_3 : Coordinate work
+jupyter --> spark_master : PySpark operations
+
+note top of data_engineer
+    Interacts with:
+    - Airflow for scheduled jobs
+    - Jupyter for interactive work
+    - Service UIs for monitoring
+end note
+
+note bottom of spark_master
+    Standalone cluster mode
+    Master URL: spark://spark:7077
+end note
+
+cloud {
+    rectangle "Host Machine" {
+        rectangle "Port 5432" <<Postgres>>
+        rectangle "Port 8282" <<Airflow>>
+        rectangle "Port 8181" <<Spark Master>>
+        rectangle "Port 8888" <<Jupyter>>
+        rectangle "Ports 4040-4080" <<Spark Apps>>
+    }
+}
+
+airflow_webserver ..> "Port 8282" : Exposes
+spark_master ..> "Port 8181" : Exposes
+spark_master ..> "Port 7077" : Cluster endpoint
+postgres ..> "Port 5432" : Exposes
+jupyter ..> "Port 8888" : Exposes
+jupyter ..> "Ports 4040-4080" : Exposes
+
+@enduml

@@ -1,0 +1,83 @@
+@startuml
+
+title Soundzone System Architecture
+
+package "Client Browser" {
+  component "React/Redux Frontend" as frontend {
+    component "AudioPlayer" as player
+    component "WaveformUI" as waveform
+    component "UploadForm" as upload
+    component "UserFeed" as feed
+    component "FollowUI" as follow
+    component "FormValidation" as validation
+  }
+}
+
+package "Backend Server" {
+  component "Node/Express Backend" as backend {
+    component "UserAuth API" as auth_api
+    component "Sound API" as sound_api
+    component "Follow API" as follow_api
+    component "Feed API" as feed_api
+  }
+}
+
+package "Storage" {
+  database "PostgreSQL" as postgresql {
+    component "Users Table" as users_table
+    component "Sounds Table" as sounds_table
+    component "Follows Table" as follows_table
+  }
+  
+  cloud "Cloudinary" as cloudinary {
+    component "Audio Storage" as audio_storage
+    component "Image Storage" as image_storage
+  }
+}
+
+' External Interfaces
+agent "User" as user
+agent "Browser" as browser
+
+' Component Relationships
+user --> browser : "Uses"
+browser --> frontend : "Renders"
+
+frontend --> backend : "HTTP API Calls\n(API Base URL)"
+frontend --> cloudinary : "Direct Media Upload\n(Cloudinary URL)"
+
+backend --> postgresql : "Database Operations\n(Persists Media URLs)"
+postgresql --> backend : "Query Results"
+
+' Data Flow Annotations
+note top of frontend : "Playback State Management\n- Single current playback\n- Cross-navigation continuity"
+note top of player : "Waveform Scrubbing\nAudio Playback"
+note top of upload : "File Upload with Validation"
+note top of feed : "Follow-related Content Feed"
+
+note top of backend : "RESTful APIs\n- User authentication\n- Sound operations\n- Follow relationships\n- Feed generation"
+
+note right of postgresql : "Stores:\n- User profiles\n- Sound metadata\n- Follow relationships\n- Cloudinary URL references"
+
+note right of cloudinary : "Hosts:\n- Audio files (.mp3, .wav)\n- Images (avatars, covers)\nReturns: Media URLs"
+
+' Component Connections within packages
+player -- waveform : "Position updates"
+upload -- player : "New sounds"
+feed -- follow : "User relationships"
+follow -- feed : "Content filtering"
+
+auth_api -- users_table : "User CRUD"
+sound_api -- sounds_table : "Sound CRUD"
+follow_api -- follows_table : "Follow CRUD"
+feed_api -- sounds_table : "Query sounds"
+feed_api -- follows_table : "Filter by follows"
+
+' External Configuration
+cloud cloudinary_config as "Cloudinary Config" {
+  note as config_note : "Upload Preset\nCloud Name\nAPI Key"
+}
+
+frontend ..> cloudinary_config : "Uses for uploads"
+
+@enduml

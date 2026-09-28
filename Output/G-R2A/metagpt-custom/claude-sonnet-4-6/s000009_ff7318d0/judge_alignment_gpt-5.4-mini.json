@@ -1,0 +1,256 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::API Gateway"
+      ],
+      "predicted_nodes": [
+        "API Gateway Layer::APIGateway\\n(Amazon API Gateway\\nAWS Sig V4 · JSON"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the API Gateway integration layer that routes frontend/backend API requests. The boundary naming differs but is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Cognito"
+      ],
+      "predicted_nodes": [
+        "Authentication & Security Layer::CognitoUserPool\\n(Amazon Cognito"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to Amazon Cognito for authentication/security. The layer attribution is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::S3"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::StaticHostingBucket\\n(Amazon S3"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the S3-hosted frontend/static hosting component. Boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Notification Service::SNS"
+      ],
+      "predicted_nodes": [
+        "Notification Layer::SNSService\\n(Amazon SNS\\nSMS Delivery"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both are SNS for SMS delivery in the notification workflow. Boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Notification Service::SQS"
+      ],
+      "predicted_nodes": [
+        "Notification Layer::SQSQueue\\n(Amazon SQS\\nReminder Request Buffer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both are SQS used to queue reminder requests before SMS delivery. Boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::SageMaker"
+      ],
+      "predicted_nodes": [
+        "Prediction Layer::SageMakerEndpoint\\n(Amazon SageMaker\\nML Match Outcome Model"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the SageMaker-based prediction service. Boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2"
+      ],
+      "predicted_nodes": [
+        "Streaming Layer\\n(Amazon EC2::KafkaCluster\\n(Apache Kafka with Apache Avro\\nLive Score Event Ingestion"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node combines the EC2-hosted streaming component around Kafka/Avro, which corresponds to the GT EC2 runtime for the live score pipeline. The boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2::Kafka"
+      ],
+      "predicted_nodes": [
+        "Streaming Layer\\n(Amazon EC2::KafkaCluster\\n(Apache Kafka with Apache Avro\\nLive Score Event Ingestion"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Kafka on EC2 for live score ingestion is represented correctly. The layer/boundary naming is acceptable and semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::live_score\\nLambda"
+      ],
+      "predicted_nodes": [
+        "Streaming Layer\\n(Amazon EC2::KafkaCluster\\n(Apache Kafka with Apache Avro\\nLive Score Event Ingestion"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT includes a Lambda component in the live score pipeline, but the predicted diagram collapses the streaming layer into Kafka/EC2 without a corresponding Lambda. This is a functional omission and boundary mismatch for that GT node."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::DynamoDB\\nLive Scores"
+      ],
+      "predicted_nodes": [
+        "Data Storage & Search Layer::DynamoDB\\n(Match Results · Fixtures · Stats"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent DynamoDB-based storage for match/live score related data. Although the predicted label is broader, the storage boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "Data Storage & Search Layer::Elasticsearch\\n(Amazon Elasticsearch Service\\nSearch & Retrieval"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent Elasticsearch for retrieval/search in the data layer. Boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::DynamoDB\\nPredictions"
+      ],
+      "predicted_nodes": [
+        "Data Storage & Search Layer::DynamoDB\\n(Match Results · Fixtures · Stats"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT prediction data store is DynamoDB, and the predicted diagram includes a DynamoDB data storage node. The boundary is semantically correct, though the label is broader than the GT."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "Data Storage & Search Layer::Elasticsearch\\n(Amazon Elasticsearch Service\\nSearch & Retrieval"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent Elasticsearch used alongside the prediction data flow. Boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::prediction\\nLambda"
+      ],
+      "predicted_nodes": [
+        "Application / Backend Layer::BackendLambda\\n(Python / Node.js\\nData · Reminders · Recommendations"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT prediction Lambda is a dedicated prediction-service component, but the predicted node is an aggregated backend Lambda covering multiple concerns. This is an incorrect functional aggregation and boundary attribution is too generic."
+    },
+    {
+      "gt_nodes": [
+        "Recommendation Service::Lex"
+      ],
+      "predicted_nodes": [
+        "Application / Backend Layer::ChatbotHandler\\n(Python / Node.js\\nIntent Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "GT uses Lex for recommendation/chatbot interaction, while the predicted node is a generic chatbot handler. This is not a precise semantic match and the architectural boundary does not align with the GT component."
+    },
+    {
+      "gt_nodes": [
+        "Recommendation Service::recommendation\\nLambda"
+      ],
+      "predicted_nodes": [
+        "Application / Backend Layer::Application / Backend Layer::BackendLambda\\n(Python / Node.js\\nData · Reminders · Recommendations"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted backend Lambda includes recommendation handling, matching the GT recommendation Lambda at a functional level. The boundary is semantically acceptable despite the aggregation."
+    },
+    {
+      "gt_nodes": [
+        "Standing Service::standing\\nLambda"
+      ],
+      "predicted_nodes": [
+        "Application / Backend Layer::BackendLambda\\n(Python / Node.js\\nData · Reminders · Recommendations"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT standing service Lambda is not explicitly separated in the predicted model, but the backend Lambda reasonably covers backend data-serving responsibilities. The boundary is acceptable as an aggregation."
+    },
+    {
+      "gt_nodes": [
+        "Standing Service::DynamoDB\\nStandings"
+      ],
+      "predicted_nodes": [
+        "Data Storage & Search Layer::DynamoDB\\n(Match Results · Fixtures · Stats"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to DynamoDB as a match-data store including standings-related information. Boundary attribution is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Standing Service::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "Data Storage & Search Layer::Elasticsearch\\n(Amazon Elasticsearch Service\\nSearch & Retrieval"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent Elasticsearch for standings/search retrieval. Boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Fixtures Service::fixtures\\nLambda"
+      ],
+      "predicted_nodes": [
+        "Application / Backend Layer::BackendLambda\\n(Python / Node.js\\nData · Reminders · Recommendations"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted backend Lambda subsumes fixture-serving functionality, which matches the GT fixtures Lambda at a higher level of abstraction. Boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Fixtures Service::SQS"
+      ],
+      "predicted_nodes": [
+        "Notification Layer::SQSQueue\\n(Amazon SQS\\nReminder Request Buffer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "GT Fixtures Service includes an SQS node, but the predicted SQS is specifically a reminder-request buffer in the notification layer, not a fixtures service component. This is a boundary/context mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Global::User"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::WebFrontend\\n(HTML / CSS / Bootstrap / jQuery"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is the user actor, while the predicted node is the frontend UI component. These are not semantically equivalent architectural nodes."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Live Score Pipeline::EC2::M4",
+    "Live Score Pipeline::EC2::foot app",
+    "Application / Backend Layer::SQSConsumerLambda\\n(Python / Node.js\\nReminder Dispatcher",
+    "Global::User"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application / Backend Layer::BackendLambda\\n(Python / Node.js\\nData · Reminders · Recommendations",
+    "Application / Backend Layer::ChatbotHandler\\n(Python / Node.js\\nIntent Handler"
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Gateway"
+      ],
+      "predicted_nodes": [
+        "API Gateway Layer::API Gateway",
+        "API Gateway Layer::API Gateway::Gateway Services"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the system gateway entry point. The AI split the GT gateway into a gateway layer and a gateway services subnode, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::SSO/IDM\n(Keycloak"
+      ],
+      "predicted_nodes": [
+        "Authentication & Security Layer::Keycloak",
+        "Authentication & Security Layer::Keycloak::Identity Provider",
+        "Authentication & Security Layer::Keycloak::Token Issuance",
+        "Global::Keycloak"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These nodes all correspond to the Keycloak identity provider/authentication function. The layer attribution is acceptable because it remains within authentication/security and does not cross into an unrelated domain."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Audit\nService"
+      ],
+      "predicted_nodes": [
+        "Monitoring & Query Layer::Audit Service",
+        "Monitoring & Query Layer::Audit Service::Audit Records",
+        "Monitoring & Query Layer::Audit Service::Event Monitoring"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The audit service is functionally equivalent. Placing it under monitoring/query is semantically acceptable given its observation-oriented role."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Query\nService"
+      ],
+      "predicted_nodes": [
+        "Monitoring & Query Layer::Query Service",
+        "Monitoring & Query Layer::Query Service::Process Execution Info",
+        "Monitoring & Query Layer::Query Service::Read Operations"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The Query Service matches directly and the monitoring/query boundary is appropriate for read-oriented process information."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Notification\nService"
+      ],
+      "predicted_nodes": [
+        "Background Components::Notification Service",
+        "Background Components::Notification Service::Event Notifications",
+        "Global::Notification Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "This is the same notification service, and the AI correctly treated it as a background component."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Customer\nLogic",
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Out of the\nBox Services"
+      ],
+      "predicted_nodes": [
+        "Background Components::Cloud Connectors",
+        "Background Components::Cloud Connectors::External Integrations",
+        "Global::Cloud Connectors"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT splits cloud connectors into specific subtypes while the AI aggregated them into a broader cloud connectors node. This is functionally equivalent and the background-component boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::BPMN, Form\nand Rule Defs",
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::Process\nRuntime"
+      ],
+      "predicted_nodes": [
+        "Process Runtime Layer::Example Runtime Bundle",
+        "Process Runtime Layer::Example Runtime Bundle::Process Definitions",
+        "Process Runtime Layer::Example Runtime Bundle::Process Instances",
+        "Process Runtime Layer::Example Runtime Bundle::SimpleProcess",
+        "Process Runtime Layer::ProcessRuntime API",
+        "Process Runtime Layer::ProcessRuntime API::Process Operations",
+        "Global::Example Runtime Bundle",
+        "Global::ProcessRuntime API"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly recognized the runtime bundle and process runtime behaviors, splitting the bundle into definitions, instances, and a specific SimpleProcess. The process runtime layer is consistent with the GT runtime bundle context."
+    },
+    {
+      "gt_nodes": [
+        "Global::Client"
+      ],
+      "predicted_nodes": [
+        "External Access Layer::External Users",
+        "External Access Layer::External Users::Authenticated Users",
+        "External Access Layer::External Users::Cluster Operators",
+        "External Access Layer::External Users::Human Participants",
+        "External Access Layer::External Users::Task API Users"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The generic client node was expanded into the relevant user classes described in the PRD. This is semantically appropriate and not a boundary violation."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Config Maps\n(Kubernetes",
+        "Activiti Cloud Infrastructure::Registry\n(Kubernetes"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Layer::Registry/Config Maps",
+        "Infrastructure Layer::Registry/Config Maps::Configuration Data"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI merged registry and config maps into a combined infrastructure configuration node, which is semantically aligned with the GT infrastructure background."
+    },
+    {
+      "gt_nodes": [
+        "Global::SSO/IDM\n(Keycloak",
+        "Global::Client"
+      ],
+      "predicted_nodes": [
+        "Authentication & Security Layer::Spring Boot Application",
+        "Authentication & Security Layer::Spring Boot Application::Application Context",
+        "Authentication & Security Layer::Spring Security",
+        "Authentication & Security Layer::Spring Security::Authorization",
+        "Authentication & Security Layer::Spring Security::Role Management",
+        "Authentication & Security Layer::Spring Security::User Management",
+        "Global::Spring Security",
+        "Task Management Layer::User Endpoints",
+        "Task Management Layer::User Endpoints::Protected Endpoints"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "These nodes correspond to the security/application context around authenticated user endpoints and access control. The AI expanded the client/security interaction into explicit security and endpoint nodes without crossing into an unrelated architectural boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "API Gateway Layer::API Gateway",
+    "API Gateway Layer::API Gateway::Gateway Services",
+    "Authentication & Security Layer::Keycloak",
+    "Authentication & Security Layer::Keycloak::Identity Provider",
+    "Authentication & Security Layer::Keycloak::Token Issuance",
+    "Authentication & Security Layer::Spring Boot Application",
+    "Authentication & Security Layer::Spring Boot Application::Application Context",
+    "Authentication & Security Layer::Spring Security",
+    "Authentication & Security Layer::Spring Security::Authorization",
+    "Authentication & Security Layer::Spring Security::Role Management",
+    "Authentication & Security Layer::Spring Security::User Management",
+    "Background Components::Cloud Connectors",
+    "Background Components::Cloud Connectors::External Integrations",
+    "Background Components::Notification Service",
+    "Background Components::Notification Service::Event Notifications",
+    "External Access Layer::External Users",
+    "External Access Layer::External Users::Authenticated Users",
+    "External Access Layer::External Users::Cluster Operators",
+    "External Access Layer::External Users::Human Participants",
+    "External Access Layer::External Users::Task API Users",
+    "External Access Layer::NGINX Ingress Controller",
+    "External Access Layer::NGINX Ingress Controller::Ingress Routing",
+    "External Access Layer::Public IP",
+    "External Access Layer::Public IP::External Access Point",
+    "Global::Authenticated Users",
+    "Global::Cloud Connectors",
+    "Global::Cluster Operators",
+    "Global::Example Runtime Bundle",
+    "Global::Human Participants",
+    "Global::Keycloak",
+    "Global::Kubernetes/GKE",
+    "Global::NGINX Ingress Controller",
+    "Global::Notification Service",
+    "Global::ProcessRuntime API",
+    "Global::Public IP",
+    "Global::Spring Security",
+    "Global::Task API Users",
+    "Global::TaskRuntime API",
+    "Global::User Endpoints",
+    "Infrastructure Layer::Deployment Descriptors",
+    "Infrastructure Layer::Deployment Descriptors::Input Rate Config",
+    "Infrastructure Layer::Deployment Descriptors::Replica Count Config",
+    "Infrastructure Layer::Kubernetes/GKE",
+    "Infrastructure Layer::Kubernetes/GKE::Container Orchestration",
+    "Infrastructure Layer::Registry/Config Maps",
+    "Infrastructure Layer::Registry/Config Maps::Configuration Data",
+    "Monitoring & Query Layer::Audit Service",
+    "Monitoring & Query Layer::Audit Service::Audit Records",
+    "Monitoring & Query Layer::Audit Service::Event Monitoring",
+    "Monitoring & Query Layer::Query Service",
+    "Monitoring & Query Layer::Query Service::Process Execution Info",
+    "Monitoring & Query Layer::Query Service::Read Operations",
+    "Process Runtime Layer::Example Runtime Bundle",
+    "Process Runtime Layer::Example Runtime Bundle::Process Definitions",
+    "Process Runtime Layer::Example Runtime Bundle::Process Instances",
+    "Process Runtime Layer::Example Runtime Bundle::SimpleProcess",
+    "Process Runtime Layer::ProcessRuntime API",
+    "Process Runtime Layer::ProcessRuntime API::Process Operations",
+    "Task Management Layer::TaskRuntime API",
+    "Task Management Layer::TaskRuntime API::Task Operations",
+    "Task Management Layer::User Endpoints",
+    "Task Management Layer::User Endpoints::Protected Endpoints"
+  ]
+}

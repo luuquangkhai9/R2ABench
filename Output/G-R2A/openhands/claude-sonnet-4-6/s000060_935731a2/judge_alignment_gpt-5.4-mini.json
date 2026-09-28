@@ -1,0 +1,256 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::Databases / Filestores\\nElastic, Hadoop, etc.",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "The GT node represents downstream storage systems, but no predicted node covers databases/filestores or persistence backends."
+    },
+    {
+      "gt_node": "Global::Kafka",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Kafka Topic\\n(serialized AuditEvent JSON",
+        "JVM Application::Kafka EventPublisher\\n(default implementation"
+      ],
+      "reasoning": "The predicted nodes capture the Kafka transport and Kafka-based default publisher responsibility, which covers the GT Kafka component."
+    },
+    {
+      "gt_node": "Global::auditor-v1 app\\nserver",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "The GT node suggests a server-side application boundary, but the predicted architecture focuses on a JVM library and does not explicitly represent this app/server node."
+    },
+    {
+      "gt_node": "application 1::auditor-v1 client",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "JVM Application::lowes/auditor Library (Kotlin/JVM 11::Auditing API",
+        "JVM Application::lowes/auditor Library (Kotlin/JVM 11::AuditEvent Builder",
+        "JVM Application::lowes/auditor Library (Kotlin/JVM 11::Change Detector"
+      ],
+      "reasoning": "The predicted auditing library and its API/processing components cover the client-side auditor responsibility represented by this application client node."
+    },
+    {
+      "gt_node": "application 2::auditor-v1 client",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "JVM Application::lowes/auditor Library (Kotlin/JVM 11::Auditing API",
+        "JVM Application::lowes/auditor Library (Kotlin/JVM 11::AuditEvent Builder",
+        "JVM Application::lowes/auditor Library (Kotlin/JVM 11::Change Detector"
+      ],
+      "reasoning": "Same client-side auditing responsibility as the other application client nodes; the predicted library covers it."
+    },
+    {
+      "gt_node": "application 3::auditor-v1 client",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "JVM Application::lowes/auditor Library (Kotlin/JVM 11::Auditing API",
+        "JVM Application::lowes/auditor Library (Kotlin/JVM 11::AuditEvent Builder",
+        "JVM Application::lowes/auditor Library (Kotlin/JVM 11::Change Detector"
+      ],
+      "reasoning": "Same client-side auditing responsibility as the other application client nodes; the predicted library covers it."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Downstream Consumers::Consumer Service\\n(deserializes AuditEvent",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Databases / Filestores\\nElastic, Hadoop, etc."
+      ],
+      "reasoning": "The PRD explicitly states that consuming systems may deserialize emitted payloads into AuditEvent objects. Although downstream consumers are outside scope, the concept is still mentioned in the ground truth context."
+    },
+    {
+      "predicted_node": "Global::Kafka Topic\\n(serialized AuditEvent JSON",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Kafka"
+      ],
+      "reasoning": "This directly corresponds to the Kafka-based event-stream transport in the GT."
+    },
+    {
+      "predicted_node": "JVM Application::Application Code",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::auditor-v1 app\\nserver",
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "This is a generic representation of the auditor client application/library context and is grounded in the GT application/client nodes."
+    },
+    {
+      "predicted_node": "JVM Application::AuditEventElementFilter",
+      "grounded": true,
+      "reference_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "Element filtering is part of the auditor client functionality and is grounded in the GT client nodes and PRD filter requirements."
+    },
+    {
+      "predicted_node": "JVM Application::AuditorEventConfig\\n(applicationName, eventSource,\\neventSubType, metadata, filters",
+      "grounded": true,
+      "reference_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "The configuration object is explicitly required by the PRD and is part of the auditor client functionality."
+    },
+    {
+      "predicted_node": "JVM Application::EventPublisher",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Kafka",
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "reasoning": "The PRD specifies an EventPublisher abstraction for audit-event delivery; this is grounded in the GT transport/publishing context."
+    },
+    {
+      "predicted_node": "JVM Application::InclusionFilter\\n(includes list",
+      "grounded": true,
+      "reference_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "This matches the supported inclusion filtering behavior in the PRD and is grounded in the client-side auditing functionality."
+    },
+    {
+      "predicted_node": "JVM Application::Kafka EventPublisher\\n(default implementation",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Kafka"
+      ],
+      "reasoning": "This is a direct elaboration of the GT Kafka transport/default implementation."
+    },
+    {
+      "predicted_node": "JVM Application::Log Provider Impl",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The PRD mentions a LogProvider abstraction, but not a specific log provider implementation node; this appears as an unsupported concrete node."
+    },
+    {
+      "predicted_node": "JVM Application::LogProvider",
+      "grounded": true,
+      "reference_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "The logging integration is part of the auditor client/library architecture and is supported by the PRD."
+    },
+    {
+      "predicted_node": "JVM Application::lowes/auditor Library (Kotlin/JVM 11::AuditEvent Builder",
+      "grounded": true,
+      "reference_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "An AuditEvent builder is a reasonable grounded decomposition of the auditor client functionality."
+    },
+    {
+      "predicted_node": "JVM Application::lowes/auditor Library (Kotlin/JVM 11::AuditEvent\\n(CREATED | UPDATED | DELETED)\\n(elements: name, updatedValue,\\npreviousValue, metadata.fqdn",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::auditor-v1 app\\nserver",
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "This directly corresponds to the AuditEvent data model and emitted event responsibility in the PRD."
+    },
+    {
+      "predicted_node": "JVM Application::lowes/auditor Library (Kotlin/JVM 11::Auditing API",
+      "grounded": true,
+      "reference_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "This is the core API exposed by the auditor client and is directly grounded in the GT client nodes."
+    },
+    {
+      "predicted_node": "JVM Application::lowes/auditor Library (Kotlin/JVM 11::Change Detector",
+      "grounded": true,
+      "reference_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "Change detection is a core function described by the PRD and is grounded in the auditor client responsibility."
+    },
+    {
+      "predicted_node": "JVM Application::lowes/auditor Library (Kotlin/JVM 11::Element Filter Engine",
+      "grounded": true,
+      "reference_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "This is a grounded decomposition of the element filtering capability required by the PRD."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "Global::Kafka Topic\\n(serialized AuditEvent JSON",
+        "JVM Application::Kafka EventPublisher\\n(default implementation"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Kafka transport is represented by both the Kafka topic and Kafka-based publisher; the boundary remains semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "predicted_nodes": [
+        "JVM Application::Application Code",
+        "JVM Application::AuditEventElementFilter",
+        "JVM Application::AuditorEventConfig\\n(applicationName, eventSource,\\neventSubType, metadata, filters",
+        "JVM Application::EventPublisher",
+        "JVM Application::InclusionFilter\\n(includes list",
+        "JVM Application::LogProvider",
+        "JVM Application::lowes/auditor Library (Kotlin/JVM 11::AuditEvent Builder",
+        "JVM Application::lowes/auditor Library (Kotlin/JVM 11::AuditEvent\\n(CREATED | UPDATED | DELETED)\\n(elements: name, updatedValue,\\npreviousValue, metadata.fqdn",
+        "JVM Application::lowes/auditor Library (Kotlin/JVM 11::Auditing API",
+        "JVM Application::lowes/auditor Library (Kotlin/JVM 11::Change Detector",
+        "JVM Application::lowes/auditor Library (Kotlin/JVM 11::Element Filter Engine"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT client nodes are aggregated into the predicted JVM library and its internal components; the library boundary is semantically consistent with the client-side auditing responsibility."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "predicted_nodes": [
+        "JVM Application::Application Code",
+        "JVM Application::lowes/auditor Library (Kotlin/JVM 11::Auditing API",
+        "JVM Application::lowes/auditor Library (Kotlin/JVM 11::AuditEvent\\n(CREATED | UPDATED | DELETED)\\n(elements: name, updatedValue,\\npreviousValue, metadata.fqdn",
+        "JVM Application::lowes/auditor Library (Kotlin/JVM 11::Change Detector"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is represented as an app/server boundary, while the predicted nodes place the implementation inside a JVM library boundary, creating a boundary mismatch relative to the GT representation."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Databases / Filestores\\nElastic, Hadoop, etc.",
+    "Global::auditor-v1 app\\nserver"
+  ],
+  "unmatched_predicted_nodes": [
+    "JVM Application::Log Provider Impl"
+  ]
+}

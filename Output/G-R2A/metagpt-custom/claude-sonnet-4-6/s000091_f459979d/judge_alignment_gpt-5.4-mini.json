@@ -1,0 +1,110 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Blockchain Network\\nEthereum / Web3j"
+      ],
+      "predicted_nodes": [
+        "Ethereum-compatible Blockchain Node::Ethereum Smart Contract\\n(getAllClients / addClient /\\ngetClientByEndpoint"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Ethereum/Web3j blockchain integration side of the system. The predicted node is more specific, but it corresponds to the same blockchain network/contract execution area, and the boundary attribution is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::BootstrapStore\\nSmart Contract"
+      ],
+      "predicted_nodes": [
+        "Ethereum-compatible Blockchain Node::Ethereum Smart Contract\\n(getAllClients / addClient /\\ngetClientByEndpoint"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT smart contract and the predicted smart contract node refer to the same blockchain contract functionality for client/bootstrap storage and retrieval. The boundary is acceptable despite naming differences."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Server\\nLeshan server component"
+      ],
+      "predicted_nodes": [
+        "Global::Leshan / Eclipse LwM2M Library"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the Leshan/LwM2M server-side library/component used for LwM2M processing. The predicted placement at Global is broader but not a severe boundary error."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Secure API\\nAuthenticated HTTP endpoints"
+      ],
+      "predicted_nodes": [
+        "LwM2M Device Management Backend (Java::API Layer::JwtUtility\\n[local token validation",
+        "LwM2M Device Management Backend (Java::API Layer::UserController"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT secure API node is split into authentication/token validation and the user controller HTTP endpoint handling. This is a reasonable decomposition, and both predicted nodes remain within the backend API boundary."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::External Applications\\nusing LwM2M"
+      ],
+      "predicted_nodes": [
+        "Global::Leshan / Eclipse LwM2M Library",
+        "LwM2M Device Management Backend (Java::LwM2M / Parsing Layer::LwM2MNodeDeserializer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a broad external LwM2M consumer/interaction area, but the predicted nodes instead model internal library/parsing components. This is only a partial semantic overlap and the boundary attribution does not faithfully reproduce the GT architecture."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Bootstrap Server"
+      ],
+      "predicted_nodes": [
+        "LwM2M Device Management Backend (Java::Service Layer::BlockchainClientService\\n[returns empty collection\\non contract failure"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT bootstrap server is a distinct LwM2M/bootstrap-side system element, while the predicted node is a backend blockchain client service. They are not architecturally equivalent, so this is a boundary/context mismatch."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Client\\nDevice 1",
+        "LwM2M Blockchain Platform::LwM2M Client\\nDevice 2"
+      ],
+      "predicted_nodes": [
+        "Global::Leshan / Eclipse LwM2M Library"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT explicitly models two client devices, but the predicted node is a shared library component. This is not a valid merge of client nodes and does not preserve the device-level architectural meaning."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Management Web UI"
+      ],
+      "predicted_nodes": [
+        "LwM2M Device Management Backend (Java::API Layer::UserController"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a management UI, while the predicted node is a backend controller. This is a frontend/backend boundary confusion."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "LwM2M Blockchain Platform::Management Web UI",
+    "LwM2M Blockchain Platform::LwM2M Client\\nDevice 1",
+    "LwM2M Blockchain Platform::LwM2M Client\\nDevice 2"
+  ],
+  "unmatched_predicted_nodes": [
+    "LwM2M Device Management Backend (Java::Blockchain Integration Layer::BootstrapDataEncoder",
+    "LwM2M Device Management Backend (Java::Blockchain Integration Layer::SmartContractProxy",
+    "LwM2M Device Management Backend (Java::Blockchain Integration Layer::Web3jConnector\\n[Web3j library embedded",
+    "LwM2M Device Management Backend (Java::Data / Model Layer::ClientBootstrapPayload",
+    "LwM2M Device Management Backend (Java::Data / Model Layer::SecurityInfoRecord",
+    "LwM2M Device Management Backend (Java::Data / Model Layer::User",
+    "LwM2M Device Management Backend (Java::LwM2M / Parsing Layer::LwM2MNodeDeserializer",
+    "LwM2M Device Management Backend (Java::Service Layer::UserService"
+  ]
+}

@@ -1,0 +1,84 @@
+@startuml
+' Deployment Node for the overall system
+node "Android Device" {
+    cloud "External Systems" {
+        component "OpenStreetMap"
+        component "Dropbox"
+        component "OpenGTS"
+        component "Google Play Services"
+        component "Android SDK"
+    }
+
+    ' Infrastructure Layer
+    package "Infrastructure Layer" {
+    }
+
+    ' Data Layer
+    package "Data Layer" {
+        database "File Storage" {
+            component "GPX Files"
+            component "KML Files"
+            component "Text Logs"
+        }
+        database "Application Settings Store"
+    }
+
+    ' Integration Layer
+    package "Integration Layer" {
+        component "OpenStreetMap Integration"
+        component "Dropbox Integration"
+        component "OpenGTS Integration"
+        component "GPRMC Encoder"
+    }
+
+    ' Business Logic Layer
+    package "Business Logic Layer" {
+        component "EventBus"
+        component "GPS Logging Service"
+        component "Location Listeners"
+        component "Loggers"
+        component "Uploaders_Upload_Jobs"
+        component "Session_Application Settings"
+    }
+
+    ' Presentation Layer
+    package "Presentation Layer" {
+        component "Main Activity and Fragments"
+    }
+
+    ' Configuration Component
+    component "Gradle Properties"
+}
+
+' Internal Dependencies
+GPS Logging Service --> Location Listeners : receives location updates
+Location Listeners --> EventBus : publishes locations
+EventBus --> Main Activity and Fragments : delivers location events
+Loggers --> GPS Logging Service : gets location data
+Uploaders_Upload_Jobs --> Loggers : accesses logged data
+OpenGTS Integration --> GPRMC Encoder : provides data for encoding
+GPRMC Encoder --> OpenGTS Integration : returns GPRMC encoded data
+OpenStreetMap Integration --> Uploaders_Upload_Jobs : handles OSM uploads
+Dropbox Integration --> Uploaders_Upload_Jobs : handles sync
+
+' External Integrations
+OpenStreetMap Integration --> OpenStreetMap : authenticates & uploads
+Dropbox Integration --> Dropbox : authenticates & syncs
+OpenGTS Integration --> OpenGTS : sends GPRMC data via UDP
+Location Listeners --> Google Play Services : requests locations
+GPS Logging Service --> Android SDK : uses platform features
+
+' Data Persistence
+Loggers --> File Storage : writes logs
+Session_Application Settings --> Application Settings Store : manages config
+
+' Configuration Flow
+Application Settings Store --> OpenStreetMap Integration : provides settings
+Application Settings Store --> Dropbox Integration : provides settings
+Application Settings Store --> OpenGTS Integration : provides settings
+Gradle Properties --> Application Settings Store : supplies credentials
+
+' SerializableLocation Data Flow
+Location Listeners --> GPRMC Encoder : passes SerializableLocation
+
+@enduml

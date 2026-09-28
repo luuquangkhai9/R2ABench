@@ -1,0 +1,100 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Jenkins\\nController"
+      ],
+      "predicted_nodes": [
+        "Oracle Cloud Infrastructure (OCI)\\n[CON-001, NFR-001::Compute Instances\\n[FR-007::Jenkins Master Instance\\n(master_shape, master_image_id,\\nmaster_ad)\\n[FR-005, FR-007"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT 'Jenkins Controller' is correctly identified as the 'Jenkins Master Instance' by the AI. The AI places it in a 'Compute Instances' boundary within 'OCI', which is semantically equivalent to the GT's placement within an OCI Subnet."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\\n(Private/Regional::Agent Node\\n(Fault Domain X",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\\n(Private/Regional::Agent Node\\n(Fault Domain Y"
+      ],
+      "predicted_nodes": [
+        "Oracle Cloud Infrastructure (OCI)\\n[CON-001, NFR-001::Compute Instances\\n[FR-007::Jenkins Slave/Agent Instance(s)\\n(slave_shape, slave_image_id,\\nslave_ads) x slave_count\\n[FR-006, FR-007"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregates the two GT 'Agent Node' instances (split by fault domain) into a single logical 'Jenkins Slave/Agent Instance(s)' node. The boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\\n(Public/Regional::Bastion\\nHost"
+      ],
+      "predicted_nodes": [
+        "Oracle Cloud Infrastructure (OCI)\\n[CON-001, NFR-001::Private-Network Access Layer\\n[CON-003, NFR-005::Bastion Host\\n(bastion_host, bastion_user,\\nbastion_private_key)\\n[FR-011, CI-003, CON-006"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT 'Bastion Host' is correctly matched. The AI places it in a logical 'Private-Network Access Layer' within OCI, which is a correct and reasonable abstraction of its role and location."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Load Balancer\\n(primary",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Load Balancer\\n(standby"
+      ],
+      "predicted_nodes": [
+        "Oracle Cloud Infrastructure (OCI)\\n[CON-001, NFR-001::Private-Network Access Layer\\n[CON-003, NFR-005::Load Balancer\\n(public entry point)\\n[FR-012, CON-003"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregates the GT's primary and standby 'Load Balancer' nodes into a single logical 'Load Balancer' component. The placement in a 'Private-Network Access Layer' within OCI is a valid logical grouping."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::NAT\\nGateway"
+      ],
+      "predicted_nodes": [
+        "Oracle Cloud Infrastructure (OCI)\\n[CON-001, NFR-001::OCI Networking (Pre-existing)\\n[FR-009, CON-002::NAT Gateway\\n(private node outbound)\\n[FR-010, CON-003"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The 'NAT Gateway' is matched perfectly. The AI's boundary 'OCI Networking' is semantically equivalent to the GT's 'VCN' boundary for this component."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\\n(Public/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\\n(Public/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\\n(Private/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\\n(Private/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\\n(Private/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\\n(Private/Regional::Security List"
+      ],
+      "predicted_nodes": [
+        "Oracle Cloud Infrastructure (OCI)\\n[CON-001, NFR-001::OCI Networking (Pre-existing)\\n[FR-009, CON-002::Route Table /\\nDHCP Options /\\nSecurity Lists\\n[FR-009, CON-002"
+      ],
+      "match_type": "10:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregates the multiple granular 'Route Table' and 'Security List' nodes from the GT into a single logical node representing network policies. The boundary attribution is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Internet",
+    "Oracle Cloud Infrastructure (Region::VCN::Internet\\nGateway",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Healthcheck"
+  ],
+  "unmatched_predicted_nodes": [
+    "Local Workstation / CI Host::Configuration Layer",
+    "Local Workstation / CI Host::Configuration Layer::JSON Input Files\\n[DI-001",
+    "Local Workstation / CI Host::Configuration Layer::SSH Key Material\\n(public + private)\\n[DR-002, FR-002",
+    "Local Workstation / CI Host::Configuration Layer::terraform.tfvars\\n/ Variable Files\\n[DI-002, DR-007",
+    "Local Workstation / CI Host::Input Variable Aggregator\\n[SI-003, FR-001..FR-006",
+    "Local Workstation / CI Host::Terraform Execution Engine\\n[CON-004, FR-013",
+    "Local Workstation / CI Host::Terraform Modules",
+    "Oracle Cloud Infrastructure (OCI)\\n[CON-001, NFR-001::Identity & Access\\n[FR-001, DR-001",
+    "Oracle Cloud Infrastructure (OCI)\\n[CON-001, NFR-001::OCI Networking (Pre-existing)\\n[FR-009, CON-002::Private Subnet(s)\\n(Jenkins Slave/Agent)\\n[FR-010, NFR-005",
+    "Oracle Cloud Infrastructure (OCI)\\n[CON-001, NFR-001::OCI Networking (Pre-existing)\\n[FR-009, CON-002::Public Subnet\\n(Jenkins Master)\\n[FR-005",
+    "Oracle Cloud Infrastructure (OCI)\\n[CON-001, NFR-001::OCI Networking (Pre-existing)\\n[FR-009, CON-002::VCN\\n[CON-001",
+    "Oracle Cloud Infrastructure (OCI)\\n[CON-001, NFR-001::OCI Networking (Pre-existing)\\n[FR-009, CON-002::VNIC-based\\nInstance Networking\\n[CI-004, CON-001"
+  ]
+}

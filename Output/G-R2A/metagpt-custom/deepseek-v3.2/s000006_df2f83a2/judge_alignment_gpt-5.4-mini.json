@@ -1,0 +1,189 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Biomechanical Model::BaseBMModel",
+        "Biomechanical Model::DerivedClass",
+        "Biomechanical Model::MoblArmsIndex"
+      ],
+      "predicted_nodes": [
+        "Core Simulation Layer::BiomechanicalModel"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT contains an abstract biomechanical base model, derived model hierarchy, and a concrete example model, while the AI aggregated them into a single biomechanical model node. This is semantically equivalent at the architecture level, and the Core Simulation Layer boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Global::Simulator"
+      ],
+      "predicted_nodes": [
+        "Global::OpenAI Gym-Compatible Runtime\\nEnvironments",
+        "Runtime Interface Layer::GymInterfaceWrapper",
+        "Runtime Interface Layer::StandaloneSimulatorPackage"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT simulator corresponds to the produced Gym-compatible runtime simulator. The AI split it into runtime wrapper and standalone package aspects, which is a valid decomposition. The boundaries are consistent with the simulator/runtime role."
+    },
+    {
+      "gt_nodes": [
+        "Interaction Task::BaseTask",
+        "Interaction Task::DerivedClass",
+        "Interaction Task::Pointing",
+        "Interaction Task::Tracking"
+      ],
+      "predicted_nodes": [
+        "Core Simulation Layer::InteractionTask"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT task base class, derived class, and specific task examples are consolidated into one interaction task node. This is a valid aggregation and the boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Perception::BaseModule",
+        "Perception::DerivedClass",
+        "Perception::Perception"
+      ],
+      "predicted_nodes": [
+        "Core Simulation Layer::<<abstract>>\\nBase Module Contract"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "These GT nodes represent the perception base/contract layer. The AI aggregated them into a base module contract node, which is semantically aligned. The core simulation layer boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Perception::BasicWithEEPos",
+        "Perception::FixedEye"
+      ],
+      "predicted_nodes": [
+        "Core Simulation Layer::Perception Modules::VisionModule"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT nodes are concrete vision-related perception modules. The AI grouped them into a vision module node, which is a reasonable abstraction. The nested perception-module boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Perception::Modalities::Modality",
+        "Perception::Modalities::Proprioception",
+        "Perception::Modalities::Vision"
+      ],
+      "predicted_nodes": [
+        "Core Simulation Layer::Perception Modules::ProprioceptionModule",
+        "Core Simulation Layer::Perception Modules::VisionModule"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT modality abstraction and modality-specific nodes map to the AI's split into proprioception and vision modules. This is a faithful decomposition and the boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Perception::BaseModule",
+        "Perception::DerivedClass",
+        "Perception::Perception",
+        "Perception::BasicWithEEPos",
+        "Perception::FixedEye",
+        "Perception::Modalities::Modality",
+        "Perception::Modalities::Proprioception",
+        "Perception::Modalities::Vision"
+      ],
+      "predicted_nodes": [
+        "Core Simulation Layer::Perception Modules::ProprioceptionModule",
+        "Core Simulation Layer::Perception Modules::VisionModule",
+        "Core Simulation Layer::<<abstract>>\\nBase Module Contract"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "Collectively, the GT perception hierarchy is represented by the AI as base contract plus modality-specific modules. This is a valid architectural condensation and the layer placement is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Perception::BasicWithEEPos"
+      ],
+      "predicted_nodes": [
+        "Core Simulation Layer::Perception Modules::ProprioceptionModule"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a perception module tied to proprioceptive/end-effector positional information. Mapping it to a proprioception module is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Perception::FixedEye"
+      ],
+      "predicted_nodes": [
+        "Core Simulation Layer::Perception Modules::VisionModule"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT fixed-eye perception node is vision-related, so the AI's vision module mapping is correct."
+    },
+    {
+      "gt_nodes": [
+        "Perception::Modalities::Proprioception"
+      ],
+      "predicted_nodes": [
+        "Core Simulation Layer::Perception Modules::ProprioceptionModule"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The modality-specific proprioception node matches the AI's proprioception module."
+    },
+    {
+      "gt_nodes": [
+        "Perception::Modalities::Vision"
+      ],
+      "predicted_nodes": [
+        "Core Simulation Layer::Perception Modules::VisionModule"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The modality-specific vision node matches the AI's vision module."
+    },
+    {
+      "gt_nodes": [
+        "Perception::Modalities::Modality"
+      ],
+      "predicted_nodes": [
+        "Core Simulation Layer::<<abstract>>\\nBase Module Contract"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT modality abstraction corresponds to the AI's abstract base module contract."
+    },
+    {
+      "gt_nodes": [
+        "Global::Simulator"
+      ],
+      "predicted_nodes": [
+        "Global::Core Simulation Layer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node refers to the actual simulator artifact, while the AI's node is a broad structural grouping rather than the simulator itself. This is a boundary/context mismatch."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Simulator"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Core Simulation Layer",
+    "Global::Integration & Build Layer",
+    "Global::MuJoCo Simulation Engine",
+    "Global::OpenAI Gym-Compatible Runtime\\nEnvironments",
+    "Global::Reinforcement-Learning\\nTraining Libraries",
+    "Global::Runtime Interface Layer",
+    "Global::Training & Evaluation Layer",
+    "Integration & Build Layer::MuJoCoXMLIntegrator",
+    "Integration & Build Layer::SimulatorBuilder",
+    "Runtime Interface Layer::GymInterfaceWrapper",
+    "Runtime Interface Layer::StandaloneSimulatorPackage",
+    "Training & Evaluation Layer::ActionLogger",
+    "Training & Evaluation Layer::EvaluationRunner",
+    "Training & Evaluation Layer::Run Folder",
+    "Training & Evaluation Layer::TrainingWorkflow"
+  ]
+}

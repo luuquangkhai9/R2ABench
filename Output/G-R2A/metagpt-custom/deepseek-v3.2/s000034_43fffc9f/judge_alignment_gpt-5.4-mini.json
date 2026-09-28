@@ -1,0 +1,136 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process",
+        "Compute node::MPI Process::Server\\nThread",
+        "Compute node::MPI Process::Worker\\nThread",
+        "Compute node::MPI Process::Task Queue"
+      ],
+      "predicted_nodes": [
+        "MPI Process (Rank N::Worker Thread Pool",
+        "MPI Process (Rank N::Worker Queue",
+        "MPI Process (Rank 0::Primary Application Task"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT groups the per-process MPI runtime elements (process, server thread, worker thread, task queue). The prediction splits these into worker pool, worker queue, and rank-0 primary task, which is semantically aligned with the same MPI process boundary despite finer granularity."
+    },
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "Global::MPI Runtime",
+        "Global::mpi4py"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT abstractly represents MPI as the global communication/runtime dependency. The prediction decomposes this into MPI runtime and mpi4py, which is a semantically consistent refinement within the global boundary."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::...",
+        "Task Queue (in detail::A1",
+        "Task Queue (in detail::A2",
+        "Task Queue (in detail::A3",
+        "Task Queue (in detail::B1",
+        "Task Queue (in detail::B2",
+        "Task Queue (in detail::Level 0",
+        "Task Queue (in detail::Level 1",
+        "Task Queue (in detail::Level 2",
+        "Task Queue (in detail::Level 3",
+        "Task Queue (in detail::Level 4",
+        "Task Queue (in detail::Level 5"
+      ],
+      "predicted_nodes": [
+        "MPI Process (Rank N::Worker Queue",
+        "MPI Process (Rank N::Task Stealing Manager",
+        "Task Management::Task Scheduler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT contains a detailed task-queue decomposition, and the prediction maps to worker queue, scheduling, and stealing management. This is a reasonable functional match, and placing these under task management / MPI process boundaries is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Task Queue"
+      ],
+      "predicted_nodes": [
+        "MPI Process (Rank N::Worker Queue",
+        "Task Management::Task Scheduler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the task queueing and scheduling mechanism inside an MPI process. The predicted naming is more explicit, but the boundary remains appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Worker\\nThread"
+      ],
+      "predicted_nodes": [
+        "MPI Process (Rank N::Worker Thread Pool"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The worker-thread concept matches directly, and the per-MPI-process boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Server\\nThread"
+      ],
+      "predicted_nodes": [
+        "MPI Process (Rank 0::Primary Application Task"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT server thread is an internal runtime thread, while the predicted primary application task is an application-level execution role. This is a semantic mismatch and a boundary confusion."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::..."
+      ],
+      "predicted_nodes": [
+        "Task Management::Callback Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT detailed task queue structure does not correspond to callback handling. Callback processing is a different runtime concern, so this is not an equivalent node."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::..."
+      ],
+      "predicted_nodes": [
+        "Task Management::torc.submit",
+        "Task Management::torc.wait",
+        "Task Management::torc.map",
+        "Task Management::torc.query"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT detailed queue structure supports task submission, waiting, map execution, and related task-management operations. The prediction groups these API operations under task management, which is acceptable at a higher abstraction level."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Data Storage::Task Descriptor Storage",
+    "Data Storage::task.input",
+    "Data Storage::task.result",
+    "Environment Configuration::Environment Variables",
+    "Environment Configuration::TORC_STEALING",
+    "Environment Configuration::TORC_STEALING_CHUNK",
+    "Environment Configuration::TORC_WORKERS",
+    "Execution::HDF5 Output",
+    "Execution::Image Preprocessing",
+    "Execution::SPMD Executor",
+    "Global::Environment Configuration",
+    "Global::termcolor",
+    "MPI Process (Rank 0::torc.disable_stealing",
+    "MPI Process (Rank 0::torc.enable_stealing",
+    "MPI Process (Rank 0::torc.init",
+    "MPI Process (Rank 0::torc.launch",
+    "MPI Process (Rank 0::torc.shutdown",
+    "MPI Process (Rank 0::torc.start"
+  ]
+}

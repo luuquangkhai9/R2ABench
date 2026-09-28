@@ -1,0 +1,625 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Drivers and Kernels::Cray Driver",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node covers Cray-specific driver functionality."
+    },
+    {
+      "gt_node": "Drivers and Kernels::OS Kernel\\nEthernet",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Linux Environment::Linux Verbs API",
+        "Global::Network Interface",
+        "psmpi Communication System::Embedded Libfabric Verbs Provider::Verbs Transport"
+      ],
+      "reasoning": "The predicted nodes cover kernel-adjacent networking and verbs transport responsibilities, though not the exact OS kernel boundary."
+    },
+    {
+      "gt_node": "Drivers and Kernels::OS Kernel\\nHost Memory",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node addresses generic host memory/kernel memory functionality."
+    },
+    {
+      "gt_node": "Drivers and Kernels::OS Kernel\\nMemory Hooks",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node covers memory hook integration at the OS kernel layer."
+    },
+    {
+      "gt_node": "Drivers and Kernels::RDMA Verbs Driver",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Verbs API Interface",
+        "Linux Environment::Linux Verbs API",
+        "psmpi Communication System::Embedded Libfabric Verbs Provider::Verbs Transport"
+      ],
+      "reasoning": "The predicted verbs-related nodes capture the RDMA verbs driver concept and related transport integration."
+    },
+    {
+      "gt_node": "Drivers and Kernels::ROCm / CUDA",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node represents GPU compute stack integration."
+    },
+    {
+      "gt_node": "Global::Applications\\nHPC, AI, ML, Big Data",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node targets the application workload category."
+    },
+    {
+      "gt_node": "Global::Hardware",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node corresponds to general hardware infrastructure."
+    },
+    {
+      "gt_node": "Programming Models and Frameworks::AI / ML Frameworks\\nTensorFlow, Burst Buffer",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node addresses AI/ML frameworks or burst buffer frameworks."
+    },
+    {
+      "gt_node": "Programming Models and Frameworks::MPI\\nMPICH, Open-MPI",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "psmpi Communication System::Communication Subsystem",
+        "psmpi Communication System::Send State Machine"
+      ],
+      "reasoning": "The predicted communication subsystem and send state machine are grounded in MPI communication concerns."
+    },
+    {
+      "gt_node": "Programming Models and Frameworks::PGAS / SHMEM\\nOpenSHMEM, UPC, CAF, X10, Chapel",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node covers PGAS/SHMEM programming models."
+    },
+    {
+      "gt_node": "Programming Models and Frameworks::Task Runtimes\\nParsec, OCR, Legion",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node covers task runtime frameworks."
+    },
+    {
+      "gt_node": "UCX::UCM Memory Services::Memory Hooks",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node specifically covers UCX memory hook services."
+    },
+    {
+      "gt_node": "UCX::UCP Protocols\\nHigh Level API::Cross-Transport Multi-Rail",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node represents multi-rail protocol selection or aggregation."
+    },
+    {
+      "gt_node": "UCX::UCP Protocols\\nHigh Level API::Fragmentation",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "psmpi Communication System::Send State Machine",
+        "psmpi Communication System::Send State Machine::Packet Buffer Manager",
+        "Global::Data Flow"
+      ],
+      "reasoning": "The send state machine and packet buffer handling are semantically related to payload packing/fragmentation behavior."
+    },
+    {
+      "gt_node": "UCX::UCP Protocols\\nHigh Level API::I/O API\\nStream",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node covers stream-oriented I/O APIs."
+    },
+    {
+      "gt_node": "UCX::UCP Protocols\\nHigh Level API::Message Passing API\\nTag Matching, Rendezvous",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "psmpi Communication System::Communication Subsystem",
+        "psmpi Communication System::Send State Machine",
+        "psmpi Communication System::Data Structures::Packet Buffer"
+      ],
+      "reasoning": "The predicted communication subsystem and send state machine cover message passing and rendezvous-related packet handling."
+    },
+    {
+      "gt_node": "UCX::UCP Protocols\\nHigh Level API::PGAS API\\nRMAs, Atomics",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node covers PGAS remote memory access or atomics APIs."
+    },
+    {
+      "gt_node": "UCX::UCP Protocols\\nHigh Level API::Software Protocols",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node explicitly represents general software protocol abstractions."
+    },
+    {
+      "gt_node": "UCX::UCP Protocols\\nHigh Level API::Task Based API\\nActive Messages",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node corresponds to active-message task APIs."
+    },
+    {
+      "gt_node": "UCX::UCP Protocols\\nHigh Level API::Transport Selection",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "psmpi Communication System::Embedded Libfabric Verbs Provider::Verbs Transport",
+        "Linux Environment::Network Transport",
+        "Global::Network Interface"
+      ],
+      "reasoning": "The transport-related predicted nodes reflect transport choice and integration concerns."
+    },
+    {
+      "gt_node": "UCX::UCS Services\\nCommon Utilities::Data Structures",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "psmpi Communication System::Data Structures",
+        "psmpi Communication System::Data Structures::Data Descriptor",
+        "psmpi Communication System::Data Structures::Packet Buffer"
+      ],
+      "reasoning": "The predicted data-structure nodes map directly to common utility data structures."
+    },
+    {
+      "gt_node": "UCX::UCS Services\\nCommon Utilities::Memory Management",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "psmpi Communication System::Data Structures::Network Send Descriptor",
+        "psmpi Communication System::Data Structures::Packet Buffer",
+        "psmpi Communication System::Embedded hwloc Verification::Manual Build Workflow"
+      ],
+      "reasoning": "The predicted nodes involve memory-related resources, descriptors, and verification workflow, which partially ground the memory-management concern."
+    },
+    {
+      "gt_node": "UCX::UCS Services\\nCommon Utilities::Utilities",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node represents generic utilities support."
+    },
+    {
+      "gt_node": "UCX::UCT Hardware Transports\\nLow Level API::DCT",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node covers DCT transport."
+    },
+    {
+      "gt_node": "UCX::UCT Hardware Transports\\nLow Level API::Ethernet Transport\\nTCP/IP Sockets",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Network Interface",
+        "Linux Environment::Network Transport"
+      ],
+      "reasoning": "The predicted network-interface and network-transport nodes cover Ethernet/TCP-IP transport at a high level."
+    },
+    {
+      "gt_node": "UCX::UCT Hardware Transports\\nLow Level API::GPU Transport\\nNVIDIA CUDA, AMD ROCm",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node covers GPU transport or CUDA/ROCm transport paths."
+    },
+    {
+      "gt_node": "UCX::UCT Hardware Transports\\nLow Level API::Gemini / Aries Transport\\nGNI",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node covers Gemini/Aries or GNI transport."
+    },
+    {
+      "gt_node": "UCX::UCT Hardware Transports\\nLow Level API::Intra-node Host Memory\\nSYSV, POSIX, KNEM, CMA, XPMEM",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node addresses intra-node host-memory transport mechanisms."
+    },
+    {
+      "gt_node": "UCX::UCT Hardware Transports\\nLow Level API::RC",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node specifically corresponds to RC transport."
+    },
+    {
+      "gt_node": "UCX::UCT Hardware Transports\\nLow Level API::RDMA Verbs Transport\\nInfiniBand, ROCE, OPA",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Verbs API Interface",
+        "Linux Environment::Linux Verbs API",
+        "psmpi Communication System::Embedded Libfabric Verbs Provider::Verbs Transport"
+      ],
+      "reasoning": "The predicted verbs-related nodes capture the RDMA verbs transport concept, though at a more abstract layer."
+    },
+    {
+      "gt_node": "UCX::UCT Hardware Transports\\nLow Level API::UD",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node covers UD transport."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Global::Command Line",
+      "grounded": true,
+      "reference_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Transport Selection",
+        "UCX::UCS Services\\nCommon Utilities::Utilities"
+      ],
+      "reasoning": "The command-line concept is grounded by the build/test CLI workflow context in the PRD, though not by a specific GT architecture node."
+    },
+    {
+      "predicted_node": "Global::Data Flow",
+      "grounded": true,
+      "reference_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Fragmentation",
+        "UCX::UCP Protocols\\nHigh Level API::Message Passing API\\nTag Matching, Rendezvous",
+        "UCX::UCS Services\\nCommon Utilities::Data Structures"
+      ],
+      "reasoning": "Data flow is grounded by send-path packing, payload transfer, and rendezvous packet handling concepts."
+    },
+    {
+      "predicted_node": "Global::Linux Environment",
+      "grounded": true,
+      "reference_nodes": [
+        "Drivers and Kernels::RDMA Verbs Driver",
+        "UCX::UCT Hardware Transports\\nLow Level API::RDMA Verbs Transport\\nInfiniBand, ROCE, OPA"
+      ],
+      "reasoning": "Linux environment is grounded by the verbs-provider and Linux Verbs requirements."
+    },
+    {
+      "predicted_node": "Global::Network Interface",
+      "grounded": true,
+      "reference_nodes": [
+        "UCX::UCT Hardware Transports\\nLow Level API::Ethernet Transport\\nTCP/IP Sockets",
+        "UCX::UCT Hardware Transports\\nLow Level API::RDMA Verbs Transport\\nInfiniBand, ROCE, OPA"
+      ],
+      "reasoning": "Network interface is grounded by the communication and transport-layer context."
+    },
+    {
+      "predicted_node": "Global::Verbs API Interface",
+      "grounded": true,
+      "reference_nodes": [
+        "Drivers and Kernels::RDMA Verbs Driver",
+        "UCX::UCT Hardware Transports\\nLow Level API::RDMA Verbs Transport\\nInfiniBand, ROCE, OPA"
+      ],
+      "reasoning": "This directly reflects the verbs API dependency and transport interface concepts."
+    },
+    {
+      "predicted_node": "Linux Environment::Linux Verbs API",
+      "grounded": true,
+      "reference_nodes": [
+        "Drivers and Kernels::RDMA Verbs Driver",
+        "UCX::UCT Hardware Transports\\nLow Level API::RDMA Verbs Transport\\nInfiniBand, ROCE, OPA"
+      ],
+      "reasoning": "This is a semantic match for the Linux Verbs API requirement."
+    },
+    {
+      "predicted_node": "Linux Environment::Network Transport",
+      "grounded": true,
+      "reference_nodes": [
+        "UCX::UCT Hardware Transports\\nLow Level API::Ethernet Transport\\nTCP/IP Sockets",
+        "UCX::UCT Hardware Transports\\nLow Level API::RDMA Verbs Transport\\nInfiniBand, ROCE, OPA"
+      ],
+      "reasoning": "This is grounded in the network transport concepts used by the communication stack."
+    },
+    {
+      "predicted_node": "Linux Environment::Shell CLI",
+      "grounded": true,
+      "reference_nodes": [
+        "UCX::UCS Services\\nCommon Utilities::Utilities"
+      ],
+      "reasoning": "The shell CLI is grounded by the documented command-line workflows for embedded hwloc verification."
+    },
+    {
+      "predicted_node": "psmpi Communication System::Communication Subsystem",
+      "grounded": true,
+      "reference_nodes": [
+        "Programming Models and Frameworks::MPI\\nMPICH, Open-MPI",
+        "UCX::UCP Protocols\\nHigh Level API::Message Passing API\\nTag Matching, Rendezvous",
+        "UCX::UCP Protocols\\nHigh Level API::Transport Selection"
+      ],
+      "reasoning": "This is a clear grounding in MPI communication subsystem concepts."
+    },
+    {
+      "predicted_node": "psmpi Communication System::Communication Subsystem::Connection Manager",
+      "grounded": true,
+      "reference_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Message Passing API\\nTag Matching, Rendezvous",
+        "UCX::UCP Protocols\\nHigh Level API::Transport Selection"
+      ],
+      "reasoning": "Connection management is directly grounded by the communication lifecycle and connection-establishment requirements."
+    },
+    {
+      "predicted_node": "psmpi Communication System::Communication Subsystem::Initialization/Termination",
+      "grounded": true,
+      "reference_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Software Protocols",
+        "UCX::UCS Services\\nCommon Utilities::Utilities"
+      ],
+      "reasoning": "Initialization/termination is grounded by the communication lifecycle responsibilities."
+    },
+    {
+      "predicted_node": "psmpi Communication System::Communication Subsystem::One-to-Many Transfer",
+      "grounded": true,
+      "reference_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Cross-Transport Multi-Rail",
+        "UCX::UCP Protocols\\nHigh Level API::Message Passing API\\nTag Matching, Rendezvous"
+      ],
+      "reasoning": "The one-to-many transfer responsibility is directly grounded by the PRD."
+    },
+    {
+      "predicted_node": "psmpi Communication System::Communication Subsystem::Progress Engine",
+      "grounded": true,
+      "reference_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Software Protocols",
+        "UCX::UCS Services\\nCommon Utilities::Utilities"
+      ],
+      "reasoning": "Progress advancement and blocking progress are grounded by communication lifecycle requirements."
+    },
+    {
+      "predicted_node": "psmpi Communication System::Data Structures",
+      "grounded": true,
+      "reference_nodes": [
+        "UCX::UCS Services\\nCommon Utilities::Data Structures"
+      ],
+      "reasoning": "Direct semantic match to the data-structures concept."
+    },
+    {
+      "predicted_node": "psmpi Communication System::Data Structures::Data Descriptor",
+      "grounded": true,
+      "reference_nodes": [
+        "UCX::UCS Services\\nCommon Utilities::Data Structures",
+        "UCX::UCP Protocols\\nHigh Level API::Message Passing API\\nTag Matching, Rendezvous"
+      ],
+      "reasoning": "The data descriptor is grounded by the PRD's data descriptor terminology."
+    },
+    {
+      "predicted_node": "psmpi Communication System::Data Structures::Flow Control State",
+      "grounded": true,
+      "reference_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Software Protocols",
+        "UCX::UCS Services\\nCommon Utilities::Data Structures"
+      ],
+      "reasoning": "Flow-control state is explicitly grounded by the send-state-machine flow-control requirements."
+    },
+    {
+      "predicted_node": "psmpi Communication System::Data Structures::Network Send Descriptor",
+      "grounded": true,
+      "reference_nodes": [
+        "UCX::UCT Hardware Transports\\nLow Level API::RDMA Verbs Transport\\nInfiniBand, ROCE, OPA",
+        "UCX::UCS Services\\nCommon Utilities::Data Structures"
+      ],
+      "reasoning": "The network send descriptor is grounded by the PRD's send-descriptor requirements."
+    },
+    {
+      "predicted_node": "psmpi Communication System::Data Structures::Packet Buffer",
+      "grounded": true,
+      "reference_nodes": [
+        "UCX::UCS Services\\nCommon Utilities::Data Structures",
+        "UCX::UCP Protocols\\nHigh Level API::Message Passing API\\nTag Matching, Rendezvous"
+      ],
+      "reasoning": "Packet buffer is directly grounded by the send-path data and control-field requirements."
+    },
+    {
+      "predicted_node": "psmpi Communication System::Embedded Libfabric Verbs Provider",
+      "grounded": true,
+      "reference_nodes": [
+        "Drivers and Kernels::RDMA Verbs Driver",
+        "UCX::UCT Hardware Transports\\nLow Level API::RDMA Verbs Transport\\nInfiniBand, ROCE, OPA"
+      ],
+      "reasoning": "This matches the embedded Libfabric verbs provider context in the PRD."
+    },
+    {
+      "predicted_node": "psmpi Communication System::Embedded Libfabric Verbs Provider::Dependency Manager",
+      "grounded": true,
+      "reference_nodes": [
+        "Drivers and Kernels::RDMA Verbs Driver",
+        "Global::Linux Environment"
+      ],
+      "reasoning": "Dependency management is grounded by the build-time library/version constraints for the verbs provider."
+    },
+    {
+      "predicted_node": "psmpi Communication System::Embedded Libfabric Verbs Provider::Verbs Transport",
+      "grounded": true,
+      "reference_nodes": [
+        "Drivers and Kernels::RDMA Verbs Driver",
+        "UCX::UCT Hardware Transports\\nLow Level API::RDMA Verbs Transport\\nInfiniBand, ROCE, OPA"
+      ],
+      "reasoning": "This is a direct grounding of the verbs transport concept."
+    },
+    {
+      "predicted_node": "psmpi Communication System::Embedded hwloc Verification",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Applications\\nHPC, AI, ML, Big Data",
+        "UCX::UCS Services\\nCommon Utilities::Utilities"
+      ],
+      "reasoning": "The embedded hwloc verification workflow is explicitly described in the PRD."
+    },
+    {
+      "predicted_node": "psmpi Communication System::Embedded hwloc Verification::Manual Build Workflow",
+      "grounded": true,
+      "reference_nodes": [
+        "UCX::UCS Services\\nCommon Utilities::Utilities"
+      ],
+      "reasoning": "This directly corresponds to the manual embedded verification workflow."
+    },
+    {
+      "predicted_node": "psmpi Communication System::Embedded hwloc Verification::run-embedded-tests.sh",
+      "grounded": true,
+      "reference_nodes": [
+        "UCX::UCS Services\\nCommon Utilities::Utilities"
+      ],
+      "reasoning": "This directly corresponds to the preferred test entry point script."
+    },
+    {
+      "predicted_node": "psmpi Communication System::Send State Machine",
+      "grounded": true,
+      "reference_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Message Passing API\\nTag Matching, Rendezvous",
+        "UCX::UCP Protocols\\nHigh Level API::Software Protocols"
+      ],
+      "reasoning": "The send state machine is explicitly grounded by the PRD's send-path note."
+    },
+    {
+      "predicted_node": "psmpi Communication System::Send State Machine::Flow Control Checker",
+      "grounded": true,
+      "reference_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Software Protocols"
+      ],
+      "reasoning": "This directly corresponds to checking flow status before posting sends."
+    },
+    {
+      "predicted_node": "psmpi Communication System::Send State Machine::Packet Buffer Manager",
+      "grounded": true,
+      "reference_nodes": [
+        "UCX::UCS Services\\nCommon Utilities::Data Structures",
+        "UCX::UCP Protocols\\nHigh Level API::Fragmentation"
+      ],
+      "reasoning": "Packet buffer management is grounded by packet-buffer packing and control-field handling."
+    },
+    {
+      "predicted_node": "psmpi Communication System::Send State Machine::Send Path Selector",
+      "grounded": true,
+      "reference_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Software Protocols",
+        "UCX::UCP Protocols\\nHigh Level API::Message Passing API\\nTag Matching, Rendezvous"
+      ],
+      "reasoning": "The send-path selector is grounded by the direct-access vs packing and packet-type-specific send-path choices."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Drivers and Kernels::RDMA Verbs Driver"
+      ],
+      "predicted_nodes": [
+        "Global::Verbs API Interface",
+        "Linux Environment::Linux Verbs API",
+        "psmpi Communication System::Embedded Libfabric Verbs Provider::Verbs Transport"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT RDMA verbs driver responsibility is split across multiple predicted verbs-related nodes, with semantically consistent boundary attribution."
+    },
+    {
+      "gt_nodes": [
+        "Programming Models and Frameworks::MPI\\nMPICH, Open-MPI"
+      ],
+      "predicted_nodes": [
+        "psmpi Communication System::Communication Subsystem",
+        "psmpi Communication System::Send State Machine"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "MPI communication responsibilities are represented by the communication subsystem and send state machine."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Fragmentation"
+      ],
+      "predicted_nodes": [
+        "psmpi Communication System::Send State Machine",
+        "psmpi Communication System::Send State Machine::Packet Buffer Manager",
+        "Global::Data Flow"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Payload packing and packet-buffer handling correspond to fragmentation-like behavior; the boundary shift is acceptable at a conceptual level."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Message Passing API\\nTag Matching, Rendezvous"
+      ],
+      "predicted_nodes": [
+        "psmpi Communication System::Communication Subsystem",
+        "psmpi Communication System::Send State Machine",
+        "psmpi Communication System::Data Structures::Packet Buffer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The message passing and rendezvous responsibilities are represented by the predicted communication subsystem and send-path nodes."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Transport Selection"
+      ],
+      "predicted_nodes": [
+        "psmpi Communication System::Embedded Libfabric Verbs Provider::Verbs Transport",
+        "Linux Environment::Network Transport",
+        "Global::Network Interface"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Transport selection is grounded by the predicted transport and network-interface nodes."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCS Services\\nCommon Utilities::Data Structures"
+      ],
+      "predicted_nodes": [
+        "psmpi Communication System::Data Structures",
+        "psmpi Communication System::Data Structures::Data Descriptor",
+        "psmpi Communication System::Data Structures::Packet Buffer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT common data-structure concept is decomposed into more specific predicted data structure nodes."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCS Services\\nCommon Utilities::Memory Management"
+      ],
+      "predicted_nodes": [
+        "psmpi Communication System::Data Structures::Network Send Descriptor",
+        "psmpi Communication System::Data Structures::Packet Buffer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted descriptor and packet-buffer handling partially cover memory-management responsibility, though at a lower abstraction."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCT Hardware Transports\\nLow Level API::Ethernet Transport\\nTCP/IP Sockets"
+      ],
+      "predicted_nodes": [
+        "Global::Network Interface",
+        "Linux Environment::Network Transport"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted network nodes semantically correspond to Ethernet/TCP-IP transport."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCT Hardware Transports\\nLow Level API::RDMA Verbs Transport\\nInfiniBand, ROCE, OPA"
+      ],
+      "predicted_nodes": [
+        "Global::Verbs API Interface",
+        "Linux Environment::Linux Verbs API",
+        "psmpi Communication System::Embedded Libfabric Verbs Provider::Verbs Transport"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted verbs-related nodes match the RDMA verbs transport concept."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Drivers and Kernels::Cray Driver",
+    "Drivers and Kernels::OS Kernel\\nHost Memory",
+    "Drivers and Kernels::OS Kernel\\nMemory Hooks",
+    "Drivers and Kernels::ROCm / CUDA",
+    "Global::Applications\\nHPC, AI, ML, Big Data",
+    "Global::Hardware",
+    "Programming Models and Frameworks::AI / ML Frameworks\\nTensorFlow, Burst Buffer",
+    "Programming Models and Frameworks::PGAS / SHMEM\\nOpenSHMEM, UPC, CAF, X10, Chapel",
+    "Programming Models and Frameworks::Task Runtimes\\nParsec, OCR, Legion",
+    "UCX::UCM Memory Services::Memory Hooks",
+    "UCX::UCP Protocols\\nHigh Level API::I/O API\\nStream",
+    "UCX::UCP Protocols\\nHigh Level API::PGAS API\\nRMAs, Atomics",
+    "UCX::UCP Protocols\\nHigh Level API::Software Protocols",
+    "UCX::UCP Protocols\\nHigh Level API::Task Based API\\nActive Messages",
+    "UCX::UCS Services\\nCommon Utilities::Utilities",
+    "UCX::UCT Hardware Transports\\nLow Level API::DCT",
+    "UCX::UCT Hardware Transports\\nLow Level API::GPU Transport\\nNVIDIA CUDA, AMD ROCm",
+    "UCX::UCT Hardware Transports\\nLow Level API::Gemini / Aries Transport\\nGNI",
+    "UCX::UCT Hardware Transports\\nLow Level API::Intra-node Host Memory\\nSYSV, POSIX, KNEM, CMA, XPMEM",
+    "UCX::UCT Hardware Transports\\nLow Level API::RC",
+    "UCX::UCT Hardware Transports\\nLow Level API::UD"
+  ],
+  "unmatched_predicted_nodes": []
+}

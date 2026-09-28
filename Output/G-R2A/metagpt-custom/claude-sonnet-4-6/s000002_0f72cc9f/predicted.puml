@@ -1,0 +1,165 @@
+@startuml Escape_Application_Architecture
+
+skinparam componentStyle rectangle
+skinparam backgroundColor #FAFAFA
+skinparam ArrowColor #333333
+skinparam package {
+  BorderColor #333333
+  BackgroundColor #F0F4FF
+  FontStyle bold
+}
+skinparam component {
+  BorderColor #555555
+  BackgroundColor #FFFFFF
+}
+skinparam node {
+  BorderColor #444444
+  BackgroundColor #EEF7EE
+}
+skinparam database {
+  BorderColor #7A3F00
+  BackgroundColor #FFF5E6
+}
+skinparam cloud {
+  BorderColor #005A9C
+  BackgroundColor #E6F2FF
+}
+
+' ──────────────────────────────────────────────
+' LAYER 1 – CLIENT (Presentation & Interaction)
+' ──────────────────────────────────────────────
+package "Client Layer  [Browser / React]" as ClientLayer {
+
+  package "Client Dependencies" as ClientDeps {
+    component [jQuery\n(DOM / AJAX Helper)] as jQuery
+  }
+
+  package "Authentication Views" as AuthViews {
+    component [SignUpView] as SignUpView
+    component [SignInView] as SignInView
+  }
+
+  component [AppComponent\n(Shared Credential State)] as AppComponent
+  component [ReactRouter\n(Client-Side Navigation)] as ReactRouter
+  component [ErrorDisplay\n(Content Retrieval Error Indicator)] as ErrorDisplay
+
+  package "Content & Scene" as ContentScene {
+    component [ContentRetriever\n(Async Sequential Fetch)] as ContentRetriever
+
+    package "3D Rendering" as Rendering {
+      component [SceneRenderer\n(A-Frame / aframe-react)] as SceneRenderer
+
+      package "SceneComponents" as SceneComponents {
+        component [Lobby] as Lobby
+        component [SF] as SF
+        component [Louvre] as Louvre
+        component [Berlin] as Berlin
+        component [Milan] as Milan
+        component [Rome] as Rome
+        component [Hack] as Hack
+        component [Camera] as Camera
+        component [Sky] as Sky
+        component [Plane] as Plane
+        component [TextPlane] as TextPlane
+      }
+    }
+  }
+}
+
+' ──────────────────────────────────────────────
+' LAYER 2 – SERVER (Application / API)
+' ──────────────────────────────────────────────
+node "Server Layer  [Node.js / Express]" as ServerLayer {
+
+  component [AuthRouter\n(Express Auth Route Handler)] as AuthRouter
+  component [UserController\n(Business Logic)] as UserController
+  component [UserModel\n(ORM / Model Interface)] as UserModel
+  component [PasswordService\n(bcrypt-nodejs Wrapper)] as PasswordService
+
+  component [ContentRouter\n(Express Content Route Handler)] as ContentRouter
+  component [ContentController\n(Title-Based Async Fetch Logic)] as ContentController
+
+  component [CacheService\n(Cache-Aside Accessor)] as CacheService
+
+  note right of PasswordService
+    Uses bcrypt-nodejs
+    (Node.js library dependency,
+    not a networked system)
+  end note
+}
+
+' ──────────────────────────────────────────────
+' LAYER 3 – PERSISTENCE (Data)
+' ──────────────────────────────────────────────
+node "Persistence Layer" as PersistenceLayer {
+  database "Database\n[MariaDB-style]\n(users, likes, photos, comments)" as Database
+  database "Cache\n[Redis-style]" as Cache
+}
+
+' ──────────────────────────────────────────────
+' EXTERNAL SYSTEMS
+' ──────────────────────────────────────────────
+cloud "External Systems" as ExternalSystems {
+  [ImageStorageService\n[AWS S3-style]] as ImageStorageService
+}
+
+' ══════════════════════════════════════════════
+' DEPENDENCIES / ARROWS
+' ══════════════════════════════════════════════
+
+' jQuery client-side usage
+AppComponent ..> jQuery : DOM / AJAX utility
+
+' Auth Views -> AppComponent
+SignUpView --> AppComponent : delegates credential\nevents & submission
+SignInView --> AppComponent : delegates credential\nevents & submission
+
+' AppComponent -> Router (navigation) and scene
+AppComponent --> ReactRouter : client-side navigation
+AppComponent --> ContentScene : initialises scene\n& content retrieval\n(FR-009)
+
+' ReactRouter -> Views (navigation targets)
+ReactRouter --> SignUpView  : navigate /signup
+ReactRouter --> SignInView  : navigate /signin
+ReactRouter --> ContentScene : navigate /app\n(authenticated area)
+
+' AppComponent -> Server (auth)
+AppComponent --> AuthRouter : HTTP POST /credentials\n(JSON)
+
+' ContentRetriever -> Content Server (separate from auth)
+ContentRetriever --> ContentRouter : HTTP GET /content\n(title-based async fetch)
+ContentRetriever --> ErrorDisplay  : triggers error indicator\non fetch failure (FR-007)
+
+' Scene composition
+SceneRenderer --> Lobby
+SceneRenderer --> SF
+SceneRenderer --> Louvre
+SceneRenderer --> Berlin
+SceneRenderer --> Milan
+SceneRenderer --> Rome
+SceneRenderer --> Hack
+SceneRenderer --> Camera
+SceneRenderer --> Sky
+SceneRenderer --> Plane
+SceneRenderer --> TextPlane
+
+' Auth server internal flow
+AuthRouter     --> UserController  : dispatch register\n/ authenticate
+UserController --> UserModel       : create / save /\nfind-all / find-one
+UserController --> PasswordService : verify password
+UserController --> CacheService    : cache-aside read/write
+
+' Content server internal flow
+ContentRouter  --> ContentController : dispatch title-based\ncontent fetch
+ContentController --> UserModel      : query content\nrelated records
+
+' Cache interaction (component-level)
+CacheService --> Cache : cache-aside\nread / write
+
+' Model -> Persistence
+UserModel --> Database : SQL read / write
+
+' External Storage
+ImageStorageService ..> ContentController : presigned URL /\nimage retrieval
+
+@enduml

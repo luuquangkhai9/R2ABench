@@ -1,0 +1,400 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::GoDaddy API\nDomain availability",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Services::GoDaddy API",
+        "Configuration::GoDaddy Credentials"
+      ],
+      "reasoning": "The GT node's GoDaddy availability integration is represented by the predicted GoDaddy API and its related credentials configuration."
+    },
+    {
+      "gt_node": "Global::HTTP API\nSession and attack requests",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "API Server::HTTP API",
+        "API Server::Request Parser",
+        "API Server::Session Manager",
+        "API Server::Job Creator",
+        "API Server::Error Handler"
+      ],
+      "reasoning": "The predicted nodes collectively cover HTTP request handling, session initialization, request parsing, job creation, and error handling responsibilities."
+    },
+    {
+      "gt_node": "Global::Redis\nCommand and reporting queues",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Message Queue::Redis",
+        "Message Queue::Redis::Job Channel",
+        "Message Queue::Redis::Reporting Channel",
+        "Background Processing::Consumer Thread"
+      ],
+      "reasoning": "Redis communication plus job/reporting channels and the Redis-listening consumer are all represented in the predicted architecture."
+    },
+    {
+      "gt_node": "Global::Socket.io\nWebSocket result channel",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "API Server::WebSocket Server",
+        "Web Interface::WebSocket Client"
+      ],
+      "reasoning": "The asynchronous result channel is represented by the WebSocket server/client pairing, which covers the Socket.IO/WebSocket-style communication responsibility."
+    },
+    {
+      "gt_node": "Global::Squatm3\nDomain generation engine",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Services::Squatm3 Engine",
+        "Background Processing::Job Processor"
+      ],
+      "reasoning": "The wrapped domain-generation engine and its execution role are covered by the predicted Squatm3 engine and job processor."
+    },
+    {
+      "gt_node": "Global::Web UI\nindex.html",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Web Interface::Web UI (index.html"
+      ],
+      "reasoning": "The predicted web interface node corresponds to the root index.html UI entry point, though the node name appears truncated."
+    },
+    {
+      "gt_node": "Global::Workers\nCommand consumers",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Background Processing::Consumer Thread",
+        "Background Processing::Job Processor",
+        "Background Processing::Result Reporter"
+      ],
+      "reasoning": "The worker/consumer responsibility is represented by the background processing nodes that consume jobs, process them, and report results."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "API Server::Error Handler",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HTTP API\nSession and attack requests"
+      ],
+      "reasoning": "Grounded in the GT HTTP API responsibility for defined error handling."
+    },
+    {
+      "predicted_node": "API Server::HTTP API",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HTTP API\nSession and attack requests"
+      ],
+      "reasoning": "Directly corresponds to the GT HTTP API node."
+    },
+    {
+      "predicted_node": "API Server::Job Creator",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HTTP API\nSession and attack requests",
+        "Global::Redis\nCommand and reporting queues"
+      ],
+      "reasoning": "Grounded in job creation/publication behavior described in the GT API and Redis flow."
+    },
+    {
+      "predicted_node": "API Server::Request Parser",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HTTP API\nSession and attack requests"
+      ],
+      "reasoning": "Grounded in attack-option parsing and query parsing responsibilities."
+    },
+    {
+      "predicted_node": "API Server::Session Manager",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HTTP API\nSession and attack requests",
+        "Global::Workers\nCommand consumers"
+      ],
+      "reasoning": "Grounded in session initialization and session validation/correlation requirements."
+    },
+    {
+      "predicted_node": "API Server::WebSocket Server",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Socket.io\nWebSocket result channel"
+      ],
+      "reasoning": "Directly corresponds to the asynchronous WebSocket/Socket.IO channel."
+    },
+    {
+      "predicted_node": "Background Processing::Consumer Thread",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Workers\nCommand consumers",
+        "Global::Redis\nCommand and reporting queues"
+      ],
+      "reasoning": "Matches the background consumer thread that listens to Redis and drives execution."
+    },
+    {
+      "predicted_node": "Background Processing::Job Processor",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Workers\nCommand consumers",
+        "Global::Squatm3\nDomain generation engine"
+      ],
+      "reasoning": "Grounded in the worker execution flow that processes jobs using Squatm3."
+    },
+    {
+      "predicted_node": "Background Processing::Result Reporter",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Workers\nCommand consumers",
+        "Global::Socket.io\nWebSocket result channel",
+        "Global::Redis\nCommand and reporting queues"
+      ],
+      "reasoning": "Matches the reporting-channel read and session-targeted emission responsibility."
+    },
+    {
+      "predicted_node": "Configuration::Attack Codes Map",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HTTP API\nSession and attack requests"
+      ],
+      "reasoning": "Grounded in supported attack-code parsing and option-construction configuration."
+    },
+    {
+      "predicted_node": "Configuration::GoDaddy Credentials",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::GoDaddy API\nDomain availability"
+      ],
+      "reasoning": "Directly grounded in the configured GoDaddy key/secret/base URL requirement."
+    },
+    {
+      "predicted_node": "Configuration::Redis URI",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Redis\nCommand and reporting queues"
+      ],
+      "reasoning": "Directly grounded in the configured Redis connection requirement."
+    },
+    {
+      "predicted_node": "External Services::GoDaddy API",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::GoDaddy API\nDomain availability"
+      ],
+      "reasoning": "Directly grounded in the optional GoDaddy integration."
+    },
+    {
+      "predicted_node": "External Services::Squatm3 Engine",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Squatm3\nDomain generation engine"
+      ],
+      "reasoning": "Directly grounded in the wrapped Squatm3 CLI engine."
+    },
+    {
+      "predicted_node": "Global::API Server",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HTTP API\nSession and attack requests",
+        "Global::Workers\nCommand consumers",
+        "Global::Socket.io\nWebSocket result channel"
+      ],
+      "reasoning": "A valid aggregation of the API-side responsibilities present in the GT."
+    },
+    {
+      "predicted_node": "Global::Background Processing",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Workers\nCommand consumers",
+        "Global::Redis\nCommand and reporting queues",
+        "Global::Squatm3\nDomain generation engine"
+      ],
+      "reasoning": "A valid aggregation of background consumer, processing, and reporting responsibilities."
+    },
+    {
+      "predicted_node": "Global::Configuration",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::GoDaddy API\nDomain availability",
+        "Global::Redis\nCommand and reporting queues",
+        "Global::Squatm3\nDomain generation engine"
+      ],
+      "reasoning": "Grounded as a higher-level grouping of configuration concerns present in the GT."
+    },
+    {
+      "predicted_node": "Global::External Services",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::GoDaddy API\nDomain availability",
+        "Global::Squatm3\nDomain generation engine"
+      ],
+      "reasoning": "Grounded as a higher-level grouping of external service dependencies."
+    },
+    {
+      "predicted_node": "Global::Message Queue",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Redis\nCommand and reporting queues"
+      ],
+      "reasoning": "Grounded as an abstraction over the Redis-based communication queue."
+    },
+    {
+      "predicted_node": "Global::Web Interface",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Web UI\nindex.html",
+        "Global::Socket.io\nWebSocket result channel"
+      ],
+      "reasoning": "Grounded in the UI entry point and client-side socket interaction."
+    },
+    {
+      "predicted_node": "Global::Web User / Security Analyst",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::HTTP API\nSession and attack requests",
+        "Global::Web UI\nindex.html"
+      ],
+      "reasoning": "A valid actor-level concept implied by the GT user-facing web interface and request flow."
+    },
+    {
+      "predicted_node": "Message Queue::Redis",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Redis\nCommand and reporting queues"
+      ],
+      "reasoning": "Directly corresponds to the Redis queue component."
+    },
+    {
+      "predicted_node": "Message Queue::Redis::Job Channel",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Redis\nCommand and reporting queues"
+      ],
+      "reasoning": "Grounded in the Redis job publication channel."
+    },
+    {
+      "predicted_node": "Message Queue::Redis::Reporting Channel",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Redis\nCommand and reporting queues"
+      ],
+      "reasoning": "Grounded in the Redis reporting channel."
+    },
+    {
+      "predicted_node": "Web Interface::Web UI (index.html",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Web UI\nindex.html"
+      ],
+      "reasoning": "Directly corresponds to the web UI index.html entry point, though the node label is malformed."
+    },
+    {
+      "predicted_node": "Web Interface::WebSocket Client",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Socket.io\nWebSocket result channel",
+        "Global::Web UI\nindex.html"
+      ],
+      "reasoning": "Grounded in the client side of the asynchronous WebSocket channel."
+    },
+    {
+      "predicted_node": "Web User / Security Analyst::Browser Client",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Web UI\nindex.html",
+        "Global::HTTP API\nSession and attack requests"
+      ],
+      "reasoning": "Grounded as the end-user browser actor consuming the web UI and API."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::GoDaddy API\nDomain availability"
+      ],
+      "predicted_nodes": [
+        "External Services::GoDaddy API",
+        "Configuration::GoDaddy Credentials"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT integration is split into service and configuration concerns, both semantically consistent with the original boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::HTTP API\nSession and attack requests"
+      ],
+      "predicted_nodes": [
+        "API Server::HTTP API",
+        "API Server::Request Parser",
+        "API Server::Session Manager",
+        "API Server::Job Creator",
+        "API Server::Error Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT HTTP API responsibility is decomposed into multiple API-server subcomponents without crossing a semantic boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Redis\nCommand and reporting queues"
+      ],
+      "predicted_nodes": [
+        "Message Queue::Redis",
+        "Message Queue::Redis::Job Channel",
+        "Message Queue::Redis::Reporting Channel",
+        "Background Processing::Consumer Thread"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The Redis queue concept is split into the queue and its channels, plus the consumer that operates on them, all within a semantically correct boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Socket.io\nWebSocket result channel"
+      ],
+      "predicted_nodes": [
+        "API Server::WebSocket Server",
+        "Web Interface::WebSocket Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT WebSocket channel is represented by complementary server and client nodes in an appropriate communication boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Squatm3\nDomain generation engine"
+      ],
+      "predicted_nodes": [
+        "External Services::Squatm3 Engine",
+        "Background Processing::Job Processor"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The engine and its invocation flow are split into service and processing responsibilities with no boundary confusion."
+    },
+    {
+      "gt_nodes": [
+        "Global::Web UI\nindex.html"
+      ],
+      "predicted_nodes": [
+        "Web Interface::Web UI (index.html"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node corresponds to the GT UI entry point, despite a malformed label."
+    },
+    {
+      "gt_nodes": [
+        "Global::Workers\nCommand consumers"
+      ],
+      "predicted_nodes": [
+        "Background Processing::Consumer Thread",
+        "Background Processing::Job Processor",
+        "Background Processing::Result Reporter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT worker concept is decomposed into consumer, processor, and reporter subcomponents in a semantically consistent boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

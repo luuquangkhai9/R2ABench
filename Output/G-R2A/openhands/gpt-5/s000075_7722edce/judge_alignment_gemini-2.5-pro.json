@@ -1,0 +1,87 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Statlord::Browser Editor\\nLayout authoring"
+      ],
+      "predicted_nodes": [
+        "Browser::Editor SPA (React/TypeScript",
+        "Browser::Editor SPA (React/TypeScript::Canvas Editing\\nRender/Delete Ops",
+        "Browser::Editor SPA (React/TypeScript::Controls Slice",
+        "Browser::Editor SPA (React/TypeScript::Displays Slice",
+        "Browser::Editor SPA (React/TypeScript::Elements Slice",
+        "Browser::Editor SPA (React/TypeScript::Gauges Slice",
+        "Browser::Editor SPA (React/TypeScript::Layouts Slice",
+        "Browser::Editor SPA (React/TypeScript::Redux Store"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the editor and split it into its detailed components mentioned in the PRD (React SPA, Redux slices, Canvas). The 'Browser' boundary is a semantically correct and more specific environment than the GT's top-level 'Statlord' system name."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Python / Django API"
+      ],
+      "predicted_nodes": [
+        "Global::Server (Python/Django",
+        "Server (Python/Django::REST API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the server and split it into a general component and a specific REST API component. Placing the main server in 'Global' is a minor deviation from the GT's 'Statlord::Server', but the overall semantic grouping is correct and not a boundary-crossing error."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Viewer Instances\\nheadless browsers"
+      ],
+      "predicted_nodes": [
+        "Browser::Viewer (Browser Route",
+        "Server (Python/Django::Viewer Renderer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly split the abstract 'Viewer' concept into its server-side rendering component and its client-facing browser route, accurately placing them in 'Server' and 'Browser' boundaries respectively, which aligns with the PRD's description."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Display Resource\\nresolution and state",
+        "Statlord::Server::Gauge Resource\\nkey, value",
+        "Statlord::Server::Layout Resource\\ndata and display positions"
+      ],
+      "predicted_nodes": [
+        "Data Resources::Display\\n{ key, available, resolution_x, resolution_y,\\n  current_layout?, display_data, rotation ",
+        "Data Resources::Gauge\\n{ key, value ",
+        "Data Resources::Layout\\n{ key, data, display_positions "
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI accurately identified the three main data resources. While the GT groups them under the 'Server' boundary, the AI created a dedicated 'Data Resources' boundary, which is a valid and semantically reasonable alternative logical grouping."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::PostgreSQL\\npersistent models"
+      ],
+      "predicted_nodes": [
+        "Global::PostgreSQL (dev"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes for the PostgreSQL database match. The GT places it within the 'Server' boundary, while the AI places it in 'Global' as an external dependency. Both are common and valid architectural representations."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Displays\\nOLED, e-paper, LCD, browser"
+      ],
+      "predicted_nodes": [
+        "Global::Display Device(s)\\n(OLED / e-paper / LCD"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes for the physical display devices, which are external actors, match. The AI's placement in the 'Global' boundary is semantically equivalent to the GT's placement within the overall 'Statlord' system boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Browser"
+  ]
+}

@@ -1,0 +1,116 @@
+@startuml
+title hAFL2 (kAFL-based Hypervisor Fuzzing) - System Architecture
+
+skinparam componentStyle rectangle
+skinparam wrapWidth 220
+skinparam maxMessageSize 200
+skinparam ArrowThickness 1.2
+skinparam ArrowColor #3B6EA5
+skinparam NodeBorderColor #555555
+skinparam ComponentBorderColor #555555
+skinparam ArtifactBorderColor #555555
+
+package "Operator Host (hAFL2 Host)" as HOST {
+  component "Standalone Test Runner\nkAFL-Fuzzer/test.py\n(Python 3 + pytest)" as TestRunner
+  component "hAFL2 Orchestrator\n(kAFL-based workflow controller)" as Orchestrator
+  component "Linux Packaging & Launch Scripts (bash)" as Packaging
+  component "Initrd Builder" as InitrdBuilder
+  component "Shared Library Collector" as LibCollector
+
+  artifact "initrd\n[target binary + required shared libraries]" as INITRD
+  artifact "Mutation Payloads (bytes)\nEffector Map (bool[])" as MUTDATA
+}
+
+node "kAFL Hypervisor" as HYP
+
+node "Linux Guest VM" as LINUX_GUEST {
+  component "Target Binary" as TargetBin
+  component "Embedded Forkserver\n(Translate kAFL hypercalls -> AFL-style guest I/O)" as Forkserver
+  artifact "Coverage/Exec Feedback" as Coverage
+}
+
+node "Windows Child Partition VM" as CHILD_VM {
+  component "loader.exe\n(Snapshot create/load + execute packet_sender.exe)" as Loader
+  component "packet_sender.exe\n(Triggers packet-sending IOCTL)" as Sender
+  component "Harness Driver" as Harness
+  artifact "Fuzzing Payloads" as FuzzPayloads
+  artifact "Windows Offset Config\n(build-specific)" as WinOffset
+}
+
+node "Windows Root Partition VM" as ROOT_VM {
+  component "Hyper-V Networking Path\nVMSwitch (vmswitch.sys)" as VMSwitch
+  component "Crash Monitoring Driver/Service" as CrashMon
+}
+
+' Control and data flows (Linux userspace workflow)
+TestRunner -[#3B6EA5]-> Orchestrator : Run test suites (FR-001, NFR-001)
+Orchestrator -[#3B6EA5]-> Packaging : Launch userspace fuzzing workflow (FR-002)
+Packaging -[#3B6EA5]-> InitrdBuilder
+LibCollector -[#3B6EA5]-> InitrdBuilder : Copy required shared libraries (FR-004)
+InitrdBuilder -[#3B6EA5]-> INITRD : Build initrd (DR-001, DR-002)
+
+Orchestrator -[#3B6EA5]-> HYP : Manage boot/monitor
+INITRD ..[#888888]..> HYP : Boot with initrd (FR-002)
+HYP -[#3B6EA5]-> LINUX_GUEST
+
+Forkserver -[#3B6EA5]<-> HYP : kAFL hypercalls / AFL-style I/O (FR-003)
+Forkserver -[#3B6EA5]-> TargetBin : Execute fuzz iterations
+MUTDATA ..[#888888]..> Forkserver : Payload + optional effector map (DR-003, DR-004)
+Coverage -[#3B6EA5]-> Orchestrator : Coverage/exec feedback (FR-003)
+
+' Control and data flows (Windows Hyper-V workflow)
+Orchestrator -[#3B6EA5]-> Loader : Prepare snapshot + execute (FR-005, NFR-004)
+Loader -[#3B6EA5]-> Sender : Load and run packet_sender.exe (FR-005)
+Sender -[#3B6EA5]-> Harness : IOCTL: trigger packet send (FR-005; Communication Interface)
+FuzzPayloads ..[#888888]..> Harness : Fuzzing payloads (DR-006)
+
+Harness -[#3B6EA5]-> VMSwitch : Fuzzing payload path via VMBus/netvsc (FR-006; Communication Interface)
+CrashMon -[#C23B22]-> Orchestrator : Crash status/monitoring result (FR-007, DR-007)
+
+' Notes and constraints
+note right of TestRunner
+FR-001: Execute random, deterministic, havoc tests
+NFR-001: Tests via pytest and standalone script
+NFR-002/NFR-003: Deterministic mutation integrity & Hamming distance
+end note
+
+note bottom of LibCollector
+FR-004 / DR-002: Identify and copy required shared libraries
+end note
+
+note right of Forkserver
+FR-003: Embedded forkserver translates kAFL hypercalls to AFL-style guest I/O
+end note
+
+note bottom of Sender
+FR-005: packet_sender.exe triggers packet-sending IOCTL
+C-002: Build via bash ./hAFL2/targets/windows_86_64/compile.sh
+end note
+
+note bottom of Loader
+FR-005: loader.exe creates snapshot, loads, executes packet_sender.exe
+NFR-005 / C-004: Supports build-specific Windows offset configuration
+end note
+
+note bottom of Harness
+C-003: Harness and crash-monitoring drivers compiled with Visual Studio
+C-005: Disable DSE from elevated prompt; restart child VM
+C-006: Configure child VM only when powered off
+end note
+
+note bottom of ROOT_VM
+FR-006: Root partition Hyper-V VMSwitch target path
+FR-007: Crash monitoring returns results to hAFL2
+end note
+
+note "C-001: BSD 3-Clause license; honor subfile licenses (incl. AGPL-3.0-or-later for kAFL-derived files)" as LicenseNote
+LicenseNote -[dashed]-> HOST
+
+legend
+  == Notation ==
+  Solid arrow: control/interaction
+  Dashed arrow: data/artifact transfer
+  Blue: workflow/control
+  Red: crash/monitoring feedback
+endlegend
+@enduml

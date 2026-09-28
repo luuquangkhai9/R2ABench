@@ -1,0 +1,90 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::GoDaddy API\\nDomain availability"
+      ],
+      "predicted_nodes": [
+        "External Systems::GoDaddy API",
+        "Integration Layer::GoDaddy Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT node representing the GoDaddy functionality has been correctly split by the AI into the external service itself ('External Systems::GoDaddy API') and the internal client component that communicates with it ('Integration Layer::GoDaddy Client'). The assigned boundaries are accurate and more descriptive than 'Global'."
+    },
+    {
+      "gt_nodes": [
+        "Global::HTTP API\\nSession and attack requests"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Error Handler",
+        "Application Layer::HTTP API",
+        "Application Layer::Job Producer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly decomposed the generic GT 'HTTP API' node into its specific functional responsibilities as described in the PRD: handling requests, producing jobs, and managing errors. The 'Application Layer' boundary is a more precise and standard architectural classification than 'Global'."
+    },
+    {
+      "gt_nodes": [
+        "Global::Redis\\nCommand and reporting queues"
+      ],
+      "predicted_nodes": [
+        "Global::Job Channel",
+        "Global::Redis",
+        "Global::Report Channel"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified Redis as a core component and explicitly modeled the two logical queues ('Job Channel', 'Report Channel') mentioned in the PRD, which were aggregated in the GT node. The 'Global' boundary is consistent and acceptable for an external infrastructure component."
+    },
+    {
+      "gt_nodes": [
+        "Global::Socket.io\\nWebSocket result channel"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::WebSocket Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the server-side component for handling real-time client updates. The AI's 'WebSocket Handler' is semantically identical to the GT's 'Socket.io' node. The 'Presentation Layer' boundary is more accurate than 'Global' as this component's function is to present data to the client."
+    },
+    {
+      "gt_nodes": [
+        "Global::Squatm3\\nDomain generation engine"
+      ],
+      "predicted_nodes": [
+        "External Systems::squatm3 CLI Engine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the wrapped command-line tool that performs the core domain generation. The AI correctly identified it and placed it in an 'External Systems' boundary, which is more appropriate than 'Global' for a third-party dependency."
+    },
+    {
+      "gt_nodes": [
+        "Global::Web UI\\nindex.html"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web UI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the user-facing entry page. The AI's choice of 'Presentation Layer' is a more accurate architectural boundary than the GT's 'Global'."
+    },
+    {
+      "gt_nodes": [
+        "Global::Workers\\nCommand consumers"
+      ],
+      "predicted_nodes": [
+        "Integration Layer::Background Consumer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the background process that consumes jobs from the Redis queue. The AI's naming ('Background Consumer') is aligned with the PRD. The 'Integration Layer' boundary is a very accurate description for a component that connects the message queue to the processing engine."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::External Systems"
+  ]
+}

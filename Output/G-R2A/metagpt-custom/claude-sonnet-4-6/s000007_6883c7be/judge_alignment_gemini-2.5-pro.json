@@ -1,0 +1,110 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Proxy Core"
+      ],
+      "predicted_nodes": [
+        "Proxy Core [SDK Module - Java 1.7::HttpProxy (retain and forward FullHttpRequest, gated on channel active"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the core HTTP proxy component responsible for forwarding requests. The boundary attributions (Proxy Layer vs Proxy Core) are semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Download"
+      ],
+      "predicted_nodes": [
+        "Test Server [Java 1.8::FileDownloadEndpoint (GET /download -> octet-stream"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both handle file download functionality, but GT places it as a plugin within the proxy layer, while the AI correctly attributes it to the test server layer based on the PRD context."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Upload"
+      ],
+      "predicted_nodes": [
+        "Test Server [Java 1.8::FileUploadHandler (POST upload -> filepath map"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both nodes represent file upload handling logic. GT categorizes it under proxy plugins, whereas the AI accurately places it in the test server component per the PRD."
+    },
+    {
+      "gt_nodes": [
+        "CGI Portal::Http Test\\nClient"
+      ],
+      "predicted_nodes": [
+        "Test Client [Java 1.8::TestClient (50 threads x 1,000 GET requests, count HTTP 200",
+        "Test Client [Java 1.8::FixedThreadPoolExecutor (workload executor, shutdown after run"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "Both represent the HTTP test client workload generator. GT places it within a broader 'CGI Portal' context, while the AI maps it directly to a dedicated 'Test Client' boundary, causing a contextual boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Business Servers::Business Server A",
+        "Business Servers::Business Server B",
+        "Business Servers::Business Server C",
+        "Business Servers::......",
+        "Clients::Business Server"
+      ],
+      "predicted_nodes": [
+        "External Systems::Upstream Server"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "GT's various business servers represent the upstream services the proxy forwards traffic to, which maps perfectly to the AI's aggregated 'Upstream Server' node. The boundary attribution is consistent as external business systems."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer\\nKeepalived(VIP::Openresty",
+    "CGI Portal::Appkey\\nManager",
+    "CGI Portal::CGI Manager",
+    "CGI Portal::Case Manager",
+    "CGI Portal::Document\\nGenerate",
+    "CGI Portal::Log & Tree\\ninquire",
+    "CGI Portal::Metrics &\\nReport",
+    "CGI Portal::Service\\nManager",
+    "Clients::APP Client",
+    "Clients::Developer",
+    "Clients::Web Client",
+    "Global::Log consumer",
+    "Proxy Layer::cgi_proxy 1::Appkey\\nValidate",
+    "Proxy Layer::cgi_proxy 1::Formatter",
+    "Proxy Layer::cgi_proxy 1::Global Limit",
+    "Proxy Layer::cgi_proxy 1::Logging",
+    "Proxy Layer::cgi_proxy 1::Login &\\nPermission",
+    "Proxy Layer::cgi_proxy 1::Plugin::Agent",
+    "Proxy Layer::cgi_proxy 1::Plugin::Attach Check",
+    "Proxy Layer::cgi_proxy 1::Plugin::Check\\nParameter",
+    "Proxy Layer::cgi_proxy 1::Plugin::Mock",
+    "Proxy Layer::cgi_proxy 2",
+    "Support Platform::Data Bank\\nHDFS/Hbase/Druid",
+    "Support Platform::Msg Center\\nKafka",
+    "Support Platform::Mysql",
+    "Support Platform::Permission\\nCenter",
+    "Support Platform::Redis Cache",
+    "Support Platform::User Center",
+    "Task Scheduler::CGI Case\\nExecutor",
+    "Task Scheduler::CGI Health\\nCheck",
+    "Task Scheduler::Daily Report",
+    "Task Scheduler::Log Analysis",
+    "Task Scheduler::Monitor/Alarm"
+  ],
+  "unmatched_predicted_nodes": [
+    "Build and Runtime Infrastructure::Maven Multi-Module Build (Java 1.8 root/test-server, Java 1.7 proxy SDK",
+    "External Systems::Async HTTP Client Library",
+    "External Systems::Grizzly / Jersey HTTP Runtime",
+    "Global::Build and Runtime Infrastructure",
+    "Global::External Systems",
+    "Global::Local Filesystem",
+    "Shared Data / Model::FilepathMap (filepath -> filename",
+    "Shared Data / Model::ResponseObject (code, msg, data",
+    "Test Server [Java 1.8::TestServer (start / stop Grizzly-Jersey"
+  ]
+}

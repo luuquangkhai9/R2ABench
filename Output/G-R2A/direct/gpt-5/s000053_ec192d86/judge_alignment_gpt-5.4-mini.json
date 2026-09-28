@@ -1,0 +1,218 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "cadctl::CHGM investigation"
+      ],
+      "predicted_nodes": [
+        "Users::SRE / Operations User"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents the CAD workflow used by SRE/operations users, and the predicted node captures the corresponding user class that performs this workflow. The boundary is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::CPD investigation"
+      ],
+      "predicted_nodes": [
+        "Users::SRE / Operations User"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The CPD investigation workflow is also an SRE/operations user action within cadctl. The predicted user boundary is acceptable for the actor associated with these workflows."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::Future investigations"
+      ],
+      "predicted_nodes": [
+        "Users::SRE / Operations User"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is another cadctl workflow capability tied to the same operational user class. The predicted boundary is consistent at a higher abstraction level."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::switch(alerttype"
+      ],
+      "predicted_nodes": [
+        "Users::SRE / Operations User"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node appears to represent a cadctl-driven alert-type switching operation, which belongs to the operational CLI usage context. The predicted user class is compatible."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton\\nEvent\\nListener"
+      ],
+      "predicted_nodes": [
+        "Tekton Execution (Cluster::Namespace: configuration-anomaly-detection::Tekton EventListener"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These refer to the same Tekton EventListener component. The namespace/package boundary in the prediction is semantically equivalent to the GT global Tekton boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?"
+      ],
+      "predicted_nodes": [
+        "Tekton Execution (Cluster::Namespace: configuration-anomaly-detection::Tekton Trigger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node corresponds to Tekton trigger/interceptor logic for alert investigation. The predicted Trigger node captures the same orchestration role, with an acceptable Tekton execution boundary."
+    },
+    {
+      "gt_nodes": [
+        "Alert Source::app-sre\\nalertmanager"
+      ],
+      "predicted_nodes": [
+        "Tekton Execution (Cluster::Namespace: configuration-anomaly-detection::Alert Webhook"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a specific alert source (app-sre Alertmanager), while the prediction generalizes it to a webhook input under Tekton execution. The function is related, but the semantic specificity and boundary are not preserved accurately."
+    },
+    {
+      "gt_nodes": [
+        "Alert Source::cluster\\nalertmanager"
+      ],
+      "predicted_nodes": [
+        "Tekton Execution (Cluster::Namespace: configuration-anomaly-detection::Alert Webhook"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a specific cluster Alertmanager source, whereas the prediction is a generic webhook entry point. This is an abstraction mismatch and loses the alert-source boundary."
+    },
+    {
+      "gt_nodes": [
+        "Alert Source::deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "Tekton Execution (Cluster::Namespace: configuration-anomaly-detection::Alert Webhook"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a specific external alert source, but the prediction collapses it into a generic alert webhook node. The boundary is too broad and not faithful to the manual design."
+    },
+    {
+      "gt_nodes": [
+        "Alerts::CHGM"
+      ],
+      "predicted_nodes": [
+        "Tekton Execution (Cluster::Namespace: configuration-anomaly-detection::Alert Webhook",
+        "Tekton Execution (Cluster::Namespace: configuration-anomaly-detection::Tekton Trigger",
+        "Tekton Execution (Cluster::Namespace: configuration-anomaly-detection::PipelineRun (v1beta1"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "CHGM is a specific alert type that in the PRD maps to the event-driven Tekton execution path. The AI decomposed it into the webhook, trigger, and pipeline run flow, which is functionally consistent."
+    },
+    {
+      "gt_nodes": [
+        "Alerts::CPD"
+      ],
+      "predicted_nodes": [
+        "Tekton Execution (Cluster::Namespace: configuration-anomaly-detection::Alert Webhook",
+        "Tekton Execution (Cluster::Namespace: configuration-anomaly-detection::Tekton Trigger",
+        "Tekton Execution (Cluster::Namespace: configuration-anomaly-detection::PipelineRun (v1beta1"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The CPD alert category is likewise represented by the Tekton event-driven execution path. The split into trigger-chain components is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Alerts::all cluster\\nalerts"
+      ],
+      "predicted_nodes": [
+        "Tekton Execution (Cluster::Namespace: configuration-anomaly-detection::Alert Webhook",
+        "Tekton Execution (Cluster::Namespace: configuration-anomaly-detection::Tekton Trigger",
+        "Tekton Execution (Cluster::Namespace: configuration-anomaly-detection::PipelineRun (v1beta1"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node denotes a broader alert category, and the predicted nodes represent the generic event-driven alert processing flow. The mapping is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Global::Update Incident\\nNotes"
+      ],
+      "predicted_nodes": [
+        "Repository Assets::Integration Library (pkg",
+        "Repository Assets::PagerDuty Integration"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "Updating incident notes is an operational disposition/action behavior, but the prediction places it under generic integration/library assets rather than a workflow/action boundary. This is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Global::Escalate alert to\\non-call SRE"
+      ],
+      "predicted_nodes": [
+        "Repository Assets::PagerDuty Integration",
+        "External Systems::PagerDuty"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "Escalation to on-call SRE is an operational disposition workflow, not merely a PagerDuty integration node. The prediction captures the external system but not the correct functional boundary."
+    },
+    {
+      "gt_nodes": [
+        "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty",
+        "Repository Assets::PagerDuty Integration"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a concrete PagerDuty team target, and the prediction includes the PagerDuty external system plus its integration code. This is a reasonable semantic match, though at a higher abstraction."
+    },
+    {
+      "gt_nodes": [
+        "PagerDuty Team::app-sre-alertmanager"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty",
+        "Repository Assets::PagerDuty Integration"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "This is another concrete PagerDuty team mapping, and the predicted PagerDuty boundary and integration asset are semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty",
+        "Repository Assets::PagerDuty Integration"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a PagerDuty team destination. The predicted nodes correctly place it under the PagerDuty external/integration boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Build Environment::Go 1.17 Builder Image",
+    "CAD Runtime::Container Image: CAD CLI (UBI minimal",
+    "External Systems::AWS",
+    "External Systems::External Alert Source",
+    "External Systems::OCM",
+    "External Systems::PagerDuty",
+    "Repository Assets::AWS Integration",
+    "Repository Assets::Integration Library (pkg",
+    "Repository Assets::OCM Integration",
+    "Repository Assets::PagerDuty Integration",
+    "Repository Assets::Template Update Utility",
+    "Tekton Execution (Cluster::Namespace: configuration-anomaly-detection",
+    "Tekton Execution (Cluster::Namespace: configuration-anomaly-detection::Pipeline: cad-checks-pipeline"
+  ]
+}

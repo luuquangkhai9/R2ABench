@@ -1,0 +1,297 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Client / Platforms::Android OS"
+      ],
+      "predicted_nodes": [
+        "Global::Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Android client platform/runtime environment. The predicted node is broader (mobile device hardware + OS), but it correctly contains Android OS as a platform boundary."
+    },
+    {
+      "gt_nodes": [
+        "Client / Platforms::iOS / Apple"
+      ],
+      "predicted_nodes": [
+        "Global::Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the iOS/Apple mobile platform. The predicted node groups multiple mobile platform constraints together, which is semantically acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Client / Platforms::Desktop PC"
+      ],
+      "predicted_nodes": [
+        "Global::Server-side Processing\\n(HW: CPU >= Pentium 900M, Rec. P4 1.2G; RAM >=256MB"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node is actually server-side processing hardware, not a desktop PC platform. This is a severe boundary/context mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Client / Platforms::Mobile Device"
+      ],
+      "predicted_nodes": [
+        "Global::Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct semantic match for the mobile device platform/hardware boundary."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure & Support::Data Exchange"
+      ],
+      "predicted_nodes": [
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::App-Server API Client",
+        "Server-side Processing\\n(HW: CPU >= Pentium 900M, Rec. P4 1.2G; RAM >=256MB::App-Server API\\n(protocol TBD",
+        "React Native Framework::End-to-End Communication"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a broad data exchange concern. The predicted nodes split this into client API, server API, and framework communication, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure & Support::Performance Optimization"
+      ],
+      "predicted_nodes": [
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::Pose Estimation Engine\\n(Skeleton Extraction",
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::Posture Evaluation & Scoring\\n(Stick Diagram, Similarity",
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::Training Session Monitor\\n(Start/End, Completion Degree",
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::Video Streamer\\n(Exercise Interface"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These nodes represent performance-sensitive mobile-side processing and streaming functions. They collectively correspond to the GT performance optimization infrastructure concern."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure & Support::Stability Construction"
+      ],
+      "predicted_nodes": [
+        "Global::Same LAN (Wi‑Fi)\\nC-002: Same LAN required",
+        "Global::Internet"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT is about system stability/reliability construction, while the predicted nodes are network/environment assumptions. This is not a valid architectural equivalence."
+    },
+    {
+      "gt_nodes": [
+        "Native Modules::Camera Call"
+      ],
+      "predicted_nodes": [
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::Camera Capture"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe native camera access/capture on the mobile device."
+    },
+    {
+      "gt_nodes": [
+        "Native Modules::Data Processing"
+      ],
+      "predicted_nodes": [
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::Pose Estimation Engine\\n(Skeleton Extraction",
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::Posture Evaluation & Scoring\\n(Stick Diagram, Similarity",
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::Training Session Monitor\\n(Start/End, Completion Degree"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT module is a broad native data-processing capability; the predicted nodes split it into concrete processing functions that fit the same native/mobile processing boundary."
+    },
+    {
+      "gt_nodes": [
+        "Native Modules::GPU Computing"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node clearly represents GPU computing."
+    },
+    {
+      "gt_nodes": [
+        "Native Modules::Linear Algebra Library"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node clearly represents a linear algebra library."
+    },
+    {
+      "gt_nodes": [
+        "Native Modules::Model Loading / TensorFlow"
+      ],
+      "predicted_nodes": [
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::Pose Estimation Engine\\n(Skeleton Extraction"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted pose estimation engine plausibly subsumes the model loading/inference role of TensorFlow in the GT, though it is named more functionally than technically."
+    },
+    {
+      "gt_nodes": [
+        "Native Modules::Permission Requests"
+      ],
+      "predicted_nodes": [
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::Auth & Permissions Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted client-side auth/permissions function reasonably covers permission requests on the mobile native side."
+    },
+    {
+      "gt_nodes": [
+        "Native Modules::Screen Recording"
+      ],
+      "predicted_nodes": [
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::Video Streamer\\n(Exercise Interface"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The exercise-interface video streaming/casting function corresponds to screen recording/stream capture at the mobile native level."
+    },
+    {
+      "gt_nodes": [
+        "Native Modules::Socket Communication"
+      ],
+      "predicted_nodes": [
+        "Casting Target Android Device\\n(Receiver::Command Handler",
+        "Casting Target Android Device\\n(Receiver::Discovery Listener",
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::Device Discovery & Connection",
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::Casting Server (Android)\\n(Control Channel"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These predicted nodes collectively represent socket-based discovery, command handling, and control-channel communication, which matches the GT native socket communication module."
+    },
+    {
+      "gt_nodes": [
+        "Native Modules::Voice Library Call"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node covers voice library integration."
+    },
+    {
+      "gt_nodes": [
+        "React Native Framework::Data Caching"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No clear predicted equivalent for data caching."
+    },
+    {
+      "gt_nodes": [
+        "React Native Framework::Data Interception"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No clear predicted equivalent for framework-level data interception."
+    },
+    {
+      "gt_nodes": [
+        "React Native Framework::End-to-End Communication"
+      ],
+      "predicted_nodes": [
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::App-Server API Client",
+        "Server-side Processing\\n(HW: CPU >= Pentium 900M, Rec. P4 1.2G; RAM >=256MB::App-Server API\\n(protocol TBD",
+        "Global::Casting Target Android Device\\n(Receiver"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted client/server API and receiver nodes together express end-to-end communication between app, server, and casting receiver."
+    },
+    {
+      "gt_nodes": [
+        "React Native Framework::Interface Packaging"
+      ],
+      "predicted_nodes": [
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::Main UI",
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::Exercise UI",
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::History UI",
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::Personal/Preferences UI",
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::Casting Operations UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT framework packaging maps well to the set of concrete packaged mobile UI screens."
+    },
+    {
+      "gt_nodes": [
+        "React Native Framework::Native Module Bridge"
+      ],
+      "predicted_nodes": [
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::App-Server API Client",
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::Camera Capture",
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::Device Discovery & Connection"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These nodes represent the bridge between the React Native layer and native capabilities such as camera and discovery/connection."
+    },
+    {
+      "gt_nodes": [
+        "React Native Framework::Redux State Management"
+      ],
+      "predicted_nodes": [
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::Main UI",
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::Exercise UI",
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::History UI",
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::Personal/Preferences UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Redux state management is reasonably reflected in the coordinated UI/state-bearing screens, though the prediction does not name Redux explicitly."
+    },
+    {
+      "gt_nodes": [
+        "React Native Framework::Server Access"
+      ],
+      "predicted_nodes": [
+        "Mobile Device\\n(Android >=8.0 / iOS >=11)\\nHW: Octa-core 2.45 GHz, 4GB RAM, 32GB ROM+::App-Server API Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct semantic match for framework-level server access from the mobile app."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Client / Platforms::Web Browser",
+    "Native Modules::GPU Computing",
+    "Native Modules::Linear Algebra Library",
+    "Native Modules::Voice Library Call",
+    "React Native Framework::Data Caching",
+    "React Native Framework::Data Interception"
+  ],
+  "unmatched_predicted_nodes": [
+    "Casting Target Android Device\\n(Receiver::Casting Client",
+    "Casting Target Android Device\\n(Receiver::Command Handler",
+    "Casting Target Android Device\\n(Receiver::Discovery Listener",
+    "Casting Target Android Device\\n(Receiver::Display Surface",
+    "Global::Casting Target Android Device\\n(Receiver",
+    "Global::Internet",
+    "Global::Same LAN (Wi‑Fi)\\nC-002: Same LAN required",
+    "Global::Server-side Processing\\n(HW: CPU >= Pentium 900M, Rec. P4 1.2G; RAM >=256MB",
+    "Server-side Processing\\n(HW: CPU >= Pentium 900M, Rec. P4 1.2G; RAM >=256MB::Auth & RBAC Service",
+    "Server-side Processing\\n(HW: CPU >= Pentium 900M, Rec. P4 1.2G; RAM >=256MB::Data Access Layer\\n(SQL Injection Protection",
+    "Server-side Processing\\n(HW: CPU >= Pentium 900M, Rec. P4 1.2G; RAM >=256MB::Evaluation Data Store",
+    "Server-side Processing\\n(HW: CPU >= Pentium 900M, Rec. P4 1.2G; RAM >=256MB::History & Records DB",
+    "Server-side Processing\\n(HW: CPU >= Pentium 900M, Rec. P4 1.2G; RAM >=256MB::Materials Processor",
+    "Server-side Processing\\n(HW: CPU >= Pentium 900M, Rec. P4 1.2G; RAM >=256MB::Plan Management Service",
+    "Server-side Processing\\n(HW: CPU >= Pentium 900M, Rec. P4 1.2G; RAM >=256MB::Plan Recommendation Service",
+    "Server-side Processing\\n(HW: CPU >= Pentium 900M, Rec. P4 1.2G; RAM >=256MB::Report/Poster Generation Service",
+    "Server-side Processing\\n(HW: CPU >= Pentium 900M, Rec. P4 1.2G; RAM >=256MB::Training Plans DB",
+    "Server-side Processing\\n(HW: CPU >= Pentium 900M, Rec. P4 1.2G; RAM >=256MB::User/Profile/Preferences DB"
+  ]
+}

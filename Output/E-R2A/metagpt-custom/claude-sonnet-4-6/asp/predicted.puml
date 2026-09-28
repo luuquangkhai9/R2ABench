@@ -1,0 +1,96 @@
+@startuml
+skinparam componentStyle rectangle
+skinparam backgroundColor #FAFAFA
+skinparam packageBackgroundColor #F0F4FF
+skinparam nodeBackgroundColor #EAF7EA
+skinparam databaseBackgroundColor #FFF8E1
+skinparam defaultFontSize 12
+
+' ─────────────────────────────────────────────
+' External Systems
+' ─────────────────────────────────────────────
+package "External Systems" {
+    component [External Requirements\nDocument\n(Zhiyan Tongjie)] as ExtReqDoc
+    component [Industry Standards] as IndStd
+    component [Product Specifications] as ProdSpec
+    component [Business Specifications] as BizSpec
+    component [Documentation Specifications] as DocSpec
+}
+
+node "Markdown-Capable Environment" as MdEnv {
+
+    ' ─────────────────────────────────────────
+    ' Artifact Structure Layer
+    ' ─────────────────────────────────────────
+    package "Artifact Structure Layer" {
+        component [ReviewPurposeBlock\n(Goal, Review & Verification\nMethods, Report Purpose,\nStandards Basis)\nFR-001, FR-002, DR-001, C-001] as PurposeBlock
+    }
+
+    ' ─────────────────────────────────────────
+    ' Review Content Layer
+    ' ─────────────────────────────────────────
+    package "Review Content Layer" {
+        component [CompletenessChecklist\n(Core / Basic Functions)\nFR-003, DR-002, NFR-001] as CompCheck
+        component [ExceptionAuxiliaryChecklist\n(Exception Cases,\nAuxiliary Functions)\nFR-004, DR-002, NFR-001] as ExcCheck
+        component [UnderstandabilityChecklist\n(Clarity, Specificity,\nDetail, Refinement)\nFR-005, DR-002, NFR-002] as UnderCheck
+        component [ModelAccuracyChecklist\n(Normative, Reasonable,\nRigorous, Accurate)\nFR-006, DR-002, NFR-003] as ModelCheck
+        component [ExtensionImprovementChecklist\n(Clarity, Feasibility,\nConcreteness, Demonstrability)\nFR-007, DR-002] as ExtCheck
+    }
+
+    ' ─────────────────────────────────────────
+    ' Data Capture Layer
+    ' ─────────────────────────────────────────
+    package "Data Capture Layer" {
+        component [ProblemReportArea\n(Issue Records, Overall\nEvaluation, Suggestions)\nFR-008, DR-003] as ProbArea
+        component [ScoringBlock\n(4 x 10-pt Dimension Scores\n+ 40-pt Total Score)\nFR-009, DR-004, NFR-004, C-003] as ScoreBlock
+        component [ReviewMetadataBlock\n(Reviewer Identity,\nReview Date)\nFR-010, DR-005] as MetaBlock
+    }
+}
+
+' ─────────────────────────────────────────────
+' Dependencies — PurposeBlock → External Systems
+' ─────────────────────────────────────────────
+PurposeBlock ..> ExtReqDoc : review objective\nrequires supplied\nreq document\nC-004
+PurposeBlock ..> IndStd : names applicable\nstandards\nFR-002
+PurposeBlock ..> ProdSpec : names applicable\nspecs\nFR-002
+PurposeBlock ..> BizSpec : names applicable\nspecs\nFR-002
+PurposeBlock ..> DocSpec : names applicable\nspecs\nFR-002
+
+' ─────────────────────────────────────────────
+' Dependencies — Review Content → External Systems
+' ─────────────────────────────────────────────
+CompCheck ..> ExtReqDoc : requires supplied\nreq document\nC-004
+CompCheck ..> IndStd : judgments relative\nto declared standards\nC-002
+CompCheck ..> DocSpec : doc-spec norms\ninform criteria\nC-002
+
+ExcCheck ..> ExtReqDoc : requires supplied\nreq document\nC-004
+ExcCheck ..> IndStd : judgments relative\nto declared standards\nC-002
+
+UnderCheck ..> ExtReqDoc : requires supplied\nreq document\nC-004
+UnderCheck ..> DocSpec : doc-spec norms\ninform criteria\nC-002
+
+ModelCheck ..> ExtReqDoc : requires supplied\nreq document\nC-004
+ModelCheck ..> IndStd : applies industry norms\nFR-006, C-002
+ModelCheck ..> DocSpec : applies doc norms\nFR-006, C-002
+
+ExtCheck ..> ExtReqDoc : requires supplied\nreq document\nC-004
+ExtCheck ..> ProdSpec : feasibility via\nproduct specs\nFR-007
+ExtCheck ..> BizSpec : feasibility via\nbiz specs\nFR-007
+
+' ─────────────────────────────────────────────
+' Dependencies — Review Content → Data Capture
+' (checklists produce findings consumed by report/score)
+' ─────────────────────────────────────────────
+CompCheck --> ProbArea : completeness\ninspection findings\nFR-008
+ExcCheck --> ProbArea : exception/auxiliary\ninspection findings\nFR-008
+UnderCheck --> ProbArea : understandability\ninspection findings\nFR-008
+ModelCheck --> ProbArea : model accuracy\ninspection findings\nFR-008
+ExtCheck --> ProbArea : extension\ninspection findings\nFR-008
+
+CompCheck --> ScoreBlock : completeness score\nderived from findings\nDR-004, NFR-004
+ExcCheck --> ScoreBlock : exception/auxiliary\nscore derived\nDR-004, NFR-004
+UnderCheck --> ScoreBlock : understandability score\nderived from findings\nDR-004, NFR-004
+ModelCheck --> ScoreBlock : model accuracy score\nderived from findings\nDR-004, NFR-004
+ExtCheck --> ScoreBlock : extension score\nderived from findings\nDR-004, NFR-004
+
+@enduml

@@ -1,0 +1,61 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Application"
+      ],
+      "predicted_nodes": [
+        "Global::Android Host Application",
+        "Android Host Application::Application Code",
+        "Android Host Application::QAPM SDK Integrator\\n(Initialization / Config"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly expanded the generic 'Application' node into its constituent parts: the host application container, its code, and the integration point for the SDK. The 'Android Host Application' boundary is a semantically correct refinement of 'Global'."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM-SDK",
+        "QAPM_SDK::QAPM_Report",
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK Core::Apache HttpClient Instrumentation Layer::Counting Input Stream\\n(DR-010, FR-009",
+        "QAPM SDK Core::Apache HttpClient Instrumentation Layer::Instrumented Response\\nEntity Wrapper\\n(FR-009, DR-010, DR-011\\nNFR-003",
+        "QAPM SDK Core::Apache HttpClient Instrumentation Layer::Instrumented Response\\nHandler Wrapper\\n(FR-008, DR-009",
+        "QAPM SDK Core::Apache HttpClient Instrumentation Layer::Transaction State\\nInspector / Instrumentor\\n(FR-008, DR-009",
+        "QAPM SDK Core::Background Scheduling Layer::QAPM Handler Manager\\n(FR-010, DR-001, DR-002",
+        "QAPM SDK Core::Background Scheduling Layer::QAPM Handler Manager\\n(FR-010, DR-001, DR-002::Default Background\\nHandlerThread + Handler\\n(FR-001, FR-002, NFR-001",
+        "QAPM SDK Core::Background Scheduling Layer::QAPM Handler Manager\\n(FR-010, DR-001, DR-002::Main-Thread Handler\\n(Looper.getMainLooper)\\n(FR-010, DR-002",
+        "QAPM SDK Core::Background Scheduling Layer::Work Handler Init\\n(FR-001, FR-002",
+        "QAPM SDK Core::Configuration Management::Configured Data Sender\\n(FR-006, DR-007",
+        "QAPM SDK Core::Configuration Management::QAPM Config Manager\\n(AD-003",
+        "QAPM SDK Core::Upload Processing Layer::Forced-Send / Storage\\nPop Handler\\n(FR-004",
+        "QAPM SDK Core::Upload Processing Layer::Network Connectivity\\nGate\\n(FR-003, NFR-002, C-003",
+        "QAPM SDK Core::Upload Processing Layer::Upload File Processor\\n(FR-005, FR-006, FR-007\\nDR-003..DR-008, NFR-005",
+        "QAPM SDK Core::Upload Processing Layer::Upload Scheduler\\n(FR-002, FR-003",
+        "QAPM SDK Core::Upload Processing Layer::Upload Success / Failure\\nCallback Handler\\n(FR-007, DR-008",
+        "Local File Storage::Pending Stored Data\\n(FR-004",
+        "Local File Storage::Upload Directory\\n/ Upload Files\\n(DR-003, DR-004, AD-002"
+      ],
+      "match_type": "3:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI successfully decomposed the high-level GT modules (SDK, Report, Storage) into fine-grained functional components as described in the PRD (scheduling, instrumentation, upload processing). The predicted boundaries 'QAPM SDK Core' and 'Local File Storage' are semantically equivalent to and a valid refinement of the GT's 'QAPM_SDK' boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "QAPM_Plugin::Plugin init compile",
+    "QAPM_Plugin::QAPM_Plugin",
+    "QAPM_SDK::QAPM_Collect"
+  ],
+  "unmatched_predicted_nodes": [
+    "Android Platform Services::Android Context\\n(FR-006, DR-006, C-001",
+    "Android Platform Services::Handler / HandlerThread\\n/ Looper\\n(C-001, NFR-004",
+    "Android Platform Services::Network Connectivity\\nService\\n(FR-003, AD-001",
+    "Apache HttpClient\\nAbstractions\\n(C-002, NFR-004::HttpEntity",
+    "Apache HttpClient\\nAbstractions\\n(C-002, NFR-004::HttpResponse",
+    "Apache HttpClient\\nAbstractions\\n(C-002, NFR-004::ResponseHandler<T>",
+    "Global::Apache HttpClient\\nAbstractions\\n(C-002, NFR-004",
+    "Global::Remote Upload Endpoint\\n(AD-005, outside SRS scope"
+  ]
+}

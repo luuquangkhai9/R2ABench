@@ -1,0 +1,153 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Web2 application stack::Applications"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Redis Applications",
+        "Application Layer::SQL Protocol Clients"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT 'Applications' is a broad application-side node. The predicted nodes split it into Redis application clients and SQL protocol clients, which are semantically consistent as application consumers."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::BlockChain Database\nTransactions, Contracts,\nCertificates and Receipts"
+      ],
+      "predicted_nodes": [
+        "Storage Layer::Redis Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the storage/backend data persistence side, though the predicted node is generalized to Redis storage rather than blockchain-specific data. Boundary attribution to storage is still consistent at the architecture level."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::File System\nLarge Files and Media"
+      ],
+      "predicted_nodes": [
+        "Storage Layer::Redis Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node is a Redis storage component, which is not semantically equivalent to a file system for large files/media. This is a mismatch in both component meaning and boundary."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::IceFireDB"
+      ],
+      "predicted_nodes": [
+        "Middleware Layer::Redis Proxy",
+        "Middleware Layer::PubSub System",
+        "Middleware Layer::Internal SQL Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT IceFireDB is the umbrella product node. The predicted middleware nodes decompose the product into its covered runtime components, which is a valid split at the architecture level."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::Platform"
+      ],
+      "predicted_nodes": [
+        "Storage Layer::Redis Storage",
+        "Storage Layer::Peer Network"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT Platform is a broad infrastructure/platform node. The predicted storage and peer-network infrastructure nodes are consistent as platform-layer decomposition."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::Processing\nBusiness Logic"
+      ],
+      "predicted_nodes": [
+        "Middleware Layer::Redis Proxy::Proxy Core",
+        "Middleware Layer::PubSub System::PubSub Core",
+        "Middleware Layer::Internal SQL Handler::Result Parser"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT business-logic/processing node is decomposed into the core processing components of the actual middleware services. This is semantically aligned and correctly placed in middleware."
+    },
+    {
+      "gt_nodes": [
+        "Web3 application stack::Applications"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Redis Applications",
+        "Application Layer::SQL Protocol Clients"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Same as the Web2 applications node: the prediction splits general applications into relevant client types, which is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Web3 application stack::BlockChain Database\nTransactions, Contracts,\nCertificates and Receipts"
+      ],
+      "predicted_nodes": [
+        "Storage Layer::Redis Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node denotes a backend storage/database concern. The predicted storage boundary is directionally correct, though generalized."
+    },
+    {
+      "gt_nodes": [
+        "Web3 application stack::Decentralized File System\nLarge Files and Media"
+      ],
+      "predicted_nodes": [
+        "Storage Layer::Peer Network"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "A decentralized file system is not the same as a peer network node grouping. The predicted node captures networking infrastructure, not file storage semantics."
+    },
+    {
+      "gt_nodes": [
+        "Web3 application stack::Decentralized Processing\nBusiness Logic"
+      ],
+      "predicted_nodes": [
+        "Middleware Layer::Redis Proxy::Proxy Core",
+        "Middleware Layer::PubSub System::PubSub Core",
+        "Middleware Layer::Internal SQL Handler::Result Parser"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT processing/business logic node is reasonably decomposed into the actual processing cores of the decentralized middleware components."
+    },
+    {
+      "gt_nodes": [
+        "Web3 application stack::IceFireDB"
+      ],
+      "predicted_nodes": [
+        "Middleware Layer::Redis Proxy",
+        "Middleware Layer::PubSub System",
+        "Middleware Layer::Internal SQL Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The product umbrella node is correctly mapped to its constituent runtime middleware services."
+    },
+    {
+      "gt_nodes": [
+        "Web3 application stack::Platform"
+      ],
+      "predicted_nodes": [
+        "Storage Layer::Redis Storage",
+        "Storage Layer::Peer Network",
+        "External Networks::Same Network",
+        "External Networks::Cross Network",
+        "External Networks::NAT/Private Network"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT platform is a broad infrastructure node, and the predicted network/storage infrastructure nodes are a reasonable architectural decomposition."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

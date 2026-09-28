@@ -1,0 +1,98 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::GoDaddy API\nDomain availability"
+      ],
+      "predicted_nodes": [
+        "Global::GoDaddy API\n(optional"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the optional GoDaddy integration for domain availability checks. The boundary remains in the global/external integration area, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::HTTP API\nSession and attack requests"
+      ],
+      "predicted_nodes": [
+        "Server Runtime::HTTP API",
+        "Server Runtime::Option Parser\n(attack codes, godaddy, output",
+        "Server Runtime::Session Manager",
+        "Server Runtime::Homoglyph-Complete Endpoint (GET",
+        "Server Runtime::Error Handler\n(400/404/500, parsing"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT HTTP API node is decomposed into more specific runtime subcomponents by the AI: request handling, session management, option parsing, endpoint handling, and error handling. These are functionally consistent and remain within the server-side/backend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Redis\nCommand and reporting queues"
+      ],
+      "predicted_nodes": [
+        "Global::Redis\n(Job Channel, Reporting Channel"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent Redis used for job publication and reporting communication. The boundary is equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Socket.io\nWebSocket result channel"
+      ],
+      "predicted_nodes": [
+        "Client::WebSocket Client",
+        "Server Runtime::WebSocket/Socket.IO Gateway"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is represented by a server-side WebSocket/Socket.IO gateway and the client counterpart. This is a reasonable split of the asynchronous result channel, and the server-side boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Squatm3\nDomain generation engine"
+      ],
+      "predicted_nodes": [
+        "Global::squatm3 CLI\n(subprocess"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the wrapped squatm3 domain-generation engine invoked as a subprocess. The naming differs, but the component is the same."
+    },
+    {
+      "gt_nodes": [
+        "Global::Web UI\nindex.html"
+      ],
+      "predicted_nodes": [
+        "Client::Web UI\n(index.html"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The functionality matches the web UI index page, but the AI placed it under Client rather than the system-side Web UI boundary. This is a boundary attribution error."
+    },
+    {
+      "gt_nodes": [
+        "Global::Workers\nCommand consumers"
+      ],
+      "predicted_nodes": [
+        "Server Runtime::Background Consumer Thread"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The background consumer thread is the concrete worker/consumer component described in the GT. The server runtime boundary is appropriate for this in-process consumer."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Client",
+    "Server Runtime::Error Handler\n(400/404/500, parsing",
+    "Server Runtime::HTTP API",
+    "Server Runtime::Homoglyph-Complete Endpoint (GET",
+    "Server Runtime::Option Parser\n(attack codes, godaddy, output",
+    "Server Runtime::Session Manager",
+    "Server Runtime::WebSocket/Socket.IO Gateway",
+    "Server Runtime::Background Consumer Thread",
+    "Server Runtime::Server Runtime"
+  ]
+}

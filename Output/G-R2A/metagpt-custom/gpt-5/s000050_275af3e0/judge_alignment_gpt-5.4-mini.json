@@ -1,0 +1,144 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "predicted_nodes": [
+        "Global::hAFL2 Controller/Orchestrator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the main hAFL2 controller/orchestration component; the predicted node uses a higher-level global boundary instead of the GT's KVM-level boundary, but this is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host"
+      ],
+      "predicted_nodes": [
+        "Global::Hyper-V Child Partition VM",
+        "Global::Hyper-V Root Partition VM",
+        "Global::Windows VMSwitch",
+        "Global::VMBus/netvsc channels"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT host-level Hyper-V layer is decomposed by the AI into more specific Hyper-V runtime components involved in the same virtualization boundary. The predicted boundaries are not identical but remain semantically consistent with the host/Hyper-V layer."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2",
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2::harness.sys"
+      ],
+      "predicted_nodes": [
+        "Hyper-V Child Partition VM::Windows Hyper-V Fuzzing::Child Partition Harness",
+        "Hyper-V Child Partition VM::Windows Hyper-V Fuzzing::Harness Driver(s"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT child-partition guest VM and its harness driver are represented by predicted child-partition fuzzing components. The AI split the node into harness and driver elements, which is a reasonable decomposition within the same child-partition boundary."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2",
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::CrashMonitoring.sys",
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::vmswitch.sys"
+      ],
+      "predicted_nodes": [
+        "Hyper-V Root Partition VM::Crash Monitoring & Feedback::Root Partition Crash Monitor",
+        "Global::Windows VMSwitch"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT root partition host OS components are captured by the predicted root-partition crash monitor and VMSwitch node. Although the boundary labels differ, the functional placement remains within the correct root-partition/Windows Hyper-V context."
+    },
+    {
+      "gt_nodes": [
+        "Global::KVM (L0"
+      ],
+      "predicted_nodes": [
+        "Global::kAFL Hypervisor/Fuzzer Framework"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the underlying hypervisor/fuzzing framework context. The predicted node is a higher-level abstraction of the GT KVM L0 layer."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::hAFL2",
+        "Global::KVM (L0"
+      ],
+      "predicted_nodes": [
+        "Global::hAFL2 Controller/Orchestrator",
+        "Orchestration & Test::Standalone Test Runner",
+        "Orchestration & Test::kAFL-Fuzzer Test Suites"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT includes the hAFL2 root orchestration area and KVM base context; the predicted nodes split the orchestration/testing responsibilities into controller and test-runner functions, which is a semantically aligned decomposition."
+    },
+    {
+      "gt_nodes": [
+        "Global::KVM (L0",
+        "KVM (L0::hAFL2"
+      ],
+      "predicted_nodes": [
+        "Global::Python 3 runtime",
+        "Global::bash environment",
+        "Global::pytest",
+        "Orchestration & Test::Standalone Test Runner",
+        "Orchestration & Test::kAFL-Fuzzer Test Suites"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT top-level execution environment for hAFL2 is represented by the predicted runtime/tooling/test nodes. These are consistent with the repository's execution and verification context."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::CrashMonitoring.sys"
+      ],
+      "predicted_nodes": [
+        "Hyper-V Root Partition VM::Crash Monitoring & Feedback::Root Partition Crash Monitor"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted crash monitor is functionally equivalent to the GT CrashMonitoring.sys component and remains in the correct root-partition monitoring boundary."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::vmswitch.sys"
+      ],
+      "predicted_nodes": [
+        "Global::Windows VMSwitch"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted Windows VMSwitch node directly corresponds to the GT vmswitch.sys component. The package label is more generic but still semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2::harness.sys"
+      ],
+      "predicted_nodes": [
+        "Hyper-V Child Partition VM::Windows Hyper-V Fuzzing::Child Partition Harness",
+        "Hyper-V Child Partition VM::Windows Hyper-V Fuzzing::Harness Driver(s"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT harness.sys is represented by a child-partition harness plus driver split. This is a reasonable decomposition within the correct child partition boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Build & Configuration Tooling::Offset Configuration Source",
+    "Build & Configuration Tooling::Windows Build Artifacts",
+    "Build & Configuration Tooling::Windows Build Script",
+    "Global::Host Filesystem/Shared Libraries",
+    "Global::VMBus/netvsc channels",
+    "Guest I/O & Forkserver::Embedded Forkserver",
+    "Linux Userspace Fuzzing::Initrd Packager",
+    "Linux Userspace Fuzzing::Linux Launch Scripts",
+    "Linux Userspace Fuzzing::Shared Library Resolver",
+    "Global::kAFL Hypercalls"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::<b><u>DATABASE</u></b>\n\n* MariaDB\n  * Users\n  * Likes\n  * Photos\n  * Comments"
+      ],
+      "predicted_nodes": [
+        "Deployment Environment::MariaDB\n(users, likes, photos, comments"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the MariaDB relational database storing application data such as users, likes, photos, and comments."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\n\n* A-Frame\n* React\n* React-Router"
+      ],
+      "predicted_nodes": [
+        "Deployment Environment::Browser",
+        "Deployment Environment::Browser::Web Client (React SPA::Auth UI\n(Sign-up / Sign-in",
+        "Deployment Environment::Browser::Web Client (React SPA::Content Retrieval Module",
+        "Deployment Environment::Browser::Web Client (React SPA::Error Display",
+        "Deployment Environment::Browser::Web Client (React SPA::Router\n(React-Router",
+        "Deployment Environment::Browser::Web Client (React SPA::Scene Renderer\n(A-Frame + aframe-react",
+        "Deployment Environment::Browser::Web Client (React SPA::Shared Credential Handlers",
+        "Deployment Environment::Browser::Web Client (React SPA::State Store\n(shared email/password, content results",
+        "Deployment Environment::Browser::Web Client (React SPA::jQuery"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT web client node (comprising React, React-Router, A-Frame, etc.) is logically split by the AI into specific frontend components running within the browser boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>WEB SERVER</u></b>\n\n* Node\n* Express\n* DigitalOcean (Deployment"
+      ],
+      "predicted_nodes": [
+        "Deployment Environment::Node.js/Express Server",
+        "Deployment Environment::Node.js/Express Server::Auth Controller",
+        "Deployment Environment::Node.js/Express Server::Content Controller",
+        "Deployment Environment::Node.js/Express Server::Express Router",
+        "Deployment Environment::Node.js/Express Server::User Controller",
+        "Deployment Environment::Node.js/Express Server::User Model",
+        "Deployment Environment::Node.js/Express Server::bcrypt-nodejs"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The monolithic GT web server node is successfully detailed into a Node.js/Express server and its constituent backend elements (controllers, models, router, and utilities)."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b>AWS S3</b>"
+      ],
+      "predicted_nodes": [
+        "Deployment Environment::Image Storage\n(S3-style"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes correspond to the external image storage service specified as AWS S3 / S3-style."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b>REDIS CACHE</b>"
+      ],
+      "predicted_nodes": [
+        "Deployment Environment::Redis Cache"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Redis caching service."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

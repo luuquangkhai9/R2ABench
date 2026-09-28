@@ -1,0 +1,97 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::GoDaddy API\\nDomain availability"
+      ],
+      "predicted_nodes": [
+        "Global::GoDaddy API\\n[C-002, DR-005"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are semantically identical, representing the external GoDaddy API. The 'Global' boundary is consistent between both."
+    },
+    {
+      "gt_nodes": [
+        "Global::HTTP API\\nSession and attack requests"
+      ],
+      "predicted_nodes": [
+        "Squatm3gator API Process::HTTP API Layer",
+        "Squatm3gator API Process::HTTP API Layer::Domain Job Request\\nHandler\\n[FR-003, FR-004",
+        "Squatm3gator API Process::HTTP API Layer::GET / Handler\\n(Main Page + Session Init)\\n[FR-001",
+        "Squatm3gator API Process::HTTP API Layer::GET Homoglyph-Complete\\nEndpoint\\n[FR-006",
+        "Squatm3gator API Process::HTTP API Layer::HTTP Error Handler\\n(400/404/500)\\n[FR-007, FR-008",
+        "Squatm3gator API Process::Attack Option Parser\\n[FR-003, DR-003, DR-004",
+        "Squatm3gator API Process::Redis Producer\\n[FR-004",
+        "Squatm3gator API Process::Session Manager\\n[DR-001"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT 'HTTP API' node is correctly split by the AI into multiple granular components that constitute the API's functionality. The AI accurately placed all these components within the 'Squatm3gator API Process' boundary, which is more specific and correct than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Redis\\nCommand and reporting queues"
+      ],
+      "predicted_nodes": [
+        "Redis\\nMessage Queue\\n[C-001::Job Channel",
+        "Redis\\nMessage Queue\\n[C-001::Reporting Channel"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly split the generic Redis node into the two specific channels ('Job' and 'Reporting') mentioned in the PRD. The AI's 'Redis' boundary is a semantically correct and more descriptive name than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Socket.io\\nWebSocket result channel"
+      ],
+      "predicted_nodes": [
+        "Squatm3gator API Process::WebSocket / Socket.IO\\nChannel\\n[FR-005"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are a direct functional match. The AI correctly placed the WebSocket component within the 'Squatm3gator API Process' boundary, as the PRD states the API process handles result delivery via WebSocket. This is more architecturally precise than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Squatm3\\nDomain generation engine"
+      ],
+      "predicted_nodes": [
+        "Squatm3gator API Process::squatm3 Subprocess Wrapper\\n[C-003, C-004"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI astutely identified the 'wrapper' component that invokes the external 'squatm3' engine, as described in the PRD. Placing this wrapper inside the 'Squatm3gator API Process' is correct, as it is part of the application's logic, while the engine itself is an external dependency."
+    },
+    {
+      "gt_nodes": [
+        "Global::Web UI\\nindex.html"
+      ],
+      "predicted_nodes": [
+        "Global::index.html\\nTemplate\\n[FR-001"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are a direct functional match for the web front-end page. The 'Global' boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Workers\\nCommand consumers"
+      ],
+      "predicted_nodes": [
+        "Squatm3gator API Process::Background Consumer Thread\\n[FR-002, C-003",
+        "Squatm3gator API Process::Background Consumer Thread\\n[FR-002, C-003::Redis Job Listener\\n[FR-002",
+        "Squatm3gator API Process::Background Consumer Thread\\n[FR-002, C-003::Session Correlator\\n[NFR-002, DR-001",
+        "Squatm3gator API Process::Background Consumer Thread\\n[FR-002, C-003::Worker Report Reader\\n[FR-005, DR-002"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The generic GT 'Workers' node is correctly represented by the AI as a specific 'Background Consumer Thread' and its sub-components. The AI's placement of this thread inside the 'Squatm3gator API Process' boundary is a significant improvement, accurately reflecting the 'in-process background thread' described in the PRD."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::DR-002",
+    "Global::Redis\\nMessage Queue\\n[C-001"
+  ]
+}

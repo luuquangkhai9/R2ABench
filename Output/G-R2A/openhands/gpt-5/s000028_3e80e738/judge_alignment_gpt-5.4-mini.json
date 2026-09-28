@@ -1,0 +1,102 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "API Gateway Account::API Gateway"
+      ],
+      "predicted_nodes": [
+        "API Gateway Account::Amazon API Gateway",
+        "API Gateway Account::API Deployment + Stage"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents the API Gateway component, which the prediction splits into the service and its deployment/stage element. Both are within the correct API Gateway account boundary."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::Calls hello/GET with id_token in headers"
+      ],
+      "predicted_nodes": [
+        "API Gateway Account::Method: WhoAmI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the authenticated API method exposed by API Gateway. The predicted method naming differs, but the functional role aligns with the GT hello/WhoAmI endpoint behavior."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::Cognito-authorizer::hello-function"
+      ],
+      "predicted_nodes": [
+        "API Gateway Account::Cognito Authorizer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is the Cognito authorizer used by API Gateway. The boundary/package attribution is consistent with the GT."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::Returns hello plus user name when authorized"
+      ],
+      "predicted_nodes": [
+        "API Gateway Account::Method: WhoAmI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT describes the response behavior of the WhoAmI method, which the predicted node captures as the corresponding API method."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::auth-function"
+      ],
+      "predicted_nodes": [
+        "API Gateway Account::Cognito Authorizer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The auth-function in GT corresponds to the authorizer/authentication component in the predicted diagram."
+    },
+    {
+      "gt_nodes": [
+        "Cognito Account::Cognito User Pool"
+      ],
+      "predicted_nodes": [
+        "Cognito Account::Cognito User Pool",
+        "Cognito Account::Cognito User Pool Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT user pool is preserved and the prediction additionally models the user pool client, which is part of the same Cognito boundary and consistent with the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Global::User"
+      ],
+      "predicted_nodes": [
+        "Cognito Account::Cognito User Pool Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT user concept is abstract, while the predicted user-pool client is the concrete Cognito-facing artifact involved in user authentication flows. This is a reasonable semantic correspondence within the Cognito boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Cognito Account::Cognito Hosted UI"
+  ],
+  "unmatched_predicted_nodes": [
+    "Cognito Account::Cognito Identity Pool",
+    "Cognito Account::IAM Role (Authenticated",
+    "Cognito Account::IAM Role (Unauthenticated",
+    "Cognito Account::Identity-Pool Role Attachment",
+    "Global::Amazon SQS (Regional",
+    "Global::ECS Service (behind NLB",
+    "Global::Network Load Balancer (input ARN",
+    "VPC::Interface VPC Endpoint (SQS",
+    "VPC::Security Group: SQS Endpoint",
+    "VPC::Subnets (configured",
+    "API Gateway Account::VPC Link",
+    "CloudFormation Templates::API Gateway Stack",
+    "CloudFormation Templates::Cognito Stack",
+    "CloudFormation Templates::VPC Endpoint Stack"
+  ]
+}

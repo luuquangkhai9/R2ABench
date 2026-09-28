@@ -1,0 +1,193 @@
+@startuml
+!define AWS_COLOR #FF9900
+!define COGNITO_COLOR #FF4F8B
+!define API_GATEWAY_COLOR #00A1C9
+!define IAM_COLOR #232F3E
+!define VPC_COLOR #7D898B
+!define SQS_COLOR #FAA81A
+!define CLOUDFORMATION_COLOR #FF4F00
+!define EXTERNAL_COLOR #545B64
+
+skinparam component {
+  BackgroundColor<<AWS>> AWS_COLOR
+  BackgroundColor<<Cognito>> COGNITO_COLOR
+  BackgroundColor<<APIGateway>> API_GATEWAY_COLOR
+  BackgroundColor<<IAM>> IAM_COLOR
+  BackgroundColor<<VPC>> VPC_COLOR
+  BackgroundColor<<SQS>> SQS_COLOR
+  BackgroundColor<<CloudFormation>> CLOUDFORMATION_COLOR
+  BackgroundColor<<External>> EXTERNAL_COLOR
+  FontColor White
+  BorderColor Black
+}
+
+title AWS Infrastructure Architecture: Cognito, API Gateway, and SQS VPC Endpoint
+
+package "Cognito Account" {
+  component "Cognito User Pool" <<Cognito>> {
+    component "User Pool Client" <<Cognito>>
+    component "Token Validity Configuration" <<Cognito>>
+    component "User Attributes" <<Cognito>> {
+      - custom:Role
+      - email
+    }
+  }
+  
+  component "Cognito Identity Pool" <<Cognito>> {
+    component "Cognito Provider Link" <<Cognito>>
+    component "Unauthenticated Identities" <<Cognito>>
+  }
+  
+  component "IAM Roles" <<IAM>> {
+    component "Authenticated Role" <<IAM>>
+    component "Unauthenticated Role" <<IAM>> {
+      - Web Identity Federation Trust
+      - Restricted Action Policies
+    }
+  }
+  
+  component "CloudFormation Stack" <<CloudFormation>> #Cognito
+}
+
+package "API Gateway Account" {
+  component "API Gateway" <<APIGateway>> {
+    component "Cognito Authorizer" <<APIGateway>>
+    component "Deployment Stage" <<APIGateway>>
+    
+    component "WhoAmI Method" <<APIGateway>> {
+      component "Role Header Handling" <<APIGateway>> {
+        - x-pagopa-pn-cx-role
+        - Optional response header
+        - Integration mapping
+      }
+    }
+    
+    component "ECS Proxy Method" <<APIGateway>> {
+      component "VPC Link Integration" <<APIGateway>>
+      component "Role Header Forwarding" <<APIGateway>> {
+        - x-pagopa-pn-cx-role
+        - Authorizer claim mapping
+      }
+    }
+    
+    component "CallbackURL Output" <<APIGateway>>
+  }
+  
+  component "CloudFormation Stack" <<CloudFormation>> #APIGateway
+}
+
+package "VPC Infrastructure" {
+  component "VPC" <<VPC>> {
+    component "Subnets" <<VPC>>
+    component "Security Group" <<VPC>> {
+      - TCP ports 0-65535
+      - VPC CIDR restriction
+    }
+  }
+  
+  component "SQS VPC Endpoint" <<SQS>> {
+    component "Interface Endpoint" <<SQS>>
+    component "Private DNS" <<SQS>>
+  }
+  
+  component "CloudFormation Stack" <<CloudFormation>> #VPCEndpoint
+}
+
+package "External Dependencies" <<External>> {
+  component "Installation Inputs" <<External>> {
+    component "AWS CLI Profiles" <<External>>
+    component "DNS/Domain Values" <<External>>
+    component "API Keys" <<External>>
+    component "Environment Names" <<External>>
+  }
+  
+  component "Network Load Balancer" <<External>> #For VPC Link
+  component "Amazon SQS Service" <<External>>
+  component "AWS Region Context" <<External>>
+}
+
+' Cross-account relationships
+"CloudFormation Stack" #Cognito --> "Cognito User Pool" : Provisions
+"CloudFormation Stack" #Cognito --> "Cognito Identity Pool" : Provisions
+"CloudFormation Stack" #Cognito --> "IAM Roles" : Creates
+
+"Cognito User Pool" --> "User Pool Client" : Contains
+"Cognito User Pool" --> "Token Validity Configuration" : Configures
+"Cognito User Pool" --> "User Attributes" : Manages
+
+"Cognito Identity Pool" --> "Cognito Provider Link" : Links to User Pool
+"Cognito Identity Pool" --> "Unauthenticated Identities" : Allows
+"Cognito Identity Pool" --> "IAM Roles" : Attaches roles
+
+"IAM Roles" --> "Authenticated Role" : Includes
+"IAM Roles" --> "Unauthenticated Role" : Includes with restrictions
+
+' API Gateway relationships
+"CloudFormation Stack" #APIGateway --> "API Gateway" : Provisions
+"API Gateway" --> "Cognito Authorizer" : Uses ARN from Cognito account
+"API Gateway" --> "Deployment Stage" : Creates
+"API Gateway" --> "WhoAmI Method" : Exposes
+"API Gateway" --> "ECS Proxy Method" : Exposes
+"API Gateway" --> "CallbackURL Output" : Publishes
+
+"WhoAmI Method" --> "Role Header Handling" : Implements
+"ECS Proxy Method" --> "VPC Link Integration" : Connects to NLB
+"ECS Proxy Method" --> "Role Header Forwarding" : Forwards claims
+
+' VPC Endpoint relationships
+"CloudFormation Stack" #VPCEndpoint --> "VPC" : Configures
+"CloudFormation Stack" #VPCEndpoint --> "SQS VPC Endpoint" : Creates
+
+"VPC" --> "Subnets" : Contains
+"VPC" --> "Security Group" : Associates
+"SQS VPC Endpoint" --> "Interface Endpoint" : Implements
+"SQS VPC Endpoint" --> "Private DNS" : Enables
+
+' Cross-account data flow
+"Cognito User Pool" --> "Cognito Authorizer" : Provides ARN
+"User Pool Client" --> "Cognito Provider Link" : Provides ClientId
+"Cognito Authorizer" --> "WhoAmI Method" : Authorizes requests
+"Cognito Authorizer" --> "ECS Proxy Method" : Authorizes requests
+"Cognito Authorizer" --> "Role Header Handling" : Provides custom:Role claim
+"Cognito Authorizer" --> "Role Header Forwarding" : Provides custom:Role claim
+
+' External dependencies
+"Installation Inputs" --> "CloudFormation Stack" #Cognito : Provides parameters
+"Installation Inputs" --> "CloudFormation Stack" #APIGateway : Provides parameters
+"Installation Inputs" --> "CloudFormation Stack" #VPCEndpoint : Provides parameters
+
+"Network Load Balancer" --> "VPC Link Integration" : Provides ARN
+"Amazon SQS Service" --> "SQS VPC Endpoint" : Private connectivity
+"AWS Region Context" --> "CloudFormation Stack" #Cognito : Deployment context
+"AWS Region Context" --> "CloudFormation Stack" #APIGateway : Deployment context
+"AWS Region Context" --> "CloudFormation Stack" #VPCEndpoint : Deployment context
+
+' Security and network relationships
+"Security Group" --> "SQS VPC Endpoint" : Protects
+"VPC CIDR" --> "Security Group" : Defines ingress rules
+"Subnets" --> "SQS VPC Endpoint" : Hosts endpoint
+
+note right of "Cognito Account"
+  <b>Cross-Account Authentication</b>
+  Cognito provisions authentication
+  objects; API Gateway account uses
+  user-pool ARN for authorizer
+end note
+
+note right of "API Gateway Account" 
+  <b>Role Header Flow</b>
+  custom:Role claim from Cognito
+  mapped to x-pagopa-pn-cx-role
+  header for both WhoAmI and
+  ECS proxy methods
+end note
+
+note right of "VPC Infrastructure"
+  <b>Private SQS Connectivity</b>
+  Interface VPC endpoint with
+  private DNS enables secure
+  communication restricted to
+  VPC CIDR range
+end note
+
+@enduml

@@ -1,0 +1,69 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::AWS EventBridge"
+      ],
+      "predicted_nodes": [
+        "AWS Account (Current Region::EventBridge Rule(s"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node represents the rules within the EventBridge service shown in the GT, which is functionally equivalent for event routing as described in FR-003. The boundaries 'AWS Cloud\\nConnector Account' and 'AWS Account (Current Region' are semantically identical."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::SNS Topic\\nalerts"
+      ],
+      "predicted_nodes": [
+        "AWS Account (Current Region::SNS Topic"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct functional match for the alerting SNS topic mentioned in FR-003. The boundaries 'AWS Cloud\\nConnector Account' and 'AWS Account (Current Region' are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::Chat notification",
+        "AWS Cloud\\nConnector Account::Email notification",
+        "AWS Cloud\\nConnector Account::Slack notification"
+      ],
+      "predicted_nodes": [
+        "Global::SNS Subscribers (Manual Mgmt"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the example notification targets from the GT into a single logical node representing the manually managed subscribers (FR-004, NFR-002). Placing this in the 'Global' boundary is appropriate as subscribers (e.g., user emails, external services) exist outside the primary AWS account."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::connector::Private subnet::AWS Fargate\\nKafka Connect Cluster"
+      ],
+      "predicted_nodes": [
+        "AWS Account (Current Region::Target Cluster & Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI identified the core connector execution environment using the terminology 'target cluster and service' from the PRD (FR-002). This functionally matches the specific 'AWS Fargate\\nKafka Connect Cluster' in the GT. The AI's higher-level boundary 'AWS Account (Current Region' is a valid, though less detailed, abstraction of the GT's specific VPC/subnet path."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "AWS Cloud\\nAppian Source::VPC::Appian\\nOracle DB",
+    "AWS Cloud\\nConnector Account::VPC::CMS BigMAC",
+    "AWS Cloud\\nConnector Account::VPC::topics::Private subnet::AWS Lambda\\ncreate/delete topics",
+    "Global::VPC peering\\nconnection"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application Services::Alert Routing Setup",
+    "Application Services::Connector Configurator",
+    "Application Services::Metrics Collector",
+    "Application Services::Stage Listing Procedure",
+    "CI/CD::GitHub Actions Runner",
+    "GitHub::Actions API (deploy.yml runs",
+    "GitHub::Pull Requests API",
+    "Global::AWS Account (Current Region",
+    "Local Environment::AWS CLI",
+    "Local Environment::Connector Mgmt Library",
+    "Local Environment::Repository CLI & Scripts"
+  ]
+}

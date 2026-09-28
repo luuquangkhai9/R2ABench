@@ -1,0 +1,101 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Jenkins\\nController"
+      ],
+      "predicted_nodes": [
+        "OCI Resource Layer::Jenkins Master Instance\\n(VNIC · Cloud-Init\\nssh_authorized_keys → default user"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node represents the Jenkins Master instance described in the PRD (FR-005, FR-007), which corresponds to the Jenkins Controller in the GT. The AI's logical layering ('OCI Resource Layer') is a valid architectural abstraction for deployed resources, differing from the GT's physical network layout but semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\\n(Private/Regional::Agent Node\\n(Fault Domain X",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\\n(Private/Regional::Agent Node\\n(Fault Domain Y"
+      ],
+      "predicted_nodes": [
+        "OCI Resource Layer::Jenkins Slave Instances\\n(VNIC · Cloud-Init · ×slave_count\\nssh_authorized_keys → default user"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node aggregates the individual agent/slave nodes from the GT into a single logical group, as described in the PRD (FR-006, FR-007). The boundary ('OCI Resource Layer') is a correct logical grouping for these deployed resources, consistent with the AI's workflow-centric view."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\\n(Public/Regional::Bastion\\nHost"
+      ],
+      "predicted_nodes": [
+        "Private Network Access Layer\\n(Operator-Prepared Prerequisites::BastionHost\\n(SSH proxy · bastion_host\\nbastion_user · bastion_private_key"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Bastion Host. The AI correctly categorizes it as an 'Operator-Prepared Prerequisite' based on the PRD (FR-011, CON-003), which is a valid logical boundary even though it differs from the GT's physical subnet boundary."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Load Balancer\\n(primary",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Load Balancer\\n(standby"
+      ],
+      "predicted_nodes": [
+        "Private Network Access Layer\\n(Operator-Prepared Prerequisites::LoadBalancer\\n(public ingress to Jenkins\\nin private-network scenarios"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node logically represents the high-availability Load Balancer shown in the GT by merging the primary and standby nodes. The AI correctly categorizes it as an 'Operator-Prepared Prerequisite' based on the PRD (FR-012, CON-003), a valid logical boundary."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::NAT\\nGateway"
+      ],
+      "predicted_nodes": [
+        "Private Network Access Layer\\n(Operator-Prepared Prerequisites::NATGateway\\n(outbound connectivity\\nfor private slave subnets"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the NAT Gateway. The AI correctly categorizes it as an 'Operator-Prepared Prerequisite' for private subnets based on the PRD (FR-010, CON-003), which is a valid logical boundary for a workflow-focused architecture."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\\n(Public/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\\n(Public/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\\n(Private/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\\n(Private/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\\n(Private/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\\n(Private/Regional::Security List"
+      ],
+      "predicted_nodes": [
+        "OCI Resource Layer::ExistingOCINetworkObjects\\n(VCN · Subnets · Route Tables\\nDHCP Options · Security Lists"
+      ],
+      "match_type": "10:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI node correctly aggregates all the detailed, pre-existing network infrastructure components from the GT into a single logical entity, as specified in the PRD (FR-009, CON-002). Placing this in the 'OCI Resource Layer' is consistent with its logical architecture."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Internet",
+    "Oracle Cloud Infrastructure (Region::VCN::Internet\\nGateway",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Healthcheck"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Oracle Cloud Infrastructure",
+    "Operator Interface Layer::ClusterConfigVars\\n(label_prefix · jenkins_version\\njenkins_password · http_port\\njnlp_port · plugins",
+    "Operator Interface Layer::JSONInputFiles\\n(.json examples",
+    "Operator Interface Layer::LBAddressInput\\n(load_balancer_public_address\\n— operator-supplied prerequisite",
+    "Operator Interface Layer::SSHKeyInputs\\n(ssh_authorized_keys\\nssh_private_key",
+    "Operator Interface Layer::TerraformVariableFiles\\n(terraform.tfvars",
+    "Oracle Cloud Infrastructure::OCI IAM\\n(tenancy · user · compartment\\nfingerprint · private_key_path",
+    "Terraform Module Layer::JenkinsMasterModule\\n(master_ad · master_subnet_id\\nmaster_image_id · master_shape\\nmaster_user_data · master_display_name\\nhttp_port · jnlp_port",
+    "Terraform Module Layer::JenkinsSlaveModule\\n(slave_count · slave_ads\\nslave_subnet_ids · slave_image_id\\nslave_shape · slave_user_data\\nslave_display_name · bastion params",
+    "Terraform Module Layer::MasterOutputs\\n(master_address\\nhttp_port · jnlp_port",
+    "Terraform Orchestration Layer::OCIProviderConfig\\n(tenancy_ocid · user_ocid\\ncompartment_ocid · fingerprint\\nregion · private_key_path",
+    "Terraform Orchestration Layer::TerraformCLI\\n(init / plan / apply",
+    "Terraform Orchestration Layer::TerraformRootModule\\n(variables · provider · wiring"
+  ]
+}

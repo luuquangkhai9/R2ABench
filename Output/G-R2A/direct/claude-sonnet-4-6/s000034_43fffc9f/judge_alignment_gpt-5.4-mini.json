@@ -1,0 +1,401 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "MPI Communication Layer\\n(mpi4py::Internal MPI\\nCommunicator",
+        "MPI Communication Layer\\n(mpi4py::Internal MPI\\nCommunicator::Inter-Process\\nTask Dispatch",
+        "MPI Communication Layer\\n(mpi4py::Internal MPI\\nCommunicator::Result Return\\n(to spawning rank",
+        "MPI Communication Layer\\n(mpi4py::Internal MPI\\nCommunicator::SPMD Broadcast\\n& Barrier",
+        "MPI Communication Layer\\n(mpi4py::Internal MPI\\nCommunicator::Steal Request\\nMessaging"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's global MPI integration is decomposed into the internal MPI communicator and its message flows. The boundary attribution is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process"
+      ],
+      "predicted_nodes": [
+        "Global::MPI Process / Node 0\\n(Rank 0 — Primary",
+        "Global::MPI Process / Node 1..N\\n(Rank 1..N — Workers"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT generic MPI process node is represented as separate primary and worker MPI process/node variants. This is a reasonable refinement within the same architectural boundary."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Server\\nThread"
+      ],
+      "predicted_nodes": [
+        "Runtime Core::Lifecycle Manager::Server Thread\\n(yield control"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the server/yield-control thread within an MPI process, and the runtime-core lifecycle boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Worker\\nThread"
+      ],
+      "predicted_nodes": [
+        "Runtime Core::Worker Thread Pool\\n(per MPI Process::Worker Thread 1",
+        "Runtime Core::Worker Thread Pool\\n(per MPI Process::Worker Thread 2",
+        "Runtime Core::Worker Thread Pool\\n(per MPI Process::Worker Thread N"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT worker thread is split into a worker thread pool with multiple concrete threads. The boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Task Queue"
+      ],
+      "predicted_nodes": [
+        "Runtime Core::Worker Thread Pool\\n(per MPI Process::Worker Queue 1",
+        "Runtime Core::Worker Thread Pool\\n(per MPI Process::Worker Queue 2",
+        "Runtime Core::Worker Thread Pool\\n(per MPI Process::Worker Queue N"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT task queue is represented as multiple per-worker queues. This is semantically consistent with the task queue boundary."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::..."
+      ],
+      "predicted_nodes": [
+        "Runtime Core::Worker Thread Pool\\n(per MPI Process::Worker Queue 1",
+        "Runtime Core::Worker Thread Pool\\n(per MPI Process::Worker Queue 2",
+        "Runtime Core::Worker Thread Pool\\n(per MPI Process::Worker Queue N"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The detailed task queue expansion in GT is reasonably matched by the predicted per-worker queue structures."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::A1",
+        "Task Queue (in detail::A2",
+        "Task Queue (in detail::A3",
+        "Task Queue (in detail::B1",
+        "Task Queue (in detail::B2",
+        "Task Queue (in detail::Level 0",
+        "Task Queue (in detail::Level 1",
+        "Task Queue (in detail::Level 2",
+        "Task Queue (in detail::Level 3",
+        "Task Queue (in detail::Level 4",
+        "Task Queue (in detail::Level 5"
+      ],
+      "predicted_nodes": [
+        "Runtime Core::Worker Thread Pool\\n(per MPI Process::Worker Queue 1",
+        "Runtime Core::Worker Thread Pool\\n(per MPI Process::Worker Queue 2",
+        "Runtime Core::Worker Thread Pool\\n(per MPI Process::Worker Queue N"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The multiple detailed GT queue nodes appear to be consolidated into fewer predicted queue nodes. The semantic role remains the same and the boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "torc Python API (torc module::Lifecycle API::torc.init",
+        "torc Python API (torc module::Lifecycle API::torc.launch(f",
+        "torc Python API (torc module::Lifecycle API::torc.shutdown",
+        "torc Python API (torc module::Lifecycle API::torc.start(f"
+      ],
+      "predicted_nodes": [
+        "Runtime Core::Lifecycle Manager::Runtime Initializer",
+        "Runtime Core::Lifecycle Manager::Primary Task\\nLauncher (Rank 0",
+        "Runtime Core::Lifecycle Manager::Shutdown Handler",
+        "torc Python API (torc module::Lifecycle API::torc.init",
+        "torc Python API (torc module::Lifecycle API::torc.launch(f",
+        "torc Python API (torc module::Lifecycle API::torc.shutdown",
+        "torc Python API (torc module::Lifecycle API::torc.start(f"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The lifecycle APIs are reflected both as Python-facing APIs and as runtime-core lifecycle components. This is semantically aligned, though split across layers."
+    },
+    {
+      "gt_nodes": [
+        "torc Python API (torc module::Task Submission & Control API::torc.submit(f, *args,\\nqid=-1, callback=None",
+        "torc Python API (torc module::Task Submission & Control API::torc.wait(tasks=None",
+        "torc Python API (torc module::Task Submission & Control API::torc.map(f, *seq,\\nchunksize=1",
+        "torc Python API (torc module::Task Submission & Control API::torc.as_completed(tasks=None",
+        "torc Python API (torc module::Task Submission & Control API::torc.spmd(f, *args"
+      ],
+      "predicted_nodes": [
+        "Runtime Core::Task Scheduler::Cyclic Distribution\\n(qid=-1",
+        "Runtime Core::Task Scheduler::Directed Submission\\n(qid=target",
+        "Runtime Core::Task Scheduler::Parallel Map\\nOrchestrator",
+        "Runtime Core::Task Scheduler::Callback Executor\\n(on spawning rank",
+        "torc Python API (torc module::Task Submission & Control API::torc.submit(f, *args,\\nqid=-1, callback=None",
+        "torc Python API (torc module::Task Submission & Control API::torc.wait(tasks=None",
+        "torc Python API (torc module::Task Submission & Control API::torc.map(f, *seq,\\nchunksize=1",
+        "torc Python API (torc module::Task Submission & Control API::torc.as_completed(tasks=None",
+        "torc Python API (torc module::Task Submission & Control API::torc.spmd(f, *args"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The task submission/control APIs are decomposed into scheduler behaviors and API surfaces. This is a correct architectural refinement."
+    },
+    {
+      "gt_nodes": [
+        "torc Python API (torc module::Stealing Control API::torc.enable_stealing",
+        "torc Python API (torc module::Stealing Control API::torc.disable_stealing"
+      ],
+      "predicted_nodes": [
+        "Runtime Core::Task Stealing Engine",
+        "Runtime Core::Task Stealing Engine::Idle Worker\\nDetector",
+        "Runtime Core::Task Stealing Engine::Queue Monitor",
+        "Runtime Core::Task Stealing Engine::Steal Request\\nIssuer",
+        "torc Python API (torc module::Stealing Control API::torc.disable_stealing",
+        "torc Python API (torc module::Stealing Control API::torc.enable_stealing"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The stealing control APIs correspond to the task stealing engine internals. The boundary attribution is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "torc Python API (torc module::Query & Timing API::torc.gettime",
+        "torc Python API (torc module::Query & Timing API::torc.node_id()\\ntorc.num_nodes",
+        "torc Python API (torc module::Query & Timing API::torc.worker_id()\\ntorc.num_workers"
+      ],
+      "predicted_nodes": [
+        "torc Python API (torc module::Query & Timing API",
+        "torc Python API (torc module::Query & Timing API::torc.gettime",
+        "torc Python API (torc module::Query & Timing API::torc.node_id()\\ntorc.num_nodes",
+        "torc Python API (torc module::Query & Timing API::torc.worker_id()\\ntorc.num_workers"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The query/timing APIs are directly represented in the predicted node list with correct Python API boundary attribution."
+    },
+    {
+      "gt_nodes": [
+        "Task Descriptor (Future::Task Descriptor",
+        "Task Descriptor (Future::Task Descriptor::task.input",
+        "Task Descriptor (Future::Task Descriptor::task.result"
+      ],
+      "predicted_nodes": [
+        "Task Descriptor (Future::Task Descriptor",
+        "Task Descriptor (Future::Task Descriptor::task.input",
+        "Task Descriptor (Future::Task Descriptor::task.result"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The task descriptor and its input/result accessors are matched directly and correctly placed."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer::Image Preprocessing\\nExample"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Image Preprocessing\\nExample",
+        "External Data::Image Files\\n(labeled subfolders",
+        "External Data::HDF5 Output File"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The example is represented along with its external data inputs/outputs. The application-layer placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer::Master-Worker\\nExample"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Master-Worker\\nExample"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match with correct application-layer attribution."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer::Numerical Optimization\\nExample (CMA/Pi4U"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Numerical Optimization\\nExample (CMA/Pi4U"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match with correct application-layer attribution."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer::SPMD Switching\\nExample"
+      ],
+      "predicted_nodes": [
+        "Application Layer::SPMD Switching\\nExample"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match with correct application-layer attribution."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer::Task Stealing\\nExample"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Task Stealing\\nExample"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match with correct application-layer attribution."
+    },
+    {
+      "gt_nodes": [
+        "Environment Configuration::TORC_SERVER_YIELDTIME"
+      ],
+      "predicted_nodes": [
+        "Environment Configuration::TORC_SERVER_YIELDTIME"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match with correct environment-configuration boundary."
+    },
+    {
+      "gt_nodes": [
+        "Environment Configuration::TORC_STEALING\\n(default: False"
+      ],
+      "predicted_nodes": [
+        "Environment Configuration::TORC_STEALING\\n(default: False"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match with correct environment-configuration boundary."
+    },
+    {
+      "gt_nodes": [
+        "Environment Configuration::TORC_WORKERS\\n(default: 1"
+      ],
+      "predicted_nodes": [
+        "Environment Configuration::TORC_WORKERS\\n(default: 1"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match with correct environment-configuration boundary."
+    },
+    {
+      "gt_nodes": [
+        "Environment Configuration::TORC_WORKER_YIELDTIME"
+      ],
+      "predicted_nodes": [
+        "Environment Configuration::TORC_WORKER_YIELDTIME"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match with correct environment-configuration boundary."
+    },
+    {
+      "gt_nodes": [
+        "Optional Dependencies::cma"
+      ],
+      "predicted_nodes": [
+        "Optional Dependencies::cma"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match with correct optional-dependencies boundary."
+    },
+    {
+      "gt_nodes": [
+        "Optional Dependencies::h5py"
+      ],
+      "predicted_nodes": [
+        "Optional Dependencies::h5py"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match with correct optional-dependencies boundary."
+    },
+    {
+      "gt_nodes": [
+        "Optional Dependencies::numpy"
+      ],
+      "predicted_nodes": [
+        "Optional Dependencies::numpy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match with correct optional-dependencies boundary."
+    },
+    {
+      "gt_nodes": [
+        "Optional Dependencies::pillow"
+      ],
+      "predicted_nodes": [
+        "Optional Dependencies::pillow"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match with correct optional-dependencies boundary."
+    },
+    {
+      "gt_nodes": [
+        "Optional Dependencies::termcolor"
+      ],
+      "predicted_nodes": [
+        "Optional Dependencies::termcolor"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match with correct optional-dependencies boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Task Queue (in detail::...",
+    "Task Queue (in detail::A1",
+    "Task Queue (in detail::A2",
+    "Task Queue (in detail::A3",
+    "Task Queue (in detail::B1",
+    "Task Queue (in detail::B2",
+    "Task Queue (in detail::Level 0",
+    "Task Queue (in detail::Level 1",
+    "Task Queue (in detail::Level 2",
+    "Task Queue (in detail::Level 3",
+    "Task Queue (in detail::Level 4",
+    "Task Queue (in detail::Level 5"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::MPI Process / Node 0\\n(Rank 0 — Primary",
+    "Global::MPI Process / Node 1..N\\n(Rank 1..N — Workers",
+    "MPI Communication Layer\\n(mpi4py::Internal MPI\\nCommunicator",
+    "MPI Communication Layer\\n(mpi4py::Internal MPI\\nCommunicator::Inter-Process\\nTask Dispatch",
+    "MPI Communication Layer\\n(mpi4py::Internal MPI\\nCommunicator::Result Return\\n(to spawning rank",
+    "MPI Communication Layer\\n(mpi4py::Internal MPI\\nCommunicator::SPMD Broadcast\\n& Barrier",
+    "MPI Communication Layer\\n(mpi4py::Internal MPI\\nCommunicator::Steal Request\\nMessaging",
+    "MPI Process / Node 0\\n(Rank 0 — Primary::Primary Application\\nTask",
+    "MPI Process / Node 1..N\\n(Rank 1..N — Workers::Worker Execution\\n(awaiting tasks",
+    "Runtime Core::Lifecycle Manager",
+    "Runtime Core::Lifecycle Manager::Primary Task\\nLauncher (Rank 0",
+    "Runtime Core::Lifecycle Manager::Runtime Initializer",
+    "Runtime Core::Lifecycle Manager::Server Thread\\n(yield control",
+    "Runtime Core::Lifecycle Manager::Shutdown Handler",
+    "Runtime Core::Task Scheduler",
+    "Runtime Core::Task Scheduler::Callback Executor\\n(on spawning rank",
+    "Runtime Core::Task Scheduler::Cyclic Distribution\\n(qid=-1",
+    "Runtime Core::Task Scheduler::Directed Submission\\n(qid=target",
+    "Runtime Core::Task Scheduler::Parallel Map\\nOrchestrator",
+    "Runtime Core::Task Stealing Engine",
+    "Runtime Core::Task Stealing Engine::Idle Worker\\nDetector",
+    "Runtime Core::Task Stealing Engine::Queue Monitor",
+    "Runtime Core::Task Stealing Engine::Steal Request\\nIssuer",
+    "Runtime Core::Worker Thread Pool\\n(per MPI Process",
+    "Runtime Core::Worker Thread Pool\\n(per MPI Process::Worker Queue 1",
+    "Runtime Core::Worker Thread Pool\\n(per MPI Process::Worker Queue 2",
+    "Runtime Core::Worker Thread Pool\\n(per MPI Process::Worker Queue N",
+    "Runtime Core::Worker Thread Pool\\n(per MPI Process::Worker Thread 1",
+    "Runtime Core::Worker Thread Pool\\n(per MPI Process::Worker Thread 2",
+    "Runtime Core::Worker Thread Pool\\n(per MPI Process::Worker Thread N",
+    "torc Python API (torc module::Lifecycle API",
+    "torc Python API (torc module::Task Submission & Control API",
+    "torc Python API (torc module::Stealing Control API",
+    "torc Python API (torc module::Query & Timing API"
+  ]
+}

@@ -1,0 +1,113 @@
+@startuml
+' archifiltre-docs subset: settings sanitization, exports, hash processing
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam roundcorner 8
+
+title archifiltre-docs (subset) — Settings, Exports, Hashing
+
+rectangle "Electron Desktop Application" as Electron {
+  [Settings Sanitizer] as SettingsSanitizer
+  [Export Controller] as ExportController
+  [Hash Controller] as HashController
+  [Translation Module] as I18n
+}
+
+[Background Worker Infra\n(Worker/Child Process)] as WorkerInfra
+
+package "Export Workers" {
+  [Tree CSV Export Worker] as TreeWorker
+  [RESIP Export Worker] as ResipWorker
+  [CSV Export Worker] as CsvWorker
+  [Excel Export Worker] as ExcelWorker
+}
+
+package "Hashing" {
+  [Hash Batch Processor] as HashBatch
+}
+
+folder "App User Data Directory\napp.getPath(\"userData\")" as UserDataDir
+artifact "hash-result-debug" as DebugResult
+artifact "hash-error-debug" as DebugError
+
+package "Export Inputs" {
+  [Files & Folders Map] as FilesMap
+  [Files/Folders Metadata] as FFMeta
+  [Aliases] as Aliases
+  [Comments] as Comments
+  [Tags] as Tags
+  [Hashes] as Hashes
+  [CsvExporterData] as CsvExporterData
+}
+
+package "Hash Inputs" {
+  [paths[]] as Paths
+  [basePath] as BasePath
+}
+
+' Settings sanitization
+[Persisted Settings] as Persisted
+[Normalized Settings] as Normalized
+Persisted --> SettingsSanitizer : persisted values
+SettingsSanitizer --> Normalized : defaults on empty/invalid\n- isTrackingEnabled=true\n- isMonitoringEnabled=true\n- language="en"\n(FR-001, FR-002)
+
+note right of SettingsSanitizer
+- Replace invalid values; preserve valid ones
+end note
+
+' Language propagation
+I18n --> ExportController : current language
+
+' Export inputs into controller
+FilesMap --> ExportController : Tree CSV input (FR-003)
+Aliases --> ExportController
+Comments --> ExportController
+Tags --> ExportController
+FFMeta --> ExportController
+Hashes --> ExportController
+CsvExporterData --> ExportController
+
+' Background worker invocation
+ExportController --> WorkerInfra : invoke background workers (NFR-001)
+WorkerInfra --> TreeWorker
+WorkerInfra --> ResipWorker
+WorkerInfra --> CsvWorker
+WorkerInfra --> ExcelWorker
+
+' Controller -> workers with required context
+ExportController --> TreeWorker : files map + language (FR-003, FR-004)
+ExportController --> ResipWorker : files, metadata, aliases, comments, tags (FR-005)
+ExportController --> CsvWorker : export data + language (FR-006)
+ExportController --> ExcelWorker : CsvExporterData + language (FR-007)
+
+' Workers emit asynchronous results (Observable/stream-like)
+TreeWorker --> ExportController : Observable(progress updates, final tree CSV) (FR-003)
+ResipWorker --> ExportController : Observable(progress counts + empty CSV, final CSV) (FR-005)
+CsvWorker --> ExportController : Observable(CSV export) (FR-006)
+ExcelWorker --> ExportController : Observable(Excel export) (FR-007)
+
+note right of TreeWorker
+- Emits computation updates\n- Final export string emitted last
+end note
+
+note right of ResipWorker
+- In-progress results: counts + empty RESIP CSV\n- Completion: final RESIP CSV\n- Controller filters + maps result payload
+end note
+
+' Hashing workflow
+Paths --> HashController : paths (FR-008)
+BasePath --> HashController : basePath (FR-008)
+HashController --> HashBatch : batch(paths, basePath) (FR-008, NFR-002)
+HashBatch --> HashController : stream(hash maps) (FR-008)
+
+HashController --> UserDataDir : open debug writers (FR-009, NFR-004)
+UserDataDir -- DebugResult
+UserDataDir -- DebugError
+HashController --> DebugResult : write results (FR-009)
+HashController --> DebugError : write errors (FR-009)
+
+note bottom of HashController
+- Aggregates batch hash results into merged hash maps
+end note
+
+@enduml

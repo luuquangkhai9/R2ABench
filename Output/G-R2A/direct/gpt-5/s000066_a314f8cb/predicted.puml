@@ -1,0 +1,82 @@
+@startuml
+title Earth Defender - System Architecture
+
+left to right direction
+skinparam componentStyle rectangle
+
+cloud "DNS / Load Balancer" as DNS
+
+node "Web Server" as WebSrv {
+  artifact "Static Assets\n- HTML\n- CSS\n- JavaScript\n- Images" as Assets
+}
+
+rectangle "Browser Client\n(Three.js)" as Client {
+  component "Game UI & Scene" as UI
+  component "Networking Layer\n- WebSocket Client\n- JSON [event,data]\n- Reconnect Logic" as Net
+  component "Heartbeat Timer\n- ping(null) every 60s\n- handle pong" as Heartbeat
+}
+
+node "Game Server Deployment\n(Erlang/OTP)" as Deploy {
+  node "Master Node" as Master {
+    component "Room Manager\n- Create/Join Rooms\n- Player Count Tracking" as RoomMgr
+    component "WebSocket API\nInbound actions:\n- game_reconnect\n- room_players_number\n- servers_list\n- servers_list_redirect\n- server_error\n- pong" as WSAPI
+    component "Server List / Redirect Service" as SvcList
+  }
+  node "Replica Node (Optional)" as Replica {
+    component "Replica Runtime\n- Fault-tolerant standby" as ReplicaRT
+  }
+}
+
+' Name resolution and static content delivery
+Client -[#blue]-> DNS : Resolve web server host
+DNS -[#blue]-> WebSrv : A/AAAA/CNAME
+
+Client -[#green]-> WebSrv : HTTP GET /assets
+WebSrv -[#green]-> Client : Static content
+
+' Multiplayer runtime over WebSocket
+Client -[#red]-> Master : WebSocket over HTTP\nJSON [event,data]
+Master -[#red]-> Client : WebSocket JSON [action,data?]
+
+' Fault tolerance / replica topology
+Master -[#purple]-> Replica : Fault-tolerance topology\n(replica/standby)
+
+' Internal relations
+WSAPI -[hidden]-> RoomMgr
+WSAPI -[hidden]-> SvcList
+
+' Constraints and behaviors
+note right of Client
+- Initiates outbound connections only (no P2P)
+- On close: reconnect; on reopen: send reconnect context [room_id, player_id, index]
+- Sends ping(null) every 60s; accepts pong
+- Parses inbound JSON [action, data?]
+end note
+
+note left of Master
+Provides to clients:
+- servers_list (update list)
+- servers_list_redirect (update list, then disconnect)
+- room_players_number (update count)
+- game_reconnect (re-add ship, continue play)
+- server_error (client reload)
+- pong (heartbeat response)
+end note
+
+note top of Deploy
+Non-functional:
+- Soft real-time gameplay
+- Uses HTTP + WebSocket protocols
+- Asynchronous, concurrent messaging
+- Supports replica for fault tolerance
+end note
+
+note bottom of diagram
+Key transports:
+- HTTP (static assets)
+- WebSocket over HTTP (multiplayer runtime)
+Constraints:
+- Distributed roles: Browser Client, Web Server, Game Server (Master/Replica)
+- No client-to-client connectivity
+end note
+@enduml

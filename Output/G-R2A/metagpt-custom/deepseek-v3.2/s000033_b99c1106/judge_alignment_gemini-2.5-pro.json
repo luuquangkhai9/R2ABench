@@ -1,0 +1,76 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver"
+      ],
+      "predicted_nodes": [
+        "Airflow Service::Airflow Webserver\\n(localhost:8282"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node for the Airflow webserver correctly maps to the GT's Airflow component, which the PRD confirms acts as the driver and has a webserver. The AI's 'Airflow Service' boundary is a semantically equivalent and more specific grouping than the GT's 'Docker Compose Environment'."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Cluster Manager\\n(Spark Standalone"
+      ],
+      "predicted_nodes": [
+        "Spark Service::Spark Master\\n(localhost:8181, spark:7077"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The Spark Master is correctly identified as the 'Cluster Manager' described in the PRD. The 'Spark Service' boundary is a valid semantic equivalent to the GT's 'Docker Compose Environment' for this component."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark"
+      ],
+      "predicted_nodes": [
+        "Jupyter Service::Jupyter/PySpark\\n(localhost:8888"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The Jupyter Notebook component is correctly matched. The 'Jupyter Service' boundary is a reasonable and semantically equivalent alternative to the GT's broader 'Docker Compose Environment'."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Postgres"
+      ],
+      "predicted_nodes": [
+        "Data & Storage::PostgreSQL\\n(Airflow Metadata"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The Postgres database is correctly identified. The AI placed it in a 'Data & Storage' layer, which is architecturally more descriptive and semantically correct compared to the GT's deployment-centric 'Docker Compose Environment' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 1",
+        "Docker Compose Environment::Spark Workers::Worker 2",
+        "Docker Compose Environment::Spark Workers::Worker 3"
+      ],
+      "predicted_nodes": [
+        "Spark Service::spark-worker-1",
+        "Spark Service::spark-worker-2",
+        "Spark Service::spark-worker-3"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the three specific Spark worker services mentioned in the PRD. The 'Spark Service' boundary is a valid grouping for all Spark components, and its semantic meaning is consistent with the GT's 'Docker Compose Environment::Spark Workers' sub-boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Docker Compose Environment::Spark Workers::Worker N",
+    "Global::Data Engineer"
+  ],
+  "unmatched_predicted_nodes": [
+    "Airflow Service::spark_default\\nConnection",
+    "Global::Airflow Service",
+    "Global::Data & Storage",
+    "Global::Docker Engine",
+    "Global::Host Machine",
+    "Global::Jupyter Service",
+    "Global::Spark Service"
+  ]
+}

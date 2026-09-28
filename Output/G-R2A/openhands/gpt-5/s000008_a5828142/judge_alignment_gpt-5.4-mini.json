@@ -1,0 +1,229 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::InfluxDB"
+      ],
+      "predicted_nodes": [
+        "Global::InfluxDB\\n(coding-process records"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the InfluxDB time-series database used for coding-process records. The predicted node uses a flattened/global boundary, but the semantic placement is still correct."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Global::MySQL\\n(users, projects, versions, battles"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent MySQL as the relational database for users, projects, versions, and battles. Boundary naming differs, but the architecture location is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::Redis"
+      ],
+      "predicted_nodes": [
+        "Global::Redis\\n(cache, workspace mapping,\\nbattle invitations/state"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent Redis for cache, workspace mapping, and battle state. The predicted node is semantically aligned with the GT database boundary."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Reverse Proxy::Nginx"
+      ],
+      "predicted_nodes": [
+        "Global::Nginx Reverse Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node correctly identifies Nginx as the reverse proxy. The boundary is simplified but not incorrect."
+    },
+    {
+      "gt_nodes": [
+        "Backend Repo::CI/CD Workflow"
+      ],
+      "predicted_nodes": [
+        "Global::Backend (Node.js/Express + Socket.IO"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a repository CI/CD workflow, while the predicted node is the backend runtime/system component. These are different concerns, so this is a boundary/context error."
+    },
+    {
+      "gt_nodes": [
+        "Backend Repo::Deploy Key"
+      ],
+      "predicted_nodes": [
+        "Global::Backend (Node.js/Express + Socket.IO"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "A deploy key is a repository/deployment credential, not the backend runtime component. This is a mismatch in architectural boundary."
+    },
+    {
+      "gt_nodes": [
+        "Backend Repo::GitHub"
+      ],
+      "predicted_nodes": [
+        "Global::Backend (Node.js/Express + Socket.IO"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "GitHub is the source repository hosting boundary, not the backend application boundary. The predicted placement is incorrect."
+    },
+    {
+      "gt_nodes": [
+        "Backend Repo::Node.js"
+      ],
+      "predicted_nodes": [
+        "Global::Backend (Node.js/Express + Socket.IO"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT indicates Node.js as part of the backend repo/runtime stack, and the predicted backend node explicitly includes Node.js/Express/Socket.IO. This is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Coding Sandbox::Coding Sandbox 1::Docker",
+        "Coding Sandbox::Coding Sandbox 2::Docker"
+      ],
+      "predicted_nodes": [
+        "Global::Docker Sandbox\\n(code compile/execute"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has two sandbox instances, while the prediction aggregates them into one Docker sandbox node. This merge is acceptable and the boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Coding Sandbox::Coding Sandbox 1::Node.js",
+        "Coding Sandbox::Coding Sandbox 2::Node.js"
+      ],
+      "predicted_nodes": [
+        "Global::Docker Sandbox\\n(code compile/execute"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT sandbox instances include Node.js execution environments; the predicted Docker sandbox captures the same execution role. The merge is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Coding Sandbox::Coding Sandbox 1::Exporter",
+        "Coding Sandbox::Coding Sandbox 2::Exporter"
+      ],
+      "predicted_nodes": [
+        "Global::Docker Sandbox\\n(code compile/execute"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "Exporter is a distinct sandbox-related component, not explicitly captured by the predicted Docker sandbox node. The merge is too coarse and loses a meaningful architectural element."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Repo::CI/CD Workflow"
+      ],
+      "predicted_nodes": [
+        "Global::Browser (Vue App"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "CI/CD workflow for the frontend repo is not the same as the Vue browser application runtime. This is a boundary confusion."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Repo::Deploy Key"
+      ],
+      "predicted_nodes": [
+        "Global::Browser (Vue App"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "A deploy key belongs to repository/deployment infrastructure, not the browser application layer."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Repo::GitHub"
+      ],
+      "predicted_nodes": [
+        "Global::Browser (Vue App"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "GitHub is source control infrastructure, while the predicted node is the frontend runtime. These are not equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Repo::Vue 3"
+      ],
+      "predicted_nodes": [
+        "Global::Browser (Vue App"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Vue 3 in the frontend repo maps correctly to the Vue browser app runtime. The naming differs but the architectural layer is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Developer"
+      ],
+      "predicted_nodes": [
+        "Global::Browser (Vue App"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "A developer is an actor, not the browser frontend component. The predicted node does not match this GT node."
+    },
+    {
+      "gt_nodes": [
+        "Global::End User"
+      ],
+      "predicted_nodes": [
+        "Global::Browser (Vue App"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "An end user is an actor, whereas the predicted node is the frontend application. This is not a valid semantic match."
+    },
+    {
+      "gt_nodes": [
+        "Static Asset Delivery::CDN\\nCloudFront"
+      ],
+      "predicted_nodes": [
+        "Global::CDN Distribution\\n(CloudFront-style"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent CDN-style static asset distribution via CloudFront-like infrastructure. The boundary is simplified but semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Static Asset Delivery::Storage\\nS3 bucket"
+      ],
+      "predicted_nodes": [
+        "Global::Object Storage (S3-compatible"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent S3-compatible object storage for asset/file storage. The names differ but the component is equivalent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Application Runtime::Reverse Proxy::Express"
+  ],
+  "unmatched_predicted_nodes": [
+    "Backend (Node.js/Express + Socket.IO::Auth API / JWT",
+    "Backend (Node.js/Express + Socket.IO::Battle Socket API",
+    "Backend (Node.js/Express + Socket.IO::Code Execution API",
+    "Backend (Node.js/Express + Socket.IO::File Upload API",
+    "Backend (Node.js/Express + Socket.IO::Playback API",
+    "Backend (Node.js/Express + Socket.IO::Project API",
+    "Backend (Node.js/Express + Socket.IO::Version API / Init Files",
+    "Backend (Node.js/Express + Socket.IO::Workspace Socket API"
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Audit\nService"
+      ],
+      "predicted_nodes": [
+        "Supporting Services Layer::Audit Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Audit Service. The boundary is semantically correct, mapping the cloud infrastructure application to a supporting services layer."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Customer\nLogic",
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Out of the\nBox Services"
+      ],
+      "predicted_nodes": [
+        "Supporting Services Layer::Background Components::Cloud Connectors"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT specifies different types of cloud connectors which the AI grouped into a single Cloud Connectors node. The boundary mapping is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Notification\nService"
+      ],
+      "predicted_nodes": [
+        "Supporting Services Layer::Background Components::Notification Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Notification Service. Grouping it under background components in supporting services is valid according to the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Query\nService"
+      ],
+      "predicted_nodes": [
+        "Supporting Services Layer::Query Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match for Query Service with a semantically equivalent layer mapping."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::BPMN, Form\nand Rule Defs"
+      ],
+      "predicted_nodes": [
+        "Business Process Layer::Example Runtime Bundle"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The BPMN/Form/Rule definitions represent the deployed components within the Example Runtime Bundle. Mapping to Business Process Layer is valid."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::Process\nRuntime"
+      ],
+      "predicted_nodes": [
+        "Business Process Layer::ProcessRuntime API",
+        "Business Process Layer::TaskRuntime API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI split the overall Process Runtime environment into its specific ProcessRuntime and TaskRuntime API components. The boundary assignment is correct."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Gateway"
+      ],
+      "predicted_nodes": [
+        "API Gateway Layer::Gateway/API Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Gateway, correctly categorized under a Gateway layer."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Config Maps\n(Kubernetes",
+        "Activiti Cloud Infrastructure::Registry\n(Kubernetes"
+      ],
+      "predicted_nodes": [
+        "Kubernetes/GKE Cluster::Deployment Descriptors"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Kubernetes Config Maps and Registry correspond directly to the deployment descriptors mentioned in the PRD for cluster configuration."
+    },
+    {
+      "gt_nodes": [
+        "Global::Client"
+      ],
+      "predicted_nodes": [
+        "Presentation/Client Layer::Command-line Tools",
+        "Presentation/Client Layer::REST API Clients"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The generic Client node from GT is detailed into Command-line Tools and REST API clients by the AI. Layer semantics are perfectly aligned."
+    },
+    {
+      "gt_nodes": [
+        "Global::SSO/IDM\n(Keycloak"
+      ],
+      "predicted_nodes": [
+        "Identity & Security Layer::Keycloak"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both clearly represent Keycloak for Identity Management. Placing it in the Identity & Security Layer is completely accurate."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Kubernetes/GKE Cluster",
+    "Kubernetes/GKE Cluster::NGINX Ingress Controller",
+    "Kubernetes/GKE Cluster::Public IP",
+    "Spring Boot Application::Spring Security",
+    "Supporting Services Layer::Background Components"
+  ]
+}

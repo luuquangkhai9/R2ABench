@@ -1,0 +1,144 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Airflow\n(Spark Driver"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Network::Airflow Webserver",
+        "Docker Compose Network::Airflow Webserver::LocalExecutor",
+        "Docker Compose Network::Airflow Webserver::Scheduler",
+        "Docker Compose Network::Airflow Webserver::SparkSubmitOperator",
+        "Docker Compose Network::Airflow Webserver::Web UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Airflow/Spark driver node is decomposed into the Airflow webserver and its internal execution components. This is a semantically consistent split within the Docker Compose environment boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Cluster Manager\n(Spark Standalone"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Network::Spark Master",
+        "Docker Compose Network::Spark Master::Cluster Manager",
+        "Docker Compose Network::Spark Master::Master UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Spark standalone cluster manager node matches the predicted Spark Master and its subcomponents. The boundary attribution remains consistent with the deployment architecture."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\n(Spark"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Network::Jupyter/PySpark",
+        "Docker Compose Network::Jupyter/PySpark::Notebook Server",
+        "Docker Compose Network::Jupyter/PySpark::PySpark Kernel"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Jupyter/PySpark node is split into notebook server and kernel components, which is semantically correct and remains within the same container/service boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Postgres"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Network::Postgres (9.6",
+        "Docker Compose Network::Postgres (9.6::Metadata Database"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Postgres node corresponds to the predicted Postgres service and its metadata database subnode. The package naming differs slightly, but the boundary attribution is equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 1"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Network::Spark Worker 1",
+        "Docker Compose Network::Spark Worker 1::Executor"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT worker node matches the predicted Spark Worker 1 service and its executor subcomponent. This is a correct decomposition of the same functional worker boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 2"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Network::Spark Worker 2",
+        "Docker Compose Network::Spark Worker 2::Executor"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT worker node matches the predicted Spark Worker 2 service and its executor subcomponent. Boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 3"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Network::Spark Worker 3",
+        "Docker Compose Network::Spark Worker 3::Executor"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT worker node matches the predicted Spark Worker 3 service and its executor subcomponent. Boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker N"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT includes an extensible additional-worker pattern, but the predicted list does not represent this generic/scalable worker node explicitly."
+    },
+    {
+      "gt_nodes": [
+        "Global::Data Engineer"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Data Engineer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The Data Engineer actor is correctly identified, and placing it under Host Machine is a reasonable semantic equivalent for the external user/actor boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Docker Compose Environment::Spark Workers::Worker N"
+  ],
+  "unmatched_predicted_nodes": [
+    "Bundled Spark CLI::ML libsvm loader",
+    "Bundled Spark CLI::pyspark shell",
+    "Bundled Spark CLI::run-example",
+    "Docker Compose Network::Airflow Webserver",
+    "Docker Compose Network::Airflow Webserver::LocalExecutor",
+    "Docker Compose Network::Airflow Webserver::Scheduler",
+    "Docker Compose Network::Airflow Webserver::SparkSubmitOperator",
+    "Docker Compose Network::Airflow Webserver::Web UI",
+    "Docker Compose Network::Jupyter/PySpark",
+    "Docker Compose Network::Jupyter/PySpark::Notebook Server",
+    "Docker Compose Network::Jupyter/PySpark::PySpark Kernel",
+    "Docker Compose Network::Postgres (9.6",
+    "Docker Compose Network::Postgres (9.6::Metadata Database",
+    "Docker Compose Network::Shared Volumes",
+    "Docker Compose Network::Spark Master",
+    "Docker Compose Network::Spark Master::Cluster Manager",
+    "Docker Compose Network::Spark Master::Master UI",
+    "Docker Compose Network::Spark Worker 1",
+    "Docker Compose Network::Spark Worker 1::Executor",
+    "Docker Compose Network::Spark Worker 2",
+    "Docker Compose Network::Spark Worker 2::Executor",
+    "Docker Compose Network::Spark Worker 3",
+    "Docker Compose Network::Spark Worker 3::Executor",
+    "Global::Bundled Spark CLI",
+    "Global::Docker Compose Network",
+    "Global::Host Machine"
+  ]
+}

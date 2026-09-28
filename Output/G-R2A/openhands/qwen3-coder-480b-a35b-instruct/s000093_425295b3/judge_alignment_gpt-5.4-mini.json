@@ -1,0 +1,164 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::OpenVR\nSteamVR Runtime",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::OpenVR Driver Interface",
+        "Global::SteamVR/OpenVR Runtime"
+      ],
+      "reasoning": "The ground truth runtime dependency is represented by the predicted runtime and driver-interface nodes. The runtime concept is covered, though split into two related nodes."
+    },
+    {
+      "gt_node": "Global::User Application",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::User Application"
+      ],
+      "reasoning": "Exact conceptual match for the external control input source application."
+    },
+    {
+      "gt_node": "Virtual Motion Tracker::Legacy Controller Binding\nmycontroller JSON",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node explicitly represents the legacy controller binding artifact or mycontroller JSON binding definition."
+    },
+    {
+      "gt_node": "Virtual Motion Tracker::OpenVR Path Constants\n/user/body and /client_info",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node covers the OpenVR path constants /user/body and /client_info dependency/context concept."
+    },
+    {
+      "gt_node": "Virtual Motion Tracker::VMT Driver\nC++",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::VMT Driver"
+      ],
+      "reasoning": "The predicted VMT Driver node covers the driver responsibility, despite missing the language annotation and being placed at Global."
+    },
+    {
+      "gt_node": "Virtual Motion Tracker::VMT Manager\nC#",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::VMT Manager"
+      ],
+      "reasoning": "The predicted VMT Manager node covers the manager responsibility, despite missing the language annotation and being placed at Global."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Global::OSC Interface",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::User Application",
+        "Virtual Motion Tracker::VMT Manager\nC#"
+      ],
+      "reasoning": "OSC is explicitly identified in the PRD as the architectural external control input interface between the user application and VMT Manager."
+    },
+    {
+      "predicted_node": "Global::OpenVR Driver Interface",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::OpenVR\nSteamVR Runtime",
+        "Virtual Motion Tracker::VMT Driver\nC++"
+      ],
+      "reasoning": "The OpenVR driver interface is a core dependency and interface concept in the PRD, grounded in the runtime-driver integration."
+    },
+    {
+      "predicted_node": "Global::Shared Memory (JSON",
+      "grounded": true,
+      "reference_nodes": [
+        "Virtual Motion Tracker::VMT Manager\nC#",
+        "Virtual Motion Tracker::VMT Driver\nC++"
+      ],
+      "reasoning": "Shared-memory JSON exchange between manager and driver is a central functional requirement, though the node name is truncated."
+    },
+    {
+      "predicted_node": "Global::SteamVR/OpenVR Runtime",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::OpenVR\nSteamVR Runtime",
+        "Virtual Motion Tracker::VMT Driver\nC++"
+      ],
+      "reasoning": "This is a direct semantic match to the runtime dependency in the GT."
+    },
+    {
+      "predicted_node": "Global::User Application",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::User Application"
+      ],
+      "reasoning": "Exact match to the GT user application node."
+    },
+    {
+      "predicted_node": "Global::VMT Driver",
+      "grounded": true,
+      "reference_nodes": [
+        "Virtual Motion Tracker::VMT Driver\nC++"
+      ],
+      "reasoning": "Direct match to the GT VMT Driver responsibility, with only boundary/language metadata differences."
+    },
+    {
+      "predicted_node": "Global::VMT Manager",
+      "grounded": true,
+      "reference_nodes": [
+        "Virtual Motion Tracker::VMT Manager\nC#"
+      ],
+      "reasoning": "Direct match to the GT VMT Manager responsibility, with only boundary/language metadata differences."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::OpenVR\nSteamVR Runtime"
+      ],
+      "predicted_nodes": [
+        "Global::SteamVR/OpenVR Runtime",
+        "Global::OpenVR Driver Interface"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT runtime dependency is represented by a split into runtime and interface-related predicted nodes. The Global boundary is acceptable for a dependency/runtime concept."
+    },
+    {
+      "gt_nodes": [
+        "Global::User Application"
+      ],
+      "predicted_nodes": [
+        "Global::User Application",
+        "Global::OSC Interface"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The user application concept is directly matched, and the OSC interface is a semantically related external control input interface described by the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::VMT Driver\nC++"
+      ],
+      "predicted_nodes": [
+        "Global::VMT Driver"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The driver concept matches directly; the predicted node omits the package and language annotation but stays within the correct architectural responsibility."
+    },
+    {
+      "gt_nodes": [
+        "Virtual Motion Tracker::VMT Manager\nC#"
+      ],
+      "predicted_nodes": [
+        "Global::VMT Manager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The manager concept matches directly; the predicted node omits the package and language annotation but stays within the correct architectural responsibility."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Virtual Motion Tracker::Legacy Controller Binding\nmycontroller JSON",
+    "Virtual Motion Tracker::OpenVR Path Constants\n/user/body and /client_info"
+  ],
+  "unmatched_predicted_nodes": []
+}

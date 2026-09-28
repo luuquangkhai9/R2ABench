@@ -1,0 +1,105 @@
+@startuml
+' Deployment Nodes
+node "Client Tier" {
+  component "Browser" as browser
+}
+
+node "Application Tier" {
+  component "User Management Service" as userMgmt
+  component "File Processing Service" as fileProc
+  component "Project Management Service" as projMgmt
+  component "Collaboration Service" as collab
+  component "Editor Component" as editor
+  component "Upload Handler" as uploadHandler
+  component "Password Recovery Service" as pwdRecovery
+}
+
+node "Service Tier" {
+  component "AI Recognition Engine" as aiEngine
+  component "LaTeX Generation Service" as latexGen
+  component "Rendering Engine" as renderer
+  component "Version Control System" as vcs
+}
+
+node "Data Tier" {
+  database "Database" as db
+  component "File Storage System" as fileStorage
+}
+
+cloud "External Systems" {
+  component "LaTeX Engines" as latexEngines
+  component "Python Runtime" as python
+}
+
+' Presentation Layer Package
+package "Presentation Layer" {
+  [browser]
+}
+
+' Application Layer Package
+package "Application Layer" {
+  [userMgmt]
+  [fileProc]
+  [projMgmt]
+  [collab]
+  [editor]
+  [uploadHandler]
+  [pwdRecovery]
+}
+
+' Service Layer Package
+package "Service Layer" {
+  [aiEngine]
+  [latexGen]
+  [renderer]
+  [vcs]
+}
+
+' Data Layer Package
+package "Data Layer" {
+  [db]
+  [fileStorage]
+}
+
+' External Systems Package
+package "External Systems" {
+  [latexEngines]
+  [python]
+}
+
+' Interfaces
+interface "REST API" as restApi
+interface "WebSocket" as ws
+
+' Connections
+browser --> restApi : HTTP/HTTPS
+browser --> ws : Real-time updates
+restApi --> userMgmt
+restApi --> fileProc
+restApi --> projMgmt
+restApi --> collab
+restApi --> editor
+restApi --> uploadHandler
+restApi --> pwdRecovery
+
+fileProc --> aiEngine : Image/PDF/handwritten input
+aiEngine --> latexGen : Recognized content
+latexGen --> renderer : LaTeX code for preview
+renderer --> ws : Real-time rendering updates
+userMgmt --> db : User/auth data
+projMgmt --> db : Project metadata
+vcs --> db : Version history
+collab --> db : Collaboration data
+collab --> userMgmt : Permission validation
+editor --> latexGen : Edit LaTeX results
+uploadHandler --> fileProc : Handle drag-and-drop uploads
+pwdRecovery --> userMgmt : Validate recovery requests
+fileProc --> projMgmt : Processed file results
+fileProc --> db : File metadata
+renderer --> db : Preview cache/storage
+fileProc --> fileStorage : Store processed files
+projMgmt --> fileStorage : Retrieve project files
+vcs --> latexEngines : Compile LaTeX
+aiEngine --> python : Execute AI models
+
+@enduml

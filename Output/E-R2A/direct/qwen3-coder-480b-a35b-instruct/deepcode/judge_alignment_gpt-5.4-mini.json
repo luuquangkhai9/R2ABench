@@ -1,0 +1,240 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Business Layer::Interceptor"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Platform Operations::Security Filter"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent back-end request filtering / permission authentication before business logic. The predicted node is more specific, but the boundary remains within the business/server side and is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::JWT Authentication"
+      ],
+      "predicted_nodes": [
+        "Business Layer::User Module::Authentication Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to user identity authentication based on JWT/OAuth in the back end. The module name differs, but the architectural layer and responsibility are consistent."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::LomBok"
+      ],
+      "predicted_nodes": [
+        "Business Layer::User Module::User Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "Lombok is a back-end development/library concern, not a user service. This is not a semantic match and indicates a component confusion."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Mybatis Plus"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Problem Module::Problem Service",
+        "Business Layer::Problem Module::Solution Service",
+        "Business Layer::User Module::User Service",
+        "Business Layer::Forum Module::Discussion Service",
+        "Business Layer::Forum Module::Comment Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "MyBatis-Plus is a persistence/data-access framework, while the predicted nodes are business services. They are not functionally equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::SMTP Service"
+      ],
+      "predicted_nodes": [
+        "External Services::SMTP Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to email sending capability via SMTP. The predicted node uses an external-service boundary, which is semantically appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Sandbox Management",
+        "Security Sandbox::Docker Singleton Mode::Seccomp: Restrict System Calls::uLimit: Restrict Process Resources::Execute User Code"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Judging Module::JudgeCore",
+        "Business Layer::Judging Module::JudgeHost",
+        "Business Layer::Judging Module::Judging Scheduler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT combines sandbox execution management and user-code execution restrictions; the predicted model splits the judging subsystem into JudgeHost/JudgeCore/scheduler, which is semantically aligned with the judging and sandboxing responsibilities. Boundary placement is acceptable for a judging subsystem."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Platform Operations::CI/CD Pipeline"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Spring Boot is the application framework, while CI/CD is deployment automation. These are unrelated concerns."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Swagger API"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Platform Operations::Monitoring & Alerting"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Swagger is API documentation, not monitoring/alerting. This is a functional mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Access Layer::MySQL Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the MySQL data store. The predicted node uses a different boundary label, but it is semantically equivalent and still correctly placed as a data/storage concern."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Database::Redis"
+      ],
+      "predicted_nodes": [
+        "Access Layer::Redis Cache"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to Redis used as a cache/store. The boundary differs in wording but is semantically consistent with data access/storage."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Distributed Storage::Object Storage Service OSS"
+      ],
+      "predicted_nodes": [
+        "Access Layer::MinIO Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote object storage for files/test cases. MinIO is the concrete implementation of the GT object storage service."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Distributed Storage::Qiniu Cloud Storage"
+      ],
+      "predicted_nodes": [
+        "Access Layer::MinIO Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Qiniu Cloud Storage and MinIO are different storage backends. This is a substitute, not a true semantic match."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::ESLint",
+        "Frontend Layer::TypeScript",
+        "Frontend Layer::Vue3",
+        "Frontend Layer::Vuex",
+        "Frontend Layer::Webpack",
+        "Frontend Layer::antd-vue",
+        "Frontend Layer::axios",
+        "Frontend Layer::vue-router"
+      ],
+      "predicted_nodes": [
+        "Frontend Layer::Vue 3 Application"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT lists front-end stack technologies individually, while the prediction aggregates them into a Vue 3 application node. This is a valid semantic merge within the frontend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Logging / Log Record"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Platform Operations::Monitoring & Alerting"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Logging is observability/log record generation, which is related to monitoring but not equivalent to monitoring and alerting as a component."
+    },
+    {
+      "gt_nodes": [
+        "Global::Permission / Access Control"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Platform Operations::Security Filter"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent permission checks and access control in request processing. The predicted node is a reasonable architectural placement for this responsibility."
+    },
+    {
+      "gt_nodes": [
+        "Network / Proxy Layer::Nginx Reverse Proxy"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Nginx Reverse Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both are the Nginx reverse proxy. The layer naming differs, but the functional and architectural role is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Persistence Layer::Concurrency Control",
+        "Persistence Layer::Data Caching",
+        "Persistence Layer::Optimistic Locking",
+        "Persistence Layer::Transaction Control"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Platform Operations::CI/CD Pipeline",
+        "Business Layer::Platform Operations::Monitoring & Alerting"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "These are persistence/runtime data-consistency mechanisms, while the predicted nodes are deployment and monitoring operations. They are not semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Ajax Interaction: GET POST PUT DELETE",
+        "Presentation Layer::Routing Control",
+        "Presentation Layer::Vue Template Rendering Engine"
+      ],
+      "predicted_nodes": [
+        "Frontend Layer::Vue 3 Application",
+        "Proxy Layer::API Gateway"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The frontend application partially covers the presentation layer, but API Gateway is not equivalent to Ajax/routing/rendering. The mapping mixes unrelated concerns, so the boundary attribution is not reliable."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Business Layer::AI Module::LLM Service Interface",
+    "Business Layer::AI Module::LangChain4j",
+    "Business Layer::Judging Module::JudgeCore",
+    "Business Layer::Judging Module::JudgeHost",
+    "Business Layer::Judging Module::Judging Scheduler",
+    "Business Layer::Platform Operations::CI/CD Pipeline",
+    "Business Layer::Platform Operations::Monitoring & Alerting",
+    "Business Layer::Problem Module::Problem Service",
+    "Business Layer::Problem Module::Solution Service",
+    "Business Layer::User Module::Authentication Service",
+    "Business Layer::User Module::User Service",
+    "External Services::AI Service Provider",
+    "Presentation Layer::CDN",
+    "Proxy Layer::API Gateway"
+  ]
+}

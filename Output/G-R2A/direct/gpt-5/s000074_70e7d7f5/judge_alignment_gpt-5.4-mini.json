@@ -1,0 +1,214 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Tengine Lite::Convert Tool::Caffe",
+        "Tengine Lite::Convert Tool::Darknet",
+        "Tengine Lite::Convert Tool::MXNet",
+        "Tengine Lite::Convert Tool::MegEngine",
+        "Tengine Lite::Convert Tool::OneFlow",
+        "Tengine Lite::Convert Tool::Others",
+        "Tengine Lite::Convert Tool::PaddlePaddle",
+        "Tengine Lite::Convert Tool::PyTorch / ONNX",
+        "Tengine Lite::Convert Tool::TF Lite",
+        "Tengine Lite::Convert Tool::TensorFlow"
+      ],
+      "predicted_nodes": [
+        "Linux Environment::Model Converter (CLI"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT contains multiple concrete conversion backends/formats under the Convert Tool boundary, while the prediction collapses them into a single CLI converter node. Functionally related, but the boundary is not accurate because the GT emphasizes specific converter targets rather than a generic environment-scoped CLI tool."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Engine::CPU Backend",
+        "Tengine Lite::Engine::Device Allocator",
+        "Tengine Lite::Engine::Exec Scheduler",
+        "Tengine Lite::Engine::GPU Backend",
+        "Tengine Lite::Engine::Graph Partition",
+        "Tengine Lite::Engine::Low Bit Quantize",
+        "Tengine Lite::Engine::NPU Backend"
+      ],
+      "predicted_nodes": [
+        "Tengine Lite Library::Core Modules::Device Backend",
+        "Tengine Lite Library::Core Modules::Operator Module",
+        "Tengine Lite Library::Core Modules::Scheduler",
+        "Tengine Lite Library::Core Modules::Serializer (tmfile"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The prediction aggregates the GT engine responsibilities into higher-level core modules. Although names differ, the core architectural meaning is aligned: device/backend, scheduler, operator, and serializer modules correspond to the GT's engine/backend and scheduler-related responsibilities. This is a semantically acceptable boundary-level abstraction."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Runtime Optimize::ARM / X86 / RISCV / MIPS",
+        "Tengine Lite::Runtime Optimize::Amlogic / RK / NXP / JLQ\\nNPU and NVDLA",
+        "Tengine Lite::Runtime Optimize::Assembly",
+        "Tengine Lite::Runtime Optimize::Auto Kernel Plugin",
+        "Tengine Lite::Runtime Optimize::CUDA / Vulkan / OpenCL",
+        "Tengine Lite::Runtime Optimize::Mix Bit Calculation",
+        "Tengine Lite::Runtime Optimize::NVIDIA / Mali / Adreno",
+        "Tengine Lite::Runtime Optimize::SGEMM",
+        "Tengine Lite::Runtime Optimize::SIMD",
+        "Tengine Lite::Runtime Optimize::TIM-VX / OpenDLA Plugin",
+        "Tengine Lite::Runtime Optimize::TensorRT / ACL Plugin",
+        "Tengine Lite::Runtime Optimize::Winograd"
+      ],
+      "predicted_nodes": [
+        "Tengine Lite Library::Core Modules::Device Backend",
+        "Tengine Lite Library::Core Modules::Scheduler"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT nodes are runtime optimization submodules, whereas the prediction maps them into generic core modules. This is too coarse and loses the architectural distinction of runtime optimization; it is not a clean semantic boundary match."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Serializer::Caffe Serializer",
+        "Tengine Lite::Serializer::Darknet Serializer",
+        "Tengine Lite::Serializer::MLIR Serializer",
+        "Tengine Lite::Serializer::MXNet Serializer",
+        "Tengine Lite::Serializer::MegEngine Serializer",
+        "Tengine Lite::Serializer::ONNX Serializer",
+        "Tengine Lite::Serializer::OneFlow Serializer",
+        "Tengine Lite::Serializer::Others Serializer",
+        "Tengine Lite::Serializer::PaddlePaddle Serializer",
+        "Tengine Lite::Serializer::TF Lite Serializer",
+        "Tengine Lite::Serializer::TensorFlow Serializer",
+        "Tengine Lite::Serializer::ncnn Serializer",
+        "Tengine Lite::Serializer::tmfile Serializer"
+      ],
+      "predicted_nodes": [
+        "Tengine Lite Library::Core Modules::Serializer (tmfile"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT includes many serializers for different model formats, while the prediction only captures the tmfile serializer. This is a partial match but not equivalent at the architectural node set level, so the mapping is incomplete and boundary attribution is not fully correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::C API Integrators"
+      ],
+      "predicted_nodes": [
+        "Global::C API Integrators",
+        "Tengine Lite Library::C API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The user role aligns with the API surface area that serves it. The additional C API node is a correct related architectural component, and the Global boundary for the integrator role is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Global::C++ API Users"
+      ],
+      "predicted_nodes": [
+        "Global::C++ API Users",
+        "Tengine Lite Library::C++ API Docs Entry"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The role and documentation entry point are semantically aligned with the GT's API documentation surface. Boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Global::Python API Users"
+      ],
+      "predicted_nodes": [
+        "Global::Python API Users",
+        "Tengine Lite Library::Python API Docs Entry"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The prediction correctly captures the Python user role and corresponding documentation entry point. The Global boundary is acceptable for a user audience node."
+    },
+    {
+      "gt_nodes": [
+        "Global::Example Users"
+      ],
+      "predicted_nodes": [
+        "Global::Example Users",
+        "Example Applications::Classification (MobileNet v1 via C API",
+        "Example Applications::Detections (SSD, RetinaFace, YoloV3/V4-tiny/V5s,\\nNanoDet, EfficientDet",
+        "Example Applications::OCR (CRNN - Chinese",
+        "Example Applications::Pose (OpenPose, HRNet",
+        "Example Applications::Segmentations (Yolact, U-Net"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT example user role is expanded into concrete example application nodes, which is a valid refinement. The example application grouping is consistent with the intended user-facing examples."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tool Users"
+      ],
+      "predicted_nodes": [
+        "Global::Tool Users",
+        "Linux Environment::Model Converter (CLI",
+        "Global::Web Browser (WebAssembly",
+        "Web Browser (WebAssembly::Online Converter (WASM"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT tool user role is correctly refined into Linux CLI and browser-based converter tools. The browser-local WebAssembly converter is semantically aligned with the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Global::CMake-based Build System"
+      ],
+      "predicted_nodes": [
+        "Global::CMake-based Build System"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact semantic match and boundary attribution are correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Linux Environment"
+      ],
+      "predicted_nodes": [
+        "Global::Linux Environment"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact semantic match and boundary attribution are correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Local Image Files (project root"
+      ],
+      "predicted_nodes": [
+        "Global::Local Image Files (project root"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This matches the GT's local asset dependency for examples."
+    },
+    {
+      "gt_nodes": [
+        "Global::Local Model Files (project root"
+      ],
+      "predicted_nodes": [
+        "Global::Local Model Files (project root"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This matches the GT's local asset dependency for examples and model workflows."
+    },
+    {
+      "gt_nodes": [
+        "Global::Web Browser (WebAssembly"
+      ],
+      "predicted_nodes": [
+        "Global::Web Browser (WebAssembly",
+        "Web Browser (WebAssembly::Online Converter (WASM"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The browser/WebAssembly execution environment is correctly captured, and the online converter is a valid refinement of that environment."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

@@ -1,0 +1,110 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::HypnoLog\\nServer"
+      ],
+      "predicted_nodes": [
+        "Server Layer::Node.js Runtime"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the core HypnoLog server runtime/application. The predicted boundary is a reasonable architectural refinement of the GT server node."
+    },
+    {
+      "gt_nodes": [
+        "Global::HTTP"
+      ],
+      "predicted_nodes": [
+        "Server Layer::Logging API",
+        "Server Layer::Web UI Server",
+        "Server Layer::JSON Parser",
+        "Server Layer::Socket.IO Server"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT HTTP node is decomposed into HTTP-related server responsibilities in the prediction, including API handling, UI serving, request parsing, and Socket.IO transport. This is a semantically consistent split."
+    },
+    {
+      "gt_nodes": [
+        "Global::In Browser Log"
+      ],
+      "predicted_nodes": [
+        "Browser Layer::Socket.IO Client",
+        "Browser Layer::Validation Engine",
+        "Browser Layer::Data Manager",
+        "Browser Layer::Window Manager",
+        "Browser Layer::DOM Renderer",
+        "Browser Layer::Visualizer System",
+        "Browser Layer::Visualizer Plugins"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT browser-side logging/viewing behavior is split into the expected browser subsystems for receiving, validating, storing, dispatching, rendering, and visualizer selection. The boundary attribution is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::C#"
+      ],
+      "predicted_nodes": [
+        "External Systems::Logging Producers",
+        "External Systems::Logging Producers::Any Language Client",
+        "External Systems::Logging Producers::HTTP JSON POST"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Although the GT node is named C#, the PRD explicitly states language-agnostic logging producers. The prediction correctly generalizes this external producer boundary rather than binding it to a specific language."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Browser Layer::DOM Renderer",
+    "Browser Layer::DOM Renderer::HTML Element Creator",
+    "Browser Layer::DOM Renderer::UI Updater",
+    "Browser Layer::Data Manager",
+    "Browser Layer::Data Manager::Received Data List",
+    "Browser Layer::Data Manager::UI State Manager",
+    "Browser Layer::Socket.IO Client",
+    "Browser Layer::Socket.IO Client::Connection Handler",
+    "Browser Layer::Socket.IO Client::Notification Listener",
+    "Browser Layer::Validation Engine",
+    "Browser Layer::Validation Engine::Ajv Validator",
+    "Browser Layer::Validation Engine::Error Wrapper",
+    "Browser Layer::Validation Engine::Schema Validation",
+    "Browser Layer::Visualizer Plugins",
+    "Browser Layer::Visualizer Plugins::Visualizer 1",
+    "Browser Layer::Visualizer Plugins::Visualizer 2",
+    "Browser Layer::Visualizer Plugins::Visualizer N",
+    "Browser Layer::Visualizer System",
+    "Browser Layer::Visualizer System::Configuration Manager",
+    "Browser Layer::Visualizer System::Visualizer Loader",
+    "Browser Layer::Visualizer System::Visualizer Registry",
+    "Browser Layer::Window Manager",
+    "Browser Layer::Window Manager::Object Dispatcher",
+    "Browser Layer::Window Manager::Window Registry",
+    "Data Model::Error Object",
+    "Data Model::Error Object::HypnoLog-error",
+    "Data Model::Error Object::Validation Details",
+    "Data Model::HypnoLog Data Object",
+    "Data Model::HypnoLog Data Object::data: required",
+    "Data Model::HypnoLog Data Object::name: optional",
+    "Data Model::HypnoLog Data Object::tags: optional",
+    "Data Model::HypnoLog Data Object::type: required",
+    "External Systems::Logging Producers::Any Language Client",
+    "External Systems::Logging Producers::HTTP JSON POST",
+    "External Systems::Web Browser",
+    "External Systems::Web Browser::Browser UI",
+    "Server Layer::JSON Parser::50MB Limit",
+    "Server Layer::JSON Parser::Body Parser",
+    "Server Layer::Logging API::GET /logger/status",
+    "Server Layer::Logging API::POST /logger/in",
+    "Server Layer::Node.js Runtime::Express Application",
+    "Server Layer::Node.js Runtime::HTTP Server",
+    "Server Layer::Socket.IO Server",
+    "Server Layer::Socket.IO Server::Connection Manager",
+    "Server Layer::Socket.IO Server::Notification Broadcaster",
+    "Server Layer::Web UI Server",
+    "Server Layer::Web UI Server::/client.html",
+    "Server Layer::Web UI Server::Static File Server"
+  ]
+}

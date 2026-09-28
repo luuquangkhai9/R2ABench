@@ -1,0 +1,528 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Access Layer::Auth Session",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Access Layer::Authorization Service",
+        "Access Layer::Session Manager"
+      ],
+      "reasoning": "The GT auth-session responsibility is covered by the predicted authorization and session management components."
+    },
+    {
+      "gt_node": "Access Layer::Gateway",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Access Layer::Client Access Gateway",
+        "Client Layer::MTProto Server Interface"
+      ],
+      "reasoning": "The GT gateway/access entry responsibility is represented by the client access gateway and MTProto-facing interface."
+    },
+    {
+      "gt_node": "Access Layer::Session",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Access Layer::Session Manager"
+      ],
+      "reasoning": "The predicted session manager covers the GT session responsibility."
+    },
+    {
+      "gt_node": "Access Layer::Status",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Async Components::Sync Service"
+      ],
+      "reasoning": "Status/synchronization-related responsibilities are reasonably represented by the sync component."
+    },
+    {
+      "gt_node": "Clients::Android",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Client Layer::Telegram Clients"
+      ],
+      "reasoning": "The predicted generic Telegram client node covers Android as one client type."
+    },
+    {
+      "gt_node": "Clients::PC",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Client Layer::Telegram Clients"
+      ],
+      "reasoning": "The predicted generic Telegram client node covers PC as one client type."
+    },
+    {
+      "gt_node": "Clients::Web",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Client Layer::Telegram Clients"
+      ],
+      "reasoning": "The predicted generic Telegram client node covers Web as one client type."
+    },
+    {
+      "gt_node": "Clients::iOS",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Client Layer::Telegram Clients"
+      ],
+      "reasoning": "The predicted generic Telegram client node covers iOS as one client type."
+    },
+    {
+      "gt_node": "Global::BFF",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Access Layer::Client Access Gateway",
+        "Client Layer::MTProto Server Interface"
+      ],
+      "reasoning": "The BFF/access-facing layer is represented by the client access gateway and MTProto interface."
+    },
+    {
+      "gt_node": "Global::Kafka",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Infrastructure::Kafka",
+        "Async Components::Message Queue Handler"
+      ],
+      "reasoning": "Kafka as external infrastructure is directly represented, and the message queue handler aligns with its usage."
+    },
+    {
+      "gt_node": "Global::Push",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Async Components::Push Notification Service"
+      ],
+      "reasoning": "The push-related GT node is covered by the push notification service."
+    },
+    {
+      "gt_node": "Global::Sync",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Async Components::Sync Service"
+      ],
+      "reasoning": "The sync-related GT node is covered by the sync service."
+    },
+    {
+      "gt_node": "Services::DFS",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Business Services::Media Processor",
+        "Storage Layer::File Storage"
+      ],
+      "reasoning": "DFS/file-distribution/storage responsibilities are approximated by the media processor and file storage components."
+    },
+    {
+      "gt_node": "Services::Msg",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Business Services::Messaging Service"
+      ],
+      "reasoning": "The messaging service directly covers the GT messaging service responsibility."
+    },
+    {
+      "gt_node": "Services::Services",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Business Services::Messaging Service",
+        "Business Services::Registration Service",
+        "Business Services::Verification Service",
+        "Business Services::Media Processor"
+      ],
+      "reasoning": "The aggregate service node is covered by the set of business service components."
+    },
+    {
+      "gt_node": "Storages::MinIO",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Infrastructure::MinIO"
+      ],
+      "reasoning": "The predicted external infrastructure MinIO node directly matches the GT storage dependency."
+    },
+    {
+      "gt_node": "Storages::MySQL",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Infrastructure::MySQL"
+      ],
+      "reasoning": "The predicted external infrastructure MySQL node directly matches the GT storage dependency."
+    },
+    {
+      "gt_node": "Storages::Redis",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Infrastructure::Redis",
+        "Storage Layer::Cache Manager"
+      ],
+      "reasoning": "The Redis dependency is directly represented, and the cache manager aligns with Redis-backed caching responsibility."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Access Layer::Authorization Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Access Layer::Auth Session",
+        "Access Layer::Session"
+      ],
+      "reasoning": "This is grounded in the GT authorization/session access responsibilities."
+    },
+    {
+      "predicted_node": "Access Layer::Client Access Gateway",
+      "grounded": true,
+      "reference_nodes": [
+        "Access Layer::Gateway",
+        "Global::BFF"
+      ],
+      "reasoning": "This directly corresponds to the GT gateway/BFF access-facing role."
+    },
+    {
+      "predicted_node": "Access Layer::Salt Manager",
+      "grounded": true,
+      "reference_nodes": [
+        "Access Layer::Auth Session"
+      ],
+      "reasoning": "Salt handling is part of the authorization/session flow described by the GT."
+    },
+    {
+      "predicted_node": "Access Layer::Session Manager",
+      "grounded": true,
+      "reference_nodes": [
+        "Access Layer::Session",
+        "Access Layer::Auth Session"
+      ],
+      "reasoning": "Session management is directly grounded in the GT session and auth-session nodes."
+    },
+    {
+      "predicted_node": "Async Components::Message Queue Handler",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Kafka",
+        "Global::Sync"
+      ],
+      "reasoning": "The message queue handler is grounded in Kafka-backed asynchronous processing and sync-related flows."
+    },
+    {
+      "predicted_node": "Async Components::Push Notification Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Push"
+      ],
+      "reasoning": "This directly corresponds to the GT push component."
+    },
+    {
+      "predicted_node": "Async Components::Sync Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Sync",
+        "Access Layer::Status"
+      ],
+      "reasoning": "This directly corresponds to the GT sync component and related status behavior."
+    },
+    {
+      "predicted_node": "Business Services::Media Processor",
+      "grounded": true,
+      "reference_nodes": [
+        "Services::DFS"
+      ],
+      "reasoning": "Media processing is reasonably grounded in the GT DFS/media-related service area."
+    },
+    {
+      "predicted_node": "Business Services::Messaging Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Services::Msg",
+        "Services::Services"
+      ],
+      "reasoning": "This directly corresponds to the GT messaging service concept."
+    },
+    {
+      "predicted_node": "Business Services::Registration Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Services::Services"
+      ],
+      "reasoning": "Registration handling is part of the GT service set, especially given registration/verification requirements in the PRD."
+    },
+    {
+      "predicted_node": "Business Services::Verification Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Services::Services"
+      ],
+      "reasoning": "Verification handling is grounded in the GT service set and PRD verification requirements."
+    },
+    {
+      "predicted_node": "Client Layer::MTProto Server Interface",
+      "grounded": true,
+      "reference_nodes": [
+        "Access Layer::Gateway",
+        "Global::BFF"
+      ],
+      "reasoning": "The MTProto server interface is grounded in the GT client access/gateway entry layer."
+    },
+    {
+      "predicted_node": "Client Layer::Telegram Clients",
+      "grounded": true,
+      "reference_nodes": [
+        "Clients::Android",
+        "Clients::PC",
+        "Clients::Web",
+        "Clients::iOS"
+      ],
+      "reasoning": "This is an abstraction over the GT Telegram client types."
+    },
+    {
+      "predicted_node": "External Infrastructure::FFmpeg/FFProbe",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The PRD mentions optional FFmpeg/FFProbe support, but there is no corresponding GT node in the reference architecture."
+    },
+    {
+      "predicted_node": "External Infrastructure::Kafka",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Kafka"
+      ],
+      "reasoning": "This directly matches the GT Kafka dependency."
+    },
+    {
+      "predicted_node": "External Infrastructure::MinIO",
+      "grounded": true,
+      "reference_nodes": [
+        "Storages::MinIO"
+      ],
+      "reasoning": "This directly matches the GT MinIO storage dependency."
+    },
+    {
+      "predicted_node": "External Infrastructure::MySQL",
+      "grounded": true,
+      "reference_nodes": [
+        "Storages::MySQL"
+      ],
+      "reasoning": "This directly matches the GT MySQL storage dependency."
+    },
+    {
+      "predicted_node": "External Infrastructure::Redis",
+      "grounded": true,
+      "reference_nodes": [
+        "Storages::Redis"
+      ],
+      "reasoning": "This directly matches the GT Redis storage dependency."
+    },
+    {
+      "predicted_node": "External Infrastructure::etcd",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "Although etcd appears in the PRD dependencies, there is no corresponding GT node in the provided reference list."
+    },
+    {
+      "predicted_node": "Storage Layer::Cache Manager",
+      "grounded": true,
+      "reference_nodes": [
+        "Storages::Redis"
+      ],
+      "reasoning": "The cache manager is grounded in the Redis-backed storage/caching concept."
+    },
+    {
+      "predicted_node": "Storage Layer::Data Access Layer",
+      "grounded": true,
+      "reference_nodes": [
+        "Storages::MySQL",
+        "Storages::Redis",
+        "Storages::MinIO"
+      ],
+      "reasoning": "The data access layer is grounded in the storage dependencies represented by the GT storage nodes."
+    },
+    {
+      "predicted_node": "Storage Layer::File Storage",
+      "grounded": true,
+      "reference_nodes": [
+        "Storages::MinIO",
+        "Services::DFS"
+      ],
+      "reasoning": "File storage is grounded in the GT MinIO and DFS-related storage responsibility."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Access Layer::Auth Session"
+      ],
+      "predicted_nodes": [
+        "Access Layer::Authorization Service",
+        "Access Layer::Salt Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT auth-session responsibility is split into authorization and salt management, with a semantically consistent access-layer boundary."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Gateway"
+      ],
+      "predicted_nodes": [
+        "Access Layer::Client Access Gateway",
+        "Client Layer::MTProto Server Interface"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The gateway responsibility is decomposed into a client access gateway and MTProto interface, which remain within a compatible access/client-facing boundary."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Session"
+      ],
+      "predicted_nodes": [
+        "Access Layer::Session Manager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The session manager is a direct semantic match for the GT session node."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Status"
+      ],
+      "predicted_nodes": [
+        "Async Components::Sync Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The status concept is only loosely related to sync, and the boundary shifts from access layer to async components."
+    },
+    {
+      "gt_nodes": [
+        "Clients::Android",
+        "Clients::PC",
+        "Clients::Web",
+        "Clients::iOS"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Telegram Clients"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Multiple client types are aggregated into a single generic Telegram client abstraction with a semantically consistent client boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::BFF"
+      ],
+      "predicted_nodes": [
+        "Access Layer::Client Access Gateway",
+        "Client Layer::MTProto Server Interface"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The BFF concept is represented by the access gateway plus MTProto-facing interface, which is boundary-consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "External Infrastructure::Kafka",
+        "Async Components::Message Queue Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Kafka is directly represented as infrastructure, and its usage is reflected by the async message queue handler."
+    },
+    {
+      "gt_nodes": [
+        "Global::Push"
+      ],
+      "predicted_nodes": [
+        "Async Components::Push Notification Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The push service directly matches the GT push node."
+    },
+    {
+      "gt_nodes": [
+        "Global::Sync"
+      ],
+      "predicted_nodes": [
+        "Async Components::Sync Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The sync service directly matches the GT sync node."
+    },
+    {
+      "gt_nodes": [
+        "Services::DFS"
+      ],
+      "predicted_nodes": [
+        "Business Services::Media Processor",
+        "Storage Layer::File Storage"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The DFS responsibility is split into media processing and file storage, which is semantically compatible with the GT service/storage boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Services::Msg"
+      ],
+      "predicted_nodes": [
+        "Business Services::Messaging Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The messaging service directly matches the GT message service."
+    },
+    {
+      "gt_nodes": [
+        "Services::Services"
+      ],
+      "predicted_nodes": [
+        "Business Services::Messaging Service",
+        "Business Services::Registration Service",
+        "Business Services::Verification Service",
+        "Business Services::Media Processor"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The aggregate services node is split into several business services, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MinIO"
+      ],
+      "predicted_nodes": [
+        "External Infrastructure::MinIO"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The MinIO storage dependency is directly matched with the same infrastructure role."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MySQL"
+      ],
+      "predicted_nodes": [
+        "External Infrastructure::MySQL"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The MySQL storage dependency is directly matched with the same infrastructure role."
+    },
+    {
+      "gt_nodes": [
+        "Storages::Redis"
+      ],
+      "predicted_nodes": [
+        "External Infrastructure::Redis",
+        "Storage Layer::Cache Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The Redis storage dependency is directly represented, and caching behavior is a compatible extension of the same storage concern."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "External Infrastructure::FFmpeg/FFProbe",
+    "External Infrastructure::etcd"
+  ]
+}

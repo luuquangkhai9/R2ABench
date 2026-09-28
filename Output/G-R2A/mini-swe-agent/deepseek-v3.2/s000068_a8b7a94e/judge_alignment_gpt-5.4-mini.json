@@ -1,0 +1,93 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "predicted_nodes": [
+        "Core Flight System::cFS Framework"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the overall cFS repository/framework bundle. The predicted boundary is a reasonable semantic equivalent of the GT global system boundary."
+    },
+    {
+      "gt_nodes": [
+        "Reuse Workflows::Submodule Reuse"
+      ],
+      "predicted_nodes": [
+        "Build & CI Layer::CI Workflows"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The prediction captures CI workflow reuse in a very broad way, but it does not specifically represent the submodule reuse workflow node. This is an over-aggregation and the boundary attribution is too generic."
+    },
+    {
+      "gt_nodes": [
+        "Reuse Workflows::cFS Reuse"
+      ],
+      "predicted_nodes": [
+        "Build & CI Layer::CI Workflows"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The functionality is related to reusable workflows, but the AI collapsed a specific reusable workflow node into a generic CI workflows container, losing the distinct cFS reuse boundary."
+    },
+    {
+      "gt_nodes": [
+        "Static and Quality Checks::CodeQL Analysis"
+      ],
+      "predicted_nodes": [
+        "Build & CI Layer::CI Workflows"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "CodeQL analysis is a specific static-analysis workflow, but the prediction only provides a generic CI workflows node. This is a coarse aggregation rather than a faithful node match."
+    },
+    {
+      "gt_nodes": [
+        "Static and Quality Checks::Format Check"
+      ],
+      "predicted_nodes": [
+        "Build & CI Layer::Format Checker"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These are semantically equivalent. The predicted boundary is a reasonable CI/build-quality layer placement."
+    },
+    {
+      "gt_nodes": [
+        "Static and Quality Checks::Static Analysis"
+      ],
+      "predicted_nodes": [
+        "Build & CI Layer::CI Workflows"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Static analysis exists in the GT as a dedicated quality-check node, but the prediction places it only under a generic CI workflows boundary, which is too imprecise."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Build & CI Layer::Build System",
+    "Build & CI Layer::Changelog Generator",
+    "Core Flight System::Framework Applications",
+    "Core Flight System::OSAL",
+    "Core Flight System::PSP",
+    "Core Flight System::cFE Core",
+    "Data & Configuration::Command Counters",
+    "Data & Configuration::Git Submodules",
+    "Data & Configuration::Makefile.sample",
+    "Data & Configuration::Telemetry Data",
+    "Data & Configuration::sample_defs",
+    "External Systems::GitHub Actions CI/CD",
+    "External Systems::Network Interface",
+    "External Systems::Operator Console",
+    "Tools & Utilities::CCDD",
+    "Tools & Utilities::Perfutils-java",
+    "Tools & Utilities::SIL/ECI",
+    "Tools & Utilities::Telemetry Interface",
+    "Tools & Utilities::cmdUtil",
+    "Tools & Utilities::gen_sch_tbl"
+  ]
+}

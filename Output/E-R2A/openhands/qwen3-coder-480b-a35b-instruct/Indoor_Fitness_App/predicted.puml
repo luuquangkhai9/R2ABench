@@ -1,0 +1,96 @@
+@startuml
+!define RECTANGLE class
+!define DATABASE rectangle
+!define COMPONENT rectangle
+!define INTERFACE rectangle
+
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam defaultTextAlignment center
+skinparam wrapWidth 200
+
+title Indoor Fitness App - System Architecture
+
+' Main system boundary
+rectangle "Indoor Fitness App System" as system {
+  ' Mobile App Components
+  rectangle "Mobile App" as mobile_app {
+    RECTANGLE "Camera Capture\nModule" as camera_module
+    RECTANGLE "Pose Estimation\nEngine" as pose_engine
+    RECTANGLE "UI Components" as ui_components {
+      RECTANGLE "Main Interface"
+      RECTANGLE "Exercise Interface"
+      RECTANGLE "History Interface"
+      RECTANGLE "Personal Interface"
+      RECTANGLE "Casting Interface"
+      RECTANGLE "Report Interface"
+    }
+    RECTANGLE "Local Storage\n(SQLite/UserDefaults)" as local_storage
+  }
+  
+  ' Server Components
+  rectangle "Server Side" as server {
+    RECTANGLE "Training Plan\nGenerator" as plan_generator
+    RECTANGLE "Report Generator" as report_generator
+    RECTANGLE "Poster Generator" as poster_generator
+    DATABASE "Database\n(MySQL/PostgreSQL)" as database
+  }
+  
+  ' External Services
+  rectangle "External Services" as external {
+    COMPONENT "Authentication\nService" as auth_service
+    COMPONENT "Push Notification\nService" as push_service
+  }
+  
+  ' Casting Components
+  rectangle "Screen Casting\nSubsystem" as casting_subsystem {
+    RECTANGLE "Device Discovery\n(Module)" as discovery_module
+    RECTANGLE "Video Streaming\n(Module)" as streaming_module
+    RECTANGLE "Control Protocol\n(Module)" as control_module
+  }
+}
+
+' External Devices
+rectangle "Mobile Device\n(Android/iOS)" as mobile_device
+rectangle "Target Device\n(Android)" as target_device
+
+' Connections
+mobile_app -down-> server : HTTP/HTTPS API
+mobile_app -down-> external : OAuth/REST
+mobile_app -down-> casting_subsystem : LAN Communication
+casting_subsystem -down-> target_device : WiFi/LAN
+mobile_device -down-> mobile_app : Installs/Runs
+
+' Internal connections
+camera_module -right-> pose_engine : Video Stream
+pose_engine -right-> ui_components : Skeleton Data
+ui_components -down-> local_storage : Cache/User Data
+mobile_app -right-> database : CRUD Operations
+plan_generator -down-> report_generator : Training Data
+report_generator -down-> poster_generator : Report Data
+
+note right of pose_engine
+  Real-time pose estimation
+  20+ FPS processing requirement
+end note
+
+note right of casting_subsystem
+  LAN-only device discovery
+  < 100ms video latency
+  < 50ms command latency
+end note
+
+note top of server
+  Server Hardware:
+  - CPU: Pentium 900M (recommended 4 1.2G)
+  - RAM: 256MB minimum
+end note
+
+note bottom of mobile_app
+  Mobile Hardware:
+  - CPU: Octa-core 2.45 GHz
+  - RAM: 4GB
+  - ROM: 32GB
+end note
+
+@enduml

@@ -1,0 +1,197 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Event Bus"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::Event Bus"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same event bus component used to publish and consume location updates. The enclosing boundary is broader in the prediction, but semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Location Capture::Google Play Services\nLocation Provider",
+        "GPSLogger Android Application::Location Capture::Location Listeners"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::Google Play\nServices Client",
+        "Android Device / Emulator\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::GPS Logging Service::Location Listener"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates location acquisition into provider and listeners, while the prediction captures these as Google Play Services client and location listener under the GPS logging service. This is a reasonable split/aggregation with an acceptable boundary mapping."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::CSV / URL Loggers",
+        "GPSLogger Android Application::Logging::Loggers"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::Log Output Manager"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT generic logger grouping and CSV/URL logger aggregation are consolidated into a log output manager. This is a valid abstraction-level merge within the application boundary."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::GPX Logger"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::GPX Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct functional match for GPX output logging with consistent application boundary placement."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::KML Logger"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::KML Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct functional match for KML output logging with consistent application boundary placement."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::NMEA / GPRMC Encoder"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::OpenGTS Uploader::GPRMC Encoder\n(SerializableLocation → GPRMC string"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The encoder is correctly identified as the GPRMC serializer used for OpenGTS interoperability. The nested placement under the uploader is acceptable because it reflects its usage context."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Upload::Upload Jobs",
+        "GPSLogger Android Application::Upload::Uploaders"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::OpenGTS Uploader",
+        "Android Device / Emulator\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::Dropbox Uploader",
+        "Android Device / Emulator\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::OpenStreetMap\nUploader"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT abstract upload layer is split into concrete uploaders in the prediction. This is functionally consistent and stays within the application/external-integration boundary."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::User Interface::Detailed View",
+        "GPSLogger Android Application::User Interface::Main Activity",
+        "GPSLogger Android Application::User Interface::Other Fragments",
+        "GPSLogger Android Application::User Interface::Simple View"
+      ],
+      "predicted_nodes": [
+        "Android Device / Emulator\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::Main Activity\n& UI Fragments",
+        "Android Device / Emulator\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::Main Activity\n& UI Fragments::Location Display\nFragment",
+        "Android Device / Emulator\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::Main Activity\n& UI Fragments::Settings\nFragment"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The prediction merges the UI-related GT nodes into a main activity and fragments boundary. This is a reasonable consolidation of the presentation layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::Dropbox"
+      ],
+      "predicted_nodes": [
+        "External Services::Dropbox API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same external Dropbox integration endpoint/service, with a semantically equivalent external services boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenGTS Endpoint\nUDP server"
+      ],
+      "predicted_nodes": [
+        "External Services::OpenGTS Server\n(UDP endpoint"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct match for the OpenGTS UDP endpoint/server. Boundary naming differs but is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenStreetMap"
+      ],
+      "predicted_nodes": [
+        "External Services::OpenStreetMap\nOAuth API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same external OpenStreetMap integration target; the OAuth API boundary is a valid more specific naming of the same service."
+    },
+    {
+      "gt_nodes": [
+        "Build System\n(Gradle / Android SDK::Android SDK\nBuild Tools 19.0.3\n+ Support Libs\n+ Google Play Services\n+ Google Repository"
+      ],
+      "predicted_nodes": [
+        "Build System\n(Gradle / Android SDK::Android SDK\nBuild Tools 19.0.3\n+ Support Libs\n+ Google Play Services\n+ Google Repository"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact build dependency node match."
+    },
+    {
+      "gt_nodes": [
+        "Build System\n(Gradle / Android SDK::Build Config\nGenerator"
+      ],
+      "predicted_nodes": [
+        "Build System\n(Gradle / Android SDK::Build Config\nGenerator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact match for build configuration generation."
+    },
+    {
+      "gt_nodes": [
+        "Build System\n(Gradle / Android SDK::gradle.properties\n(~/.gradle/gradle.properties)\n[GPSLOGGER_OSM_CONSUMERKEY,\nGPSLOGGER_OSM_CONSUMERSECRET,\nGPSLOGGER_DROPBOX_APPKEY,\nGPSLOGGER_DROPBOX_APPSECRET"
+      ],
+      "predicted_nodes": [
+        "Build System\n(Gradle / Android SDK::gradle.properties\n(~/.gradle/gradle.properties)\n[GPSLOGGER_OSM_CONSUMERKEY,\nGPSLOGGER_OSM_CONSUMERSECRET,\nGPSLOGGER_DROPBOX_APPKEY,\nGPSLOGGER_DROPBOX_APPSECRET"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact match for Gradle credential properties."
+    },
+    {
+      "gt_nodes": [
+        "Build System\n(Gradle / Android SDK::local.properties\n(sdk.dir"
+      ],
+      "predicted_nodes": [
+        "Build System\n(Gradle / Android SDK::local.properties\n(sdk.dir"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact match for local.properties SDK path configuration."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Android Device / Emulator\n(Android 2.2+, API 17+ for Google Play features::Android Application Process",
+    "Android Device / Emulator\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::GPS Logging Service",
+    "Android Device / Emulator\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::GPS Logging Service::Session &\nApp Settings",
+    "Android Device / Emulator\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::Main Activity\n& UI Fragments",
+    "Android Device / Emulator\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::OpenGTS Uploader",
+    "Android Device / Emulator\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::OpenGTS Uploader::OpenGTS Config\n(server, port, method,\ndevice ID, [path",
+    "Android Device / Emulator\n(Android 2.2+, API 17+ for Google Play features::Android Application Process::OpenGTS Uploader::UDP Sender",
+    "Android Device / Emulator\n(Android 2.2+, API 17+ for Google Play features::Local File Storage",
+    "Android Device / Emulator\n(Android 2.2+, API 17+ for Google Play features::Local File Storage::GPX Files",
+    "Android Device / Emulator\n(Android 2.2+, API 17+ for Google Play features::Local File Storage::KML Files",
+    "Android Device / Emulator\n(Android 2.2+, API 17+ for Google Play features::Local File Storage::Text Log Files",
+    "Global::Android Device / Emulator\n(Android 2.2+, API 17+ for Google Play features",
+    "Global::Build System\n(Gradle / Android SDK",
+    "Global::External Services"
+  ]
+}

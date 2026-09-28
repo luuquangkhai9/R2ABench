@@ -1,0 +1,106 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Statlord::Browser Editor\nLayout authoring"
+      ],
+      "predicted_nodes": [
+        "Client Layer\\n(Browser::TypeScript/React\\nSingle-Page Application\\n(Browser Editor",
+        "Client Layer\\n(Browser::TypeScript/React\\nSingle-Page Application\\n(Browser Editor::Layout Editor\\n(Canvas, Multi-Display",
+        "Client Layer\\n(Browser::TypeScript/React\\nSingle-Page Application\\n(Browser Editor::Redux Store\\n(controls, elements,\\nlayouts, gauges, displays"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT browser editor node is decomposed into the SPA, layout editor, and Redux state subnodes. This is semantically consistent with the PRD and remains within the client/browser boundary."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Displays\nOLED, e-paper, LCD, browser"
+      ],
+      "predicted_nodes": [
+        "Global::Physical / Virtual Displays\\n(OLEDs, e-paper, LCDs"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the physical/virtual display devices supported by the system. The boundary is appropriately global/device-level."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Display Resource\nresolution and state"
+      ],
+      "predicted_nodes": [
+        "Container / Server Layer\\n(Python 3.7, Django::Django Server\\n(manage.py runserver::API Layer::Display API\\n(key, available,\\nresolution_x, resolution_y,\\ncurrent_layout, display_data,\\nrotation"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted Display API node matches the GT display resource covering resolution and state fields, and it is placed under the server/API boundary correctly."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Gauge Resource\nkey, value"
+      ],
+      "predicted_nodes": [
+        "Container / Server Layer\\n(Python 3.7, Django::Django Server\\n(manage.py runserver::API Layer::Gauge API\\n(key, value"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The Gauge API node is functionally equivalent to the GT Gauge Resource and is correctly located in the server API boundary."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Layout Resource\ndata and display positions"
+      ],
+      "predicted_nodes": [
+        "Container / Server Layer\\n(Python 3.7, Django::Django Server\\n(manage.py runserver::API Layer::Layout API\\n(key, data,\\ndisplay_positions"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The Layout API node matches the GT Layout Resource in both function and field set, and the boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::PostgreSQL\npersistent models"
+      ],
+      "predicted_nodes": [
+        "Global::PostgreSQL\\n(Persistent Storage",
+        "PostgreSQL\\n(Persistent Storage::Display Entity\\n(key, available,\\nresolution_x, resolution_y,\\ncurrent_layout → Layout,\\ndisplay_data, rotation",
+        "PostgreSQL\\n(Persistent Storage::Gauge Entity\\n(key, value",
+        "PostgreSQL\\n(Persistent Storage::Layout Entity\\n(key, data [binary],\\ndisplay_positions [text"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT PostgreSQL persistent-models node is split into specific persisted entities under the PostgreSQL storage boundary, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Python / Django API"
+      ],
+      "predicted_nodes": [
+        "Global::Container / Server Layer\\n(Python 3.7, Django",
+        "Container / Server Layer\\n(Python 3.7, Django::Django Server\\n(manage.py runserver",
+        "Container / Server Layer\\n(Python 3.7, Django::Django Server\\n(manage.py runserver::API Layer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT server/API concept is decomposed into the container/server layer, Django server, and API layer. This is an acceptable refinement and stays within the correct backend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Viewer Instances\nheadless browsers"
+      ],
+      "predicted_nodes": [
+        "Client Layer\\n(Browser::TypeScript/React\\nSingle-Page Application\\n(Browser Editor::Viewer Interface\\n(B&W Pixel Renderer",
+        "Container / Server Layer\\n(Python 3.7, Django::Django Server\\n(manage.py runserver::API Layer::Viewer Route\\n(render path"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT viewer/headless-browser rendering concept is represented by the viewer interface and viewer route. While split across client and server concerns, the overall function is preserved and the viewer path is placed plausibly within system boundaries."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Build Environment\\n(Node.js, npm::Built Static Assets\\n(JS/CSS/HTML",
+    "Build Environment\\n(Node.js, npm::Client Build Pipeline\\n(npm install, npm run build",
+    "Container / Server Layer\\n(Python 3.7, Django::Django Server\\n(manage.py runserver::Static Asset Server\\n(Built Client Assets"
+  ]
+}

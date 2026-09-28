@@ -1,0 +1,80 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Audit\nService"
+      ],
+      "predicted_nodes": [
+        "Kubernetes/GKE::Observability::Audit Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Audit Service; the predicted boundary is different but semantically consistent with deployment/observability placement."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Query\nService"
+      ],
+      "predicted_nodes": [
+        "Kubernetes/GKE::Observability::Query Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Query Service; the predicted placement under Kubernetes observability is acceptable and not a context error."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::BPMN, Form\nand Rule Defs"
+      ],
+      "predicted_nodes": [
+        "Kubernetes/GKE::Process Execution::Example Runtime Bundle"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node about deployed definitions inside the Runtime Bundle is semantically covered by the Example Runtime Bundle in the predicted diagram."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::Process\nRuntime"
+      ],
+      "predicted_nodes": [
+        "Kubernetes/GKE::Process Execution::ProcessRuntime API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The ProcessRuntime API is the same functional component; the predicted boundary under process execution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::SSO/IDM\n(Keycloak"
+      ],
+      "predicted_nodes": [
+        "Identity & Access::Keycloak",
+        "Identity & Access::Keycloak::Token Endpoint"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT identity provider node is split into the provider plus its token endpoint. This is a valid refinement and stays within the correct identity/access boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Customer\nLogic",
+    "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Out of the\nBox Services",
+    "Activiti Cloud Infrastructure::Activiti Cloud Application::Notification\nService",
+    "Activiti Cloud Infrastructure::Config Maps\n(Kubernetes",
+    "Activiti Cloud Infrastructure::Gateway",
+    "Activiti Cloud Infrastructure::Registry\n(Kubernetes",
+    "Global::Client"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Deployment Descriptors",
+    "Global::Human Participant",
+    "Global::Identity & Access",
+    "Global::Kubernetes/GKE",
+    "Kubernetes/GKE::Application Runtime::Spring Boot Application",
+    "Kubernetes/GKE::Application Runtime::Spring Boot Application::Spring Security",
+    "Kubernetes/GKE::Application Runtime::Spring Boot Application::User Endpoints",
+    "Kubernetes/GKE::NGINX Ingress Controller",
+    "Kubernetes/GKE::Process Execution::TaskRuntime API"
+  ]
+}

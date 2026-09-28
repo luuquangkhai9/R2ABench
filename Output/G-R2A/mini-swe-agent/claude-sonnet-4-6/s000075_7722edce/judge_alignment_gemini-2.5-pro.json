@@ -1,0 +1,74 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Statlord::Browser Editor\nLayout authoring"
+      ],
+      "predicted_nodes": [
+        "Client Layer (TypeScript/React SPA::Browser Editor\n(Layout Editor UI",
+        "Client Layer (TypeScript/React SPA::Redux Store\n(controls, elements, layouts,\ngauges, displays"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's browser editor node is split into the editor UI and its underlying Redux state store by the AI. The client layer boundary corresponds correctly to the frontend application."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Display Resource\nresolution and state",
+        "Statlord::Server::Gauge Resource\nkey, value",
+        "Statlord::Server::Layout Resource\ndata and display positions"
+      ],
+      "predicted_nodes": [
+        "Server Layer (Python/Django::REST API\n(Gauge, Display, Layout endpoints"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The detailed specific resource models in the GT are aggregated into a single REST API endpoints node in the AI's prediction. The server layer boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Python / Django API"
+      ],
+      "predicted_nodes": [
+        "Server Layer (Python/Django::Django Web Server\n(manage.py runserver"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the core Django server/API instance handling web requests, and the boundary is correctly assigned to the Server Layer."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::PostgreSQL\npersistent models"
+      ],
+      "predicted_nodes": [
+        "Data Layer::PostgreSQL\n(Gauge, Display, Layout"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the PostgreSQL database for persistent models. Mapping from GT 'Server' boundary to AI 'Data Layer' is semantically consistent for databases."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Viewer Instances\nheadless browsers"
+      ],
+      "predicted_nodes": [
+        "Client Layer (TypeScript/React SPA::Viewer Interface\n(Display Renderer",
+        "Server Layer (Python/Django::Viewer Path\n(Display Rendering Logic"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT viewer instances (headless browsers) are split into the server-side rendering logic path and the client-side display renderer by the AI. The boundaries reflect the full request lifecycle."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Statlord::Displays\nOLED, e-paper, LCD, browser"
+  ],
+  "unmatched_predicted_nodes": [
+    "Build & Packaging::Node.js / npm Build\n(TypeScript/React → Static Assets",
+    "Global::Build & Packaging",
+    "Global::Client Layer (TypeScript/React SPA",
+    "Global::Data Layer",
+    "Global::Server Layer (Python/Django",
+    "Server Layer (Python/Django::Static Asset Server\n(Built Client Assets"
+  ]
+}

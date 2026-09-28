@@ -1,0 +1,312 @@
+@startuml
+!define RECTANGLE rectangle
+!define COMPONENT component
+!define DATABASE database
+!define QUEUE queue
+!define CLOUD cloud
+!define ACTOR actor
+
+skinparam componentStyle rectangle
+skinparam backgroundColor #F0F0F0
+skinparam component {
+  BackgroundColor #E6F3FF
+  BorderColor #0066CC
+  FontColor #000000
+}
+skinparam database {
+  BackgroundColor #FFE6E6
+  BorderColor #CC0000
+  FontColor #000000
+}
+skinparam queue {
+  BackgroundColor #E6FFE6
+  BorderColor #00CC00
+  FontColor #000000
+}
+skinparam cloud {
+  BackgroundColor #FFFFE6
+  BorderColor #CCCC00
+  FontColor #000000
+}
+skinparam actor {
+  BackgroundColor #F0F0F0
+  FontColor #000000
+}
+
+title AwesomeMusic AI Music Creation and Sharing Platform - System Architecture
+
+' ====== ACTORS ======
+actor "Music Enthusiast" as User
+actor "Composer" as Composer
+actor "Music Appreciator" as Appreciator
+
+' ====== EXTERNAL COMPONENTS ======
+cloud "Internet" as Internet
+cloud "User Browser" as Browser
+
+' ====== FRONTEND LAYER ======
+package "Web Frontend" {
+  component "Registration/Login Interface" as UI_RegisterLogin
+  component "Homepage Interface" as UI_Homepage
+  component "Search Interface" as UI_Search
+  component "Song Detail Interface" as UI_SongDetail
+  component "Song Generation Interface" as UI_Generation
+  component "Personal Center Interface" as UI_PersonalCenter
+  
+  UI_RegisterLogin -down-> UI_Homepage
+  UI_Homepage -down-> UI_Search
+  UI_Homepage -down-> UI_SongDetail
+  UI_Homepage -down-> UI_Generation
+  UI_Homepage -down-> UI_PersonalCenter
+}
+
+' ====== GATEWAY/LOAD BALANCER ======
+component "Nginx Gateway" as Nginx #lightblue
+component "Load Balancer" as LoadBalancer #lightblue
+
+' ====== BACKEND LAYER ======
+package "Web Backend (Golang/Gin)" {
+  component "Authentication Service" as Backend_Auth
+  component "User Management Service" as Backend_User
+  component "Score Management Service" as Backend_Score
+  component "Model Management Service" as Backend_Model
+  component "Recommendation Service" as Backend_Recommendation
+  component "Search Service" as Backend_Search
+  component "Hot Charts Service" as Backend_HotCharts
+  component "File Upload/Download Service" as Backend_File
+  
+  Backend_Auth -down-> Backend_User
+  Backend_User -down-> Backend_Score
+  Backend_Score -down-> Backend_Model
+  Backend_Score -down-> Backend_Recommendation
+  Backend_Score -down-> Backend_Search
+  Backend_Score -down-> Backend_HotCharts
+  Backend_Score -down-> Backend_File
+}
+
+' ====== ALGORITHM SERVICE LAYER ======
+package "Algorithm Service" {
+  component "Music Generation Service" as Algo_Generation
+  component "Model Training Service" as Algo_Training
+  component "Score Classification Service" as Algo_Classification
+  component "Recommendation Algorithm" as Algo_Recommendation
+  component "MIDI/ABC Converter" as Algo_Converter
+  component "Track Seed Extractor" as Algo_TrackSeed
+  
+  Algo_Generation -down-> Algo_Training
+  Algo_Generation -down-> Algo_Classification
+  Algo_Generation -down-> Algo_Recommendation
+  Algo_Generation -down-> Algo_Converter
+  Algo_Converter -down-> Algo_TrackSeed
+}
+
+' ====== SCHEDULING LAYER ======
+package "Scheduling Module" {
+  component "Task Scheduler" as Scheduler
+  component "Task Queue Manager" as QueueManager
+  component "Task Status Monitor" as StatusMonitor
+  
+  Scheduler -down-> QueueManager
+  QueueManager -down-> StatusMonitor
+}
+
+' ====== MESSAGE QUEUE ======
+queue "RabbitMQ" as RabbitMQ #lightgreen
+
+' ====== DATA STORAGE LAYER ======
+database "User Database" as DB_Users {
+  table "User Accounts" as T_Users
+  table "Follow Relationships" as T_Follows
+  table "Favorites" as T_Favorites
+  table "Model Favorites" as T_ModelFavorites
+}
+
+database "Score Database" as DB_Scores {
+  table "Score Metadata" as T_ScoreMeta
+  table "Score Content" as T_ScoreContent
+  table "Score Labels" as T_ScoreLabels
+  table "Hot Charts" as T_HotCharts
+}
+
+database "Model Database" as DB_Models {
+  table "GPT-2 Model Parameters" as T_GPT2Models
+  table "LSTM Representations" as T_LSTMReps
+  table "Training History" as T_TrainingHistory
+}
+
+database "File Storage" as DB_Files {
+  table "MIDI Files" as T_MIDI
+  table "ABC Scores" as T_ABC
+  table "Track Seeds" as T_TrackSeeds
+}
+
+database "Task Database" as DB_Tasks {
+  table "Task Metadata" as T_TaskMeta
+  table "Task Status" as T_TaskStatus
+  table "Task Logs" as T_TaskLogs
+}
+
+' ====== DISTRIBUTED STORAGE ======
+cloud "Hadoop HDFS" as HDFS #lightyellow
+
+' ====== SERVICE DISCOVERY ======
+component "etcd Service Discovery" as Etcd #lightpurple
+
+' ====== CONNECTIONS ======
+' User access flow
+User --> Browser
+Composer --> Browser
+Appreciator --> Browser
+Browser --> Internet
+Internet --> Nginx
+
+' Frontend to Backend
+Nginx --> LoadBalancer
+LoadBalancer --> UI_RegisterLogin
+LoadBalancer --> UI_Homepage
+LoadBalancer --> UI_Search
+LoadBalancer --> UI_SongDetail
+LoadBalancer --> UI_Generation
+LoadBalancer --> UI_PersonalCenter
+
+UI_RegisterLogin --> Backend_Auth : HTTPS
+UI_Homepage --> Backend_HotCharts : HTTPS
+UI_Homepage --> Backend_Recommendation : HTTPS
+UI_Search --> Backend_Search : HTTPS
+UI_SongDetail --> Backend_Score : HTTPS
+UI_Generation --> Backend_Score : HTTPS
+UI_PersonalCenter --> Backend_User : HTTPS
+UI_PersonalCenter --> Backend_Model : HTTPS
+
+' Backend internal connections
+Backend_Auth --> Backend_User : TCP/IP
+Backend_Score --> Backend_Model : TCP/IP
+Backend_Score --> Backend_Recommendation : TCP/IP
+Backend_Score --> Backend_Search : TCP/IP
+Backend_Score --> Backend_HotCharts : TCP/IP
+Backend_Score --> Backend_File : TCP/IP
+
+' Backend to Algorithm Service
+Backend_Score --> Algo_Generation : TCP/IP
+Backend_Model --> Algo_Training : TCP/IP
+Backend_Recommendation --> Algo_Recommendation : TCP/IP
+
+' Backend to Scheduling
+Backend_Score --> Scheduler : TCP/IP
+Backend_Model --> Scheduler : TCP/IP
+
+' Scheduling to Message Queue
+Scheduler --> RabbitMQ : Push Tasks
+QueueManager --> RabbitMQ : Manage Queue
+StatusMonitor --> RabbitMQ : Poll Status
+
+' Algorithm Service to Message Queue
+Algo_Generation --> RabbitMQ : Consume Tasks
+Algo_Training --> RabbitMQ : Consume Tasks
+Algo_Classification --> RabbitMQ : Consume Tasks
+Algo_Recommendation --> RabbitMQ : Consume Tasks
+
+' Data storage connections
+Backend_Auth --> DB_Users : TCP/IP
+Backend_User --> DB_Users : TCP/IP
+Backend_Score --> DB_Scores : TCP/IP
+Backend_Score --> DB_Files : TCP/IP
+Backend_Model --> DB_Models : TCP/IP
+Backend_Recommendation --> DB_Scores : TCP/IP
+Backend_Search --> DB_Scores : TCP/IP
+Backend_HotCharts --> DB_Scores : TCP/IP
+Backend_File --> DB_Files : TCP/IP
+
+' Algorithm Service to Data Storage
+Algo_Generation --> DB_Models : TCP/IP
+Algo_Generation --> DB_Files : TCP/IP
+Algo_Training --> DB_Models : TCP/IP
+Algo_Training --> DB_Files : TCP/IP
+Algo_Classification --> DB_Scores : TCP/IP
+Algo_Classification --> DB_Files : TCP/IP
+Algo_Recommendation --> DB_Scores : TCP/IP
+Algo_Recommendation --> DB_Users : TCP/IP
+Algo_Converter --> DB_Files : TCP/IP
+Algo_TrackSeed --> DB_Files : TCP/IP
+
+' Scheduling to Data Storage
+Scheduler --> DB_Tasks : TCP/IP
+QueueManager --> DB_Tasks : TCP/IP
+StatusMonitor --> DB_Tasks : TCP/IP
+
+' Distributed storage for large files
+Backend_File --> HDFS : TCP/IP
+Algo_Generation --> HDFS : TCP/IP
+Algo_Training --> HDFS : TCP/IP
+
+' Service discovery
+Backend_Auth --> Etcd : TCP/IP
+Backend_User --> Etcd : TCP/IP
+Backend_Score --> Etcd : TCP/IP
+Backend_Model --> Etcd : TCP/IP
+Algo_Generation --> Etcd : TCP/IP
+Algo_Training --> Etcd : TCP/IP
+Scheduler --> Etcd : TCP/IP
+
+' ====== LEGEND ======
+legend right
+  <b>Communication Protocols:</b>
+  -- HTTPS (User-Facing)
+  -- TCP/IP (Internal)
+  <b>Key Data Flows:</b>
+  -- User Requests
+  -- Task Scheduling
+  -- Algorithm Processing
+  -- Data Storage
+endlegend
+
+' ====== NOTES ======
+note top of Nginx
+  <b>Gateway & Load Balancing</b>
+  - Isolates internal/external networks
+  - Routes HTTPS traffic
+  - Distributes load across backend instances
+end note
+
+note right of RabbitMQ
+  <b>Message Queue</b>
+  - RabbitMQ 3.8.14
+  - Reliable message transmission
+  - Task queuing for async processing
+  - Status polling mechanism
+end note
+
+note left of HDFS
+  <b>Distributed Storage</b>
+  - Hadoop 3.2.2
+  - Stores large MIDI/ABC files
+  - 3-replica data storage
+  - High availability
+end note
+
+note bottom of Etcd
+  <b>Service Discovery</b>
+  - etcd 3.4.15
+  - Service registration
+  - Health checking
+  - Configuration management
+end note
+
+note right of Scheduler
+  <b>Scheduled Tasks:</b>
+  - Daily training (02:00)
+  - Daily classification
+  - Daily recommendations
+  - User-submitted generation tasks
+end note
+
+note left of Algo_Generation
+  <b>Algorithm Processing:</b>
+  - MIDI to ABC conversion
+  - 5 track seed extraction
+  - GPT-2 score generation
+  - ABC to MIDI conversion
+  - Fallback on conversion failures
+end note
+
+@enduml

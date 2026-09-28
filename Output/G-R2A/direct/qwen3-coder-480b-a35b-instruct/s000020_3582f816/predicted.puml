@@ -1,0 +1,58 @@
+@startuml
+!define RECTANGLE class
+
+RECTANGLE "Browser" as Browser {
+  [Admin Application]
+}
+
+RECTANGLE "Server" as Server {
+  [MyEMS REST API Service]
+  [Database]
+}
+
+RECTANGLE "Deployment" as Deployment {
+  [Nginx (Optional)]
+  [Docker Environment]
+}
+
+[Browser] --> [Server] : HTTP/HTTPS\n/api/ requests
+[Admin Application] --> [MyEMS REST API Service] : /api/ path resolution
+[MyEMS REST API Service] --> [Database] : Persistent storage access
+
+package "Admin Application Modules" {
+  [User Settings Module]
+  [Contact Settings Module]
+  [Tariff Settings Module]
+  [Category Settings Module]
+}
+
+[Admin Application] ..> [User Settings Module] : Lazy-loaded
+[Admin Application] ..> [Contact Settings Module] : Lazy-loaded
+[Admin Application] ..> [Tariff Settings Module] : Lazy-loaded (if configured)
+[Admin Application] ..> [Category Settings Module] : Lazy-loaded (if configured)
+
+note right of Server
+  - Python runtime with dependencies
+  - Supports Linux & Windows dev modes
+  - Docker-based deployment supported
+end note
+
+note right of Deployment
+  Optional reverse proxy like Nginx
+  can route /api/ traffic to API service
+end note
+
+note top of Admin Application
+  Routes:
+  - /user (User Settings)
+  - /contact (Contact Settings)
+  - Others (Tariff, Category if enabled)
+end note
+
+note bottom of MyEMS REST API Service
+  Provides RESTful endpoints for:
+  - MyEMS components
+  - Third-party applications
+end note
+
+@enduml

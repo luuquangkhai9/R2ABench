@@ -1,0 +1,87 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::HTTP"
+      ],
+      "predicted_nodes": [
+        "External Logging Producers::Any Language/Env\\nHTTP Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the HTTP-based client-side submission capability and logging producers using HTTP. The predicted node is more specific but semantically equivalent in function."
+    },
+    {
+      "gt_nodes": [
+        "Global::HypnoLog\\nServer"
+      ],
+      "predicted_nodes": [
+        "Global::Server Host",
+        "Server Host::Node.js Runtime",
+        "Server Host::Node.js Runtime::Express App",
+        "Server Host::Node.js Runtime::JSON Body Parser\\n(limit 50mb",
+        "Server Host::Node.js Runtime::Logging Router\\nmounted at /logger",
+        "Server Host::Node.js Runtime::Node HTTP Server\\nPort 7000 (default)\\n(override via CLI arg",
+        "Server Host::Node.js Runtime::Static File Server\\n(public/, /client.html"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT server node is decomposed into runtime, HTTP server, Express app, router, body parser, and static file hosting. This is a valid refinement of the same server boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::In Browser Log"
+      ],
+      "predicted_nodes": [
+        "Global::Browser Client",
+        "Browser Client::Ajv Validator",
+        "Browser Client::Client UI\\n(client.html",
+        "Browser Client::Default Window",
+        "Browser Client::Message Processor",
+        "Browser Client::Received-Data List",
+        "Browser Client::Socket.IO Client",
+        "Browser Client::Visualizer Dispatcher\\n(first canDisplay match",
+        "Browser Client::Visualizers[]\\n(canDisplay(obj), display(obj, cb",
+        "Browser Client::Window Dispatcher"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT browser-side logging/visualization subsystem is split into its functional parts. The predicted nodes align with the browser client responsibilities described in the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Global::Python"
+      ],
+      "predicted_nodes": [
+        "Browser Client::Ajv Validator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is an unrelated language label, while the prediction is a browser-side JSON schema validator component. This is not semantically equivalent and represents a hallucinated/misplaced match."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::C#"
+  ],
+  "unmatched_predicted_nodes": [
+    "Browser Client::Ajv Validator",
+    "Browser Client::Client UI\\n(client.html",
+    "Browser Client::Default Window",
+    "Browser Client::Message Processor",
+    "Browser Client::Received-Data List",
+    "Browser Client::Socket.IO Client",
+    "Browser Client::Visualizer Dispatcher\\n(first canDisplay match",
+    "Browser Client::Visualizers[]\\n(canDisplay(obj), display(obj, cb",
+    "Browser Client::Window Dispatcher",
+    "Global::Browser Client",
+    "Global::External Logging Producers",
+    "Global::HypnoLog Data Object",
+    "Global::Server Host",
+    "Server Host::Node.js Runtime",
+    "Server Host::Node.js Runtime::Express App",
+    "Server Host::Node.js Runtime::JSON Body Parser\\n(limit 50mb",
+    "Server Host::Node.js Runtime::Logging Router\\nmounted at /logger",
+    "Server Host::Node.js Runtime::Node HTTP Server\\nPort 7000 (default)\\n(override via CLI arg",
+    "Server Host::Node.js Runtime::Static File Server\\n(public/, /client.html"
+  ]
+}

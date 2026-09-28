@@ -1,0 +1,109 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Audit\nService"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Audit Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same Audit Service component; placing it under the Kubernetes / GKE cluster boundary is semantically consistent with the deployment context."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Customer\nLogic",
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Out of the\nBox Services"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Cloud Connectors"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node aggregates the two GT Cloud Connectors subnodes into a single higher-level Cloud Connectors component. The boundary is acceptable as an architectural aggregation."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Notification\nService"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Notification Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same Notification Service component; the cluster boundary is consistent with deployment placement."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Query\nService"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Query Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same Query Service component and same deployment-level placement."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::Process\nRuntime"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::ProcessRuntime API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "ProcessRuntime API corresponds to the GT Process Runtime concept; the cluster boundary is acceptable because it reflects runtime deployment context."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Config Maps\n(Kubernetes",
+        "Activiti Cloud Infrastructure::Registry\n(Kubernetes"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Deployment Descriptors\n+ Config Maps\n(input rate, replicas"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node merges deployment descriptors with config maps, which is consistent with the GT config-maps/deployment-configuration background. Registry is not explicitly represented, but the deployed configuration aspect is captured at the right infrastructure boundary."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Gateway"
+      ],
+      "predicted_nodes": [
+        "Global::Public IP / External Access"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "These are related to external access, but they are not the same component. Gateway is an internal routing/API gateway element, while Public IP / External Access is an exposure mechanism; this is a semantic mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Global::SSO/IDM\n(Keycloak"
+      ],
+      "predicted_nodes": [
+        "Global::Keycloak\n(Identity Provider"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same Keycloak identity-provider component at the correct global SSO/IDM level."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::BPMN, Form\nand Rule Defs",
+    "Global::Client"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Authenticated User",
+    "Global::Cluster Operator",
+    "Global::Developer/Integrator",
+    "Global::Human Participant",
+    "Global::Kubernetes / GKE Cluster",
+    "Global::Task API User\n(ROLE_ACTIVITI_USER",
+    "Kubernetes / GKE Cluster::Example Runtime Bundle\n(Spring Boot + Spring Security",
+    "Kubernetes / GKE Cluster::NGINX Ingress Controller",
+    "Kubernetes / GKE Cluster::TaskRuntime API"
+  ]
+}

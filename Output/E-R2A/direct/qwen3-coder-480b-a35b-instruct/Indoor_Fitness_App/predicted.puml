@@ -1,0 +1,83 @@
+@startuml
+!define RECTANGLE class
+
+RECTANGLE "Mobile App" as MobileApp {
+  - Camera Capture
+  - Exercise Interface
+  - Posture Evaluation
+  - Plan Recommendation
+  - Poster & Report Generation
+  - Screen Casting
+  - User Management
+}
+
+RECTANGLE "Server" as Server {
+  - Plan Processing
+  - Data Analysis
+  - Report Generation
+  - User Data Storage
+}
+
+RECTANGLE "Database" as Database {
+  - User Information
+  - Exercise Plans
+  - Training Records
+  - Standard Movements
+}
+
+RECTANGLE "Android Devices (LAN)" as AndroidDevices {
+  - Screen Casting Receiver
+  - Real-time Display
+}
+
+MobileApp --> Server : API Calls\n(Plan Recommendation,\nReport Generation)
+MobileApp --> Database : Data Access\n(User Info, Plans,\nHistory)
+Server --> Database : Data Read/Write
+MobileApp <--> AndroidDevices : Screen Casting\n(Real-time Video Stream)
+
+note right of MobileApp
+  Key Capabilities:
+  - Pose Estimation
+  - Real-time Feedback
+  - Custom Training Plans
+  - Social Sharing
+end note
+
+note right of Server
+  Key Functions:
+  - Intelligent Recommendations
+  - Data Processing
+  - Report Generation
+  - User Analytics
+end note
+
+note right of Database
+  Data Types:
+  - User Profiles
+  - Exercise History
+  - Training Plans
+  - Movement Standards
+  - Biometric Data
+end note
+
+note right of AndroidDevices
+  Casting Features:
+  - LAN Discovery
+  - Real-time Streaming
+  - Low-latency Control
+end note
+
+rectangle "External Systems" as External {
+  - Authentication Services
+  - Cloud Backup
+  - Analytics Platforms
+}
+
+Server ..> External : Optional Integration
+
+title Indoor Fitness App - System Architecture
+
+legend bottom
+  Core Components and Data Flow for Pose-based Fitness Training
+end legend
+@enduml

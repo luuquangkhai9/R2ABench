@@ -1,0 +1,312 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::API Gateway"
+      ],
+      "predicted_nodes": [
+        "AWS Account::Amazon API Gateway\\n(REST APIs - execute-api"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the API Gateway entry point for frontend-backend communication. The AWS Account boundary is acceptable and semantically equivalent to the GT global placement."
+    },
+    {
+      "gt_nodes": [
+        "Global::Cognito"
+      ],
+      "predicted_nodes": [
+        "AWS Account::Amazon Cognito\\n(User Pools"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote Cognito authentication services. The predicted boundary is a more explicit AWS packaging of the same component."
+    },
+    {
+      "gt_nodes": [
+        "Global::S3"
+      ],
+      "predicted_nodes": [
+        "AWS Account::Amazon S3\\nStatic Website\\n(Web Frontend: HTML/CSS/Bootstrap/jQuery"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the S3-hosted frontend/static website. Boundary attribution is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Notification Service::SQS"
+      ],
+      "predicted_nodes": [
+        "AWS Account::Amazon SQS\\nReminders Queue"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both are the reminder queueing component implemented with SQS. The boundary/package naming differs but is equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Notification Service::SNS"
+      ],
+      "predicted_nodes": [
+        "AWS Account::Amazon SNS\\n(SMS Topic"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent SNS for SMS delivery in the notification workflow. The predicted node is correctly placed within the AWS service context."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::SageMaker"
+      ],
+      "predicted_nodes": [
+        "AWS Account::Amazon SageMaker\\n(Prediction Endpoint"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both are the ML prediction service endpoint based on SageMaker. Boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::DynamoDB\\nPredictions"
+      ],
+      "predicted_nodes": [
+        "AWS Account::Amazon DynamoDB\\n(Match Data Store"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is specifically the prediction datastore, while the predicted node is a generic match data store and does not clearly preserve the prediction-specific boundary/function."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "AWS Account::Amazon Elasticsearch\\n(Search Index"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to Elasticsearch used as a search/index backing component in the prediction data path. Boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Standing Service::DynamoDB\\nStandings"
+      ],
+      "predicted_nodes": [
+        "AWS Account::Amazon DynamoDB\\n(Match Data Store"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is specifically the standings datastore, but the predicted node is only a generic match data store and loses the standings boundary/function specificity."
+    },
+    {
+      "gt_nodes": [
+        "Standing Service::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "AWS Account::Amazon Elasticsearch\\n(Search Index"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Elasticsearch search layer supporting standings retrieval. Boundary attribution is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Fixtures Service::SQS"
+      ],
+      "predicted_nodes": [
+        "AWS Account::Amazon SQS\\nReminders Queue"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT Fixtures Service SQS node is tied to the fixtures/reminder-related service context, while the predicted SQS node is explicitly modeled as the reminders queue. This is a functional mismatch rather than a clean equivalence."
+    },
+    {
+      "gt_nodes": [
+        "Fixtures Service::fixtures\\nLambda"
+      ],
+      "predicted_nodes": [
+        "AWS Account::AWS Lambda (Python/Node)\\nBackend Functions::Reminder API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is the fixtures Lambda, but the predicted node is a reminder API Lambda. These are different functional components and should not be matched."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::DynamoDB\\nLive Scores"
+      ],
+      "predicted_nodes": [
+        "AWS Account::Amazon DynamoDB\\n(Match Data Store"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a live scores datastore within the streaming pipeline, while the predicted node is a generic match data store. The functional boundary is too broad and not clearly equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2"
+      ],
+      "predicted_nodes": [
+        "AWS Account::Amazon EC2\\nKafka Cluster"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to EC2 as the runtime for the live score pipeline. The predicted boundary is more specific but still semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2::Kafka"
+      ],
+      "predicted_nodes": [
+        "AWS Account::Amazon EC2\\nKafka Cluster::Kafka Topic\\nLive Scores (Apache Avro"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the Kafka component used for live score streaming on EC2. The predicted node adds topic/format detail but remains within the correct pipeline boundary."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2::M4"
+      ],
+      "predicted_nodes": [
+        "AWS Account::Amazon EC2\\nKafka Cluster::Stream Processors\\n(EC2 Consumers"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "GT explicitly models an EC2 M4 instance type, while the prediction replaces it with stream processors/consumers. This is not the same node semantically or architecturally."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2::foot app"
+      ],
+      "predicted_nodes": [
+        "AWS Account::Amazon EC2\\nKafka Cluster::Stream Processors\\n(EC2 Consumers"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT foot app is a distinct application component in the live score pipeline, whereas the predicted node is a stream processor/consumer role. These are not equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "AWS Account::Amazon Elasticsearch\\n(Search Index"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both are Elasticsearch search components used in the live score context. Boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::live_score\\nLambda"
+      ],
+      "predicted_nodes": [
+        "AWS Account::AWS Lambda (Python/Node)\\nBackend Functions::Data API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is the live score Lambda, but the predicted node is a data API Lambda. These are different functions and should not be matched."
+    },
+    {
+      "gt_nodes": [
+        "Recommendation Service::Lex"
+      ],
+      "predicted_nodes": [
+        "AWS Account::AWS Lambda (Python/Node)\\nBackend Functions::Chatbot Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "GT uses Lex for recommendation/chatbot capability, but the prediction models a custom chatbot handler Lambda instead. They are not semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Recommendation Service::recommendation\\nLambda"
+      ],
+      "predicted_nodes": [
+        "AWS Account::AWS Lambda (Python/Node)\\nBackend Functions::Chatbot Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT recommendation Lambda is specifically for recommendation handling, while the predicted chatbot handler is a broader conversational component. The functional mapping is not exact enough."
+    },
+    {
+      "gt_nodes": [
+        "AWS Account::AWS Lambda (Python/Node)\\nBackend Functions::Reminder Processor\\n(SQS -> SNS"
+      ],
+      "predicted_nodes": [
+        "Notification Service::SQS",
+        "Notification Service::SNS"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT reminder processor is functionally split across the queueing and SMS delivery services in the predicted model. The decomposition is semantically consistent with the notification workflow."
+    },
+    {
+      "gt_nodes": [
+        "AWS Account::AWS Lambda (Python/Node)\\nBackend Functions::Data API"
+      ],
+      "predicted_nodes": [
+        "AWS Account::Amazon API Gateway\\n(REST APIs - execute-api"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The data API Lambda is backend execution logic, while API Gateway is only the front door/routing layer. These are not equivalent components."
+    },
+    {
+      "gt_nodes": [
+        "AWS Account::AWS Lambda (Python/Node)\\nBackend Functions::Prediction API"
+      ],
+      "predicted_nodes": [
+        "AWS Account::Amazon SageMaker\\n(Prediction Endpoint"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is an API Lambda invoking prediction logic, while the predicted node is the SageMaker model endpoint itself. They are related but not the same architectural node."
+    },
+    {
+      "gt_nodes": [
+        "AWS Account::AWS Lambda (Python/Node)\\nBackend Functions::Chatbot Handler"
+      ],
+      "predicted_nodes": [
+        "AWS Account::AWS Lambda (Python/Node)\\nBackend Functions::Reminder API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "These are different backend functions serving different user workflows. No semantic equivalence."
+    },
+    {
+      "gt_nodes": [
+        "Global::User"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "The user actor is present in the GT but missing from the predicted list."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Fixtures Service::SQS",
+    "Fixtures Service::fixtures\\nLambda",
+    "Global::User",
+    "Live Score Pipeline::DynamoDB\\nLive Scores",
+    "Live Score Pipeline::EC2::M4",
+    "Live Score Pipeline::EC2::foot app",
+    "Live Score Pipeline::live_score\\nLambda",
+    "Recommendation Service::Lex",
+    "Recommendation Service::recommendation\\nLambda",
+    "Standing Service::DynamoDB\\nStandings",
+    "Standing Service::standing\\nLambda"
+  ],
+  "unmatched_predicted_nodes": [
+    "AWS Account::AWS Identity and Access Management\\n(IAM",
+    "AWS Account::AWS Lambda (Python/Node)\\nBackend Functions::Chatbot Handler",
+    "AWS Account::AWS Lambda (Python/Node)\\nBackend Functions::Data API",
+    "AWS Account::AWS Lambda (Python/Node)\\nBackend Functions::Prediction API",
+    "AWS Account::AWS Lambda (Python/Node)\\nBackend Functions::Reminder API",
+    "AWS Account::Amazon EC2\\nKafka Cluster::Stream Processors\\n(EC2 Consumers",
+    "Global::External Live Score Producers\\n(Data Feeds",
+    "Global::External SMS Carrier / Phone Network"
+  ]
+}

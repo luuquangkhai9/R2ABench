@@ -1,0 +1,60 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Turing System::Turing API Server\\nHTTP REST API to configure Routers"
+      ],
+      "predicted_nodes": [
+        "API Layer::HTTP API Server",
+        "API Layer::Router Handler",
+        "API Layer::Ensembler Handler",
+        "Service / Business Logic Layer::Router Service",
+        "Service / Business Logic Layer::Ensembler Service",
+        "Middleware Layer::Authorization Middleware\\n(conditional",
+        "Middleware Layer::OpenAPI Validation Middleware\\n(conditional"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly decomposed the GT's monolithic API server into granular components including the runtime server, handlers for specific resources (Routers, Ensemblers), business logic services, and middleware layers, all of which are described in the PRD. The use of architectural layer boundaries (API Layer, Service Layer, Middleware Layer) is a semantically equivalent and more detailed representation than the GT's single system boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Router Endpoints"
+      ],
+      "predicted_nodes": [
+        "Global::HTTP Endpoints\\n(Client Inbound"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct semantic match for the system's public API surface. Both are correctly placed in a 'Global' boundary, indicating they are externally accessible."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Authorization Service",
+    "Global::Experimentation Service",
+    "Global::Machine Learning Platform\\nMLP API Server",
+    "Global::Monitoring and Alerting Service",
+    "Global::Router Clients",
+    "Global::Secret Store",
+    "Global::Turing User",
+    "Kubernetes Cluster::Istio",
+    "Kubernetes Cluster::Knative Controller",
+    "Turing System::Database\\nPersistent storage for Router objects",
+    "Turing System::Turing UI\\nWeb interface to configure Routers"
+  ],
+  "unmatched_predicted_nodes": [
+    "Cluster Management Layer::Kubernetes Cluster Manager",
+    "Global::Artifact Download Interface",
+    "Global::Cluster API Interface",
+    "Global::Jaeger\\n(Distributed Tracing Backend",
+    "Global::Kubernetes Cluster",
+    "Global::MLflow Model Registry",
+    "Global::PyFuncEnsembler HTTP Interface",
+    "Global::Trace Export Interface",
+    "Kubernetes Cluster::Kubernetes API",
+    "Observability Layer::Jaeger Tracing Client",
+    "OpenAPI Specification (v3.0.3::Endpoint Schemas",
+    "PyFuncEnsembler Runtime Layer::PyFuncEnsembler Image Builder",
+    "PyFuncEnsembler Runtime Layer::PyFuncEnsemblerRunner\\n(webservice"
+  ]
+}

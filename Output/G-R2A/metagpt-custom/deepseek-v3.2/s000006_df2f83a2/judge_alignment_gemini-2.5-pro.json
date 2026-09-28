@@ -1,0 +1,98 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Simulator"
+      ],
+      "predicted_nodes": [
+        "Runtime Interface Layer::StandaloneSimulatorPackage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the final packaged simulator. The boundary shifts from Global to Runtime Interface Layer, which is an accurate and acceptable architectural mapping."
+    },
+    {
+      "gt_nodes": [
+        "Biomechanical Model::BaseBMModel",
+        "Biomechanical Model::DerivedClass",
+        "Biomechanical Model::MoblArmsIndex"
+      ],
+      "predicted_nodes": [
+        "Core Simulation Layer::BiomechanicalModel"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The detailed biomechanical model classes in GT are aggregated into a single functional component by the AI. The boundary 'Core Simulation Layer' is a valid architectural equivalent to the 'Biomechanical Model' package."
+    },
+    {
+      "gt_nodes": [
+        "Interaction Task::BaseTask",
+        "Interaction Task::DerivedClass",
+        "Interaction Task::Pointing",
+        "Interaction Task::Tracking"
+      ],
+      "predicted_nodes": [
+        "Core Simulation Layer::InteractionTask"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Various specific interaction task instances in GT are grouped into the broader 'InteractionTask' node by the AI. Layer attribution is semantically valid."
+    },
+    {
+      "gt_nodes": [
+        "Perception::Modalities::Proprioception"
+      ],
+      "predicted_nodes": [
+        "Core Simulation Layer::Perception Modules::ProprioceptionModule"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact match of the proprioception modality module. The nested package boundary in the AI prediction correctly reflects the perception domain."
+    },
+    {
+      "gt_nodes": [
+        "Perception::Modalities::Vision"
+      ],
+      "predicted_nodes": [
+        "Core Simulation Layer::Perception Modules::VisionModule"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact match of the vision modality module, placed in an appropriate simulation layer."
+    },
+    {
+      "gt_nodes": [
+        "Perception::BaseModule",
+        "Perception::Modalities::Modality"
+      ],
+      "predicted_nodes": [
+        "Core Simulation Layer::<<abstract>>\nBase Module Contract"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The abstract/base perception module classes in the GT are matched to the AI's Base Module Contract, fulfilling the PRD's interface inheritance requirements."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Perception::BasicWithEEPos",
+    "Perception::DerivedClass",
+    "Perception::FixedEye",
+    "Perception::Perception"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Core Simulation Layer",
+    "Global::Integration & Build Layer",
+    "Global::MuJoCo Simulation Engine",
+    "Global::OpenAI Gym-Compatible Runtime\nEnvironments",
+    "Global::Reinforcement-Learning\nTraining Libraries",
+    "Global::Runtime Interface Layer",
+    "Global::Training & Evaluation Layer",
+    "Integration & Build Layer::MuJoCoXMLIntegrator",
+    "Integration & Build Layer::SimulatorBuilder",
+    "Runtime Interface Layer::GymInterfaceWrapper",
+    "Training & Evaluation Layer::ActionLogger",
+    "Training & Evaluation Layer::EvaluationRunner",
+    "Training & Evaluation Layer::Run Folder",
+    "Training & Evaluation Layer::TrainingWorkflow"
+  ]
+}

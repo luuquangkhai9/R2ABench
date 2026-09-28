@@ -1,0 +1,143 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Lucene Layer::Apache Lucene API"
+      ],
+      "predicted_nodes": [
+        "Global::Lucene Index",
+        "Lucene Index::Analyzer-normalized Term Data",
+        "Lucene Index::Document Data"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Lucene API and index-related functionality is split into concrete index/data nodes by the AI. Although the AI separates API from data elements, the semantic placement remains within the Lucene layer and is consistent with the underlying Lucene ecosystem."
+    },
+    {
+      "gt_nodes": [
+        "Lucene Layer::Index"
+      ],
+      "predicted_nodes": [
+        "Global::Lucene Index",
+        "Lucene Index::Analyzer-normalized Term Data",
+        "Lucene Index::Document Data"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT index node is represented by the AI as a Lucene index boundary plus its contained document and term data. This is a reasonable split and stays within the correct Lucene-related boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Scala Driver for Lucene\\nAnalyzer, Word-counter, FST dictionary"
+      ],
+      "predicted_nodes": [
+        "NLP4L Core (Scala::Document Processor",
+        "NLP4L Core (Scala::Term Data Accessor",
+        "NLP4L Core (Scala::Vector Generator",
+        "NLP4L Core (Scala::LIBSVM Exporter",
+        "NLP4L Core (Scala::Chart Visualizer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT high-level Scala driver corresponds to multiple Scala core processing utilities in the AI diagram. This is a valid decomposition into functional subcomponents, and the Scala/core boundary is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Global::Scala High Level API\\nfor convenience in text mining and stats"
+      ],
+      "predicted_nodes": [
+        "NLP4L Core (Scala::Document Processor",
+        "NLP4L Core (Scala::Search Engine Interface",
+        "NLP4L Core (Scala::Vector Generator",
+        "NLP4L Core (Scala::LIBSVM Exporter",
+        "NLP4L Core (Scala::Schema Loader",
+        "NLP4L Core (Scala::Schema Model",
+        "NLP4L Core (Scala::Term Data Accessor",
+        "NLP4L Core (Scala::Chart Visualizer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT convenience high-level API is broadly decomposed into specific Scala services by the AI. The functional scope matches and the Scala boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "NLP4L User Interfaces and Integrations::Applications"
+      ],
+      "predicted_nodes": [
+        "NLP4L Core (Scala::Chart Visualizer",
+        "NLP4L Core (Scala::Document Processor",
+        "NLP4L Core (Scala::LIBSVM Exporter",
+        "NLP4L Core (Scala::Schema Loader",
+        "NLP4L Core (Scala::Search Engine Interface",
+        "NLP4L Core (Scala::Term Data Accessor",
+        "NLP4L Core (Scala::Vector Generator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node represents user-facing applications/integrations, while the AI placed the corresponding functionality inside the core Scala layer. This is a boundary mismatch because application/integration concerns are not the same as core processing."
+    },
+    {
+      "gt_nodes": [
+        "NLP4L User Interfaces and Integrations::File based\\nMahout/Spark\\nconnector"
+      ],
+      "predicted_nodes": [
+        "NLP4L Core (Scala::LIBSVM Exporter",
+        "NLP4L Core (Scala::Vector Generator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT integration connector to external ML tools is mapped to internal core services by the AI. The functionality is related, but the boundary is incorrect because an external connector/integration was collapsed into core processing/export components."
+    },
+    {
+      "gt_nodes": [
+        "NLP4L User Interfaces and Integrations::Index Schema\\nBrowser (GUI/CUI"
+      ],
+      "predicted_nodes": [
+        "NLP4L Core (Scala::Schema Loader",
+        "NLP4L Core (Scala::Schema Model"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a schema browsing UI, while the AI modeled only backend schema loading/modeling functions. This is a severe layer mismatch between UI/browser functionality and core schema handling."
+    },
+    {
+      "gt_nodes": [
+        "NLP4L User Interfaces and Integrations::Interactive Shell\\nfor NLP4L (REPL"
+      ],
+      "predicted_nodes": [
+        "NLP4L Core (Scala::Document Processor",
+        "NLP4L Core (Scala::Search Engine Interface",
+        "NLP4L Core (Scala::Term Data Accessor",
+        "NLP4L Core (Scala::Vector Generator",
+        "NLP4L Core (Scala::LIBSVM Exporter",
+        "NLP4L Core (Scala::Schema Loader"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is an interactive shell/repl interface, but the AI placed its behavior into internal core services. That is a boundary error because the interaction layer was not preserved."
+    },
+    {
+      "gt_nodes": [
+        "NLP4L User Interfaces and Integrations::Applications",
+        "NLP4L User Interfaces and Integrations::File based\\nMahout/Spark\\nconnector",
+        "NLP4L User Interfaces and Integrations::Index Schema\\nBrowser (GUI/CUI",
+        "NLP4L User Interfaces and Integrations::Interactive Shell\\nfor NLP4L (REPL"
+      ],
+      "predicted_nodes": [
+        "NLP4L Core (Scala::Chart Visualizer",
+        "NLP4L Core (Scala::Document Processor",
+        "NLP4L Core (Scala::LIBSVM Exporter",
+        "NLP4L Core (Scala::Schema Loader",
+        "NLP4L Core (Scala::Schema Model",
+        "NLP4L Core (Scala::Search Engine Interface",
+        "NLP4L Core (Scala::Term Data Accessor",
+        "NLP4L Core (Scala::Vector Generator"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "Several GT user-interface and integration nodes were merged into core Scala processing nodes. While some functional overlap exists, the architectural boundary is incorrect because UI/integration concerns were collapsed into the internal core layer."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

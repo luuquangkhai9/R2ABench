@@ -1,0 +1,99 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::GoDaddy API\\nDomain availability"
+      ],
+      "predicted_nodes": [
+        "External Integration Layer::GoDaddyClient",
+        "External Systems::GoDaddy API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both predicted nodes represent the optional GoDaddy integration/availability-check capability described by the GT node. The split into client and external system is acceptable and semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Global::HTTP API\\nSession and attack requests"
+      ],
+      "predicted_nodes": [
+        "API Layer::AttackOptionParser",
+        "API Layer::ErrorHandler\\n(400 / 404 / 500",
+        "API Layer::HomoglyphEndpoint",
+        "API Layer::JobController",
+        "API Layer::QueryStringFailureHandler\\n(FR-008",
+        "API Layer::SessionManager",
+        "Presentation Layer::WebEntryController\\n(GET /"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These nodes collectively cover the HTTP API responsibilities in the GT: root GET/session creation, attack request handling, job submission, error handling, and query parsing failure handling. The boundary split into Presentation/API layers is reasonable."
+    },
+    {
+      "gt_nodes": [
+        "Global::Redis\\nCommand and reporting queues"
+      ],
+      "predicted_nodes": [
+        "Global::Redis\\n(Job Channel + Reporting Channel",
+        "Messaging Layer::RedisProducer",
+        "Messaging Layer::RedisReportingReader"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted nodes accurately decompose Redis into producer and reporting-reader responsibilities, and the Redis channel usage matches the GT command/reporting queues."
+    },
+    {
+      "gt_nodes": [
+        "Global::Socket.io\\nWebSocket result channel"
+      ],
+      "predicted_nodes": [
+        "Async Notification Layer::WebSocket Session Channel",
+        "Async Notification Layer::WebSocketNotifier\\n(Socket.IO"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both predicted nodes represent the asynchronous Socket.IO/WebSocket result channel described in the GT. The layer naming differs but is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Squatm3\\nDomain generation engine"
+      ],
+      "predicted_nodes": [
+        "Domain Generation Layer::Squatm3Wrapper",
+        "External Systems::squatm3 CLI binary"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT engine is represented by a wrapper plus the underlying CLI binary. This is a valid split of the same domain-generation component."
+    },
+    {
+      "gt_nodes": [
+        "Global::Web UI\\nindex.html"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::WebEntryController\\n(GET /",
+        "Presentation Layer::index.html Template"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT web UI entry page is captured by the index.html template and the root GET controller. The presentation-layer placement is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::Workers\\nCommand consumers"
+      ],
+      "predicted_nodes": [
+        "Worker / Consumer Layer::BackgroundConsumerThread"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The background consumer thread directly matches the GT worker/consumer component and is placed in a correct worker-oriented boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Browser / HTTP Client",
+    "Global::External Systems",
+    "Configuration Layer::AppConfig"
+  ]
+}

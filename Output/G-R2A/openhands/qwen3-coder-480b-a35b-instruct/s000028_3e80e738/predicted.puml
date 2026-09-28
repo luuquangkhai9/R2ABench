@@ -1,0 +1,118 @@
+@startuml
+!define AWSPREFIX icons/aws
+!define AWSCOLOR #FF9900
+
+skinparam linetype ortho
+skinparam componentStyle rectangle
+
+package "AWS Cloud" {
+  package "Cognito Account" {
+    node "Cognito User Pool" as userpool [
+      [User Pool]
+      ----
+      - Custom attributes
+      - Token validity config
+    ]
+    
+    node "Cognito Identity Pool" as idpool [
+      [Identity Pool]
+      ----
+      - Cognito provider binding
+      - Unauthenticated identities
+    ]
+    
+    artifact "User Pool Client" as client [
+      [Client App]
+      ----
+      - Read/write attributes
+      - Custom:Role, email
+    ]
+    
+    rectangle "IAM Roles" as iam_roles {
+      artifact "Authenticated Role" as auth_role
+      artifact "Unauthenticated Role" as unauth_role [
+        [Unauth Role]
+        ----
+        - Web identity trust
+        - Limited permissions
+      ]
+    }
+  }
+  
+  package "API Gateway Account" {
+    node "API Gateway" as apigw [
+      [API Gateway]
+      ----
+      - Cognito Authorizer
+      - WhoAmI Method
+      - ECS Proxy Method
+    ]
+    
+    node "VPC" as vpc {
+      node "VPC Endpoint\n(SQS)" as sqs_endpoint [
+        [SQS Endpoint]
+        ----
+        - Interface type
+        - Private DNS
+        - Security Group
+      ]
+      
+      artifact "Security Group" as sg [
+        [Security Group]
+        ----
+        - VPC CIDR restriction
+        - TCP 0-65535
+      ]
+    }
+    
+    node "NLB" as nlb [
+      [Network Load Balancer]
+    ]
+  }
+}
+
+' Relationships
+userpool --> client : Provides authentication
+client --> idpool : Binds to identity pool
+idpool --> auth_role : Maps authenticated role
+idpool --> unauth_role : Maps unauthenticated role
+
+userpool ..> apigw : UserPool ARN\n(cross-account)
+apigw --> userpool : Cognito Authorizer
+apigw --> nlb : VPC Link Integration
+
+apigw --> sqs_endpoint : Private SQS access
+sqs_endpoint --> sg : Restricted by
+sg --> vpc : Attached to
+
+note right of userpool
+  **Cognito Account**
+  - Contains User Pool and Identity Pool
+  - Configures token validity units
+  - Defines custom attributes
+end note
+
+note right of apigw
+  **API Gateway Account**
+  - Cross-account integration
+  - Methods: WhoAmI, ECS Proxy
+  - Role header handling
+end note
+
+note right of sqs_endpoint
+  **VPC Endpoint**
+  - Private SQS connectivity
+  - VPC CIDR restriction
+  - Private DNS enabled
+end note
+
+cloud "External Systems" {
+  node "Amazon SQS" as sqs
+  node "Downstream Services" as downstream
+}
+
+sqs_endpoint --> sqs : Private access
+apigw --> downstream : API consumers
+nlb --> downstream : ECS proxy target
+
+@enduml

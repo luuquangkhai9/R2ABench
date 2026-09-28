@@ -1,0 +1,87 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Control::DBW Node\\nDrive-by-wire"
+      ],
+      "predicted_nodes": [
+        "Docker Container\\n(ROS Environment::System Nodes (ROS::Control Subsystem::Drive-By-Wire Node"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are a direct match for the Drive-By-Wire functionality. The GT boundary 'Control' and the AI boundary 'Control Subsystem' are semantically equivalent and correct."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Control::Waypoint Follower\\nController"
+      ],
+      "predicted_nodes": [
+        "Docker Container\\n(ROS Environment::System Nodes (ROS::Control Subsystem::Twist Controller"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'Waypoint Follower' is responsible for generating commands to follow waypoints, which corresponds functionally to the AI's 'Twist Controller' that would generate 'twist_cmd' messages. The 'Control' and 'Control Subsystem' boundaries are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Perception::Traffic Light\\nDetection Node"
+      ],
+      "predicted_nodes": [
+        "Docker Container\\n(ROS Environment::System Nodes (ROS::Perception Subsystem::Traffic Light Classifier",
+        "Docker Container\\n(ROS Environment::System Nodes (ROS::Perception Subsystem::Traffic Light Detector",
+        "Docker Container\\n(ROS Environment::System Nodes (ROS::Perception Subsystem::Traffic Waypoint Publisher"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly split the single perception node from the GT into its constituent functions (detection, classification, and waypoint publishing) as described in the PRD (FR-009). All generated nodes are correctly placed in the 'Perception Subsystem', which is semantically equivalent to the GT's 'Perception' layer."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Planning::Waypoint Loader\\nROS Node"
+      ],
+      "predicted_nodes": [
+        "Docker Container\\n(ROS Environment::System Nodes (ROS::Planning Subsystem::Waypoint Loader"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are a direct functional and name match. The GT boundary 'Planning' and the AI boundary 'Planning Subsystem' are semantically equivalent and correct."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Planning::Waypoint Updater Node\\nROS Node"
+      ],
+      "predicted_nodes": [
+        "Docker Container\\n(ROS Environment::System Nodes (ROS::Planning Subsystem::Waypoint Updater"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are a direct functional and name match. The GT boundary 'Planning' and the AI boundary 'Planning Subsystem' are semantically equivalent and correct."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Car / Simulator"
+      ],
+      "predicted_nodes": [
+        "Global::Udacity Simulator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the external simulator application. The AI's placement in the 'Global' boundary is arguably more accurate for an external dependency than the GT's placement within the 'ROS Architecture'."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Udacity Self-Driving Car Capstone\\nROS Architecture::Perception::Obstacle Detection\\nROS Node"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Docker Container\\n(ROS Environment",
+    "Global::Launch: site.launch\\n(site mode",
+    "Global::Launch: styx.launch\\n(simulator mode",
+    "Global::Recorded Training Bag\\n(playback",
+    "Global::base_waypoints\\n(twist.twist.linear.x carries target speed",
+    "Global::current_pose",
+    "Global::final_waypoints",
+    "Global::traffic_waypoint",
+    "Global::twist_cmd",
+    "Global::vehicle_cmd"
+  ]
+}

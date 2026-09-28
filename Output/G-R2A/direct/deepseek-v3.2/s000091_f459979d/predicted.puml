@@ -1,0 +1,120 @@
+@startuml
+!define RECTANGLE class
+skinparam componentStyle rectangle
+skinparam backgroundColor #FEFEFE
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam rectangle {
+    BackgroundColor #E6F3FF
+    BorderColor #0066CC
+    FontColor #003366
+}
+skinparam interface {
+    BackgroundColor #FFF2E6
+    BorderColor #CC6600
+    FontColor #663300
+}
+skinparam database {
+    BackgroundColor #E6FFE6
+    BorderColor #009933
+    FontColor #004D00
+}
+skinparam queue {
+    BackgroundColor #F0E6FF
+    BorderColor #6600CC
+    FontColor #330066
+}
+
+title System Architecture for LwM2M Device Management
+
+package "External Systems" {
+    [Authenticated API Client] as API_Client
+    [Ethereum-Compatible Node] as Eth_Node
+    [LwM2M Service Component] as LwM2M_Service
+    database "Smart Contract" as Smart_Contract
+}
+
+package "Backend System" {
+    interface "User HTTP API" as User_API
+    interface "Blockchain Client/Bootstrap Interface" as Blockchain_Interface
+    interface "LwM2M Node Deserialization Interface" as LwM2M_Interface
+
+    RECTANGLE "Spring Backend" as Spring_Backend {
+        RECTANGLE "User Controller" as User_Controller
+        RECTANGLE "Token Validator" as Token_Validator
+        RECTANGLE "User Service" as User_Service
+    }
+
+    RECTANGLE "Blockchain Integration Service" as Blockchain_Service {
+        RECTANGLE "Web3j Client" as Web3j_Client
+        RECTANGLE "Contract Client" as Contract_Client
+        RECTANGLE "Data Encoder/Decoder" as Data_Encoder
+    }
+
+    RECTANGLE "LwM2M Data Handler" as LwM2M_Handler {
+        RECTANGLE "JSON Parser" as JSON_Parser
+        RECTANGLE "Node Deserializer" as Node_Deserializer
+        RECTANGLE "Type Mapper" as Type_Mapper
+    }
+}
+
+' External Connections
+API_Client --> User_API : HTTP Requests\nAuthorization Header
+User_API --> User_Controller : Routes Requests
+Eth_Node --> Web3j_Client : HTTP Transport
+Smart_Contract --> Contract_Client : Contract Calls
+LwM2M_Service --> LwM2M_Interface : JSON Payloads
+
+' Internal Backend Connections
+User_Controller --> Token_Validator : Validates Token
+Token_Validator --> User_Controller : Validation Result (0,1,2)
+User_Controller --> User_Service : User Operations
+User_Service --> User_Controller : User Data
+
+' Blockchain Service Connections
+Blockchain_Interface --> Contract_Client : Client/Bootstrap Operations
+Contract_Client --> Data_Encoder : Encode/Decode Strings
+Data_Encoder --> Contract_Client : Fixed 32-byte ASCII
+Contract_Client --> Web3j_Client : Blockchain Calls
+Web3j_Client --> Eth_Node : HTTP Connectivity
+
+' LwM2M Handler Connections
+LwM2M_Interface --> JSON_Parser : JSON Input
+JSON_Parser --> Node_Deserializer : Parsed Structure
+Node_Deserializer --> Type_Mapper : Primitive Values
+Type_Mapper --> Node_Deserializer : Typed Resources
+Node_Deserializer --> LwM2M_Interface : Typed Node Structure
+
+' Data Flow Annotations
+note on link
+  <b>FR-001/FR-002:</b>
+  Token-based access control
+  for user operations
+end note
+
+note on link
+  <b>FR-003/FR-004/FR-005:</b>
+  Blockchain-backed storage
+  with 32-byte ASCII encoding
+end note
+
+note on link
+  <b>FR-006:</b>
+  LwM2M node JSON
+  deserialization with
+  type mapping
+end note
+
+note on link
+  <b>NFR-001:</b>
+  Security enforcement
+  on all user endpoints
+end note
+
+note on link
+  <b>NFR-004:</b>
+  Fixed 32-byte ASCII
+  encoding/decoding
+end note
+
+@enduml

@@ -1,0 +1,83 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Internet"
+      ],
+      "predicted_nodes": [
+        "Global::External Systems"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the external world outside the system boundary. The semantic role is equivalent and the Global boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Proxy"
+      ],
+      "predicted_nodes": [
+        "Proxy Layer::PlugIt Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The core proxy component matches directly. The layer name differs, but Proxy Layer is a semantically correct placement for the proxy node."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Service 1",
+        "Internal Network::PlugIt Service 2",
+        "Internal Network::PlugIt Service 3"
+      ],
+      "predicted_nodes": [
+        "Service Layer::PlugIt Service"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT shows multiple isolated PlugIt services, while the prediction aggregates them into one generic PlugIt Service. This is a valid merge at the diagram level, and the service boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB_Proxy"
+      ],
+      "predicted_nodes": [
+        "Proxy Layer::Proxy Data Store"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The proxy-side datastore matches the GT DB_Proxy concept. The storage node is placed under a reasonable proxy/data store boundary."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB 1",
+        "Internal Network::DB 2",
+        "Internal Network::DB 3"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Service Data Store"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT contains multiple service databases, and the prediction aggregates them into a generic service data store. This is semantically consistent and the data-layer placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Proxy"
+      ],
+      "predicted_nodes": [
+        "Proxy Layer::PlugIt Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Duplicate of the proxy match is not needed."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Configuration Layer::API Endpoint Configuration",
+    "Configuration Layer::Private Settings Manager",
+    "Configuration Layer::Service Configuration Files",
+    "Data Layer::Alembic Migration Interface",
+    "External Integration Layer::API Client",
+    "Optional Components::Mail Processor"
+  ]
+}

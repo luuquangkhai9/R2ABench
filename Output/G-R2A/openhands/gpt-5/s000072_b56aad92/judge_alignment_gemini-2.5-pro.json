@@ -1,0 +1,112 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Drivers and Kernels::RDMA Verbs Driver",
+        "UCX::UCT Hardware Transports\\nLow Level API::RDMA Verbs Transport\\nInfiniBand, ROCE, OPA"
+      ],
+      "predicted_nodes": [
+        "Network & Transport::Libfabric Verbs Provider",
+        "Network & Transport::Linux Verbs API",
+        "Network & Transport::libibverbs >= 1.1.8",
+        "Network & Transport::librdmacm >= 1.0.16"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT nodes describe the abstract RDMA Verbs driver and transport layer. The AI correctly identified the specific software libraries and the provider component mentioned in the PRD that implement and use this functionality. The AI's 'Network & Transport' boundary is semantically equivalent to the GT's 'Drivers and Kernels' and 'UCT Hardware Transports' for these components."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Cross-Transport Multi-Rail",
+        "UCX::UCP Protocols\\nHigh Level API::Fragmentation",
+        "UCX::UCP Protocols\\nHigh Level API::PGAS API\\nRMAs, Atomics",
+        "UCX::UCP Protocols\\nHigh Level API::Software Protocols",
+        "UCX::UCP Protocols\\nHigh Level API::Task Based API\\nActive Messages",
+        "UCX::UCP Protocols\\nHigh Level API::Transport Selection",
+        "UCX::UCS Services\\nCommon Utilities::Data Structures",
+        "UCX::UCS Services\\nCommon Utilities::Utilities",
+        "UCX::UCT Hardware Transports\\nLow Level API::DCT",
+        "UCX::UCT Hardware Transports\\nLow Level API::RC",
+        "UCX::UCT Hardware Transports\\nLow Level API::UD"
+      ],
+      "predicted_nodes": [
+        "Network & Transport::UCX"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified UCX as a component from the PRD and aggregated its numerous detailed internal protocols and services, described in the GT, into a single high-level node. Placing UCX in the 'Network & Transport' boundary is architecturally correct."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Message Passing API\\nTag Matching, Rendezvous"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem::Rendezvous Handler\\n(rndv-rts/cts/data"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node describes a generic rendezvous API feature within UCX, while the AI node represents a specific implementation of a rendezvous handler as described in the PRD. The functionality is equivalent, but the boundaries are not. The AI's 'Communication Subsystem' is a custom application layer, whereas the GT's 'UCX::UCP Protocols' is a specific layer within a library, which are not semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Drivers and Kernels::OS Kernel\\nHost Memory",
+        "UCX::UCM Memory Services::Memory Hooks",
+        "UCX::UCS Services\\nCommon Utilities::Memory Management"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem::Pinned User Data"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The AI identified the specific concept of 'Pinned User Data' from the PRD. This functionality is implemented using the lower-level memory management, hooks, and host memory access described in the GT. However, the AI placed it in the 'Communication Subsystem' boundary, reflecting its role in the application's logic, which is a different architectural layer from the GT's 'Drivers/Kernels' and 'UCX Services' boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Global::Hardware"
+      ],
+      "predicted_nodes": [
+        "Network & Transport::Network Device"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The AI's 'Network Device' is a specific type of hardware mentioned in the PRD context, which is a reasonable match for the GT's generic 'Hardware' node. However, the AI places it in the 'Network & Transport' layer, while the GT correctly places it in the 'Global' scope, representing the physical foundation. These boundaries are not semantically equivalent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Drivers and Kernels::Cray Driver",
+    "Drivers and Kernels::OS Kernel\\nEthernet",
+    "Drivers and Kernels::ROCm / CUDA",
+    "Global::Applications\\nHPC, AI, ML, Big Data",
+    "Programming Models and Frameworks::AI / ML Frameworks\\nTensorFlow, Burst Buffer",
+    "Programming Models and Frameworks::MPI\\nMPICH, Open-MPI",
+    "Programming Models and Frameworks::PGAS / SHMEM\\nOpenSHMEM, UPC, CAF, X10, Chapel",
+    "Programming Models and Frameworks::Task Runtimes\\nParsec, OCR, Legion",
+    "UCX::UCP Protocols\\nHigh Level API::I/O API\\nStream",
+    "UCX::UCT Hardware Transports\\nLow Level API::Ethernet Transport\\nTCP/IP Sockets",
+    "UCX::UCT Hardware Transports\\nLow Level API::GPU Transport\\nNVIDIA CUDA, AMD ROCm",
+    "UCX::UCT Hardware Transports\\nLow Level API::Gemini / Aries Transport\\nGNI",
+    "UCX::UCT Hardware Transports\\nLow Level API::Intra-node Host Memory\\nSYSV, POSIX, KNEM, CMA, XPMEM"
+  ],
+  "unmatched_predicted_nodes": [
+    "Build & Verification::Autotools Build",
+    "Build & Verification::Distribution Tarball",
+    "Build & Verification::Embedded Hwloc Verification\\n(run-embedded-tests.sh",
+    "Build & Verification::Manual Embedded Verification\\n(autogen/configure/make",
+    "Communication Subsystem::Connection Manager\\n(connection establishment",
+    "Communication Subsystem::DD (Data Descriptor",
+    "Communication Subsystem::Direct Access Sender",
+    "Communication Subsystem::Envelope",
+    "Communication Subsystem::Flow Control State",
+    "Communication Subsystem::LIBA",
+    "Communication Subsystem::Lifecycle Manager\\n(init, finalize",
+    "Communication Subsystem::Network Send Descriptor",
+    "Communication Subsystem::OD",
+    "Communication Subsystem::One-to-Many Transfer\\n(scatter-style",
+    "Communication Subsystem::Packet Buffer",
+    "Communication Subsystem::Packet Buffer Packer",
+    "Communication Subsystem::Progress Manager\\n(progress, blocking",
+    "Communication Subsystem::Send State Machine",
+    "Network & Transport::CH4 Integration",
+    "Network & Transport::OFI / Libfabric"
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Docker Compose Network::airflow-webserver\\n(docker-airflow-spark:latest)\\nPort: 8282"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Airflow service. The predicted node correctly uses the service name 'airflow-webserver' from the PRD. The boundaries 'Docker Compose Environment' and 'Docker Host::Docker Compose Network' are semantically equivalent for the containerized environment."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Cluster Manager\\n(Spark Standalone"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Docker Compose Network::spark master\\n(bitnami/spark:latest)\\nHostname: spark\\nPorts: 8181(UI)->8080, 7077(cluster)"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Spark Master component. The boundaries 'Docker Compose Environment' and 'Docker Host::Docker Compose Network' are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Docker Compose Network::jupyter-spark\\n(jupyter/pyspark-notebook)\\nPorts: 8888(UI), 4040-4080(app UI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Jupyter service. The predicted node correctly uses the service name 'jupyter-spark' from the PRD. The boundaries 'Docker Compose Environment' and 'Docker Host::Docker Compose Network' are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Postgres"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Docker Compose Network::Postgres 9.6\\nPort: 5432"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Postgres database service. The boundaries 'Docker Compose Environment' and 'Docker Host::Docker Compose Network' are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 1"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Docker Compose Network::spark-worker-1\\n(bitnami/spark:latest)"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the first Spark worker. The predicted node's boundary 'Docker Host::Docker Compose Network' is semantically equivalent to the GT's main boundary 'Docker Compose Environment', despite flattening the 'Spark Workers' sub-boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 2"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Docker Compose Network::spark-worker-2\\n(bitnami/spark:latest)"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the second Spark worker. The predicted node's boundary 'Docker Host::Docker Compose Network' is semantically equivalent to the GT's main boundary 'Docker Compose Environment', despite flattening the 'Spark Workers' sub-boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 3"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Docker Compose Network::spark-worker-3\\n(bitnami/spark:latest)"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the third Spark worker. The predicted node's boundary 'Docker Host::Docker Compose Network' is semantically equivalent to the GT's main boundary 'Docker Compose Environment', despite flattening the 'Spark Workers' sub-boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Docker Compose Environment::Spark Workers::Worker N",
+    "Global::Data Engineer"
+  ],
+  "unmatched_predicted_nodes": [
+    "Docker Host::Docker Compose Network",
+    "Global::Docker Host"
+  ]
+}

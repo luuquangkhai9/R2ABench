@@ -1,0 +1,260 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Udacity Self-Driving Car Capstone\\nROS Architecture::Car / Simulator",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Systems & Environment::Udacity Capstone Simulator"
+      ],
+      "reasoning": "The GT node represents the simulator/runtime vehicle environment, which is covered by the predicted simulator environment node."
+    },
+    {
+      "gt_node": "Udacity Self-Driving Car Capstone\\nROS Architecture::Control::DBW Node\\nDrive-by-wire",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Core Subsystems::Control Subsystem::Drive-by-Wire\\nControl"
+      ],
+      "reasoning": "The predicted drive-by-wire control node covers the same DBW responsibility."
+    },
+    {
+      "gt_node": "Udacity Self-Driving Car Capstone\\nROS Architecture::Control::Waypoint Follower\\nController",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Core Subsystems::Control Subsystem::Waypoint\\nFollowing"
+      ],
+      "reasoning": "The predicted waypoint following node matches the waypoint follower/controller responsibility."
+    },
+    {
+      "gt_node": "Udacity Self-Driving Car Capstone\\nROS Architecture::Perception::Obstacle Detection\\nROS Node",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node explicitly covers obstacle detection; the perception nodes focus on traffic lights only."
+    },
+    {
+      "gt_node": "Udacity Self-Driving Car Capstone\\nROS Architecture::Perception::Traffic Light\\nDetection Node",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Core Subsystems::Perception Subsystem::Traffic Light\\nDetection",
+        "Core Subsystems::Perception Subsystem::Traffic Light\\nClassification"
+      ],
+      "reasoning": "The predicted traffic light detection and classification nodes together cover the GT traffic light detection node's responsibility."
+    },
+    {
+      "gt_node": "Udacity Self-Driving Car Capstone\\nROS Architecture::Planning::Waypoint Loader\\nROS Node",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Core Subsystems::Planning Subsystem::Waypoint\\nLoading"
+      ],
+      "reasoning": "The predicted waypoint loading node directly covers the GT waypoint loader responsibility."
+    },
+    {
+      "gt_node": "Udacity Self-Driving Car Capstone\\nROS Architecture::Planning::Waypoint Updater Node\\nROS Node",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Core Subsystems::Planning Subsystem::Waypoint\\nUpdating"
+      ],
+      "reasoning": "The predicted waypoint updating node directly covers the GT waypoint updater responsibility."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Core Subsystems::Control Subsystem",
+      "grounded": true,
+      "reference_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Control::DBW Node\\nDrive-by-wire",
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Control::Waypoint Follower\\nController"
+      ],
+      "reasoning": "This is a valid aggregate boundary for the GT control nodes."
+    },
+    {
+      "predicted_node": "Core Subsystems::Control Subsystem::Drive-by-Wire\\nControl",
+      "grounded": true,
+      "reference_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Control::DBW Node\\nDrive-by-wire"
+      ],
+      "reasoning": "This directly corresponds to the GT DBW node."
+    },
+    {
+      "predicted_node": "Core Subsystems::Control Subsystem::Waypoint\\nFollowing",
+      "grounded": true,
+      "reference_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Control::Waypoint Follower\\nController"
+      ],
+      "reasoning": "This directly corresponds to the GT waypoint follower/controller."
+    },
+    {
+      "predicted_node": "Core Subsystems::Perception Subsystem",
+      "grounded": true,
+      "reference_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Perception::Obstacle Detection\\nROS Node",
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Perception::Traffic Light\\nDetection Node"
+      ],
+      "reasoning": "This is a valid aggregate boundary for the GT perception nodes, though it is broader than the explicit traffic-light-only emphasis in the GT."
+    },
+    {
+      "predicted_node": "Core Subsystems::Perception Subsystem::Traffic Light\\nClassification",
+      "grounded": true,
+      "reference_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Perception::Traffic Light\\nDetection Node"
+      ],
+      "reasoning": "Traffic light classification is part of the GT traffic light perception responsibility."
+    },
+    {
+      "predicted_node": "Core Subsystems::Perception Subsystem::Traffic Light\\nDetection",
+      "grounded": true,
+      "reference_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Perception::Traffic Light\\nDetection Node"
+      ],
+      "reasoning": "This directly corresponds to the GT traffic light detection node."
+    },
+    {
+      "predicted_node": "Core Subsystems::Planning Subsystem",
+      "grounded": true,
+      "reference_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Planning::Waypoint Loader\\nROS Node",
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Planning::Waypoint Updater Node\\nROS Node"
+      ],
+      "reasoning": "This is a valid aggregate boundary for the GT planning nodes."
+    },
+    {
+      "predicted_node": "Core Subsystems::Planning Subsystem::Waypoint\\nLoading",
+      "grounded": true,
+      "reference_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Planning::Waypoint Loader\\nROS Node"
+      ],
+      "reasoning": "This directly corresponds to the GT waypoint loader node."
+    },
+    {
+      "predicted_node": "Core Subsystems::Planning Subsystem::Waypoint\\nUpdating",
+      "grounded": true,
+      "reference_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Planning::Waypoint Updater Node\\nROS Node"
+      ],
+      "reasoning": "This directly corresponds to the GT waypoint updater node."
+    },
+    {
+      "predicted_node": "External Systems & Environment::Docker Container",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is context from the PRD but not a GT architecture node."
+    },
+    {
+      "predicted_node": "External Systems & Environment::ROS Environment",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is context from the PRD but not a GT architecture node."
+    },
+    {
+      "predicted_node": "External Systems & Environment::Recorded Training Bag",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is an external artifact in the PRD, not a GT architecture node."
+    },
+    {
+      "predicted_node": "External Systems & Environment::Udacity Capstone Simulator",
+      "grounded": true,
+      "reference_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Car / Simulator"
+      ],
+      "reasoning": "This corresponds to the simulator/environment concept in the GT."
+    },
+    {
+      "predicted_node": "Global::ROS Topics",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "ROS topics are mentioned in the PRD, but no corresponding GT node exists at this abstraction level."
+    },
+    {
+      "predicted_node": "Launch Entry Points::site.launch\\n(Site Mode",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is PRD execution metadata, not a GT architecture node."
+    },
+    {
+      "predicted_node": "Launch Entry Points::styx.launch\\n(Simulator Mode",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is PRD execution metadata, not a GT architecture node."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Car / Simulator"
+      ],
+      "predicted_nodes": [
+        "External Systems & Environment::Udacity Capstone Simulator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same simulator concept, with a semantically equivalent external-system boundary."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Control::DBW Node\\nDrive-by-wire"
+      ],
+      "predicted_nodes": [
+        "Core Subsystems::Control Subsystem::Drive-by-Wire\\nControl"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same drive-by-wire control component, boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Control::Waypoint Follower\\nController"
+      ],
+      "predicted_nodes": [
+        "Core Subsystems::Control Subsystem::Waypoint\\nFollowing"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same waypoint-following controller, boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Perception::Traffic Light\\nDetection Node"
+      ],
+      "predicted_nodes": [
+        "Core Subsystems::Perception Subsystem::Traffic Light\\nDetection",
+        "Core Subsystems::Perception Subsystem::Traffic Light\\nClassification"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT traffic-light perception node is split into detection and classification in the prediction; the boundary remains semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Planning::Waypoint Loader\\nROS Node"
+      ],
+      "predicted_nodes": [
+        "Core Subsystems::Planning Subsystem::Waypoint\\nLoading"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same waypoint loading responsibility, with a semantically equivalent planning boundary."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\\nROS Architecture::Planning::Waypoint Updater Node\\nROS Node"
+      ],
+      "predicted_nodes": [
+        "Core Subsystems::Planning Subsystem::Waypoint\\nUpdating"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same waypoint updating responsibility, with a semantically equivalent planning boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Udacity Self-Driving Car Capstone\\nROS Architecture::Perception::Obstacle Detection\\nROS Node"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems & Environment::Docker Container",
+    "External Systems & Environment::ROS Environment",
+    "External Systems & Environment::Recorded Training Bag",
+    "Global::ROS Topics",
+    "Launch Entry Points::site.launch\\n(Site Mode",
+    "Launch Entry Points::styx.launch\\n(Simulator Mode"
+  ]
+}

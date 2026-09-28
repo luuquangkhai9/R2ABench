@@ -1,0 +1,95 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Router Clients"
+      ],
+      "predicted_nodes": [
+        "Global::API Clients"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent external clients consuming the Turing HTTP API for router-related operations. The global boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Turing User"
+      ],
+      "predicted_nodes": [
+        "Global::End Users"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the human users interacting with the system. The global boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Machine Learning Platform\\nMLP API Server"
+      ],
+      "predicted_nodes": [
+        "TuringSystem::MLflow Model Registry"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These both refer to the external ML platform/model registry dependency used for artifact retrieval in the PyFuncEnsembler build flow. The predicted boundary is acceptable as an internal/external dependency grouping."
+    },
+    {
+      "gt_nodes": [
+        "Global::Monitoring and Alerting Service"
+      ],
+      "predicted_nodes": [
+        "TuringSystem::Jaeger Tracing"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both correspond to observability/tracing infrastructure. Jaeger is a specific tracing component within the broader monitoring/alerting concern, so the semantic match is valid."
+    },
+    {
+      "gt_nodes": [
+        "Kubernetes Cluster::Knative Controller"
+      ],
+      "predicted_nodes": [
+        "TuringSystem::Kubernetes Cluster"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a specific controller inside the Kubernetes cluster, while the prediction aggregates the Kubernetes environment. This is a valid coarse-grained match with acceptable boundary attribution."
+    },
+    {
+      "gt_nodes": [
+        "Turing System::Turing API Server\\nHTTP REST API to configure Routers"
+      ],
+      "predicted_nodes": [
+        "TuringSystem::API Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the main API server exposing HTTP REST endpoints for Turing resource management. The naming differs but the component is equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Turing System::Database\\nPersistent storage for Router objects"
+      ],
+      "predicted_nodes": [
+        "TuringSystem::Router Management"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a persistence/storage component, while the predicted node refers to application logic for managing routers. This is a functional mismatch and a boundary/layer error."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Authorization Service",
+    "Global::Experimentation Service",
+    "Global::Router Endpoints",
+    "Global::Secret Store",
+    "Kubernetes Cluster::Istio",
+    "Turing System::Turing UI\\nWeb interface to configure Routers"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Platform Operators",
+    "Global::TuringSystem",
+    "TuringSystem::Ensembler Management",
+    "TuringSystem::PyFuncEnsembler Runtime"
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2"
+      ],
+      "predicted_nodes": [
+        "Global::Child Partition VM",
+        "Child Partition VM::Guest Environment"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT node representing the child partition and its guest environment is split by the AI into a container node and a content node. The AI correctly places the 'Guest Environment' within the 'Child Partition VM' boundary it created. The overall boundary is semantically acceptable."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2"
+      ],
+      "predicted_nodes": [
+        "Global::Root Partition VM",
+        "Root Partition VM::Host Environment"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT node representing the root partition and its host OS environment is split by the AI into a container node and a content node. The AI correctly places the 'Host Environment' within the 'Root Partition VM' boundary it created. The overall boundary is semantically acceptable."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::vmswitch.sys"
+      ],
+      "predicted_nodes": [
+        "Global::Hyper-V Virtual Switch (vmswitch.sys"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The node is correctly identified as the fuzzing target. However, the AI places it in the 'Global' scope, whereas the GT correctly places it inside the 'Root Partition'. This is a severe boundary-crossing error."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2::harness.sys"
+      ],
+      "predicted_nodes": [
+        "VM Orchestration Layer::Child Partition Harness"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The component is correctly matched. However, the AI places it in a logical 'VM Orchestration Layer' instead of within the 'Child Partition VM' container it defined. This fails to represent the component's deployment location as specified in the GT."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::CrashMonitoring.sys"
+      ],
+      "predicted_nodes": [
+        "Monitoring & Feedback Layer::Root Partition Monitor"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The component is correctly matched. However, the AI places it in a logical 'Monitoring & Feedback Layer' instead of within the 'Root Partition VM' container it defined. This fails to represent the component's deployment location as specified in the GT."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "predicted_nodes": [
+        "Global::kAFL-Fuzzer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'hAFL2' node represents the core fuzzing system, which the PRD identifies as kAFL-based. The AI's 'kAFL-Fuzzer' is a correct semantic match. The 'KVM (L0' boundary is a top-level container, which is semantically equivalent to the AI's 'Global' scope."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::KVM (L0",
+    "KVM (L0::Hyper-V (L1) - Host"
+  ],
+  "unmatched_predicted_nodes": [
+    "Fuzzing Execution Layer::Standalone Test Runner",
+    "Guest Interaction Layer::Embedded Forkserver",
+    "Global::VMBus/netvsc Channels",
+    "Target Packaging Layer::InitRD Packager",
+    "Target Packaging Layer::Linux Userspace Launcher",
+    "Target Packaging Layer::Shared Library Copier",
+    "Windows Workflow Layer::Loader (loader.exe",
+    "Windows Workflow Layer::Packet Sender (packet_sender.exe"
+  ]
+}

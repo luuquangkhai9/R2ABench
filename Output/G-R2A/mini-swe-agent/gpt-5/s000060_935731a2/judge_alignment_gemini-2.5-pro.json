@@ -1,0 +1,57 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "predicted_nodes": [
+        "Application Layer (JVM 11::Integrating JVM Application\\n(Service using auditor"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the three example client applications from the GT into a single, representative 'Integrating JVM Application' node. The 'Application Layer' boundary is semantically equivalent to the individual 'application' boundaries in the GT."
+    },
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "External Systems::Kafka Topic\\n(Event Stream"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Kafka message bus. The AI's boundary 'External Systems' is semantically equivalent to the GT's 'Global' boundary in this context."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "predicted_nodes": [
+        "Auditor Client Library (Kotlin/JVM::Auditor Client API\\n(Generates AuditEvent from old/new"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the core auditor component. The AI's node name 'Auditor Client API' is more accurate according to the PRD than the GT's 'app server', as it is a library. The AI's boundary 'Auditor Client Library' is more specific and correct than the GT's generic 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Databases / Filestores\\nElastic, Hadoop, etc."
+      ],
+      "predicted_nodes": [
+        "External Systems::Downstream Consumers\\n(Out of scope"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node gives examples of persistence stores for downstream systems, while the AI node abstracts this to 'Downstream Consumers'. This is a valid semantic match for the out-of-scope consuming systems. The 'External Systems' boundary is equivalent to 'Global'."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Default Implementation (Optional::KafkaPublisher\\n(Default EventPublisher",
+    "Infrastructure Abstractions::AuditEventElementFilter",
+    "Infrastructure Abstractions::EventPublisher",
+    "Infrastructure Abstractions::LogProvider"
+  ]
+}

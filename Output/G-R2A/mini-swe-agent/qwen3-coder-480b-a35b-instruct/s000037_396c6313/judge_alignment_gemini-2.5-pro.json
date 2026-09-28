@@ -1,0 +1,73 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::docker"
+      ],
+      "predicted_nodes": [
+        "External Systems::Docker"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the Docker runtime dependency. The AI's boundary 'External Systems' is semantically equivalent to the GT's 'Infrastructure and Input Backends'."
+    },
+    {
+      "gt_nodes": [
+        "Global::runner"
+      ],
+      "predicted_nodes": [
+        "veinmind-tools::Runner Execution",
+        "External Systems::veinmind-runner Image"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's abstract 'runner' node is correctly split by the AI into the functional component 'Runner Execution' (placed within the system) and the external dependency 'veinmind-runner Image'. The boundary attributions are more precise and correct."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::image",
+        "Scan Targets::container",
+        "Scan Targets::iac"
+      ],
+      "predicted_nodes": [
+        "veinmind-tools::Image Scanning",
+        "veinmind-tools::Container Scanning",
+        "veinmind-tools::IaC Scanning"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "A semantic match exists where the GT models the objects being scanned ('Scan Targets'), while the AI models the corresponding system functions ('... Scanning'). The AI correctly places these functions within the 'veinmind-tools' system boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::plugin",
+        "SDK::plugin system"
+      ],
+      "predicted_nodes": [
+        "veinmind-tools::Plugin Packaging"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated the general concept of plugins and the SDK system for managing them into a single, concrete function 'Plugin Packaging' mentioned in the PRD. Placing this function within the 'veinmind-tools' system is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Infrastructure and Input Backends::containerd",
+    "Infrastructure and Input Backends::dockerfile",
+    "Infrastructure and Input Backends::kubernetes",
+    "Infrastructure and Input Backends::tarball",
+    "SDK::interact system",
+    "Scan Targets::cluster"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::Parallel Container Script",
+    "External Systems::Python Runtime (veinmind/python3.6:1.3.1-stretch",
+    "Global::Deployment Operator",
+    "Global::Integrator",
+    "Global::Plugin Developer",
+    "Global::Security Operator",
+    "veinmind-tools::Authorization Routing",
+    "veinmind-tools::CLI Interface",
+    "veinmind-tools::Reporting Data"
+  ]
+}

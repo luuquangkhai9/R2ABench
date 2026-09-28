@@ -1,0 +1,225 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process"
+      ],
+      "predicted_nodes": [
+        "Global::MPI Runtime\n(mpi4py, mpirun"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the MPI process/runtime execution context. The predicted node is broader and includes the runtime tooling, but it semantically covers the GT MPI process boundary."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Server\nThread"
+      ],
+      "predicted_nodes": [
+        "Execution Layer::IdleYieldMonitor\n(worker idle-poll loop\nTORC_WORKER_YIELDTIME",
+        "MPI Communication Layer::MPIPollingLoop\n(MPI message polling\nTORC_SERVER_YIELDTIME idle yield"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT server thread is decomposed into execution-side idle polling and MPI-side polling responsibilities. This split is semantically consistent with the server-thread role."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Task Queue"
+      ],
+      "predicted_nodes": [
+        "Scheduling & Queue Layer::WorkerQueue\n(per-worker FIFO"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the per-worker task queue. The boundary naming differs, but it is the same architectural component."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Worker\nThread"
+      ],
+      "predicted_nodes": [
+        "Execution Layer::WorkerThreadPool\n(TORC_WORKERS threads\nper MPI process\nidle-yield via TORC_WORKER_YIELDTIME"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent worker threads executing tasks within each MPI process. The predicted node is a slightly higher-level aggregation, but it is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "Global::MPI Runtime\n(mpi4py, mpirun"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the MPI foundation used by the library. The predicted node appropriately expands the runtime context."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::..."
+      ],
+      "predicted_nodes": [
+        "Scheduling & Queue Layer::WorkerQueue\n(per-worker FIFO",
+        "Scheduling & Queue Layer::CyclicScheduler\n(qid = -1, round-robin",
+        "Scheduling & Queue Layer::DirectedScheduler\n(qid >= 0, targeted",
+        "Scheduling & Queue Layer::StealingCoordinator\n(idle detection, steal request"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT detail node is an abstract umbrella for task-queue internals, and the predicted nodes reasonably decompose it into scheduling, queueing, and stealing subcomponents."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::A1"
+      ],
+      "predicted_nodes": [
+        "Scheduling & Queue Layer::CyclicScheduler\n(qid = -1, round-robin"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This appears to be one of the detailed queue variants and maps to cyclic/round-robin scheduling."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::A2"
+      ],
+      "predicted_nodes": [
+        "Scheduling & Queue Layer::DirectedScheduler\n(qid >= 0, targeted"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This detailed queue variant corresponds to directed task submission to a specific worker queue."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::A3"
+      ],
+      "predicted_nodes": [
+        "Scheduling & Queue Layer::StealingCoordinator\n(idle detection, steal request"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This detailed queue variant corresponds to task stealing coordination."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::B1"
+      ],
+      "predicted_nodes": [
+        "Scheduling & Queue Layer::WorkerQueue\n(per-worker FIFO"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This detailed node aligns with the per-worker FIFO queue implementation."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::B2"
+      ],
+      "predicted_nodes": [
+        "MPI Communication Layer::MPICommSubsystem\n(task dispatch, result return\nsteal req/resp, SPMD coord"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a queue-detail component, while the predicted node places it in the MPI communication subsystem, which is a layer mismatch and mixes queue behavior with communication infrastructure."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::Level 0"
+      ],
+      "predicted_nodes": [
+        "Scheduling & Queue Layer::CyclicScheduler\n(qid = -1, round-robin"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This detail level is consistent with default cyclic scheduling."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::Level 1"
+      ],
+      "predicted_nodes": [
+        "Scheduling & Queue Layer::DirectedScheduler\n(qid >= 0, targeted"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This detail level is consistent with targeted queue selection."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::Level 2"
+      ],
+      "predicted_nodes": [
+        "Scheduling & Queue Layer::StealingCoordinator\n(idle detection, steal request"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This detail level is consistent with stealing behavior."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::Level 3"
+      ],
+      "predicted_nodes": [
+        "Scheduling & Queue Layer::WorkerQueue\n(per-worker FIFO"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This detail level corresponds to the underlying worker queue."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::Level 4"
+      ],
+      "predicted_nodes": [
+        "Task Management Layer::TaskSubmissionManager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Task submission management is related to queueing but is a higher-level task lifecycle component, not the GT queue detail itself."
+    },
+    {
+      "gt_nodes": [
+        "Task Queue (in detail::Level 5"
+      ],
+      "predicted_nodes": [
+        "MPI Communication Layer::MPICommSubsystem\n(task dispatch, result return\nsteal req/resp, SPMD coord"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "This places a queue-detail node into the MPI communication layer, which is an architectural boundary mismatch."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Example / Application Layer::ImagePreprocessingExample",
+    "Example / Application Layer::MasterWorkerExample",
+    "Example / Application Layer::NumericalOptimizationExample",
+    "Example / Application Layer::SPMDExample",
+    "Example / Application Layer::TaskStealingExample",
+    "Global::HDF5 File System\n(preprocessed image output",
+    "Global::Labeled Image File System\n(raw image input",
+    "Global::Optional Dependencies",
+    "Global::Python Threading Runtime\n(threading module",
+    "Global::termcolor\n(console output formatting",
+    "MPI Communication Layer::MPICommSubsystem\n(task dispatch, result return\nsteal req/resp, SPMD coord",
+    "MPI Communication Layer::MPIPollingLoop\n(MPI message polling\nTORC_SERVER_YIELDTIME idle yield",
+    "Optional Dependencies::cma\n(CMA-ES",
+    "Optional Dependencies::h5py",
+    "Optional Dependencies::numpy",
+    "Optional Dependencies::pillow",
+    "Public API Layer::TorcAPI\n(torc.submit, torc.wait, torc.map\ntorc.spmd, torc.start, torc.init\ntorc.launch, torc.shutdown\ntorc.worker_id, torc.num_workers\ntorc.node_id, torc.num_nodes\ntorc.enable_stealing\ntorc.disable_stealing, torc.gettime",
+    "Runtime Configuration Layer::ConfigurationManager\n(TORC_WORKERS\nTORC_STEALING\nTORC_SERVER_YIELDTIME\nTORC_WORKER_YIELDTIME",
+    "Scheduling & Queue Layer::CyclicScheduler\n(qid = -1, round-robin",
+    "Scheduling & Queue Layer::DirectedScheduler\n(qid >= 0, targeted",
+    "Scheduling & Queue Layer::StealingCoordinator\n(idle detection, steal request",
+    "Scheduling & Queue Layer::WorkerQueue\n(per-worker FIFO",
+    "Task Management Layer::CallbackDispatcher\n(fires on spawning rank\nafter result return",
+    "Task Management Layer::CompletionIterator\n(as_completed: yields tasks\nin completion order",
+    "Task Management Layer::ParallelMapExecutor",
+    "Task Management Layer::TaskDescriptor\n(Future-like: input, result",
+    "Task Management Layer::TaskSubmissionManager"
+  ]
+}

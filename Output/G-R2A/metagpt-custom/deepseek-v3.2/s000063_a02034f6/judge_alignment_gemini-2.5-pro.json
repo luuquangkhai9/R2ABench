@@ -1,0 +1,91 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Access Layer::Gateway"
+      ],
+      "predicted_nodes": [
+        "Client Access Layer::MTProto Server",
+        "Client Access Layer::MTProto Protocol Handler",
+        "BFF/Access-Facing Layer::BFF Gateway"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT 'Gateway' node is correctly split by the AI into a low-level protocol server/handler and a higher-level BFF gateway. The boundaries 'Client Access Layer' and 'BFF/Access-Facing Layer' are more descriptive and accurate than the generic 'Access Layer' and align with the PRD's description of a layered architecture."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Auth Session",
+        "Access Layer::Session",
+        "Services::Services"
+      ],
+      "predicted_nodes": [
+        "BFF/Access-Facing Layer::Authorization Service",
+        "BFF/Access-Facing Layer::Session Manager",
+        "Business/Service Layer::Registration/Verification Service",
+        "BFF/Access-Facing Layer::Service Message Handler"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly decomposes the generic GT nodes for session, auth, and services into specific, fine-grained services (Authorization, Session Management, Registration, Service Message Handling) that are explicitly mentioned or implied in the PRD. The boundary placement is logical, with access-facing components in the BFF layer and business logic in the service layer."
+    },
+    {
+      "gt_nodes": [
+        "Services::Msg",
+        "Global::Push",
+        "Global::Sync"
+      ],
+      "predicted_nodes": [
+        "Business/Service Layer::Messaging Service",
+        "Business/Service Layer::Push Notification Service",
+        "Business/Service Layer::Sync Service"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "There is a direct semantic match for core business services. The AI improves on the GT by consolidating these services into a single, appropriate 'Business/Service Layer' instead of scattering them across 'Services' and 'Global'."
+    },
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "Storage/Data Layer::Kafka",
+        "Infrastructure/Supporting Layer::Kafka Producer",
+        "Infrastructure/Supporting Layer::Kafka Consumer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly expands the single 'Kafka' node, separating the infrastructure component itself ('Storage/Data Layer::Kafka') from the application's interactive components ('Producer'/'Consumer'), providing a more detailed and accurate architectural view."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MinIO",
+        "Services::DFS",
+        "Storages::MySQL",
+        "Storages::Redis"
+      ],
+      "predicted_nodes": [
+        "Storage/Data Layer::MinIO",
+        "Storage/Data Layer::MySQL",
+        "Storage/Data Layer::Redis"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identifies and matches the primary storage components. It correctly consolidates the redundant 'Services::DFS' (Distributed File System) and 'Storages::MinIO' into a single MinIO node and places all storage systems within a consistent 'Storage/Data Layer'."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer::Status",
+    "Clients::Android",
+    "Clients::PC",
+    "Clients::Web",
+    "Clients::iOS",
+    "Global::BFF"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Tools::FFmpeg/FFProbe",
+    "Global::External Tools",
+    "Infrastructure/Supporting Layer::Media Processor",
+    "Storage/Data Layer::etcd"
+  ]
+}

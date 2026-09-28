@@ -1,0 +1,139 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "High level architecture::Analytics and storage::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "Data Store Layer::Elasticsearch"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the Elasticsearch storage component. The boundary names differ, but they are semantically equivalent storage-layer placements."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Analytics and storage::Kibana"
+      ],
+      "predicted_nodes": [
+        "Data Inspection Layer::Kibana",
+        "Data Inspection Layer::UI-002 Kibana UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has a single Kibana node, while the prediction splits it into the Kibana service and its UI requirement. This is semantically consistent and correctly placed in a data inspection boundary."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Backend::FastAPI"
+      ],
+      "predicted_nodes": [
+        "Application/API Layer::FastAPI Backend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the backend FastAPI application component. The boundary attribution is equivalent at the application/API/backend layer."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Backend::Genius API\nintegration"
+      ],
+      "predicted_nodes": [
+        "External Systems::Genius API",
+        "External Systems::API-003 Genius Search"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT backend integration to Genius is represented by the external Genius API and its search use case. Modeling it under external systems is correct and aligns with the PRD."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Frontend::React"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::React Frontend",
+        "Presentation Layer::UI-001 React UI (COM-001"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The frontend React node is split into the React frontend and its UI/access requirement. Both belong in the presentation layer, which is correct."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Frontend::Docker\nfrontend container"
+      ],
+      "predicted_nodes": [
+        "Deployment/Infrastructure Layer::Docker Runtime::Frontend Container"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the frontend Docker container. The deployment/infrastructure boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Backend::Docker\nbackend container"
+      ],
+      "predicted_nodes": [
+        "Deployment/Infrastructure Layer::Docker Runtime::Backend Container"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the backend Docker container. The deployment boundary is correct and semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Analytics and storage::Docker\nelasticsearch container"
+      ],
+      "predicted_nodes": [
+        "Deployment/Infrastructure Layer::Docker Runtime::Elasticsearch Container"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Elasticsearch Docker container. The deployment boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Analytics and storage::Docker\nkibana container"
+      ],
+      "predicted_nodes": [
+        "Deployment/Infrastructure Layer::Docker Runtime::Kibana Container"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Kibana Docker container. The deployment boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Developer/Admin"
+      ],
+      "predicted_nodes": [
+        "Deployment/Infrastructure Layer::Docker Runtime::Docker Network"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a human actor/admin role, while the predicted node is a Docker networking infrastructure element. These are not semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::user"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::UI-001 React UI (COM-001"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is the end user actor, while the predicted node is a frontend UI requirement. This is a role-to-component confusion and not a valid boundary match."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "High level architecture::Developer/Admin",
+    "High level architecture::user"
+  ],
+  "unmatched_predicted_nodes": [
+    "Deployment/Infrastructure Layer::Docker Runtime",
+    "Deployment/Infrastructure Layer::Docker Runtime::Docker Network",
+    "Data Inspection Layer::API-004 ES Read",
+    "Data Store Layer::API-002 ES Search/Index",
+    "Application/API Layer::API-001 Song Lookup"
+  ]
+}

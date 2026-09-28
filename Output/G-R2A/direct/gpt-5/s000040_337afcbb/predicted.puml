@@ -1,0 +1,116 @@
+@startuml
+skinparam componentStyle rectangle
+skinparam wrapWidth 240
+left to right direction
+title PlugIt Framework - System Architecture
+
+rectangle "External" {
+  component "External Users / Systems" as External
+  component "Integrator App" as Integrator
+  component "PlugIt API Client SDK" as SDK
+  Integrator --> SDK : Use SDK
+}
+
+node "Internal Network (PI_ALLOWED_NETWORKS)" as Internal {
+  component "PlugIt Proxy" as Proxy
+  database "Proxy Data Store" as ProxyDB
+  Proxy -down- ProxyDB
+
+  package "Standalone Proxy Mail (Example Scope)" as MailPkg {
+    cloud "Inbound Mail Server" as MailSrv
+    component "Mail Intake" as MailIntake
+    component "Auto-Response Filter" as AutoFilter
+    component "Routing Token Validator\n(SHA-512 slice [30:42])" as TokenValidator
+    component "Text Extractor\n(First text part)" as TextExtractor
+    component "Mail Handler" as MailHandler
+
+    MailSrv --> MailIntake
+    MailIntake --> AutoFilter
+    AutoFilter --> TokenValidator
+    TokenValidator --> TextExtractor
+    TextExtractor --> MailHandler
+    MailHandler ..> MailSrv : Ack & remove on success
+  }
+
+  package "PlugIt Services" as Services {
+    package "Service A" as SA {
+      component "PlugIt Service A" as ServiceA
+      database "Service A DB\n(MySQL/SQLite)" as DBA
+      artifact "Project Config\n(config.yaml)" as SvcAConf
+      artifact "Local/Private Config\n(local.yaml)" as SvcALocal
+      artifact "Alembic Upgrade Files" as SvcAMig
+
+      ServiceA -down- DBA
+      ServiceA ..> SvcAConf
+      ServiceA ..> SvcALocal
+      ServiceA ..> SvcAMig
+    }
+    package "Service B" as SB {
+      component "PlugIt Service B" as ServiceB
+      database "Service B DB\n(MySQL/SQLite)" as DBB
+      artifact "Project Config\n(config.yaml)" as SvcBConf
+      artifact "Local/Private Config\n(local.yaml)" as SvcBLocal
+      artifact "Alembic Upgrade Files" as SvcBMig
+
+      ServiceB -down- DBB
+      ServiceB ..> SvcBConf
+      ServiceB ..> SvcBLocal
+      ServiceB ..> SvcBMig
+    }
+  }
+
+  Proxy --> ServiceA : PlugIt Protocol
+  Proxy --> ServiceB : PlugIt Protocol
+}
+
+External --> Proxy : Access via Proxy\n(HTTP/S)
+SDK --> Proxy : API Requests\n(Users, Tags, Orgs,\nMembers, Email, Forum)
+
+note right of Proxy
+- Hosts shared user experience
+- Exposes main API endpoint (API_URL)
+- Applies network controls (PI_ALLOWED_NETWORKS)
+end note
+
+note bottom of Services
+Multiple mutually isolated services.\nEach maintains its own database and configuration.
+end note
+
+note right of ServiceA
+Reads configuration:
+- API_URL (Proxy endpoint)
+- SQLALCHEMY_URL
+- DEBUG
+- PI_BASE_URL
+- PI_ALLOWED_NETWORKS (where applicable)
+end note
+
+note right of SvcALocal
+Private settings.\nExcluded from source control.
+end note
+
+note right of SvcAMig
+Version-managed schema upgrades\n(e.g., Alembic) for maintainable evolution.
+end note
+
+note right of DBA
+Provisioned externally before use (C-001).
+end note
+
+note right of SDK
+Programmatic client initialized with main\nAPI endpoint URL (API_URL).
+Supports categories: users, subscription tags,\norganizations, project members, email, forum topics.
+end note
+
+note right of MailPkg
+Example/standalone proxy workflow:
+- Auto-response suppression headers checked:
+  x-auto-response-suppress, Auto-Autorespond,
+  auto-submitted; Auto-Submitted != no;
+  precedence/x-precedence in auto_reply, bluk, junk.
+- Routing token parsed as hash:data; compute SHA-512 hex,
+  take [30:42] slice and compare.
+- Extract first text part as payload.
+- Invoke mail handler; on success, remove message.
+end note
+@enduml

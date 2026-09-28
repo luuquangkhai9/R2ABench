@@ -1,0 +1,94 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::GoDaddy API\\nDomain availability"
+      ],
+      "predicted_nodes": [
+        "Global::GoDaddy APIs",
+        "GoDaddy APIs::Availability Endpoints"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT node for the external GoDaddy service is correctly split into a general service node and a more specific endpoint node. The 'Global' and 'GoDaddy APIs' boundaries are semantically correct for an external system."
+    },
+    {
+      "gt_nodes": [
+        "Global::HTTP API\\nSession and attack requests"
+      ],
+      "predicted_nodes": [
+        "API Server Process::HTTP API\\n- GET /\\n- GET /homoglyphs/complete?domain=...\\n- Error handling (400/404/500)\\n- Session validation",
+        "API Server Process::Option Builder\\n- Parse attack codes: Hf, Hc, -add, F, R\\n- Flags: godaddy, output\\n- Build CLI opts (e.g., -Hf, --add, --output=json",
+        "API Server Process::Session Manager\\n- Create session on GET /\\n- Session ID == Job ID"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's generic HTTP API is correctly decomposed into specific responsibilities: the API endpoints, a session manager, and an option builder for creating command-line arguments. Placing them in the 'API Server Process' boundary is more specific and accurate than 'Global'."
+    },
+    {
+      "gt_nodes": [
+        "Global::Redis\\nCommand and reporting queues"
+      ],
+      "predicted_nodes": [
+        "Global::Redis Job Channel",
+        "Global::Redis Report Channel"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single Redis node from the GT is correctly split into its two distinct logical channels (job and report) as described in the PRD. The 'Global' boundary is appropriate for this external dependency."
+    },
+    {
+      "gt_nodes": [
+        "Global::Socket.io\\nWebSocket result channel"
+      ],
+      "predicted_nodes": [
+        "API Server Process::WebSocket Gateway\\n(Socket.IO/WebSocket"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes match functionally. The AI correctly placed the server-side WebSocket component within the 'API Server Process' boundary, which is a more specific and accurate location than the generic 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Squatm3\\nDomain generation engine"
+      ],
+      "predicted_nodes": [
+        "Worker Execution::Subprocess: squatm3 CLI\\n(domain-generation engine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes refer to the same domain generation engine. The AI correctly placed it in a 'Worker Execution' boundary, accurately reflecting the PRD which states it is invoked as a subprocess by the worker."
+    },
+    {
+      "gt_nodes": [
+        "Global::Web UI\\nindex.html"
+      ],
+      "predicted_nodes": [
+        "Client Browser::Web UI\\n(index.html"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes for the web UI are a direct match. Placing the UI in a 'Client Browser' boundary is more precise and semantically correct than the generic 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Workers\\nCommand consumers"
+      ],
+      "predicted_nodes": [
+        "API Server Process::Background Consumer Thread\\n- Started by API process",
+        "Worker Execution::Worker Adapter\\n- Receive jobs\\n- Invoke engine\\n- Stream progress/results"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's single 'Workers' node is correctly split into the 'Background Consumer Thread' and the 'Worker Adapter'. The AI accurately placed the thread inside the 'API Server Process' and the adapter logic in a 'Worker Execution' boundary, correctly interpreting the implementation details described in the PRD."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Client Browser::WebSocket Client",
+    "Global::API Server Process",
+    "Global::Client Browser",
+    "Global::Configuration\\n- Redis URI\\n- GoDaddy key/secret/base URL/endpoints",
+    "Global::Worker Execution"
+  ]
+}

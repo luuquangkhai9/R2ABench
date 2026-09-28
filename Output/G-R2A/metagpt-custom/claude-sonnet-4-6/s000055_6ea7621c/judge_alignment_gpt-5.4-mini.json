@@ -1,0 +1,112 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "BACKEND::Router"
+      ],
+      "predicted_nodes": [
+        "Heroku Cloud Platform::Node.js Runtime::HTTP Routing Layer::Router"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same routing component. The predicted boundary is more detailed but semantically consistent with the backend router in the GT."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::algorithm"
+      ],
+      "predicted_nodes": [
+        "Heroku Cloud Platform::Node.js Runtime::Search / Autocomplete Algorithm Layer::AutocompleteAlgorithm"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the autocomplete/search algorithm module. The layer attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::data.json"
+      ],
+      "predicted_nodes": [
+        "Global::Local Filesystem"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "GT names the local JSON data file, while the prediction abstracts it to the local filesystem data source. This is semantically aligned, though higher level."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::handlers"
+      ],
+      "predicted_nodes": [
+        "Heroku Cloud Platform::Node.js Runtime::Request Handling Layer::HomePageHandler",
+        "Heroku Cloud Platform::Node.js Runtime::Request Handling Layer::NotFoundHandler",
+        "Heroku Cloud Platform::Node.js Runtime::Request Handling Layer::StaticAssetHandler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT handler node is split into specific request handlers, which is a valid refinement. The request-handling boundary remains correct."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::public assets\\nhtml\\ncss\\njs"
+      ],
+      "predicted_nodes": [
+        "Global::Local Filesystem",
+        "Heroku Cloud Platform::Node.js Runtime::Request Handling Layer::MIMETypeMapper\\n(html, css, js, jpg, ico"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT combines static asset serving and content-type mapping. The prediction splits these concerns into filesystem access and MIME type mapping, which is semantically consistent with the GT responsibility."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::XMLHttpRequest"
+      ],
+      "predicted_nodes": [
+        "Web Browser::SearchInputUI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "These are not equivalent. XMLHttpRequest is a frontend network/request mechanism, while SearchInputUI is a user interface component. This is a functional mismatch."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::index.html"
+      ],
+      "predicted_nodes": [
+        "Global::Web Browser"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is the application's home page HTML asset, but the predicted node is the browser environment. This is a boundary and component mismatch."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::main.css"
+      ],
+      "predicted_nodes": [
+        "Global::Web Browser"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a CSS static asset, not the browser environment. This is not a valid match."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::userInput"
+      ],
+      "predicted_nodes": [
+        "Web Browser::SearchInputUI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the user input field on the frontend. The predicted boundary is appropriate."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Heroku Cloud Platform",
+    "Heroku Cloud Platform::Node.js Runtime",
+    "Heroku Cloud Platform::Node.js Runtime::Test Layer::FrontendTestSuite\\n(NFR-001"
+  ]
+}

@@ -1,0 +1,128 @@
+@startuml
+!theme plain
+skinparam backgroundColor #FAFAFA
+skinparam defaultFontName Arial
+skinparam defaultFontSize 13
+skinparam rectangle {
+  BorderColor #4A6FA5
+  BackgroundColor #EEF2F8
+  FontColor #1A1A2E
+  BorderThickness 1.5
+  RoundCorner 8
+}
+skinparam package {
+  BorderColor #2E6DA4
+  BackgroundColor #D6E4F0
+  FontColor #1A1A2E
+  BorderThickness 2
+  RoundCorner 10
+}
+skinparam database {
+  BorderColor #2E8B57
+  BackgroundColor #DFF5E8
+  FontColor #1A1A2E
+}
+skinparam node {
+  BorderColor #7B5EA7
+  BackgroundColor #EDE7F6
+  FontColor #1A1A2E
+}
+skinparam actor {
+  BorderColor #C0392B
+  BackgroundColor #FADBD8
+  FontColor #1A1A2E
+}
+skinparam arrow {
+  Color #4A6FA5
+  FontColor #333333
+  FontSize 11
+}
+skinparam title {
+  FontSize 18
+  FontColor #1A1A2E
+  FontStyle bold
+}
+
+title Zhiyan Tongjie — Requirements Review Checklist System Architecture
+
+'─── Actors ───────────────────────────────────────────────
+actor "Reviewer" as REVIEWER #FADBD8
+actor "Requirements\nOwner" as REQ_OWNER #FDE8D8
+actor "Project\nStakeholder" as STAKEHOLDER #FDE8D8
+
+'─── Operating Environment ─────────────────────────────────
+node "Markdown-Capable Environment\n(Editor / Viewer)" as MD_ENV {
+
+  '─── Review Artifact ─────────────────────────────────────
+  package "Review Artifact\n(Markdown Checklist Document)" as ARTIFACT {
+
+    '── Section 1: Review Objectives & Basis ──────────────
+    rectangle "FR-001 / FR-002 | DR-001\nReview Purpose & Basis\n─────────────────────────\n• Review Goal (user needs + doc norms)\n• Review / Verification Method\n• Industry Standards Reference\n• Product Specifications Reference\n• Business Specifications Reference\n• Documentation Specifications Reference" as SEC_PURPOSE
+
+    '── Section 2: Completeness Checklist ─────────────────
+    rectangle "FR-003 / FR-004 | DR-002 | NFR-001\nCompleteness Review Checklist\n─────────────────────────\n• Core / Basic Functions vs. Goals\n• Alignment with User Needs\n• Special Cases & Exception Handling\n• Auxiliary / Supporting Functions" as SEC_COMPLETE
+
+    '── Section 3: Understandability Checklist ────────────
+    rectangle "FR-005 | DR-002 | NFR-002\nUnderstandability Review Checklist\n─────────────────────────\n• Clarity of Requirement Statements\n• Ease of Understanding\n• Specificity of Descriptions\n• Level of Detail\n• Degree of Refinement" as SEC_UNDERSTAND
+
+    '── Section 4: Model Accuracy Checklist ───────────────
+    rectangle "FR-006 | DR-002 | NFR-003\nRequirement Model Accuracy Checklist\n─────────────────────────\n• Conformance to Norms\n• Reasonableness of Models\n• Rigor & Precision\n• Accuracy of Models" as SEC_MODEL
+
+    '── Section 5: Extension & Improvement Checklist ──────
+    rectangle "FR-007 | DR-002\nExtension & Improvement Checklist\n─────────────────────────\n• Clarity of Extension Goals\n• Reasonableness & Feasibility\n• Concreteness of Improvement Goals\n• Sufficiency & Demonstrability" as SEC_EXTEND
+
+    '── Section 6: Problem Report ─────────────────────────
+    rectangle "FR-008 | DR-003\nSoftware Requirements Problem Report\n─────────────────────────\n• Discovered Requirement Issues (list)\n• Overall Evaluation\n• Improvement Suggestions" as SEC_REPORT
+
+    '── Section 7: Scoring ────────────────────────────────
+    rectangle "FR-009 | DR-004 | NFR-004 | C-003\nReview Score Record\n─────────────────────────\n• Content Completeness Score  /10\n• Understandability Score     /10\n• Model Accuracy Score        /10\n• Extension/Improvement Score /10\n• Total Score                 /40" as SEC_SCORE
+
+    '── Section 8: Reviewer Metadata ──────────────────────
+    rectangle "FR-010 | DR-005\nReview Metadata\n─────────────────────────\n• Reviewer Identity\n• Review Date" as SEC_META
+
+  }
+
+  '─── External Input Referenced by Reviewers ──────────────
+  package "External Reference Inputs (C-002 / C-004)" as EXT_REF {
+    rectangle "Requirements Document\nUnder Review\n(source artifact)" as REQ_DOC
+    rectangle "Industry Standards\nProduct Specs\nBusiness Rules\nDoc Norms" as STANDARDS
+  }
+
+  '─── Data Store ──────────────────────────────────────────
+  database "Checklist Data Store\n(Markdown File)\n─────────────\nDR-001 Review Purpose\nDR-002 Checklist Items\nDR-003 Problem Report\nDR-004 Score Record\nDR-005 Review Metadata" as DATASTORE
+
+}
+
+'─── Relationships ─────────────────────────────────────────
+
+REVIEWER --> SEC_PURPOSE     : confirms objectives\n& review basis
+REVIEWER --> SEC_COMPLETE    : inspects completeness
+REVIEWER --> SEC_UNDERSTAND  : inspects understandability
+REVIEWER --> SEC_MODEL       : inspects model accuracy
+REVIEWER --> SEC_EXTEND      : inspects extensibility
+REVIEWER --> SEC_REPORT      : records problems\n& suggestions
+REVIEWER --> SEC_SCORE       : assigns dimension\n& total scores
+REVIEWER --> SEC_META        : signs & dates review
+
+REQ_DOC   --> SEC_COMPLETE   : reviewed content
+REQ_DOC   --> SEC_UNDERSTAND : reviewed content
+REQ_DOC   --> SEC_MODEL      : reviewed content
+REQ_DOC   --> SEC_EXTEND     : reviewed content
+
+STANDARDS --> SEC_PURPOSE    : referenced basis
+
+ARTIFACT  --> DATASTORE      : persisted as\nMarkdown file
+
+DATASTORE --> REQ_OWNER      : review findings &\nimprovement suggestions
+DATASTORE --> STAKEHOLDER    : review result &\nquality status summary
+
+'─── Constraints note ─────────────────────────────────────
+note bottom of ARTIFACT
+  **Constraints**
+  C-001: Review must use requirements review & verification methods
+  C-002: Must consider industry, product, business & doc specifications
+  C-003: Scoring limited to 4 × 10-point dimensions; total = 40
+  C-004: Product business functions defined outside this artifact
+end note
+
+@enduml

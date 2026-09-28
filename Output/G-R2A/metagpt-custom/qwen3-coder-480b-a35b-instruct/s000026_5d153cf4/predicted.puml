@@ -1,0 +1,55 @@
+@startuml
+skinparam componentStyle rectangle
+
+' === Deployment Nodes ===
+node "Google Cloud Platform" {
+    node "Google Kubernetes Engine" {
+        component "Horizontal Pod Autoscaler"
+        component "LoadBalancer Service" as lb
+        component "Adapter Container" as adapter
+        component "ConfigMap"
+    }
+
+    cloud "External Systems" {
+        database "Google Cloud Pub/Sub"
+        component "WebSocket Clients"
+    }
+}
+
+' === Adapter Container Internal Components ===
+component "websocketd" as websocketd
+component "pulltop" as pulltop
+component "exec.sh" as execsh
+component "Message Cache" as cache
+
+' === External Integrations ===
+[Google Cloud Pub/Sub] --> pulltop : Consumes messages
+[WebSocket Clients] --> lb : Connects via WebSocket
+
+' === Configuration Flow ===
+ConfigMap --> adapter : Injects SYMBOL env var\n(topic ID)
+
+' === Internal Dependencies ===
+adapter --> execsh : Launches with\nSYMBOL context
+execsh --> pulltop : Starts with\ntopic parameter
+pulltop --> websocketd : Streams output
+websocketd --> cache : Stores last 10 messages
+cache --> websocketd : Provides message history
+lb --> adapter : Forwards traffic\n(port 80 → 8080)
+Horizontal Pod Autoscaler --> adapter : Scales pods
+
+note right of adapter
+  Container includes:
+  - websocketd (port 8080)
+  - pulltop (Node.js)
+  - exec.sh (entrypoint)
+  - Message Cache (last 10 msgs)
+end note
+
+note right of ConfigMap
+  Provides:
+  - SYMBOL env var
+  - Pub/Sub topic ID
+end note
+
+@enduml

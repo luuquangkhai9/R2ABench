@@ -1,0 +1,129 @@
+@startuml
+!define RECTANGLE class
+
+RECTANGLE "attic-nlp4l" {
+  package "Core NLP Processing" {
+    [Document Data Processor] as docProc
+    [Term Data Accessor] as termAccessor
+    [Search Engine Interface] as searchInterface
+    [Document Vector Generator] as vecGen
+  }
+
+  package "Schema Management" {
+    [Schema Loader] as schemaLoader
+    [Schema Validator] as schemaValidator
+    [Schema Model] as schemaModel
+  }
+
+  package "Data I/O & Formats" {
+    [LIBSVM Writer] as libsvmWriter
+    [Lucene Index Reader] as luceneReader
+    [Configuration Parser] as configParser
+  }
+
+  package "User Interaction" {
+    [Scala REPL Support] as replSupport
+    [Chart Display (Experimental)] as chartDisplay
+  }
+
+  docProc --> luceneReader : reads from
+  termAccessor --> luceneReader : accesses
+  searchInterface --> luceneReader : queries
+  vecGen --> docProc : processes
+  vecGen --> libsvmWriter : outputs to
+
+  schemaLoader --> configParser : parses
+  schemaValidator --> schemaModel : validates against
+  schemaLoader --> schemaValidator : sends loaded schema
+
+  docProc --> schemaModel : uses for processing
+  termAccessor --> schemaModel : applies field/analyzer rules
+  searchInterface --> schemaModel : filters/indexing info
+
+  replSupport --> docProc : enables interactive use
+  replSupport --> termAccessor : enables interactive use
+  replSupport --> vecGen : enables interactive use
+  replSupport --> schemaLoader : loads schemas interactively
+
+  chartDisplay --> termAccessor : visualizes word counts
+}
+
+note right of attic-nlp4l
+  System Context: Scala-based NLP toolkit 
+  for Apache Lucene ecosystem
+end note
+
+note top of docProc
+  Processes Lucene-indexed 
+  document data for NLP tasks
+end note
+
+note top of termAccessor
+  Provides access to analyzer-
+  normalized term data
+end note
+
+note top of searchInterface
+  Supports querying indexed documents
+  with filters, sorting, limits
+end note
+
+note top of vecGen
+  Creates document vectors from
+  Lucene index data
+end note
+
+note top of libsvmWriter
+  Exports document vectors
+  in LIBSVM format
+end note
+
+note top of luceneReader
+  Reads document and term data
+  from Lucene indexes
+end note
+
+note top of schemaLoader
+  Loads schema from resources
+  or file paths
+end note
+
+note top of schemaValidator
+  Validates schema structure
+  and required elements
+end note
+
+note top of schemaModel
+  Holds parsed schema including
+  analyzers, fields, configurations
+end note
+
+note top of replSupport
+  Enables interactive usage
+  within Scala environments
+end note
+
+note top of chartDisplay
+  Experimental visualization
+  of word count data
+end note
+
+note top of configParser
+  Parses schema configuration
+  into structured data
+end note
+
+rectangle "External Systems" {
+  [Apache Lucene] as lucene
+  [Machine Learning Tools] as mlTools
+  [File System] as fs
+  [Scala Environment] as scalaEnv
+}
+
+luceneReader --> lucene : reads index data
+libsvmWriter --> fs : writes files
+schemaLoader --> fs : loads configs
+mlTools ..> libsvmWriter : consumes output
+scalaEnv --> replSupport : hosts interactions
+
+@enduml

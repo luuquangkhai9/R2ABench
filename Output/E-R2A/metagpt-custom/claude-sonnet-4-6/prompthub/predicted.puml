@@ -1,0 +1,204 @@
+@startuml PromptHub_Architecture
+
+skinparam componentStyle rectangle
+skinparam linetype ortho
+skinparam backgroundColor #FAFAFA
+skinparam component {
+  BackgroundColor #DDEEFF
+  BorderColor #336699
+  FontColor #111111
+}
+skinparam package {
+  BackgroundColor #F5F5F5
+  BorderColor #888888
+}
+skinparam node {
+  BackgroundColor #FFF8DC
+  BorderColor #B8860B
+}
+skinparam database {
+  BackgroundColor #E8F5E9
+  BorderColor #2E7D32
+}
+skinparam rectangle {
+  BackgroundColor #FCE4EC
+  BorderColor #C62828
+}
+
+' ─────────────────────────────────────────────
+' EXTERNAL SYSTEMS  (rectangle, not cloud)
+' ─────────────────────────────────────────────
+rectangle "External Systems" as ExtSystems {
+  component [Client Web Browser\n(Chrome 110+ / Safari 15.3+ / Firefox 119+)] as Browser
+  component [Email Service\n(Verification & Alerts)] as EmailSvc
+  component [Offsite DR Backup Storage] as OffSiteBackup
+}
+
+' ─────────────────────────────────────────────
+' INFRASTRUCTURE / RUNTIME LAYER
+' ─────────────────────────────────────────────
+node "Infrastructure / Runtime Layer\nUbuntu 22.04 · Docker 20.10.17" as InfraLayer {
+
+  ' ── interfaces declared INSIDE the node ──
+  interface "HTTPS / REST" as HTTPS_REST
+  interface "DB Access" as DBAccess
+  interface "Log Events" as LogEvents
+  interface "Notification Events" as NotifEvents
+
+  ' ─────────────────────────────────────────
+  ' PRESENTATION LAYER
+  ' ─────────────────────────────────────────
+  package "Presentation Layer" as PresentationLayer {
+    component [FrontendApp\n(Vue / JQuery / HTML / CSS / JS)\n[Deployed as obfuscated &\nminified bundle – NFR-013]\nViews: Home · Artwork Detail · Upload/Edit\nFavorites · Notifications · Admin Panel\nUser Profile] as FrontendApp
+  }
+
+  ' ─────────────────────────────────────────
+  ' APPLICATION / BUSINESS LAYER
+  ' ─────────────────────────────────────────
+  package "Application / Business Layer  (Django · Python)" as AppLayer {
+
+    component [RateLimiter\n(Concurrency & Access\nThrottling Gate – C-003 / AD-003)] as RateLimiter
+
+    component [SecurityMiddleware\n(HTTPS · Auth · CORS · Firewall\nXSS/SQLi Prevention · Data Encryption)] as SecurityMiddleware
+
+    component [UserService\n(Registration · Login · Logout\nPassword · Avatar · Session)] as UserService
+
+    component [ArtworkService\n(Upload · Edit · Delete · Search\nFilter · Sort · Detail)] as ArtworkService
+
+    component [ReviewService\n(Review Queue · Progress\nApprove / Reject)] as ReviewService
+
+    component [FavoriteService\n(Favorites · Categories\nVisibility · CRUD)] as FavoriteService
+
+    component [CommentReplyService\n(Comments · Replies\nOwnership · CRUD)] as CommentReplyService
+
+    component [FollowService\n(Follow · Unfollow\nFollow List · Fan List)] as FollowService
+
+    component [NotificationService\n(Unread Records · Mark-Read\nDelete · Event Listener)] as NotificationService
+
+    component [BrowsingHistoryService\n(Record · Retrieve\nRecommendation Signals)] as BrowsingHistoryService
+
+    component [RecommendationPreferenceService\n(Enable / Disable Personalized\nRecommendation Toggle – FR-049 / DR-012)] as RecPrefService
+
+    component [AdminService\n(User List · Artwork List\nComment/Reply View & Delete\nInvokes Review Actions – FR-022)] as AdminService
+
+    component [LoggingService\n(Capture · Backup · Error Timestamp\nDeveloper Email Alerts)] as LoggingService
+
+    component [DiskMonitor\n(Server Disk Usage Monitor\nAlert at 80% – NFR-008)] as DiskMonitor
+  }
+
+  ' ─────────────────────────────────────────
+  ' ALGORITHM SUPPORT LAYER
+  ' ─────────────────────────────────────────
+  package "Algorithm Support Layer  (Python · PyTorch / TensorFlow)" as AlgoLayer {
+    component [RecommendationEngine\n(Popularity Ranking\nPersonalized Recommendations\nReads history / favorites /\nfollow data from DB\nPyTorch / TensorFlow Models)] as RecommendationEngine
+  }
+
+  ' ─────────────────────────────────────────
+  ' DATA PERSISTENCE LAYER
+  ' ─────────────────────────────────────────
+  package "Data Persistence Layer" as DataLayer {
+    database "SQLite Database\n(Users · Admins · Artworks · Reviews\nComments · Replies · Favorites\nFav Categories · Follows · History\nRecommendation Prefs · Notifications\nLogs · Encrypted Sensitive Data)" as DB
+  }
+
+}
+
+' ─────────────────────────────────────────────
+' BROWSER → RATE LIMITER → PRESENTATION
+' ─────────────────────────────────────────────
+Browser --> RateLimiter : all inbound requests
+RateLimiter --> FrontendApp : allowed requests
+
+' ─────────────────────────────────────────────
+' PRESENTATION → APPLICATION
+' ─────────────────────────────────────────────
+FrontendApp --> HTTPS_REST
+HTTPS_REST --> SecurityMiddleware : authenticated &\nfiltered requests
+
+' SecurityMiddleware error response back to FrontendApp (D-005)
+SecurityMiddleware --> FrontendApp : error responses\n(403 / blocked XSS etc.)
+
+SecurityMiddleware --> UserService
+SecurityMiddleware --> ArtworkService
+SecurityMiddleware --> ReviewService
+SecurityMiddleware --> FavoriteService
+SecurityMiddleware --> CommentReplyService
+SecurityMiddleware --> FollowService
+SecurityMiddleware --> NotificationService
+SecurityMiddleware --> BrowsingHistoryService
+SecurityMiddleware --> RecPrefService
+SecurityMiddleware --> AdminService
+
+' ─────────────────────────────────────────────
+' ADMIN → REVIEW  (AdminService invokes ReviewService – D-001 fix)
+' ─────────────────────────────────────────────
+AdminService --> ReviewService : invokes approve/reject\n(FR-022)
+
+' ─────────────────────────────────────────────
+' NOTIFICATION EVENT TRIGGERS  (M-001 fix)
+' ─────────────────────────────────────────────
+CommentReplyService --> NotifEvents
+ReviewService --> NotifEvents
+AdminService --> NotifEvents : review-completion\nnotification trigger
+NotifEvents --> NotificationService
+
+' ─────────────────────────────────────────────
+' REVIEW → ARTWORK STATE UPDATE
+' ─────────────────────────────────────────────
+ReviewService --> ArtworkService : approve/reject\nupdates artwork state
+
+' ─────────────────────────────────────────────
+' APPLICATION → DATABASE  (RecommendationEngine reads via DBAccess – M-003 / H-4 fix)
+' ─────────────────────────────────────────────
+UserService --> DBAccess
+ArtworkService --> DBAccess
+ReviewService --> DBAccess
+FavoriteService --> DBAccess
+CommentReplyService --> DBAccess
+FollowService --> DBAccess
+NotificationService --> DBAccess
+BrowsingHistoryService --> DBAccess
+RecPrefService --> DBAccess
+AdminService --> DBAccess
+LoggingService --> DBAccess
+RecommendationEngine --> DBAccess : reads history · favorites\nfollow data · prefs (DR-011/DR-012)
+DBAccess --> DB
+
+' ─────────────────────────────────────────────
+' RECOMMENDATION ENGINE  (H-002/H-003/H-004/D-002/D-004 fixes)
+' Engine reads directly from DB (above); results returned to AppLayer services
+' ─────────────────────────────────────────────
+RecommendationEngine --> NotificationService : recommendation\nresults for delivery
+RecommendationEngine --> FavoriteService : recommendation\nresults for delivery
+
+' ─────────────────────────────────────────────
+' APPLICATION → LOGGING
+' ─────────────────────────────────────────────
+UserService --> LogEvents
+ArtworkService --> LogEvents
+ReviewService --> LogEvents
+FavoriteService --> LogEvents
+CommentReplyService --> LogEvents
+FollowService --> LogEvents
+NotificationService --> LogEvents
+BrowsingHistoryService --> LogEvents
+RecPrefService --> LogEvents
+AdminService --> LogEvents
+SecurityMiddleware --> LogEvents
+LogEvents --> LoggingService
+
+' ─────────────────────────────────────────────
+' DISK MONITOR → LOGGING / ALERTS  (M-006 fix)
+' ─────────────────────────────────────────────
+DiskMonitor --> LoggingService : disk usage alerts\n(NFR-008 – alert at 80%)
+DiskMonitor --> EmailSvc : ops alert emails\n(NFR-008)
+
+' ─────────────────────────────────────────────
+' LOGGING & INFRA → EXTERNAL
+' ─────────────────────────────────────────────
+LoggingService --> EmailSvc : developer alert emails
+LoggingService --> OffSiteBackup : offsite log backup
+DB --> OffSiteBackup : offsite DB backup (NFR-007)
+
+UserService --> EmailSvc : verification &\npassword-recovery emails
+
+@enduml

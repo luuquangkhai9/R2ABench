@@ -1,0 +1,362 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::cFS Bundle",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::GitHub Actions CI",
+        "Build Environment::Build Artifacts\n(debug | release)",
+        "Build Environment::make prep\n/ make install",
+        "Build Environment::Makefile.sample\n/ sample_defs",
+        "GitHub Actions CI::Primary CI Workflows::Build & Install\nCI Job\n(ubuntu-18.04",
+        "GitHub Actions CI::Primary CI Workflows::Functional Test\nCI Job\n(ubuntu-18.04,\ntimeout: 15 min",
+        "GitHub Actions CI::Primary CI Workflows::Changelog Generation\nWorkflow\n(ubuntu-latest",
+        "GitHub Actions CI::Reusable Workflows (workflow_call::cFS / Submodule\nReuse Workflows",
+        "GitHub Actions CI::Reusable Workflows (workflow_call::Format Check\nWorkflow",
+        "GitHub Actions CI::Reusable Workflows (workflow_call::Static Analysis\nWorkflow",
+        "GitHub Actions CI::Reusable Workflows (workflow_call::CodeQL\nWorkflow",
+        "Host-Side Tooling::cmdUtil",
+        "cFS Target (core-cpu1::core-cpu1\nExecutable",
+        "cFS Target (core-cpu1::Framework\nApplications",
+        "cFS Target (core-cpu1::OSAL\n(OS Abstraction Layer",
+        "cFS Target (core-cpu1::PSP\n(Platform Support Package",
+        "cFS Target (core-cpu1::cFE\n(Core Flight Executive"
+      ],
+      "reasoning": "The predicted model decomposes the cFS bundle into build, CI, host tooling, and runtime target subnodes that collectively cover the bundle-level scope."
+    },
+    {
+      "gt_node": "Reuse Workflows::Submodule Reuse",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "GitHub Actions CI::Reusable Workflows (workflow_call::cFS / Submodule\nReuse Workflows"
+      ],
+      "reasoning": "The reusable workflow for cFS/submodule reuse directly covers the submodule reuse concept."
+    },
+    {
+      "gt_node": "Reuse Workflows::cFS Reuse",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "GitHub Actions CI::Reusable Workflows (workflow_call::cFS / Submodule\nReuse Workflows"
+      ],
+      "reasoning": "The predicted reusable workflow node explicitly includes cFS reuse and therefore covers this GT concept."
+    },
+    {
+      "gt_node": "Static and Quality Checks::CodeQL Analysis",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "GitHub Actions CI::Reusable Workflows (workflow_call::CodeQL\nWorkflow",
+        "GitHub Actions CI::Primary CI Workflows::Changelog Generation\nWorkflow\n(ubuntu-latest",
+        "GitHub Actions CI::Primary CI Workflows::Duplicate Check\nJob\n(ubuntu-latest"
+      ],
+      "reasoning": "CodeQL analysis is directly represented by the reusable CodeQL workflow node; the other CI nodes are related but not the primary grounding."
+    },
+    {
+      "gt_node": "Static and Quality Checks::Format Check",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "GitHub Actions CI::Reusable Workflows (workflow_call::Format Check\nWorkflow"
+      ],
+      "reasoning": "The predicted reusable format-check workflow matches the GT format check responsibility."
+    },
+    {
+      "gt_node": "Static and Quality Checks::Static Analysis",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "GitHub Actions CI::Reusable Workflows (workflow_call::Static Analysis\nWorkflow"
+      ],
+      "reasoning": "The predicted reusable static-analysis workflow matches the GT static analysis responsibility."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Build Environment::Build Artifacts\n(debug | release",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "reasoning": "Grounded in the build/release variant requirements of the cFS bundle."
+    },
+    {
+      "predicted_node": "Build Environment::Makefile.sample\n/ sample_defs",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "reasoning": "Grounded in the documented build-preparation assets for the cFS bundle."
+    },
+    {
+      "predicted_node": "Build Environment::make prep\n/ make install",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "reasoning": "Grounded in the build/install requirements described for the bundle."
+    },
+    {
+      "predicted_node": "GitHub Actions CI::Changelog Artifact\n(Closed Issues, Breaking Changes,\nEnhancements, Bugs,\nDeprecated, Removed,\nSecurity Fixes",
+      "grounded": true,
+      "reference_nodes": [
+        "Static and Quality Checks::Format Check",
+        "Global::cFS Bundle"
+      ],
+      "reasoning": "The changelog artifact and its labels are directly grounded in the PRD, though the boundary is CI-specific."
+    },
+    {
+      "predicted_node": "GitHub Actions CI::Primary CI Workflows::Build & Install\nCI Job\n(ubuntu-18.04",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "reasoning": "Grounded in the reviewed build workflow and runner assignment requirements."
+    },
+    {
+      "predicted_node": "GitHub Actions CI::Primary CI Workflows::Changelog Generation\nWorkflow\n(ubuntu-latest",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "reasoning": "Grounded in the changelog generation workflow requirements."
+    },
+    {
+      "predicted_node": "GitHub Actions CI::Primary CI Workflows::Duplicate Check\nJob\n(ubuntu-latest",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "reasoning": "Grounded by the reviewed CI process scope, although duplicate-check is only indirectly described."
+    },
+    {
+      "predicted_node": "GitHub Actions CI::Primary CI Workflows::Functional Test\nCI Job\n(ubuntu-18.04,\ntimeout: 15 min",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::cFS Bundle",
+        "cFS Target (core-cpu1::core-cpu1\nExecutable",
+        "Host-Side Tooling::cmdUtil"
+      ],
+      "reasoning": "Grounded in the functional-test target, host command utility, and timeout requirement."
+    },
+    {
+      "predicted_node": "GitHub Actions CI::Reusable Workflows (workflow_call::CodeQL\nWorkflow",
+      "grounded": true,
+      "reference_nodes": [
+        "Static and Quality Checks::CodeQL Analysis"
+      ],
+      "reasoning": "Directly grounded in the GT CodeQL analysis node."
+    },
+    {
+      "predicted_node": "GitHub Actions CI::Reusable Workflows (workflow_call::Format Check\nWorkflow",
+      "grounded": true,
+      "reference_nodes": [
+        "Static and Quality Checks::Format Check"
+      ],
+      "reasoning": "Directly grounded in the GT format check node."
+    },
+    {
+      "predicted_node": "GitHub Actions CI::Reusable Workflows (workflow_call::Static Analysis\nWorkflow",
+      "grounded": true,
+      "reference_nodes": [
+        "Static and Quality Checks::Static Analysis"
+      ],
+      "reasoning": "Directly grounded in the GT static analysis node."
+    },
+    {
+      "predicted_node": "GitHub Actions CI::Reusable Workflows (workflow_call::cFS / Submodule\nReuse Workflows",
+      "grounded": true,
+      "reference_nodes": [
+        "Reuse Workflows::Submodule Reuse",
+        "Reuse Workflows::cFS Reuse"
+      ],
+      "reasoning": "Directly grounded in both GT reusable-workflow concepts."
+    },
+    {
+      "predicted_node": "Global::GitHub Actions CI",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "reasoning": "CI is a major grounded aspect of the bundle, though the node is broad and structural."
+    },
+    {
+      "predicted_node": "Host-Side Tooling::cmdUtil",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "reasoning": "Grounded in the host-side command submission requirements."
+    },
+    {
+      "predicted_node": "Related Interfaces & Libraries::CCDD",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "reasoning": "Referenced in the PRD as a related interface/library/tool."
+    },
+    {
+      "predicted_node": "Related Interfaces & Libraries::ECI",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "reasoning": "Referenced in the PRD as a related interface/library/tool."
+    },
+    {
+      "predicted_node": "Related Interfaces & Libraries::Perfutils-java",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "reasoning": "Referenced in the PRD as a related interface/library/tool."
+    },
+    {
+      "predicted_node": "Related Interfaces & Libraries::SIL",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "reasoning": "Referenced in the PRD as a related interface/library/tool."
+    },
+    {
+      "predicted_node": "Related Interfaces & Libraries::cFS_IO_LIB",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "reasoning": "Referenced in the PRD as a related interface/library/tool."
+    },
+    {
+      "predicted_node": "Related Interfaces & Libraries::cFS_LIB",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "reasoning": "Referenced in the PRD as a related interface/library/tool."
+    },
+    {
+      "predicted_node": "Related Interfaces & Libraries::gen_sch_tbl",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "reasoning": "Referenced in the PRD as a related interface/library/tool."
+    },
+    {
+      "predicted_node": "cFS Target (core-cpu1::Framework\nApplications",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "reasoning": "Grounded in the runnable cFS target composition, though packaged under a specific target boundary."
+    },
+    {
+      "predicted_node": "cFS Target (core-cpu1::OSAL\n(OS Abstraction Layer",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "reasoning": "Grounded in the core cFS target composition."
+    },
+    {
+      "predicted_node": "cFS Target (core-cpu1::PSP\n(Platform Support Package",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "reasoning": "Grounded in the core cFS target composition."
+    },
+    {
+      "predicted_node": "cFS Target (core-cpu1::cFE\n(Core Flight Executive",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "reasoning": "Grounded in the core cFS target composition."
+    },
+    {
+      "predicted_node": "cFS Target (core-cpu1::core-cpu1\nExecutable",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "reasoning": "Directly grounded in the functional-execution target requirement."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "predicted_nodes": [
+        "Global::GitHub Actions CI",
+        "Build Environment::Build Artifacts\n(debug | release",
+        "Build Environment::Makefile.sample\n/ sample_defs",
+        "Build Environment::make prep\n/ make install",
+        "GitHub Actions CI::Changelog Artifact\n(Closed Issues, Breaking Changes,\nEnhancements, Bugs,\nDeprecated, Removed,\nSecurity Fixes",
+        "GitHub Actions CI::Primary CI Workflows::Build & Install\nCI Job\n(ubuntu-18.04",
+        "GitHub Actions CI::Primary CI Workflows::Changelog Generation\nWorkflow\n(ubuntu-latest",
+        "GitHub Actions CI::Primary CI Workflows::Duplicate Check\nJob\n(ubuntu-latest",
+        "GitHub Actions CI::Primary CI Workflows::Functional Test\nCI Job\n(ubuntu-18.04,\ntimeout: 15 min",
+        "GitHub Actions CI::Reusable Workflows (workflow_call::CodeQL\nWorkflow",
+        "GitHub Actions CI::Reusable Workflows (workflow_call::Format Check\nWorkflow",
+        "GitHub Actions CI::Reusable Workflows (workflow_call::Static Analysis\nWorkflow",
+        "GitHub Actions CI::Reusable Workflows (workflow_call::cFS / Submodule\nReuse Workflows",
+        "Host-Side Tooling::cmdUtil",
+        "cFS Target (core-cpu1::Framework\nApplications",
+        "cFS Target (core-cpu1::OSAL\n(OS Abstraction Layer",
+        "cFS Target (core-cpu1::PSP\n(Platform Support Package",
+        "cFS Target (core-cpu1::cFE\n(Core Flight Executive",
+        "cFS Target (core-cpu1::core-cpu1\nExecutable"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT bundle is broadly represented by multiple predicted subnodes; the boundary shift into explicit build/CI/runtime/host-tool partitions is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Reuse Workflows::Submodule Reuse",
+        "Reuse Workflows::cFS Reuse"
+      ],
+      "predicted_nodes": [
+        "GitHub Actions CI::Reusable Workflows (workflow_call::cFS / Submodule\nReuse Workflows"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Two GT reusable-workflow concepts are aggregated into one predicted reusable workflow node, with consistent workflow_call boundary attribution."
+    },
+    {
+      "gt_nodes": [
+        "Static and Quality Checks::CodeQL Analysis"
+      ],
+      "predicted_nodes": [
+        "GitHub Actions CI::Reusable Workflows (workflow_call::CodeQL\nWorkflow"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "CodeQL analysis is directly matched and the reusable workflow boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Static and Quality Checks::Format Check"
+      ],
+      "predicted_nodes": [
+        "GitHub Actions CI::Reusable Workflows (workflow_call::Format Check\nWorkflow"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Format check is directly matched and the reusable workflow boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Static and Quality Checks::Static Analysis"
+      ],
+      "predicted_nodes": [
+        "GitHub Actions CI::Reusable Workflows (workflow_call::Static Analysis\nWorkflow"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Static analysis is directly matched and the reusable workflow boundary is appropriate."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

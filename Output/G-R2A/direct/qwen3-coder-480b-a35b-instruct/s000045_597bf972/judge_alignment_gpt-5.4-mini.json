@@ -1,0 +1,137 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Application"
+      ],
+      "predicted_nodes": [
+        "Global::Android Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the host Android application context that integrates the QAPM SDK."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_Plugin::Plugin init compile",
+        "QAPM_Plugin::QAPM_Plugin"
+      ],
+      "predicted_nodes": [
+        "Global::Android Platform"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT nodes describe QAPM plugin initialization/build-time behavior, while the predicted node is too generic and placed in the Android platform boundary, which does not accurately represent the plugin context."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "predicted_nodes": [
+        "Global::QAPM SDK"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These both represent the core QAPM SDK component."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Collect"
+      ],
+      "predicted_nodes": [
+        "Global::Upload Processing",
+        "Global::Network-gated processing",
+        "Global::File enumeration",
+        "Global::File processing",
+        "Global::Parameter derivation",
+        "Global::Data Sender",
+        "Global::Success/failure callbacks"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT collection-related node is not explicitly detailed in the PRD scope, but the predicted nodes collectively capture the upload/file-processing pipeline described in the requirements. The boundary is acceptable as internal SDK behavior."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "predicted_nodes": [
+        "Global::Background work dispatch",
+        "Global::Upload scheduling"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT report node aligns most closely with asynchronous work/upload dispatch behavior in the PRD. The predicted nodes are a reasonable decomposition and remain within SDK behavior boundaries."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "predicted_nodes": [
+        "Global::Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to SDK storage responsibilities, including local upload storage and pop/delete behavior."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Global::",
+        "Global::+ Main"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "These are structural/auxiliary nodes rather than meaningful components in the GT; they do not correspond to a manual design node."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Global::Android Platform",
+        "Global::Apache HttpClient Wrapper",
+        "Global::Background Handler Thread",
+        "Global::Background work dispatch",
+        "Global::Data Sender",
+        "Global::File enumeration",
+        "Global::File processing",
+        "Global::HTTP instrumentation",
+        "Global::HttpEntity content counting",
+        "Global::Network-gated processing",
+        "Global::Parameter derivation",
+        "Global::ResponseHandler wrapping",
+        "Global::Storage",
+        "Global::Success/failure callbacks",
+        "Global::Transaction state tracking",
+        "Global::Upload Processing",
+        "Global::Upload scheduling",
+        "Global::thread handler"
+      ],
+      "match_type": "unmatched_predicted",
+      "is_boundary_correct": false,
+      "reasoning": "These predicted nodes are either over-detailed decompositions of GT nodes, or separate operational concerns not explicitly represented in the GT node list."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::",
+    "Global::+ Main",
+    "Global::Android Platform",
+    "Global::Apache HttpClient Wrapper",
+    "Global::Background Handler Thread",
+    "Global::Background work dispatch",
+    "Global::Data Sender",
+    "Global::File enumeration",
+    "Global::File processing",
+    "Global::HTTP instrumentation",
+    "Global::HttpEntity content counting",
+    "Global::Network-gated processing",
+    "Global::Parameter derivation",
+    "Global::ResponseHandler wrapping",
+    "Global::Storage",
+    "Global::Success/failure callbacks",
+    "Global::Transaction state tracking",
+    "Global::Upload Processing",
+    "Global::Upload scheduling",
+    "Global::thread handler"
+  ]
+}

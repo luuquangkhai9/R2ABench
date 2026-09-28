@@ -1,0 +1,102 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Browser Web UI\\nstatic app client"
+      ],
+      "predicted_nodes": [
+        "Global::Web Management Console"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are semantically equivalent, representing the user-facing web application described in the PRD. The 'Global' boundary for a client application is a reasonable alternative to the overall system name."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon Cognito"
+      ],
+      "predicted_nodes": [
+        "AWS (Regional::Identity Service\\n(e.g., Cognito"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node correctly identifies the identity service and provides Cognito as the specific example, matching the GT. The 'AWS (Regional' boundary is semantically equivalent to the system name for a regional AWS service."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon API Gateway\\nREST API"
+      ],
+      "predicted_nodes": [
+        "AWS (Regional::Amazon API Gateway\\nREST API\\n(stage: prod,\\nCORS + Validation,\\nAccess Logs JSON,\\nMethod Logging: INFO,\\nTracing Enabled"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are an exact match for the API Gateway component. The AI's prediction is more detailed, with all details being confirmed in the PRD (C-001, FR-002, FR-003, NFRs). The boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS Lambda\\nSimulator API"
+      ],
+      "predicted_nodes": [
+        "AWS (Regional::AWS Lambda\\nSimulation API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are a direct semantic match for the Lambda function(s) backing the management API. The boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS CloudFormation\\nCustom resources"
+      ],
+      "predicted_nodes": [
+        "AWS (Regional::AWS Lambda\\nCustom Resource\\n(Deployment-Time"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node describes the CloudFormation feature, while the predicted node accurately identifies the Lambda function that implements this feature, as described in the PRD. This is a valid implementation-focused match. The boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS Step Functions\\nSimulation workflow"
+      ],
+      "predicted_nodes": [
+        "AWS (Regional::AWS Step Functions\\nSimulation Orchestration",
+        "AWS (Regional::AWS Lambda\\nRoute Loader"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's single 'Simulation workflow' node is correctly split by the AI into the orchestrator (Step Functions) and a key functional task within that workflow (the Route Loader Lambda, derived from FR-005). This is a valid and more detailed decomposition. The boundaries are correct."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon DynamoDB\\nSimulator state"
+      ],
+      "predicted_nodes": [
+        "AWS (Regional::Amazon DynamoDB\\n(Config & State"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are a direct match for the DynamoDB table used for persistence. The predicted node's name '(Config & State)' is a reasonable interpretation of 'Simulator state'. The boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS IoT Core"
+      ],
+      "predicted_nodes": [
+        "AWS (Regional::AWS IoT\\nTopics"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node names the AWS service, while the predicted node specifies the exact feature ('Topics') used for message publication (FR-008), which is a correct and more specific match. The boundary is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "AWS IoT Device Simulator::Amazon CloudFront",
+    "AWS IoT Device Simulator::Amazon S3\\nRoute data bucket",
+    "AWS IoT Device Simulator::Amazon S3\\nWeb UI bucket",
+    "AWS IoT Device Simulator::Users"
+  ],
+  "unmatched_predicted_nodes": [
+    "AWS (Regional::Logging & Tracing\\n(CloudWatch Logs, X-Ray"
+  ]
+}

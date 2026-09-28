@@ -1,0 +1,131 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "Deployment Context::Kafka",
+        "Global::Kafka",
+        "Infrastructure Layer::Message Queue Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Kafka is correctly identified and mapped across global, deployment context, and infrastructure boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MinIO"
+      ],
+      "predicted_nodes": [
+        "Deployment Context::MinIO",
+        "Global::MinIO",
+        "Storage Layer::Object Storage Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "MinIO object storage is correctly identified and mapped across global and storage/deployment layers."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MySQL"
+      ],
+      "predicted_nodes": [
+        "Deployment Context::MySQL",
+        "Global::MySQL",
+        "Storage Layer::Database Adapters"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "MySQL database is correctly mapped to deployment context, global, and specific database adapter nodes."
+    },
+    {
+      "gt_nodes": [
+        "Storages::Redis"
+      ],
+      "predicted_nodes": [
+        "Deployment Context::Redis",
+        "Global::Redis"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Redis caching component matched accurately across its predicted nodes."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Gateway"
+      ],
+      "predicted_nodes": [
+        "Client Access Layer::MTProto Server",
+        "Deployment Context::MTProto Server"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The MTProto Server acts as the Gateway handling client access and communication, placed in consistent access boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Auth Session"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Authorization Service",
+        "Service Layer::Salt Service",
+        "Service Layer::Future Salt Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The authorization and salt functionalities match the Auth Session GT node, but AI incorrectly placed them in the Service Layer rather than the Access Layer."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Session"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Session Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Session functionality correctly matched, but the boundary crosses from Access Layer in GT to Service Layer in AI."
+    },
+    {
+      "gt_nodes": [
+        "Services::Services"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Registration Service",
+        "Service Layer::Verification Code Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The generic services node in GT is split into specific microservices (Registration, Verification) within the matching Service boundary."
+    },
+    {
+      "gt_nodes": [
+        "Services::Msg"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Service Message Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Message handling service is semantically equivalent and placed in correct service layers."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer::Status",
+    "Clients::Android",
+    "Clients::PC",
+    "Clients::Web",
+    "Clients::iOS",
+    "Global::BFF",
+    "Global::Push",
+    "Global::Sync",
+    "Services::DFS"
+  ],
+  "unmatched_predicted_nodes": [
+    "Deployment Context::etcd",
+    "Global::Deployment Context",
+    "Global::etcd",
+    "Service Layer::Media Processing Service"
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Application"
+      ],
+      "predicted_nodes": [
+        "Global::Host Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the host Android application integrating the SDK. Both are correctly placed in the global scope."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "predicted_nodes": [
+        "Global::Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both nodes represent the local storage handling pending data, but the predicted node incorrectly places it in the Global scope instead of the QAPM_SDK boundary."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "predicted_nodes": [
+        "Global::Upload Processor",
+        "Global::DataSender"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT report module is split into specific upload processing and data sending nodes by the AI. However, the predicted nodes are incorrectly placed in the Global boundary instead of QAPM_SDK."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Collect"
+      ],
+      "predicted_nodes": [
+        "Global::ResponseHandlerWrapper",
+        "Global::ContentBufferingResponseEntity",
+        "Global::Transaction State",
+        "Global::Counting InputStream"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT collection module is mapped to specific HTTP instrumentation, transaction state, and stream nodes in the prediction, which are responsible for data collection. The predicted nodes fail to place them in the QAPM_SDK boundary."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "predicted_nodes": [
+        "Global::WorkHandlerManager",
+        "Global::Background Handler Thread",
+        "Global::MainThread Handler",
+        "Global::QAPM Configuration Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The core QAPM-SDK node in GT encompasses the SDK's orchestration, threading, handlers, and configuration. The AI split this into detailed components but failed to assign them the correct QAPM_SDK boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "QAPM_Plugin::Plugin init compile",
+    "QAPM_Plugin::QAPM_Plugin"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Android Context",
+    "Global::Apache HttpClient"
+  ]
+}

@@ -1,0 +1,126 @@
+@startuml
+!define RECTANGLE class
+skinparam componentStyle rectangle
+skinparam nodesep 10
+skinparam ranksep 20
+
+title Indoor Fitness App - System Architecture
+
+package "Mobile Client" {
+  [Mobile App] as App
+  [Camera Module] as Camera
+  [Pose Estimation Model] as PoseModel
+  [UI Rendering Engine] as UI
+  [Casting Client Module] as CastClient
+}
+
+package "Server Backend" {
+  [API Gateway] as Gateway
+  [User Service] as UserService
+  [Plan Service] as PlanService
+  [Evaluation Service] as EvalService
+  [Report Service] as ReportService
+  [Material Processing Service] as MaterialService
+}
+
+package "Data Storage" {
+  database "User Database" as UserDB
+  database "Plan Database" as PlanDB
+  database "Video & Model Database" as MediaDB
+  database "History & Report Database" as HistoryDB
+}
+
+package "External Systems" {
+  [Android Casting Target] as CastTarget
+  [Standard Movement Library] as StdLib
+}
+
+' === Core Data Flows ===
+' 1. Video Capture & Pose Evaluation
+Camera -> PoseModel : Video Stream
+PoseModel -> StdLib : Fetch Standard Skeletons
+PoseModel --> EvalService : Skeleton Data & Scores
+EvalService --> PlanService : Evaluation Results
+
+' 2. Training Plan Management
+App -> PlanService : Goals, Condition, Restrictions
+PlanService -> StdLib : Access Standard Videos
+PlanService --> App : System/Custom Plans
+PlanService -> PlanDB : Store/Retrieve Plans
+
+' 3. User & Session Management
+App -> UserService : Login/Registration
+UserService -> UserDB : CRUD User Data
+UserService --> App : Auth Token & Permissions
+
+' 4. Report & Poster Generation
+EvalService -> MaterialService : Posture/State Data
+PlanService -> MaterialService : Plan Data
+MaterialService -> ReportService : Processed Materials
+ReportService -> HistoryDB : Store Reports
+ReportService --> App : Generated Reports/Posters
+
+' 5. Exercise History
+App -> HistoryDB : Query History & Overview
+EvalService -> HistoryDB : Log Training Sessions
+
+' 6. Screen Casting
+App -> CastClient : Initiate Cast
+CastClient -> CastTarget : Discover & Connect
+UI -> CastClient : Exercise Interface Stream
+CastClient -> CastTarget : Real-time Video Stream
+
+' === Service Dependencies ===
+Gateway --> UserService : Route Requests
+Gateway --> PlanService : Route Requests
+Gateway --> EvalService : Route Requests
+Gateway --> ReportService : Route Requests
+
+UserService --> UserDB : Primary Data
+PlanService --> PlanDB : Primary Data
+PlanService --> UserDB : Read User Profile
+EvalService --> MediaDB : Store/Read Video & Models
+ReportService --> HistoryDB : Primary Data
+MaterialService --> MediaDB : Access Media Assets
+
+' === Key Interfaces ===
+App - Gateway : RESTful API (Training Data, Commands)
+Camera - PoseModel : Native Camera API
+PoseModel - EvalService : Evaluation API
+CastClient - CastTarget : LAN Protocol (Discovery, Stream)
+
+' === Security & Constraints ===
+UserService ..> SQL_Injection_Protection : Implements
+UserService ..> Data_Leakage_Protection : Implements
+note on link
+  NFR-012, NFR-013
+end note
+
+note top of Camera
+  Requires 30+ fps capture
+  (Constraint C-001)
+end note
+
+note on link between CastClient and CastTarget
+  Same LAN required
+  Latency <100ms video, <50ms command
+  (Constraint C-002, NFR-010, NFR-011)
+end note
+
+note right of PoseModel
+  Runtime >20 fps
+  Accuracy >95%
+  (NFR-002, NFR-004)
+end note
+
+note right of PlanService
+  Plan generation <1 sec
+  (NFR-008)
+end note
+
+note right of ReportService
+  Report generation <3 sec
+  (NFR-009)
+end note
+
+@enduml

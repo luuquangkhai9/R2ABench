@@ -1,0 +1,468 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Access Layer::Auth Session",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Client Access Layer::Authorization Key\nHandler",
+        "Client Access Layer::Server Salt\nHandler",
+        "Client Access Layer::Session Manager"
+      ],
+      "reasoning": "The GT auth-session responsibility is covered by the predicted authorization-key, server-salt, and session management components. It is split across multiple more specific nodes."
+    },
+    {
+      "gt_node": "Access Layer::Gateway",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Client Access Layer::MTProto Gateway"
+      ],
+      "reasoning": "The MTProto gateway responsibility is directly represented by the predicted gateway node."
+    },
+    {
+      "gt_node": "Access Layer::Session",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Client Access Layer::Session Manager"
+      ],
+      "reasoning": "Session handling is covered by the predicted session manager component."
+    },
+    {
+      "gt_node": "Access Layer::Status",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node clearly represents a status-related access layer component."
+    },
+    {
+      "gt_node": "Clients::Android",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "The predicted architecture does not model client platform nodes."
+    },
+    {
+      "gt_node": "Clients::PC",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "The predicted architecture does not model client platform nodes."
+    },
+    {
+      "gt_node": "Clients::Web",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "The predicted architecture does not model client platform nodes."
+    },
+    {
+      "gt_node": "Clients::iOS",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "The predicted architecture does not model client platform nodes."
+    },
+    {
+      "gt_node": "Global::BFF",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "BFF / Access Service Layer::BFF Service"
+      ],
+      "reasoning": "The BFF concept is directly represented by the predicted BFF service node."
+    },
+    {
+      "gt_node": "Global::Kafka",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Infrastructure Services::Kafka\n(Message Broker"
+      ],
+      "reasoning": "Kafka is explicitly represented as an infrastructure service."
+    },
+    {
+      "gt_node": "Global::Push",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Business / Service Layer::Push Service"
+      ],
+      "reasoning": "The push-related global service is covered by the predicted push service."
+    },
+    {
+      "gt_node": "Global::Sync",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Business / Service Layer::Sync Service"
+      ],
+      "reasoning": "The sync-related global service is covered by the predicted sync service."
+    },
+    {
+      "gt_node": "Services::DFS",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node clearly corresponds to DFS as a service concept."
+    },
+    {
+      "gt_node": "Services::Msg",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Business / Service Layer::Messaging Service"
+      ],
+      "reasoning": "Messaging service responsibility is directly covered by the predicted messaging service."
+    },
+    {
+      "gt_node": "Services::Services",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "BFF / Access Service Layer::BFF Service",
+        "Business / Service Layer::Messaging Service",
+        "Business / Service Layer::Push Service",
+        "Business / Service Layer::Sync Service",
+        "Business / Service Layer::Future Salts\nService"
+      ],
+      "reasoning": "This appears to be a broad aggregate service node in the GT, and the predicted architecture decomposes it into multiple service-specific components."
+    },
+    {
+      "gt_node": "Storages::MinIO",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Infrastructure Services::MinIO\n(Object Storage"
+      ],
+      "reasoning": "MinIO is directly represented as an infrastructure storage service."
+    },
+    {
+      "gt_node": "Storages::MySQL",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Infrastructure Services::MySQL"
+      ],
+      "reasoning": "MySQL is directly represented as an infrastructure storage service."
+    },
+    {
+      "gt_node": "Storages::Redis",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Infrastructure Services::Redis"
+      ],
+      "reasoning": "Redis is directly represented as an infrastructure storage service."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "BFF / Access Service Layer::BFF Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::BFF",
+        "Services::Services"
+      ],
+      "reasoning": "This is grounded in the GT BFF concept and also aligns with the broader service aggregation."
+    },
+    {
+      "predicted_node": "BFF / Access Service Layer::Registration Handler",
+      "grounded": true,
+      "reference_nodes": [
+        "Access Layer::Auth Session",
+        "Services::Services"
+      ],
+      "reasoning": "Registration handling is supported by the PRD and fits within the access/auth session flow, though not named explicitly in GT."
+    },
+    {
+      "predicted_node": "BFF / Access Service Layer::Verification Service\n(Code: 12345 / External",
+      "grounded": true,
+      "reference_nodes": [
+        "Access Layer::Auth Session",
+        "Services::Services"
+      ],
+      "reasoning": "Verification code handling is supported by the requirements, including the fixed 12345 behavior and optional external verification service."
+    },
+    {
+      "predicted_node": "Business / Service Layer::Future Salts\nService",
+      "grounded": true,
+      "reference_nodes": [
+        "Access Layer::Auth Session",
+        "Services::Services"
+      ],
+      "reasoning": "Future-salts processing is explicitly required by the PRD and is a valid service concept."
+    },
+    {
+      "predicted_node": "Business / Service Layer::Messaging Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Services::Msg",
+        "Services::Services"
+      ],
+      "reasoning": "Messaging service is directly grounded in the GT and PRD."
+    },
+    {
+      "predicted_node": "Business / Service Layer::Push Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Push",
+        "Services::Services"
+      ],
+      "reasoning": "Push service is grounded in the GT and PRD."
+    },
+    {
+      "predicted_node": "Business / Service Layer::Sync Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Sync",
+        "Services::Services"
+      ],
+      "reasoning": "Sync service is grounded in the GT and PRD."
+    },
+    {
+      "predicted_node": "Client Access Layer::Authorization Key\nHandler",
+      "grounded": true,
+      "reference_nodes": [
+        "Access Layer::Auth Session"
+      ],
+      "reasoning": "Authorization-key handling is directly part of the auth-session responsibility."
+    },
+    {
+      "predicted_node": "Client Access Layer::MTProto Gateway",
+      "grounded": true,
+      "reference_nodes": [
+        "Access Layer::Gateway"
+      ],
+      "reasoning": "This matches the gateway responsibility for MTProto client access."
+    },
+    {
+      "predicted_node": "Client Access Layer::Server Salt\nHandler",
+      "grounded": true,
+      "reference_nodes": [
+        "Access Layer::Auth Session"
+      ],
+      "reasoning": "Server-salt handling is explicitly required and belongs to auth-session processing."
+    },
+    {
+      "predicted_node": "Client Access Layer::Service Message\nProcessor",
+      "grounded": true,
+      "reference_nodes": [
+        "Services::Msg",
+        "Access Layer::Auth Session"
+      ],
+      "reasoning": "Service-message processing is directly grounded in the PRD's rpc_drop_answer and destroy_session requirements."
+    },
+    {
+      "predicted_node": "Client Access Layer::Session Manager",
+      "grounded": true,
+      "reference_nodes": [
+        "Access Layer::Session",
+        "Access Layer::Auth Session"
+      ],
+      "reasoning": "Session management is directly grounded in the GT and PRD."
+    },
+    {
+      "predicted_node": "Deployment::Docker / Manual\nBuild & Install",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::BFF"
+      ],
+      "reasoning": "Deployment capability is clearly supported by the PRD, though it is not represented as a GT node; it is still a valid grounded architecture concern rather than hallucination."
+    },
+    {
+      "predicted_node": "Infrastructure Services::Kafka\n(Message Broker",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Kafka"
+      ],
+      "reasoning": "Kafka is explicitly present in the GT and PRD infrastructure dependencies."
+    },
+    {
+      "predicted_node": "Infrastructure Services::MinIO\n(Object Storage",
+      "grounded": true,
+      "reference_nodes": [
+        "Storages::MinIO"
+      ],
+      "reasoning": "MinIO is explicitly present in the GT and PRD infrastructure dependencies."
+    },
+    {
+      "predicted_node": "Infrastructure Services::MySQL",
+      "grounded": true,
+      "reference_nodes": [
+        "Storages::MySQL"
+      ],
+      "reasoning": "MySQL is explicitly present in the GT and PRD infrastructure dependencies."
+    },
+    {
+      "predicted_node": "Infrastructure Services::Redis",
+      "grounded": true,
+      "reference_nodes": [
+        "Storages::Redis"
+      ],
+      "reasoning": "Redis is explicitly present in the GT and PRD infrastructure dependencies."
+    },
+    {
+      "predicted_node": "Infrastructure Services::etcd\n(Service Registry/Config",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "etcd is mentioned in the PRD but does not appear in the GT node list, so it is not grounded in the reference architecture."
+    },
+    {
+      "predicted_node": "Optional Media::FFmpeg / FFProbe",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "FFmpeg/FFProbe are mentioned in the PRD, but no GT node represents optional media infrastructure."
+    },
+    {
+      "predicted_node": "Optional Media::Media Wrapper",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The media wrapper capability is mentioned in the PRD but has no corresponding GT node."
+    },
+    {
+      "predicted_node": "Storage Facade::Data Access\nComponent",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is too generic and not represented as a distinct GT concept; it is not clearly grounded in the reference node set."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Access Layer::Auth Session"
+      ],
+      "predicted_nodes": [
+        "Client Access Layer::Authorization Key\nHandler",
+        "Client Access Layer::Server Salt\nHandler",
+        "Client Access Layer::Session Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT auth-session responsibility is split into specific client-access handlers, and the boundary shift remains semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Gateway"
+      ],
+      "predicted_nodes": [
+        "Client Access Layer::MTProto Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The gateway concept matches directly, and the client-access boundary is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Session"
+      ],
+      "predicted_nodes": [
+        "Client Access Layer::Session Manager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Session management matches directly, with a semantically consistent boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::BFF"
+      ],
+      "predicted_nodes": [
+        "BFF / Access Service Layer::BFF Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The BFF concept matches, and the boundary naming is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Services::Kafka\n(Message Broker"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Kafka matches directly as an infrastructure service."
+    },
+    {
+      "gt_nodes": [
+        "Global::Push"
+      ],
+      "predicted_nodes": [
+        "Business / Service Layer::Push Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Push service responsibility is directly represented and boundary semantics are aligned."
+    },
+    {
+      "gt_nodes": [
+        "Global::Sync"
+      ],
+      "predicted_nodes": [
+        "Business / Service Layer::Sync Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Sync service responsibility is directly represented and boundary semantics are aligned."
+    },
+    {
+      "gt_nodes": [
+        "Services::Msg"
+      ],
+      "predicted_nodes": [
+        "Business / Service Layer::Messaging Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Messaging service responsibility is directly represented and boundary semantics are aligned."
+    },
+    {
+      "gt_nodes": [
+        "Services::Services"
+      ],
+      "predicted_nodes": [
+        "BFF / Access Service Layer::BFF Service",
+        "Business / Service Layer::Messaging Service",
+        "Business / Service Layer::Push Service",
+        "Business / Service Layer::Sync Service",
+        "Business / Service Layer::Future Salts\nService"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT aggregate services node is decomposed into multiple service-layer components; the boundary attribution is still semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MinIO"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Services::MinIO\n(Object Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "MinIO matches directly and the storage boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MySQL"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Services::MySQL"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "MySQL matches directly and the storage boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Storages::Redis"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Services::Redis"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Redis matches directly and the storage boundary is semantically equivalent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer::Status",
+    "Clients::Android",
+    "Clients::PC",
+    "Clients::Web",
+    "Clients::iOS",
+    "Services::DFS"
+  ],
+  "unmatched_predicted_nodes": [
+    "Infrastructure Services::etcd\n(Service Registry/Config",
+    "Optional Media::FFmpeg / FFProbe",
+    "Optional Media::Media Wrapper",
+    "Storage Facade::Data Access\nComponent",
+    "Deployment::Docker / Manual\nBuild & Install"
+  ]
+}

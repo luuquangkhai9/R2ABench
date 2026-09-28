@@ -1,0 +1,124 @@
+# Software Requirements Specification (SRS)
+
+## 1. Introduction
+
+### Purpose
+This SRS defines requirements for a requirements review checklist and review reporting artifact used for the "Zhiyan Tongjie" software requirements review.
+
+### Product scope
+The covered scope is limited to the review process and review artifact:
+- defining review objectives and review basis,
+- checking requirement completeness, understandability, model accuracy, and extensibility,
+- recording requirement problems and improvement suggestions,
+- scoring the review result and preserving reviewer metadata.
+
+Business functions of the "Zhiyan Tongjie" platform are outside this SRS because the checklist does not specify them.
+
+### Intended audience
+- Requirements reviewers
+- Product managers and analysts preparing review material
+- Developers and testers consuming review findings
+- Project stakeholders who need a concise review result
+
+## 2. Overall Description
+
+### Product perspective
+The review checklist is a lightweight requirements quality-control artifact. It supports software requirements review and verification by guiding reviewers through objective confirmation, checklist-based inspection, problem reporting, scoring, and sign-off.
+
+### Product functions summary
+- Define review goals and applicable standards.
+- Inspect whether core requirements satisfy user needs.
+- Inspect whether exceptional cases and supporting functions are covered.
+- Inspect whether requirement statements are clear, understandable, specific, detailed, and refined.
+- Inspect whether requirement models are normative, reasonable, rigorous, and accurate.
+- Inspect whether extension and improvement goals are clear, feasible, concrete, and demonstrable.
+- Record requirement problems, overall evaluation, improvement suggestions, scores, reviewer, and review date.
+
+### User classes
+- Reviewer: completes checklist inspection, records problems, assigns scores, and signs the review.
+- Requirements owner: receives review findings and improvement suggestions.
+- Project stakeholder: reads the review result to understand requirement quality status.
+
+### Operating environment
+No runtime operating environment is specified. The artifact is represented as a Markdown checklist and can be inspected or edited in a Markdown-capable environment.
+
+### Assumptions and dependencies
+- The requirements document under review exists before the checklist is applied.
+- Reviewers have access to applicable industry standards, product specifications, business rules, and documentation norms.
+- Product-specific functional requirements must be obtained from other requirement artifacts, not from this checklist.
+
+## 3. External Interface Requirements
+
+### User interfaces
+The review artifact shall provide checklist items for each review dimension, free-text space for a software requirements problem report, scoring fields, reviewer field, and review date field.
+
+### Software/API interfaces
+No software or API interface is specified by the checklist.
+
+### Communication interfaces
+No communication interface is specified by the checklist.
+
+### Data exchange formats
+The supported format is a Markdown checklist containing review items, scores, reviewer metadata, and review comments.
+
+## 4. Functional Requirements
+
+| ID | Description | Trigger / Input | System behavior | Output | Priority | Verification |
+|---|---|---|---|---|---|---|
+| FR-001 | Define review objectives and review basis | A requirements review is initiated | The review artifact shall state that the review checks whether software requirements satisfy user needs and conform to documentation norms, and shall identify that review and verification methods are used. | Review purpose and method are visible in the artifact. | High | Inspection |
+| FR-002 | Support standards-based review | A reviewer prepares to inspect requirements | The review artifact shall direct reviewers to consider industry standards, product specifications, business specifications, and documentation specifications. | Review basis for standards conformance. | High | Inspection |
+| FR-003 | Support completeness review | A reviewer inspects requirement content | The review artifact shall prompt reviewers to check whether core/basic functions align with goals and user needs. | Completeness finding for core requirements. | High | Inspection |
+| FR-004 | Support exception and auxiliary function review | A reviewer inspects requirement coverage | The review artifact shall prompt reviewers to check whether special cases, exception handling, and auxiliary functions are included. | Coverage finding for exceptional and auxiliary requirements. | High | Inspection |
+| FR-005 | Support understandability review | A reviewer inspects requirement wording | The review artifact shall prompt reviewers to check whether requirement statements are clear, understandable, specific, detailed, and refined. | Understandability finding. | Medium | Inspection |
+| FR-006 | Support requirement model accuracy review | A reviewer inspects requirement models | The review artifact shall prompt reviewers to check whether requirement models are normative, reasonable, rigorous, and accurate. | Model accuracy finding. | Medium | Inspection |
+| FR-007 | Support extension and improvement review | A reviewer inspects future-change content | The review artifact shall prompt reviewers to check whether extension and improvement goals are clear, reasonable, feasible, concrete, sufficient, and demonstrable. | Extension and improvement finding. | Medium | Inspection |
+| FR-008 | Record requirement problems and improvement suggestions | Review findings are available | The review artifact shall provide a problem report area for listing discovered requirement issues, overall evaluation, and improvement suggestions. | Software requirements problem report. | High | Demonstration |
+| FR-009 | Record dimensional and total scores | A reviewer completes scoring | The review artifact shall provide four 10-point scoring dimensions and a 40-point total score field. | Score record for the review. | Medium | Demonstration |
+| FR-010 | Record reviewer and review date | A review is finalized | The review artifact shall provide fields for reviewer identity and review date. | Signed review metadata. | Medium | Demonstration |
+
+## 5. Non-Functional Requirements
+
+| ID | Requirement | Quality attribute | Priority | Verification |
+|---|---|---|---|---|
+| NFR-001 | The review artifact shall make requirement completeness inspectable through explicit checks for core/basic functions, user needs, exceptions, and auxiliary functions. | Completeness | High | Inspection |
+| NFR-002 | The review artifact shall make requirement understandability inspectable through explicit checks for clarity, ease of understanding, specificity, detail, and refinement. | Usability / clarity | Medium | Inspection |
+| NFR-003 | The review artifact shall make model quality inspectable through explicit checks for conformance, reasonableness, rigor, and accuracy. | Correctness | Medium | Inspection |
+| NFR-004 | The review artifact shall provide a quantitative review summary using four dimensions worth 10 points each and a total score out of 40. | Measurability | Medium | Inspection |
+
+## 6. Data Requirements
+
+| ID | Data entity / object | Requirement |
+|---|---|---|
+| DR-001 | Review purpose | The artifact shall store the review goal, method, report purpose, and standard/reference basis. |
+| DR-002 | Checklist item | The artifact shall store checklist items for completeness, understandability, model accuracy, and extension/improvement review dimensions. |
+| DR-003 | Problem report | The artifact shall store discovered requirement problems, overall review evaluation, and improvement suggestions. |
+| DR-004 | Score record | The artifact shall store scores for content completeness, understandability, model accuracy, extension/improvement, and total score. |
+| DR-005 | Review metadata | The artifact shall store reviewer identity and review date. |
+
+## 7. Constraints
+
+| ID | Constraint |
+|---|---|
+| C-001 | The review must use software requirements review and verification methods or strategies. |
+| C-002 | The review must consider industry standards, product specifications, business specifications, and documentation specifications. |
+| C-003 | Review scoring is constrained to four 10-point dimensions and a total score out of 40. |
+| C-004 | Product business requirements are not defined by this checklist and must be obtained from other requirement artifacts. |
+
+## 8. Verification and Acceptance
+
+| Requirement ID | Verification method | Acceptance basis |
+|---|---|---|
+| FR-001 | Inspection | The artifact states review objective and review/verification method. |
+| FR-002 | Inspection | The artifact references industry, product, business, and document specifications as review bases. |
+| FR-003 | Inspection | The artifact includes a completeness check for core/basic functions and user needs. |
+| FR-004 | Inspection | The artifact includes a coverage check for exceptional cases and auxiliary functions. |
+| FR-005 | Inspection | The artifact includes clarity, understandability, specificity, detail, and refinement checks. |
+| FR-006 | Inspection | The artifact includes requirement model conformance, reasonableness, rigor, and accuracy checks. |
+| FR-007 | Inspection | The artifact includes extension/improvement goal and content checks. |
+| FR-008 | Demonstration | A reviewer can record requirement problems, overall evaluation, and improvement suggestions. |
+| FR-009 | Demonstration | A reviewer can enter four dimension scores and a total score. |
+| FR-010 | Demonstration | A reviewer can enter reviewer identity and review date. |
+| NFR-001 | Inspection | Completeness criteria are explicitly represented. |
+| NFR-002 | Inspection | Understandability criteria are explicitly represented. |
+| NFR-003 | Inspection | Model quality criteria are explicitly represented. |
+| NFR-004 | Inspection | The 4x10 scoring model and 40-point total are represented. |

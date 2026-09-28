@@ -1,0 +1,79 @@
+@startuml
+
+node "Server Application" {
+
+  package "Presentation Layer" {
+    component "WebEntryPage"
+    interface "WebSocketChannel"
+  }
+
+  package "API Layer" {
+    component "MainPageController"
+    component "SessionManager"
+    component "AttackOptionParser"
+    component "HomoglyphCompleteEndpoint"
+    component "ErrorHandler"
+  }
+
+  package "Messaging Layer" {
+    component "JobProducer"
+    component "RedisClient"
+    component "ReportingDispatcher"
+  }
+
+  package "Execution/Worker Layer" {
+    component "BackgroundConsumerThread"
+    component "Squatm3Wrapper"
+  }
+
+  package "External Integration Layer" {
+    component "GoDaddyClient"
+  }
+
+  package "Configuration Layer" {
+    component "ConfigurationManager"
+  }
+}
+
+database "Redis"
+component "squatm3 CLI engine"
+cloud "GoDaddy APIs"
+
+// Key dependencies within the application
+"MainPageController" --> "SessionManager"
+"MainPageController" --> "WebEntryPage"
+"MainPageController" --> "ErrorHandler"
+
+"HomoglyphCompleteEndpoint" --> "AttackOptionParser"
+"HomoglyphCompleteEndpoint" --> "SessionManager" : validate session / get session key
+"HomoglyphCompleteEndpoint" --> "JobProducer" : publish job
+"HomoglyphCompleteEndpoint" --> "ErrorHandler"
+
+"SessionManager" --> "JobProducer"
+"JobProducer" --> "RedisClient"
+"RedisClient" --> "Redis"
+
+// Background worker interactions
+"BackgroundConsumerThread" --> "RedisClient" : subscribe jobs
+"BackgroundConsumerThread" --> "Squatm3Wrapper"
+"BackgroundConsumerThread" --> "RedisClient" : publish reports
+
+"ReportingDispatcher" --> "RedisClient"
+"ReportingDispatcher" --> "SessionManager"
+"ReportingDispatcher" --> "WebSocketChannel"
+
+"Squatm3Wrapper" --> "squatm3 CLI engine"
+
+// Optional external integration
+"BackgroundConsumerThread" --> "GoDaddyClient" : optional availability checks
+"GoDaddyClient" --> "GoDaddy APIs"
+
+// Configuration dependencies
+package "API Layer" --> "ConfigurationManager"
+"RedisClient" --> "ConfigurationManager"
+"GoDaddyClient" --> "ConfigurationManager"
+
+// Service startup dependency
+package "API Layer" --> "BackgroundConsumerThread" : starts
+
+@enduml

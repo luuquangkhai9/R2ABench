@@ -1,0 +1,270 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "BACKEND::Router",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Node.js Server (Heroku::HTTP Router"
+      ],
+      "reasoning": "The predicted HTTP Router covers the routing responsibility of the GT Router, including delegation of search requests."
+    },
+    {
+      "gt_node": "BACKEND::algorithm",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Node.js Server (Heroku::Autocomplete /\nSearch-Hint Algorithm"
+      ],
+      "reasoning": "The predicted autocomplete/search-hint algorithm covers the GT backend algorithm responsibility."
+    },
+    {
+      "gt_node": "BACKEND::data.json",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Local Laureate Data\n(JSON"
+      ],
+      "reasoning": "The predicted local laureate JSON data corresponds to the GT data.json responsibility."
+    },
+    {
+      "gt_node": "BACKEND::handlers",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Node.js Server (Heroku::Handler Module"
+      ],
+      "reasoning": "The predicted handler module covers the GT request-handling responsibilities for home page, static assets, and not-found behavior."
+    },
+    {
+      "gt_node": "BACKEND::public assets\\nhtml\\ncss\\njs",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Public Asset Directory",
+        "Public Asset Directory::HTML / CSS / JS /\nJPG / ICO Files"
+      ],
+      "reasoning": "The predicted public asset directory and its file grouping cover the GT public assets responsibility, though the prediction explicitly includes additional asset types beyond the GT node."
+    },
+    {
+      "gt_node": "FRONTEND::XMLHttpRequest",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Web Browser"
+      ],
+      "reasoning": "The browser-side request initiation responsibility covers the GT XMLHttpRequest frontend behavior, even though it is modeled more broadly."
+    },
+    {
+      "gt_node": "FRONTEND::index.html",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Web Browser::Search Input Field"
+      ],
+      "reasoning": "The search input field is a frontend UI element that corresponds to the GT index.html-based user interface responsibility."
+    },
+    {
+      "gt_node": "FRONTEND::main.css",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Public Asset Directory::HTML / CSS / JS /\nJPG / ICO Files"
+      ],
+      "reasoning": "The predicted static asset grouping includes CSS assets and therefore covers the GT main.css responsibility."
+    },
+    {
+      "gt_node": "FRONTEND::userInput",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Web Browser::Search Input Field"
+      ],
+      "reasoning": "The predicted search input field covers the GT user input responsibility."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Global::Local Laureate Data\n(JSON",
+      "grounded": true,
+      "reference_nodes": [
+        "BACKEND::data.json"
+      ],
+      "reasoning": "This is grounded in the GT local JSON laureate data node."
+    },
+    {
+      "predicted_node": "Global::Node.js Server (Heroku",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is an overly broad deployment/runtime container not explicitly present as a GT node; it is not a direct architectural component in the manual diagram."
+    },
+    {
+      "predicted_node": "Global::Public Asset Directory",
+      "grounded": true,
+      "reference_nodes": [
+        "BACKEND::public assets\\nhtml\\ncss\\njs",
+        "FRONTEND::index.html",
+        "FRONTEND::main.css"
+      ],
+      "reasoning": "The public asset directory is grounded by the GT public assets and static frontend files."
+    },
+    {
+      "predicted_node": "Global::Web Browser",
+      "grounded": true,
+      "reference_nodes": [
+        "FRONTEND::XMLHttpRequest",
+        "FRONTEND::index.html",
+        "FRONTEND::main.css",
+        "FRONTEND::userInput"
+      ],
+      "reasoning": "The browser boundary is a valid umbrella for the frontend UI and request initiation concepts in the GT."
+    },
+    {
+      "predicted_node": "Node.js Server (Heroku::Autocomplete /\nSearch-Hint Algorithm",
+      "grounded": true,
+      "reference_nodes": [
+        "BACKEND::algorithm"
+      ],
+      "reasoning": "This is grounded in the GT backend algorithm node."
+    },
+    {
+      "predicted_node": "Node.js Server (Heroku::HTTP Router",
+      "grounded": true,
+      "reference_nodes": [
+        "BACKEND::Router"
+      ],
+      "reasoning": "This is grounded in the GT backend router node."
+    },
+    {
+      "predicted_node": "Node.js Server (Heroku::Handler Module",
+      "grounded": true,
+      "reference_nodes": [
+        "BACKEND::handlers"
+      ],
+      "reasoning": "This is grounded in the GT handlers node."
+    },
+    {
+      "predicted_node": "Public Asset Directory::HTML / CSS / JS /\nJPG / ICO Files",
+      "grounded": true,
+      "reference_nodes": [
+        "BACKEND::public assets\\nhtml\\ncss\\njs",
+        "FRONTEND::index.html",
+        "FRONTEND::main.css"
+      ],
+      "reasoning": "The file grouping is grounded in the GT public assets and static file nodes, though it expands the asset set to include JPG and ICO as supported by the PRD."
+    },
+    {
+      "predicted_node": "Web Browser::Search Input Field",
+      "grounded": true,
+      "reference_nodes": [
+        "FRONTEND::userInput",
+        "FRONTEND::index.html"
+      ],
+      "reasoning": "The search input field is grounded in the GT frontend user input and page UI nodes."
+    },
+    {
+      "predicted_node": "Web Browser::Suggestions List",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT nodes do not explicitly include a separate suggestions list component; this is a UI detail inferred from requirements rather than a manual architecture node."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "BACKEND::Router"
+      ],
+      "predicted_nodes": [
+        "Node.js Server (Heroku::HTTP Router"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same router responsibility; boundary is semantically consistent despite naming differences."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::algorithm"
+      ],
+      "predicted_nodes": [
+        "Node.js Server (Heroku::Autocomplete /\nSearch-Hint Algorithm"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same autocomplete/search algorithm responsibility; boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::data.json"
+      ],
+      "predicted_nodes": [
+        "Global::Local Laureate Data\n(JSON"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same local JSON laureate data responsibility; boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::handlers"
+      ],
+      "predicted_nodes": [
+        "Node.js Server (Heroku::Handler Module"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same handler responsibility; boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::public assets\\nhtml\\ncss\\njs"
+      ],
+      "predicted_nodes": [
+        "Global::Public Asset Directory",
+        "Public Asset Directory::HTML / CSS / JS /\nJPG / ICO Files"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT public assets node is split into a broader directory and a file-type grouping; boundary remains semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::XMLHttpRequest"
+      ],
+      "predicted_nodes": [
+        "Global::Web Browser"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The browser-side request initiation covers the frontend XMLHttpRequest responsibility, though at a broader abstraction."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::index.html"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Search Input Field"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The UI input field is part of the frontend page UI represented by index.html."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::main.css"
+      ],
+      "predicted_nodes": [
+        "Public Asset Directory::HTML / CSS / JS /\nJPG / ICO Files"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "CSS asset responsibility is correctly placed under the public asset directory."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::userInput"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Search Input Field"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted input field directly corresponds to the frontend user input responsibility."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Node.js Server (Heroku",
+    "Web Browser::Suggestions List"
+  ]
+}

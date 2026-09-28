@@ -1,0 +1,80 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Turing System::Turing API Server\\nHTTP REST API to configure Routers"
+      ],
+      "predicted_nodes": [
+        "Turing Core::HTTP API Server",
+        "Turing Core::Cluster Components",
+        "Turing Core::Service Components"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI accurately decomposes the single GT API Server node into its distinct functional parts as described in the PRD (HTTP interface, cluster-facing components, and other service components), while keeping them all within the semantically equivalent 'Turing Core' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Router Clients",
+        "Global::Turing User"
+      ],
+      "predicted_nodes": [
+        "External Systems::API Clients"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregates different user and client actors from the GT into a single 'API Clients' node and places it in an equivalent 'External Systems' boundary, which is appropriate for actors outside the system."
+    },
+    {
+      "gt_nodes": [
+        "Global::Authorization Service"
+      ],
+      "predicted_nodes": [
+        "Turing Core::Middleware Layer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI's 'Middleware Layer' accurately represents the functionality described in NFR-001 (authorization and validation). Placing it inside 'Turing Core' is a more faithful interpretation of the PRD ('The API service shall provide an HTTP middleware layer...') than the GT's placement as a generic 'Global' service."
+    },
+    {
+      "gt_nodes": [
+        "Global::Monitoring and Alerting Service"
+      ],
+      "predicted_nodes": [
+        "External Systems::Jaeger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identifies the specific observability tool (Jaeger) mentioned in the PRD (NFR-002), which matches the GT's generic monitoring service. The 'External Systems' boundary is semantically equivalent to 'Global' for an external dependency."
+    },
+    {
+      "gt_nodes": [
+        "Kubernetes Cluster::Istio",
+        "Kubernetes Cluster::Knative Controller"
+      ],
+      "predicted_nodes": [
+        "External Systems::Kubernetes Cluster"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI abstracts the detailed implementation components (Istio, Knative) from the GT into a single, higher-level node representing the Kubernetes Cluster as a whole. This is a valid aggregation, and placing it in 'External Systems' is equivalent to the GT's 'Kubernetes Cluster' boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Experimentation Service",
+    "Global::Machine Learning Platform\\nMLP API Server",
+    "Global::Router Endpoints",
+    "Global::Secret Store",
+    "Turing System::Database\\nPersistent storage for Router objects",
+    "Turing System::Turing UI\\nWeb interface to configure Routers"
+  ],
+  "unmatched_predicted_nodes": [
+    "Data Resources::Ensembler Resource",
+    "Data Resources::Router Resource",
+    "External Systems::MLflow Model Registry",
+    "PyFuncEnsembler Runtime::Docker Image Builder",
+    "PyFuncEnsembler Runtime::PyFuncEnsembler Webservice",
+    "PyFuncEnsembler Runtime::User-defined Ensembler",
+    "Turing Core::OpenAPI Spec"
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::API Gateway"
+      ],
+      "predicted_nodes": [
+        "API & Auth Layer::Amazon API Gateway\n(execute-api"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the API Gateway handling frontend to backend traffic. The boundary transition from Global to API & Auth Layer is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Cognito"
+      ],
+      "predicted_nodes": [
+        "API & Auth Layer::Amazon Cognito\n(Authentication"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes denote Amazon Cognito for user authentication. The boundary mapping is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::S3"
+      ],
+      "predicted_nodes": [
+        "Frontend Layer::Amazon S3\n(Static Hosting",
+        "Frontend Layer::Web Frontend\n(HTML/CSS/Bootstrap/jQuery"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT specifies a single S3 node for frontend hosting, while the AI splits it into S3 storage and the actual web frontend application. Both reside correctly in the Frontend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::DynamoDB\nLive Scores",
+        "Prediction Service::DynamoDB\nPredictions",
+        "Standing Service::DynamoDB\nStandings"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Amazon DynamoDB\n(Match Data Storage"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT splits DynamoDB by individual services, whereas the AI merges them into a single centralized Data Layer DynamoDB node. This is a valid structural grouping."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::Elasticsearch",
+        "Prediction Service::Elasticsearch",
+        "Standing Service::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Amazon Elasticsearch\n(Match Data Search"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT explicitly lists Elasticsearch clusters for different services, while the AI consolidates them under the Data Layer. The boundaries are semantically appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::SageMaker"
+      ],
+      "predicted_nodes": [
+        "ML / Prediction Layer::Amazon SageMaker\n(Match Outcome Prediction"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes accurately represent the SageMaker machine learning integration. The Prediction layer boundary matches the service context."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2",
+        "Live Score Pipeline::EC2::M4",
+        "Live Score Pipeline::EC2::foot app"
+      ],
+      "predicted_nodes": [
+        "Streaming / Live Score Layer::Amazon EC2"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT details EC2 instance types and the hosted app separately, whereas the AI uses a single aggregate EC2 node within the live streaming layer."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2::Kafka"
+      ],
+      "predicted_nodes": [
+        "Streaming / Live Score Layer::Amazon EC2::Apache Kafka\n(Live Score Streaming",
+        "Streaming / Live Score Layer::Amazon EC2::Apache Avro\n(Payload Serialization"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT specifies Kafka, which the AI expands into Kafka and its associated Apache Avro serialization layer running on EC2. Both accurately reflect the streaming requirements."
+    },
+    {
+      "gt_nodes": [
+        "Notification Service::SNS"
+      ],
+      "predicted_nodes": [
+        "Notification Layer::Amazon SNS\n(SMS Delivery"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both correctly refer to Amazon SNS for SMS deliveries within a notification context."
+    },
+    {
+      "gt_nodes": [
+        "Fixtures Service::SQS",
+        "Notification Service::SQS"
+      ],
+      "predicted_nodes": [
+        "Notification Layer::Amazon SQS\n(Reminder Queue"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "GT has separate SQS queues for fixtures and notifications, which the AI condenses into a single Reminder Queue SQS node in the Notification Layer."
+    },
+    {
+      "gt_nodes": [
+        "Recommendation Service::Lex"
+      ],
+      "predicted_nodes": [
+        "Backend / Business Logic Layer::Chatbot Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "GT explicitly identifies Lex as the recommendation/chatbot interface, matching the AI's Chatbot Service node in the Backend."
+    },
+    {
+      "gt_nodes": [
+        "Fixtures Service::fixtures\nLambda",
+        "Live Score Pipeline::live_score\nLambda",
+        "Standing Service::standing\nLambda"
+      ],
+      "predicted_nodes": [
+        "Backend / Business Logic Layer::Match Info Service\n(Fixtures, Standings, Scores, Results"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregates three separate GT Lambda functions handling fixtures, live scores, and standings into a single Match Info Service backend node."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::prediction\nLambda"
+      ],
+      "predicted_nodes": [
+        "Backend / Business Logic Layer::Prediction Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes describe the Lambda logic that handles predictions within the business logic/backend tier."
+    },
+    {
+      "gt_nodes": [
+        "Recommendation Service::recommendation\nLambda"
+      ],
+      "predicted_nodes": [
+        "Backend / Business Logic Layer::Screening Recommendation Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both correspond to the functional logic for screening recommendations. AI correctly places this in the Business Logic Layer."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::User"
+  ],
+  "unmatched_predicted_nodes": [
+    "API & Auth Layer::AWS IAM\n(Security Management",
+    "Backend / Business Logic Layer::AWS Lambda\n(Python / Node",
+    "Backend / Business Logic Layer::Reminder Service",
+    "External Systems::Football Data\nExternal API"
+  ]
+}

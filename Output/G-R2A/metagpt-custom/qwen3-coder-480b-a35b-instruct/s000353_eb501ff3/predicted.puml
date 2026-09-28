@@ -1,0 +1,55 @@
+@startuml
+' Deployment Node for the overall system
+node "Turing System" {
+  ' API Layer
+  package "API Layer" {
+    component "HTTP API Server"
+    component "OpenAPI Specification"
+  }
+
+  ' Service Layer
+  package "Service Layer" {
+    component "Router Manager"
+    component "Ensembler Manager"
+  }
+
+  ' Cluster Layer
+  package "Cluster Layer" {
+    component "Kubernetes Deployer"
+  }
+
+  ' Runtime Layer
+  package "Runtime Layer" {
+    component "PyFuncEnsembler Runner"
+  }
+
+  ' Middleware Layer
+  package "Middleware Layer" {
+    component "Authorization Middleware"
+    component "Validation Middleware"
+  }
+}
+
+' External Systems
+cloud "External Systems" {
+  node "Kubernetes Cluster"
+  database "MLflow Model Registry"
+  node "Jaeger"
+}
+
+' Dependencies and Connections
+HTTP API Server --> OpenAPI Specification : implements
+HTTP API Server --> Router Manager : manages routers\n(lists, creates, updates, deletes)
+HTTP API Server --> Ensembler Manager : manages ensemblers\n(lists, creates, updates, deletes)
+HTTP API Server --> Authorization Middleware : authorizes requests
+HTTP API Server --> Validation Middleware : validates requests
+
+Router Manager --> Kubernetes Deployer : deploys routers
+Ensembler Manager --> PyFuncEnsembler Runner : runs ensemblers
+Ensembler Manager --> "MLflow Model Registry" : fetches model artifacts\nfor image building
+
+Kubernetes Deployer --> "Kubernetes Cluster" : manages deployments
+
+Router Manager ..> Jaeger : traces requests\n(via integrated Jaeger client)
+
+@enduml

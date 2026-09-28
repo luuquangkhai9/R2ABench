@@ -1,0 +1,157 @@
+@startuml
+' ITAS System Deployment & Component Diagram
+
+' === Presentation Layer ===
+package "Presentation Layer" {
+    component "Frontend Application" as FE [
+        Vue.js-based frontend
+        - Login / Profile
+        - Mining / Upload
+        - Results / Task Execution
+    ]
+}
+
+' === API Gateway Layer ===
+package "API Gateway Layer" {
+    component "Nginx Reverse Proxy" as NGINX
+    component "Spring Gateway" as SPRING_GATEWAY [
+        Authentication &
+        Authorization
+    ]
+}
+
+' === Application Layer ===
+package "Application Layer" {
+    component "User Management Service" as USER_SVC
+    component "Annotation Project Service" as PROJ_SVC
+    component "Document Management Service" as DOC_SVC
+    component "Tag Management Service" as TAG_SVC
+    component "Task Management Service" as TASK_SVC
+    component "Annotation Result Service" as ANNOT_RES_SVC
+    component "Mining Workflow Service" as MINE_SVC
+}
+
+' === Service Layer ===
+package "Service Layer" {
+    component "File Conversion Service" as FILE_CONV_SVC
+}
+
+' === AI/ML Layer ===
+package "AI/ML Layer" {
+    component "Model Integration Service" as MODEL_SVC [
+        BERT for paragraph modeling
+        GPT API for entity mining
+    ]
+}
+
+' === Data Access Layer ===
+package "Data Access Layer" {
+    component "MyBatis ORM" as MYBATIS
+    component "Minio SDK" as MINIO_SDK
+}
+
+' === Storage Layer ===
+package "Storage Layer" {
+    database "MySQL" as MYSQL
+    database "Redis" as REDIS
+    database "Minio" as MINIO
+}
+
+' === Messaging Layer ===
+package "Messaging Layer" {
+    component "RabbitMQ" as RABBITMQ
+}
+
+' === External Systems ===
+cloud "External Systems" {
+    component "GPT API / ChatGPT" as GPT_API
+    node "Tencent Cloud" as TENCENT
+}
+
+' === Deployment Nodes ===
+node "Web Tier" {
+    FE
+    NGINX
+    SPRING_GATEWAY
+}
+
+node "Application Tier" {
+    USER_SVC
+    PROJ_SVC
+    DOC_SVC
+    TAG_SVC
+    TASK_SVC
+    ANNOT_RES_SVC
+    MINE_SVC
+    MODEL_SVC
+}
+
+node "Service Tier" {
+    FILE_CONV_SVC
+    RABBITMQ
+}
+
+node "Data Tier" {
+    MYSQL
+    REDIS
+    MINIO
+}
+
+TENCENT contains "Web Tier"
+TENCENT contains "Application Tier"
+TENCENT contains "Service Tier"
+TENCENT contains "Data Tier"
+
+' === Major Dependencies ===
+ANNOT_RES_SVC --> MINE_SVC : AD-001
+MINE_SVC --> MODEL_SVC : AD-002
+DOC_SVC --> FILE_CONV_SVC : FR-018
+
+USER_SVC --> MYSQL : API-004, DSR-001
+PROJ_SVC --> MYSQL
+DOC_SVC --> MYSQL
+TAG_SVC --> MYSQL
+TASK_SVC --> MYSQL
+ANNOT_RES_SVC --> MYSQL
+MINE_SVC --> MYSQL
+
+DOC_SVC --> MINIO : AD-003, API-004, DSR-002
+
+USER_SVC --> REDIS : API-004, DSR-003
+PROJ_SVC --> REDIS
+DOC_SVC --> REDIS
+TAG_SVC --> REDIS
+TASK_SVC --> REDIS
+ANNOT_RES_SVC --> REDIS
+MINE_SVC --> REDIS
+
+FILE_CONV_SVC --> RABBITMQ : AD-004, COM-004
+
+MODEL_SVC --> GPT_API : API-003
+
+' === Interface Connections ===
+FE --> NGINX
+NGINX --> SPRING_GATEWAY
+
+SPRING_GATEWAY --> USER_SVC
+SPRING_GATEWAY --> PROJ_SVC
+SPRING_GATEWAY --> DOC_SVC
+SPRING_GATEWAY --> TAG_SVC
+SPRING_GATEWAY --> TASK_SVC
+SPRING_GATEWAY --> ANNOT_RES_SVC
+SPRING_GATEWAY --> MINE_SVC
+
+USER_SVC --> MYBATIS
+PROJ_SVC --> MYBATIS
+DOC_SVC --> MYBATIS
+TAG_SVC --> MYBATIS
+TASK_SVC --> MYBATIS
+ANNOT_RES_SVC --> MYBATIS
+MINE_SVC --> MYBATIS
+
+DOC_SVC --> MINIO_SDK
+MINIO_SDK --> MINIO
+
+MYBATIS --> MYSQL
+
+@enduml

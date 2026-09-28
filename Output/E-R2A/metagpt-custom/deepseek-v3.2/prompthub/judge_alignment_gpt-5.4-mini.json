@@ -1,0 +1,280 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Frontend / Client Layer::Admin System"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::User Interface Component",
+        "Presentation Layer::Client Web Browsers"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT admin UI is represented by general presentation/UI nodes in the prediction. The AI split the frontend/client scope into UI and browser presentation concerns, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Frontend / Client Layer::Admin System::Admin Login",
+        "Frontend / Client Layer::User System::User Login"
+      ],
+      "predicted_nodes": [
+        "Application Layer::User Management Service"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "Login-related frontend use-case nodes were merged into a backend application service. While functionally related, this is a severe boundary error because a client-side interaction node was placed in the application/backend layer."
+    },
+    {
+      "gt_nodes": [
+        "Frontend / Client Layer::Admin System::Audit / Review Works",
+        "Frontend / Client Layer::Admin System::View User List",
+        "Frontend / Client Layer::Admin System::View Works List"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Administration Service"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "These admin-facing frontend nodes were aggregated into a backend administration service. The functionality aligns, but the architectural boundary is incorrect because the GT nodes are frontend client interactions."
+    },
+    {
+      "gt_nodes": [
+        "Frontend / Client Layer::Collection System",
+        "Frontend / Client Layer::Collection System::Add Collection",
+        "Frontend / Client Layer::Collection System::Collection Category",
+        "Frontend / Client Layer::Collection System::Edit Collection",
+        "Frontend / Client Layer::Collection System::Query Collection"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Artwork Management Service",
+        "Application Layer::Query & Sorting Component"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": false,
+      "reasoning": "Favorite/collection management is mapped to backend artwork/query services. The functionality is only partially aligned, and the prediction places frontend collection behavior into backend application services, which is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Frontend / Client Layer::Comment System",
+        "Frontend / Client Layer::Comment System::Comment on Works",
+        "Frontend / Client Layer::Comment System::Delete Comment",
+        "Frontend / Client Layer::Comment System::Delete Reply",
+        "Frontend / Client Layer::Comment System::Reply to Comment"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Content Interaction Service",
+        "Application Layer::Notification Service"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": false,
+      "reasoning": "Comment/reply UI actions and related notification handling are combined into backend application services. Although semantically related, the GT nodes are client-layer interaction nodes, so the boundary attribution is incorrect."
+    },
+    {
+      "gt_nodes": [
+        "Frontend / Client Layer::Display System",
+        "Frontend / Client Layer::Display System::Query Upload Progress",
+        "Frontend / Client Layer::Display System::Query Works",
+        "Frontend / Client Layer::Display System::Upload Works",
+        "Frontend / Client Layer::Display System::View Works"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::User Interface Component",
+        "Presentation Layer::Client Web Browsers",
+        "Application Layer::Artwork Management Service",
+        "Application Layer::Query & Sorting Component"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": false,
+      "reasoning": "The display/upload/query artwork flows are represented, but parts are pushed into backend services. The core display system belongs to the frontend/client layer in GT, so the prediction crosses boundaries incorrectly."
+    },
+    {
+      "gt_nodes": [
+        "Frontend / Client Layer::Notification System",
+        "Frontend / Client Layer::Notification System::Audit Notification",
+        "Frontend / Client Layer::Notification System::Comment Notification",
+        "Frontend / Client Layer::Notification System::Private Message - TBD",
+        "Frontend / Client Layer::Notification System::Reply Notification"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Notification Service",
+        "Data Layer::Content & History Data"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": false,
+      "reasoning": "Notification behavior is correctly identified functionally, but the GT nodes are frontend notification screens/flows while the prediction relocates them into backend application/data layers. This is not boundary-correct."
+    },
+    {
+      "gt_nodes": [
+        "Frontend / Client Layer::Recommendation System",
+        "Frontend / Client Layer::Recommendation System::Close Recommendations",
+        "Frontend / Client Layer::Recommendation System::Hot Recommendations",
+        "Frontend / Client Layer::Recommendation System::Personalized Recommendations"
+      ],
+      "predicted_nodes": [
+        "Algorithm Layer::Recommendation Engine",
+        "Algorithm Layer::Browsing History Component"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT recommendation nodes are frontend entry points, while the prediction places them in the algorithm layer. The functionality is related, but the architectural boundary is wrong because UI recommendation controls are not algorithm nodes."
+    },
+    {
+      "gt_nodes": [
+        "Frontend / Client Layer::User System",
+        "Frontend / Client Layer::User System::Browse History",
+        "Frontend / Client Layer::User System::Follow Others",
+        "Frontend / Client Layer::User System::View Home Page"
+      ],
+      "predicted_nodes": [
+        "Application Layer::User Management Service",
+        "Data Layer::User & Relationship Data",
+        "Data Layer::Content & History Data"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": false,
+      "reasoning": "User profile, follow, and browsing-history related frontend features were mapped to backend application/data layers. The semantics overlap, but the boundary is incorrect because the GT nodes are client-side modules."
+    },
+    {
+      "gt_nodes": [
+        "Global::Frontend / Client Layer"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::User Interface Component",
+        "Presentation Layer::Client Web Browsers",
+        "Presentation Layer::User Interface Component"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The global frontend/client layer is reflected by generic presentation-layer nodes. Although the prediction is more specific, it stays within the correct high-level boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Infrastructure",
+        "Infrastructure::Docker Deployment"
+      ],
+      "predicted_nodes": [
+        "Data Layer::System Logs"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node relates to persistence/operations data rather than infrastructure/deployment. This is not a valid semantic match and the boundary is incorrect."
+    },
+    {
+      "gt_nodes": [
+        "Global::Service / Backend Layer",
+        "Service / Backend Layer::Backend Framework: Django",
+        "Service / Backend Layer::Business Services",
+        "Service / Backend Layer::Business Services::Account Service",
+        "Service / Backend Layer::Business Services::Audit Service",
+        "Service / Backend Layer::Business Services::Authentication Service",
+        "Service / Backend Layer::Business Services::Notification Service",
+        "Service / Backend Layer::Business Services::Resource Service",
+        "Service / Backend Layer::Business Services::Works Service"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Administration Service",
+        "Application Layer::Artwork Management Service",
+        "Application Layer::Content Interaction Service",
+        "Application Layer::Notification Service",
+        "Application Layer::User Management Service"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "These backend business services are semantically equivalent to the predicted application services. The naming differs, but the architectural placement within backend/application concerns is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Service / Backend Layer::Recommendation Algorithms",
+        "Service / Backend Layer::Recommendation Algorithms::Content Heat / Popularity Based",
+        "Service / Backend Layer::Recommendation Algorithms::Social Relation Based",
+        "Service / Backend Layer::Recommendation Algorithms::User Collection / History Based"
+      ],
+      "predicted_nodes": [
+        "Algorithm Layer::Recommendation Engine",
+        "Algorithm Layer::Browsing History Component"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT recommendation algorithm subnodes are correctly reflected by the algorithm-layer prediction. The boundary attribution is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Service / Backend Layer::SQLite Database"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Artwork & Review Data",
+        "Data Layer::Content & History Data",
+        "Data Layer::User & Relationship Data"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single SQLite persistence node is decomposed into multiple data-layer nodes. This is a reasonable split and the database/data-layer boundary is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Frontend / Client Layer::Admin System::Admin Login",
+    "Frontend / Client Layer::Admin System::Audit / Review Works",
+    "Frontend / Client Layer::Admin System::View User List",
+    "Frontend / Client Layer::Admin System::View Works List",
+    "Frontend / Client Layer::Collection System",
+    "Frontend / Client Layer::Collection System::Add Collection",
+    "Frontend / Client Layer::Collection System::Collection Category",
+    "Frontend / Client Layer::Collection System::Edit Collection",
+    "Frontend / Client Layer::Collection System::Query Collection",
+    "Frontend / Client Layer::Comment System",
+    "Frontend / Client Layer::Comment System::Comment on Works",
+    "Frontend / Client Layer::Comment System::Delete Comment",
+    "Frontend / Client Layer::Comment System::Delete Reply",
+    "Frontend / Client Layer::Comment System::Reply to Comment",
+    "Frontend / Client Layer::Display System",
+    "Frontend / Client Layer::Display System::Query Upload Progress",
+    "Frontend / Client Layer::Display System::Query Works",
+    "Frontend / Client Layer::Display System::Upload Works",
+    "Frontend / Client Layer::Display System::View Works",
+    "Frontend / Client Layer::Notification System",
+    "Frontend / Client Layer::Notification System::Audit Notification",
+    "Frontend / Client Layer::Notification System::Comment Notification",
+    "Frontend / Client Layer::Notification System::Private Message - TBD",
+    "Frontend / Client Layer::Notification System::Reply Notification",
+    "Frontend / Client Layer::Recommendation System",
+    "Frontend / Client Layer::Recommendation System::Close Recommendations",
+    "Frontend / Client Layer::Recommendation System::Hot Recommendations",
+    "Frontend / Client Layer::Recommendation System::Personalized Recommendations",
+    "Frontend / Client Layer::User System",
+    "Frontend / Client Layer::User System::Browse History",
+    "Frontend / Client Layer::User System::Follow Others",
+    "Frontend / Client Layer::User System::View Home Page",
+    "Global::Infrastructure",
+    "Global::Service / Backend Layer",
+    "Infrastructure::Docker Deployment",
+    "Service / Backend Layer::Backend Framework: Django",
+    "Service / Backend Layer::Business Services",
+    "Service / Backend Layer::Business Services::Account Service",
+    "Service / Backend Layer::Business Services::Audit Service",
+    "Service / Backend Layer::Business Services::Authentication Service",
+    "Service / Backend Layer::Business Services::Notification Service",
+    "Service / Backend Layer::Business Services::Resource Service",
+    "Service / Backend Layer::Business Services::Works Service",
+    "Service / Backend Layer::Recommendation Algorithms",
+    "Service / Backend Layer::Recommendation Algorithms::Content Heat / Popularity Based",
+    "Service / Backend Layer::Recommendation Algorithms::Social Relation Based",
+    "Service / Backend Layer::Recommendation Algorithms::User Collection / History Based",
+    "Service / Backend Layer::SQLite Database"
+  ],
+  "unmatched_predicted_nodes": [
+    "Algorithm Layer::Browsing History Component",
+    "Algorithm Layer::Recommendation Engine",
+    "Application Layer::Administration Service",
+    "Application Layer::Artwork Management Service",
+    "Application Layer::Content Interaction Service",
+    "Application Layer::Notification Service",
+    "Application Layer::Query & Sorting Component",
+    "Application Layer::User Management Service",
+    "Data Layer::Artwork & Review Data",
+    "Data Layer::Content & History Data",
+    "Data Layer::System Logs",
+    "Data Layer::User & Relationship Data",
+    "Presentation Layer::Client Web Browsers",
+    "Presentation Layer::User Interface Component"
+  ]
+}

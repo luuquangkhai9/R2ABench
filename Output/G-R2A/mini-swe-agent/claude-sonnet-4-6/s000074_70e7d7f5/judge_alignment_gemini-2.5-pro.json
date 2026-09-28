@@ -1,0 +1,97 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Tengine Lite::Engine::CPU Backend",
+        "Tengine Lite::Engine::Device Allocator",
+        "Tengine Lite::Engine::Exec Scheduler",
+        "Tengine Lite::Engine::GPU Backend",
+        "Tengine Lite::Engine::Graph Partition",
+        "Tengine Lite::Engine::Low Bit Quantize",
+        "Tengine Lite::Engine::NPU Backend",
+        "Tengine Lite::Runtime Optimize::ARM / X86 / RISCV / MIPS",
+        "Tengine Lite::Runtime Optimize::Amlogic / RK / NXP / JLQ\\nNPU and NVDLA",
+        "Tengine Lite::Runtime Optimize::Assembly",
+        "Tengine Lite::Runtime Optimize::Auto Kernel Plugin",
+        "Tengine Lite::Runtime Optimize::CUDA / Vulkan / OpenCL",
+        "Tengine Lite::Runtime Optimize::Mix Bit Calculation",
+        "Tengine Lite::Runtime Optimize::NVIDIA / Mali / Adreno",
+        "Tengine Lite::Runtime Optimize::SGEMM",
+        "Tengine Lite::Runtime Optimize::SIMD",
+        "Tengine Lite::Runtime Optimize::TIM-VX / OpenDLA Plugin",
+        "Tengine Lite::Runtime Optimize::TensorRT / ACL Plugin",
+        "Tengine Lite::Runtime Optimize::Winograd"
+      ],
+      "predicted_nodes": [
+        "Tengine Lite Core Engine::Device Module\\n(NN Operators Backend)",
+        "Tengine Lite Core Engine::Operator Module\\n(Register & Initialize NN Operators)",
+        "Tengine Lite Core Engine::Scheduler\\n(NNIR / Computation Graph /\\nHW Resources / Serializer)"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated numerous low-level GT nodes related to hardware backends, schedulers, and runtime optimizations into the three high-level core engine modules described in the PRD. The AI's boundary 'Tengine Lite Core Engine' is a semantically correct abstraction of the GT's 'Tengine Lite::Engine' and 'Tengine Lite::Runtime Optimize' packages."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Serializer::tmfile Serializer"
+      ],
+      "predicted_nodes": [
+        "Tengine Lite Core Engine::Serializer Module\\n(tmfile Decoder)"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are functionally identical, representing the decoding of the tmfile format. The AI placed it within the 'Tengine Lite Core Engine' boundary, which is consistent with the PRD's description of it being a core module. This is semantically equivalent to the GT's 'Tengine Lite::Serializer' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Convert Tool::Caffe",
+        "Tengine Lite::Convert Tool::Darknet",
+        "Tengine Lite::Convert Tool::MXNet",
+        "Tengine Lite::Convert Tool::MegEngine",
+        "Tengine Lite::Convert Tool::OneFlow",
+        "Tengine Lite::Convert Tool::Others",
+        "Tengine Lite::Convert Tool::PaddlePaddle",
+        "Tengine Lite::Convert Tool::PyTorch / ONNX",
+        "Tengine Lite::Convert Tool::TF Lite",
+        "Tengine Lite::Convert Tool::TensorFlow",
+        "Tengine Lite::Serializer::Caffe Serializer",
+        "Tengine Lite::Serializer::Darknet Serializer",
+        "Tengine Lite::Serializer::MLIR Serializer",
+        "Tengine Lite::Serializer::MXNet Serializer",
+        "Tengine Lite::Serializer::MegEngine Serializer",
+        "Tengine Lite::Serializer::ONNX Serializer",
+        "Tengine Lite::Serializer::OneFlow Serializer",
+        "Tengine Lite::Serializer::Others Serializer",
+        "Tengine Lite::Serializer::PaddlePaddle Serializer",
+        "Tengine Lite::Serializer::TF Lite Serializer",
+        "Tengine Lite::Serializer::TensorFlow Serializer",
+        "Tengine Lite::Serializer::ncnn Serializer"
+      ],
+      "predicted_nodes": [
+        "Model Conversion Tooling::Linux Pre-compiled\\nConversion Tool",
+        "Model Conversion Tooling::Online WebAssembly\\nConverter\\n(Browser-local"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated all GT nodes related to converting from specific external model formats (e.g., Caffe, ONNX) into the two high-level conversion tools mentioned in the PRD. The AI's 'Model Conversion Tooling' boundary is a correct functional abstraction of the GT's 'Convert Tool' and 'Serializer' packages."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "API Layer::C API\\n(Tengine-compatible",
+    "API Layer::C++ API",
+    "API Layer::Python API",
+    "Build System::CMake Build\\n(Cross-platform",
+    "Example Applications::Classification Example",
+    "Example Applications::Facial Landmark Detection\\nExample",
+    "Example Applications::OCR / Character Recognition\\nExample",
+    "Example Applications::Object Detection Example\\n(SSD",
+    "Example Applications::Pose Estimation Example",
+    "Example Applications::Segmentation Example",
+    "External Assets::Local Image Files",
+    "External Assets::Local Model Files",
+    "Global::Converted Model\\nArtifacts",
+    "Global::Web Browser\\n(WebAssembly Runtime",
+    "Global::tmfile Binary\\nModel Store"
+  ]
+}

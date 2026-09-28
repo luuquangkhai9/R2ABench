@@ -1,0 +1,90 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Client A1",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Client A2",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Client A3",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Client B1",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Client B2",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Client B3"
+      ],
+      "predicted_nodes": [
+        "Distributed Execution Layer::Client Component"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated multiple instances of 'Client' components from the GT's deployment view into a single logical 'Client Component'. The 'Distributed Execution Layer' is a semantically correct architectural layer for this component, consistent with the PRD's description of distributed operation."
+    },
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Server\\n-wsplit",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Server\\n-wsplit"
+      ],
+      "predicted_nodes": [
+        "Distributed Execution Layer::Server Component"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the two 'Server' instances from the GT into a single logical 'Server Component'. Placing it in the 'Distributed Execution Layer' is accurate and architecturally sound."
+    },
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Merger"
+      ],
+      "predicted_nodes": [
+        "Persistence Layer::Merge Manager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the 'Merger' tool and named it 'Merge Manager'. Placing it in the 'Persistence Layer' is a valid architectural choice, as its primary function is to process and merge persisted work files."
+    },
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Kangaroo file A1",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Kangaroo file A2",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Kangaroo file A3",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Work files\\nHashTable A",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Kangaroo file B1",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Kangaroo file B2",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Kangaroo file B3",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Work files\\nHashTable B",
+        "Kangrand Distributed Pollard Kangaroo::Master WorkFile\\nHashTable"
+      ],
+      "predicted_nodes": [
+        "Data Stores::Work Files",
+        "Data Stores::Split Backup Files"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated various instances of work files, hash tables, and kangaroo files from the GT into logical data entities. It also correctly identified the specific 'Split Backup Files' type from the PRD. Placing these data artifacts in a 'Data Stores' boundary is a correct and standard architectural practice."
+    },
+    {
+      "gt_nodes": [
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group A::Result.txt A",
+        "Kangrand Distributed Pollard Kangaroo::Distributed Search Group B::Result.txt B"
+      ],
+      "predicted_nodes": [
+        "Data Stores::Result Files"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly grouped the instance-specific result files from the GT into a single 'Result Files' data entity. The 'Data Stores' boundary is the correct classification for this data artifact."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Core Solver Layer::Distinguished Points Manager",
+    "Core Solver Layer::GPU Acceleration Module",
+    "Core Solver Layer::Hash Table Manager",
+    "Data Stores::Configuration Files",
+    "Data Stores::Input ASCII Files",
+    "Distributed Execution Layer::Work Distribution Manager",
+    "External Systems::Network Environment",
+    "External Systems::Operator CLI",
+    "Input Layer::Configuration Manager",
+    "Input Layer::Input File Parser",
+    "Persistence Layer::Result File Manager",
+    "Persistence Layer::Work File Manager"
+  ]
+}

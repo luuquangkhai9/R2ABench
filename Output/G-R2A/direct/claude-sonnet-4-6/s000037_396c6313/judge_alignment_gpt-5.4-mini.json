@@ -1,0 +1,218 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::plugin"
+      ],
+      "predicted_nodes": [
+        "Global::veinmind-tools Suite"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the overall plugin/tool-suite scope. The predicted node is broader in naming but semantically equivalent at the top level."
+    },
+    {
+      "gt_nodes": [
+        "Global::runner"
+      ],
+      "predicted_nodes": [
+        "Infrastructure & Runtime::veinmind-runner"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the runner execution environment/component. The predicted boundary is more specific but still consistent with the GT runner node."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::containerd"
+      ],
+      "predicted_nodes": [
+        "Infrastructure & Runtime::Container Runtime::Containerd\\n(NFR-002"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same container runtime backend, with semantically equivalent boundary naming."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::docker"
+      ],
+      "predicted_nodes": [
+        "Infrastructure & Runtime::Container Runtime::Docker\\n(CON-001"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same Docker runtime backend; boundary naming differs but is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::dockerfile"
+      ],
+      "predicted_nodes": [
+        "Infrastructure & Runtime::Image Registries",
+        "Infrastructure & Runtime::Image Registries::Docker Registry",
+        "Infrastructure & Runtime::Image Registries::DockerHub",
+        "Infrastructure & Runtime::Image Registries::Harbor"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is Dockerfile input backend, but the predicted nodes are image registries. This is a severe semantic mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::kubernetes"
+      ],
+      "predicted_nodes": [
+        "Global::External Users & Integrators"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No semantically equivalent Kubernetes backend/component exists in the prediction; the suggested top-level user/integrator node is unrelated."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::tarball"
+      ],
+      "predicted_nodes": [
+        "veinmind-tools Suite::Plugin Examples",
+        "veinmind-tools Suite::Plugin Examples::Python Example Package\\n(FR-006, NFR-003",
+        "veinmind-tools Suite::Plugin Examples::Python Example Package\\n(FR-006, NFR-003::entrypoint.sh\\n/tool/entrypoint.sh\\n(CON-006",
+        "veinmind-tools Suite::Plugin Examples::Python Example Package\\n(FR-006, NFR-003::requirements.txt\\nDependencies\\n(CON-005",
+        "veinmind-tools Suite::Plugin Examples::Python Example Package\\n(FR-006, NFR-003::scan.py\\n(FR-006"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "GT tarball input backend is not represented by the Python example packaging nodes; this is not a functional equivalent."
+    },
+    {
+      "gt_nodes": [
+        "SDK::interact system"
+      ],
+      "predicted_nodes": [
+        "Global::SDK / Library Layer",
+        "SDK / Library Layer::veinmind-sdk /\\nlibveinmind\\n(API-001, CON-004"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT SDK interaction system is represented by the SDK/library layer and the concrete veinmind-sdk/libveinmind node. Boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "SDK::plugin system"
+      ],
+      "predicted_nodes": [
+        "Global::SDK / Library Layer",
+        "SDK / Library Layer::veinmind-sdk /\\nlibveinmind\\n(API-001, CON-004"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The plugin system is correctly tied to the SDK/library layer and the SDK/library dependency node."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::cluster"
+      ],
+      "predicted_nodes": [
+        "Global::External Users & Integrators"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No cluster scan target exists in the prediction. The matched node is unrelated."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::container"
+      ],
+      "predicted_nodes": [
+        "veinmind-tools Suite::CLI Layer::scan-container\\n(FR-002, CLI-002"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Container scan target is reflected by the scan-container CLI node. Boundary attribution is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::iac"
+      ],
+      "predicted_nodes": [
+        "veinmind-tools Suite::CLI Layer::scan-iac\\n(FR-007, CLI-003",
+        "veinmind-tools Suite::IaC Scanning Engine",
+        "veinmind-tools Suite::IaC Scanning Engine::Alert Detail\\nBuilder\\n(FR-007",
+        "veinmind-tools Suite::IaC Scanning Engine::IaC Scanner\\n(FR-007",
+        "veinmind-tools Suite::IaC Scanning Engine::Policy Library\\nLoader\\n(FR-007",
+        "veinmind-tools Suite::IaC Scanning Engine::Report Event\\nPublisher\\n(API-003",
+        "veinmind-tools Suite::IaC Scanning Engine::Result Deduplicator\\n(FR-007",
+        "veinmind-tools Suite::Reporting Data Layer::IaC Alert Detail\\n(DR-007",
+        "veinmind-tools Suite::Reporting Data Layer::IaC File-Location\\nDetail\\n(DR-006",
+        "veinmind-tools Suite::Reporting Data Layer::IaC Rule Metadata\\n(DR-005"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The IaC scan target is decomposed into CLI, engine, and report-data nodes. This is a valid refinement of the GT IaC target."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::image"
+      ],
+      "predicted_nodes": [
+        "veinmind-tools Suite::CLI Layer::scan-image\\n(FR-001, CLI-001",
+        "veinmind-tools Suite::Quick-Start Workflow::run.sh\\nParallel-Container\\nStartup Script\\n(FR-003, CLI-004"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The image scan target is represented by the scan-image CLI and quick-start workflow nodes. The layering is appropriate."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Infrastructure and Input Backends::dockerfile",
+    "Infrastructure and Input Backends::kubernetes",
+    "Infrastructure and Input Backends::tarball",
+    "Scan Targets::cluster"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::External Users & Integrators",
+    "Global::Infrastructure & Runtime",
+    "Global::SDK / Library Layer",
+    "Infrastructure & Runtime::Container Runtime",
+    "Infrastructure & Runtime::Container Runtime::Containerd\\n(NFR-002",
+    "Infrastructure & Runtime::Container Runtime::Docker\\n(CON-001",
+    "Infrastructure & Runtime::Image Registries",
+    "Infrastructure & Runtime::Image Registries::Docker Registry",
+    "Infrastructure & Runtime::Image Registries::DockerHub",
+    "Infrastructure & Runtime::Image Registries::Harbor",
+    "Infrastructure & Runtime::Python Base Image",
+    "Infrastructure & Runtime::Python Base Image::veinmind/python3.6:\\n1.3.1-stretch\\n(NFR-003, CON-005",
+    "Infrastructure & Runtime::veinmind-runner",
+    "Infrastructure & Runtime::veinmind-runner::Runner Image\\n(CON-002, DEP-002",
+    "SDK / Library Layer::veinmind-sdk /\\nlibveinmind\\n(API-001, CON-004",
+    "veinmind-tools Suite::Authorization Routing",
+    "veinmind-tools Suite::Authorization Routing::Docker Auth\\nRouting Component\\n(FR-004, FR-005",
+    "veinmind-tools Suite::Authorization Routing::NoneDockerPlugin\\nFallback\\n(FR-005, DAT-IF-003",
+    "veinmind-tools Suite::Authorization Routing::Route Pattern\\nMatcher",
+    "veinmind-tools Suite::CLI Layer",
+    "veinmind-tools Suite::CLI Layer::scan-container\\n(FR-002, CLI-002",
+    "veinmind-tools Suite::CLI Layer::scan-iac\\n(FR-007, CLI-003",
+    "veinmind-tools Suite::CLI Layer::scan-image\\n(FR-001, CLI-001",
+    "veinmind-tools Suite::IaC Scanning Engine",
+    "veinmind-tools Suite::IaC Scanning Engine::Alert Detail\\nBuilder\\n(FR-007",
+    "veinmind-tools Suite::IaC Scanning Engine::IaC Scanner\\n(FR-007",
+    "veinmind-tools Suite::IaC Scanning Engine::Policy Library\\nLoader\\n(FR-007",
+    "veinmind-tools Suite::IaC Scanning Engine::Report Event\\nPublisher\\n(API-003",
+    "veinmind-tools Suite::IaC Scanning Engine::Result Deduplicator\\n(FR-007",
+    "veinmind-tools Suite::Plugin Examples",
+    "veinmind-tools Suite::Plugin Examples::Python Example Package\\n(FR-006, NFR-003",
+    "veinmind-tools Suite::Plugin Examples::Python Example Package\\n(FR-006, NFR-003::entrypoint.sh\\n/tool/entrypoint.sh\\n(CON-006",
+    "veinmind-tools Suite::Plugin Examples::Python Example Package\\n(FR-006, NFR-003::requirements.txt\\nDependencies\\n(CON-005",
+    "veinmind-tools Suite::Plugin Examples::Python Example Package\\n(FR-006, NFR-003::scan.py\\n(FR-006",
+    "veinmind-tools Suite::Quick-Start Workflow",
+    "veinmind-tools Suite::Quick-Start Workflow::run.sh\\nParallel-Container\\nStartup Script\\n(FR-003, CLI-004",
+    "veinmind-tools Suite::Reporting Data Layer",
+    "veinmind-tools Suite::Reporting Data Layer::IaC Alert Detail\\n(DR-007",
+    "veinmind-tools Suite::Reporting Data Layer::IaC File-Location\\nDetail\\n(DR-006",
+    "veinmind-tools Suite::Reporting Data Layer::IaC Rule Metadata\\n(DR-005",
+    "veinmind-tools Suite::Reporting Data Layer::MaliciousFileInfo\\n(DR-001",
+    "veinmind-tools Suite::Reporting Data Layer::ReportData\\n(DR-002",
+    "veinmind-tools Suite::Reporting Data Layer::ReportImage\\n(DR-003",
+    "veinmind-tools Suite::Reporting Data Layer::ReportLayer\\n(DR-004"
+  ]
+}

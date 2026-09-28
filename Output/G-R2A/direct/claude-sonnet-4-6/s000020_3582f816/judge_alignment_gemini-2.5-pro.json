@@ -1,0 +1,136 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "数据可视化::Web UI"
+      ],
+      "predicted_nodes": [
+        "Browser Environment::MyEMS Admin Application::API Base Path Resolver",
+        "Browser Environment::MyEMS Admin Application::Category Settings Module\n(Lazy-Loaded",
+        "Browser Environment::MyEMS Admin Application::Client-Side Router",
+        "Browser Environment::MyEMS Admin Application::Contact Settings Module\n(Lazy-Loaded",
+        "Browser Environment::MyEMS Admin Application::Route Configuration Data",
+        "Browser Environment::MyEMS Admin Application::Tariff Settings Module\n(Lazy-Loaded",
+        "Browser Environment::MyEMS Admin Application::User Settings Module\n(Lazy-Loaded"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT generically represents the frontend as 'Web UI', while the AI breaks it down into specific browser environment modules described in the SRS. The boundary semantics are consistent."
+    },
+    {
+      "gt_nodes": [
+        "数据分析服务::API"
+      ],
+      "predicted_nodes": [
+        "API Service Runtime\n(Python Environment::MyEMS REST API Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the core REST API service. While the GT groups it under data analysis, both refer to the main API backend component."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::数据库集群"
+      ],
+      "predicted_nodes": [
+        "Persistent Storage::MySQL Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the backend database system for persistent storage."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::Web Server"
+      ],
+      "predicted_nodes": [
+        "Network / Routing Layer::Reverse Proxy\n(e.g. Nginx — optional"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A reverse proxy like Nginx acts as the routing web server for the system."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::Docker Engine"
+      ],
+      "predicted_nodes": [
+        "API Service Runtime\n(Python Environment::Deployment Paths (FR-008 / FR-009::Docker-Based\nInstallation"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both relate to Docker, but the AI incorrectly placed the Docker installation/execution path inside the Python Environment boundary instead of treating it as infrastructure."
+    },
+    {
+      "gt_nodes": [
+        "数据分析服务::Excel导出"
+      ],
+      "predicted_nodes": [
+        "API Service Runtime\n(Python Environment::Python Dependencies (CON-001::Spreadsheet & Image Handling"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the service/dependency capability required to handle spreadsheets (e.g., Excel)."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "其它数据源::BMS",
+    "其它数据源::ERP",
+    "其它数据源::MES",
+    "其它数据源::天气",
+    "其它数据源::手工录入",
+    "安全::API Access",
+    "安全::HTTPS",
+    "安全::用户权限",
+    "容器化服务器集群::...",
+    "容器化服务器集群::Kafka Broker",
+    "容器化服务器集群::MQTT Broker",
+    "容器化服务器集群::云端Kubernetes集群",
+    "容器化服务器集群::本地Kubernetes集群",
+    "容器化服务器集群::虚拟机",
+    "容器化服务器集群::裸金属服务器",
+    "数据分析服务::...",
+    "数据分析服务::FDD规则引擎",
+    "数据分析服务::邮件/短信/微信",
+    "数据分析服务::高级报表引擎",
+    "数据可视化::...",
+    "数据可视化::BI",
+    "数据可视化::大屏",
+    "数据可视化::小程序",
+    "数据可视化::手机应用",
+    "数据计算服务::...",
+    "数据计算服务::成本数据",
+    "数据计算服务::数据清洗",
+    "数据计算服务::数据规范化",
+    "数据计算服务::碳排放数据",
+    "数据计算服务::租户数据",
+    "数据计算服务::空间数据",
+    "数据计算服务::组合设备数据",
+    "数据计算服务::计量表数据",
+    "数据计算服务::设备数据",
+    "数据计算服务::车间数据",
+    "数据计算服务::门店数据",
+    "数据采集服务::...",
+    "数据采集服务::BACnet",
+    "数据采集服务::EtherNet/IP",
+    "数据采集服务::Kafka",
+    "数据采集服务::MQTT",
+    "数据采集服务::Modbus",
+    "数据采集服务::OPC UA",
+    "数据采集服务::S7",
+    "硬件网关::数据采集",
+    "硬件网关::设备控制",
+    "第三方应用::...",
+    "第三方应用::AR",
+    "第三方应用::BMS",
+    "第三方应用::ERP"
+  ],
+  "unmatched_predicted_nodes": [
+    "API Service Runtime\n(Python Environment::Deployment Paths (FR-008 / FR-009::Linux Quick-Run\nDevelopment Mode",
+    "API Service Runtime\n(Python Environment::Deployment Paths (FR-008 / FR-009::Windows Quick-Run\nDevelopment Mode",
+    "API Service Runtime\n(Python Environment::Python Dependencies (CON-001::CORS Support",
+    "API Service Runtime\n(Python Environment::Python Dependencies (CON-001::MySQL Connector",
+    "API Service Runtime\n(Python Environment::Python Dependencies (CON-001::REST Framework Support",
+    "API Service Runtime\n(Python Environment::Python Dependencies (CON-001::WSGI Execution Support"
+  ]
+}

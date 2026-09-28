@@ -1,0 +1,85 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Flutter-based app::Android",
+        "Flutter-based app::MacOS",
+        "Flutter-based app::Web",
+        "Flutter-based app::iOS"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Flutter/Dart Client\n(Android · iOS · Web · macOS"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT explicitly models individual platforms for the Flutter application, whereas the AI aggregates them into a single multi-platform client node. 'Flutter-based app' and 'Client Layer' boundaries are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Flutter-based app::Dart"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Dart Generated gRPC Client\n(from .proto"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the generated Dart client code that acts as the bridge to the gRPC backend. The boundaries align semantically."
+    },
+    {
+      "gt_nodes": [
+        "Global::Hosted in Azure Kubernetes Service"
+      ],
+      "predicted_nodes": [
+        "Deployment Infrastructure::Azure Kubernetes Service (AKS"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes correctly identify the AKS deployment target. 'Global' and 'Deployment Infrastructure' are acceptable boundary mappings."
+    },
+    {
+      "gt_nodes": [
+        "Hosted in Azure Kubernetes Service::Docker container"
+      ],
+      "predicted_nodes": [
+        "Deployment Infrastructure::Docker Container\n(Server Image"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Docker container for the server runtime. The 'Deployment Infrastructure' and 'Hosted in AKS' boundaries are semantically analogous."
+    },
+    {
+      "gt_nodes": [
+        "Hosted in Azure Kubernetes Service::Docker container::Recipes Server\n(gRPC Server)\nGolang"
+      ],
+      "predicted_nodes": [
+        "Backend Layer::Go gRPC Server\n(Recipe & Ingredient Services",
+        "Backend Layer::Go Generated gRPC Server Code\n(from .proto"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT places the gRPC server logically within the deployment hierarchy ('Docker container' -> 'AKS'), while the AI places it in a purely logical 'Backend Layer'. Although functionally equivalent, the differing architectural perspectives (Deployment vs. Logical layer) mean the boundary context strictly does not match."
+    },
+    {
+      "gt_nodes": [
+        "Global::gRPC Gateway\n(HTTP-gRPC Proxy)\nGolang"
+      ],
+      "predicted_nodes": [
+        "Backend Layer::gRPC-Gateway Middleware\n(HTTP → gRPC mapping"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the gRPC-Gateway middleware. Placing this proxy in the 'Backend Layer' (AI) is a conceptually accurate equivalent to the 'Global' positioning in the GT."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Postman",
+    "Global::Test Client 1\nNodeJS",
+    "Global::Test Client 2\nGolang"
+  ],
+  "unmatched_predicted_nodes": [
+    "Data Layer::Ingredient Data Store",
+    "Data Layer::Recipe Data Store",
+    "Deployment Infrastructure::Local Kubernetes Cluster",
+    "Shared Contract::Protocol Buffers Definitions\n(.proto files"
+  ]
+}

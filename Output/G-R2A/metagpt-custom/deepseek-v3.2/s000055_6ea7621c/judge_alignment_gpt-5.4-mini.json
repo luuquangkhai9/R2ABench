@@ -1,0 +1,96 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "BACKEND::Router"
+      ],
+      "predicted_nodes": [
+        "Request Routing Layer::Router"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the HTTP routing component that delegates requests, and the predicted layer name is semantically consistent with the GT backend routing boundary."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::algorithm"
+      ],
+      "predicted_nodes": [
+        "Business Logic::autocomplete/search-hint algorithm"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the autocomplete/search-hint processing logic. The business logic boundary is acceptable for this algorithmic backend responsibility."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::handlers"
+      ],
+      "predicted_nodes": [
+        "Request Handlers::Home Page Handler",
+        "Request Handlers::Not-Found Handler",
+        "Request Handlers::Search Request Handler",
+        "Request Handlers::Static Asset Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has one consolidated handlers module, while the prediction splits it into specific request handlers. This is a valid decomposition and remains within the correct server-side request handling boundary."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::XMLHttpRequest"
+      ],
+      "predicted_nodes": [
+        "Frontend (Browser::Frontend Helper Module",
+        "Global::Client Browser"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT frontend XMLHttpRequest functionality is represented by a browser-side helper/module and the client browser context. This is a reasonable frontend-side match, although the predicted nodes are more granular/contextual."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::index.html"
+      ],
+      "predicted_nodes": [
+        "Request Handlers::Home Page Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a frontend HTML asset, while the predicted node is a backend handler. They are related through serving the page, but they are not the same component and are placed in different architectural boundaries."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::main.css"
+      ],
+      "predicted_nodes": [
+        "Request Handlers::Static Asset Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a static frontend asset, but the prediction maps it to a server-side static asset handler. This is a boundary confusion between asset and handler."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::userInput"
+      ],
+      "predicted_nodes": [
+        "Frontend (Browser::Search Input Field"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the user input field in the browser frontend, and the boundary attribution is appropriate."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "BACKEND::data.json",
+    "BACKEND::public assets\\nhtml\\ncss\\njs"
+  ],
+  "unmatched_predicted_nodes": [
+    "Business Logic::Content-Type Mapper",
+    "Frontend (Browser::Suggestions Output",
+    "Global::Client Browser",
+    "Request Handlers::Not-Found Handler",
+    "Request Handlers::Search Request Handler"
+  ]
+}

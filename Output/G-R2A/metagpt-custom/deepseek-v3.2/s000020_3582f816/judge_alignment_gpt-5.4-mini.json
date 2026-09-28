@@ -1,0 +1,187 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "数据分析服务::API"
+      ],
+      "predicted_nodes": [
+        "Application/Service Layer::API Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the system's REST API service exposed to MyEMS components and third-party applications. The predicted boundary is a reasonable service-layer placement for the GT data analysis API node."
+    },
+    {
+      "gt_nodes": [
+        "第三方应用::AR",
+        "第三方应用::BMS",
+        "第三方应用::ERP"
+      ],
+      "predicted_nodes": [
+        "Global::Third-Party Applications"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT lists multiple example external applications, while the prediction aggregates them into a generic third-party applications node. This is semantically equivalent and the global/external boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "数据可视化::Web UI"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Admin Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a visualization web UI, while the predicted node is specifically the Admin application. The predicted node is too specific and represents the administration client rather than the GT visualization web UI component, so this is not a correct semantic match."
+    },
+    {
+      "gt_nodes": [
+        "数据可视化::BI",
+        "数据可视化::大屏",
+        "数据可视化::小程序",
+        "数据可视化::手机应用"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Admin Application"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "These GT nodes are visualization frontends across BI, dashboard, mini-program, and mobile app channels, not the Admin application. The prediction conflates unrelated presentation clients with the admin UI, causing a semantic boundary/context error."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::Docker Engine"
+      ],
+      "predicted_nodes": [
+        "Development & Deployment::Docker-based Installation"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT indicates Docker-related deployment/runtime support, and the prediction captures Docker-based installation. The boundary is acceptable as deployment tooling."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::Web Server"
+      ],
+      "predicted_nodes": [
+        "Global::Reverse Proxy (e.g., Nginx"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT web server node aligns with the predicted reverse proxy/web server role used to route /api/ traffic. Although the prediction names Nginx as an example, the function is consistent."
+    },
+    {
+      "gt_nodes": [
+        "安全::API Access"
+      ],
+      "predicted_nodes": [
+        "Application/Service Layer::API Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "API Access is a security concern, while the predicted node is the API service itself. The functionality is related but not equivalent, and the boundary is incorrect."
+    },
+    {
+      "gt_nodes": [
+        "安全::HTTPS"
+      ],
+      "predicted_nodes": [
+        "Global::Web Browser"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "HTTPS is a transport/security protocol, not a browser component. This is not a valid semantic match."
+    },
+    {
+      "gt_nodes": [
+        "安全::用户权限"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Admin Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "User permissions are a security/access-control concern, whereas the Admin application is a UI client. The prediction does not represent the same component."
+    },
+    {
+      "gt_nodes": [
+        "容器化服务器集群::数据库集群"
+      ],
+      "predicted_nodes": [
+        "Global::Database (e.g., MySQL"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the database runtime/storage tier. The predicted boundary is semantically consistent with the GT database cluster."
+    },
+    {
+      "gt_nodes": [
+        "第三方应用::..."
+      ],
+      "predicted_nodes": [
+        "Global::Third-Party Applications"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT ellipsis indicates the category of third-party applications in general, which matches the predicted aggregated external-application node."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "其它数据源::BMS",
+    "其它数据源::ERP",
+    "其它数据源::MES",
+    "其它数据源::天气",
+    "其它数据源::手工录入",
+    "安全::用户权限",
+    "容器化服务器集群::...",
+    "容器化服务器集群::Kafka Broker",
+    "容器化服务器集群::MQTT Broker",
+    "容器化服务器集群::云端Kubernetes集群",
+    "容器化服务器集群::本地Kubernetes集群",
+    "容器化服务器集群::虚拟机",
+    "容器化服务器集群::裸金属服务器",
+    "数据分析服务::...",
+    "数据分析服务::Excel导出",
+    "数据分析服务::FDD规则引擎",
+    "数据分析服务::邮件/短信/微信",
+    "数据分析服务::高级报表引擎",
+    "数据可视化::...",
+    "数据计算服务::...",
+    "数据计算服务::成本数据",
+    "数据计算服务::数据清洗",
+    "数据计算服务::数据规范化",
+    "数据计算服务::碳排放数据",
+    "数据计算服务::租户数据",
+    "数据计算服务::空间数据",
+    "数据计算服务::组合设备数据",
+    "数据计算服务::计量表数据",
+    "数据计算服务::设备数据",
+    "数据计算服务::车间数据",
+    "数据计算服务::门店数据",
+    "数据采集服务::...",
+    "数据采集服务::BACnet",
+    "数据采集服务::EtherNet/IP",
+    "数据采集服务::Kafka",
+    "数据采集服务::MQTT",
+    "数据采集服务::Modbus",
+    "数据采集服务::OPC UA",
+    "数据采集服务::S7",
+    "硬件网关::数据采集",
+    "硬件网关::设备控制",
+    "第三方应用::AR",
+    "第三方应用::BMS",
+    "第三方应用::ERP"
+  ],
+  "unmatched_predicted_nodes": [
+    "Presentation Layer::Admin Application::/contact Route",
+    "Presentation Layer::Admin Application::/user Route",
+    "Presentation Layer::Admin Application::API Base Path Resolver",
+    "Presentation Layer::Admin Application::Category Settings Modules",
+    "Presentation Layer::Admin Application::Routing Configuration",
+    "Presentation Layer::Admin Application::Tariff Settings Modules",
+    "Development & Deployment::Development Quick-Run Modes",
+    "Development & Deployment::Docker-based Installation",
+    "Global::MyEMS Components"
+  ]
+}

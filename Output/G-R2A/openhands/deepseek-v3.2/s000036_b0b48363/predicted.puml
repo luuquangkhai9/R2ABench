@@ -1,0 +1,195 @@
+@startuml
+!define RECTANGLE rectangle
+skinparam componentStyle rectangle
+skinparam backgroundColor #FFFFFF
+skinparam component {
+  BackgroundColor #F5F5F5
+  BorderColor #333333
+  ArrowColor #333333
+  FontColor #000000
+}
+
+title HypnoLog Server System Architecture
+
+package "External Systems" {
+  component "Logging Producers" as PRODUCERS
+  note right of PRODUCERS
+    Any language/environment
+    capable of HTTP POST
+  end note
+}
+
+package "HypnoLog Server" {
+  component "Node.js Runtime" as NODE
+  component "Express Application" as EXPRESS
+  component "HTTP Server" as HTTP
+  component "Socket.IO Server" as SOCKETIO
+  component "JSON Body Parser" as PARSER
+  
+  database "No Persistence" as NOPERSIST {
+    note "No explicit persistence\nrequirements per SRS"
+  }
+  
+  EXPRESS -- HTTP
+  HTTP -- NODE
+  SOCKETIO -- HTTP
+  PARSER -- EXPRESS
+  
+  rectangle "Routes" {
+    component "/logger/in" as LOGIN [
+      POST endpoint
+      JSON log submission
+    ]
+    
+    component "/logger/status" as STATUS [
+      Status check
+      HTTP 200 response
+    ]
+    
+    LOGIN -- EXPRESS
+    STATUS -- EXPRESS
+  }
+  
+  rectangle "Static Files" {
+    component "/client.html" as CLIENTHTML [
+      Browser UI entry point
+    ]
+    
+    component "Public Web Directory" as PUBLIC [
+      Browser assets
+      JavaScript bundles
+    ]
+    
+    CLIENTHTML -- EXPRESS
+    PUBLIC -- EXPRESS
+  }
+}
+
+package "Browser Client" {
+  component "Browser UI" as BROWSER [
+    Standard browser
+    loads /client.html
+  ]
+  
+  component "Socket.IO Client" as CLIENTIO [
+    Real-time connection
+    to same origin
+  ]
+  
+  component "Ajv Validator" as AJV [
+    JSON Schema validation
+    of received messages
+  ]
+  
+  component "Data Store" as DATASTORE [
+    Received-data list
+    Last-update time
+  ]
+  
+  component "Window Dispatcher" as WINDOWDISP [
+    Passes objects to
+    registered windows
+  ]
+  
+  component "Default Window" as DEFAULTWIN [
+    Creates DOM elements
+    via visualizers
+  ]
+  
+  component "Visualizer Dispatcher" as VISDISP [
+    Selects first matching
+    visualizer by canDisplay
+  ]
+  
+  rectangle "Visualizers" {
+    component "Visualizer 1" as VIZ1 [
+      canDisplay(obj)
+      display(obj, callback)
+    ]
+    
+    component "Visualizer 2" as VIZ2 [
+      canDisplay(obj)
+      display(obj, callback)
+    ]
+    
+    component "Visualizer N" as VIZN [
+      canDisplay(obj)
+      display(obj, callback)
+    ]
+  }
+  
+  BROWSER -- CLIENTIO
+  CLIENTIO -- SOCKETIO : <<Socket.IO>>
+  CLIENTIO -- AJV : "notification event"
+  AJV -- DATASTORE : "valid/invalid objects"
+  DATASTORE -- WINDOWDISP
+  WINDOWDISP -- DEFAULTWIN
+  DEFAULTWIN -- VISDISP
+  VISDISP -- VIZ1
+  VISDISP -- VIZ2
+  VISDISP -- VIZN
+}
+
+' Data flows
+PRODUCERS -- LOGIN : "HTTP POST\napplication/json\nHypnoLog Data Object"
+LOGIN -- PARSER : "JSON body\nup to 50mb limit"
+PARSER -- SOCKETIO : "Forward parsed\nrequest body"
+SOCKETIO -- CLIENTIO : "notification event\nwith log object"
+AJV --> DATASTORE : "Valid object or\nHypnoLog-error"
+DATASTORE --> WINDOWDISP : "Object for display"
+WINDOWDISP --> DEFAULTWIN : "Pass to window"
+VISDISP --> VIZ1 : "First canDisplay=true"
+VIZ1 --> DEFAULTWIN : "DOM element\nvia callback"
+
+' Configuration and startup
+component "CLI Startup" as CLI [
+  npm start
+  node ./bin/www
+  port argument (default 7000)
+]
+
+CLI -- NODE
+CLI -- HTTP : "opens browser to\n/client.html URL"
+
+' Legend
+legend right
+  | Color | Meaning |
+  | <color:#F5F5F5> | Component |
+  | <color:#D5E8D4> | External system |
+  | <color:#FFF2CC> | Browser client |
+  | -- | Association |
+  | --> | Data flow |
+end legend
+
+note top of PRODUCERS
+  Language-agnostic
+  HTTP/JSON clients
+end note
+
+note top of SOCKETIO
+  Attached to HTTP server
+  Broadcasts to all connected clients
+end note
+
+note top of AJV
+  Validates against
+  HypnoLog Data Object schema
+  Creates HypnoLog-error
+  for invalid messages
+end note
+
+note top of VISDISP
+  Loads visualizers from
+  configuration
+  Tolerates loading failures
+  Order matters
+end note
+
+note top of VIZ1
+  Plugin contract:
+  - canDisplay(obj)
+  - display(obj, callback)
+  Returns DOM element
+end note
+
+@enduml

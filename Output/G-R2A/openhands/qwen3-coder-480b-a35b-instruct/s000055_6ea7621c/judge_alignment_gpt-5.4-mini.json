@@ -1,0 +1,263 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "BACKEND::Router",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Web Application::HTTP Router"
+      ],
+      "reasoning": "The predicted HTTP Router clearly covers the routing responsibility of the GT Router."
+    },
+    {
+      "gt_node": "BACKEND::algorithm",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Web Application::Search/Autocomplete Module"
+      ],
+      "reasoning": "The predicted Search/Autocomplete Module matches the GT backend algorithm responsibility."
+    },
+    {
+      "gt_node": "BACKEND::data.json",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Web Application::Laureate Data\\n(JSON",
+        "Web Application::Local Data Access"
+      ],
+      "reasoning": "The GT local JSON data node is represented by the predicted laureate data and local data access nodes."
+    },
+    {
+      "gt_node": "BACKEND::handlers",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Web Application::Request Handler"
+      ],
+      "reasoning": "The predicted Request Handler covers the GT handlers responsibility."
+    },
+    {
+      "gt_node": "BACKEND::public assets\\nhtml\\ncss\\njs",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Web Application::Public Assets::HTML Files",
+        "Web Application::Public Assets::CSS Files",
+        "Web Application::Public Assets::JavaScript Files",
+        "Web Application::Public Assets::Image Files"
+      ],
+      "reasoning": "The GT public assets node is split into specific asset-type nodes in the prediction; HTML, CSS, and JavaScript are directly covered, and the prediction also adds images as an extra asset category."
+    },
+    {
+      "gt_node": "FRONTEND::XMLHttpRequest",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Web Application::Frontend"
+      ],
+      "reasoning": "The predicted Frontend node covers the frontend request initiation role, including XMLHttpRequest usage."
+    },
+    {
+      "gt_node": "FRONTEND::index.html",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Web Application::Public Assets::HTML Files"
+      ],
+      "reasoning": "The predicted HTML Files node covers the GT index.html frontend asset."
+    },
+    {
+      "gt_node": "FRONTEND::main.css",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Web Application::Public Assets::CSS Files"
+      ],
+      "reasoning": "The predicted CSS Files node covers the GT main.css frontend asset."
+    },
+    {
+      "gt_node": "FRONTEND::userInput",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Web Application::Frontend"
+      ],
+      "reasoning": "The predicted Frontend node covers the user input responsibility."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Web Application::Frontend",
+      "grounded": true,
+      "reference_nodes": [
+        "FRONTEND::XMLHttpRequest",
+        "FRONTEND::userInput",
+        "FRONTEND::index.html",
+        "FRONTEND::main.css"
+      ],
+      "reasoning": "This is grounded in the frontend responsibilities from the GT, though it is broader and more aggregated."
+    },
+    {
+      "predicted_node": "Web Application::HTTP Router",
+      "grounded": true,
+      "reference_nodes": [
+        "BACKEND::Router"
+      ],
+      "reasoning": "Directly corresponds to the GT router concept."
+    },
+    {
+      "predicted_node": "Web Application::Laureate Data\\n(JSON",
+      "grounded": true,
+      "reference_nodes": [
+        "BACKEND::data.json"
+      ],
+      "reasoning": "This corresponds to the GT JSON data source node, despite the slightly malformed name."
+    },
+    {
+      "predicted_node": "Web Application::Local Data Access",
+      "grounded": true,
+      "reference_nodes": [
+        "BACKEND::data.json"
+      ],
+      "reasoning": "This is grounded in the GT local data responsibility, though it is more abstract than the concrete data.json node."
+    },
+    {
+      "predicted_node": "Web Application::Public Assets::CSS Files",
+      "grounded": true,
+      "reference_nodes": [
+        "BACKEND::public assets\\nhtml\\ncss\\njs",
+        "FRONTEND::main.css"
+      ],
+      "reasoning": "This is directly grounded in the GT public assets and main.css concepts."
+    },
+    {
+      "predicted_node": "Web Application::Public Assets::HTML Files",
+      "grounded": true,
+      "reference_nodes": [
+        "BACKEND::public assets\\nhtml\\ncss\\njs",
+        "FRONTEND::index.html"
+      ],
+      "reasoning": "This is directly grounded in the GT public assets and index.html concepts."
+    },
+    {
+      "predicted_node": "Web Application::Public Assets::Image Files",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT public assets node only mentions html, css, and js; image files are not represented in the GT node list."
+    },
+    {
+      "predicted_node": "Web Application::Public Assets::JavaScript Files",
+      "grounded": true,
+      "reference_nodes": [
+        "BACKEND::public assets\\nhtml\\ncss\\njs"
+      ],
+      "reasoning": "This is grounded in the GT public assets node."
+    },
+    {
+      "predicted_node": "Web Application::Request Handler",
+      "grounded": true,
+      "reference_nodes": [
+        "BACKEND::handlers"
+      ],
+      "reasoning": "This corresponds to the GT handlers component."
+    },
+    {
+      "predicted_node": "Web Application::Search/Autocomplete Module",
+      "grounded": true,
+      "reference_nodes": [
+        "BACKEND::algorithm"
+      ],
+      "reasoning": "This directly matches the GT autocomplete/algorithm responsibility."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "BACKEND::Router"
+      ],
+      "predicted_nodes": [
+        "Web Application::HTTP Router"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same routing responsibility with a semantically equivalent boundary."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::algorithm"
+      ],
+      "predicted_nodes": [
+        "Web Application::Search/Autocomplete Module"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same autocomplete algorithm responsibility with an appropriate boundary."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::data.json"
+      ],
+      "predicted_nodes": [
+        "Web Application::Laureate Data\\n(JSON",
+        "Web Application::Local Data Access"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT data source responsibility is split into data representation and access, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::handlers"
+      ],
+      "predicted_nodes": [
+        "Web Application::Request Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The request handler responsibility matches directly."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::public assets\\nhtml\\ncss\\njs"
+      ],
+      "predicted_nodes": [
+        "Web Application::Public Assets::HTML Files",
+        "Web Application::Public Assets::CSS Files",
+        "Web Application::Public Assets::JavaScript Files"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT public assets node is decomposed into file-type specific asset nodes with a consistent boundary."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::XMLHttpRequest",
+        "FRONTEND::userInput"
+      ],
+      "predicted_nodes": [
+        "Web Application::Frontend"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted frontend node aggregates multiple frontend responsibilities from the GT."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::index.html"
+      ],
+      "predicted_nodes": [
+        "Web Application::Public Assets::HTML Files"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The responsibility matches, but the GT treats index.html as a frontend artifact while the prediction places it under public assets; this is a mild boundary shift but not a severe context error."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::main.css"
+      ],
+      "predicted_nodes": [
+        "Web Application::Public Assets::CSS Files"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The responsibility matches, but the GT treats it as a frontend artifact while the prediction places it under public assets; this is a boundary shift."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Web Application::Public Assets::Image Files"
+  ]
+}

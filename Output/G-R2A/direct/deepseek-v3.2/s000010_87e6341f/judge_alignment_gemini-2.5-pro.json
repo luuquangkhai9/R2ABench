@@ -1,0 +1,62 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Flutter-based app::Android",
+        "Flutter-based app::Dart",
+        "Flutter-based app::MacOS",
+        "Flutter-based app::Web",
+        "Flutter-based app::iOS"
+      ],
+      "predicted_nodes": [
+        "Client Tier::Flutter/Dart Client\\n(Android, iOS, Web, macOS"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the five GT nodes representing the multi-platform client into a single, comprehensive node. The 'Client Tier' boundary is semantically equivalent to the 'Flutter-based app' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Hosted in Azure Kubernetes Service::Docker container::Recipes Server\\n(gRPC Server)\\nGolang"
+      ],
+      "predicted_nodes": [
+        "Server Tier::Go gRPC Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the gRPC server. While the GT uses a nested physical deployment hierarchy ('Hosted in Azure Kubernetes Service::Docker container') as its boundary, the AI's use of a logical 'Server Tier' is a standard and semantically equivalent architectural practice."
+    },
+    {
+      "gt_nodes": [
+        "Global::gRPC Gateway\\n(HTTP-gRPC Proxy)\\nGolang"
+      ],
+      "predicted_nodes": [
+        "Server Tier::gRPC-Gateway\\nMiddleware"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the gRPC-Gateway. Placing it in the 'Server Tier' alongside the gRPC server is a better architectural grouping than the GT's generic 'Global' boundary, as both components form the backend server stack described in the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Global::Hosted in Azure Kubernetes Service"
+      ],
+      "predicted_nodes": [
+        "Deployment & Runtime::Azure Kubernetes\\nService (AKS"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI identified the AKS deployment environment. The 'Deployment & Runtime' boundary created by the AI is a logical and more descriptive grouping for a deployment technology than the GT's generic 'Global' boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Postman",
+    "Global::Test Client 1\\nNodeJS",
+    "Global::Test Client 2\\nGolang",
+    "Hosted in Azure Kubernetes Service::Docker container"
+  ],
+  "unmatched_predicted_nodes": [
+    "Deployment & Runtime::Docker Runtime",
+    "Deployment & Runtime::Local Kubernetes\\nCluster"
+  ]
+}

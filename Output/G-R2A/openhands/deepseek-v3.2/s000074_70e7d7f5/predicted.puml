@@ -1,0 +1,112 @@
+@startuml
+' Tengine Lite System Architecture Diagram
+' Generated from Software Requirements Specification
+
+skinparam componentStyle uml2
+skinparam nodesep 20
+skinparam ranksep 30
+skinparam shadowing false
+
+' Define layers
+rectangle "Application Layer" as applayer {
+  component "Example Applications" as examples
+  component "Linux Model Converter" as linux_converter
+  component "Browser Converter (WASM)" as browser_converter
+}
+
+rectangle "API Layer" as apilayer {
+  interface "C API" as c_api
+  interface "C++ API" as cpp_api
+  interface "Python API" as python_api
+}
+
+rectangle "Core Architecture Layer" as corelayer {
+  component "Device Module" as device [
+    NN Operators Backend
+  ]
+  
+  component "Scheduler Module" as scheduler [
+    NNIR & Computation Graphs\nHardware Resource Management\nModel Serializer Coordination
+  ]
+  
+  component "Operator Module" as operator [
+    NN Operators Registration\nNN Operators Initialization
+  ]
+  
+  component "Serializer Module" as serializer [
+    Binary tmfile Decoding\nSerialized Parameter Output
+  ]
+}
+
+' External components
+rectangle "Build System" as buildsys {
+  component "CMake" as cmake [
+    Cross-platform Compilation
+  ]
+}
+
+database "Local Assets" as assets [
+  Model Files (*.tmfile)\nImage Files
+]
+
+' Relationships and dependencies
+
+' Core module dependencies
+scheduler --> device : manages
+scheduler --> operator : coordinates
+scheduler --> serializer : invokes
+operator --> device : registers to
+
+' API dependencies on core modules
+c_api --> scheduler : uses
+cpp_api --> scheduler : uses
+python_api --> scheduler : uses
+
+' Application dependencies
+examples --> c_api : via original Tengine-compatible API
+linux_converter --> serializer : uses for conversion
+browser_converter --> serializer : WASM-based local conversion
+
+' Build system dependency
+cmake ..> corelayer : compiles
+cmake ..> apilayer : compiles
+
+' Data flow
+assets --> examples : provides models/images
+assets --> serializer : provides tmfile inputs
+serializer --> examples : provides decoded parameters
+linux_converter --> assets : produces converted models
+browser_converter --> assets : produces converted models
+
+' External interfaces
+cloud "Web Browser" as browser
+browser --> browser_converter : hosts
+
+folder "Linux System" as linux
+linux --> linux_converter : executes
+
+' Layer separators
+note top of applayer: User-facing Applications & Tools
+note top of apilayer: Integration Interfaces
+note top of corelayer: Core Inference Engine
+
+' Component grouping notes
+note right of device
+  Provides NN Operators backend
+  Hardware abstraction
+end note
+
+note right of scheduler
+  Central coordination module
+  Manages computation graphs
+  Handles hardware resources
+  Coordinates serializer
+end note
+
+note right of serializer
+  Decodes binary tmfile format
+  Produces serialized model parameters
+  Used by conversion tools
+end note
+
+@enduml

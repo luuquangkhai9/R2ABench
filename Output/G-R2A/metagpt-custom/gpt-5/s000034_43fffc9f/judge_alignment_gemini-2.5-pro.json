@@ -1,0 +1,95 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process"
+      ],
+      "predicted_nodes": [
+        "Global::torc MPI Rank Process"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the main process container for the torc_py library's runtime components. The GT nests this within a 'Compute node' while the AI places it at the 'Global' level, but both serve as the primary boundary for the process's internal architecture, making them semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::MPI"
+      ],
+      "predicted_nodes": [
+        "Global::MPI runtime + mpi4py"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct and exact match for the underlying MPI system. The AI's node name is more specific by including 'mpi4py' as mentioned in the PRD. Both are correctly placed in the Global scope."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Server\\nThread"
+      ],
+      "predicted_nodes": [
+        "torc MPI Rank Process::Interprocess Communication Layer (MPI::Server Message Pump\\n(server thread"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A clear match for the communication thread within each MPI process, which is implied in the PRD by TORC_SERVER_YIELDTIME and the need for inter-process communication. The AI correctly places it inside the MPI Process boundary within a logical communication layer."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Worker\\nThread"
+      ],
+      "predicted_nodes": [
+        "torc MPI Rank Process::Worker Execution Layer (Threads::Worker Queues & Executor"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI's 'Worker Queues & Executor' node functionally represents the GT's 'Worker Thread' which is responsible for executing tasks from its queue. The boundary attribution inside the MPI Process is correct."
+    },
+    {
+      "gt_nodes": [
+        "Compute node::MPI Process::Task Queue",
+        "Task Queue (in detail::...",
+        "Task Queue (in detail::A1",
+        "Task Queue (in detail::A2",
+        "Task Queue (in detail::A3",
+        "Task Queue (in detail::B1",
+        "Task Queue (in detail::B2",
+        "Task Queue (in detail::Level 0",
+        "Task Queue (in detail::Level 1",
+        "Task Queue (in detail::Level 2",
+        "Task Queue (in detail::Level 3",
+        "Task Queue (in detail::Level 4",
+        "Task Queue (in detail::Level 5"
+      ],
+      "predicted_nodes": [
+        "torc MPI Rank Process::Task Scheduling & Queueing Layer::Scheduler"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's multiple nodes representing the concept of a task queue and its contents are aggregated into the AI's single 'Scheduler' node. This node logically represents the mechanism for queuing and distributing tasks (cyclic, directed) as described in the PRD. The boundary is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Examples & Workflows\\n(master-worker, SPMD, stealing,\\n image preprocessing, optimization",
+    "Global::HDF5 files",
+    "Global::Image dataset files",
+    "Global::Operating System Environment\\n(TORC_* env vars",
+    "Global::Optional example packages\\n(numpy, cma, h5py, pillow",
+    "Global::Python runtime",
+    "Global::mpirun",
+    "torc MPI Rank Process::Configuration Layer::Config Manager",
+    "torc MPI Rank Process::Data Model Layer::Task Descriptor\\n(Future",
+    "torc MPI Rank Process::Interprocess Communication Layer (MPI::MPI Communicator",
+    "torc MPI Rank Process::Interprocess Communication Layer (MPI::SPMD Executor\\n(torc.spmd",
+    "torc MPI Rank Process::Interprocess Communication Layer (MPI::Stealing Controller\\n(torc.enable/disable_stealing",
+    "torc MPI Rank Process::Python API Layer::Lifecycle API\\n(torc.start/init/launch/shutdown",
+    "torc MPI Rank Process::Python API Layer::Map Engine\\n(torc.map",
+    "torc MPI Rank Process::Python API Layer::SPMD API\\n(torc.spmd",
+    "torc MPI Rank Process::Python API Layer::Submission API\\n(torc.submit",
+    "torc MPI Rank Process::Python API Layer::Wait/Completion API\\n(torc.wait, as_completed",
+    "torc MPI Rank Process::Runtime Lifecycle Layer::Lifecycle Manager\\n(torc.start/init/launch/shutdown",
+    "torc MPI Rank Process::Task Scheduling & Queueing Layer::Callback Dispatcher",
+    "torc MPI Rank Process::Utilities & Introspection Layer::Identity Service\\n(torc.worker_id/num_workers,\\n torc.node_id/num_nodes",
+    "torc MPI Rank Process::Utilities & Introspection Layer::Timing Service\\n(torc.gettime"
+  ]
+}

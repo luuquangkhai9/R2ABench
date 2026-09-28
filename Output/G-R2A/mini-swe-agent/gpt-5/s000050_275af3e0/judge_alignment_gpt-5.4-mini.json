@@ -1,0 +1,115 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::KVM (L0"
+      ],
+      "predicted_nodes": [
+        "Orchestration::Standalone Test Runner (Python CLI",
+        "Orchestration::kAFL-Fuzzer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "GT has a top-level KVM/hypervisor context containing the test runner workflow; the predicted nodes split out the standalone runner and kAFL-Fuzzer appropriately, but placing them under a separate orchestration layer rather than the KVM/hAFL2 context is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "predicted_nodes": [
+        "Orchestration::Standalone Test Runner (Python CLI",
+        "Orchestration::kAFL-Fuzzer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These predicted nodes correspond to the hAFL2-side orchestration/test execution components represented by the GT hAFL2 node. The semantic match is correct, and the orchestration boundary is acceptable as a more explicit decomposition of the same area."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host"
+      ],
+      "predicted_nodes": [
+        "Windows Hyper-V Fuzzing Workflow::VMBus/netvsc Channel"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT host-side Hyper-V boundary encompasses the communication channel used by the Windows workflow. The predicted channel node is a reasonable, more specific decomposition within the host/hypervisor communication layer."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2"
+      ],
+      "predicted_nodes": [
+        "Windows Hyper-V Fuzzing Workflow::Child Partition VM (Windows"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the child partition guest VM participating in the Windows Hyper-V fuzzing workflow."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2::harness.sys"
+      ],
+      "predicted_nodes": [
+        "Windows Hyper-V Fuzzing Workflow::Child Partition VM (Windows::Harness Driver"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The harness driver in the child partition matches the GT harness.sys component, and the boundary is consistent with the child partition VM."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2"
+      ],
+      "predicted_nodes": [
+        "Windows Hyper-V Fuzzing Workflow::Root Partition (Windows"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The root partition host OS is correctly represented by the predicted root partition boundary."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::CrashMonitoring.sys"
+      ],
+      "predicted_nodes": [
+        "Windows Hyper-V Fuzzing Workflow::Root Partition (Windows::Crash Monitoring Driver"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "CrashMonitoring.sys and the crash monitoring driver are semantically equivalent, and both belong in the root partition boundary."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::vmswitch.sys"
+      ],
+      "predicted_nodes": [
+        "Windows Hyper-V Fuzzing Workflow::Root Partition (Windows::Hyper-V VMSwitch (vmswitch.sys"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The vmswitch.sys component is correctly identified and placed in the root partition boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::KVM (L0"
+      ],
+      "predicted_nodes": [
+        "Linux Userspace Fuzzing Workflow::Guest VM (Linux",
+        "Linux Userspace Fuzzing Workflow::Host (Linux"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT top-level KVM/hypervisor context does not correspond to the Linux userspace host/guest workflow nodes. These are plausible system components, but they are not semantically equivalent to the GT node and represent a different subsystem."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Linux Userspace Fuzzing Workflow::Guest VM (Linux",
+    "Linux Userspace Fuzzing Workflow::Guest VM (Linux::Embedded Forkserver",
+    "Linux Userspace Fuzzing Workflow::Guest VM (Linux::Target Binary",
+    "Linux Userspace Fuzzing Workflow::Host (Linux",
+    "Linux Userspace Fuzzing Workflow::Host (Linux::Initrd Builder (bash scripts",
+    "Linux Userspace Fuzzing Workflow::Host (Linux::initrd"
+  ]
+}

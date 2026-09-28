@@ -1,0 +1,116 @@
+﻿@startuml
+!define RECTANGLE class
+!define DATABASE rectangle
+!define COMPONENT rectangle
+!define INTERFACE rectangle
+
+skinparam componentStyle rectangle
+
+title PromptHub System Architecture
+
+package "Client Layer" {
+  [Web Browser] as browser #lightblue
+}
+
+package "Presentation Layer" {
+  [Vue.js Frontend] as frontend #lightgreen
+}
+
+package "Application Layer" {
+  [Django Backend] as backend #lightyellow
+  [Recommendation Engine] as algo #lightyellow
+}
+
+package "Data Layer" {
+  [SQLite Database] as database #lightgray
+}
+
+package "Infrastructure" {
+  [Docker Container] as docker #lightpink
+  [Email Service] as email #lightpink
+}
+
+actor "Visitor" as visitor
+actor "Registered User" as user
+actor "Administrator" as admin
+actor "AI Creator" as creator
+
+visitor -- browser
+user -- browser
+admin -- browser
+creator -- browser
+
+browser --> frontend : uses
+frontend --> backend : REST API
+backend --> database : ORM
+algo --> backend : provides
+recommendations
+backend --> algo : requests
+recommendations
+backend --> email : sends
+notifications
+docker .. backend : deploys
+docker .. frontend : deploys
+docker .. algo : deploys
+database .. docker : contained in
+
+package "Frontend Components" {
+  [Artwork Display] as display
+  [User Interface] as ui
+  [Search & Filter] as search
+}
+
+package "Backend Services" {
+  [User Management] as usermgmt
+  [Artwork Management] as artmgmt
+  [Review System] as review
+  [Comment System] as comment
+  [Favorite System] as favorite
+  [Notification System] as notify
+}
+
+frontend --> display
+frontend --> ui
+frontend --> search
+
+backend --> usermgmt
+backend --> artmgmt
+backend --> review
+backend --> comment
+backend --> favorite
+backend --> notify
+
+usermgmt --> database
+artmgmt --> database
+review --> database
+comment --> database
+favorite --> database
+notify --> database
+
+note right of backend
+  Handles all business logic:
+  - User authentication
+  - Artwork CRUD operations
+  - Content moderation
+  - Community features
+end note
+
+note right of algo
+  Provides:
+  - Popular recommendations
+  - Personalized recommendations
+  - Content analysis
+end note
+
+note right of database
+  Stores:
+  - User accounts
+  - Artworks and prompts
+  - Comments and replies
+  - Favorites
+  - Notifications
+  - Review status
+end note
+
+@enduml
+

@@ -1,0 +1,389 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Browser Clients::Client Browser\\nPlayer 1",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Client Environment\\n(Browser",
+        "Client Environment\\n(Browser::WebSocket\\nHandler",
+        "Client Environment\\n(Browser::Room\\nManager",
+        "Client Environment\\n(Browser::Reconnect\\nController",
+        "Client Environment\\n(Browser::Heartbeat\\nManager\\n(ping/pong, 60 s",
+        "Client Environment\\n(Browser::Message\\nSerializer\\n[event, data",
+        "Client Environment\\n(Browser::Message\\nParser\\n[action, data?",
+        "Client Environment\\n(Browser::Three.js\\nRenderer"
+      ],
+      "reasoning": "The predicted nodes collectively cover the browser client responsibilities for a player, including rendering, room workflow, WebSocket communication, messaging, heartbeat, and reconnection."
+    },
+    {
+      "gt_node": "Browser Clients::Client Browser\\nPlayer 2",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Client Environment\\n(Browser",
+        "Client Environment\\n(Browser::WebSocket\\nHandler",
+        "Client Environment\\n(Browser::Room\\nManager",
+        "Client Environment\\n(Browser::Reconnect\\nController",
+        "Client Environment\\n(Browser::Heartbeat\\nManager\\n(ping/pong, 60 s",
+        "Client Environment\\n(Browser::Message\\nSerializer\\n[event, data",
+        "Client Environment\\n(Browser::Message\\nParser\\n[action, data?",
+        "Client Environment\\n(Browser::Three.js\\nRenderer"
+      ],
+      "reasoning": "As with the other browser client nodes, the predicted client-side components cover the responsibilities of an individual browser player instance."
+    },
+    {
+      "gt_node": "Browser Clients::Client Browser\\nPlayer 3",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Client Environment\\n(Browser",
+        "Client Environment\\n(Browser::WebSocket\\nHandler",
+        "Client Environment\\n(Browser::Room\\nManager",
+        "Client Environment\\n(Browser::Reconnect\\nController",
+        "Client Environment\\n(Browser::Heartbeat\\nManager\\n(ping/pong, 60 s",
+        "Client Environment\\n(Browser::Message\\nSerializer\\n[event, data",
+        "Client Environment\\n(Browser::Message\\nParser\\n[action, data?",
+        "Client Environment\\n(Browser::Three.js\\nRenderer"
+      ],
+      "reasoning": "The predicted browser-side client stack covers the player client responsibility."
+    },
+    {
+      "gt_node": "Erlang / OTP Game Server Cluster::Server Master\\nErlang",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Erlang/OTP Game Server\\n(Master",
+        "Erlang/OTP Game Server\\n(Master::Fault-Tolerance\\nCoordinator",
+        "Erlang/OTP Game Server\\n(Master::Player\\nRegistry",
+        "Erlang/OTP Game Server\\n(Master::Room\\nSession\\nManager",
+        "Erlang/OTP Game Server\\n(Master::Server List\\nManager",
+        "Erlang/OTP Game Server\\n(Master::WebSocket\\nEndpoint"
+      ],
+      "reasoning": "The master-side server responsibilities are represented by the predicted master server nodes, including session, player, server list, WebSocket, and fault-tolerance coordination."
+    },
+    {
+      "gt_node": "Erlang / OTP Game Server Cluster::Server Slave\\nErlang",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Erlang/OTP Game Server\\n(Replica",
+        "Erlang/OTP Game Server\\n(Replica::Replica\\nRoom\\nSession\\nManager",
+        "Erlang/OTP Game Server\\n(Replica::Replica\\nWebSocket\\nEndpoint"
+      ],
+      "reasoning": "The slave/replica role in the GT is covered by the predicted replica-side nodes."
+    },
+    {
+      "gt_node": "Global::DNS",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Network Infrastructure",
+        "Network Infrastructure::DNS /\\nLoad Balancer"
+      ],
+      "reasoning": "The predicted DNS/load balancer node covers the DNS responsibility, with a slightly broader infrastructure boundary."
+    },
+    {
+      "gt_node": "Global::Erlang / OTP Game Server Cluster",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Erlang/OTP Game Server\\n(Master",
+        "Global::Erlang/OTP Game Server\\n(Replica",
+        "Erlang/OTP Game Server\\n(Master::Fault-Tolerance\\nCoordinator",
+        "Erlang/OTP Game Server\\n(Master::Player\\nRegistry",
+        "Erlang/OTP Game Server\\n(Master::Room\\nSession\\nManager",
+        "Erlang/OTP Game Server\\n(Master::Server List\\nManager",
+        "Erlang/OTP Game Server\\n(Master::WebSocket\\nEndpoint",
+        "Erlang/OTP Game Server\\n(Replica::Replica\\nRoom\\nSession\\nManager",
+        "Erlang/OTP Game Server\\n(Replica::Replica\\nWebSocket\\nEndpoint"
+      ],
+      "reasoning": "The overall game server cluster concept is represented by the predicted master and replica server structures."
+    },
+    {
+      "gt_node": "Static Web Tier::Web Server\\nGame assets, HTML, CSS, JS",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Web Server",
+        "Web Server::Static Asset\\nServer\\n(HTML, CSS, JS,\\nImages"
+      ],
+      "reasoning": "The predicted web server and static asset server nodes cover the static web tier responsibility for serving assets."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Client Environment\\n(Browser::Heartbeat\\nManager\\n(ping/pong, 60 s",
+      "grounded": true,
+      "reference_nodes": [
+        "Browser Clients::Client Browser\\nPlayer 1",
+        "Browser Clients::Client Browser\\nPlayer 2",
+        "Browser Clients::Client Browser\\nPlayer 3"
+      ],
+      "reasoning": "Grounded in client heartbeat behavior for ping/pong and 60-second timing."
+    },
+    {
+      "predicted_node": "Client Environment\\n(Browser::Message\\nParser\\n[action, data?",
+      "grounded": true,
+      "reference_nodes": [
+        "Browser Clients::Client Browser\\nPlayer 1",
+        "Browser Clients::Client Browser\\nPlayer 2",
+        "Browser Clients::Client Browser\\nPlayer 3"
+      ],
+      "reasoning": "Grounded in inbound WebSocket message parsing of JSON arrays with action and optional data."
+    },
+    {
+      "predicted_node": "Client Environment\\n(Browser::Message\\nSerializer\\n[event, data",
+      "grounded": true,
+      "reference_nodes": [
+        "Browser Clients::Client Browser\\nPlayer 1",
+        "Browser Clients::Client Browser\\nPlayer 2",
+        "Browser Clients::Client Browser\\nPlayer 3"
+      ],
+      "reasoning": "Grounded in outbound message serialization as [event, data]."
+    },
+    {
+      "predicted_node": "Client Environment\\n(Browser::Reconnect\\nController",
+      "grounded": true,
+      "reference_nodes": [
+        "Browser Clients::Client Browser\\nPlayer 1",
+        "Browser Clients::Client Browser\\nPlayer 2",
+        "Browser Clients::Client Browser\\nPlayer 3"
+      ],
+      "reasoning": "Grounded in reconnection behavior after WebSocket close and reconnect context submission."
+    },
+    {
+      "predicted_node": "Client Environment\\n(Browser::Room\\nManager",
+      "grounded": true,
+      "reference_nodes": [
+        "Browser Clients::Client Browser\\nPlayer 1",
+        "Browser Clients::Client Browser\\nPlayer 2",
+        "Browser Clients::Client Browser\\nPlayer 3"
+      ],
+      "reasoning": "Grounded in multiplayer room workflows including create/join room behavior."
+    },
+    {
+      "predicted_node": "Client Environment\\n(Browser::Three.js\\nRenderer",
+      "grounded": true,
+      "reference_nodes": [
+        "Browser Clients::Client Browser\\nPlayer 1",
+        "Browser Clients::Client Browser\\nPlayer 2",
+        "Browser Clients::Client Browser\\nPlayer 3"
+      ],
+      "reasoning": "Grounded in the browser-based client environment using Three.js."
+    },
+    {
+      "predicted_node": "Client Environment\\n(Browser::WebSocket\\nHandler",
+      "grounded": true,
+      "reference_nodes": [
+        "Browser Clients::Client Browser\\nPlayer 1",
+        "Browser Clients::Client Browser\\nPlayer 2",
+        "Browser Clients::Client Browser\\nPlayer 3"
+      ],
+      "reasoning": "Grounded in the browser client's WebSocket communication with the server."
+    },
+    {
+      "predicted_node": "Erlang/OTP Game Server\\n(Master::Fault-Tolerance\\nCoordinator",
+      "grounded": true,
+      "reference_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\\nErlang",
+        "Erlang / OTP Game Server Cluster::Server Slave\\nErlang"
+      ],
+      "reasoning": "Grounded in replica/fault-tolerance support in the master-side server architecture."
+    },
+    {
+      "predicted_node": "Erlang/OTP Game Server\\n(Master::Player\\nRegistry",
+      "grounded": true,
+      "reference_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\\nErlang"
+      ],
+      "reasoning": "Grounded in server-side player/session management responsibilities."
+    },
+    {
+      "predicted_node": "Erlang/OTP Game Server\\n(Master::Room\\nSession\\nManager",
+      "grounded": true,
+      "reference_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\\nErlang"
+      ],
+      "reasoning": "Grounded in multiplayer room session workflows on the server."
+    },
+    {
+      "predicted_node": "Erlang/OTP Game Server\\n(Master::Server List\\nManager",
+      "grounded": true,
+      "reference_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\\nErlang"
+      ],
+      "reasoning": "Grounded in server list update and redirect handling behavior."
+    },
+    {
+      "predicted_node": "Erlang/OTP Game Server\\n(Master::WebSocket\\nEndpoint",
+      "grounded": true,
+      "reference_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\\nErlang"
+      ],
+      "reasoning": "Grounded in the server-side WebSocket runtime interface."
+    },
+    {
+      "predicted_node": "Erlang/OTP Game Server\\n(Replica::Replica\\nRoom\\nSession\\nManager",
+      "grounded": true,
+      "reference_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Slave\\nErlang"
+      ],
+      "reasoning": "Grounded in the replica server's fault-tolerant session handling role."
+    },
+    {
+      "predicted_node": "Erlang/OTP Game Server\\n(Replica::Replica\\nWebSocket\\nEndpoint",
+      "grounded": true,
+      "reference_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Slave\\nErlang"
+      ],
+      "reasoning": "Grounded in the replica-side server communication endpoint."
+    },
+    {
+      "predicted_node": "Global::Client Environment\\n(Browser",
+      "grounded": true,
+      "reference_nodes": [
+        "Browser Clients::Client Browser\\nPlayer 1",
+        "Browser Clients::Client Browser\\nPlayer 2",
+        "Browser Clients::Client Browser\\nPlayer 3"
+      ],
+      "reasoning": "A broad browser client container grounded in the GT browser client nodes."
+    },
+    {
+      "predicted_node": "Global::Erlang/OTP Game Server\\n(Master",
+      "grounded": true,
+      "reference_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\\nErlang"
+      ],
+      "reasoning": "A broad master server container grounded in the GT master node."
+    },
+    {
+      "predicted_node": "Global::Erlang/OTP Game Server\\n(Replica",
+      "grounded": true,
+      "reference_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Slave\\nErlang"
+      ],
+      "reasoning": "A broad replica server container grounded in the GT slave/replica node."
+    },
+    {
+      "predicted_node": "Global::Network Infrastructure",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::DNS"
+      ],
+      "reasoning": "Grounded as an infrastructure umbrella that includes the DNS/load balancer responsibility."
+    },
+    {
+      "predicted_node": "Global::Web Server",
+      "grounded": true,
+      "reference_nodes": [
+        "Static Web Tier::Web Server\\nGame assets, HTML, CSS, JS"
+      ],
+      "reasoning": "Grounded in the static web tier web server concept."
+    },
+    {
+      "predicted_node": "Network Infrastructure::DNS /\\nLoad Balancer",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::DNS"
+      ],
+      "reasoning": "Grounded in the DNS lookup and load balancing role described by the PRD."
+    },
+    {
+      "predicted_node": "Web Server::Static Asset\\nServer\\n(HTML, CSS, JS,\\nImages",
+      "grounded": true,
+      "reference_nodes": [
+        "Static Web Tier::Web Server\\nGame assets, HTML, CSS, JS"
+      ],
+      "reasoning": "Grounded in serving static game assets such as HTML, CSS, JavaScript, and images."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Browser Clients::Client Browser\\nPlayer 1",
+        "Browser Clients::Client Browser\\nPlayer 2",
+        "Browser Clients::Client Browser\\nPlayer 3"
+      ],
+      "predicted_nodes": [
+        "Global::Client Environment\\n(Browser",
+        "Client Environment\\n(Browser::WebSocket\\nHandler",
+        "Client Environment\\n(Browser::Room\\nManager",
+        "Client Environment\\n(Browser::Reconnect\\nController",
+        "Client Environment\\n(Browser::Heartbeat\\nManager\\n(ping/pong, 60 s",
+        "Client Environment\\n(Browser::Message\\nSerializer\\n[event, data",
+        "Client Environment\\n(Browser::Message\\nParser\\n[action, data?",
+        "Client Environment\\n(Browser::Three.js\\nRenderer"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The three GT browser client nodes are aggregated into one client environment with detailed browser-side subcomponents; the boundary remains within the browser client context."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\\nErlang"
+      ],
+      "predicted_nodes": [
+        "Global::Erlang/OTP Game Server\\n(Master",
+        "Erlang/OTP Game Server\\n(Master::Fault-Tolerance\\nCoordinator",
+        "Erlang/OTP Game Server\\n(Master::Player\\nRegistry",
+        "Erlang/OTP Game Server\\n(Master::Room\\nSession\\nManager",
+        "Erlang/OTP Game Server\\n(Master::Server List\\nManager",
+        "Erlang/OTP Game Server\\n(Master::WebSocket\\nEndpoint"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT master server node is split into several predicted master-side responsibilities, all still within the correct server boundary."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Slave\\nErlang"
+      ],
+      "predicted_nodes": [
+        "Global::Erlang/OTP Game Server\\n(Replica",
+        "Erlang/OTP Game Server\\n(Replica::Replica\\nRoom\\nSession\\nManager",
+        "Erlang/OTP Game Server\\n(Replica::Replica\\nWebSocket\\nEndpoint"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT slave server is represented as a replica-side server split into detailed responsibilities within the correct boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::DNS"
+      ],
+      "predicted_nodes": [
+        "Global::Network Infrastructure",
+        "Network Infrastructure::DNS /\\nLoad Balancer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The DNS responsibility is preserved, though expanded into a broader infrastructure boundary and a DNS/load balancer component."
+    },
+    {
+      "gt_nodes": [
+        "Global::Erlang / OTP Game Server Cluster"
+      ],
+      "predicted_nodes": [
+        "Global::Erlang/OTP Game Server\\n(Master",
+        "Global::Erlang/OTP Game Server\\n(Replica",
+        "Erlang/OTP Game Server\\n(Master::Fault-Tolerance\\nCoordinator",
+        "Erlang/OTP Game Server\\n(Master::Player\\nRegistry",
+        "Erlang/OTP Game Server\\n(Master::Room\\nSession\\nManager",
+        "Erlang/OTP Game Server\\n(Master::Server List\\nManager",
+        "Erlang/OTP Game Server\\n(Master::WebSocket\\nEndpoint",
+        "Erlang/OTP Game Server\\n(Replica::Replica\\nRoom\\nSession\\nManager",
+        "Erlang/OTP Game Server\\n(Replica::Replica\\nWebSocket\\nEndpoint"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The cluster is preserved as a master/replica decomposition, semantically equivalent to the GT game server cluster."
+    },
+    {
+      "gt_nodes": [
+        "Static Web Tier::Web Server\\nGame assets, HTML, CSS, JS"
+      ],
+      "predicted_nodes": [
+        "Global::Web Server",
+        "Web Server::Static Asset\\nServer\\n(HTML, CSS, JS,\\nImages"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT static web tier is split into a web server container and a static asset server, which is boundary-consistent."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

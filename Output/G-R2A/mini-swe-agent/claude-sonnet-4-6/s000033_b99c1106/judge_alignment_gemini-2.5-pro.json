@@ -1,0 +1,95 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Postgres"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Environment (format 3.7::Metadata Store Layer::PostgreSQL 9.6\n(Airflow metadata)\nPort: 5432"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the PostgreSQL database for Airflow metadata, correctly placed within the Docker Compose environment boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Airflow\n(Spark Driver"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Environment (format 3.7::Orchestration Layer::Airflow Scheduler\n(docker-airflow-spark:latest",
+        "Docker Compose Environment (format 3.7::Orchestration Layer::Airflow Webserver\n(docker-airflow-spark:latest)\nPort: 8282\nLocalExecutor mode",
+        "Docker Compose Environment (format 3.7::Orchestration Layer::SparkSubmitOperator\n(spark_default connection"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The monolithic Airflow component in the ground truth is accurately split into its sub-components (Scheduler, Webserver, and Operator) in the prediction, with semantically equivalent boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\n(Spark"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Environment (format 3.7::Interactive Development Layer::Jupyter / PySpark\n(jupyter/pyspark-notebook)\nPort: 8888\nSpark UI: 4040-4080"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Jupyter/PySpark interactive environment, placed in consistent architectural boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Cluster Manager\n(Spark Standalone"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Environment (format 3.7::Spark Cluster Layer::Spark Master\n(bitnami/spark:latest)\nSPARK_MODE=master\nWeb UI: 8181\nCluster: 7077"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the Spark Standalone Cluster Manager/Master node. Boundary attribution is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 1"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Environment (format 3.7::Spark Cluster Layer::Spark Worker 1\n(bitnami/spark:latest)\nSPARK_MODE=worker"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact functional match for Spark Worker 1 within the Docker Compose environment."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 2"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Environment (format 3.7::Spark Cluster Layer::Spark Worker 2\n(bitnami/spark:latest)\nSPARK_MODE=worker"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact functional match for Spark Worker 2 within the Docker Compose environment."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 3"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Environment (format 3.7::Spark Cluster Layer::Spark Worker 3\n(bitnami/spark:latest)\nSPARK_MODE=worker"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact functional match for Spark Worker 3 within the Docker Compose environment."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Docker Compose Environment::Spark Workers::Worker N",
+    "Global::Data Engineer"
+  ],
+  "unmatched_predicted_nodes": [
+    "Docker Compose Environment (format 3.7::Interactive Development Layer",
+    "Docker Compose Environment (format 3.7::Metadata Store Layer",
+    "Docker Compose Environment (format 3.7::Orchestration Layer",
+    "Docker Compose Environment (format 3.7::Shared Volumes Layer",
+    "Docker Compose Environment (format 3.7::Spark Cluster Layer",
+    "Global::Docker Compose Environment (format 3.7"
+  ]
+}

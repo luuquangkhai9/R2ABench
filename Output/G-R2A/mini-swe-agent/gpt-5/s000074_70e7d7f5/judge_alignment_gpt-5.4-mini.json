@@ -1,0 +1,239 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Tengine Lite::Serializer::tmfile Serializer"
+      ],
+      "predicted_nodes": [
+        "Core Engine Layer::Serializer\n(tmfile decoder"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the tmfile decoding serializer component. The predicted node uses a broader 'Core Engine Layer' boundary, but this is semantically consistent with the GT serializer module."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Engine::Device Allocator"
+      ],
+      "predicted_nodes": [
+        "Core Engine Layer::Device Backend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node is not named identically, but it corresponds to the core device/backend responsibility in the engine area. The boundary is still within the core engine architecture and is acceptable as a semantic match."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Engine::Exec Scheduler"
+      ],
+      "predicted_nodes": [
+        "Core Engine Layer::Scheduler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct semantic match for the scheduler responsibility. The boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Engine::CPU Backend",
+        "Tengine Lite::Engine::GPU Backend",
+        "Tengine Lite::Engine::NPU Backend"
+      ],
+      "predicted_nodes": [
+        "Core Engine Layer::Device Backend"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates backend implementations by device type, while the prediction aggregates them into a single device backend node. This is a valid merge and the boundary remains correct."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Engine::Graph Partition"
+      ],
+      "predicted_nodes": [
+        "Core Engine Layer::Scheduler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Graph partitioning is part of execution/scheduling responsibilities in the GT architecture. The predicted scheduler boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Engine::Low Bit Quantize"
+      ],
+      "predicted_nodes": [
+        "Core Engine Layer::Operator Module"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node does not correspond to low-bit quantization. This is a functional mismatch, not just a boundary difference."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Serializer::Caffe Serializer",
+        "Tengine Lite::Serializer::Darknet Serializer",
+        "Tengine Lite::Serializer::MLIR Serializer",
+        "Tengine Lite::Serializer::MXNet Serializer",
+        "Tengine Lite::Serializer::MegEngine Serializer",
+        "Tengine Lite::Serializer::ONNX Serializer",
+        "Tengine Lite::Serializer::OneFlow Serializer",
+        "Tengine Lite::Serializer::Others Serializer",
+        "Tengine Lite::Serializer::PaddlePaddle Serializer",
+        "Tengine Lite::Serializer::TF Lite Serializer",
+        "Tengine Lite::Serializer::TensorFlow Serializer",
+        "Tengine Lite::Serializer::ncnn Serializer"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Linux Model Converter (CLI"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT serializer nodes are model-format decoders, while the predicted node is a model conversion CLI tool. These are different responsibilities and should not be matched."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Convert Tool::Caffe",
+        "Tengine Lite::Convert Tool::Darknet",
+        "Tengine Lite::Convert Tool::MXNet",
+        "Tengine Lite::Convert Tool::MegEngine",
+        "Tengine Lite::Convert Tool::OneFlow",
+        "Tengine Lite::Convert Tool::Others",
+        "Tengine Lite::Convert Tool::PaddlePaddle",
+        "Tengine Lite::Convert Tool::PyTorch / ONNX",
+        "Tengine Lite::Convert Tool::TF Lite",
+        "Tengine Lite::Convert Tool::TensorFlow"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Linux Model Converter (CLI"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT contains multiple format-specific conversion tool nodes, and the prediction aggregates them into one Linux CLI converter. This is a valid merge, and the client/tool boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Convert Tool::Caffe",
+        "Tengine Lite::Convert Tool::Darknet",
+        "Tengine Lite::Convert Tool::MXNet",
+        "Tengine Lite::Convert Tool::MegEngine",
+        "Tengine Lite::Convert Tool::OneFlow",
+        "Tengine Lite::Convert Tool::Others",
+        "Tengine Lite::Convert Tool::PaddlePaddle",
+        "Tengine Lite::Convert Tool::PyTorch / ONNX",
+        "Tengine Lite::Convert Tool::TF Lite",
+        "Tengine Lite::Convert Tool::TensorFlow"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Online Model Converter (WASM"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is the browser-local WebAssembly-based conversion tool corresponding to the GT conversion tool family. Aggregation is acceptable and the boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Runtime Optimize::ARM / X86 / RISCV / MIPS",
+        "Tengine Lite::Runtime Optimize::Amlogic / RK / NXP / JLQ\\nNPU and NVDLA",
+        "Tengine Lite::Runtime Optimize::Assembly",
+        "Tengine Lite::Runtime Optimize::Auto Kernel Plugin",
+        "Tengine Lite::Runtime Optimize::CUDA / Vulkan / OpenCL",
+        "Tengine Lite::Runtime Optimize::Mix Bit Calculation",
+        "Tengine Lite::Runtime Optimize::NVIDIA / Mali / Adreno",
+        "Tengine Lite::Runtime Optimize::SGEMM",
+        "Tengine Lite::Runtime Optimize::SIMD",
+        "Tengine Lite::Runtime Optimize::TIM-VX / OpenDLA Plugin",
+        "Tengine Lite::Runtime Optimize::TensorRT / ACL Plugin",
+        "Tengine Lite::Runtime Optimize::Winograd"
+      ],
+      "predicted_nodes": [
+        "Core Engine Layer::Device Backend"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT runtime optimization nodes are performance-tuning implementation details, not a device backend abstraction. This is a severe functional mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Engine::Exec Scheduler",
+        "Tengine Lite::Engine::Graph Partition",
+        "Tengine Lite::Engine::Device Allocator"
+      ],
+      "predicted_nodes": [
+        "Core Engine Layer::Scheduler"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "These GT engine responsibilities are all reasonably grouped under scheduling/execution orchestration in the predicted architecture. The boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Serializer::tmfile Serializer"
+      ],
+      "predicted_nodes": [
+        "Core Engine Layer::Serializer\n(tmfile decoder"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Repeated match for clarity: the node corresponds to tmfile decoding serializer functionality and the boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Convert Tool::PyTorch / ONNX"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Linux Model Converter (CLI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The CLI converter is the likely implementation surface for the GT conversion tool entry. Boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Convert Tool::PyTorch / ONNX"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Online Model Converter (WASM"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The browser-local converter is another presentation of the conversion tooling. Boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Engine::CPU Backend"
+      ],
+      "predicted_nodes": [
+        "Core Engine Layer::Device Backend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "CPU backend is encompassed by the broader device backend abstraction. Boundary attribution is acceptable."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Tengine Lite::Runtime Optimize::ARM / X86 / RISCV / MIPS",
+    "Tengine Lite::Runtime Optimize::Amlogic / RK / NXP / JLQ\\nNPU and NVDLA",
+    "Tengine Lite::Runtime Optimize::Assembly",
+    "Tengine Lite::Runtime Optimize::Auto Kernel Plugin",
+    "Tengine Lite::Runtime Optimize::CUDA / Vulkan / OpenCL",
+    "Tengine Lite::Runtime Optimize::Mix Bit Calculation",
+    "Tengine Lite::Runtime Optimize::NVIDIA / Mali / Adreno",
+    "Tengine Lite::Runtime Optimize::SGEMM",
+    "Tengine Lite::Runtime Optimize::SIMD",
+    "Tengine Lite::Runtime Optimize::TIM-VX / OpenDLA Plugin",
+    "Tengine Lite::Runtime Optimize::TensorRT / ACL Plugin",
+    "Tengine Lite::Runtime Optimize::Winograd"
+  ],
+  "unmatched_predicted_nodes": [
+    "API Layer::C API",
+    "API Layer::C++ API Docs",
+    "API Layer::Python API Docs",
+    "Client Layer::Example Applications\\n(Classification, Detection, Segmentation,\\nPose Estimation, Landmark, OCR",
+    "Data Layer::Converted Model Artifacts",
+    "Data Layer::Local Image Files",
+    "Data Layer::Local Model Files\\n(tmfile",
+    "Execution & Build Environment::Linux Environment",
+    "Execution & Build Environment::Web Browser\\n(WASM Runtime",
+    "Core Engine Layer::Operator Module"
+  ]
+}

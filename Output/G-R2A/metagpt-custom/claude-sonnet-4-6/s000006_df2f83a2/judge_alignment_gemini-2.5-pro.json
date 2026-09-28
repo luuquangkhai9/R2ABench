@@ -1,0 +1,80 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Biomechanical Model::BaseBMModel",
+        "Biomechanical Model::DerivedClass",
+        "Biomechanical Model::MoblArmsIndex"
+      ],
+      "predicted_nodes": [
+        "Simulation Core Layer::BiomechanicalModel"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the abstract and concrete biomechanical model classes from the GT into a single, high-level component. The 'Simulation Core Layer' is a semantically appropriate boundary for this core simulation element, equivalent to the GT's 'Biomechanical Model' package."
+    },
+    {
+      "gt_nodes": [
+        "Interaction Task::BaseTask",
+        "Interaction Task::DerivedClass",
+        "Interaction Task::Pointing",
+        "Interaction Task::Tracking"
+      ],
+      "predicted_nodes": [
+        "Simulation Core Layer::InteractionTask"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the various specific and abstract interaction task classes from the GT into a single representative component. Placing this within the 'Simulation Core Layer' is functionally correct and semantically equivalent to the GT's 'Interaction Task' package."
+    },
+    {
+      "gt_nodes": [
+        "Perception::BaseModule",
+        "Perception::BasicWithEEPos",
+        "Perception::DerivedClass",
+        "Perception::FixedEye",
+        "Perception::Modalities::Modality",
+        "Perception::Modalities::Proprioception",
+        "Perception::Modalities::Vision",
+        "Perception::Perception"
+      ],
+      "predicted_nodes": [
+        "Perception Layer::PerceptionModule\\n(Abstract Base",
+        "Perception Layer::EgocentricVisionModule",
+        "Perception Layer::ProprioceptionModule"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the perception components, restructuring the GT's flat list into a more organized structure with a base module and specific modality implementations (vision, proprioception), as described in the PRD. The 'Perception Layer' boundary is semantically equivalent to the GT's 'Perception' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Simulator"
+      ],
+      "predicted_nodes": [
+        "Simulation Core Layer::GymSimulatorWrapper",
+        "File-System / Artifact Layer::Standalone Simulator\\nPackage"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly split the general 'Simulator' concept from the GT into its two distinct aspects described in the PRD: the runtime component that implements the Gym interface ('GymSimulatorWrapper') and the distributable file artifact ('Standalone Simulator Package'). The AI's boundary assignments ('Simulation Core Layer', 'File-System / Artifact Layer') are more specific and accurate than the GT's generic 'Global' placement."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Build Layer::MuJoCoXMLIntegrator",
+    "Build Layer::SimulatorBuilder",
+    "Evaluation Layer::ActionLogger",
+    "Evaluation Layer::CheckpointManager",
+    "Evaluation Layer::EvaluationRunner",
+    "File-System / Artifact Layer::Merged MuJoCo XML\\n(Integrated Asset",
+    "File-System / Artifact Layer::MuJoCo XML Assets",
+    "File-System / Artifact Layer::Run Folder\\n(checkpoints/ | training_outputs/",
+    "File-System / Artifact Layer::Standalone Simulator\\nPackage",
+    "File-System / Artifact Layer::YAML Config Files",
+    "File-System / Artifact Layer::evaluate/ Directory",
+    "Global::MuJoCo\\n(Physics Engine",
+    "Global::OpenAI Gym\\n(Interface Contract",
+    "Training Layer::RLTrainingRunner"
+  ]
+}

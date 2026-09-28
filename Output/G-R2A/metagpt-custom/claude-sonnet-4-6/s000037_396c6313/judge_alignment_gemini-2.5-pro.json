@@ -1,0 +1,109 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::containerd"
+      ],
+      "predicted_nodes": [
+        "Container Runtimes::Containerd"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Containerd backend/runtime. The boundary 'Infrastructure and Input Backends' is semantically consistent with 'Container Runtimes'."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::docker"
+      ],
+      "predicted_nodes": [
+        "Container Runtimes::Docker"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Docker backend/runtime. The boundary 'Infrastructure and Input Backends' is semantically consistent with 'Container Runtimes'."
+    },
+    {
+      "gt_nodes": [
+        "Global::runner"
+      ],
+      "predicted_nodes": [
+        "Execution / Infrastructure Layer::VeinmindRunner\ncontainerized runner\nparallel execution host"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the veinmind-runner component. The Global scope maps acceptably to the Execution/Infrastructure layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::plugin"
+      ],
+      "predicted_nodes": [
+        "Plugin / Tool Layer::IaCScanTool\npolicy loader + scanner",
+        "Plugin / Tool Layer::PythonPlugin\nscan.py"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's generalized 'plugin' node is split by the AI into specific plugins detailed in the PRD (IaC Tool and Python Plugin). Boundaries are semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "SDK::interact system",
+        "SDK::plugin system"
+      ],
+      "predicted_nodes": [
+        "External SDK::veinmind-sdk\nlibveinmind"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Multiple SDK subsystem nodes in the GT are aggregated into a single SDK node by the AI. The SDK boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::container"
+      ],
+      "predicted_nodes": [
+        "CLI / Entrypoint Layer::ScanContainerCommand\nscan-container"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both refer to the container scanning capability, but the AI mapped it as a CLI command in the entrypoint layer, whereas GT models it as a domain scan target, resulting in a boundary/layer discrepancy."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::iac"
+      ],
+      "predicted_nodes": [
+        "CLI / Entrypoint Layer::ScanIaCCommand\nscan-iac"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both refer to the IaC scanning capability, but the boundary context differs (Scan Targets vs CLI Layer)."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::image"
+      ],
+      "predicted_nodes": [
+        "CLI / Entrypoint Layer::ScanImageCommand\nscan-image"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both refer to the image scanning capability, but the boundary context differs (Scan Targets vs CLI Layer)."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Infrastructure and Input Backends::dockerfile",
+    "Infrastructure and Input Backends::kubernetes",
+    "Infrastructure and Input Backends::tarball",
+    "Scan Targets::cluster"
+  ],
+  "unmatched_predicted_nodes": [
+    "Authorization Routing Layer::DockerAuthRouter\nmethod + URI matching",
+    "Image Registries::Docker Registry",
+    "Image Registries::DockerHub",
+    "Image Registries::Harbor",
+    "Policy Libraries::PolicyLibrary\nexternal policy store",
+    "Reporting / Data Layer::IaCReportModel\nrule metadata\nfile-location details\nalert-detail composite",
+    "Reporting / Data Layer::MaliciousFileReportModel\nMaliciousFileInfo\nReportData / ReportImage\nReportLayer"
+  ]
+}

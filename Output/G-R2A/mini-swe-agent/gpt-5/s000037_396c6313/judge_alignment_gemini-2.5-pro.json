@@ -1,0 +1,101 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::containerd"
+      ],
+      "predicted_nodes": [
+        "Infrastructure / External Systems::Containerd"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Containerd component. The boundaries (Infrastructure and Input Backends vs Infrastructure / External Systems) are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::docker"
+      ],
+      "predicted_nodes": [
+        "Infrastructure / External Systems::Docker Engine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Docker component. The boundaries are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "SDK::interact system",
+        "SDK::plugin system"
+      ],
+      "predicted_nodes": [
+        "Infrastructure / External Systems::veinmind-sdk / libveinmind"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT breaks down the SDK into interact and plugin systems, while the predicted node aggregates them into the veinmind-sdk library. Placing the SDK as an external system/infrastructure is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::container"
+      ],
+      "predicted_nodes": [
+        "Domain / Services::Container Scanner"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "GT specifies the target (container), while predicted specifies the functional scanner for the target. They represent the same logical scanning capability mapping."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::iac"
+      ],
+      "predicted_nodes": [
+        "Domain / Services::IaC Scanner"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "GT specifies the target (IaC), while predicted specifies the IaC scanner. They map to the same functional area."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::image"
+      ],
+      "predicted_nodes": [
+        "Domain / Services::Image Scanner"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "GT specifies the target (image), while predicted specifies the Image scanner. They represent the same functional capability mapping."
+    },
+    {
+      "gt_nodes": [
+        "Global::runner"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Runner Controller",
+        "Infrastructure / External Systems::veinmind-runner Image"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The global runner node in GT is split into the runner controller and the runner image in the predicted architecture. Boundary attributions are semantically appropriate."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::plugin",
+    "Infrastructure and Input Backends::dockerfile",
+    "Infrastructure and Input Backends::kubernetes",
+    "Infrastructure and Input Backends::tarball",
+    "Scan Targets::cluster"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application Layer::Scan Orchestrator",
+    "Data Layer::Scan Report Data\n(Structured objects",
+    "Domain / Services::Authorization Router\n(Docker AuthZ Plugin",
+    "Domain / Services::Plugin Packaging Example\n(Python tool",
+    "Infrastructure / External Systems::Image Registries\n- DockerHub\n- Docker Registry\n- Harbor",
+    "Infrastructure / External Systems::Policy Libraries",
+    "Infrastructure / External Systems::Startup Script\nparallel-container",
+    "Presentation / CLI Layer::CLI Commands\n- scan-image\n- scan-container\n- scan-iac",
+    "Presentation / CLI Layer::Quick-Start Script\n./run.sh scan-host image"
+  ]
+}

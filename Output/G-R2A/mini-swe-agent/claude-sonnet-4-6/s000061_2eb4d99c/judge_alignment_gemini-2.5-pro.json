@@ -1,0 +1,123 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon API Gateway\nREST API"
+      ],
+      "predicted_nodes": [
+        "API Layer::Amazon API Gateway\n(Regional REST API, stage: prod"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the API Gateway REST API. The boundary attribution is semantically consistent between the system-level boundary and the API Layer."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS CloudFormation\nCustom resources"
+      ],
+      "predicted_nodes": [
+        "Deployment Layer::AWS CloudFormation\n(Stack Deployment",
+        "Application / Service Layer::Custom Resource Handler\nLambda"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node for CloudFormation Custom Resources is split by the AI into the CloudFormation deployment construct and its backing Lambda custom resource handler. The boundary layers are semantically appropriate."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS Lambda\nSimulator API"
+      ],
+      "predicted_nodes": [
+        "Application / Service Layer::Device Simulator\nLambda / Execution Engine",
+        "Application / Service Layer::Device Type Management\nLambda Service",
+        "Application / Service Layer::Route Loader\nLambda Service",
+        "Application / Service Layer::Simulation Management\nLambda Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single aggregated AWS Lambda API node in the GT is split by the AI into multiple specific Lambda services handling device simulation, route loading, and management. Boundary attribution to Application/Service Layer is correct."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS Step Functions\nSimulation workflow"
+      ],
+      "predicted_nodes": [
+        "Orchestration Layer::AWS Step Functions\n(Simulation Workflow"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Step Functions workflow orchestrating simulations. The Orchestration Layer boundary perfectly matches the component's role."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon DynamoDB\nSimulator state"
+      ],
+      "predicted_nodes": [
+        "Data & Storage Layer::Amazon DynamoDB\n(Simulations & Device Types"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the DynamoDB state store. The Data & Storage Layer boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS IoT Core"
+      ],
+      "predicted_nodes": [
+        "Messaging & IoT Layer::AWS IoT Core\n(IoT Topics"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the AWS IoT Core messaging component. The Messaging & IoT Layer boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon CloudFront",
+        "AWS IoT Device Simulator::Amazon S3\nWeb UI bucket"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Amazon CloudFront / S3 Hosting"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated the CloudFront distribution and the S3 Web UI bucket into a single S3/CloudFront hosting node. The Presentation Layer boundary is appropriate for frontend hosting."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Browser Web UI\nstatic app client"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web Management Console"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the client-side web application interface. Presentation Layer boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon Cognito"
+      ],
+      "predicted_nodes": [
+        "Identity & Security Layer::Amazon Cognito\n(Identity & Auth"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the Cognito authentication service. Identity & Security Layer is a correct boundary mapping."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "AWS IoT Device Simulator::Amazon S3\nRoute data bucket",
+    "AWS IoT Device Simulator::Users"
+  ],
+  "unmatched_predicted_nodes": [
+    "Messaging & IoT Layer::Amazon CloudWatch Logs\n(API Access Logs",
+    "Global::API Layer",
+    "Global::Application / Service Layer",
+    "Global::Data & Storage Layer",
+    "Global::Deployment Layer",
+    "Global::Identity & Security Layer",
+    "Global::Messaging & IoT Layer",
+    "Global::Orchestration Layer",
+    "Global::Presentation Layer"
+  ]
+}

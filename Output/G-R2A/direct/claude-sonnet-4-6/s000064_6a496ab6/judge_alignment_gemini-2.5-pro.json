@@ -1,0 +1,212 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Native App"
+      ],
+      "predicted_nodes": [
+        "Frontend Clients::Native Mobile\\nApplications"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are semantically equivalent. The AI's boundary 'Frontend Clients' is a more specific and appropriate grouping for client applications than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Web Admin App"
+      ],
+      "predicted_nodes": [
+        "Frontend Clients::Administrative\\nWeb Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are semantically equivalent. The AI's boundary 'Frontend Clients' is a more specific and appropriate grouping for client applications than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Backend::BFF / API Gateway::Admin Console Gateway",
+        "Backend::BFF / API Gateway::Native App Gateway"
+      ],
+      "predicted_nodes": [
+        "GCP Cloud Infrastructure::Gateway / BFF Layer::API Gateway / BFF\\n(Node.js-style"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the Gateway/BFF layer but aggregated the two specific GT gateways into a single node, which is a reasonable abstraction. The 'GCP Cloud Infrastructure::Gateway / BFF Layer' boundary is semantically equivalent to 'Backend::BFF / API Gateway' given the GCP hosting context from the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Backend::L7 Load Balancer"
+      ],
+      "predicted_nodes": [
+        "GCP Cloud Infrastructure::Network / Access Layer::Cloud Load Balancer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are semantically equivalent. The AI correctly placed the load balancer within a 'Network / Access Layer' inside the overall 'GCP Cloud Infrastructure', which is a more detailed and accurate boundary attribution than the generic 'Backend' in the GT."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Auth API"
+      ],
+      "predicted_nodes": [
+        "GCP Cloud Infrastructure::Backend Microservices (Containerised on GKE::Authentication API\\n(FR-001"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes refer to the same authentication service. The AI's boundary is more descriptive ('GCP Cloud Infrastructure::Backend Microservices (Containerised on GKE)') but semantically consistent with the GT's 'Backend::Microservices'."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Book Service"
+      ],
+      "predicted_nodes": [
+        "GCP Cloud Infrastructure::Backend Microservices (Containerised on GKE::Book Management API\\n(FR-003, Golang"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "'Book Service' and 'Book Management API' are semantically equivalent. The AI's boundary is more descriptive but semantically consistent with the GT's 'Backend::Microservices'."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Store Service"
+      ],
+      "predicted_nodes": [
+        "GCP Cloud Infrastructure::Backend Microservices (Containerised on GKE::EC Site API\\n(FR-004, Golang"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "'Store Service' and 'EC Site API' are semantically equivalent as per PRD function FR-004. The AI's boundary is more descriptive but semantically consistent with the GT's 'Backend::Microservices'."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Support Service"
+      ],
+      "predicted_nodes": [
+        "GCP Cloud Infrastructure::Backend Microservices (Containerised on GKE::Support API\\n(FR-007, Golang"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "'Support Service' and 'Support API' are semantically equivalent. The AI's boundary is more descriptive but semantically consistent with the GT's 'Backend::Microservices'."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::User Service"
+      ],
+      "predicted_nodes": [
+        "GCP Cloud Infrastructure::Backend Microservices (Containerised on GKE::User Management API\\n(FR-002, Golang"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "'User Service' and 'User Management API' are semantically equivalent. The AI's boundary is more descriptive but semantically consistent with the GT's 'Backend::Microservices'."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Microservices::Notification Service"
+      ],
+      "predicted_nodes": [
+        "GCP Cloud Infrastructure::Backend Microservices (Containerised on GKE::Notification\\nService"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are an exact match in name and function. The AI's boundary is more descriptive but semantically consistent with the GT's 'Backend::Microservices'."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Database::RDB\\n(MySQL"
+      ],
+      "predicted_nodes": [
+        "GCP Cloud Infrastructure::Data Stores::MySQL\\n(Book Data)\\n[DR-003",
+        "GCP Cloud Infrastructure::Data Stores::MySQL\\n(EC Site Data)\\n[DR-004",
+        "GCP Cloud Infrastructure::Data Stores::MySQL\\n(User Data)\\n[DR-002"
+      ],
+      "match_type": "1:3",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified MySQL as the RDB and split the single GT node into three more specific nodes based on the data domains described in the PRD (DR-002, DR-003, DR-004). The boundary 'GCP Cloud Infrastructure::Data Stores' is semantically equivalent to 'Backend::Database'."
+    },
+    {
+      "gt_nodes": [
+        "Backend::Database::NoSQL\\n(Firestore"
+      ],
+      "predicted_nodes": [
+        "GCP Cloud Infrastructure::Data Stores::NoSQL Storage\\n(Message Data)\\n[DR-005"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes refer to the NoSQL database. The AI's prediction is more aligned with the PRD (DR-005) by linking it to 'Message Data'. The boundary 'GCP Cloud Infrastructure::Data Stores' is semantically equivalent to 'Backend::Database'."
+    },
+    {
+      "gt_nodes": [
+        "Backend::File Storage::NAS\\n(Cloud Storage"
+      ],
+      "predicted_nodes": [
+        "GCP Cloud Infrastructure::Data Stores::Object Storage\\n(Thumbnails)\\n[DR-006"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes refer to the object storage system. The AI correctly grouped it under a 'Data Stores' boundary, which is a reasonable architectural decision and semantically consistent with the GT's 'Backend::File Storage'."
+    },
+    {
+      "gt_nodes": [
+        "Backend::External APIs::Firebase\\nAuthentication"
+      ],
+      "predicted_nodes": [
+        "External Services::Firebase Authentication\\n[DR-001, FR-001"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are a direct match. The 'External Services' boundary created by the AI is semantically equivalent to the GT's 'Backend::External APIs'."
+    },
+    {
+      "gt_nodes": [
+        "Backend::External APIs::Google Books API"
+      ],
+      "predicted_nodes": [
+        "External Services::Book-Search API\\n[FR-005, C-007"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes match functionally. The AI's generic 'Book-Search API' name is more accurate according to the PRD (C-007), which states the provider should not be fixed. The 'External Services' boundary is semantically equivalent to 'Backend::External APIs'."
+    },
+    {
+      "gt_nodes": [
+        "Backend::External APIs::Stripe"
+      ],
+      "predicted_nodes": [
+        "External Services::Stripe\\n(Payment Processing)\\n[FR-006"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are a direct match for the payment processor. The 'External Services' boundary is semantically equivalent to 'Backend::External APIs'."
+    },
+    {
+      "gt_nodes": [
+        "Backend::External APIs::Push Notification\\n(FCM"
+      ],
+      "predicted_nodes": [
+        "External Services::Push Notification\\nProvider\\n[NFR-004"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes match functionally. The AI correctly uses a generic provider name, which is acceptable. The 'External Services' boundary is semantically equivalent to 'Backend::External APIs'."
+    },
+    {
+      "gt_nodes": [
+        "Backend::External APIs::Email Sending\\n(SendGrid"
+      ],
+      "predicted_nodes": [
+        "External Services::Email Notification\\nProvider\\n[NFR-004"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes match functionally. The AI correctly uses a generic provider name, which is acceptable. The 'External Services' boundary is semantically equivalent to 'Backend::External APIs'."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Backend::Microservices::Admin Service"
+  ],
+  "unmatched_predicted_nodes": [
+    "GCP Cloud Infrastructure::Backend Microservices (Containerised on GKE::Message Management\\nService",
+    "GCP Cloud Infrastructure::VM / Ops Layer (GCE::GKE Cluster\\n(Container Orchestration"
+  ]
+}

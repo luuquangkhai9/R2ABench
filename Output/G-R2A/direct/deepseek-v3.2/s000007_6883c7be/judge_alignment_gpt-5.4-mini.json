@@ -1,0 +1,148 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "CGI Portal::Http Test\nClient"
+      ],
+      "predicted_nodes": [
+        "HTTP Proxy System::Test Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both represent the bundled HTTP test client functionality, but the GT places it under CGI Portal while the prediction places it in the HTTP Proxy System boundary, which is a different architectural layer/context."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Proxy Core"
+      ],
+      "predicted_nodes": [
+        "HTTP Proxy System::HTTP Proxy",
+        "HTTP Proxy System::HTTP Proxy::Channel Manager",
+        "HTTP Proxy System::HTTP Proxy::Forwarding Handler",
+        "HTTP Proxy System::Request Buffer",
+        "HTTP Proxy System::HTTP Proxy::Debug Logger"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted nodes collectively represent the proxy core and its internal responsibilities such as forwarding, buffering, channel management, and debug logging. However, the GT proxy core is a single proxy-layer component and the prediction moves it into a different top-level system boundary, so the boundary attribution is not strictly consistent with the GT."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Download"
+      ],
+      "predicted_nodes": [
+        "HTTP Proxy System::Test Server::File Download Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The functionality matches the file-download behavior, but the GT places it as a proxy plugin while the prediction places it in the test server layer. That is a significant boundary/context shift."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Upload"
+      ],
+      "predicted_nodes": [
+        "HTTP Proxy System::Test Server::File Upload Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both refer to file-upload handling, but the GT locates it under the proxy plugin area whereas the prediction places it in the test server boundary. This is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Logging"
+      ],
+      "predicted_nodes": [
+        "HTTP Proxy System::HTTP Proxy::Debug Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both correspond to logging/debug diagnostics for the proxy, but the GT node is part of the proxy layer while the prediction nests it under the HTTP Proxy subsystem. The functional match is acceptable, but the layer attribution is not identical."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Agent"
+      ],
+      "predicted_nodes": [
+        "HTTP Proxy System::Test Client::Async HTTP Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The AI appears to have matched the external/client-side HTTP agent behavior, but the GT node is a proxy plugin/agent component. These are not the same architectural boundary and the semantic alignment is weak."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Check\nParameter"
+      ],
+      "predicted_nodes": [
+        "HTTP Proxy System::HTTP Proxy::Forwarding Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT plugin is about parameter checking, while the predicted node is a request forwarding handler. These are not functionally equivalent enough to count as a correct match."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Formatter"
+      ],
+      "predicted_nodes": [
+        "HTTP Proxy System::HTTP Proxy::Structured Response"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT formatter likely corresponds to shaping structured response payloads, and the prediction’s structured response component is semantically aligned. The boundary change is acceptable because both are internal application-level components."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer\\nKeepalived(VIP::Openresty",
+    "Business Servers::......",
+    "Business Servers::Business Server A",
+    "Business Servers::Business Server B",
+    "Business Servers::Business Server C",
+    "CGI Portal::Appkey\\nManager",
+    "CGI Portal::CGI Manager",
+    "CGI Portal::Case Manager",
+    "CGI Portal::Document\\nGenerate",
+    "CGI Portal::Log & Tree\\ninquire",
+    "CGI Portal::Metrics &\\nReport",
+    "CGI Portal::Service\\nManager",
+    "Clients::APP Client",
+    "Clients::Business Server",
+    "Clients::Developer",
+    "Clients::Web Client",
+    "Global::Log consumer",
+    "Proxy Layer::cgi_proxy 1::Appkey\\nValidate",
+    "Proxy Layer::cgi_proxy 1::Global Limit",
+    "Proxy Layer::cgi_proxy 1::Login &\\nPermission",
+    "Proxy Layer::cgi_proxy 1::Plugin::Attach Check",
+    "Proxy Layer::cgi_proxy 1::Plugin::Mock",
+    "Proxy Layer::cgi_proxy 2",
+    "Support Platform::Data Bank\\nHDFS/Hbase/Druid",
+    "Support Platform::Msg Center\\nKafka",
+    "Support Platform::Mysql",
+    "Support Platform::Permission\\nCenter",
+    "Support Platform::Redis Cache",
+    "Support Platform::User Center",
+    "Task Scheduler::CGI Case\\nExecutor",
+    "Task Scheduler::CGI Health\\nCheck",
+    "Task Scheduler::Daily Report",
+    "Task Scheduler::Log Analysis",
+    "Task Scheduler::Monitor/Alarm"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Actors::HTTP Client",
+    "External Actors::Local Filesystem",
+    "External Actors::Upstream Server",
+    "HTTP Proxy System::Async Request Queue",
+    "HTTP Proxy System::HTTP Proxy::Channel Manager",
+    "HTTP Proxy System::HTTP Proxy::Debug Logger",
+    "HTTP Proxy System::HTTP Proxy::Forwarding Handler",
+    "HTTP Proxy System::Request Buffer",
+    "HTTP Proxy System::Test Client::Async HTTP Client",
+    "HTTP Proxy System::Test Client::Executor Service",
+    "HTTP Proxy System::Test Client::Success Counter",
+    "HTTP Proxy System::Test Client::Workload Generator",
+    "HTTP Proxy System::Test Server::Server Startup",
+    "HTTP Proxy System::Test Server::Structured Response"
+  ]
+}

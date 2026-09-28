@@ -1,0 +1,390 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Backend Layer::Flask: Backend Framework",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Back-End Module",
+        "Back-End Module::Model Service\\n(Search / View / Upload /\\nModify / Delete",
+        "Back-End Module::Account Service\\n(Registration / Login 2FA+OAuth2.0 /\\nLogout / Password / Permission"
+      ],
+      "reasoning": "The predicted architecture contains a back-end module and back-end services that collectively cover the Flask backend framework responsibility, even though Flask itself is not named."
+    },
+    {
+      "gt_node": "Backend Layer::Netron: Model Conversion & Parsing",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Algorithm Support Module::Model Parsing Engine\\n(ONNX / PyTorch Operator Analysis",
+        "Global::Algorithm Support Module"
+      ],
+      "reasoning": "Model conversion/parsing responsibility is covered by the predicted model parsing engine in the algorithm support module."
+    },
+    {
+      "gt_node": "Backend Layer::SQLAlchemy: ORM Framework",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node explicitly covers ORM framework functionality such as SQLAlchemy."
+    },
+    {
+      "gt_node": "Data Presentation Layer::Netron: Graph Representation Language",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Front-End Module::Topology Graph Renderer\\n(Evolution Graph Visualization",
+        "Client Browser\\n(Firefox / Chrome / 360 Browser::Model Search & Viewing UI\\n(Search / Basic Info /\\nEvolution Graph / Evolution Details"
+      ],
+      "reasoning": "The predicted UI graph renderer covers graph presentation/visualization responsibilities corresponding to Netron graph representation."
+    },
+    {
+      "gt_node": "Data Presentation Layer::RESTful API Design",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "The predicted nodes do not explicitly represent RESTful API design as a data presentation/interface layer concept."
+    },
+    {
+      "gt_node": "Frontend Layer::Netron: Node Drawing Features",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Front-End Module::Topology Graph Renderer\\n(Evolution Graph Visualization",
+        "Client Browser\\n(Firefox / Chrome / 360 Browser::Evolution Relationship UI\\n(Add / Delete / Modify\\nEvolution & Layer-Reuse"
+      ],
+      "reasoning": "Graph rendering and evolution relationship visualization cover the node drawing/display responsibility."
+    },
+    {
+      "gt_node": "Frontend Layer::React Framework",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Front-End Module::Responsive Web Application\\n(HTML / CSS / JavaScript",
+        "Global::Front-End Module"
+      ],
+      "reasoning": "The predicted responsive front-end implementation semantically covers a React-based frontend framework, though React is not named explicitly."
+    },
+    {
+      "gt_node": "Frontend Layer::React-Router: Page Navigation",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Front-End Module::Responsive Web Application\\n(HTML / CSS / JavaScript",
+        "Global::Client Browser\\n(Firefox / Chrome / 360 Browser"
+      ],
+      "reasoning": "Page navigation responsibility is covered by the front-end web application and client browser UI structure, although React Router is not explicitly named."
+    },
+    {
+      "gt_node": "Storage / Database Layer::MySQL: Relational Database",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::MySQL\\n(Users / Roles / Permissions /\\nModel Attributes / Datasets /\\nTrained Models / Performance Metrics"
+      ],
+      "reasoning": "The predicted MySQL node directly covers the relational database responsibility."
+    },
+    {
+      "gt_node": "Storage / Database Layer::Neo4j: Graph Database",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Neo4j\\n(Model Evolution Relationships\\nTopology Graphs"
+      ],
+      "reasoning": "The predicted Neo4j node directly covers the graph database responsibility."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Algorithm Support Module::Evolution Analysis Engine\\n(Operator Diff / Layer Reuse Detection",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Layer::Netron: Model Conversion & Parsing",
+        "Frontend Layer::Netron: Node Drawing Features",
+        "Data Presentation Layer::Netron: Graph Representation Language"
+      ],
+      "reasoning": "Grounded in GT concepts for model evolution detail analysis and layer-reuse/change detection, though more specific than the manual node set."
+    },
+    {
+      "predicted_node": "Algorithm Support Module::Model Parsing Engine\\n(ONNX / PyTorch Operator Analysis",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Layer::Netron: Model Conversion & Parsing"
+      ],
+      "reasoning": "Directly corresponds to model conversion and parsing responsibilities."
+    },
+    {
+      "predicted_node": "Algorithm Support Module::Performance Metrics Engine\\n(Execution Time / Prediction Accuracy",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The PRD mentions performance metrics as data requirements, but the GT node list does not contain a corresponding architecture node; this is an extrapolated component."
+    },
+    {
+      "predicted_node": "Algorithm Support Module::Python Library Interface",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The PRD mentions Python library interfaces, but there is no matching GT architecture node for this interface boundary."
+    },
+    {
+      "predicted_node": "Back-End Module::Account Service\\n(Registration / Login 2FA+OAuth2.0 /\\nLogout / Password / Permission",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Layer::Flask: Backend Framework"
+      ],
+      "reasoning": "The account management responsibility is grounded in the back-end layer, though the GT is broader and more framework-oriented."
+    },
+    {
+      "predicted_node": "Back-End Module::Concurrency & Load Handler\\n(50 concurrent users /\\n50 queries/s / 10 modifications/s",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "Concurrency/load handling is a non-functional concern present in the PRD, but it is not represented as a GT node in the manual architecture list."
+    },
+    {
+      "predicted_node": "Back-End Module::Dataset & Trained Model Service\\n(Dataset Records / Trained Model Info",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT node list does not include a back-end service for datasets/trained models; only storage nodes are present."
+    },
+    {
+      "predicted_node": "Back-End Module::Evolution Relationship Service\\n(Add / Delete / Modify\\nEvolution & Layer-Reuse",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The functional responsibility exists in the PRD, but no corresponding GT node is present in the manual architecture list."
+    },
+    {
+      "predicted_node": "Back-End Module::Model Service\\n(Search / View / Upload /\\nModify / Delete",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Layer::Flask: Backend Framework"
+      ],
+      "reasoning": "This is grounded in the back-end application layer responsible for core model operations, although the GT does not decompose it into a model service."
+    },
+    {
+      "predicted_node": "Back-End Module::Security & Auth Layer\\n(TLS / AES/DES Encryption /\\nAccess Control / Privilege Control",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "Security requirements appear in the PRD but are not represented as a dedicated GT architecture node."
+    },
+    {
+      "predicted_node": "Back-End Module::User Management Service\\n(Manage / Delete / Permission Review",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT list does not contain a dedicated user-management backend node."
+    },
+    {
+      "predicted_node": "Client Browser\\n(Firefox / Chrome / 360 Browser::Account Management UI\\n(Register / Login / Logout /\\nPassword / Permission Request",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT architecture has frontend layers but no explicit browser-bound account management UI node."
+    },
+    {
+      "predicted_node": "Client Browser\\n(Firefox / Chrome / 360 Browser::Evolution Relationship UI\\n(Add / Delete / Modify\\nEvolution & Layer-Reuse",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend Layer::Netron: Node Drawing Features",
+        "Data Presentation Layer::Netron: Graph Representation Language"
+      ],
+      "reasoning": "The evolution relationship visualization/editing UI corresponds to the graph drawing/presentation responsibilities in GT."
+    },
+    {
+      "predicted_node": "Client Browser\\n(Firefox / Chrome / 360 Browser::Model Contribution UI\\n(ONNX Upload / PyTorch Upload /\\nOnline Edit / Profile Modify / Delete",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT frontend nodes do not include a dedicated contribution UI boundary."
+    },
+    {
+      "predicted_node": "Client Browser\\n(Firefox / Chrome / 360 Browser::Model Search & Viewing UI\\n(Search / Basic Info /\\nEvolution Graph / Evolution Details",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend Layer::Netron: Node Drawing Features",
+        "Data Presentation Layer::Netron: Graph Representation Language",
+        "Frontend Layer::React Framework"
+      ],
+      "reasoning": "This UI aligns with the GT's model viewing and graph presentation responsibilities."
+    },
+    {
+      "predicted_node": "Client Browser\\n(Firefox / Chrome / 360 Browser::User Management UI\\n(Manage Users / Delete Users /\\nReview Permission Changes",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT browser UI node specifically covers user management."
+    },
+    {
+      "predicted_node": "Front-End Module::Online Code Editor\\n(PyTorch Source Editing",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT list does not include an online code editor component."
+    },
+    {
+      "predicted_node": "Front-End Module::Responsive Web Application\\n(HTML / CSS / JavaScript",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend Layer::React Framework",
+        "Frontend Layer::React-Router: Page Navigation"
+      ],
+      "reasoning": "This is a reasonable frontend implementation grounding for the GT React-based web application and routing layer."
+    },
+    {
+      "predicted_node": "Front-End Module::Topology Graph Renderer\\n(Evolution Graph Visualization",
+      "grounded": true,
+      "reference_nodes": [
+        "Data Presentation Layer::Netron: Graph Representation Language",
+        "Frontend Layer::Netron: Node Drawing Features"
+      ],
+      "reasoning": "Directly grounded in the GT graph presentation and node drawing responsibilities."
+    },
+    {
+      "predicted_node": "Global::Algorithm Support Module",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Layer::Netron: Model Conversion & Parsing"
+      ],
+      "reasoning": "The GT includes algorithmic/model parsing responsibility, and this global module is a semantic umbrella for that area."
+    },
+    {
+      "predicted_node": "Global::Back-End Module",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Layer::Flask: Backend Framework",
+        "Backend Layer::SQLAlchemy: ORM Framework"
+      ],
+      "reasoning": "This umbrella back-end module is grounded in the GT backend layer nodes."
+    },
+    {
+      "predicted_node": "Global::Client Browser\\n(Firefox / Chrome / 360 Browser",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT architecture specifies frontend layers, not a browser as an architecture node/boundary."
+    },
+    {
+      "predicted_node": "Global::Front-End Module",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend Layer::React Framework",
+        "Frontend Layer::React-Router: Page Navigation",
+        "Frontend Layer::Netron: Node Drawing Features"
+      ],
+      "reasoning": "This is grounded in the GT frontend layer concepts."
+    },
+    {
+      "predicted_node": "Global::MySQL\\n(Users / Roles / Permissions /\\nModel Attributes / Datasets /\\nTrained Models / Performance Metrics",
+      "grounded": true,
+      "reference_nodes": [
+        "Storage / Database Layer::MySQL: Relational Database"
+      ],
+      "reasoning": "Directly matches the GT MySQL storage/database node."
+    },
+    {
+      "predicted_node": "Global::Neo4j\\n(Model Evolution Relationships\\nTopology Graphs",
+      "grounded": true,
+      "reference_nodes": [
+        "Storage / Database Layer::Neo4j: Graph Database"
+      ],
+      "reasoning": "Directly matches the GT Neo4j storage/database node."
+    },
+    {
+      "predicted_node": "Global::Standby / Failover Server\\n(Failover within 0.5 hours",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "Failover infrastructure is described in the PRD non-functional requirements but is absent from the GT node list."
+    },
+    {
+      "predicted_node": "Standby / Failover Server\\n(Failover within 0.5 hours::Backup Back-End",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is a speculative deployment subcomponent not present in the GT architecture."
+    },
+    {
+      "predicted_node": "Standby / Failover Server\\n(Failover within 0.5 hours::Backup Databases",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is a speculative deployment subcomponent not present in the GT architecture."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Backend Layer::Flask: Backend Framework",
+        "Backend Layer::SQLAlchemy: ORM Framework"
+      ],
+      "predicted_nodes": [
+        "Global::Back-End Module",
+        "Back-End Module::Model Service\\n(Search / View / Upload /\\nModify / Delete",
+        "Back-End Module::Account Service\\n(Registration / Login 2FA+OAuth2.0 /\\nLogout / Password / Permission"
+      ],
+      "match_type": "2:3",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted backend module and services collectively cover the GT backend responsibilities; boundary is semantically consistent at the backend layer."
+    },
+    {
+      "gt_nodes": [
+        "Backend Layer::Netron: Model Conversion & Parsing"
+      ],
+      "predicted_nodes": [
+        "Algorithm Support Module::Model Parsing Engine\\n(ONNX / PyTorch Operator Analysis",
+        "Algorithm Support Module::Evolution Analysis Engine\\n(Operator Diff / Layer Reuse Detection"
+      ],
+      "match_type": "1:2",
+      "is_boundary_correct": true,
+      "reasoning": "The GT parsing/conversion responsibility is split into parsing and evolution analysis in the predicted design, with a semantically acceptable boundary placement in algorithm support."
+    },
+    {
+      "gt_nodes": [
+        "Data Presentation Layer::Netron: Graph Representation Language",
+        "Frontend Layer::Netron: Node Drawing Features"
+      ],
+      "predicted_nodes": [
+        "Front-End Module::Topology Graph Renderer\\n(Evolution Graph Visualization",
+        "Client Browser\\n(Firefox / Chrome / 360 Browser::Evolution Relationship UI\\n(Add / Delete / Modify\\nEvolution & Layer-Reuse",
+        "Client Browser\\n(Firefox / Chrome / 360 Browser::Model Search & Viewing UI\\n(Search / Basic Info /\\nEvolution Graph / Evolution Details"
+      ],
+      "match_type": "2:3",
+      "is_boundary_correct": true,
+      "reasoning": "Graph representation and node drawing are implemented through frontend rendering/UI components, which is semantically consistent with the GT presentation/front-end boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::React Framework",
+        "Frontend Layer::React-Router: Page Navigation"
+      ],
+      "predicted_nodes": [
+        "Front-End Module::Responsive Web Application\\n(HTML / CSS / JavaScript"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted responsive web application aggregates the frontend framework and routing concerns without crossing into an incorrect architectural boundary."
+    },
+    {
+      "gt_nodes": [
+        "Storage / Database Layer::MySQL: Relational Database"
+      ],
+      "predicted_nodes": [
+        "Global::MySQL\\n(Users / Roles / Permissions /\\nModel Attributes / Datasets /\\nTrained Models / Performance Metrics"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The storage boundary is preserved and semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Storage / Database Layer::Neo4j: Graph Database"
+      ],
+      "predicted_nodes": [
+        "Global::Neo4j\\n(Model Evolution Relationships\\nTopology Graphs"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The storage boundary is preserved and semantically equivalent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Backend Layer::SQLAlchemy: ORM Framework",
+    "Data Presentation Layer::RESTful API Design"
+  ],
+  "unmatched_predicted_nodes": [
+    "Algorithm Support Module::Performance Metrics Engine\\n(Execution Time / Prediction Accuracy",
+    "Algorithm Support Module::Python Library Interface",
+    "Back-End Module::Concurrency & Load Handler\\n(50 concurrent users /\\n50 queries/s / 10 modifications/s",
+    "Back-End Module::Dataset & Trained Model Service\\n(Dataset Records / Trained Model Info",
+    "Back-End Module::Evolution Relationship Service\\n(Add / Delete / Modify\\nEvolution & Layer-Reuse",
+    "Back-End Module::Security & Auth Layer\\n(TLS / AES/DES Encryption /\\nAccess Control / Privilege Control",
+    "Back-End Module::User Management Service\\n(Manage / Delete / Permission Review",
+    "Client Browser\\n(Firefox / Chrome / 360 Browser::Account Management UI\\n(Register / Login / Logout /\\nPassword / Permission Request",
+    "Client Browser\\n(Firefox / Chrome / 360 Browser::Model Contribution UI\\n(ONNX Upload / PyTorch Upload /\\nOnline Edit / Profile Modify / Delete",
+    "Client Browser\\n(Firefox / Chrome / 360 Browser::User Management UI\\n(Manage Users / Delete Users /\\nReview Permission Changes",
+    "Front-End Module::Online Code Editor\\n(PyTorch Source Editing",
+    "Global::Client Browser\\n(Firefox / Chrome / 360 Browser",
+    "Global::Standby / Failover Server\\n(Failover within 0.5 hours",
+    "Standby / Failover Server\\n(Failover within 0.5 hours::Backup Back-End",
+    "Standby / Failover Server\\n(Failover within 0.5 hours::Backup Databases"
+  ]
+}

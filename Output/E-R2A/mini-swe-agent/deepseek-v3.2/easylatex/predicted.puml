@@ -1,0 +1,123 @@
+@startuml  
+title EasyLaTeX System Architecture  
+  
+skinparam component {  
+  BackgroundColor<<Client>> #E6F3FF  
+  BackgroundColor<<Application>> #F0F8FF  
+  BackgroundColor<<Data>> #F5F5F5  
+  BackgroundColor<<External>> #FFF0F5  
+  BorderColor #333333  
+  ArrowColor #333333  
+}  
+  
+rectangle "Client Layer" <<Client>> {  
+  component "Web Browser" as Browser [  
+    Modern browser  
+    WebSocket support  
+  ]  
+}  
+  
+rectangle "Application Layer" <<Application>> {  
+  component "API Gateway" as Gateway [  
+    HTTP/REST API  
+    Authentication  
+  ]  
+  
+  component "User Service" as UserService [  
+    User management  
+    Registration/login  
+  ]  
+  
+  component "File Service" as FileService [  
+    File processing  
+    Upload handling  
+  ]  
+  
+  component "AI Recognition Service" as AIService [  
+    OCR & deep learning  
+    Formula/table detection  
+  ]  
+  
+  component "LaTeX Service" as LaTeXService [  
+    LaTeX generation  
+    Code conversion  
+  ]  
+  
+  component "Rendering Service" as RenderService [  
+    Preview rendering  
+    Export generation  
+  ]  
+  
+  component "Collaboration Service" as CollabService [  
+    Project management  
+    Team collaboration  
+  ]  
+  
+  component "Version Service" as VersionService [  
+    Version control  
+    History tracking  
+  ]  
+}  
+  
+rectangle "Data Layer" <<Data>> {  
+  database "Database" as DB [  
+    MySQL/PostgreSQL  
+    User/project data  
+  ]  
+  
+  component "File Storage" as Storage [  
+    File storage  
+    Uploaded files  
+  ]  
+}  
+  
+rectangle "External Systems" <<External>> {  
+  component "LaTeX Engine" as LaTeXEngine [  
+    TeX Live/MiKTeX  
+    PDF compilation  
+  ]  
+  
+  component "AI Models" as AIModels [  
+    Pre-trained models  
+    Recognition models  
+  ]  
+}  
+  
+Browser --> Gateway : HTTP/REST API  
+Browser ..> Gateway : WebSocket  
+  
+Gateway --> UserService  
+Gateway --> FileService  
+Gateway --> CollabService  
+Gateway --> VersionService  
+  
+FileService --> AIService  
+AIService --> LaTeXService  
+LaTeXService --> RenderService  
+  
+UserService --> DB  
+CollabService --> DB  
+VersionService --> DB  
+FileService --> Storage  
+RenderService --> Storage  
+  
+AIService --> AIModels  
+RenderService --> LaTeXEngine  
+  
+CollabService --> VersionService  
+UserService --> CollabService  
+  
+RenderService --> Browser : Exports  
+  
+note right of Browser  
+  Inputs:  
+  - Handwritten formulas  
+  - Images (JPG, PNG)  
+  - PDF, CSV, Excel  
+  Outputs:  
+  - LaTeX code  
+  - PDF/PNG/JPEG  
+  - Real-time preview  
+end note  
+  
+@enduml

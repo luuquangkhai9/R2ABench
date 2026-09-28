@@ -1,0 +1,74 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::<b><u>DATABASE</u></b>\\n\\n* MariaDB\\n  * Users\\n  * Likes\\n  * Photos\\n  * Comments"
+      ],
+      "predicted_nodes": [
+        "Persistence Layer::MariaDB\\n(users, likes, photos, comments"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the relational persistence/database layer containing MariaDB and the same application data entities."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>WEB CLIENT</u></b>\\n\\n* A-Frame\\n* React\\n* React-Router"
+      ],
+      "predicted_nodes": [
+        "Browser Client::React App\\n(React + React-Router",
+        "Browser Client::Scene Renderer\\n(A-Frame + aframe-react",
+        "Browser Client::Scene Components\\n(Lobby, SF, Louvre, Berlin,\\nMilan, Rome, Hack,\\nCamera, Sky, Plane, TextPlane"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT web client is split into the React/navigation part and the A-Frame scene rendering part, which is a semantically valid decomposition within the browser client boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::<b><u>WEB SERVER</u></b>\\n\\n* Node\\n* Express\\n* DigitalOcean (Deployment"
+      ],
+      "predicted_nodes": [
+        "Web Server::Node.js / Express Server",
+        "Web Server::Auth Routes\\n(Register / Login",
+        "Web Server::Content Routes",
+        "Web Server::User Controller"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT server node is decomposed into server runtime, routes, and controller layers, which aligns with the same backend/server boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::AWS S3"
+      ],
+      "predicted_nodes": [
+        "External Services::Redis Cache"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "This is not a semantic match: AWS S3 is image storage, while Redis Cache is a cache component. They are different external services and should not be matched."
+    },
+    {
+      "gt_nodes": [
+        "Global::REDIS CACHE"
+      ],
+      "predicted_nodes": [
+        "External Services::Redis Cache"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These are semantically equivalent cache components, and the external services boundary is appropriate."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::AWS S3"
+  ],
+  "unmatched_predicted_nodes": [
+    "Browser Client::Auth Views\\n(Sign-up / Sign-in",
+    "Browser Client::Content Retrieval\\n(jQuery / fetch",
+    "Browser Client::Shared Credential Handlers",
+    "Persistence Layer::User Model",
+    "Persistence Layer::bcrypt-nodejs\\n(Password Verification"
+  ]
+}

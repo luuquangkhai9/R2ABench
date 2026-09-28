@@ -1,0 +1,126 @@
+@startuml
+!define RECTANGLE class
+
+title Prediction Cards System Architecture
+
+' Define styles
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam defaultTextAlignment center
+
+' Define components
+package "Frontend Layer" {
+  RECTANGLE FrontendApplication [
+    Frontend Application
+    --
+    - Prediction creation
+    - Prediction viewing
+    - Fund/rent operations
+    - Withdrawal and reward claiming
+  ]
+  
+  RECTANGLE WalletIntegration [
+    Aeternity Wallet
+    --
+    - Wallet connection
+    - Blockchain interactions
+  ]
+}
+
+package "Blockchain Layer" {
+  RECTANGLE PredictionCardsContract [
+    PredictionCards Smart Contract
+    --
+    - Prediction state management
+    - Outcome NFT state
+    - Reward claiming logic
+  ]
+  
+  RECTANGLE AENS [
+    AENS Name Service
+    --
+    - Contract resolution
+  ]
+}
+
+package "Service Layer" {
+  RECTANGLE OracleService [
+    Oracle Service
+    --
+    - Oracle registration
+    - Query processing
+    - Price comparison
+    - Response submission
+  ]
+  
+  RECTANGLE PredictionProcessingService [
+    Prediction Processing Service
+    --
+    - Closed prediction detection
+    - Oracle query initiation
+    - Result processing
+  ]
+}
+
+package "External Systems" {
+  RECTANGLE ExternalPriceProvider [
+    External Price Provider
+    --
+    - Price data
+  ]
+  
+  RECTANGLE MediaStorage [
+    Prediction Media Storage
+    --
+    - Outcome NFT media
+    - Images/animations
+  ]
+}
+
+package "Testing Environment" {
+  RECTANGLE LocalTestStack [
+    Local Integration Test Stack
+    --
+    - Aeternity node
+    - Compiler service
+    - CORS proxy
+  ]
+}
+
+' Define relationships
+FrontendApplication --> WalletIntegration : uses
+WalletIntegration --> PredictionCardsContract : interacts
+PredictionCardsContract --> AENS : resolves through
+OracleService --> PredictionCardsContract : reads queries
+OracleService --> ExternalPriceProvider : gets price data
+PredictionProcessingService --> PredictionCardsContract : processes outcomes
+PredictionProcessingService --> OracleService : initiates queries
+FrontendApplication --> MediaStorage : loads media
+LocalTestStack ..> PredictionCardsContract : tests
+LocalTestStack ..> OracleService : tests
+LocalTestStack ..> PredictionProcessingService : tests
+
+' Add notes for key data flows
+note right of FrontendApplication
+  1. Wallet connection
+  2. Prediction creation
+  3. View predictions
+  4. Fund/rent operations
+  5. Withdrawal/claim rewards
+end note
+
+note right of PredictionProcessingService
+  1. Detect closed predictions
+  2. Initiate oracle queries
+  3. Process oracle responses
+  4. Complete on-chain result processing
+end note
+
+note right of OracleService
+  1. Check pending queries
+  2. Get price data
+  3. Compare prices
+  4. Submit responses
+end note
+
+@enduml

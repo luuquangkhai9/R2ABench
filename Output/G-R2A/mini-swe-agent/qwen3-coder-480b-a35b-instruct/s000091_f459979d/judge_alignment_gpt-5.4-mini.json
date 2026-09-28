@@ -1,0 +1,92 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Blockchain Network\\nEthereum / Web3j"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Ethereum Blockchain"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Ethereum/Web3j blockchain connectivity layer. The predicted node is semantically equivalent and the data/backing infrastructure boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::BootstrapStore\\nSmart Contract"
+      ],
+      "predicted_nodes": [
+        "Backend Layer::Blockchain Integration Service",
+        "Global::blockchainService"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT smart contract node is functionally covered by the predicted blockchain service, but the AI places the contract logic inside a service layer and also introduces an extra global service node. This is a boundary abstraction mismatch rather than a clean equivalent placement."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Secure API\\nAuthenticated HTTP endpoints"
+      ],
+      "predicted_nodes": [
+        "Backend Layer::Spring HTTP Controllers",
+        "Global::controllers"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the authenticated HTTP API/controller boundary for protected backend endpoints. The decomposition into a Spring controller layer and a global controller node is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Server\\nLeshan server component"
+      ],
+      "predicted_nodes": [
+        "Backend Layer::LwM2M Node Parsing Service",
+        "Global::lwm2mService"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is the Leshan/LwM2M server-side component, while the predicted node only captures JSON parsing service behavior and places it in a generic backend service boundary. This is an incomplete and somewhat misplaced representation of the actual server component."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::External Applications\\nusing LwM2M"
+      ],
+      "predicted_nodes": [
+        "External Systems::LwM2M Service Components"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote external LwM2M-consuming service actors/components. The boundary attribution to external systems is correct."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Management Web UI"
+      ],
+      "predicted_nodes": [
+        "External Systems::Authenticated API Clients",
+        "Global::apiClients"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is specifically a management web UI, whereas the predicted node generalizes it to authenticated API clients. This loses the UI-specific nature of the component and places it in a different usage boundary."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Client\\nDevice 1",
+        "LwM2M Blockchain Platform::LwM2M Client\\nDevice 2"
+      ],
+      "predicted_nodes": [],
+      "match_type": "2:0",
+      "is_boundary_correct": false,
+      "reasoning": "The GT contains two explicit LwM2M client/device nodes, but there is no corresponding predicted node. These are omitted."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "LwM2M Blockchain Platform::LwM2M Client\\nDevice 1",
+    "LwM2M Blockchain Platform::LwM2M Client\\nDevice 2"
+  ],
+  "unmatched_predicted_nodes": [
+    "Backend Layer::User Management Service",
+    "Data Layer::User Database"
+  ]
+}

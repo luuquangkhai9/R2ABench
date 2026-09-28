@@ -1,0 +1,138 @@
+@startuml
+!define RECTANGLE rectangle linewidth 1
+
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam defaultTextAlignment center
+skinparam noteFontSize 10
+
+title POCD System Architecture
+
+' Layers
+package "Frontend Layer" {
+  [Web Browser] as browser
+}
+
+package "API Gateway" {
+  [Authentication Service] as auth
+  [File Management Service] as filemgmt
+  [Detection Configuration Service] as configsvc
+  [Parsing Service] as parsersvc
+  [Matching Service] as matchingsvc
+  [Detection Service] as detectionsvc
+  [Repair Service] as repairsvc
+  [Reporting Service] as reportsvc
+  [Help Service] as helpsvc
+}
+
+package "Business Logic Layer" {
+  [Account Management] as account
+  [File Processing] as fileproc
+  [Rule Engine] as rules
+  [Exception Handler] as exceptions
+  [Class Diagram Parser] as cdparser
+  [Database Parser] as dbparser
+  [Entity Matcher] as matcher
+  [Inconsistency Detector] as detector
+  [Repair Generator] as repairgen
+  [Report Generator] as reportgen
+  [History Manager] as history
+  [Help Content Manager] as helpmgr
+}
+
+package "Data Access Layer" {
+  [User Repository] as userrepo
+  [File Repository] as filerepo
+  [Configuration Repository] as configrepo
+  [Parsing Repository] as parserepo
+  [Matching Repository] as matchrepo
+  [Detection Repository] as detectrepo
+  [Repair Repository] as repairrepo
+  [History Repository] as historyrepo
+  [Help Repository] as helprepo
+}
+
+package "External Systems" {
+  [StarUML MDJ Files] as mdjfiles
+  [MySQL Database] as mysqldb
+  [JDBC Connector] as jdbc
+}
+
+' Frontend to API Gateway
+browser --> auth : Authentication
+browser --> filemgmt : File Operations
+browser --> configsvc : Configuration
+browser --> parsersvc : Parsing Requests
+browser --> matchingsvc : Matching Requests
+browser --> detectionsvc : Detection Requests
+browser --> repairsvc : Repair Requests
+browser --> reportsvc : Reporting
+browser --> helpsvc : Help Requests
+
+' API Gateway to Business Logic
+auth --> account
+filemgmt --> fileproc
+configsvc --> rules
+configsvc --> exceptions
+parsersvc --> cdparser
+parsersvc --> dbparser
+matchingsvc --> matcher
+detectionsvc --> detector
+repairsvc --> repairgen
+reportsvc --> reportgen
+helpsvc --> helpmgr
+
+' Business Logic to Data Access
+account --> userrepo
+fileproc --> filerepo
+rules --> configrepo
+exceptions --> configrepo
+cdparser --> parserepo
+dbparser --> parserepo
+matcher --> matchrepo
+detector --> detectrepo
+repairgen --> repairrepo
+reportgen --> detectrepo
+history --> historyrepo
+helpmgr --> helprepo
+
+' External Connections
+mdjfiles --> cdparser : Input
+mysqldb --> dbparser : Input
+jdbc --> dbparser : Connection
+cdparser --> parserepo : Store Results
+dbparser --> parserepo : Store Results
+matcher --> matchrepo : Store Results
+detector --> detectrepo : Store Results
+repairgen --> repairrepo : Store Results
+
+note right of browser
+  Web-based User Interface
+  HTML/CSS/JavaScript
+end note
+
+note right of APIGateway
+  RESTful API Endpoints
+  Request Routing
+  Authentication & Authorization
+end note
+
+note right of BusinessLogic
+  Core Business Algorithms
+  Processing Logic
+  Service Orchestration
+end note
+
+note right of DataAccess
+  Data Persistence Layer
+  Database Operations
+  Data Access Objects
+end note
+
+note right of ExternalSystems
+  External Data Sources
+  File System
+  Database Connections
+end note
+
+@enduml

@@ -1,0 +1,134 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Tekton Event Listener"
+      ],
+      "predicted_nodes": [
+        "Orchestration Layer::EventListener"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Tekton EventListener component used for webhook-driven execution. The boundary names differ but are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Alerts::CHGM",
+        "Alerts::CPD"
+      ],
+      "predicted_nodes": [
+        "CLI Layer::CHGM Workflow"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node captures the CLI workflow area, but only CHGM is explicitly represented; CPD is omitted from the predicted node. This is a partial aggregation around CAD CLI workflows, and the CLI boundary is appropriate for the workflow concept."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::CHGM investigation",
+        "cadctl::CPD investigation",
+        "cadctl::Future investigations",
+        "cadctl::switch(alerttype"
+      ],
+      "predicted_nodes": [
+        "CLI Layer::cadctl"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT decomposes cadctl into specific command/workflow nodes, while the prediction aggregates them into the main cadctl CLI node. This is a valid merge and the CLI boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton Interceptor:\nAlert investigation\nimplemented in CAD?"
+      ],
+      "predicted_nodes": [
+        "Orchestration Layer::Trigger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node denotes the Tekton trigger/interceptor concept used in orchestration. The predicted Trigger node is semantically equivalent and placed in the correct orchestration boundary."
+    },
+    {
+      "gt_nodes": [
+        "Alert Source::app-sre\nalertmanager",
+        "Alert Source::cluster\nalertmanager",
+        "Alert Source::deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "Alert Source::Alert Webhook"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT lists concrete alert sources; the predicted node aggregates them into a generic alert webhook source, which is semantically consistent and correctly placed."
+    },
+    {
+      "gt_nodes": [
+        "PagerDuty Team::<cluster>.openshiftapps.com-\nhive-cluster",
+        "PagerDuty Team::app-sre-alertmanager",
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT specifies concrete PagerDuty teams, while the predicted node abstracts them as the PagerDuty external system. This is a valid aggregation and boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::Escalate alert to\non-call SRE"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Escalation to on-call SRE is operationally associated with PagerDuty in this domain. The prediction captures the external system boundary appropriately, though it is less specific than the GT."
+    },
+    {
+      "gt_nodes": [
+        "Global::Update Incident\nNotes"
+      ],
+      "predicted_nodes": [
+        "Integration Layer::Integration Library"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is an operational action/behavior, not an integration library component. The predicted boundary is too generic and does not correctly reproduce the functional placement."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton Event Listener"
+      ],
+      "predicted_nodes": [
+        "Orchestration Layer::EventListener"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Semantically equivalent Tekton EventListener component; boundary attribution is consistent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Alerts::all cluster\nalerts",
+    "Global::Update Incident\nNotes",
+    "Global::Tekton Interceptor:\nAlert investigation\nimplemented in CAD?",
+    "PagerDuty Team::<cluster>.openshiftapps.com-\nhive-cluster",
+    "PagerDuty Team::app-sre-alertmanager",
+    "PagerDuty Team::prod-deadmanssnitch",
+    "cadctl::CHGM investigation",
+    "cadctl::CPD investigation",
+    "cadctl::Future investigations",
+    "cadctl::switch(alerttype"
+  ],
+  "unmatched_predicted_nodes": [
+    "Deployment/Asset Layer::Container Runtime",
+    "Deployment/Asset Layer::Template Update Utility",
+    "External Systems::AWS",
+    "External Systems::OCM",
+    "Global::Alert Source",
+    "Global::External Systems",
+    "Integration Layer::Integration Library",
+    "Orchestration Layer::PipelineRun",
+    "Tekton Execution Environment::Tekton"
+  ]
+}

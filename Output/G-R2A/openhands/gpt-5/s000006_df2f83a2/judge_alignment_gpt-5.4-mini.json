@@ -1,0 +1,105 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Simulator"
+      ],
+      "predicted_nodes": [
+        "Runtime & Packaging::Simulator Wrapper (Gym-compatible",
+        "Runtime & Packaging::Standalone Simulator Package"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT single simulator node is represented by two predicted runtime/package nodes: one for the Gym-compatible simulator interface and one for the standalone packaged simulator. This is a semantically valid split, and the boundary attribution is consistent with runtime/packaging."
+    },
+    {
+      "gt_nodes": [
+        "Biomechanical Model::BaseBMModel",
+        "Biomechanical Model::DerivedClass",
+        "Biomechanical Model::MoblArmsIndex"
+      ],
+      "predicted_nodes": [
+        "Modules::Biomechanical Model"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node aggregates the biomechanical model hierarchy into a single module-level node, which is semantically equivalent to the GT biomechanical model family. The boundary is acceptable as a module grouping."
+    },
+    {
+      "gt_nodes": [
+        "Interaction Task::BaseTask",
+        "Interaction Task::DerivedClass",
+        "Interaction Task::Pointing",
+        "Interaction Task::Tracking"
+      ],
+      "predicted_nodes": [
+        "Modules::Interaction Task"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node aggregates the interaction-task hierarchy into a single module-level node, matching the GT task family semantically. The boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Perception::Perception",
+        "Perception::BaseModule",
+        "Perception::DerivedClass",
+        "Perception::BasicWithEEPos",
+        "Perception::FixedEye",
+        "Perception::Modalities::Modality",
+        "Perception::Modalities::Proprioception",
+        "Perception::Modalities::Vision"
+      ],
+      "predicted_nodes": [
+        "Modules::Perception Modules (by modality::Proprioception",
+        "Modules::Perception Modules (by modality::Vision (Egocentric"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted nodes capture the modality-specific perception modules emphasized in the PRD, especially proprioception and egocentric vision. Although the GT includes additional base/perception framework nodes and more detailed class names, the modality-specific nodes are semantically aligned and the boundary placement under modules/by-modality is correct."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Build & Composition::MuJoCo XML Integration Layer"
+      ],
+      "match_type": "unmatched_predicted",
+      "is_boundary_correct": false,
+      "reasoning": "This is a hallucinated standalone node from the perspective of the GT list; no directly corresponding GT node exists, even though the PRD supports MuJoCo XML integration as a concept."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Build & Composition::Simulator Builder"
+      ],
+      "match_type": "unmatched_predicted",
+      "is_boundary_correct": false,
+      "reasoning": "This builder node is not explicitly present in the GT node list, so it cannot be matched at the node level."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Workflows::Evaluation Runner"
+      ],
+      "match_type": "unmatched_predicted",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding GT node exists, although the PRD describes evaluation functionality."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Workflows::Reinforcement-Learning Training"
+      ],
+      "match_type": "unmatched_predicted",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding GT node exists, although the PRD includes reinforcement-learning training."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Build & Composition::MuJoCo XML Integration Layer",
+    "Build & Composition::Simulator Builder",
+    "Workflows::Evaluation Runner",
+    "Workflows::Reinforcement-Learning Training"
+  ]
+}

@@ -1,0 +1,387 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Event Handler eBPF Programs::Default Handler Probes",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kernel Space (Linux eBPF::Handler eBPF Programs::Default Handler\\nProbes\\n(kprobe/handle_NAME"
+      ],
+      "reasoning": "The predicted default handler probe node directly covers the GT default handler probes responsibility, despite slightly different boundary wording."
+    },
+    {
+      "gt_node": "Event Handler eBPF Programs::Handler Probe\\nhandle_syscall_write",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node specifically captures this exact traced handler probe concept; the closest nodes are generic handler maps or generic default/process-specific probe groups."
+    },
+    {
+      "gt_node": "Event Handler eBPF Programs::Process Specific\\nHandler Probes",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kernel Space (Linux eBPF::Handler eBPF Programs::Process-Specific\\nHandler Probes\\n(kretprobe/handle_NAME"
+      ],
+      "reasoning": "The predicted process-specific handler probes node matches the GT responsibility, though the predicted node only names the kretprobe side explicitly."
+    },
+    {
+      "gt_node": "Global::Perf Event Map\\nshared event map",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kernel Space (Linux eBPF::Perf-Based\\nEvent Channel"
+      ],
+      "reasoning": "The GT perf event map/shared event map corresponds semantically to the predicted perf-based event channel used for event delivery."
+    },
+    {
+      "gt_node": "Global::Prog ID Map\\npid to id",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "User Space::CLI Layer::Event Registration\\nStructure\\n(ProgramID, Pids, ELFPath"
+      ],
+      "reasoning": "The predicted event registration structure includes ProgramID and process selection data, which covers the GT program-ID mapping responsibility at the interface level."
+    },
+    {
+      "gt_node": "Global::TraceLeft\\nCLI and library tracer",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "User Space::CLI Layer::CLI Entry Point",
+        "User Space::CLI Layer::Trace Command",
+        "User Space::TraceLeft Library::Probe Subsystem\\n/ Probe Loader",
+        "User Space::TraceLeft Library::Userspace Tracer\\n/ Event Dispatcher"
+      ],
+      "reasoning": "The GT top-level TraceLeft CLI/library tracer is covered by the predicted CLI entry point, trace command, probe loader, and userspace tracer/dispatcher decomposition."
+    },
+    {
+      "gt_node": "Linux Kernel Functions::inet_csk_accept",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node represents this specific kernel function target."
+    },
+    {
+      "gt_node": "Linux Kernel Functions::sys_open",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node represents this specific kernel function target."
+    },
+    {
+      "gt_node": "Linux Kernel Functions::sys_write",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node represents this specific kernel function target."
+    },
+    {
+      "gt_node": "Main eBPF Program::Kprobe / Kretprobe\\nother traced calls",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kernel Space (Linux eBPF::Main eBPF Program\\n(kprobe / kretprobe"
+      ],
+      "reasoning": "The predicted main eBPF program node covers the GT main program handling kprobe/kretprobe traced calls."
+    },
+    {
+      "gt_node": "Main eBPF Program::Kprobe\\nentry probe",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kernel Space (Linux eBPF::Main eBPF Program\\n(kprobe / kretprobe"
+      ],
+      "reasoning": "The predicted main eBPF program includes kprobe behavior and covers the entry-probe responsibility."
+    },
+    {
+      "gt_node": "Main eBPF Program::Kretprobe\\nreturn probe",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kernel Space (Linux eBPF::Main eBPF Program\\n(kprobe / kretprobe"
+      ],
+      "reasoning": "The predicted main eBPF program includes kretprobe behavior and covers the return-probe responsibility."
+    },
+    {
+      "gt_node": "Main eBPF Program::Prog Map\\npid to fd",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kernel Space (Linux eBPF::Handler Maps::Program Maps\\nhandle_NAME_progs\\n(kprobe"
+      ],
+      "reasoning": "The GT program map keyed by pid to fd is conceptually covered by the predicted program maps for handler selection, although the naming is generalized."
+    },
+    {
+      "gt_node": "Main eBPF Program::Prog Maps\\nhandler mappings",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kernel Space (Linux eBPF::Handler Maps::Program Maps\\nhandle_NAME_progs\\n(kprobe",
+        "Kernel Space (Linux eBPF::Handler Maps::Return Program Maps\\nhandle_NAME_progs_ret\\n(kretprobe"
+      ],
+      "reasoning": "The predicted handler maps directly correspond to the GT handler mapping structures."
+    },
+    {
+      "gt_node": "Main eBPF Program::Ret Prog Map\\npid to fd",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kernel Space (Linux eBPF::Handler Maps::Return Program Maps\\nhandle_NAME_progs_ret\\n(kretprobe"
+      ],
+      "reasoning": "The predicted return program maps cover the GT return-program map responsibility."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Global::Generated eBPF\\nHandler Source",
+      "grounded": true,
+      "reference_nodes": [
+        "Event Handler eBPF Programs::Default Handler Probes",
+        "Event Handler eBPF Programs::Process Specific\\nHandler Probes"
+      ],
+      "reasoning": "The generated handler source is grounded in the GT handler probe concepts and the configuration-driven handler generation requirements."
+    },
+    {
+      "predicted_node": "Kernel Space (Linux eBPF::Handler Maps::Program Maps\\nhandle_NAME_progs\\n(kprobe",
+      "grounded": true,
+      "reference_nodes": [
+        "Main eBPF Program::Prog Maps\\nhandler mappings",
+        "Main eBPF Program::Prog Map\\npid to fd"
+      ],
+      "reasoning": "This predicted node corresponds to the GT handler mapping / program map structures, with a semantically consistent kernel-space boundary."
+    },
+    {
+      "predicted_node": "Kernel Space (Linux eBPF::Handler Maps::Return Program Maps\\nhandle_NAME_progs_ret\\n(kretprobe",
+      "grounded": true,
+      "reference_nodes": [
+        "Main eBPF Program::Ret Prog Map\\npid to fd",
+        "Main eBPF Program::Prog Maps\\nhandler mappings"
+      ],
+      "reasoning": "This is grounded in the GT return program map and handler mapping concepts."
+    },
+    {
+      "predicted_node": "Kernel Space (Linux eBPF::Handler eBPF Programs::Default Handler\\nProbes\\n(kprobe/handle_NAME",
+      "grounded": true,
+      "reference_nodes": [
+        "Event Handler eBPF Programs::Default Handler Probes"
+      ],
+      "reasoning": "Direct semantic match to the GT default handler probes."
+    },
+    {
+      "predicted_node": "Kernel Space (Linux eBPF::Handler eBPF Programs::No-Op Handler\\n(returns 0",
+      "grounded": true,
+      "reference_nodes": [
+        "Event Handler eBPF Programs::Default Handler Probes",
+        "Event Handler eBPF Programs::Handler Probe\\nhandle_syscall_write"
+      ],
+      "reasoning": "The no-op/returns-0 behavior is explicitly grounded in the GT no-handler behavior requirement."
+    },
+    {
+      "predicted_node": "Kernel Space (Linux eBPF::Handler eBPF Programs::Process-Specific\\nHandler Probes\\n(kretprobe/handle_NAME",
+      "grounded": true,
+      "reference_nodes": [
+        "Event Handler eBPF Programs::Process Specific\\nHandler Probes"
+      ],
+      "reasoning": "Direct semantic match to process-specific handler probes, though only one probe form is explicitly named."
+    },
+    {
+      "predicted_node": "Kernel Space (Linux eBPF::Main eBPF Program\\n(kprobe / kretprobe",
+      "grounded": true,
+      "reference_nodes": [
+        "Main eBPF Program::Kprobe / Kretprobe\\nother traced calls",
+        "Main eBPF Program::Kprobe\\nentry probe",
+        "Main eBPF Program::Kretprobe\\nreturn probe"
+      ],
+      "reasoning": "This predicted node is directly grounded in the GT main eBPF program and its entry/return probes."
+    },
+    {
+      "predicted_node": "Kernel Space (Linux eBPF::Perf-Based\\nEvent Channel",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Perf Event Map\\nshared event map"
+      ],
+      "reasoning": "The perf-based event channel matches the GT shared perf event map and event delivery mechanism."
+    },
+    {
+      "predicted_node": "User Space::CLI Layer::CLI Entry Point",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::TraceLeft\\nCLI and library tracer"
+      ],
+      "reasoning": "The CLI entry point is grounded in the GT top-level TraceLeft CLI/tracer node."
+    },
+    {
+      "predicted_node": "User Space::CLI Layer::Event Registration\\nStructure\\n(ProgramID, Pids, ELFPath",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Prog ID Map\\npid to id",
+        "Main eBPF Program::Prog Map\\npid to fd",
+        "Main eBPF Program::Ret Prog Map\\npid to fd"
+      ],
+      "reasoning": "The event registration structure is grounded in the GT process/program selection and ID mapping responsibilities."
+    },
+    {
+      "predicted_node": "User Space::CLI Layer::Trace Command",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::TraceLeft\\nCLI and library tracer"
+      ],
+      "reasoning": "The trace command is a direct decomposition of the GT CLI/tracer node."
+    },
+    {
+      "predicted_node": "User Space::Generator Subsystem::Event Config\\nMetadata\\n(Proto/JSON)\\n[position, type, name,\\nsuffix, hash_func",
+      "grounded": true,
+      "reference_nodes": [
+        "Event Handler eBPF Programs::Handler Probe\\nhandle_syscall_write"
+      ],
+      "reasoning": "This node is grounded in the GT configuration-driven generation and event-argument metadata requirements, even though the GT does not have a dedicated metadata node."
+    },
+    {
+      "predicted_node": "User Space::Generator Subsystem::Handler Code\\nGenerator",
+      "grounded": true,
+      "reference_nodes": [
+        "Event Handler eBPF Programs::Default Handler Probes",
+        "Event Handler eBPF Programs::Process Specific\\nHandler Probes"
+      ],
+      "reasoning": "The handler code generator is grounded in the GT handler generation function."
+    },
+    {
+      "predicted_node": "User Space::TraceLeft Library::Probe Subsystem\\n/ Probe Loader",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::TraceLeft\\nCLI and library tracer",
+        "Main eBPF Program::Prog Maps\\nhandler mappings",
+        "Main eBPF Program::Ret Prog Map\\npid to fd"
+      ],
+      "reasoning": "The probe loader is grounded in the GT TraceLeft library and handler loading/mapping responsibilities."
+    },
+    {
+      "predicted_node": "User Space::TraceLeft Library::Userspace Tracer\\n/ Event Dispatcher",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::TraceLeft\\nCLI and library tracer",
+        "Global::Perf Event Map\\nshared event map"
+      ],
+      "reasoning": "The userspace tracer and event dispatcher are grounded in the GT top-level tracer and event delivery architecture."
+    },
+    {
+      "predicted_node": "User Space::gobpf Integration\\nLayer",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::TraceLeft\\nCLI and library tracer"
+      ],
+      "reasoning": "This is grounded as a technology boundary supporting the GT tracer/library implementation, consistent with the gobpf dependency constraint."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Event Handler eBPF Programs::Default Handler Probes"
+      ],
+      "predicted_nodes": [
+        "Kernel Space (Linux eBPF::Handler eBPF Programs::Default Handler\\nProbes\\n(kprobe/handle_NAME"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same responsibility; kernel-space boundary is semantically acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Event Handler eBPF Programs::Process Specific\\nHandler Probes"
+      ],
+      "predicted_nodes": [
+        "Kernel Space (Linux eBPF::Handler eBPF Programs::Process-Specific\\nHandler Probes\\n(kretprobe/handle_NAME"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same responsibility; predicted node is a semantically correct kernel-space specialization."
+    },
+    {
+      "gt_nodes": [
+        "Global::Perf Event Map\\nshared event map"
+      ],
+      "predicted_nodes": [
+        "Kernel Space (Linux eBPF::Perf-Based\\nEvent Channel"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The perf event map and perf-based event channel are semantically equivalent event-delivery mechanisms."
+    },
+    {
+      "gt_nodes": [
+        "Global::TraceLeft\\nCLI and library tracer"
+      ],
+      "predicted_nodes": [
+        "User Space::CLI Layer::CLI Entry Point",
+        "User Space::CLI Layer::Trace Command",
+        "User Space::TraceLeft Library::Probe Subsystem\\n/ Probe Loader",
+        "User Space::TraceLeft Library::Userspace Tracer\\n/ Event Dispatcher"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT top-level tracer is decomposed into CLI, library probing, and userspace dispatch responsibilities with correct user-space placement."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Kprobe / Kretprobe\\nother traced calls",
+        "Main eBPF Program::Kprobe\\nentry probe",
+        "Main eBPF Program::Kretprobe\\nreturn probe"
+      ],
+      "predicted_nodes": [
+        "Kernel Space (Linux eBPF::Main eBPF Program\\n(kprobe / kretprobe"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Multiple GT main-program probe nodes are aggregated into one predicted main eBPF program node, with correct kernel-space attribution."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Prog Map\\npid to fd",
+        "Main eBPF Program::Prog Maps\\nhandler mappings",
+        "Main eBPF Program::Ret Prog Map\\npid to fd"
+      ],
+      "predicted_nodes": [
+        "Kernel Space (Linux eBPF::Handler Maps::Program Maps\\nhandle_NAME_progs\\n(kprobe",
+        "Kernel Space (Linux eBPF::Handler Maps::Return Program Maps\\nhandle_NAME_progs_ret\\n(kretprobe"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT map responsibilities are split into program maps and return program maps, and the kernel-space boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Prog ID Map\\npid to id"
+      ],
+      "predicted_nodes": [
+        "User Space::CLI Layer::Event Registration\\nStructure\\n(ProgramID, Pids, ELFPath"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The event registration structure carries the program/process identity data that covers the GT mapping responsibility; user-space boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::TraceLeft\\nCLI and library tracer"
+      ],
+      "predicted_nodes": [
+        "User Space::CLI Layer::CLI Entry Point",
+        "User Space::CLI Layer::Trace Command",
+        "User Space::TraceLeft Library::Probe Subsystem\\n/ Probe Loader",
+        "User Space::TraceLeft Library::Userspace Tracer\\n/ Event Dispatcher"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Same as above; the GT top-level tracer is represented by several user-space components."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Event Handler eBPF Programs::Handler Probe\\nhandle_syscall_write",
+    "Linux Kernel Functions::inet_csk_accept",
+    "Linux Kernel Functions::sys_open",
+    "Linux Kernel Functions::sys_write"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Generated eBPF\\nHandler Source",
+    "Kernel Space (Linux eBPF::Handler Maps::Program Maps\\nhandle_NAME_progs\\n(kprobe",
+    "Kernel Space (Linux eBPF::Handler Maps::Return Program Maps\\nhandle_NAME_progs_ret\\n(kretprobe",
+    "Kernel Space (Linux eBPF::Handler eBPF Programs::Default Handler\\nProbes\\n(kprobe/handle_NAME",
+    "Kernel Space (Linux eBPF::Handler eBPF Programs::No-Op Handler\\n(returns 0",
+    "Kernel Space (Linux eBPF::Handler eBPF Programs::Process-Specific\\nHandler Probes\\n(kretprobe/handle_NAME",
+    "Kernel Space (Linux eBPF::Main eBPF Program\\n(kprobe / kretprobe",
+    "Kernel Space (Linux eBPF::Perf-Based\\nEvent Channel",
+    "User Space::CLI Layer::CLI Entry Point",
+    "User Space::CLI Layer::Event Registration\\nStructure\\n(ProgramID, Pids, ELFPath",
+    "User Space::CLI Layer::Trace Command",
+    "User Space::Generator Subsystem::Event Config\\nMetadata\\n(Proto/JSON)\\n[position, type, name,\\nsuffix, hash_func",
+    "User Space::Generator Subsystem::Handler Code\\nGenerator",
+    "User Space::TraceLeft Library::Probe Subsystem\\n/ Probe Loader",
+    "User Space::TraceLeft Library::Userspace Tracer\\n/ Event Dispatcher",
+    "User Space::gobpf Integration\\nLayer"
+  ]
+}

@@ -1,0 +1,200 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot",
+        "Business Layer::Spring Boot::Community Management"
+      ],
+      "predicted_nodes": [
+        "Application Services Iris::Community System::Post Service",
+        "Application Services Iris::Community System::Comment Service",
+        "Application Services Iris::Community System::Favorites Service",
+        "Application Services Iris::Community System::Notification Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT's general backend/community business layer is decomposed into concrete community application services. The functional scope aligns and the boundary remains within the backend business/application tier, which is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot",
+        "Business Layer::Spring Boot::Game System"
+      ],
+      "predicted_nodes": [
+        "Application Services Iris::Game System::Background Setup Service",
+        "Application Services Iris::Game System::Game Engine Service",
+        "Application Services Iris::Game System::Save Management Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT's game business module is split into specific game services. This is a reasonable refinement within the same backend application boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot",
+        "Business Layer::Spring Boot::User Management"
+      ],
+      "predicted_nodes": [
+        "Application Services Iris::User and Admin System::User Account Service",
+        "Application Services Iris::User and Admin System::User Profile Service",
+        "Application Services Iris::User and Admin System::Admin Governance Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT user management is decomposed into account, profile, and admin governance services. The functional mapping is correct and still belongs to the backend business/application boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot",
+        "Business Layer::Spring Boot::Notification Module"
+      ],
+      "predicted_nodes": [
+        "Application Services Iris::Community System::Notification Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The notification functionality is equivalent. The predicted node is a more specific implementation but remains in the correct backend application boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Spring Boot",
+        "Business Layer::Spring Boot::Favorites Module"
+      ],
+      "predicted_nodes": [
+        "Application Services Iris::Community System::Favorites Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Favorites management matches the GT favorites module and is placed in an appropriate backend application service boundary."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Read/Write Database",
+        "Database Layer::MySQL"
+      ],
+      "predicted_nodes": [
+        "Data Tier MySQL GORM::Community DB",
+        "Data Tier MySQL GORM::Game Saves DB",
+        "Data Tier MySQL GORM::User Auth DB",
+        "Data Tier MySQL GORM::Achievement DB",
+        "Data Tier MySQL GORM::Log Audit DB"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT has a generic read/write database and MySQL backend storage; the prediction splits it into multiple domain databases on MySQL/GORM. This is a valid decomposition and the storage/database boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Caching"
+      ],
+      "predicted_nodes": [
+        "Data Tier MySQL GORM::Community DB",
+        "Data Tier MySQL GORM::Game Saves DB",
+        "Data Tier MySQL GORM::User Auth DB"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node represents caching, while the predicted nodes are persistent relational databases. This is a functional mismatch and not a valid boundary-equivalent placement."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Storage"
+      ],
+      "predicted_nodes": [
+        "External Services::Cloud Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Persistent storage in GT is semantically equivalent to cloud storage in the prediction. The external service boundary is acceptable for storage functionality."
+    },
+    {
+      "gt_nodes": [
+        "Global::Log Recording"
+      ],
+      "predicted_nodes": [
+        "Data Tier MySQL GORM::Log Audit DB"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Log recording corresponds to audit/log persistence. Modeling it as a log audit database is semantically consistent, though more concrete."
+    },
+    {
+      "gt_nodes": [
+        "Global::Permission Control"
+      ],
+      "predicted_nodes": [
+        "Application Services Iris::User and Admin System::Admin Governance Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Permission control is implemented through administrator/user governance in the predicted architecture. This is a reasonable backend responsibility mapping."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Ajax Interaction",
+        "Presentation Layer::Ajax Interaction::GET Request",
+        "Presentation Layer::Ajax Interaction::POST Request"
+      ],
+      "predicted_nodes": [
+        "API Gateway::API Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "AJAX GET/POST interaction is a frontend presentation-layer concern, whereas an API gateway is an infrastructure/backend routing component. This is a clear boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Template Rendering"
+      ],
+      "predicted_nodes": [
+        "Client Tier::Web Browser Vue.js Nuxt.js"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Template rendering in the GT aligns with the frontend web client rendering stack. Vue.js/Nuxt.js is a semantically consistent frontend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Frontend UI Layer::TypeScript",
+        "Frontend UI Layer::Vite2",
+        "Frontend UI Layer::Vue3",
+        "Frontend UI Layer::element-plus"
+      ],
+      "predicted_nodes": [
+        "Client Tier::Web Browser Vue.js Nuxt.js"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT frontend UI technologies are aggregated into a single web client node. The boundary is correct because all are frontend client technologies."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "AI LLM Integration Layer::AIGC Media Service",
+    "AI LLM Integration Layer::LLM Adapter Service",
+    "API Gateway::API Gateway",
+    "Application Services Iris::Achievement System::Achievement Currency Service",
+    "Application Services Iris::Community System::Comment Service",
+    "Application Services Iris::Community System::Favorites Service",
+    "Application Services Iris::Community System::Notification Service",
+    "Application Services Iris::Community System::Post Service",
+    "Application Services Iris::Game System::Background Setup Service",
+    "Application Services Iris::Game System::Game Engine Service",
+    "Application Services Iris::Game System::Save Management Service",
+    "Application Services Iris::User and Admin System::Admin Governance Service",
+    "Application Services Iris::User and Admin System::User Account Service",
+    "Application Services Iris::User and Admin System::User Profile Service",
+    "Client Tier::Mobile Client",
+    "Client Tier::Web Browser Vue.js Nuxt.js",
+    "Data Tier MySQL GORM::Achievement DB",
+    "Data Tier MySQL GORM::Community DB",
+    "Data Tier MySQL GORM::Game Saves DB",
+    "Data Tier MySQL GORM::Log Audit DB",
+    "Data Tier MySQL GORM::User Auth DB",
+    "External Services::Cloud Storage",
+    "External Services::Email SMS Provider",
+    "External Services::LLM Cloud Provider",
+    "Infrastructure Docker Kubernetes::Docker Containers",
+    "Infrastructure Docker Kubernetes::Kubernetes Orchestration"
+  ]
+}

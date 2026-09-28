@@ -1,0 +1,164 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::Browser",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::WebSocket Clients"
+      ],
+      "reasoning": "Both represent the client-side web consumers connecting to the exposed WebSocket endpoint."
+    },
+    {
+      "gt_node": "Your GCP project::Compute Engine",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kubernetes Cluster::Deployment\n(adapter pods"
+      ],
+      "reasoning": "The GT node is a deployment/runtime host concept, and the predicted Deployment node covers the same runtime workload responsibility even though it is expressed in Kubernetes terms rather than Compute Engine."
+    },
+    {
+      "gt_node": "Your GCP project::Compute Engine::pulltop",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Adapter Pod::Container::pulltop\n(Node.js process"
+      ],
+      "reasoning": "The predicted pulltop Node.js process directly matches the GT runtime element pulltop."
+    },
+    {
+      "gt_node": "Your GCP project::Compute Engine::websocketd",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Adapter Pod::Container::websocketd\n(port 8080"
+      ],
+      "reasoning": "The predicted websocketd process directly matches the GT runtime element websocketd."
+    },
+    {
+      "gt_node": "pubsub-public-data project::Cloud Pub/Sub\\ntopic",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Pub/Sub Topic",
+        "Kubernetes Cluster::ConfigMap\\n(topic identifier"
+      ],
+      "reasoning": "The predicted Pub/Sub Topic covers the actual source topic responsibility, and the ConfigMap node covers the configuration binding aspect of the GT topic context."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Adapter Pod::Container::exec.sh\\n(entrypoint",
+      "grounded": true,
+      "reference_nodes": [
+        "Your GCP project::Compute Engine::pulltop",
+        "Your GCP project::Compute Engine::websocketd"
+      ],
+      "reasoning": "exec.sh is part of the runtime chain described in the PRD and is grounded by the GT runtime elements, even though the GT list omits it as a separate node."
+    },
+    {
+      "predicted_node": "Adapter Pod::Container::pulltop\\n(Node.js process",
+      "grounded": true,
+      "reference_nodes": [
+        "Your GCP project::Compute Engine::pulltop"
+      ],
+      "reasoning": "Directly corresponds to the GT pulltop runtime component."
+    },
+    {
+      "predicted_node": "Adapter Pod::Container::websocketd\\n(port 8080",
+      "grounded": true,
+      "reference_nodes": [
+        "Your GCP project::Compute Engine::websocketd"
+      ],
+      "reasoning": "Directly corresponds to the GT websocketd runtime component."
+    },
+    {
+      "predicted_node": "Global::Pub/Sub Topic",
+      "grounded": true,
+      "reference_nodes": [
+        "pubsub-public-data project::Cloud Pub/Sub\\ntopic"
+      ],
+      "reasoning": "This is the same Pub/Sub topic concept as the GT node, with a more generic boundary label."
+    },
+    {
+      "predicted_node": "Global::WebSocket Clients",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Browser"
+      ],
+      "reasoning": "The GT browser node and the predicted WebSocket clients both represent client consumers of the adapter."
+    },
+    {
+      "predicted_node": "Kubernetes Cluster::ConfigMap\\n(topic identifier",
+      "grounded": true,
+      "reference_nodes": [
+        "pubsub-public-data project::Cloud Pub/Sub\\ntopic"
+      ],
+      "reasoning": "This node is grounded by the configuration-binding aspect of the topic responsibility, though it focuses on the Kubernetes-side storage of the topic identifier rather than the external topic itself."
+    },
+    {
+      "predicted_node": "Kubernetes Cluster::Deployment\\n(adapter pods",
+      "grounded": true,
+      "reference_nodes": [
+        "Your GCP project::Compute Engine"
+      ],
+      "reasoning": "This is the Kubernetes deployment form of the same adapter runtime workload represented in the GT architecture."
+    },
+    {
+      "predicted_node": "Kubernetes Cluster::HPA\\n(horizontal pod autoscaler",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "The PRD explicitly requires HPA configuration, but the GT node list does not include it; still, it is grounded by the provided requirements context."
+    },
+    {
+      "predicted_node": "Kubernetes Cluster::Service\\n(LoadBalancer",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "The PRD explicitly requires a LoadBalancer service, but the GT node list does not include it; still, it is grounded by the provided requirements context."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Browser"
+      ],
+      "predicted_nodes": [
+        "Global::WebSocket Clients"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the web client endpoint consumers; the boundary difference is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine::pulltop"
+      ],
+      "predicted_nodes": [
+        "Adapter Pod::Container::pulltop\\n(Node.js process"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same runtime process, with an equivalent container/pod boundary instead of Compute Engine."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine::websocketd"
+      ],
+      "predicted_nodes": [
+        "Adapter Pod::Container::websocketd\\n(port 8080"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same websocketd runtime process, with a semantically equivalent deployment boundary."
+    },
+    {
+      "gt_nodes": [
+        "pubsub-public-data project::Cloud Pub/Sub\\ntopic"
+      ],
+      "predicted_nodes": [
+        "Global::Pub/Sub Topic"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same Pub/Sub topic concept; the predicted boundary is generic but not contradictory."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

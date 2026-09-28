@@ -1,0 +1,476 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Docker Compose Environment::Airflow\\n(Spark Driver",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Docker Compose Environment::Airflow Webserver",
+        "Docker Compose Environment::Airflow Webserver::8282",
+        "Docker Compose Environment::Airflow Webserver::PySpark\\nDependency",
+        "Docker Compose Environment::Airflow Webserver::Scheduler",
+        "Docker Compose Environment::Airflow Webserver::Web UI"
+      ],
+      "reasoning": "The GT node represents the Airflow container acting as the Spark driver/scheduler. The predicted nodes cover the same Airflow service responsibilities, including webserver, scheduler, UI, and PySpark dependency."
+    },
+    {
+      "gt_node": "Docker Compose Environment::Cluster Manager\\n(Spark Standalone",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Docker Compose Environment::Spark Master",
+        "Docker Compose Environment::Spark Master::7077",
+        "Docker Compose Environment::Spark Master::8181",
+        "Docker Compose Environment::Spark Master::Cluster Manager"
+      ],
+      "reasoning": "The GT node refers to the Spark standalone cluster manager/master. The predicted Spark Master node and its ports/UI capture this responsibility."
+    },
+    {
+      "gt_node": "Docker Compose Environment::Jupyter Notebook\\n(Spark",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Docker Compose Environment::Jupyter/PySpark",
+        "Docker Compose Environment::Jupyter/PySpark::4040-4080",
+        "Docker Compose Environment::Jupyter/PySpark::8888",
+        "Docker Compose Environment::Jupyter/PySpark::Notebook Server",
+        "Docker Compose Environment::Jupyter/PySpark::PySpark Kernel"
+      ],
+      "reasoning": "The GT node denotes the Jupyter/PySpark interactive notebook service. The predicted Jupyter/PySpark node and subnodes cover notebook serving, PySpark execution, and exposed ports."
+    },
+    {
+      "gt_node": "Docker Compose Environment::Postgres",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Docker Compose Environment::Postgres 9.6",
+        "Docker Compose Environment::Postgres 9.6::5432"
+      ],
+      "reasoning": "The predicted Postgres node matches the GT database responsibility and adds version/port detail."
+    },
+    {
+      "gt_node": "Docker Compose Environment::Spark Workers::Worker 1",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Docker Compose Environment::Spark Workers::spark-worker-1"
+      ],
+      "reasoning": "The predicted worker-1 node directly corresponds to Worker 1."
+    },
+    {
+      "gt_node": "Docker Compose Environment::Spark Workers::Worker 2",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Docker Compose Environment::Spark Workers::spark-worker-2"
+      ],
+      "reasoning": "The predicted worker-2 node directly corresponds to Worker 2."
+    },
+    {
+      "gt_node": "Docker Compose Environment::Spark Workers::Worker 3",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Docker Compose Environment::Spark Workers::spark-worker-3"
+      ],
+      "reasoning": "The predicted worker-3 node directly corresponds to Worker 3."
+    },
+    {
+      "gt_node": "Docker Compose Environment::Spark Workers::Worker N",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Docker Compose Environment::Spark Workers::...\\n(pattern extensible"
+      ],
+      "reasoning": "The GT extensible worker pattern is represented by the predicted extensible worker pattern node."
+    },
+    {
+      "gt_node": "Global::Data Engineer",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Host Machine"
+      ],
+      "reasoning": "The predicted node is not a perfect semantic match for the actor, but it is the only global top-level external entity and can partially ground the human/host side of interaction. However, this is a weak match and should be interpreted cautiously."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Bundled Spark Distribution::./bin/pyspark",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark",
+        "Docker Compose Environment::Airflow\\n(Spark Driver"
+      ],
+      "reasoning": "This is an inherited Spark capability described in the PRD, grounded in the bundled Spark distribution requirements rather than the Docker Compose service topology."
+    },
+    {
+      "predicted_node": "Bundled Spark Distribution::./bin/run-example",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark"
+      ],
+      "reasoning": "This is an inherited Spark example runner capability explicitly required by the PRD."
+    },
+    {
+      "predicted_node": "Bundled Spark Distribution::ML libsvm support",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark"
+      ],
+      "reasoning": "This corresponds to the inherited Spark ML example capability that loads libsvm datasets."
+    },
+    {
+      "predicted_node": "Docker Compose Environment::Airflow Webserver",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver"
+      ],
+      "reasoning": "This is the Airflow service node, grounded in the GT Airflow/Spark driver component."
+    },
+    {
+      "predicted_node": "Docker Compose Environment::Airflow Webserver::8282",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver"
+      ],
+      "reasoning": "This is a valid subnode for the Airflow exposed port."
+    },
+    {
+      "predicted_node": "Docker Compose Environment::Airflow Webserver::PySpark\\nDependency",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver"
+      ],
+      "reasoning": "This corresponds to the PRD requirement that Airflow include PySpark."
+    },
+    {
+      "predicted_node": "Docker Compose Environment::Airflow Webserver::Scheduler",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver"
+      ],
+      "reasoning": "Scheduler is a legitimate decomposition of the Airflow service responsibility."
+    },
+    {
+      "predicted_node": "Docker Compose Environment::Airflow Webserver::Web UI",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver"
+      ],
+      "reasoning": "This is a legitimate decomposition of the Airflow service responsibility."
+    },
+    {
+      "predicted_node": "Docker Compose Environment::Jupyter/PySpark",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark"
+      ],
+      "reasoning": "This matches the Jupyter/PySpark service in the GT."
+    },
+    {
+      "predicted_node": "Docker Compose Environment::Jupyter/PySpark::4040-4080",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark"
+      ],
+      "reasoning": "This is a valid exposed port range for Spark application UIs in the Jupyter service."
+    },
+    {
+      "predicted_node": "Docker Compose Environment::Jupyter/PySpark::8888",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark"
+      ],
+      "reasoning": "This is a valid exposed notebook port."
+    },
+    {
+      "predicted_node": "Docker Compose Environment::Jupyter/PySpark::Notebook Server",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark"
+      ],
+      "reasoning": "Notebook server is a legitimate subcomponent of the Jupyter service."
+    },
+    {
+      "predicted_node": "Docker Compose Environment::Jupyter/PySpark::PySpark Kernel",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark"
+      ],
+      "reasoning": "PySpark kernel is a legitimate subcomponent of the Jupyter/PySpark environment."
+    },
+    {
+      "predicted_node": "Docker Compose Environment::Postgres 9.6",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Postgres"
+      ],
+      "reasoning": "This directly corresponds to the Postgres service, with added version specificity."
+    },
+    {
+      "predicted_node": "Docker Compose Environment::Postgres 9.6::5432",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Postgres"
+      ],
+      "reasoning": "This is a valid port subnode for Postgres."
+    },
+    {
+      "predicted_node": "Docker Compose Environment::Spark Master",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Cluster Manager\\n(Spark Standalone"
+      ],
+      "reasoning": "This directly corresponds to the Spark standalone cluster manager/master."
+    },
+    {
+      "predicted_node": "Docker Compose Environment::Spark Master::7077",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Cluster Manager\\n(Spark Standalone"
+      ],
+      "reasoning": "This is the cluster submission port for Spark master."
+    },
+    {
+      "predicted_node": "Docker Compose Environment::Spark Master::8181",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Cluster Manager\\n(Spark Standalone"
+      ],
+      "reasoning": "This is the Spark master UI port."
+    },
+    {
+      "predicted_node": "Docker Compose Environment::Spark Master::Cluster Manager",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Cluster Manager\\n(Spark Standalone"
+      ],
+      "reasoning": "This is semantically equivalent to the GT cluster manager node."
+    },
+    {
+      "predicted_node": "Docker Compose Environment::Spark Workers::...\\n(pattern extensible",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker N"
+      ],
+      "reasoning": "This represents the extensible worker pattern required by the PRD."
+    },
+    {
+      "predicted_node": "Docker Compose Environment::Spark Workers::spark-worker-1",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 1"
+      ],
+      "reasoning": "This directly corresponds to Worker 1."
+    },
+    {
+      "predicted_node": "Docker Compose Environment::Spark Workers::spark-worker-2",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 2"
+      ],
+      "reasoning": "This directly corresponds to Worker 2."
+    },
+    {
+      "predicted_node": "Docker Compose Environment::Spark Workers::spark-worker-3",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 3"
+      ],
+      "reasoning": "This directly corresponds to Worker 3."
+    },
+    {
+      "predicted_node": "Global::Host Machine",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Data Engineer"
+      ],
+      "reasoning": "This is a weakly grounded external node representing the host-side interaction context, but it does not precisely match the Data Engineer actor."
+    },
+    {
+      "predicted_node": "Host Machine::Docker Compose\\nFormat 3.7",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Data Engineer"
+      ],
+      "reasoning": "This is grounded in the deployment requirement for Docker Compose format 3.7, though the boundary is host-oriented rather than a system component."
+    },
+    {
+      "predicted_node": "Host Machine::Port Mappings",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver",
+        "Docker Compose Environment::Cluster Manager\\n(Spark Standalone",
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark",
+        "Docker Compose Environment::Postgres"
+      ],
+      "reasoning": "Port mappings are explicitly required by the PRD and correspond to the exposed service interfaces."
+    },
+    {
+      "predicted_node": "Shared Data Directories::DAGs\\n/opt/airflow/dags",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver"
+      ],
+      "reasoning": "This is grounded in the shared DAG directory requirement."
+    },
+    {
+      "predicted_node": "Shared Data Directories::Input Data\\n/data",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark",
+        "Docker Compose Environment::Airflow\\n(Spark Driver"
+      ],
+      "reasoning": "This matches the shared input data requirement."
+    },
+    {
+      "predicted_node": "Shared Data Directories::Notebooks\\n/home/jovyan/work",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark"
+      ],
+      "reasoning": "This corresponds to the mounted notebook directory for Jupyter users."
+    },
+    {
+      "predicted_node": "Shared Data Directories::Spark Applications\\n/opt/airflow/apps",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver"
+      ],
+      "reasoning": "This matches the shared Spark application files directory requirement."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Environment::Airflow Webserver",
+        "Docker Compose Environment::Airflow Webserver::8282",
+        "Docker Compose Environment::Airflow Webserver::PySpark\\nDependency",
+        "Docker Compose Environment::Airflow Webserver::Scheduler",
+        "Docker Compose Environment::Airflow Webserver::Web UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The Airflow driver/scheduler responsibility is split into service, port, dependency, scheduler, and UI subnodes, all within a semantically consistent Airflow boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Cluster Manager\\n(Spark Standalone"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Environment::Spark Master",
+        "Docker Compose Environment::Spark Master::7077",
+        "Docker Compose Environment::Spark Master::8181",
+        "Docker Compose Environment::Spark Master::Cluster Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Spark standalone cluster manager is faithfully represented by the Spark Master node and its associated ports/UI."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Environment::Jupyter/PySpark",
+        "Docker Compose Environment::Jupyter/PySpark::4040-4080",
+        "Docker Compose Environment::Jupyter/PySpark::8888",
+        "Docker Compose Environment::Jupyter/PySpark::Notebook Server",
+        "Docker Compose Environment::Jupyter/PySpark::PySpark Kernel"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The Jupyter/PySpark service is decomposed into service, notebook server, kernel, and ports, which is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Postgres"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Environment::Postgres 9.6",
+        "Docker Compose Environment::Postgres 9.6::5432"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The Postgres service is correctly matched and enriched with version and port detail."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 1"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Environment::Spark Workers::spark-worker-1"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match for Worker 1 within the Spark Workers boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 2"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Environment::Spark Workers::spark-worker-2"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match for Worker 2 within the Spark Workers boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 3"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Environment::Spark Workers::spark-worker-3"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match for Worker 3 within the Spark Workers boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker N"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Environment::Spark Workers::...\\n(pattern extensible"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The extensible worker pattern is preserved."
+    },
+    {
+      "gt_nodes": [
+        "Global::Data Engineer"
+      ],
+      "predicted_nodes": [
+        "Global::Host Machine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "This is not a proper semantic equivalence: the GT is a human actor, while the prediction is the host machine. The boundary/context is therefore incorrect."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Bundled Spark Distribution::./bin/pyspark",
+    "Bundled Spark Distribution::./bin/run-example",
+    "Bundled Spark Distribution::ML libsvm support",
+    "Docker Compose Environment::Airflow Webserver::8282",
+    "Docker Compose Environment::Airflow Webserver::PySpark\\nDependency",
+    "Docker Compose Environment::Airflow Webserver::Scheduler",
+    "Docker Compose Environment::Airflow Webserver::Web UI",
+    "Docker Compose Environment::Jupyter/PySpark::4040-4080",
+    "Docker Compose Environment::Jupyter/PySpark::8888",
+    "Docker Compose Environment::Jupyter/PySpark::Notebook Server",
+    "Docker Compose Environment::Jupyter/PySpark::PySpark Kernel",
+    "Docker Compose Environment::Postgres 9.6::5432",
+    "Docker Compose Environment::Spark Master::7077",
+    "Docker Compose Environment::Spark Master::8181",
+    "Docker Compose Environment::Spark Master::Cluster Manager",
+    "Docker Compose Environment::Spark Workers::...\\n(pattern extensible",
+    "Docker Compose Environment::Spark Workers::spark-worker-1",
+    "Docker Compose Environment::Spark Workers::spark-worker-2",
+    "Docker Compose Environment::Spark Workers::spark-worker-3",
+    "Host Machine::Docker Compose\\nFormat 3.7",
+    "Host Machine::Port Mappings",
+    "Shared Data Directories::DAGs\\n/opt/airflow/dags",
+    "Shared Data Directories::Input Data\\n/data",
+    "Shared Data Directories::Notebooks\\n/home/jovyan/work",
+    "Shared Data Directories::Spark Applications\\n/opt/airflow/apps"
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Proxy Core"
+      ],
+      "predicted_nodes": [
+        "HTTP Proxy Layer::HTTP Proxy",
+        "HTTP Proxy Layer::HTTP Proxy::Channel Manager",
+        "HTTP Proxy Layer::HTTP Proxy::Request Forwarder"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The Proxy Core node in the Ground Truth is mapped to the detailed HTTP Proxy components in the predicted architecture. Both represent the core request forwarding engine, and the boundary mapping from 'Proxy Layer' to 'HTTP Proxy Layer' is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Logging"
+      ],
+      "predicted_nodes": [
+        "HTTP Proxy Layer::HTTP Proxy::Debug Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the internal logging functionality of the proxy. The layer attribution is semantically matching."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Download"
+      ],
+      "predicted_nodes": [
+        "Test Server Layer::Test Server::File Download Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Functionally, both nodes handle file download requests. However, the Ground Truth incorrectly placed it as a proxy plugin, whereas the Predicted architecture correctly places it in the Test Server as explicitly defined in the PRD. Therefore, the boundary attribution does not align."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Upload"
+      ],
+      "predicted_nodes": [
+        "Test Server Layer::Test Server::File Upload Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Functionally equivalent as both process file uploads. Similar to download, the boundary is mismatched because GT placed it inside the Proxy Layer while AI placed it in the Test Server Layer."
+    },
+    {
+      "gt_nodes": [
+        "CGI Portal::Http Test\\nClient"
+      ],
+      "predicted_nodes": [
+        "Test Client Layer::Test Client",
+        "Test Client Layer::Test Client::Async HTTP Client",
+        "Test Client Layer::Test Client::Response Counter",
+        "Test Client Layer::Test Client::Workload Generator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "Both sets represent the HTTP test client generating workloads. However, GT placed it in the CGI Portal (implying a UI/Management context), whereas Predicted placed it in a dedicated standalone Test Client Layer, resulting in a severe boundary discrepancy."
+    },
+    {
+      "gt_nodes": [
+        "Business Servers::Business Server A",
+        "Business Servers::Business Server B",
+        "Business Servers::Business Server C",
+        "Business Servers::......"
+      ],
+      "predicted_nodes": [
+        "External Systems::Upstream Server"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Multiple explicit business server instances in the GT are generalized into a single Upstream Server external node by the AI. The boundaries (Business Servers vs External Systems) are semantically valid."
+    },
+    {
+      "gt_nodes": [
+        "Clients::APP Client",
+        "Clients::Business Server",
+        "Clients::Developer",
+        "Clients::Web Client"
+      ],
+      "predicted_nodes": [
+        "External Systems::HTTP Client"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Various client types in GT are summarized into a generic HTTP Client node by the AI. The boundaries correctly identify them as external callers."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer\\nKeepalived(VIP::Openresty",
+    "CGI Portal::Appkey\\nManager",
+    "CGI Portal::CGI Manager",
+    "CGI Portal::Case Manager",
+    "CGI Portal::Document\\nGenerate",
+    "CGI Portal::Log & Tree\\ninquire",
+    "CGI Portal::Metrics &\\nReport",
+    "CGI Portal::Service\\nManager",
+    "Global::Log consumer",
+    "Proxy Layer::cgi_proxy 1",
+    "Proxy Layer::cgi_proxy 2",
+    "Proxy Layer::cgi_proxy 1::Appkey\\nValidate",
+    "Proxy Layer::cgi_proxy 1::Formatter",
+    "Proxy Layer::cgi_proxy 1::Global Limit",
+    "Proxy Layer::cgi_proxy 1::Login &\\nPermission",
+    "Proxy Layer::cgi_proxy 1::Plugin::Agent",
+    "Proxy Layer::cgi_proxy 1::Plugin::Attach Check",
+    "Proxy Layer::cgi_proxy 1::Plugin::Check\\nParameter",
+    "Proxy Layer::cgi_proxy 1::Plugin::Mock",
+    "Support Platform::Data Bank\\nHDFS/Hbase/Druid",
+    "Support Platform::Msg Center\\nKafka",
+    "Support Platform::Mysql",
+    "Support Platform::Permission\\nCenter",
+    "Support Platform::Redis Cache",
+    "Support Platform::User Center",
+    "Task Scheduler::CGI Case\\nExecutor",
+    "Task Scheduler::CGI Health\\nCheck",
+    "Task Scheduler::Daily Report",
+    "Task Scheduler::Log Analysis",
+    "Task Scheduler::Monitor/Alarm"
+  ],
+  "unmatched_predicted_nodes": [
+    "Data Layer::Request Cache",
+    "Data Layer::Response Data",
+    "External Systems::File System",
+    "Test Server Layer::Test Server",
+    "Test Server Layer::Test Server::Grizzly/Jersey Server"
+  ]
+}

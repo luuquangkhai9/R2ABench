@@ -1,0 +1,123 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS CloudFormation\nCustom resources"
+      ],
+      "predicted_nodes": [
+        "AWS (Regional::AWS Lambda\nCustom Resource\n(Deployment-Time"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the deployment-time CloudFormation custom-resource Lambda handling. The predicted node is more specific but semantically equivalent, and the boundary/package attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS IoT Core"
+      ],
+      "predicted_nodes": [
+        "AWS (Regional::AWS IoT\nTopics"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the AWS IoT messaging/publishing target. The predicted node is a more specific representation of IoT topics, which is functionally aligned with the GT IoT Core boundary."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS Lambda\nSimulator API"
+      ],
+      "predicted_nodes": [
+        "AWS (Regional::AWS Lambda\nSimulation API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These are the same API backend Lambda component with only naming variation. The boundary remains correct."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::AWS Step Functions\nSimulation workflow"
+      ],
+      "predicted_nodes": [
+        "AWS (Regional::AWS Step Functions\nSimulation Orchestration"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the simulation workflow/orchestration component implemented with Step Functions. Boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon API Gateway\nREST API"
+      ],
+      "predicted_nodes": [
+        "AWS (Regional::Amazon API Gateway\nREST API\n(stage: prod,\nCORS + Validation,\nAccess Logs JSON,\nMethod Logging: INFO,\nTracing Enabled"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct match to the REST API gateway node, and the predicted node correctly embeds the documented deployment characteristics such as prod stage, CORS, validation, logging, and tracing."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon DynamoDB\nSimulator state"
+      ],
+      "predicted_nodes": [
+        "AWS (Regional::Amazon DynamoDB\n(Config & State"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the DynamoDB-backed state/configuration storage. The naming differs, but the component and boundary are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon S3\nRoute data bucket"
+      ],
+      "predicted_nodes": [
+        "AWS (Regional::AWS Lambda\nRoute Loader"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is an S3 route-data bucket, while the predicted node is a Lambda route-loader component. These are not the same architectural component; this is a boundary and functional mismatch rather than a valid split/merge of the same node."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Amazon S3\nWeb UI bucket"
+      ],
+      "predicted_nodes": [
+        "Global::Web Management Console"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is an S3 bucket for hosting the web UI, while the predicted node is the console itself. This conflates hosting infrastructure with the client application, so the boundary attribution is incorrect."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Browser Web UI\nstatic app client"
+      ],
+      "predicted_nodes": [
+        "Global::Web Management Console"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the user-facing web management console/static app client. The global placement is acceptable for the browser-side application."
+    },
+    {
+      "gt_nodes": [
+        "AWS IoT Device Simulator::Users"
+      ],
+      "predicted_nodes": [
+        "Global::Web Management Console"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Users are actors, not the web console component. The predicted node is a different architectural element and should not be matched to the user actor boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "AWS IoT Device Simulator::Amazon CloudFront",
+    "AWS IoT Device Simulator::Amazon Cognito"
+  ],
+  "unmatched_predicted_nodes": [
+    "AWS (Regional::AWS Lambda\nRoute Loader",
+    "AWS (Regional::Identity Service\n(e.g., Cognito",
+    "AWS (Regional::Logging & Tracing\n(CloudWatch Logs, X-Ray"
+  ]
+}

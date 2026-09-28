@@ -1,0 +1,110 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Result"
+      ],
+      "predicted_nodes": [
+        "Global::Result"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact match for the allocation result data model. The 'Global' boundary is correct for a core data model."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tally"
+      ],
+      "predicted_nodes": [
+        "Global::Tally",
+        "Global::Candidate"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT 'Tally' node is correctly split by the AI into the main 'Tally' object and its constituent 'Candidate' part (DR-002). The 'Global' boundary for these core data models is correct."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Processor::Process"
+      ],
+      "predicted_nodes": [
+        "Global::Processor"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT 'Process' node, representing the workflow execution, functionally matches the AI's 'Processor' component (FR-011). However, the AI incorrectly placed it in 'Global' instead of a dedicated 'Seat Allocation Processor' layer, losing the architectural boundary."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::Parameters"
+      ],
+      "predicted_nodes": [
+        "Global::Configuration"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT 'Parameters' node maps to the AI's more general 'Configuration' node. The boundary is incorrect as the AI placed it in 'Global' instead of a 'Seat Allocation Configuration' layer."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::ResultDecorators"
+      ],
+      "predicted_nodes": [
+        "Global::ResultDecorator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node for configuring decorators maps to the AI's 'ResultDecorator' component. The boundary is incorrect as the AI placed it in 'Global' instead of a 'Seat Allocation Configuration' layer."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::TallyFilters"
+      ],
+      "predicted_nodes": [
+        "Global::TallyFilter"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node for configuring filters maps to the AI's 'TallyFilter' component. The boundary is incorrect as the AI placed it in 'Global' instead of a 'Seat Allocation Configuration' layer."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::TieBreaker"
+      ],
+      "predicted_nodes": [
+        "Global::TieBreaker"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Exact functional match for the tie-breaking rule. The boundary is incorrect as the AI placed it in 'Global' instead of a 'Seat Allocation Configuration' layer."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::Seat Allocation\\nMethod"
+      ],
+      "predicted_nodes": [
+        "Global::AllocationMethod",
+        "Global::EqualProportionsMethod",
+        "Global::HighestAveragesMethod",
+        "Global::LargestRemainderMethod",
+        "Global::MajorityMethod",
+        "Global::RankedMethod"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT's generic 'Seat Allocation Method' is correctly expanded by the AI into the base contract and its specific implementation families (FR-003). The boundary is incorrect as the AI flattened these components into 'Global' instead of the 'Seat Allocation Configuration' layer."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Seat Allocation Processor::Decorate",
+    "Seat Allocation Processor::Filter"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::AllocationEntryPoint",
+    "Global::Command-Line Shell",
+    "Global::CommandLineLauncher",
+    "Global::Java Runtime Environment (JRE",
+    "Global::SeatAllocationException",
+    "Global::XMLParser"
+  ]
+}

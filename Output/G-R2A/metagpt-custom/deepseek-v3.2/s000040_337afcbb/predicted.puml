@@ -1,0 +1,53 @@
+@startuml
+
+package "Proxy Layer" {
+    component "PlugIt Proxy" as proxy
+    component "Proxy Mail Handler" as mail_handler
+    database "Proxy Data Store" as proxy_store
+}
+
+package "Service Layer" {
+    component "PlugIt Service" as service
+    component "Schema Migration Manager" as migration_manager
+    database "Service Data Store" as service_store
+}
+
+package "Configuration" {
+    component "Project Configuration File" as project_config
+    component "Local Configuration File" as local_config
+}
+
+node "External Systems" {
+    actor "External User" as external_user
+    actor "Service Developer" as service_dev
+    cloud "Email/Mailbox System" as email_system
+}
+
+' Core Framework Components
+proxy -[dashed]-> service : PlugIt Protocol
+external_user --> proxy : accesses services through
+proxy --> proxy_store : uses
+service --> service_store : uses
+migration_manager --> service_store : applies to
+migration_manager ..> "Alembic Migration Interface" : implements
+
+' Configuration Management
+service --> project_config : reads
+service --> local_config : reads (overrides)
+
+' Example/Standalone Scope (Mail Processing)
+note right of mail_handler
+  Example/Standalone Scope
+  (not core framework)
+end note
+mail_handler --> email_system : processes inbound email
+mail_handler --> proxy : extends
+
+' Legend/Note
+note top of diagram
+  Solid lines = Core Framework
+  Dashed lines = Communication Protocol
+  Note blocks = Scope clarification
+end note
+
+@enduml

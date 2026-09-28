@@ -1,0 +1,373 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::Databases / Filestores\\nElastic, Hadoop, etc.",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node represents downstream storage systems such as databases or filestores."
+    },
+    {
+      "gt_node": "Global::Kafka",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "auditor Client Library::Default Implementation::Kafka Publisher"
+      ],
+      "reasoning": "The GT Kafka node is covered by the predicted Kafka-based default publisher responsibility."
+    },
+    {
+      "gt_node": "Global::auditor-v1 app\\nserver",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "The predicted model focuses on the client library and does not include a server-side application node equivalent to the GT app/server component."
+    },
+    {
+      "gt_node": "application 1::auditor-v1 client",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "auditor Client Library::Auditing API",
+        "auditor Client Library::Audit Event Generator",
+        "auditor Client Library::Object Comparator",
+        "auditor Client Library::Default Implementation",
+        "auditor Client Library::EventPublisher\\nAbstraction",
+        "auditor Client Library::LogProvider\\nAbstraction",
+        "auditor Client Library::auditor-v1 client"
+      ],
+      "reasoning": "The GT client application responsibility is captured by the auditor client library API and its internal generation/comparison/publishing abstractions."
+    },
+    {
+      "gt_node": "application 2::auditor-v1 client",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "auditor Client Library::Auditing API",
+        "auditor Client Library::Audit Event Generator",
+        "auditor Client Library::Object Comparator",
+        "auditor Client Library::Default Implementation",
+        "auditor Client Library::EventPublisher\\nAbstraction",
+        "auditor Client Library::LogProvider\\nAbstraction",
+        "auditor Client Library::auditor-v1 client"
+      ],
+      "reasoning": "Same client-library responsibility as the first application client node; the predicted library covers the client-side auditing capability."
+    },
+    {
+      "gt_node": "application 3::auditor-v1 client",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "auditor Client Library::Auditing API",
+        "auditor Client Library::Audit Event Generator",
+        "auditor Client Library::Object Comparator",
+        "auditor Client Library::Default Implementation",
+        "auditor Client Library::EventPublisher\\nAbstraction",
+        "auditor Client Library::LogProvider\\nAbstraction",
+        "auditor Client Library::auditor-v1 client"
+      ],
+      "reasoning": "The predicted client library sufficiently covers the repeated GT client node responsibility."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Configuration::AuditorEventConfig",
+      "grounded": true,
+      "reference_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "This corresponds to the caller-supplied auditing configuration described in the PRD."
+    },
+    {
+      "predicted_node": "Configuration::applicationName\\neventSource\\neventSubType\\nmetadata",
+      "grounded": true,
+      "reference_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "These are directly grounded in the configuration fields required by the PRD."
+    },
+    {
+      "predicted_node": "Configuration::filters.element\\nenabled\\ntypes\\nincludes",
+      "grounded": true,
+      "reference_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "This matches the documented element-filter configuration and inclusion-list behavior."
+    },
+    {
+      "predicted_node": "Downstream Consumers::Event Processing\\nServices",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Databases / Filestores\\nElastic, Hadoop, etc."
+      ],
+      "reasoning": "Downstream consumers are not a central GT node, but they are semantically related to the GT downstream storage/processing ecosystem; however this is broader than the GT storage node."
+    },
+    {
+      "predicted_node": "Global::Configuration",
+      "grounded": true,
+      "reference_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "Configuration is a real concept in the PRD, though the GT does not isolate it as a top-level node."
+    },
+    {
+      "predicted_node": "Global::Downstream Consumers",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Databases / Filestores\\nElastic, Hadoop, etc."
+      ],
+      "reasoning": "The PRD mentions downstream services consuming the published events, so this is grounded even if not explicitly diagrammed in GT."
+    },
+    {
+      "predicted_node": "Global::Infrastructure Integrators",
+      "grounded": true,
+      "reference_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "Infrastructure integrators align with the PRD's publisher, logging, and filter implementers."
+    },
+    {
+      "predicted_node": "Global::Input Objects",
+      "grounded": true,
+      "reference_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "Input objects are grounded in the audited old/new object inputs described by the PRD."
+    },
+    {
+      "predicted_node": "Global::JVM Application",
+      "grounded": true,
+      "reference_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "The PRD explicitly states the component is a JVM library for JVM applications."
+    },
+    {
+      "predicted_node": "Global::Output Events",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Kafka"
+      ],
+      "reasoning": "Output events are core to the PRD, though the GT only explicitly captures the transport and deployment context rather than an output-events container."
+    },
+    {
+      "predicted_node": "Infrastructure Integrators::Publisher/Loger/Filter\\nImplementations",
+      "grounded": true,
+      "reference_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "This directly matches the PRD requirement for externally supplied publisher, logger, and filter implementations."
+    },
+    {
+      "predicted_node": "Input Objects::newObject",
+      "grounded": true,
+      "reference_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "The new object input is explicitly required by the auditing API."
+    },
+    {
+      "predicted_node": "Input Objects::oldObject",
+      "grounded": true,
+      "reference_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "The old object input is explicitly required by the auditing API."
+    },
+    {
+      "predicted_node": "JVM Application::Application Code",
+      "grounded": true,
+      "reference_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "This is consistent with the PRD's JVM library/application integration context."
+    },
+    {
+      "predicted_node": "Output Events::AuditEvent",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Kafka"
+      ],
+      "reasoning": "AuditEvent is the central output object in the PRD; the GT does not name it directly, but it is clearly grounded in the audited event stream concept."
+    },
+    {
+      "predicted_node": "Output Events::JSON Payload",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Kafka"
+      ],
+      "reasoning": "The PRD specifies the published payload is a JSON string deserializable into AuditEvent."
+    },
+    {
+      "predicted_node": "Output Events::UPDATED\\nCREATED\\nDELETED",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Kafka"
+      ],
+      "reasoning": "These are the event types defined for detected changes in the PRD."
+    },
+    {
+      "predicted_node": "Output Events::name\\nupdatedValue\\npreviousValue\\nmetadata.fqdn",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Kafka"
+      ],
+      "reasoning": "These fields are directly specified for changed event elements in the PRD."
+    },
+    {
+      "predicted_node": "auditor Client Library::Audit Event Generator",
+      "grounded": true,
+      "reference_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "This corresponds to the audit event generation responsibility of the client library."
+    },
+    {
+      "predicted_node": "auditor Client Library::AuditEventElementFilter\\nAbstraction",
+      "grounded": true,
+      "reference_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "Directly grounded in the PRD's element filter integration requirement."
+    },
+    {
+      "predicted_node": "auditor Client Library::Auditing API",
+      "grounded": true,
+      "reference_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "This is the core externally exposed API described by the PRD."
+    },
+    {
+      "predicted_node": "auditor Client Library::Default Implementation",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Kafka"
+      ],
+      "reasoning": "The PRD explicitly mentions a default Kafka-based implementation."
+    },
+    {
+      "predicted_node": "auditor Client Library::Default Implementation::Kafka Publisher",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Kafka"
+      ],
+      "reasoning": "This directly corresponds to the default Kafka-based publishing implementation."
+    },
+    {
+      "predicted_node": "auditor Client Library::EventPublisher\\nAbstraction",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Kafka"
+      ],
+      "reasoning": "The PRD requires an EventPublisher abstraction for delivery."
+    },
+    {
+      "predicted_node": "auditor Client Library::LogProvider\\nAbstraction",
+      "grounded": true,
+      "reference_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "The PRD requires a LogProvider abstraction for logging support."
+    },
+    {
+      "predicted_node": "auditor Client Library::Object Comparator",
+      "grounded": true,
+      "reference_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "reasoning": "Comparing old and new object states is a core responsibility described in the PRD."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "auditor Client Library::Default Implementation::Kafka Publisher",
+        "auditor Client Library::Default Implementation"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Kafka node is represented by the predicted default Kafka publisher implementation; the boundary remains semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "predicted_nodes": [
+        "auditor Client Library::Auditing API",
+        "auditor Client Library::Audit Event Generator",
+        "auditor Client Library::Object Comparator",
+        "auditor Client Library::EventPublisher\\nAbstraction",
+        "auditor Client Library::LogProvider\\nAbstraction",
+        "auditor Client Library::AuditEventElementFilter\\nAbstraction",
+        "auditor Client Library::Default Implementation"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The three GT client nodes are effectively the same client-side auditor library responsibility, which is captured by the predicted library boundary and its internal components."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Databases / Filestores\\nElastic, Hadoop, etc.",
+    "Global::auditor-v1 app\\nserver"
+  ],
+  "unmatched_predicted_nodes": [
+    "Configuration::AuditorEventConfig",
+    "Configuration::applicationName\\neventSource\\neventSubType\\nmetadata",
+    "Configuration::filters.element\\nenabled\\ntypes\\nincludes",
+    "Downstream Consumers::Event Processing\\nServices",
+    "Global::Configuration",
+    "Global::Downstream Consumers",
+    "Global::Infrastructure Integrators",
+    "Global::Input Objects",
+    "Global::JVM Application",
+    "Global::Output Events",
+    "Infrastructure Integrators::Publisher/Loger/Filter\\nImplementations",
+    "Input Objects::newObject",
+    "Input Objects::oldObject",
+    "JVM Application::Application Code",
+    "Output Events::AuditEvent",
+    "Output Events::JSON Payload",
+    "Output Events::UPDATED\\nCREATED\\nDELETED",
+    "Output Events::name\\nupdatedValue\\npreviousValue\\nmetadata.fqdn",
+    "auditor Client Library::Audit Event Generator",
+    "auditor Client Library::AuditEventElementFilter\\nAbstraction",
+    "auditor Client Library::Auditing API",
+    "auditor Client Library::Default Implementation",
+    "auditor Client Library::Default Implementation::Kafka Publisher",
+    "auditor Client Library::EventPublisher\\nAbstraction",
+    "auditor Client Library::LogProvider\\nAbstraction",
+    "auditor Client Library::Object Comparator"
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::HTTP"
+      ],
+      "predicted_nodes": [
+        "Global::HTTP Server",
+        "Logging Router::/logger/in (POST",
+        "Logging Router::/logger/status (GET"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT HTTP node is split across the HTTP server and HTTP route endpoints, which is semantically consistent with the manual design."
+    },
+    {
+      "gt_nodes": [
+        "Global::HypnoLog\\nServer"
+      ],
+      "predicted_nodes": [
+        "Global::Express App",
+        "Global::HTTP Server",
+        "Global::Socket.IO Server",
+        "HTTP Server::Node.js Runtime",
+        "Express App::JSON Parser Middleware",
+        "Express App::Static File Server",
+        "Logging Router::/logger/in (POST",
+        "Logging Router::/logger/status (GET",
+        "Express App::Status Endpoint Announcer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT server node is decomposed into its runtime, Express app, HTTP server, middleware, routes, and Socket.IO components. This is a reasonable architectural expansion and stays within the correct server-side boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::In Browser Log"
+      ],
+      "predicted_nodes": [
+        "Global::Web Browser",
+        "Web Browser::Browser UI",
+        "Web Browser::Browser UI::Client Interface",
+        "Web Browser::Browser UI::Visualizer Loader",
+        "Web Browser::Configuration Loader",
+        "Web Browser::Configuration Loader::User Overrides",
+        "Web Browser::Configuration Loader::Visualizer Config",
+        "Web Browser::Data Store",
+        "Web Browser::Data Store::Log Objects List",
+        "Web Browser::Data Store::Metadata Processor",
+        "Web Browser::Socket.IO Client",
+        "Web Browser::Socket.IO Client::Connection Handler",
+        "Web Browser::Socket.IO Client::Message Receiver",
+        "Web Browser::Validation & Error Handler",
+        "Web Browser::Validation & Error Handler::Ajv Schema Validator",
+        "Web Browser::Validation & Error Handler::Error Object Generator",
+        "Web Browser::Visualizer Dispatcher",
+        "Web Browser::Visualizer Modules",
+        "Web Browser::Visualizer Modules::Visualizer A",
+        "Web Browser::Visualizer Modules::Visualizer B",
+        "Web Browser::Visualizer Modules::Visualizer N",
+        "Web Browser::Window Dispatcher",
+        "Web Browser::Window Dispatcher::Default Window",
+        "Web Browser::Window Dispatcher::Message Distributor",
+        "Web Browser::Window Dispatcher::Window Registry"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT browser-side logging/display node is expanded into its actual browser UI, data store, Socket.IO client, validation, visualizer, and window-dispatch subsystems. The boundary attribution is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::C#",
+    "Global::Python"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Logging Producers",
+    "Logging Producers::External Clients"
+  ]
+}

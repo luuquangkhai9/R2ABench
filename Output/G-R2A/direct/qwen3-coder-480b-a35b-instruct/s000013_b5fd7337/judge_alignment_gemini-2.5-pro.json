@@ -1,0 +1,68 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "High level architecture::Analytics and storage::Docker\nelasticsearch container",
+        "High level architecture::Analytics and storage::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "Docker Network::Elasticsearch"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT separates the service and container under an 'Analytics and storage' logical boundary, whereas the predicted model groups it under a generic 'Docker Network', losing the specific tier-level architectural separation."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Analytics and storage::Docker\nkibana container",
+        "High level architecture::Analytics and storage::Kibana"
+      ],
+      "predicted_nodes": [
+        "Docker Network::Kibana"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT defines a specific 'Analytics and storage' tier, while the predicted node places it in a flattened 'Docker Network' boundary."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Backend::Docker\nbackend container",
+        "High level architecture::Backend::FastAPI"
+      ],
+      "predicted_nodes": [
+        "Docker Network::FastAPI Backend"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT explicitly encapsulates the container and framework within a 'Backend' boundary, but the predicted node places it in a generic 'Docker Network' boundary."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Frontend::Docker\nfrontend container",
+        "High level architecture::Frontend::React"
+      ],
+      "predicted_nodes": [
+        "Docker Network::React Frontend"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT explicitly models the container and library within a 'Frontend' boundary, whereas the predicted model collapses it into a generic 'Docker Network' boundary."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Backend::Genius API\nintegration"
+      ],
+      "predicted_nodes": [
+        "Global::Genius API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT manually models the Genius API integration inside the 'Backend' boundary, whereas the predicted node places it in the 'Global' scope (despite being structurally accurate per the PRD, it fails strictly to reproduce the GT boundary attribution)."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "High level architecture::Developer/Admin",
+    "High level architecture::user"
+  ],
+  "unmatched_predicted_nodes": []
+}

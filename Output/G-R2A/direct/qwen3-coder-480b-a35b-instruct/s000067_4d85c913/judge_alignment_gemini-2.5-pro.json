@@ -1,0 +1,91 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::TraceLeft\\nCLI and library tracer"
+      ],
+      "predicted_nodes": [
+        "TraceLeft Framework::CLI Entry Point",
+        "TraceLeft Framework::Configuration Reader",
+        "TraceLeft Framework::Event Generator",
+        "TraceLeft Framework::Handler Loader",
+        "TraceLeft Framework::Probe Installer",
+        "TraceLeft Framework::Trace Command Handler",
+        "TraceLeft Framework::Userspace Tracer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly decomposed the monolithic GT node 'TraceLeft\\nCLI and library tracer' into its constituent functional parts as described in the PRD (CLI, generator, loader, installer, tracer). The boundary 'TraceLeft Framework' is a more specific and accurate grouping than the GT's 'Global'."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Kprobe / Kretprobe\\nother traced calls",
+        "Main eBPF Program::Kprobe\\nentry probe",
+        "Main eBPF Program::Kretprobe\\nreturn probe"
+      ],
+      "predicted_nodes": [
+        "TraceLeft Framework::Kernel Probes (kprobe/kretprobe)"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the specific main eBPF probe examples from the GT into a single, conceptually accurate node. The GT boundary 'Main eBPF Program' is more specific, but the AI's 'TraceLeft Framework' is a semantically acceptable high-level grouping for components belonging to the system."
+    },
+    {
+      "gt_nodes": [
+        "Event Handler eBPF Programs::Default Handler Probes",
+        "Event Handler eBPF Programs::Handler Probe\\nhandle_syscall_write",
+        "Event Handler eBPF Programs::Process Specific\\nHandler Probes"
+      ],
+      "predicted_nodes": [
+        "TraceLeft Framework::Handler Programs"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the detailed examples of different handler probes from the GT into a single 'Handler Programs' node. The boundary 'TraceLeft Framework' is a reasonable high-level grouping, while the GT's 'Event Handler eBPF Programs' is a more specific but semantically related layer."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Prog Maps\\nhandler mappings"
+      ],
+      "predicted_nodes": [
+        "TraceLeft Framework::Handler Maps"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct 1:1 match. Both nodes refer to the eBPF maps used to select handler programs. The AI's boundary 'TraceLeft Framework' is semantically equivalent to the GT's 'Main eBPF Program' in the context of grouping the system's core components."
+    },
+    {
+      "gt_nodes": [
+        "Global::Perf Event Map\\nshared event map"
+      ],
+      "predicted_nodes": [
+        "TraceLeft Framework::Perf Event Channel"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct 1:1 match for the kernel-to-userspace communication mechanism. The predicted name 'Perf Event Channel' is semantically identical to 'Perf Event Map'. The AI's boundary 'TraceLeft Framework' is an improvement over the generic 'Global' boundary in the GT."
+    },
+    {
+      "gt_nodes": [
+        "Linux Kernel Functions::inet_csk_accept",
+        "Linux Kernel Functions::sys_open",
+        "Linux Kernel Functions::sys_write"
+      ],
+      "predicted_nodes": [
+        "External Dependencies::Linux Kernel"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly abstracted the specific traced kernel functions from the GT into a single 'Linux Kernel' node. The boundary 'External Dependencies' is a perfect match for the GT's 'Linux Kernel Functions', accurately categorizing it as an external system."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Prog ID Map\\npid to id",
+    "Main eBPF Program::Prog Map\\npid to fd",
+    "Main eBPF Program::Ret Prog Map\\npid to fd"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Dependencies::gobpf Library",
+    "TraceLeft Framework::eBPF Runtime"
+  ]
+}

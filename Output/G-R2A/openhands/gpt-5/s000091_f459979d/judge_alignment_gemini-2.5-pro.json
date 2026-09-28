@@ -1,0 +1,75 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Secure API\nAuthenticated HTTP endpoints"
+      ],
+      "predicted_nodes": [
+        "Management API (Spring::UserController\n- GET /users\n- POST /add",
+        "Management API (Spring::UserService",
+        "Management API (Spring::JwtUtility\nisValidToken(auth,1"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Secure API is split by the AI into specific MVC components (Controller, Service, Utility). The boundaries align semantically representing the management API domain."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Management Web UI"
+      ],
+      "predicted_nodes": [
+        "Global::Authenticated API Client\n(HTTP + Authorization"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT explicitly denotes the Web UI, which the AI correctly maps to the generic client role (Authenticated API Client) invoking management operations based on the PRD."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Blockchain Network\nEthereum / Web3j"
+      ],
+      "predicted_nodes": [
+        "Global::Ethereum-Compatible Node\n(Web3j HTTP",
+        "Blockchain Integration::Web3j Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Blockchain Network node is detailed into the physical node and the software client library component by the AI. The boundaries are correctly interpreted as external and integration."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::BootstrapStore\nSmart Contract"
+      ],
+      "predicted_nodes": [
+        "Blockchain Integration::ClientBootstrapContract"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the smart contract component storing bootstrap details. Boundary attribution correctly encapsulates blockchain concepts."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Server\nLeshan server component"
+      ],
+      "predicted_nodes": [
+        "Global::LwM2M Service Component",
+        "LwM2M Handling::Leshan/LwM2M Model Types",
+        "LwM2M Handling::LwM2MNodeParser\n(JSON -> typed nodes"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT server component is divided by the AI into the core service class, internal parsers, and typed models. Boundary placement correctly reflects LwM2M data handling logic."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "LwM2M Blockchain Platform::External Applications\nusing LwM2M",
+    "LwM2M Blockchain Platform::LwM2M Bootstrap Server",
+    "LwM2M Blockchain Platform::LwM2M Client\nDevice 1",
+    "LwM2M Blockchain Platform::LwM2M Client\nDevice 2"
+  ],
+  "unmatched_predicted_nodes": [
+    "Blockchain Integration::BlockchainService\n- getAllClientSecurity()\n- addClient()\n- getClientByEndpoint",
+    "Global::Backend Integration Service",
+    "Blockchain Integration::Fixed32BytesCodec\nASCII encode/decode (32 bytes"
+  ]
+}

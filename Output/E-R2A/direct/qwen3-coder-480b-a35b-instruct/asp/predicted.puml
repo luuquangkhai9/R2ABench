@@ -1,0 +1,65 @@
+@startuml
+!define RECTANGLE class
+
+RECTANGLE "Review Artifact" as artifact {
+  + Review Purpose
+  + Checklist Items
+  + Problem Report Area
+  + Scoring Fields
+  + Reviewer Metadata
+}
+
+RECTANGLE "Reviewer" as reviewer {
+  + Inspect Requirements
+  + Record Problems
+  + Assign Scores
+  + Sign Review
+}
+
+RECTANGLE "Requirements Owner" as owner {
+  + Receive Findings
+  + Get Suggestions
+}
+
+RECTANGLE "Project Stakeholder" as stakeholder {
+  + Read Review Result
+}
+
+RECTANGLE "Standards & Specifications" as standards {
+  + Industry Standards
+  + Product Specs
+  + Business Rules
+  + Documentation Norms
+}
+
+artifact --> standards : references
+reviewer --> artifact : uses
+owner <-- artifact : receives findings
+stakeholder <-- artifact : reads results
+
+note right of artifact
+  Markdown-based checklist
+  No runtime environment
+end note
+
+note right of reviewer
+  Completes inspection
+  Records issues
+  Provides scores
+end note
+
+note left of owner
+  Gets review feedback
+  Implements improvements
+end note
+
+note left of stakeholder
+  Monitors quality status
+  Makes decisions
+end note
+
+note right of standards
+  Review basis
+  Compliance reference
+end note
+@enduml

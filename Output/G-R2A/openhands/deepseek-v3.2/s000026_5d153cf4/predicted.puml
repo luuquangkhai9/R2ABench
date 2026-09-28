@@ -1,0 +1,114 @@
+@startuml
+
+!define GCP_COLOR #4285F4
+!define K8S_COLOR #326CE5
+!define RUNTIME_COLOR #34A853
+!define CLIENT_COLOR #EA4335
+!define CONFIG_COLOR #FBBC05
+
+title GKE Pub/Sub WebSocket Adapter System Architecture
+
+' === External Cloud Services ===
+cloud "Google Cloud Platform (GCP)" as GCP {
+  database "Pub/Sub Topic\n<size:12>projects/<project-id>/topics/<topic-name></size>" as PUBSUB_TOPIC #GCP_COLOR
+}
+
+' === Kubernetes Cluster ===
+node "Google Kubernetes Engine (GKE)" as GKE_CLUSTER #K8S_COLOR {
+  rectangle "Kubernetes Namespace" as NS {
+    folder "Configuration" as CONFIG #CONFIG_COLOR {
+      file "ConfigMap" as CONFIGMAP {
+        note right
+          <b>topic:</b>
+          projects/<project-id>/topics/<topic-name>
+        end note
+      }
+    }
+    
+    rectangle "Deployment (Adapter)" as DEPLOYMENT {
+      component "Adapter Pod" as POD_1
+      component "Adapter Pod" as POD_2
+      component "Adapter Pod" as POD_N
+      
+      POD_1 -[hidden]down-> POD_2
+      POD_2 -[hidden]down-> POD_N
+      note on link
+        <b>HPA:</b>
+        min: 1, max: 2
+        CPU target: 80%
+      end note
+    }
+    
+    rectangle "Service" as SERVICE {
+      interface "LoadBalancer" as LB
+    
+      note right of LB
+        <b>External IP:</b> <i>load-balancer-ip</i>
+        <b>Port Mapping:</b>
+        TCP 80 → 8080
+      end note
+    }
+    
+    ' === Pod Internal Components ===
+    component "Adapter Container" as CONTAINER #RUNTIME_COLOR {
+      rectangle "Runtime Process" as RUNTIME {
+        component "exec.sh" as EXEC
+        component "Node.js pulltop" as PULLTOP
+        component "websocketd" as WEBSOCKETD
+        
+        EXEC --> PULLTOP : "with SYMBOL param"
+        PULLTOP --> WEBSOCKETD : "stdout stream"
+      }
+      
+      database "Message Cache\n(Last 10 messages)" as CACHE
+    }
+  }
+}
+
+' === External Clients ===
+cloud "Internet" as INTERNET {
+  rectangle "Web Client 1" as CLIENT_1 #CLIENT_COLOR
+  rectangle "Web Client 2" as CLIENT_2 #CLIENT_COLOR
+  rectangle "Web Client N" as CLIENT_N #CLIENT_COLOR
+  
+  CLIENT_1 -[hidden]down-> CLIENT_2
+  CLIENT_2 -[hidden]down-> CLIENT_N
+}
+
+' === Data Flows ===
+PUBSUB_TOPIC ..> PULLTOP : "1. Consume messages\n(via Pub/Sub subscription)" #GCP_COLOR
+CONFIGMAP ..> CONTAINER : "2. Inject as SYMBOL\nenvironment variable" #CONFIG_COLOR
+WEBSOCKETD --> LB : "3. Serve on port 8080" #RUNTIME_COLOR
+LB ..> CLIENT_1 : "4. WebSocket connection\n(TCP 80 → 8080)" #CLIENT_COLOR
+LB ..> CLIENT_2 : "4. WebSocket connection\n(TCP 80 → 8080)" #CLIENT_COLOR
+LB ..> CLIENT_N : "4. WebSocket connection\n(TCP 80 → 8080)" #CLIENT_COLOR
+PULLTOP --> CACHE : "5. Update cache"
+CACHE ..> WEBSOCKETD : "6. Serve cached messages\n(on new connections)" #RUNTIME_COLOR
+
+' === Legend ===
+legend right
+  <b>Color Legend:</b>
+  <color:#4285F4>GCP Components</color>
+  <color:#326CE5>Kubernetes Components</color>
+  <color:#34A853>Runtime Components</color>
+  <color:#EA4335>Client Components</color>
+  <color:#FBBC05>Configuration</color>
+endlegend
+
+' === Notes ===
+note top of GCP
+  <b>Preconditions:</b>
+  1. GCP Project with billing enabled
+  2. Read access to configured topic
+  3. Permission to create Pub/Sub subscriptions
+end note
+
+note bottom of DEPLOYMENT
+  <b>Key Characteristics:</b>
+  • One deployment instance per topic
+  • Multiplexes many clients with one subscription
+  • Horizontal scaling via HPA
+  • Load-balanced client connections
+end note
+
+@enduml

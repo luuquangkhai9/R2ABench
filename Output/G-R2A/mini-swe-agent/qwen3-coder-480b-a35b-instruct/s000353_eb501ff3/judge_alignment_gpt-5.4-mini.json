@@ -1,0 +1,69 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Turing System::Turing API Server\nHTTP REST API to configure Routers"
+      ],
+      "predicted_nodes": [
+        "Turing API Service::HTTP API Layer",
+        "Turing API Service::Middleware Layer",
+        "Turing API Service::Router Management Service",
+        "Turing API Service::Ensembler Management Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents the Turing API server as a single REST API component, while the predicted diagram decomposes it into API, middleware, and domain management services. This is a reasonable functional split and the boundary remains within the same Turing API service context."
+    },
+    {
+      "gt_nodes": [
+        "Turing System::Database\nPersistent storage for Router objects"
+      ],
+      "predicted_nodes": [
+        "Data Store::Routers DB",
+        "Data Store::Ensemblers DB"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT storage node is a single persistent storage component for router objects, and the prediction splits persistence into router and ensembler databases. While the GT only explicitly mentions router storage, the database boundary is still correct and the decomposition is plausible for the broader Turing system."
+    },
+    {
+      "gt_nodes": [
+        "Kubernetes Cluster::Istio"
+      ],
+      "predicted_nodes": [
+        "External Systems::Kubernetes Cluster"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The prediction captures Kubernetes-related infrastructure, but it is too coarse and does not specifically reproduce Istio as a distinct cluster component. This is a boundary/abstraction mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Kubernetes Cluster::Knative Controller"
+      ],
+      "predicted_nodes": [
+        "External Systems::Kubernetes Cluster"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT identifies Knative Controller as a specific Kubernetes cluster component, but the prediction collapses it into a generic Kubernetes Cluster node. This loses the distinct architectural boundary and is not an accurate reproduction."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Authorization Service",
+    "Global::Experimentation Service",
+    "Global::Machine Learning Platform\nMLP API Server",
+    "Global::Monitoring and Alerting Service",
+    "Global::Router Clients",
+    "Global::Router Endpoints",
+    "Global::Secret Store",
+    "Global::Turing User",
+    "Global::Turing UI\nWeb interface to configure Routers"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::Jaeger Tracing",
+    "External Systems::MLflow Model Registry",
+    "Global::Data Store",
+    "PyFuncEnsembler Runtime::PyFuncEnsembler Webservice"
+  ]
+}

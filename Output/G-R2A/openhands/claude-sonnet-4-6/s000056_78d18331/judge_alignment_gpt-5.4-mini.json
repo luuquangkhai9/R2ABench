@@ -1,0 +1,270 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::Go build tags",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kubernetes Node (Privileged DaemonSet::End-to-End Test Suite::Provider-Specific Test Files\\n(//go:build <provider>"
+      ],
+      "reasoning": "The GT node is about provider-specific test selection via Go build tags, which is directly represented by the predicted provider-specific test files node."
+    },
+    {
+      "gt_node": "Host Scanner Endpoint Tests::endpoint_platform1_test.go\\nplatform-specific expected data",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kubernetes Node (Privileged DaemonSet::End-to-End Test Suite::Provider-Specific Test Files\\n(//go:build <provider>"
+      ],
+      "reasoning": "The predicted node captures provider-specific test files and expected data selection, covering this platform-specific endpoint test file responsibility."
+    },
+    {
+      "gt_node": "Host Scanner Endpoint Tests::endpoint_platform2_test.go\\nplatform-specific expected data",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kubernetes Node (Privileged DaemonSet::End-to-End Test Suite::Provider-Specific Test Files\\n(//go:build <provider>"
+      ],
+      "reasoning": "The predicted node captures provider-specific test files and expected data selection, covering this platform-specific endpoint test file responsibility."
+    },
+    {
+      "gt_node": "Host Scanner Endpoint Tests::endpoint_test.go\\ncommon endpoint tests",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Kubernetes Node (Privileged DaemonSet::End-to-End Test Suite::HTTP Endpoint Tests"
+      ],
+      "reasoning": "The common endpoint test file maps well to the broader HTTP endpoint tests node."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Global::Kubernetes Node Host\\nFilesystem & Runtime",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "This is a contextual environment node derived from the PRD's host filesystem and runtime environment descriptions. It is broad and not directly represented in the GT node list, but it is grounded in the provided system context."
+    },
+    {
+      "predicted_node": "Global::Runtime Environments",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "This is a contextual environment grouping from the PRD and is grounded by the runtime environment discussion, though it is not explicitly present as a GT node."
+    },
+    {
+      "predicted_node": "Kubernetes Node (Privileged DaemonSet::End-to-End Test Suite",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Go build tags",
+        "Host Scanner Endpoint Tests::endpoint_platform1_test.go\\nplatform-specific expected data",
+        "Host Scanner Endpoint Tests::endpoint_platform2_test.go\\nplatform-specific expected data",
+        "Host Scanner Endpoint Tests::endpoint_test.go\\ncommon endpoint tests"
+      ],
+      "reasoning": "This is a valid aggregation of the test-related GT concepts, though it overgeneralizes them into a larger suite boundary."
+    },
+    {
+      "predicted_node": "Kubernetes Node (Privileged DaemonSet::End-to-End Test Suite::CNI Resolution Tests",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT node set contains only Go build tags and endpoint tests; CNI resolution testing is supported by the PRD but not represented in the GT nodes provided."
+    },
+    {
+      "predicted_node": "Kubernetes Node (Privileged DaemonSet::End-to-End Test Suite::HTTP Endpoint Tests",
+      "grounded": true,
+      "reference_nodes": [
+        "Host Scanner Endpoint Tests::endpoint_test.go\\ncommon endpoint tests"
+      ],
+      "reasoning": "This corresponds to the common endpoint test concept in the GT."
+    },
+    {
+      "predicted_node": "Kubernetes Node (Privileged DaemonSet::End-to-End Test Suite::Provider-Specific Test Files\\n(//go:build <provider>",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Go build tags",
+        "Host Scanner Endpoint Tests::endpoint_platform1_test.go\\nplatform-specific expected data",
+        "Host Scanner Endpoint Tests::endpoint_platform2_test.go\\nplatform-specific expected data"
+      ],
+      "reasoning": "This is directly grounded in the GT's Go build tags and platform-specific expected data files."
+    },
+    {
+      "predicted_node": "Kubernetes Node (Privileged DaemonSet::End-to-End Test Suite::Sanitization Tests",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node corresponds to sanitization tests; this is supported by PRD context but absent from the provided GT node list."
+    },
+    {
+      "predicted_node": "Kubernetes Node (Privileged DaemonSet::host-scanner Service",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT list is test-focused and does not include the service node itself."
+    },
+    {
+      "predicted_node": "Kubernetes Node (Privileged DaemonSet::host-scanner Service::CNI Config Directory Resolver",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is grounded in the PRD but not in the provided GT node list."
+    },
+    {
+      "predicted_node": "Kubernetes Node (Privileged DaemonSet::host-scanner Service::CNI Config Directory Resolver::CLI Argument Parser",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node covers CLI argument parsing."
+    },
+    {
+      "predicted_node": "Kubernetes Node (Privileged DaemonSet::host-scanner Service::CNI Config Directory Resolver::Config-File Parser",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node covers configuration-file parsing."
+    },
+    {
+      "predicted_node": "Kubernetes Node (Privileged DaemonSet::host-scanner Service::CNI Config Directory Resolver::Default Path Provider\\n(/etc/cni/, /var/lib/cni/",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node covers default CNI path resolution."
+    },
+    {
+      "predicted_node": "Kubernetes Node (Privileged DaemonSet::host-scanner Service::CNI Config Directory Resolver::Runtime Type Selector",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node covers runtime-type selection."
+    },
+    {
+      "predicted_node": "Kubernetes Node (Privileged DaemonSet::host-scanner Service::Control-Plane Data Sanitizer",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node covers control-plane data sanitization."
+    },
+    {
+      "predicted_node": "Kubernetes Node (Privileged DaemonSet::host-scanner Service::Control-Plane Data Sanitizer::Encryption Secret Remover",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node covers secret removal."
+    },
+    {
+      "predicted_node": "Kubernetes Node (Privileged DaemonSet::host-scanner Service::Control-Plane Data Sanitizer::JSON Input Processor",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node covers JSON input processing."
+    },
+    {
+      "predicted_node": "Kubernetes Node (Privileged DaemonSet::host-scanner Service::Control-Plane Data Sanitizer::Sanitized JSON Output Producer",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node covers sanitized JSON output production."
+    },
+    {
+      "predicted_node": "Kubernetes Node (Privileged DaemonSet::host-scanner Service::HTTP API Layer",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node covers the HTTP API layer directly."
+    },
+    {
+      "predicted_node": "Kubernetes Node (Privileged DaemonSet::host-scanner Service::HTTP API Layer::Endpoint Router",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node covers endpoint routing."
+    },
+    {
+      "predicted_node": "Kubernetes Node (Privileged DaemonSet::host-scanner Service::HTTP API Layer::Unknown Endpoint Handler\\n(returns HTTP 404",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node explicitly represents the unknown endpoint handler, although the PRD does describe 404 behavior."
+    },
+    {
+      "predicted_node": "Kubernetes Node (Privileged DaemonSet::host-scanner Service::Host Information Collector",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node covers host information collection."
+    },
+    {
+      "predicted_node": "Kubernetes Node Host\\nFilesystem & Runtime::/etc/cni/",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "This is a valid environment/path concept grounded in the PRD context, though not present in the GT node list."
+    },
+    {
+      "predicted_node": "Kubernetes Node Host\\nFilesystem & Runtime::/run/, /var/lib/",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "This is a valid environment/path concept grounded in the PRD context, though not present in the GT node list."
+    },
+    {
+      "predicted_node": "Kubernetes Node Host\\nFilesystem & Runtime::/var/lib/cni/",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "This is a valid environment/path concept grounded in the PRD context, though not present in the GT node list."
+    },
+    {
+      "predicted_node": "Runtime Environments::CRI-O",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "CRI-O is explicitly mentioned in the PRD operating environment and is therefore grounded, though not in the GT node list."
+    },
+    {
+      "predicted_node": "Runtime Environments::kubelet / containerd",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "kubelet/containerd is explicitly mentioned in the PRD and is therefore grounded, though not in the GT node list."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Go build tags"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Node (Privileged DaemonSet::End-to-End Test Suite::Provider-Specific Test Files\\n(//go:build <provider>"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The function matches, but the GT is a global/test-concern node while the predicted node places it inside a privileged DaemonSet service boundary, which is not semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Host Scanner Endpoint Tests::endpoint_platform1_test.go\\nplatform-specific expected data",
+        "Host Scanner Endpoint Tests::endpoint_platform2_test.go\\nplatform-specific expected data"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Node (Privileged DaemonSet::End-to-End Test Suite::Provider-Specific Test Files\\n(//go:build <provider>"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node correctly captures the provider-specific test-file concept, but it aggregates both platform-specific GT nodes and places them under an overly specific service boundary."
+    },
+    {
+      "gt_nodes": [
+        "Host Scanner Endpoint Tests::endpoint_test.go\\ncommon endpoint tests"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Node (Privileged DaemonSet::End-to-End Test Suite::HTTP Endpoint Tests"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The test responsibility matches, but the predicted node places the test concept under a service boundary that does not correspond to the GT test package boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Kubernetes Node Host\\nFilesystem & Runtime",
+    "Global::Runtime Environments",
+    "Kubernetes Node (Privileged DaemonSet::End-to-End Test Suite",
+    "Kubernetes Node (Privileged DaemonSet::End-to-End Test Suite::CNI Resolution Tests",
+    "Kubernetes Node (Privileged DaemonSet::End-to-End Test Suite::HTTP Endpoint Tests",
+    "Kubernetes Node (Privileged DaemonSet::End-to-End Test Suite::Provider-Specific Test Files\\n(//go:build <provider>",
+    "Kubernetes Node (Privileged DaemonSet::End-to-End Test Suite::Sanitization Tests",
+    "Kubernetes Node (Privileged DaemonSet::host-scanner Service",
+    "Kubernetes Node (Privileged DaemonSet::host-scanner Service::CNI Config Directory Resolver",
+    "Kubernetes Node (Privileged DaemonSet::host-scanner Service::CNI Config Directory Resolver::CLI Argument Parser",
+    "Kubernetes Node (Privileged DaemonSet::host-scanner Service::CNI Config Directory Resolver::Config-File Parser",
+    "Kubernetes Node (Privileged DaemonSet::host-scanner Service::CNI Config Directory Resolver::Default Path Provider\\n(/etc/cni/, /var/lib/cni/",
+    "Kubernetes Node (Privileged DaemonSet::host-scanner Service::CNI Config Directory Resolver::Runtime Type Selector",
+    "Kubernetes Node (Privileged DaemonSet::host-scanner Service::Control-Plane Data Sanitizer",
+    "Kubernetes Node (Privileged DaemonSet::host-scanner Service::Control-Plane Data Sanitizer::Encryption Secret Remover",
+    "Kubernetes Node (Privileged DaemonSet::host-scanner Service::Control-Plane Data Sanitizer::JSON Input Processor",
+    "Kubernetes Node (Privileged DaemonSet::host-scanner Service::Control-Plane Data Sanitizer::Sanitized JSON Output Producer",
+    "Kubernetes Node (Privileged DaemonSet::host-scanner Service::HTTP API Layer",
+    "Kubernetes Node (Privileged DaemonSet::host-scanner Service::HTTP API Layer::Endpoint Router",
+    "Kubernetes Node (Privileged DaemonSet::host-scanner Service::HTTP API Layer::Unknown Endpoint Handler\\n(returns HTTP 404",
+    "Kubernetes Node (Privileged DaemonSet::host-scanner Service::Host Information Collector",
+    "Kubernetes Node Host\\nFilesystem & Runtime::/etc/cni/",
+    "Kubernetes Node Host\\nFilesystem & Runtime::/run/, /var/lib/",
+    "Kubernetes Node Host\\nFilesystem & Runtime::/var/lib/cni/",
+    "Runtime Environments::CRI-O",
+    "Runtime Environments::kubelet / containerd"
+  ]
+}

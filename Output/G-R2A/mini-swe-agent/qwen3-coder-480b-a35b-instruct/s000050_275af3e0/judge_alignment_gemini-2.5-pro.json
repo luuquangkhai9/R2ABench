@@ -1,0 +1,74 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "predicted_nodes": [
+        "hAFL2 System::Linux Userspace Workflow",
+        "hAFL2 System::Standalone Test Runner",
+        "hAFL2 System::Windows Hyper-V Workflow",
+        "hAFL2 System::kAFL Fuzzer Core"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT node 'hAFL2' represents the main fuzzing orchestrator. The AI correctly splits this into its main functional components: the core engine, the test entrypoint, and the two primary workflows it manages. The AI's 'hAFL2 System' boundary is a logical grouping, which is a valid, high-level alternative to the GT's host-level boundary 'KVM (L0'."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2"
+      ],
+      "predicted_nodes": [
+        "Windows Environment::Child Partition VM"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the child partition VM in the Hyper-V fuzzing workflow. The AI's 'Windows Environment' boundary is a logical grouping for all Windows-related components, which is semantically consistent with the GT's more specific physical location within the 'Hyper-V (L1) - Host'."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2"
+      ],
+      "predicted_nodes": [
+        "Windows Environment::Root Partition VM"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the root partition VM in the Hyper-V fuzzing workflow. The AI's 'Windows Environment' boundary is a logical grouping for all Windows-related components, which is semantically consistent with the GT's more specific physical location within the 'Hyper-V (L1) - Host'."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2::harness.sys"
+      ],
+      "predicted_nodes": [
+        "Windows Environment::Harness Driver"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "'Harness Driver' is a correct generic description for 'harness.sys'. The GT places it inside the 'Child Partition' boundary, while the AI uses a broader 'Windows Environment' boundary. This is a less specific but still contextually correct placement."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::CrashMonitoring.sys"
+      ],
+      "predicted_nodes": [
+        "Windows Environment::Crash Monitor"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "'Crash Monitor' is a correct generic description for 'CrashMonitoring.sys'. The GT places it inside the 'Root Partition' boundary, while the AI uses a broader 'Windows Environment' boundary. This is a less specific but still contextually correct placement."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::KVM (L0",
+    "KVM (L0::Hyper-V (L1) - Host",
+    "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::vmswitch.sys"
+  ],
+  "unmatched_predicted_nodes": [
+    "Guest Environment::Embedded Forkserver",
+    "Guest Environment::InitRD",
+    "Guest Environment::Target Binary",
+    "Windows Environment::Loader",
+    "Windows Environment::Packet Sender"
+  ]
+}

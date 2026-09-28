@@ -1,0 +1,102 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Alert Source::app-sre\nalertmanager",
+        "Alert Source::cluster\nalertmanager",
+        "Alert Source::deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Systems::Alert Webhook\nSource"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT explicitly lists various alert sources, which the AI accurately groups into a single external alert webhook source node."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::switch(alerttype"
+      ],
+      "predicted_nodes": [
+        "User Interface Layer::CLI Tool\ncadctl"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the core CLI tool entrypoint/routing behavior. The CLI Tool boundary appropriately maps to the GT 'cadctl' namespace."
+    },
+    {
+      "gt_nodes": [
+        "Alerts::CHGM",
+        "cadctl::CHGM investigation"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::CHGM Alert Handler"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The specific CHGM alerts and their associated CLI investigation tasks in the GT are aggregated into the CHGM Alert Handler in the AI prediction's business logic layer."
+    },
+    {
+      "gt_nodes": [
+        "Alerts::CPD",
+        "Alerts::all cluster\nalerts",
+        "cadctl::CPD investigation",
+        "cadctl::Future investigations"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Anomaly Detector"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "General cluster alerts and their respective investigations in the GT correspond directly to the anomaly detection business logic component."
+    },
+    {
+      "gt_nodes": [
+        "PagerDuty Team::<cluster>.openshiftapps.com-\nhive-cluster",
+        "PagerDuty Team::app-sre-alertmanager",
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The multiple distinct PagerDuty team notifications in the GT are successfully merged into a single PagerDuty external system node by the AI."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton\nEvent\nListener",
+        "Global::Tekton Interceptor:\nAlert investigation\nimplemented in CAD?"
+      ],
+      "predicted_nodes": [
+        "Execution Layer::Tekton Pipeline\nExecution"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The Tekton event listener and interceptor nodes from the GT represent the trigger mechanisms, mapping well to the Tekton Pipeline Execution layer in the prediction."
+    },
+    {
+      "gt_nodes": [
+        "Global::Escalate alert to\non-call SRE",
+        "Global::Update Incident\nNotes"
+      ],
+      "predicted_nodes": [
+        "Business Logic Layer::Disposition Engine"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Escalating alerts and updating incident notes are exactly the mitigation and disposition actions described in the PRD, which the AI models as the Disposition Engine."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Business Logic Layer::Integration Library",
+    "Execution Layer::Skip-Webhook\nExecution Path",
+    "External Systems::AWS",
+    "External Systems::OCM",
+    "External Systems::Tekton Controller",
+    "Global::Cluster Data",
+    "Global::Deployment Templates",
+    "User Interface Layer::Template Update\nUtility"
+  ]
+}

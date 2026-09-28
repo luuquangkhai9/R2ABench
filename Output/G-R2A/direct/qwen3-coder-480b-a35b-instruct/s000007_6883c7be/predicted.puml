@@ -1,0 +1,66 @@
+@startuml
+!define RECTANGLE class
+
+RECTANGLE "HTTP Client" as client
+RECTANGLE "HTTP Proxy" as proxy
+RECTANGLE "Upstream Server" as upstream
+RECTANGLE "Test Server" as testServer
+RECTANGLE "Test Client" as testClient
+
+client --> proxy : FullHttpRequest
+proxy --> upstream : Forwarded Request\n(URI, Headers, Body)
+testClient --> testServer : GET /download
+testServer --> testClient : File Download Response\n(application/octet-stream)
+
+note right of proxy
+  Forwards requests only after
+  upstream channel is active
+end note
+
+note right of testServer
+  Provides file download endpoint
+  Returns binary file when exists
+end note
+
+note right of testClient
+  Async HTTP client
+  Counts 200 responses
+end note
+
+package "Java Runtime Environment" {
+  [Proxy Component] as proxyComponent
+  [Test Server Component] as testServerComponent
+  [Test Client Component] as testClientComponent
+}
+
+proxyComponent --> proxy
+testServerComponent --> testServer
+testClientComponent --> testClient
+
+note top of proxyComponent
+  Requires Netty-style
+  channel activation
+end note
+
+note top of testServerComponent
+  Uses Grizzly/Jersey
+  HTTP server stack
+end note
+
+note top of testClientComponent
+  Uses async HTTP client
+  Fixed thread pool (50 threads)
+end note
+
+folder "File System" {
+  [Target File] as targetFile
+}
+
+targetFile --> testServer : File existence check
+
+note right of targetFile
+  File download behavior
+  depends on file presence
+end note
+
+@enduml

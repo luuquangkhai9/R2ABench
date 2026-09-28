@@ -1,0 +1,107 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Browser / Client Layer::Frontend Interface\\n(Bootstrap-Vue"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Web Browser (Vue/TypeScript UI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the client-side browser UI layer. The naming differs, but the semantic role is equivalent and the boundary remains correctly on the frontend/client side."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Blog Data",
+        "Database Layer\\n(MySQL::Dataset Data",
+        "Database Layer\\n(MySQL::Following Data",
+        "Database Layer\\n(MySQL::Model Data",
+        "Database Layer\\n(MySQL::Q&A Community Data",
+        "Database Layer\\n(MySQL::User Data"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL Database"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates several MySQL-backed domain tables/data areas, while the prediction aggregates them into a single MySQL database node. This is a valid consolidation and the storage boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Admin Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Core Services (Spring Boot::Admin Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The administrative backend functionality matches. The layer/package naming differs but still correctly maps to the server/application backend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Blog Sharing Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Core Services (Spring Boot::Community Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The community service plausibly covers the blog sharing module, since the PRD groups blogs and Q&A community capabilities under the platform social/community domain. Boundary placement is still backend/server side."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Dataset Management Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Core Services (Spring Boot::Dataset Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct functional match for dataset upload/download/delete/modify operations, and the backend layer attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Following Management Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Core Services (Spring Boot::User Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted user service is too broad and does not specifically preserve the follow-management boundary. While related to user features, this is a boundary/context mismatch because following is a distinct domain module in the GT."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Model Management Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Core Services (Spring Boot::Model Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The model service corresponds directly to model upload, review, purchase, download, and management. Backend boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Q&A Community Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Core Services (Spring Boot::Community Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The community service is semantically equivalent to the GT Q&A community module, covering questions and answers. The backend boundary is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Application Layer::API Gateway / Load Balancer",
+    "Application Layer::Core Services (Spring Boot::Inference Service",
+    "Application Layer::Core Services (Spring Boot::Recommendation Service",
+    "Data Layer::File/Object Storage",
+    "External Systems::Email Service",
+    "External Systems::Model Runtime Engine",
+    "External Systems::Payment Gateway"
+  ]
+}

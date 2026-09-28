@@ -1,0 +1,360 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::Application",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Android Runtime Environment::Android Context",
+        "Background Scheduling System::Work Handler Manager",
+        "External Interfaces::QAPM Configuration Manager"
+      ],
+      "reasoning": "The GT application node is broadly represented by the Android host/runtime context plus the app-level scheduling/configuration infrastructure, though the match is conceptual rather than a dedicated application node."
+    },
+    {
+      "gt_node": "QAPM_Plugin::Plugin init compile",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node captures plugin build-time initialization/compilation behavior."
+    },
+    {
+      "gt_node": "QAPM_Plugin::QAPM_Plugin",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node represents the plugin component itself."
+    },
+    {
+      "gt_node": "QAPM_SDK::QAPM-SDK",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Background Scheduling System::Work Handler Manager",
+        "Data Sending System::Data Sender",
+        "Apache HttpClient Instrumentation::Response Handler Wrapper",
+        "Apache HttpClient Instrumentation::Entity Wrapper",
+        "Local Storage::Pending Storage",
+        "Local Storage::Upload Directory",
+        "Local Storage::Upload Files"
+      ],
+      "reasoning": "The SDK is decomposed into its reviewed functional subcomponents in the prediction set, covering the SDK responsibility at a subsystem level."
+    },
+    {
+      "gt_node": "QAPM_SDK::QAPM_Collect",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node covers the collection module."
+    },
+    {
+      "gt_node": "QAPM_SDK::QAPM_Report",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node covers the reporting module."
+    },
+    {
+      "gt_node": "QAPM_SDK::QAPM_Storage",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Local Storage::Pending Storage",
+        "Local Storage::Upload Directory",
+        "Local Storage::Upload Files",
+        "Upload Processing System::Storage Popper"
+      ],
+      "reasoning": "The storage responsibility is represented by local upload storage concepts and storage pop behavior."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Android Runtime Environment::Android Context",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Application",
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "Grounded by the Android context dependency required for upload processing."
+    },
+    {
+      "predicted_node": "Android Runtime Environment::HandlerThread",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "Grounded by the background work-handler initialization requirements."
+    },
+    {
+      "predicted_node": "Android Runtime Environment::Main Looper",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "Grounded by the requirement to maintain a main-thread handler."
+    },
+    {
+      "predicted_node": "Android Runtime Environment::Network Connectivity",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "Grounded by the network-gated upload processing requirement."
+    },
+    {
+      "predicted_node": "Apache HttpClient Instrumentation::Counting Input Stream",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "Grounded by the wrapped entity getContent() counting input stream requirement."
+    },
+    {
+      "predicted_node": "Apache HttpClient Instrumentation::Entity Wrapper",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "Grounded by the HTTP entity wrapping requirement."
+    },
+    {
+      "predicted_node": "Apache HttpClient Instrumentation::Response Handler Wrapper",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "Grounded by the transaction-aware response handler instrumentation requirement."
+    },
+    {
+      "predicted_node": "Apache HttpClient Instrumentation::Transaction State Manager",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "Grounded by the requirement to maintain and instrument transaction state during response handling."
+    },
+    {
+      "predicted_node": "Background Scheduling System::Work Handler Manager",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "Grounded by the background work-handler initialization and dispatch requirements."
+    },
+    {
+      "predicted_node": "Background Scheduling System::Work Handler Manager::Background Handler Thread",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "Grounded by the background HandlerThread requirement."
+    },
+    {
+      "predicted_node": "Background Scheduling System::Work Handler Manager::Main Thread Handler",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "Grounded by the default main-thread handler requirement."
+    },
+    {
+      "predicted_node": "Background Scheduling System::Work Handler Manager::Work Handler",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "Grounded by the handler bound to a background looper for asynchronous execution."
+    },
+    {
+      "predicted_node": "Data Sending System::Data Sender",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "Grounded by the configured sender used to submit bParam/cParam pairs."
+    },
+    {
+      "predicted_node": "Data Sending System::Parameter Combiner",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "Grounded by the parameter-pair submission behavior for bParam and cParam."
+    },
+    {
+      "predicted_node": "Data Sending System::Sender Callback Handler",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "Grounded by sender success/failure callback handling for cleanup and logging."
+    },
+    {
+      "predicted_node": "External Interfaces::Apache HttpClient",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "Grounded by the Apache HttpClient environment/interface requirements."
+    },
+    {
+      "predicted_node": "External Interfaces::HttpEntity Interface",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "Grounded by the entity wrapper interface requirement."
+    },
+    {
+      "predicted_node": "External Interfaces::QAPM Configuration Manager",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "Grounded by the configured sender being obtained through QAPM configuration management."
+    },
+    {
+      "predicted_node": "External Interfaces::ResponseHandler Interface",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "Grounded by the response-handler wrapping requirement."
+    },
+    {
+      "predicted_node": "External Interfaces::Sender Interface",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "Grounded by the upload sender interface requirement."
+    },
+    {
+      "predicted_node": "Local Storage::Pending Storage",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "reasoning": "Grounded by forced-send storage pop behavior and queued upload data concepts."
+    },
+    {
+      "predicted_node": "Local Storage::Upload Directory",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "reasoning": "Grounded by upload-directory access and scanning requirements."
+    },
+    {
+      "predicted_node": "Local Storage::Upload Files",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "reasoning": "Grounded by upload-file enumeration, read, delete, and lifecycle handling."
+    },
+    {
+      "predicted_node": "Upload Processing System::Context Parameter Extractor",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "Grounded by deriving cParam from Android context."
+    },
+    {
+      "predicted_node": "Upload Processing System::File Content Reader",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "Grounded by reading upload file content as bParam."
+    },
+    {
+      "predicted_node": "Upload Processing System::Network Gate",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "Grounded by network connectivity gating before file processing."
+    },
+    {
+      "predicted_node": "Upload Processing System::Storage Popper",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "reasoning": "Grounded by forced-send behavior that pops stored data before scanning."
+    },
+    {
+      "predicted_node": "Upload Processing System::Upload Directory Scanner",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "reasoning": "Grounded by enumerating matching upload files in the directory."
+    },
+    {
+      "predicted_node": "Upload Processing System::Upload Scheduler",
+      "grounded": true,
+      "reference_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "reasoning": "Grounded by asynchronous scheduling of runnable and upload work."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "predicted_nodes": [
+        "Background Scheduling System::Work Handler Manager",
+        "Apache HttpClient Instrumentation::Response Handler Wrapper",
+        "Apache HttpClient Instrumentation::Entity Wrapper",
+        "Apache HttpClient Instrumentation::Transaction State Manager",
+        "Local Storage::Pending Storage",
+        "Local Storage::Upload Directory",
+        "Local Storage::Upload Files",
+        "Data Sending System::Data Sender",
+        "Data Sending System::Parameter Combiner",
+        "Data Sending System::Sender Callback Handler",
+        "Upload Processing System::Context Parameter Extractor",
+        "Upload Processing System::File Content Reader",
+        "Upload Processing System::Network Gate",
+        "Upload Processing System::Storage Popper",
+        "Upload Processing System::Upload Directory Scanner",
+        "Upload Processing System::Upload Scheduler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The SDK node is decomposed into the reviewed functional areas covered by the prediction set, and the boundaries are consistent with SDK internals."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "predicted_nodes": [
+        "Local Storage::Pending Storage",
+        "Local Storage::Upload Directory",
+        "Local Storage::Upload Files",
+        "Upload Processing System::Storage Popper"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT storage module is split into local storage artifacts and storage-pop behavior, with semantically consistent boundary placement."
+    },
+    {
+      "gt_nodes": [
+        "Global::Application"
+      ],
+      "predicted_nodes": [
+        "Android Runtime Environment::Android Context",
+        "Background Scheduling System::Work Handler Manager",
+        "External Interfaces::QAPM Configuration Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The application-level responsibility is only loosely represented by host/runtime and app configuration concerns; boundaries are acceptable but the match is coarse."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "QAPM_Plugin::Plugin init compile",
+    "QAPM_Plugin::QAPM_Plugin",
+    "QAPM_SDK::QAPM_Collect",
+    "QAPM_SDK::QAPM_Report"
+  ],
+  "unmatched_predicted_nodes": []
+}

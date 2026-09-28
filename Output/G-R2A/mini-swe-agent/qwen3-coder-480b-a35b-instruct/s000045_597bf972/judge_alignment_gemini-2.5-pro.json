@@ -1,0 +1,60 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Application"
+      ],
+      "predicted_nodes": [
+        "Android Application::Host Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the host Android application that integrates the QAPM SDK. The boundaries 'Global' and 'Android Application' are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK (Scoped::Background Handler Thread",
+        "QAPM SDK (Scoped::Work Scheduler",
+        "QAPM SDK (Scoped::Network Connectivity",
+        "QAPM SDK (Scoped::Android Context"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The generic QAPM-SDK component from the GT is split by the AI into multiple foundational SDK execution, scheduling, and environment context components. The boundaries 'QAPM_SDK' and 'QAPM SDK (Scoped' map correctly."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Collect"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK (Scoped::HTTP Client Wrapper"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The HTTP Client Wrapper in the predicted nodes is the specific implementation of the SDK's data collection/instrumentation behavior outlined within the PRD's scope."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK (Scoped::Upload Processor",
+        "QAPM SDK (Scoped::Data Sender"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The broader reporting module in the GT is detailed into specific upload processing and data sending nodes by the AI. Boundaries align logically."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "QAPM_Plugin::Plugin init compile",
+    "QAPM_Plugin::QAPM_Plugin",
+    "QAPM_SDK::QAPM_Storage"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::Remote Server"
+  ]
+}

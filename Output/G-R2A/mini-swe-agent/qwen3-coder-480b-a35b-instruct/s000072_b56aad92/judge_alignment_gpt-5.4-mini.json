@@ -1,0 +1,274 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Applications\nHPC, AI, ML, Big Data"
+      ],
+      "predicted_nodes": [
+        "User Environment::Developer/Test Engineer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both refer to the human/user side of the system context, but the GT node is an application domain category while the predicted node is a user role/environment. They are not the same architectural layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::Hardware"
+      ],
+      "predicted_nodes": [
+        "External Dependencies::Linux Verbs Stack"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT hardware boundary is broadly aligned with the predicted external dependency on the Linux Verbs stack as an underlying platform dependency. The mapping is semantically close, though the prediction is more specific."
+    },
+    {
+      "gt_nodes": [
+        "Drivers and Kernels::OS Kernel\nEthernet"
+      ],
+      "predicted_nodes": [
+        "External Dependencies::OFI/libfabric"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a kernel/network driver layer, while the predicted node is a higher-level external library dependency. This is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Drivers and Kernels::OS Kernel\nHost Memory"
+      ],
+      "predicted_nodes": [
+        "External Dependencies::UCX"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node represents kernel host-memory support, but the prediction places it under a transport/library dependency. This crosses architectural boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Drivers and Kernels::OS Kernel\nMemory Hooks"
+      ],
+      "predicted_nodes": [
+        "Build & Verification Layer::Embedded hwloc Tests"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "GT memory hooks are kernel-level functionality, whereas the predicted node is a build/test workflow. These are unrelated layers."
+    },
+    {
+      "gt_nodes": [
+        "Drivers and Kernels::RDMA Verbs Driver"
+      ],
+      "predicted_nodes": [
+        "External Dependencies::Linux Verbs Stack"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The RDMA verbs driver is semantically part of the Linux verbs stack. The predicted boundary is acceptable as an external dependency abstraction."
+    },
+    {
+      "gt_nodes": [
+        "Drivers and Kernels::ROCm / CUDA"
+      ],
+      "predicted_nodes": [
+        "External Dependencies::UCX"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "GT is GPU/accelerator driver support, while UCX is a communication library dependency. This is a clear layer mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Programming Models and Frameworks::MPI\nMPICH, Open-MPI"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem::Connection Manager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "MPI frameworks and a connection manager are not the same component. The prediction captures only a small part of communication stack behavior and places it in the wrong architectural boundary."
+    },
+    {
+      "gt_nodes": [
+        "Programming Models and Frameworks::PGAS / SHMEM\nOpenSHMEM, UPC, CAF, X10, Chapel"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem::Data Transfer Module"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a programming model category, not a communication implementation module. The prediction is a different abstraction layer."
+    },
+    {
+      "gt_nodes": [
+        "Programming Models and Frameworks::Task Runtimes\nParsec, OCR, Legion"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem::Progress Engine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Task runtimes are not equivalent to a progress engine. The predicted node is an internal subsystem function rather than the GT framework category."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCM Memory Services::Memory Hooks"
+      ],
+      "predicted_nodes": [
+        "Build & Verification Layer::Libfabric Integration"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "GT is a UCX memory-service component, while the prediction is a build/integration concern. These are not equivalent and are in different layers."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\nHigh Level API::Message Passing API\nTag Matching, Rendezvous"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem::Send State Machine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "There is partial thematic overlap around messaging/rendezvous, but the GT node is a specific UCX protocol/API area, whereas the prediction is a generic send-state-machine module. Boundary attribution is not faithful."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\nHigh Level API::Transport Selection"
+      ],
+      "predicted_nodes": [
+        "External Dependencies::OFI/libfabric"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Transport selection in UCX is semantically related to choosing OFI/libfabric as a transport backend dependency. The abstraction level is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCS Services\nCommon Utilities::Data Structures"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem::Data Transfer Module"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Data structures are common utilities, not a data transfer module. The prediction misplaces the concept into a higher functional layer."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCS Services\nCommon Utilities::Memory Management"
+      ],
+      "predicted_nodes": [
+        "Build & Verification Layer::Autotools Build System"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Memory management is a runtime utility concern, not a build-system component."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCS Services\nCommon Utilities::Utilities"
+      ],
+      "predicted_nodes": [
+        "User Environment::Shell Environment"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a general runtime utility layer inside UCX, while the prediction refers to the user's shell environment. This is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCT Hardware Transports\nLow Level API::Ethernet Transport\nTCP/IP Sockets"
+      ],
+      "predicted_nodes": [
+        "External Dependencies::Linux Verbs Stack"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Ethernet/TCP/IP sockets are not the Linux Verbs stack. These are different transport technologies."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCT Hardware Transports\nLow Level API::GPU Transport\nNVIDIA CUDA, AMD ROCm"
+      ],
+      "predicted_nodes": [
+        "External Dependencies::UCX"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "GT is a GPU transport backend within UCX, while the prediction is the UCX library itself. This is too coarse and mixes layers."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCT Hardware Transports\nLow Level API::Gemini / Aries Transport\nGNI"
+      ],
+      "predicted_nodes": [
+        "External Dependencies::OFI/libfabric"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Gemini/Aries GNI transport is not equivalent to OFI/libfabric. The transport/backend semantics differ."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCT Hardware Transports\nLow Level API::Intra-node Host Memory\nSYSV, POSIX, KNEM, CMA, XPMEM"
+      ],
+      "predicted_nodes": [
+        "Build & Verification Layer::Embedded hwloc Tests"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a low-level intra-node transport mechanism, not a test workflow."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCT Hardware Transports\nLow Level API::RC"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem::Connection Manager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "RC is a transport class, while the predicted node is a connection-management function. They are related but not equivalent."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCT Hardware Transports\nLow Level API::RDMA Verbs Transport\nInfiniBand, ROCE, OPA"
+      ],
+      "predicted_nodes": [
+        "External Dependencies::Linux Verbs Stack"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a good semantic match: RDMA verbs transport corresponds to the Linux Verbs stack dependency and boundary."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCT Hardware Transports\nLow Level API::UD"
+      ],
+      "predicted_nodes": [
+        "Communication Subsystem::Send State Machine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "UD is a transport type, while the prediction is a send-state-machine behavior. Not equivalent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Drivers and Kernels::Cray Driver",
+    "Build & Verification Layer::Autotools Build System",
+    "Build & Verification Layer::Embedded hwloc Tests"
+  ],
+  "unmatched_predicted_nodes": [
+    "Communication Subsystem::Connection Manager",
+    "Communication Subsystem::Data Transfer Module",
+    "Communication Subsystem::Progress Engine",
+    "Communication Subsystem::Send State Machine",
+    "External Dependencies::Linux Verbs Stack",
+    "External Dependencies::OFI/libfabric",
+    "External Dependencies::UCX",
+    "User Environment::Developer/Test Engineer",
+    "User Environment::Shell Environment",
+    "Build & Verification Layer::Libfabric Integration"
+  ]
+}

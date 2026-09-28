@@ -1,0 +1,68 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Browser Clients::Client Browser\nPlayer 1",
+        "Browser Clients::Client Browser\nPlayer 2",
+        "Browser Clients::Client Browser\nPlayer 3"
+      ],
+      "predicted_nodes": [
+        "Global::Browser Client\n(Three.js"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT depicts multiple browser client instances/players, while the predicted diagram aggregates them into one browser client node. This is a valid semantic merge, and placing it in a global/browser-client boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\nErlang",
+        "Erlang / OTP Game Server Cluster::Server Slave\nErlang"
+      ],
+      "predicted_nodes": [
+        "Global::Erlang Game Server\n(Master Node",
+        "Global::Erlang Game Server\n(Replica Node"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted nodes correspond to the GT master and slave server roles. The naming differs but the functional components are equivalent, and representing them under a global Erlang game server boundary is semantically consistent with the GT cluster boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::DNS"
+      ],
+      "predicted_nodes": [
+        "Global::DNS/Load Balancer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node extends DNS into DNS/load balancer, which is compatible with the GT DNS node in the context of addressing and routing. This is not a severe boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Global::Erlang / OTP Game Server Cluster"
+      ],
+      "predicted_nodes": [
+        "Global::External Systems"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is an internal server cluster boundary, while the predicted node places it in an external systems boundary, which is a context/architectural mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Static Web Tier::Web Server\nGame assets, HTML, CSS, JS"
+      ],
+      "predicted_nodes": [
+        "Global::Web Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted web server node matches the GT static web tier web server that serves game assets and static files. The boundary label is simplified but semantically aligned."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::action, data?",
+    "Global::event, data"
+  ]
+}

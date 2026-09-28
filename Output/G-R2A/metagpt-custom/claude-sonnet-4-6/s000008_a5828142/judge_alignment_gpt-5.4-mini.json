@@ -1,0 +1,165 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::InfluxDB"
+      ],
+      "predicted_nodes": [
+        "Time-Series Data Layer::InfluxDB\\n(Coding-Process Events /\\nTime-Range Queryable"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the InfluxDB time-series datastore used for coding-process records/playback. The layer/package naming differs, but the semantic boundary is equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Relational Data Layer::MySQL Database\\n(Users / Projects / Versions /\\nBattle Records / Problem Data"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the MySQL relational database for core application entities. The naming and boundary are semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::Redis"
+      ],
+      "predicted_nodes": [
+        "Caching Layer::Redis\\n(Socket Mappings / Battle State /\\nTTL Invitations / Concurrency Control"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent Redis used for workspace/battle coordination and cache-backed temporary state. The boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Reverse Proxy::Nginx"
+      ],
+      "predicted_nodes": [
+        "API Gateway / Reverse Proxy Layer::Nginx Reverse Proxy\\n(HTTP & WebSocket Termination\\n/ Static Asset Serving"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the Nginx reverse proxy role. The predicted node is semantically equivalent and correctly placed in a reverse proxy layer."
+    },
+    {
+      "gt_nodes": [
+        "Backend Repo::CI/CD Workflow",
+        "Backend Repo::Deploy Key",
+        "Backend Repo::GitHub"
+      ],
+      "predicted_nodes": [
+        "Deployment / Infrastructure Layer::Automated Deployment Scripts\\n(Service Config & Wiring"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT repository/deployment artifacts are aggregated into a single deployment automation node. This is a reasonable semantic merge and the boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Backend Repo::Node.js"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Express REST API Server\\n(Auth / Project / Execution /\\nPlayback / File Endpoints"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node indicates the backend Node.js runtime; the predicted node is the Node.js/Express API server implementation. This is semantically equivalent and correctly in backend/application scope."
+    },
+    {
+      "gt_nodes": [
+        "Coding Sandbox::Coding Sandbox 1::Docker",
+        "Coding Sandbox::Coding Sandbox 1::Exporter",
+        "Coding Sandbox::Coding Sandbox 1::Node.js",
+        "Coding Sandbox::Coding Sandbox 2::Docker",
+        "Coding Sandbox::Coding Sandbox 2::Exporter",
+        "Coding Sandbox::Coding Sandbox 2::Node.js"
+      ],
+      "predicted_nodes": [
+        "Execution Layer::Docker Sandbox\\n(Isolated Container Runtime\\nCompile & Execute"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates multiple sandbox instances and their internal components, while the predicted architecture aggregates them into a single execution sandbox. This is a valid abstraction and the execution boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Repo::CI/CD Workflow",
+        "Frontend Repo::Deploy Key",
+        "Frontend Repo::GitHub"
+      ],
+      "predicted_nodes": [
+        "Deployment / Infrastructure Layer::Automated Deployment Scripts\\n(Service Config & Wiring"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The frontend repository deployment artifacts are merged into the automated deployment layer. This is semantically consistent and within the correct deployment boundary."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Repo::Vue 3"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Vue Frontend Application\\n(Workspace Editor /\\nPlayback View / Battle View"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Vue frontend application. The predicted node correctly places it in the presentation layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::Developer",
+        "Global::End User"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Vue Frontend Application\\n(Workspace Editor /\\nPlayback View / Battle View"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT global actors correspond to end users/developers interacting with the frontend application. The predicted node captures the user-facing frontend surface, which is a reasonable semantic aggregation."
+    },
+    {
+      "gt_nodes": [
+        "Static Asset Delivery::CDN\\nCloudFront"
+      ],
+      "predicted_nodes": [
+        "Object Storage & Distribution Layer::CDN Distribution Service\\n(CloudFront-Style / Distributable URLs"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote CDN-based distribution for static assets and downloadable content. Boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Static Asset Delivery::Storage\\nS3 bucket"
+      ],
+      "predicted_nodes": [
+        "Object Storage & Distribution Layer::S3-Compatible Object Storage\\n(Code Files / Battle Results /\\nUser Files / Archives"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent S3-compatible object storage for file assets. The semantic match and boundary placement are correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Application Runtime::Reverse Proxy::Express",
+    "Coding Sandbox::Coding Sandbox 1::Docker",
+    "Coding Sandbox::Coding Sandbox 1::Exporter",
+    "Coding Sandbox::Coding Sandbox 1::Node.js",
+    "Coding Sandbox::Coding Sandbox 2::Docker",
+    "Coding Sandbox::Coding Sandbox 2::Exporter",
+    "Coding Sandbox::Coding Sandbox 2::Node.js"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application Layer::Code Execution Service\\n(Submission Coordinator",
+    "Application Layer::Coding-Process Recorder\\n(Event Capture & Playback Query",
+    "Application Layer::Express REST API Server\\n(Auth / Project / Execution /\\nPlayback / File Endpoints",
+    "Application Layer::File Upload & Distribution Manager\\n(Upload / Metadata Persistence /\\nCDN URL Generation",
+    "Application Layer::JWT Authentication Middleware\\n(Token Validation / User Resolution",
+    "Application Layer::Project & Version Manager\\n(Project / Version / File CRUD",
+    "Real-Time Communication Layer\\n(Socket.IO — co-located within App Process::Battle Socket Handler\\n(Invitation / Sync / Judge / Outcome",
+    "Real-Time Communication Layer\\n(Socket.IO — co-located within App Process::Workspace Socket Handler\\n(Auth / Editing State / Disconnect"
+  ]
+}

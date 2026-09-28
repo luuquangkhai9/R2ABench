@@ -1,0 +1,155 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::TraceLeft\nCLI and library tracer"
+      ],
+      "predicted_nodes": [
+        "CLI Layer::CLI Entry Point",
+        "CLI Layer::Trace Command",
+        "Library/Loader Layer::Userspace Tracer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents the overall CLI/library tracer surface, which the AI split into entry point, trace command, and userspace tracer concerns. The boundary attribution is consistent with the CLI/library layer."
+    },
+    {
+      "gt_nodes": [
+        "Event Handler eBPF Programs::Default Handler Probes",
+        "Event Handler eBPF Programs::Process Specific\nHandler Probes",
+        "Event Handler eBPF Programs::Handler Probe\nhandle_syscall_write"
+      ],
+      "predicted_nodes": [
+        "Kernel eBPF Layer::Handler eBPF Programs"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node aggregates the GT's handler eBPF program nodes into one higher-level kernel eBPF layer component. This is semantically equivalent and the boundary remains appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::Perf Event Map\nshared event map"
+      ],
+      "predicted_nodes": [
+        "Event Channel::Perf Event Channel"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the perf-based event delivery mechanism between kernel space and userspace. The naming differs, but the architectural role matches."
+    },
+    {
+      "gt_nodes": [
+        "Global::Prog ID Map\npid to id"
+      ],
+      "predicted_nodes": [
+        "CLI Layer::Event Registration Structure"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a kernel/global program-ID mapping structure, while the predicted node is a CLI input data structure. These are not the same component and the boundary placement is incorrect."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Kprobe / Kretprobe\nother traced calls",
+        "Main eBPF Program::Kprobe\nentry probe",
+        "Main eBPF Program::Kretprobe\nreturn probe"
+      ],
+      "predicted_nodes": [
+        "Kernel eBPF Layer::Main eBPF Program",
+        "Linux Kernel::eBPF/kprobe facilities"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT nodes are specific parts of the main eBPF program attaching via kprobe/kretprobe; the AI aggregated them into the main eBPF program plus the underlying eBPF/kprobe facilities. This is semantically aligned and boundary placement is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Prog Map\npid to fd",
+        "Main eBPF Program::Prog Maps\nhandler mappings",
+        "Main eBPF Program::Ret Prog Map\npid to fd"
+      ],
+      "predicted_nodes": [
+        "Kernel eBPF Layer::Program Maps (handle_NAME_progs",
+        "Kernel eBPF Layer::Return-Program Maps (handle_NAME_progs_ret"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted nodes correspond to the handler program maps and return-program maps described in the GT. The naming is abbreviated, but the functional equivalence is clear and the kernel eBPF boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Linux Kernel Functions::inet_csk_accept",
+        "Linux Kernel Functions::sys_open",
+        "Linux Kernel Functions::sys_write"
+      ],
+      "predicted_nodes": [
+        "Global::Linux Kernel",
+        "Linux Kernel::kprobe/handle_NAME",
+        "Linux Kernel::kretprobe/handle_NAME"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT nodes are concrete traced kernel functions, whereas the prediction generalizes them into kernel/naming-rule nodes rather than matching the actual functions. This is too abstract and does not accurately reproduce the GT nodes."
+    },
+    {
+      "gt_nodes": [
+        "Global::TraceLeft\nCLI and library tracer"
+      ],
+      "predicted_nodes": [
+        "Library/Loader Layer::Probe Loader"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The probe loader is a valid subsystem within the TraceLeft library/tracer scope. The prediction isolates one function of the GT system, with acceptable boundary placement."
+    },
+    {
+      "gt_nodes": [
+        "Global::TraceLeft\nCLI and library tracer"
+      ],
+      "predicted_nodes": [
+        "Library/Loader Layer::gobpf Library"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT system depends on gobpf, and the predicted node captures that dependency in the correct library layer."
+    },
+    {
+      "gt_nodes": [
+        "Event Handler eBPF Programs::Handler Probe\nhandle_syscall_write"
+      ],
+      "predicted_nodes": [
+        "Kernel eBPF Layer::No-op Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a concrete handler probe, while the predicted node describes a behavioral fallback for missing handlers. These are related but not equivalent components."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Prog Maps\nhandler mappings"
+      ],
+      "predicted_nodes": [
+        "Linux Kernel::kprobe/handle_NAME",
+        "Linux Kernel::kretprobe/handle_NAME"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a handler mapping structure, whereas the predicted nodes are probe naming patterns. The semantics do not align closely enough for a correct match."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Prog ID Map\npid to id",
+    "Linux Kernel Functions::inet_csk_accept",
+    "Linux Kernel Functions::sys_open",
+    "Linux Kernel Functions::sys_write"
+  ],
+  "unmatched_predicted_nodes": [
+    "Configuration Generator::Configuration Generator",
+    "Configuration Generator::Event Configuration Metadata",
+    "Event Channel::Common Event Header",
+    "Global::Linux Kernel",
+    "Kernel eBPF Layer::No-op Handler",
+    "Library/Loader Layer::Userspace Tracer",
+    "Linux Kernel::eBPF/kprobe facilities"
+  ]
+}

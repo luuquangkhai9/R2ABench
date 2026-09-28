@@ -1,0 +1,98 @@
+@startuml
+!define AWSPUML https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v17.0/dist
+!includeurl AWSPUML/AWSCommon.puml
+!includeurl AWSPUML/Compute/EC2.puml
+!includeurl AWSPUML/Compute/Lambda.puml
+!includeurl AWSPUML/Analytics/KinesisDataStreams.puml
+!includeurl AWSPUML/ApplicationIntegration/SimpleQueueService.puml
+!includeurl AWSPUML/ApplicationIntegration/SimpleNotificationService.puml
+!includeurl AWSPUML/MachineLearning/SageMaker.puml
+!includeurl AWSPUML/Storage/SimpleStorageService.puml
+!includeurl AWSPUML/Database/DynamoDB.puml
+!includeurl AWSPUML/Analytics/ElasticsearchService.puml
+!includeurl AWSPUML/SecurityIdentityCompliance/Cognito.puml
+!includeurl AWSPUML/NetworkingContentDelivery/APIGateway.puml
+!includeurl AWSPUML/General/Users.puml
+!includeurl AWSPUML/General/Internet.puml
+!includeurl AWSPUML/General/MobileClient.puml
+
+skinparam componentStyle rectangle
+skinparam linetype ortho
+
+left to right direction
+
+actor "Football Enthusiast" as User
+actor "Chatbot User" as ChatUser
+actor "Reminder Requester" as RemUser
+actor "Application Maintainer" as Admin
+
+rectangle "Frontend" {
+  component "Web Application\n(HTML, CSS, Bootstrap, jQuery)" as WebApp
+  component "Chatbot UI" as ChatUI
+}
+
+rectangle "Backend Services" {
+  component "API Gateway" as APIGW
+  component "Lambda Functions\n(Python/Node)" as Lambda
+  component "Conversation Handler" as ChatHandler
+}
+
+rectangle "Data & Storage" {
+  component "DynamoDB\n(Match Data)" as DDB
+  component "Elasticsearch\n(Search)" as ES
+}
+
+rectangle "Machine Learning" {
+  component "SageMaker\n(Predictions)" as SageMaker
+}
+
+rectangle "Notifications" {
+  component "SQS\n(Reminder Queue)" as SQS
+  component "SNS\n(SMS Delivery)" as SNS
+}
+
+rectangle "Authentication" {
+  component "Cognito" as Cognito
+  component "IAM" as IAM
+}
+
+rectangle "Streaming Pipeline" {
+  component "EC2 Instance" as EC2
+  component "Kafka with Apache Avro\n(Live Scores)" as Kafka
+}
+
+component "S3\n(Static Hosting)" as S3
+
+User --> WebApp : "Views match info,\npredictions, scores"
+ChatUser --> ChatUI : "Sends text queries"
+RemUser --> WebApp : "Requests SMS reminders"
+Admin --> IAM : "Configures services"
+
+WebApp --> S3 : "Hosted on"
+WebApp --> APIGW : "API calls via\nAWS SigV4"
+ChatUI --> APIGW : "Submits messages"
+
+APIGW --> Lambda : "Invokes"
+Lambda --> Cognito : "Authentication"
+Lambda --> IAM : "Protected access"
+
+Lambda --> DDB : "Stores/retrieves\nmatch data"
+DDB --> ES : "Connected for search"
+Lambda --> ES : "Queries match data"
+
+Lambda --> SageMaker : "Gets predictions"
+SageMaker --> DDB : "Uses match data\nfor training/inference"
+
+Lambda --> SQS : "Queues reminder requests"
+SQS --> SNS : "Triggers SMS delivery"
+SNS --> MobileClient : "Sends SMS"
+
+Lambda --> ChatHandler : "Processes intents"
+ChatHandler --> DDB : "Retrieves fixture/\nresult data"
+ChatHandler --> ES : "Searches for\nscreening locations"
+
+Kafka --> EC2 : "Runs on"
+EC2 --> Lambda : "Pushes live score updates\n(via integration)"
+Lambda --> DDB : "Updates live scores"
+
+@enduml

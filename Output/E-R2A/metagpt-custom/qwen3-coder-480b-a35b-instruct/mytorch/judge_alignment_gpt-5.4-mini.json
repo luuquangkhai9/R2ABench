@@ -1,0 +1,308 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Presentation Layer::Configuration Interface"
+      ],
+      "predicted_nodes": [
+        "ApplicationLayer::Configuration Interface"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same UI component; boundary name differs only in naming style, but both clearly indicate the application/presentation front-end layer."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Inference Interface"
+      ],
+      "predicted_nodes": [
+        "ApplicationLayer::Inference Interface"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same inference UI component placed in the front-end/application layer, which is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Main Interface"
+      ],
+      "predicted_nodes": [
+        "ApplicationLayer::Main Interface"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The main entry UI matches the front-end/application boundary."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer::Training Interface"
+      ],
+      "predicted_nodes": [
+        "ApplicationLayer::Training Interface"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same training UI component; boundary attribution is correct for a front-end element."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer::Core Functional Modules::Training::Training Visualization",
+        "Service Layer::Core Functional Modules::Initialization::Initialization Visualization",
+        "Service Layer::Core Functional Modules::Inference::Inference Visualization"
+      ],
+      "predicted_nodes": [
+        "ApplicationLayer::Backend Service",
+        "PresentationLayer::Frontend UI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates visualization concerns by flow, while the prediction aggregates generic backend/frontend responsibilities. It is only a partial semantic match, but the UI-related part is still placed in a reasonable front-end boundary."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer::Core Functional Modules::Initialization::Parameter Settings",
+        "Service Layer::Core Functional Modules::Training::Training Hyperparams",
+        "Service Layer::Core Functional Modules::Inference::Task Settings",
+        "Service Layer::Core Functional Modules::Inference::Model Selection",
+        "Service Layer::Core Functional Modules::Training::Model Selection",
+        "Service Layer::Core Functional Modules::Initialization::Backbone Selection"
+      ],
+      "predicted_nodes": [
+        "ApplicationLayer::Backend Service"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT nodes are specific service-layer business modules for configuration, selection, and task setup, but the prediction collapses them into an overly generic backend service, losing the service-layer granularity and domain boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer::Model Initialization"
+      ],
+      "predicted_nodes": [
+        "FrameworkLayer::Inferencer",
+        "FrameworkLayer::Trainer",
+        "FrameworkLayer::Weight Initializer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "Model initialization in GT is an application-layer responsibility, but the prediction places related behavior into framework-layer components, which is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer::Model Training"
+      ],
+      "predicted_nodes": [
+        "FrameworkLayer::Trainer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Training is exposed as an application-layer function in the GT, while the prediction moves it into the framework layer, crossing the intended architectural boundary."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer::Task Inference"
+      ],
+      "predicted_nodes": [
+        "FrameworkLayer::Inferencer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Inference task orchestration belongs to the application layer in GT, but the predicted node is placed in the framework layer, which is too low and breaks the boundary."
+    },
+    {
+      "gt_nodes": [
+        "MyTorch Framework Layer::High-Level Components::Data Related::Data Loader"
+      ],
+      "predicted_nodes": [
+        "FrameworkLayer::Data Loader"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same data loader concept; the predicted framework boundary is semantically consistent with the GT MyTorch framework high-level component."
+    },
+    {
+      "gt_nodes": [
+        "MyTorch Framework Layer::High-Level Components::Data Related::Datasets"
+      ],
+      "predicted_nodes": [
+        "FrameworkLayer::Preset Datasets"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Preset datasets correspond to the GT dataset component within the framework layer."
+    },
+    {
+      "gt_nodes": [
+        "MyTorch Framework Layer::High-Level Components::Neural Network::Activation Functions"
+      ],
+      "predicted_nodes": [
+        "FrameworkLayer::Weight Initializer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "These are different framework concerns: activation functions are not the same as weight initialization. The semantic match is weak and the attribution is not correct."
+    },
+    {
+      "gt_nodes": [
+        "MyTorch Framework Layer::Low-Level Operations::Mathematical Interfaces"
+      ],
+      "predicted_nodes": [
+        "Global::GPU Hardware/API",
+        "FrameworkLayer::GPU Accelerator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT mathematical interfaces and low-level GPU-related capability are not equivalent to a generic global GPU hardware/API node plus a framework accelerator node; the abstraction and placement are inconsistent."
+    },
+    {
+      "gt_nodes": [
+        "MyTorch Framework Layer::Low-Level Operations::Tensor Operations"
+      ],
+      "predicted_nodes": [
+        "FrameworkLayer::GPU Accelerator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Tensor operations are a specific low-level operation set, while GPU Accelerator is a capability wrapper. They are related but not semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer::Infrastructure & Interfaces::Business System",
+        "Service Layer::Infrastructure & Interfaces::Service Interface",
+        "Service Layer::Infrastructure & Interfaces::Public Interface"
+      ],
+      "predicted_nodes": [
+        "ApplicationLayer::Backend Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT distinguishes infrastructure/interface concerns in the service layer, but the prediction collapses them into a generic backend service under the application layer, causing boundary confusion."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer::Neural Network Model Management"
+      ],
+      "predicted_nodes": [
+        "FrameworkLayer::Classic Models Repository"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Model management is a service-layer responsibility, whereas a classic models repository is only a data/catalog component in the framework layer; the boundary is incorrect."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer::System Management::Logging System"
+      ],
+      "predicted_nodes": [
+        "DataLayer::SQLite Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Logging system is a service-layer management component, not the database itself. The prediction misplaces the concern into storage."
+    },
+    {
+      "gt_nodes": [
+        "Storage / Data Layer::NN Model Data"
+      ],
+      "predicted_nodes": [
+        "DataLayer::SQLite Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Model data persistence in GT maps to the database/storage layer in the prediction."
+    },
+    {
+      "gt_nodes": [
+        "Storage / Data Layer::Train/Inference History"
+      ],
+      "predicted_nodes": [
+        "DataLayer::SQLite Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Training and inference history are persisted data objects, and the database boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer::System Management::Permission Management",
+        "Service Layer::System Management::Security Audit"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding security/permission/audit components are present in the predicted nodes."
+    },
+    {
+      "gt_nodes": [
+        "MyTorch Framework Layer::High-Level Components::Neural Network::Loss Functions"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No loss function node is predicted."
+    },
+    {
+      "gt_nodes": [
+        "MyTorch Framework Layer::High-Level Components::Optimization::LR Scheduler",
+        "MyTorch Framework Layer::High-Level Components::Optimization::Optimizers"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No optimizer or learning-rate scheduler nodes are predicted."
+    },
+    {
+      "gt_nodes": [
+        "MyTorch Framework Layer::Low-Level Operations::Gradient Computation"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No gradient computation node is predicted."
+    },
+    {
+      "gt_nodes": [
+        "Service Layer::Software Construction & Middleware"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding middleware/construction node is predicted."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "MyTorch Framework Layer::High-Level Components::Neural Network::Loss Functions",
+    "MyTorch Framework Layer::High-Level Components::Neural Network::Neural Network Tools",
+    "MyTorch Framework Layer::High-Level Components::Optimization::LR Scheduler",
+    "MyTorch Framework Layer::High-Level Components::Optimization::Optimizers",
+    "MyTorch Framework Layer::Low-Level Operations::Gradient Computation",
+    "MyTorch Framework Layer::Low-Level Operations::Mathematical Interfaces",
+    "MyTorch Framework Layer::Low-Level Operations::Tensor Operations",
+    "Service Layer::Core Functional Modules::Inference::Inference Visualization",
+    "Service Layer::Core Functional Modules::Inference::Model Selection",
+    "Service Layer::Core Functional Modules::Inference::Task Settings",
+    "Service Layer::Core Functional Modules::Initialization::Backbone Selection",
+    "Service Layer::Core Functional Modules::Initialization::Initialization Visualization",
+    "Service Layer::Core Functional Modules::Initialization::Parameter Settings",
+    "Service Layer::Core Functional Modules::Training::Model Selection",
+    "Service Layer::Core Functional Modules::Training::Training Hyperparams",
+    "Service Layer::Core Functional Modules::Training::Training Visualization",
+    "Service Layer::Infrastructure & Interfaces::Business System",
+    "Service Layer::Infrastructure & Interfaces::Public Interface",
+    "Service Layer::Infrastructure & Interfaces::Service Interface",
+    "Service Layer::Neural Network Model Management",
+    "Service Layer::Software Construction & Middleware",
+    "Service Layer::System Management::Logging System",
+    "Service Layer::System Management::Permission Management",
+    "Service Layer::System Management::Security Audit",
+    "Storage / Data Layer::NN Model Data",
+    "Storage / Data Layer::Train/Inference History"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::ApplicationLayer",
+    "Global::DataLayer",
+    "Global::FrameworkLayer",
+    "Global::GPU Hardware/API",
+    "Global::PresentationLayer"
+  ]
+}

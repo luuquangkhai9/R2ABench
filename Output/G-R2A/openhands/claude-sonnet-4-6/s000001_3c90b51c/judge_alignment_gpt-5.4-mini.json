@@ -1,0 +1,452 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::Result",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "JSeats System::Data Model::Result",
+        "JSeats System::Extensions::Result Decorators",
+        "JSeats System::Allocation Processor::Result Decoration\nAPI"
+      ],
+      "reasoning": "The GT result node is covered by the predicted result data model and the result decoration capability around it."
+    },
+    {
+      "gt_node": "Global::Tally",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "JSeats System::Data Model::Tally",
+        "JSeats System::Data Exchange::XML Tally\nLoader\n(Tally.fromXML",
+        "JSeats System::Entry Points::Caller-Facing\nAllocation API",
+        "JSeats System::Allocation Method Contract::AllocationMethod\n(Protected Tally View"
+      ],
+      "reasoning": "The predicted nodes cover tally storage, XML loading, caller-facing intake, and protected tally-view usage."
+    },
+    {
+      "gt_node": "Seat Allocation Configuration::Parameters",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "JSeats System::Data Model::Properties",
+        "JSeats System::Data Model::Processor\nConfiguration",
+        "JSeats System::Entry Points::Caller-Facing\nAllocation API",
+        "JSeats System::Allocation Method Contract::AllocationMethod\n(Protected Tally View"
+      ],
+      "reasoning": "The predicted properties and processor-configuration nodes cover configurable parameters for allocation processing."
+    },
+    {
+      "gt_node": "Seat Allocation Configuration::ResultDecorators",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "JSeats System::Extensions::Result Decorators",
+        "JSeats System::Allocation Processor::Result Decoration\nAPI"
+      ],
+      "reasoning": "The predicted result decorator extension and API directly cover the GT result-decorator configuration concept."
+    },
+    {
+      "gt_node": "Seat Allocation Configuration::Seat Allocation\\nMethod",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "JSeats System::Allocation Method Contract::AllocationMethod\n(Protected Tally View",
+        "JSeats System::Entry Points::Caller-Facing\nAllocation API",
+        "JSeats System::Majority Methods::Simple Majority",
+        "JSeats System::Majority Methods::Qualified Majority",
+        "JSeats System::Majority Methods::Absolute Majority",
+        "JSeats System::Ranked Methods::Ranked by Votes",
+        "JSeats System::Equal Proportions Methods::Huntington-Hill",
+        "JSeats System::Largest Remainder Methods::Hare",
+        "JSeats System::Largest Remainder Methods::Droop",
+        "JSeats System::Largest Remainder Methods::Imperiali (LR",
+        "JSeats System::Highest Averages Methods::Danish",
+        "JSeats System::Highest Averages Methods::Imperiali (HA",
+        "JSeats System::Highest Averages Methods::Sainte-Lague /\nWebster"
+      ],
+      "reasoning": "The GT method configuration node is covered by the allocation-method contract and the concrete supported method nodes."
+    },
+    {
+      "gt_node": "Seat Allocation Configuration::TallyFilters",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "JSeats System::Extensions::Tally Filters",
+        "JSeats System::Allocation Processor::Tally Filter\nAPI",
+        "JSeats System::Allocation Processor::Seat Allocation\nProcessor"
+      ],
+      "reasoning": "The predicted tally filter extension and API cover the GT tally-filter configuration concept."
+    },
+    {
+      "gt_node": "Seat Allocation Configuration::TieBreaker",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node explicitly covers tie-breaking rules or tie-break configuration behavior."
+    },
+    {
+      "gt_node": "Seat Allocation Processor::Decorate",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "JSeats System::Allocation Processor::Result Decoration\nAPI",
+        "JSeats System::Extensions::Result Decorators"
+      ],
+      "reasoning": "The predicted result-decoration API and extension correspond to the decorate step in the processor."
+    },
+    {
+      "gt_node": "Seat Allocation Processor::Filter",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "JSeats System::Allocation Processor::Tally Filter\nAPI",
+        "JSeats System::Extensions::Tally Filters",
+        "JSeats System::Allocation Processor::Seat Allocation\nProcessor"
+      ],
+      "reasoning": "The predicted tally-filter API and extension correspond to the filter step in the processor."
+    },
+    {
+      "gt_node": "Seat Allocation Processor::Process",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "JSeats System::Allocation Processor::Seat Allocation\nProcessor",
+        "JSeats System::Entry Points::Caller-Facing\nAllocation API",
+        "JSeats System::Allocation Method Contract::AllocationMethod\n(Protected Tally View",
+        "JSeats System::Data Model::Processor\nConfiguration"
+      ],
+      "reasoning": "The predicted seat-allocation processor and related API/configuration nodes cover the overall processing workflow."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "JSeats System::Allocation Method Contract::AllocationMethod\n(Protected Tally View",
+      "grounded": true,
+      "reference_nodes": [
+        "Seat Allocation Configuration::Seat Allocation\\nMethod"
+      ],
+      "reasoning": "This is grounded in the GT allocation-method concept and its protected tally-view contract."
+    },
+    {
+      "predicted_node": "JSeats System::Allocation Processor::Result Decoration\nAPI",
+      "grounded": true,
+      "reference_nodes": [
+        "Seat Allocation Configuration::ResultDecorators",
+        "Seat Allocation Processor::Decorate"
+      ],
+      "reasoning": "This corresponds to the GT result decoration capability and decorate processor step."
+    },
+    {
+      "predicted_node": "JSeats System::Allocation Processor::Seat Allocation\nProcessor",
+      "grounded": true,
+      "reference_nodes": [
+        "Seat Allocation Processor::Process",
+        "Seat Allocation Processor::Filter",
+        "Seat Allocation Processor::Decorate"
+      ],
+      "reasoning": "This is grounded in the GT processor workflow node that performs filtering, processing, and decoration."
+    },
+    {
+      "predicted_node": "JSeats System::Allocation Processor::Tally Filter\nAPI",
+      "grounded": true,
+      "reference_nodes": [
+        "Seat Allocation Configuration::TallyFilters",
+        "Seat Allocation Processor::Filter"
+      ],
+      "reasoning": "This matches the GT tally-filter concept and processor filter step."
+    },
+    {
+      "predicted_node": "JSeats System::Data Exchange::XML Config /\nResult I/O",
+      "grounded": true,
+      "reference_nodes": [
+        "Seat Allocation Configuration::Parameters",
+        "Seat Allocation Configuration::ResultDecorators",
+        "Seat Allocation Processor::Process"
+      ],
+      "reasoning": "XML configuration and result I/O are supported by the GT configuration and processor/output concerns, though not as a separate GT node."
+    },
+    {
+      "predicted_node": "JSeats System::Data Exchange::XML Tally\nLoader\n(Tally.fromXML",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Tally"
+      ],
+      "reasoning": "This directly corresponds to the GT XML tally-loading requirement."
+    },
+    {
+      "predicted_node": "JSeats System::Data Model::Candidate",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "Although candidates appear in the PRD, there is no explicit GT node for Candidate in the provided manual node list."
+    },
+    {
+      "predicted_node": "JSeats System::Data Model::Processor\nConfiguration",
+      "grounded": true,
+      "reference_nodes": [
+        "Seat Allocation Configuration::Parameters",
+        "Seat Allocation Configuration::ResultDecorators",
+        "Seat Allocation Configuration::TallyFilters",
+        "Seat Allocation Configuration::TieBreaker",
+        "Seat Allocation Processor::Process"
+      ],
+      "reasoning": "This is grounded in the GT processor configuration and its included parameters/extensions."
+    },
+    {
+      "predicted_node": "JSeats System::Data Model::Properties",
+      "grounded": true,
+      "reference_nodes": [
+        "Seat Allocation Configuration::Parameters"
+      ],
+      "reasoning": "This matches the GT parameters/properties concept."
+    },
+    {
+      "predicted_node": "JSeats System::Data Model::Result",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Result"
+      ],
+      "reasoning": "This directly corresponds to the GT result node."
+    },
+    {
+      "predicted_node": "JSeats System::Data Model::Tally",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Tally"
+      ],
+      "reasoning": "This directly corresponds to the GT tally node."
+    },
+    {
+      "predicted_node": "JSeats System::Entry Points::CLI Launcher",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is supported by the PRD, but there is no explicit GT node for the CLI launcher in the provided manual node list."
+    },
+    {
+      "predicted_node": "JSeats System::Entry Points::Caller-Facing\nAllocation API",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is a valid PRD concept, but the provided GT node list does not include a dedicated caller-facing API node."
+    },
+    {
+      "predicted_node": "JSeats System::Equal Proportions Methods::Huntington-Hill",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is a concrete method node from the PRD, but no corresponding GT node was provided."
+    },
+    {
+      "predicted_node": "JSeats System::Error Handling::SeatAllocationException",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is a PRD concept, but there is no explicit GT node for exception handling."
+    },
+    {
+      "predicted_node": "JSeats System::Extensions::Result Decorators",
+      "grounded": true,
+      "reference_nodes": [
+        "Seat Allocation Configuration::ResultDecorators",
+        "Seat Allocation Processor::Decorate"
+      ],
+      "reasoning": "This corresponds to the GT result-decorator configuration and decorate step."
+    },
+    {
+      "predicted_node": "JSeats System::Extensions::Tally Filters",
+      "grounded": true,
+      "reference_nodes": [
+        "Seat Allocation Configuration::TallyFilters",
+        "Seat Allocation Processor::Filter"
+      ],
+      "reasoning": "This corresponds to the GT tally-filter configuration and filter step."
+    },
+    {
+      "predicted_node": "JSeats System::Highest Averages Methods::Danish",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is a PRD-supported concrete method, but it is not represented in the GT nodes."
+    },
+    {
+      "predicted_node": "JSeats System::Highest Averages Methods::Imperiali (HA",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is a PRD-supported concrete method, but it is not represented in the GT nodes."
+    },
+    {
+      "predicted_node": "JSeats System::Highest Averages Methods::Sainte-Lague /\nWebster",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is a PRD-supported concrete method, but it is not represented in the GT nodes."
+    },
+    {
+      "predicted_node": "JSeats System::Largest Remainder Methods::Droop",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is a PRD-supported concrete method, but it is not represented in the GT nodes."
+    },
+    {
+      "predicted_node": "JSeats System::Largest Remainder Methods::Hare",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is a PRD-supported concrete method, but it is not represented in the GT nodes."
+    },
+    {
+      "predicted_node": "JSeats System::Largest Remainder Methods::Imperiali (LR",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is a PRD-supported concrete method, but it is not represented in the GT nodes."
+    },
+    {
+      "predicted_node": "JSeats System::Majority Methods::Absolute Majority",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is a PRD-supported concrete method, but it is not represented in the GT nodes."
+    },
+    {
+      "predicted_node": "JSeats System::Majority Methods::Qualified Majority",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is a PRD-supported concrete method, but it is not represented in the GT nodes."
+    },
+    {
+      "predicted_node": "JSeats System::Majority Methods::Simple Majority",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is a PRD-supported concrete method, but it is not represented in the GT nodes."
+    },
+    {
+      "predicted_node": "JSeats System::Ranked Methods::Ranked by Votes",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is a PRD-supported concrete method, but it is not represented in the GT nodes."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Result"
+      ],
+      "predicted_nodes": [
+        "JSeats System::Data Model::Result"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The result data model matches the GT result node, and the data-model boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tally"
+      ],
+      "predicted_nodes": [
+        "JSeats System::Data Model::Tally",
+        "JSeats System::Data Exchange::XML Tally\nLoader\n(Tally.fromXML"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT tally concept is split into the tally model and XML loading responsibility, which are semantically consistent with the GT boundary."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::Parameters"
+      ],
+      "predicted_nodes": [
+        "JSeats System::Data Model::Properties",
+        "JSeats System::Data Model::Processor\nConfiguration"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT parameters node is represented by properties and processor configuration, which are semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::ResultDecorators"
+      ],
+      "predicted_nodes": [
+        "JSeats System::Extensions::Result Decorators",
+        "JSeats System::Allocation Processor::Result Decoration\nAPI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT result-decorator configuration maps cleanly to the extension and API nodes."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::Seat Allocation\\nMethod"
+      ],
+      "predicted_nodes": [
+        "JSeats System::Allocation Method Contract::AllocationMethod\n(Protected Tally View",
+        "JSeats System::Majority Methods::Simple Majority",
+        "JSeats System::Majority Methods::Qualified Majority",
+        "JSeats System::Majority Methods::Absolute Majority",
+        "JSeats System::Ranked Methods::Ranked by Votes",
+        "JSeats System::Equal Proportions Methods::Huntington-Hill",
+        "JSeats System::Largest Remainder Methods::Hare",
+        "JSeats System::Largest Remainder Methods::Droop",
+        "JSeats System::Largest Remainder Methods::Imperiali (LR",
+        "JSeats System::Highest Averages Methods::Danish",
+        "JSeats System::Highest Averages Methods::Imperiali (HA",
+        "JSeats System::Highest Averages Methods::Sainte-Lague /\nWebster"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT method configuration node is decomposed into the contract plus concrete supported methods, with semantically correct layering."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::TallyFilters"
+      ],
+      "predicted_nodes": [
+        "JSeats System::Extensions::Tally Filters",
+        "JSeats System::Allocation Processor::Tally Filter\nAPI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The filter configuration is represented by the extension and API nodes with a consistent boundary."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Processor::Decorate"
+      ],
+      "predicted_nodes": [
+        "JSeats System::Allocation Processor::Result Decoration\nAPI",
+        "JSeats System::Extensions::Result Decorators"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The decorate processor step is captured by the result-decoration API and extension."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Processor::Filter"
+      ],
+      "predicted_nodes": [
+        "JSeats System::Allocation Processor::Tally Filter\nAPI",
+        "JSeats System::Extensions::Tally Filters"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The filter step is captured by the tally-filter API and extension."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Processor::Process"
+      ],
+      "predicted_nodes": [
+        "JSeats System::Allocation Processor::Seat Allocation\nProcessor",
+        "JSeats System::Entry Points::Caller-Facing\nAllocation API",
+        "JSeats System::Allocation Method Contract::AllocationMethod\n(Protected Tally View",
+        "JSeats System::Data Model::Processor\nConfiguration"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The overall processing workflow is represented by the processor, entry point, contract, and configuration nodes without a boundary mismatch."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Seat Allocation Configuration::TieBreaker"
+  ],
+  "unmatched_predicted_nodes": [
+    "JSeats System::Data Model::Candidate",
+    "JSeats System::Entry Points::CLI Launcher",
+    "JSeats System::Entry Points::Caller-Facing\nAllocation API",
+    "JSeats System::Equal Proportions Methods::Huntington-Hill",
+    "JSeats System::Error Handling::SeatAllocationException",
+    "JSeats System::Highest Averages Methods::Danish",
+    "JSeats System::Highest Averages Methods::Imperiali (HA",
+    "JSeats System::Highest Averages Methods::Sainte-Lague /\nWebster",
+    "JSeats System::Largest Remainder Methods::Droop",
+    "JSeats System::Largest Remainder Methods::Hare",
+    "JSeats System::Largest Remainder Methods::Imperiali (LR",
+    "JSeats System::Majority Methods::Absolute Majority",
+    "JSeats System::Majority Methods::Qualified Majority",
+    "JSeats System::Majority Methods::Simple Majority",
+    "JSeats System::Ranked Methods::Ranked by Votes"
+  ]
+}

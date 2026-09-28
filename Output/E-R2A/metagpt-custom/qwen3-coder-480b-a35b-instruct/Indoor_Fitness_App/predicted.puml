@@ -1,0 +1,69 @@
+@startuml
+title Indoor Fitness App - Component Deployment Diagram
+
+' === Infrastructure Layer ===
+node "Mobile Device" {
+    component "Mobile App" as mobileApp
+    component "Camera Capture Module" as cameraModule
+    database "Local Storage" as localStorage
+}
+
+node "Server Environment" {
+    component "Server Backend" as serverBackend
+    database "Central Database" as centralDB
+}
+
+node "Target Android Devices" {
+    ' Removed explicit Casting Receiver per review feedback
+}
+
+' === Presentation Layer ===
+package "Presentation Layer" {
+    ' Components now reside only in their respective nodes
+}
+
+' === Application Logic Layer ===
+package "Application Logic Layer" {
+    component "Posture Evaluation Engine" as postureEngine
+    component "Training Plan Generator" as planGenerator
+    component "Exercise History Manager" as historyManager
+    component "User Management System" as userManager
+    component "Screen Casting Service" as castingService
+    component "Recommendation Engine" as recommendEngine  ' Added per feedback
+    component "Exercise State Monitor" as exerciseMonitor  ' Added per feedback
+    component "Permission Manager" as permissionManager   ' Added per feedback
+}
+
+' === Data Processing Layer ===
+package "Data Processing Layer" {
+    component "Report Generation Service" as reportService
+    component "Poster Generation Service" as posterService  ' Added per feedback
+    component "Video/Movement Repository" as movementRepo    ' Added per feedback
+}
+
+' === External Systems ===
+component "Mobile Device Camera" as externalCamera
+' Removed Pose Estimation Model as standalone component per feedback
+
+' === Key Dependencies ===
+cameraModule --> externalCamera : captures video feed
+postureEngine --> cameraModule : uses video stream
+postureEngine --> movementRepo : compares with standard movements
+planGenerator --> userManager : retrieves user profile
+planGenerator --> historyManager : considers past performance
+recommendEngine --> postureEngine : evaluates adjustments
+reportService --> postureEngine : gets posture data
+reportService --> planGenerator : gets training data
+posterService --> reportService : generates summaries
+castingService --> mobileApp : accesses UI content
+castingService --> cameraModule : transmits exercise video
+mobileApp --> serverBackend : requests plans & reports
+historyManager --> userManager : authenticates user
+serverBackend --> centralDB : reads/writes data
+castingService --> "Target Android Devices" : casts to devices
+mobileApp --> localStorage : stores local data
+postureEngine --> localStorage : caches skeleton data
+exerciseMonitor --> mobileApp : monitors exercise state
+permissionManager --> userManager : manages roles
+
+@enduml

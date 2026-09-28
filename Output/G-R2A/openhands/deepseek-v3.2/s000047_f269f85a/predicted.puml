@@ -1,0 +1,117 @@
+@startuml
+title Archifiltre-docs System Architecture (Settings, Export, Hash Subsystem)
+
+' Define colors and styles
+skinparam component {
+  BackgroundColor<<Runtime>> LightBlue
+  BackgroundColor<<Component>> LightYellow
+  BackgroundColor<<External>> LightGreen
+  BackgroundColor<<Storage>> LightGray
+  BorderColor Black
+  ArrowColor Black
+}
+
+' Runtime Environment
+component "Electron Desktop Application" as ElectronApp <<Runtime>> {
+  component "Application Controller" as AppController <<Component>>
+  component "Translation Module" as TranslationModule <<Component>> {
+    database "Current Language" as LanguageValue
+  }
+  
+  component "User Settings Sanitizer" as SettingsSanitizer <<Component>> {
+    note right
+      Sanitizes persisted settings
+      Applies defaults for empty/invalid values
+      Returns normalized settings object
+    end note
+  }
+  
+  component "Export Generation System" as ExportSystem <<Component>> {
+    component "Tree CSV Export" as TreeCSVExport <<Component>>
+    component "RESIP Export" as RESIPExport <<Component>>
+    component "CSV Export" as CSVExport <<Component>>
+    component "Excel Export" as ExcelExport <<Component>>
+  }
+  
+  component "Hash Computation System" as HashSystem <<Component>> {
+    note right
+      Processes paths in batches
+      Aggregates hash map results
+      Creates debug outputs
+    end note
+  }
+  
+  component "Background Worker Manager" as WorkerManager <<Component>> {
+    note right
+      Manages worker/child-process
+      execution for async operations
+    end note
+  }
+}
+
+' External Components
+component "File System" as FileSystem <<External>>
+component "Application User Data Directory" as UserDataDir <<Storage>> {
+  database "Hash Debug Files" as DebugFiles {
+    file "hash-result-debug"
+    file "hash-error-debug"
+  }
+}
+
+' Data Models/Structures
+database "User Settings" as UserSettings <<Storage>> {
+  field "isTrackingEnabled: boolean"
+  field "isMonitoringEnabled: boolean"
+  field "language: string"
+}
+
+database "Export Data Models" as ExportData <<Storage>> {
+  field "FilesAndFoldersMap"
+  field "Metadata"
+  field "Aliases"
+  field "Comments"
+  field "Tags"
+  field "Hashes"
+  field "CsvExporterData"
+}
+
+' Relationships and Data Flow
+AppController --> SettingsSanitizer : "Persisted settings\n(empty/invalid)"
+SettingsSanitizer --> UserSettings : "Normalized settings\nwith defaults"
+
+AppController --> ExportSystem : "Export requests"
+TranslationModule --> ExportSystem : "Current language value"
+ExportSystem --> WorkerManager : "Async export tasks"
+WorkerManager --> TreeCSVExport : "Files-and-folders map"
+WorkerManager --> RESIPExport : "Files, metadata, aliases,\ncomments, tags"
+WorkerManager --> CSVExport : "Aliases, comments, files,\nmetadata, tags, hashes"
+WorkerManager --> ExcelExport : "CsvExporterData"
+
+TreeCSVExport --> FileSystem : "Tree CSV export string"
+RESIPExport --> FileSystem : "RESIP CSV export"
+CSVExport --> FileSystem : "CSV exports"
+ExcelExport --> FileSystem : "Excel exports"
+
+AppController --> HashSystem : "Paths + basePath"
+HashSystem --> WorkerManager : "Batch hash computation"
+HashSystem --> FileSystem : "Read file content"
+HashSystem --> UserDataDir : "Write debug files"
+DebugFiles <-[hidden] UserDataDir
+
+ExportSystem --> FileSystem : "Export outputs"
+
+' Interface notes
+note top of WorkerManager
+  Provides Observable/stream-like
+  interfaces for async results
+  and progress updates
+end note
+
+note bottom of SettingsSanitizer
+  Handles {}, "", undefined
+  Defaults: isTrackingEnabled=true
+  isMonitoringEnabled=true
+  language="en"
+end note
+
+@enduml

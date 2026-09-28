@@ -1,0 +1,172 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Business Logic Layer - Django::Community Module::Like/Favorite",
+        "Business Logic Layer - Django::Community Module::Post/Comment Display",
+        "Business Logic Layer - Django::Community Module::Publish Post/Comment"
+      ],
+      "predicted_nodes": [
+        "Application / Business Logic Layer::Community::CommunityManager",
+        "Application / Business Logic Layer::Community::PopularityCalculator"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "These GT community operations are functionally covered by the predicted community management component(s). The boundary is semantically consistent at the application/business logic layer, though the AI splits out popularity handling into a separate service."
+    },
+    {
+      "gt_nodes": [
+        "Business Logic Layer - Django::Management Module::Admin Info Maintenance",
+        "Business Logic Layer - Django::Management Module::Post/Comment Audit",
+        "Business Logic Layer - Django::Management Module::User Qualification Audit"
+      ],
+      "predicted_nodes": [
+        "Application / Business Logic Layer::User & Identity::CertificationWorkflow",
+        "Application / Business Logic Layer::User & Identity::FieldValidator",
+        "Application / Business Logic Layer::User & Identity::PermissionGateway",
+        "Application / Business Logic Layer::Project & Application::ProjectManager",
+        "Application / Business Logic Layer::Community::CommunityManager",
+        "Service / Integration Layer::RiskControlModule"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT management module includes admin account maintenance and moderation/audit functions. The predicted nodes partially cover certification and risk control, but they do not cleanly preserve the management/admin boundary and disperse the functionality across unrelated domains. This is a boundary attribution mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Business Logic Layer - Django::Project Module::Favorite Project",
+        "Business Logic Layer - Django::Project Module::Project Enrollment",
+        "Business Logic Layer - Django::Project Module::Project Info View",
+        "Business Logic Layer - Django::Project Module::Project Management",
+        "Business Logic Layer - Django::Project Module::Project Message Reminder",
+        "Business Logic Layer - Django::Project Module::Project Recommendation",
+        "Business Logic Layer - Django::Project Module::Project Search",
+        "Business Logic Layer - Django::Project Module::Publish Project",
+        "Business Logic Layer - Django::Project Module::Teacher-Student Interaction"
+      ],
+      "predicted_nodes": [
+        "Application / Business Logic Layer::Project & Application::ApplicationProcessor",
+        "Application / Business Logic Layer::Project & Application::FavoritesManager",
+        "Application / Business Logic Layer::Project & Application::MutualEvaluationService",
+        "Application / Business Logic Layer::Project & Application::ProjectManager",
+        "Application / Business Logic Layer::Project & Application::SearchService",
+        "Service / Integration Layer::NotificationDispatcher",
+        "Service / Integration Layer::RecommendationEngine"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted project/application services correspond well to GT project module capabilities. Recommendation, search, favorites, project management, applications, mutual evaluation, and notifications are placed in a reasonable business/application boundary, which is semantically aligned with the GT backend business logic layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Logic Layer - Django::User Module::Login/Registration",
+        "Business Logic Layer - Django::User Module::Personal Info Maintenance",
+        "Business Logic Layer - Django::User Module::Resume Maintenance",
+        "Business Logic Layer - Django::User Module::Student/Enterprise Verification",
+        "Business Logic Layer - Django::User Module::User Search & Favorite"
+      ],
+      "predicted_nodes": [
+        "Application / Business Logic Layer::User & Identity::CertificationWorkflow",
+        "Application / Business Logic Layer::User & Identity::FieldValidator",
+        "Application / Business Logic Layer::User & Identity::PermissionGateway",
+        "Application / Business Logic Layer::User & Identity::UserProfileManager",
+        "Service / Integration Layer::AuthService",
+        "Service / Integration Layer::EmailVerificationInterface",
+        "Service / Integration Layer::FileStorageService"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted identity/profile/authentication services cover the GT user module functions including login/registration, verification, profile maintenance, and resume handling. The boundary assignment to application/business logic plus integration services is acceptable and not a severe context shift."
+    },
+    {
+      "gt_nodes": [
+        "Data Access Layer - PyMySQL::Database Connection",
+        "Data Access Layer - PyMySQL::File Data Parsing"
+      ],
+      "predicted_nodes": [
+        "Data Layer::DatabaseRepository\\n(Users | Projects | Applications\\nPosts | Comments | Favorites\\nEvaluations | Reviews | Chat Logs\\nAdmin Accounts | Risk Logs"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT data access concerns are aggregated into a unified repository/data layer node. Although the naming is broader, it semantically matches the data access responsibility."
+    },
+    {
+      "gt_nodes": [
+        "Storage Layer - MySQL::Community Data DB",
+        "Storage Layer - MySQL::Other Data DB",
+        "Storage Layer - MySQL::Project Data DB",
+        "Storage Layer - MySQL::User Info DB"
+      ],
+      "predicted_nodes": [
+        "Data Layer::DatabaseRepository\\n(Users | Projects | Applications\\nPosts | Comments | Favorites\\nEvaluations | Reviews | Chat Logs\\nAdmin Accounts | Risk Logs"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted repository aggregates what GT separated into multiple MySQL storage nodes. This is a valid merge, and the storage/data boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "User Interface Layer - WeChat Mini Program / Vue.js::File Transfer",
+        "User Interface Layer - WeChat Mini Program / Vue.js::Message Notification",
+        "User Interface Layer - WeChat Mini Program / Vue.js::Personal Info",
+        "User Interface Layer - WeChat Mini Program / Vue.js::Post Information",
+        "User Interface Layer - WeChat Mini Program / Vue.js::Project Info",
+        "User Interface Layer - WeChat Mini Program / Vue.js::Project Registration"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Admin Console\\n(Role: Administrator::Admin Console",
+        "Presentation Layer::Mobile Client\\n(Android 7.0+ | iOS 8.0+ | WeChat 6.5.6+::Enterprise-Certified Student Mobile UI",
+        "Presentation Layer::Mobile Client\\n(Android 7.0+ | iOS 8.0+ | WeChat 6.5.6+::Mentor Mobile UI",
+        "Presentation Layer::Mobile Client\\n(Android 7.0+ | iOS 8.0+ | WeChat 6.5.6+::Student Mobile UI",
+        "Presentation Layer::Web Client\\n(Chrome / Firefox / Edge\\nWindows 7+ | macOS 10.9+::Enterprise-Certified Student Web UI",
+        "Presentation Layer::Web Client\\n(Chrome / Firefox / Edge\\nWindows 7+ | macOS 10.9+::Mentor Web UI",
+        "Presentation Layer::Web Client\\n(Chrome / Firefox / Edge\\nWindows 7+ | macOS 10.9+::Student Web UI"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT UI nodes are mapped into role-based presentation clients in the predicted architecture. This is an acceptable refinement of the same frontend layer, and the boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Business Logic Layer - Django::Project Module::Project Recommendation"
+      ],
+      "predicted_nodes": [
+        "Service / Integration Layer::RecommendationEngine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent project recommendation functionality. Moving it to a service/integration layer is still semantically reasonable and not a boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Business Logic Layer - Django::Project Module::Project Message Reminder"
+      ],
+      "predicted_nodes": [
+        "Service / Integration Layer::NotificationDispatcher",
+        "Application / Business Logic Layer::Messaging::InSiteInbox"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT reminder function is split into notification dispatch and inbox/message handling. This is a valid decomposition, and the boundary remains consistent."
+    },
+    {
+      "gt_nodes": [
+        "Business Logic Layer - Django::User Module::Login/Registration",
+        "Business Logic Layer - Django::User Module::Student/Enterprise Verification"
+      ],
+      "predicted_nodes": [
+        "Service / Integration Layer::AuthService",
+        "Service / Integration Layer::EmailVerificationInterface",
+        "External Systems::Campus Email Provider",
+        "External Systems::Enterprise Email Provider"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Authentication and email verification are correctly decomposed into internal services and external providers. The boundary is consistent with the GT user/auth module."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::External Systems"
+  ]
+}

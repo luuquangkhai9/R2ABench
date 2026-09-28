@@ -1,0 +1,111 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Browser"
+      ],
+      "predicted_nodes": [
+        "Global::Web Clients",
+        "Web Clients::Browser / Web Client 1",
+        "Web Clients::Browser / Web Client M"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT Browser is semantically equivalent to the predicted web client/browser nodes. The predicted diagram splits the concept into a global web client group plus individual client instances, which is acceptable and stays within the correct frontend/client boundary."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine"
+      ],
+      "predicted_nodes": [
+        "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster",
+        "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Configuration Layer",
+        "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Configuration Layer::ConfigMap\n[topic: <topic-identifier>",
+        "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Configuration Layer::HPA\n[min:1, max:2, CPU:80%",
+        "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods",
+        "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance 1",
+        "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance 1::Container Runtime",
+        "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance 1::Container Runtime::Message Cache\n[last 10 messages",
+        "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance 1::Container Runtime::exec.sh\n[entrypoint",
+        "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance 1::Container Runtime::pulltop\n(Node.js)\n[pulls topic data",
+        "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance 1::Container Runtime::websocketd\n[port 8080",
+        "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance 1::SYMBOL env var\n[injected from ConfigMap",
+        "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance N",
+        "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance N::Container Runtime",
+        "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance N::Container Runtime::Message Cache\n[last 10 messages",
+        "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance N::Container Runtime::exec.sh\n[entrypoint",
+        "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance N::Container Runtime::pulltop\n(Node.js)\n[pulls topic data",
+        "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance N::Container Runtime::websocketd\n[port 8080",
+        "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance N::SYMBOL env var\n[injected from ConfigMap",
+        "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Service Layer",
+        "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Service Layer::LoadBalancer Service\n[TCP :80 -> :8080"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node appears to represent the runtime deployment host environment / compute environment for the adapter. The predicted model expands it into many Kubernetes-specific infrastructure and runtime nodes, but this is not a clean semantic equivalent of the single GT Compute Engine boundary. The overall placement shifts the concept into a GKE/Kubernetes architecture layer rather than the GT's simpler compute environment, so boundary attribution is not strictly correct."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine::pulltop"
+      ],
+      "predicted_nodes": [
+        "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance 1::Container Runtime::pulltop\n(Node.js)\n[pulls topic data",
+        "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance N::Container Runtime::pulltop\n(Node.js)\n[pulls topic data"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The pulltop process is correctly identified as the Node.js topic-pulling runtime component. Although the predicted diagram places it under Kubernetes deployment/runtime layers, that is semantically appropriate for this system."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine::websocketd"
+      ],
+      "predicted_nodes": [
+        "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance 1::Container Runtime::websocketd\n[port 8080",
+        "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance N::Container Runtime::websocketd\n[port 8080"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The websocketd runtime component is correctly matched. The predicted nodes place it inside the container runtime of the deployment, which is consistent with the PRD."
+    },
+    {
+      "gt_nodes": [
+        "pubsub-public-data project::Cloud Pub/Sub\ntopic"
+      ],
+      "predicted_nodes": [
+        "Google Cloud Platform::Google Cloud Pub/Sub::Pub/Sub Topic\n(projects/<id>/topics/<name>"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the configured Pub/Sub topic. The project naming differs, but the component and boundary are semantically aligned."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Google Cloud Platform::Google Cloud Pub/Sub",
+    "Google Cloud Platform::Google Cloud Pub/Sub::Pub/Sub Subscription\n(1 per running instance",
+    "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster",
+    "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Configuration Layer",
+    "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Configuration Layer::ConfigMap\n[topic: <topic-identifier>",
+    "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Configuration Layer::HPA\n[min:1, max:2, CPU:80%",
+    "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods",
+    "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance 1",
+    "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance 1::Container Runtime",
+    "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance 1::Container Runtime::Message Cache\n[last 10 messages",
+    "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance 1::Container Runtime::exec.sh\n[entrypoint",
+    "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance 1::Container Runtime::pulltop\n(Node.js)\n[pulls topic data",
+    "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance 1::Container Runtime::websocketd\n[port 8080",
+    "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance 1::SYMBOL env var\n[injected from ConfigMap",
+    "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance N",
+    "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance N::Container Runtime",
+    "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance N::Container Runtime::Message Cache\n[last 10 messages",
+    "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance N::Container Runtime::exec.sh\n[entrypoint",
+    "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance N::Container Runtime::pulltop\n(Node.js)\n[pulls topic data",
+    "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance N::Container Runtime::websocketd\n[port 8080",
+    "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Deployment\n(Adapter Pods::Adapter Pod Instance N::SYMBOL env var\n[injected from ConfigMap",
+    "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Service Layer",
+    "Google Cloud Platform::Google Kubernetes Engine (GKE) Cluster::Kubernetes Service Layer::LoadBalancer Service\n[TCP :80 -> :8080",
+    "Web Clients::Browser / Web Client 1",
+    "Web Clients::Browser / Web Client M"
+  ]
+}

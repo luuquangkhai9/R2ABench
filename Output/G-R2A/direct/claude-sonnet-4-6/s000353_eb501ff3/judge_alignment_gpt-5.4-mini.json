@@ -1,0 +1,102 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Router Endpoints"
+      ],
+      "predicted_nodes": [
+        "Turing API Service::HTTP API Handlers (OpenAPI 3.0.3::Router API Handler\\nGET /projects/{project_id}/routers"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the HTTP endpoint layer for router-related API access. The predicted node is more specific, but it is correctly placed under the Turing API Service HTTP API handlers boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Router Clients"
+      ],
+      "predicted_nodes": [
+        "Turing API Service::Service Layer::Router Service\\n(project-scoped resource mgmt"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both relate to router resource management logic consumed by clients. The predicted service-layer placement is consistent with the GT's router-facing backend functionality, though the predicted node is more implementation-specific."
+    },
+    {
+      "gt_nodes": [
+        "Global::Authorization Service"
+      ],
+      "predicted_nodes": [
+        "Turing API Service::HTTP Middleware Layer::Authorization\\nMiddleware\\n(when auth config enabled"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The functionality matches exactly: authorization is implemented as HTTP middleware. The boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Machine Learning Platform\\nMLP API Server"
+      ],
+      "predicted_nodes": [
+        "External Systems::MLflow Model Registry\\n(model artifact source\\nfor PyFuncEnsembler builds"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These both refer to the external model/artifact registry used by the PyFuncEnsembler build flow. Although the GT names MLP API Server and the prediction names MLflow Model Registry, they are semantically aligned as the external ML artifact source."
+    },
+    {
+      "gt_nodes": [
+        "Kubernetes Cluster::Knative Controller"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Kubernetes API\\n(create/update/delete\\ndeployment resources",
+        "Kubernetes Cluster::Turing Router\\nDeployment\\n(containerPort: 8080 default,\\noverridden via ports.containerPort"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT cluster-side controller responsibility is split into the Kubernetes API interaction and the managed router deployment representation. The Kubernetes Cluster boundary is preserved and semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Kubernetes Cluster::Istio"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Turing Router\\nDeployment\\n(containerPort: 8080 default,\\noverridden via ports.containerPort"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Istio in the GT is a Kubernetes-cluster-side infrastructure component, and the predicted router deployment node is also correctly placed within the Kubernetes Cluster boundary. The exact component names differ, but both are cluster-side runtime/deployment concerns."
+    },
+    {
+      "gt_nodes": [
+        "Turing System::Turing API Server\\nHTTP REST API to configure Routers"
+      ],
+      "predicted_nodes": [
+        "Turing API Service::HTTP API Handlers (OpenAPI 3.0.3::Ensembler API Handler\\nGET/POST/PUT/DELETE\\n/projects/{project_id}/ensemblers/{ensembler_id",
+        "Turing API Service::HTTP API Handlers (OpenAPI 3.0.3::Router API Handler\\nGET /projects/{project_id}/routers",
+        "Turing API Service::HTTP Middleware Layer::Authorization\\nMiddleware\\n(when auth config enabled",
+        "Turing API Service::HTTP Middleware Layer::OpenAPI Request\\nValidation Middleware\\n(when validation config enabled)\\nOpenAPI 3.0.3",
+        "Turing API Service::Service Layer::Ensembler Service\\n(create/retrieve/update/delete)\\nReturns JSON: Ensembler, EnsemblerId",
+        "Turing API Service::Service Layer::Router Service\\n(project-scoped resource mgmt"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT monolithic API server is decomposed into multiple predicted subcomponents: HTTP handlers, middleware, and service layer. This is a valid split of the same system responsibility, and the boundary attribution remains within the API service."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Experimentation Service",
+    "Global::Monitoring and Alerting Service",
+    "Global::Secret Store",
+    "Global::Global::Turing User",
+    "Turing System::Database\\nPersistent storage for Router objects",
+    "Turing System::Turing UI\\nWeb interface to configure Routers"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::Jaeger Tracing Backend\\n(distributed tracing",
+    "PyFuncEnsembler Runtime::Docker Image Builder\\n(local image build\\nfrom MLflow artifacts",
+    "PyFuncEnsembler Runtime::PyFuncEnsembler\\nWebservice\\n(user-defined ensembler\\nruntime, port 8080 default",
+    "Turing API Service::Cluster Management::Jaeger Tracing Client\\n(request tracing,\\nsampling-based",
+    "Turing API Service::Cluster Management::Router Deployment Manager\\n(create/update/delete\\nrouter deployments"
+  ]
+}

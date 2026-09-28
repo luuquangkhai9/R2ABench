@@ -1,0 +1,240 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::AI Module"
+      ],
+      "predicted_nodes": [
+        "Processing_Layer::Recognition Service OCR + DL"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the core recognition/AI processing capability for formula/table/image conversion. The predicted node uses a more specific service name, but it is semantically equivalent and placed within the backend/processing layer, which is consistent with the GT backend service boundary."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::AI Module::Image Pre-processing Module"
+      ],
+      "predicted_nodes": [
+        "Processing_Layer::Recognition Service OCR + DL"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT image preprocessing submodule is absorbed into the broader recognition service. This is a valid merge because preprocessing is a standard part of OCR/recognition processing, and the boundary remains in the backend processing layer."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::AI Module::LaTeX Generation Module"
+      ],
+      "predicted_nodes": [
+        "Processing_Layer::LaTeX Generation Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes describe LaTeX generation from recognized content. The predicted node is a direct semantic match and is correctly placed in the backend processing layer."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::AI Module::Result Processing Module"
+      ],
+      "predicted_nodes": [
+        "Processing_Layer::Rendering Service",
+        "Processing_Layer::Export Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT result processing module is reasonably split into rendering and export responsibilities. These are semantically aligned post-processing functions, and the placement in backend processing is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::File Processing Service"
+      ],
+      "predicted_nodes": [
+        "Processing_Layer::File Ingestion Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes cover file intake and parsing/conversion initiation. The predicted node is a narrower but semantically equivalent backend service, with correct layer attribution."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::Project Management Service"
+      ],
+      "predicted_nodes": [
+        "Processing_Layer::Project & Workspace Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node matches the GT project management responsibility and includes workspace handling, which is consistent with the GT service scope. The backend service boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::Project Management Service::Collaboration & Permissions Service"
+      ],
+      "predicted_nodes": [
+        "Processing_Layer::Collaboration & Version Control"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The collaboration aspect matches, but the predicted node incorrectly merges collaboration with version control, while the GT node specifically isolates collaboration and permissions. This is a semantic over-aggregation that introduces boundary/function confusion."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::Project Management Service::Project Basic Services"
+      ],
+      "predicted_nodes": [
+        "Processing_Layer::Project & Workspace Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Project basic services align well with project/workspace management. This is a valid semantic match within the backend processing boundary."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::User Management Service"
+      ],
+      "predicted_nodes": [
+        "Processing_Layer::Auth & Permission Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "User management in the GT covers registration, login, recovery, and authorization-related concerns. The predicted auth and permission service is a correct semantic match and remains in the backend layer."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer / Storage::Project & Article Info"
+      ],
+      "predicted_nodes": [
+        "Data_Layer::Relational Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a specific data domain stored in the database; the predicted node is the storage technology boundary representing that persistence. This is semantically consistent and correctly placed in the data layer."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer / Storage::Team Learning Data"
+      ],
+      "predicted_nodes": [
+        "Data_Layer::Relational Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Although the predicted node is generic, it can store the team/collaboration data described in GT. The data-layer attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer / Storage::User Information"
+      ],
+      "predicted_nodes": [
+        "Data_Layer::Relational Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "User information is expected to be stored in relational storage. The predicted node is a valid storage-level match, and the data-layer boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Application Layer / Backend Services"
+      ],
+      "predicted_nodes": [
+        "Application_Layer::Backend API Service Python",
+        "Application_Layer::Realtime Gateway WebSocket",
+        "Application_Layer::Web Server / API Gateway",
+        "Processing_Layer::Auth & Permission Service",
+        "Processing_Layer::Collaboration & Version Control",
+        "Processing_Layer::Export Service",
+        "Processing_Layer::File Ingestion Service",
+        "Processing_Layer::LaTeX Generation Service",
+        "Processing_Layer::Project & Workspace Service",
+        "Processing_Layer::Recognition Service OCR + DL",
+        "Processing_Layer::Rendering Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT global backend layer is decomposed into concrete backend services and infrastructure components. This is a reasonable split and remains within the backend/application boundary overall."
+    },
+    {
+      "gt_nodes": [
+        "Global::Data Layer / Storage"
+      ],
+      "predicted_nodes": [
+        "Data_Layer::File/Object Storage",
+        "Data_Layer::Relational Database"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT global storage layer is split into specific storage technologies for files and structured data. This is semantically appropriate and correctly remains in the data layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::Presentation Layer / Frontend"
+      ],
+      "predicted_nodes": [
+        "Presentation_Layer::Browser Frontend SPA"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both indicate the frontend presentation layer. The predicted SPA frontend is a valid implementation-specific match."
+    },
+    {
+      "gt_nodes": [
+        "Global::User Layer / Client Layer"
+      ],
+      "predicted_nodes": [
+        "Presentation_Layer::Browser Frontend SPA"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT user/client layer refers to end-user browsers and devices, while the predicted node places this as a frontend application layer component. This crosses the client/presentation boundary and conflates user devices with application UI."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer / Frontend::File Upload Interface"
+      ],
+      "predicted_nodes": [
+        "Presentation_Layer::Browser Frontend SPA"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The file upload interface is part of the frontend SPA. The predicted node is broader than the GT node but still semantically contains it and is in the correct frontend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer / Frontend::LaTeX Rendering Interface"
+      ],
+      "predicted_nodes": [
+        "Presentation_Layer::Browser Frontend SPA"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The rendering interface is a frontend function within the SPA. The match is semantically correct and boundary-consistent."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer / Frontend::Registration & Login Interface"
+      ],
+      "predicted_nodes": [
+        "Presentation_Layer::Browser Frontend SPA"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Registration and login screens are standard frontend SPA functionality, so this is a correct semantic and boundary match."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer / Frontend::Workspace Interface"
+      ],
+      "predicted_nodes": [
+        "Presentation_Layer::Browser Frontend SPA"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The workspace interface is part of the browser frontend application, so the predicted node is an acceptable broader match."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "External_Dependencies::LaTeX Engine TeX Live / MiKTeX"
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::Cloudinary\\n- stores audio files\\n- stores images\\n- returns file URLs",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Soundzone System::Cloudinary Media Storage"
+      ],
+      "reasoning": "The predicted Cloudinary storage node covers media storage and URL-return responsibilities for audio and images."
+    },
+    {
+      "gt_node": "Global::Express Server\\n- fetches data with Sequelize\\n- serves React frontend\\n- handles backend API requests",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Soundzone System::Node/Express Backend",
+        "Soundzone System::Node/Express Backend::API Layer",
+        "Soundzone System::Node/Express Backend::Business Logic"
+      ],
+      "reasoning": "The predicted backend nodes cover the Express server responsibilities, including API handling and backend logic. Serving the React frontend is represented at the backend/system level rather than as a separate node."
+    },
+    {
+      "gt_node": "Global::PostgreSQL Database\\n- stores users and sounds\\n- stores Cloudinary URL references",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Soundzone System::PostgreSQL Database"
+      ],
+      "reasoning": "The predicted PostgreSQL database node covers persistence of users, sounds, and media URL references."
+    },
+    {
+      "gt_node": "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Soundzone System::React/Redux Frontend",
+        "Soundzone System::React/Redux Frontend::Redux Store",
+        "Soundzone System::React/Redux Frontend::User Interface"
+      ],
+      "reasoning": "The predicted frontend, Redux store, and UI nodes collectively cover the React frontend responsibilities, including state management, uploads, and playback UI."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Global::Soundzone System",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Cloudinary\\n- stores audio files\\n- stores images\\n- returns file URLs",
+        "Global::Express Server\\n- fetches data with Sequelize\\n- serves React frontend\\n- handles backend API requests",
+        "Global::PostgreSQL Database\\n- stores users and sounds\\n- stores Cloudinary URL references",
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback"
+      ],
+      "reasoning": "This is a valid umbrella system node that corresponds to the overall Soundzone architecture described by the GT nodes."
+    },
+    {
+      "predicted_node": "Soundzone System::Cloudinary Media Storage",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Cloudinary\\n- stores audio files\\n- stores images\\n- returns file URLs"
+      ],
+      "reasoning": "This directly corresponds to the Cloudinary storage/media handling concept in the GT."
+    },
+    {
+      "predicted_node": "Soundzone System::Node/Express Backend",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Express Server\\n- fetches data with Sequelize\\n- serves React frontend\\n- handles backend API requests"
+      ],
+      "reasoning": "This is the backend server concept from the GT, expressed at a slightly higher aggregation level."
+    },
+    {
+      "predicted_node": "Soundzone System::Node/Express Backend::API Layer",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Express Server\\n- fetches data with Sequelize\\n- serves React frontend\\n- handles backend API requests"
+      ],
+      "reasoning": "The API layer is a grounded sub-responsibility of the Express backend."
+    },
+    {
+      "predicted_node": "Soundzone System::Node/Express Backend::Business Logic",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Express Server\\n- fetches data with Sequelize\\n- serves React frontend\\n- handles backend API requests"
+      ],
+      "reasoning": "Backend business logic is a reasonable decomposition of the Express server responsibilities present in the GT."
+    },
+    {
+      "predicted_node": "Soundzone System::PostgreSQL Database",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::PostgreSQL Database\\n- stores users and sounds\\n- stores Cloudinary URL references"
+      ],
+      "reasoning": "This directly matches the GT database storage node."
+    },
+    {
+      "predicted_node": "Soundzone System::React/Redux Frontend",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback"
+      ],
+      "reasoning": "This directly matches the GT frontend concept and preserves the React/Redux architecture."
+    },
+    {
+      "predicted_node": "Soundzone System::React/Redux Frontend::Redux Store",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback"
+      ],
+      "reasoning": "Redux state management is explicitly part of the GT frontend node."
+    },
+    {
+      "predicted_node": "Soundzone System::React/Redux Frontend::User Interface",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback"
+      ],
+      "reasoning": "The UI layer is grounded in the frontend responsibilities around upload, playback control, and visualization."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Cloudinary\\n- stores audio files\\n- stores images\\n- returns file URLs"
+      ],
+      "predicted_nodes": [
+        "Soundzone System::Cloudinary Media Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same media storage concept; boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Express Server\\n- fetches data with Sequelize\\n- serves React frontend\\n- handles backend API requests"
+      ],
+      "predicted_nodes": [
+        "Soundzone System::Node/Express Backend",
+        "Soundzone System::Node/Express Backend::API Layer",
+        "Soundzone System::Node/Express Backend::Business Logic"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Express server node is split into backend container plus API and business logic subnodes; the boundary remains within the backend context."
+    },
+    {
+      "gt_nodes": [
+        "Global::PostgreSQL Database\\n- stores users and sounds\\n- stores Cloudinary URL references"
+      ],
+      "predicted_nodes": [
+        "Soundzone System::PostgreSQL Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same persistence store concept with consistent database boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback"
+      ],
+      "predicted_nodes": [
+        "Soundzone System::React/Redux Frontend",
+        "Soundzone System::React/Redux Frontend::Redux Store",
+        "Soundzone System::React/Redux Frontend::User Interface"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The frontend responsibilities are decomposed into frontend shell, Redux state, and UI concerns, all within the correct frontend boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

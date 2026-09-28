@@ -1,0 +1,162 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Client-side::Technology::Angular 7"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Angular ClientApp"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the core Angular front-end application. The AI's 'Client Layer' is semantically equivalent to the GT's 'Client-side' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Data::ngRX state store"
+      ],
+      "predicted_nodes": [
+        "Client Layer::NgRx Store"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes correctly identify the NgRx store for client-side state management. The 'Client Layer' boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Logic::Angular\\nServices"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Service Wrappers::Controlled-list Loader",
+        "Client Layer::Service Wrappers::Evacuee Service",
+        "Client Layer::Service Wrappers::Incident-Task Service",
+        "Client Layer::Service Wrappers::Organization Service",
+        "Client Layer::Service Wrappers::Referral Service",
+        "Client Layer::Cookie Service",
+        "Client Layer::HTTP Interceptor",
+        "Client Layer::Notification Queue",
+        "Client Layer::Role-based Router",
+        "Client Layer::Watchdog Timer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly split the GT's generic 'Angular Services' node into multiple, more specific service and logic components that are all explicitly mentioned in the PRD. All these components reside within the client-side logic, so the 'Client Layer' boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Client-side::Logic::UI Components"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Notifier Component"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI identified a specific UI component ('Notifier Component') from the PRD, which is a concrete instance of the GT's more abstract 'UI Components' node. The boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Technology::.NET Core\\nWebAPI"
+      ],
+      "predicted_nodes": [
+        "API/Server Layer::.NET Core WebAPI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the backend WebAPI framework. The AI's 'API/Server Layer' is semantically equivalent to the GT's 'Server-side' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::WebAPI\\nControllers"
+      ],
+      "predicted_nodes": [
+        "API/Server Layer::API Controllers"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the API controller layer of the backend. The 'API/Server Layer' boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::Domain Services"
+      ],
+      "predicted_nodes": [
+        "Domain Layer::Domain Services"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the business logic layer. The AI's use of a separate 'Domain Layer' is a standard architectural practice and is semantically equivalent to the GT's placement within 'Server-side::Logic'."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::Domain Services::PDF"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Service Wrappers::Registration Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The AI correctly associated the PDF capability with the Registration Service as per the PRD. However, it placed the node in the 'Client Layer', representing the front-end wrapper. The GT correctly places the PDF generation logic itself in the 'Server-side::Logic'. This is a boundary-crossing error, confusing the client-side caller with the server-side implementation."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Logic::DbContext"
+      ],
+      "predicted_nodes": [
+        "Data Access Layer::DbContext"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the Entity Framework DbContext. The AI's creation of a 'Data Access Layer' is a valid and more specific architectural refinement compared to the GT's generic 'Server-side::Logic' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Technology::Entity\\nFramework\\n(ORM"
+      ],
+      "predicted_nodes": [
+        "Data Access Layer::Entity Framework"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the ORM technology. The AI correctly placed it in a dedicated 'Data Access Layer', which is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Data::DB Entities\\n(Registration, Community, etc."
+      ],
+      "predicted_nodes": [
+        "Persistence Layer::Persistent Entities"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the data entities that map to the database. The AI's 'Persistence Layer' is a standard and appropriate boundary for these components."
+    },
+    {
+      "gt_nodes": [
+        "Server-side::Data::View-Models\\n(C#",
+        "Server-side::Technology::Standard\\nC# Classes"
+      ],
+      "predicted_nodes": [
+        "Domain Layer::C# Domain Classes"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated the GT's backend ViewModels and general C# classes into a single 'C# Domain Classes' node. This is a reasonable aggregation, and placing it in the 'Domain Layer' is architecturally sound."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Client-side::Data::View-Models\\n(JSON",
+    "Client-side::Logic::UI Components::Component\\nClass",
+    "Client-side::Logic::UI Components::HTML\\nTemplates",
+    "Server-side::Logic::Domain Services::CAPTCHA",
+    "Server-side::Logic::Domain Services::Email"
+  ],
+  "unmatched_predicted_nodes": [
+    "API/Server Layer::Development Back Door",
+    "API/Server Layer::SiteMinder Auth",
+    "Client Layer::Module Load Diagnostic",
+    "External Systems::External URL",
+    "External Systems::Web Browser",
+    "Persistence Layer::MS SQL Database",
+    "Persistence Layer::Repository SQL Scripts"
+  ]
+}

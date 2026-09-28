@@ -1,0 +1,68 @@
+@startuml
+!define RECTANGLE rectangle linewidth 1
+
+title GKE Pub/Sub WebSocket Adapter Architecture
+
+skinparam componentStyle rectangle
+
+package "Google Cloud Platform" {
+  [Pub/Sub Topic] as pubsub #lightblue
+  [GKE Cluster] as gke #lightyellow
+}
+
+package "GKE Cluster" {
+  [ConfigMap
+(topic configuration)] as configmap #lightgreen
+  [Deployment
+(adapter pods)] as deployment #lightcoral
+  [Service
+(LoadBalancer)] as service #lightpink
+  [Horizontal Pod Autoscaler] as hpa #lightgray
+  
+  package "Adapter Pod (Container)" {
+    [exec.sh
+(entrypoint)] as entrypoint
+    [pulltop
+(Node.js process)] as pulltop
+    [websocketd
+(WebSocket server)] as websocketd
+  }
+}
+
+pubsub --> deployment : Messages consumed via
+Pub/Sub subscription
+configmap --> deployment : Injects SYMBOL env var
+deployment --> service : Exposes port 8080
+service --> clients : WebSocket endpoint
+(TCP port 80)
+hpa --> deployment : Scales pods based on
+CPU utilization
+entrypoint --> pulltop : Passes topic param
+pulltop --> websocketd : Streams message data
+websocketd --> clients : Sends messages to
+WebSocket clients
+
+note right of pubsub
+  External system
+end note
+
+note right of clients
+  Web clients connect via
+  WebSocket to receive
+  mirrored topic data
+end note
+
+note bottom of deployment
+  Each pod runs:
+  - exec.sh
+  - pulltop
+  - websocketd
+end note
+
+note bottom of hpa
+  Min: 1 replica
+  Max: 2 replicas
+  Target CPU: 80%
+end note
+
+@enduml

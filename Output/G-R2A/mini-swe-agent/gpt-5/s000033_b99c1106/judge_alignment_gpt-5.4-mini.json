@@ -1,0 +1,98 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Postgres"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Docker Compose Network::Postgres 9.6\\nPort: 5432"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Postgres service used for Airflow metadata persistence. The predicted node adds image and port details but remains within the same semantic boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Docker Compose Network::airflow-webserver\\n(docker-airflow-spark:latest)\\nPort: 8282"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Airflow webserver/driver component in the Docker Compose environment. The predicted boundary is more detailed but semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Docker Compose Network::jupyter-spark\\n(jupyter/pyspark-notebook)\\nPorts: 8888(UI), 4040-4080(app UI"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Jupyter/PySpark notebook service. The predicted node correctly places it in the Docker Compose network boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Cluster Manager\\n(Spark Standalone"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Docker Compose Network::spark master\\n(bitnami/spark:latest)\\nHostname: spark\\nPorts: 8181(UI)->8080, 7077(cluster"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes denote the Spark standalone master/cluster manager. The predicted node preserves the correct architectural role and placement."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 1"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Docker Compose Network::spark-worker-1\\n(bitnami/spark:latest"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node corresponds directly to Worker 1. Boundary placement within the Docker Compose network is correct."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 2"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Docker Compose Network::spark-worker-2\\n(bitnami/spark:latest"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node corresponds directly to Worker 2. Boundary placement is consistent with the GT."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 3"
+      ],
+      "predicted_nodes": [
+        "Docker Host::Docker Compose Network::spark-worker-3\\n(bitnami/spark:latest"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node corresponds directly to Worker 3. Boundary placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Data Engineer"
+      ],
+      "predicted_nodes": [
+        "Global::Docker Host"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "This is not semantically equivalent: the GT node is an actor, while the predicted node is an infrastructure element. This is a clear hallucinated/misplaced node."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Docker Compose Environment::Spark Workers::Worker N"
+  ],
+  "unmatched_predicted_nodes": [
+    "Docker Host::Docker Compose Network"
+  ]
+}

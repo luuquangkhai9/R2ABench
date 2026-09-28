@@ -1,0 +1,66 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "predicted_nodes": [
+        "cFS Bundle Repository::Source + Submodules",
+        "cFS Bundle Repository::Build Assets (Makefile.sample, sample_defs",
+        "Global::cFS Target (core-cpu1",
+        "cFS Target (core-cpu1::Command & Telemetry Interface",
+        "cFS Target (core-cpu1::Framework Applications",
+        "cFS Target (core-cpu1::OSAL",
+        "cFS Target (core-cpu1::PSP",
+        "cFS Target (core-cpu1::cFE Core"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT 'cFS Bundle' is a high-level representation of the entire Core Flight System bundle, which the AI correctly split into its constituent repository source/assets, target executable, and internal cFS subsystems (OSAL, PSP, cFE, etc.). The boundaries are semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Reuse Workflows::Submodule Reuse",
+        "Reuse Workflows::cFS Reuse"
+      ],
+      "predicted_nodes": [
+        "CI/CD (GitHub Actions::Reusable Workflows (workflow_call"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT explicitly separates submodule and cFS reuse workflows, whereas the AI merged them into a single reusable workflows node. Both correctly group these under CI/CD workflow boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Static and Quality Checks::CodeQL Analysis",
+        "Static and Quality Checks::Static Analysis"
+      ],
+      "predicted_nodes": [
+        "CI/CD (GitHub Actions::Static Analysis (CodeQL"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT models CodeQL and general static analysis as distinct quality check nodes. The AI merged them into a single CodeQL Static Analysis node under the GitHub Actions CI/CD boundary, which is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Static and Quality Checks::Format Check"
+      ],
+      "predicted_nodes": [
+        "CI/CD (GitHub Actions::Format Check Workflow <<ubuntu-18.04>>"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the automated format checking process. Placing this under GitHub Actions vs 'Static and Quality Checks' is functionally and environmentally accurate based on the PRD."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "CI/CD (GitHub Actions::Artifact Store (Changelog",
+    "CI/CD (GitHub Actions::Build & Install Job <<ubuntu-18.04>>",
+    "CI/CD (GitHub Actions::Changelog Generation <<ubuntu-latest>>",
+    "CI/CD (GitHub Actions::Functional Test Job <<ubuntu-18.04>>",
+    "Global::IP Network (Operator-entered address",
+    "Host Tools::cmdUtil (Host Command Utility"
+  ]
+}

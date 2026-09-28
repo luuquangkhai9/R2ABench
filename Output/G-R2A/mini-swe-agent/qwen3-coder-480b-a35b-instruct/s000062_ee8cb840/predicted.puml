@@ -1,0 +1,60 @@
+@startuml
+title System Architecture - Udacity Self-Driving Car Capstone
+
+skinparam componentStyle rectangle
+
+package "ROS Environment" {
+    [Perception Subsystem] as Perception
+    [Planning Subsystem] as Planning
+    [Control Subsystem] as Control
+    
+    database "Waypoint Data" as Waypoints
+    database "Traffic Light Data" as TrafficData
+    
+    Perception --> TrafficData : reads real images
+produces classification
+    Perception --> Waypoints : outputs stop waypoints
+    
+    Planning --> Waypoints : reads base waypoints
+    Planning --> Waypoints : writes final waypoints
+    
+    Control --> Waypoints : reads final waypoints
+    Control --> "Vehicle Actuators" : sends commands
+    
+    Perception ..> Planning : publishes traffic waypoint
+    Planning ..> Control : publishes final waypoints
+}
+
+node "Execution Environment" {
+    [Docker Container] as Docker
+    [ROS Core] as ROS
+    [Launch Files] as Launch
+    
+    Docker contains ROS
+    ROS contains Launch
+    Launch --> Perception
+    Launch --> Planning
+    Launch --> Control
+}
+
+artifact "Udacity Simulator" as Simulator
+artifact "Training Bag Files" as BagFiles
+
+Simulator --> Perception : provides images (simulator mode)
+BagFiles --> Perception : provides images (site mode)
+
+note right of Perception
+  Detects and classifies traffic lights
+  Produces stop-related waypoints
+end note
+
+note right of Planning
+  Loads and updates waypoints
+  Generates final trajectory
+end note
+
+note right of Control
+  Generates throttle, steering, brake
+end note
+
+@enduml

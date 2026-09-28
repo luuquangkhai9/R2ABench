@@ -1,0 +1,341 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Admin Mgmt Service"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Admin Product Management Service",
+        "Business Layer::Admin Order Management Service",
+        "Business Layer::Admin User Management Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT admin management is a coarse-grained service that the AI split into three functionally equivalent admin services. The boundary remains within the business layer and is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Help Goods Service"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Product Browsing Service",
+        "Business Layer::Search Service",
+        "Business Layer::Category & Tag Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT service covers product browsing/help-goods related functions, which the AI decomposed into browsing, search, and category/tag handling. This is a reasonable business-layer split."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Order Mgmt Service"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Order Service",
+        "Business Layer::Admin Order Management Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT order management service is represented by separate user-order and admin-order services. This is a valid functional split within the business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Core Services::Personal Center Service"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Personal Center Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Names and function align directly, and both are in the business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Create Order Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Order Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT module for creating orders is functionally equivalent to the AI's order service. Boundary is consistent as a business-layer component."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Favorites Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Favorites Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Favorites functionality matches directly and is correctly placed in the business layer."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Goods Category Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Category & Tag Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Category browsing in GT corresponds to the AI's category/tag service. Boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Hot Items Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Product Browsing Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Hot items/popular products are part of product browsing functionality. The business-layer attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Modify User Info Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Admin User Management Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "GT user info modification is contained within user management. The AI expresses it as an admin user management service, which is acceptable for the administrator-side function."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Order Record Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Order Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Order record viewing is part of overall order functionality. The business-layer placement is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer::Functional Modules::Platform Mgmt Module"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Admin Product Management Service",
+        "Business Layer::Admin Order Management Service",
+        "Business Layer::Admin User Management Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT platform management module is an umbrella admin module that the AI decomposed into product/order/user management services. This is semantically equivalent and correctly remains in the business layer."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Custom Functions"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Admin Log Repository",
+        "Data Layer::Favorite Repository",
+        "Data Layer::Order Repository",
+        "Data Layer::Product Repository",
+        "Data Layer::Tag/Category Repository",
+        "Data Layer::User Repository"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT custom data functions are represented by multiple data repositories. This is a valid data-layer decomposition."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Backup"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Metrics Repository"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Metrics storage is not semantically equivalent to data backup. The AI has not reproduced the backup node correctly."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Cache"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding cache node is present in the prediction."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Recovery"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No corresponding recovery node is present in the prediction."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Read/Write Database"
+      ],
+      "predicted_nodes": [
+        "Global::CampusHelperDB"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT read/write database is semantically equivalent to the AI's concrete system database node. The boundary shift from data layer to a global database node is acceptable because it still represents the database component."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Stored Procedures"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No stored procedures node is present in the prediction."
+    },
+    {
+      "gt_nodes": [
+        "Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Global::CampusHelperDB"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted database node is a concrete MySQL database for the system, which is semantically equivalent to the GT MySQL node."
+    },
+    {
+      "gt_nodes": [
+        "Display Layer::GET Request"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No explicit GET request node is present in the prediction."
+    },
+    {
+      "gt_nodes": [
+        "Display Layer::POST Request"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No explicit POST request node is present in the prediction."
+    },
+    {
+      "gt_nodes": [
+        "Display Layer::Template Engine Rendering\\n(pages"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::WeChat Mini Program Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node refers to server-side template/page rendering, while the prediction places it at the client presentation layer. This is a boundary mismatch and not semantically equivalent in architecture."
+    },
+    {
+      "gt_nodes": [
+        "Display Layer::wx.request Interaction"
+      ],
+      "predicted_nodes": [
+        "Global::WeChat Mini Program Runtime"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "wx.request is a client-side API interaction mechanism, not the runtime itself. The AI conflated the interaction node with the runtime environment, causing a boundary and component mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Global::Log Recording"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Logging Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Logging is semantically related, but the GT places it as a global concern while the AI placed it as a business service. This is a cross-boundary architectural mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Global::Permission Control"
+      ],
+      "predicted_nodes": [
+        "Business Layer::Auth & Permission Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Permission control is semantically equivalent, but the AI moved a global cross-cutting concern into the business layer. This is a boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Mini-program UI::JavaScript"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::WeChat Mini Program Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a specific UI technology asset, while the prediction is a higher-level client container. This is not an exact architectural equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Mini-program UI::Wxml"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::WeChat Mini Program Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a concrete UI markup technology, but the AI only provided the general client boundary. This is too coarse and not a faithful reproduction."
+    },
+    {
+      "gt_nodes": [
+        "Mini-program UI::Wxss"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::WeChat Mini Program Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a specific style layer technology, while the prediction is only the generic client boundary. Not equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Runtime Environment::MySQL 106.55.224.139\\n2 Cores 4GB"
+      ],
+      "predicted_nodes": [
+        "Global::CampusHelperDB"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node describes the runtime host environment, whereas the prediction is only the database logical node. These are different architectural concerns."
+    },
+    {
+      "gt_nodes": [
+        "Runtime Environment::Tencent Cloud\\nLightweight App Server"
+      ],
+      "predicted_nodes": [
+        "Global::WeChat Mini Program Runtime"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a server/runtime environment, while the predicted node is the client runtime. This is a severe boundary and role mismatch."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Data Layer::Data Cache",
+    "Data Layer::Data Recovery",
+    "Data Layer::Stored Procedures",
+    "Display Layer::GET Request",
+    "Display Layer::POST Request"
+  ],
+  "unmatched_predicted_nodes": [
+    "Business Layer::Monitoring Service",
+    "Business Layer::Search Service",
+    "Data Layer::Metrics Repository",
+    "Global::CampusHelperDB",
+    "Global::WeChat Mini Program Runtime",
+    "Presentation Layer::Administration Console",
+    "Presentation Layer::WeChat Mini Program Client"
+  ]
+}

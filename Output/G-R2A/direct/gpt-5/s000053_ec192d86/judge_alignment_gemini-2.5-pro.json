@@ -1,0 +1,81 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Alert Source::app-sre\\nalertmanager",
+        "Alert Source::cluster\\nalertmanager",
+        "Alert Source::deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Systems::External Alert Source"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated multiple specific alert sources from the GT into a single, logical 'External Alert Source' node. The 'External Systems' boundary is semantically equivalent to the 'Alert Source' boundary."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::CHGM investigation",
+        "cadctl::CPD investigation",
+        "cadctl::Future investigations",
+        "cadctl::switch(alerttype"
+      ],
+      "predicted_nodes": [
+        "CAD Runtime::Container Image: CAD CLI (UBI minimal"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the detailed internal functions of the `cadctl` tool, described in the GT, into a single node representing the tool's runtime container. The 'CAD Runtime' boundary is a valid architectural layer for the component, making it semantically equivalent to the GT's 'cadctl' boundary."
+    },
+    {
+      "gt_nodes": [
+        "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster",
+        "PagerDuty Team::app-sre-alertmanager",
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified 'PagerDuty' as a single external system, aggregating the specific PagerDuty team endpoints from the GT. The boundary 'External Systems' is a correct and more general classification than 'PagerDuty Team'."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton\\nEvent\\nListener"
+      ],
+      "predicted_nodes": [
+        "Tekton Execution (Cluster::Namespace: configuration-anomaly-detection::Tekton EventListener"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the Tekton EventListener component. The AI's boundary attribution 'Tekton Execution (Cluster::Namespace: configuration-anomaly-detection)' is more specific and accurate according to the PRD than the GT's 'Global' boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Alerts::CHGM",
+    "Alerts::CPD",
+    "Alerts::all cluster\\nalerts",
+    "Global::Escalate alert to\\non-call SRE",
+    "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?",
+    "Global::Update Incident\\nNotes"
+  ],
+  "unmatched_predicted_nodes": [
+    "Build Environment::Go 1.17 Builder Image",
+    "External Systems::AWS",
+    "External Systems::OCM",
+    "Repository Assets::AWS Integration",
+    "Repository Assets::Integration Library (pkg",
+    "Repository Assets::OCM Integration",
+    "Repository Assets::PagerDuty Integration",
+    "Repository Assets::Template Update Utility",
+    "Tekton Execution (Cluster::Namespace: configuration-anomaly-detection",
+    "Tekton Execution (Cluster::Namespace: configuration-anomaly-detection::Alert Webhook",
+    "Tekton Execution (Cluster::Namespace: configuration-anomaly-detection::Pipeline: cad-checks-pipeline",
+    "Tekton Execution (Cluster::Namespace: configuration-anomaly-detection::PipelineRun (v1beta1",
+    "Tekton Execution (Cluster::Namespace: configuration-anomaly-detection::Tekton Trigger",
+    "Users::Deployment Engineer",
+    "Users::Developer / Contributor",
+    "Users::SRE / Operations User"
+  ]
+}

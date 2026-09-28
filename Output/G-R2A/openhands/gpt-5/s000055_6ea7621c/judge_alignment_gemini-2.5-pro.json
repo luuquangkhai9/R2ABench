@@ -1,0 +1,72 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "BACKEND::Router"
+      ],
+      "predicted_nodes": [
+        "Heroku Dyno\n(Node.js Runtime::Application (CommonJS::HTTP Router"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the backend HTTP routing component. The 'BACKEND' and 'Heroku Dyno (Node.js Runtime)' boundaries are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::handlers"
+      ],
+      "predicted_nodes": [
+        "Heroku Dyno\n(Node.js Runtime::Application (CommonJS::Request Handlers::Home Page Handler",
+        "Heroku Dyno\n(Node.js Runtime::Application (CommonJS::Request Handlers::Not-Found Handler (404",
+        "Heroku Dyno\n(Node.js Runtime::Application (CommonJS::Request Handlers::Static File Server\n+ Content-Type Mapper"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single handler node in GT is explicitly split into specialized request handlers (Home, Not-Found, Static Server) by the AI. The boundaries are semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::algorithm"
+      ],
+      "predicted_nodes": [
+        "Heroku Dyno\n(Node.js Runtime::Application (CommonJS::Search / Autocomplete::Autocomplete Engine",
+        "Heroku Dyno\n(Node.js Runtime::Application (CommonJS::Search / Autocomplete::Data Access"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT algorithm node maps to the predicted autocomplete engine and its associated data access logic handling the search behavior."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::data.json"
+      ],
+      "predicted_nodes": [
+        "Heroku Dyno\n(Node.js Runtime::Laureate Data\n(local JSON"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both accurately identify the local JSON data source containing laureate records."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::XMLHttpRequest",
+        "FRONTEND::index.html",
+        "FRONTEND::main.css",
+        "FRONTEND::userInput"
+      ],
+      "predicted_nodes": [
+        "Global::Web Browser\n(Search UI"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Multiple specific frontend components in the GT (UI assets, inputs, and client requests) are abstracted into a single Web Browser client node by the AI. 'FRONTEND' and 'Web Browser' boundaries match contextually."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "BACKEND::public assets\nhtml\ncss\njs"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Automated Tests",
+    "Global::Heroku Dyno\n(Node.js Runtime"
+  ]
+}

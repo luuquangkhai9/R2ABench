@@ -1,0 +1,173 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Tengine Lite::Convert Tool::Caffe",
+        "Tengine Lite::Convert Tool::Darknet",
+        "Tengine Lite::Convert Tool::MXNet",
+        "Tengine Lite::Convert Tool::MegEngine",
+        "Tengine Lite::Convert Tool::OneFlow",
+        "Tengine Lite::Convert Tool::Others",
+        "Tengine Lite::Convert Tool::PaddlePaddle",
+        "Tengine Lite::Convert Tool::PyTorch / ONNX",
+        "Tengine Lite::Convert Tool::TF Lite",
+        "Tengine Lite::Convert Tool::TensorFlow"
+      ],
+      "predicted_nodes": [
+        "Model Conversion & Tooling Layer::Linux Pre-compiled Converter",
+        "Model Conversion & Tooling Layer::WebAssembly Online Converter\n<<local-only execution\nno private data uploaded>>"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT lists multiple model-format-specific conversion tools under a single convert-tool area, while the predicted diagram aggregates them into two conversion delivery mechanisms (Linux precompiled and browser-local WebAssembly). This is semantically aligned with the PRD and not a boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Engine::CPU Backend",
+        "Tengine Lite::Engine::Device Allocator",
+        "Tengine Lite::Engine::Exec Scheduler",
+        "Tengine Lite::Engine::GPU Backend",
+        "Tengine Lite::Engine::Graph Partition",
+        "Tengine Lite::Engine::Low Bit Quantize",
+        "Tengine Lite::Engine::NPU Backend"
+      ],
+      "predicted_nodes": [
+        "Core Inference Engine Layer::Device Module\n(NN Operator Backend /\nHardware Dispatch",
+        "Core Inference Engine Layer::Operator Module\n(NN Operator Registry &\nInitialization",
+        "Core Inference Engine Layer::Scheduler Module\n(Graph Orchestration &\nHardware Coordination",
+        "Core Inference Engine Layer::Serializer Module\n(tmfile Binary Decoder"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT engine responsibilities are decomposed into the predicted core engine modules. Although the GT separates CPU/GPU/NPU backend, allocator, scheduler, graph partition, and quantization, the predicted grouping is a reasonable functional consolidation within the core inference engine boundary."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Runtime Optimize::ARM / X86 / RISCV / MIPS",
+        "Tengine Lite::Runtime Optimize::Amlogic / RK / NXP / JLQ\\nNPU and NVDLA",
+        "Tengine Lite::Runtime Optimize::Assembly",
+        "Tengine Lite::Runtime Optimize::Auto Kernel Plugin",
+        "Tengine Lite::Runtime Optimize::CUDA / Vulkan / OpenCL",
+        "Tengine Lite::Runtime Optimize::Mix Bit Calculation",
+        "Tengine Lite::Runtime Optimize::NVIDIA / Mali / Adreno",
+        "Tengine Lite::Runtime Optimize::SGEMM",
+        "Tengine Lite::Runtime Optimize::SIMD",
+        "Tengine Lite::Runtime Optimize::TIM-VX / OpenDLA Plugin",
+        "Tengine Lite::Runtime Optimize::TensorRT / ACL Plugin",
+        "Tengine Lite::Runtime Optimize::Winograd"
+      ],
+      "predicted_nodes": [
+        "Core Inference Engine Layer::Device Module\n(NN Operator Backend /\nHardware Dispatch",
+        "Core Inference Engine Layer::Scheduler Module\n(Graph Orchestration &\nHardware Coordination"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The runtime optimization implementations in GT are hardware/backend execution optimizations, which are reasonably absorbed into the predicted device/scheduler core engine modules. The boundary is still within the core backend/inference area."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Serializer::Caffe Serializer",
+        "Tengine Lite::Serializer::Darknet Serializer",
+        "Tengine Lite::Serializer::MLIR Serializer",
+        "Tengine Lite::Serializer::MXNet Serializer",
+        "Tengine Lite::Serializer::MegEngine Serializer",
+        "Tengine Lite::Serializer::ONNX Serializer",
+        "Tengine Lite::Serializer::OneFlow Serializer",
+        "Tengine Lite::Serializer::Others Serializer",
+        "Tengine Lite::Serializer::PaddlePaddle Serializer",
+        "Tengine Lite::Serializer::TF Lite Serializer",
+        "Tengine Lite::Serializer::TensorFlow Serializer",
+        "Tengine Lite::Serializer::ncnn Serializer",
+        "Tengine Lite::Serializer::tmfile Serializer"
+      ],
+      "predicted_nodes": [
+        "Core Inference Engine Layer::Serializer Module\n(tmfile Binary Decoder",
+        "Global::Serialized Model Parameters\n(Decoded tmfile Output"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT enumerates multiple serializer implementations, while the predicted diagram abstracts this into a serializer module plus its decoded output. This matches the PRD emphasis on tmfile decoding and serializer responsibility."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Engine::Exec Scheduler"
+      ],
+      "predicted_nodes": [
+        "Core Inference Engine Layer::Scheduler Module\n(Graph Orchestration &\nHardware Coordination"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the execution/scheduling function of the engine, and the predicted boundary is an appropriate abstraction of the GT scheduler component."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Serializer::tmfile Serializer"
+      ],
+      "predicted_nodes": [
+        "Core Inference Engine Layer::Serializer Module\n(tmfile Binary Decoder"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is the direct semantic match for the tmfile decoding serializer, and the predicted boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Convert Tool::Caffe",
+        "Tengine Lite::Convert Tool::Darknet",
+        "Tengine Lite::Convert Tool::MXNet",
+        "Tengine Lite::Convert Tool::MegEngine",
+        "Tengine Lite::Convert Tool::OneFlow",
+        "Tengine Lite::Convert Tool::Others",
+        "Tengine Lite::Convert Tool::PaddlePaddle",
+        "Tengine Lite::Convert Tool::PyTorch / ONNX",
+        "Tengine Lite::Convert Tool::TF Lite",
+        "Tengine Lite::Convert Tool::TensorFlow"
+      ],
+      "predicted_nodes": [
+        "Model Conversion & Tooling Layer::Linux Pre-compiled Converter"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The Linux pre-compiled converter is the predicted counterpart of the GT conversion tool family. The GT lists supported source frameworks rather than deployment form, so the abstraction is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Tengine Lite::Convert Tool::Caffe",
+        "Tengine Lite::Convert Tool::Darknet",
+        "Tengine Lite::Convert Tool::MXNet",
+        "Tengine Lite::Convert Tool::MegEngine",
+        "Tengine Lite::Convert Tool::OneFlow",
+        "Tengine Lite::Convert Tool::Others",
+        "Tengine Lite::Convert Tool::PaddlePaddle",
+        "Tengine Lite::Convert Tool::PyTorch / ONNX",
+        "Tengine Lite::Convert Tool::TF Lite",
+        "Tengine Lite::Convert Tool::TensorFlow"
+      ],
+      "predicted_nodes": [
+        "Model Conversion & Tooling Layer::WebAssembly Online Converter\n<<local-only execution\nno private data uploaded>>"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The browser-local online converter corresponds to the GT conversion tool capability, and the boundary aligns with the PRD's web-based converter."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "API Surface Layer::C API Module\n<<compatible with original\nTengine C API (NFR-002)>>",
+    "API Surface Layer::C++ API Module",
+    "API Surface Layer::Python API Module",
+    "Build & Deployment Layer::CMake Build System",
+    "Core Inference Engine Layer::Device Module\n(NN Operator Backend /\nHardware Dispatch",
+    "Core Inference Engine Layer::Operator Module\n(NN Operator Registry &\nInitialization",
+    "Core Inference Engine Layer::Scheduler Module\n(Graph Orchestration &\nHardware Coordination",
+    "Core Inference Engine Layer::Serializer Module\n(tmfile Binary Decoder",
+    "Example Application Layer::Example Programs\n(Classification / Detection /\nSegmentation / Pose /\nLandmark / OCR",
+    "Global::Serialized Model Parameters\n(Decoded tmfile Output",
+    "Global::WebAssembly-capable\nWeb Browser",
+    "Local Filesystem\n(Model & Image Assets::Image Assets",
+    "Local Filesystem\n(Model & Image Assets::tmfile Binaries",
+    "Model Conversion & Tooling Layer::Linux Pre-compiled Converter",
+    "Model Conversion & Tooling Layer::WebAssembly Online Converter\n<<local-only execution\nno private data uploaded>>",
+    "WebAssembly-capable\nWeb Browser::Browser WASM Runtime"
+  ]
+}

@@ -1,0 +1,53 @@
+@startuml
+title PlugIt Architecture Overview
+
+skinparam componentStyle rectangle
+
+package "PlugIt Framework" {
+  [PlugIt Proxy] as proxy
+  [Proxy Data Store] as proxyDB
+  
+  package "PlugIt Services" {
+    [Service 1] as service1
+    [Service 2] as service2
+    [Service N] as serviceN
+    [Service Data Store 1] as serviceDB1
+    [Service Data Store 2] as serviceDB2
+    [Service Data Store N] as serviceDBN
+  }
+  
+  package "External Systems" {
+    [External Users/API Clients] as clients
+    [Inbound Mail System] as mail
+  }
+}
+
+clients --> proxy : Access services via
+Proxy API
+proxy --> service1 : PlugIt Protocol
+proxy --> service2 : PlugIt Protocol
+proxy --> serviceN : PlugIt Protocol
+proxy ..> proxyDB : Manage proxy data
+
+service1 ..> serviceDB1 : Service-specific data
+service2 ..> serviceDB2 : Service-specific data
+serviceN ..> serviceDBN : Service-specific data
+
+mail ..> proxy : Example mail
+processing (standalone)
+
+note right of mail
+  Example/standalone scope only
+end note
+
+note bottom of serviceN
+  Services are isolated and
+maintain separate data stores
+end note
+
+note top of proxy
+  Central access point for all
+services and user experiences
+end note
+
+@enduml

@@ -1,0 +1,58 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Application"
+      ],
+      "predicted_nodes": [
+        "Android Application::Host Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the host Android application that integrates the QAPM SDK. The boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_Plugin::Plugin init compile",
+        "QAPM_Plugin::QAPM_Plugin"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK (Scoped::Data Sender",
+        "QAPM SDK (Scoped::HTTP Client Wrapper",
+        "QAPM SDK (Scoped::Network Connectivity",
+        "QAPM SDK (Scoped::Upload Processor",
+        "QAPM SDK (Scoped::Work Scheduler",
+        "QAPM SDK (Scoped::Background Handler Thread",
+        "QAPM SDK (Scoped::Android Context"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT plugin-related nodes represent build-time/initialization plugin behavior, while the predicted nodes are runtime SDK functional components. This is a severe boundary/context mismatch rather than a valid split."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK (Scoped::Data Sender",
+        "QAPM SDK (Scoped::HTTP Client Wrapper",
+        "QAPM SDK (Scoped::Network Connectivity",
+        "QAPM SDK (Scoped::Upload Processor",
+        "QAPM SDK (Scoped::Work Scheduler",
+        "QAPM SDK (Scoped::Background Handler Thread",
+        "QAPM SDK (Scoped::Android Context"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted nodes are decomposed functional parts of the QAPM SDK and align with the reviewed scope around scheduling, upload processing, context usage, network gating, and HTTP wrapper behavior. The boundary attribution remains within the SDK context."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "QAPM_SDK::QAPM_Collect",
+    "QAPM_SDK::QAPM_Report",
+    "QAPM_SDK::QAPM_Storage"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::Remote Server"
+  ]
+}

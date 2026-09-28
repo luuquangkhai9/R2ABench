@@ -1,0 +1,89 @@
+@startuml
+!define RECTANGLE class
+skinparam componentStyle rectangle
+skinparam backgroundColor #FEFEFE
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam roundCorner 10
+
+title MyEMS System Architecture
+
+package "Browser Environment" {
+  [Admin Application] as AdminApp
+  [Browser] as Browser
+}
+
+package "API Service Environment" {
+  [REST API Service] as APIService
+  [Python Runtime] as PythonRuntime
+  [Docker Container] as DockerContainer
+  [Database] as Database
+}
+
+package "Deployment & Runtime" {
+  [Reverse Proxy\n(e.g., Nginx)] as ReverseProxy
+  [Development Host\n(Linux/Windows)] as DevHost
+}
+
+' Core connections
+Browser --> AdminApp : "Renders"
+AdminApp --> ReverseProxy : "API calls via /api/"
+ReverseProxy --> APIService : "Forwards requests"
+APIService --> Database : "Persistent storage"
+APIService --> PythonRuntime : "Executes within"
+PythonRuntime --> DockerContainer : "Can run inside"
+DevHost --> APIService : "Quick-run execution"
+
+' Admin routing components
+package "Admin Routing Configuration" {
+  [User Settings Route\n(/user)] as UserRoute
+  [Contact Settings Route\n(/contact)] as ContactRoute
+  [Tariff Settings Modules] as TariffModules
+  [Category Settings Modules] as CategoryModules
+  [Lazy-Loading Mechanism] as LazyLoader
+}
+
+' Module dependencies
+UserRoute --> LazyLoader : "Triggers load of"
+ContactRoute --> LazyLoader : "Triggers load of"
+LazyLoader --> TariffModules : "Loads when configured"
+LazyLoader --> CategoryModules : "Loads when configured"
+
+' Data flows
+AdminApp --> UserRoute : "Navigates to"
+AdminApp --> ContactRoute : "Navigates to"
+AdminApp --> LazyLoader : "Uses for"
+AdminApp ..> APIService : "API Base Path:\n{protocol}//{host}:{port}/api/"
+
+' External integrations
+[MyEMS Components] as MyEMS --> APIService : "REST API calls"
+[Third-Party Applications] as ThirdParty --> APIService : "REST API calls"
+
+' Deployment relationships
+DockerContainer ..> APIService : "Packages for installation"
+DevHost ..> PythonRuntime : "Provides environment"
+
+' Legend/note areas
+note top of APIService
+  Python dependencies:
+  - REST framework
+  - CORS support
+  - WSGI execution
+  - MySQL connector
+  - Spreadsheet/image handling
+end note
+
+note right of AdminApp
+  Route titles use
+  localization keys:
+  - MENU.USERSETTING.USER
+  - MENU.SETTINGS.CONTACT
+end note
+
+note left of ReverseProxy
+  Optional deployment component
+  for same-origin routing
+  and CORS avoidance
+end note
+
+@enduml

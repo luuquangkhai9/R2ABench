@@ -1,0 +1,130 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Secure API\nAuthenticated HTTP endpoints"
+      ],
+      "predicted_nodes": [
+        "API Layer::User Management API (Spring HTTP"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both represent the protected HTTP management API for authenticated user operations. However, the GT node is a broader secure API endpoint area within the LwM2M Blockchain Platform, while the prediction narrows it to User Management API. Functionally equivalent enough, but the boundary attribution is not strictly correct because it omits the broader platform grouping and shifts into an application-layer naming."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Secure API\nAuthenticated HTTP endpoints"
+      ],
+      "predicted_nodes": [
+        "Application Services::Auth/JWT Validation Utility"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT secure API endpoint area necessarily includes token validation behavior, and the predicted JWT validation utility correctly captures the access-control concern. The boundary is acceptable as an application service/security utility supporting the secure API."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Secure API\nAuthenticated HTTP endpoints"
+      ],
+      "predicted_nodes": [
+        "Application Services::User Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The secure API includes user retrieval/creation operations backed by a user service. The user service is a reasonable functional component under the secure API boundary."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Blockchain Network\nEthereum / Web3j"
+      ],
+      "predicted_nodes": [
+        "External Systems::Ethereum-compatible Node (HTTP JSON-RPC"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This matches the external blockchain endpoint/network used for Ethereum/Web3j connectivity. The predicted node is correctly placed as an external system."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Blockchain Network\nEthereum / Web3j"
+      ],
+      "predicted_nodes": [
+        "Integration/Libraries::Web3j (Ethereum Client Library"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT network node includes Web3j as the blockchain connectivity layer. Modeling Web3j as an integration/library component is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::BootstrapStore\nSmart Contract"
+      ],
+      "predicted_nodes": [
+        "External Systems::Smart Contract: Client/Bootstrap Registry"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is the blockchain smart contract responsible for client/bootstrap registry behavior. The external-system boundary is appropriate for the on-chain contract."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::External Applications\nusing LwM2M",
+        "LwM2M Blockchain Platform::LwM2M Server\nLeshan server component"
+      ],
+      "predicted_nodes": [
+        "Integration/Libraries::Leshan/LwM2M Model Library",
+        "Application Services::LwM2M Node JSON Parsing Service"
+      ],
+      "match_type": "1:2",
+      "is_boundary_correct": true,
+      "reasoning": "The GT external LwM2M/Leshan side is represented by a library and a parsing service in the prediction. This is a reasonable split of LwM2M concerns into library and application logic, and the boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Bootstrap Server"
+      ],
+      "predicted_nodes": [
+        "Application Services::Client/Bootstrap Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The bootstrap server responsibility in the GT is functionally aligned with client/bootstrap service logic in the prediction. The service boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Bootstrap Server"
+      ],
+      "predicted_nodes": [
+        "Application Services::Fixed 32-byte Encoding/Decoding Utility"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT bootstrap server participates in the fixed-width contract field encoding/decoding workflow. Modeling this as a dedicated utility is semantically correct and fits the backend service boundary."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Client\nDevice 1",
+        "LwM2M Blockchain Platform::LwM2M Client\nDevice 2"
+      ],
+      "predicted_nodes": [
+        "External Systems::Authenticated API Client"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT nodes are actual LwM2M client devices, while the prediction is an authenticated API client for management endpoints. These are not semantically equivalent; this is a context confusion between device-side LwM2M clients and API consumers."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Management Web UI"
+      ],
+      "predicted_nodes": [
+        "API Layer::User Management API (Spring HTTP"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a management web UI, but the prediction is a backend HTTP API. This is a severe boundary mismatch between presentation/UI and server API layers."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

@@ -1,0 +1,277 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "AWS Cloud\\nAppian Source::VPC::Appian\\nOracle DB",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Appian"
+      ],
+      "reasoning": "The GT node represents the Appian source system and its backing data source. The predicted Appian node covers the core Appian-side responsibility, though it omits the explicit Oracle DB and VPC detail."
+    },
+    {
+      "gt_node": "AWS Cloud\\nConnector Account::AWS EventBridge",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "AWS::EventBridge\\n(Event Routing Rules"
+      ],
+      "reasoning": "The predicted EventBridge node covers the same event-routing capability as the GT EventBridge node."
+    },
+    {
+      "gt_node": "AWS Cloud\\nConnector Account::Chat notification",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node represents chat notifications."
+    },
+    {
+      "gt_node": "AWS Cloud\\nConnector Account::Email notification",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node represents email notifications."
+    },
+    {
+      "gt_node": "AWS Cloud\\nConnector Account::SNS Topic\\nalerts",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "AWS::SNS Topic"
+      ],
+      "reasoning": "The predicted SNS topic covers the GT SNS topic responsibility, though it lacks the explicit alerts label and connector-account context."
+    },
+    {
+      "gt_node": "AWS Cloud\\nConnector Account::Slack notification",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node represents Slack notifications."
+    },
+    {
+      "gt_node": "AWS Cloud\\nConnector Account::VPC::CMS BigMAC",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::CMS BigMAC"
+      ],
+      "reasoning": "The predicted CMS BigMAC node covers the same external BigMAC target system, but without the AWS/VPC placement detail."
+    },
+    {
+      "gt_node": "AWS Cloud\\nConnector Account::VPC::connector::Private subnet::AWS Fargate\\nKafka Connect Cluster",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "AWS::Target Cluster\\n& Service",
+        "macpro-appian-connector::Connector\\nConfiguration Handler",
+        "macpro-appian-connector::Connector\\nManagement Library"
+      ],
+      "reasoning": "The GT node is a detailed connector runtime/management target. The predicted nodes cover the connector configuration and target cluster/service responsibilities, but as a higher-level abstraction."
+    },
+    {
+      "gt_node": "AWS Cloud\\nConnector Account::VPC::topics::Private subnet::AWS Lambda\\ncreate/delete topics",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node captures the specific Lambda-based create/delete topics responsibility."
+    },
+    {
+      "gt_node": "Global::VPC peering\\nconnection",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node represents VPC peering connectivity."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "AWS::AWS CLI",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "This is grounded by the PRD requirement that stage listing relies on AWS CLI credentials, though it is not explicitly represented as a GT diagram node."
+    },
+    {
+      "predicted_node": "AWS::EventBridge\\n(Event Routing Rules",
+      "grounded": true,
+      "reference_nodes": [
+        "AWS Cloud\\nConnector Account::AWS EventBridge"
+      ],
+      "reasoning": "This matches the GT EventBridge concept and is aligned with the event-routing requirements."
+    },
+    {
+      "predicted_node": "AWS::SNS Subscriptions\\n(manually managed",
+      "grounded": true,
+      "reference_nodes": [
+        "AWS Cloud\\nConnector Account::Chat notification",
+        "AWS Cloud\\nConnector Account::Email notification",
+        "AWS Cloud\\nConnector Account::Slack notification"
+      ],
+      "reasoning": "The GT diagram has multiple manual notification/subscription targets; this predicted node captures the manually managed SNS subscription concept, albeit aggregated."
+    },
+    {
+      "predicted_node": "AWS::SNS Topic",
+      "grounded": true,
+      "reference_nodes": [
+        "AWS Cloud\\nConnector Account::SNS Topic\\nalerts"
+      ],
+      "reasoning": "This is grounded in the GT SNS topic node."
+    },
+    {
+      "predicted_node": "AWS::Target Cluster\\n& Service",
+      "grounded": true,
+      "reference_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::connector::Private subnet::AWS Fargate\\nKafka Connect Cluster"
+      ],
+      "reasoning": "This represents the target cluster/service side of connector operations, which is grounded in the GT connector runtime component."
+    },
+    {
+      "predicted_node": "GitHub::GitHub Actions\\n(CI/CD",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The PRD mentions GitHub Actions as the CI/CD environment, but the GT diagram provided does not include a GitHub Actions node."
+    },
+    {
+      "predicted_node": "GitHub::Pull Requests API",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The PRD requires PR metrics via the GitHub Pull Requests API, but there is no corresponding GT node in the diagram."
+    },
+    {
+      "predicted_node": "GitHub::Workflow Runs API\\n(deploy.yml",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The PRD requires workflow-run metrics, but the GT diagram does not explicitly contain this node."
+    },
+    {
+      "predicted_node": "Global::AWS",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is too generic and does not correspond to a specific GT concept."
+    },
+    {
+      "predicted_node": "Global::Appian",
+      "grounded": true,
+      "reference_nodes": [
+        "AWS Cloud\\nAppian Source::VPC::Appian\\nOracle DB"
+      ],
+      "reasoning": "This is grounded in the Appian source side of the GT diagram."
+    },
+    {
+      "predicted_node": "Global::CMS BigMAC",
+      "grounded": true,
+      "reference_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::CMS BigMAC"
+      ],
+      "reasoning": "This is grounded in the GT CMS BigMAC external system node."
+    },
+    {
+      "predicted_node": "Global::GitHub",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is overly generic and not represented as a GT diagram node."
+    },
+    {
+      "predicted_node": "macpro-appian-connector::Connector\\nConfiguration Handler",
+      "grounded": true,
+      "reference_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::connector::Private subnet::AWS Fargate\\nKafka Connect Cluster"
+      ],
+      "reasoning": "The handler is grounded in the connector-management behavior represented by the GT connector cluster node."
+    },
+    {
+      "predicted_node": "macpro-appian-connector::Connector\\nManagement Library",
+      "grounded": true,
+      "reference_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::connector::Private subnet::AWS Fargate\\nKafka Connect Cluster",
+        "AWS Cloud\\nConnector Account::VPC::topics::Private subnet::AWS Lambda\\ncreate/delete topics"
+      ],
+      "reasoning": "This library is grounded in the GT connector-management/runtime components, even though the GT diagram is more infrastructure-oriented."
+    },
+    {
+      "predicted_node": "macpro-appian-connector::Deployment\\nMetrics Collector",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The PRD requires deployment metrics, but there is no corresponding GT diagram node."
+    },
+    {
+      "predicted_node": "macpro-appian-connector::PR Metrics\\nCollector",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The PRD requires PR metrics, but there is no corresponding GT diagram node."
+    },
+    {
+      "predicted_node": "macpro-appian-connector::Stage Listing\\nHandler",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "Stage listing is required by the PRD, but the GT diagram does not explicitly include this application-level handler node."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nAppian Source::VPC::Appian\\nOracle DB"
+      ],
+      "predicted_nodes": [
+        "Global::Appian"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The Appian source responsibility matches, but the GT explicitly includes VPC and Oracle DB context that the predicted node omits."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::AWS EventBridge"
+      ],
+      "predicted_nodes": [
+        "AWS::EventBridge\\n(Event Routing Rules"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same EventBridge responsibility with semantically equivalent boundary attribution."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::SNS Topic\\nalerts"
+      ],
+      "predicted_nodes": [
+        "AWS::SNS Topic"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same SNS topic concept; the predicted node is a higher-level but semantically equivalent boundary."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::CMS BigMAC"
+      ],
+      "predicted_nodes": [
+        "Global::CMS BigMAC"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The external system matches, but the GT places it inside an AWS/VPC boundary that the predicted node does not preserve."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::connector::Private subnet::AWS Fargate\\nKafka Connect Cluster"
+      ],
+      "predicted_nodes": [
+        "AWS::Target Cluster\\n& Service",
+        "macpro-appian-connector::Connector\\nConfiguration Handler",
+        "macpro-appian-connector::Connector\\nManagement Library"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT infrastructure/runtime node is split into application-level and target-service abstractions, but the boundary attribution shifts away from the detailed AWS/Fargate/private-subnet placement."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "AWS Cloud\\nConnector Account::Chat notification",
+    "AWS Cloud\\nConnector Account::Email notification",
+    "AWS Cloud\\nConnector Account::Slack notification",
+    "AWS Cloud\\nConnector Account::VPC::topics::Private subnet::AWS Lambda\\ncreate/delete topics",
+    "Global::VPC peering\\nconnection"
+  ],
+  "unmatched_predicted_nodes": [
+    "AWS::AWS CLI",
+    "AWS::SNS Subscriptions\\n(manually managed",
+    "GitHub::GitHub Actions\\n(CI/CD",
+    "GitHub::Pull Requests API",
+    "GitHub::Workflow Runs API\\n(deploy.yml",
+    "Global::AWS",
+    "Global::GitHub",
+    "macpro-appian-connector::Deployment\\nMetrics Collector",
+    "macpro-appian-connector::PR Metrics\\nCollector",
+    "macpro-appian-connector::Stage Listing\\nHandler"
+  ]
+}

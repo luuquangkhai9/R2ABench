@@ -1,0 +1,466 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Fixtures Service::SQS",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "AWS Cloud::Notification Service::Amazon SQS\\n(Reminder Request Queue"
+      ],
+      "reasoning": "The predicted SQS queue covers the queueing responsibility associated with the fixtures/reminder flow, even though it is modeled under a reminder queue name rather than a fixtures-specific service."
+    },
+    {
+      "gt_node": "Fixtures Service::fixtures\\nLambda",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "AWS Cloud::API & Compute::AWS Lambda\\n(Python / Node::Football Info Handler\\n(Fixtures · Standings · Results · Live Scores"
+      ],
+      "reasoning": "The football info handler Lambda covers the fixtures-related backend computation and retrieval responsibility."
+    },
+    {
+      "gt_node": "Global::API Gateway",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "AWS Cloud::API & Compute::Amazon API Gateway\\n(REST / execute-api · AWS Sig v4 · JSON"
+      ],
+      "reasoning": "The predicted API Gateway node directly covers the same API routing responsibility."
+    },
+    {
+      "gt_node": "Global::Cognito",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "AWS Cloud::Authentication & Security::Amazon Cognito\\n(User Auth"
+      ],
+      "reasoning": "The predicted Cognito node matches the authentication responsibility."
+    },
+    {
+      "gt_node": "Global::S3",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "AWS Cloud::Hosting::Amazon S3\\n(Static Website Hosting"
+      ],
+      "reasoning": "The predicted S3 node covers the static hosting responsibility."
+    },
+    {
+      "gt_node": "Global::User",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Frontend (HTML / CSS / Bootstrap / jQuery::Web Application UI\\n(Fixtures · Standings · Live Scores\\nPredictions · Chatbot · Reminders"
+      ],
+      "reasoning": "The user is represented as the frontend web application interaction point; this is a reasonable semantic coverage for the user-facing boundary."
+    },
+    {
+      "gt_node": "Live Score Pipeline::DynamoDB\\nLive Scores",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "The predicted diagram includes DynamoDB for match results/statistics/fixtures, but it does not explicitly ground a live-scores DynamoDB responsibility."
+    },
+    {
+      "gt_node": "Live Score Pipeline::EC2",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "AWS Cloud::Streaming Infrastructure (EC2::Apache Kafka\\n(Live Score Event Broker",
+        "AWS Cloud::Streaming Infrastructure (EC2::Apache Avro\\n(Streaming Payload Encoding"
+      ],
+      "reasoning": "The streaming infrastructure is grounded on EC2 in the predicted model, covering the EC2 hosting responsibility for the live score pipeline."
+    },
+    {
+      "gt_node": "Live Score Pipeline::EC2::Kafka",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "AWS Cloud::Streaming Infrastructure (EC2::Apache Kafka\\n(Live Score Event Broker"
+      ],
+      "reasoning": "Kafka is explicitly represented in the predicted streaming infrastructure."
+    },
+    {
+      "gt_node": "Live Score Pipeline::EC2::M4",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node captures the EC2 M4 instance-type detail."
+    },
+    {
+      "gt_node": "Live Score Pipeline::EC2::foot app",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node explicitly represents the Foot app runtime component inside the EC2 boundary."
+    },
+    {
+      "gt_node": "Live Score Pipeline::Elasticsearch",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "The predicted Elasticsearch node is for match data storage and retrieval, not explicitly for the live score pipeline."
+    },
+    {
+      "gt_node": "Live Score Pipeline::live_score\\nLambda",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted Lambda node is specifically grounded as the live_score Lambda."
+    },
+    {
+      "gt_node": "Notification Service::SNS",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "AWS Cloud::Notification Service::Amazon SNS\\n(SMS Delivery"
+      ],
+      "reasoning": "The predicted SNS node covers SMS delivery via the notification service."
+    },
+    {
+      "gt_node": "Notification Service::SQS",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "AWS Cloud::Notification Service::Amazon SQS\\n(Reminder Request Queue"
+      ],
+      "reasoning": "The predicted SQS node covers reminder request queueing."
+    },
+    {
+      "gt_node": "Prediction Service::DynamoDB\\nPredictions",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "The predicted architecture includes DynamoDB for match data, but not a prediction-specific DynamoDB node."
+    },
+    {
+      "gt_node": "Prediction Service::Elasticsearch",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node explicitly grounds prediction-service Elasticsearch usage."
+    },
+    {
+      "gt_node": "Prediction Service::SageMaker",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "AWS Cloud::Prediction Service::Amazon SageMaker\\n(ML Match Outcome Predictions\\nHome Win · Draw · Away Win"
+      ],
+      "reasoning": "The predicted SageMaker node directly matches the prediction service responsibility."
+    },
+    {
+      "gt_node": "Prediction Service::prediction\\nLambda",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "AWS Cloud::API & Compute::AWS Lambda\\n(Python / Node::Prediction Handler\\n(SageMaker Integration"
+      ],
+      "reasoning": "The prediction handler Lambda covers the prediction backend orchestration responsibility."
+    },
+    {
+      "gt_node": "Recommendation Service::Lex",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "AWS Cloud::API & Compute::AWS Lambda\\n(Python / Node::Chatbot / Conversation Handler\\n(Intent Resolution · Screening Recommendations"
+      ],
+      "reasoning": "Although Lex is not named explicitly, the chatbot/conversation handler semantically covers intent resolution and screening recommendation dialogue, which is the core responsibility attributed to Lex in the GT."
+    },
+    {
+      "gt_node": "Recommendation Service::recommendation\\nLambda",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "AWS Cloud::API & Compute::AWS Lambda\\n(Python / Node::Chatbot / Conversation Handler\\n(Intent Resolution · Screening Recommendations"
+      ],
+      "reasoning": "The predicted chatbot/conversation Lambda covers recommendation generation and intent handling."
+    },
+    {
+      "gt_node": "Standing Service::DynamoDB\\nStandings",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "The predicted DynamoDB node is for match results, statistics, and fixtures, but standings storage is not explicitly grounded."
+    },
+    {
+      "gt_node": "Standing Service::Elasticsearch",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node explicitly represents standings search/retrieval via Elasticsearch."
+    },
+    {
+      "gt_node": "Standing Service::standing\\nLambda",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "AWS Cloud::API & Compute::AWS Lambda\\n(Python / Node::Football Info Handler\\n(Fixtures · Standings · Results · Live Scores"
+      ],
+      "reasoning": "The football info handler Lambda covers standings handling as part of the broader match information workflow."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "AWS Cloud::API & Compute::AWS Lambda\\n(Python / Node",
+      "grounded": true,
+      "reference_nodes": [
+        "Fixtures Service::fixtures\\nLambda",
+        "Live Score Pipeline::live_score\\nLambda",
+        "Prediction Service::prediction\\nLambda",
+        "Recommendation Service::recommendation\\nLambda",
+        "Standing Service::standing\\nLambda"
+      ],
+      "reasoning": "This is a parent/container node for multiple GT Lambda-based backend services."
+    },
+    {
+      "predicted_node": "AWS Cloud::API & Compute::AWS Lambda\\n(Python / Node::Chatbot / Conversation Handler\\n(Intent Resolution · Screening Recommendations",
+      "grounded": true,
+      "reference_nodes": [
+        "Recommendation Service::Lex",
+        "Recommendation Service::recommendation\\nLambda"
+      ],
+      "reasoning": "This node grounds the conversational intent-resolution and screening recommendation functionality."
+    },
+    {
+      "predicted_node": "AWS Cloud::API & Compute::AWS Lambda\\n(Python / Node::Football Info Handler\\n(Fixtures · Standings · Results · Live Scores",
+      "grounded": true,
+      "reference_nodes": [
+        "Fixtures Service::fixtures\\nLambda",
+        "Standing Service::standing\\nLambda",
+        "Live Score Pipeline::live_score\\nLambda"
+      ],
+      "reasoning": "This node grounds the football information backend responsibilities across fixtures, standings, results, and live scores."
+    },
+    {
+      "predicted_node": "AWS Cloud::API & Compute::AWS Lambda\\n(Python / Node::Prediction Handler\\n(SageMaker Integration",
+      "grounded": true,
+      "reference_nodes": [
+        "Prediction Service::prediction\\nLambda",
+        "Prediction Service::SageMaker"
+      ],
+      "reasoning": "The prediction handler is grounded in the prediction Lambda orchestration and SageMaker integration."
+    },
+    {
+      "predicted_node": "AWS Cloud::API & Compute::AWS Lambda\\n(Python / Node::Reminder Handler\\n(Reminder Queue Dispatch",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT includes reminder queueing and SMS delivery via SQS/SNS, but no dedicated reminder Lambda node is present."
+    },
+    {
+      "predicted_node": "AWS Cloud::API & Compute::Amazon API Gateway\\n(REST / execute-api · AWS Sig v4 · JSON",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::API Gateway"
+      ],
+      "reasoning": "This directly matches the API Gateway responsibility."
+    },
+    {
+      "predicted_node": "AWS Cloud::Authentication & Security::AWS IAM\\n(Access Control",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Cognito"
+      ],
+      "reasoning": "IAM is part of the authentication/security stack explicitly required by the GT/PRD, though it is not a standalone GT node."
+    },
+    {
+      "predicted_node": "AWS Cloud::Authentication & Security::Amazon Cognito\\n(User Auth",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Cognito"
+      ],
+      "reasoning": "This directly matches the Cognito authentication responsibility."
+    },
+    {
+      "predicted_node": "AWS Cloud::Data Storage & Search::Amazon DynamoDB\\n(Match Results · Statistics · Fixtures",
+      "grounded": true,
+      "reference_nodes": [
+        "Standing Service::DynamoDB\\nStandings",
+        "Prediction Service::DynamoDB\\nPredictions",
+        "Live Score Pipeline::DynamoDB\\nLive Scores"
+      ],
+      "reasoning": "The node is grounded in the GT storage concepts, though it aggregates multiple domains and omits explicit standings/predictions/live-scores labels."
+    },
+    {
+      "predicted_node": "AWS Cloud::Data Storage & Search::Amazon Elasticsearch\\n(Match Data Search & Retrieval",
+      "grounded": true,
+      "reference_nodes": [
+        "Standing Service::Elasticsearch",
+        "Prediction Service::Elasticsearch",
+        "Live Score Pipeline::Elasticsearch"
+      ],
+      "reasoning": "This is grounded as the search/retrieval layer for match data, corresponding to the Elasticsearch nodes in GT."
+    },
+    {
+      "predicted_node": "AWS Cloud::Hosting::Amazon S3\\n(Static Website Hosting",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::S3"
+      ],
+      "reasoning": "This directly matches the S3 hosting responsibility."
+    },
+    {
+      "predicted_node": "AWS Cloud::Notification Service::Amazon SNS\\n(SMS Delivery",
+      "grounded": true,
+      "reference_nodes": [
+        "Notification Service::SNS"
+      ],
+      "reasoning": "This directly matches the SNS SMS delivery responsibility."
+    },
+    {
+      "predicted_node": "AWS Cloud::Notification Service::Amazon SQS\\n(Reminder Request Queue",
+      "grounded": true,
+      "reference_nodes": [
+        "Notification Service::SQS",
+        "Fixtures Service::SQS"
+      ],
+      "reasoning": "This directly matches the SQS reminder queue responsibility and also covers the GT's queue node."
+    },
+    {
+      "predicted_node": "AWS Cloud::Prediction Service::Amazon SageMaker\\n(ML Match Outcome Predictions\\nHome Win · Draw · Away Win",
+      "grounded": true,
+      "reference_nodes": [
+        "Prediction Service::SageMaker"
+      ],
+      "reasoning": "This directly matches the SageMaker prediction responsibility."
+    },
+    {
+      "predicted_node": "AWS Cloud::Streaming Infrastructure (EC2::Apache Avro\\n(Streaming Payload Encoding",
+      "grounded": true,
+      "reference_nodes": [
+        "Live Score Pipeline::EC2",
+        "Live Score Pipeline::EC2::Kafka"
+      ],
+      "reasoning": "This is grounded as part of the live score streaming pipeline, but it only covers the Avro encoding portion."
+    },
+    {
+      "predicted_node": "AWS Cloud::Streaming Infrastructure (EC2::Apache Kafka\\n(Live Score Event Broker",
+      "grounded": true,
+      "reference_nodes": [
+        "Live Score Pipeline::EC2",
+        "Live Score Pipeline::EC2::Kafka"
+      ],
+      "reasoning": "This directly matches the Kafka streaming broker responsibility."
+    },
+    {
+      "predicted_node": "Frontend (HTML / CSS / Bootstrap / jQuery::Web Application UI\\n(Fixtures · Standings · Live Scores\\nPredictions · Chatbot · Reminders",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::User"
+      ],
+      "reasoning": "This is the frontend user interface boundary and is grounded by the GT's user-facing interaction point."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::API Gateway"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::API & Compute::Amazon API Gateway\\n(REST / execute-api · AWS Sig v4 · JSON"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same component and correct boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Cognito"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Authentication & Security::Amazon Cognito\\n(User Auth"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same authentication component with semantically equivalent boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::S3"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Hosting::Amazon S3\\n(Static Website Hosting"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same hosting component with equivalent boundary."
+    },
+    {
+      "gt_nodes": [
+        "Notification Service::SNS"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Notification Service::Amazon SNS\\n(SMS Delivery"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same notification service component."
+    },
+    {
+      "gt_nodes": [
+        "Notification Service::SQS",
+        "Fixtures Service::SQS"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Notification Service::Amazon SQS\\n(Reminder Request Queue"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has two SQS usages; the AI aggregates them into one queue node. Boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::SageMaker"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Prediction Service::Amazon SageMaker\\n(ML Match Outcome Predictions\\nHome Win · Draw · Away Win"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same ML prediction service."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::prediction\\nLambda"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::API & Compute::AWS Lambda\\n(Python / Node::Prediction Handler\\n(SageMaker Integration"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same backend prediction orchestration function."
+    },
+    {
+      "gt_nodes": [
+        "Fixtures Service::fixtures\\nLambda",
+        "Standing Service::standing\\nLambda",
+        "Live Score Pipeline::live_score\\nLambda"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::API & Compute::AWS Lambda\\n(Python / Node::Football Info Handler\\n(Fixtures · Standings · Results · Live Scores"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node aggregates multiple football information Lambdas into one handler, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Recommendation Service::Lex",
+        "Recommendation Service::recommendation\\nLambda"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::API & Compute::AWS Lambda\\n(Python / Node::Chatbot / Conversation Handler\\n(Intent Resolution · Screening Recommendations"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The conversational recommendation functionality is preserved, and the boundary is acceptable as a merged chatbot/recommendation handler."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2",
+        "Live Score Pipeline::EC2::Kafka"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Streaming Infrastructure (EC2::Apache Kafka\\n(Live Score Event Broker"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Kafka is correctly placed on EC2-backed streaming infrastructure; the node merges host and broker detail."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Live Score Pipeline::DynamoDB\\nLive Scores",
+    "Live Score Pipeline::EC2::M4",
+    "Live Score Pipeline::EC2::foot app",
+    "Live Score Pipeline::Elasticsearch",
+    "Live Score Pipeline::live_score\\nLambda",
+    "Prediction Service::DynamoDB\\nPredictions",
+    "Prediction Service::Elasticsearch",
+    "Standing Service::DynamoDB\\nStandings",
+    "Standing Service::Elasticsearch"
+  ],
+  "unmatched_predicted_nodes": [
+    "AWS Cloud::API & Compute::AWS Lambda\\n(Python / Node",
+    "AWS Cloud::API & Compute::AWS Lambda\\n(Python / Node::Reminder Handler\\n(Reminder Queue Dispatch",
+    "AWS Cloud::Authentication & Security::AWS IAM\\n(Access Control",
+    "AWS Cloud::Data Storage & Search::Amazon DynamoDB\\n(Match Results · Statistics · Fixtures",
+    "AWS Cloud::Data Storage & Search::Amazon Elasticsearch\\n(Match Data Search & Retrieval",
+    "AWS Cloud::Streaming Infrastructure (EC2::Apache Avro\\n(Streaming Payload Encoding"
+  ]
+}

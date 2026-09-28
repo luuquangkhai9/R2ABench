@@ -1,0 +1,131 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Applications\\nHPC, AI, ML, Big Data"
+      ],
+      "predicted_nodes": [
+        "Global::External Sources & OS Infrastructure"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "This is not a true semantic match. The GT node is a broad application-domain category, while the predicted node is an OS/external-sources infrastructure boundary. They are both global-level grouping nodes, but they represent different architectural scopes."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Message Passing API\\nTag Matching, Rendezvous"
+      ],
+      "predicted_nodes": [
+        "Send State-Machine Layer::SendStateMachine\\n(flow-control gate, direct-access\\nvs. packet-buffer mode,\\nrndv-rts / rndv-cts / rndv-data\\ncontrol-field population)\\n(FR-005, FR-006, FR-007, FR-008"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The send state machine content is related to message passing/rendezvous behavior, but the GT node is specifically the UCX UCP high-level API message-passing rendezvous area. The predicted node creates a separate send-state-machine layer, which is a boundary mismatch relative to the GT diagram."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCS Services\\nCommon Utilities::Data Structures"
+      ],
+      "predicted_nodes": [
+        "Send State-Machine Layer::PacketBuffer\\n(envelope + rendezvous\\ncontrol terms: LIBA(OD),\\ntwo LIBAs, one LIBA)\\n(DR-001, DR-004"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "PacketBuffer is a concrete data structure, but the GT node is a general UCS common-utilities data-structures boundary. The predicted node places it in a send-state-machine layer, which is a significant boundary shift from the GT's utility/data-structure grouping."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCS Services\\nCommon Utilities::Memory Management"
+      ],
+      "predicted_nodes": [
+        "Send State-Machine Layer::PinnedUserData\\n(user buffer pinned\\nfor zero-copy DMA)\\n(DR-002, DR-003, FR-006"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Pinned user data is conceptually tied to memory management, but the GT node is a UCX common-utilities memory-management area. The predicted node anchors it inside the send-state-machine layer, which is an incorrect architectural boundary placement."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCT Hardware Transports\\nLow Level API::RDMA Verbs Transport\\nInfiniBand, ROCE, OPA"
+      ],
+      "predicted_nodes": [
+        "External Sources & OS Infrastructure::Linux Verbs Infrastructure::libibverbs\\n(>= 1.1.8"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both involve verbs-related infrastructure, but the GT node is a UCX low-level transport, while the predicted node is a Linux verbs library dependency. This is a boundary-level mismatch between transport implementation and external dependency."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCT Hardware Transports\\nLow Level API::Ethernet Transport\\nTCP/IP Sockets"
+      ],
+      "predicted_nodes": [
+        "External Sources & OS Infrastructure::OFI/libfabric\\n(system-level instance"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node refers to an external transport stack instance, not the specific UCX Ethernet transport node in the GT. They are related at a very high level, but not semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCM Memory Services::Memory Hooks"
+      ],
+      "predicted_nodes": [
+        "Build & Verification Layer::BuildEnvironmentVariables\\n(CFLAGS, LDFLAGS,\\nLD_LIBRARY_PATH)\\n(NFR-003"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is about memory hooks in UCX UCM, while the predicted node is about build environment variables. There is no functional equivalence."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Drivers and Kernels::Cray Driver",
+    "Drivers and Kernels::OS Kernel\\nEthernet",
+    "Drivers and Kernels::OS Kernel\\nHost Memory",
+    "Drivers and Kernels::OS Kernel\\nMemory Hooks",
+    "Drivers and Kernels::RDMA Verbs Driver",
+    "Drivers and Kernels::ROCm / CUDA",
+    "Global::Hardware",
+    "Programming Models and Frameworks::AI / ML Frameworks\\nTensorFlow, Burst Buffer",
+    "Programming Models and Frameworks::MPI\\nMPICH, Open-MPI",
+    "Programming Models and Frameworks::PGAS / SHMEM\\nOpenSHMEM, UPC, CAF, X10, Chapel",
+    "Programming Models and Frameworks::Task Runtimes\\nParsec, OCR, Legion",
+    "UCX::UCP Protocols\\nHigh Level API::Cross-Transport Multi-Rail",
+    "UCX::UCP Protocols\\nHigh Level API::Fragmentation",
+    "UCX::UCP Protocols\\nHigh Level API::I/O API\\nStream",
+    "UCX::UCP Protocols\\nHigh Level API::PGAS API\\nRMAs, Atomics",
+    "UCX::UCP Protocols\\nHigh Level API::Software Protocols",
+    "UCX::UCP Protocols\\nHigh Level API::Task Based API\\nActive Messages",
+    "UCX::UCP Protocols\\nHigh Level API::Transport Selection",
+    "UCX::UCT Hardware Transports\\nLow Level API::DCT",
+    "UCX::UCT Hardware Transports\\nLow Level API::GPU Transport\\nNVIDIA CUDA, AMD ROCm",
+    "UCX::UCT Hardware Transports\\nLow Level API::Gemini / Aries Transport\\nGNI",
+    "UCX::UCT Hardware Transports\\nLow Level API::Intra-node Host Memory\\nSYSV, POSIX, KNEM, CMA, XPMEM",
+    "UCX::UCT Hardware Transports\\nLow Level API::RC",
+    "UCX::UCT Hardware Transports\\nLow Level API::UD"
+  ],
+  "unmatched_predicted_nodes": [
+    "Build & Verification Layer::BuildEnvironmentVariables\\n(CFLAGS, LDFLAGS,\\nLD_LIBRARY_PATH)\\n(NFR-003",
+    "Build & Verification Layer::EmbeddedHwlocTestRunner\\n./run-embedded-tests.sh <tarball>\\n(configure → make → make check\\n→ clean → distclean)\\n[exits 0 on success, nonzero on failure]\\n(FR-001, C-002",
+    "Build & Verification Layer::ManualHwlocBuildWorkflow\\nhwloc-tree/ rename path\\n(autogen.sh → configure → make)\\n(FR-002, C-003",
+    "Communication Subsystem Layer::CommunicationSubsystemManager\\n(init, finalize, progress,\\nblocking-progress,\\nconnection establishment)\\n(FR-003",
+    "Communication Subsystem Layer::OneToManyTransferHandler\\n(scatter-style\\none-to-many transfer)\\n(FR-004",
+    "External Sources & OS Infrastructure::Autotools Toolchain::autogen.sh",
+    "External Sources & OS Infrastructure::Autotools Toolchain::configure",
+    "External Sources & OS Infrastructure::Autotools Toolchain::make / make check",
+    "External Sources & OS Infrastructure::Linux Verbs Infrastructure::Matching Verbs Headers\\n(build-time",
+    "External Sources & OS Infrastructure::Linux Verbs Infrastructure::librdmacm\\n(>= 1.0.16",
+    "External Sources & OS Infrastructure::UCX\\n(alternative CH4 backend",
+    "External Sources & OS Infrastructure::hwloc Distribution Tarball\\n(FR-001, FR-002",
+    "Send State-Machine Layer::DataDescriptor\\n(payload descriptor;\\nsource of data for packing\\nor direct-access binding)\\n(DR-003, FR-006, FR-007",
+    "Send State-Machine Layer::FlowControlState\\n(flow-restricted /\\nflow-enabled condition)\\n(FR-005, DR-005",
+    "Send State-Machine Layer::NetworkDevice\\n(hardware send endpoint;\\nreceives posted send\\ndescriptors from send path)\\n(DR-002, Section 3",
+    "Send State-Machine Layer::NetworkSendDescriptor\\n(posted-send descriptor;\\nassociated with PinnedUserData\\nor PacketBuffer at post time)\\n(DR-002, DR-003",
+    "Send State-Machine Layer::PacketBuffer\\n(envelope + rendezvous\\ncontrol terms: LIBA(OD),\\ntwo LIBAs, one LIBA)\\n(DR-001, DR-004",
+    "Send State-Machine Layer::PinnedUserData\\n(user buffer pinned\\nfor zero-copy DMA)\\n(DR-002, DR-003, FR-006",
+    "Send State-Machine Layer::SendStateMachine\\n(flow-control gate, direct-access\\nvs. packet-buffer mode,\\nrndv-rts / rndv-cts / rndv-data\\ncontrol-field population)\\n(FR-005, FR-006, FR-007, FR-008",
+    "Transport Integration Layer::CH4NetworkModuleIntegration\\n(CH4 network-module binding;\\nselects OFI/libfabric or UCX)\\n(Section 2",
+    "Transport Integration Layer::EmbeddedLibfabricModule\\n(embedded Libfabric CH4 backend",
+    "Transport Integration Layer::VerbsProvider\\n(optional sub-component;\\nenabled at build time\\n(NFR-001, NFR-002"
+  ]
+}

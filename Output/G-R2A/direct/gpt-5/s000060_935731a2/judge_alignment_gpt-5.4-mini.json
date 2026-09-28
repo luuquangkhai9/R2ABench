@@ -1,0 +1,82 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "Event Streaming::Kafka Cluster",
+        "Event Streaming::Kafka Cluster::Topic: audit.events",
+        "Global::KafkaPublisher"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Kafka node is represented by a Kafka cluster/topic and a Kafka-based publisher implementation. This is a reasonable split of the same infrastructure concern, and the Event Streaming boundary is semantically consistent with the GT Global Kafka node."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "predicted_nodes": [
+        "Global::JVM Application (Java 11",
+        "JVM Application (Java 11::Application Service\\n(Integrating Code",
+        "JVM Application (Java 11::Auditor Client API\\nlowes/auditor",
+        "JVM Application (Java 11::Comparator",
+        "JVM Application (Java 11::Event Builder",
+        "JVM Application (Java 11::EventPublisher",
+        "JVM Application (Java 11::Filter Engine",
+        "JVM Application (Java 11::JSON Serializer",
+        "JVM Application (Java 11::LogProvider",
+        "JVM Application (Java 11::Logger Impl",
+        "JVM Application (Java 11::AuditEventElementFilter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT application/server node corresponds to the auditor client library running inside a JVM application. The predicted nodes decompose that application into internal library components, which is a valid finer-grained representation within the same JVM application boundary."
+    },
+    {
+      "gt_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "predicted_nodes": [
+        "JVM Application (Java 11::Auditor Client API\\nlowes/auditor",
+        "JVM Application (Java 11::Application Service\\n(Integrating Code"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The three GT client nodes all represent integrating applications consuming the auditor client API. The predicted diagram aggregates this into a single JVM application/client-side integration representation, which is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Global::Databases / Filestores\\nElastic, Hadoop, etc."
+      ],
+      "predicted_nodes": [
+        "Global::Downstream Consumers (Out of Scope"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Although not a database/filestore in the literal sense, the GT node represents external downstream persistence/storage infrastructure outside the client library scope. The predicted downstream-consumer/out-of-scope boundary captures the same externalized dependency context adequately."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Downstream Consumers (Out of Scope::Event Consumer Service(s",
+    "Event Streaming::Kafka Cluster",
+    "Event Streaming::Kafka Cluster::Topic: audit.events",
+    "Global::CustomPublisher\\n(optional",
+    "Global::Event Streaming",
+    "Global::Logging Sink",
+    "JVM Application (Java 11::Application Service\\n(Integrating Code",
+    "JVM Application (Java 11::AuditEventElementFilter",
+    "JVM Application (Java 11::Auditor Client API\\nlowes/auditor",
+    "JVM Application (Java 11::Comparator",
+    "JVM Application (Java 11::Event Builder",
+    "JVM Application (Java 11::EventPublisher",
+    "JVM Application (Java 11::Filter Engine",
+    "JVM Application (Java 11::JSON Serializer",
+    "JVM Application (Java 11::LogProvider",
+    "JVM Application (Java 11::Logger Impl"
+  ]
+}

@@ -1,0 +1,78 @@
+@startuml
+title VirtualMotionTracker System Architecture
+skinparam componentStyle rectangle
+skinparam backgroundColor #F0F0F0
+
+' Define external systems
+component "User Application" as userapp {
+  rectangle "External Control\nInput Source" as controlinput
+}
+
+' Define main system components
+component "VMT Manager" as manager {
+  rectangle "Control Input\nReceiver" as inputreceiver
+  rectangle "JSON Message\nProcessor" as msgprocessor_mgr
+}
+
+component "VMT Driver" as driver {
+  rectangle "JSON Message\nProcessor" as msgprocessor_drv
+  rectangle "OpenVR Driver\nInterface" as driverinterface
+}
+
+' Define runtime environment
+cloud "SteamVR/OpenVR Runtime" as openvr {
+  rectangle "OpenVR Driver\nHost" as driverhost
+}
+
+' Define data artifacts
+file "Legacy Controller\nBinding File" as bindingfile [
+  controller_type: "mycontroller"
+  JSON format
+  right-hand mappings
+]
+
+' Define interfaces and connections
+' External control interface (OSC)
+userapp --> manager : "External Control Input\n(OSC protocol)"
+note on link: "Identified as OSC interface\nNo port/command set specified"
+
+' Shared memory communication
+manager --> driver : "JSON Messages\nvia Shared Memory"
+driver --> manager : "JSON Messages\nvia Shared Memory"
+note on link: "Bidirectional channels\nwith sync metadata:\n- send count\n- handshake count\n- message length"
+
+' Runtime integration
+driver --> openvr : "OpenVR Driver Interface"
+note on link: "Driver artifact loadable\nby OpenVR/SteamVR"
+
+' Binding file usage
+openvr --> bindingfile : "Loads\nController Binding"
+note on link: "Legacy binding for 'mycontroller'\nButton mode, sub_mode: complex"
+
+' Internal component connections
+controlinput --> inputreceiver : "Control data"
+inputreceiver --> msgprocessor_mgr : "Processed input"
+msgprocessor_mgr ..> msgprocessor_drv : "JSON via shared memory"
+msgprocessor_drv --> driverinterface : "Tracking state"
+driverinterface --> driverhost : "Driver API calls"
+
+' Component notes
+note top of manager
+  Receives external control input
+  Manages shared-memory communication
+  Processes JSON messages
+end note
+
+note top of driver
+  Exposes virtual motion tracking
+  Integrates with OpenVR runtime
+  Processes JSON messages
+end note
+
+note right of openvr
+  SteamVR/OpenVR runtime
+  Hosts VMT driver
+  Loads controller bindings
+end note
+
+@enduml

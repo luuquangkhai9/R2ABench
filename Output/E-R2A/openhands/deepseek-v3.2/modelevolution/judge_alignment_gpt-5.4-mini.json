@@ -1,0 +1,644 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Backend Layer::Flask: Backend Framework",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "System Components::Backend Module"
+      ],
+      "reasoning": "The predicted backend module covers the backend framework responsibility at a higher abstraction level, even though Flask is not named explicitly."
+    },
+    {
+      "gt_node": "Backend Layer::Netron: Model Conversion & Parsing",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "System Components::Algorithm Support Module::Model Parser",
+        "System Components::Algorithm Support Module::ONNX Processor",
+        "System Components::Algorithm Support Module::PyTorch Analyzer"
+      ],
+      "reasoning": "The predicted algorithm-support subcomponents cover the model parsing, ONNX processing, and PyTorch analysis responsibilities, which align with Netron's conversion/parsing role."
+    },
+    {
+      "gt_node": "Backend Layer::SQLAlchemy: ORM Framework",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "System Components::Backend Module",
+        "System Components::MySQL Database"
+      ],
+      "reasoning": "The predicted backend module plus MySQL storage cover ORM-backed backend persistence responsibilities, though SQLAlchemy is not explicitly represented."
+    },
+    {
+      "gt_node": "Data Presentation Layer::Netron: Graph Representation Language",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "System Components::Algorithm Support Module::Graph Generator",
+        "System Components::Neo4j Database::Evolution Graph"
+      ],
+      "reasoning": "The predicted graph generator and evolution graph storage cover graph representation/display responsibilities at a semantic level."
+    },
+    {
+      "gt_node": "Data Presentation Layer::RESTful API Design",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "System Components::Backend Module",
+        "System Components::Backend Module::Model Service",
+        "System Components::Backend Module::Evolution Service",
+        "System Components::Backend Module::User Service"
+      ],
+      "reasoning": "The predicted backend services imply API exposure and service endpoints, covering the RESTful API design responsibility."
+    },
+    {
+      "gt_node": "Frontend Layer::Netron: Node Drawing Features",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "System Components::Frontend Module::Model Viewer UI",
+        "System Components::Frontend Module::Evolution Editor UI",
+        "System Components::Algorithm Support Module::Graph Generator"
+      ],
+      "reasoning": "The predicted viewer/editor UI plus graph generation cover the visual node-drawing and graph display responsibility."
+    },
+    {
+      "gt_node": "Frontend Layer::React Framework",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "System Components::Frontend Module"
+      ],
+      "reasoning": "The predicted frontend module covers the frontend framework responsibility, though React is not explicitly named."
+    },
+    {
+      "gt_node": "Frontend Layer::React-Router: Page Navigation",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "System Components::Frontend Module",
+        "User Environment::Browser::Web Interface"
+      ],
+      "reasoning": "The predicted frontend module and web interface cover page navigation behavior at a coarse level."
+    },
+    {
+      "gt_node": "Storage / Database Layer::MySQL: Relational Database",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "System Components::MySQL Database"
+      ],
+      "reasoning": "The predicted MySQL database directly matches the relational storage responsibility."
+    },
+    {
+      "gt_node": "Storage / Database Layer::Neo4j: Graph Database",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "System Components::Neo4j Database"
+      ],
+      "reasoning": "The predicted Neo4j database directly matches the graph storage responsibility."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Global::Security Layer",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Layer::Flask: Backend Framework",
+        "Backend Layer::SQLAlchemy: ORM Framework",
+        "Data Presentation Layer::RESTful API Design",
+        "Storage / Database Layer::MySQL: Relational Database",
+        "Storage / Database Layer::Neo4j: Graph Database"
+      ],
+      "reasoning": "This is a cross-cutting architectural concern grounded in the system's authentication, encryption, access control, and privacy requirements, even though GT does not model it as a standalone layer."
+    },
+    {
+      "predicted_node": "Global::User Environment",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend Layer::React Framework",
+        "Frontend Layer::React-Router: Page Navigation",
+        "Storage / Database Layer::MySQL: Relational Database",
+        "Storage / Database Layer::Neo4j: Graph Database"
+      ],
+      "reasoning": "The user environment concept is grounded in the PRD's browser-based operating environment and supported client-side context."
+    },
+    {
+      "predicted_node": "Security Layer::Access Control",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Layer::Flask: Backend Framework",
+        "Backend Layer::SQLAlchemy: ORM Framework",
+        "Data Presentation Layer::RESTful API Design"
+      ],
+      "reasoning": "Access control is a real system concern in the PRD and aligns with backend/API enforcement responsibilities."
+    },
+    {
+      "predicted_node": "Security Layer::Data Encryption",
+      "grounded": true,
+      "reference_nodes": [
+        "Storage / Database Layer::MySQL: Relational Database",
+        "Storage / Database Layer::Neo4j: Graph Database"
+      ],
+      "reasoning": "Encryption of data at rest and in transit is explicitly required by the PRD and is grounded in storage-related responsibilities."
+    },
+    {
+      "predicted_node": "Security Layer::OAuth 2.0",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Layer::Flask: Backend Framework",
+        "Data Presentation Layer::RESTful API Design"
+      ],
+      "reasoning": "OAuth 2.0 is explicitly required for login security and is grounded in backend authentication design."
+    },
+    {
+      "predicted_node": "Security Layer::TLS Encryption",
+      "grounded": true,
+      "reference_nodes": [
+        "Data Presentation Layer::RESTful API Design",
+        "Storage / Database Layer::MySQL: Relational Database",
+        "Storage / Database Layer::Neo4j: Graph Database"
+      ],
+      "reasoning": "TLS is explicitly required for data transmission security and is grounded in the system's interface and storage connectivity."
+    },
+    {
+      "predicted_node": "Security Layer::Two-Factor Auth",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Layer::Flask: Backend Framework",
+        "Data Presentation Layer::RESTful API Design"
+      ],
+      "reasoning": "Two-factor authentication is explicitly required for login and belongs to the backend authentication concern."
+    },
+    {
+      "predicted_node": "System Components::Algorithm Support Module",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Layer::Netron: Model Conversion & Parsing",
+        "Data Presentation Layer::Netron: Graph Representation Language"
+      ],
+      "reasoning": "The PRD explicitly includes an algorithm-support module, so this is grounded even though GT uses more specific implementation-oriented nodes."
+    },
+    {
+      "predicted_node": "System Components::Algorithm Support Module::Evolution Analyzer",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Layer::Netron: Model Conversion & Parsing",
+        "Data Presentation Layer::Netron: Graph Representation Language"
+      ],
+      "reasoning": "Evolution analysis is consistent with the PRD's evolution relationship and detail visualization requirements."
+    },
+    {
+      "predicted_node": "System Components::Algorithm Support Module::Graph Generator",
+      "grounded": true,
+      "reference_nodes": [
+        "Data Presentation Layer::Netron: Graph Representation Language",
+        "Frontend Layer::Netron: Node Drawing Features"
+      ],
+      "reasoning": "Graph generation is directly grounded in the model evolution topology display requirements."
+    },
+    {
+      "predicted_node": "System Components::Algorithm Support Module::Model Parser",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Layer::Netron: Model Conversion & Parsing"
+      ],
+      "reasoning": "Model parsing is explicitly consistent with the GT Netron conversion/parsing responsibility."
+    },
+    {
+      "predicted_node": "System Components::Algorithm Support Module::ONNX Processor",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Layer::Netron: Model Conversion & Parsing"
+      ],
+      "reasoning": "ONNX upload and parsing are explicitly required, so this subcomponent is grounded."
+    },
+    {
+      "predicted_node": "System Components::Algorithm Support Module::PyTorch Analyzer",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Layer::Netron: Model Conversion & Parsing"
+      ],
+      "reasoning": "PyTorch source upload and online editing are explicitly required, making this grounded."
+    },
+    {
+      "predicted_node": "System Components::Backend Module",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Layer::Flask: Backend Framework",
+        "Backend Layer::SQLAlchemy: ORM Framework",
+        "Data Presentation Layer::RESTful API Design"
+      ],
+      "reasoning": "This is a valid aggregation of the backend responsibilities represented in the GT."
+    },
+    {
+      "predicted_node": "System Components::Backend Module::Auth Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Layer::Flask: Backend Framework",
+        "Backend Layer::SQLAlchemy: ORM Framework"
+      ],
+      "reasoning": "Authentication is required by the PRD and grounded in the backend layer."
+    },
+    {
+      "predicted_node": "System Components::Backend Module::Evolution Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Layer::Netron: Model Conversion & Parsing",
+        "Data Presentation Layer::RESTful API Design"
+      ],
+      "reasoning": "Evolution relationship management is explicitly required and grounded."
+    },
+    {
+      "predicted_node": "System Components::Backend Module::File Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Layer::Netron: Model Conversion & Parsing",
+        "Storage / Database Layer::MySQL: Relational Database"
+      ],
+      "reasoning": "File upload and storage for ONNX/PyTorch assets is grounded by the PRD."
+    },
+    {
+      "predicted_node": "System Components::Backend Module::Model Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Layer::Flask: Backend Framework",
+        "Backend Layer::SQLAlchemy: ORM Framework"
+      ],
+      "reasoning": "Model CRUD, search, and profile operations are grounded in the backend responsibilities."
+    },
+    {
+      "predicted_node": "System Components::Backend Module::User Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Layer::Flask: Backend Framework",
+        "Backend Layer::SQLAlchemy: ORM Framework"
+      ],
+      "reasoning": "User registration, login, permission changes, and management are explicitly required."
+    },
+    {
+      "predicted_node": "System Components::External Interfaces",
+      "grounded": true,
+      "reference_nodes": [
+        "Data Presentation Layer::RESTful API Design",
+        "Backend Layer::Flask: Backend Framework"
+      ],
+      "reasoning": "The PRD explicitly defines external software/API and communication interfaces."
+    },
+    {
+      "predicted_node": "System Components::External Interfaces::Browser Console",
+      "grounded": true,
+      "reference_nodes": [
+        "Data Presentation Layer::RESTful API Design"
+      ],
+      "reasoning": "Browser console as an external interface is explicitly listed in the PRD."
+    },
+    {
+      "predicted_node": "System Components::External Interfaces::Communication Protocols",
+      "grounded": true,
+      "reference_nodes": [
+        "Data Presentation Layer::RESTful API Design"
+      ],
+      "reasoning": "The PRD explicitly lists communication protocols as external interfaces."
+    },
+    {
+      "predicted_node": "System Components::External Interfaces::Communication Protocols::FTP",
+      "grounded": true,
+      "reference_nodes": [
+        "Data Presentation Layer::RESTful API Design"
+      ],
+      "reasoning": "FTP is explicitly listed in the PRD communication interfaces."
+    },
+    {
+      "predicted_node": "System Components::External Interfaces::Communication Protocols::HTTP/HTTPS",
+      "grounded": true,
+      "reference_nodes": [
+        "Data Presentation Layer::RESTful API Design"
+      ],
+      "reasoning": "HTTP and HTTPS are explicitly listed in the PRD communication interfaces."
+    },
+    {
+      "predicted_node": "System Components::External Interfaces::Communication Protocols::SMTP",
+      "grounded": true,
+      "reference_nodes": [
+        "Data Presentation Layer::RESTful API Design"
+      ],
+      "reasoning": "SMTP is explicitly listed in the PRD communication interfaces."
+    },
+    {
+      "predicted_node": "System Components::External Interfaces::Communication Protocols::TCP/IP",
+      "grounded": true,
+      "reference_nodes": [
+        "Data Presentation Layer::RESTful API Design"
+      ],
+      "reasoning": "TCP and IP are explicitly listed in the PRD communication interfaces."
+    },
+    {
+      "predicted_node": "System Components::External Interfaces::Communication Protocols::UDP",
+      "grounded": true,
+      "reference_nodes": [
+        "Data Presentation Layer::RESTful API Design"
+      ],
+      "reasoning": "UDP is explicitly listed in the PRD communication interfaces."
+    },
+    {
+      "predicted_node": "System Components::External Interfaces::Python Libraries",
+      "grounded": true,
+      "reference_nodes": [
+        "Backend Layer::Netron: Model Conversion & Parsing",
+        "Backend Layer::Flask: Backend Framework"
+      ],
+      "reasoning": "Python library interface is explicitly required."
+    },
+    {
+      "predicted_node": "System Components::Frontend Module",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend Layer::React Framework",
+        "Frontend Layer::React-Router: Page Navigation"
+      ],
+      "reasoning": "The frontend module is grounded by the GT frontend layer responsibilities."
+    },
+    {
+      "predicted_node": "System Components::Frontend Module::Account Management UI",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend Layer::React Framework",
+        "Frontend Layer::React-Router: Page Navigation"
+      ],
+      "reasoning": "Account management UI is explicitly required by the PRD."
+    },
+    {
+      "predicted_node": "System Components::Frontend Module::Evolution Editor UI",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend Layer::Netron: Node Drawing Features",
+        "Frontend Layer::React Framework"
+      ],
+      "reasoning": "Evolution editing UI is grounded in the evolution relationship editing requirements."
+    },
+    {
+      "predicted_node": "System Components::Frontend Module::Model Search UI",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend Layer::React Framework",
+        "Frontend Layer::React-Router: Page Navigation"
+      ],
+      "reasoning": "Model search and viewing UI is explicitly required."
+    },
+    {
+      "predicted_node": "System Components::Frontend Module::Model Upload/Edit UI",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend Layer::React Framework",
+        "Frontend Layer::React-Router: Page Navigation"
+      ],
+      "reasoning": "Model upload and editing UI is explicitly required."
+    },
+    {
+      "predicted_node": "System Components::Frontend Module::Model Viewer UI",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend Layer::Netron: Node Drawing Features",
+        "Frontend Layer::React Framework"
+      ],
+      "reasoning": "Model viewing and topology display are explicitly required."
+    },
+    {
+      "predicted_node": "System Components::Frontend Module::User Management UI",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend Layer::React Framework",
+        "Frontend Layer::React-Router: Page Navigation"
+      ],
+      "reasoning": "User management UI is explicitly required for administrators."
+    },
+    {
+      "predicted_node": "System Components::MySQL Database",
+      "grounded": true,
+      "reference_nodes": [
+        "Storage / Database Layer::MySQL: Relational Database"
+      ],
+      "reasoning": "Directly grounded by the GT MySQL storage node."
+    },
+    {
+      "predicted_node": "System Components::MySQL Database::Dataset Info",
+      "grounded": true,
+      "reference_nodes": [
+        "Storage / Database Layer::MySQL: Relational Database"
+      ],
+      "reasoning": "Dataset storage is explicitly required by the PRD."
+    },
+    {
+      "predicted_node": "System Components::MySQL Database::Model Metadata",
+      "grounded": true,
+      "reference_nodes": [
+        "Storage / Database Layer::MySQL: Relational Database"
+      ],
+      "reasoning": "Model basic information and metadata storage are explicitly required."
+    },
+    {
+      "predicted_node": "System Components::MySQL Database::Performance Metrics",
+      "grounded": true,
+      "reference_nodes": [
+        "Storage / Database Layer::MySQL: Relational Database"
+      ],
+      "reasoning": "Model performance metrics are explicitly required."
+    },
+    {
+      "predicted_node": "System Components::MySQL Database::User Data",
+      "grounded": true,
+      "reference_nodes": [
+        "Storage / Database Layer::MySQL: Relational Database"
+      ],
+      "reasoning": "User and permission data are explicitly required."
+    },
+    {
+      "predicted_node": "System Components::Neo4j Database",
+      "grounded": true,
+      "reference_nodes": [
+        "Storage / Database Layer::Neo4j: Graph Database"
+      ],
+      "reasoning": "Directly grounded by the GT Neo4j storage node."
+    },
+    {
+      "predicted_node": "System Components::Neo4j Database::Evolution Graph",
+      "grounded": true,
+      "reference_nodes": [
+        "Storage / Database Layer::Neo4j: Graph Database"
+      ],
+      "reasoning": "Evolution relationship graphs are explicitly required."
+    },
+    {
+      "predicted_node": "System Components::Neo4j Database::Model Relationships",
+      "grounded": true,
+      "reference_nodes": [
+        "Storage / Database Layer::Neo4j: Graph Database"
+      ],
+      "reasoning": "Model evolution relationships are explicitly required."
+    },
+    {
+      "predicted_node": "User Environment::Administrator",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend Layer::React Framework",
+        "Frontend Layer::React-Router: Page Navigation"
+      ],
+      "reasoning": "Administrator is a valid user class from the PRD."
+    },
+    {
+      "predicted_node": "User Environment::Browser",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend Layer::React Framework",
+        "Frontend Layer::React-Router: Page Navigation"
+      ],
+      "reasoning": "Browser-based access is explicitly required."
+    },
+    {
+      "predicted_node": "User Environment::Browser::Web Interface",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend Layer::React Framework",
+        "Frontend Layer::React-Router: Page Navigation"
+      ],
+      "reasoning": "The web interface is grounded by the browser-access requirement."
+    },
+    {
+      "predicted_node": "User Environment::Learner",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend Layer::React Framework",
+        "Frontend Layer::React-Router: Page Navigation"
+      ],
+      "reasoning": "Learner is a valid user class from the PRD."
+    },
+    {
+      "predicted_node": "User Environment::Model Contributor",
+      "grounded": true,
+      "reference_nodes": [
+        "Frontend Layer::React Framework",
+        "Frontend Layer::React-Router: Page Navigation"
+      ],
+      "reasoning": "Model contributor is a valid user class from the PRD."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Backend Layer::Flask: Backend Framework"
+      ],
+      "predicted_nodes": [
+        "System Components::Backend Module"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Backend framework responsibility is captured by the backend module at a coarser granularity, and the boundary remains within the backend layer."
+    },
+    {
+      "gt_nodes": [
+        "Backend Layer::Netron: Model Conversion & Parsing"
+      ],
+      "predicted_nodes": [
+        "System Components::Algorithm Support Module::Model Parser",
+        "System Components::Algorithm Support Module::ONNX Processor",
+        "System Components::Algorithm Support Module::PyTorch Analyzer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT parsing/conversion role is split into more specific algorithm-support subcomponents, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Backend Layer::SQLAlchemy: ORM Framework"
+      ],
+      "predicted_nodes": [
+        "System Components::Backend Module",
+        "System Components::MySQL Database"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The ORM responsibility is represented indirectly through backend services and relational persistence, staying within backend/storage boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Data Presentation Layer::Netron: Graph Representation Language"
+      ],
+      "predicted_nodes": [
+        "System Components::Algorithm Support Module::Graph Generator",
+        "System Components::Neo4j Database::Evolution Graph"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Graph representation is split between graph generation and graph storage/display support, which is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Data Presentation Layer::RESTful API Design"
+      ],
+      "predicted_nodes": [
+        "System Components::Backend Module",
+        "System Components::Backend Module::Auth Service",
+        "System Components::Backend Module::Evolution Service",
+        "System Components::Backend Module::File Service",
+        "System Components::Backend Module::Model Service",
+        "System Components::Backend Module::User Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The RESTful API responsibility is distributed across backend services, which is an acceptable decomposition."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::Netron: Node Drawing Features"
+      ],
+      "predicted_nodes": [
+        "System Components::Frontend Module::Model Viewer UI",
+        "System Components::Frontend Module::Evolution Editor UI",
+        "System Components::Algorithm Support Module::Graph Generator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Node drawing and graph visualization are decomposed into frontend UIs plus graph generation support, staying in the presentation boundary."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::React Framework"
+      ],
+      "predicted_nodes": [
+        "System Components::Frontend Module"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The frontend module corresponds to the React-based frontend layer at a coarse architectural level."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Layer::React-Router: Page Navigation"
+      ],
+      "predicted_nodes": [
+        "System Components::Frontend Module",
+        "User Environment::Browser::Web Interface"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Page navigation is reflected in frontend module structure and browser web interface behavior without crossing architectural boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Storage / Database Layer::MySQL: Relational Database"
+      ],
+      "predicted_nodes": [
+        "System Components::MySQL Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node directly matches the MySQL storage layer."
+    },
+    {
+      "gt_nodes": [
+        "Storage / Database Layer::Neo4j: Graph Database"
+      ],
+      "predicted_nodes": [
+        "System Components::Neo4j Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node directly matches the Neo4j storage layer."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

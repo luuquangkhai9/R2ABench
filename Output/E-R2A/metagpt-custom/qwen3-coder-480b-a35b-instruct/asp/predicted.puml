@@ -1,0 +1,24 @@
+@startuml
+' Artifact representation as a single checklist document with distinct sections
+artifact "Markdown Checklist Artifact" {
+    component "Review Basis Definition"
+    component "Completeness Checklist Items"
+    component "Understandability Checklist Items"
+    component "Model Accuracy Checklist Items"
+    component "Extension/Improvement Checklist Items"
+    component "Metadata Section"
+}
+
+' External systems that reviewers reference during checklist creation
+cloud "Requirements Document Repository"
+cloud "Industry Standards Database"
+cloud "Markdown Editor/Viewer Environment"
+
+' Bidirectional references for external sources
+"Review Basis Definition" <--> "Requirements Document Repository"
+"Review Basis Definition" <--> "Industry Standards Database"
+
+' Connection to editing environment
+"Markdown Editor/Viewer Environment" --> "Markdown Checklist Artifact"
+
+@enduml

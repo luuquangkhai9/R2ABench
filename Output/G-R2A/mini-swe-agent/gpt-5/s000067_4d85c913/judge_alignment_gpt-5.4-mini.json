@@ -1,0 +1,165 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Event Handler eBPF Programs::Default Handler Probes"
+      ],
+      "predicted_nodes": [
+        "Kernel Space (eBPF::Handler eBPF Programs"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a subset of the predicted broader handler-program node. Both refer to default handler logic in kernel-space eBPF programs, and the boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Event Handler eBPF Programs::Handler Probe\nhandle_syscall_write"
+      ],
+      "predicted_nodes": [
+        "Kernel Space (eBPF::Handler eBPF Programs"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The specific handler probe corresponds to the predicted handler eBPF program group. The prediction is broader, but the kernel-space boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Event Handler eBPF Programs::Process Specific\nHandler Probes"
+      ],
+      "predicted_nodes": [
+        "Kernel Space (eBPF::Handler eBPF Programs"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Process-specific handler probes are part of the handler eBPF program set. The predicted kernel-space attribution is correct, though less specific."
+    },
+    {
+      "gt_nodes": [
+        "Global::Perf Event Map\nshared event map"
+      ],
+      "predicted_nodes": [
+        "Kernel Space (eBPF::Perf-Based Event Channel"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT perf event map/ shared event map aligns with the perf-based event delivery channel. The kernel-space placement is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Prog ID Map\npid to id"
+      ],
+      "predicted_nodes": [
+        "Kernel Space (eBPF::Main EBPF Program"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT prog-id map is a component of the main eBPF runtime. Although the prediction is broader, it remains in the correct kernel-space boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::TraceLeft\nCLI and library tracer"
+      ],
+      "predicted_nodes": [
+        "Userspace::TraceLeft Library",
+        "Userspace::CLI\n(Trace Command"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT combined CLI/library tracer is split into CLI and library components. Both predicted nodes are correctly placed in userspace."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Kprobe / Kretprobe\nother traced calls",
+        "Main eBPF Program::Kprobe\nentry probe",
+        "Main eBPF Program::Kretprobe\nreturn probe"
+      ],
+      "predicted_nodes": [
+        "Kernel Space (eBPF::kprobe/kretprobe Hooks",
+        "Kernel Space (eBPF::Main EBPF Program"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT main program and its entry/return probes are aggregated into the predicted main eBPF program and hook infrastructure. The kernel-space attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Prog Map\npid to fd",
+        "Main eBPF Program::Prog Maps\nhandler mappings",
+        "Main eBPF Program::Ret Prog Map\npid to fd"
+      ],
+      "predicted_nodes": [
+        "Kernel Space (eBPF::Handler Maps\n(handle_NAME_progs,\nhandle_NAME_progs_ret",
+        "Kernel Space (eBPF::Main EBPF Program"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT program maps and return-program maps correspond to handler maps and main-program runtime structures. The prediction groups them more coarsely but keeps them in the correct kernel-space boundary."
+    },
+    {
+      "gt_nodes": [
+        "Linux Kernel Functions::inet_csk_accept",
+        "Linux Kernel Functions::sys_open",
+        "Linux Kernel Functions::sys_write"
+      ],
+      "predicted_nodes": [
+        "Kernel Space (eBPF::kprobe/kretprobe Hooks"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The kernel functions are the trace targets hooked by kprobe/kretprobe. While the predicted node is abstract, it is correctly placed in kernel-space hook infrastructure."
+    },
+    {
+      "gt_nodes": [
+        "Global::Prog ID Map\npid to id",
+        "Main eBPF Program::Prog Map\npid to fd",
+        "Main eBPF Program::Ret Prog Map\npid to fd"
+      ],
+      "predicted_nodes": [
+        "Kernel Space (eBPF::Main EBPF Program"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "These map structures are all part of the main eBPF program’s runtime state. The prediction is broad but not boundary-wrong."
+    },
+    {
+      "gt_nodes": [
+        "Event Handler eBPF Programs::Default Handler Probes",
+        "Event Handler eBPF Programs::Process Specific\nHandler Probes"
+      ],
+      "predicted_nodes": [
+        "Kernel Space (eBPF::Handler eBPF Programs"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both GT nodes are subtypes of handler eBPF programs. The predicted placement in kernel-space eBPF is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Perf Event Map\nshared event map"
+      ],
+      "predicted_nodes": [
+        "Kernel Space (eBPF::Perf-Based Event Channel"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The shared perf event map implements the perf-based event channel. This is a correct semantic and boundary match."
+    },
+    {
+      "gt_nodes": [
+        "Global::TraceLeft\nCLI and library tracer"
+      ],
+      "predicted_nodes": [
+        "Userspace::Userspace Tracer & Dispatcher"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The tracer/dispatcher is the userspace side of TraceLeft. The boundary placement is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "External Dependencies::gobpf Integration",
+    "Userspace::Handler Generator",
+    "Userspace::Probe Loader"
+  ]
+}

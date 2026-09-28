@@ -1,0 +1,103 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::TraceLeft\nCLI and library tracer"
+      ],
+      "predicted_nodes": [
+        "TraceLeft Framework::CLI Entry Point",
+        "TraceLeft Framework::Trace Command Handler",
+        "TraceLeft Framework::Userspace Tracer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents the TraceLeft CLI/library tracing surface, which is split in the AI output into CLI entry, trace command handling, and userspace tracing. This is a semantically correct decomposition within the TraceLeft framework boundary."
+    },
+    {
+      "gt_nodes": [
+        "Event Handler eBPF Programs::Default Handler Probes",
+        "Event Handler eBPF Programs::Process Specific\nHandler Probes"
+      ],
+      "predicted_nodes": [
+        "TraceLeft Framework::Handler Loader",
+        "TraceLeft Framework::Handler Programs",
+        "TraceLeft Framework::Handler Maps"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT nodes cover handler probe loading and related handler program/map mechanisms. The AI grouped these into handler loader, handler programs, and handler maps, which is a reasonable functional aggregation and remains within the correct TraceLeft framework boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Perf Event Map\nshared event map"
+      ],
+      "predicted_nodes": [
+        "TraceLeft Framework::Perf Event Channel"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT perf event map corresponds to the perf-based event delivery mechanism. Naming differs, but the semantics are aligned and the boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::Prog ID Map\npid to id"
+      ],
+      "predicted_nodes": [
+        "TraceLeft Framework::Handler Loader"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Prog ID map is part of the handler loading / selection mechanism. The predicted node is broader, but still covers the same functional area without a clear boundary violation."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Prog Map\npid to fd",
+        "Main eBPF Program::Ret Prog Map\npid to fd",
+        "Main eBPF Program::Prog Maps\nhandler mappings"
+      ],
+      "predicted_nodes": [
+        "TraceLeft Framework::Handler Maps",
+        "TraceLeft Framework::eBPF Runtime"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT nodes describe handler-related program maps and return maps in the main eBPF program. The predicted output aggregates these as handler maps and eBPF runtime, which is semantically consistent and not a severe boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Main eBPF Program::Kprobe / Kretprobe\nother traced calls",
+        "Main eBPF Program::Kprobe\nentry probe",
+        "Main eBPF Program::Kretprobe\nreturn probe"
+      ],
+      "predicted_nodes": [
+        "TraceLeft Framework::Kernel Probes (kprobe/kretprobe",
+        "TraceLeft Framework::Probe Installer",
+        "TraceLeft Framework::eBPF Runtime"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT nodes represent the main eBPF program using kprobe/kretprobe attachment points. The predicted nodes capture the same capability at a higher level, and the boundary remains within the TraceLeft framework."
+    },
+    {
+      "gt_nodes": [
+        "Linux Kernel Functions::sys_open",
+        "Linux Kernel Functions::sys_write",
+        "Linux Kernel Functions::inet_csk_accept"
+      ],
+      "predicted_nodes": [
+        "External Dependencies::Linux Kernel"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT nodes are specific Linux kernel functions being traced. The AI collapsed them into the broader Linux kernel dependency, which is semantically appropriate though less detailed."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "External Dependencies::gobpf Library",
+    "TraceLeft Framework::Configuration Reader",
+    "TraceLeft Framework::Event Generator",
+    "TraceLeft Framework::Trace Command Handler",
+    "TraceLeft Framework::Probe Installer"
+  ]
+}

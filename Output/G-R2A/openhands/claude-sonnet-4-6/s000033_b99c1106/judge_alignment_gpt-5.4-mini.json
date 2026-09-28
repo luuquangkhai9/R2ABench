@@ -1,0 +1,465 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Docker Compose Environment::Airflow\\n(Spark Driver",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Host Machine::Docker Compose Network (format 3.7::airflow-webserver\\n(docker-airflow-spark:latest",
+        "Host Machine::Docker Compose Network (format 3.7::airflow-webserver\\n(docker-airflow-spark:latest::Airflow Webserver\\n& Scheduler\\n(LocalExecutor",
+        "Host Machine::Docker Compose Network (format 3.7::airflow-webserver\\n(docker-airflow-spark:latest::PySpark\\n(pyspark dependency",
+        "Host Machine::Docker Compose Network (format 3.7::airflow-webserver\\n(docker-airflow-spark:latest::SparkSubmitOperator\\n(spark_default conn"
+      ],
+      "reasoning": "The GT Airflow driver node is covered by the predicted Airflow service plus its scheduler, PySpark dependency, and Spark submission operator responsibilities."
+    },
+    {
+      "gt_node": "Docker Compose Environment::Cluster Manager\\n(Spark Standalone",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Host Machine::Docker Compose Network (format 3.7::spark\\n(bitnami/spark:latest)\\nhostname: spark",
+        "Host Machine::Docker Compose Network (format 3.7::spark\\n(bitnami/spark:latest)\\nhostname: spark::Spark Master\\n(SPARK_MODE=master"
+      ],
+      "reasoning": "The GT Spark standalone cluster manager is represented by the predicted Spark master service."
+    },
+    {
+      "gt_node": "Docker Compose Environment::Jupyter Notebook\\n(Spark",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Host Machine::Docker Compose Network (format 3.7::jupyter-spark\\n(jupyter/pyspark-notebook",
+        "Host Machine::Docker Compose Network (format 3.7::jupyter-spark\\n(jupyter/pyspark-notebook::Jupyter Notebook\\n& PySpark"
+      ],
+      "reasoning": "The GT Jupyter/PySpark node is covered by the predicted Jupyter notebook service and its PySpark functionality."
+    },
+    {
+      "gt_node": "Docker Compose Environment::Postgres",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Host Machine::Docker Compose Network (format 3.7::postgres\\n(postgres:9.6",
+        "Host Machine::Docker Compose Network (format 3.7::postgres\\n(postgres:9.6::Airflow\\nMetadata DB"
+      ],
+      "reasoning": "The GT Postgres node is covered by the predicted Postgres service and its Airflow metadata database responsibility."
+    },
+    {
+      "gt_node": "Docker Compose Environment::Spark Workers::Worker 1",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-1\\n(bitnami/spark:latest",
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-1\\n(bitnami/spark:latest::Spark Worker 1\\n(SPARK_MODE=worker"
+      ],
+      "reasoning": "The GT Worker 1 node is directly covered by the predicted Spark worker 1 service."
+    },
+    {
+      "gt_node": "Docker Compose Environment::Spark Workers::Worker 2",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-2\\n(bitnami/spark:latest",
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-2\\n(bitnami/spark:latest::Spark Worker 2\\n(SPARK_MODE=worker"
+      ],
+      "reasoning": "The GT Worker 2 node is directly covered by the predicted Spark worker 2 service."
+    },
+    {
+      "gt_node": "Docker Compose Environment::Spark Workers::Worker 3",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-3\\n(bitnami/spark:latest",
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-3\\n(bitnami/spark:latest::Spark Worker 3\\n(SPARK_MODE=worker"
+      ],
+      "reasoning": "The GT Worker 3 node is directly covered by the predicted Spark worker 3 service."
+    },
+    {
+      "gt_node": "Docker Compose Environment::Spark Workers::Worker N",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-1\\n(bitnami/spark:latest",
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-1\\n(bitnami/spark:latest::Spark Worker 1\\n(SPARK_MODE=worker",
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-2\\n(bitnami/spark:latest",
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-2\\n(bitnami/spark:latest::Spark Worker 2\\n(SPARK_MODE=worker",
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-3\\n(bitnami/spark:latest",
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-3\\n(bitnami/spark:latest::Spark Worker 3\\n(SPARK_MODE=worker"
+      ],
+      "reasoning": "The GT extensible worker pattern is covered by the predicted worker instances, which show the scalable worker configuration concept."
+    },
+    {
+      "gt_node": "Global::Data Engineer",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node explicitly models the Data Engineer actor; the generated diagram focuses on infrastructure and service components."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Global::Host Machine",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The host machine is implicit in the deployment context but is not a GT node in the manual design."
+    },
+    {
+      "predicted_node": "Host Machine::Docker Compose Network (format 3.7",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver",
+        "Docker Compose Environment::Cluster Manager\\n(Spark Standalone",
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark",
+        "Docker Compose Environment::Postgres",
+        "Docker Compose Environment::Spark Workers::Worker 1",
+        "Docker Compose Environment::Spark Workers::Worker 2",
+        "Docker Compose Environment::Spark Workers::Worker 3",
+        "Docker Compose Environment::Spark Workers::Worker N"
+      ],
+      "reasoning": "The Docker Compose network is grounded in the GT Docker Compose environment boundary and service topology."
+    },
+    {
+      "predicted_node": "Host Machine::Docker Compose Network (format 3.7::Shared Volumes",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver",
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark"
+      ],
+      "reasoning": "Shared volumes are grounded by the GT shared mounted directories used by Airflow and Jupyter/Spark workflows."
+    },
+    {
+      "predicted_node": "Host Machine::Docker Compose Network (format 3.7::Shared Volumes::DAG Files",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver"
+      ],
+      "reasoning": "DAG files correspond to the GT Airflow responsibility and mounted DAG directory."
+    },
+    {
+      "predicted_node": "Host Machine::Docker Compose Network (format 3.7::Shared Volumes::Input Data Files",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver",
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark"
+      ],
+      "reasoning": "Input data files are explicitly required in the GT shared data mounts for Spark and notebook workflows."
+    },
+    {
+      "predicted_node": "Host Machine::Docker Compose Network (format 3.7::Shared Volumes::Notebook Files",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark"
+      ],
+      "reasoning": "Notebook files are grounded in the GT Jupyter notebook service and its mounted notebook directory."
+    },
+    {
+      "predicted_node": "Host Machine::Docker Compose Network (format 3.7::Shared Volumes::Spark App Files",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver"
+      ],
+      "reasoning": "Spark application files are grounded in the GT Airflow submission flow and shared Spark application mount."
+    },
+    {
+      "predicted_node": "Host Machine::Docker Compose Network (format 3.7::airflow-webserver\\n(docker-airflow-spark:latest",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver"
+      ],
+      "reasoning": "This is the predicted Airflow service boundary corresponding to the GT Airflow driver node."
+    },
+    {
+      "predicted_node": "Host Machine::Docker Compose Network (format 3.7::airflow-webserver\\n(docker-airflow-spark:latest::Airflow Webserver\\n& Scheduler\\n(LocalExecutor",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver"
+      ],
+      "reasoning": "The Airflow webserver and scheduler are grounded in the GT Airflow driver/scheduler node."
+    },
+    {
+      "predicted_node": "Host Machine::Docker Compose Network (format 3.7::airflow-webserver\\n(docker-airflow-spark:latest::PySpark\\n(pyspark dependency",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver"
+      ],
+      "reasoning": "PySpark dependency is explicitly required within the GT Airflow environment."
+    },
+    {
+      "predicted_node": "Host Machine::Docker Compose Network (format 3.7::airflow-webserver\\n(docker-airflow-spark:latest::SparkSubmitOperator\\n(spark_default conn",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver"
+      ],
+      "reasoning": "SparkSubmitOperator and spark_default connection are core GT Airflow-to-Spark submission concepts."
+    },
+    {
+      "predicted_node": "Host Machine::Docker Compose Network (format 3.7::jupyter-spark\\n(jupyter/pyspark-notebook",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark"
+      ],
+      "reasoning": "This is the predicted Jupyter/PySpark service boundary corresponding to the GT Jupyter notebook node."
+    },
+    {
+      "predicted_node": "Host Machine::Docker Compose Network (format 3.7::jupyter-spark\\n(jupyter/pyspark-notebook::Jupyter Notebook\\n& PySpark",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark"
+      ],
+      "reasoning": "The notebook and PySpark capability directly match the GT Jupyter Notebook node."
+    },
+    {
+      "predicted_node": "Host Machine::Docker Compose Network (format 3.7::postgres\\n(postgres:9.6",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Postgres"
+      ],
+      "reasoning": "This is the predicted Postgres service boundary corresponding to the GT Postgres node."
+    },
+    {
+      "predicted_node": "Host Machine::Docker Compose Network (format 3.7::postgres\\n(postgres:9.6::Airflow\\nMetadata DB",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Postgres"
+      ],
+      "reasoning": "The Airflow metadata DB responsibility is grounded in the GT Postgres node."
+    },
+    {
+      "predicted_node": "Host Machine::Docker Compose Network (format 3.7::spark-worker-1\\n(bitnami/spark:latest",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 1",
+        "Docker Compose Environment::Spark Workers::Worker N"
+      ],
+      "reasoning": "This predicted worker service is grounded in the GT worker topology."
+    },
+    {
+      "predicted_node": "Host Machine::Docker Compose Network (format 3.7::spark-worker-1\\n(bitnami/spark:latest::Spark Worker 1\\n(SPARK_MODE=worker",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 1",
+        "Docker Compose Environment::Spark Workers::Worker N"
+      ],
+      "reasoning": "This is a direct grounding of GT Worker 1 and the scalable worker pattern."
+    },
+    {
+      "predicted_node": "Host Machine::Docker Compose Network (format 3.7::spark-worker-2\\n(bitnami/spark:latest",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 2",
+        "Docker Compose Environment::Spark Workers::Worker N"
+      ],
+      "reasoning": "This predicted worker service is grounded in the GT worker topology."
+    },
+    {
+      "predicted_node": "Host Machine::Docker Compose Network (format 3.7::spark-worker-2\\n(bitnami/spark:latest::Spark Worker 2\\n(SPARK_MODE=worker",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 2",
+        "Docker Compose Environment::Spark Workers::Worker N"
+      ],
+      "reasoning": "This is a direct grounding of GT Worker 2 and the scalable worker pattern."
+    },
+    {
+      "predicted_node": "Host Machine::Docker Compose Network (format 3.7::spark-worker-3\\n(bitnami/spark:latest",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 3",
+        "Docker Compose Environment::Spark Workers::Worker N"
+      ],
+      "reasoning": "This predicted worker service is grounded in the GT worker topology."
+    },
+    {
+      "predicted_node": "Host Machine::Docker Compose Network (format 3.7::spark-worker-3\\n(bitnami/spark:latest::Spark Worker 3\\n(SPARK_MODE=worker",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 3",
+        "Docker Compose Environment::Spark Workers::Worker N"
+      ],
+      "reasoning": "This is a direct grounding of GT Worker 3 and the scalable worker pattern."
+    },
+    {
+      "predicted_node": "Host Machine::Docker Compose Network (format 3.7::spark\\n(bitnami/spark:latest)\\nhostname: spark",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Cluster Manager\\n(Spark Standalone"
+      ],
+      "reasoning": "This predicted Spark service boundary corresponds to the GT cluster manager node."
+    },
+    {
+      "predicted_node": "Host Machine::Docker Compose Network (format 3.7::spark\\n(bitnami/spark:latest)\\nhostname: spark::Spark Master\\n(SPARK_MODE=master",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Cluster Manager\\n(Spark Standalone"
+      ],
+      "reasoning": "The Spark master role directly matches the GT Spark standalone cluster manager."
+    },
+    {
+      "predicted_node": "Host Machine::Host Port Mappings",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver",
+        "Docker Compose Environment::Cluster Manager\\n(Spark Standalone",
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark",
+        "Docker Compose Environment::Postgres"
+      ],
+      "reasoning": "Host port mappings are grounded in the GT exposed service interfaces."
+    },
+    {
+      "predicted_node": "Host Machine::Host Port Mappings:::4040-4080",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark"
+      ],
+      "reasoning": "This matches the GT Spark application UI ports exposed by Jupyter/Spark."
+    },
+    {
+      "predicted_node": "Host Machine::Host Port Mappings:::5432",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Postgres"
+      ],
+      "reasoning": "This matches the GT Postgres host port mapping."
+    },
+    {
+      "predicted_node": "Host Machine::Host Port Mappings:::7077",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Cluster Manager\\n(Spark Standalone"
+      ],
+      "reasoning": "This matches the GT Spark cluster endpoint port."
+    },
+    {
+      "predicted_node": "Host Machine::Host Port Mappings:::8181",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Cluster Manager\\n(Spark Standalone"
+      ],
+      "reasoning": "This matches the GT Spark master UI port."
+    },
+    {
+      "predicted_node": "Host Machine::Host Port Mappings:::8282",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver"
+      ],
+      "reasoning": "This matches the GT Airflow web UI port."
+    },
+    {
+      "predicted_node": "Host Machine::Host Port Mappings:::8888",
+      "grounded": true,
+      "reference_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark"
+      ],
+      "reasoning": "This matches the GT Jupyter Notebook UI port."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Airflow\\n(Spark Driver"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Docker Compose Network (format 3.7::airflow-webserver\\n(docker-airflow-spark:latest",
+        "Host Machine::Docker Compose Network (format 3.7::airflow-webserver\\n(docker-airflow-spark:latest::Airflow Webserver\\n& Scheduler\\n(LocalExecutor",
+        "Host Machine::Docker Compose Network (format 3.7::airflow-webserver\\n(docker-airflow-spark:latest::PySpark\\n(pyspark dependency",
+        "Host Machine::Docker Compose Network (format 3.7::airflow-webserver\\n(docker-airflow-spark:latest::SparkSubmitOperator\\n(spark_default conn"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Airflow driver/scheduler responsibility is split into the Airflow service, scheduler, PySpark dependency, and Spark submission operator, all within a semantically equivalent deployment boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Cluster Manager\\n(Spark Standalone"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Docker Compose Network (format 3.7::spark\\n(bitnami/spark:latest)\\nhostname: spark",
+        "Host Machine::Docker Compose Network (format 3.7::spark\\n(bitnami/spark:latest)\\nhostname: spark::Spark Master\\n(SPARK_MODE=master"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Spark standalone cluster manager is split into the Spark service and its master role; boundary attribution is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\\n(Spark"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Docker Compose Network (format 3.7::jupyter-spark\\n(jupyter/pyspark-notebook",
+        "Host Machine::Docker Compose Network (format 3.7::jupyter-spark\\n(jupyter/pyspark-notebook::Jupyter Notebook\\n& PySpark"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Jupyter/PySpark node is split into the service boundary and its notebook/PySpark role, which is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Postgres"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Docker Compose Network (format 3.7::postgres\\n(postgres:9.6",
+        "Host Machine::Docker Compose Network (format 3.7::postgres\\n(postgres:9.6::Airflow\\nMetadata DB"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Postgres node is split into the service boundary and its Airflow metadata DB role, which remains within the correct semantic boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 1"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-1\\n(bitnami/spark:latest",
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-1\\n(bitnami/spark:latest::Spark Worker 1\\n(SPARK_MODE=worker"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT worker node is represented by the predicted service boundary and worker role; boundaries are consistent."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 2"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-2\\n(bitnami/spark:latest",
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-2\\n(bitnami/spark:latest::Spark Worker 2\\n(SPARK_MODE=worker"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT worker node is represented by the predicted service boundary and worker role; boundaries are consistent."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 3"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-3\\n(bitnami/spark:latest",
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-3\\n(bitnami/spark:latest::Spark Worker 3\\n(SPARK_MODE=worker"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT worker node is represented by the predicted service boundary and worker role; boundaries are consistent."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker N"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-1\\n(bitnami/spark:latest",
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-1\\n(bitnami/spark:latest::Spark Worker 1\\n(SPARK_MODE=worker",
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-2\\n(bitnami/spark:latest",
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-2\\n(bitnami/spark:latest::Spark Worker 2\\n(SPARK_MODE=worker",
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-3\\n(bitnami/spark:latest",
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-3\\n(bitnami/spark:latest::Spark Worker 3\\n(SPARK_MODE=worker"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT extensible worker pattern is represented by multiple worker instances, which is semantically correct for the deployment boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Data Engineer"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node corresponds to the human actor, so there is no valid match."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Data Engineer"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Host Machine"
+  ]
+}

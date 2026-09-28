@@ -1,0 +1,85 @@
+@startuml
+!define RECTANGLE class
+skinparam componentStyle rectangle
+skinparam backgroundColor #F5F5F5
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam rectangle {
+    BackgroundColor #FFFFFF
+    BorderColor #333333
+    ArrowColor #333333
+    FontColor #333333
+}
+
+title "Song Mood Web Application - System Architecture"
+
+rectangle "User's Browser" as Browser {
+    [User]
+}
+
+rectangle "Frontend Container" as Frontend {
+    [React Frontend]
+}
+
+rectangle "Backend Container" as Backend {
+    [FastAPI Backend]
+}
+
+rectangle "Storage Container" as Storage {
+    [Elasticsearch]
+}
+
+rectangle "Auxiliary UI Container" as AuxUI {
+    [Kibana]
+}
+
+rectangle "External Service" as External {
+    [Genius API]
+}
+
+' User interactions
+User --> Browser : "Accesses via\nWeb Browser"
+Browser --> Frontend : "HTTP/HTTPS\n(COM-001)"
+Frontend --> Backend : "API Calls\n(API-001)"
+
+' Backend interactions
+Backend --> Storage : "Query/Write Data\n(API-002)"
+Backend --> External : "Search Requests\n(API-003)"
+
+' Auxiliary UI interactions
+AuxUI --> Storage : "Data Inspection\n(API-004)"
+
+' Container boundaries
+together {
+    Frontend
+    Backend
+    Storage
+    AuxUI
+}
+
+note right of Frontend
+  Technology: React
+  (C-001)
+end note
+
+note right of Backend
+  Technology: FastAPI
+  (C-002)
+end note
+
+note right of Storage
+  Technology: Elasticsearch
+  (C-003)
+end note
+
+note right of AuxUI
+  Technology: Kibana
+  (C-004)
+end note
+
+note right of External
+  External Dependency
+  (C-005, C-007)
+end note
+
+@enduml

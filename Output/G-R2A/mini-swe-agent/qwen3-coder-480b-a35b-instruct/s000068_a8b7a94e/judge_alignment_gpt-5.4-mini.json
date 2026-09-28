@@ -1,0 +1,95 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "predicted_nodes": [
+        "Framework Layer::Framework Applications",
+        "Global::Framework Applications",
+        "Global::cFE (Core Flight Executive",
+        "Framework Layer::cFE (Core Flight Executive",
+        "Framework Layer::OSAL (Operating System Abstraction Layer",
+        "Framework Layer::PSP (Platform Support Package",
+        "Global::Build System (Make",
+        "Tooling & Utilities::Build System (Make",
+        "Global::cFS Target Executable",
+        "Application Layer::cFS Target Executable",
+        "Global::Host Command Utility",
+        "Application Layer::Host Command Utility",
+        "Global::Reusable Workflows",
+        "CI/CD Infrastructure::Reusable Workflows",
+        "Global::Changelog Generator",
+        "Tooling & Utilities::Changelog Generator",
+        "Global::Format Checker",
+        "Tooling & Utilities::Format Checker",
+        "Global::Developer",
+        "User Environment::Developer",
+        "Global::Operator",
+        "User Environment::Operator",
+        "Global::CIMaintainer",
+        "User Environment::CI Maintainer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a broad umbrella for the cFS repository bundle. The predicted diagram splits it into constituent build, runtime, tooling, workflow, and user-related elements. While many predicted nodes are over-specific or duplicated, they all remain within the same overall cFS bundle scope rather than crossing into an unrelated system boundary."
+    },
+    {
+      "gt_nodes": [
+        "Reuse Workflows::Submodule Reuse",
+        "Reuse Workflows::cFS Reuse"
+      ],
+      "predicted_nodes": [
+        "Global::Reusable Workflows",
+        "CI/CD Infrastructure::Reusable Workflows"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both GT nodes represent reusable workflow composition/reuse, which the AI aggregated into a single reusable-workflows concept. The CI/CD Infrastructure boundary is semantically acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Static and Quality Checks::CodeQL Analysis",
+        "Static and Quality Checks::Format Check",
+        "Static and Quality Checks::Static Analysis"
+      ],
+      "predicted_nodes": [
+        "Global::Format Checker",
+        "Tooling & Utilities::Format Checker"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted nodes only explicitly capture the format-check portion of the quality-checks group, omitting CodeQL and static analysis. The matched portion is correctly placed in a quality-check/tooling boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Application Layer::Host Command Utility",
+    "Application Layer::cFS Target Executable",
+    "CI/CD Infrastructure::GitHub Actions Runner",
+    "Data Stores::Configuration Files",
+    "Data Stores::Telemetry Data Store",
+    "Framework Layer::Framework Applications",
+    "Framework Layer::OSAL (Operating System Abstraction Layer",
+    "Framework Layer::PSP (Platform Support Package",
+    "Framework Layer::cFE (Core Flight Executive",
+    "Global::Build System (Make",
+    "Global::CIMaintainer",
+    "Global::Changelog Generator",
+    "Global::Configuration Files",
+    "Global::Developer",
+    "Global::Format Checker",
+    "Global::Framework Applications",
+    "Global::Host Command Utility",
+    "Global::Operator",
+    "Global::Reusable Workflows",
+    "Global::cFE (Core Flight Executive",
+    "Global::cFS Target Executable",
+    "Tooling & Utilities::Build System (Make",
+    "Tooling & Utilities::Changelog Generator",
+    "Tooling & Utilities::Format Checker",
+    "User Environment::CI Maintainer",
+    "User Environment::Developer",
+    "User Environment::Operator"
+  ]
+}

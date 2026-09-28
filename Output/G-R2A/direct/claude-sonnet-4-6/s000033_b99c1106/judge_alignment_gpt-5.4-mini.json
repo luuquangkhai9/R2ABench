@@ -1,0 +1,134 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Airflow\n(Spark Driver"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Docker Compose Network (format 3.7::airflow-webserver\n[docker-airflow-spark:latest]\nLocalExecutor | Port: 8282",
+        "Host Machine::Docker Compose Network (format 3.7::airflow-webserver\n[docker-airflow-spark:latest]\nLocalExecutor | Port: 8282::Airflow Webserver\n& Scheduler",
+        "Host Machine::Docker Compose Network (format 3.7::airflow-webserver\n[docker-airflow-spark:latest]\nLocalExecutor | Port: 8282::DAG Definitions\n(loaded from mount",
+        "Host Machine::Docker Compose Network (format 3.7::airflow-webserver\n[docker-airflow-spark:latest]\nLocalExecutor | Port: 8282::PySpark Runtime\n(pyspark installed)\nPinned deps:\ncelery==4.1.1\nkombu==4.2.0\ntornado==5.1.1\nwerkzeug==0.16.0\nSQLAlchemy==1.3.15",
+        "Host Machine::Docker Compose Network (format 3.7::airflow-webserver\n[docker-airflow-spark:latest]\nLocalExecutor | Port: 8282::SparkSubmitOperator\n(spark_default → spark://spark:7077"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Airflow/Spark driver node is decomposed into the Airflow service, its scheduler/webserver, DAG loading, PySpark runtime, and Spark submission operator. This is a semantically correct refinement within the same Airflow container/context."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Cluster Manager\n(Spark Standalone"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Docker Compose Network (format 3.7::spark (master)\n[bitnami/spark:latest]\nhostname: spark\nSPARK_MODE=master\nUI Port: 8181 → 8080\nCluster Port: 7077",
+        "Host Machine::Docker Compose Network (format 3.7::spark (master)\n[bitnami/spark:latest]\nhostname: spark\nSPARK_MODE=master\nUI Port: 8181 → 8080\nCluster Port: 7077::Bundled Spark 2.4.5\n(Hadoop 2.6)\n./bin/pyspark\n./bin/run-example\nMASTER var support\nlibsvm ML examples",
+        "Host Machine::Docker Compose Network (format 3.7::spark (master)\n[bitnami/spark:latest]\nhostname: spark\nSPARK_MODE=master\nUI Port: 8181 → 8080\nCluster Port: 7077::Spark Master Web UI\n(application visibility",
+        "Host Machine::Docker Compose Network (format 3.7::spark (master)\n[bitnami/spark:latest]\nhostname: spark\nSPARK_MODE=master\nUI Port: 8181 → 8080\nCluster Port: 7077::Spark Standalone Master\nEndpoint: spark://spark:7077"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT cluster manager maps to the Spark master service. The extra bundled Spark capabilities and UI/endpoint subnodes are still within the Spark master/container boundary, so the placement is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\n(Spark"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Docker Compose Network (format 3.7::jupyter-spark\n[jupyter/pyspark-notebook]\nPorts: 8888, 4040-4080",
+        "Host Machine::Docker Compose Network (format 3.7::jupyter-spark\n[jupyter/pyspark-notebook]\nPorts: 8888, 4040-4080::Jupyter Notebook Server\n(PySpark enabled",
+        "Host Machine::Docker Compose Network (format 3.7::jupyter-spark\n[jupyter/pyspark-notebook]\nPorts: 8888, 4040-4080::Spark App UI\n(Ports 4040-4080"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Jupyter/PySpark node is split into the Jupyter service, notebook server, and exposed Spark app UIs. This remains within the correct Jupyter container boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Postgres"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Docker Compose Network (format 3.7::postgres\n[postgres:9.6]\nPort: 5432",
+        "Host Machine::Docker Compose Network (format 3.7::postgres\n[postgres:9.6]\nPort: 5432::Airflow Metadata DB\n(DAG runs, tasks,\nscheduler state"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Postgres node is represented as the Postgres service and its Airflow metadata database role. This is semantically consistent and correctly bounded."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 1"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-1\n[bitnami/spark:latest]\nSPARK_MODE=worker",
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-1\n[bitnami/spark:latest]\nSPARK_MODE=worker::Spark Worker 1\n→ spark://spark:7077"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Worker 1 matches directly, and the worker-specific endpoint/submission relationship is correctly placed under the worker service boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 2"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-2\n[bitnami/spark:latest]\nSPARK_MODE=worker",
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-2\n[bitnami/spark:latest]\nSPARK_MODE=worker::Spark Worker 2\n→ spark://spark:7077"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Worker 2 is correctly matched and placed within the Spark worker container boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 3"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-3\n[bitnami/spark:latest]\nSPARK_MODE=worker",
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-3\n[bitnami/spark:latest]\nSPARK_MODE=worker::Spark Worker 3\n→ spark://spark:7077"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Worker 3 is correctly matched and bounded in the Spark worker service."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker N"
+      ],
+      "predicted_nodes": [
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-N\n[bitnami/spark:latest]\nSPARK_MODE=worker\n(extensible pattern",
+        "Host Machine::Docker Compose Network (format 3.7::spark-worker-N\n[bitnami/spark:latest]\nSPARK_MODE=worker\n(extensible pattern::Spark Worker N\n→ spark://spark:7077"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The extensible worker pattern in GT is faithfully represented as an Nth worker service pattern, with correct worker-context placement."
+    },
+    {
+      "gt_nodes": [
+        "Global::Data Engineer"
+      ],
+      "predicted_nodes": [
+        "Global::Host Machine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted 'Host Machine' is not a system component but serves as the top-level environment/context around the actor. The actual data engineer actor is not explicitly drawn, so this is not a clean semantic match; however, no clear equivalent actor node exists in predictions."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Host Machine",
+    "Host Machine::Docker Compose Network (format 3.7",
+    "Host Machine::Docker Compose Network (format 3.7::Shared Volume Mounts",
+    "Host Machine::Docker Compose Network (format 3.7::Shared Volume Mounts::/dags\n(DAG definition files",
+    "Host Machine::Docker Compose Network (format 3.7::Shared Volume Mounts::/data\n(Input data files",
+    "Host Machine::Docker Compose Network (format 3.7::Shared Volume Mounts::/notebooks\n(Notebook files",
+    "Host Machine::Docker Compose Network (format 3.7::Shared Volume Mounts::/spark-apps\n(Spark application files",
+    "Host Machine::Host Port Mappings",
+    "Host Machine::Host Port Mappings::4040-4080 → Spark App UIs",
+    "Host Machine::Host Port Mappings::5432 → Postgres",
+    "Host Machine::Host Port Mappings::7077 → Spark Cluster",
+    "Host Machine::Host Port Mappings::8181 → Spark Master UI",
+    "Host Machine::Host Port Mappings::8282 → Airflow UI",
+    "Host Machine::Host Port Mappings::8888 → Jupyter"
+  ]
+}

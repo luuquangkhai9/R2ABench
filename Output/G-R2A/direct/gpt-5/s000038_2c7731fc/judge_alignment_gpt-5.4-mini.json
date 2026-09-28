@@ -1,0 +1,191 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Web3 application stack::Applications"
+      ],
+      "predicted_nodes": [
+        "Global::Pub/Sub App (Publisher",
+        "Global::Pub/Sub App (Subscriber",
+        "Global::Redis-based Application\\n(Client uses Redis protocol"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "GT 'Applications' is a generic application client boundary, and the predicted publisher/subscriber plus Redis-based application nodes are the semantically relevant application-facing clients. However, the predicted nodes are split into specific runtime roles and placed globally rather than within the Web3 application stack boundary, so the boundary attribution is not faithful to the GT layering."
+    },
+    {
+      "gt_nodes": [
+        "Web3 application stack::BlockChain Database\\nTransactions, Contracts,\\nCertificates and Receipts"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:0",
+      "is_boundary_correct": false,
+      "reasoning": "No semantically equivalent node is present in the predicted list."
+    },
+    {
+      "gt_nodes": [
+        "Web3 application stack::Decentralized File System\\nLarge Files and Media"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:0",
+      "is_boundary_correct": false,
+      "reasoning": "No semantically equivalent node is present in the predicted list."
+    },
+    {
+      "gt_nodes": [
+        "Web3 application stack::Decentralized Processing\\nBusiness Logic"
+      ],
+      "predicted_nodes": [
+        "Global::P2P Pub/Sub Network\\nKademlia DHT + libp2p/IPFS-style\\nPeer discovery & routing",
+        "Global::Redis Agent Sync Network\\n(Instruction synchronization across agents",
+        "IceFireDB - PubSub::Site A (Private/NAT::PubSub Node A",
+        "IceFireDB - PubSub::Site B (Private/NAT::PubSub Node B",
+        "IceFireDB - Redis Proxy::Redis Proxy Agent A",
+        "IceFireDB - Redis Proxy::Redis Proxy Agent B",
+        "IceFireDB - SQLite (internal::SQL/MySQL Result Parser\\n- Fields & metadata\\n- Rows\\n- Warnings & status"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node represents decentralized processing/business logic as a high-level layer. The predicted nodes decompose this into network, agent, site, proxy, and parser-specific components, which are functionally related, but they do not preserve the original high-level boundary and some are overly implementation-specific."
+    },
+    {
+      "gt_nodes": [
+        "Web3 application stack::IceFireDB"
+      ],
+      "predicted_nodes": [
+        "Global::P2P Pub/Sub Network\\nKademlia DHT + libp2p/IPFS-style\\nPeer discovery & routing",
+        "Global::Redis Agent Sync Network\\n(Instruction synchronization across agents",
+        "Global::Redis Storage\\n(Standalone or Cluster",
+        "Global::Redis-based Application\\n(Client uses Redis protocol",
+        "IceFireDB - PubSub::Site A (Private/NAT::PubSub Node A",
+        "IceFireDB - PubSub::Site B (Private/NAT::PubSub Node B",
+        "IceFireDB - Redis Proxy::Redis Proxy Agent A",
+        "IceFireDB - Redis Proxy::Redis Proxy Agent B",
+        "IceFireDB - SQLite (internal::SQL/MySQL Result Parser\\n- Fields & metadata\\n- Rows\\n- Warnings & status"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted list contains the main IceFireDB runtime components covered by the PRD, but it splits them into multiple concrete subnodes instead of a single system node. The grouping is semantically related, yet the boundary attribution is not aligned with the GT's single IceFireDB system boundary."
+    },
+    {
+      "gt_nodes": [
+        "Web3 application stack::Platform"
+      ],
+      "predicted_nodes": [
+        "Global::P2P Pub/Sub Network\\nKademlia DHT + libp2p/IPFS-style\\nPeer discovery & routing",
+        "Global::Redis Agent Sync Network\\n(Instruction synchronization across agents",
+        "Global::Redis Storage\\n(Standalone or Cluster"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT platform node is a broad infrastructure/platform layer. The predicted nodes correspond to infrastructure pieces, but they are fragmented and placed globally rather than under the GT platform boundary, so the layering is not preserved."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::Applications"
+      ],
+      "predicted_nodes": [
+        "Global::Redis-based Application\\n(Client uses Redis protocol"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The functionality matches as an application client, but the GT node is under the Web2 application stack while the predicted node is global. This is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::BlockChain Database\\nTransactions, Contracts,\\nCertificates and Receipts"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:0",
+      "is_boundary_correct": false,
+      "reasoning": "No matching predicted node."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::File System\\nLarge Files and Media"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:0",
+      "is_boundary_correct": false,
+      "reasoning": "No matching predicted node."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::IceFireDB"
+      ],
+      "predicted_nodes": [
+        "IceFireDB - PubSub::Site A (Private/NAT::PubSub Node A",
+        "IceFireDB - PubSub::Site B (Private/NAT::PubSub Node B",
+        "IceFireDB - Redis Proxy::Redis Proxy Agent A",
+        "IceFireDB - Redis Proxy::Redis Proxy Agent B",
+        "IceFireDB - SQLite (internal::SQL/MySQL Result Parser\\n- Fields & metadata\\n- Rows\\n- Warnings & status"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a broad system node, and the predicted nodes are a reasonable decomposition into the IceFireDB subcomponents relevant to the PRD. Although split into multiple concrete parts, they remain within the IceFireDB system boundary."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::Platform"
+      ],
+      "predicted_nodes": [
+        "Global::P2P Pub/Sub Network\\nKademlia DHT + libp2p/IPFS-style\\nPeer discovery & routing",
+        "Global::Redis Agent Sync Network\\n(Instruction synchronization across agents",
+        "Global::Redis Storage\\n(Standalone or Cluster"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "Predicted infrastructure components correspond to platform-level concerns, but they are not placed under the Web2 application stack platform boundary. The boundary attribution is therefore incorrect."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::Processing\\nBusiness Logic"
+      ],
+      "predicted_nodes": [
+        "IceFireDB - Redis Proxy::Redis Proxy Agent A",
+        "IceFireDB - Redis Proxy::Redis Proxy Agent B",
+        "IceFireDB - SQLite (internal::SQL/MySQL Result Parser\\n- Fields & metadata\\n- Rows\\n- Warnings & status"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "These predicted nodes reflect processing logic and internal handling, but they are modeled as specific runtime components rather than the generic business-logic layer in the GT. The boundary/layer abstraction does not match the manual design."
+    },
+    {
+      "gt_nodes": [
+        "Web3 application stack::Web3 application stack::Web3 application stack::Web3 application stack"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:0",
+      "is_boundary_correct": false,
+      "reasoning": "No matching node."
+    },
+    {
+      "gt_nodes": [
+        "Web3 application stack::Web3 application stack"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:0",
+      "is_boundary_correct": false,
+      "reasoning": "No matching node."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Web3 application stack::BlockChain Database\\nTransactions, Contracts,\\nCertificates and Receipts",
+    "Web3 application stack::Decentralized File System\\nLarge Files and Media",
+    "Web2 application stack::BlockChain Database\\nTransactions, Contracts,\\nCertificates and Receipts",
+    "Web2 application stack::File System\\nLarge Files and Media"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::P2P Pub/Sub Network\\nKademlia DHT + libp2p/IPFS-style\\nPeer discovery & routing",
+    "Global::Pub/Sub App (Publisher",
+    "Global::Pub/Sub App (Subscriber",
+    "Global::Redis Agent Sync Network\\n(Instruction synchronization across agents",
+    "Global::Redis Storage\\n(Standalone or Cluster",
+    "Global::Redis-based Application\\n(Client uses Redis protocol",
+    "IceFireDB - PubSub::Site A (Private/NAT::PubSub Node A",
+    "IceFireDB - PubSub::Site B (Private/NAT::PubSub Node B",
+    "IceFireDB - Redis Proxy::Redis Proxy Agent A",
+    "IceFireDB - Redis Proxy::Redis Proxy Agent B",
+    "IceFireDB - SQLite (internal::SQL/MySQL Result Parser\\n- Fields & metadata\\n- Rows\\n- Warnings & status"
+  ]
+}

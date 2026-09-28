@@ -1,0 +1,94 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Secure API\\nAuthenticated HTTP endpoints"
+      ],
+      "predicted_nodes": [
+        "Spring Backend Layer::JWT Utility\\n(JwtUtility.isValidToken)",
+        "Spring Backend Layer::User Management\\nController\\n(HTTP REST API)",
+        "Spring Backend Layer::User Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's high-level 'Secure API' node is correctly decomposed by the AI into the standard components of a Spring web application: a Controller for endpoints, a Service for business logic, and a JWT Utility for security. The 'Spring Backend Layer' boundary is more specific and semantically correct than the generic GT boundary."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Blockchain Network\\nEthereum / Web3j",
+        "LwM2M Blockchain Platform::BootstrapStore\\nSmart Contract"
+      ],
+      "predicted_nodes": [
+        "Blockchain Integration Layer::32-Byte ASCII\\nEncoder/Decoder",
+        "Blockchain Integration Layer::Blockchain Service\\nFacade",
+        "Blockchain Integration Layer::Client Bootstrap\\nService",
+        "Blockchain Integration Layer::Smart Contract\\nProxy\\n(Ethereum Contract",
+        "Blockchain Integration Layer::Web3j HTTP\\nConnector",
+        "Global::Ethereum-Compatible\\nBlockchain Node\\n(HTTP Transport)"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly expanded the GT's high-level blockchain components into the specific functional parts described in the PRD. This includes the external blockchain node, the smart contract interaction logic, the Web3j connector, the business logic services, and the specific ASCII encoder/decoder. The AI's use of a 'Blockchain Integration Layer' for internal components and 'Global' for the external node is a superior and more accurate architectural representation."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Server\\nLeshan server component"
+      ],
+      "predicted_nodes": [
+        "LwM2M / Leshan Layer::Bootstrap Config\\nBuilder",
+        "LwM2M / Leshan Layer::LwM2M Node JSON\\nDeserializer",
+        "LwM2M / Leshan Layer::LwM2M Primitive\\nType Mapper\\n(BOOLEAN/STRING/INTEGER/FLOAT"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The PRD focuses on specific LwM2M data handling functions (JSON deserialization, bootstrap config creation) rather than the entire server. The AI correctly extracted these functions from the PRD and grouped them, representing a sub-function of the GT's broader 'LwM2M Server'. The 'LwM2M / Leshan Layer' boundary is appropriate and more descriptive."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Client\\nDevice 1",
+        "LwM2M Blockchain Platform::LwM2M Client\\nDevice 2"
+      ],
+      "predicted_nodes": [
+        "Global::LwM2MClient"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the two specific client device instances from the GT into a single, generic 'LwM2MClient' node, which represents the external actor. Placing this actor in the 'Global' boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Management Web UI"
+      ],
+      "predicted_nodes": [
+        "Global::APIClient"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The PRD explicitly states 'No human-facing GUI' and describes an 'Authenticated API client'. The AI's 'APIClient' is therefore more accurate than the GT's 'Management Web UI'. Placing this external actor in the 'Global' boundary is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "LwM2M Blockchain Platform::External Applications\\nusing LwM2M",
+    "LwM2M Blockchain Platform::LwM2M Bootstrap Server"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::001",
+    "Global::002",
+    "Global::003",
+    "Global::004",
+    "Global::005",
+    "Global::006",
+    "Global::A",
+    "Global::Blockchain Integration Layer",
+    "Global::C",
+    "Global::DR",
+    "Global::FR",
+    "Global::LwM2M / Leshan Layer",
+    "Global::NFR",
+    "Global::Security Info\\nCollection Store",
+    "Global::Spring Backend Layer",
+    "Global::System Architecture",
+    "Global::User Store\\n(Backend DB",
+    "Global::title LwM2M Device Management Backend"
+  ]
+}

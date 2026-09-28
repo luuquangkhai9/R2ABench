@@ -1,0 +1,113 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Programming Models and Frameworks::MPI\\nMPICH, Open-MPI"
+      ],
+      "predicted_nodes": [
+        "CH4 Integration Context::CH4 Netmod"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the 'CH4 Netmod' from the PRD, which is the specific integration module for the MPICH framework. This is a direct functional equivalent to the GT's 'MPI' node. The AI's boundary 'CH4 Integration Context' is a specific and semantically correct name for the layer where the system interfaces with the MPI framework."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCP Protocols\\nHigh Level API::Message Passing API\\nTag Matching, Rendezvous",
+        "UCX::UCP Protocols\\nHigh Level API::Software Protocols",
+        "UCX::UCP Protocols\\nHigh Level API::Transport Selection"
+      ],
+      "predicted_nodes": [
+        "ParaStation/psmpi Repository::Communication Subsystem",
+        "ParaStation/psmpi Repository::Connection Manager",
+        "ParaStation/psmpi Repository::One-to-Many Scatter",
+        "ParaStation/psmpi Repository::Progress Manager",
+        "ParaStation/psmpi Repository::Send Path::Send State Machine"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly extracted the specific components of the 'psmpi' communication subsystem from the PRD. These components (Progress, Connection, Send State Machine) collectively perform the functions of the high-level protocol layer (UCP) in the GT's generic UCX architecture. The boundary 'ParaStation/psmpi Repository' is correct as these are parts of the system described in the PRD."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCT Hardware Transports\\nLow Level API::RDMA Verbs Transport\\nInfiniBand, ROCE, OPA"
+      ],
+      "predicted_nodes": [
+        "ParaStation/psmpi Repository::Embedded Libfabric Module::Verbs Provider"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the 'Embedded Libfabric Module::Verbs Provider' from the PRD. This component's function is to be a transport over RDMA Verbs, which is exactly what the corresponding GT node describes in the context of the low-level transport API (UCT). The AI correctly places it within the 'psmpi Repository'."
+    },
+    {
+      "gt_nodes": [
+        "Drivers and Kernels::RDMA Verbs Driver"
+      ],
+      "predicted_nodes": [
+        "Linux Verbs Environment::libibverbs",
+        "Linux Verbs Environment::librdmacm"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the specific user-space libraries ('libibverbs', 'librdmacm') from the PRD, which are required for the verbs provider. The GT represents this entire subsystem with a single, more abstract 'RDMA Verbs Driver' node. The AI's 'Linux Verbs Environment' boundary is semantically equivalent to the GT's 'Drivers and Kernels' boundary in this context."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCS Services\\nCommon Utilities::Data Structures"
+      ],
+      "predicted_nodes": [
+        "Send Path Data::Data Descriptor (DD",
+        "Send Path Data::Envelope",
+        "Send Path Data::LIBA",
+        "Send Path Data::OD",
+        "Send Path Data::Packet Buffer",
+        "Send Path Data::Network Send Descriptor (DD"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI split the GT's generic 'Data Structures' node into multiple specific data items explicitly mentioned in the PRD's 'Send Path' and 'Data exchange formats' sections. The AI created a highly relevant 'Send Path Data' boundary, which is semantically consistent with the GT's 'UCS Services' utility layer."
+    },
+    {
+      "gt_nodes": [
+        "UCX::UCS Services\\nCommon Utilities::Memory Management"
+      ],
+      "predicted_nodes": [
+        "Send Path Data::Pinned User Data"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI's 'Pinned User Data' node, which enables direct-access sending, is a specific function of the 'Memory Management' service in a communication stack like UCX. The boundary attribution is correct as it's part of the data used in the send path."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Drivers and Kernels::Cray Driver",
+    "Drivers and Kernels::OS Kernel\\nEthernet",
+    "Drivers and Kernels::OS Kernel\\nHost Memory",
+    "Drivers and Kernels::OS Kernel\\nMemory Hooks",
+    "Drivers and Kernels::ROCm / CUDA",
+    "Global::Applications\\nHPC, AI, ML, Big Data",
+    "Global::Hardware",
+    "Programming Models and Frameworks::AI / ML Frameworks\\nTensorFlow, Burst Buffer",
+    "Programming Models and Frameworks::PGAS / SHMEM\\nOpenSHMEM, UPC, CAF, X10, Chapel",
+    "Programming Models and Frameworks::Task Runtimes\\nParsec, OCR, Legion",
+    "UCX::UCM Memory Services::Memory Hooks",
+    "UCX::UCP Protocols\\nHigh Level API::Fragmentation",
+    "UCX::UCP Protocols\\nHigh Level API::PGAS API\\nRMAs, Atomics",
+    "UCX::UCT Hardware Transports\\nLow Level API::Ethernet Transport\\nTCP/IP Sockets",
+    "UCX::UCT Hardware Transports\\nLow Level API::GPU Transport\\nNVIDIA CUDA, AMD ROCm",
+    "UCX::UCT Hardware Transports\\nLow Level API::Gemini / Aries Transport\\nGNI",
+    "UCX::UCT Hardware Transports\\nLow Level API::Intra-node Host Memory\\nSYSV, POSIX, KNEM, CMA, XPMEM"
+  ],
+  "unmatched_predicted_nodes": [
+    "Build & Verification Environment::Autotools Workflow\\n(autogen.sh, configure, make",
+    "Build & Verification Environment::hwloc tarball",
+    "Build & Verification Environment::hwloc-tree/",
+    "Build & Verification Environment::run-embedded-tests.sh",
+    "Global::Build & Verification Environment",
+    "Global::Linux Verbs Environment",
+    "Linux Verbs Environment::Network Device",
+    "Send Path Data::Flow-Control State",
+    "Transport Layers::OFI/libfabric",
+    "Transport Layers::UCX"
+  ]
+}

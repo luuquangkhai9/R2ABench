@@ -1,0 +1,234 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::AI Module"
+      ],
+      "predicted_nodes": [
+        "Global::Container(latex_service, \"LaTeX Service\", \"Node",
+        "Global::Container(preview_service, \"Preview Service\", \"Node"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT AI Module is split into LaTeX generation and preview-related services in the prediction, which is functionally related. However, the AI module in GT is a backend application service grouping, while the prediction places these as separate top-level containers without preserving the original backend service boundary."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::AI Module::LaTeX Generation Module"
+      ],
+      "predicted_nodes": [
+        "Global::Container(latex_service, \"LaTeX Service\", \"Node"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Functionally equivalent as the LaTeX generation component, but the predicted node is modeled as a separate container rather than as a submodule under the GT AI Module boundary."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::AI Module::Result Processing Module"
+      ],
+      "predicted_nodes": [
+        "Global::Container(preview_service, \"Preview Service\", \"Node"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT result processing module corresponds to post-recognition result handling and presentation/preview support. The predicted preview service is semantically close, but it is placed as an independent top-level service rather than within the GT AI module boundary."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::AI Module::Image Pre-processing Module"
+      ],
+      "predicted_nodes": [
+        "Global::Container(file_service, \"File Service\", \"Node"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both relate to preparing uploaded inputs before recognition, but the prediction moves this capability into a general file service instead of the GT AI preprocessing submodule, which is a boundary shift."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::File Processing Service"
+      ],
+      "predicted_nodes": [
+        "Global::Container(file_service, \"File Service\", \"Node"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The names differ but the component meaning is the same: handling file upload, storage, and retrieval. The backend service boundary is preserved."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::Project Management Service"
+      ],
+      "predicted_nodes": [
+        "Global::Container(project_service, \"Project Service\", \"Node",
+        "Global::Container(version_service, \"Version Service\", \"Node",
+        "Global::Container(collaboration_service, \"Collaboration Service\", \"Node",
+        "Global::Container(comment_service, \"Comment Service\", \"Node"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT project management service is decomposed into separate services for projects, versions, collaboration, and comments. This split is semantically consistent with the GT backend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::Project Management Service::Project Basic Services"
+      ],
+      "predicted_nodes": [
+        "Global::Container(project_service, \"Project Service\", \"Node"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Project basic services map directly to the predicted project service. The boundary remains within backend project management."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::Project Management Service::Collaboration & Permissions Service"
+      ],
+      "predicted_nodes": [
+        "Global::Container(collaboration_service, \"Collaboration Service\", \"Node"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is functionally equivalent to collaboration and permission handling. The prediction keeps it in the backend service layer."
+    },
+    {
+      "gt_nodes": [
+        "Application Layer / Backend Services::User Management Service"
+      ],
+      "predicted_nodes": [
+        "Global::Container(user_service, \"User Service\", \"Node",
+        "Global::Container(validation_service, \"Validation Service\", \"Node"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "User management is split into user service plus validation/auth-related service. This is a reasonable decomposition within backend services."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer / Storage::Project & Article Info"
+      ],
+      "predicted_nodes": [
+        "Global::side logic"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node does not explicitly represent project/article storage and appears to be an unrelated placeholder, so this is not a valid semantic match."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer / Storage::Team Learning Data"
+      ],
+      "predicted_nodes": [
+        "Global::side logic"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No clear storage-equivalent predicted node exists for team learning data."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer / Storage::User Information"
+      ],
+      "predicted_nodes": [
+        "Global::Container(user_service, \"User Service\", \"Node"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node is a service, not a data/storage node. This is a boundary mismatch between data layer and application layer."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer / Frontend::File Upload Interface"
+      ],
+      "predicted_nodes": [
+        "Global::Container(web_app, \"Web Application\", \"React/Angular\", \"Provides the user interface and handles client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The web application encompasses the file upload interface as part of the frontend/presentation layer."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer / Frontend::LaTeX Rendering Interface"
+      ],
+      "predicted_nodes": [
+        "Global::Container(web_app, \"Web Application\", \"React/Angular\", \"Provides the user interface and handles client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The rendering interface is appropriately contained within the frontend web application boundary."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer / Frontend::Registration & Login Interface"
+      ],
+      "predicted_nodes": [
+        "Global::Container(web_app, \"Web Application\", \"React/Angular\", \"Provides the user interface and handles client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Registration and login UI are part of the frontend web application."
+    },
+    {
+      "gt_nodes": [
+        "Presentation Layer / Frontend::Workspace Interface"
+      ],
+      "predicted_nodes": [
+        "Global::Container(web_app, \"Web Application\", \"React/Angular\", \"Provides the user interface and handles client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Workspace UI belongs to the frontend web application boundary."
+    },
+    {
+      "gt_nodes": [
+        "User Layer / Client Layer::Mobile Browser"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No explicit mobile browser node is present in the prediction."
+    },
+    {
+      "gt_nodes": [
+        "User Layer / Client Layer::PC Browser"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No explicit PC browser node is present in the prediction."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Application Layer / Backend Services",
+    "Global::Data Layer / Storage",
+    "Global::Presentation Layer / Frontend",
+    "Global::User Layer / Client Layer",
+    "User Layer / Client Layer::Mobile Browser",
+    "User Layer / Client Layer::PC Browser",
+    "Data Layer / Storage::Project & Article Info",
+    "Data Layer / Storage::Team Learning Data"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Container Diagram",
+    "Global::Container(api_gateway, \"API Gateway\", \"Node",
+    "Global::Container(export_service, \"Export Service\", \"Node",
+    "Global::Container(validation_service, \"Validation Service\", \"Node",
+    "Global::Rel(preview_service, web_app, \"Sends real",
+    "Global::js/Java\", \"Generates LaTeX code and manages compilation",
+    "Global::js/Java\", \"Generates real-time previews of LaTeX documents",
+    "Global::js/Java\", \"Handles export to PDF, LaTeX source, PNG, and JPEG formats",
+    "Global::js/Java\", \"Handles real-time editing and synchronization via WebSockets",
+    "Global::js/Java\", \"Handles user registration, authentication, and profile management",
+    "Global::js/Java\", \"Manages annotations and comments on document versions",
+    "Global::js/Java\", \"Manages document versioning, branching, and restoration",
+    "Global::js/Java\", \"Manages projects, groups, and user permissions",
+    "Global::js/Java\", \"Manages uploads, storage, and retrieval of files and artifacts",
+    "Global::js/Java\", \"Performs input validation and security checks",
+    "Global::js/Java\", \"Routes HTTP requests, manages API endpoints",
+    "Global::side logic",
+    "Global::time preview updates\", \"WebSocket",
+    "Global::title EasyLaTeX System"
+  ]
+}

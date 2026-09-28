@@ -1,0 +1,195 @@
+@startuml
+!define RECTANGLE class
+skinparam componentStyle rectangle
+skinparam backgroundColor #FEFEFE
+skinparam defaultFontName Helvetica
+skinparam defaultFontSize 12
+skinparam rectangle {
+    BackgroundColor #E6F3FF
+    BorderColor #0066CC
+    FontColor #003366
+}
+skinparam database {
+    BackgroundColor #FFF0E6
+    BorderColor #CC6600
+    FontColor #663300
+}
+skinparam interface {
+    BackgroundColor #E6FFE6
+    BorderColor #009900
+    FontColor #003300
+}
+skinparam folder {
+    BackgroundColor #F0F0F0
+    BorderColor #666666
+    FontColor #333333
+}
+skinparam node {
+    BackgroundColor #FFFFFF
+    BorderColor #333333
+    FontColor #000000
+}
+skinparam cloud {
+    BackgroundColor #F9F9F9
+    BorderColor #999999
+    FontColor #333333
+}
+
+title Kubescape Host-Scanner System Architecture
+
+cloud "Kubernetes Cluster" as k8s {
+    node "Kubernetes Node" as node {
+        database "Host Filesystem" as hostfs {
+            folder "/etc/cni/" as etc_cni
+            folder "/var/lib/cni/" as var_lib_cni
+            folder "/etc" as etc
+            folder "/run" as run
+            folder "/var/lib" as var_lib
+            file "Configuration Files" as config_files
+            file "Control-Plane JSON Data" as cp_json
+        }
+
+        RECTANGLE "host-scanner DaemonSet Pod" as pod {
+            interface "HTTP API" as api [
+                HTTP API
+                ----
+                GET /doesnotexist -> 404
+            ]
+
+            RECTANGLE "Core Service" as core [
+                Core Service
+                ----
+                - HTTP request handler
+                - Endpoint routing
+            ]
+
+            RECTANGLE "CNI Directory Resolver" as cni_resolver [
+                CNI Directory Resolver
+                ----
+                Inputs:
+                - Runtime type
+                - Default config
+                - Config file content
+                - Command-line args
+                ----
+                Output: Resolved CNI path
+            ]
+
+            RECTANGLE "JSON Sanitizer" as json_sanitizer [
+                JSON Sanitizer
+                ----
+                - Removes encryption provider
+                configuration secrets
+                ----
+                Output: Sanitized JSON
+            ]
+
+            RECTANGLE "Configuration Manager" as config_mgr [
+                Configuration Manager
+                ----
+                - Runtime configuration
+                - Process arguments
+                - Default values
+            ]
+
+            RECTANGLE "Test Framework" as test_fw [
+                Test Framework
+                ----
+                - Provider-specific E2E tests
+                - Go build tags:
+                //go:build <provider>
+            ]
+        }
+    }
+}
+
+cloud "External Systems" as external {
+    RECTANGLE "HTTP Client" as http_client [
+        HTTP Client
+        ----
+        - API consumer
+        - Sends GET requests
+    ]
+
+    RECTANGLE "Operator" as operator [
+        Operator
+        ----
+        - Deploys DaemonSet
+        - Manages configuration
+    ]
+
+    RECTANGLE "Test Engineer" as tester [
+        Test Engineer
+        ----
+        - Executes E2E tests
+        - Validates behavior
+    ]
+
+    RECTANGLE "Integrator" as integrator [
+        Integrator
+        ----
+        - Supplies runtime inputs
+        - Provides configuration
+    ]
+}
+
+' Data flows and relationships
+http_client --> api : "HTTP GET requests"
+api --> core : "Route requests"
+core --> api : "HTTP responses"
+
+config_mgr --> cni_resolver : "Runtime config,\ncommand-line args"
+cni_resolver --> hostfs : "Reads/validates\nCNI paths"
+cni_resolver --> core : "Provides resolved\nCNI directory"
+
+core --> json_sanitizer : "Control-plane\nJSON data"
+json_sanitizer --> core : "Sanitized JSON\noutput"
+
+operator --> pod : "Deploys & configures"
+tester --> test_fw : "Executes tests\nwith build tags"
+integrator --> config_mgr : "Supplies runtime\n& config inputs"
+
+' Component connections within pod
+core --> cni_resolver : "Invokes for\npath resolution"
+core --> json_sanitizer : "Invokes for\nJSON sanitization"
+
+' External access to host filesystem
+pod --> hostfs : "Reads host\ninformation"
+
+' Test framework connections
+test_fw --> api : "Validates\nHTTP behavior"
+test_fw --> cni_resolver : "Tests CNI\nresolution"
+test_fw --> json_sanitizer : "Tests JSON\nsanitization"
+
+note right of pod
+  Deployment: Privileged DaemonSet
+  Environment: Kubernetes node
+  Implementation: Go-based
+  Key Functions:
+  1. HTTP endpoint handling
+  2. CNI directory resolution
+  3. JSON secret removal
+  4. Provider-specific testing
+end note
+
+note top of cni_resolver
+  Resolution Scenarios:
+  - kubelet/containerd default → /etc/cni/
+  - Explicit CNI arg → /var/lib/cni/
+  - Config-derived → specific subpaths
+end note
+
+note bottom of json_sanitizer
+  Security Requirement:
+  Removes encryption provider
+  configuration secrets from
+  control-plane JSON data
+end note
+
+note left of test_fw
+  Build Tag Mechanism:
+  //go:build <provider>
+  Enables provider-specific
+  E2E test selection
+end note
+@enduml

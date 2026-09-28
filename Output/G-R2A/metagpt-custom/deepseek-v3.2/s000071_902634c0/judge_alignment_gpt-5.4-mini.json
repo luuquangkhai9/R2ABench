@@ -1,0 +1,163 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "ClearML Server::Backend Service API"
+      ],
+      "predicted_nodes": [
+        "ClearML Server::Backend Session",
+        "Service Interface Layer::Backend Service Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT backend API is represented by the predicted backend session plus client interface, which together cover the same backend service interaction capability. The boundary remains within the ClearML Server / service interface context without a severe context shift."
+    },
+    {
+      "gt_nodes": [
+        "ClearML Server::ML Ops::Execution Queue"
+      ],
+      "predicted_nodes": [
+        "ClearML Server::ClearML Execution Queue"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the ClearML execution queue used for job retrieval. The naming differs, but the semantic component and server-side boundary align."
+    },
+    {
+      "gt_nodes": [
+        "ClearML Server::ML Ops::Monitoring"
+      ],
+      "predicted_nodes": [
+        "Execution Layer::Worker Telemetry"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The function matches telemetry/monitoring, but the predicted node is placed in the execution layer rather than the server-side ML Ops monitoring boundary, which is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "ClearML Server::ML Ops::Orchestration"
+      ],
+      "predicted_nodes": [
+        "Execution Layer::Experiment Runner",
+        "Execution Layer::Worker Configuration",
+        "Execution Layer::Worker Telemetry"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT orchestration capability is split across execution-side components, but the predicted placement shifts orchestration responsibilities away from the server-side ML Ops boundary into the worker execution layer, which is a significant boundary/context mismatch."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::ClearML Agent\\nService Pod"
+      ],
+      "predicted_nodes": [
+        "Global::Kubernetes Cluster",
+        "Execution Layer::Experiment Runner"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The service-pod concept is partially represented by the Kubernetes environment and runner, but the AI did not preserve the specific agent service-pod boundary. This is too diffuse and crosses abstraction levels."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Kubernetes Glue"
+      ],
+      "predicted_nodes": [
+        "Global::Kubernetes Glue"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node preserves the same Kubernetes Glue concept. The Global boundary is acceptable as a semantic wrapper for the Kubernetes integration component."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Kubernetes Job"
+      ],
+      "predicted_nodes": [
+        "Global::Kubernetes Cluster"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "A Kubernetes Job is not equivalent to the whole Kubernetes Cluster. The predicted node is too coarse and placed at the wrong architectural level."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Mapped Docker Socket\\nSibling Containers"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Docker Socket"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node captures the same Docker socket dependency enabling sibling container management. The boundary is semantically consistent, though simplified."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Pod Execution Environment\\nand Docker User Code"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Pod Environment"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted pod environment corresponds to the GT pod execution environment. It is a reasonable boundary match despite being less detailed."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::YAML Job Template"
+      ],
+      "predicted_nodes": [
+        "Global::YAML Template"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The YAML template is the same artifact used for job preparation. The predicted boundary is generic but semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Data Scientist Environment::ClearML Snippet"
+      ],
+      "predicted_nodes": [
+        "Service Interface Layer::Backend Service Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The ClearML Snippet is a user-side/data-scientist-side code integration artifact, not a backend service client interface. This is a boundary and context confusion."
+    },
+    {
+      "gt_nodes": [
+        "Data Scientist Environment::Python ML / DL Code"
+      ],
+      "predicted_nodes": [
+        "Execution Layer::Experiment Runner"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "User-authored ML/DL code is not the same as the experiment runner/execution component. The predicted node shifts the responsibility into the execution layer, which is incorrect."
+    },
+    {
+      "gt_nodes": [
+        "ClearML Server::Experiment Manager::Collaboration",
+        "ClearML Server::Experiment Manager::Data Tracking",
+        "ClearML Server::Experiment Manager::Versioning",
+        "ClearML Server::Experiment Manager::Visualization"
+      ],
+      "predicted_nodes": [
+        "Global::ClearML Server"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These GT nodes are detailed sub-capabilities of the ClearML Server. The predicted model aggregates them into a single server node, which is an acceptable higher-level merge with no severe boundary violation."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "GPU / Kubernetes Workers\\nOn Prem or Cloud::ClearML Agent\\nService Pod"
+  ],
+  "unmatched_predicted_nodes": [
+    "ClearML Server::Events Service (v2.5",
+    "ClearML Server::Models Service (v2.4",
+    "Service Interface Layer::Events Service Interface",
+    "Service Interface Layer::Models Service Interface"
+  ]
+}

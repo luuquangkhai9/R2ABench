@@ -1,0 +1,125 @@
+@startuml
+!define RECTANGLE rectangle linewidth 1
+
+skinparam rectangle {
+    borderColor #666666
+    borderWidth 1
+}
+
+skinparam component {
+    borderColor #666666
+    borderWidth 1
+}
+
+skinparam node {
+    borderColor #666666
+    borderWidth 1
+}
+
+skinparam database {
+    borderColor #666666
+    borderWidth 1
+}
+
+skinparam package {
+    borderColor #666666
+    borderWidth 1
+}
+
+' Frontend Layer
+node "Browser" as browser {
+    rectangle "Vue Frontend" as frontend
+}
+
+' Backend Layer
+node "Server" as server {
+    rectangle "Node.js/Express" as backend
+    rectangle "Socket.IO" as socketio
+    rectangle "JWT Authentication" as jwt
+    rectangle "Redis Client" as redisClient
+    rectangle "MySQL Client" as mysqlClient
+    rectangle "InfluxDB Client" as influxClient
+    rectangle "Object Storage Client" as storageClient
+    rectangle "Docker Client" as dockerClient
+}
+
+' External Services
+database "MySQL\n(Relational Data)" as mysql
+database "InfluxDB\n(Time-Series Data)" as influxdb
+node "Redis\n(Cache)" as redis
+node "Docker\n(Sandbox)" as docker
+node "Object Storage\n(S3 Compatible)" as storage
+node "CDN\n(CloudFront Style)" as cdn
+node "Nginx\n(Reverse Proxy)" as nginx
+
+' Connections
+browser --> nginx : HTTP/HTTPS
+nginx --> backend : Reverse Proxy
+backend --> mysql : Data Storage
+backend --> influxdb : Process Records
+backend --> redis : Coordination
+backend --> docker : Code Execution
+backend --> storage : File Storage
+storage --> cdn : Distribution
+socketio --> frontend : Real-time Events
+jwt --> backend : Authentication
+redisClient --> redis : Cache Ops
+mysqlClient --> mysql : Queries
+influxClient --> influxdb : Records
+storageClient --> storage : Upload/Download
+dockerClient --> docker : Sandbox Control
+
+' Grouping
+package "Application Layer" {
+    browser
+    server
+    nginx
+}
+
+package "Data Layer" {
+    mysql
+    influxdb
+    redis
+}
+
+package "Infrastructure Layer" {
+    docker
+    storage
+    cdn
+}
+
+note right of backend
+  Core Components:
+  - REST API Endpoints
+  - Authentication Service
+  - Project Management
+  - Workspace Coordination
+  - Battle Management
+  - Code Execution Service
+  - File Distribution Service
+end note
+
+note right of frontend
+  Features:
+  - User Authentication UI
+  - Project Workspace Editor
+  - Real-time Collaboration
+  - Battle Interface
+  - Playback Viewer
+end note
+
+note right of redis
+  Use Cases:
+  - Live Workspace State
+  - Battle Invitations
+  - Session Management
+end note
+
+note right of docker
+  Sandboxing:
+  - Code Compilation
+  - Code Execution
+  - Isolation Security
+end note
+
+@enduml

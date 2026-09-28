@@ -1,0 +1,126 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Application"
+      ],
+      "predicted_nodes": [
+        "Host Application::App Code"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the host application that integrates the SDK. The predicted boundary is semantically equivalent to the GT global application context."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_Plugin::Plugin init compile",
+        "QAPM_Plugin::QAPM_Plugin"
+      ],
+      "predicted_nodes": [
+        "Host Application::App Code"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT plugin nodes represent QAPM plugin build/init behavior, while the predicted node is host application code. This collapses distinct plugin concerns into the wrong architectural boundary."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK::Scheduling::Handler Manager",
+        "QAPM SDK::Scheduling::Background Handler",
+        "QAPM SDK::Upload Pipeline::Upload Processor",
+        "QAPM SDK::Upload Pipeline::Connectivity Gate",
+        "QAPM SDK::Upload Pipeline::Storage Pop (forced send",
+        "QAPM SDK::Upload Pipeline::File Scanner",
+        "QAPM SDK::Upload Pipeline::File Reader (bParam",
+        "QAPM SDK::Upload Pipeline::Param Deriver (cParam from Context",
+        "QAPM SDK::Upload Pipeline::Sender Adapter",
+        "QAPM SDK::Upload Pipeline::Callback Handler (success delete / failure log",
+        "QAPM SDK::HTTP Instrumentation::ResponseHandler Wrapper",
+        "QAPM SDK::HTTP Instrumentation::Buffering Entity Wrapper",
+        "QAPM SDK::HTTP Instrumentation::Counting InputStream",
+        "QAPM SDK::HTTP Instrumentation::Transaction State",
+        "QAPM SDK::QAPM Config (Provides Sender"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT SDK node is a coarse umbrella that the AI split into detailed SDK subsystems. The overall boundary remains within QAPM SDK, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Collect"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No clear predicted node corresponds to the collection module. The predicted list focuses on scheduling, upload, and HTTP instrumentation, which are outside this GT collection node."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node matches the report module. The AI omitted this GT architectural node."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK::Upload Pipeline::Storage Pop (forced send"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The storage-pop behavior is a specific part of the GT storage concern and is placed within the QAPM SDK upload pipeline, which is semantically appropriate for the checked scope."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "predicted_nodes": [
+        "Android Platform::File System (Upload Directory"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "This is not the QAPM storage module itself but the underlying Android file system/upload directory dependency. It is related but not equivalent to the SDK storage boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "QAPM_Plugin::Plugin init compile",
+    "QAPM_Plugin::QAPM_Plugin",
+    "QAPM_SDK::QAPM_Collect",
+    "QAPM_SDK::QAPM_Report"
+  ],
+  "unmatched_predicted_nodes": [
+    "Android Platform::Connectivity Manager",
+    "Android Platform::Context",
+    "Android Platform::File System (Upload Directory",
+    "Android Platform::HandlerThread + Looper",
+    "Android Platform::Main Looper (MainThread Handler",
+    "Apache HttpClient::HttpEntity",
+    "Apache HttpClient::ResponseHandler",
+    "Global::Configured Sender",
+    "Global::Network",
+    "Host Application::App Code",
+    "QAPM SDK::HTTP Instrumentation::Buffering Entity Wrapper",
+    "QAPM SDK::HTTP Instrumentation::Counting InputStream",
+    "QAPM SDK::HTTP Instrumentation::ResponseHandler Wrapper",
+    "QAPM SDK::HTTP Instrumentation::Transaction State",
+    "QAPM SDK::Logger",
+    "QAPM SDK::QAPM Config (Provides Sender",
+    "QAPM SDK::Scheduling::Background Handler",
+    "QAPM SDK::Scheduling::Handler Manager",
+    "QAPM SDK::Upload Pipeline::Callback Handler (success delete / failure log",
+    "QAPM SDK::Upload Pipeline::Connectivity Gate",
+    "QAPM SDK::Upload Pipeline::File Reader (bParam",
+    "QAPM SDK::Upload Pipeline::File Scanner",
+    "QAPM SDK::Upload Pipeline::Param Deriver (cParam from Context",
+    "QAPM SDK::Upload Pipeline::Sender Adapter",
+    "QAPM SDK::Upload Pipeline::Storage Pop (forced send",
+    "QAPM SDK::Upload Pipeline::Upload Processor"
+  ]
+}

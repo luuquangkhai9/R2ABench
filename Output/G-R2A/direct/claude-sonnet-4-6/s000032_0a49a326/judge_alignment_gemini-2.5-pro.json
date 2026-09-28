@@ -1,0 +1,109 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Audit\nService"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Activiti Runtime Services::Audit Service\n[API-005, FR-004, DR-004"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are a direct match. The predicted boundary 'Kubernetes / GKE Cluster::Activiti Runtime Services' is semantically equivalent and more specific to the PRD's description of a Kubernetes-deployed environment than the GT's 'Activiti Cloud Infrastructure::Activiti Cloud Application'."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Customer\nLogic",
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Out of the\nBox Services"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Activiti Runtime Services::Cloud Connectors\n[Architecture Background"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly merged two detailed GT nodes into a single 'Cloud Connectors' component, which aligns with its role as 'architecture background' in the PRD. The boundary attribution is semantically correct and consistent with other services."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Notification\nService"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Activiti Runtime Services::Notification Service\n[Architecture Background"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are a direct match. The predicted boundary is semantically equivalent to the GT boundary but more specific, reflecting the Kubernetes deployment context mentioned in the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Query\nService"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Activiti Runtime Services::Query Service\n[API-006, DR-005"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are a direct match. The predicted boundary is semantically equivalent and consistent with the overall architecture described."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::BPMN, Form\nand Rule Defs",
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::Process\nRuntime"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Activiti Runtime Services::Example Runtime Bundle\n(Process Definitions & Instances)\n[API-003, API-004, FR-002, FR-003, DR-002, DR-003",
+        "Kubernetes / GKE Cluster::Activiti Runtime Services::Example Runtime Bundle\n(Process Definitions & Instances)\n[API-003, API-004, FR-002, FR-003, DR-002, DR-003::ProcessRuntime API\n[API-008, FR-006",
+        "Kubernetes / GKE Cluster::Activiti Runtime Services::Example Runtime Bundle\n(Process Definitions & Instances)\n[API-003, API-004, FR-002, FR-003, DR-002, DR-003::TaskRuntime API\n(Requires ROLE_ACTIVITI_USER)\n[API-007, FR-005, FR-006, C-002, NFR-003"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the 'Example Runtime Bundle' and provided a more detailed and accurate breakdown, including the ProcessRuntime and TaskRuntime APIs as mentioned in the PRD, which maps to the GT's concept of the Runtime Bundle and its contents. The boundaries are correct and well-structured."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Config Maps\n(Kubernetes",
+        "Activiti Cloud Infrastructure::Registry\n(Kubernetes"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Configuration & Deployment::Kubernetes Config Maps\n/ Registry\n[Architecture Background"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI logically merged the GT's separate Config Maps and Registry nodes into a single component and placed it within a well-defined 'Configuration & Deployment' boundary inside the Kubernetes cluster, which is architecturally sound and semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Gateway"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::API Gateway\n[Architecture Background"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "'Gateway' and 'API Gateway' are semantically identical. The AI correctly placed it within the 'Kubernetes / GKE Cluster' boundary, which aligns with the PRD's context."
+    },
+    {
+      "gt_nodes": [
+        "Global::SSO/IDM\n(Keycloak"
+      ],
+      "predicted_nodes": [
+        "Kubernetes / GKE Cluster::Identity & Access Management::Keycloak\n(SSO / Token Issuer)\n[API-001, FR-001, DR-001, NFR-001"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes for Keycloak match. The AI's decision to place it within an 'Identity & Access Management' boundary inside the 'Kubernetes / GKE Cluster' is a more specific and plausible architectural choice than the GT's vague 'Global' boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Client"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Network / Public IP::NGINX Ingress Controller\n[CI-002, FR-007, C-003",
+    "Global::External Network / Public IP",
+    "Global::Kubernetes / GKE Cluster",
+    "Kubernetes / GKE Cluster::Configuration & Deployment::Deployment Descriptors\n(Input Rate & Replica Count)\n[DE-007, DR-007, NFR-002",
+    "Kubernetes / GKE Cluster::Identity & Access Management::Spring Security\n(Role / User / Group Context)\n[C-001, DR-006, CI-001",
+    "Kubernetes / GKE Cluster::Spring Boot Application Context\n[C-001",
+    "Kubernetes / GKE Cluster::Spring Boot Application Context\n[C-001::Spring Boot App\n(User / Security Setup"
+  ]
+}

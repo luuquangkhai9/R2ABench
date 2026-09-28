@@ -1,0 +1,181 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Clients::Android",
+        "Clients::PC",
+        "Clients::Web",
+        "Clients::iOS"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Telegram-Compatible Clients",
+        "Global::Telegram-Compatible Clients"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "GT specifies various client platforms, which the AI generalizes into Telegram-compatible clients. The boundary mappings to Client Layer and Global are semantically acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Gateway"
+      ],
+      "predicted_nodes": [
+        "Access Layer::MTProto Server Interface",
+        "Access Layer::MTProto Server Interface::Client Connection Handler",
+        "Access Layer::MTProto Server Interface::Protocol Message Parser"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI breaks down the Gateway into specific MTProto server interface entry points. Both are correctly placed in the Access Layer."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Auth Session"
+      ],
+      "predicted_nodes": [
+        "Access Layer::Session Management::Authorization Handler",
+        "Access Layer::Session Management::Salt Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Auth Session functionally matches the authorization and salt management components predicted by the AI. Boundaries are consistent."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Session"
+      ],
+      "predicted_nodes": [
+        "Access Layer::Session Management",
+        "Access Layer::Session Management::Session Controller"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The Session node in GT matches the general session management controllers predicted by AI. The Access Layer boundary is preserved."
+    },
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "External Systems::Kafka",
+        "External Systems::Kafka::Event Stream",
+        "External Systems::Kafka::Message Queue",
+        "Data Layer::Async Processing::Kafka Consumer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The global Kafka infrastructure in GT is split into external system nodes and a consumer by the AI. External Systems is a semantically compatible boundary for infrastructure."
+    },
+    {
+      "gt_nodes": [
+        "Global::Push"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Async Processing::Push Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The Push service matches functionally, but the AI incorrectly placed it in the Data Layer. Push is a communication/async service, not a data storage component."
+    },
+    {
+      "gt_nodes": [
+        "Global::Sync"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Async Processing::Sync Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The Sync service matches functionally, but placing it in the Data Layer is a boundary error. It belongs in a global or service layer."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MySQL"
+      ],
+      "predicted_nodes": [
+        "External Systems::MySQL",
+        "External Systems::MySQL::Message Data",
+        "External Systems::MySQL::Session Data",
+        "External Systems::MySQL::User Data",
+        "Data Layer::Data Access Components",
+        "Data Layer::Data Access Components::Message Repository",
+        "Data Layer::Data Access Components::Session Repository",
+        "Data Layer::Data Access Components::User Repository"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT's MySQL storage is detailed into the AI's MySQL system nodes and Data Access Repositories. The boundary split between External Systems (DB) and Data Layer (Repositories) is conceptually sound."
+    },
+    {
+      "gt_nodes": [
+        "Storages::Redis"
+      ],
+      "predicted_nodes": [
+        "External Systems::Redis",
+        "External Systems::Redis::Cache Store",
+        "External Systems::Redis::Session Cache"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Redis cache and session cache match the Redis storage node. External Systems is an acceptable boundary mapping."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MinIO"
+      ],
+      "predicted_nodes": [
+        "External Systems::MinIO",
+        "External Systems::MinIO::File Storage",
+        "External Systems::MinIO::Media Storage"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "MinIO storage matches directly, and mapping to External Systems represents a valid boundary."
+    },
+    {
+      "gt_nodes": [
+        "Services::Msg"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Business Services::Messaging Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The specific messaging service correctly matches the Msg service in GT, with consistent service boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Services::Services"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Business Services",
+        "Service Layer::Business Services::Phone Verification Service",
+        "Service Layer::Business Services::Registration Service",
+        "Service Layer::Service Message Handler",
+        "Service Layer::Service Message Handler::destroy_session Handler",
+        "Service Layer::Service Message Handler::rpc_drop_answer Handler",
+        "Service Layer::Verification Service",
+        "Service Layer::Verification Service::Default Verifier (12345",
+        "Service Layer::Verification Service::External Verifier Adapter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The generic Services node in GT is expanded by the AI into specific business logic and verification services. The Service Layer boundary is semantically equivalent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer::Status",
+    "Global::BFF",
+    "Services::DFS"
+  ],
+  "unmatched_predicted_nodes": [
+    "Data Layer::Async Processing",
+    "Data Layer::Media Wrapper",
+    "Data Layer::Media Wrapper::FFProbe Interface",
+    "Data Layer::Media Wrapper::FFmpeg Interface",
+    "External Systems::External Verification Service",
+    "External Systems::etcd",
+    "External Systems::etcd::Configuration Store",
+    "External Systems::etcd::Service Discovery"
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::GoDaddy API\\nDomain availability"
+      ],
+      "predicted_nodes": [
+        "External Systems::GoDaddy API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the optional external GoDaddy integration used for domain availability checks. The boundary differs in wording but is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::HTTP API\\nSession and attack requests"
+      ],
+      "predicted_nodes": [
+        "squatm3gator API Server::Request Handler",
+        "squatm3gator API Server::Request Handler::Attack Parser",
+        "squatm3gator API Server::Request Handler::Job Creator",
+        "squatm3gator API Server::Session Manager",
+        "squatm3gator API Server::Request Handler::Error Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT HTTP API node is decomposed into request/session handling subcomponents by the AI. This is a reasonable structural split and stays within the same backend/API boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Redis\\nCommand and reporting queues"
+      ],
+      "predicted_nodes": [
+        "External Systems::Redis",
+        "External Systems::Redis::Job Channel",
+        "External Systems::Redis::Reporting Channel"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Redis queue abstraction is split into Redis plus its job and reporting channels. This is semantically correct and the boundary attribution is appropriate as an external system."
+    },
+    {
+      "gt_nodes": [
+        "Global::Socket.io\\nWebSocket result channel"
+      ],
+      "predicted_nodes": [
+        "squatm3gator API Server::Web Server::WebSocket"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the asynchronous client update channel over WebSocket/Socket.IO. The AI's boundary places it under the web server, which is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Global::Squatm3\\nDomain generation engine"
+      ],
+      "predicted_nodes": [
+        "squatm3gator API Server::squatm3 Engine Wrapper"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is the wrapped squatm3 generation engine, and the predicted wrapper captures the same responsibility. The boundary is acceptable as an internal wrapper around the engine."
+    },
+    {
+      "gt_nodes": [
+        "Global::Web UI\\nindex.html"
+      ],
+      "predicted_nodes": [
+        "External Systems::Web Browser",
+        "squatm3gator API Server::Web Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is the served UI page/template, but the AI modeled the browser and generic web server instead of the actual index.html UI artifact. This is a boundary/semantic mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Global::Workers\\nCommand consumers"
+      ],
+      "predicted_nodes": [
+        "squatm3gator API Server::Background Consumer",
+        "squatm3gator API Server::Background Consumer::Job Processor",
+        "squatm3gator API Server::Background Consumer::Result Router"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT worker/consumer concept is split into a background consumer with processing and routing subcomponents. This matches the PRD's in-process consumer thread and is placed in a correct backend boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "External Systems::Web Browser",
+    "squatm3gator API Server::Global::squatm3gator API Server",
+    "squatm3gator API Server::Web Server::HTTP API",
+    "squatm3gator API Server::Request Handler::Error Handler",
+    "squatm3gator API Server::Request Handler::Job Creator",
+    "squatm3gator API Server::Session Manager"
+  ]
+}

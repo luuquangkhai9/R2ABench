@@ -1,0 +1,117 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "API Gateway Account::API Gateway"
+      ],
+      "predicted_nodes": [
+        "External Systems::API Gateway",
+        "Infrastructure Layer::ApiGatewayStack"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the API Gateway system component. The GT names the deployment account boundary, while the prediction splits it into the external AWS service and the stack that provisions it, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::Cognito-authorizer::hello-function"
+      ],
+      "predicted_nodes": [
+        "Authorization Layer::CognitoAuthorizer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Cognito-based authorizer used by the API Gateway path. The predicted layer name is abstracted but still within the correct API authorization boundary."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::Calls hello/GET with id_token in headers"
+      ],
+      "predicted_nodes": [
+        "Integration Layer::WhoAmIMethod",
+        "Integration Layer::EcsProxyMethod"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node captures API methods involved in the authorized call flow and header handling. The prediction splits this into the concrete API methods, which is functionally equivalent and placed in an appropriate integration/API layer."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::Returns hello plus user name when authorized"
+      ],
+      "predicted_nodes": [
+        "Integration Layer::WhoAmIMethod"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This matches the WhoAmI/hello response behavior under authorization. The boundary is consistent with the API method layer."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::auth-function"
+      ],
+      "predicted_nodes": [
+        "Integration Layer::EcsProxyMethod"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT auth-function corresponds to the ECS proxy/auth-related API method in the prediction. The integration layer placement is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Cognito Account::Cognito User Pool"
+      ],
+      "predicted_nodes": [
+        "Authentication Layer::CognitoUserPool",
+        "Authentication Layer::UserPoolClient",
+        "Authentication Layer::CognitoIdentityPool"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Cognito User Pool is represented by the predicted user pool plus related Cognito authentication objects. Although split more finely, the authentication boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Cognito Account::Cognito Hosted UI"
+      ],
+      "predicted_nodes": [
+        "Authentication Layer::CognitoUserPool"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Hosted UI is part of Cognito authentication/user-pool functionality. The prediction keeps it within the correct authentication boundary, though at a more abstract level."
+    },
+    {
+      "gt_nodes": [
+        "Global::User"
+      ],
+      "predicted_nodes": [
+        "Authentication Layer::UserPoolClient"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is an end user actor, while the predicted node is an infrastructure component. This is not semantically equivalent and indicates a category mismatch."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "External Systems::AWS Cognito",
+    "External Systems::AWS IAM",
+    "External Systems::AWS VPC",
+    "External Systems::Amazon SQS",
+    "Global::Authentication Layer",
+    "Global::Authorization Layer",
+    "Global::External Systems",
+    "Global::Infrastructure Layer",
+    "Global::Integration Layer",
+    "Global::Networking Layer",
+    "Infrastructure Layer::ApiGatewayStack",
+    "Infrastructure Layer::CognitoStack",
+    "Infrastructure Layer::VpcEndpointTemplate",
+    "Integration Layer::ApiStageDeployment",
+    "Integration Layer::CallbackUrlOutput",
+    "Integration Layer::VpcLink",
+    "Networking Layer::SqsVpcEndpoint",
+    "Networking Layer::VpcSecurityGroup"
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "BACKEND::Router"
+      ],
+      "predicted_nodes": [
+        "Heroku (Deployment Env)\\nNFR-004::Node.js Server (CommonJS)\\nC-001, NFR-003\\nStarted via Node.js start script::HTTP Router\\nFR-004, C-004"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the backend request router responsible for delegating search URLs to the autocomplete module. The predicted placement within the Node.js server boundary is semantically consistent with the GT backend boundary."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::algorithm"
+      ],
+      "predicted_nodes": [
+        "Heroku (Deployment Env)\\nNFR-004::Node.js Server (CommonJS)\\nC-001, NFR-003\\nStarted via Node.js start script::Autocomplete/Search Module\\nFR-002, FR-009"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the backend autocomplete/search-hint algorithm. The predicted boundary under the server is appropriate and matches the GT backend placement."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::data.json"
+      ],
+      "predicted_nodes": [
+        "Heroku (Deployment Env)\\nNFR-004::Node.js Server (CommonJS)\\nC-001, NFR-003\\nStarted via Node.js start script::Value Extraction\\nFR-008"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is the local JSON data source, while the predicted node is a value extraction function rather than the data store itself. This is a functional mismatch, even though both are backend-related."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::handlers"
+      ],
+      "predicted_nodes": [
+        "Heroku (Deployment Env)\\nNFR-004::Node.js Server (CommonJS)\\nC-001, NFR-003\\nStarted via Node.js start script::Home Page Handler\\nFR-003",
+        "Heroku (Deployment Env)\\nNFR-004::Node.js Server (CommonJS)\\nC-001, NFR-003\\nStarted via Node.js start script::Not-Found Handler (404)\\nFR-007",
+        "Heroku (Deployment Env)\\nNFR-004::Node.js Server (CommonJS)\\nC-001, NFR-003\\nStarted via Node.js start script::Static Asset Server\\nFR-005"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT handlers node is split into multiple more specific request-handling responsibilities in the prediction. The backend/server boundary is consistent with the original backend handler area."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::public assets\\nhtml\\ncss\\njs"
+      ],
+      "predicted_nodes": [
+        "Heroku (Deployment Env)\\nNFR-004::Node.js Server (CommonJS)\\nC-001, NFR-003\\nStarted via Node.js start script::Content-Type Mapper\\nFR-006, NFR-002\\nhtml, css, js, jpg, ico"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node represents public assets, while the predicted node is only the content-type mapping logic. These are related but not the same component, so this is a mismatch."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::XMLHttpRequest"
+      ],
+      "predicted_nodes": [
+        "Global::Web Browser"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a frontend browser request mechanism, but the predicted node is only the broader browser environment. This is too coarse and does not accurately reproduce the component."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::index.html"
+      ],
+      "predicted_nodes": [
+        "Global::Web Browser"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is the HTML frontend entry page, but the predicted node is a general browser environment, not the page itself."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::main.css"
+      ],
+      "predicted_nodes": [
+        "Global::Web Browser"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is the CSS asset, while the predicted node is the browser environment. This is not semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::userInput"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Search UI\\n- Input field (FR-001)\\n- Suggestions list"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the user-facing search input UI. The browser boundary is appropriate for a frontend input component."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Heroku (Deployment Env)\\nNFR-004",
+    "Heroku (Deployment Env)\\nNFR-004::Node.js Server (CommonJS)\\nC-001, NFR-003\\nStarted via Node.js start script"
+  ]
+}

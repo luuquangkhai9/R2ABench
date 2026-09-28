@@ -1,0 +1,98 @@
+@startuml
+!define RECTANGLE class
+
+title Home Recipes System Architecture
+
+skinparam componentStyle rectangle
+
+package "Client Layer" {
+    RECTANGLE FlutterClient [
+        Flutter/Dart Client
+        --
+        - Runs on Android, iOS, Web, macOS
+        - Uses generated Dart gRPC code
+        - Communicates via gRPC
+    ]
+}
+
+package "Backend Layer" {
+    RECTANGLE GoGRPCServer [
+        Go gRPC Server
+        --
+        - Generated from .proto definitions
+        - Implements recipe & ingredient services
+        - Listens for gRPC calls
+    ]
+
+    RECTANGLE GRPCGateway [
+        gRPC-Gateway Middleware
+        --
+        - Translates HTTP to gRPC
+        - Exposes HTTP endpoints:
+          * addRecipe
+          * ListAllRecipes
+          * ListAllIngredientsAtHome
+          * GetAllIngredientsForRecipe
+    ]
+}
+
+package "Deployment Layer" {
+    RECTANGLE DockerContainer [
+        Docker Container
+        --
+        - Packages Go gRPC server
+        - Runs locally as container
+    ]
+
+    package "Kubernetes" {
+        RECTANGLE LocalK8s [
+            Local Kubernetes
+            --
+            - Deploys server stack
+            - Uses deployment manifests
+        ]
+
+        RECTANGLE AKS [
+            Azure Kubernetes Service
+            --
+            - Managed K8s deployment
+            - Uses AKS manifests
+        ]
+    }
+}
+
+package "Shared Definitions" {
+    RECTANGLE ProtoContract [
+        Protocol Buffers Contract (.proto)
+        --
+        - Shared service/message definitions
+        - Used by client, server, gateway
+        - Drives code generation
+    ]
+}
+
+FlutterClient --> GoGRPCServer : gRPC (generated)
+FlutterClient --> ProtoContract : Code Generation
+GoGRPCServer --> ProtoContract : Code Generation
+GRPCGateway --> ProtoContract : Code Generation
+GRPCGateway --> GoGRPCServer : gRPC Translation
+DockerContainer --> GoGRPCServer : Contains
+LocalK8s --> DockerContainer : Deploys
+AKS --> DockerContainer : Deploys
+
+note right of GRPCGateway
+  HTTP Endpoints:
+  POST /addRecipe
+  GET /ListAllRecipes
+  GET /ListAllIngredientsAtHome
+  GET /GetAllIngredientsForRecipe
+end note
+
+note top of ProtoContract
+  Central contract defining:
+  - Services: RecipeService, IngredientService
+  - Messages: Recipe, Ingredient
+  - RPC methods and streaming behavior
+end note
+
+@enduml

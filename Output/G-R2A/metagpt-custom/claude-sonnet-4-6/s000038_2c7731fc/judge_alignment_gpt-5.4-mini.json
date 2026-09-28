@@ -1,0 +1,95 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Web2 application stack::Applications",
+        "Web3 application stack::Applications"
+      ],
+      "predicted_nodes": [
+        "External Clients::Redis-based\nApplication Client"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both GT nodes represent external application/client consumers of the system. The predicted node captures the same application-facing role, and placing it under External Clients is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::IceFireDB",
+        "Web3 application stack::IceFireDB"
+      ],
+      "predicted_nodes": [
+        "Decentralized Middleware Layer::AgentSyncNetwork",
+        "Decentralized Middleware Layer::PubSubNode",
+        "Decentralized Middleware Layer::RedisProxyAgent\n\nSupported command categories:\nString, Set, List, Hash,\nSorted Set, Stream,\nBasic Control Commands"
+      ],
+      "match_type": "2:3",
+      "is_boundary_correct": true,
+      "reasoning": "The GT IceFireDB node is a coarse system node, while the predicted nodes split it into runtime middleware components that implement the IceFireDB functionality. The decentralized middleware boundary is appropriate for these components."
+    },
+    {
+      "gt_nodes": [
+        "Web3 application stack::Decentralized Processing\nBusiness Logic",
+        "Web2 application stack::Processing\nBusiness Logic"
+      ],
+      "predicted_nodes": [
+        "Internal Protocol Handling Layer::SQLiteResultParser\n(MySQL-Protocol Parser",
+        "MySQL/SQLite Protocol\nData Source::Packetized MySQL-Protocol\nResult Data"
+      ],
+      "match_type": "2:2",
+      "is_boundary_correct": true,
+      "reasoning": "These GT nodes are broad processing/business-logic placeholders. The predicted nodes refine that processing into internal protocol/result handling, which is consistent with the PRD's limited internal SQL/MySQL result parsing scope."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::Platform",
+        "Web3 application stack::Platform"
+      ],
+      "predicted_nodes": [
+        "Global::libp2p / IPFS Peer Network",
+        "P2P Network Layer::PeerDiscoveryRouter\n(Kademlia DHT / libp2p",
+        "libp2p / IPFS Peer Network::DHT / libp2p\nPeer Infrastructure\n(peer discovery, routing\n& NAT traversal"
+      ],
+      "match_type": "2:3",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Platform nodes map to the underlying peer/network platform used by the decentralized system. The predicted network and routing nodes align with the PRD's Kademlia/libp2p/IPFS-style peer discovery and NAT traversal requirements."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::BlockChain Database\nTransactions, Contracts,\nCertificates and Receipts",
+        "Web3 application stack::BlockChain Database\nTransactions, Contracts,\nCertificates and Receipts"
+      ],
+      "predicted_nodes": [
+        "Global::MySQL/SQLite Protocol\nData Source",
+        "Global::Redis Cluster",
+        "Global::Redis Standalone Instance",
+        "Redis Cluster::Redis Cluster\nStore (multi-node",
+        "Redis Standalone Instance::Redis\nSingle-Node Store",
+        "Storage Backend Layer::RedisClusterAdapter",
+        "Storage Backend Layer::RedisStandaloneAdapter"
+      ],
+      "match_type": "2:6",
+      "is_boundary_correct": true,
+      "reasoning": "Although the GT label is generalized as a blockchain-database style storage element, the predicted nodes split it into the concrete storage backends covered by the PRD: Redis standalone, Redis cluster, and their adapters. This is a semantically valid refinement and the storage-layer boundaries are appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::File System\nLarge Files and Media",
+        "Web3 application stack::Decentralized File System\nLarge Files and Media"
+      ],
+      "predicted_nodes": [
+        "Global::libp2p / IPFS Peer Network",
+        "libp2p / IPFS Peer Network::DHT / libp2p\nPeer Infrastructure\n(peer discovery, routing\n& NAT traversal"
+      ],
+      "match_type": "2:2",
+      "is_boundary_correct": false,
+      "reasoning": "The GT nodes refer to file-system/storage semantics, while the predicted nodes describe peer-discovery networking infrastructure. This is a severe semantic mismatch and not a correct boundary placement."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::External Clients",
+    "Global::MySQL/SQLite Protocol\nData Source",
+    "Global::Redis Cluster",
+    "Global::Redis Standalone Instance"
+  ]
+}

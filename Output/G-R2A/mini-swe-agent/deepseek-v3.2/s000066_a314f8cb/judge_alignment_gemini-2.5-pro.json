@@ -1,0 +1,78 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Browser Clients::Client Browser\\nPlayer 1",
+        "Browser Clients::Client Browser\\nPlayer 2",
+        "Browser Clients::Client Browser\\nPlayer 3"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Browser Client",
+        "Client Layer::Browser Client::Game State Manager",
+        "Client Layer::Browser Client::Room Manager",
+        "Client Layer::Browser Client::Three.js Game Engine",
+        "Client Layer::Browser Client::WebSocket Client"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's multiple player instances are aggregated by the AI into a single generic 'Browser Client' concept, which is then correctly decomposed into its constituent functional parts. The boundaries 'Browser Clients' and 'Client Layer' are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\\nErlang"
+      ],
+      "predicted_nodes": [
+        "Game Server Layer::Master Game Server",
+        "Game Server Layer::Master Game Server::Erlang/OTP Server",
+        "Game Server Layer::Master Game Server::Game Logic Engine",
+        "Game Server Layer::Master Game Server::Player Session Manager",
+        "Game Server Layer::Master Game Server::Room Management",
+        "Game Server Layer::Master Game Server::WebSocket Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identifies the single GT master server node and splits it into more granular, logical microservices. The boundary 'Erlang / OTP Game Server Cluster' is semantically equivalent to 'Game Server Layer'."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Slave\\nErlang"
+      ],
+      "predicted_nodes": [
+        "Game Server Layer::Replica Server",
+        "Game Server Layer::Replica Server::Erlang/OTP Replica",
+        "Game Server Layer::Replica Server::Fault Tolerance Handler",
+        "Game Server Layer::Replica Server::State Synchronization"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identifies the GT's slave/replica server node and splits it into logical components related to its role. The boundary 'Erlang / OTP Game Server Cluster' is semantically equivalent to 'Game Server Layer'."
+    },
+    {
+      "gt_nodes": [
+        "Static Web Tier::Web Server\\nGame assets, HTML, CSS, JS"
+      ],
+      "predicted_nodes": [
+        "Web Server Layer::Static Asset Server",
+        "Web Server Layer::Static Asset Server::HTTP Server",
+        "Web Server Layer::Static Asset Server::Static File Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identifies the static web server from the GT and decomposes it into its underlying components. The boundaries 'Static Web Tier' and 'Web Server Layer' are semantically equivalent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::DNS",
+    "Global::Erlang / OTP Game Server Cluster"
+  ],
+  "unmatched_predicted_nodes": [
+    "Data Layer::Game State Database",
+    "Data Layer::Game State Database::Game State",
+    "Data Layer::Game State Database::Player Sessions",
+    "Data Layer::Game State Database::Room Data",
+    "Data Layer::Session Store",
+    "Data Layer::Session Store::Connection States",
+    "Data Layer::Session Store::Player Contexts",
+    "Global::Internet"
+  ]
+}

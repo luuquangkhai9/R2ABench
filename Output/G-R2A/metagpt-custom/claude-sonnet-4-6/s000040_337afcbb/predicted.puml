@@ -1,0 +1,149 @@
+@startuml PlugIt_Framework_Architecture
+
+skinparam backgroundColor #FAFAFA
+skinparam package {
+  BorderColor #555555
+  FontStyle bold
+  FontSize 13
+}
+skinparam component {
+  BorderColor #336699
+  BackgroundColor #D6EAF8
+  FontSize 11
+}
+skinparam node {
+  BorderColor #2E7D32
+  BackgroundColor #E8F5E9
+  FontSize 11
+}
+skinparam database {
+  BorderColor #6A1B9A
+  BackgroundColor #F3E5F5
+  FontSize 11
+}
+skinparam cloud {
+  BorderColor #BF360C
+  BackgroundColor #FBE9E7
+  FontSize 11
+}
+skinparam arrow {
+  Color #333333
+  FontSize 10
+}
+
+' ─────────────────────────────────────────────
+' EXTERNAL SYSTEMS
+' ─────────────────────────────────────────────
+cloud "External Access Layer" as EAL {
+  component [External User / System] as ExtUser
+}
+
+cloud "External Systems" as ExtSys {
+  component [Inbound Email /\nMailbox System] as MailboxSys
+}
+
+' ─────────────────────────────────────────────
+' PROXY LAYER
+' ─────────────────────────────────────────────
+package "Proxy Layer" as ProxyLayer {
+  component [PlugIt Proxy\n(PI_ALLOWED_NETWORKS enforcement)] as Proxy
+  interface "PlugIt Proxy\nAPI Endpoint" as ProxyAPI
+  Proxy -- ProxyAPI
+}
+
+' ─────────────────────────────────────────────
+' SERVICE LAYER
+' ─────────────────────────────────────────────
+package "Service Layer" as ServiceLayer {
+  component [PlugIt Service\n(Instance 1)] as Service1
+  component [PlugIt Service\n(Instance N)] as ServiceN
+}
+
+' ─────────────────────────────────────────────
+' CONFIGURATION LAYER
+' ─────────────────────────────────────────────
+package "Configuration Layer" as ConfigLayer {
+  component [Service Configuration Manager\n(API_URL, SQLALCHEMY_URL,\nDEBUG, PI_BASE_URL,\nPI_ALLOWED_NETWORKS)] as ConfigMgr
+  component [Project Config File] as ProjCfg
+  component [Local / Private Config File\n(excluded from VCS)] as LocalCfg
+  ProjCfg --> ConfigMgr
+  LocalCfg --> ConfigMgr
+}
+
+' ─────────────────────────────────────────────
+' DATA LAYER
+' ─────────────────────────────────────────────
+package "Data Layer" as DataLayer {
+  database "Proxy-Side\nData Store" as ProxyDB
+  database "Service-Specific\nData Store\n(MySQL / SQLite)" as ServiceDB
+  component [Schema Migration Manager\n(Alembic — operator-invoked tool,\nversioned upgrade files)] as SchemaMgr
+  SchemaMgr --> ServiceDB : apply schema upgrades
+}
+
+' ─────────────────────────────────────────────
+' INTEGRATION / CLIENT LAYER
+' ─────────────────────────────────────────────
+package "Integration / Client Layer" as ClientLayer {
+  component [PlugIt API Client\n(users, subscription tags,\norganizations, project members,\nemail, forum topics)] as APIClient
+}
+
+' ─────────────────────────────────────────────
+' EXAMPLE MAIL WORKFLOW LAYER (standalone proxy scope only)
+' ─────────────────────────────────────────────
+package "Example Mail Workflow Layer" as MailLayer {
+  component [Mail Intake Handler] as MailIntake
+  component [Auto-Response Filter\n(x-auto-response-suppress,\nAuto-Submitted, precedence...)] as AutoFilter
+  component [Routing Token Validator\n(SHA-512 hash[30:42])] as TokenValidator
+  component [Mail Payload Extractor\n(first text part)] as PayloadExtractor
+  component [Mail Handler\n(routes decoded data +\ntext payload)] as MailHandler
+}
+
+' ─────────────────────────────────────────────
+' DEPENDENCIES / ARROWS
+' ─────────────────────────────────────────────
+
+' External access → Proxy
+ExtUser --> ProxyAPI : all external requests\n(no direct service access)
+
+' Proxy → Services (PlugIt protocol)
+Proxy --> Service1 : PlugIt protocol\nrouting
+Proxy --> ServiceN : PlugIt protocol\nrouting
+
+' Proxy ↔ Proxy-side data store (read and write)
+Proxy --> ProxyDB : persist proxy-level data
+ProxyDB --> Proxy : read proxy-level data
+
+' Configuration → Proxy (supplies PI_ALLOWED_NETWORKS, PI_BASE_URL, API_URL)
+ConfigMgr --> Proxy : supplies PI_ALLOWED_NETWORKS,\nPI_BASE_URL settings
+
+' Services → Configuration
+Service1 --> ConfigMgr : read deployment settings
+ServiceN --> ConfigMgr : read deployment settings
+
+' Services → Service data store
+Service1 --> ServiceDB : read / write
+ServiceN --> ServiceDB : read / write
+
+' Services → Schema Migration Manager (services trigger or rely on migrations)
+Service1 --> SchemaMgr : invoke schema migration\non model change
+ServiceN --> SchemaMgr : invoke schema migration\non model change
+
+' Configuration → API Client (API_URL initialization)
+ConfigMgr --> APIClient : supplies API_URL
+
+' Services → API Client (services use the API client)
+Service1 --> APIClient : call proxy APIs\nvia API client
+ServiceN --> APIClient : call proxy APIs\nvia API client
+
+' API Client → Proxy API
+APIClient --> ProxyAPI : all API requests\n(initialized with proxy URL)
+
+' Mail workflow pipeline
+MailboxSys --> MailIntake : deliver inbound email
+MailIntake --> AutoFilter : pass inbound message
+AutoFilter --> TokenValidator : message passes\nauto-response check
+TokenValidator --> PayloadExtractor : token validated
+PayloadExtractor --> MailHandler : routing data +\nextracted text payload
+MailHandler --> MailboxSys : success — acknowledge\nand remove message\nfrom mailbox
+
+@enduml

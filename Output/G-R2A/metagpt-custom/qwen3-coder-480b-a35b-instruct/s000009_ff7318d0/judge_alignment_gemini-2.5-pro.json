@@ -1,0 +1,165 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::S3"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Web Hosting::S3 Bucket",
+        "Presentation Layer::Web UI"
+      ],
+      "match_type": "1:2",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the S3 service for hosting the web frontend (as per C-003) and also created a logical node for the Web UI itself. The AI's `AWS Cloud::Web Hosting` and `Presentation Layer` boundaries are more specific and contextually appropriate than the GT's generic `Global` boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::API Gateway"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::API Management::API Gateway",
+        "API Layer::REST API"
+      ],
+      "match_type": "1:2",
+      "is_boundary_correct": true,
+      "reasoning": "The AI successfully matched the API Gateway, providing both the specific service node and an abstract functional node (REST API). The `API Layer` and `AWS Cloud::API Management` boundaries are semantically correct and more descriptive than the GT's `Global` placement."
+    },
+    {
+      "gt_nodes": [
+        "Global::Cognito"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Authentication::Cognito",
+        "AWS Cloud::Authentication::IAM",
+        "Authentication Layer::Auth Service"
+      ],
+      "match_type": "1:3",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified Cognito (C-005), reasonably included the related IAM service mentioned in the PRD (NFR-001), and provided an abstract 'Auth Service' representation. The `Authentication Layer` boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Fixtures Service::fixtures\\nLambda",
+        "Live Score Pipeline::live_score\\nLambda",
+        "Prediction Service::prediction\\nLambda",
+        "Recommendation Service::recommendation\\nLambda",
+        "Standing Service::standing\\nLambda"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Compute::Lambda Functions",
+        "Application Layer::Backend Logic"
+      ],
+      "match_type": "5:2",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated all specific Lambda functions mentioned across different GT services into a single 'Lambda Functions' node and an abstract 'Backend Logic' node. The AI's layer-based boundaries (`Application Layer`, `AWS Cloud::Compute`) are a valid architectural perspective compared to the GT's service-based boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::DynamoDB\\nLive Scores",
+        "Prediction Service::DynamoDB\\nPredictions",
+        "Standing Service::DynamoDB\\nStandings"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Data Storage::DynamoDB",
+        "Data Layer::User-Data Store"
+      ],
+      "match_type": "3:2",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the multiple specific uses of DynamoDB from the GT into a single service node and an abstract 'User-Data Store' node. The `Data Layer` and `AWS Cloud::Data Storage` boundaries are semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::Elasticsearch",
+        "Prediction Service::Elasticsearch",
+        "Standing Service::Elasticsearch"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Data Storage::Elasticsearch",
+        "Data Layer::Search Index"
+      ],
+      "match_type": "3:2",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the multiple uses of Elasticsearch into a single service node and an abstract 'Search Index' node. The `Data Layer` and `AWS Cloud::Data Storage` boundaries are semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Fixtures Service::SQS",
+        "Notification Service::SQS"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Messaging::SQS",
+        "Notification Layer::Message Queue"
+      ],
+      "match_type": "2:2",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated the SQS uses from different GT services and provided an abstract 'Message Queue' representation. The `Notification Layer` and `AWS Cloud::Messaging` boundaries are semantically correct for this component's function (C-006)."
+    },
+    {
+      "gt_nodes": [
+        "Notification Service::SNS"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Messaging::SNS",
+        "Notification Layer::Notifier",
+        "Application Layer::Reminder Handler"
+      ],
+      "match_type": "1:3",
+      "is_boundary_correct": true,
+      "reasoning": "The AI identified the SNS service, its abstract role ('Notifier'), and the business logic component that uses it ('Reminder Handler'). The `Notification Layer` and `Application Layer` boundaries are appropriate and consistent with the PRD (FR-005)."
+    },
+    {
+      "gt_nodes": [
+        "Prediction Service::SageMaker"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::AI-ML::SageMaker",
+        "AI-ML Layer::Prediction Engine"
+      ],
+      "match_type": "1:2",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the SageMaker service (C-007) and its abstract role as a 'Prediction Engine'. The `AI-ML Layer` is a semantically correct boundary."
+    },
+    {
+      "gt_nodes": [
+        "Recommendation Service::Lex"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Chatbot Interface"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The AI matched the chatbot functionality but made a severe boundary error. The GT's `Recommendation Service::Lex` is a backend conversational AI service, but the AI classified it as `Presentation Layer::Chatbot Interface`, confusing a backend component with a frontend one."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Streaming::EC2 Instance"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the EC2 instance. The AI's `AWS Cloud::Streaming` boundary accurately reflects the component's purpose as described in the PRD (FR-008, C-009)."
+    },
+    {
+      "gt_nodes": [
+        "Live Score Pipeline::EC2::Kafka",
+        "Live Score Pipeline::EC2::foot app"
+      ],
+      "predicted_nodes": [
+        "AWS Cloud::Streaming::EC2 Instance::Kafka-Avro Processor",
+        "Streaming Layer::Event Streamer"
+      ],
+      "match_type": "2:2",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified Kafka and the application running on EC2, merging them into a specific 'Kafka-Avro Processor' node and an abstract 'Event Streamer'. The `Streaming Layer` boundary is semantically correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::User",
+    "Live Score Pipeline::EC2::M4"
+  ],
+  "unmatched_predicted_nodes": [
+    "Presentation Layer::Live Scores Display"
+  ]
+}

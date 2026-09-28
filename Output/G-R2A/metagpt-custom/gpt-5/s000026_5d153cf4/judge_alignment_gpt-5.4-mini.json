@@ -1,0 +1,73 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Browser"
+      ],
+      "predicted_nodes": [
+        "Global::Web Clients"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the client/browser side consumers of the WebSocket endpoint. The boundary remains at the global/client-facing level."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine"
+      ],
+      "predicted_nodes": [
+        "Platform Environment::GCP Project::GKE Cluster",
+        "Platform Environment::GCP Project::GKE Cluster::Deployment & Scaling::Adapter Deployment",
+        "Platform Environment::GCP Project::GKE Cluster::Deployment & Scaling::Horizontal Pod Autoscaler (HPA",
+        "Platform Environment::GCP Project::GKE Cluster::Networking / Exposure::Kubernetes Service (LoadBalancer) (:80",
+        "Platform Environment::GCP Project::GKE Cluster::Runtime::Adapter Pod/Container",
+        "Platform Environment::GCP Project::GKE Cluster::Runtime::Adapter Pod/Container::RecentMessageCache (last 10",
+        "Platform Environment::GCP Project::GKE Cluster::Runtime::Adapter Pod/Container::exec.sh",
+        "Platform Environment::GCP Project::GKE Cluster::Runtime::Adapter Pod/Container::pulltop (Node.js",
+        "Platform Environment::GCP Project::GKE Cluster::Runtime::Adapter Pod/Container::websocketd (:8080"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is a broad runtime host/deployment container concept, while the predicted nodes decompose the same deployment/runtime into the GKE cluster, deployment, service, HPA, pod/container, and runtime elements. This is a semantically consistent split for the checked architecture."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine::pulltop"
+      ],
+      "predicted_nodes": [
+        "Platform Environment::GCP Project::GKE Cluster::Runtime::Adapter Pod/Container::pulltop (Node.js"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Node.js pulltop runtime process. The predicted nesting inside the adapter pod/container is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Your GCP project::Compute Engine::websocketd"
+      ],
+      "predicted_nodes": [
+        "Platform Environment::GCP Project::GKE Cluster::Runtime::Adapter Pod/Container::websocketd (:8080"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the websocketd bridge process, and the predicted runtime/container boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "pubsub-public-data project::Cloud Pub/Sub\\ntopic"
+      ],
+      "predicted_nodes": [
+        "Platform Environment::GCP Project::Google Cloud Pub/Sub"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the external Google Cloud Pub/Sub topic/source side. The predicted node is broader than the GT topic node, but still semantically aligned with the same Pub/Sub boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Platform Environment::GCP Project",
+    "Platform Environment::GCP Project::GKE Cluster::Configuration::Kubernetes ConfigMap (topic",
+    "Platform Environment::GCP Project::GKE Cluster::Configuration::Runtime Topic Parameter (SYMBOL"
+  ]
+}

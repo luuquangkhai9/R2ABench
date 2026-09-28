@@ -1,0 +1,98 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Flutter-based app::Android",
+        "Flutter-based app::Dart",
+        "Flutter-based app::MacOS",
+        "Flutter-based app::Web",
+        "Flutter-based app::iOS"
+      ],
+      "predicted_nodes": [
+        "Client Platforms::Flutter/Dart\nHome Recipes Client",
+        "Client Platforms::Flutter/Dart\nHome Recipes Client::Android",
+        "Client Platforms::Flutter/Dart\nHome Recipes Client::Web",
+        "Client Platforms::Flutter/Dart\nHome Recipes Client::iOS",
+        "Client Platforms::Flutter/Dart\nHome Recipes Client::macOS",
+        "Client Platforms::Generated Dart\nProtoBuf Client Code"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The multiple GT nodes representing the client application and its target platforms are correctly aggregated and detailed by the AI under a semantically equivalent 'Client Platforms' boundary. The AI also correctly inferred the 'Generated Dart ProtoBuf Client Code' as a key component from the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Hosted in Azure Kubernetes Service::Docker container::Recipes Server\n(gRPC Server)\nGolang"
+      ],
+      "predicted_nodes": [
+        "Backend Server Stack::Go gRPC Server",
+        "Backend Server Stack::Generated Go\ngRPC Server Code",
+        "Backend Server Stack::Go gRPC Server::Ingredient Service",
+        "Backend Server Stack::Go gRPC Server::Recipe Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT node for the gRPC server is correctly identified and expanded by the AI into the server itself, its logical services (Recipe, Ingredient), and the generated code component. The AI places this in a logical 'Backend Server Stack' boundary, which is a valid architectural grouping, differing from the GT's physical deployment nesting but not incorrect."
+    },
+    {
+      "gt_nodes": [
+        "Global::gRPC Gateway\n(HTTP-gRPC Proxy)\nGolang"
+      ],
+      "predicted_nodes": [
+        "Backend Server Stack::gRPC-Gateway\nMiddleware",
+        "Backend Server Stack::gRPC-Gateway\nMiddleware::GetAllIngredientsForRecipe\nHTTP Endpoint",
+        "Backend Server Stack::gRPC-Gateway\nMiddleware::ListAllIngredientsAtHome\nHTTP Endpoint",
+        "Backend Server Stack::gRPC-Gateway\nMiddleware::ListAllRecipes\nHTTP Endpoint",
+        "Backend Server Stack::gRPC-Gateway\nMiddleware::addRecipe\nHTTP Endpoint"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT gRPC Gateway node is correctly matched and split by the AI into the middleware component and its specific HTTP endpoints as described in the PRD. Placing it within the 'Backend Server Stack' is a more precise and logical grouping than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Hosted in Azure Kubernetes Service"
+      ],
+      "predicted_nodes": [
+        "Global::Azure Kubernetes Service (AKS",
+        "Azure Kubernetes Service (AKS::AKS Deployment\nManifests",
+        "Azure Kubernetes Service (AKS::Server Stack\nDeployment (AKS"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's single node for the AKS environment is matched and detailed by the AI, which correctly includes the deployment manifests and the deployed application instance within the AKS context. The boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Hosted in Azure Kubernetes Service::Docker container"
+      ],
+      "predicted_nodes": [
+        "Docker Runtime::Server Docker\nContainer Image"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's node representing a running container is matched to the AI's node for the container image artifact. These represent the same containerization concept. The AI's 'Docker Runtime' boundary is a valid logical separation from the deployment environment, which is an acceptable alternative to the GT's physical nesting."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Postman",
+    "Global::Test Client 1\\nNodeJS",
+    "Global::Test Client 2\\nGolang"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Code Generation Toolchain",
+    "Code Generation Toolchain::protoc-gen-dart\n(Dart Plugin",
+    "Code Generation Toolchain::protoc-gen-go\n(Go Plugin",
+    "Code Generation Toolchain::protoc-gen-grpc-gateway\n(Gateway Plugin",
+    "Code Generation Toolchain::protoc\n(Proto Compiler",
+    "Global::Local Kubernetes Cluster",
+    "Local Kubernetes Cluster::Kubernetes\nDeployment Manifests",
+    "Local Kubernetes Cluster::Server Stack\nDeployment (Local",
+    "Global::Protocol Buffers Contract\n(.proto definitions",
+    "Protocol Buffers Contract\n(.proto definitions::Message Definitions\n(Recipe, Ingredient,\nRequest/Response",
+    "Protocol Buffers Contract\n(.proto definitions::Service Definitions\n(Recipe & Ingredient",
+    "Global::Backend Server Stack",
+    "Global::Client Platforms",
+    "Global::Docker Runtime"
+  ]
+}

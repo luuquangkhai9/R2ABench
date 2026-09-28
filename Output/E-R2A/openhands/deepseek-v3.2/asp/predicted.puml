@@ -1,0 +1,131 @@
+@startuml
+' Requirements Review Checklist System Architecture
+' Generated from SRS for "Zhiyan Tongjie" requirements review
+
+skinparam componentStyle rectangle
+skinparam backgroundColor #F8F9FA
+skinparam arrowColor #333333
+skinparam component {
+  BackgroundColor #E3F2FD
+  BorderColor #1976D2
+  FontColor #0D47A1
+}
+skinparam rectangle {
+  BackgroundColor #FFF3E0
+  BorderColor #F57C00
+  FontColor #E65100
+}
+skinparam database {
+  BackgroundColor #E8F5E8
+  BorderColor #388E3C
+  FontColor #1B5E20
+}
+skinparam actor {
+  BackgroundColor #FCE4EC
+  BorderColor #C2185B
+  FontColor #880E4F
+}
+
+title Requirements Review Checklist System Architecture
+
+' === Actors/Users ===
+actor "Reviewer" as Reviewer <<User>>
+actor "Requirements Owner" as Owner <<User>>
+actor "Project Stakeholder" as Stakeholder <<User>>
+
+' === External Systems/Artifacts ===
+rectangle "External Requirements Documents" as RequirementsDoc <<External>> {
+  database "Software Requirements\nSpecification (SRS)" as SRS
+}
+
+rectangle "External Standards & References" as Standards <<External>> {
+  component "Industry Standards" as IndustryStd
+  component "Product Specifications" as ProductSpec
+  component "Business Specifications" as BusinessSpec
+  component "Documentation Norms" as DocNorms
+}
+
+' === Core Review Artifact ===
+component "Requirements Review\nChecklist Artifact" as ReviewArtifact <<Core>> {
+  database "Review Purpose & Basis" as ReviewPurpose
+  database "Checklist Items\n(Completeness, Understandability,\nModel Accuracy, Extension)" as ChecklistItems
+  database "Problem Report &\nImprovement Suggestions" as ProblemReport
+  database "Score Record\n(4x10 dimensions, 40 total)" as ScoreRecord
+  database "Review Metadata\n(Reviewer, Date)" as ReviewMetadata
+}
+
+' === Review Process Components ===
+package "Review Process Modules" as ReviewProcess {
+  component "Review Objectives\n& Basis Module" as ObjModule
+  component "Standards-Based\nReview Module" as StdModule
+  component "Completeness Review\nModule" as CompleteModule
+  component "Exception & Auxiliary\nReview Module" as ExceptionModule
+  component "Understandability\nReview Module" as UnderstandModule
+  component "Model Accuracy\nReview Module" as ModelModule
+  component "Extension & Improvement\nReview Module" as ExtensionModule
+  component "Problem Reporting\nModule" as ProblemModule
+  component "Scoring Module" as ScoringModule
+  component "Metadata Management\nModule" as MetadataModule
+}
+
+' === Data Flows ===
+' External inputs to review process
+RequirementsDoc --> ObjModule : "Requirements to Review"
+Standards --> StdModule : "Reference Standards"
+
+' Review process interactions with artifact
+ObjModule --> ReviewPurpose : "Defines Review Purpose"
+StdModule --> ReviewPurpose : "Adds Standards Basis"
+
+CompleteModule --> ChecklistItems : "Completeness Checks"
+ExceptionModule --> ChecklistItems : "Exception Coverage Checks"
+UnderstandModule --> ChecklistItems : "Understandability Checks"
+ModelModule --> ChecklistItems : "Model Accuracy Checks"
+ExtensionModule --> ChecklistItems : "Extension/Improvement Checks"
+
+ProblemModule --> ProblemReport : "Records Problems & Suggestions"
+ScoringModule --> ScoreRecord : "Records Dimension Scores"
+MetadataModule --> ReviewMetadata : "Records Reviewer & Date"
+
+' User interactions
+Reviewer --> ReviewProcess : "Performs Review"
+Reviewer --> ReviewArtifact : "Completes Checklist\nRecords Problems\nAssigns Scores"
+
+Owner <.. ReviewArtifact : "Receives Review Findings"
+Stakeholder <.. ReviewArtifact : "Consumes Review Results"
+
+' === Constraints ===
+note top of ReviewArtifact
+  **Constraints:**
+  - C-001: Uses requirements review/verification methods
+  - C-002: Considers industry/product/business/document standards
+  - C-003: 4x10 scoring dimensions, 40-point total
+  - C-004: Business requirements from external artifacts
+end note
+
+' === Key Interfaces ===
+interface "Markdown Format" as MarkdownFormat
+ReviewArtifact ..> MarkdownFormat : "Output Format"
+
+' === Verification & Acceptance ===
+rectangle "Verification & Acceptance" as Verification {
+  component "Inspection\n(FR-001 to FR-007, NFR-001 to NFR-004)" as Inspection
+  component "Demonstration\n(FR-008 to FR-010)" as Demonstration
+}
+
+ReviewArtifact --> Inspection : "Artifact Inspection"
+ReviewProcess --> Demonstration : "Process Demonstration"
+
+' === Legend ===
+legend right
+  | Color Legend |
+  <color:#E3F2FD>Core Components</color> |
+  <color:#FFF3E0>External Systems</color> |
+  <color:#E8F5E8>Data Storage</color> |
+  <color:#FCE4EC>Users/Actors</color> |
+  -- |
+  **Solid Arrow**: Data/Control Flow |
+  **Dotted Arrow**: Consumption/Reference |
+end legend
+
+@enduml

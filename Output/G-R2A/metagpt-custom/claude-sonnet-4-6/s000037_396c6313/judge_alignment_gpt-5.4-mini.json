@@ -1,0 +1,151 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::plugin"
+      ],
+      "predicted_nodes": [
+        "Plugin / Tool Layer::PythonPlugin\\nscan.py"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the plugin/tool-side Python example component. The predicted node is more specific, but it aligns with the GT plugin concept and stays within the correct plugin boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::runner"
+      ],
+      "predicted_nodes": [
+        "Execution / Infrastructure Layer::VeinmindRunner\\ncontainerized runner\\nparallel execution host"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node corresponds to the runner execution support in GT. The boundary is semantically consistent with infrastructure/execution."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::containerd"
+      ],
+      "predicted_nodes": [
+        "Container Runtimes::Containerd"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same container runtime component, with a semantically equivalent boundary name."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::docker"
+      ],
+      "predicted_nodes": [
+        "Container Runtimes::Docker"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same Docker runtime dependency, and the boundary attribution is equivalent."
+    },
+    {
+      "gt_nodes": [
+        "SDK::interact system",
+        "SDK::plugin system"
+      ],
+      "predicted_nodes": [
+        "External SDK::veinmind-sdk\\nlibveinmind"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT splits SDK concerns into interaction and plugin system nodes, while the prediction aggregates them into the underlying SDK/library family. This is a valid merge and the boundary placement is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::container"
+      ],
+      "predicted_nodes": [
+        "CLI / Entrypoint Layer::ScanContainerCommand\\nscan-container"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node describes the CLI command for container scanning, not the scan target itself. Although related, it is a different architectural concern and is placed in the wrong layer relative to the GT target node."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::image"
+      ],
+      "predicted_nodes": [
+        "CLI / Entrypoint Layer::ScanImageCommand\\nscan-image"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The prediction is the CLI entrypoint for image scanning rather than the image scan target node. The functional area is related, but the architectural node type and boundary differ from GT."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::iac"
+      ],
+      "predicted_nodes": [
+        "CLI / Entrypoint Layer::ScanIaCCommand\\nscan-iac",
+        "Plugin / Tool Layer::IaCScanTool\\npolicy loader + scanner",
+        "Policy Libraries::PolicyLibrary\\nexternal policy store",
+        "Reporting / Data Layer::IaCReportModel\\nrule metadata\\nfile-location details\\nalert-detail composite"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT IaC scan target is decomposed into command, tool, policy library, and reporting/data parts in the prediction. This is a reasonable structural split and the boundaries are consistent with the described responsibilities."
+    },
+    {
+      "gt_nodes": [
+        "Scan Targets::cluster"
+      ],
+      "predicted_nodes": [
+        "Execution / Infrastructure Layer::VeinmindRunner\\ncontainerized runner\\nparallel execution host"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT cluster target is not explicitly represented as a predicted node. The runner component supports execution, but it is not semantically equivalent to the cluster scan target."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::dockerfile"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node clearly corresponds to the Dockerfile input backend."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::kubernetes"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node clearly corresponds to the Kubernetes input backend."
+    },
+    {
+      "gt_nodes": [
+        "Infrastructure and Input Backends::tarball"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node clearly corresponds to the tarball input backend."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Infrastructure and Input Backends::dockerfile",
+    "Infrastructure and Input Backends::kubernetes",
+    "Infrastructure and Input Backends::tarball",
+    "Scan Targets::cluster"
+  ],
+  "unmatched_predicted_nodes": [
+    "Authorization Routing Layer::DockerAuthRouter\\nmethod + URI matching",
+    "CLI / Entrypoint Layer::ScanContainerCommand\\nscan-container",
+    "CLI / Entrypoint Layer::ScanIaCCommand\\nscan-iac",
+    "CLI / Entrypoint Layer::ScanImageCommand\\nscan-image",
+    "Image Registries::Docker Registry",
+    "Image Registries::DockerHub",
+    "Image Registries::Harbor",
+    "Reporting / Data Layer::IaCReportModel\\nrule metadata\\nfile-location details\\nalert-detail composite",
+    "Reporting / Data Layer::MaliciousFileReportModel\\nMaliciousFileInfo\\nReportData / ReportImage\\nReportLayer"
+  ]
+}

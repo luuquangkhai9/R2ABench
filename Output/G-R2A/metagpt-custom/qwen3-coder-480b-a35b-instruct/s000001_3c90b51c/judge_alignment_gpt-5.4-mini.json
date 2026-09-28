@@ -1,0 +1,108 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Result"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Result"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the allocation result object exchanged by the system. The GT places it at global scope, while the prediction classifies it as a data-layer artifact, which is semantically consistent for a model object."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tally"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Tally"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the tally data structure used as primary input to allocation. Moving it into a data layer is a reasonable and semantically equivalent boundary attribution."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::Parameters"
+      ],
+      "predicted_nodes": [
+        "Core Processing Layer::Configuration",
+        "Data Layer::Properties"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT configuration parameters are split into a core configuration node and a properties/data node. This reflects the PRD distinction between processor configuration and Java Properties, and does not indicate a severe boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::ResultDecorators"
+      ],
+      "predicted_nodes": [
+        "API Layer::ResultDecorator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "GT represents the configured result-decorator concept, while the prediction exposes the corresponding decorator interface. The boundary is acceptable as an API-layer contract."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::TallyFilters"
+      ],
+      "predicted_nodes": [
+        "API Layer::TallyFilter"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to tally filtering capability before allocation. The predicted API-layer placement is semantically aligned with the GT configuration element."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Processor::Decorate"
+      ],
+      "predicted_nodes": [
+        "API Layer::ResultDecorator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT decorate step corresponds to result decoration, which the prediction models as the decorator interface. This is semantically equivalent even though the architectural representation differs."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Processor::Filter"
+      ],
+      "predicted_nodes": [
+        "API Layer::TallyFilter"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT filter processing step matches the predicted tally filter API. The boundary attribution is consistent with a preprocessing interface."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Processor::Process"
+      ],
+      "predicted_nodes": [
+        "Core Processing Layer::Processor",
+        "API Layer::SeatAllocator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT processor node is decomposed into a processor core and a caller-facing seat allocator entry point. This split matches the PRD distinction between the allocation API and the underlying processing contract."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Seat Allocation Configuration::Seat Allocation\\nMethod",
+    "Seat Allocation Configuration::TieBreaker"
+  ],
+  "unmatched_predicted_nodes": [
+    "CLI Layer::CommandLineInterface",
+    "Global::Command Line Shell Environment",
+    "Global::Java Runtime Environment",
+    "Method Implementation Layer::EqualProportionsMethod",
+    "Method Implementation Layer::HighestAveragesMethod",
+    "Method Implementation Layer::LargestRemainderMethod",
+    "Method Implementation Layer::MajorityMethod",
+    "Method Implementation Layer::RankedMethod"
+  ]
+}

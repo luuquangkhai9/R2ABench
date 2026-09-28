@@ -1,0 +1,107 @@
+@startuml
+!define RECTANGLE class
+!define DATABASE rectangle
+!define COMPONENT rectangle
+!define INTERFACE rectangle
+
+' Title and Theme
+title EIVAS System Architecture
+
+' User Roles
+actor "Epidemiological\nForm Filler" as filler
+actor "Epidemiological\nAnalyst" as analyst
+
+' Frontend Layer
+RECTANGLE "Web Frontend" as frontend {
+  RECTANGLE "Reporting Form UI" as reportingUI
+  RECTANGLE "Case Management UI" as caseMgmtUI
+  RECTANGLE "Map Display UI" as mapUI
+  RECTANGLE "Association Display UI" as assocUI
+  RECTANGLE "Graph Relationship UI" as graphUI
+  RECTANGLE "Statistical Charts UI" as statsUI
+}
+
+' Backend Layer
+RECTANGLE "Backend Services" as backend {
+  RECTANGLE "Case Management Service" as caseService
+  RECTANGLE "Analysis Service" as analysisService
+  RECTANGLE "Data Processing Module" as dataModule
+  RECTANGLE "Algorithm Module" as algoModule
+}
+
+' Database Layer
+DATABASE "Database" as database {
+  RECTANGLE "Case Data Storage" as caseStorage
+  RECTANGLE "Itinerary Data Storage" as itineraryStorage
+  RECTANGLE "Association Data Storage" as assocStorage
+}
+
+' External Components
+COMPONENT "Map Service" as mapService
+COMPONENT "Authentication Service" as authService
+
+' Connections
+filler --> reportingUI : Enters case info
+analyst --> caseMgmtUI : Manages cases
+analyst --> mapUI : Views locations
+analyst --> assocUI : Reviews associations
+analyst --> graphUI : Analyzes relationships
+analyst --> statsUI : Views statistics
+
+reportingUI --> caseService : Submits data
+caseMgmtUI --> caseService : Queries data
+mapUI --> mapService : Displays maps
+assocUI --> analysisService : Requests associations
+graphUI --> analysisService : Requests graphs
+statsUI --> analysisService : Requests statistics
+
+caseService --> dataModule : Processes data
+analysisService --> dataModule : Retrieves data
+dataModule --> database : Stores/Retrieves
+algoModule --> analysisService : Performs analysis
+dataModule --> algoModule : Provides data
+
+database --> caseStorage : Case info
+database --> itineraryStorage : Itinerary data
+database --> assocStorage : Association data
+
+' Security Boundary
+note right of authService
+  Authentication & Authorization
+  Encrypts personal info queries
+  Rate limits frequent requests
+end note
+
+authService .. reportingUI
+authService .. caseMgmtUI
+authService .. mapUI
+authService .. assocUI
+authService .. graphUI
+authService .. statsUI
+
+' Non-functional Requirements Notes
+note top of backend
+  NFR-001: Robustness
+  NFR-002: Performance (100 concurrent users)
+  NFR-003: Failover within 20 minutes
+  NFR-007: Maintainable code architecture
+end note
+
+note bottom of database
+  NFR-004: Encrypted personal info queries
+  NFR-005: IP cooldown for frequent queries
+  DR-001 to DR-008: Data requirements
+end note
+
+note right of mapService
+  AD-003: Geographic visualization
+  Displays locations and paths
+end note
+
+note right of algoModule
+  AD-002: Generates flow maps
+  and clustering graphs
+  FR-012, FR-013: Regional flow
+  and clustering analysis
+end note
+@enduml

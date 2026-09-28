@@ -1,0 +1,288 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::Authorization Service",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Turing System::Authorization Middleware"
+      ],
+      "reasoning": "The predicted authorization middleware covers the GT authorization responsibility, though it is modeled as middleware rather than a standalone service."
+    },
+    {
+      "gt_node": "Global::Experimentation Service",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node represents experimentation or A/B testing functionality."
+    },
+    {
+      "gt_node": "Global::Machine Learning Platform\\nMLP API Server",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::MLflow Registry"
+      ],
+      "reasoning": "The GT node refers to the ML platform/API server used for model-related operations; the predicted MLflow Registry captures the closest related ML artifact source, but it is not a precise architectural match."
+    },
+    {
+      "gt_node": "Global::Monitoring and Alerting Service",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Jaeger Backend",
+        "Turing System::Jaeger Tracer"
+      ],
+      "reasoning": "The predicted Jaeger backend and tracer cover observability/tracing concerns, which overlap with the monitoring aspect of the GT node, though alerting is not explicitly represented."
+    },
+    {
+      "gt_node": "Global::Router Clients",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::API Clients"
+      ],
+      "reasoning": "API Clients is a direct semantic match for router clients consuming the HTTP API."
+    },
+    {
+      "gt_node": "Global::Router Endpoints",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Turing System::API Service"
+      ],
+      "reasoning": "The API Service represents the HTTP router endpoints exposed by the system."
+    },
+    {
+      "gt_node": "Global::Secret Store",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node corresponds to a secret storage component."
+    },
+    {
+      "gt_node": "Global::Turing User",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node explicitly represents the end user or operator role."
+    },
+    {
+      "gt_node": "Kubernetes Cluster::Istio",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "The predicted Kubernetes cluster and operator do not specifically capture Istio as a service mesh component."
+    },
+    {
+      "gt_node": "Kubernetes Cluster::Knative Controller",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Turing System::Kubernetes Operator"
+      ],
+      "reasoning": "The Kubernetes Operator is a reasonable semantic proxy for controller-like cluster orchestration, though it is not a precise Knative-specific match."
+    },
+    {
+      "gt_node": "Turing System::Database\\nPersistent storage for Router objects",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Turing System::Configuration Store"
+      ],
+      "reasoning": "Configuration Store is the closest storage-like predicted component and can partially cover persistence responsibilities, though it is not explicitly a router-object database."
+    },
+    {
+      "gt_node": "Turing System::Turing API Server\\nHTTP REST API to configure Routers",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Turing System::API Service"
+      ],
+      "reasoning": "API Service directly covers the HTTP REST API server responsible for router configuration."
+    },
+    {
+      "gt_node": "Turing System::Turing UI\\nWeb interface to configure Routers",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node represents a web UI for configuring routers."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Global::API Clients",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Router Clients",
+        "Global::Turing User"
+      ],
+      "reasoning": "This is grounded in the GT client/user-side actors consuming the API."
+    },
+    {
+      "predicted_node": "Global::Jaeger Backend",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Monitoring and Alerting Service"
+      ],
+      "reasoning": "Jaeger Backend is grounded in the GT observability/monitoring concept."
+    },
+    {
+      "predicted_node": "Global::Kubernetes Cluster",
+      "grounded": true,
+      "reference_nodes": [
+        "Kubernetes Cluster::Istio",
+        "Kubernetes Cluster::Knative Controller"
+      ],
+      "reasoning": "The Kubernetes cluster is explicitly present in the GT as the environment for cluster components."
+    },
+    {
+      "predicted_node": "Global::MLflow Registry",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Machine Learning Platform\\nMLP API Server"
+      ],
+      "reasoning": "MLflow Registry is grounded by the PRD dependency on an MLflow model registry for artifact download, although it is more specific than the GT node."
+    },
+    {
+      "predicted_node": "Turing System::API Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Turing System::Turing API Server\\nHTTP REST API to configure Routers",
+        "Global::Router Endpoints"
+      ],
+      "reasoning": "This is a clear grounding of the API server/endpoints responsibility."
+    },
+    {
+      "predicted_node": "Turing System::Authorization Middleware",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Authorization Service"
+      ],
+      "reasoning": "The middleware is a grounded implementation detail of the authorization responsibility."
+    },
+    {
+      "predicted_node": "Turing System::Configuration Store",
+      "grounded": true,
+      "reference_nodes": [
+        "Turing System::Database\\nPersistent storage for Router objects"
+      ],
+      "reasoning": "This is grounded as a storage/persistence-related component, though the exact storage semantics are not fully specified."
+    },
+    {
+      "predicted_node": "Turing System::Jaeger Tracer",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Monitoring and Alerting Service"
+      ],
+      "reasoning": "The tracer is grounded in the observability/monitoring requirement."
+    },
+    {
+      "predicted_node": "Turing System::Kubernetes Operator",
+      "grounded": true,
+      "reference_nodes": [
+        "Kubernetes Cluster::Knative Controller"
+      ],
+      "reasoning": "The operator is grounded as a controller/orchestration component in the Kubernetes management area."
+    },
+    {
+      "predicted_node": "Turing System::PyFuncEnsembler Runtime",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The PRD mentions a PyFuncEnsembler webservice/runtime, but the GT node list provided does not include this concept, so it is hallucinated relative to the reference nodes."
+    },
+    {
+      "predicted_node": "Turing System::Request Validator",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Authorization Service"
+      ],
+      "reasoning": "Request validation middleware is grounded by the middleware/validation requirement, though the GT only explicitly names authorization as a service."
+    },
+    {
+      "predicted_node": "Turing System::Router Manager",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node directly corresponds to a router manager component; this appears to be an inferred but ungrounded internal abstraction."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Authorization Service"
+      ],
+      "predicted_nodes": [
+        "Turing System::Authorization Middleware"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Functionally aligned, but the GT is a global service while the prediction places it inside Turing System as middleware; this is a boundary shift, though semantically related."
+    },
+    {
+      "gt_nodes": [
+        "Global::Machine Learning Platform\\nMLP API Server"
+      ],
+      "predicted_nodes": [
+        "Global::MLflow Registry"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both are in the global ML integration boundary and relate to ML model/artifact platform capabilities; the prediction is a specific external ML registry aligned with the GT's broader ML platform concept."
+    },
+    {
+      "gt_nodes": [
+        "Global::Monitoring and Alerting Service"
+      ],
+      "predicted_nodes": [
+        "Global::Jaeger Backend",
+        "Turing System::Jaeger Tracer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT observability node is split into backend and in-service tracer concerns, which are semantically consistent with the monitoring role."
+    },
+    {
+      "gt_nodes": [
+        "Global::Router Clients"
+      ],
+      "predicted_nodes": [
+        "Global::API Clients"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Direct semantic match of API consumers."
+    },
+    {
+      "gt_nodes": [
+        "Global::Router Endpoints",
+        "Turing System::Turing API Server\\nHTTP REST API to configure Routers"
+      ],
+      "predicted_nodes": [
+        "Turing System::API Service"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates endpoints and API server detail, while the prediction aggregates them into a single API service component with consistent system boundary placement."
+    },
+    {
+      "gt_nodes": [
+        "Kubernetes Cluster::Knative Controller"
+      ],
+      "predicted_nodes": [
+        "Turing System::Kubernetes Operator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both are controller-like orchestration components, but the GT places the component in the Kubernetes cluster boundary whereas the prediction places it inside Turing System, indicating a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Turing System::Database\\nPersistent storage for Router objects"
+      ],
+      "predicted_nodes": [
+        "Turing System::Configuration Store"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote persistence/storage inside the Turing System boundary, with a semantically similar storage responsibility."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Experimentation Service",
+    "Global::Secret Store",
+    "Global::Turing User",
+    "Kubernetes Cluster::Istio",
+    "Turing System::Turing UI\\nWeb interface to configure Routers"
+  ],
+  "unmatched_predicted_nodes": [
+    "Turing System::PyFuncEnsembler Runtime",
+    "Turing System::Router Manager"
+  ]
+}

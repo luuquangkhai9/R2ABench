@@ -1,0 +1,674 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Browser / Client Layer::Frontend Interface\\n(Bootstrap-Vue",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Client Layer\\n(Modern Browser::Vue + TypeScript SPA::Account UI\\n(Register / Login / Profile / Logout",
+        "Client Layer\\n(Modern Browser::Vue + TypeScript SPA::Admin UI\\n(Account Cancellation / Content Deletion",
+        "Client Layer\\n(Modern Browser::Vue + TypeScript SPA::Blog UI\\n(Articles / Comments",
+        "Client Layer\\n(Modern Browser::Vue + TypeScript SPA::Dataset UI\\n(Upload / Download / Manage",
+        "Client Layer\\n(Modern Browser::Vue + TypeScript SPA::Follow UI\\n(Follow / Unfollow / Follow List",
+        "Client Layer\\n(Modern Browser::Vue + TypeScript SPA::Model UI\\n(Upload / Browse / Invoke / Purchase\\n/ Recommendation Pool",
+        "Client Layer\\n(Modern Browser::Vue + TypeScript SPA::Q&A Community UI\\n(Questions / Answers",
+        "Client Layer\\n(Modern Browser::Vue + TypeScript SPA::i18n Module\\n(Chinese / English"
+      ],
+      "reasoning": "The GT frontend interface is covered by multiple client-side UI modules and the i18n module. The predicted nodes decompose the frontend into concrete SPA screens instead of a single generic interface."
+    },
+    {
+      "gt_node": "Database Layer\\n(MySQL::Blog Data",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Data Layer::MySQL Database::Blog & Comment Data\\n(DR-004 / DR-005"
+      ],
+      "reasoning": "The predicted storage node explicitly covers blog article and comment persistence, which matches the GT blog data responsibility."
+    },
+    {
+      "gt_node": "Database Layer\\n(MySQL::Dataset Data",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Data Layer::MySQL Database::Dataset Metadata\\n(DR-007",
+        "Data Layer::Dataset Files"
+      ],
+      "reasoning": "The GT dataset data responsibility is split into dataset metadata and dataset file storage in the prediction, which together cover the intended dataset storage scope."
+    },
+    {
+      "gt_node": "Database Layer\\n(MySQL::Following Data",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Data Layer::MySQL Database::Follow Relationship Data\\n(DR-008"
+      ],
+      "reasoning": "The predicted follow relationship storage directly corresponds to the GT following data node."
+    },
+    {
+      "gt_node": "Database Layer\\n(MySQL::Model Data",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Data Layer::MySQL Database::Model Data\\n(DR-006",
+        "Data Layer::Model Files"
+      ],
+      "reasoning": "The predicted nodes cover both model metadata and model file storage, which together match the GT model data responsibility."
+    },
+    {
+      "gt_node": "Database Layer\\n(MySQL::Q&A Community Data",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Data Layer::MySQL Database::Q&A Data\\n(DR-002 / DR-003"
+      ],
+      "reasoning": "The predicted Q&A data node covers both questions and answers, matching the GT community data scope."
+    },
+    {
+      "gt_node": "Database Layer\\n(MySQL::User Data",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Data Layer::MySQL Database::User Account Data\\n(DR-001"
+      ],
+      "reasoning": "The predicted user account data node covers registration, login, profile, and role information, matching the GT user data responsibility."
+    },
+    {
+      "gt_node": "Server Layer\\n(Spring Boot::Core Modules::Account Management Module",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Application Layer\\n(Spring Boot::Business Services::Account Service\\n(FR-001 to FR-005"
+      ],
+      "reasoning": "The predicted account service covers registration, login, password recovery, profile modification, and logout, matching the GT account management module."
+    },
+    {
+      "gt_node": "Server Layer\\n(Spring Boot::Core Modules::Admin Module",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Application Layer\\n(Spring Boot::Business Services::Admin Service\\n(FR-031 to FR-032"
+      ],
+      "reasoning": "The predicted admin service covers account cancellation and illegal content deletion, matching the GT admin module."
+    },
+    {
+      "gt_node": "Server Layer\\n(Spring Boot::Core Modules::Blog Sharing Module",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Application Layer\\n(Spring Boot::Business Services::Blog Service\\n(FR-012 to FR-017"
+      ],
+      "reasoning": "The predicted blog service covers articles and comments publishing/modification/deletion, matching the GT blog sharing module."
+    },
+    {
+      "gt_node": "Server Layer\\n(Spring Boot::Core Modules::Dataset Management Module",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Application Layer\\n(Spring Boot::Business Services::Dataset Service\\n(FR-025 to FR-028"
+      ],
+      "reasoning": "The predicted dataset service covers upload, download, delete, and modify dataset operations, matching the GT dataset management module."
+    },
+    {
+      "gt_node": "Server Layer\\n(Spring Boot::Core Modules::Following Management Module",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Application Layer\\n(Spring Boot::Business Services::Follow Service\\n(FR-029 to FR-030"
+      ],
+      "reasoning": "The predicted follow service covers follow and unfollow operations, matching the GT following management module."
+    },
+    {
+      "gt_node": "Server Layer\\n(Spring Boot::Core Modules::Model Management Module",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Application Layer\\n(Spring Boot::Business Services::Model Service\\n(FR-018 to FR-024",
+        "Application Layer\\n(Spring Boot::Business Services::Model Invocation Service\\n(FR-022",
+        "Application Layer\\n(Spring Boot::Business Services::Recommendation Service\\n(FR-023 / NFR-015",
+        "Application Layer\\n(Spring Boot::Business Services::Payment Service\\n(FR-024",
+        "Application Layer\\n(Spring Boot::Business Services::Review Workflow\\n(FR-018"
+      ],
+      "reasoning": "The GT model management responsibility is split across several predicted services: model CRUD/upload, online invocation, recommendation, payment, and review workflow. Together they cover the module."
+    },
+    {
+      "gt_node": "Server Layer\\n(Spring Boot::Core Modules::Q&A Community Module",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Application Layer\\n(Spring Boot::Business Services::Q&A Service\\n(FR-006 to FR-011"
+      ],
+      "reasoning": "The predicted Q&A service covers question and answer publishing, modification, and deletion, matching the GT Q&A community module."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Application Layer\\n(Spring Boot::API Gateway / Security Filter::Authentication & Authorization\\n(Session / Token Validation",
+      "grounded": true,
+      "reference_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Account Management Module",
+        "Server Layer\\n(Spring Boot::Core Modules::Admin Module"
+      ],
+      "reasoning": "Authentication and authorization are grounded in the account login/logout and administrator access requirements, though the GT does not explicitly separate them as a standalone node."
+    },
+    {
+      "predicted_node": "Application Layer\\n(Spring Boot::API Gateway / Security Filter::Input Validation &\\nInjection Prevention",
+      "grounded": true,
+      "reference_nodes": [
+        "NFR-001",
+        "NFR-002",
+        "Server Layer\\n(Spring Boot::Core Modules::Account Management Module",
+        "Server Layer\\n(Spring Boot::Core Modules::Blog Sharing Module",
+        "Server Layer\\n(Spring Boot::Core Modules::Dataset Management Module",
+        "Server Layer\\n(Spring Boot::Core Modules::Model Management Module",
+        "Server Layer\\n(Spring Boot::Core Modules::Q&A Community Module"
+      ],
+      "reasoning": "Input validation and injection prevention are explicitly supported by security and validation requirements in the PRD, so the node is grounded."
+    },
+    {
+      "predicted_node": "Application Layer\\n(Spring Boot::Business Services::Account Service\\n(FR-001 to FR-005",
+      "grounded": true,
+      "reference_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Account Management Module",
+        "Database Layer\\n(MySQL::User Data"
+      ],
+      "reasoning": "This service directly implements account management responsibilities from the GT and PRD."
+    },
+    {
+      "predicted_node": "Application Layer\\n(Spring Boot::Business Services::Admin Service\\n(FR-031 to FR-032",
+      "grounded": true,
+      "reference_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Admin Module",
+        "Database Layer\\n(MySQL::User Data"
+      ],
+      "reasoning": "The admin service is grounded in administrator governance requirements."
+    },
+    {
+      "predicted_node": "Application Layer\\n(Spring Boot::Business Services::Blog Service\\n(FR-012 to FR-017",
+      "grounded": true,
+      "reference_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Blog Sharing Module",
+        "Database Layer\\n(MySQL::Blog Data"
+      ],
+      "reasoning": "The blog service is directly grounded in blog article and comment requirements."
+    },
+    {
+      "predicted_node": "Application Layer\\n(Spring Boot::Business Services::Dataset Service\\n(FR-025 to FR-028",
+      "grounded": true,
+      "reference_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Dataset Management Module",
+        "Database Layer\\n(MySQL::Dataset Data"
+      ],
+      "reasoning": "The dataset service is grounded in dataset upload, download, deletion, and modification requirements."
+    },
+    {
+      "predicted_node": "Application Layer\\n(Spring Boot::Business Services::Follow Service\\n(FR-029 to FR-030",
+      "grounded": true,
+      "reference_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Following Management Module",
+        "Database Layer\\n(MySQL::Following Data"
+      ],
+      "reasoning": "The follow service is grounded in follow/unfollow functionality."
+    },
+    {
+      "predicted_node": "Application Layer\\n(Spring Boot::Business Services::Model Invocation Service\\n(FR-022",
+      "grounded": true,
+      "reference_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Model Management Module",
+        "Database Layer\\n(MySQL::Model Data"
+      ],
+      "reasoning": "Model online invocation is an explicit requirement and part of model management."
+    },
+    {
+      "predicted_node": "Application Layer\\n(Spring Boot::Business Services::Model Service\\n(FR-018 to FR-024",
+      "grounded": true,
+      "reference_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Model Management Module",
+        "Database Layer\\n(MySQL::Model Data"
+      ],
+      "reasoning": "This is well grounded in the model management functionality, including upload, browse, purchase, and related operations."
+    },
+    {
+      "predicted_node": "Application Layer\\n(Spring Boot::Business Services::Notification Service\\n(Email / Alerts",
+      "grounded": true,
+      "reference_nodes": [
+        "FR-003",
+        "FR-006",
+        "FR-009",
+        "FR-012",
+        "FR-015",
+        "FR-018",
+        "FR-019",
+        "FR-024",
+        "FR-031",
+        "FR-032"
+      ],
+      "reasoning": "Notifications are grounded by password recovery email and various prompt/feedback behaviors in the PRD, though the GT does not isolate them as a separate module."
+    },
+    {
+      "predicted_node": "Application Layer\\n(Spring Boot::Business Services::Payment Service\\n(FR-024",
+      "grounded": true,
+      "reference_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Model Management Module",
+        "External Services::Payment Gateway\\n(Model Purchase"
+      ],
+      "reasoning": "Payment is grounded by model purchase requirements and the external payment interface context."
+    },
+    {
+      "predicted_node": "Application Layer\\n(Spring Boot::Business Services::Q&A Service\\n(FR-006 to FR-011",
+      "grounded": true,
+      "reference_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Q&A Community Module",
+        "Database Layer\\n(MySQL::Q&A Community Data"
+      ],
+      "reasoning": "The Q&A service directly corresponds to the GT Q&A community module."
+    },
+    {
+      "predicted_node": "Application Layer\\n(Spring Boot::Business Services::Recommendation Service\\n(FR-023 / NFR-015",
+      "grounded": true,
+      "reference_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Model Management Module",
+        "Database Layer\\n(MySQL::Model Data",
+        "DR-009"
+      ],
+      "reasoning": "Model recommendation is explicitly required and grounded in browsing history and registration information."
+    },
+    {
+      "predicted_node": "Application Layer\\n(Spring Boot::Business Services::Review Workflow\\n(FR-018",
+      "grounded": true,
+      "reference_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Model Management Module"
+      ],
+      "reasoning": "Model review is mentioned in the PRD as part of upload flow, so the review workflow is grounded even though the exact process is unspecified."
+    },
+    {
+      "predicted_node": "Client Layer\\n(Modern Browser::Vue + TypeScript SPA::Account UI\\n(Register / Login / Profile / Logout",
+      "grounded": true,
+      "reference_nodes": [
+        "Browser / Client Layer::Frontend Interface\\n(Bootstrap-Vue"
+      ],
+      "reasoning": "This UI is a concrete implementation of the frontend interface and matches the account-related UI requirements."
+    },
+    {
+      "predicted_node": "Client Layer\\n(Modern Browser::Vue + TypeScript SPA::Admin UI\\n(Account Cancellation / Content Deletion",
+      "grounded": true,
+      "reference_nodes": [
+        "Browser / Client Layer::Frontend Interface\\n(Bootstrap-Vue"
+      ],
+      "reasoning": "The admin UI is grounded in the administrator interface and governance functions."
+    },
+    {
+      "predicted_node": "Client Layer\\n(Modern Browser::Vue + TypeScript SPA::Blog UI\\n(Articles / Comments",
+      "grounded": true,
+      "reference_nodes": [
+        "Browser / Client Layer::Frontend Interface\\n(Bootstrap-Vue"
+      ],
+      "reasoning": "This is a concrete frontend module for blog functionality."
+    },
+    {
+      "predicted_node": "Client Layer\\n(Modern Browser::Vue + TypeScript SPA::Dataset UI\\n(Upload / Download / Manage",
+      "grounded": true,
+      "reference_nodes": [
+        "Browser / Client Layer::Frontend Interface\\n(Bootstrap-Vue"
+      ],
+      "reasoning": "This UI is grounded in dataset interface requirements."
+    },
+    {
+      "predicted_node": "Client Layer\\n(Modern Browser::Vue + TypeScript SPA::Follow UI\\n(Follow / Unfollow / Follow List",
+      "grounded": true,
+      "reference_nodes": [
+        "Browser / Client Layer::Frontend Interface\\n(Bootstrap-Vue"
+      ],
+      "reasoning": "The follow UI is grounded in follow management requirements."
+    },
+    {
+      "predicted_node": "Client Layer\\n(Modern Browser::Vue + TypeScript SPA::Model UI\\n(Upload / Browse / Invoke / Purchase\\n/ Recommendation Pool",
+      "grounded": true,
+      "reference_nodes": [
+        "Browser / Client Layer::Frontend Interface\\n(Bootstrap-Vue"
+      ],
+      "reasoning": "The model UI is grounded in model upload, browse, invoke, purchase, and recommendation requirements."
+    },
+    {
+      "predicted_node": "Client Layer\\n(Modern Browser::Vue + TypeScript SPA::Q&A Community UI\\n(Questions / Answers",
+      "grounded": true,
+      "reference_nodes": [
+        "Browser / Client Layer::Frontend Interface\\n(Bootstrap-Vue"
+      ],
+      "reasoning": "The Q&A community UI is grounded in the Q&A interface requirements."
+    },
+    {
+      "predicted_node": "Client Layer\\n(Modern Browser::Vue + TypeScript SPA::i18n Module\\n(Chinese / English",
+      "grounded": true,
+      "reference_nodes": [
+        "NFR-012"
+      ],
+      "reasoning": "The multilingual interface requirement explicitly supports Chinese and English switching."
+    },
+    {
+      "predicted_node": "Data Layer::Dataset Files",
+      "grounded": true,
+      "reference_nodes": [
+        "Database Layer\\n(MySQL::Dataset Data",
+        "DR-007"
+      ],
+      "reasoning": "Dataset file storage is grounded by the dataset requirements, even though the GT database node is more aggregated."
+    },
+    {
+      "predicted_node": "Data Layer::Model Files",
+      "grounded": true,
+      "reference_nodes": [
+        "Database Layer\\n(MySQL::Model Data",
+        "DR-006"
+      ],
+      "reasoning": "Model file storage is grounded by model data requirements."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database",
+      "grounded": true,
+      "reference_nodes": [
+        "Database Layer\\n(MySQL::Blog Data",
+        "Database Layer\\n(MySQL::Dataset Data",
+        "Database Layer\\n(MySQL::Following Data",
+        "Database Layer\\n(MySQL::Model Data",
+        "Database Layer\\n(MySQL::Q&A Community Data",
+        "Database Layer\\n(MySQL::User Data"
+      ],
+      "reasoning": "The generic MySQL database node is grounded as a container for the GT MySQL-backed storage concepts."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database::Admin Governance Data\\n(DR-010",
+      "grounded": true,
+      "reference_nodes": [
+        "DR-010",
+        "Server Layer\\n(Spring Boot::Core Modules::Admin Module"
+      ],
+      "reasoning": "Administrator governance data is grounded in the PRD's admin deletion and account cancellation requirements."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database::Blog & Comment Data\\n(DR-004 / DR-005",
+      "grounded": true,
+      "reference_nodes": [
+        "Database Layer\\n(MySQL::Blog Data",
+        "DR-004",
+        "DR-005"
+      ],
+      "reasoning": "This is directly grounded in blog article and comment data requirements."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database::Dataset Metadata\\n(DR-007",
+      "grounded": true,
+      "reference_nodes": [
+        "Database Layer\\n(MySQL::Dataset Data",
+        "DR-007"
+      ],
+      "reasoning": "Dataset metadata is grounded in dataset storage requirements."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database::Follow Relationship Data\\n(DR-008",
+      "grounded": true,
+      "reference_nodes": [
+        "Database Layer\\n(MySQL::Following Data",
+        "DR-008"
+      ],
+      "reasoning": "Follow relationship data is directly grounded in the PRD."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database::Model Data\\n(DR-006",
+      "grounded": true,
+      "reference_nodes": [
+        "Database Layer\\n(MySQL::Model Data",
+        "DR-006"
+      ],
+      "reasoning": "Model data is directly grounded in the GT and PRD."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database::Q&A Data\\n(DR-002 / DR-003",
+      "grounded": true,
+      "reference_nodes": [
+        "Database Layer\\n(MySQL::Q&A Community Data",
+        "DR-002",
+        "DR-003"
+      ],
+      "reasoning": "Q&A data is grounded in question and answer storage requirements."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database::Recommendation Data\\n(DR-009",
+      "grounded": true,
+      "reference_nodes": [
+        "DR-009",
+        "NFR-015"
+      ],
+      "reasoning": "Recommendation data is grounded by the recommendation requirement and browsing-history-based recommendation logic."
+    },
+    {
+      "predicted_node": "Data Layer::MySQL Database::User Account Data\\n(DR-001",
+      "grounded": true,
+      "reference_nodes": [
+        "Database Layer\\n(MySQL::User Data",
+        "DR-001"
+      ],
+      "reasoning": "User account data is directly grounded by the account management data requirements."
+    },
+    {
+      "predicted_node": "External Services::Email Service\\n(Password Recovery / Notifications",
+      "grounded": true,
+      "reference_nodes": [
+        "FR-003",
+        "Application Layer\\n(Spring Boot::Business Services::Notification Service\\n(Email / Alerts"
+      ],
+      "reasoning": "Email service is grounded by password recovery email and notification behavior."
+    },
+    {
+      "predicted_node": "External Services::Payment Gateway\\n(Model Purchase",
+      "grounded": true,
+      "reference_nodes": [
+        "FR-024",
+        "Application Layer\\n(Spring Boot::Business Services::Payment Service\\n(FR-024"
+      ],
+      "reasoning": "Payment gateway is grounded by the model purchase flow."
+    },
+    {
+      "predicted_node": "Global::Application Layer\\n(Spring Boot",
+      "grounded": true,
+      "reference_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Account Management Module",
+        "Server Layer\\n(Spring Boot::Core Modules::Admin Module",
+        "Server Layer\\n(Spring Boot::Core Modules::Blog Sharing Module",
+        "Server Layer\\n(Spring Boot::Core Modules::Dataset Management Module",
+        "Server Layer\\n(Spring Boot::Core Modules::Following Management Module",
+        "Server Layer\\n(Spring Boot::Core Modules::Model Management Module",
+        "Server Layer\\n(Spring Boot::Core Modules::Q&A Community Module"
+      ],
+      "reasoning": "The generic Spring Boot application layer is grounded as a parent abstraction over all backend modules."
+    },
+    {
+      "predicted_node": "Global::Client Layer\\n(Modern Browser",
+      "grounded": true,
+      "reference_nodes": [
+        "Browser / Client Layer::Frontend Interface\\n(Bootstrap-Vue"
+      ],
+      "reasoning": "The generic client layer is grounded as a parent abstraction over the frontend."
+    },
+    {
+      "predicted_node": "Global::Data Layer",
+      "grounded": true,
+      "reference_nodes": [
+        "Database Layer\\n(MySQL::Blog Data",
+        "Database Layer\\n(MySQL::Dataset Data",
+        "Database Layer\\n(MySQL::Following Data",
+        "Database Layer\\n(MySQL::Model Data",
+        "Database Layer\\n(MySQL::Q&A Community Data",
+        "Database Layer\\n(MySQL::User Data",
+        "Data Layer::Dataset Files",
+        "Data Layer::Model Files"
+      ],
+      "reasoning": "The generic data layer is grounded as a parent abstraction for persistent data/storage nodes."
+    },
+    {
+      "predicted_node": "Global::External Services",
+      "grounded": true,
+      "reference_nodes": [
+        "External Services::Email Service\\n(Password Recovery / Notifications",
+        "External Services::Payment Gateway\\n(Model Purchase"
+      ],
+      "reasoning": "The generic external services layer is grounded by the email and payment integrations."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Browser / Client Layer::Frontend Interface\\n(Bootstrap-Vue"
+      ],
+      "predicted_nodes": [
+        "Client Layer\\n(Modern Browser::Vue + TypeScript SPA::Account UI\\n(Register / Login / Profile / Logout",
+        "Client Layer\\n(Modern Browser::Vue + TypeScript SPA::Admin UI\\n(Account Cancellation / Content Deletion",
+        "Client Layer\\n(Modern Browser::Vue + TypeScript SPA::Blog UI\\n(Articles / Comments",
+        "Client Layer\\n(Modern Browser::Vue + TypeScript SPA::Dataset UI\\n(Upload / Download / Manage",
+        "Client Layer\\n(Modern Browser::Vue + TypeScript SPA::Follow UI\\n(Follow / Unfollow / Follow List",
+        "Client Layer\\n(Modern Browser::Vue + TypeScript SPA::Model UI\\n(Upload / Browse / Invoke / Purchase\\n/ Recommendation Pool",
+        "Client Layer\\n(Modern Browser::Vue + TypeScript SPA::Q&A Community UI\\n(Questions / Answers",
+        "Client Layer\\n(Modern Browser::Vue + TypeScript SPA::i18n Module\\n(Chinese / English"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The frontend GT node is decomposed into concrete client modules. The client-layer attribution is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Blog Data"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL Database::Blog & Comment Data\\n(DR-004 / DR-005"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Blog data matches the blog/comment persistence node, and the MySQL database boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Dataset Data"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL Database::Dataset Metadata\\n(DR-007",
+        "Data Layer::Dataset Files"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Dataset data is split into metadata and files; both remain within the data/database boundary semantically."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Following Data"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL Database::Follow Relationship Data\\n(DR-008"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Follow relationship storage corresponds directly to following data."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Model Data"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL Database::Model Data\\n(DR-006",
+        "Data Layer::Model Files"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Model data is split into metadata and files, which is semantically consistent with the GT model storage scope."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::Q&A Community Data"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL Database::Q&A Data\\n(DR-002 / DR-003"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Q&A community data maps directly to Q&A data."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\\n(MySQL::User Data"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL Database::User Account Data\\n(DR-001"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "User data maps directly to user account data."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Account Management Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer\\n(Spring Boot::Business Services::Account Service\\n(FR-001 to FR-005"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The account service faithfully implements the GT account management module within the backend/application boundary."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Admin Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer\\n(Spring Boot::Business Services::Admin Service\\n(FR-031 to FR-032"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Admin governance is correctly represented by the admin service."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Blog Sharing Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer\\n(Spring Boot::Business Services::Blog Service\\n(FR-012 to FR-017"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Blog sharing responsibilities are preserved in the blog service."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Dataset Management Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer\\n(Spring Boot::Business Services::Dataset Service\\n(FR-025 to FR-028"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Dataset management responsibilities are preserved in the dataset service."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Following Management Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer\\n(Spring Boot::Business Services::Follow Service\\n(FR-029 to FR-030"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Following management is correctly represented by the follow service."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Model Management Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer\\n(Spring Boot::Business Services::Model Service\\n(FR-018 to FR-024",
+        "Application Layer\\n(Spring Boot::Business Services::Model Invocation Service\\n(FR-022",
+        "Application Layer\\n(Spring Boot::Business Services::Recommendation Service\\n(FR-023 / NFR-015",
+        "Application Layer\\n(Spring Boot::Business Services::Payment Service\\n(FR-024",
+        "Application Layer\\n(Spring Boot::Business Services::Review Workflow\\n(FR-018"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT model module is split into multiple backend services, but all remain within the appropriate backend/application boundary."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\\n(Spring Boot::Core Modules::Q&A Community Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer\\n(Spring Boot::Business Services::Q&A Service\\n(FR-006 to FR-011"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Q&A community responsibilities are correctly captured by the Q&A service."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

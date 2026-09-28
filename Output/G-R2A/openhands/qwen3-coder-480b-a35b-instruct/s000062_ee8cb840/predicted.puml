@@ -1,0 +1,94 @@
+@startuml
+!define RECTANGLE rectangle linewidth 1
+
+skinparam componentStyle rectangle
+skinparam defaultTextAlignment center
+skinparam shadowing false
+skinparam noteFontSize 10
+
+title Udacity Self-Driving Car System Architecture
+
+package "ROS Environment" {
+  [Docker Container] as docker #LightBlue
+  
+  package "Perception Subsystem" {
+    [Traffic Light\nDetection] as tld #LightGreen
+    [Traffic Light\nClassification] as tlc #LightGreen
+    [Waypoint Loader] as wl #LightGreen
+  }
+  
+  package "Planning Subsystem" {
+    [Waypoint\nUpdater] as wu #LightYellow
+    [Final Waypoint\nGenerator] as fwg #LightYellow
+  }
+  
+  package "Control Subsystem" {
+    [Waypoint Follower] as wf #LightPink
+    [Drive-by-Wire\nController] as dbw #LightPink
+  }
+  
+  package "External Interfaces" {
+    [Udacity Simulator] as sim #LightGray
+    [Training Bag\nPlayback] as bag #LightGray
+  }
+}
+
+'data flows
+sim --> wl : current_pose
+sim --> wl : base_waypoints
+wl --> fwg : base_waypoints
+tlc --> fwg : traffic_waypoint
+fwg --> wf : final_waypoints
+wf --> dbw : twist_command
+dbw --> sim : vehicle_command
+bag --> tld : camera_images
+tld --> tlc : detected_light
+tlc --> fwg : traffic_waypoint
+
+note right of Perception
+  Processes sensor data
+  Detects and classifies traffic lights
+  Loads waypoints
+end note
+
+note right of Planning
+  Updates waypoints based on
+  traffic conditions
+  Generates final trajectory
+end note
+
+note right of Control
+  Controls vehicle actuators
+  Throttle, steering, braking
+end note
+
+note right of docker
+  Contains all ROS nodes
+  Launched via styx.launch or site.launch
+end note
+
+note bottom of sim
+  Udacity Capstone Project Simulator
+  Used for testing and evaluation
+end note
+
+note bottom of bag
+  Recorded training data
+  For real-world testing
+end note
+
+rectangle "Launch Files" as launch {
+  [styx.launch] as styx
+  [site.launch] as site
+}
+
+styx ..> docker : simulator mode
+site ..> docker : site mode
+
+note right of launch
+  Entry points for system execution
+  styx.launch: simulator testing
+  site.launch: real-world testing
+end note
+
+@enduml

@@ -1,0 +1,148 @@
+@startuml
+!define RECTANGLE class
+!define DATABASE rectangle
+!define COMPONENT rectangle
+!define INTERFACE rectangle
+
+' Title and Theme
+title AI-Driven Text Adventure Game and Community Platform - System Architecture
+
+' Technology Stack Components
+package "Client Layer" {
+  RECTANGLE VueJS [
+    Vue.js
+    ----
+    Frontend Framework
+  ]
+  
+  RECTANGLE NuxtJS [
+    Nuxt.js
+    ----
+    Server-Side Rendering
+  ]
+}
+
+package "Application Layer" {
+  RECTANGLE Iris [
+    Iris Framework
+    ----
+    Go Web Framework
+    MVC, Middleware, Session Management
+  ]
+  
+  RECTANGLE Gorm [
+    Gorm ORM
+    ----
+    Database Abstraction
+  ]
+}
+
+package "Data Layer" {
+  DATABASE MySQL [
+    MySQL Database
+    ----
+    Relational Data Storage
+  ]
+}
+
+package "Infrastructure Layer" {
+  COMPONENT Docker [
+    Docker Containers
+    ----
+    Application Containerization
+  ]
+  
+  COMPONENT Kubernetes [
+    Kubernetes
+    ----
+    Container Orchestration
+  ]
+}
+
+package "AI Services" {
+  RECTANGLE LLM [
+    Large Language Model
+    ----
+    Dynamic Plot Generation
+    Random Events
+    Decision Effects
+  ]
+}
+
+' Main System Components
+package "Core Systems" {
+  RECTANGLE GameSystem [
+    Game System
+    ----
+    New Games
+    Background Setup
+    Save Management
+    Choice-Based Progression
+    Save Sharing
+  ]
+  
+  RECTANGLE CommunitySystem [
+    Community System
+    ----
+    Posts
+    Comments
+    Replies
+    Search
+    Recommendations
+  ]
+  
+  RECTANGLE UserSystem [
+    User System
+    ----
+    Registration
+    Login/Logout
+    Profile Management
+    Password Recovery
+  ]
+  
+  RECTANGLE AdminSystem [
+    Administration System
+    ----
+    User Management
+    Post Governance
+    Content Review
+  ]
+  
+  RECTANGLE FavoritesSystem [
+    Favorites System
+    ----
+    Post Favoriting
+    Favorite Management
+  ]
+  
+  RECTANGLE NotificationSystem [
+    Notification System
+    ----
+    Comment Notifications
+    Reply Notifications
+    Review Status Updates
+  ]
+}
+
+' Relationships
+VueJS --> NuxtJS : Uses
+NuxtJS --> Iris : API Calls
+Iris --> Gorm : Data Access
+Gorm --> MySQL : Database Operations
+Iris --> LLM : Model Reasoning
+GameSystem --> LLM : Plot/Event Generation
+GameSystem --> UserSystem : User Context
+CommunitySystem --> UserSystem : User Authentication
+AdminSystem --> UserSystem : Admin Authentication
+AdminSystem --> CommunitySystem : Content Moderation
+CommunitySystem --> FavoritesSystem : Post Favoriting
+CommunitySystem --> NotificationSystem : Event Triggering
+FavoritesSystem --> UserSystem : User Context
+NotificationSystem --> UserSystem : User Notifications
+
+' Infrastructure Connections
+Iris --> Docker : Containerized
+Docker --> Kubernetes : Orchestration
+Kubernetes --> MySQL : Database Hosting
+
+@enduml

@@ -1,0 +1,90 @@
+@startuml
+title Requirements Review Checklist - Architecture View
+
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+skinparam defaultFontName Arial
+left to right direction
+
+' Users (represented as components with <<User>> stereotype)
+component "Reviewer" <<User>> as Reviewer
+component "Requirements Owner" <<User>> as Owner
+component "Project Stakeholder" <<User>> as Stakeholder
+
+' External Sources
+artifact "Requirements Document\n(under review)" as ReqDoc
+folder "Standards & Specifications\n(industry, product, business, documentation)" as Standards
+
+' Main Artifact
+package "Requirements Review Artifact\n(Markdown Checklist)" as Artifact {
+  component "Objective & Basis Section" as ObjBasis
+  component "Completeness Check" as CheckCompleteness
+  component "Exception & Auxiliary Coverage Check" as CheckExceptions
+  component "Understandability Check" as CheckUnderstandability
+  component "Model Accuracy Check" as CheckModel
+  component "Extension & Improvement Check" as CheckExtend
+  component "Scoring (4x10 + total)" as Scoring
+  artifact "Problem Report" as ProblemReport
+  artifact "Score Record" as ScoreRecord
+  artifact "Review Metadata\n(reviewer, date)" as ReviewMeta
+}
+
+' Relationships
+Reviewer --> Artifact : fills checklist,\nrecords findings & scores
+Artifact ..> ReqDoc : references
+Artifact ..> Standards : considers
+
+ObjBasis -down- CheckCompleteness
+ObjBasis -down- CheckExceptions
+ObjBasis -down- CheckUnderstandability
+ObjBasis -down- CheckModel
+ObjBasis -down- CheckExtend
+
+CheckCompleteness --> ProblemReport
+CheckExceptions --> ProblemReport
+CheckUnderstandability --> ProblemReport
+CheckModel --> ProblemReport
+CheckExtend --> ProblemReport
+
+CheckCompleteness --> Scoring
+CheckExceptions --> Scoring
+CheckUnderstandability --> Scoring
+CheckModel --> Scoring
+CheckExtend --> Scoring
+
+Scoring --> ScoreRecord
+Reviewer --> ReviewMeta : signs
+
+ProblemReport --> Owner : delivers findings
+ScoreRecord --> Owner
+ProblemReport --> Stakeholder : share summary
+ScoreRecord --> Stakeholder
+
+' Constraints and Notes
+note right of ObjBasis
+C-001: Use review & verification methods
+C-002: Consider standards/specifications
+end note
+
+note right of Scoring
+C-003: Four dimensions (10 pts each)\nTotal out of 40
+end note
+
+note bottom of Artifact
+C-004: Business requirements are out of scope for this artifact.
+end note
+
+' Data requirements mapping
+note top of ProblemReport
+Stores: issues, overall evaluation,\nimprovement suggestions (DR-003)
+end note
+
+note top of ScoreRecord
+Stores: completeness, understandability,\nmodel accuracy, extension/improvement scores,\nand total (DR-004)
+end note
+
+note top of ReviewMeta
+Stores: reviewer identity, review date (DR-005)
+end note
+
+@enduml

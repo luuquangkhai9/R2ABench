@@ -1,0 +1,164 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Access Layer::Gateway"
+      ],
+      "predicted_nodes": [
+        "Client Access Layer::MTProto Gateway\n(Access/BFF"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the client-facing gateway/access entry for MTProto traffic; the boundary naming differs but is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::BFF"
+      ],
+      "predicted_nodes": [
+        "Client Access Layer::MTProto Gateway\n(Access/BFF"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted gateway explicitly includes BFF/access responsibilities, which aligns with the GT BFF node."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Auth Session",
+        "Access Layer::Session"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Auth Service\n(Authorization Keys, Server/Future Salts",
+        "Service Layer::Session Service\n(Encrypted Sessions, session_id,\nDestroy/Drop Answer Handling"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT access-layer session/auth session responsibilities are split into more specific auth and session services. The functional mapping is consistent despite the more service-oriented boundary naming."
+    },
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "Integration & Infrastructure Layer::Kafka"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same infrastructure dependency with equivalent boundary placement."
+    },
+    {
+      "gt_nodes": [
+        "Global::Push"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Push/Sync Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node covers push responsibilities and is semantically equivalent to the GT push component."
+    },
+    {
+      "gt_nodes": [
+        "Global::Sync"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Push/Sync Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node covers sync responsibilities and is semantically equivalent to the GT sync component."
+    },
+    {
+      "gt_nodes": [
+        "Services::Msg"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Message Service\n(Service Messages"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the message/service-message handling component."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MinIO"
+      ],
+      "predicted_nodes": [
+        "Integration & Infrastructure Layer::MinIO (Object Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same storage technology and same infrastructure role."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MySQL"
+      ],
+      "predicted_nodes": [
+        "Integration & Infrastructure Layer::MySQL"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same storage technology and same infrastructure role."
+    },
+    {
+      "gt_nodes": [
+        "Storages::Redis"
+      ],
+      "predicted_nodes": [
+        "Integration & Infrastructure Layer::Redis"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same storage technology and same infrastructure role."
+    },
+    {
+      "gt_nodes": [
+        "Services::DFS"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Media Service (optional",
+        "Integration & Infrastructure Layer::FFmpeg/FFProbe\n(optional tools"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT DFS/media-related capability is decomposed into an optional media service and its optional external media tools. This is semantically aligned with the PRD's optional media wrapper capability."
+    },
+    {
+      "gt_nodes": [
+        "Services::Services"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Auth Service\n(Authorization Keys, Server/Future Salts",
+        "Service Layer::Message Service\n(Service Messages",
+        "Service Layer::Push/Sync Service",
+        "Service Layer::Registration & Verification Service",
+        "Service Layer::Session Service\n(Encrypted Sessions, session_id,\nDestroy/Drop Answer Handling"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT aggregate services node is split into multiple concrete services. This is a valid decomposition and the service-layer boundary is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Status"
+      ],
+      "predicted_nodes": [
+        "Client Access Layer::MTProto Gateway\n(Access/BFF"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Although status may be exposed via the access/gateway layer, the predicted gateway node does not specifically represent the status component; this is at best an imprecise functional approximation."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Clients::Android",
+    "Clients::PC",
+    "Clients::Web",
+    "Clients::iOS"
+  ],
+  "unmatched_predicted_nodes": [
+    "Integration & Infrastructure Layer::External Verification Service\n(optional",
+    "Integration & Infrastructure Layer::etcd"
+  ]
+}

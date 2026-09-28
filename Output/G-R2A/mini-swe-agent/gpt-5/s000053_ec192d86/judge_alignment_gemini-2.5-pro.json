@@ -1,0 +1,74 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "cadctl::CHGM investigation",
+        "cadctl::CPD investigation",
+        "cadctl::Future investigations",
+        "cadctl::switch(alerttype"
+      ],
+      "predicted_nodes": [
+        "Interface Layer::cadctl CLI\\n(/bin/cadctl"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated multiple GT nodes representing the internal logic of the `cadctl` tool into a single, high-level component. The 'Interface Layer' boundary is an architecturally sound classification for a user-facing CLI."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton\\nEvent\\nListener"
+      ],
+      "predicted_nodes": [
+        "Execution & Orchestration (Tekton::EventListener"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct 1:1 match. The AI improved the boundary attribution from the generic 'Global' to a more specific and accurate 'Execution & Orchestration (Tekton', which is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?"
+      ],
+      "predicted_nodes": [
+        "Execution & Orchestration (Tekton::Trigger",
+        "Execution & Orchestration (Tekton::Pipeline: cad-checks-pipeline",
+        "Execution & Orchestration (Tekton::PipelineRun"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly decomposed the abstract 'Tekton Interceptor' from the GT into the concrete Tekton components (`Trigger`, `Pipeline`, `PipelineRun`) that perform the orchestration, as detailed in the PRD. The boundary is also more specific and accurate than 'Global'."
+    },
+    {
+      "gt_nodes": [
+        "Global::Escalate alert to\\non-call SRE",
+        "Global::Update Incident\\nNotes",
+        "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster",
+        "PagerDuty Team::app-sre-alertmanager",
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty API"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI consolidated various GT nodes, which describe specific PagerDuty actions and configurations, into a single, abstract node representing the PagerDuty API as an external system. The 'External Systems' boundary is a correct architectural classification."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Alert Source::app-sre\\nalertmanager",
+    "Alert Source::cluster\\nalertmanager",
+    "Alert Source::deadmanssnitch",
+    "Alerts::CHGM",
+    "Alerts::CPD",
+    "Alerts::all cluster\\nalerts"
+  ],
+  "unmatched_predicted_nodes": [
+    "Build Environment::Go 1.17 Builder",
+    "Data & Artifacts::Deployment Template Assets",
+    "External Systems::AWS Services",
+    "External Systems::OCM API",
+    "Integration Library Layer::Integration Library",
+    "Interface Layer::Template Update Utility",
+    "Runtime Artifact::CAD Container Image\\n(UBI minimal runtime"
+  ]
+}

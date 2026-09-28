@@ -1,0 +1,75 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK::Background Scheduling::Background HandlerThread",
+        "QAPM SDK::Background Scheduling::Main Thread Handler",
+        "QAPM SDK::Background Scheduling::Work Handler",
+        "QAPM SDK::Background Scheduling::Work Handler Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The generic GT node for the SDK is detailed by the AI into the core scheduling and handler components (FR-001, FR-010) that form the foundation of the SDK as described in the PRD. The `QAPM SDK` boundary is semantically identical to `QAPM_SDK` and is correctly applied."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Collect"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK::HTTP Instrumentation::Counting InputStream",
+        "QAPM SDK::HTTP Instrumentation::Response Entity Wrapper",
+        "QAPM SDK::HTTP Instrumentation::Response Handler Wrapper",
+        "QAPM SDK::HTTP Instrumentation::Transaction State"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's high-level 'Collect' component is instantiated by the AI as the specific Apache HttpClient instrumentation functions (FR-008, FR-009). In an APM context, this instrumentation is a form of data collection, and it's the primary collection mechanism detailed in the provided SRS. The `QAPM SDK` boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK::Upload Processing::File Enumerator",
+        "QAPM SDK::Upload Processing::Network Connectivity Gate",
+        "QAPM SDK::Upload Processing::Parameter Deriver",
+        "QAPM SDK::Upload Processing::Upload Processor",
+        "QAPM SDK::Data Sender::Configured Sender",
+        "QAPM SDK::Data Sender::QAPM Configuration Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'Report' component, which covers data sending, is correctly expanded by the AI into the detailed upload processing (FR-003, FR-005, FR-006) and data sender components (FR-006) from the PRD. The `QAPM SDK` boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK::Local Storage::Upload Directory",
+        "QAPM SDK::Local Storage::Upload Files",
+        "QAPM SDK::Upload Processing::Storage Pop Module"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's abstract 'Storage' component is correctly detailed by the AI into the specific file-based storage entities (DR-003, DR-004) and the logic for accessing them (FR-004, FR-005), as specified in the PRD. The boundary `QAPM SDK` is correct, and placing a component like `Storage Pop Module` in `Upload Processing` is functionally logical."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Application",
+    "QAPM_Plugin::Plugin init compile",
+    "QAPM_Plugin::QAPM_Plugin"
+  ],
+  "unmatched_predicted_nodes": [
+    "Android Host Application::Android Application Integrator",
+    "Android Host Application::Network Instrumentation Integrator",
+    "Global::Android Application Integrator",
+    "Global::Network Instrumentation Integrator",
+    "QAPM SDK::External Dependencies::Android Context",
+    "QAPM SDK::External Dependencies::Apache HttpClient",
+    "QAPM SDK::External Dependencies::Network State"
+  ]
+}

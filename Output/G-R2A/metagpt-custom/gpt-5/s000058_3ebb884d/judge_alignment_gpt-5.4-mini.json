@@ -1,0 +1,135 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::AWS EventBridge"
+      ],
+      "predicted_nodes": [
+        "Integration Layer::AWS::AWS EventBridge"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the AWS EventBridge integration used for event routing. The architectural boundary differs in naming, but it is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::SNS Topic\\nalerts"
+      ],
+      "predicted_nodes": [
+        "Integration Layer::AWS::AWS SNS",
+        "Integration Layer::AWS::SNS Notification Topic"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT SNS topic is split into the SNS service and notification topic concept. This is a semantically consistent decomposition of the same alerting destination."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::Chat notification",
+        "AWS Cloud\\nConnector Account::Email notification",
+        "AWS Cloud\\nConnector Account::Slack notification"
+      ],
+      "predicted_nodes": [
+        "Integration Layer::Email Subscriber Endpoint",
+        "Integration Layer::Webhook Subscriber Endpoint"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "These GT notification targets represent manually maintained subscription endpoints. The AI has aggregated them into generic subscriber endpoint nodes, which is acceptable at this abstraction level."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::CMS BigMAC"
+      ],
+      "predicted_nodes": [
+        "Integration Layer::AWS::Project Runtime Service (Event Producer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is the external CMS BigMAC target environment, while the predicted node is a runtime service/event producer. They are not functionally equivalent and the boundary is incorrect."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::connector::Private subnet::AWS Fargate\\nKafka Connect Cluster"
+      ],
+      "predicted_nodes": [
+        "Application Services Layer::ConnectorConfig Handler",
+        "Integration Layer::Connector Management Adapter",
+        "Integration Layer::Connector Management Library (External"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node represents the connector runtime cluster, while the predicted nodes decompose the connector management functionality around it. This is a reasonable split of the connector subsystem, and the boundaries are semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::VPC::topics::Private subnet::AWS Lambda\\ncreate/delete topics"
+      ],
+      "predicted_nodes": [
+        "Integration Layer::AWS::AWS EventBridge",
+        "Integration Layer::Event Routing Ruleset"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is an AWS Lambda used for topic creation/deletion, but the predicted nodes describe event routing. This is a functional mismatch and indicates boundary confusion."
+    },
+    {
+      "gt_nodes": [
+        "Global::VPC peering\\nconnection"
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:0",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node corresponds to the VPC peering connection."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::AWS EventBridge"
+      ],
+      "predicted_nodes": [
+        "Integration Layer::AWS::AWS EventBridge"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Duplicate of the same semantic match; EventBridge is correctly identified as the event-routing integration."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\\nConnector Account::SNS Topic\\nalerts"
+      ],
+      "predicted_nodes": [
+        "Integration Layer::AWS::SNS Notification Topic"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This specifically matches the SNS notification topic aspect of the GT alert topic."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::VPC peering\\nconnection"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application Services Layer::DeploymentMetrics Collector",
+    "Application Services Layer::PRMergeMetrics Collector",
+    "Application Services Layer::StageListing Procedure",
+    "Configuration/Environment Layer::AWS Account/Region Context",
+    "Configuration/Environment Layer::Connector Configuration Inputs (Env/Files",
+    "Integration Layer::AWS",
+    "Integration Layer::AWS CLI",
+    "Integration Layer::AWS::Project Runtime Service (Event Producer",
+    "Integration Layer::Connector Management Adapter",
+    "Integration Layer::Connector Management Library (External",
+    "Integration Layer::Email Subscriber Endpoint",
+    "Integration Layer::Event Routing Ruleset",
+    "Integration Layer::GitHub",
+    "Integration Layer::GitHub API Pagination Aggregator",
+    "Integration Layer::GitHub::GitHub Actions",
+    "Integration Layer::GitHub::GitHub Actions API",
+    "Integration Layer::GitHub::GitHub Pull Requests API",
+    "Integration Layer::Webhook Subscriber Endpoint",
+    "Interface Layer::GitHub Actions Workflows (deploy.yml",
+    "Interface Layer::Manual Subscription Administration Surface",
+    "Interface Layer::Onboarding and Credential Setup",
+    "Interface Layer::Terminal/Script Interface"
+  ]
+}

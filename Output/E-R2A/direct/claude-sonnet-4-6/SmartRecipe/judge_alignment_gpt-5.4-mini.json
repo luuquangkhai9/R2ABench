@@ -1,0 +1,242 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Admin Audit"
+      ],
+      "predicted_nodes": [
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Control Layer::Admin Controller\\n(FR-012, FR-013, FR-014, FR-016",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Service Layer::Admin Management Service\\n(User Mgmt, DB Mgmt, Feedback"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both predicted nodes belong to the GT admin-audit/admin-management capability; the split into controller and service is architecturally reasonable and stays within the backend Spring Boot business layer context."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Community Sharing"
+      ],
+      "predicted_nodes": [
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Control Layer::Community Controller\\n(FR-009, FR-010, FR-015",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Service Layer::Community Service\\n(Share, Like, Comment, Review"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted controller/service pair semantically corresponds to the GT community sharing module and remains within the correct backend business boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Health Management"
+      ],
+      "predicted_nodes": [
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Health Controller\\n(FR-005, FR-006, FR-007, FR-008",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Service Layer::Nutrition & Health Service\\n(Analysis, Diet Plan, Check-in"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted health controller and nutrition/health service are the same functional area as the GT health management module, correctly placed in backend business/service layers."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Recipe Search"
+      ],
+      "predicted_nodes": [
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Recipe Controller\\n(FR-003, FR-004, FR-012, FR-013",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Service Layer::Recipe Service\\n(Text Search, Recipe CRUD"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The recipe search capability is represented by the predicted controller/service pair. Although the controller also includes add/review responsibilities, the recipe search portion is correctly within the backend business boundary."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::Smart Recommendation"
+      ],
+      "predicted_nodes": [
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Recommendation Controller\\n(FR-011",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Service Layer::Recommendation Service\\n(Collaborative Filter, History"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted recommendation controller and service correspond to the GT smart recommendation module and are placed in the correct backend service context."
+    },
+    {
+      "gt_nodes": [
+        "Business Layer (Spring Boot Framework::Modules::User Information"
+      ],
+      "predicted_nodes": [
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Auth Controller\\n(FR-001, FR-002",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Service Layer::User Service\\n(Registration, Login, Profile",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Data Access Layer::User Repository",
+        "MySQL\\n(Structured Data::Users & Auth\\n(DR-001, DR-002"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT user information module is split across auth controller, user service, repository, and user/auth database table. This is semantically consistent and remains within the correct backend/database boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Data Cleaning"
+      ],
+      "predicted_nodes": [
+        "Mobile Client Layer\\n(Android / iOS::Local Image Preprocessor\\n(Validity Check, Cropping",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Service Layer::Image Processing Service\\n(Upload, URL Management",
+        "Flask Model Inference Service\\n(Deep Learning::Food Image Recognition Model\\n(Preprocessed Matrix Input",
+        "Flask Model Inference Service\\n(Deep Learning::Ingredient Extraction Module",
+        "Flask Model Inference Service\\n(Deep Learning::Recipe Generation Module"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT data cleaning step is decomposed into local preprocessing, image processing, and inference-side modules. This is a reasonable functional split across client/backend/Flask boundaries for the image pipeline."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Dataset"
+      ],
+      "predicted_nodes": [
+        "MySQL\\n(Structured Data::Recipes & Ingredients\\n(DR-004, DR-012, DR-013",
+        "MySQL\\n(Structured Data::Health & Chronic Disease\\n(DR-005, DR-006, DR-007",
+        "MySQL\\n(Structured Data::User History & Recommend\\n(DR-008, DR-014",
+        "MySQL\\n(Structured Data::Merchant & Food Recommend\\n(DR-009, DR-010",
+        "MySQL\\n(Structured Data::Community & Comments\\n(DR-011",
+        "MySQL\\n(Structured Data::Users & Auth\\n(DR-001, DR-002",
+        "MySQL\\n(Structured Data::Images\\n(DR-003"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT dataset is represented as multiple structured MySQL domain tables. This is a valid decomposition of the dataset storage boundary."
+    },
+    {
+      "gt_nodes": [
+        "Data Layer::Read/Write Database"
+      ],
+      "predicted_nodes": [
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Data Access Layer",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Data Access Layer::Community Repository",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Data Access Layer::Health Repository",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Data Access Layer::Merchant Repository",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Data Access Layer::Recipe Repository",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Data Access Layer::Recommendation Repository",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Data Access Layer::User Repository",
+        "MySQL\\n(Structured Data::Community & Comments\\n(DR-011",
+        "MySQL\\n(Structured Data::Health & Chronic Disease\\n(DR-005, DR-006, DR-007",
+        "MySQL\\n(Structured Data::Images\\n(DR-003",
+        "MySQL\\n(Structured Data::Merchant & Food Recommend\\n(DR-009, DR-010",
+        "MySQL\\n(Structured Data::Recipes & Ingredients\\n(DR-004, DR-012, DR-013",
+        "MySQL\\n(Structured Data::User History & Recommend\\n(DR-008, DR-014",
+        "MySQL\\n(Structured Data::Users & Auth\\n(DR-001, DR-002"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT read/write database layer is decomposed into repositories plus concrete MySQL tables. This is consistent with the GT storage layer."
+    },
+    {
+      "gt_nodes": [
+        "Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Global::MySQL\\n(Structured Data",
+        "MySQL\\n(Structured Data::Community & Comments\\n(DR-011",
+        "MySQL\\n(Structured Data::Health & Chronic Disease\\n(DR-005, DR-006, DR-007",
+        "MySQL\\n(Structured Data::Images\\n(DR-003",
+        "MySQL\\n(Structured Data::Merchant & Food Recommend\\n(DR-009, DR-010",
+        "MySQL\\n(Structured Data::Recipes & Ingredients\\n(DR-004, DR-012, DR-013",
+        "MySQL\\n(Structured Data::User History & Recommend\\n(DR-008, DR-014",
+        "MySQL\\n(Structured Data::Users & Auth\\n(DR-001, DR-002"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted MySQL nodes are all semantically the same database boundary as the GT MySQL node, just decomposed by domain tables."
+    },
+    {
+      "gt_nodes": [
+        "Database::Redis"
+      ],
+      "predicted_nodes": [
+        "Global::Redis Cache\\n(NFR-004"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Redis cache is directly equivalent to the GT Redis database/cache node and is placed correctly in infrastructure/database context."
+    },
+    {
+      "gt_nodes": [
+        "Frontend UI::Recipe App"
+      ],
+      "predicted_nodes": [
+        "Global::Mobile Client Layer\\n(Android / iOS",
+        "Mobile Client Layer\\n(Android / iOS::Administrator Interface\\n(FR-012, FR-013, FR-014",
+        "Mobile Client Layer\\n(Android / iOS::Community Sharing Interface\\n(FR-009, FR-010, FR-015",
+        "Mobile Client Layer\\n(Android / iOS::Health Center / Nutrition\\nAnalysis Interface\\n(FR-005, FR-006, FR-007, FR-008",
+        "Mobile Client Layer\\n(Android / iOS::Local Image Preprocessor\\n(Validity Check, Cropping",
+        "Mobile Client Layer\\n(Android / iOS::Login Interface\\n(FR-001, FR-002",
+        "Mobile Client Layer\\n(Android / iOS::Photo Recognition Interface\\n(FR-003",
+        "Mobile Client Layer\\n(Android / iOS::Recipe Display Interface\\n(FR-003, FR-004",
+        "Mobile Client Layer\\n(Android / iOS::Recommendation Interface\\n(FR-011",
+        "Mobile Client Layer\\n(Android / iOS::User Main Interface\\n(Search, Camera, Community"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT frontend app is expanded into multiple mobile interfaces/screens. The boundary remains correct as mobile client/frontend."
+    },
+    {
+      "gt_nodes": [
+        "Runtime Environment::Flask Service"
+      ],
+      "predicted_nodes": [
+        "Global::Flask Model Inference Service\\n(Deep Learning",
+        "Flask Model Inference Service\\n(Deep Learning::Food Image Recognition Model\\n(Preprocessed Matrix Input",
+        "Flask Model Inference Service\\n(Deep Learning::Ingredient Extraction Module",
+        "Flask Model Inference Service\\n(Deep Learning::Recipe Generation Module"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Flask runtime service is correctly represented by the Flask model inference service and its internal ML modules."
+    },
+    {
+      "gt_nodes": [
+        "Runtime Environment::Springboot Service"
+      ],
+      "predicted_nodes": [
+        "Global::Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Control Layer",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Data Access Layer",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Service Layer",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Control Layer::Admin Controller\\n(FR-012, FR-013, FR-014, FR-016",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Control Layer::Auth Controller\\n(FR-001, FR-002",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Control Layer::Community Controller\\n(FR-009, FR-010, FR-015",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Control Layer::Health Controller\\n(FR-005, FR-006, FR-007, FR-008",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Control Layer::Recipe Controller\\n(FR-003, FR-004, FR-012, FR-013",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Control Layer::Recommendation Controller\\n(FR-011",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Data Access Layer::Community Repository",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Data Access Layer::Health Repository",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Data Access Layer::Merchant Repository",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Data Access Layer::Recipe Repository",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Data Access Layer::Recommendation Repository",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Data Access Layer::User Repository",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Service Layer::Admin Management Service\\n(User Mgmt, DB Mgmt, Feedback",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Service Layer::Catering Data Service\\n(FR-016",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Service Layer::Community Service\\n(Share, Like, Comment, Review",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Service Layer::Image Processing Service\\n(Upload, URL Management",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Service Layer::Merchant Service\\n(Location, Map Display",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Service Layer::Nutrition & Health Service\\n(Analysis, Diet Plan, Check-in",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Service Layer::Recipe Service\\n(Text Search, Recipe CRUD",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Service Layer::Recommendation Service\\n(Collaborative Filter, History",
+        "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Service Layer::User Service\\n(Registration, Login, Profile"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted backend Spring Boot layering is a detailed decomposition of the GT Springboot runtime/service environment and stays within the same backend boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::External / Infrastructure",
+    "Global::Mobile Client Layer\\n(Android / iOS",
+    "Global::MySQL\\n(Structured Data",
+    "Global::Redis Cache\\n(NFR-004",
+    "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Control Layer",
+    "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Data Access Layer",
+    "Backend Service Layer\\n(Spring Boot — Business / Control / Service / Data Access::Service Layer"
+  ]
+}

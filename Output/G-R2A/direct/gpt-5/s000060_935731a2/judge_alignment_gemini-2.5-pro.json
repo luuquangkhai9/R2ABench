@@ -1,0 +1,58 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "Event Streaming::Kafka Cluster",
+        "Event Streaming::Kafka Cluster::Topic: audit.events"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the Kafka component mentioned in the PRD. It placed it in a more specific but semantically equivalent 'Event Streaming' boundary and split it into a cluster and a topic, which is a valid and more detailed representation."
+    },
+    {
+      "gt_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "predicted_nodes": [
+        "JVM Application (Java 11::Application Service\\n(Integrating Code",
+        "JVM Application (Java 11::Auditor Client API\\nlowes/auditor",
+        "JVM Application (Java 11::Comparator",
+        "JVM Application (Java 11::Event Builder",
+        "JVM Application (Java 11::EventPublisher",
+        "JVM Application (Java 11::Filter Engine",
+        "JVM Application (Java 11::JSON Serializer",
+        "JVM Application (Java 11::LogProvider",
+        "JVM Application (Java 11::Logger Impl",
+        "JVM Application (Java 11::AuditEventElementFilter",
+        "Global::KafkaPublisher",
+        "Global::CustomPublisher\\n(optional"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's multiple 'auditor-v1 client' nodes represent high-level applications using the library. The AI correctly aggregates these into a single conceptual 'JVM Application' and decomposes the 'auditor' functionality into its detailed internal components, interfaces, and pluggable implementations as described in the PRD. The 'JVM Application (Java 11)' boundary is a correct semantic generalization of the GT's 'application *' boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "predicted_nodes": [
+        "Global::Downstream Consumers (Out of Scope",
+        "Downstream Consumers (Out of Scope::Event Consumer Service(s"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'auditor-v1 app\\nserver' represents the downstream services that consume audit events. The AI correctly identifies this as 'Downstream Consumers', accurately notes it's 'Out of Scope' per the PRD, and places it in an appropriately named boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Databases / Filestores\\nElastic, Hadoop, etc."
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Logging Sink"
+  ]
+}

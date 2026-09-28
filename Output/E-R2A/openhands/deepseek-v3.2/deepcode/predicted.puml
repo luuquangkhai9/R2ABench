@@ -1,0 +1,193 @@
+@startuml
+
+!define LIGHTGRAY #F5F5F5
+!define BLUE #4A90E2
+!define GREEN #50C878
+!define ORANGE #FF8C00
+!define PURPLE #9370DB
+!define RED #FF6B6B
+!define TEAL #20B2AA
+
+skinparam component {
+  BackgroundColor LIGHTGRAY
+  BorderColor #333333
+  ArrowColor #333333
+  FontSize25
+}
+
+title DeepCode System Architecture
+
+package "Client Layer" {
+  [Browser Client\nHTML5 Compatible\nEdge/Chrome/Firefox/Safari] as Browser
+  [Mobile Browser\nResponsive Design] as Mobile
+}
+
+package "Infrastructure Layer" {
+  [CDN\nStatic Resources\nImages/CSS/JS] as CDN
+  [DNS Service\nDomain Resolution] as DNS
+  [Firewall\nPort Restrictions\nIntranet Only] as Firewall
+}
+
+package "Presentation Layer" {
+  [Nginx Reverse Proxy\nLoad Balancing\nHTTPS Termination] as Nginx
+}
+
+package "Frontend Layer" {
+  component "Vue 3 Application\nTypeScript + Vuex\nvue-router + Ant Design" as VueApp
+  component "Code Editor\nCodeMirror Integration" as CodeEditor
+  component "Rich Text Editor\nwangEditor Integration" as RichTextEditor
+  component "Charts\nECharts Visualization" as Charts
+}
+
+package "Backend Layer" {
+  rectangle "Spring Boot 3.1.2 Application\nJDK 21-LTS" as SpringBoot {
+    component "API Controllers\nRESTful Endpoints" as Controllers
+    component "Service Layer\nBusiness Logic" as Services
+    component "Data Access\nMyBatis-Plus" as DataAccess
+    component "Security Layer\nJWT/OAuth 2.0\nFilters + Interceptors" as Security
+    component "Thread Pool\nAsync Processing" as ThreadPool
+  }
+  
+  component "Swagger UI\nAPI Documentation" as Swagger
+}
+
+package "Data Layer" {
+  database "MySQL 5.7.44\nBusiness Data Storage" as MySQL
+  database "Redis 7.4.6\nSession Cache\nHigh-frequency Data" as Redis
+  component "MinIO\nObject Storage\nImages/Test Cases/Files" as MinIO
+}
+
+package "External Services" {
+  component "LLM Service\nLangChain4j Integration\nAI Capabilities" as LLMService
+  component "JudgeHost\nJudging Service\nTask Queue Management" as JudgeHost
+  component "JudgeCore\nCode Execution\nResource Limitation" as JudgeCore
+  component "SMTP Server\nEmail Service\nNotifications" as SMTP
+  component "Docker Runtime\nContainer Execution" as Docker
+}
+
+package "Monitoring & Operations" {
+  component "Prometheus\nMetrics Collection" as Prometheus
+  component "Grafana\nDashboard Visualization" as Grafana
+  component "Alert Manager\nPagerDuty/DingTalk" as AlertManager
+  component "GitLab CI/CD\nAutomated Pipeline" as GitLabCI
+  component "Kubernetes\nContainer Orchestration" as Kubernetes
+  component "Private Registry\nDocker Images" as Registry
+}
+
+' User flows
+Browser --> Nginx : HTTPS Requests
+Mobile --> Nginx : HTTPS Requests
+Nginx --> VueApp : Proxy Requests
+VueApp --> Controllers : REST API Calls
+VueApp --> CDN : Static Resources
+
+' Frontend components
+VueApp --> CodeEditor : Code Editing
+VueApp --> RichTextEditor : Content Creation
+VueApp --> Charts : Data Visualization
+
+' Backend flows
+Controllers --> Services : Business Logic
+Services --> DataAccess : Data Operations
+Security --> Controllers : Authentication/Authorization
+ThreadPool --> Services : Async Processing
+Services --> Swagger : API Documentation
+
+' Data layer connections
+DataAccess --> MySQL : CRUD Operations
+DataAccess --> Redis : Cache Operations
+DataAccess --> MinIO : File Operations
+
+' External service integrations
+Services --> LLMService : AI Requests\n(Recommendation/Analysis/Explanation)
+Services --> JudgeHost : Judging Requests\n(Code Submission)
+JudgeHost --> JudgeCore : Execution Tasks
+JudgeCore --> Docker : Container Execution
+Services --> SMTP : Email Notifications
+
+' Monitoring connections
+SpringBoot --> Prometheus : Metrics Export
+Prometheus --> Grafana : Data Visualization
+Prometheus --> AlertManager : Alert Triggers
+
+' Deployment pipeline
+GitLabCI --> Registry : Build & Push Images
+Registry --> Kubernetes : Deploy Containers
+Kubernetes --> SpringBoot : Host Application
+
+' Infrastructure
+DNS --> Nginx : Domain Resolution
+Firewall --> Nginx : Traffic Filtering
+Nginx --> Firewall : Intranet Communication
+
+note top of SpringBoot
+  Backend Modules:
+  - User Management
+  - Problem Bank & Judging
+  - Problem & Solution Management
+  - Forum Interaction
+  - AI-Assisted Learning
+  - Platform Operations
+end note
+
+note right of LLMService
+  AI Capabilities:
+  - Problem Recommendation
+  - Problem Analysis
+  - Code Explanation
+  - Assisted Review
+  - Forum @AI Replies
+end note
+
+note right of JudgeHost
+  Judging Features:
+  - Task Queue Management
+  - Resource Allocation
+  - Test Case Retrieval
+  - Result Packaging
+end note
+
+note right of JudgeCore
+  Code Execution:
+  - Resource Limitation
+  - Runtime/Memory Limits
+  - seccomp Restrictions
+  - Output Comparison
+end note
+
+note right of MySQL
+  Data Entities:
+  - Users & Permissions
+  - Problems & Test Cases
+  - Solutions & Discussions
+  - Submission Records
+  - Tags & Relationships
+end note
+
+note right of Redis
+  Cached Data:
+  - Session Tokens
+  - Frequently Accessed Problems
+  - Leaderboard Data
+  - AI Analysis Results
+end note
+
+note right of MinIO
+  Stored Files:
+  - User Avatars
+  - Problem Test Cases
+  - Solution Images
+  - Forum Attachments
+end note
+
+legend right
+  = Communication Protocols =
+  HTTPS : External Client Access
+  REST API : Frontend-Backend
+  HTTP : Internal Service Calls
+  JDBC : Database Access
+  Redis Protocol : Cache Access
+  S3 Protocol : Object Storage
+end legend
+
+@enduml

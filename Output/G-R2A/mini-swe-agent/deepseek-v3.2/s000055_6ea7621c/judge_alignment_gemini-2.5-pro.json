@@ -1,0 +1,94 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "BACKEND::Router"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Router",
+        "Global::Router"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the Router component. The use of 'Application Layer' is a semantically equivalent and standard architectural layer for a backend routing component, matching the GT's 'BACKEND' boundary."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::algorithm"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Autocomplete Module",
+        "Application Layer::Autocomplete Module::Search Algorithm",
+        "Application Layer::Autocomplete Module::Value Extractor",
+        "Global::Autocomplete Module"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI successfully split the generic 'algorithm' node into a more detailed and accurate set of components ('Search Algorithm', 'Value Extractor') as described in the PRD. The 'Application Layer' boundary is a correct placement for this backend business logic."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::data.json"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Laureate Data Store",
+        "Data Layer::Laureate Data Store::Local JSON Data"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the data source and logically split it into an abstract store and its concrete implementation. Placing it in a dedicated 'Data Layer' is a standard practice and semantically more precise than the generic 'BACKEND' boundary."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::handlers"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Home Page Handler",
+        "Application Layer::Not-Found Handler",
+        "Application Layer::Static Asset Handler",
+        "Global::Home Page Handler",
+        "Global::Not-Found Handler",
+        "Global::Static Asset Handler",
+        "HTTP Layer::HTTP Server::Request Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI accurately decomposed the single 'handlers' node from the GT into specific handlers for each function described in the PRD. The 'Application Layer' and 'HTTP Layer' are both appropriate boundaries for these backend components."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::index.html",
+        "FRONTEND::main.css"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web Browser",
+        "Global::Web Browser",
+        "Presentation Layer::Web Browser::Suggestions Display"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated the specific frontend files (HTML, CSS) into the 'Web Browser' component that renders them, and also identified a key UI element ('Suggestions Display'). The 'Presentation Layer' is a standard architectural term and a perfect semantic match for the 'FRONTEND' boundary."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::userInput"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web Browser::Search Input Field"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct and accurate match. The AI correctly identified the user input field and placed it within the 'Web Browser' in the 'Presentation Layer', which is a more descriptive and correct representation than the GT's top-level 'FRONTEND' boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "BACKEND::public assets\\nhtml\\ncss\\njs",
+    "FRONTEND::XMLHttpRequest"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::HTTP Server",
+    "HTTP Layer::HTTP Server",
+    "Infrastructure Layer::Heroku Platform",
+    "Infrastructure Layer::Heroku Platform::Node.js Runtime"
+  ]
+}

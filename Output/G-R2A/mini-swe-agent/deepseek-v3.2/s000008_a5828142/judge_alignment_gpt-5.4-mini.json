@@ -1,0 +1,214 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::InfluxDB"
+      ],
+      "predicted_nodes": [
+        "Data Layer::InfluxDB",
+        "Data Layer::InfluxDB::Coding Process Records"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the same InfluxDB-backed time-series storage for coding-process records. The predicted diagram splits the database into a parent layer node and a specific record node, which is semantically consistent with the GT database boundary."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Data Layer::MySQL Database",
+        "Data Layer::MySQL Database::Battles Table",
+        "Data Layer::MySQL Database::Projects Table",
+        "Data Layer::MySQL Database::Users Table",
+        "Data Layer::MySQL Database::Versions Table"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted nodes represent the same MySQL relational datastore, further decomposed into tables. This is a valid refinement of the GT MySQL database node and the boundary is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::Redis"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Redis Cache",
+        "Data Layer::Redis Cache::Battle Invitations",
+        "Data Layer::Redis Cache::Battle State",
+        "Data Layer::Redis Cache::Workspace State"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both depict Redis as the cache/store used for workspace coordination and battle state. The AI decomposed Redis into cache subdomains, which remains consistent with the GT boundary."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Reverse Proxy::Nginx"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Layer::Nginx Reverse Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is the same Nginx reverse proxy component, placed under an infrastructure-oriented boundary that is semantically equivalent to the GT reverse proxy placement."
+    },
+    {
+      "gt_nodes": [
+        "Backend Repo::CI/CD Workflow"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Layer::Deployment Scripts"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT CI/CD workflow is represented by deployment scripts in the predicted diagram. The exact naming differs, but both denote deployment automation; boundary placement is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Backend Repo::Deploy Key"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Layer::Deployment Scripts"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The deploy key is part of deployment automation/configuration. It is not modeled as a separate node in the prediction, but its functionality is subsumed within deployment scripts and infrastructure handling."
+    },
+    {
+      "gt_nodes": [
+        "Backend Repo::GitHub"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Layer::Deployment Scripts"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT GitHub node represents the repository/CI source for backend deployment. The prediction abstracts this into deployment scripts, which is a coarse but semantically related representation."
+    },
+    {
+      "gt_nodes": [
+        "Backend Repo::Node.js"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Node.js/Express Backend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The backend runtime is correctly recognized as Node.js/Express. The predicted placement under application layer is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Coding Sandbox::Coding Sandbox 1::Docker",
+        "Coding Sandbox::Coding Sandbox 1::Node.js",
+        "Coding Sandbox::Coding Sandbox 1::Exporter",
+        "Coding Sandbox::Coding Sandbox 2::Docker",
+        "Coding Sandbox::Coding Sandbox 2::Node.js",
+        "Coding Sandbox::Coding Sandbox 2::Exporter"
+      ],
+      "predicted_nodes": [
+        "External Services Layer::Docker Sandbox",
+        "External Services Layer::Docker Sandbox::Code Execution Engine"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT models two sandbox instances with Docker, Node.js, and exporter components; the AI aggregates these into a single Docker sandbox and execution engine. This is a valid merge of the same external code execution capability, and the boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Repo::Vue 3"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Web Browser (Vue.js",
+        "Client Layer::Web Browser (Vue.js::Battle Interface",
+        "Client Layer::Web Browser (Vue.js::Code Editor",
+        "Client Layer::Web Browser (Vue.js::REST API Client",
+        "Client Layer::Web Browser (Vue.js::Socket.IO Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The frontend Vue application is correctly mapped to the client layer, with reasonable decomposition into UI and communication subcomponents. The GT Vue 3 frontend and the predicted Vue.js browser client are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Repo::CI/CD Workflow"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Layer::Deployment Scripts"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Frontend CI/CD workflow is represented through deployment scripts. While coarse, it remains within the correct deployment/infrastructure context."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Repo::Deploy Key"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Layer::Deployment Scripts"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The deploy key is part of frontend deployment setup and is effectively absorbed into the deployment scripts/infrastructure model."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Repo::GitHub"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Layer::Deployment Scripts"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GitHub repo is not explicitly shown, but the predicted deployment scripts imply the repository-based delivery pipeline. This is semantically acceptable at a higher abstraction level."
+    },
+    {
+      "gt_nodes": [
+        "Static Asset Delivery::CDN\\nCloudFront"
+      ],
+      "predicted_nodes": [
+        "External Services Layer::CDN Distribution",
+        "External Services Layer::CDN Distribution::Content Delivery"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "CloudFront-style distribution is correctly captured as CDN distribution. The predicted node is a valid semantic equivalent under an external services boundary."
+    },
+    {
+      "gt_nodes": [
+        "Static Asset Delivery::Storage\\nS3 bucket"
+      ],
+      "predicted_nodes": [
+        "External Services Layer::Object Storage (S3-compatible",
+        "External Services Layer::Object Storage (S3-compatible::Battle Results",
+        "External Services Layer::Object Storage (S3-compatible::Code Files",
+        "External Services Layer::Object Storage (S3-compatible::Static Assets",
+        "External Services Layer::Object Storage (S3-compatible::User Files"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT S3 bucket is represented as S3-compatible object storage with further logical subdivisions for stored asset types. This is a correct semantic match and boundary placement."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Developer",
+    "Global::End User",
+    "Application Runtime::Reverse Proxy::Express"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application Layer::Node.js/Express Backend",
+    "Application Layer::Node.js/Express Backend::Authentication Service",
+    "Application Layer::Node.js/Express Backend::Battle Management",
+    "Application Layer::Node.js/Express Backend::Code Execution Service",
+    "Application Layer::Node.js/Express Backend::File Upload Service",
+    "Application Layer::Node.js/Express Backend::Playback Service",
+    "Application Layer::Node.js/Express Backend::Project Management",
+    "Application Layer::Node.js/Express Backend::REST API Gateway",
+    "Application Layer::Node.js/Express Backend::Socket.IO Server",
+    "Application Layer::Node.js/Express Backend::Workspace Coordination",
+    "Global::Application Layer",
+    "Global::Client Layer",
+    "Global::Data Layer",
+    "Global::External Services Layer",
+    "Global::Infrastructure Layer"
+  ]
+}

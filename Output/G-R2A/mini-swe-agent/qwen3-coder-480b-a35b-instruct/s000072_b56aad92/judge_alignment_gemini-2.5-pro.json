@@ -1,0 +1,70 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "UCX::UCM Memory Services::Memory Hooks",
+        "UCX::UCP Protocols\\nHigh Level API::Cross-Transport Multi-Rail",
+        "UCX::UCP Protocols\\nHigh Level API::Fragmentation",
+        "UCX::UCP Protocols\\nHigh Level API::I/O API\\nStream",
+        "UCX::UCP Protocols\\nHigh Level API::Message Passing API\\nTag Matching, Rendezvous",
+        "UCX::UCP Protocols\\nHigh Level API::PGAS API\\nRMAs, Atomics",
+        "UCX::UCP Protocols\\nHigh Level API::Software Protocols",
+        "UCX::UCP Protocols\\nHigh Level API::Task Based API\\nActive Messages",
+        "UCX::UCP Protocols\\nHigh Level API::Transport Selection",
+        "UCX::UCS Services\\nCommon Utilities::Data Structures",
+        "UCX::UCS Services\\nCommon Utilities::Memory Management",
+        "UCX::UCS Services\\nCommon Utilities::Utilities",
+        "UCX::UCT Hardware Transports\\nLow Level API::DCT",
+        "UCX::UCT Hardware Transports\\nLow Level API::Ethernet Transport\\nTCP/IP Sockets",
+        "UCX::UCT Hardware Transports\\nLow Level API::GPU Transport\\nNVIDIA CUDA, AMD ROCm",
+        "UCX::UCT Hardware Transports\\nLow Level API::Gemini / Aries Transport\\nGNI",
+        "UCX::UCT Hardware Transports\\nLow Level API::Intra-node Host Memory\\nSYSV, POSIX, KNEM, CMA, XPMEM",
+        "UCX::UCT Hardware Transports\\nLow Level API::RC",
+        "UCX::UCT Hardware Transports\\nLow Level API::RDMA Verbs Transport\\nInfiniBand, ROCE, OPA",
+        "UCX::UCT Hardware Transports\\nLow Level API::UD"
+      ],
+      "predicted_nodes": [
+        "External Dependencies::UCX"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT explicitly maps out the entire internal architecture of the UCX framework across many nodes. The AI abstracts UCX into a single external dependency node based on the PRD context, resulting in a system vs dependency boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Drivers and Kernels::RDMA Verbs Driver"
+      ],
+      "predicted_nodes": [
+        "External Dependencies::Linux Verbs Stack"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both nodes represent the Linux RDMA/Verbs driver stack. However, the GT places it strictly within 'Drivers and Kernels', while the AI places it in 'External Dependencies', which is a boundary misattribution."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Drivers and Kernels::Cray Driver",
+    "Drivers and Kernels::OS Kernel\\nEthernet",
+    "Drivers and Kernels::OS Kernel\\nHost Memory",
+    "Drivers and Kernels::OS Kernel\\nMemory Hooks",
+    "Drivers and Kernels::ROCm / CUDA",
+    "Global::Applications\\nHPC, AI, ML, Big Data",
+    "Global::Hardware",
+    "Programming Models and Frameworks::AI / ML Frameworks\\nTensorFlow, Burst Buffer",
+    "Programming Models and Frameworks::MPI\\nMPICH, Open-MPI",
+    "Programming Models and Frameworks::PGAS / SHMEM\\nOpenSHMEM, UPC, CAF, X10, Chapel",
+    "Programming Models and Frameworks::Task Runtimes\\nParsec, OCR, Legion"
+  ],
+  "unmatched_predicted_nodes": [
+    "Build & Verification Layer::Autotools Build System",
+    "Build & Verification Layer::Embedded hwloc Tests",
+    "Build & Verification Layer::Libfabric Integration",
+    "Communication Subsystem::Connection Manager",
+    "Communication Subsystem::Data Transfer Module",
+    "Communication Subsystem::Progress Engine",
+    "Communication Subsystem::Send State Machine",
+    "External Dependencies::OFI/libfabric",
+    "User Environment::Developer/Test Engineer",
+    "User Environment::Shell Environment"
+  ]
+}

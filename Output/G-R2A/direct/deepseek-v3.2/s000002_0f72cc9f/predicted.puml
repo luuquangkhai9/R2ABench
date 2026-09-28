@@ -1,0 +1,104 @@
+@startuml
+!define RECTANGLE class
+skinparam componentStyle rectangle
+skinparam backgroundColor #FEFEFE
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam ArrowColor #333333
+skinparam RectangleBorderColor #333333
+skinparam RectangleBackgroundColor #FFFFFF
+skinparam RectangleFontStyle bold
+skinparam DatabaseBackgroundColor #E6F3FF
+skinparam DatabaseBorderColor #0066CC
+skinparam StorageBackgroundColor #FFF0E6
+skinparam StorageBorderColor #CC6600
+skinparam CacheBackgroundColor #E6FFE6
+skinparam CacheBorderColor #00CC66
+
+title Escape Application - System Architecture
+
+package "Client Tier" {
+  [Web Client] as WEB_CLIENT
+  WEB_CLIENT : React + React-Router
+  WEB_CLIENT : jQuery
+  WEB_CLIENT : A-Frame + aframe-react
+  WEB_CLIENT : Authentication Views
+  WEB_CLIENT : Scene Components
+  note right of WEB_CLIENT
+    Components:
+    Lobby, SF, Louvre, Berlin,
+    Milan, Rome, Hack, Camera,
+    Sky, Plane, TextPlane
+  end note
+}
+
+package "Server Tier" {
+  [Web Server] as WEB_SERVER
+  WEB_SERVER : Node.js + Express
+  WEB_SERVER : Authentication Routes
+  WEB_SERVER : User Controller
+  WEB_SERVER : Content Retrieval API
+}
+
+package "Data Tier" {
+  database "Database" as DB {
+    [User Model]
+    [Application Data]
+    note right
+      Tables:
+      users, likes,
+      photos, comments
+    end note
+  }
+
+  [Cache] as CACHE
+  CACHE : Redis-style
+  CACHE : Session/Data Cache
+
+  [Image Storage Service] as IMAGE_STORAGE
+  IMAGE_STORAGE : AWS S3-style
+  IMAGE_STORAGE : Photo/Image Storage
+}
+
+package "External Dependencies" {
+  [bcrypt-nodejs] as BCRYPT
+  BCRYPT : Password Verification
+}
+
+' Client-Server Connections
+WEB_CLIENT --> WEB_SERVER : HTTP/HTTPS\nJSON POST (Credentials)\nContent Requests
+WEB_CLIENT --> WEB_SERVER : Authentication Responses\nParagraph Content
+
+' Server-Data Tier Connections
+WEB_SERVER --> DB : User Operations\n(Create, Retrieve, Query)
+WEB_SERVER --> CACHE : Cache Reads/Writes
+WEB_SERVER --> IMAGE_STORAGE : Image Storage/Retrieval
+
+' External Dependency Connections
+WEB_SERVER --> BCRYPT : Password Comparison
+
+' Data Tier Internal Note
+note top of DB
+  User Model Interface:
+  - create/save
+  - retrieve all
+  - retrieve one (query)
+end note
+
+' Authentication Flow Note
+note left of WEB_CLIENT
+  Shared Credential Handlers:
+  - Email/password input
+  - State management
+  - JSON POST submission
+end note
+
+' Content Flow Note
+note right of WEB_SERVER
+  Sequential Content Retrieval:
+  - Title-based requests
+  - Error handling
+  - State accumulation
+end note
+
+@enduml

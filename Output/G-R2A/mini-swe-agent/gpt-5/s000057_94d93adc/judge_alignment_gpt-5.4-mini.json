@@ -1,0 +1,57 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Cloudinary\n- stores audio files\n- stores images\n- returns file URLs"
+      ],
+      "predicted_nodes": [
+        "Global::Cloudinary (Audio & Image Storage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Cloudinary external media storage service used for uploading audio and images and returning hosted URLs. The boundary remains global/external and is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Express Server\n- fetches data with Sequelize\n- serves React frontend\n- handles backend API requests"
+      ],
+      "predicted_nodes": [
+        "Backend Layer (Node/Express::Express REST API",
+        "Backend Layer (Node/Express::Auth & Users API",
+        "Backend Layer (Node/Express::Follow & Feed API",
+        "Backend Layer (Node/Express::Sound API",
+        "Backend Layer (Node/Express::Data Access (ORM/Queries"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Express Server is a coarse-grained backend node covering API handling, serving the frontend, and Sequelize-backed data access. The AI split it into more specific backend responsibilities, which is a valid decomposition within the same backend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::PostgreSQL Database\n- stores users and sounds\n- stores Cloudinary URL references"
+      ],
+      "predicted_nodes": [
+        "Global::PostgreSQL"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the PostgreSQL persistence layer storing application records and Cloudinary URL references. The naming is simplified, but the semantic and architectural boundary are correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::React Frontend\n- Redux state management\n- uploads images and audio\n- controls and visualizes playback"
+      ],
+      "predicted_nodes": [
+        "Client Layer (React/Redux SPA::HTTP API Client",
+        "Client Layer (React/Redux SPA::Playback Manager",
+        "Client Layer (React/Redux SPA::Redux Store & Actions",
+        "Client Layer (React/Redux SPA::Web UI: Upload / Playback / Follow"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT frontend node is a broad React/Redux client component. The AI correctly decomposed it into client-side subcomponents for state management, playback, API communication, and UI flows, all within the correct frontend boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

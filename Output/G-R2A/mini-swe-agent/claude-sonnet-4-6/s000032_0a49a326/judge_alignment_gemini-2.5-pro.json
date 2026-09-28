@@ -1,0 +1,88 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Audit\\nService"
+      ],
+      "predicted_nodes": [
+        "Activiti Cloud Runtime Layer::Audit Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct functional match for the Audit Service. The AI's boundary 'Activiti Cloud Runtime Layer' is semantically equivalent to the GT's 'Activiti Cloud Infrastructure::Activiti Cloud Application'."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Query\\nService"
+      ],
+      "predicted_nodes": [
+        "Activiti Cloud Runtime Layer::Query Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct functional match for the Query Service. The AI's boundary 'Activiti Cloud Runtime Layer' is semantically equivalent to the GT's 'Activiti Cloud Infrastructure::Activiti Cloud Application'."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::BPMN, Form\\nand Rule Defs",
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::Process\\nRuntime"
+      ],
+      "predicted_nodes": [
+        "Activiti Cloud Runtime Layer::Example Runtime Bundle\\n(ProcessRuntime API"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the two GT nodes representing the Runtime Bundle's definitions and runtime engine into a single 'Example Runtime Bundle' node, which is consistent with the PRD. The boundary attribution is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::SSO/IDM\\n(Keycloak"
+      ],
+      "predicted_nodes": [
+        "Identity & Security Layer::Keycloak\\n(Identity Provider"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct functional match for Keycloak. The AI correctly placed the node in a more specific 'Identity & Security Layer' rather than the GT's 'Global' boundary, which is an architectural improvement."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Gateway"
+      ],
+      "predicted_nodes": [
+        "External Access Layer::NGINX Ingress Controller",
+        "External Access Layer::Public IP"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly split the generic 'Gateway' from the GT into the more specific components ('NGINX Ingress Controller', 'Public IP') described in the PRD for providing external access. The 'External Access Layer' is a more descriptive and semantically correct boundary."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Config Maps\\n(Kubernetes",
+        "Activiti Cloud Infrastructure::Registry\\n(Kubernetes"
+      ],
+      "predicted_nodes": [
+        "Deployment & Infrastructure Layer::Deployment Descriptors\\n(replica count, input rate",
+        "Deployment & Infrastructure Layer::Kubernetes / GKE Cluster"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI's nodes for 'Deployment Descriptors' and the 'Kubernetes / GKE Cluster' functionally represent the configuration and hosting environment that the GT's 'Config Maps' and 'Registry' nodes are part of. The 'Deployment & Infrastructure Layer' boundary is semantically equivalent to the GT's 'Activiti Cloud Infrastructure'."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Customer\\nLogic",
+    "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Out of the\\nBox Services",
+    "Activiti Cloud Infrastructure::Activiti Cloud Application::Notification\\nService",
+    "Global::Client"
+  ],
+  "unmatched_predicted_nodes": [
+    "Activiti Cloud Runtime Layer::TaskRuntime API\\n(ROLE_ACTIVITI_USER required",
+    "Application Layer::Spring Boot Application\\n(Application Context",
+    "Identity & Security Layer::Spring Security\\n(User/Role/Group Context",
+    "Global::Audit Event Records",
+    "Global::Process Definitions\\n& Process Instances",
+    "Global::Process Execution State"
+  ]
+}

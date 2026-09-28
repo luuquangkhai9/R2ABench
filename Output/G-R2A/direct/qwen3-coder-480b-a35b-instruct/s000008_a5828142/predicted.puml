@@ -1,0 +1,229 @@
+@startuml
+!define RECTANGLE class
+
+title Bunny Code System Architecture
+
+skinparam componentStyle rectangle
+
+package "Frontend" {
+    RECTANGLE VueApp [
+        Vue Application
+        ----
+        - Browser-based UI
+        - Project workspaces
+        - Code editing
+        - Playback view
+        - Battle view
+    ]
+}
+
+package "Backend Services" {
+    RECTANGLE NodeJSApp [
+        Node.js/Express Server
+        ----
+        - REST API endpoints
+        - Socket.IO channels
+        - Authentication logic
+        - Business logic
+    ]
+
+    RECTANGLE AuthModule [
+        Authentication Module
+        ----
+        - JWT token handling
+        - User registration/login
+        - User detail queries
+    ]
+
+    RECTANGLE ProjectModule [
+        Project Management
+        ----
+        - Project CRUD operations
+        - Version management
+        - Initial file creation
+    ]
+
+    RECTANGLE WorkspaceModule [
+        Workspace Coordination
+        ----
+        - Real-time collaboration
+        - Edit state management
+        - Authorization control
+    ]
+
+    RECTANGLE BattleModule [
+        Battle Workflow
+        ----
+        - Battle invitation
+        - Battle acceptance
+        - Readiness sync
+        - Judging & outcomes
+    ]
+
+    RECTANGLE ExecutionModule [
+        Code Execution
+        ----
+        - Code compilation
+        - Sandbox invocation
+        - Result processing
+    ]
+
+    RECTANGLE ReplayModule [
+        Coding Process Replay
+        ----
+        - Event recording
+        - Playback queries
+        - Time-series data
+    ]
+
+    RECTANGLE FileModule [
+        File Distribution
+        ----
+        - File uploads
+        - Asset distribution
+        - Archive handling
+    ]
+}
+
+package "Data Storage" {
+    RECTANGLE MySQLDB [
+        MySQL Database
+        ----
+        - User accounts
+        - Projects/Versions
+        - Battle records
+        - Relational data
+    ]
+
+    RECTANGLE InfluxDB [
+        InfluxDB
+        ----
+        - Time-series records
+        - Coding process data
+        - Playback events
+    ]
+
+    RECTANGLE RedisCache [
+        Redis Cache
+        ----
+        - Session state
+        - Workspace mapping
+        - Battle coordination
+        - Temporary invitations
+    ]
+
+    RECTANGLE ObjectStorage [
+        Object Storage (S3-compatible)
+        ----
+        - Code files
+        - User files
+        - Battle results
+        - Static assets
+    ]
+}
+
+package "Infrastructure" {
+    RECTANGLE DockerSandbox [
+        Docker Sandbox
+        ----
+        - Code execution
+        - Isolated environment
+        - Security containment
+    ]
+
+    RECTANGLE CDN [
+        CDN (CloudFront-style)
+        ----
+        - File distribution
+        - Static asset delivery
+        - Archive downloads
+    ]
+
+    RECTANGLE NginxProxy [
+        Nginx Reverse Proxy
+        ----
+        - Request routing
+        - Load balancing
+        - SSL termination
+    ]
+
+    RECTANGLE Deployment [
+        Deployment Infrastructure
+        ----
+        - Automated deployment
+        - Service orchestration
+        - Configuration management
+    ]
+}
+
+VueApp --> NodeJSApp : REST API & Socket.IO
+NodeJSApp --> AuthModule
+NodeJSApp --> ProjectModule
+NodeJSApp --> WorkspaceModule
+NodeJSApp --> BattleModule
+NodeJSApp --> ExecutionModule
+NodeJSApp --> ReplayModule
+NodeJSApp --> FileModule
+
+AuthModule --> MySQLDB
+ProjectModule --> MySQLDB
+WorkspaceModule --> RedisCache
+BattleModule --> RedisCache
+ReplayModule --> InfluxDB
+FileModule --> ObjectStorage
+
+ExecutionModule --> DockerSandbox
+FileModule --> CDN
+
+NodeJSApp --> MySQLDB
+NodeJSApp --> InfluxDB
+NodeJSApp --> RedisCache
+NodeJSApp --> ObjectStorage
+
+NginxProxy --> VueApp
+NginxProxy --> NodeJSApp
+Deployment --> NginxProxy
+Deployment --> NodeJSApp
+Deployment --> MySQLDB
+Deployment --> InfluxDB
+Deployment --> RedisCache
+Deployment --> DockerSandbox
+Deployment --> ObjectStorage
+Deployment --> CDN
+
+note right of VueApp
+    Browser-based frontend
+    Vue.js framework
+end note
+
+note right of NodeJSApp
+    Backend services
+    Node.js + Express
+    REST + Socket.IO
+end note
+
+note right of RedisCache
+    Live coordination
+    Session state
+    Battle workflows
+end note
+
+note right of DockerSandbox
+    Secure execution
+    Code isolation
+    Container-based
+end note
+
+note right of ObjectStorage
+    File persistence
+    S3-compatible
+    Asset storage
+end note
+
+note right of CDN
+    Content delivery
+    Static assets
+    Global distribution
+end note
+
+@enduml

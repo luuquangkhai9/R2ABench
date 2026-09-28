@@ -1,0 +1,75 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::DNS"
+      ],
+      "predicted_nodes": [
+        "External Systems::DNS / Load Balancer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the external DNS/load-balancing entry point used to reach the system. The boundary naming differs, but it is semantically equivalent and not a context error."
+    },
+    {
+      "gt_nodes": [
+        "Static Web Tier::Web Server\nGame assets, HTML, CSS, JS"
+      ],
+      "predicted_nodes": [
+        "Web / Asset Server Layer::Static Asset Server\n(HTML, CSS, JS, Images"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the static web/asset server that serves HTML, CSS, JavaScript, and images to browser clients. The layer naming differs but the architectural role is equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\nErlang"
+      ],
+      "predicted_nodes": [
+        "Game Server Layer – Master (Erlang/OTP::OTP Game Server – Master"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the master Erlang/OTP game server node. The package naming is equivalent and correctly placed in the game server master boundary."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Slave\nErlang"
+      ],
+      "predicted_nodes": [
+        "Game Server Layer – Replica (Erlang/OTP::OTP Game Server – Replica"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the replica/slave server node used for fault tolerance. The boundary is semantically consistent with the GT cluster slave role."
+    },
+    {
+      "gt_nodes": [
+        "Global::Erlang / OTP Game Server Cluster"
+      ],
+      "predicted_nodes": [
+        "Global::External Systems"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is the game server cluster as a system-level grouping, while the predicted node is a generic external-systems container. This is not a faithful semantic match and indicates a boundary/context mismatch."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Browser Clients::Client Browser\nPlayer 1",
+    "Browser Clients::Client Browser\nPlayer 2",
+    "Browser Clients::Client Browser\nPlayer 3"
+  ],
+  "unmatched_predicted_nodes": [
+    "Client Layer (Browser::Heartbeat Timer /\nPing-Pong Handler",
+    "Client Layer (Browser::Inbound Action Dispatcher",
+    "Client Layer (Browser::Message Serializer /\nDeserializer",
+    "Client Layer (Browser::Page / Window Controller",
+    "Client Layer (Browser::Reconnect Context Store",
+    "Client Layer (Browser::Room Manager",
+    "Client Layer (Browser::Server List Manager",
+    "Client Layer (Browser::Three.js Renderer",
+    "Client Layer (Browser::WebSocket Manager"
+  ]
+}

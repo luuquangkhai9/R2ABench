@@ -1,0 +1,93 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "ClearML Server::Backend Service API"
+      ],
+      "predicted_nodes": [
+        "ClearML Server::Backend Services::API Gateway",
+        "ClearML Server::Backend Services::Events Service v2.5",
+        "ClearML Server::Backend Services::Models Service v2.4"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Backend Service API is split into API Gateway and specific versioned services (Events, Models) in the predicted nodes, all correctly placed within the ClearML Server boundary."
+    },
+    {
+      "gt_nodes": [
+        "ClearML Server::ML Ops::Execution Queue"
+      ],
+      "predicted_nodes": [
+        "ClearML Server::Backend Services::Execution Queue"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Execution Queue. The boundary difference (ML Ops vs Backend Services) is semantically equivalent under the broader ClearML Server context."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\nOn Prem or Cloud::Kubernetes Glue"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Kubernetes Glue Mode",
+        "Kubernetes Cluster::Kubernetes Glue Mode::K8s Glue Adapter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Kubernetes Glue node is split into the execution mode and its specific adapter in the predicted nodes. The boundary 'GPU / Kubernetes Workers' translates to 'Kubernetes Cluster', which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\nOn Prem or Cloud::Kubernetes Job"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Kubernetes Glue Mode::Kubernetes Job(s"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Kubernetes Job executed in the cluster environment."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\nOn Prem or Cloud::ClearML Agent\nService Pod"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Service Pod Mode",
+        "Kubernetes Cluster::Service Pod Mode::Pod: clearml-agent",
+        "Kubernetes Cluster::Service Pod Mode::Pod: clearml-agent::ClearML Agent",
+        "Kubernetes Cluster::Service Pod Mode::Pod: clearml-agent::Worker Telemetry",
+        "Kubernetes Cluster::Service Pod Mode::Pod: clearml-agent::Backend Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT ClearML Agent Service Pod is detailed by the AI into various components including the mode, agent process, worker telemetry, and backend client. All are placed correctly under the Kubernetes cluster boundary."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\nOn Prem or Cloud::Mapped Docker Socket\nSibling Containers"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Service Pod Mode::Pod: clearml-agent::Docker Socket (/var/run/docker.sock"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the mapped Docker socket used for sibling container management, properly situated within the worker/cluster pod boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "ClearML Server::Experiment Manager::Collaboration",
+    "ClearML Server::Experiment Manager::Data Tracking",
+    "ClearML Server::Experiment Manager::Versioning",
+    "ClearML Server::Experiment Manager::Visualization",
+    "ClearML Server::ML Ops::Monitoring",
+    "ClearML Server::ML Ops::Orchestration",
+    "Data Scientist Environment::ClearML Snippet",
+    "Data Scientist Environment::Python ML / DL Code",
+    "GPU / Kubernetes Workers\nOn Prem or Cloud::Pod Execution Environment\nand Docker User Code",
+    "GPU / Kubernetes Workers\nOn Prem or Cloud::YAML Job Template"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::ClearML Server",
+    "Global::Kubernetes Cluster"
+  ]
+}

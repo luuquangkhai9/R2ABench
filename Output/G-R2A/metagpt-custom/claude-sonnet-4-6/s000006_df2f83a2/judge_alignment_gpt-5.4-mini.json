@@ -1,0 +1,169 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Simulator"
+      ],
+      "predicted_nodes": [
+        "Build Layer::SimulatorBuilder",
+        "Simulation Core Layer::GymSimulatorWrapper",
+        "File-System / Artifact Layer::Standalone Simulator\nPackage"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT simulator is split across builder, runtime wrapper, and packaged output. These predicted nodes collectively represent the simulator composition and produced simulator artifact, with semantically appropriate boundaries for build/runtime/artifact concerns."
+    },
+    {
+      "gt_nodes": [
+        "Biomechanical Model::BaseBMModel",
+        "Biomechanical Model::DerivedClass",
+        "Biomechanical Model::MoblArmsIndex"
+      ],
+      "predicted_nodes": [
+        "Simulation Core Layer::BiomechanicalModel"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node aggregates the GT biomechanical model hierarchy into a single abstract/implementation container. Boundary attribution remains consistent with the biomechanical model domain."
+    },
+    {
+      "gt_nodes": [
+        "Interaction Task::BaseTask",
+        "Interaction Task::DerivedClass",
+        "Interaction Task::Pointing",
+        "Interaction Task::Tracking"
+      ],
+      "predicted_nodes": [
+        "Simulation Core Layer::InteractionTask"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node consolidates the GT interaction task hierarchy into one task component. The boundary is semantically correct for the task domain."
+    },
+    {
+      "gt_nodes": [
+        "Perception::BaseModule",
+        "Perception::DerivedClass",
+        "Perception::Perception",
+        "Perception::Modalities::Modality"
+      ],
+      "predicted_nodes": [
+        "Perception Layer::PerceptionModule\n(Abstract Base"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node captures the GT perception base/module abstraction and modality-based organization at a higher level. The perception layer attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Perception::BasicWithEEPos"
+      ],
+      "predicted_nodes": [
+        "Perception Layer::ProprioceptionModule"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "This is likely intended to represent a proprioception-related perception implementation, but the specific GT node is a concrete combined perception module and the predicted node is a generic proprioception module. The semantic overlap is partial, but the mapping is not precise enough to confirm equivalence."
+    },
+    {
+      "gt_nodes": [
+        "Perception::FixedEye"
+      ],
+      "predicted_nodes": [
+        "Perception Layer::EgocentricVisionModule"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT fixed-eye perception aligns with an egocentric vision module. The perception layer boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Perception::Modalities::Proprioception"
+      ],
+      "predicted_nodes": [
+        "Perception Layer::ProprioceptionModule"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The modality-specific proprioception node matches the predicted proprioception module, and the perception layer attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Perception::Modalities::Vision"
+      ],
+      "predicted_nodes": [
+        "Perception Layer::EgocentricVisionModule"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The modality-specific vision node matches the predicted egocentric vision module, which is an appropriate concrete realization of vision perception."
+    },
+    {
+      "gt_nodes": [
+        "File-System / Artifact Layer::YAML Config Files"
+      ],
+      "predicted_nodes": [
+        "File-System / Artifact Layer::YAML Config Files"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact semantic match and the file-system/artifact boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "File-System / Artifact Layer::MuJoCo XML Assets"
+      ],
+      "predicted_nodes": [
+        "File-System / Artifact Layer::MuJoCo XML Assets",
+        "File-System / Artifact Layer::Merged MuJoCo XML\n(Integrated Asset"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT MuJoCo XML asset space is split into source XML assets and the merged integrated XML artifact. This is a valid decomposition within the same artifact boundary."
+    },
+    {
+      "gt_nodes": [
+        "File-System / Artifact Layer::Run Folder"
+      ],
+      "predicted_nodes": [
+        "File-System / Artifact Layer::Run Folder\n(checkpoints/ | training_outputs/",
+        "File-System / Artifact Layer::evaluate/ Directory",
+        "Evaluation Layer::CheckpointManager",
+        "Evaluation Layer::EvaluationRunner",
+        "Evaluation Layer::ActionLogger"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT run-folder/evaluation artifact concept is expanded into explicit run-folder structure, checkpoint handling, evaluation directory, and evaluation behaviors. The artifact boundary is appropriate, and the evaluation-related components are correctly placed in evaluation/build-adjacent layers."
+    },
+    {
+      "gt_nodes": [
+        "File-System / Artifact Layer::Standalone Simulator\nPackage"
+      ],
+      "predicted_nodes": [
+        "File-System / Artifact Layer::Standalone Simulator\nPackage",
+        "Simulation Core Layer::GymSimulatorWrapper",
+        "Global::OpenAI Gym\n(Interface Contract"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The standalone package corresponds to a Gym-compatible simulator wrapper and the Gym interface contract. Although split, the architectural attribution is consistent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Perception::BasicWithEEPos"
+  ],
+  "unmatched_predicted_nodes": [
+    "Build Layer::MuJoCoXMLIntegrator",
+    "Evaluation Layer::ActionLogger",
+    "Evaluation Layer::CheckpointManager",
+    "Evaluation Layer::EvaluationRunner",
+    "Global::MuJoCo\n(Physics Engine",
+    "Global::OpenAI Gym\n(Interface Contract",
+    "Perception Layer::EgocentricVisionModule",
+    "Perception Layer::PerceptionModule\n(Abstract Base",
+    "Perception Layer::ProprioceptionModule",
+    "Simulation Core Layer::GymSimulatorWrapper",
+    "Training Layer::RLTrainingRunner"
+  ]
+}

@@ -1,0 +1,84 @@
+@startuml
+!define RECTANGLE class
+!define DATABASE rectangle
+!define COMPONENT component
+!define INTERFACE interface
+
+title Configuration Anomaly Detection (CAD) System Architecture
+
+' High-level containers
+package "External Systems" {
+    RECTANGLE PagerDuty
+    RECTANGLE AWS
+    RECTANGLE OCM
+}
+
+package "User Environment" {
+    RECTANGLE "SRE / Operations User"
+    RECTANGLE "Deployment Engineer"
+    RECTANGLE "Developer / Contributor"
+}
+
+package "CAD System" {
+    COMPONENT "CLI Tool (cadctl)" as CLI
+    COMPONENT "Integration Library" as Integrations
+    package "Tekton Execution Layer" {
+        COMPONENT "EventListener" as EventListener
+        COMPONENT "Trigger" as Trigger
+        COMPONENT "PipelineRun" as PipelineRun
+    }
+    COMPONENT "Template Update Utility" as TemplateUpdater
+}
+
+' Interfaces
+INTERFACE "Alert Webhook Input" as WebhookInput
+INTERFACE "Direct Pipeline Invocation" as DirectInvoke
+INTERFACE "Communication Interfaces" as CommInterfaces
+
+' Connections
+"SRE / Operations User" --> CLI : Uses
+"Deployment Engineer" --> EventListener : Triggers via\nWebhook
+"Deployment Engineer" --> DirectInvoke : Creates\nPipelineRun
+"Developer / Contributor" --> CLI : Extends
+"Developer / Contributor" --> Integrations : Extends
+"Developer / Contributor" --> TemplateUpdater : Maintains
+
+CLI --> Integrations : Utilizes
+Integrations --> PagerDuty : Communicates
+Integrations --> AWS : Communicates
+Integrations --> OCM : Communicates
+
+WebhookInput --> EventListener : Receives Alerts
+EventListener --> Trigger : Activates
+Trigger --> PipelineRun : Initiates
+DirectInvoke --> PipelineRun : Bypasses\nEventListener
+
+PipelineRun --> CLI : Executes cadctl
+TemplateUpdater --> "Deployment Templates" : Updates
+
+note right of CLI
+  Entry point for all CAD workflows
+  Handles CHGM alerts and anomaly detection
+end note
+
+note right of EventListener
+  Standard event-driven execution path
+  Receives external alert webhooks
+end note
+
+note right of DirectInvoke
+  Skip-webhook execution path
+  Directly creates PipelineRun resources
+end note
+
+note right of Integrations
+  Package-level integration code
+  Supports PagerDuty, AWS, and OCM
+end note
+
+note right of TemplateUpdater
+  Updates deployment template artifacts
+  Used for maintenance purposes
+end note
+
+@enduml

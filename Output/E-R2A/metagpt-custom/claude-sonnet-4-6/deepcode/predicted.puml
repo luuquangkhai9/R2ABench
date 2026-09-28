@@ -1,0 +1,232 @@
+@startuml DeepCode_Architecture_Refined
+
+skinparam packageStyle rectangle
+skinparam componentStyle uml2
+skinparam backgroundColor #FAFAFA
+skinparam package {
+  BorderColor #555555
+  FontStyle bold
+  FontSize 13
+}
+skinparam component {
+  BackgroundColor #DDEEFF
+  BorderColor #336699
+  FontSize 11
+}
+skinparam node {
+  BackgroundColor #EEF5EE
+  BorderColor #3A7A3A
+  FontSize 12
+}
+skinparam database {
+  BackgroundColor #FFF8DC
+  BorderColor #B8860B
+}
+skinparam cloud {
+  BackgroundColor #F0F0FF
+  BorderColor #6666AA
+}
+
+' ─────────────────────────────────────────────
+' EXTERNAL SYSTEMS
+' ─────────────────────────────────────────────
+cloud "External Systems" {
+  component [LLM Service\n(via LangChain4j)] as LLM
+  component [SMTP Mail Service] as SMTP
+  component [CDN] as CDN
+}
+
+cloud "Observability & Alerting" {
+  component [Prometheus] as Prometheus
+  component [Grafana] as Grafana
+  component [PagerDuty] as PagerDuty
+  component [DingTalk Robot] as DingTalk
+}
+
+cloud "CI/CD & Registry" {
+  component [GitLab\n(Source + CI/CD)] as GitLab
+  component [Docker Private\nImage Registry] as DockerRegistry
+  component [Apache JMeter 5.6.13\n(Performance Testing)] as JMeter
+}
+
+' ─────────────────────────────────────────────
+' KUBERNETES CLUSTER
+' ─────────────────────────────────────────────
+node "Kubernetes Cluster" as K8s {
+
+  ' ───────────────────────────────────────────
+  ' FRONTEND LAYER
+  ' ───────────────────────────────────────────
+  package "Frontend Layer" #E8F4FD {
+    component [VueFrontend\n(Vue 3 SPA)\n- vue-router\n- Vuex Store\n- CodeMirror / wangEditor / ECharts\n- Axios HTTP Client] as VueFrontend
+  }
+
+  ' ───────────────────────────────────────────
+  ' PROXY LAYER
+  ' ───────────────────────────────────────────
+  package "Proxy Layer" #EDF7ED {
+    component [NginxProxy\n- HTTPS Termination\n- Reverse Proxy\n- Static Asset Routing\n- Port Policy] as NginxProxy
+  }
+
+  ' ───────────────────────────────────────────
+  ' PRESENTATION LAYER
+  ' ───────────────────────────────────────────
+  package "Presentation Layer" #FFF3E0 {
+    component [REST Controllers\n(Spring Boot)\n- JSON Serialize/Deserialize\n- Request Mapping] as RestControllers
+    component [Swagger\n(API Documentation\n& Debug Interface)] as Swagger
+  }
+
+  ' ───────────────────────────────────────────
+  ' BUSINESS LAYER
+  ' ───────────────────────────────────────────
+  package "Business Layer" #FCF0FF {
+    component [AuthFilterChain\n(JWT / OAuth 2.0\nRole-Based Permissions)] as AuthFilterChain
+    component [Interceptor\n(Spring MVC Interceptor\n- Request Logging\n- Pre/Post Processing)] as Interceptor
+    component [WebFlux Pipeline\n(Reactive Stream\n- AI Response Streaming)] as WebFlux
+    component [UserService\n- Registration / Login\n- Profile / Activity\n- Admin Management] as UserService
+    component [ProblemService\n- Browse / Upload\n- Review Workflow\n- Test-Case Coordination] as ProblemService
+    component [JudgeOrchestrator\n- Submission Dispatch\n- Result Surfacing\n- Metadata Recording] as JudgeOrchestrator
+    component [SolutionService\n- Publish / Edit / Delete\n- Likes / Comments\n- Access Control] as SolutionService
+    component [ForumService\n- Posts / Comments / Replies\n- Reports / Drafts\n- Sensitive-Word Check] as ForumService
+    component [AIService\n(LangChain4j)\n- Recommendation\n- Code Explanation\n- AI Review\n- @AI Replies\n- Cooldown Enforcement] as AIService
+  }
+
+  ' ───────────────────────────────────────────
+  ' JUDGING SUBSYSTEM LAYER
+  ' ───────────────────────────────────────────
+  node "Judging Subsystem" as JudgingSubsystem {
+    node "JudgeHost Container (Docker + seccomp)" as JudgeHostNode {
+      component [JudgeHost\n- HTTP Endpoint\n- Thread Pool & Queue\n- Test-Case Fetcher] as JudgeHost
+    }
+    node "JudgeCore Container (Docker + seccomp)" as JudgeCoreNode {
+      component [JudgeCore\n- Sandboxed Execution\n- CPU / Memory / Output Limits\n- syscall Restrictions\n- Result & Resource Metrics] as JudgeCore
+    }
+    component [JudgeStorageClient\n(MinIO SDK)\n- Fetch Test-Case Files] as JudgeStorageClient
+  }
+
+  ' ───────────────────────────────────────────
+  ' ACCESS LAYER
+  ' ───────────────────────────────────────────
+  package "Access Layer" #FFFFF0 {
+    component [UserRepository] as UserRepo
+    component [ProblemRepository] as ProblemRepo
+    component [RecordRepository] as RecordRepo
+    component [SolutionRepository] as SolutionRepo
+    component [ForumRepository] as ForumRepo
+    component [FollowRepository] as FollowRepo
+    component [LanguageRepository] as LanguageRepo
+    component [AIResultRepository] as AIResultRepo
+    component [CacheClient\n(Redis Client)\n- Sessions / Counters\n- Rate-Limit Counters\n- Token Blacklist] as CacheClient
+    component [ObjectStorageClient\n(MinIO SDK)\n- Images / Test Cases\n- Binary Assets] as ObjectStorageClient
+  }
+
+  ' ───────────────────────────────────────────
+  ' DATA STORES
+  ' ───────────────────────────────────────────
+  package "Data Stores" #F5F5DC {
+    database "MySQL\n(Persistent Business Data)" as MySQL
+    database "Redis\n(Cache & Session Store)" as Redis
+    database "MinIO\n(Object Storage)" as MinIO
+  }
+
+} ' end Kubernetes Cluster
+
+' ─────────────────────────────────────────────
+' CI/CD DEPLOYS TO CLUSTER (external → cluster)
+' ─────────────────────────────────────────────
+GitLab --> DockerRegistry : Build & push Docker images
+DockerRegistry --> K8s : Pull images on deploy
+GitLab --> K8s : Deploy / scale / rollback
+
+' ─────────────────────────────────────────────
+' RELATIONSHIPS
+' ─────────────────────────────────────────────
+
+' --- Frontend ↔ Proxy / CDN ---
+VueFrontend --> NginxProxy : HTTPS API calls\n(client resolves via DNS)
+VueFrontend --> CDN : Static assets\n(JS / CSS / Images)
+
+' --- Proxy → Presentation ---
+NginxProxy --> RestControllers : Intranet HTTP\n(API forwarding)
+
+' --- Presentation internals ---
+RestControllers --> Swagger : Expose API docs\n& debug interface
+
+' --- Presentation → Auth + Interceptor + Business ---
+RestControllers --> AuthFilterChain : Every protected request
+RestControllers --> Interceptor : Pre/post request processing
+RestControllers --> UserService
+RestControllers --> ProblemService
+RestControllers --> JudgeOrchestrator
+RestControllers --> SolutionService
+RestControllers --> ForumService
+RestControllers --> AIService
+RestControllers --> WebFlux : Stream AI responses\nto client
+
+' --- Auth → UserRepo + CacheClient ---
+AuthFilterChain --> UserRepo : Validate JWT / roles\n(is_admin, disabled)
+AuthFilterChain --> CacheClient : Token blacklist /\nsession invalidation lookup
+
+' --- Business cross-calls ---
+AIService --> ForumService : @AI replies after cooldown
+AIService --> CacheClient : Cache AI result refs /\ncooldown counters
+AIService --> AIResultRepo : Persist AI analysis results\n(durable storage)
+AIService --> WebFlux : Push streaming response
+
+' --- UserService ---
+UserService --> UserRepo
+UserService --> FollowRepo : Follow / unfollow\n& social graph
+UserService --> CacheClient : Session / token caching
+UserService --> SMTP : Email notifications
+
+' --- ProblemService ---
+ProblemService --> ProblemRepo
+ProblemService --> RecordRepo : Retrieve submission records\nfor problem detail view
+ProblemService --> LanguageRepo : Fetch supported languages
+ProblemService --> ObjectStorageClient : Store / read test cases & images
+ProblemService --> CacheClient : Cache high-frequency\nproblem data
+ProblemService --> SMTP : Notify submitter\nof review result
+
+' --- JudgeOrchestrator ---
+JudgeOrchestrator --> RecordRepo : Record submission metadata
+JudgeOrchestrator --> JudgeHost : HTTP judging request / result
+
+' --- SolutionService ---
+SolutionService --> SolutionRepo
+SolutionService --> ObjectStorageClient : Store / retrieve\nembedded media & images
+
+' --- ForumService ---
+ForumService --> ForumRepo
+ForumService --> CacheClient : Cache high-frequency\nforum data
+
+' --- AIService → LLM ---
+AIService --> LLM : LangChain4j calls
+
+' --- Judging Subsystem internal ---
+JudgeHost --> JudgeStorageClient : Fetch test-case files
+JudgeStorageClient --> MinIO : Direct object storage access
+JudgeHost --> JudgeCore : Spawn sandboxed execution\n(code path, input, limits)
+
+' --- Access Layer → Data Stores ---
+UserRepo --> MySQL
+ProblemRepo --> MySQL
+RecordRepo --> MySQL
+SolutionRepo --> MySQL
+ForumRepo --> MySQL
+FollowRepo --> MySQL
+LanguageRepo --> MySQL
+AIResultRepo --> MySQL
+CacheClient --> Redis
+ObjectStorageClient --> MinIO
+
+' --- Observability ---
+MonitoringAgent --> Prometheus : Export metrics
+Prometheus --> Grafana : Feed dashboards
+Prometheus --> PagerDuty : Threshold alerts
+Prometheus --> DingTalk : Threshold alerts
+
+' MonitoringAgent placed as external note reference
+component [MonitoringAgent\n(Prometheus Exporter)\n- CPU / Mem / Disk / QPS] as MonitoringAgent
+K8s --> MonitoringAgent : Emit cluster metrics
+
+@enduml

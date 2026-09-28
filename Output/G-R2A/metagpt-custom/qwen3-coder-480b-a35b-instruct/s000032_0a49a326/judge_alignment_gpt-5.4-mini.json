@@ -1,0 +1,121 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Gateway"
+      ],
+      "predicted_nodes": [
+        "API Layer::API Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the gateway entry point for routed access into the platform. The boundary names differ, but the architectural role is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::SSO/IDM\\n(Keycloak"
+      ],
+      "predicted_nodes": [
+        "Security Layer::Keycloak",
+        "API Layer::Authentication Gateway"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT identity provider is decomposed into a Keycloak security component and an authentication gateway in the prediction. The Keycloak boundary is correct, and the added authentication gateway is consistent with the authentication flow context."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::Process\\nRuntime"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Activiti Runtime Bundle",
+        "Service Layer::ProcessRuntime API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Runtime Bundle and Process Runtime are represented as the Activiti runtime bundle plus its ProcessRuntime API. This is a reasonable split and remains within the correct service/runtime boundary."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Runtime Bundle::BPMN, Form\\nand Rule Defs"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Activiti Runtime Bundle"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The deployed process definitions, forms, and rules are encompassed by the Activiti runtime bundle in the prediction. The semantic match is correct."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Audit\\nService"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Audit Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the audit service used to inspect events for the just-started process instance. Boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Query\\nService"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Query Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the query service providing process execution information. Boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Notification\\nService"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Notification Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The notification service is semantically equivalent in both lists, and the service boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Customer\\nLogic",
+        "Activiti Cloud Infrastructure::Activiti Cloud Application::Cloud Connectors::Out of the\\nBox Services"
+      ],
+      "predicted_nodes": [
+        "Service Layer::Cloud Connectors"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT contains multiple cloud connector subnodes that are aggregated into one Cloud Connectors node in the prediction. This is a valid merge and stays in the correct architectural area."
+    },
+    {
+      "gt_nodes": [
+        "Activiti Cloud Infrastructure::Config Maps\\n(Kubernetes",
+        "Activiti Cloud Infrastructure::Registry\\n(Kubernetes"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Layer::Kubernetes / GKE::Kubernetes Registry/Config Maps"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separates registry and config maps, while the prediction aggregates them under Kubernetes registry/config maps. This is semantically equivalent and boundary-consistent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Client"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::External Users & Systems",
+    "Infrastructure Layer::Kubernetes / GKE",
+    "Infrastructure Layer::Kubernetes / GKE::Deployment Descriptors",
+    "Infrastructure Layer::Kubernetes / GKE::NGINX Ingress Controller",
+    "Infrastructure Layer::Kubernetes / GKE::Persistent Storage",
+    "Presentation Layer::Cluster Commands",
+    "Presentation Layer::Developer Actions",
+    "Presentation Layer::REST/API Requests",
+    "Security Layer::Spring Security"
+  ]
+}

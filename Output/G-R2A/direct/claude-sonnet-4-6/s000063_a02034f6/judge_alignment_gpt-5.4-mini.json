@@ -1,0 +1,205 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Access Layer::Auth Session"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go Runtime)::Client Access Layer::Encrypted Session Manager\\n(FR-003, DR-003"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the client session/auth-session handling in the access/client-facing layer. The predicted node is more specific but semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Gateway"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go Runtime)::Client Access Layer::MTProto Gateway\\n(FR-001, NFR-002"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the MTProto-facing gateway for client communication, and the boundary matches the access/client layer."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Session"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go Runtime)::Client Access Layer::Encrypted Session Manager\\n(FR-003, DR-003"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT session node is represented by the predicted encrypted session manager. This is a reasonable semantic match within the same client access layer."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Status"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go Runtime)::Client Access Layer::MTProto Gateway\\n(FR-001, NFR-002"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted MTProto gateway does not specifically correspond to status handling; this is an overly broad or mismatched mapping."
+    },
+    {
+      "gt_nodes": [
+        "Global::BFF"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go Runtime)::BFF / Access-Facing Service Layer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the BFF/access-facing service layer. The boundary attribution is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Services::Kafka\\n(Message Broker",
+        "Teamgram Server (Go Runtime)::Storage-Facing & Async Components::Message Queue Producer/Consumer\\n(Kafka Adapter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Kafka node is split into the external infrastructure service and the internal Kafka adapter. This is semantically correct and boundary placement is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::Push"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go Runtime)::Storage-Facing & Async Components::Push & Sync Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted push & sync service matches the GT push-related component and is placed in a suitable async/supporting area."
+    },
+    {
+      "gt_nodes": [
+        "Global::Sync"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go Runtime)::Storage-Facing & Async Components::Push & Sync Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT sync component is represented as part of the combined push & sync service. This is an acceptable aggregation."
+    },
+    {
+      "gt_nodes": [
+        "Services::DFS"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go Runtime)::Storage-Facing & Async Components::Object Store Client\\n(MinIO Adapter"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "DFS is plausibly represented by the object store client backed by MinIO. The storage-facing boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Services::Msg"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go Runtime)::Business / Service Layer::Messaging Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The messaging service corresponds directly to the GT message service and is placed in the business/service layer correctly."
+    },
+    {
+      "gt_nodes": [
+        "Services::Services"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go Runtime)::Business / Service Layer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT generic services node is captured by the business/service layer aggregate. This is a valid consolidation."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MinIO"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Services::MinIO\\n(Object Storage",
+        "Teamgram Server (Go Runtime)::Storage-Facing & Async Components::Object Store Client\\n(MinIO Adapter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The storage node is split into the external MinIO service and the internal adapter. Boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "Storages::MySQL"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Services::MySQL\\n(Persistent Storage",
+        "Teamgram Server (Go Runtime)::Storage-Facing & Async Components::Data Access Layer\\n(MySQL Adapter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT MySQL storage node is properly split into infrastructure and adapter components, with correct boundary semantics."
+    },
+    {
+      "gt_nodes": [
+        "Storages::Redis"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Services::Redis\\n(Cache / Session Store",
+        "Teamgram Server (Go Runtime)::Storage-Facing & Async Components::Cache Manager\\n(Redis Adapter"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The Redis storage node is split into the external Redis service and internal cache adapter, which is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Access Layer::Auth Session",
+        "Access Layer::Session"
+      ],
+      "predicted_nodes": [
+        "Teamgram Server (Go Runtime)::Client Access Layer::Encrypted Session Manager\\n(FR-003, DR-003"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The two GT session-related access-layer nodes are reasonably merged into a single encrypted session manager within the client access layer."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Clients::Android",
+    "Clients::PC",
+    "Clients::Web",
+    "Clients::iOS",
+    "Access Layer::Status"
+  ],
+  "unmatched_predicted_nodes": [
+    "Deployment Infrastructure\\n(NFR-003, C-003::Docker-Based Startup",
+    "Deployment Infrastructure\\n(NFR-003, C-003::Manual Build / Install",
+    "External Services::External Verification\\nCode Service\\n(FR-009, C-004",
+    "Global::Deployment Infrastructure\\n(NFR-003, C-003",
+    "Global::External Services",
+    "Global::Infrastructure Services",
+    "Global::Teamgram Server (Go Runtime",
+    "Global::Telegram-Compatible Clients",
+    "Infrastructure Services::etcd\\n(Service Discovery",
+    "Teamgram Server (Go Runtime::BFF / Access-Facing Service Layer::RPC Dispatcher",
+    "Teamgram Server (Go Runtime::BFF / Access-Facing Service Layer::Registration & Phone\\nVerification Handler\\n(FR-004, DR-004",
+    "Teamgram Server (Go Runtime::BFF / Access-Facing Service Layer::Session ID Manager\\n(FR-005, DR-003",
+    "Teamgram Server (Go Runtime::BFF / Access-Facing Service Layer::Verification Code Service\\n(FR-009",
+    "Teamgram Server (Go Runtime::Business / Service Layer::Account & Auth Service",
+    "Teamgram Server (Go Runtime::Business / Service Layer::Channel & Group Service",
+    "Teamgram Server (Go Runtime::Business / Service Layer::User & Contact Service",
+    "Teamgram Server (Go Runtime::Client Access Layer::Authorization Key Handler\\n(FR-002, DR-001",
+    "Teamgram Server (Go Runtime::Client Access Layer::Server Salt / Future Salt Handler\\n(FR-002, FR-008, DR-002",
+    "Teamgram Server (Go Runtime::Client Access Layer::Service Message Processor\\nrpc_drop_answer | destroy_session\\n(FR-006, FR-007, DR-005",
+    "Teamgram Server (Go Runtime::Optional Media Processing",
+    "Teamgram Server (Go Runtime::Optional Media Processing::FFmpeg/FFProbe Wrapper\\n(NFR-004, C-005",
+    "Telegram-Compatible Clients::Mobile / Desktop Clients"
+  ]
+}

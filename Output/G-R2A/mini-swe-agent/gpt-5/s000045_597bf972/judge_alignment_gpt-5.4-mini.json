@@ -1,0 +1,114 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Application"
+      ],
+      "predicted_nodes": [
+        "Host Android Application::Host Android Application"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the host Android application that integrates the QAPM SDK."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM-SDK"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK::UploadProcessor",
+        "QAPM SDK::WorkHandlerManager",
+        "QAPM SDK::DataSender",
+        "QAPM SDK::HttpClientInstrumentation::CountingInputStream",
+        "QAPM SDK::HttpClientInstrumentation::ResponseEntityWrapper",
+        "QAPM SDK::HttpClientInstrumentation::ResponseHandlerWrapper",
+        "QAPM SDK::HttpClientInstrumentation::TransactionState"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT SDK node is a coarse container and the predicted nodes are reasonable functional decompositions within the QAPM SDK scope. The boundary attribution remains within the SDK."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Storage"
+      ],
+      "predicted_nodes": [
+        "Local Storage::Upload Directory"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent local storage used for upload files; the predicted boundary is a semantically equivalent storage location."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Report"
+      ],
+      "predicted_nodes": [
+        "Remote Systems::Remote Reporting Endpoint"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the reporting destination/endpoint aspect of the SDK, with equivalent semantics at the architecture level."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_SDK::QAPM_Collect"
+      ],
+      "predicted_nodes": [
+        "Android Platform::Context",
+        "Android Platform::NetworkConnectivityService",
+        "Apache HttpClient Library::HttpClient",
+        "Apache HttpClient Library::HttpEntity",
+        "Apache HttpClient Library::ResponseHandler",
+        "Android Platform::HandlerThread/Looper",
+        "Android Platform::Main Looper"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "These predicted nodes are support platform/library dependencies rather than the QAPM collection module itself. The GT collection boundary is not semantically reproduced; this is a boundary/context mismatch."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_Plugin::QAPM_Plugin"
+      ],
+      "predicted_nodes": [
+        "QAPM SDK::WorkHandlerManager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node is an SDK work-scheduling component, not the QAPM plugin. This is a clear semantic mismatch."
+    },
+    {
+      "gt_nodes": [
+        "QAPM_Plugin::Plugin init compile"
+      ],
+      "predicted_nodes": [],
+      "match_type": "unmatched",
+      "is_boundary_correct": false,
+      "reasoning": "No predicted node corresponds to the plugin initialization/compile-time behavior."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "QAPM_Plugin::Plugin init compile",
+    "QAPM_Plugin::QAPM_Plugin",
+    "QAPM_SDK::QAPM_Collect"
+  ],
+  "unmatched_predicted_nodes": [
+    "Android Platform::Context",
+    "Android Platform::HandlerThread/Looper",
+    "Android Platform::Main Looper",
+    "Android Platform::NetworkConnectivityService",
+    "Apache HttpClient Library::HttpClient",
+    "Apache HttpClient Library::HttpEntity",
+    "Apache HttpClient Library::ResponseHandler",
+    "Local Storage::Upload Directory",
+    "QAPM SDK::DataSender",
+    "QAPM SDK::HttpClientInstrumentation::CountingInputStream",
+    "QAPM SDK::HttpClientInstrumentation::ResponseEntityWrapper",
+    "QAPM SDK::HttpClientInstrumentation::ResponseHandlerWrapper",
+    "QAPM SDK::HttpClientInstrumentation::TransactionState",
+    "QAPM SDK::UploadProcessor",
+    "QAPM SDK::WorkHandlerManager",
+    "Remote Systems::Remote Reporting Endpoint"
+  ]
+}

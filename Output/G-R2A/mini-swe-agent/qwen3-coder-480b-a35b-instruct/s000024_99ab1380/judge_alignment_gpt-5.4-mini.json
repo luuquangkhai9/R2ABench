@@ -1,0 +1,137 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Internet"
+      ],
+      "predicted_nodes": [
+        "External Systems::Oracle Cloud Infrastructure"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both represent external/cloud-side infrastructure context, but the GT node is specifically the Internet boundary while the prediction generalizes it to OCI, which is a different semantic boundary."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Internet\\nGateway"
+      ],
+      "predicted_nodes": [
+        "OCI Jenkins Deployment System::OCI Networking\\n(VCN, Subnets, etc."
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The predicted node broadly covers OCI networking, but it does not specifically capture the Internet Gateway component and places it inside the deployment system rather than the OCI network boundary."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::NAT\\nGateway"
+      ],
+      "predicted_nodes": [
+        "OCI Jenkins Deployment System::NAT Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The component is functionally equivalent, but the GT places it inside the OCI network/VCN boundary whereas the AI places it inside the Jenkins deployment system boundary."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\\n(Public/Regional::Bastion\\nHost"
+      ],
+      "predicted_nodes": [
+        "OCI Jenkins Deployment System::Bastion Host"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The bastion host is semantically the same, but GT models it as an OCI subnet-resident infrastructure component, while the prediction incorrectly attributes it to the deployment system boundary."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Jenkins\\nController"
+      ],
+      "predicted_nodes": [
+        "OCI Jenkins Deployment System::Jenkins Master Instance"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Jenkins Controller and Jenkins Master Instance are semantically equivalent, but the GT places the node in a private OCI subnet boundary and the prediction places it in the deployment system boundary."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\\n(Private/Regional::Agent Node\\n(Fault Domain X",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\\n(Private/Regional::Agent Node\\n(Fault Domain Y"
+      ],
+      "predicted_nodes": [
+        "OCI Jenkins Deployment System::Jenkins Slave/Agent Instances"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The prediction correctly aggregates multiple GT agent nodes into one logical group, but the GT nodes are specific OCI subnet instances and the predicted node incorrectly places them in the deployment system boundary instead of OCI subnet boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Load Balancer\\n(primary",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Load Balancer\\n(standby"
+      ],
+      "predicted_nodes": [
+        "OCI Jenkins Deployment System::Load Balancer"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The prediction correctly merges the primary and standby load balancer nodes into one logical load balancer, but the GT locates them in the OCI public subnet boundary while the prediction places them in the deployment system boundary."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\\n(Public/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\\n(Public/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\\n(Private/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\\n(Private/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\\n(Private/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\\n(Private/Regional::Security List"
+      ],
+      "predicted_nodes": [
+        "OCI Jenkins Deployment System::OCI Networking\\n(VCN, Subnets, etc."
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The prediction aggregates multiple OCI networking artifacts, but the GT explicitly models separate route tables and security lists per subnet. The boundary attribution is also too coarse and shifted into the deployment system boundary."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Healthcheck"
+      ],
+      "predicted_nodes": [
+        "OCI Jenkins Deployment System::Load Balancer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT healthcheck node is closely tied to the load balancer topology, but it is not itself the load balancer. The prediction collapses related infrastructure into a generic load balancer node, losing the specific healthcheck component."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Load Balancer\\n(primary",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Load Balancer\\n(standby",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Route Table",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Security List",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\\n(Public/Regional::Route Table",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\\n(Public/Regional::Security List",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Healthcheck",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Route Table",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Security List",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\\n(Private/Regional::Route Table",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\\n(Private/Regional::Security List",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\\n(Private/Regional::Route Table",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\\n(Private/Regional::Security List"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::SSH Keys",
+    "OCI Jenkins Deployment System::OCI Networking\\n(VCN, Subnets, etc.",
+    "OCI Jenkins Deployment System::Terraform Configuration\\n(Jenkins Modules",
+    "Operator Environment::Deployment Operator",
+    "Operator Environment::Terraform CLI",
+    "Operator Environment::Variable Files\\n(terraform.tfvars"
+  ]
+}

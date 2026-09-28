@@ -1,0 +1,45 @@
+@startuml
+
+package "External Control Layer" {
+    component "User Application" as user_app
+}
+
+package "Management & Communication Layer" {
+    component "VMT Manager" as vmt_manager
+    component "Shared Memory Interface" as shared_mem
+    note right of shared_mem: JSON message exchange\nwith sync metadata\n(send count, handshake count,\nmessage length)
+}
+
+package "Driver Integration Layer" {
+    component "VMT Driver" as vmt_driver
+}
+
+package "Binding & Configuration Layer" {
+    database "Legacy Controller Binding File" as binding_file
+}
+
+cloud "SteamVR/OpenVR runtime" as steamvr_runtime
+
+' External dependencies notation
+component "OpenVR SDK" as openvr_sdk
+openvr_sdk -[hidden]dashed-> steamvr_runtime
+note top of openvr_sdk: External dependency
+
+' Core relationships
+user_app --> vmt_manager : "OSC protocol\n(external control input)"
+
+vmt_manager --> shared_mem : "writes JSON messages\n(manager-to-driver channel)"
+shared_mem --> vmt_driver : "reads JSON messages"
+
+vmt_driver --> shared_mem : "writes JSON messages\n(driver-to-manager channel)"
+shared_mem --> vmt_manager : "reads JSON messages"
+
+vmt_driver --> steamvr_runtime : "driver interface"
+
+' Corrected binding file dependency
+binding_file --> steamvr_runtime : "configuration\n(consumed by runtime)"
+
+' External dependencies
+steamvr_runtime --> vmt_driver : "hosts driver"
+
+@enduml

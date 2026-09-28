@@ -1,0 +1,79 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Browser Clients::Client Browser\\nPlayer 1",
+        "Browser Clients::Client Browser\\nPlayer 2",
+        "Browser Clients::Client Browser\\nPlayer 3"
+      ],
+      "predicted_nodes": [
+        "Browser Client::3D Renderer (Three.js",
+        "Browser Client::Game Reconnect Handler",
+        "Browser Client::Heartbeat Timer",
+        "Browser Client::Message Serializer/Deserializer",
+        "Browser Client::Page Reload Handler",
+        "Browser Client::Reconnection Handler",
+        "Browser Client::Room Player Count Display",
+        "Browser Client::Server List Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly decomposed the single logical 'Client Browser' component (represented as multiple instances in the GT) into its functional sub-components based on the SRS. The 'Browser Client' boundary is semantically equivalent to the GT's 'Browser Clients' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\\nErlang"
+      ],
+      "predicted_nodes": [
+        "Game Server (Master::Connection Manager",
+        "Game Server (Master::Game Logic Engine",
+        "Game Server (Master::Ping/Pong Handler",
+        "Game Server (Master::Room Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly split the 'Server Master' node into its core functional responsibilities, which are all described in the SRS. Using the master server itself as a boundary ('Game Server (Master') for its components is a valid alternative to placing it within the GT's 'Erlang / OTP Game Server Cluster' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Slave\\nErlang"
+      ],
+      "predicted_nodes": [
+        "Global::Replica Server (Slave"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The AI correctly identified the slave/replica server but misplaced it. It belongs in the server cluster ('Erlang / OTP Game Server Cluster') with the master, not in the 'Global' scope. This is a boundary-crossing error."
+    },
+    {
+      "gt_nodes": [
+        "Static Web Tier::Web Server\\nGame assets, HTML, CSS, JS"
+      ],
+      "predicted_nodes": [
+        "Global::Web Server",
+        "Web Server::Static Asset Server"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The AI correctly identified the web server's function but misplaced the main component in the 'Global' scope. The GT's 'Static Web Tier' is a more accurate boundary, and placing the web server at the same level as DNS is an error."
+    },
+    {
+      "gt_nodes": [
+        "Global::DNS"
+      ],
+      "predicted_nodes": [
+        "Global::DNS/Load Balancer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are functionally equivalent and correctly placed in the 'Global' scope. The addition of 'Load Balancer' is a reasonable inference for a distributed system."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Erlang / OTP Game Server Cluster"
+  ],
+  "unmatched_predicted_nodes": [
+    "Browser Client::Input Handler",
+    "Global::Game Server (Master"
+  ]
+}

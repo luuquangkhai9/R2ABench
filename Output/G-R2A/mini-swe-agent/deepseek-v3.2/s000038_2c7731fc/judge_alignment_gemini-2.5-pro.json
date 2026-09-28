@@ -1,0 +1,64 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Web2 application stack::Applications",
+        "Web3 application stack::Applications"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Redis Applications",
+        "Application Layer::Redis Applications::Pub/Sub Clients",
+        "Application Layer::Redis Applications::Redis Clients",
+        "Application Layer::SQL Protocol Clients",
+        "Application Layer::SQL Protocol Clients::SQL Clients"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": false,
+      "reasoning": "The AI predicted specific client applications from the PRD, which map semantically to the generic 'Applications' nodes in the GT. However, the AI failed to reproduce the Web2/Web3 stack boundaries."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::IceFireDB",
+        "Web3 application stack::IceFireDB"
+      ],
+      "predicted_nodes": [
+        "Middleware Layer::Internal SQL Handler",
+        "Middleware Layer::Internal SQL Handler::Packet Processor",
+        "Middleware Layer::Internal SQL Handler::Result Parser",
+        "Middleware Layer::PubSub System",
+        "Middleware Layer::PubSub System::Message Router",
+        "Middleware Layer::PubSub System::Peer Discovery",
+        "Middleware Layer::PubSub System::PubSub Core",
+        "Middleware Layer::Redis Proxy",
+        "Middleware Layer::Redis Proxy::Command Handler",
+        "Middleware Layer::Redis Proxy::Proxy Core",
+        "Middleware Layer::Redis Proxy::Synchronization Engine"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT diagram places IceFireDB as monolithic nodes within Web2 and Web3 stacks. The AI split IceFireDB into its detailed internal components based on the text but placed them in a generic 'Middleware Layer' instead of the GT's Web2/Web3 boundaries."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Web2 application stack::BlockChain Database\nTransactions, Contracts,\nCertificates and Receipts",
+    "Web2 application stack::File System\nLarge Files and Media",
+    "Web2 application stack::Platform",
+    "Web2 application stack::Processing\nBusiness Logic",
+    "Web3 application stack::BlockChain Database\nTransactions, Contracts,\nCertificates and Receipts",
+    "Web3 application stack::Decentralized File System\nLarge Files and Media",
+    "Web3 application stack::Decentralized Processing\nBusiness Logic",
+    "Web3 application stack::Platform"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Networks::Cross Network",
+    "External Networks::NAT/Private Network",
+    "External Networks::Same Network",
+    "Global::External Networks",
+    "Storage Layer::Peer Network",
+    "Storage Layer::Peer Network::Kademlia DHT",
+    "Storage Layer::Peer Network::Peer Routing",
+    "Storage Layer::Redis Storage",
+    "Storage Layer::Redis Storage::Redis Cluster",
+    "Storage Layer::Redis Storage::Standalone Redis"
+  ]
+}

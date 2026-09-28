@@ -1,0 +1,104 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Flutter-based app::Android"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Flutter/Dart Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted client node represents the same Flutter-based application family that includes Android as one supported target. The boundary is acceptable because it stays within the client layer."
+    },
+    {
+      "gt_nodes": [
+        "Flutter-based app::Dart"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Flutter/Dart Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node corresponds to the Dart client implementation used by the Flutter app. The client boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Flutter-based app::MacOS"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Flutter/Dart Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted client node covers the same multi-platform Flutter application, including macOS. Boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Flutter-based app::Web"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Flutter/Dart Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node represents the same Flutter client deployed to Web. The client boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Flutter-based app::iOS"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Flutter/Dart Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted client node includes the iOS target as part of the Flutter app. Boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Hosted in Azure Kubernetes Service"
+      ],
+      "predicted_nodes": [
+        "Deployment Environments::Azure Kubernetes Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the AKS deployment environment. The boundary/package name differs but is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::gRPC Gateway\\n(HTTP-gRPC Proxy)\\nGolang"
+      ],
+      "predicted_nodes": [
+        "API Gateway Layer::gRPC-Gateway"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node is the same gRPC-Gateway middleware component. The API Gateway Layer boundary is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Hosted in Azure Kubernetes Service::Docker container",
+        "Hosted in Azure Kubernetes Service::Docker container::Recipes Server\\n(gRPC Server)\\nGolang"
+      ],
+      "predicted_nodes": [
+        "Deployment Environments::Docker Container",
+        "Service Layer::Go gRPC Server"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT separates the Docker container environment from the contained recipe gRPC server, while the prediction splits them into deployment environment and service layer. However, the predicted service placement is too generic relative to the GT's explicit AKS-hosted containerized server stack, and the overall attribution introduces a boundary shift between deployment and runtime service context."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Postman",
+    "Global::Test Client 1\\nNodeJS",
+    "Global::Test Client 2\\nGolang"
+  ],
+  "unmatched_predicted_nodes": [
+    "Data Layer::Ingredient Store",
+    "Data Layer::Recipe Store",
+    "Deployment Environments::Kubernetes Cluster"
+  ]
+}

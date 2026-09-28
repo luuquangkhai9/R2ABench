@@ -1,0 +1,58 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::React Frontend\\n- Redux state management\\n- uploads images and audio\\n- controls and visualizes playback"
+      ],
+      "predicted_nodes": [
+        "Client Device::Frontend Layer::React Frontend",
+        "Client Device::Frontend Layer::Redux Store",
+        "Client Device::Frontend Layer::Waveform Player",
+        "Client Device::Frontend Layer::Form Validator"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single GT frontend node, which encompasses state management and playback control, is accurately split by the AI into more granular, functionally-related components. The 'Client Device::Frontend Layer' boundary is a more specific and correct representation for these components than the GT's 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Express Server\\n- fetches data with Sequelize\\n- serves React frontend\\n- handles backend API requests"
+      ],
+      "predicted_nodes": [
+        "Server Environment::Backend Layer::Express Backend",
+        "Server Environment::Backend Layer::Auth Service",
+        "Server Environment::Backend Layer::Feed Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The monolithic GT Express Server is correctly identified and further decomposed by the AI into logical services (Auth, Feed) based on the API interfaces described in the PRD. The 'Server Environment::Backend Layer' boundary is an accurate and standard architectural placement for these backend services."
+    },
+    {
+      "gt_nodes": [
+        "Global::PostgreSQL Database\\n- stores users and sounds\\n- stores Cloudinary URL references"
+      ],
+      "predicted_nodes": [
+        "Server Environment::Data Layer::PostgreSQL Database"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct 1:1 match for the application database. The AI correctly placed it in a 'Data Layer' within the 'Server Environment', which is a more refined and appropriate boundary than the GT's 'Global'."
+    },
+    {
+      "gt_nodes": [
+        "Global::Cloudinary\\n- stores audio files\\n- stores images\\n- returns file URLs"
+      ],
+      "predicted_nodes": [
+        "Server Environment::Data Layer::Cloudinary API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The nodes are semantically equivalent, referring to the external media storage service. However, the AI made a severe boundary error by placing Cloudinary, a third-party external service, inside the internal 'Server Environment'. The GT correctly represents it as a 'Global' component, external to the application's server."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Client Device",
+    "Global::Server Environment"
+  ]
+}

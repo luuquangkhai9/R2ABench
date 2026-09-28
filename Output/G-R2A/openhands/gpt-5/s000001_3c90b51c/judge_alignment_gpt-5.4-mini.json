@@ -1,0 +1,145 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Result"
+      ],
+      "predicted_nodes": [
+        "Data & Config::Result"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the allocation result object exchanged by the system. The predicted boundary is a reasonable semantic grouping for shared data/configuration artifacts."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tally"
+      ],
+      "predicted_nodes": [
+        "Data & Config::Tally"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the primary tally data model used as allocation input. The boundary placement is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::Parameters"
+      ],
+      "predicted_nodes": [
+        "Data & Config::Properties"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "GT 'Parameters' and predicted 'Properties' both denote configurable method/processor parameters. The boundary differs in wording but remains semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::ResultDecorators"
+      ],
+      "predicted_nodes": [
+        "JSeats Core (Java::Result Decorators",
+        "JSeats Core (Java::Result Decorators SPI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT single configuration node is split into the concrete decorator registry/implementation area and its SPI. This is a valid decomposition and remains within the same architectural concern."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::Seat Allocation\nMethod"
+      ],
+      "predicted_nodes": [
+        "JSeats Core (Java::Method Registry",
+        "JSeats Core (Java::Methods::Absolute Majority",
+        "JSeats Core (Java::Methods::Equal Proportions\n(Huntington-Hill",
+        "JSeats Core (Java::Methods::Largest Remainder\n(Hare, Droop, Imperiali",
+        "JSeats Core (Java::Methods::Majority\n(Simple, Qualified",
+        "JSeats Core (Java::Methods::Ranked\n(By Votes",
+        "JSeats Core (Java::Divisor Sequence Provider"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT's method configuration node is expanded into a method registry plus concrete method implementations and divisor-sequence support. This matches the PRD scope and is a reasonable structural split."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::TallyFilters"
+      ],
+      "predicted_nodes": [
+        "JSeats Core (Java::Tally Filters",
+        "JSeats Core (Java::Tally Filters SPI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT filter configuration node is decomposed into the filter collection and its SPI. This is a correct refinement within the same subsystem."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Configuration::TieBreaker"
+      ],
+      "predicted_nodes": [
+        "JSeats Core (Java::Tie-breaking Rules"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both denote the tie-breaking rule component used during allocation processing. The naming differs but the functionality matches."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Processor::Decorate"
+      ],
+      "predicted_nodes": [
+        "JSeats Core (Java::Result Decorators",
+        "JSeats Core (Java::Result Decorators SPI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT's decoration step is represented by the predicted decorator implementation and SPI, which is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Processor::Filter"
+      ],
+      "predicted_nodes": [
+        "JSeats Core (Java::Tally Filters",
+        "JSeats Core (Java::Tally Filters SPI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT's filtering step is represented by the predicted filter implementation and SPI, which is a valid decomposition."
+    },
+    {
+      "gt_nodes": [
+        "Seat Allocation Processor::Process"
+      ],
+      "predicted_nodes": [
+        "JSeats Core (Java::AllocationProcessor",
+        "JSeats Core (Java::Caller-facing Allocation API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT's processing node maps to the predicted processor plus the caller-facing API that invokes it. This is functionally aligned with the PRD workflow."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tally"
+      ],
+      "predicted_nodes": [
+        "Global::XML Loader\n(Tally.fromXML"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The XML loader is not a separate domain entity from Tally, but it is a valid supporting capability for constructing/loading tally data. It does not indicate a boundary error."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Data & Config::Candidate",
+    "Data & Config::Processor Configuration\n(method, filters, decorators,\nproperties, tie-breaker",
+    "Global::CLI Launcher",
+    "Global::JSeats Core (Java",
+    "Global::SeatAllocationException",
+    "JSeats Core (Java::AllocationMethod Contract"
+  ]
+}

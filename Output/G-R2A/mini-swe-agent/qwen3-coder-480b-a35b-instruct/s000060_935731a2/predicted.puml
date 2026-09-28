@@ -1,0 +1,47 @@
+@startuml
+' Layered Component Architecture for lowes/auditor'
+
+package "Application Layer" {
+  [Integrating Application] as App
+}
+
+package "Auditor Library (JVM/Kotlin)" {
+  [Auditing API] as API
+  [Audit Event Generator] as Generator
+  [Configuration Handler] as ConfigHandler
+  [Element Filter] as Filter
+}
+
+package "Infrastructure Abstractions" {
+  [Event Publisher] as Publisher
+  [Log Provider] as Logger
+}
+
+package "External Systems" {
+  [Kafka Event Stream] as Kafka
+  [Downstream Consumers] as Consumers
+}
+
+' Connections '
+App --> API : Uses
+API --> Generator : Triggers
+Generator --> ConfigHandler : Applies config
+Generator --> Filter : Filters elements
+Generator --> Publisher : Sends AuditEvent
+Publisher --> Kafka : Default transport
+Kafka --> Consumers : Delivers events
+Logger ..> Generator : Logs activity
+Filter ..> Generator : Filters elements
+
+note right of Auditor Library
+  - JVM 11 targeted
+  - Pluggable interfaces
+  - Default Kafka publisher
+end note
+
+note right of Kafka
+  Serialized AuditEvent
+  JSON format
+end note
+
+@enduml

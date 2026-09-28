@@ -1,0 +1,132 @@
+@startuml
+!define RECTANGLE class
+
+title Smart Recipe System - System Architecture
+
+skinparam componentStyle rectangle
+
+package "Mobile Application Layer" {
+    RECTANGLE MobileApp [
+        <<Android App>>
+        --
+        + User Interface
+        + Camera Integration
+        + Image Processing
+        + Network Communication
+    ]
+}
+
+package "Backend Service Layer" {
+    package "Spring Boot Framework" {
+        RECTANGLE BusinessLayer [
+            <<Business Logic>>
+            --
+            + User Management
+            + Recipe Search
+            + Community Features
+            + Health Analysis
+            + Admin Operations
+        ]
+        
+        RECTANGLE ControlLayer [
+            <<API Controllers>>
+            --
+            + RESTful Endpoints
+            + Request Routing
+            + Authentication
+        ]
+        
+        RECTANGLE ServiceLayer [
+            <<Service Layer>>
+            --
+            + Business Services
+            + Data Validation
+            + Workflow Orchestration
+        ]
+        
+        RECTANGLE DataAccessLayer [
+            <<Data Access>>
+            --
+            + Database Operations
+            + Cache Management
+            + Data Mapping
+        ]
+    }
+    
+    package "Flask Framework" {
+        RECTANGLE ModelInference [
+            <<AI/ML Service>>
+            --
+            + Image Recognition
+            + Deep Learning Models
+            + Recipe Generation
+        ]
+    }
+}
+
+package "Data Storage Layer" {
+    RECTANGLE MySQL [
+        <<Relational Database>>
+        --
+        + User Data
+        + Recipe Information
+        + Nutrition Data
+        + Community Content
+    ]
+    
+    RECTANGLE Redis [
+        <<Cache Storage>>
+        --
+        + Session Cache
+        + Query Results
+        + Performance Optimization
+    ]
+}
+
+package "External Systems" {
+    RECTANGLE ImageRecognitionModel [
+        <<AI Model>>
+        --
+        + Pre-trained Models
+        + Image Analysis
+        + Feature Extraction
+    ]
+}
+
+MobileApp --> ControlLayer : HTTP/Ajax Requests
+ControlLayer --> ServiceLayer : Service Calls
+ServiceLayer --> DataAccessLayer : Data Operations
+DataAccessLayer --> MySQL : SQL Queries
+DataAccessLayer --> Redis : Cache Operations
+ServiceLayer --> ModelInference : Model Inference Requests
+ModelInference --> ImageRecognitionModel : Image Processing
+
+note right of MobileApp
+    Android Application
+    Supports iOS compatibility
+end note
+
+note right of BusinessLayer
+    Main Business Logic
+    User Management
+    Recipe Processing
+end note
+
+note right of ModelInference
+    Flask-based
+    Model Inference Service
+end note
+
+note right of MySQL
+    Structured Data Storage
+    User Accounts
+    Recipes
+    Nutrition Info
+end note
+
+note right of Redis
+    Performance Caching
+    Session Management
+end note
+
+@enduml

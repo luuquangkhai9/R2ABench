@@ -1,0 +1,140 @@
+@startuml
+!define RECTANGLE class
+skinparam componentStyle rectangle
+skinparam backgroundColor #FEFEFE
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam component {
+    BackgroundColor #E6F3FF
+    BorderColor #0066CC
+    FontColor #003366
+    ArrowColor #0066CC
+}
+skinparam database {
+    BackgroundColor #FFF0E6
+    BorderColor #CC6600
+    FontColor #663300
+}
+skinparam queue {
+    BackgroundColor #E6FFE6
+    BorderColor #00CC66
+    FontColor #006633
+}
+skinparam node {
+    BackgroundColor #F0E6FF
+    BorderColor #6600CC
+    FontColor #330066
+}
+
+title StatLord System Architecture
+
+node "Client Environment" {
+    component "Web Browser" as browser {
+        component "Editor SPA" as editor [
+            TypeScript/React Application
+            ---
+            Redux State Management
+            - Controls
+            - Elements
+            - Layouts
+            - Gauges
+            - Displays
+        ]
+        component "Viewer" as viewer [
+            Display Rendering
+            ---
+            Black & White Pixel View
+            Canvas Operations
+        ]
+    }
+}
+
+node "Server Environment" {
+    component "Python Server" as server [
+        Django Application
+        ---
+        API Endpoints
+        Static Asset Serving
+    ]
+    
+    component "API Layer" as api [
+        RESTful API
+        ---
+        Gauge Resources
+        Display Resources
+        Layout Resources
+    ]
+    
+    database "PostgreSQL" as db [
+        Persistent Storage
+        ---
+        Gauge Entities
+        Display Entities
+        Layout Entities
+    ]
+    
+    queue "Data Queue" as data_queue [
+        Real-time Data
+        ---
+        Gauge Updates
+        Display Registrations
+    ]
+}
+
+node "External Systems" {
+    component "API Clients" as api_clients [
+        Data Posting
+        Display Registration
+    ]
+    
+    component "Display Devices" as displays [
+        OLED / E-paper / LCD
+        ---
+        Unique Identifier
+        Resolution (x, y)
+        Rotation
+    ]
+}
+
+' Connections
+api_clients --> data_queue : Posts data\nRegisters displays
+data_queue --> api : Processes requests
+editor --> api : CRUD operations\nLayout management
+viewer --> api : Fetches display data\nLayouts
+api --> db : Persists entities\n(DR-010)
+server --> browser : Serves static assets\nClient build output
+api --> displays : Pushes rendered views\nDisplay configuration
+displays --> viewer : Display resolution\nRotation data
+
+' Data flow annotations
+note on link
+    Gauge: key, value (FR-001)
+    Display: key, resolution_x, resolution_y,\navailable, current_layout,\ndisplay_data, rotation (FR-002, FR-003)
+    Layout: key, data, display_positions (FR-006)
+end note
+
+' Component relationships
+editor ..> viewer : Generates layouts for\nrendering (FR-005)
+db ..> api : Foreign key relationships\n(DR-008, DR-009)
+server ..> api : Hosts API endpoints
+api ..> data_queue : Consumes real-time data
+
+' Deployment notes
+note top of server
+    Containerized Deployment
+    Python 3.7 + Django
+    Development-grade (C-006)
+end note
+
+note right of editor
+    Build: npm install\nnpm run build (C-003)
+    State: Redux managed (NFR-003)
+end note
+
+note left of db
+    Development Requirement:
+    PostgreSQL (C-001)
+    Python > 3.5 (NFR-002)
+end note
+
+@enduml

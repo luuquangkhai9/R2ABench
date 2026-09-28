@@ -1,0 +1,61 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::cFS Bundle"
+      ],
+      "predicted_nodes": [
+        "Build Layer::Git Submodule Handler",
+        "Build Layer::Makefile Manager",
+        "Build Layer::Makefile.sample",
+        "Build Layer::sample_defs",
+        "Global::GitHub Actions",
+        "Command Layer::Command Utility",
+        "Execution Layer::Core Executable Runner",
+        "Execution Layer::core-cpu1",
+        "Telemetry Layer::Telemetry Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT 'cFS Bundle' is a broad system-level node covering build, execution, command, telemetry, and CI-related behavior. The prediction fragments this into multiple operational nodes, which is acceptable as a split, but several items are placed into narrow technical layers rather than preserving the GT's holistic global boundary. Because the original node is a top-level bundle/system node, the boundary attribution is not strictly equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Reuse Workflows::Submodule Reuse",
+        "Reuse Workflows::cFS Reuse"
+      ],
+      "predicted_nodes": [
+        "CI/Workflow Layer::Reusable Workflow Engine",
+        "CI/Workflow Layer::workflow_call"
+      ],
+      "match_type": "2:2",
+      "is_boundary_correct": true,
+      "reasoning": "Both GT nodes describe reusable workflow composition for cFS and submodules. The predicted reusable workflow engine and workflow_call mechanism collectively capture the same functionality, and the CI/Workflow boundary is semantically consistent with the GT reuse-workflows boundary."
+    },
+    {
+      "gt_nodes": [
+        "Static and Quality Checks::CodeQL Analysis",
+        "Static and Quality Checks::Format Check",
+        "Static and Quality Checks::Static Analysis"
+      ],
+      "predicted_nodes": [
+        "CI/Workflow Layer::Format Checker"
+      ],
+      "match_type": "3:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT set includes multiple static/quality workflow checks. The predicted node only directly matches Format Check, while the other checks are omitted. The matched part is correctly placed in the CI/workflow boundary, which aligns with the GT static and quality checks boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "CI/Workflow Layer::Changelog Generator",
+    "CI/Workflow Layer::Changelog Generator::Breaking Changes",
+    "CI/Workflow Layer::Changelog Generator::Bug Fixes",
+    "CI/Workflow Layer::Changelog Generator::Closed Issues",
+    "CI/Workflow Layer::Changelog Generator::New Features",
+    "CI/Workflow Layer::Changelog Generator::Performance Improvements",
+    "Global::CCDD",
+    "Global::Perfutils-java",
+    "Global::gen_sch_tbl"
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Turing System::Turing API Server\nHTTP REST API to configure Routers"
+      ],
+      "predicted_nodes": [
+        "API Layer::Turing API Server",
+        "API Layer::Ensembler Handlers",
+        "API Layer::Router Handlers",
+        "API Layer::OpenAPI 3.0.3 Spec",
+        "API Layer::OpenAPI Request Validation",
+        "Service Layer::Router Deployment Manager",
+        "Integration Layer::Kubernetes API Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Turing API Server is split by the AI into detailed API, service, and integration layer components, which are semantically consistent with the internal structure of the Turing System."
+    },
+    {
+      "gt_nodes": [
+        "Global::Authorization Service"
+      ],
+      "predicted_nodes": [
+        "API Layer::Authorization Middleware"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "GT models authorization as an external global service, whereas AI models it as internal middleware within the API layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::Monitoring and Alerting Service"
+      ],
+      "predicted_nodes": [
+        "Global::Jaeger",
+        "API Layer::Jaeger Tracing Client"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT's generalized monitoring/alerting service maps to AI's specific Jaeger observability components. The external Jaeger node maintains the Global boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Router Endpoints"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Cluster::Turing Router Deployments"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "GT focuses on the network endpoints globally, while AI focuses on the underlying K8s deployments mapping to these endpoints, causing a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Kubernetes Cluster::Istio",
+        "Kubernetes Cluster::Knative Controller"
+      ],
+      "predicted_nodes": [
+        "Global::Kubernetes Cluster"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "GT specifies Istio and Knative inside a Kubernetes Cluster boundary, whereas AI aggregates the entire cluster as a single Global node, losing the boundary context."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Experimentation Service",
+    "Global::Machine Learning Platform\nMLP API Server",
+    "Global::Router Clients",
+    "Global::Secret Store",
+    "Global::Turing User",
+    "Turing System::Database\nPersistent storage for Router objects",
+    "Turing System::Turing UI\nWeb interface to configure Routers"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::MLflow Model Registry",
+    "Integration Layer::PyFuncEnsembler Image Build Flow",
+    "Kubernetes Cluster::PyFuncEnsembler Webservice"
+  ]
+}

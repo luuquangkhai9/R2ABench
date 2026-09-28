@@ -1,0 +1,84 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Cloudinary\n- stores audio files\n- stores images\n- returns file URLs"
+      ],
+      "predicted_nodes": [
+        "External Services::Cloudinary Media Storage",
+        "External Services::Cloudinary Media Storage::Audio File Storage",
+        "External Services::Cloudinary Media Storage::Image Storage"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Cloudinary external media storage responsibility, including audio/image hosting and URL return behavior. The predicted model splits the GT node into a container plus media-specific subnodes, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Express Server\n- fetches data with Sequelize\n- serves React frontend\n- handles backend API requests"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Node/Express Backend",
+        "Application Layer::Node/Express Backend::Feed API",
+        "Application Layer::Node/Express Backend::Follow API",
+        "Application Layer::Node/Express Backend::Sound API",
+        "Application Layer::Node/Express Backend::User/Auth API"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Express server corresponds to the backend application server. The AI further decomposed backend API responsibilities into functional APIs, which is a reasonable refinement and stays within the correct backend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::PostgreSQL Database\n- stores users and sounds\n- stores Cloudinary URL references"
+      ],
+      "predicted_nodes": [
+        "Data Layer::PostgreSQL Database",
+        "Data Layer::PostgreSQL Database::Follow Relationships",
+        "Data Layer::PostgreSQL Database::Media URL References",
+        "Data Layer::PostgreSQL Database::Sound Records",
+        "Data Layer::PostgreSQL Database::User Data"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the PostgreSQL persistence layer and its stored entities. The predicted nodes split the database into logical record groupings, which is consistent with the GT database node."
+    },
+    {
+      "gt_nodes": [
+        "Global::React Frontend\n- Redux state management\n- uploads images and audio\n- controls and visualizes playback"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::React Frontend",
+        "Presentation Layer::React Frontend::Audio Player UI",
+        "Presentation Layer::React Frontend::Follow Interface",
+        "Presentation Layer::React Frontend::Form Validation",
+        "Presentation Layer::React Frontend::Upload Interface",
+        "Presentation Layer::React Frontend::Waveform Navigation",
+        "Presentation Layer::Redux State Management",
+        "Presentation Layer::Redux State Management::Follow State",
+        "Presentation Layer::Redux State Management::Playback State",
+        "Presentation Layer::Redux State Management::Sound State",
+        "Presentation Layer::Redux State Management::User State"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT frontend node includes UI, upload, playback, and Redux responsibilities. The AI splits these into frontend and Redux subcomponents, which is semantically aligned and correctly placed in the frontend/presentation boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::React Frontend\n- Redux state management\n- uploads images and audio\n- controls and visualizes playback"
+      ],
+      "predicted_nodes": [
+        "Frontend Configuration::API Base URL",
+        "Frontend Configuration::Cloudinary URL",
+        "Frontend Configuration::Upload Preset",
+        "Global::Frontend Configuration"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT frontend node implies runtime configuration dependencies, and the predicted configuration nodes represent those frontend environment values. This is a valid decomposition and correctly belongs to frontend configuration."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

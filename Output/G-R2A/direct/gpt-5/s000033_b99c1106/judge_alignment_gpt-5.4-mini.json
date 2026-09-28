@@ -1,0 +1,99 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Airflow\n(Spark Driver"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Network (format 3.7::Airflow Webserver (LocalExecutor)\nImage: docker-airflow-spark:latest\nUI: 8282\nIncludes: pyspark"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Airflow service acting as the Spark driver within the Docker Compose environment. The predicted node adds implementation details but remains in the correct system boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Cluster Manager\n(Spark Standalone"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Network (format 3.7::Spark Master (hostname: spark)\nImage: bitnami/spark:latest\nWeb UI: 8080 (host 8181)\nCluster: 7077"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT cluster manager corresponds to the Spark master in the predicted diagram. This is a correct semantic match and the boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Jupyter Notebook\n(Spark"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Network (format 3.7::Jupyter PySpark Notebook\nImage: jupyter/pyspark-notebook\nUI: 8888\nSpark App UIs: 4040-4080"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Jupyter/PySpark interactive notebook service. The predicted boundary is consistent with the GT service placement."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Postgres"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Network (format 3.7::Postgres 9.6\nPort: 5432"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is the same Postgres service used for Airflow metadata persistence. The version and port details in the predicted node are aligned with the GT boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 1"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Network (format 3.7::Spark Workers (scalable::spark-worker-1\nImage: bitnami/spark:latest"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted node correctly identifies the first Spark worker instance within the Spark Workers boundary. This is semantically equivalent to the GT worker node."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 2"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Network (format 3.7::Spark Workers (scalable::spark-worker-2\nImage: bitnami/spark:latest"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This matches the second Spark worker instance and remains in the correct worker boundary."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker 3"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Network (format 3.7::Spark Workers (scalable::spark-worker-3\nImage: bitnami/spark:latest"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This matches the third Spark worker instance and the boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Docker Compose Environment::Spark Workers::Worker N"
+      ],
+      "predicted_nodes": [
+        "Docker Compose Network (format 3.7::Spark Workers (scalable::spark-worker-N\n(scale out pattern"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT extensible worker pattern is accurately represented by the scalable worker-N node. Boundary placement is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Data Engineer"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Docker Compose Network (format 3.7",
+    "Global::Host Machine"
+  ]
+}

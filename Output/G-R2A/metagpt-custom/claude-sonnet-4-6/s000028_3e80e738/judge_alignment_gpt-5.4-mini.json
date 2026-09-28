@@ -1,0 +1,215 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "API Gateway Account::API Gateway"
+      ],
+      "predicted_nodes": [
+        "AWS Account: API Gateway Account::API Gateway Layer::ApiGatewayDeployment\n(stage deployment"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the API Gateway deployment/stage-level API Gateway component. The predicted node adds a more specific layer label but remains within the correct API Gateway account boundary."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::Calls hello/GET with id_token in headers"
+      ],
+      "predicted_nodes": [
+        "AWS Account: API Gateway Account::API Gateway Layer::WhoAmIMethod\n(x-pagopa-pn-cx-role response header\ncustom:Role claim mapping)\n<<HTTP 200 response defined>>"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node is the hello/GET method behavior, and the predicted WhoAmI method captures the same authorized API method with header mapping and HTTP 200 response. Boundary placement under the API Gateway account is correct."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::Cognito-authorizer::hello-function"
+      ],
+      "predicted_nodes": [
+        "AWS Account: API Gateway Account::API Gateway Layer::CognitoUserPoolAuthorizer\n(cross-account user-pool ARN"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Cognito authorizer for the hello function matches the predicted Cognito user pool authorizer. The cross-account API Gateway account boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::Returns hello plus user name when authorized"
+      ],
+      "predicted_nodes": [
+        "AWS Account: API Gateway Account::API Gateway Layer::WhoAmIMethod\n(x-pagopa-pn-cx-role response header\ncustom:Role claim mapping)\n<<HTTP 200 response defined>>"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the authorized WhoAmI/hello response behavior returning user-related information. The predicted placement in the API Gateway account is correct."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::auth-function"
+      ],
+      "predicted_nodes": [
+        "AWS Account: API Gateway Account::API Gateway Layer::ECSProxyMethod\n(x-pagopa-pn-cx-role request header\nVPC link integration"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT auth-function corresponds to the API Gateway method that forwards authorization context to backend integration. The predicted ECS proxy method matches this role-forwarding integration within the correct API Gateway account."
+    },
+    {
+      "gt_nodes": [
+        "Cognito Account::Cognito Hosted UI"
+      ],
+      "predicted_nodes": [
+        "AWS Account: Cognito Account::Authentication Layer::CognitoUserPool\n(token validity, custom:Role, email"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT hosted UI is part of the Cognito authentication surface, and the predicted Cognito user pool is the underlying Cognito component in the correct account boundary. The match is acceptable at this abstraction level."
+    },
+    {
+      "gt_nodes": [
+        "Cognito Account::Cognito User Pool"
+      ],
+      "predicted_nodes": [
+        "AWS Account: Cognito Account::Authentication Layer::CognitoUserPool\n(token validity, custom:Role, email"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct semantic match. The predicted node is in the correct Cognito account and authentication layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::User"
+      ],
+      "predicted_nodes": [
+        "Global::AWS Account: API Gateway Account",
+        "Global::AWS Account: Cognito Account"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT generic user actor is represented indirectly by the two AWS account contexts involved in the flow. Although not a perfect diagrammatic equivalent, the global boundary is not violated."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::API Gateway"
+      ],
+      "predicted_nodes": [
+        "AWS Account: API Gateway Account::API Gateway Layer::ApiGatewayVpcLink\n(NLB ARN integration"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is part of the API Gateway stack, specifically the VPC link subcomponent. It remains within the correct API Gateway account boundary."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::API Gateway"
+      ],
+      "predicted_nodes": [
+        "AWS Account: API Gateway Account::API Gateway Layer::CallbackURLOutput\n(API GW ID + region + stage"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The callback URL output is an API Gateway deployment artifact and belongs in the API Gateway account boundary."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::API Gateway"
+      ],
+      "predicted_nodes": [
+        "AWS Account: API Gateway Account::API Gateway Layer::ECSProxyMethod\n(x-pagopa-pn-cx-role request header\nVPC link integration"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The ECS proxy method is part of the API Gateway stack and is correctly placed in the API Gateway account boundary."
+    },
+    {
+      "gt_nodes": [
+        "Cognito Account::Cognito User Pool"
+      ],
+      "predicted_nodes": [
+        "AWS Account: Cognito Account::Authentication Layer::CognitoUserPoolClient\n(attribute scope, ClientId"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The user pool client is a direct subcomponent of Cognito user-pool setup. The Cognito account placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Cognito Account::Cognito User Pool"
+      ],
+      "predicted_nodes": [
+        "AWS Account: Cognito Account::Authentication Layer::IdentityPoolRoleAttachment\n(auth + unauth role mapping"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "While more specific than the GT node, the role attachment is still part of the Cognito identity-pool configuration in the correct Cognito account boundary."
+    },
+    {
+      "gt_nodes": [
+        "Cognito Account::Cognito User Pool"
+      ],
+      "predicted_nodes": [
+        "AWS Account: Cognito Account::Authorization & Identity Layer::AuthenticatedIAMRole\n(sts:AssumeRoleWithWebIdentity",
+        "AWS Account: Cognito Account::Authorization & Identity Layer::UnauthenticatedIAMRole\n(sts:AssumeRoleWithWebIdentity"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Cognito setup is split into authenticated and unauthenticated IAM roles in the predicted model. This is a reasonable decomposition and remains within the correct Cognito account boundary."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::API Gateway"
+      ],
+      "predicted_nodes": [
+        "AWS Account: API Gateway Account::API Gateway Layer::ApiGatewayDeployment\n(stage deployment",
+        "AWS Account: API Gateway Account::API Gateway Layer::CognitoUserPoolAuthorizer\n(cross-account user-pool ARN",
+        "AWS Account: API Gateway Account::API Gateway Layer::WhoAmIMethod\n(x-pagopa-pn-cx-role response header\ncustom:Role claim mapping)\n<<HTTP 200 response defined>>",
+        "AWS Account: API Gateway Account::API Gateway Layer::ECSProxyMethod\n(x-pagopa-pn-cx-role request header\nVPC link integration"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT API Gateway node is split into deployment, authorizer, and method-level subnodes. This is an appropriate refinement and remains in the correct API Gateway account boundary."
+    },
+    {
+      "gt_nodes": [
+        "Cognito Account::Cognito User Pool"
+      ],
+      "predicted_nodes": [
+        "AWS Account: Cognito Account::Authentication Layer::CognitoIdentityPool\n(provider binding, unauth identities",
+        "AWS Account: Cognito Account::Authentication Layer::CognitoUserPoolClient\n(attribute scope, ClientId",
+        "AWS Account: Cognito Account::Authentication Layer::CognitoUserPool\n(token validity, custom:Role, email",
+        "AWS Account: Cognito Account::Authorization & Identity Layer::AuthenticatedIAMRole\n(sts:AssumeRoleWithWebIdentity",
+        "AWS Account: Cognito Account::Authorization & Identity Layer::UnauthenticatedIAMRole\n(sts:AssumeRoleWithWebIdentity"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Cognito user-pool area is decomposed into identity pool, client, roles, and user pool details. This is semantically consistent and placed in the correct Cognito account boundary."
+    },
+    {
+      "gt_nodes": [
+        "API Gateway Account::API Gateway"
+      ],
+      "predicted_nodes": [
+        "AWS Account: API Gateway Account::Private Network Connectivity Layer::SQSVpcInterfaceEndpoint\n(interface type, regional SQS service",
+        "AWS Account: API Gateway Account::Private Network Connectivity Layer::SQSEndpointSecurityGroup\n(TCP 0-65535, VPC CIDR ingress"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "These are real infrastructure components in the overall system, but they belong to the private SQS/VPC endpoint area, not the API Gateway architecture node. This is a boundary confusion across architectural domains."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::AWS Account: API Gateway Account",
+    "Global::AWS Account: Cognito Account",
+    "Global::AWS CLI",
+    "Global::AWS CloudFormation\n(Provisioning Engine",
+    "Global::AWS IAM\n(Web-Identity Federation",
+    "Global::AWS VPC / EC2 Networking\n(VPC, subnets, security groups",
+    "Global::Amazon SQS\n(private access target",
+    "Global::Network Load Balancer\n(ECS Target ARN",
+    "Infrastructure Provisioning Layer::CloudFormation Templates\n(YAML 2010-09-09",
+    "Infrastructure Provisioning Layer::Installation Scripts\n(AWS CLI profiles & env params",
+    "Infrastructure Provisioning Layer::TokenValidityParams\n(AccessTokenValidityUnits,\nIdTokenValidityUnits,\nRefreshTokenValidityUnits"
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::NAT\nGateway"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Layer::NAT Gateway Module"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the NAT Gateway component. The AI represented it logically as an infrastructure module, which is an acceptable boundary alignment."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\n(Public/Regional::Load Balancer\n(primary",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\n(Public/Regional::Load Balancer\n(standby"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Layer::Load Balancer Module"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT primary and standby load balancer nodes are aggregated by the AI into a single Load Balancer Module. The infrastructure boundary is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\n(Private/Regional::Jenkins\nController",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\n(Private/Regional::Agent Node\n(Fault Domain X",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\n(Private/Regional::Agent Node\n(Fault Domain Y"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Layer::Jenkins Instance Module"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI merged the distinct Jenkins controller and agent nodes into a single general Jenkins instance module representation. The infrastructure boundary matches the physical instance context."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Internet\nGateway",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\n(Public/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\n(Public/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\n(Public/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\n(Public/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\n(Private/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\n(Private/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\n(Private/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\n(Private/Regional::Security List",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\n(Private/Regional::Route Table",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\n(Private/Regional::Security List"
+      ],
+      "predicted_nodes": [
+        "Infrastructure Layer::Network Module",
+        "Infrastructure Layer::Existing Network Objects",
+        "Oracle Cloud Infrastructure (OCI::VCN / Networking"
+      ],
+      "match_type": "N:M",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated multiple detailed network components (route tables, security lists, internet gateway) into higher-level network module nodes. The boundary context is appropriate for infrastructure configuration."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Internet",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\n(Public/Regional::Bastion\nHost",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\n(Private/Regional::Healthcheck"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application Layer::Base64 Encoder",
+    "Application Layer::Jenkins Master Config",
+    "Application Layer::Jenkins Slave Config",
+    "Configuration Layer::Label Prefix Handler",
+    "Configuration Layer::Plugin Manager",
+    "Configuration Layer::Port Configurator",
+    "Configuration Layer::Variable Manager",
+    "Configuration Layer::terraform.tfvars",
+    "External Tools::SSH Client/Server",
+    "External Tools::Terraform CLI",
+    "Global::External Tools",
+    "Global::Oracle Cloud Infrastructure (OCI",
+    "Infrastructure Layer::OCI Provider",
+    "Oracle Cloud Infrastructure (OCI::Compute API",
+    "Oracle Cloud Infrastructure (OCI::Load Balancer API",
+    "Oracle Cloud Infrastructure (OCI::Tenancy / Compartment",
+    "Orchestration Layer::Terraform Orchestrator",
+    "Orchestration Layer::Terraform Workflow"
+  ]
+}

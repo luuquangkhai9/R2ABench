@@ -1,0 +1,128 @@
+@startuml
+!theme plain
+skinparam rectangleLineWidth 1
+skinparam noteFontSize 10
+skinparam noteBackgroundColor #FFFFCC
+
+' Main system boundary
+rectangle "Kangrand System" as kangrand_system {
+
+  ' Core solver component
+  rectangle "Kangaroo Solver Engine" as solver_engine [
+    Kangaroo Solver Engine
+    ==
+    Implements Pollard's kangaroo algorithm
+    with tame/wild herds and 
+    distinguished points
+  ]
+
+  ' Input processing component
+  rectangle "Input Processor" as input_processor [
+    Input Processor
+    ==
+    Parses ASCII input files
+    Handles hex values and 
+    public keys (compressed/
+    uncompressed)
+  ]
+
+  ' Work file management
+  rectangle "Work File Manager" as work_manager [
+    Work File Manager
+    ==
+    Manages work file creation,
+    loading, and saving
+    Supports resume functionality
+    Handles kangaroo state
+  ]
+  
+  ' Distributed components
+  rectangle "Distributed Server" as dist_server [
+    Distributed Server
+    ==
+    Coordinates distributed execution
+    Outputs work files, hash tables
+    No built-in authentication
+  ]
+  
+  ' Client component
+  rectangle "Distributed Client" as dist_client [
+    Distributed Client
+    ==
+    Performs kangaroo computation
+    Connects to server
+    Supports GPU execution
+  ]
+  
+  ' Offline merger component
+  rectangle "Offline Merger" as offline_merger [
+    Offline Merger
+    ==
+    Combines work files
+    Creates master work files
+    Discovers solving results
+  ]
+  
+  ' Configuration handler
+  rectangle "Configuration Handler" as config_handler [
+    Configuration Handler
+    ==
+    Processes command-line options
+    Handles configuration files
+    Manages execution parameters
+  ]
+
+}
+
+' External entities
+actor "Local Operator" as local_operator
+actor "Distributed Operator" as dist_operator
+actor "Offline Analyst" as offline_analyst
+
+' Data stores/files
+database "Input Files" as input_files
+database "Work Files" as work_files
+database "Config Files" as config_files
+database "Result Files" as result_files
+
+' Relationships
+local_operator --> config_handler : uses CLI
+local_operator --> input_processor : provides input
+input_processor --> solver_engine : feeds problem
+solver_engine --> work_manager : periodic saves
+work_manager --> work_files : reads/writes
+config_handler --> solver_engine : configures
+config_handler --> work_manager : configures
+
+dist_operator --> dist_server : manages
+dist_operator --> dist_client : deploys
+dist_client --> dist_server : connects
+dist_client --> solver_engine : computes
+dist_server --> work_files : outputs
+dist_server --> result_files : outputs
+
+offline_analyst --> offline_merger : uses
+offline_merger --> work_files : reads
+offline_merger --> work_files : writes merged
+offline_merger --> result_files : outputs
+
+input_processor --> input_files : reads
+config_handler --> config_files : reads
+
+note right of dist_server
+  No authentication mechanism
+  Operator-managed network required
+end note
+
+note right of work_manager
+  Supports wsplit-style backups
+  Resets hash table after backup
+end note
+
+note bottom of solver_engine
+  SECP256K1 specific
+  Distinguished points method
+  Reduces memory usage
+end note
+
+@enduml

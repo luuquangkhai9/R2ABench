@@ -1,0 +1,82 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\nROS Architecture::Control::DBW Node\nDrive-by-wire"
+      ],
+      "predicted_nodes": [
+        "Control Layer::DBWNode\n(Drive-By-Wire)\n- subscribes: /twist_cmd,\n  vehicle state\n- publishes: /vehicle_cmd\n  (throttle, steering, brake"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the drive-by-wire control node that converts twist commands and vehicle state into vehicle actuation commands. The control-layer placement is semantically consistent with the GT control boundary."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\nROS Architecture::Control::Waypoint Follower\nController"
+      ],
+      "predicted_nodes": [
+        "Control Layer::WaypointFollower\n- subscribes: /final_waypoints,\n  /current_pose\n- publishes: /twist_cmd\n  (linear & angular velocity"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the waypoint-following controller that consumes final waypoints and pose and outputs twist commands. The control-layer attribution matches the GT control boundary."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\nROS Architecture::Perception::Traffic Light\nDetection Node"
+      ],
+      "predicted_nodes": [
+        "Perception Layer::TLDetectorClassifier\n(tl_detector node)\n- subscribes: /image_color,\n  base_waypoints, current_pose\n- detects & classifies\n  traffic light state\n- publishes: /traffic_waypoint\n  (stop waypoint index"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the traffic light detection/classification node. The perception-layer placement is correct and aligns with the GT perception boundary."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\nROS Architecture::Planning::Waypoint Loader\nROS Node"
+      ],
+      "predicted_nodes": [
+        "Planning Layer::WaypointLoader\n- loads waypoints from CSV\n- publishes: /base_waypoints\n  (incl. target speeds"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the waypoint loading component that provides base waypoints. The planning-layer attribution is consistent with the GT planning boundary."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\nROS Architecture::Planning::Waypoint Updater Node\nROS Node"
+      ],
+      "predicted_nodes": [
+        "Planning Layer::WaypointUpdater\n- subscribes: /base_waypoints,\n  /current_pose, /traffic_waypoint\n- publishes: /final_waypoints\n  (velocity-adjusted window"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the waypoint updater that generates final waypoints from base waypoints, pose, and traffic waypoint inputs. The planning-layer placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "Udacity Self-Driving Car Capstone\nROS Architecture::Car / Simulator"
+      ],
+      "predicted_nodes": [
+        "External Systems::Udacity Capstone\nProject Simulator"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT car/simulator node corresponds to the external simulator environment. Although named differently, the semantic role is the same and the external-systems boundary is appropriate."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Udacity Self-Driving Car Capstone\nROS Architecture::Perception::Obstacle Detection\nROS Node"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::Recorded Training\nBag Player",
+    "Global::External Systems",
+    "Global::Infrastructure / Environment Layer\n(Docker Container",
+    "Infrastructure / Environment Layer\n(Docker Container::ROSMaster\n(Topic Broker &\nComm Backbone",
+    "Launch / Configuration Layer::SiteLaunchConfig\n(site.launch —\nSite / Bag Mode",
+    "Launch / Configuration Layer::StyxLaunchConfig\n(styx.launch —\nSimulator Mode",
+    "Styx WebSocket Bridge::StyxBridge\n(bridge.py / server.py)\nWebSocket ↔ ROS adapter"
+  ]
+}

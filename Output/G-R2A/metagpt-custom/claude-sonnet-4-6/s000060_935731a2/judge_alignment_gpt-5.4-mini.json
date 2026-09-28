@@ -1,0 +1,123 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Kafka"
+      ],
+      "predicted_nodes": [
+        "Global::Kafka Cluster",
+        "Kafka Cluster::Audit Events Topic"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Kafka node is represented by a Kafka cluster and its audit topic. This is a reasonable split of the same messaging infrastructure, and the boundary attribution remains semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Databases / Filestores\\nElastic, Hadoop, etc."
+      ],
+      "predicted_nodes": [],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "No specific database/filestore component equivalent to the GT storage node is present in the predicted list."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "predicted_nodes": [
+        "Global::Integrating JVM Application",
+        "Integrating JVM Application::Application Code"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT application server is modeled as an integrating JVM application plus its application code. This is semantically equivalent and boundary placement is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "application 1::auditor-v1 client",
+        "application 2::auditor-v1 client",
+        "application 3::auditor-v1 client"
+      ],
+      "predicted_nodes": [
+        "Integrating JVM Application::Application Code"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Multiple client applications in GT are abstracted into a generic integrating JVM application code node. This is an acceptable aggregation of the same client-side usage context."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "predicted_nodes": [
+        "lowes/auditor  [Kotlin/JVM Client Library::API Layer",
+        "lowes/auditor  [Kotlin/JVM Client Library::API Layer::AuditorAPI"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT server-side application boundary is refined into the client library API layer and its API entrypoint. This reflects the PRD's client-library architecture and is boundary-correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "predicted_nodes": [
+        "lowes/auditor  [Kotlin/JVM Client Library::Abstraction / Interface Layer",
+        "lowes/auditor  [Kotlin/JVM Client Library::Abstraction / Interface Layer::AuditEventElementFilter\\n<<interface>>",
+        "lowes/auditor  [Kotlin/JVM Client Library::Abstraction / Interface Layer::EventPublisher\\n<<interface>>",
+        "lowes/auditor  [Kotlin/JVM Client Library::Abstraction / Interface Layer::LogProvider\\n<<interface>>"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT application boundary includes the library's abstract integration points. These interface nodes align well with the audited client library's dependency-abstraction layer."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "predicted_nodes": [
+        "lowes/auditor  [Kotlin/JVM Client Library::Core Processing Layer",
+        "lowes/auditor  [Kotlin/JVM Client Library::Core Processing Layer::AuditEventAssembler\\n(builds AuditEvent from\\ndiff results + config",
+        "lowes/auditor  [Kotlin/JVM Client Library::Core Processing Layer::DiffProcessor\\n(compares object states,\\ndetects CREATED / UPDATED / DELETED",
+        "lowes/auditor  [Kotlin/JVM Client Library::Core Processing Layer::FilterEvaluator\\n(applies AuditEventElementFilter\\nper element"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These core processing components are part of the auditor client library and correspond to the GT application/server logic that performs diffing, filtering, and event assembly."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "predicted_nodes": [
+        "lowes/auditor  [Kotlin/JVM Client Library::Data / Model Layer",
+        "lowes/auditor  [Kotlin/JVM Client Library::Data / Model Layer::AuditEvent\\n[changeType: CREATED|UPDATED|DELETED\\nelements: List<ChangedElement>\\n  each element: {name, oldVal, newVal,\\n  metadata.fqdn",
+        "lowes/auditor  [Kotlin/JVM Client Library::Data / Model Layer::AuditorEventConfig\\n[appName, eventSource,\\neventSubType, metadata,\\nfilters: List<InclusionFilter>",
+        "lowes/auditor  [Kotlin/JVM Client Library::Data / Model Layer::InclusionFilter\\n[type, includes: List<String>"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT application boundary includes the library data models used to represent audit output and configuration. The predicted model layer is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "Global::auditor-v1 app\\nserver"
+      ],
+      "predicted_nodes": [
+        "lowes/auditor  [Kotlin/JVM Client Library::Infrastructure / Integration Layer",
+        "lowes/auditor  [Kotlin/JVM Client Library::Infrastructure / Integration Layer::KafkaEventPublisher\\n(default impl"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The default Kafka publisher is an infrastructure/integration concern, which matches the GT application server's outbound integration role."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Databases / Filestores\\nElastic, Hadoop, etc."
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::LogProvider Implementation\\n(externally supplied",
+    "LogProvider Implementation\\n(externally supplied::LogProvider Impl\\n(e.g. SLF4J adapter"
+  ]
+}

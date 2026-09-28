@@ -1,0 +1,58 @@
+@startuml
+title Appian-to-BigMAC Data Transfer System - Component/Deployment Diagram
+
+' --------------------------
+' Layers
+' --------------------------
+
+node "Interface Layer" {
+    component "StageListingService"
+    component "SNSNotificationManager"
+}
+
+node "Core Logic Layer" {
+    component "ConnectorConfigurationHandler"
+    component "EventRoutingService"
+    component "DeploymentMetricsCollector"
+    component "PullRequestMetricsCollector"
+}
+
+node "Integration Layer" {
+    component "AWS EventBridge"
+    component "AWS SNS"
+    component "GitHub Actions API"
+    component "GitHub Pull Requests API"
+}
+
+node "Data Layer" {
+    database "Connector Configurations Store"
+}
+
+cloud "External Systems" {
+    component "AWS CLI"
+}
+
+' --------------------------
+' Component Dependencies
+' --------------------------
+
+' Interface to external systems
+StageListingService --> AWS CLI : queries stages
+StageListingService --> EventRoutingService : triggers on schedule
+
+' Core Logic to Data
+ConnectorConfigurationHandler --> Connector Configurations Store : read/write
+
+' Core Logic to Integration
+EventRoutingService --> AWS EventBridge : sends events
+AWS EventBridge --> AWS SNS : routes matched events
+DeploymentMetricsCollector --> GitHub Actions API : fetches workflow runs
+PullRequestMetricsCollector --> GitHub Pull Requests API : fetches PRs
+
+' Manual SNS Subscription Management
+SNSNotificationManager --> AWS SNS : manages subscriptions
+
+' Connector Configuration Operations
+ConnectorConfigurationHandler --> AWS CLI : restarts connectors
+
+@enduml

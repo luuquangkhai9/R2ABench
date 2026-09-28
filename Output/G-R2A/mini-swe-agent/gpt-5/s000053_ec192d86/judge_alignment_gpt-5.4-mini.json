@@ -1,0 +1,235 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Tekton\\nEvent\\nListener"
+      ],
+      "predicted_nodes": [
+        "Execution & Orchestration (Tekton::EventListener"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Tekton EventListener component used for webhook-driven execution. The boundary naming differs but is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?"
+      ],
+      "predicted_nodes": [
+        "Execution & Orchestration (Tekton::Trigger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT interceptor/trigger logic is represented by the Tekton Trigger node in the prediction. The boundary is equivalent at the orchestration layer."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::CHGM investigation"
+      ],
+      "predicted_nodes": [
+        "Interface Layer::cadctl CLI\\n(/bin/cadctl"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT has a specific CHGM investigation workflow node under cadctl, while the prediction aggregates cadctl as the CLI interface. This is a valid higher-level aggregation and the CLI boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::CPD investigation"
+      ],
+      "predicted_nodes": [
+        "Interface Layer::cadctl CLI\\n(/bin/cadctl"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT workflow is a cadctl capability and is reasonably covered by the broader cadctl CLI node. Boundary placement is correct."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::Future investigations"
+      ],
+      "predicted_nodes": [
+        "Interface Layer::cadctl CLI\\n(/bin/cadctl"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The prediction groups multiple cadctl workflow endpoints into the overall CLI node. This is semantically consistent and boundary-correct."
+    },
+    {
+      "gt_nodes": [
+        "cadctl::switch(alerttype"
+      ],
+      "predicted_nodes": [
+        "Interface Layer::cadctl CLI\\n(/bin/cadctl"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "This appears to be a cadctl command/option and is appropriately subsumed by the CLI node. The boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Alert Source::app-sre\\nalertmanager"
+      ],
+      "predicted_nodes": [
+        "Execution & Orchestration (Tekton::EventListener"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is an external alert source, while the predicted node is an internal Tekton EventListener component. These are not semantically equivalent components, so this is not a valid match."
+    },
+    {
+      "gt_nodes": [
+        "Alert Source::cluster\\nalertmanager"
+      ],
+      "predicted_nodes": [
+        "Execution & Orchestration (Tekton::EventListener"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "An external alert source was incorrectly conflated with the EventListener ingestion component. This is a boundary and role mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Alert Source::deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "Execution & Orchestration (Tekton::EventListener"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "Deadmanssnitch is an upstream alert source, not the EventListener itself. The predicted placement is architecturally incorrect."
+    },
+    {
+      "gt_nodes": [
+        "Alerts::CHGM"
+      ],
+      "predicted_nodes": [
+        "Execution & Orchestration (Tekton::Pipeline: cad-checks-pipeline"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "CHGM alert workflow ultimately maps to the cad-checks pipeline execution path, but the prediction places it at the pipeline component level rather than the alert/workflow domain. This is a layer mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Alerts::CPD"
+      ],
+      "predicted_nodes": [
+        "Execution & Orchestration (Tekton::Pipeline: cad-checks-pipeline"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "CPD is a workflow/alert type, but the prediction collapses it into the pipeline artifact boundary. This is not the correct layer attribution."
+    },
+    {
+      "gt_nodes": [
+        "Alerts::all cluster\\nalerts"
+      ],
+      "predicted_nodes": [
+        "Execution & Orchestration (Tekton::Pipeline: cad-checks-pipeline"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT alert category is broader than the specific pipeline node. The semantic match is too weak and the boundary is incorrect."
+    },
+    {
+      "gt_nodes": [
+        "Global::Escalate alert to\\non-call SRE"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Escalation to on-call SRE is functionally represented by PagerDuty integration. The external systems boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Global::Update Incident\\nNotes"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Updating incident notes is a PagerDuty-related operation and the external integration boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "PagerDuty Team::<cluster>.openshiftapps.com-\\nhive-cluster"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty API"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT team-specific PagerDuty target is captured by the broader PagerDuty API/integration node. Boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "PagerDuty Team::app-sre-alertmanager"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty API"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "This specific PagerDuty team target is properly subsumed under the PagerDuty integration boundary."
+    },
+    {
+      "gt_nodes": [
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty API"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted PagerDuty integration node correctly captures this GT team routing concept."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton\\nEvent\\nListener"
+      ],
+      "predicted_nodes": [
+        "Execution & Orchestration (Tekton::PipelineRun"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "PipelineRun is part of the Tekton execution flow, but it is not equivalent to the EventListener. The prediction merges distinct orchestration components, causing a boundary/role confusion."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton Interceptor:\\nAlert investigation\\nimplemented in CAD?"
+      ],
+      "predicted_nodes": [
+        "Execution & Orchestration (Tekton::PipelineRun"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The interceptor/trigger logic is not the same as the PipelineRun execution object. This is a severe semantic mismatch."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Alert Source::app-sre\\nalertmanager",
+    "Alert Source::cluster\\nalertmanager",
+    "Alert Source::deadmanssnitch",
+    "Alerts::CHGM",
+    "Alerts::CPD",
+    "Alerts::all cluster\\nalerts"
+  ],
+  "unmatched_predicted_nodes": [
+    "Build Environment::Go 1.17 Builder",
+    "Data & Artifacts::Deployment Template Assets",
+    "Execution & Orchestration (Tekton::Pipeline: cad-checks-pipeline",
+    "Execution & Orchestration (Tekton::PipelineRun",
+    "Execution & Orchestration (Tekton::Trigger",
+    "External Systems::AWS Services",
+    "External Systems::OCM API",
+    "External Systems::PagerDuty API",
+    "Integration Library Layer::Integration Library",
+    "Interface Layer::Template Update Utility",
+    "Interface Layer::cadctl CLI\\n(/bin/cadctl",
+    "Runtime Artifact::CAD Container Image\\n(UBI minimal runtime"
+  ]
+}

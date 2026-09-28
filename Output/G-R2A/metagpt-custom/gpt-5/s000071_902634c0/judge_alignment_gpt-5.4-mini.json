@@ -1,0 +1,155 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "ClearML Server::Backend Service API"
+      ],
+      "predicted_nodes": [
+        "Backend Services Layer::Backend Service Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the backend API/client interface used for service actions such as create/get/get_by_id/get_all/get_all_ex. The boundary differs in naming but is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "ClearML Server::ML Ops::Execution Queue"
+      ],
+      "predicted_nodes": [
+        "Global::ClearML Execution Queue",
+        "Kubernetes Integration Layer::Execution Queue Consumer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT queue is represented by the queue itself and the consuming component in the prediction. This is a reasonable split, and the queue-related boundary attribution remains semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::ClearML Agent\\nService Pod"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Integration Layer::Service Pod Runner"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted service pod runner corresponds to the GT clearml-agent service pod execution mode. The Kubernetes integration boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Kubernetes Glue"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Integration Layer::Kubernetes Glue Job Preparer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is the same Kubernetes Glue concept, focused on job preparation. The boundary attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Kubernetes Job"
+      ],
+      "predicted_nodes": [
+        "Global::Kubernetes Cluster"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is a Kubernetes job artifact, while the prediction is only the broader cluster environment. This is a boundary/context mismatch and not a semantically precise match."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Mapped Docker Socket\\nSibling Containers"
+      ],
+      "predicted_nodes": [
+        "Global::Docker Daemon\\n(mapped socket",
+        "Execution Runtime Layer::Sibling Docker Container Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT node combines the mapped socket dependency and sibling-container management. The prediction splits this into the Docker socket endpoint and the manager component, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::Pod Execution Environment\\nand Docker User Code"
+      ],
+      "predicted_nodes": [
+        "Execution Runtime Layer::In-Pod Experiment Manager"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the in-pod experiment execution environment and management of user code. The execution runtime boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\\nOn Prem or Cloud::YAML Job Template"
+      ],
+      "predicted_nodes": [
+        "Kubernetes Integration Layer::Kubernetes Glue Job Preparer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The job preparer uses the YAML template as its input, so this is a valid functional correspondence even though the GT emphasizes the template artifact and the prediction emphasizes the processor."
+    },
+    {
+      "gt_nodes": [
+        "Data Scientist Environment::ClearML Snippet"
+      ],
+      "predicted_nodes": [
+        "Global::ClearML Server/Backend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "These do not represent the same component. The ClearML snippet is a client-side developer artifact, while the backend server is a different system area."
+    },
+    {
+      "gt_nodes": [
+        "Data Scientist Environment::Python ML / DL Code"
+      ],
+      "predicted_nodes": [
+        "Global::ClearML Server/Backend"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "User-side ML/DL code is not equivalent to the backend server. This is a severe boundary and context error."
+    },
+    {
+      "gt_nodes": [
+        "ClearML Server::ML Ops::Monitoring"
+      ],
+      "predicted_nodes": [
+        "Telemetry & Logging Layer::Worker Telemetry Reporter",
+        "Telemetry & Logging Layer::Server Connectivity Pinger"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT monitoring capability is decomposed into telemetry reporting and connectivity pinging. This is a reasonable and semantically aligned split."
+    },
+    {
+      "gt_nodes": [
+        "ClearML Server::Experiment Manager::Data Tracking"
+      ],
+      "predicted_nodes": [
+        "Backend Services Layer::Session Handler"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Data tracking in the experiment manager is not the same as a session handler. The prediction is a backend infrastructure detail that does not match the GT functional boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "ClearML Server::Experiment Manager::Collaboration",
+    "ClearML Server::Experiment Manager::Versioning",
+    "ClearML Server::Experiment Manager::Visualization",
+    "ClearML Server::ML Ops::Orchestration"
+  ],
+  "unmatched_predicted_nodes": [
+    "Backend Services Layer::Events Service Interface\\n(v2.5",
+    "Backend Services Layer::Models Service Interface\\n(v2.4",
+    "Backend Services Layer::Session Handler",
+    "Configuration Layer::Configuration Manager\\n(report_period_sec, ping_period_sec,\\nlog_stdout, report_global_mem_used",
+    "Global::ClearML Server/Backend",
+    "Global::Docker Daemon\\n(mapped socket",
+    "Global::Kubernetes Cluster",
+    "Telemetry & Logging Layer::Logging Manager"
+  ]
+}

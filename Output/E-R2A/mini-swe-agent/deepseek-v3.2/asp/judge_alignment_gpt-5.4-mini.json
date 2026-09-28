@@ -1,0 +1,78 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Service / Backend Layer::Back-office Management"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Review Management"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "Both refer to the review-management/business control function, but the GT places it in the backend service layer while the prediction places it in the application layer. This is a layer mismatch rather than a semantic mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Service / Backend Layer::Django Service Clusters"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Checklist Engine",
+        "Application Layer::Problem Reporting",
+        "Application Layer::Report Generation",
+        "Application Layer::Scoring System"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT contains a generic backend service cluster, while the prediction decomposes it into several checklist/review-related application services. The functional domain is related, but the GT node is an infrastructure/backend cluster and the AI has shifted it into application-layer business components, which is a boundary confusion."
+    },
+    {
+      "gt_nodes": [
+        "Storage / Database Layer::MySQL Database"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Requirements Documents",
+        "Data Layer::Review Artifacts",
+        "Data Layer::Review Artifacts::Checklist Items",
+        "Data Layer::Review Artifacts::Problem Reports",
+        "Data Layer::Review Artifacts::Review Metadata",
+        "Data Layer::Review Artifacts::Review Purpose Data",
+        "Data Layer::Review Artifacts::Score Records",
+        "Data Layer::Standards Repository"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The prediction models persistent review/checklist data that would typically be stored in a database. Although the predicted nodes are more logical data entities rather than a concrete MySQL component, the storage boundary is semantically consistent with the GT database layer."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Client Layer::Client Terminal",
+    "Client Layer::Cloud DNS",
+    "Global::Client Layer",
+    "Global::Network / Gateway Layer",
+    "Global::Service / Backend Layer",
+    "Global::Storage / Database Layer",
+    "Network / Gateway Layer::Machine 01",
+    "Network / Gateway Layer::Machine 01::LVS - Linux Virtual Server",
+    "Network / Gateway Layer::Machine 01::Nginx",
+    "Network / Gateway Layer::Machine 02",
+    "Network / Gateway Layer::Machine 02::LVS - Linux Virtual Server",
+    "Network / Gateway Layer::Machine 02::Nginx",
+    "Network / Gateway Layer::Machine 03",
+    "Network / Gateway Layer::Machine 03::LVS - Linux Virtual Server",
+    "Network / Gateway Layer::Machine 03::Nginx",
+    "Service / Backend Layer::Literature Service",
+    "Service / Backend Layer::Socializing Service",
+    "Service / Backend Layer::User Information Service",
+    "Storage / Database Layer::Elasticsearch",
+    "Storage / Database Layer::Redis Cache"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::Business Rules",
+    "External Systems::Documentation Norms",
+    "External Systems::Industry Standards",
+    "External Systems::Product Specifications",
+    "User Layer::Project Stakeholder",
+    "User Layer::Requirements Owner",
+    "User Layer::Reviewer"
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host"
+      ],
+      "predicted_nodes": [
+        "Windows Hyper-V Fuzzing::Child Partition VM",
+        "Windows Hyper-V Fuzzing::Root Partition VM"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node represents the Hyper-V host/container level, while the predicted nodes split the child and root VM roles. This is only a loose contextual relation and the AI omitted the actual host/Hyper-V boundary, so the boundary attribution is not correct."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2"
+      ],
+      "predicted_nodes": [
+        "Windows Hyper-V Fuzzing::Child Partition VM",
+        "Windows Hyper-V Fuzzing::Child Partition VM::Harness/Driver"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT child-partition guest VM is correctly represented as the child partition VM, and the harness/driver is a plausible internal decomposition of that guest-side workflow. The boundary remains within the child partition context."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\\nGuest VM (L2::harness.sys"
+      ],
+      "predicted_nodes": [
+        "Windows Hyper-V Fuzzing::Child Partition VM::Harness/Driver"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted harness/driver corresponds to the GT harness.sys component in the child partition guest VM. The boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2"
+      ],
+      "predicted_nodes": [
+        "Windows Hyper-V Fuzzing::Root Partition VM",
+        "Windows Hyper-V Fuzzing::Root Partition VM::Crash Monitor",
+        "Windows Hyper-V Fuzzing::Root Partition VM::Hyper-V VMSwitch (vmswitch.sys",
+        "Windows Hyper-V Fuzzing::VMBus / netvsc"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT root-partition host OS is decomposed into root-partition VM internals in the prediction. This is semantically aligned with the root-side workflow and communication path."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::CrashMonitoring.sys"
+      ],
+      "predicted_nodes": [
+        "Windows Hyper-V Fuzzing::Root Partition VM::Crash Monitor"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "CrashMonitoring.sys is functionally equivalent to the crash monitor component on the root partition side. The boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\\nHost OS (L2::vmswitch.sys"
+      ],
+      "predicted_nodes": [
+        "Windows Hyper-V Fuzzing::Root Partition VM::Hyper-V VMSwitch (vmswitch.sys",
+        "Windows Hyper-V Fuzzing::VMBus / netvsc"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT vmswitch.sys node is directly represented by the predicted Hyper-V VMSwitch component, and the additional VMBus/netvsc node reflects the documented communication path. The root-partition boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "predicted_nodes": [
+        "hAFL2 Platform::Standalone Test Runner",
+        "hAFL2 Platform::hAFL2 Controller",
+        "hAFL2 Platform::kAFL-Fuzzer Tests (pytest"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT hAFL2 node is correctly decomposed into its main platform responsibilities: standalone runner, controller, and pytest-based tests. The boundary attribution is semantically consistent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::KVM (L0"
+  ],
+  "unmatched_predicted_nodes": [
+    "Linux Userspace Fuzzing::Guest (Linux Userspace Target",
+    "Linux Userspace Fuzzing::Guest (Linux Userspace Target::Embedded Forkserver",
+    "Linux Userspace Fuzzing::Guest (Linux Userspace Target::Target Binary",
+    "Linux Userspace Fuzzing::Linux Host",
+    "Linux Userspace Fuzzing::Linux Host::Initrd Packager",
+    "Linux Userspace Fuzzing::Linux Host::Shared Library Copier"
+  ]
+}

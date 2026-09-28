@@ -1,0 +1,109 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::KVM (L0"
+      ],
+      "predicted_nodes": [
+        "Virtualization Layer::Hypervisor"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "KVM (L0) acts as the bare-metal L0 hypervisor, which perfectly aligns with the predicted 'Hypervisor' within the 'Virtualization Layer'."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\nGuest VM (L2"
+      ],
+      "predicted_nodes": [
+        "Virtualization Layer::Windows Child Partition VM"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the L2 Child Partition Guest VM in the Hyper-V architecture. The GT bounds it under the L1 host, while the predicted bounds it under the Virtualization Layer, which is semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Child Partition\nGuest VM (L2::harness.sys"
+      ],
+      "predicted_nodes": [
+        "Virtualization Layer::Windows Child Partition VM::Harness Driver"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the fuzzing harness driver running inside the Child Partition VM."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\nHost OS (L2"
+      ],
+      "predicted_nodes": [
+        "Virtualization Layer::Windows Root Partition VM"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the Root Partition (Host OS) running as an L2 VM. The boundary mappings are semantically acceptable."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\nHost OS (L2::CrashMonitoring.sys"
+      ],
+      "predicted_nodes": [
+        "Virtualization Layer::Windows Root Partition VM::Crash Monitor"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both point to the crash monitoring component running inside the Root Partition. Boundary is equivalent."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::Hyper-V (L1) - Host::Root Partition\nHost OS (L2::vmswitch.sys"
+      ],
+      "predicted_nodes": [
+        "Virtualization Layer::Windows Root Partition VM::VMSwitch Target"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the target 'vmswitch' component in the Root Partition networking path."
+    },
+    {
+      "gt_nodes": [
+        "KVM (L0::hAFL2"
+      ],
+      "predicted_nodes": [
+        "Host System::hAFL2 Fuzzing Platform",
+        "Host System::hAFL2 Fuzzing Platform::Fuzzing Controller",
+        "Host System::hAFL2 Fuzzing Platform::Linux Fuzzing Workflow",
+        "Host System::hAFL2 Fuzzing Platform::Test Runner",
+        "Host System::hAFL2 Fuzzing Platform::Windows Fuzzing Workflow",
+        "Host System::hAFL2 Fuzzing Platform::kAFL-Fuzzer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The single hAFL2 entity in GT is split into multiple specific platform components in the predicted diagram. Placing hAFL2 under 'Host System' instead of directly under 'KVM (L0)' is functionally and semantically valid, as it runs on the host to manage the fuzzing."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "KVM (L0::Hyper-V (L1) - Host"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::Build Tools",
+    "External Systems::Command Line Interface",
+    "External Systems::VM Management",
+    "External Systems::Visual Studio",
+    "Global::External Systems",
+    "Global::Host System",
+    "Global::Virtualization Layer",
+    "Host System::Effector Maps",
+    "Host System::Mutation Payloads",
+    "Host System::Shared Libraries",
+    "Host System::Target Binaries",
+    "Virtualization Layer::Linux Guest VM",
+    "Virtualization Layer::Linux Guest VM::Embedded Forkserver",
+    "Virtualization Layer::Linux Guest VM::Linux Target Binary",
+    "Virtualization Layer::Linux Guest VM::initrd Image",
+    "Virtualization Layer::Windows Child Partition VM::Crash Monitor",
+    "Virtualization Layer::Windows Child Partition VM::loader.exe",
+    "Virtualization Layer::Windows Child Partition VM::packet_sender.exe"
+  ]
+}

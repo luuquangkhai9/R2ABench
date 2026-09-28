@@ -1,0 +1,103 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Clients::APP Client",
+        "Clients::Web Client"
+      ],
+      "predicted_nodes": [
+        "External Actors::HTTP Client"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated multiple specific client types from the GT into a single generic 'HTTP Client' actor, which is a valid abstraction for the system described in the PRD. The 'Clients' and 'External Actors' boundaries are semantically equivalent for describing entities outside the core system."
+    },
+    {
+      "gt_nodes": [
+        "Business Servers::Business Server A",
+        "Business Servers::Business Server B",
+        "Business Servers::Business Server C"
+      ],
+      "predicted_nodes": [
+        "External Actors::Upstream Server"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly used the term 'Upstream Server' from the PRD, which functionally corresponds to the GT's multiple 'Business Server' nodes. The 'Business Servers' and 'External Actors' boundaries are semantically equivalent for external dependencies."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Proxy Core"
+      ],
+      "predicted_nodes": [
+        "HTTP Proxy System::HTTP Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the central proxy forwarding logic. The 'Proxy Layer' and 'HTTP Proxy System' boundaries are semantically equivalent. The AI's node and its sub-components (like Forwarding Handler, Channel Manager) are a much more accurate decomposition based on the PRD."
+    },
+    {
+      "gt_nodes": [
+        "CGI Portal::Http Test\\nClient"
+      ],
+      "predicted_nodes": [
+        "HTTP Proxy System::Test Client"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "While the nodes are functionally equivalent, the GT places the 'Test Client' inside a 'CGI Portal', implying a web-based UI. This contradicts the PRD which explicitly states the system has no GUI. The AI correctly places it as a bundled component within the 'HTTP Proxy System', making the GT's boundary attribution a severe context error."
+    },
+    {
+      "gt_nodes": [
+        "Proxy Layer::cgi_proxy 1::Plugin::Download",
+        "Proxy Layer::cgi_proxy 1::Plugin::Upload"
+      ],
+      "predicted_nodes": [
+        "HTTP Proxy System::Test Server"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": false,
+      "reasoning": "The GT incorrectly models file handling as plugins within the 'Proxy Layer'. The PRD clearly defines this functionality as part of a separate, bundled 'Test Server'. The AI correctly identified this and created a distinct 'Test Server' component. This represents a fundamental architectural error in the GT's component structure and boundary assignment."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Access Layer\\nKeepalived(VIP::Openresty",
+    "Business Servers::......",
+    "CGI Portal::Appkey\\nManager",
+    "CGI Portal::CGI Manager",
+    "CGI Portal::Case Manager",
+    "CGI Portal::Document\\nGenerate",
+    "CGI Portal::Log & Tree\\ninquire",
+    "CGI Portal::Metrics &\\nReport",
+    "CGI Portal::Service\\nManager",
+    "Clients::Business Server",
+    "Clients::Developer",
+    "Global::Log consumer",
+    "Proxy Layer::cgi_proxy 1::Appkey\\nValidate",
+    "Proxy Layer::cgi_proxy 1::Formatter",
+    "Proxy Layer::cgi_proxy 1::Global Limit",
+    "Proxy Layer::cgi_proxy 1::Logging",
+    "Proxy Layer::cgi_proxy 1::Login &\\nPermission",
+    "Proxy Layer::cgi_proxy 1::Plugin::Agent",
+    "Proxy Layer::cgi_proxy 1::Plugin::Attach Check",
+    "Proxy Layer::cgi_proxy 1::Plugin::Check\\nParameter",
+    "Proxy Layer::cgi_proxy 1::Plugin::Mock",
+    "Proxy Layer::cgi_proxy 2",
+    "Support Platform::Data Bank\\nHDFS/Hbase/Druid",
+    "Support Platform::Msg Center\\nKafka",
+    "Support Platform::Mysql",
+    "Support Platform::Permission\\nCenter",
+    "Support Platform::Redis Cache",
+    "Support Platform::User Center",
+    "Task Scheduler::CGI Case\\nExecutor",
+    "Task Scheduler::CGI Health\\nCheck",
+    "Task Scheduler::Daily Report",
+    "Task Scheduler::Log Analysis",
+    "Task Scheduler::Monitor/Alarm"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Actors::Local Filesystem",
+    "HTTP Proxy System::Async Request Queue",
+    "HTTP Proxy System::Request Buffer"
+  ]
+}

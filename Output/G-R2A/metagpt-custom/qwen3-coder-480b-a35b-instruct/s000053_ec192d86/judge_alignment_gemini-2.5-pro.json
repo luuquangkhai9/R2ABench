@@ -1,0 +1,68 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "cadctl::CHGM investigation",
+        "cadctl::CPD investigation",
+        "cadctl::Future investigations",
+        "cadctl::switch(alerttype"
+      ],
+      "predicted_nodes": [
+        "CLI Layer::cadctl"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT explicitly lists various functions and logic blocks within cadctl, whereas the AI abstracted them into a single cadctl CLI entry point node. The boundary attribution to CLI Layer is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Tekton\nEvent\nListener"
+      ],
+      "predicted_nodes": [
+        "Execution Layer::Tekton EventListener"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Tekton EventListener used for webhook-driven execution. The AI's placement in the Execution Layer is logically appropriate for an event trigger component."
+    },
+    {
+      "gt_nodes": [
+        "PagerDuty Team::<cluster>.openshiftapps.com-\nhive-cluster",
+        "PagerDuty Team::app-sre-alertmanager",
+        "PagerDuty Team::prod-deadmanssnitch"
+      ],
+      "predicted_nodes": [
+        "External Systems::PagerDuty"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT specifies individual PagerDuty team endpoints, while the AI aggregated them into a single PagerDuty component representing the external system integration. The boundary is semantically correct."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Alert Source::app-sre\nalertmanager",
+    "Alert Source::cluster\nalertmanager",
+    "Alert Source::deadmanssnitch",
+    "Alerts::CHGM",
+    "Alerts::CPD",
+    "Alerts::all cluster\nalerts",
+    "Global::Escalate alert to\non-call SRE",
+    "Global::Tekton Interceptor:\nAlert investigation\nimplemented in CAD?",
+    "Global::Update Incident\nNotes"
+  ],
+  "unmatched_predicted_nodes": [
+    "Deployment Layer::Deployment Template Artifacts",
+    "Deployment Layer::Template Update Utility",
+    "Execution Layer::Skip-Webhook Executor",
+    "Execution Layer::Tekton PipelineRun",
+    "External Systems::AWS",
+    "External Systems::OCM",
+    "Global::CLI Layer",
+    "Global::Deployment Layer",
+    "Global::Execution Layer",
+    "Global::External Systems",
+    "Global::Integration Layer",
+    "Global::Tekton Pipeline (cad-checks-pipeline",
+    "Integration Layer::Integration Library"
+  ]
+}

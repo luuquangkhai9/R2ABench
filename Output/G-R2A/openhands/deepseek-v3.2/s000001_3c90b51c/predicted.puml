@@ -1,0 +1,125 @@
+@startuml
+skinparam componentStyle rectangle
+skinparam backgroundcolor transparent
+skinparam linetype ortho
+
+title JSeats System Architecture
+
+package "JSeats System" {
+  component "JSeats Core" as core {
+    component "Java API Interface" as api
+    component "CLI Launcher" as cli
+  }
+  
+  package "Configuration System" as config {
+    component "Processor Configuration" as proc_config
+    component "Properties Manager" as props
+    component "Workflow Controller" as workflow
+  }
+  
+  package "Data Processing Layer" as processing {
+    component "Tally Manager" as tally_mgr
+    component "Tally Filters" as filters
+    component "Allocation Engine" as alloc_engine
+    component "Result Decorators" as decorators
+    component "Tie-Breaking Rules" as tie_break
+  }
+  
+  package "Allocation Methods" as methods {
+    component "Majority Methods" as majority [
+      Simple Majority
+      Qualified Majority
+      Absolute Majority
+    ]
+    
+    component "Ranked Methods" as ranked [
+      By Votes
+    ]
+    
+    component "Equal Proportions" as equal [
+      Huntington-Hill
+    ]
+    
+    component "Largest Remainder" as largest [
+      Hare
+      Droop
+      Imperiali
+    ]
+    
+    component "Highest Averages" as highest [
+      D'Hondt
+      Sainte-Lague/Webster
+      Imperiali
+      Danish
+    ]
+  }
+}
+
+package "External Interfaces" {
+  component "Java Application" as java_app
+  component "Command Line Shell" as shell
+  component "XML Files" as xml_files
+  component "Input/Output Files" as io_files
+}
+
+' Data Objects
+class "Tally Data" as tally_data
+class "Candidate" as candidate
+class "Result" as result
+class "Configuration" as config_obj
+class "Properties" as properties_obj
+
+' API Contracts
+interface "Allocation Method Contract" as method_contract
+interface "Result Decoration Contract" as decor_contract
+
+' Relationships
+java_app --> api : "uses"
+shell --> cli : "invokes"
+
+cli --> proc_config : "loads/configures"
+cli --> tally_mgr : "provides tally"
+cli --> alloc_engine : "executes allocation"
+
+api --> workflow : "submits processing"
+api --> method_contract : "implements"
+
+tally_mgr --> tally_data : "manages"
+tally_data --> candidate : "contains"
+
+filters --> tally_data : "pre-processes"
+alloc_engine --> method_contract : "executes"
+alloc_engine --> result : "produces"
+decorators --> result : "post-processes"
+tie_break --> alloc_engine : "resolves ties"
+
+majority --> method_contract : "implements"
+ranked --> method_contract : "implements"
+equal --> method_contract : "implements"
+largest --> method_contract : "implements"
+highest --> method_contract : "implements"
+
+xml_files --> tally_mgr : "Tally.fromXML()"
+io_files --> cli : "read/write"
+io_files --> api : "serialize/deserialize"
+
+proc_config --> config_obj : "stores"
+proc_config --> props : "manages"
+props --> properties_obj : "contains"
+workflow --> proc_config : "uses"
+
+' Notes and constraints
+note top of api: "Caller-facing allocation entry point\nAccepts tally, method, config"
+note top of method_contract: "Protected tally view\nImmutable tally constraint"
+note right of methods: "Documented methods only:\n- Majority (simple, qualified, absolute)\n- Ranked (by votes)\n- Equal proportions (Huntington-Hill)\n- Largest remainder (Hare, Droop, Imperiali)\n- Highest averages (D'Hondt, Sainte-Lague/Webster,\n  Imperiali, Danish)"
+note bottom of core: "Java implementation only\nNo web interface"
+note right of processing: "Configurable workflow:\n1. Tally filtering\n2. Allocation method\n3. Tie-breaking\n4. Result decoration"
+
+' Color coding
+skinparam component {
+  BackgroundColor<<Allocation Methods>> LightBlue
+  BackgroundColor<<Data Processing>> LightGreen
+  BackgroundColor<<Configuration>> LightYellow
+}
+
+@enduml

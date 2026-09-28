@@ -1,0 +1,154 @@
+@startuml
+!define RECTANGLE class
+skinparam componentStyle rectangle
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor #F9F9F9
+skinparam component {
+  BackgroundColor #E6F3FF
+  BorderColor #0066CC
+  FontColor #003366
+  ArrowColor #0066CC
+}
+skinparam node {
+  BackgroundColor #FFF2E6
+  BorderColor #CC6600
+  FontColor #663300
+}
+skinparam database {
+  BackgroundColor #E6FFE6
+  BorderColor #009900
+  FontColor #006600
+}
+skinparam rectangle {
+  BackgroundColor #F0F0F0
+  BorderColor #666666
+  FontColor #333333
+}
+
+title Software Requirements Review Checklist System Architecture
+
+rectangle "External Inputs" {
+  component "Requirements Document\n(Under Review)" as REQ_DOC
+  component "Applicable Standards &\nSpecifications" as STANDARDS
+  component "Product Business\nRequirements" as BUSINESS_REQ
+}
+
+database "Review Artifact\n(Markdown Checklist)" as ARTIFACT {
+  component "Review Purpose &\nBasis" as PURPOSE
+  component "Checklist Items" as CHECKLIST
+  component "Problem Report &\nSuggestions" as PROBLEMS
+  component "Score Record" as SCORES
+  component "Review Metadata" as METADATA
+}
+
+node "Reviewer" as REVIEWER
+node "Requirements Owner" as OWNER
+node "Project Stakeholder" as STAKEHOLDER
+
+rectangle "Review Process" {
+  component "Define Review\nObjectives" as DEFINE
+  component "Standards-Based\nReview" as STANDARDS_REV
+  component "Completeness\nReview" as COMPLETE_REV
+  component "Exception & Auxiliary\nReview" as EXCEPTION_REV
+  component "Understandability\nReview" as UNDERSTAND_REV
+  component "Model Accuracy\nReview" as MODEL_REV
+  component "Extension &\nImprovement Review" as EXTENSION_REV
+  component "Record Problems &\nSuggestions" as RECORD_PROB
+  component "Score Assignment" as SCORE_ASSIGN
+  component "Finalize & Sign\nReview" as FINALIZE
+}
+
+' External Inputs to Review Process
+REQ_DOC --> DEFINE : "Input"
+REQ_DOC --> STANDARDS_REV : "Input"
+REQ_DOC --> COMPLETE_REV : "Input"
+REQ_DOC --> EXCEPTION_REV : "Input"
+REQ_DOC --> UNDERSTAND_REV : "Input"
+REQ_DOC --> MODEL_REV : "Input"
+REQ_DOC --> EXTENSION_REV : "Input"
+STANDARDS --> STANDARDS_REV : "Reference"
+BUSINESS_REQ --> COMPLETE_REV : "Reference"
+
+' Reviewer interactions with Process
+REVIEWER --> DEFINE : "Initiates"
+REVIEWER --> STANDARDS_REV : "Performs"
+REVIEWER --> COMPLETE_REV : "Performs"
+REVIEWER --> EXCEPTION_REV : "Performs"
+REVIEWER --> UNDERSTAND_REV : "Performs"
+REVIEWER --> MODEL_REV : "Performs"
+REVIEWER --> EXTENSION_REV : "Performs"
+REVIEWER --> RECORD_PROB : "Records"
+REVIEWER --> SCORE_ASSIGN : "Assigns"
+REVIEWER --> FINALIZE : "Finalizes"
+
+' Process to Artifact data flow
+DEFINE --> PURPOSE : "Writes"
+STANDARDS_REV --> PURPOSE : "References"
+COMPLETE_REV --> CHECKLIST : "Populates"
+EXCEPTION_REV --> CHECKLIST : "Populates"
+UNDERSTAND_REV --> CHECKLIST : "Populates"
+MODEL_REV --> CHECKLIST : "Populates"
+EXTENSION_REV --> CHECKLIST : "Populates"
+RECORD_PROB --> PROBLEMS : "Creates"
+SCORE_ASSIGN --> SCORES : "Records"
+FINALIZE --> METADATA : "Signs"
+
+' Artifact outputs to Users
+ARTIFACT --> OWNER : "Delivers\nReview Findings"
+ARTIFACT --> STAKEHOLDER : "Provides\nQuality Status"
+
+' Constraints influence
+rectangle "Constraints" as CONSTRAINTS {
+  component "C-001: Use Review/\nVerification Methods" as C1
+  component "C-002: Consider\nStandards" as C2
+  component "C-003: 4x10 Scoring\nModel" as C3
+  component "C-004: Business Reqs\nExternal" as C4
+}
+
+C1 ..> DEFINE : "Guides"
+C2 ..> STANDARDS_REV : "Mandates"
+C3 ..> SCORE_ASSIGN : "Limits"
+C4 ..> BUSINESS_REQ : "Specifies"
+
+' Non-functional requirements as quality attributes
+rectangle "Quality Attributes" as QUALITY {
+  component "Completeness\n(NFR-001)" as QA1
+  component "Usability/Clarity\n(NFR-002)" as QA2
+  component "Correctness\n(NFR-003)" as QA3
+  component "Measurability\n(NFR-004)" as QA4
+}
+
+QA1 ..> COMPLETE_REV : "Ensures"
+QA1 ..> EXCEPTION_REV : "Ensures"
+QA2 ..> UNDERSTAND_REV : "Ensures"
+QA3 ..> MODEL_REV : "Ensures"
+QA4 ..> SCORES : "Provides"
+
+' Data requirements mapping
+PURPOSE -[hidden]r- CHECKLIST
+CHECKLIST -[hidden]r- PROBLEMS
+PROBLEMS -[hidden]r- SCORES
+SCORES -[hidden]r- METADATA
+
+note right of PURPOSE
+  DR-001: Review Purpose
+end note
+
+note right of CHECKLIST
+  DR-002: Checklist Items
+end note
+
+note right of PROBLEMS
+  DR-003: Problem Report
+end note
+
+note right of SCORES
+  DR-004: Score Record
+end note
+
+note right of METADATA
+  DR-005: Review Metadata
+end note
+
+@enduml

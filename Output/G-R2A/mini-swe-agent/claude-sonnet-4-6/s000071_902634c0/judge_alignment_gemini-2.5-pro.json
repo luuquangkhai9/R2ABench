@@ -1,0 +1,104 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "ClearML Server::Backend Service API",
+        "ClearML Server::Experiment Manager::Collaboration",
+        "ClearML Server::Experiment Manager::Data Tracking",
+        "ClearML Server::Experiment Manager::Versioning",
+        "ClearML Server::Experiment Manager::Visualization",
+        "ClearML Server::ML Ops::Monitoring",
+        "ClearML Server::ML Ops::Orchestration"
+      ],
+      "predicted_nodes": [
+        "External Systems::ClearML Server\n(Backend",
+        "Global::External Systems"
+      ],
+      "match_type": "N:2",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated various ClearML Server modules (Backend API, Experiment Manager, ML Ops orchestration) into a single External Systems node for the ClearML Server. The boundary attribution is semantically aligned."
+    },
+    {
+      "gt_nodes": [
+        "ClearML Server::ML Ops::Execution Queue"
+      ],
+      "predicted_nodes": [
+        "Data / Templates::ClearML Execution Queue",
+        "Global::Data / Templates"
+      ],
+      "match_type": "1:2",
+      "is_boundary_correct": false,
+      "reasoning": "The AI identified the execution queue but placed it under a static 'Data / Templates' boundary rather than recognizing it as an active ML Ops component running on the ClearML Server, resulting in a severe boundary error."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\nOn Prem or Cloud::ClearML Agent\nService Pod"
+      ],
+      "predicted_nodes": [
+        "Global::ClearML Agent Runtime",
+        "ClearML Agent Runtime::Execution Engine",
+        "ClearML Agent Runtime::Execution Engine::Experiment Environment Installer",
+        "ClearML Agent Runtime::Execution Engine::Experiment Process Monitor",
+        "ClearML Agent Runtime::Kubernetes Integration Layer",
+        "ClearML Agent Runtime::Kubernetes Integration Layer::Service Pod Manager\n(Long-lasting Pod Mode",
+        "ClearML Agent Runtime::Worker Telemetry",
+        "ClearML Agent Runtime::Worker Telemetry::Connectivity Pinger\n(every 30s default",
+        "ClearML Agent Runtime::Worker Telemetry::Memory Reporter\n(process/machine scope",
+        "ClearML Agent Runtime::Worker Telemetry::Status Reporter\n(every 2s default",
+        "ClearML Agent Runtime::Backend Client Layer",
+        "ClearML Agent Runtime::Backend Client Layer::Events Service Client\n(v2.5",
+        "ClearML Agent Runtime::Backend Client Layer::Generic Service Client\n(create/get/get_by_id/get_all/get_all_ex",
+        "ClearML Agent Runtime::Backend Client Layer::Models Service Client\n(v2.4",
+        "ClearML Agent Runtime::Backend Client Layer::Session Handler\n(Request/Response"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT models the ClearML Agent as a single node running on workers, while the AI splits it into a detailed runtime architecture including an Execution Engine, Kubernetes Integration Layer, Worker Telemetry, and Backend Client Layer. The boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\nOn Prem or Cloud::Kubernetes Glue"
+      ],
+      "predicted_nodes": [
+        "ClearML Agent Runtime::Kubernetes Integration Layer::Kubernetes Glue\n(Queue-to-Job Converter"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both accurately identify the Kubernetes Glue component. The AI's placement of it within the agent's Kubernetes Integration Layer matches the worker deployment boundary."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\nOn Prem or Cloud::Mapped Docker Socket\nSibling Containers"
+      ],
+      "predicted_nodes": [
+        "ClearML Agent Runtime::Kubernetes Integration Layer::Sibling Container Manager\n(Docker Socket",
+        "External Systems::Docker Runtime\n(via Docker Socket"
+      ],
+      "match_type": "1:2",
+      "is_boundary_correct": true,
+      "reasoning": "GT models the mapped Docker socket for sibling containers as a single node. The AI splits it into an internal manager component and the external Docker Runtime. The boundaries accurately reflect the deployment reality."
+    },
+    {
+      "gt_nodes": [
+        "GPU / Kubernetes Workers\nOn Prem or Cloud::YAML Job Template"
+      ],
+      "predicted_nodes": [
+        "Data / Templates::Kubernetes YAML Template"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both identify the YAML job template. The AI places it under a Data/Templates boundary, which is semantically appropriate for this static artifact used by the worker."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Data Scientist Environment::ClearML Snippet",
+    "Data Scientist Environment::Python ML / DL Code",
+    "GPU / Kubernetes Workers\nOn Prem or Cloud::Kubernetes Job",
+    "GPU / Kubernetes Workers\nOn Prem or Cloud::Pod Execution Environment\nand Docker User Code"
+  ],
+  "unmatched_predicted_nodes": [
+    "External Systems::Kubernetes Cluster",
+    "Global::Configuration",
+    "Configuration::Worker Configuration\n(report_period_sec, ping_period_sec,\nlog_stdout, report_global_mem_used"
+  ]
+}

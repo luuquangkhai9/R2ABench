@@ -1,0 +1,175 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Browser / Client Layer::Frontend Interface\n(Bootstrap-Vue"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Web UI (Vue + TypeScript"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the browser-side user interface layer. The technology stack differs in wording but is semantically equivalent, and the boundary attribution to the presentation/client side is correct."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\n(MySQL::Blog Data"
+      ],
+      "predicted_nodes": [
+        "Data Access Layer::BlogPostRepository",
+        "Data Access Layer::BlogCommentRepository"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT blog data node is semantically split into blog post and comment repositories, which is acceptable as a decomposition. However, the predicted nodes are repositories (data access objects) rather than the database/storage layer itself, so the architectural boundary attribution is not correct."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\n(MySQL::Dataset Data"
+      ],
+      "predicted_nodes": [
+        "Data Access Layer::DatasetRepository"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The dataset storage concept is correctly identified, but the predicted node is placed in the data access layer instead of the database/storage boundary, which is a boundary mismatch."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\n(MySQL::Following Data"
+      ],
+      "predicted_nodes": [
+        "Data Access Layer::TransactionRepository"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "This is not a proper semantic match. TransactionRepository relates to payment/transaction handling, not follow-relationship storage, so the match is incorrect and the boundary is also wrong."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\n(MySQL::Model Data"
+      ],
+      "predicted_nodes": [
+        "Data Access Layer::ModelRepository"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The model data storage entity is matched to a repository rather than the database layer. Functionally related, but the boundary attribution is incorrect."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\n(MySQL::Q&A Community Data"
+      ],
+      "predicted_nodes": [
+        "Data Access Layer::QuestionRepository",
+        "Data Access Layer::AnswerRepository"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT Q&A storage node is reasonably split into question and answer repositories, but these are still data access components rather than the database/storage boundary, so boundary attribution is incorrect."
+    },
+    {
+      "gt_nodes": [
+        "Database Layer\n(MySQL::User Data"
+      ],
+      "predicted_nodes": [
+        "Data Access Layer::UserRepository"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "User data is semantically equivalent to the user repository concept, but the predicted node is in the data access layer instead of the database layer, making the boundary incorrect."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\n(Spring Boot::Core Modules::Account Management Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::AccountService"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both describe the account management backend component. The application-layer service is a reasonable semantic equivalent of the Spring Boot account module, and the boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\n(Spring Boot::Core Modules::Admin Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::AdminService"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent administrator governance logic. The service boundary is semantically consistent with the backend admin module."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\n(Spring Boot::Core Modules::Blog Sharing Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::BlogService",
+        "Application Layer::BlogCommentService"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT blog module is split into blog and comment services, which is a valid finer-grained decomposition. The application-layer placement is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\n(Spring Boot::Core Modules::Dataset Management Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::DatasetService",
+        "Application Layer::DatasetDownloadService"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The dataset management module is decomposed into dataset management and download services, which is semantically consistent. The application-layer attribution is correct."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\n(Spring Boot::Core Modules::Following Management Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::FollowService"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The follow management module matches the follow service concept directly, and the application-layer boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\n(Spring Boot::Core Modules::Model Management Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::ModelService",
+        "Application Layer::ModelExecutionService",
+        "Application Layer::PurchaseService",
+        "Application Layer::RecommendationEngine"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The model module is reasonably split into service components for model management, execution, purchase, and recommendation. These are all valid backend application-layer concerns."
+    },
+    {
+      "gt_nodes": [
+        "Server Layer\n(Spring Boot::Core Modules::Q&A Community Module"
+      ],
+      "predicted_nodes": [
+        "Application Layer::QnAService"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The Q&A community module and QnA service are semantically equivalent backend components, and the application-layer placement is correct."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Data Access Layer::MySQL Database",
+    "External Systems::Email Service",
+    "External Systems::Payment Gateway",
+    "Global::External Systems",
+    "Global::Infrastructure Layer",
+    "Infrastructure Layer::Cloud Environment",
+    "Infrastructure Layer::Cloud Environment::x86-64/ARM Server"
+  ]
+}

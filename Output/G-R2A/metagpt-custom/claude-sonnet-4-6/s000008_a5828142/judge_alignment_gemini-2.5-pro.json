@@ -1,0 +1,137 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Application Runtime::Reverse Proxy::Nginx"
+      ],
+      "predicted_nodes": [
+        "API Gateway / Reverse Proxy Layer::Nginx Reverse Proxy\\n(HTTP & WebSocket Termination\\n/ Static Asset Serving"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes for the Nginx reverse proxy are a direct match. The GT boundary 'Application Runtime::Reverse Proxy' is semantically equivalent to the AI's 'API Gateway / Reverse Proxy Layer'."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Reverse Proxy::Express"
+      ],
+      "predicted_nodes": [
+        "Application Layer::Express REST API Server\\n(Auth / Project / Execution /\\nPlayback / File Endpoints",
+        "Application Layer::JWT Authentication Middleware\\n(Token Validation / User Resolution",
+        "Application Layer::Project & Version Manager\\n(Project / Version / File CRUD",
+        "Application Layer::Code Execution Service\\n(Submission Coordinator",
+        "Application Layer::Coding-Process Recorder\\n(Event Capture & Playback Query",
+        "Application Layer::File Upload & Distribution Manager\\n(Upload / Metadata Persistence /\\nCDN URL Generation",
+        "Real-Time Communication Layer\\n(Socket.IO — co-located within App Process::Workspace Socket Handler\\n(Auth / Editing State / Disconnect",
+        "Real-Time Communication Layer\\n(Socket.IO — co-located within App Process::Battle Socket Handler\\n(Invitation / Sync / Judge / Outcome"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's single 'Express' node, representing the entire backend application, was correctly identified and split into multiple specific functional components by the AI. The GT's boundary 'Reverse Proxy' for Express is incorrect; the AI's 'Application Layer' and 'Real-Time Communication Layer' are architecturally accurate."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::MySQL"
+      ],
+      "predicted_nodes": [
+        "Relational Data Layer::MySQL Database\\n(Users / Projects / Versions /\\nBattle Records / Problem Data"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the MySQL database. The GT boundary 'Application Runtime::Database' and the AI's 'Relational Data Layer' are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::InfluxDB"
+      ],
+      "predicted_nodes": [
+        "Time-Series Data Layer::InfluxDB\\n(Coding-Process Events /\\nTime-Range Queryable"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the InfluxDB time-series database. The GT boundary 'Application Runtime::Database' and the AI's 'Time-Series Data Layer' are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Application Runtime::Database::Redis"
+      ],
+      "predicted_nodes": [
+        "Caching Layer::Redis\\n(Socket Mappings / Battle State /\\nTTL Invitations / Concurrency Control"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for Redis. The AI correctly categorized it into a 'Caching Layer', which is more specific and semantically equivalent to 'Application Runtime::Database' given its described function in the PRD."
+    },
+    {
+      "gt_nodes": [
+        "Coding Sandbox::Coding Sandbox 1::Docker",
+        "Coding Sandbox::Coding Sandbox 2::Docker"
+      ],
+      "predicted_nodes": [
+        "Execution Layer::Docker Sandbox\\n(Isolated Container Runtime\\nCompile & Execute"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated the GT's multiple specific Docker sandbox instances into a single, logical 'Docker Sandbox' component. The GT boundary 'Coding Sandbox' is semantically equivalent to the AI's 'Execution Layer'."
+    },
+    {
+      "gt_nodes": [
+        "Frontend Repo::Vue 3"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Vue Frontend Application\\n(Workspace Editor /\\nPlayback View / Battle View"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the Vue frontend. The AI's boundary 'Presentation Layer' is a more accurate architectural term for a runtime UI component than the GT's 'Frontend Repo', which conflates the code repository with the running application."
+    },
+    {
+      "gt_nodes": [
+        "Static Asset Delivery::Storage\\nS3 bucket"
+      ],
+      "predicted_nodes": [
+        "Object Storage & Distribution Layer::S3-Compatible Object Storage\\n(Code Files / Battle Results /\\nUser Files / Archives"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for S3-compatible object storage. The GT boundary 'Static Asset Delivery' and the AI's 'Object Storage & Distribution Layer' are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Static Asset Delivery::CDN\\nCloudFront"
+      ],
+      "predicted_nodes": [
+        "Object Storage & Distribution Layer::CDN Distribution Service\\n(CloudFront-Style / Distributable URLs"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "A direct match for the CDN service. The GT boundary 'Static Asset Delivery' and the AI's 'Object Storage & Distribution Layer' are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "Backend Repo::CI/CD Workflow",
+        "Backend Repo::Deploy Key",
+        "Backend Repo::GitHub",
+        "Frontend Repo::CI/CD Workflow",
+        "Frontend Repo::Deploy Key",
+        "Frontend Repo::GitHub"
+      ],
+      "predicted_nodes": [
+        "Deployment / Infrastructure Layer::Automated Deployment Scripts\\n(Service Config & Wiring"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated multiple GT nodes related to source code repositories and CI/CD pipelines into a single 'Automated Deployment Scripts' component. The AI's 'Deployment / Infrastructure Layer' is a valid and semantically equivalent abstraction for the GT's 'Backend Repo' and 'Frontend Repo' boundaries in this context."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Developer",
+    "Global::End User",
+    "Backend Repo::Node.js",
+    "Coding Sandbox::Coding Sandbox 1::Exporter",
+    "Coding Sandbox::Coding Sandbox 1::Node.js",
+    "Coding Sandbox::Coding Sandbox 2::Exporter",
+    "Coding Sandbox::Coding Sandbox 2::Node.js"
+  ],
+  "unmatched_predicted_nodes": []
+}

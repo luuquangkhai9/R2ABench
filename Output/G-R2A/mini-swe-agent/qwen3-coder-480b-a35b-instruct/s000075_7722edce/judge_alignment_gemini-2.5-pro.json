@@ -1,0 +1,58 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Statlord::Browser Editor\\nLayout authoring"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Browser Editor"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted 'Browser Editor' node correctly matches the GT's editor component, which the PRD describes as a TypeScript/React single-page application. The 'Client Layer' boundary is a semantically correct and more specific architectural classification than the GT's general 'Statlord' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Python / Django API",
+        "Statlord::Server::Display Resource\\nresolution and state",
+        "Statlord::Server::Gauge Resource\\nkey, value",
+        "Statlord::Server::Layout Resource\\ndata and display positions"
+      ],
+      "predicted_nodes": [
+        "Server Layer::API Service"
+      ],
+      "match_type": "4:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the GT's server implementation ('Python / Django API') and the logical data resources it manages ('Display', 'Gauge', 'Layout') into a single 'API Service' node. This is a valid N:1 aggregation as the API service is responsible for all this functionality. The 'Server Layer' boundary is correct for all these components."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::PostgreSQL\\npersistent models"
+      ],
+      "predicted_nodes": [
+        "Server Layer::Data Store"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted 'Data Store' is a correct, more abstract representation of the GT's specific 'PostgreSQL' node. The PRD confirms PostgreSQL is used for persistence. Placing it in the 'Server Layer' is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Viewer Instances\\nheadless browsers"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Viewer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The 'Viewer' component for rendering is correctly identified. The PRD describes it as a 'viewer layer' and 'viewer path for rendering'. Classifying it under 'Client Layer' is a reasonable architectural decision as it's a presentation-focused component."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Statlord::Displays\\nOLED, e-paper, LCD, browser"
+  ],
+  "unmatched_predicted_nodes": [
+    "Build & Deployment::Container Runtime",
+    "Build & Deployment::Node.js Build"
+  ]
+}

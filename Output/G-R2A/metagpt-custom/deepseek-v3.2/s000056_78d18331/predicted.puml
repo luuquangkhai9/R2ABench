@@ -1,0 +1,60 @@
+@startuml
+
+package "HTTP Interface Layer" {
+    component "HTTP Server" <<component>> as http_server
+    interface "HTTP API" <<interface>> as http_api
+    component "HTTP Endpoint Handler" <<component>> as endpoint_handler
+}
+
+package "Business Logic Layer" {
+    component "CNI Directory Resolver" <<component>> as cni_resolver
+    component "JSON Sanitizer" <<component>> as json_sanitizer
+    component "Test Selector" <<component>> as test_selector
+    component "Test Executor" <<component>> as test_executor
+}
+
+package "Configuration Layer" {
+    component "Command-line Parser" <<component>> as cli_parser
+    component "Config File Parser" <<component>> as file_parser
+    component "Runtime Configuration" <<component>> as runtime_config
+}
+
+node "Kubernetes Node" <<node>> as k8s_node {
+    http_server
+    endpoint_handler
+    cni_resolver
+    json_sanitizer
+    test_selector
+    test_executor
+    cli_parser
+    file_parser
+    runtime_config
+}
+
+cloud "HTTP Clients" <<cloud>> as http_clients
+
+' HTTP Layer Connections
+http_clients --> http_api
+http_api --> http_server
+http_server --> endpoint_handler
+
+' Endpoint Handler to Business Logic
+endpoint_handler --> cni_resolver : triggers
+endpoint_handler --> json_sanitizer : triggers
+
+' Configuration Processing
+cli_parser --> runtime_config : provides
+file_parser --> runtime_config : provides
+runtime_config --> cni_resolver : configures
+runtime_config --> json_sanitizer : configures
+
+' Test Selection and Execution
+test_selector ..> "Go Build Tags" : selects via
+test_selector --> test_executor : triggers
+test_executor --> "Provider Tests" : executes
+
+' JSON Processing Interface
+json_sanitizer --> "JSON Input" : processes
+json_sanitizer --> "JSON Output" : produces
+
+@enduml

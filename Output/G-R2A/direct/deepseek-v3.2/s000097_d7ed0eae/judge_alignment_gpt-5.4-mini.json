@@ -1,0 +1,74 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "IBM Cloud::Express App",
+        "IBM Cloud::LoopBack Generated Code",
+        "IBM Cloud::Node.js Runtime"
+      ],
+      "predicted_nodes": [
+        "API Tier::LoopBack Node.js Server"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "These GT nodes collectively represent the backend LoopBack server implementation/runtime, which the predicted node aggregates into a single API server boundary. The architectural level is consistent."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Cloudant::User and API data"
+      ],
+      "predicted_nodes": [
+        "Data Tier::Persistent Storage",
+        "Data Tier::Persistent Storage::User Repository"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT persistent data store for user/API data corresponds to the predicted persistent storage boundary, and the User Repository is a plausible decomposition aligned with the PRD. The boundary attribution is consistent."
+    },
+    {
+      "gt_nodes": [
+        "IBM Cloud::Object Storage",
+        "IBM Cloud::Watson Studio",
+        "IBM Cloud::CSV File\\nExport / training data"
+      ],
+      "predicted_nodes": [
+        "Supporting Services::Recommendation Workflow Engine",
+        "Supporting Services::Sustainability Scoring Service"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": true,
+      "reasoning": "These GT cloud/data-processing assets correspond to supporting analytics and recommendation workflows in the PRD. The predicted nodes are a reasonable functional abstraction of that supporting layer, though not exact name matches."
+    },
+    {
+      "gt_nodes": [
+        "Browser Extension::React UI\\nExtension",
+        "Browser Extension::TypeScript\\nExtension code"
+      ],
+      "predicted_nodes": [
+        "Client Tier::Chrome Browser Extension"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT separately shows the browser extension UI and implementation code, while the prediction aggregates them into the browser-extension client boundary. This is semantically equivalent and correctly placed."
+    },
+    {
+      "gt_nodes": [
+        "Website::React UI\\nBeeGreen site",
+        "Website::TypeScript\\nWebsite code"
+      ],
+      "predicted_nodes": [
+        "Client Tier::React/TypeScript Website"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT splits the website into UI and code, while the prediction aggregates them into the website client boundary. This is semantically equivalent and correctly placed."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::User\\nShopping at online stores",
+    "Global::User\\nVisiting BeeGreen site"
+  ],
+  "unmatched_predicted_nodes": [
+    "Data Tier::Persistent Storage::InventoryItem Data"
+  ]
+}

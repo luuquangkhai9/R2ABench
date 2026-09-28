@@ -1,0 +1,85 @@
+@startuml
+' Layered Architecture Diagram for Tengine Lite
+
+package "Application Layer" {
+    component "Example Applications" as examples <<executable>>
+    database "Model Files\n(.tmfile)" as model_files
+    file "Image Assets" as image_files
+    
+    note right of examples
+        Provides executable workflows
+        for AI tasks (classification,
+        detection, segmentation, etc.)
+    end note
+}
+
+package "API Layer" {
+    component "C API" as c_api <<interface>>
+    component "C++ API" as cpp_api <<interface>>
+    component "Python API" as python_api <<interface>>
+}
+
+package "Core Architecture Layer" {
+    component "Scheduler Module" as scheduler <<module>>
+    component "Operator Module" as operator <<module>>
+    component "Device Module" as device <<module>>
+    
+    note right of scheduler
+        Handles NNIR (Neural Network
+        Intermediate Representation)
+        and computation graphs
+    end note
+}
+
+package "Serialization Layer" {
+    component "Serializer Module" as serializer <<module>>
+    database "tmfile Format" as tmfile_format
+}
+
+package "Conversion Utilities" {
+    component "Model Conversion Tool" as offline_tool <<utility>>
+    component "Online Model Converter" as online_converter <<utility>>
+    database "Converted Model\nArtifacts" as converted_models
+}
+
+cloud "Web Browser Environment" as browser_env {
+    component "WebAssembly Runtime" as wasm_runtime
+}
+
+' Data dependencies
+model_files --> serializer : "reads"
+serializer --> "Serialized Model\nParameters" as serialized_params : "produces"
+serialized_params --> scheduler : "feeds"
+
+examples --> model_files : "consumes"
+examples --> image_files : "consumes"
+
+' API to core layer relationships
+c_api --> scheduler : "calls for\ninference"
+cpp_api --> scheduler : "calls for\ninference"
+python_api --> scheduler : "calls for\ninference"
+
+' Internal architecture flow
+scheduler --> operator : "manages\nexecution"
+operator --> device : "executes via"
+
+' Conversion workflows
+offline_tool --> tmfile_format : "processes"
+offline_tool --> converted_models : "generates"
+
+online_converter --> tmfile_format : "processes"
+online_converter --> converted_models : "generates"
+online_converter --> wasm_runtime : "depends on"
+
+' External environment relationships
+offline_tool --> "Linux OS" as linux_env : "runs on"
+online_converter --> browser_env : "executes in"
+
+' Legend
+legend right
+    | Arrow Type | Meaning |
+    | --> | Data/Control Flow |
+    | ..> | Dependency/Environment |
+endlegend
+
+@enduml

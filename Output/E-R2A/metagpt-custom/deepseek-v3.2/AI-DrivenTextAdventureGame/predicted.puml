@@ -1,0 +1,216 @@
+@startuml
+
+' Define colors for layers
+skinparam packageBackgroundColor #F0F8FF
+skinparam componentBackgroundColor #FFF5EE
+skinparam nodeBackgroundColor #F5F5F5
+skinparam databaseBackgroundColor #E6E6FA
+
+' Presentation Layer
+package "Presentation Layer" {
+    component "Frontend Application" as frontend [
+        Vue.js/Nuxt.js
+        ---
+        Game Interface
+        Community Browser
+        Admin Panels
+    ]
+}
+
+' Core Game System Layer
+package "Core Game System" {
+    component "Game System" as game_system [
+        Core Game Loop
+        ---
+        Plot Processing
+        State Management
+        AI Content Integration
+        Background Setup Handler
+    ]
+    
+    component "Game Currency/Item System" as currency_system [
+        Achievement Tracking
+        ---
+        Item Rewards
+        Currency Management
+    ]
+}
+
+' Application Services Layer
+package "Application Services" {
+    component "Authentication Service" as auth_service [
+        Login/Logout
+        ---
+        Session Management
+        Password Recovery
+        Admin/User Separation
+    ]
+    
+    component "User Service" as user_service [
+        User Management
+        ---
+        Profile Management
+        Preferences
+        Favorites System
+    ]
+    
+    component "Community Service" as community_service [
+        Community Features
+        ---
+        Posts/Comments
+        Content Moderation
+        Review Workflow
+    ]
+    
+    component "Search/Recommendation Service" as search_service [
+        Content Discovery
+        ---
+        Post Search
+        Homepage Recommendations
+    ]
+    
+    component "Notification Service" as notification_service [
+        Event Notifications
+        ---
+        Comment/Reply Alerts
+        Status Updates
+        Game Event Notifications
+    ]
+    
+    component "Save Manager" as save_manager [
+        Game State Persistence
+        ---
+        Save/Load Operations
+        Save Sharing
+    ]
+    
+    component "Administration Service" as admin_service [
+        System Governance
+        ---
+        User Management
+        Content Review
+        Report Handling
+        System Monitoring
+    ]
+}
+
+' Data Access Layer
+package "Data Access Layer" {
+    component "Data Access Layer" as data_access [
+        GORM ORM
+        ---
+        Database Abstraction
+        Query Optimization
+        Transaction Management
+    ]
+}
+
+' Data Storage Layer
+package "Data Storage Layer" {
+    database "MySQL Database" as mysql [
+        Structured Data Storage
+        ---
+        User Data
+        Game Data
+        Community Data
+        Game Saves
+        System Logs
+    ]
+}
+
+' External Systems
+cloud "Large Language Model Provider" as llm_provider [
+    External AI Service
+    ---
+    Narrative Generation
+    Content Creation
+    Image/Sound Generation
+]
+
+' Security & Observability
+package "Infrastructure Services" {
+    component "Security Layer" as security_layer [
+        Encryption
+        ---
+        Access Control
+        Input Validation
+        Audit Logging
+    ]
+    
+    component "Observability Layer" as observability_layer [
+        System Monitoring
+        ---
+        Logging
+        Metrics Collection
+        Performance Tracking
+    ]
+}
+
+' Containerization
+node "Docker Container" as container {
+    component "Application Runtime" as app_runtime [
+        Kubernetes Pod
+        ---
+        Service Mesh
+        Load Balancing
+    ]
+}
+
+' Key Dependencies
+frontend --> game_system : "Game Interaction\n(API)"
+frontend --> community_service : "Community Access\n(API)"
+frontend --> admin_service : "Admin Operations\n(API)"
+frontend --> notification_service : "Notification Management\n(API)"
+frontend --> user_service : "Profile Management\n(API)"
+frontend --> search_service : "Search/Recommendations\n(API)"
+
+game_system --> llm_provider : "AI Content Requests\n(API)"
+game_system --> currency_system : "Achievement/Reward Updates"
+game_system --> save_manager : "Save/Load State"
+game_system --> community_service : "Share Game Saves"
+save_manager --> game_system : "Restore State"
+
+community_service --> user_service : "User Association"
+community_service --> search_service : "Index Content"
+notification_service --> community_service : "Event Triggers"
+notification_service --> user_service : "Recipient Mapping"
+notification_service --> game_system : "Game Event Notifications"
+admin_service --> user_service : "User Governance"
+admin_service --> community_service : "Content Review"
+admin_service --> notification_service : "Review Result Notifications"
+
+auth_service --> user_service : "User Verification"
+currency_system --> user_service : "Reward Assignment"
+
+' Data Access Dependencies
+game_system --> data_access : "Persist Game State"
+user_service --> data_access : "Manage User Data"
+community_service --> data_access : "Store Community Content"
+notification_service --> data_access : "Record Notifications"
+save_manager --> data_access : "Track Save States"
+admin_service --> data_access : "Access System Data"
+auth_service --> data_access : "Session Storage"
+search_service --> data_access : "Query Data"
+currency_system --> data_access : "Store Currency/Items"
+
+' Storage Dependencies
+data_access --> mysql : "CRUD Operations"
+
+' Infrastructure Dependencies
+app_runtime --> security_layer : "Security Enforcement"
+app_runtime --> observability_layer : "Monitoring Data"
+frontend --> security_layer : "Secure Communication"
+game_system --> observability_layer : "Performance Metrics"
+
+' Container Dependencies
+game_system ..> container : "Deployed in"
+user_service ..> container : "Deployed in"
+community_service ..> container : "Deployed in"
+notification_service ..> container : "Deployed in"
+admin_service ..> container : "Deployed in"
+auth_service ..> container : "Deployed in"
+search_service ..> container : "Deployed in"
+save_manager ..> container : "Deployed in"
+currency_system ..> container : "Deployed in"
+
+@enduml

@@ -1,0 +1,174 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Event Bus"
+      ],
+      "predicted_nodes": [
+        "Application/Core Layer::Event Bus"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same component; the core/application layer placement is semantically consistent with the GT application boundary."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Location Capture::Google Play Services\\nLocation Provider"
+      ],
+      "predicted_nodes": [
+        "Platform Layer::Google Play Services\\n(Fused Location"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Google Play Services-based location provider. The platform boundary is acceptable and consistent."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Location Capture::Location Listeners"
+      ],
+      "predicted_nodes": [
+        "Platform Layer::Android Location Provider"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The AI mapped a listener/consumption component to a location provider component. These are related but not semantically equivalent, so this is a boundary/context error."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::CSV / URL Loggers"
+      ],
+      "predicted_nodes": [
+        "Integration Layer::Text Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "GT includes CSV/URL logging behavior, while the prediction is only a text logger. This is an incomplete semantic match and not equivalent."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::GPX Logger"
+      ],
+      "predicted_nodes": [
+        "Integration Layer::GPX Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same logger component; the integration layer placement is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::KML Logger"
+      ],
+      "predicted_nodes": [
+        "Integration Layer::KML Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same logger component; boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::Loggers"
+      ],
+      "predicted_nodes": [
+        "Integration Layer::Text Logger"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT contains a broader logger aggregation, while the prediction only covers one concrete logger type. This is not a faithful aggregation of the GT node."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::NMEA / GPRMC Encoder"
+      ],
+      "predicted_nodes": [
+        "Integration Layer::GPRMC Encoder"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same encoding responsibility; the predicted boundary is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Upload::Upload Jobs"
+      ],
+      "predicted_nodes": [
+        "Integration Layer::Dropbox Uploader",
+        "Integration Layer::OpenGTS Uploader\\n(UDP"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "GT is a generic upload-job orchestration area, while the prediction splits into specific uploaders only. This misses the broader job layer semantics."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Upload::Uploaders"
+      ],
+      "predicted_nodes": [
+        "Integration Layer::Dropbox Uploader",
+        "Integration Layer::OpenGTS Uploader\\n(UDP"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT uploader abstraction is reasonably split into concrete uploaders. The integration layer placement is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::User Interface::Detailed View",
+        "GPSLogger Android Application::User Interface::Main Activity",
+        "GPSLogger Android Application::User Interface::Other Fragments",
+        "GPSLogger Android Application::User Interface::Simple View"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Main Activity &\\nFragments"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Multiple UI nodes in GT are aggregated into a single presentation node. The boundary is correct at a higher abstraction level."
+    },
+    {
+      "gt_nodes": [
+        "Global::Dropbox"
+      ],
+      "predicted_nodes": [
+        "External Systems::Dropbox API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Same external Dropbox integration; external systems boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenGTS Endpoint\\nUDP server"
+      ],
+      "predicted_nodes": [
+        "External Systems::OpenGTS Server",
+        "Integration Layer::OpenGTS Uploader\\n(UDP"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT OpenGTS endpoint is represented by the external server plus the UDP uploader path. The split is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenStreetMap"
+      ],
+      "predicted_nodes": [
+        "External Systems::OpenStreetMap API",
+        "Integration Layer::OpenStreetMap Integration"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "GT OpenStreetMap integration is split into the external API and internal integration node. This is semantically consistent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "GPSLogger Android Application::Location Capture::Location Listeners",
+    "GPSLogger Android Application::Logging::CSV / URL Loggers"
+  ],
+  "unmatched_predicted_nodes": [
+    "Application/Core Layer::GPS Logging Service",
+    "Application/Core Layer::Settings &\\nConfiguration",
+    "Platform Layer::Local Storage\\n(GPX/KML/Text files"
+  ]
+}

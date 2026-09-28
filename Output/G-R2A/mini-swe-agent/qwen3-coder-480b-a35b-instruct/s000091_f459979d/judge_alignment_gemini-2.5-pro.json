@@ -1,0 +1,84 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Blockchain Network\\nEthereum / Web3j",
+        "LwM2M Blockchain Platform::BootstrapStore\\nSmart Contract"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Ethereum Blockchain"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the GT's abstract Blockchain Network and the specific Smart Contract into a single data persistence node, 'Ethereum Blockchain'. Placing this in the 'Data Layer' is architecturally correct as it serves as the system's storage for client and bootstrap information."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Secure API\\nAuthenticated HTTP endpoints"
+      ],
+      "predicted_nodes": [
+        "Backend Layer::Spring HTTP Controllers",
+        "Backend Layer::User Management Service"
+      ],
+      "match_type": "1:2",
+      "is_boundary_correct": true,
+      "reasoning": "The AI decomposed the GT's 'Secure API' node into a more detailed and standard two-tier backend pattern: 'Spring HTTP Controllers' for the API exposure and 'User Management Service' for the business logic. Both are correctly placed within the 'Backend Layer'."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Server\\nLeshan server component"
+      ],
+      "predicted_nodes": [
+        "Backend Layer::LwM2M Node Parsing Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted 'LwM2M Node Parsing Service' represents a core function (FR-006) of the GT's 'LwM2M Server'. The AI focused on the specific functionality described in the PRD. The 'Backend Layer' attribution is correct for this service."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::Management Web UI"
+      ],
+      "predicted_nodes": [
+        "External Systems::Authenticated API Clients"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the consumer of the management API. The AI's node 'Authenticated API Clients' is more accurate based on the PRD, which specifies an API but not a GUI. Placing it in an 'External Systems' boundary is more precise than the GT's placement within the platform itself."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::LwM2M Bootstrap Server"
+      ],
+      "predicted_nodes": [
+        "Backend Layer::Blockchain Integration Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's 'LwM2M Bootstrap Server' is responsible for providing bootstrap data, which the PRD states is retrieved from the blockchain. The predicted 'Blockchain Integration Service' is the component that performs this exact function. The AI has named the component by its technical implementation, while the GT uses its protocol role. The 'Backend Layer' boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "LwM2M Blockchain Platform::External Applications\\nusing LwM2M"
+      ],
+      "predicted_nodes": [
+        "External Systems::LwM2M Service Components"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "This is a direct semantic match for external consumers of the LwM2M services. The AI's boundary choice, 'External Systems', is more architecturally precise for a component that is outside the core system."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "LwM2M Blockchain Platform::LwM2M Client\\nDevice 1",
+    "LwM2M Blockchain Platform::LwM2M Client\\nDevice 2"
+  ],
+  "unmatched_predicted_nodes": [
+    "Data Layer::User Database",
+    "Global::apiClients",
+    "Global::blockchainService",
+    "Global::controllers",
+    "Global::lwm2mService",
+    "Global::userService"
+  ]
+}

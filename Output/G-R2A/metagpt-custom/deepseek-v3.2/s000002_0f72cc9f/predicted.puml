@@ -1,0 +1,111 @@
+@startuml
+
+package "Presentation Layer (Client)" {
+  component "Authentication Views" {
+    component "SignUp View"
+    component "SignIn View"
+  }
+  
+  component "Shared Credential Handlers" {
+    component "Email Handler"
+    component "Password Handler"
+  }
+  
+  component "Credential Submission Function"
+  component "Content Retrieval Client"
+  component "Error Display Component"
+  component "Paragraph Result State"
+  
+  component "Scene Renderer" {
+    component "Lobby Component"
+    component "SF Component"
+    component "Louvre Component"
+    component "Berlin Component"
+    component "Milan Component"
+    component "Rome Component"
+    component "Hack Component"
+    component "Camera Component"
+    component "Sky Component"
+    component "Plane Component"
+    component "TextPlane Component"
+  }
+  
+  component "React-Router" as ReactRouter
+}
+
+package "Application Layer (Server)" {
+  component "Authentication Routes" {
+    component "SignUp Route"
+    component "SignIn Route"
+  }
+  
+  component "User Controller"
+  component "Title-Based Content Logic"
+  
+  component "Express Server"
+}
+
+package "Data Access Layer" {
+  component "User Model"
+}
+
+database "Database" {
+  component "MariaDB"
+  component "User Data"
+  component "Likes Data"
+  component "Photos Data"
+  component "Comments Data"
+}
+
+node "Cache" {
+  component "Redis"
+}
+
+cloud "Image Storage Service" {
+  component "AWS S3"
+}
+
+component "bcrypt-nodejs library" as BcryptLib
+
+' Dependencies within Presentation Layer
+Authentication Views --> Shared Credential Handlers : "delegates input capture"
+Credential Submission Function --> Shared Credential Handlers : "reads client state"
+Content Retrieval Client --> Paragraph Result State : "updates with fetched data"
+Content Retrieval Client --> Error Display Component : "triggers on failure"
+Scene Renderer --> "Lobby Component" : "renders"
+Scene Renderer --> "SF Component" : "renders"
+Scene Renderer --> "Louvre Component" : "renders"
+Scene Renderer --> "Berlin Component" : "renders"
+Scene Renderer --> "Milan Component" : "renders"
+Scene Renderer --> "Rome Component" : "renders"
+Scene Renderer --> "Hack Component" : "renders"
+Scene Renderer --> "Camera Component" : "renders"
+Scene Renderer --> "Sky Component" : "renders"
+Scene Renderer --> "Plane Component" : "renders"
+Scene Renderer --> "TextPlane Component" : "renders"
+ReactRouter --> "SignUp View" : "navigation"
+ReactRouter --> "SignIn View" : "navigation"
+
+' Client-Server Communication
+Credential Submission Function --> Authentication Routes : "POST credentials"
+Content Retrieval Client --> Express Server : "HTTP requests for content"
+
+' Application Layer Dependencies
+Authentication Routes --> User Controller : "invokes operations"
+User Controller --> Title-Based Content Logic : "processes title lists"
+User Controller --> BcryptLib : "password comparison"
+Title-Based Content Logic --> Express Server : "handles sequential requests"
+
+' Data Access to Database
+User Controller --> User Model : "persistent operations"
+User Model --> "User Data" : "CRUD operations"
+User Model --> "Likes Data" : "CRUD operations"
+User Model --> "Photos Data" : "CRUD operations"
+User Model --> "Comments Data" : "CRUD operations"
+
+' Infrastructure Dependencies
+Express Server --> Database : "data operations"
+Express Server --> "Image Storage Service" : "image storage"
+Express Server --> Cache : "caching"
+
+@enduml

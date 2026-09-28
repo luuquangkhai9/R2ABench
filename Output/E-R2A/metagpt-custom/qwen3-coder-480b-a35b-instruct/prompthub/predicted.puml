@@ -1,0 +1,92 @@
+@startuml
+' Deployment nodes representing infrastructure/platforms
+node "Web Browser" {
+    component "Frontend Application" as frontend
+}
+
+node "Docker Container Platform" {
+    node "Backend Services" {
+        component "User Management Service" as userSvc
+        component "Artwork Service" as artworkSvc
+        component "Favorite Service" as favoriteSvc
+        component "Comment Service" as commentSvc
+        component "Notification Service" as notificationSvc
+        component "Admin Service" as adminSvc
+        component "Upload Service" as uploadSvc
+        component "Follow Service" as followSvc
+        component "Personalization Service" as personalizationSvc
+        component "Search Service" as searchSvc
+    }
+
+    node "Algorithm Services" {
+        component "Recommendation Service" as recommendationSvc
+    }
+
+    node "Data Persistence" {
+        database "SQLite Database" as db
+    }
+}
+
+' Layered packaging for logical grouping
+package "Frontend Layer" {
+    frontend
+}
+
+package "Backend Layer" {
+    userSvc
+    artworkSvc
+    favoriteSvc
+    commentSvc
+    notificationSvc
+    adminSvc
+    uploadSvc
+    followSvc
+    personalizationSvc
+    searchSvc
+}
+
+package "Algorithm Layer" {
+    recommendationSvc
+}
+
+package "Data Persistence Layer" {
+    db
+}
+
+' Dependencies between components
+frontend --> userSvc : authenticates users
+frontend --> artworkSvc : displays artworks
+frontend --> favoriteSvc : manages favorites
+frontend --> commentSvc : manages comments
+frontend --> notificationSvc : fetches/manages notifications
+frontend --> adminSvc : admin operations
+
+userSvc --> db : stores/retrieves user data
+artworkSvc --> db : stores/retrieves artwork data
+artworkSvc --> userSvc : gets uploader info
+favoriteSvc --> db : manages favorites
+commentSvc --> db : stores/retrieves comments
+notificationSvc --> db : manages notifications
+adminSvc --> artworkSvc : reviews/moderates artworks
+adminSvc --> commentSvc : moderates comments
+adminSvc --> db : manages review queues
+
+uploadSvc --> artworkSvc : handles uploads
+uploadSvc --> db : stores upload metadata
+
+followSvc --> userSvc : manages follow relationships
+followSvc --> db : stores follow data
+
+personalizationSvc --> userSvc : gets user preferences
+personalizationSvc --> artworkSvc : gets browsing history
+personalizationSvc --> db : stores personalization data
+
+searchSvc --> artworkSvc : searches artworks
+searchSvc --> db : indexes/searches metadata
+
+recommendationSvc --> userSvc : fetches user data
+recommendationSvc --> artworkSvc : fetches artwork data
+recommendationSvc --> notificationSvc : triggers recommendations
+recommendationSvc --> db : stores recommendation models
+
+@enduml

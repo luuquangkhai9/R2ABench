@@ -1,0 +1,95 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::NAT\\nGateway"
+      ],
+      "predicted_nodes": [
+        "OCI::Tenancy::Compartment::VCN::NAT Gateway\\n(Outbound only for private nodes"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are semantically identical. The AI's boundary 'OCI::Tenancy::Compartment::VCN' is a more detailed but correct logical representation of the GT's implicit 'VCN' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Load Balancer\\n(primary",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Load Balancer\\n(standby"
+      ],
+      "predicted_nodes": [
+        "OCI::Tenancy::Compartment::VCN::Public Subnet::Load Balancer (Optional)\\nPublic endpoint for Jenkins"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly merged the primary and standby load balancers into a single conceptual node. The placement in a 'Public Subnet' is semantically equivalent to the GT's 'Subnet 1 (Public/Regional)'."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Jenkins\\nController"
+      ],
+      "predicted_nodes": [
+        "OCI::Tenancy::Compartment::VCN::Public Subnet::Jenkins Master\\nCompute Instance"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly identified the 'Jenkins Controller' as the 'Jenkins Master'. Although the GT places it in a private subnet and the AI in a public one, the PRD explicitly allows for the master to be in a public subnet (Sec 2.1). Therefore, this is a valid alternative configuration, not a boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\\n(Private/Regional::Agent Node\\n(Fault Domain X",
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\\n(Private/Regional::Agent Node\\n(Fault Domain Y"
+      ],
+      "predicted_nodes": [
+        "OCI::Tenancy::Compartment::VCN::Private Subnet(s::Jenkins Agents x N\\nCompute Instances"
+      ],
+      "match_type": "2:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI correctly aggregated the specific agent nodes from different fault domains into a single, generalized 'Jenkins Agents' node. The placement within 'Private Subnet(s)' matches the GT's placement in private subnets."
+    },
+    {
+      "gt_nodes": [
+        "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\\n(Public/Regional::Bastion\\nHost"
+      ],
+      "predicted_nodes": [
+        "OCI::Tenancy::Compartment::VCN::Private Subnet(s::Bastion Host (Optional)\\nControlled SSH access"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The AI correctly identified the Bastion Host. However, it placed it in a private subnet, which is a severe boundary error. A bastion host's purpose is to provide an access point from an external network, so it must reside in a public subnet, as correctly shown in the GT."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Internet",
+    "Oracle Cloud Infrastructure (Region::VCN::Internet\\nGateway",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Route Table",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 1\\n(Public/Regional::Security List",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\\n(Public/Regional::Route Table",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 2\\n(Public/Regional::Security List",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Healthcheck",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Route Table",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 3\\n(Private/Regional::Security List",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\\n(Private/Regional::Route Table",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 4\\n(Private/Regional::Security List",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\\n(Private/Regional::Route Table",
+    "Oracle Cloud Infrastructure (Region::VCN::Subnet 5\\n(Private/Regional::Security List"
+  ],
+  "unmatched_predicted_nodes": [
+    "Deployment Inputs::Agent Inputs\\n- slave_count\\n- slave_ads\\n- slave_subnet_ids\\n- slave_display_name\\n- slave_image_id\\n- slave_shape\\n- slave_user_data (base64",
+    "Deployment Inputs::Bastion Inputs (private deployment)\\n- bastion_host (canonical)\\n- bastion_user\\n- bastion_private_key",
+    "Deployment Inputs::Jenkins Cluster Inputs\\n- label_prefix\\n- jenkins_version\\n- jenkins_password\\n- http_port\\n- jnlp_port\\n- plugins",
+    "Deployment Inputs::Master Inputs\\n- master_ad\\n- master_subnet_id\\n- master_display_name\\n- master_image_id\\n- master_shape\\n- master_user_data (base64",
+    "Deployment Inputs::OCI Credential Inputs\\n- tenancy_ocid\\n- compartment_ocid\\n- user_ocid\\n- region\\n- fingerprint\\n- private_key_path",
+    "Deployment Inputs::SSH Access Inputs\\n- ssh_authorized_keys\\n- ssh_private_key",
+    "Global::OCI",
+    "OCI::Tenancy",
+    "OCI::Tenancy::Compartment",
+    "OCI::Tenancy::Compartment::VCN",
+    "OCI::Tenancy::Compartment::VCN::Private Subnet(s",
+    "OCI::Tenancy::Compartment::VCN::Public Subnet",
+    "Operator Environment::Terraform CLI\\n(init, plan, apply",
+    "Operator Environment::terraform.tfvars / JSON\\n(variable-file configuration",
+    "Terraform Configuration::Jenkins Agent Module\\n- slave_* variables\\n- jnlp_port\\n- label_prefix",
+    "Terraform Configuration::Jenkins Master Module\\n- master_* variables\\n- http_port, jnlp_port\\n- label_prefix",
+    "Terraform Configuration::OCI Provider"
+  ]
+}

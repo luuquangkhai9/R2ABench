@@ -1,0 +1,68 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "High level architecture::Backend::FastAPI",
+        "High level architecture::Backend::Docker\nbackend container"
+      ],
+      "predicted_nodes": [
+        "Application Layer::FastAPI Backend"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated the backend container and the FastAPI service into a single Application Layer node. Application Layer is semantically equivalent to Backend."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Analytics and storage::Elasticsearch",
+        "High level architecture::Analytics and storage::Docker\nelasticsearch container"
+      ],
+      "predicted_nodes": [
+        "Data Layer::Elasticsearch"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated the Elasticsearch service and its container into a single Data Layer node. Data Layer is semantically equivalent to Analytics and storage for the database component."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Analytics and storage::Kibana",
+        "High level architecture::Analytics and storage::Docker\nkibana container"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Kibana"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI grouped Kibana and its container into one node. While GT places it in 'Analytics and storage', Kibana functions as a UI tool, making 'Presentation Layer' a semantically acceptable boundary."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Frontend::React",
+        "High level architecture::Frontend::Docker\nfrontend container"
+      ],
+      "predicted_nodes": [
+        "Presentation Layer::Browser"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI mapped the frontend container and React application to the Browser node in the Presentation Layer, which is semantically consistent as the browser hosts and serves the frontend UI."
+    },
+    {
+      "gt_nodes": [
+        "High level architecture::Backend::Genius API\nintegration"
+      ],
+      "predicted_nodes": [
+        "Global::Genius API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "GT models the integration as part of the Backend boundary, while AI models it globally as the external API itself. Both represent the Genius API dependency, and Global is an appropriate architectural boundary for an external service."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "High level architecture::Developer/Admin",
+    "High level architecture::user"
+  ],
+  "unmatched_predicted_nodes": []
+}

@@ -1,0 +1,108 @@
+@startuml
+!define RECTANGLE rectangle
+!define COMPONENT component
+!define DATABASE database
+!define INTERFACE interface
+!define NOTE note
+
+title GKE Pub/Sub WebSocket Adapter Architecture
+
+skinparam componentStyle rectangle
+
+' Kubernetes Cluster Boundary
+package "Kubernetes Cluster" {
+    [GKE Cluster] as gke_cluster
+
+    ' Deployment Components
+    package "Adapter Deployment" {
+        [Adapter Pod] as adapter_pod #LightBlue [
+            <b>Adapter Pod</b>
+            - Contains:
+              * exec.sh
+              * pulltop (Node.js)
+              * websocketd
+            - Receives SYMBOL env var
+            - Streams messages via WebSocket
+        ]
+
+        [ConfigMap] as configmap #LightYellow [
+            <b>Kubernetes ConfigMap</b>
+            - Key: topic
+            - Value: Pub/Sub topic identifier
+        ]
+
+        [Horizontal Pod Autoscaler] as hpa #LightGreen [
+            <b>HPA</b>
+            - Targets Adapter Deployment
+            - Min Replicas: 1
+            - Max Replicas: 2
+            - CPU Target: 80%
+        ]
+    }
+
+    ' Service Layer
+    [LoadBalancer Service] as lb_service #LightCoral [
+        <b>Kubernetes LoadBalancer</b>
+        - Type: LoadBalancer
+        - Port: 80 (external)
+        - Target Port: 8080 (adapter)
+        - Distributes client connections
+    ]
+
+    ' Relationships within Kubernetes
+    configmap ..> adapter_pod : Provides topic config\n(SYMBOL env var)
+    adapter_pod --> lb_service : Serves on port 8080
+    hpa --> adapter_pod : Scales based on CPU
+}
+
+' External Systems
+[GCP Project] as gcp_project #LightGray [
+    <b>GCP Project</b>
+    - Billing Enabled
+    - Contains Pub/Sub Topics
+]
+
+[Pub/Sub Topic] as pubsub_topic #LightPink [
+    <b>Google Cloud Pub/Sub</b>
+    - Configured Topic
+    - Readable by deployment identity
+    - Messages pulled by pulltop
+]
+
+[WebSocket Clients] as clients #LightSkyBlue [
+    <b>Web Clients</b>
+    - Connect via WebSocket
+    - Receive mirrored messages
+    - No direct Pub/Sub access required
+]
+
+' External Relationships
+gcp_project --> pubsub_topic : Hosts
+adapter_pod --> pubsub_topic : Consumes messages\nvia pulltop + subscription
+clients --> lb_service : Connect via WebSocket\n(port 80)
+lb_service --> adapter_pod : Routes traffic
+
+note right of adapter_pod
+    <b>Runtime Flow:</b>
+    1. ConfigMap provides topic ID
+    2. SYMBOL env var injected
+    3. exec.sh starts pulltop
+    4. pulltop pulls from Pub/Sub
+    5. websocketd streams to clients
+end note
+
+note bottom of pubsub_topic
+    <b>Subscription Behavior:</b>
+    - One subscription per pod instance
+    - Not per client connection
+    - Efficient resource usage
+end note
+
+note top of lb_service
+    <b>Service Exposure:</b>
+    - External endpoint on port 80
+    - Internal routing to port 8080
+    - Load balancing across pods
+end note
+
+@enduml

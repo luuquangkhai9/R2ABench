@@ -1,0 +1,76 @@
+@startuml
+!define LAYER_COLOR #DDDDDD
+!define COMPONENT_COLOR #CCCCFF
+!define EXTERNAL_COLOR #FFCCCC
+!define DATA_COLOR #CCFFCC
+
+title VirtualMotionTracker - Layered Architecture
+
+skinparam component {
+  BackgroundColor<<Layer>> LAYER_COLOR
+  BackgroundColor<<Component>> COMPONENT_COLOR
+  BackgroundColor<<External>> EXTERNAL_COLOR
+  BackgroundColor<<Data>> DATA_COLOR
+  BorderColor #333333
+  ArrowColor #333333
+}
+
+package "External Systems" <<External>> {
+  component "User Application" as USER_APP <<External>> {
+    [OSC Client]
+  }
+  
+  component "OpenVR/SteamVR Runtime" as STEAMVR <<External>> {
+    [OpenVR Driver Interface]
+  }
+}
+
+package "VirtualMotionTracker System" <<Layer>> {
+  component "VMT Manager" as VMT_MANAGER <<Component>> {
+    [OSC Input Handler]
+    [Shared Memory Controller]
+  }
+  
+  component "VMT Driver" as VMT_DRIVER <<Component>> {
+    [OpenVR Driver Implementation]
+    [Shared Memory Interface]
+  }
+  
+  component "Shared Memory" as SHARED_MEM <<Data>> {
+    [JSON Message Buffer]
+    [Control Fields:\nsend count, handshake count,\nmessage length]
+  }
+  
+  component "Controller Bindings" as BINDINGS <<Data>> {
+    [Legacy Binding File\ncontroller_type: mycontroller]
+  }
+}
+
+' External connections
+USER_APP --> VMT_MANAGER : "OSC Control Input"
+VMT_DRIVER --> STEAMVR : "OpenVR Driver Interface"
+STEAMVR --> BINDINGS : "Loads Binding File"
+
+' Internal connections
+VMT_MANAGER --> SHARED_MEM : "JSON Messages\n(manager→driver)"
+SHARED_MEM --> VMT_DRIVER : "JSON Messages\n(manager→driver)"
+VMT_DRIVER --> SHARED_MEM : "JSON Messages\n(driver→manager)"
+SHARED_MEM --> VMT_MANAGER : "JSON Messages\n(driver→manager)"
+
+' Data flow annotations
+note on link
+  Bidirectional JSON exchange
+  via shared memory
+end note
+
+note on link between USER_APP and VMT_MANAGER
+  External control interface
+  (architecturally identified as OSC)
+end note
+
+note on link between VMT_DRIVER and STEAMVR
+  Driver integration point
+  for virtual motion tracking
+end note
+
+@enduml

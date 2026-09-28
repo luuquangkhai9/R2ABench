@@ -1,0 +1,395 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Statlord::Browser Editor\nLayout authoring",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Client Layer (Node.js / TypeScript / React::Browser Editor SPA",
+        "Client Layer (Node.js / TypeScript / React::Browser Editor SPA::Layout Editor UI",
+        "Client Layer (Node.js / TypeScript / React::Browser Editor SPA::Redux Store",
+        "Client Layer (Node.js / TypeScript / React::Browser Editor SPA::Redux Store::Controls State",
+        "Client Layer (Node.js / TypeScript / React::Browser Editor SPA::Redux Store::Elements State",
+        "Client Layer (Node.js / TypeScript / React::Browser Editor SPA::Redux Store::Layouts State",
+        "Client Layer (Node.js / TypeScript / React::Browser Editor SPA::Redux Store::Gauges State",
+        "Client Layer (Node.js / TypeScript / React::Browser Editor SPA::Redux Store::Displays State",
+        "Client Layer (Node.js / TypeScript / React::Browser Editor SPA::Canvas (Render/Delete ops"
+      ],
+      "reasoning": "These predicted client/editor nodes collectively cover the browser-based layout authoring workflow described in the GT node."
+    },
+    {
+      "gt_node": "Statlord::Displays\nOLED, e-paper, LCD, browser",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Target Displays::OLEDs / e-paper /\nLCDs / Browsers",
+        "Client Layer (Node.js / TypeScript / React::Viewer Interface",
+        "Server Layer (Python / Django::Viewer Path / Renderer\n(B&W pixel view @ display resolution"
+      ],
+      "reasoning": "The predicted target display node matches the display device set, and the viewer/rendering nodes cover browser/display output concerns."
+    },
+    {
+      "gt_node": "Statlord::Server::Display Resource\nresolution and state",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Data Layer::PostgreSQL::Display Entity\n(key, available, resolution_x,\nresolution_y, current_layout FK,\ndisplay_data, rotation",
+        "Server Layer (Python / Django::REST API::Display API Resource\n(key, available, resolution_x,\nresolution_y, current_layout,\ndisplay_data, rotation"
+      ],
+      "reasoning": "The predicted display entity and API resource cover the GT display resource with resolution and state fields."
+    },
+    {
+      "gt_node": "Statlord::Server::Gauge Resource\nkey, value",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Data Layer::PostgreSQL::Gauge Entity\n(key, value[600",
+        "Server Layer (Python / Django::REST API::Gauge API Resource\n(key, value"
+      ],
+      "reasoning": "The predicted gauge entity and API resource cover the GT gauge resource responsibilities."
+    },
+    {
+      "gt_node": "Statlord::Server::Layout Resource\ndata and display positions",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Data Layer::PostgreSQL::Layout Entity\n(key, data[binary],\ndisplay_positions[text",
+        "Server Layer (Python / Django::REST API::Layout API Resource\n(key, data, display_positions"
+      ],
+      "reasoning": "The predicted layout entity and API resource cover the GT layout resource fields and persistence concerns."
+    },
+    {
+      "gt_node": "Statlord::Server::PostgreSQL\npersistent models",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Data Layer::PostgreSQL",
+        "Data Layer::PostgreSQL::Display Entity\n(key, available, resolution_x,\nresolution_y, current_layout FK,\ndisplay_data, rotation",
+        "Data Layer::PostgreSQL::Gauge Entity\n(key, value[600",
+        "Data Layer::PostgreSQL::Layout Entity\n(key, data[binary],\ndisplay_positions[text"
+      ],
+      "reasoning": "The predicted data layer with PostgreSQL and the associated entities cover the GT persistent model/storage responsibility."
+    },
+    {
+      "gt_node": "Statlord::Server::Python / Django API",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Server Layer (Python / Django::REST API",
+        "Server Layer (Python / Django::REST API::Display API Resource\n(key, available, resolution_x,\nresolution_y, current_layout,\ndisplay_data, rotation",
+        "Server Layer (Python / Django::REST API::Gauge API Resource\n(key, value",
+        "Server Layer (Python / Django::REST API::Layout API Resource\n(key, data, display_positions",
+        "Server Layer (Python / Django::Django Dev Server\n(manage.py runserver"
+      ],
+      "reasoning": "These predicted server nodes cover the Django/Python API boundary and runtime behavior in the GT."
+    },
+    {
+      "gt_node": "Statlord::Viewer Instances\nheadless browsers",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Client Layer (Node.js / TypeScript / React::Viewer Interface",
+        "Server Layer (Python / Django::Viewer Path / Renderer\n(B&W pixel view @ display resolution"
+      ],
+      "reasoning": "The GT viewer instances are covered by the predicted viewer/rendering path, though the exact headless-browser instantiation is not explicitly named."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Client Layer (Node.js / TypeScript / React::Browser Editor SPA",
+      "grounded": true,
+      "reference_nodes": [
+        "Statlord::Browser Editor\nLayout authoring"
+      ],
+      "reasoning": "This is a direct grounding of the browser editor component in the GT."
+    },
+    {
+      "predicted_node": "Client Layer (Node.js / TypeScript / React::Browser Editor SPA::Canvas (Render/Delete ops",
+      "grounded": true,
+      "reference_nodes": [
+        "Statlord::Browser Editor\nLayout authoring"
+      ],
+      "reasoning": "Canvas render/delete operations are part of the browser editor/layout authoring workflow."
+    },
+    {
+      "predicted_node": "Client Layer (Node.js / TypeScript / React::Browser Editor SPA::Layout Editor UI",
+      "grounded": true,
+      "reference_nodes": [
+        "Statlord::Browser Editor\nLayout authoring"
+      ],
+      "reasoning": "The layout editor UI is a grounded refinement of the browser editor authoring function."
+    },
+    {
+      "predicted_node": "Client Layer (Node.js / TypeScript / React::Browser Editor SPA::Redux Store",
+      "grounded": true,
+      "reference_nodes": [
+        "Statlord::Browser Editor\nLayout authoring"
+      ],
+      "reasoning": "Redux state management is explicitly supported by the PRD for the browser editor."
+    },
+    {
+      "predicted_node": "Client Layer (Node.js / TypeScript / React::Redux Store::Controls State",
+      "grounded": true,
+      "reference_nodes": [
+        "Statlord::Browser Editor\nLayout authoring"
+      ],
+      "reasoning": "Controls state is a documented part of the editor's Redux-managed state."
+    },
+    {
+      "predicted_node": "Client Layer (Node.js / TypeScript / React::Redux Store::Displays State",
+      "grounded": true,
+      "reference_nodes": [
+        "Statlord::Browser Editor\nLayout authoring",
+        "Statlord::Displays\nOLED, e-paper, LCD, browser"
+      ],
+      "reasoning": "Display state is part of the editor state and also relates to the managed display domain."
+    },
+    {
+      "predicted_node": "Client Layer (Node.js / TypeScript / React::Redux Store::Elements State",
+      "grounded": true,
+      "reference_nodes": [
+        "Statlord::Browser Editor\nLayout authoring"
+      ],
+      "reasoning": "Elements state is explicitly named in the PRD's Redux-managed editor state."
+    },
+    {
+      "predicted_node": "Client Layer (Node.js / TypeScript / React::Redux Store::Gauges State",
+      "grounded": true,
+      "reference_nodes": [
+        "Statlord::Server::Gauge Resource\nkey, value",
+        "Statlord::Browser Editor\nLayout authoring"
+      ],
+      "reasoning": "Gauge state is explicitly grounded in the editor state and gauge resource concepts."
+    },
+    {
+      "predicted_node": "Client Layer (Node.js / TypeScript / React::Redux Store::Layouts State",
+      "grounded": true,
+      "reference_nodes": [
+        "Statlord::Server::Layout Resource\ndata and display positions",
+        "Statlord::Browser Editor\nLayout authoring"
+      ],
+      "reasoning": "Layouts state is explicitly grounded in the editor state and layout resource concepts."
+    },
+    {
+      "predicted_node": "Client Layer (Node.js / TypeScript / React::Viewer Interface",
+      "grounded": true,
+      "reference_nodes": [
+        "Statlord::Viewer Instances\nheadless browsers",
+        "Statlord::Displays\nOLED, e-paper, LCD, browser"
+      ],
+      "reasoning": "The viewer interface is grounded in the GT viewer/headless browser rendering path and display output concern."
+    },
+    {
+      "predicted_node": "Containerized Environment (Dev-grade::Docker Container\n(Python 3.7 base",
+      "grounded": true,
+      "reference_nodes": [
+        "Statlord::Server::Python / Django API"
+      ],
+      "reasoning": "This is grounded as the containerized development environment described in the PRD, though it is an environment/support node rather than a product feature."
+    },
+    {
+      "predicted_node": "Data Layer::PostgreSQL",
+      "grounded": true,
+      "reference_nodes": [
+        "Statlord::Server::PostgreSQL\npersistent models"
+      ],
+      "reasoning": "Direct grounding in the server-side PostgreSQL persistence layer."
+    },
+    {
+      "predicted_node": "Data Layer::PostgreSQL::Display Entity\n(key, available, resolution_x,\nresolution_y, current_layout FK,\ndisplay_data, rotation",
+      "grounded": true,
+      "reference_nodes": [
+        "Statlord::Server::Display Resource\nresolution and state"
+      ],
+      "reasoning": "This entity matches the GT display resource/state concept."
+    },
+    {
+      "predicted_node": "Data Layer::PostgreSQL::Gauge Entity\n(key, value[600",
+      "grounded": true,
+      "reference_nodes": [
+        "Statlord::Server::Gauge Resource\nkey, value"
+      ],
+      "reasoning": "This entity matches the GT gauge resource concept."
+    },
+    {
+      "predicted_node": "Data Layer::PostgreSQL::Layout Entity\n(key, data[binary],\ndisplay_positions[text",
+      "grounded": true,
+      "reference_nodes": [
+        "Statlord::Server::Layout Resource\ndata and display positions"
+      ],
+      "reasoning": "This entity matches the GT layout resource concept."
+    },
+    {
+      "predicted_node": "Server Layer (Python / Django::Django Dev Server\n(manage.py runserver",
+      "grounded": true,
+      "reference_nodes": [
+        "Statlord::Server::Python / Django API"
+      ],
+      "reasoning": "The development server startup is part of the grounded server-side Django runtime."
+    },
+    {
+      "predicted_node": "Server Layer (Python / Django::REST API",
+      "grounded": true,
+      "reference_nodes": [
+        "Statlord::Server::Python / Django API"
+      ],
+      "reasoning": "This is the predicted implementation of the GT Python/Django API."
+    },
+    {
+      "predicted_node": "Server Layer (Python / Django::REST API::Display API Resource\n(key, available, resolution_x,\nresolution_y, current_layout,\ndisplay_data, rotation",
+      "grounded": true,
+      "reference_nodes": [
+        "Statlord::Server::Display Resource\nresolution and state"
+      ],
+      "reasoning": "Direct grounding of the display API resource."
+    },
+    {
+      "predicted_node": "Server Layer (Python / Django::REST API::Gauge API Resource\n(key, value",
+      "grounded": true,
+      "reference_nodes": [
+        "Statlord::Server::Gauge Resource\nkey, value"
+      ],
+      "reasoning": "Direct grounding of the gauge API resource."
+    },
+    {
+      "predicted_node": "Server Layer (Python / Django::REST API::Layout API Resource\n(key, data, display_positions",
+      "grounded": true,
+      "reference_nodes": [
+        "Statlord::Server::Layout Resource\ndata and display positions"
+      ],
+      "reasoning": "Direct grounding of the layout API resource."
+    },
+    {
+      "predicted_node": "Server Layer (Python / Django::Static Asset Server\n(built client assets",
+      "grounded": true,
+      "reference_nodes": [
+        "Statlord::Browser Editor\nLayout authoring"
+      ],
+      "reasoning": "Serving built client assets is part of the browser editor client delivery described in the PRD."
+    },
+    {
+      "predicted_node": "Server Layer (Python / Django::Viewer Path / Renderer\n(B&W pixel view @ display resolution",
+      "grounded": true,
+      "reference_nodes": [
+        "Statlord::Viewer Instances\nheadless browsers",
+        "Statlord::Displays\nOLED, e-paper, LCD, browser"
+      ],
+      "reasoning": "This directly grounds the viewer rendering requirement."
+    },
+    {
+      "predicted_node": "Target Displays::OLEDs / e-paper /\nLCDs / Browsers",
+      "grounded": true,
+      "reference_nodes": [
+        "Statlord::Displays\nOLED, e-paper, LCD, browser"
+      ],
+      "reasoning": "Direct grounding of the target display types."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Statlord::Browser Editor\nLayout authoring"
+      ],
+      "predicted_nodes": [
+        "Client Layer (Node.js / TypeScript / React::Browser Editor SPA",
+        "Client Layer (Node.js / TypeScript / React::Browser Editor SPA::Canvas (Render/Delete ops",
+        "Client Layer (Node.js / TypeScript / React::Browser Editor SPA::Layout Editor UI",
+        "Client Layer (Node.js / TypeScript / React::Browser Editor SPA::Redux Store",
+        "Client Layer (Node.js / TypeScript / React::Browser Editor SPA::Redux Store::Controls State",
+        "Client Layer (Node.js / TypeScript / React::Browser Editor SPA::Redux Store::Displays State",
+        "Client Layer (Node.js / TypeScript / React::Browser Editor SPA::Redux Store::Elements State",
+        "Client Layer (Node.js / TypeScript / React::Browser Editor SPA::Redux Store::Gauges State",
+        "Client Layer (Node.js / TypeScript / React::Browser Editor SPA::Redux Store::Layouts State"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT editor responsibility is decomposed into multiple specific client/editor nodes, all within the correct client boundary."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Displays\nOLED, e-paper, LCD, browser"
+      ],
+      "predicted_nodes": [
+        "Target Displays::OLEDs / e-paper /\nLCDs / Browsers",
+        "Client Layer (Node.js / TypeScript / React::Viewer Interface",
+        "Server Layer (Python / Django::Viewer Path / Renderer\n(B&W pixel view @ display resolution"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The display targets and viewer/rendering responsibilities are split across target display and viewer-related nodes, preserving semantic boundary alignment."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Display Resource\nresolution and state"
+      ],
+      "predicted_nodes": [
+        "Data Layer::PostgreSQL::Display Entity\n(key, available, resolution_x,\nresolution_y, current_layout FK,\ndisplay_data, rotation",
+        "Server Layer (Python / Django::REST API::Display API Resource\n(key, available, resolution_x,\nresolution_y, current_layout,\ndisplay_data, rotation"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT display resource is represented both as a persisted entity and an API resource, which are semantically appropriate subcomponents."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Gauge Resource\nkey, value"
+      ],
+      "predicted_nodes": [
+        "Data Layer::PostgreSQL::Gauge Entity\n(key, value[600",
+        "Server Layer (Python / Django::REST API::Gauge API Resource\n(key, value"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The gauge resource is split into database entity and API resource, with consistent boundary placement."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Layout Resource\ndata and display positions"
+      ],
+      "predicted_nodes": [
+        "Data Layer::PostgreSQL::Layout Entity\n(key, data[binary],\ndisplay_positions[text",
+        "Server Layer (Python / Django::REST API::Layout API Resource\n(key, data, display_positions"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The layout resource is split into persistence and API concerns without boundary confusion."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::PostgreSQL\npersistent models"
+      ],
+      "predicted_nodes": [
+        "Data Layer::PostgreSQL",
+        "Data Layer::PostgreSQL::Display Entity\n(key, available, resolution_x,\nresolution_y, current_layout FK,\ndisplay_data, rotation",
+        "Data Layer::PostgreSQL::Gauge Entity\n(key, value[600",
+        "Data Layer::PostgreSQL::Layout Entity\n(key, data[binary],\ndisplay_positions[text"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT persistence concept is decomposed into the database boundary plus concrete entities, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Server::Python / Django API"
+      ],
+      "predicted_nodes": [
+        "Server Layer (Python / Django::REST API",
+        "Server Layer (Python / Django::Django Dev Server\n(manage.py runserver",
+        "Server Layer (Python / Django::REST API::Display API Resource\n(key, available, resolution_x,\nresolution_y, current_layout,\ndisplay_data, rotation",
+        "Server Layer (Python / Django::REST API::Gauge API Resource\n(key, value",
+        "Server Layer (Python / Django::REST API::Layout API Resource\n(key, data, display_positions",
+        "Server Layer (Python / Django::Static Asset Server\n(built client assets",
+        "Server Layer (Python / Django::Viewer Path / Renderer\n(B&W pixel view @ display resolution"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Python/Django API is expanded into related server-side runtime, API, static serving, and rendering nodes within the same server boundary."
+    },
+    {
+      "gt_nodes": [
+        "Statlord::Viewer Instances\nheadless browsers"
+      ],
+      "predicted_nodes": [
+        "Client Layer (Node.js / TypeScript / React::Viewer Interface",
+        "Server Layer (Python / Django::Viewer Path / Renderer\n(B&W pixel view @ display resolution"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The viewer/rendering responsibility is captured, but the predicted split places one part in the client layer and one in the server layer, which does not clearly preserve the GT headless-browser instance boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": []
+}

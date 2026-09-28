@@ -1,0 +1,95 @@
+@startuml
+!define LAYER_COLOR #E6F3FF
+!define COMPONENT_COLOR #F0F8FF
+!define EXTERNAL_COLOR #FFF0F0
+!define DATA_COLOR #F5F0FF
+
+skinparam component {
+  BackgroundColor COMPONENT_COLOR
+  BorderColor #333333
+  ArrowColor #333333
+}
+skinparam package {
+  BackgroundColor LAYER_COLOR
+  BorderColor #333333
+  FontStyle bold
+}
+skinparam node {
+  BackgroundColor EXTERNAL_COLOR
+  BorderColor #333333
+  FontStyle bold
+}
+
+package "Verification Layer" {
+  component "Embedded Test Runner" as ETR
+  component "Manual Build Workflow" as MBW
+  component "./run-embedded-tests.sh" as CLI_ETR
+  component "autotools commands" as CLI_AUTO
+}
+
+package "Communication Design Layer" {
+  component "Communication Subsystem Documentation" as CSD
+}
+
+package "Send-Path Layer" {
+  component "Send State Machine" as SSM
+  component "Packet Buffer" as PB
+  component "Network Send Descriptor" as NSD
+}
+
+package "Transport Integration Layer" {
+  component "Embedded Libfabric Verbs Provider" as ELVP
+}
+
+package "Build/Deployment Layer" {
+  component "Build Environment Configurator" as BEC
+}
+
+package "Data Components" {
+  BackgroundColor DATA_COLOR
+  component "Data Descriptor" as DD
+  component "Flow Control State" as FCS
+  component "Rendezvous Control Fields" as RCF
+  component "User Data" as UD
+  component "Envelope" as ENV
+}
+
+node "External Systems" {
+  component "libibverbs (>=1.1.8)" as LIBV
+  component "librdmacm (>=1.0.16)" as LRCM
+  component "OFI/libfabric" as OFI
+  component "UCX" as UCX
+  component "hwloc verification workflow" as HWLOC_VF
+}
+
+' Key Dependencies
+SSM --> PB : "carries control/payload"
+SSM --> NSD : "posts sends\nbinds to pinned data"
+SSM --> FCS : "checks flow-control\nconditions"
+SSM --> DD : "sources payload data"
+PB --> RCF : "populates with\npacket type info"
+PB --> ENV : "includes message-matching\ninformation"
+DD --> UD : "references pinned\nuser data"
+ELVP --> LIBV : "requires >=1.1.8"
+ELVP --> LRCM : "requires >=1.0.16"
+MBW --> HWLOC_VF : "executes verification\nworkflow"
+CSD --> OFI : "documents potential\nintegration context"
+CSD --> UCX : "documents potential\nintegration context"
+
+' Verification Layer Dependencies
+ETR --> CLI_ETR : "executes via"
+ETR --> "tarball input" as TARBALL : "processes"
+MBW --> CLI_AUTO : "executes via"
+CLI_ETR --> HWLOC_VF : "includes"
+CLI_AUTO --> HWLOC_VF : "includes"
+
+' Layer Connections
+ETR --> MBW : "executes via"
+BEC --> ELVP : "configures environment\nfor"
+BEC --> MBW : "manages dependencies\nfor"
+
+' External System Dependencies
+OFI --> ELVP : "potential integration"
+UCX --> ELVP : "potential integration"
+
+@enduml

@@ -1,0 +1,393 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Global::Authorization Service",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Turing API Server::Middleware Layer::Authorization"
+      ],
+      "reasoning": "The predicted authorization middleware covers the authorization responsibility described in the GT node."
+    },
+    {
+      "gt_node": "Global::Experimentation Service",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node corresponds to an experimentation service."
+    },
+    {
+      "gt_node": "Global::Machine Learning Platform\\nMLP API Server",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "The predicted ML-related nodes are about MLflow model registry and PyFuncEnsembler runtime, not an MLP API server."
+    },
+    {
+      "gt_node": "Global::Monitoring and Alerting Service",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "External Services::Jaeger Tracing"
+      ],
+      "reasoning": "Jaeger tracing is a monitoring/observability integration and partially covers the monitoring responsibility, though alerting is not represented."
+    },
+    {
+      "gt_node": "Global::Router Clients",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "API Clients::HTTP Client",
+        "API Clients::Platform Operator",
+        "API Clients::User",
+        "Global::API Clients"
+      ],
+      "reasoning": "The predicted API client group and its concrete client roles cover the router client responsibility."
+    },
+    {
+      "gt_node": "Global::Router Endpoints",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Turing API Server::HTTP API Layer::Routers API"
+      ],
+      "reasoning": "The routers API endpoint layer directly covers the router endpoints responsibility."
+    },
+    {
+      "gt_node": "Global::Secret Store",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node represents a secret store."
+    },
+    {
+      "gt_node": "Global::Turing User",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "API Clients::User"
+      ],
+      "reasoning": "The user API client corresponds to the Turing user concept."
+    },
+    {
+      "gt_node": "Kubernetes Cluster::Istio",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node identifies Istio specifically."
+    },
+    {
+      "gt_node": "Kubernetes Cluster::Knative Controller",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node identifies Knative Controller specifically."
+    },
+    {
+      "gt_node": "Turing System::Database\\nPersistent storage for Router objects",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node models the persistent database/storage for router objects."
+    },
+    {
+      "gt_node": "Turing System::Turing API Server\\nHTTP REST API to configure Routers",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Global::Turing API Server",
+        "Turing API Server::HTTP API Layer",
+        "Turing API Server::HTTP API Layer::Routers API",
+        "Turing API Server::HTTP API Layer::Ensemblers API",
+        "Turing API Server::Service Layer",
+        "Turing API Server::Service Layer::Router Service",
+        "Turing API Server::Service Layer::Ensembler Service",
+        "Turing API Server::Middleware Layer",
+        "Turing API Server::Middleware Layer::Authorization",
+        "Turing API Server::Middleware Layer::OpenAPI Validation"
+      ],
+      "reasoning": "The predicted Turing API Server and its HTTP/middleware/service sublayers cover the API server responsibility, including router configuration."
+    },
+    {
+      "gt_node": "Turing System::Turing UI\\nWeb interface to configure Routers",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node represents a Turing UI or web interface."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "API Clients::HTTP Client",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Router Clients",
+        "Global::Turing User"
+      ],
+      "reasoning": "This is a concrete client role grounded in the GT router clients and user concepts."
+    },
+    {
+      "predicted_node": "API Clients::Platform Operator",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Router Clients"
+      ],
+      "reasoning": "Platform operators are part of the GT client/actor space for Kubernetes router management."
+    },
+    {
+      "predicted_node": "API Clients::User",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Turing User"
+      ],
+      "reasoning": "Directly corresponds to the GT Turing User concept."
+    },
+    {
+      "predicted_node": "External Services::Jaeger Tracing",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Monitoring and Alerting Service"
+      ],
+      "reasoning": "Jaeger tracing is a valid observability/monitoring external service grounded in the GT monitoring concept."
+    },
+    {
+      "predicted_node": "External Services::MLflow Model Registry",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Machine Learning Platform\\nMLP API Server"
+      ],
+      "reasoning": "The PRD explicitly mentions MLflow model registry as a dependency for PyFuncEnsembler image building, so this is grounded even though the GT node names the MLP API server more broadly."
+    },
+    {
+      "predicted_node": "Global::API Clients",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Router Clients",
+        "Global::Turing User"
+      ],
+      "reasoning": "This is an aggregate of the GT client/user actor concepts."
+    },
+    {
+      "predicted_node": "Global::External Services",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Monitoring and Alerting Service",
+        "Global::Machine Learning Platform\\nMLP API Server"
+      ],
+      "reasoning": "This is a generic aggregation of external services referenced by the PRD and GT."
+    },
+    {
+      "predicted_node": "Global::Kubernetes Cluster",
+      "grounded": true,
+      "reference_nodes": [
+        "Kubernetes Cluster::Istio",
+        "Kubernetes Cluster::Knative Controller"
+      ],
+      "reasoning": "The cluster boundary is grounded by the Kubernetes-related GT nodes, even though it is more generic."
+    },
+    {
+      "predicted_node": "Global::PyFuncEnsembler Service",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "The PRD explicitly includes a PyFuncEnsembler service/runtime, which is not named in GT but is clearly a real system component."
+    },
+    {
+      "predicted_node": "Global::Turing API Server",
+      "grounded": true,
+      "reference_nodes": [
+        "Turing System::Turing API Server\\nHTTP REST API to configure Routers"
+      ],
+      "reasoning": "Directly corresponds to the GT Turing API Server."
+    },
+    {
+      "predicted_node": "Kubernetes Cluster::Router Deployment",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "Router deployment is part of the PRD, but the GT nodes do not include a router deployment component; this appears to be an extra inferred node rather than a direct GT concept."
+    },
+    {
+      "predicted_node": "PyFuncEnsembler Service::Ensembler Runner",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The concept is related to PyFuncEnsembler but is not represented in the GT node list and is more specific than the GT concepts provided."
+    },
+    {
+      "predicted_node": "PyFuncEnsembler Service::Local Image Builder",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "Although supported by the PRD, there is no corresponding GT node for local image building."
+    },
+    {
+      "predicted_node": "PyFuncEnsembler Service::Webservice Runtime",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "This is supported by the PRD but not present as a GT node."
+    },
+    {
+      "predicted_node": "Turing API Server::Cluster Components",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "The GT has no separate cluster-components subnode under the Turing API Server."
+    },
+    {
+      "predicted_node": "Turing API Server::Cluster Components::Deployment Manager",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node corresponds to this subcomponent."
+    },
+    {
+      "predicted_node": "Turing API Server::Cluster Components::Lifecycle Controller",
+      "grounded": false,
+      "reference_nodes": [],
+      "reasoning": "No GT node corresponds to this subcomponent."
+    },
+    {
+      "predicted_node": "Turing API Server::HTTP API Layer",
+      "grounded": true,
+      "reference_nodes": [
+        "Turing System::Turing API Server\\nHTTP REST API to configure Routers"
+      ],
+      "reasoning": "This is a valid decomposition of the GT API server."
+    },
+    {
+      "predicted_node": "Turing API Server::HTTP API Layer::Ensemblers API",
+      "grounded": true,
+      "reference_nodes": [
+        "Turing System::Turing API Server\\nHTTP REST API to configure Routers"
+      ],
+      "reasoning": "This is a grounded subpart of the API server covering ensembler endpoints."
+    },
+    {
+      "predicted_node": "Turing API Server::HTTP API Layer::Routers API",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Router Endpoints",
+        "Turing System::Turing API Server\\nHTTP REST API to configure Routers"
+      ],
+      "reasoning": "This directly matches the router endpoint functionality."
+    },
+    {
+      "predicted_node": "Turing API Server::Middleware Layer",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Authorization Service"
+      ],
+      "reasoning": "The middleware layer is grounded by the GT authorization service concept and the PRD middleware requirements."
+    },
+    {
+      "predicted_node": "Turing API Server::Middleware Layer::Authorization",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Authorization Service"
+      ],
+      "reasoning": "Directly grounded in the authorization service concept."
+    },
+    {
+      "predicted_node": "Turing API Server::Middleware Layer::OpenAPI Validation",
+      "grounded": true,
+      "reference_nodes": [],
+      "reasoning": "The PRD explicitly requires OpenAPI-based request validation; no exact GT node exists, but it is a real requirement-grounded component."
+    },
+    {
+      "predicted_node": "Turing API Server::Service Layer",
+      "grounded": true,
+      "reference_nodes": [
+        "Turing System::Turing API Server\\nHTTP REST API to configure Routers"
+      ],
+      "reasoning": "A generic service layer is a reasonable decomposition of the Turing API Server."
+    },
+    {
+      "predicted_node": "Turing API Server::Service Layer::Ensembler Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Turing System::Turing API Server\\nHTTP REST API to configure Routers"
+      ],
+      "reasoning": "This is grounded by the ensembler management responsibilities of the API server."
+    },
+    {
+      "predicted_node": "Turing API Server::Service Layer::Router Service",
+      "grounded": true,
+      "reference_nodes": [
+        "Global::Router Endpoints",
+        "Turing System::Turing API Server\\nHTTP REST API to configure Routers"
+      ],
+      "reasoning": "This is grounded by the router management responsibilities of the API server."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Authorization Service"
+      ],
+      "predicted_nodes": [
+        "Turing API Server::Middleware Layer",
+        "Turing API Server::Middleware Layer::Authorization"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT authorization service is represented by the middleware layer and its authorization subnode; the boundary is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "Global::Monitoring and Alerting Service"
+      ],
+      "predicted_nodes": [
+        "External Services::Jaeger Tracing"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Jaeger tracing is a semantically appropriate observability/monitoring external service, though alerting is not explicit."
+    },
+    {
+      "gt_nodes": [
+        "Global::Router Clients",
+        "Global::Turing User"
+      ],
+      "predicted_nodes": [
+        "API Clients::HTTP Client",
+        "API Clients::Platform Operator",
+        "API Clients::User",
+        "Global::API Clients"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted client nodes aggregate the GT client/user actors, and the boundary attribution is acceptable."
+    },
+    {
+      "gt_nodes": [
+        "Global::Router Endpoints"
+      ],
+      "predicted_nodes": [
+        "Turing API Server::HTTP API Layer::Routers API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The router endpoint responsibility is directly captured by the routers API subnode."
+    },
+    {
+      "gt_nodes": [
+        "Turing System::Turing API Server\\nHTTP REST API to configure Routers"
+      ],
+      "predicted_nodes": [
+        "Global::Turing API Server",
+        "Turing API Server::HTTP API Layer",
+        "Turing API Server::HTTP API Layer::Ensemblers API",
+        "Turing API Server::HTTP API Layer::Routers API",
+        "Turing API Server::Middleware Layer",
+        "Turing API Server::Middleware Layer::Authorization",
+        "Turing API Server::Middleware Layer::OpenAPI Validation",
+        "Turing API Server::Service Layer",
+        "Turing API Server::Service Layer::Ensembler Service",
+        "Turing API Server::Service Layer::Router Service"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT API server has been decomposed into multiple semantically consistent subnodes under the Turing API Server boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Experimentation Service",
+    "Global::Machine Learning Platform\\nMLP API Server",
+    "Global::Secret Store",
+    "Kubernetes Cluster::Istio",
+    "Kubernetes Cluster::Knative Controller",
+    "Turing System::Database\\nPersistent storage for Router objects",
+    "Turing System::Turing UI\\nWeb interface to configure Routers"
+  ],
+  "unmatched_predicted_nodes": [
+    "Kubernetes Cluster::Router Deployment",
+    "PyFuncEnsembler Service::Ensembler Runner",
+    "PyFuncEnsembler Service::Local Image Builder",
+    "PyFuncEnsembler Service::Webservice Runtime",
+    "Turing API Server::Cluster Components",
+    "Turing API Server::Cluster Components::Deployment Manager",
+    "Turing API Server::Cluster Components::Lifecycle Controller"
+  ]
+}

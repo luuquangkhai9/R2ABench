@@ -1,0 +1,52 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "AWS Cloud\nConnector Account::AWS EventBridge"
+      ],
+      "predicted_nodes": [
+        "AWS Environment::EventBridge"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the AWS EventBridge component used for event routing, with semantically equivalent AWS environment boundaries."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\nConnector Account::SNS Topic\nalerts"
+      ],
+      "predicted_nodes": [
+        "AWS Environment::SNS Topic"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the AWS SNS Topic used for notifications. The predicted node captures the GT node accurately under an equivalent AWS boundary."
+    },
+    {
+      "gt_nodes": [
+        "AWS Cloud\nConnector Account::VPC::connector::Private subnet::AWS Fargate\nKafka Connect Cluster",
+        "AWS Cloud\nConnector Account::VPC::topics::Private subnet::AWS Lambda\ncreate/delete topics"
+      ],
+      "predicted_nodes": [
+        "AWS Environment::Connector Service"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated the Kafka Connect Cluster and Lambda topic management (which handle connector definition and operations per the PRD) into a single broader 'Connector Service' node. The AWS environment boundary is semantically equivalent."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "AWS Cloud\nAppian Source::VPC::Appian\nOracle DB",
+    "AWS Cloud\nConnector Account::Chat notification",
+    "AWS Cloud\nConnector Account::Email notification",
+    "AWS Cloud\nConnector Account::Slack notification",
+    "AWS Cloud\nConnector Account::VPC::CMS BigMAC",
+    "Global::VPC peering\nconnection"
+  ],
+  "unmatched_predicted_nodes": [
+    "AWS Environment::Stage Listing Service",
+    "GitHub Environment::GitHub API",
+    "GitHub Environment::GitHub Actions",
+    "Local Environment::Terminal Interface"
+  ]
+}

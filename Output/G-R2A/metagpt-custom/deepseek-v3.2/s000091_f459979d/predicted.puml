@@ -1,0 +1,47 @@
+@startuml
+
+package "Presentation/API Layer" {
+    rectangle "User HTTP Controller" as user_controller
+    user_controller : /users (POST)
+    user_controller : /users/{id} (GET)
+}
+
+package "Business/Application Layer" {
+    rectangle "User Service" as user_service
+    rectangle "JWT Token Validator" as jwt_validator
+    rectangle "Security Information Collector" as security_collector
+}
+
+package "Integration Layer" {
+    rectangle "Blockchain Service" as blockchain_service
+    rectangle "Web3j HTTP Client" as web3j_client
+    rectangle "Data Encoder/Decoder" as data_encoder
+    rectangle "LwM2M Model Parser" as lwm2m_parser
+}
+
+package "Blockchain Storage Layer" {
+    database "Smart Contracts" as smart_contracts
+    smart_contracts : retrieveAllClients()
+    smart_contracts : addClientData()
+    smart_contracts : retrieveClientByEndpoint()
+}
+
+cloud "External Systems" {
+    node "Ethereum Node" as ethereum_node
+}
+
+' Internal dependencies
+user_controller --> jwt_validator : "validates JWT token"
+user_controller --> user_service : "delegates user operations"
+user_service --> blockchain_service : "queries client data"
+user_service --> security_collector : "converts to security info"
+blockchain_service --> web3j_client : "uses for connectivity"
+web3j_client --> data_encoder : "encodes/decodes 32-byte ASCII"
+data_encoder --> lwm2m_parser : "provides encoded data"
+lwm2m_parser --> blockchain_service : "retrieves bootstrap config"
+blockchain_service --> smart_contracts : "calls contract operations"
+
+' External dependencies
+web3j_client --> ethereum_node : "HTTP transport"
+
+@enduml

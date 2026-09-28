@@ -1,0 +1,76 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Flutter-based app::Android",
+        "Flutter-based app::Dart",
+        "Flutter-based app::MacOS",
+        "Flutter-based app::Web",
+        "Flutter-based app::iOS"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Flutter/Dart Client\\n(Android · iOS · Web · macOS"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The GT contains platform-specific client runtime targets, while the prediction aggregates them into one Flutter/Dart client node. This is semantically equivalent and the client boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::gRPC Gateway\\n(HTTP-gRPC Proxy)\\nGolang",
+        "Global::Test Client 1\\nNodeJS",
+        "Global::Test Client 2\\nGolang",
+        "Global::Postman"
+      ],
+      "predicted_nodes": [
+        "Backend Layer::gRPC-Gateway Middleware\\n(HTTP → gRPC mapping"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted gateway middleware corresponds to the GT gRPC Gateway proxy component. The GT also shows external API test clients that interact with the gateway, but those are not direct functional equivalents of the middleware itself. The gateway boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Hosted in Azure Kubernetes Service",
+        "Hosted in Azure Kubernetes Service::Docker container",
+        "Hosted in Azure Kubernetes Service::Docker container::Recipes Server\\n(gRPC Server)\\nGolang"
+      ],
+      "predicted_nodes": [
+        "Deployment Infrastructure::Azure Kubernetes Service (AKS",
+        "Deployment Infrastructure::Docker Container\\n(Server Image"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT deployment stack is split across Azure Kubernetes Service and Docker container hosting for the recipes server. The predicted deployment infrastructure nodes capture the same deployment concerns, and the boundary attribution is semantically consistent."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Backend Layer::Go Generated gRPC Server Code\\n(from .proto",
+        "Backend Layer::Go gRPC Server\\n(Recipe & Ingredient Services"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "These predicted backend nodes correspond to the GT recipes server as generated Go gRPC server code and the runnable service implementation. The GT does not separate code generation and runtime into distinct nodes, but the prediction is semantically aligned."
+    },
+    {
+      "gt_nodes": [],
+      "predicted_nodes": [
+        "Shared Contract::Protocol Buffers Definitions\\n(.proto files"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The PRD strongly centers the shared .proto contract as a core system artifact. Although not explicitly present as a GT node, this predicted node is semantically valid and correctly placed in a shared contract boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::Test Client 1\\nNodeJS",
+    "Global::Test Client 2\\nGolang",
+    "Global::Postman"
+  ],
+  "unmatched_predicted_nodes": [
+    "Data Layer::Ingredient Data Store",
+    "Data Layer::Recipe Data Store",
+    "Deployment Infrastructure::Local Kubernetes Cluster"
+  ]
+}

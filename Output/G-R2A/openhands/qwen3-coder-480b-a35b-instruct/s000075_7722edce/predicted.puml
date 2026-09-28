@@ -1,0 +1,79 @@
+@startuml
+!define RECTANGLE class
+!define DATABASE rectangle
+!define COMPONENT rectangle
+
+skinparam componentStyle rectangle
+
+title statlord System Architecture
+
+' Browser Editor Component
+RECTANGLE "Browser Editor\n(React/TypeScript/Redux)" as editor #LightBlue {
+  RECTANGLE "Layout Editor" as layoutEditor
+  RECTANGLE "State Management\n(Redux Store)" as reduxStore
+}
+
+' Server Side Components
+package "Server (Python/Django)" {
+  RECTANGLE "API Layer" as apiLayer
+  RECTANGLE "Display Management" as displayMgr
+  RECTANGLE "Layout Management" as layoutMgr
+  RECTANGLE "Gauge Data Handler" as gaugeHandler
+  RECTANGLE "Viewer Renderer" as viewerRenderer
+}
+
+' Database
+DATABASE "PostgreSQL\nDatabase" as db #LightYellow {
+  RECTANGLE "Displays Table" as displaysTable
+  RECTANGLE "Layouts Table" as layoutsTable
+  RECTANGLE "Gauges Table" as gaugesTable
+}
+
+' External Systems
+rectangle "Web Browser" as browser
+rectangle "API Clients" as apiClients
+rectangle "Display Devices" as displayDevices
+
+' Connections
+browser --> editor : Uses
+editor --> apiLayer : HTTP/REST
+apiClients --> apiLayer : HTTP/REST
+apiLayer --> displayMgr
+apiLayer --> layoutMgr
+apiLayer --> gaugeHandler
+layoutMgr --> layoutsTable : CRUD
+displayMgr --> displaysTable : CRUD
+gaugeHandler --> gaugesTable : CRUD
+displayMgr --> viewerRenderer
+layoutMgr --> viewerRenderer
+viewerRenderer --> displayDevices : Render Output
+reduxStore --> apiLayer : Sync State
+layoutsTable --> db
+displaysTable --> db
+gaugesTable --> db
+
+note right of editor
+  Single Page Application
+  Redux for state management
+  Canvas-based layout editing
+end note
+
+note right of apiLayer
+  RESTful API endpoints
+  JSON data exchange
+end note
+
+note right of db
+  Persistent storage for:
+  - Displays
+  - Layouts
+  - Gauges
+end note
+
+note bottom of viewerRenderer
+  Renders black-and-white
+  pixel views at display
+  resolution
+end note
+
+@enduml

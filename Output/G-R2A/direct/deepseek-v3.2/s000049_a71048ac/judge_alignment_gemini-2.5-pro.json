@@ -1,0 +1,74 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Lucene Layer::Index"
+      ],
+      "predicted_nodes": [
+        "External Systems::Apache Lucene Index"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes refer to the Lucene index, which serves as the primary data source. The GT's 'Lucene Layer' and the AI's 'External Systems' are both semantically valid boundaries for a data dependency."
+    },
+    {
+      "gt_nodes": [
+        "NLP4L User Interfaces and Integrations::Interactive Shell\\nfor NLP4L (REPL"
+      ],
+      "predicted_nodes": [
+        "External Systems::Scala Interactive Environment"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both nodes represent the Scala REPL for interactive use, as described in FR-004. The GT views it as a 'User Interface', while the AI views it as an 'External System'; both are correct perspectives."
+    },
+    {
+      "gt_nodes": [
+        "NLP4L User Interfaces and Integrations::File based\\nMahout/Spark\\nconnector"
+      ],
+      "predicted_nodes": [
+        "NLP4L Core System::Document Vector Generator",
+        "Data Formats::LIBSVM Format Writer"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's single 'connector' node is correctly decomposed by the AI into the two core functions it performs: generating document vectors (FR-003) and writing them in LIBSVM format (DR-003). The AI's boundary attribution ('Core System' and 'Data Formats') is a logical refinement of the GT's 'Integrations' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Scala Driver for Lucene\\nAnalyzer, Word-counter, FST dictionary"
+      ],
+      "predicted_nodes": [
+        "NLP4L Core System::Index Processor",
+        "NLP4L Core System::Term Data Access"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT's broad 'Scala Driver' node, responsible for low-level processing, is accurately split by the AI into more specific components: one for processing the index (FR-001) and another for accessing term data (FR-002a). The 'NLP4L Core System' boundary is a more precise and appropriate placement than 'Global'."
+    },
+    {
+      "gt_nodes": [
+        "Global::Scala High Level API\\nfor convenience in text mining and stats"
+      ],
+      "predicted_nodes": [
+        "NLP4L Core System::Search Engine"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI's 'Search Engine' node represents a key functionality (FR-002b) provided through the GT's 'Scala High Level API'. The match is functionally sound, and the AI's 'NLP4L Core System' boundary is a correct refinement of the GT's 'Global' scope."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Lucene Layer::Apache Lucene API",
+    "NLP4L User Interfaces and Integrations::Applications",
+    "NLP4L User Interfaces and Integrations::Index Schema\\nBrowser (GUI/CUI"
+  ],
+  "unmatched_predicted_nodes": [
+    "Data Formats::Word Count Data",
+    "External Systems::External ML Tools",
+    "External Systems::Schema Configuration File/Resource",
+    "NLP4L Core System::Chart Display (Experimental)",
+    "NLP4L Core System::Schema Loader & Validator",
+    "NLP4L Core System::Schema Model"
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Web2 application stack::Applications"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Redis Application\n(Integrator / Developer"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent the external application/user entry point consuming the system, though the predicted node is more specific."
+    },
+    {
+      "gt_nodes": [
+        "Web3 application stack::Applications"
+      ],
+      "predicted_nodes": [
+        "Client Layer::Redis Pub/Sub\nApplication"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both represent client applications using the platform, and the client boundary is appropriate."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::Platform",
+        "Web3 application stack::Platform"
+      ],
+      "predicted_nodes": [
+        "Decentralized P2P Network::PubSub Node 1",
+        "Decentralized P2P Network::PubSub Node 2",
+        "Decentralized P2P Network::Redis Proxy\nAgent Node A",
+        "Decentralized P2P Network::Redis Proxy\nAgent Node B",
+        "Decentralized P2P Network::libp2p / IPFS-style\nPeer Network",
+        "Redis Storage Backend::Redis Cluster",
+        "Redis Storage Backend::Redis Standalone"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT platform nodes are generic platform/infrastructure containers, while the prediction places concrete runtime components and storage backends under different, more specific boundaries. This is a semantic expansion but not a faithful reproduction of the GT boundary structure."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::Processing\nBusiness Logic",
+        "Web3 application stack::Decentralized Processing\nBusiness Logic"
+      ],
+      "predicted_nodes": [
+        "IceFireDB Core::IceFireDB-Redis-Proxy::Redis Proxy\nMiddleware",
+        "IceFireDB Core::IceFireDB-Redis-Proxy::Instruction\nSynchronizer",
+        "IceFireDB Core::IceFireDB-Redis-Proxy::Command Handler\n(String/Set/List/Hash/\nSortedSet/Stream/Control",
+        "IceFireDB Core::IceFireDB-Redis-Proxy::Cluster-Aware\nRouter",
+        "IceFireDB Core::IceFireDB-PubSub::PubSub\nService",
+        "IceFireDB Core::IceFireDB-PubSub::Message\nDistributor",
+        "IceFireDB Core::IceFireDB-PubSub::NAT Traversal\nHandler",
+        "IceFireDB Core::IceFireDB-PubSub::Peer Discovery\n& Routing\n(Kademlia DHT",
+        "IceFireDB Core::IceFireDB-SQLite\n(Internal Data Handling::MySQL Protocol\nResult Parser",
+        "IceFireDB Core::IceFireDB-SQLite\n(Internal Data Handling::Field / Row /\nWarning Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT business-logic blocks are decomposed into specific IceFireDB runtime services and internal handlers. The boundaries are more detailed, but they remain consistent with the functional layers implied by the GT processing nodes."
+    },
+    {
+      "gt_nodes": [
+        "Web2 application stack::IceFireDB",
+        "Web3 application stack::IceFireDB"
+      ],
+      "predicted_nodes": [
+        "IceFireDB Core::IceFireDB-Redis-Proxy::Redis Proxy\nMiddleware",
+        "IceFireDB Core::IceFireDB-Redis-Proxy::Instruction\nSynchronizer",
+        "IceFireDB Core::IceFireDB-Redis-Proxy::Command Handler\n(String/Set/List/Hash/\nSortedSet/Stream/Control",
+        "IceFireDB Core::IceFireDB-Redis-Proxy::Cluster-Aware\nRouter",
+        "IceFireDB Core::IceFireDB-PubSub::PubSub\nService",
+        "IceFireDB Core::IceFireDB-PubSub::Message\nDistributor",
+        "IceFireDB Core::IceFireDB-PubSub::NAT Traversal\nHandler",
+        "IceFireDB Core::IceFireDB-PubSub::Peer Discovery\n& Routing\n(Kademlia DHT",
+        "IceFireDB Core::IceFireDB-SQLite\n(Internal Data Handling::MySQL Protocol\nResult Parser",
+        "IceFireDB Core::IceFireDB-SQLite\n(Internal Data Handling::Field / Row /\nWarning Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT IceFireDB node is represented by multiple concrete subcomponents in the prediction. This is a valid decomposition and the IceFireDB core boundary is appropriate."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Web2 application stack::BlockChain Database\nTransactions, Contracts,\nCertificates and Receipts",
+    "Web2 application stack::File System\nLarge Files and Media",
+    "Web3 application stack::BlockChain Database\nTransactions, Contracts,\nCertificates and Receipts",
+    "Web3 application stack::Decentralized File System\nLarge Files and Media"
+  ],
+  "unmatched_predicted_nodes": []
+}

@@ -1,0 +1,112 @@
+@startuml
+!define AWSPUML https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v17.0/dist
+!includeurl AWSPUML/AWSCommon.puml
+!includeurl AWSPUML/Compute/Lambda/Lambda.puml
+!includeurl AWSPUML/ApplicationIntegration/StepFunctions/StepFunctions.puml
+!includeurl AWSPUML/Storage/SimpleStorageServiceS3/S3.puml
+!includeurl AWSPUML/InternetOfThings/IoT/IoT.puml
+!includeurl AWSPUML/ManagementGovernance/CloudFormation/CloudFormation.puml
+!includeurl AWSPUML/General/Users.puml
+!includeurl AWSPUML/General/Internetalt1.puml
+!includeurl AWSPUML/SecurityIdentityCompliance/Cognito/Cognito.puml
+!includeurl AWSPUML/Database/DynamoDB/DynamoDB.puml
+!includeurl AWSPUML/NetworkingContentDelivery/APIGateway/APIGateway.puml
+
+skinparam componentStyle rectangle
+skinparam defaultFontSize 14
+title AWS IoT Device Simulator - System Architecture
+
+' ====== EXTERNAL USERS & SYSTEMS ======
+actor "Administrator / Operator" as Admin
+Users(Admin, "Web Console User")
+
+cloud "Internet" as Internet {
+  Internetalt1(PublicWeb, "Public Access")
+}
+
+' ====== FRONTEND & API LAYER ======
+rectangle "Web Management Console" as WebConsole {
+  file "Static Assets" as StaticAssets
+}
+
+APIGateway(APIGateway, "API Gateway\nRegional REST API\nStage: prod", "CORS, Validation, Logging, Tracing")
+
+' ====== BACKEND SERVICES (LAMBDA) ======
+rectangle "Lambda Functions" as LambdaGroup {
+  Lambda(ManagementAPI, "Management API\n(Simulations, Device Types)")
+  Lambda(CustomResource, "Custom Resource Handler\n(CFn Deployment)")
+  Lambda(RouteLoader, "Route Loader")
+  Lambda(DeviceSimulator, "Device Simulator")
+}
+
+' ====== DATA STORES ======
+DynamoDB(DynamoDB, "DynamoDB\n(Simulation State, Device Types)")
+S3(S3Bucket, "S3 Route Bucket\n(ROUTE_BUCKET)", "JSON Route Files")
+
+' ====== ORCHESTRATION & MESSAGING ======
+StepFunctions(StepFunctions, "Step Functions\n(Simulation Orchestration)")
+IoT(IoTCore, "AWS IoT Core\n(Message Broker)")
+
+' ====== DEPLOYMENT & IDENTITY ======
+CloudFormation(CloudFormation, "CloudFormation\n(Stack Deployment)")
+Cognito(Cognito, "Amazon Cognito\n(User Pool)")
+
+' ====== PRIMARY DATA FLOWS ======
+
+' 1. Console & API Access
+Admin --> Internet : HTTPS
+Internet --> WebConsole : Serves Console
+Admin --> APIGateway : REST API Calls\n(GET, POST, PUT, DELETE, OPTIONS)
+APIGateway --> ManagementAPI : Proxy Integration
+APIGateway --> Cognito : Authorize Requests
+
+' 2. Management Operations
+ManagementAPI --> DynamoDB : CRUD Operations
+ManagementAPI --> StepFunctions : Start/Stop Simulations
+
+' 3. Route Loading (Simulation Execution)
+DeviceSimulator --> RouteLoader : Request Route Data
+RouteLoader --> S3Bucket : Get Object\n(route-{id}.json)
+RouteLoader --> DeviceSimulator : Return Parsed Route State
+
+' 4. Device Simulation & Messaging
+StepFunctions --> DeviceSimulator : Execute Simulation
+DeviceSimulator --> IoTCore : Publish Messages\nto IoT Topics
+
+' 5. Deployment & Custom Resources
+CloudFormation --> CustomResource : Invoke (Create/Update/Delete)
+CustomResource --> DynamoDB : Initialize Tables
+CustomResource --> S3Bucket : Setup Resources
+CustomResource --> CloudFormation : Send Response
+
+' ====== SUPPORTING FLOWS ======
+ManagementAPI --> S3Bucket : (Optional) List/Read
+DeviceSimulator --> DynamoDB : Update Simulation State
+APIGateway --> CloudWatch : Access Logs (JSON)\nTracing (X-Ray)
+
+note right of APIGateway
+  **API Configuration:**
+  - Endpoint Type: REGIONAL
+  - CORS: Preflight for GET, POST, PUT, DELETE, OPTIONS
+  - Validation: Request Params & Body
+  - Logging: INFO level, JSON format
+  - Tracing: Enabled
+end note
+
+note bottom of RouteLoader
+  **Route Loading Logic:**
+  Input: routeInfo.routeName (or generate default)
+  Source: S3://ROUTE_BUCKET/{key}
+  Output: Route State with metadata,
+  segments, odometer, triggers.
+end note
+
+note left of CustomResource
+  **Custom Resource Input:**
+  - CloudFormation Event
+  - Lambda Context
+  - Solution ID/Version
+  - Stack Name (property)
+end note
+
+@enduml

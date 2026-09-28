@@ -1,0 +1,81 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::Internet"
+      ],
+      "predicted_nodes": [
+        "Global::External Users/\\nSystems"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The nodes are semantically equivalent, representing external actors interacting with the system. Both are correctly placed in the 'Global' boundary."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Proxy"
+      ],
+      "predicted_nodes": [
+        "Global::PlugIt Proxy"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The component is correctly identified, but its boundary placement is critically wrong. The PRD specifies that the proxy and services are deployed inside an 'Internal Network' to mediate access. The AI placed the Proxy in the 'Global' boundary, which is a severe boundary-crossing error that misrepresents the core architecture."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::PlugIt Service 1",
+        "Internal Network::PlugIt Service 2",
+        "Internal Network::PlugIt Service 3"
+      ],
+      "predicted_nodes": [
+        "Global::PlugIt Service 1",
+        "Global::PlugIt Service 2",
+        "Global::PlugIt Service N"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": false,
+      "reasoning": "The AI correctly identified the pattern of multiple services. However, similar to the PlugIt Proxy, it placed them in the 'Global' boundary instead of the 'Internal Network' as specified in the PRD and shown in the GT. This is a severe boundary-crossing error."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB_Proxy"
+      ],
+      "predicted_nodes": [
+        "PlugIt Proxy::Proxy Data Store"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": false,
+      "reasoning": "The nodes refer to the same 'proxy-side data store'. The AI correctly associated the data store with the proxy by nesting it. However, since the parent 'PlugIt Proxy' node was incorrectly placed in 'Global', this data store is also effectively moved out of the 'Internal Network' where it belongs, constituting a major boundary error."
+    },
+    {
+      "gt_nodes": [
+        "Internal Network::DB 1",
+        "Internal Network::DB 2",
+        "Internal Network::DB 3"
+      ],
+      "predicted_nodes": [
+        "PlugIt Service 1::Service Data Store",
+        "PlugIt Service 2::Service Data Store",
+        "PlugIt Service N::Service Data Store"
+      ],
+      "match_type": "N:N",
+      "is_boundary_correct": false,
+      "reasoning": "The nodes refer to the individual databases for each service. The AI's decomposition is logical. However, the parent 'PlugIt Service' nodes were incorrectly placed in the 'Global' boundary, which pulls these data stores out of the 'Internal Network' where they belong according to the GT and the PRD. This is a severe, cascading boundary error."
+    }
+  ],
+  "unmatched_gt_nodes": [],
+  "unmatched_predicted_nodes": [
+    "Global::Configuration Files\\n(Project & Local",
+    "Global::Database Technology\\n(MySQL, SQLite, etc.",
+    "Global::Inbound Email\\nMessages",
+    "PlugIt Proxy::Mail Workflow\\n(Standalone Example",
+    "PlugIt Proxy::Proxy API Endpoint",
+    "PlugIt Service 1::Service API Client",
+    "PlugIt Service 1::Service Config",
+    "PlugIt Service 2::Service API Client",
+    "PlugIt Service 2::Service Config",
+    "PlugIt Service N::Service API Client",
+    "PlugIt Service N::Service Config"
+  ]
+}

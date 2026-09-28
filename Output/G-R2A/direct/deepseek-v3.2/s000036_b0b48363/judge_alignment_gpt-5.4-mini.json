@@ -1,0 +1,83 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Global::HTTP"
+      ],
+      "predicted_nodes": [
+        "HypnoLog Server::Express HTTP Server",
+        "HypnoLog Server::Express HTTP Server::JSON Body Parser",
+        "HypnoLog Server::Express HTTP Server::Router: /logger",
+        "HypnoLog Server::Express HTTP Server::Router: /logger::GET /logger/status",
+        "HypnoLog Server::Express HTTP Server::Router: /logger::POST /logger/in",
+        "HypnoLog Server::Express HTTP Server::Static File Server",
+        "HypnoLog Server::Socket.IO Server",
+        "HypnoLog Server::Socket.IO Server::Connection Manager",
+        "HypnoLog Server::Socket.IO Server::Notification Broadcaster"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT HTTP node corresponds to the server-side HTTP, routing, parsing, static hosting, and Socket.IO transport responsibilities. The predicted diagram decomposes it into more specific server components, which is semantically consistent and within the correct backend boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::HypnoLog\\nServer"
+      ],
+      "predicted_nodes": [
+        "HypnoLog Server::Connected Clients List",
+        "HypnoLog Server::Express HTTP Server",
+        "HypnoLog Server::Express HTTP Server::JSON Body Parser",
+        "HypnoLog Server::Express HTTP Server::Router: /logger",
+        "HypnoLog Server::Express HTTP Server::Router: /logger::GET /logger/status",
+        "HypnoLog Server::Express HTTP Server::Router: /logger::POST /logger/in",
+        "HypnoLog Server::Express HTTP Server::Static File Server",
+        "HypnoLog Server::HypnoLog Data Object Schema",
+        "HypnoLog Server::Socket.IO Server",
+        "HypnoLog Server::Socket.IO Server::Connection Manager",
+        "HypnoLog Server::Socket.IO Server::Notification Broadcaster"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT server node represents the HypnoLog Server as a whole. The predicted nodes are valid internal decompositions of that server into HTTP, routing, schema, client tracking, and Socket.IO responsibilities, all correctly placed in the server boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::In Browser Log"
+      ],
+      "predicted_nodes": [
+        "Browser Client (UI::Ajv Schema Validator",
+        "Browser Client (UI::DOM Renderer",
+        "Browser Client (UI::Default Window",
+        "Browser Client (UI::Error Wrapper",
+        "Browser Client (UI::Message Handler",
+        "Browser Client (UI::Received Data List",
+        "Browser Client (UI::Socket.IO Client",
+        "Browser Client (UI::UI State Manager",
+        "Browser Client (UI::Visualizer Configuration",
+        "Browser Client (UI::Visualizer Dispatcher",
+        "Browser Client (UI::Visualizer Module",
+        "Browser Client (UI::Window Dispatcher"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT browser-side logging/viewing node is correctly expanded into browser UI components such as message handling, validation, error wrapping, state management, dispatching, and rendering. The boundary attribution to the browser UI is semantically correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Python"
+      ],
+      "predicted_nodes": [
+        "External Environment::Logging Producer Client",
+        "External Environment::Node.js Runtime",
+        "External Environment::Web Browser"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT Python node is being used as an example of an external logging producer environment. The predicted external environment nodes broadly capture the non-system actors/runtime environments, though they generalize beyond Python. The boundary remains correct as external."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::C#"
+  ],
+  "unmatched_predicted_nodes": []
+}

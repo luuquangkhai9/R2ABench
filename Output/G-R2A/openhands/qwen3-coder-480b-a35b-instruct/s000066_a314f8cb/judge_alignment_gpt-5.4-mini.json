@@ -1,0 +1,221 @@
+{
+  "reference_node_coverage": [
+    {
+      "gt_node": "Browser Clients::Client Browser\nPlayer 1",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Browser Client::Three.js Game Client"
+      ],
+      "reasoning": "The predicted browser game client covers the responsibilities of the player-facing browser client, including Player 1's client functionality."
+    },
+    {
+      "gt_node": "Browser Clients::Client Browser\nPlayer 2",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Browser Client::Three.js Game Client"
+      ],
+      "reasoning": "The same predicted browser game client covers the second player browser client concept."
+    },
+    {
+      "gt_node": "Browser Clients::Client Browser\nPlayer 3",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Browser Client::Three.js Game Client"
+      ],
+      "reasoning": "The predicted browser game client covers the third player browser client concept."
+    },
+    {
+      "gt_node": "Erlang / OTP Game Server Cluster::Server Master\nErlang",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Game Server (Master::Erlang/OTP Game Server",
+        "Game Server (Master::Connection Handler",
+        "Game Server (Master::Heartbeat Monitor",
+        "Game Server (Master::Message Processor",
+        "Game Server (Master::Room Manager"
+      ],
+      "reasoning": "The GT master server responsibility is represented by multiple predicted master-side service nodes, which collectively cover the server master concept."
+    },
+    {
+      "gt_node": "Erlang / OTP Game Server Cluster::Server Slave\nErlang",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Game Server (Replica::Erlang/OTP Replica Server"
+      ],
+      "reasoning": "The predicted replica server covers the GT slave/replica fault-tolerance role."
+    },
+    {
+      "gt_node": "Global::DNS",
+      "covered": false,
+      "covering_predicted_nodes": [],
+      "reasoning": "No predicted node explicitly covers DNS/load-balancing address resolution."
+    },
+    {
+      "gt_node": "Global::Erlang / OTP Game Server Cluster",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Game Server (Master::Erlang/OTP Game Server",
+        "Game Server (Replica::Erlang/OTP Replica Server"
+      ],
+      "reasoning": "The predicted master and replica server nodes together cover the overall game server cluster concept."
+    },
+    {
+      "gt_node": "Static Web Tier::Web Server\nGame assets, HTML, CSS, JS",
+      "covered": true,
+      "covering_predicted_nodes": [
+        "Web Server::Static Asset Server"
+      ],
+      "reasoning": "The predicted static asset server covers the web server role for serving game assets and static web resources."
+    }
+  ],
+  "predicted_node_grounding": [
+    {
+      "predicted_node": "Browser Client::Three.js Game Client",
+      "grounded": true,
+      "reference_nodes": [
+        "Browser Clients::Client Browser\nPlayer 1",
+        "Browser Clients::Client Browser\nPlayer 2",
+        "Browser Clients::Client Browser\nPlayer 3"
+      ],
+      "reasoning": "This is grounded in the browser client/player-side concepts from the GT."
+    },
+    {
+      "predicted_node": "Browser Client::WebSocket Connection",
+      "grounded": true,
+      "reference_nodes": [
+        "Browser Clients::Client Browser\nPlayer 1",
+        "Browser Clients::Client Browser\nPlayer 2",
+        "Browser Clients::Client Browser\nPlayer 3",
+        "Erlang / OTP Game Server Cluster::Server Master\nErlang",
+        "Global::Erlang / OTP Game Server Cluster"
+      ],
+      "reasoning": "The WebSocket connection is a valid decomposition of the client-server communication concept present in the GT."
+    },
+    {
+      "predicted_node": "Game Server (Master::Connection Handler",
+      "grounded": true,
+      "reference_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\nErlang"
+      ],
+      "reasoning": "This is a grounded decomposition of the master game server responsibilities."
+    },
+    {
+      "predicted_node": "Game Server (Master::Erlang/OTP Game Server",
+      "grounded": true,
+      "reference_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\nErlang",
+        "Global::Erlang / OTP Game Server Cluster"
+      ],
+      "reasoning": "This directly corresponds to the master server in the GT."
+    },
+    {
+      "predicted_node": "Game Server (Master::Heartbeat Monitor",
+      "grounded": true,
+      "reference_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\nErlang"
+      ],
+      "reasoning": "Heartbeat handling is part of the server-side game system and is a reasonable grounded split of master server behavior."
+    },
+    {
+      "predicted_node": "Game Server (Master::Message Processor",
+      "grounded": true,
+      "reference_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\nErlang"
+      ],
+      "reasoning": "Message processing is grounded in the server master's role within the game server cluster."
+    },
+    {
+      "predicted_node": "Game Server (Master::Room Manager",
+      "grounded": true,
+      "reference_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\nErlang"
+      ],
+      "reasoning": "Room management is a core server responsibility implied by the GT multiplayer server."
+    },
+    {
+      "predicted_node": "Game Server (Replica::Erlang/OTP Replica Server",
+      "grounded": true,
+      "reference_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Slave\nErlang",
+        "Global::Erlang / OTP Game Server Cluster"
+      ],
+      "reasoning": "The replica server is directly grounded in the GT slave/replica fault-tolerance role."
+    },
+    {
+      "predicted_node": "Web Server::Static Asset Server",
+      "grounded": true,
+      "reference_nodes": [
+        "Static Web Tier::Web Server\nGame assets, HTML, CSS, JS"
+      ],
+      "reasoning": "This is grounded in the static web tier/web server concept from the GT."
+    }
+  ],
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "Browser Clients::Client Browser\nPlayer 1",
+        "Browser Clients::Client Browser\nPlayer 2",
+        "Browser Clients::Client Browser\nPlayer 3"
+      ],
+      "predicted_nodes": [
+        "Browser Client::Three.js Game Client"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "Multiple GT browser client instances are aggregated into one predicted browser client node, with semantically consistent boundary attribution."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Master\nErlang"
+      ],
+      "predicted_nodes": [
+        "Game Server (Master::Erlang/OTP Game Server",
+        "Game Server (Master::Connection Handler",
+        "Game Server (Master::Heartbeat Monitor",
+        "Game Server (Master::Message Processor",
+        "Game Server (Master::Room Manager"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT master server node is split into several master-side predicted components, all within a semantically correct master/server boundary."
+    },
+    {
+      "gt_nodes": [
+        "Erlang / OTP Game Server Cluster::Server Slave\nErlang"
+      ],
+      "predicted_nodes": [
+        "Game Server (Replica::Erlang/OTP Replica Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The replica/slave role matches directly and remains within a semantically equivalent boundary."
+    },
+    {
+      "gt_nodes": [
+        "Global::Erlang / OTP Game Server Cluster"
+      ],
+      "predicted_nodes": [
+        "Game Server (Master::Erlang/OTP Game Server",
+        "Game Server (Replica::Erlang/OTP Replica Server"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The overall cluster concept is represented by separate master and replica server nodes, which is a semantically valid decomposition."
+    },
+    {
+      "gt_nodes": [
+        "Static Web Tier::Web Server\nGame assets, HTML, CSS, JS"
+      ],
+      "predicted_nodes": [
+        "Web Server::Static Asset Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The predicted static asset server corresponds to the GT static web tier/web server boundary."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "Global::DNS"
+  ],
+  "unmatched_predicted_nodes": []
+}

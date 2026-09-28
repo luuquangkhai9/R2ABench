@@ -1,0 +1,158 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Event Bus"
+      ],
+      "predicted_nodes": [
+        "Android Runtime::GPSLogger App::Event Bus"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact functional match for the event bus. The boundaries 'GPSLogger Android Application' and 'Android Runtime::GPSLogger App' are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Location Capture::Google Play Services\\nLocation Provider"
+      ],
+      "predicted_nodes": [
+        "Android Runtime::Google Play Services"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the Google Play Services location dependency. The predicted node accurately places it outside the app boundary as a platform-level runtime dependency."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Location Capture::Location Listeners"
+      ],
+      "predicted_nodes": [
+        "Android Runtime::GPSLogger App::Location Listeners"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact functional match for location listeners. Boundary attribution is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::GPX Logger"
+      ],
+      "predicted_nodes": [
+        "Android Runtime::GPSLogger App::Log Outputs::GPX Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact functional match. The 'Logging' vs 'Log Outputs' layer names are semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::KML Logger"
+      ],
+      "predicted_nodes": [
+        "Android Runtime::GPSLogger App::Log Outputs::KML Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact functional match. Layer attribution is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::CSV / URL Loggers"
+      ],
+      "predicted_nodes": [
+        "Android Runtime::GPSLogger App::Log Outputs::Text Logger"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "The text file logger in the predicted architecture maps directly to the CSV logging capability described in the GT. Semantically equivalent."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Logging::NMEA / GPRMC Encoder"
+      ],
+      "predicted_nodes": [
+        "Android Runtime::GPSLogger App::OpenGTS Integration::GPRMC Encoder"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the GPRMC string encoder. The predicted node correctly attributes it to the OpenGTS Integration context, which matches the PRD's description for its use case."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::User Interface::Detailed View",
+        "GPSLogger Android Application::User Interface::Main Activity",
+        "GPSLogger Android Application::User Interface::Other Fragments",
+        "GPSLogger Android Application::User Interface::Simple View"
+      ],
+      "predicted_nodes": [
+        "Android Runtime::GPSLogger App::Main Activity / Fragments"
+      ],
+      "match_type": "N:1",
+      "is_boundary_correct": true,
+      "reasoning": "The AI aggregated multiple specific UI fragments and activities from the GT into a single consolidated UI node. The app-level boundary is correct."
+    },
+    {
+      "gt_nodes": [
+        "Global::Dropbox"
+      ],
+      "predicted_nodes": [
+        "Global::Dropbox API"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact functional match for the external Dropbox service dependency."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenStreetMap"
+      ],
+      "predicted_nodes": [
+        "Global::OpenStreetMap Service"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact functional match for the external OpenStreetMap service dependency."
+    },
+    {
+      "gt_nodes": [
+        "Global::OpenGTS Endpoint\\nUDP server"
+      ],
+      "predicted_nodes": [
+        "Global::OpenGTS Server"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Exact functional match for the external OpenGTS server receiving UDP payloads."
+    },
+    {
+      "gt_nodes": [
+        "GPSLogger Android Application::Upload::Uploaders"
+      ],
+      "predicted_nodes": [
+        "Android Runtime::GPSLogger App::External Integrations::Dropbox Integration",
+        "Android Runtime::GPSLogger App::External Integrations::OpenStreetMap Integration",
+        "Android Runtime::GPSLogger App::OpenGTS Integration::OpenGTS Sender (UDP"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT abstracts all third-party upload mechanisms into 'Uploaders', whereas the AI accurately split them into concrete integrations for Dropbox, OSM, and OpenGTS."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "GPSLogger Android Application::Logging::Loggers",
+    "GPSLogger Android Application::Upload::Upload Jobs"
+  ],
+  "unmatched_predicted_nodes": [
+    "Android Runtime::GPSLogger App::App Configuration",
+    "Android Runtime::GPSLogger App::GPS Logging Service",
+    "Android Runtime::GPSLogger App::OpenGTS Integration::OpenGTS Config",
+    "Android Runtime::GPSLogger App::OpenGTS Integration::SerializableLocation",
+    "Android Runtime::GPSLogger App::Session Settings",
+    "Build Environment::Android SDK Build Tools 19.0.3",
+    "Build Environment::Gradle Build",
+    "Build Environment::Support & Google Repositories",
+    "Build Environment::local.properties (sdk.dir",
+    "Global::Android Runtime",
+    "Global::Build Environment"
+  ]
+}

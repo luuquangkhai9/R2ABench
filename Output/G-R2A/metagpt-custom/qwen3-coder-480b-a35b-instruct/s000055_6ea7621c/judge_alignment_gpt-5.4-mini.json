@@ -1,0 +1,101 @@
+{
+  "matched_pairs": [
+    {
+      "gt_nodes": [
+        "BACKEND::algorithm"
+      ],
+      "predicted_nodes": [
+        "Global::Autocomplete Algorithm",
+        "Heroku::Node.js Runtime::Autocomplete Algorithm"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both predicted nodes represent the same backend autocomplete/search-hint algorithm as the GT algorithm node. The boundary differs in granularity, but 'Global' and 'Heroku::Node.js Runtime' do not indicate a semantic context error for this backend logic."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::data.json"
+      ],
+      "predicted_nodes": [
+        "File System::Laureate Data Files",
+        "Global::Laureate Data Source",
+        "Heroku::Data Access Layer::Laureate Data Source"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "These all correspond to the local laureate data source used by the backend. The predicted nodes split the GT data node into file-system and data-source views, which is semantically consistent."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::handlers"
+      ],
+      "predicted_nodes": [
+        "Global::NotFound Handler",
+        "Global::Request Handler",
+        "Heroku::Node.js Runtime::Handler Module::Request Handler",
+        "Heroku::Node.js Runtime::NotFound Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The GT handler module is represented by separate request and not-found handlers in the prediction. This is a valid decomposition of the same backend responsibility."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::public assets\\nhtml\\ncss\\njs"
+      ],
+      "predicted_nodes": [
+        "File System::Public Assets Directory"
+      ],
+      "match_type": "1:1",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the public static assets served by the application. The predicted package is a semantically equivalent filesystem boundary."
+    },
+    {
+      "gt_nodes": [
+        "BACKEND::Router"
+      ],
+      "predicted_nodes": [
+        "Global::HTTP Router",
+        "Heroku::Node.js Runtime::Routing Layer::HTTP Router"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "The router component matches directly. The predicted placement in a routing layer/runtime context is consistent with the backend router in GT."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::XMLHttpRequest"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Frontend Input Handler",
+        "Global::Frontend Input Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": false,
+      "reasoning": "The GT node is specifically an XMLHttpRequest frontend communication mechanism, while the prediction shifts it to a generic input handler. This is a functional mismatch and loses the request-initiating role."
+    },
+    {
+      "gt_nodes": [
+        "FRONTEND::userInput"
+      ],
+      "predicted_nodes": [
+        "Web Browser::Frontend Input Handler",
+        "Global::Frontend Input Handler"
+      ],
+      "match_type": "1:N",
+      "is_boundary_correct": true,
+      "reasoning": "Both refer to the frontend input capture responsibility. The boundary placement in the web browser is appropriate."
+    }
+  ],
+  "unmatched_gt_nodes": [
+    "FRONTEND::index.html",
+    "FRONTEND::main.css"
+  ],
+  "unmatched_predicted_nodes": [
+    "Global::Content-Type Mapper",
+    "Global::File System",
+    "Global::Heroku",
+    "Heroku::Node.js Runtime",
+    "Heroku::Node.js Runtime::Content-Type Mapper"
+  ]
+}
